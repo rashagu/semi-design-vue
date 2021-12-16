@@ -1,0 +1,8 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+
+# 项目排除路径
+/src/packages/icons/svgs/

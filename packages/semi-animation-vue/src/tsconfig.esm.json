@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "exclude": ["./**/*.spec.*",
+    "./main.ts", "../script/*", "../components",
+    "./Comp1",
+    "./App.tsx",
+    "./__test__",
+    "../scripts"
+  ],
+  "compilerOptions": {
+    "rootDir": "./packages/",
+    "outDir": "../dist/es",
+    "strictNullChecks": false,
+    "module": "ES6",
+    "target": "ES6"
+  }
+}

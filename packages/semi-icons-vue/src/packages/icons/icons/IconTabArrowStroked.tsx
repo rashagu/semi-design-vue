@@ -1,0 +1,52 @@
+
+    import {defineComponent, ref, h, onActivated} from 'vue'
+    import { ConvertIcon, IconProps, vuePropsType as iconVuePropsType} from '../components/Icon';
+
+    interface ExampleProps {
+      name?: string
+    }
+    export const vuePropsType = {
+      name: String
+    }
+    const SvgComponent = defineComponent<ExampleProps>((props, {slots}) => {
+      return ()=>(
+            <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            
+// @ts-ignore
+focusable={false}
+              
+            aria-hidden={true}
+            {...props}
+        >
+            <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M2 5C2 3.89543 2.89543 3 4 3H15C15.5523 3 16 3.44772 16 4C16 4.55228 15.5523 5 15 5H4V19H20V11C20 10.4477 20.4477 10 21 10C21.5523 10 22 10.4477 22 11V19C22 20.1046 21.1046 21 20 21H4C2.89543 21 2 20.1046 2 19V5Z"
+                fill="currentColor"
+            />
+            <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M18.2929 8.70711C17.9024 8.31658 17.9024 7.68342 18.2929 7.29289L19.5858 6L18.2929 4.70711C17.9024 4.31658 17.9024 3.68342 18.2929 3.29289C18.6834 2.90237 19.3166 2.90237 19.7071 3.29289L21.7071 5.29289C21.8946 5.48043 22 5.73478 22 6C22 6.26522 21.8946 6.51957 21.7071 6.70711L19.7071 8.70711C19.3166 9.09763 18.6834 9.09763 18.2929 8.70711Z"
+                fill="currentColor"
+            />
+        </svg>
+
+      );
+    })
+    SvgComponent.props = vuePropsType
+
+    const IconComponent = defineComponent<IconProps>((props, {slots}) => {
+      return ()=>
+        <ConvertIcon iconType={'tab_arrow_stroked'} {...props} >
+      <SvgComponent/>
+    </ConvertIcon>;
+})
+IconComponent.props = iconVuePropsType
+export default IconComponent
+    

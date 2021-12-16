@@ -1,0 +1,5 @@
+{
+    "useWorkspaces": true,
+    "npmClient": "pnpm",
+    "version": "2.1.5"
+}
