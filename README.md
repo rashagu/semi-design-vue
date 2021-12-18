@@ -1,4 +1,6 @@
+`pnpm add --global lerna`
 
+`lerna bootstrap --hoist`
 
 `lerna add @kousum/semi-icons-vue --scope=@kousum/semi-ui-vue`
 

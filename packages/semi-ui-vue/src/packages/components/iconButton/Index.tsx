@@ -70,7 +70,6 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
       [`${prefixCls}-with-icon-only`]: slots.default == null || (slots.default as any) === '',
       [`${prefixCls}-loading`]: loading,
     })} theme={theme} style={style}>
-
       {
         (()=>{
           let IconElem = ():any=>null;

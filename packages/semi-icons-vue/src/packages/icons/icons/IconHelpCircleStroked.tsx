@@ -50,7 +50,9 @@ focusable={false}
     const IconComponent = defineComponent<IconProps>((props, {slots}) => {
       return ()=>
         <ConvertIcon iconType={'help_circle_stroked'} {...props} >
-      <SvgComponent/>
+          {{
+            default:()=><SvgComponent/>
+          }}
     </ConvertIcon>;
 })
 IconComponent.props = iconVuePropsType

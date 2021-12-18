@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, onMounted,} from 'vue'
-import Button from "./packages/components/button/Demo";
+// import Button from "./packages/components/button/Demo";
 import IconTest from "./__test__/IconTest";
-import AnimationTest from "./__test__/AnimationTest";
+import TootipDemo from "./packages/components/tooltip/__test__/TootipDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -15,8 +15,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div id={'a'}  style={{color:'#E91E63', display:'flex', flexWrap:'wrap',}}>
       {/*<Button />*/}
-      <AnimationTest />
+
       {/*<IconTest />*/}
+      <TootipDemo />
     </div>
   )
 })

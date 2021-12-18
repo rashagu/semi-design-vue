@@ -60,14 +60,16 @@ export interface convertIconType extends IconProps{
   iconType:string
 }
 const ConvertIcon = defineComponent<convertIconType>((props, {slots}) => {
-  
+
   onActivated(() => {
 
   })
 
   return () => (
     <Icon type={props.iconType} ref={ref as any} {...props} >
-      {slots.default?slots.default():null}
+      {{
+        default:()=>slots.default(),
+      }}
     </Icon>
   )
 })

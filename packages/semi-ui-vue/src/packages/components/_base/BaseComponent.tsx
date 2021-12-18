@@ -1,0 +1,83 @@
+import {defineComponent, ref, h, StyleValue, cloneVNode, provide, reactive} from 'vue'
+import baseLog  from '@douyinfe/semi-foundation/utils/log';
+import { DefaultAdapter } from '@douyinfe/semi-foundation/base/foundation';
+import { VALIDATE_STATUS } from '@douyinfe/semi-foundation/base/constants';
+import { ArrayElement } from './base';
+import {ContextValue} from "../configProvider/context";
+
+const { hasOwnProperty } = Object.prototype;
+
+export type ValidateStatus = ArrayElement<typeof VALIDATE_STATUS>;
+
+export interface BaseProps {
+  style?: StyleValue;
+  className?: string;
+  [key:string]:any,
+}
+
+
+const BaseComponent = defineComponent<BaseProps>((props, {slots}) => {
+  const cache = ref<any>({});
+  const foundation = ref<any>(null);
+  const state = reactive<any>({})
+
+  // eslint-disable-next-line
+  const isControlled = (key: any) => Boolean(key && props && typeof props === 'object' && hasOwnProperty.call(props, key));
+
+  const context = ref<ContextValue>({})
+
+
+
+  function adapter<P extends BaseProps = {}, S = {}>(): DefaultAdapter<P, S> {
+    return {
+      getContext: key => { // eslint-disable-line
+        if (context.value && key) {
+          // @ts-ignore
+          return context.value[key];
+        }
+      },
+      getContexts: () => context.value, // eslint-disable-line
+      getProp: key => props[key], // eslint-disable-line
+      // return all props
+      getProps: () => props as P, // eslint-disable-line
+      getState: key => state[key], // eslint-disable-line
+      getStates: () => state, // eslint-disable-line
+      setState: (states, cb) => {
+        // this.setState({ ...states }, cb)
+      }, // eslint-disable-line
+      getCache: key => key && cache[key], // eslint-disable-line
+      getCaches: () => cache.value, // eslint-disable-line
+      setCache: (key, value) => key && (cache.value[key] = value), // eslint-disable-line
+      stopPropagation: e => { // eslint-disable-line
+        try {
+          e.stopPropagation();
+          e.nativeEvent && e.nativeEvent.stopImmediatePropagation();
+        } catch (error) {
+
+        }
+      }
+    };
+  }
+
+  function log(text: string, ...rest: any): any {
+    return baseLog(text, ...rest);
+  }
+
+
+  provide('cache', cache)
+  provide('foundation', foundation)
+  provide('adapter', adapter)
+  provide('log', log)
+  provide('context', context)
+
+
+  return () => slots.default?slots.default():null
+})
+
+
+BaseComponent.props = {
+  style: Object,
+  className: String,
+}
+
+export default BaseComponent

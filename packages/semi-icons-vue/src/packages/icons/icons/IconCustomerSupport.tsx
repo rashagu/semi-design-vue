@@ -36,7 +36,9 @@ focusable={false}
     const IconComponent = defineComponent<IconProps>((props, {slots}) => {
       return ()=>
         <ConvertIcon iconType={'customer_support'} {...props} >
-      <SvgComponent/>
+          {{
+            default:()=><SvgComponent/>
+          }}
     </ConvertIcon>;
 })
 IconComponent.props = iconVuePropsType

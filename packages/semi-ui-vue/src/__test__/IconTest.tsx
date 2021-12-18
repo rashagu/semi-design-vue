@@ -11,13 +11,13 @@ export const VuePropsType = {
 
 const App = defineComponent<ExampleProps>((props, {slots}) => {
 
-  const domArr = ref<any[]>([])
+  const domArr = ref<JSX.Element[]>([])
 
   onMounted(()=>{
     const iconsObj:any = icons;
     for(let i in icons){
       const Dom = iconsObj[i];
-      domArr.value.push(()=><Dom size={'extra-large'} />)
+      domArr.value.push(<Dom size={'extra-large'} />)
     }
   })
   return () => (
@@ -26,7 +26,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
       {domArr.value.map((item:any, index:any)=>{
         return (
           <div key={index}>
-            {item()}
+            {item}
           </div>
         )
       })}

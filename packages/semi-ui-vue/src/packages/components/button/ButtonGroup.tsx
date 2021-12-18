@@ -1,5 +1,5 @@
-import {defineComponent, ref, h, cloneVNode, isVNode, RendererNode, RendererElement, VNode} from 'vue'
-import {BaseProps} from '../base/BaseComponent';
+import {defineComponent, ref, h, cloneVNode, isVNode, RendererNode, RendererElement, VNode, } from 'vue'
+import {BaseProps} from '../_base/BaseComponent';
 
 import {cssClasses, strings} from '@douyinfe/semi-foundation/button/constants';
 import {Type, Size} from './Button';
