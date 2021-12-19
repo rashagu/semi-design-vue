@@ -10,9 +10,12 @@ export const vuePropsType = {
 const TootipDemo = defineComponent<ExampleProps>((props, {slots}) => {
 
   return ()=>(
-    <Tooltip content={'hi bytedance'}>
-      <div>123123</div>
-    </Tooltip>
+    <div style={{padding:'10rem'}}>
+
+      <Tooltip content={'hi bytedance'} motion>
+        <div style={{color:'red'}}>123123</div>
+      </Tooltip>
+    </div>
   );
 })
 

@@ -229,10 +229,8 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
 
 
   return () => <div>
-    {JSON.stringify(props)}
     {(() => {
       const children: any = slots.default;
-
       if (typeof children === 'function' && animation.value) {
         return children(animation.value.getCurrentStates());
       } else if (isVNode(children)) {

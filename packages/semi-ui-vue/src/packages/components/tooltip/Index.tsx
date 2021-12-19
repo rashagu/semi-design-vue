@@ -6,7 +6,7 @@ import {
   Fragment,
   CSSProperties,
   reactive,
-  nextTick, onMounted, onUnmounted, isVNode, watch, cloneVNode, provide, inject,
+  nextTick, onMounted, onUnmounted, isVNode, watch, cloneVNode, provide, inject, watchEffect,
 } from 'vue'
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -17,11 +17,11 @@ import warning from '@douyinfe/semi-foundation/utils/warning';
 import Event from '@douyinfe/semi-foundation/utils/Event';
 import { ArrayElement } from '@douyinfe/semi-foundation/utils/type';
 import { convertDOMRectToObject, DOMRectLikeType } from '@douyinfe/semi-foundation/utils/dom';
-import TooltipFoundation, { TooltipAdapter, Position, PopupContainerDOMRect } from '@douyinfe/semi-foundation/tooltip/foundation';
+import TooltipFoundation, { TooltipAdapter, Position, PopupContainerDOMRect } from '../../../../../semi-foundation/tooltip/foundation';
 import { strings, cssClasses, numbers } from '@douyinfe/semi-foundation/tooltip/constants';
 import '@douyinfe/semi-foundation/tooltip/tooltip.scss';
 
-import BaseComponent, { BaseProps } from '../_base/baseComponent';
+import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import { isHTMLElement } from '../_base/reactUtils';
 import { stopPropagation } from '../_utils';
 import Portal from '../_portal/index';
@@ -55,7 +55,7 @@ export interface TooltipProps extends BaseProps {
   clickToHide?: boolean;
   visible?: boolean;
   style?: CSSProperties;
-  content?: JSX.Element;
+  content?: JSX.Element | string;
   prefixCls?: string;
   onVisibleChange?: (visible: boolean) => void;
   onClickOutSide?: (e: MouseEvent) => void;
@@ -125,7 +125,7 @@ export const vuePropsType = {
   clickToHide: Boolean,
   visible: Boolean,
   style: [Object,  String],
-  content: Object,
+  content: [Object,  String],
   prefixCls: {
     type: String,
     default: prefix,
@@ -175,20 +175,13 @@ export const vuePropsType = {
 
 const Index = defineComponent<TooltipProps>((props, {slots}) => {
 
-  const cache = inject('cache')
-  const foundation = inject('foundation')
-  // const adapterInject = inject<<P, S = {}>()=>DefaultAdapter<P, S>>('adapter')
-  const adapterInject = inject<any>('adapter')
-
-  const log = inject('log')
-  const context = inject<ContextValue>('context')
 
 
-  let eventManager: Event;
-  let triggerEl: any;
-  let containerEl: any;
+  const eventManager = ref<Event>(new Event);
+  const triggerEl = ref(null);
+  const containerEl = ref(null);
   let clickOutsideHandler: any;
-  let resizeHandler: any;
+  const resizeHandler = ref(null);
   let isWrapped: boolean;
   let mounted: any;
   let scrollHandler: any;
@@ -211,34 +204,24 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     isInsert: false,
     placement: props.position || 'top',
     transitionStyle: {},
-    willUpdateStates:{},
+    willUpdateStates:{
+    },
   })
-  const foundationRef = ref(new TooltipFoundation(adapter()));
-  const eventManagerRef = new Event();
-  const triggerElRef = ref(null);
-  const containerElRef = ref(null);
-  const clickOutsideHandlerRef = ref(null);
-  const resizeHandlerRef = ref(null);
-  const isWrappedRef = ref(false); // Identifies whether a span element is wrapped
-  const containerPositionRef = ref(undefined);
+  const {cache, adapter: adapterInject, log, context} = useBaseComponent<TooltipProps>(props, state)
 
-  const isInsertRef = ref(undefined)
-  const transitionStateRef = ref(undefined)
-  const containerStyleRef = ref(undefined)
-
-  const setContainerEl = (node: any) => (containerEl = { current: node });
-
+  const theAdapter = adapter()
   function adapter(): TooltipAdapter<TooltipProps, TooltipState> {
     return  {
       ...adapterInject<TooltipProps, TooltipState>(),
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      on: (...args: any[]) => eventManager.on(...args),
+      on: (...args: any[]) => eventManager.value.on(...args),
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      off: (...args: any[]) => eventManager.off(...args),
+      off: (...args: any[]) => eventManager.value.off(...args),
       insertPortal: (content: string, { position, ...containerStyle }: { position: Position }) => {
 
+        console.log(content)
 
         state.isInsert = true;
         state.transitionState = 'enter';
@@ -246,26 +229,29 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
 
 
         nextTick(()=>{
-          eventManager.emit('portalInserted');
+          eventManager.value.emit('portalInserted');
         })
       },
       removePortal: () => {
+        console.log('removePortal')
         state.isInsert = false;
       },
       getEventName: () => ({
-        mouseEnter: 'onMouseEnter',
-        mouseLeave: 'onMouseLeave',
-        mouseOut: 'onMouseOut',
-        mouseOver: 'onMouseOver',
+        mouseEnter: 'onMouseenter',
+        mouseLeave: 'onMouseleave',
+        mouseOut: 'onMouseout',
+        mouseOver: 'onMouseover',
         click: 'onClick',
         focus: 'onFocus',
         blur: 'onBlur',
       }),
       registerTriggerEvent: (triggerEventSet: Record<string, any>) => {
+        console.log(triggerEventSet)
         state.triggerEventSet = triggerEventSet
       },
       unregisterTriggerEvent: () => {},
       registerPortalEvent: (portalEventSet: Record<string, any>) => {
+
         state.portalEventSet = portalEventSet
       },
       unregisterPortalEvent: () => {},
@@ -273,9 +259,9 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         // eslint-disable-next-line
         // It may be a React component or an html element
         // There is no guarantee that triggerE l.current can get the real dom, so call findDOMNode to ensure that you can get the real dom
-        let triggerDOM = triggerEl.current;
-        if (!isHTMLElement(triggerEl.current)) {
-          const realDomNode = triggerEl.current;
+        let triggerDOM = triggerEl.value;
+        if (!isHTMLElement(triggerEl.value)) {
+          const realDomNode = triggerEl.value;
           (triggerEl as any).current = realDomNode;
           triggerDOM = realDomNode;
         }
@@ -319,7 +305,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         state.containerStyle = { ...state.containerStyle, ...style }
         state.placement = position
         nextTick(()=>{
-          eventManager.emit('positionUpdated');
+          eventManager.value.emit('positionUpdated');
         })
 
       },
@@ -329,26 +315,31 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       togglePortalVisible: (visible: boolean, cb: () => void) => {
         const willUpdateStates: Partial<TooltipState> = {};
 
-        if (adapter().canMotion()) {
+        if (theAdapter.canMotion()) {
           willUpdateStates.transitionState = visible ? 'enter' : 'leave';
           willUpdateStates.visible = visible;
         } else {
           willUpdateStates.visible = visible;
         }
-        state.willUpdateStates = willUpdateStates
+        state.transitionState = willUpdateStates.transitionState
+        state.visible = willUpdateStates.visible
+
+
+
+        console.log('willUpdateStates')
         nextTick(()=>{
           cb();
         })
       },
       registerClickOutsideHandler: (cb: () => void) => {
         if (clickOutsideHandler.value) {
-          adapter().unregisterClickOutsideHandler();
+          theAdapter.unregisterClickOutsideHandler();
         }
         clickOutsideHandler.value = (e: any): any => {
           if (!mounted) {
             return false;
           }
-          let el = triggerEl && triggerEl.current;
+          let el = triggerEl && triggerEl.value;
           let popupEl = containerEl && containerEl.current;
           el = el;
           popupEl = popupEl;
@@ -370,7 +361,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       },
       registerResizeHandler: (cb: (e: any) => void) => {
         if (resizeHandler.value) {
-          adapter().unregisterResizeHandler();
+          theAdapter.unregisterResizeHandler();
         }
         resizeHandler.value = throttle((e): any => {
           if (!mounted) {
@@ -381,25 +372,25 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         window.addEventListener('resize', resizeHandler.value, false);
       },
       unregisterResizeHandler: () => {
-        if (resizeHandler) {
+        if (resizeHandler.value) {
           window.removeEventListener('resize', resizeHandler, false);
-          resizeHandler = null;
+          resizeHandler.value = null;
         }
       },
       notifyVisibleChange: (visible: boolean) => {
         props.onVisibleChange(visible);
       },
       registerScrollHandler: (rePositionCb: (arg: { x: number; y: number }) => void) => {
-        if (scrollHandler.value) {
-          adapter().unregisterScrollHandler();
+        if (scrollHandler) {
+          theAdapter.unregisterScrollHandler();
         }
-        scrollHandler.value = throttle((e): any => {
+        scrollHandler = throttle((e): any => {
           if (!mounted) {
             return false;
           }
-          let triggerDOM = triggerEl.current;
-          if (!isHTMLElement(triggerEl.current)) {
-            triggerDOM = triggerEl.current;
+          let triggerDOM = triggerEl.value;
+          if (!isHTMLElement(triggerEl.value)) {
+            triggerDOM = triggerEl.value;
           }
           const isRelativeScroll = e.target.contains(triggerDOM);
           if (isRelativeScroll) {
@@ -407,12 +398,12 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
             rePositionCb(scrollPos);
           }
         }, 10); // When it is greater than 16ms, it will be very obvious
-        window.addEventListener('scroll', scrollHandler.value, true);
+        window.addEventListener('scroll', scrollHandler, true);
       },
       unregisterScrollHandler: () => {
-        if (scrollHandler.value) {
-          window.removeEventListener('scroll', scrollHandler.value, true);
-          scrollHandler.value = null;
+        if (scrollHandler) {
+          window.removeEventListener('scroll', scrollHandler, true);
+          scrollHandler = null;
         }
       },
       canMotion: () => Boolean(props.motion),
@@ -429,6 +420,23 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       getContainerPosition: () => containerPosition,
     };
   }
+
+
+  const foundationRef = ref(new TooltipFoundation(theAdapter));
+  const eventManagerRef = new Event();
+  const triggerElRef = ref(null);
+  const containerElRef = ref(null);
+  const clickOutsideHandlerRef = ref(null);
+  const resizeHandlerRef = ref(null);
+  const isWrappedRef = ref(false); // Identifies whether a span element is wrapped
+  const containerPositionRef = ref(undefined);
+
+  const isInsertRef = ref(undefined)
+  const transitionStateRef = ref(undefined)
+  const containerStyleRef = ref(undefined)
+
+  const setContainerEl = (node: any) => (containerEl.value = { current: node });
+
 
   onMounted(()=>{
     mounted = true;
@@ -477,10 +485,11 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     // this.setState({ visible: true });
   };
   const didLeave = () => {
-    adapter().unregisterClickOutsideHandler();
-    adapter().unregisterScrollHandler();
-    adapter().unregisterResizeHandler();
-    adapter().removePortal();
+    console.error('didLeave')
+    theAdapter.unregisterClickOutsideHandler();
+    theAdapter.unregisterScrollHandler();
+    theAdapter.unregisterResizeHandler();
+    theAdapter.removePortal();
   };
 
   /** for transition - end */
@@ -488,18 +497,26 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
   function rePosition() {
     return foundationRef.value.calcPosition();
   }
-  watch(()=>props, (newProps, prevProps)=>{
+
+  watchEffect(()=>{
+    console.log(state.willUpdateStates,props.visible,props.rePosKey);
+  })
+
+
+
+  watch([()=>props.mouseLeaveDelay,()=>props.mouseEnterDelay], ()=>{
     warning(
       props.mouseLeaveDelay < props.mouseEnterDelay,
       "[Semi Tooltip] 'mouseLeaveDelay' cannot be less than 'mouseEnterDelay', which may cause the dropdown layer to not be hidden."
     );
-    if (prevProps.visible !== props.visible) {
-     props.visible ? foundationRef.value.delayShow() : foundationRef.value.delayHide();
-    }
-    if (prevProps.rePosKey !== props.rePosKey) {
-      rePosition();
-    }
   })
+  watch(()=>props.visible, ()=>{
+    props.visible ? foundationRef.value.delayShow() : foundationRef.value.delayHide();
+  })
+  watch(()=>props.rePosKey, ()=>{
+    rePosition();
+  })
+
 
   const renderIcon = () => {
     const { placement } = state;
@@ -531,6 +548,9 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     }
   };
 
+  watch(()=>state.visible, ()=>{
+    console.log(state.visible);
+  }, {immediate:true})
   const renderPortal = () => {
     const { containerStyle = {}, visible, portalEventSet, placement, transitionState } = state;
     const { prefixCls, content, showArrow, style, motion, zIndex } = props;
@@ -545,46 +565,50 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     const icon = renderIcon();
     const portalInnerStyle = omit(containerStyle, motion ? ['transformOrigin'] : undefined);
     const transformOrigin = get(containerStyle, 'transformOrigin');
-    const inner = motion ? (
-      <TooltipTransition position={placement} willEnter={willEnter} didLeave={didLeave} motion={motion}>
-        {
-          transitionState === 'enter' ?
-            ({ animateCls, animateStyle, animateEvents }:any) => (
-              <div
-                className={classNames(className, animateCls)}
-                style={{
-                  visibility: 'visible',
-                  ...animateStyle,
-                  transformOrigin,
-                  ...style,
-                }}
-                {...portalEventSet}
-                {...animateEvents}
-                x-placement={placement}
-              >
-                {content}
-                {icon}
-              </div>
-            ) :
-            null
-        }
-      </TooltipTransition>
-    ) : (
-      <div class={className} {...portalEventSet} x-placement={placement} style={style}>
-        {content}
-        {icon}
-      </div>
-    );
 
+    console.error(visible)
     return (
       <Portal getPopupContainer={props.getPopupContainer} style={{ zIndex }}>
         <div
+
           class={`${BASE_CLASS_PREFIX}-portal-inner`}
           style={portalInnerStyle}
           ref={setContainerEl}
           onClick={handlePortalInnerClick}
         >
-          {inner}
+          {motion ? (
+            <TooltipTransition position={placement} willEnter={willEnter} didLeave={didLeave} motion={motion}>
+              {{
+                default: transitionState === 'enter' ? ({animateCls, animateStyle, animateEvents}: any) => {
+                  console.log({animateCls, animateStyle, animateEvents, portalEventSet})
+                  console.error(className)
+                  console.error(animateCls)
+                  return (
+                    <div
+                      className={classNames(className, animateCls)}
+                      style={{
+                        visibility: 'visible',
+                        ...animateStyle,
+                        transformOrigin,
+                        ...style,
+                      }}
+                      {...portalEventSet}
+                      {...animateEvents}
+                      x-placement={placement}
+                    >
+                      {content}
+                      {icon}
+                    </div>
+                  )
+                } :null
+              }}
+            </TooltipTransition>
+          ) : (
+            <div class={className} {...portalEventSet} x-placement={placement} style={style}>
+              {content}
+              {icon}
+            </div>
+          )}
         </div>
       </Portal>
     );
@@ -627,9 +651,9 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
 
   return () => {
 
-    const { isInsert, triggerEventSet } = state;
+    const { triggerEventSet } = state;
     const { wrapWhenSpecial } = props;
-    let { children } = props;
+    let children:any = slots.default()[0];
     const childrenStyle = { ...get(children, 'props.style') };
     const extraStyle: CSSProperties = {};
 
@@ -652,6 +676,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       }
     }
 
+    console.log(children.props)
     // The incoming children is a single valid element, otherwise wrap a layer with span
     const newChild = cloneVNode(children, {
       ...children.props,
@@ -679,13 +704,15 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       },
     });
 
+    console.log(children.props, {...mergeEvents((children).props, triggerEventSet)})
     // If you do not add a layer of div, in order to bind the events and className in the tooltip, you need to cloneElement children, but this time it may overwrite the children's original ref reference
     // So if the user adds ref to the content, you need to use callback ref: https://github.com/facebook/react/issues/8873
-    return ()=>(
-      <BaseComponent>
-        {isInsert ? renderPortal() : null}
+    return (
+      <div>
+        {JSON.stringify(state.isInsert)}
+        {state.isInsert ? renderPortal() : null}
         {newChild}
-      </BaseComponent>
+      </div>
     );
   }
 })

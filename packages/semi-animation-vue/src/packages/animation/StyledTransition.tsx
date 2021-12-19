@@ -1,7 +1,9 @@
-import {defineComponent, ref, h, onActivated, Fragment, onMounted} from 'vue'
+import {defineComponent, ref, h, onActivated, Fragment, onMounted, watch} from 'vue'
 import PropTypes from 'prop-types';
 import StyledAnimation, {StyledAnimationProps} from './StyledAnimation';
 import noop from './utils/noop';
+import {Slot} from "@vue/test-utils/dist/types";
+import {SpinProps} from "@kousum/semi-ui-vue/src/packages/components/spin";
 
 export interface StyledTransitionProps extends StyledAnimationProps {
   state?: string | boolean;
@@ -16,10 +18,17 @@ export interface StyledTransitionProps extends StyledAnimationProps {
 }
 
 export const vuePropsType = {
+  duration: String,
+  className: String,
+  name: String,
+  position: String,
+  motion: [Boolean],
+
+
   state: [String, Boolean],
   from: Object,
-  enter: Object,
-  leave: Object,
+  enter: String,
+  leave: String,
 
   willEnter: {
     type: Function,
@@ -46,11 +55,19 @@ export const vuePropsType = {
     default: noop,
   },
 }
+
+export interface StyledTransitionState {
+  state: string | boolean;
+  lastChildren: any;
+  currentChildren: any;
+}
+
+
 const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots}) => {
 
 
   let instance: any;
-  const state = ref<string | boolean>('')
+  const state = ref<string | boolean>('enter')
   const lastChildren = ref(null)
   const currentChildren = ref(null)
 
@@ -62,6 +79,29 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
     }
   })
 
+
+
+
+  // TODO getDerivedStateFromProps
+  onMounted(()=>{
+    if (slots.default() !== currentChildren.value) {
+      lastChildren.value = currentChildren.value;
+      currentChildren.value = slots.default();
+
+      if (slots.default == null) {
+        state.value = 'leave';
+      } else {
+        state.value = 'enter';
+      }
+    }
+
+    if (props.state != null && props.state !== state.value) {
+      state.value = props.state;
+    }
+  })
+
+
+
   const _isControlled = () => [true, false, 'enter', 'leave'].includes(props.state);
 
   const forwardInstance = (instance0: any) => {
@@ -69,6 +109,7 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
   };
 
   const onRest = (props: any) => {
+    console.log('onRest')
 
     if (state.value === 'enter') {
       props.didEnter(props);
@@ -93,39 +134,49 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
   };
 
 
-  const { enter, leave, ...restProps } = props;
-
-  const isControlled = _isControlled();
-
-
   return ()=>{
 
-    let children, type;
+
+    const { enter, leave, ...restProps } = props;
+
+    const isControlled = _isControlled();
+
+
+    let children:any, type: string;
+
+    let thisSate:any = state.value;
 
 
     if (isControlled) {
       children = slots.default;
-      state.value = props.state;
+      thisSate = props.state;
+      debugger
     } else if (currentChildren == null && lastChildren == null) {
       return null;
     }
 
-    if (state.value === 'enter') {
+    if (thisSate === 'enter') {
       type = enter;
 
       if (!isControlled) {
         children = currentChildren;
       }
-    } else if (state.value === 'leave') {
+    } else if (thisSate === 'leave') {
       type = leave;
 
       if (!isControlled) {
         children = lastChildren;
       }
     }
+
+    const props_ =  {...{...restProps,type,onStart,onRest}}
+    console.log(thisSate, props_)
+    debugger
     return (
-      <StyledAnimation {...restProps} type={type} onStart={onStart} onRest={onRest}>
-        {children()}
+      <StyledAnimation>
+        {{
+          default: (arg:any)=>children(arg)
+        }}
       </StyledAnimation>
     )
   };

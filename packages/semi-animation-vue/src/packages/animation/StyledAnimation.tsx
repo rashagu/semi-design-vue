@@ -26,6 +26,17 @@ const types: any = Object.values(styledTypes).reduce((arr, cur) => [...arr as an
 
 
 export const vuePropsType = {
+  state: [Object, String, Boolean, Function],
+  willEnter: [Object, String, Boolean, Function],
+  didEnter: [Object, String, Boolean, Function],
+  willLeave: [Object, String, Boolean, Function],
+  didLeave: [Object, String, Boolean, Function],
+  from: [Object, String, Boolean, Function],
+  motion: [Object, String, Boolean, Function],
+  name: [Object, String, Boolean, Function],
+  position: [Object, String, Boolean, Function],
+
+
   className: String,
   type: [Object, String],
   style: [Object, String],
@@ -48,14 +59,19 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
   onActivated(() => {
 
   })
-  const _generateAnimateEvents = (child: any, props: StyledAnimationProps = {}) => ({
-    onAnimationIteration: (...args: any) =>
-      invokeFns([child && child.props && child.props.onAnimationIteration, props.onFrame], args),
-    onAnimationStart: (...args: any) =>
-      invokeFns([child && child.props && child.props.onAnimationStart, props.onStart], args),
-    onAnimationEnd: (...args: any) =>
-      invokeFns([child && child.props && child.props.onAnimationEnd, props.onRest], args),
-  });
+  const _generateAnimateEvents = (child: any, props: StyledAnimationProps = {}) => (
+    {
+    onAnimationiteration: (...args: any) =>
+      invokeFns([child && child.props && child.props.onAnimationiteration, props.onFrame], args),
+    onAnimationstart: (...args: any) =>
+      invokeFns([child && child.props && child.props.onAnimationstart, props.onStart], args),
+    onAnimationend: (...args: any) =>{
+      console.error(props.onRest)
+
+      return invokeFns([child && child.props && child.props.onAnimationend, props.onRest], args)
+    },
+  }
+  );
 
   const _hasSpeedClass = (speed = props.speed) => speed != null && speeds.includes(speed as string);
   const _hasTypeClass = (type = props.type) => type != null && types.includes(type);
@@ -81,6 +97,7 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
   const hasDelayClass = _hasDelayClass();
   const hasLoopClass = _hasLoopClass();
 
+  console.log(type)
   const animateCls =
     className ||
     classnames(`${prefixCls}-animated`, {
@@ -89,6 +106,7 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
       [`${prefixCls}-delay-${delay}`]: hasDelayClass,
       [`${prefixCls}-loop-${loop}`]: hasLoopClass,
     });
+  console.log(type)
 
   const animateStyle = {
     animationTimingFunction: timing,
@@ -101,19 +119,26 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
   };
 
 
+
+  // return  ()=>{
+  //   return slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
+  // }
+
   return () => {
-    if (slots.default && isVNode(slots.default())) {
+    if (slots.default && isVNode(slots.default)) {
+      debugger
       return slots.default().map(slots.default, (child: any) => {
         const animateEvents = _generateAnimateEvents(child, props);
         let style = props.style ? props.style : {}
-        return cloneVNode(child, {
-          className: classnames(child.props.className, animateCls),
-          style: {...child.props.style, ...style},
-          ...animateEvents,
-        });
+        return (cloneVNode(child, {
+            className: classnames(child.props.className, animateCls),
+            style: {...child.props.style, ...style},
+            ...animateEvents,
+          })
+        );
       });
     } else {
-      slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
+      return slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
     }
   };
 })
