@@ -180,7 +180,6 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
   const eventManager = ref<Event>(new Event);
   const triggerEl = ref(null);
   const containerEl = ref(null);
-  let clickOutsideHandler: any;
   const resizeHandler = ref(null);
   let isWrapped: boolean;
   let mounted: any;
@@ -188,6 +187,17 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
   let getPopupContainer: () => HTMLElement;
   let containerPosition: string;
 
+  const eventManagerRef = new Event();
+  const triggerElRef = ref(null);
+  const containerElRef = ref(null);
+  const clickOutsideHandler = ref(null);
+  const resizeHandlerRef = ref(null);
+  const isWrappedRef = ref(false); // Identifies whether a span element is wrapped
+  const containerPositionRef = ref(undefined);
+
+  const isInsertRef = ref(undefined)
+  const transitionStateRef = ref(undefined)
+  const containerStyleRef = ref(undefined)
 
   const state = reactive({
     visible: false,
@@ -221,11 +231,12 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       off: (...args: any[]) => eventManager.value.off(...args),
       insertPortal: (content: string, { position, ...containerStyle }: { position: Position }) => {
 
-        console.log(content)
 
         state.isInsert = true;
         state.transitionState = 'enter';
-        state.containerStyle = { ...state.containerStyle, ...containerStyle };
+        // @ts-ignore
+        state.containerStyle = { ...state.containerStyle, ...{...containerStyle,left: containerStyle.left + 'px', top: containerStyle.top + 'px'} };
+        console.log()
 
 
         nextTick(()=>{
@@ -233,7 +244,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         })
       },
       removePortal: () => {
-        console.log('removePortal')
+        //console.log('removePortal')
         state.isInsert = false;
       },
       getEventName: () => ({
@@ -246,7 +257,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         blur: 'onBlur',
       }),
       registerTriggerEvent: (triggerEventSet: Record<string, any>) => {
-        console.log(triggerEventSet)
+        //console.log(triggerEventSet)
         state.triggerEventSet = triggerEventSet
       },
       unregisterTriggerEvent: () => {},
@@ -321,12 +332,13 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         } else {
           willUpdateStates.visible = visible;
         }
+
         state.transitionState = willUpdateStates.transitionState
         state.visible = willUpdateStates.visible
 
 
 
-        console.log('willUpdateStates')
+        //console.log('willUpdateStates')
         nextTick(()=>{
           cb();
         })
@@ -413,7 +425,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
           // getComputedStyle need first parameter is Element type
           const computedStyle = window.getComputedStyle(container);
           const position = computedStyle.getPropertyValue('position');
-          console.log(position)
+          //console.log(position)
           containerPosition = position;
         }
       },
@@ -423,17 +435,6 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
 
 
   const foundationRef = ref(new TooltipFoundation(theAdapter));
-  const eventManagerRef = new Event();
-  const triggerElRef = ref(null);
-  const containerElRef = ref(null);
-  const clickOutsideHandlerRef = ref(null);
-  const resizeHandlerRef = ref(null);
-  const isWrappedRef = ref(false); // Identifies whether a span element is wrapped
-  const containerPositionRef = ref(undefined);
-
-  const isInsertRef = ref(undefined)
-  const transitionStateRef = ref(undefined)
-  const containerStyleRef = ref(undefined)
 
   const setContainerEl = (node: any) => (containerEl.value = { current: node });
 
@@ -499,7 +500,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
   }
 
   watchEffect(()=>{
-    console.log(state.willUpdateStates,props.visible,props.rePosKey);
+    //console.log(state.willUpdateStates,props.visible,props.rePosKey);
   })
 
 
@@ -549,7 +550,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
   };
 
   watch(()=>state.visible, ()=>{
-    console.log(state.visible);
+    //console.log(state.visible);
   }, {immediate:true})
   const renderPortal = () => {
     const { containerStyle = {}, visible, portalEventSet, placement, transitionState } = state;
@@ -566,7 +567,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     const portalInnerStyle = omit(containerStyle, motion ? ['transformOrigin'] : undefined);
     const transformOrigin = get(containerStyle, 'transformOrigin');
 
-    console.error(visible)
+    // console.error(visible)
     return (
       <Portal getPopupContainer={props.getPopupContainer} style={{ zIndex }}>
         <div
@@ -577,30 +578,31 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
           onClick={handlePortalInnerClick}
         >
           {motion ? (
-            <TooltipTransition position={placement} willEnter={willEnter} didLeave={didLeave} motion={motion}>
+            <TooltipTransition transitionState={state.transitionState} position={placement} willEnter={willEnter} didLeave={didLeave} motion={motion}>
               {{
-                default: transitionState === 'enter' ? ({animateCls, animateStyle, animateEvents}: any) => {
-                  console.log({animateCls, animateStyle, animateEvents, portalEventSet})
-                  console.error(className)
-                  console.error(animateCls)
-                  return (
-                    <div
-                      className={classNames(className, animateCls)}
-                      style={{
-                        visibility: 'visible',
-                        ...animateStyle,
-                        transformOrigin,
-                        ...style,
-                      }}
-                      {...portalEventSet}
-                      {...animateEvents}
-                      x-placement={placement}
-                    >
-                      {content}
-                      {icon}
-                    </div>
-                  )
-                } :null
+                default: state.transitionState === 'enter' ? ({animateCls, animateStyle, animateEvents}: any) => {
+                  //console.log({animateCls, animateStyle, animateEvents, portalEventSet})
+                  // console.error(className)
+                   console.error(animateStyle)
+
+                  return (<div
+                    className={classNames(className, animateCls)}
+                    style={{
+                      visibility: 'visible',
+                      ...animateStyle,
+                      transformOrigin,
+                      ...style,
+                    }}
+                    {...portalEventSet}
+                    {...animateEvents}
+                    x-placement={placement}
+                  >
+                    {content}
+                    {icon}
+                  </div>)
+                  } :
+                  // @ts-ignore
+                  ()=>null
               }}
             </TooltipTransition>
           ) : (
@@ -676,7 +678,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       }
     }
 
-    console.log(children.props)
+    //console.log(children.props)
     // The incoming children is a single valid element, otherwise wrap a layer with span
     const newChild = cloneVNode(children, {
       ...children.props,
@@ -692,7 +694,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       // to maintain refs with callback
       ref: (node: any) => {
         // Keep your own reference
-        (triggerEl as any).current = node;
+        triggerEl.value = node;
         // Call the original ref, if any
         const { ref } = children as any;
         // this.log('tooltip render() - get ref', ref);
@@ -704,7 +706,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       },
     });
 
-    console.log(children.props, {...mergeEvents((children).props, triggerEventSet)})
+    //console.log(children.props, {...mergeEvents((children).props, triggerEventSet)})
     // If you do not add a layer of div, in order to bind the events and className in the tooltip, you need to cloneElement children, but this time it may overwrite the children's original ref reference
     // So if the user adds ref to the content, you need to use callback ref: https://github.com/facebook/react/issues/8873
     return (

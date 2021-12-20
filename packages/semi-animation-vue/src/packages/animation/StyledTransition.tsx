@@ -9,6 +9,7 @@ export interface StyledTransitionProps extends StyledAnimationProps {
   state?: string | boolean;
   enter?: string;
   leave?: string;
+  transitionState:string
   willEnter?: (value: any) => void;
   didEnter?: (value: any) => void;
   willLeave?: (value: any) => void;
@@ -23,9 +24,12 @@ export const vuePropsType = {
   name: String,
   position: String,
   motion: [Boolean],
+  transitionState: String,
 
-
-  state: [String, Boolean],
+  state: {
+    type: [String, Boolean],
+    default: undefined as any
+  },
   from: Object,
   enter: String,
   leave: String,
@@ -67,7 +71,7 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
 
 
   let instance: any;
-  const state = ref<string | boolean>('enter')
+  const state = ref<string | boolean>('')
   const lastChildren = ref(null)
   const currentChildren = ref(null)
 
@@ -83,19 +87,25 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
 
 
   // TODO getDerivedStateFromProps
-  onMounted(()=>{
-    if (slots.default() !== currentChildren.value) {
+  watch([()=>props.transitionState], (newData, preData)=>{
+    console.error(newData, preData)
+    if (slots.default !== currentChildren.value) {
       lastChildren.value = currentChildren.value;
-      currentChildren.value = slots.default();
+      currentChildren.value = slots.default;
+
 
       if (slots.default == null) {
         state.value = 'leave';
       } else {
         state.value = 'enter';
       }
-    }
 
-    if (props.state != null && props.state !== state.value) {
+    }
+    console.log(state.value)
+  }, {immediate: true})
+
+  watch(()=>props.state , ()=>{
+    if (props.state != null) {
       state.value = props.state;
     }
   })
@@ -108,29 +118,29 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
     instance = instance0;
   };
 
-  const onRest = (props: any) => {
-    console.log('onRest')
+  const onRest = (thisProps: any) => {
+    console.log(state.value )
 
     if (state.value === 'enter') {
-      props.didEnter(props);
+      props.didEnter(thisProps);
     } else if (state.value === 'leave') {
       currentChildren.value = null
       lastChildren.value = null
-      props.didLeave(props);
+      props.didLeave(thisProps);
     }
 
-    props.onRest(props);
+    props.onRest(thisProps);
   };
 
-  const onStart = (funcProps: any) => {
+  const onStart = (thisProps: any) => {
 
     if (state.value === 'enter') {
-      props.willEnter(funcProps);
+      props.willEnter(thisProps);
     } else if (state.value === 'leave') {
-      props.willLeave(funcProps);
+      props.willLeave(thisProps);
     }
 
-    props.onStart(funcProps);
+    props.onStart(thisProps);
   };
 
 
@@ -144,13 +154,12 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
 
     let children:any, type: string;
 
-    let thisSate:any = state.value;
+    let thisSate:any = JSON.parse(JSON.stringify(state.value));
 
 
     if (isControlled) {
       children = slots.default;
       thisSate = props.state;
-      debugger
     } else if (currentChildren == null && lastChildren == null) {
       return null;
     }
@@ -159,25 +168,23 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
       type = enter;
 
       if (!isControlled) {
-        children = currentChildren;
+        children = currentChildren.value;
       }
     } else if (thisSate === 'leave') {
       type = leave;
 
       if (!isControlled) {
-        children = lastChildren;
+        children = lastChildren.value;
       }
     }
 
     const props_ =  {...{...restProps,type,onStart,onRest}}
-    console.log(thisSate, props_)
-    debugger
-    return (
-      <StyledAnimation>
+    return (typeof children === 'function'?
+      <StyledAnimation {...props_}>
         {{
           default: (arg:any)=>children(arg)
         }}
-      </StyledAnimation>
+      </StyledAnimation>:null
     )
   };
 })

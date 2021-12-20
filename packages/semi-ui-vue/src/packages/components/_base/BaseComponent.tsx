@@ -43,14 +43,14 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
       },
       getContexts: () => context, // eslint-disable-line
       getProp: key => {
-        // console.log(key,props,props[key])
+        // //console.log(key,props,props[key])
         return props[key]
       }, // eslint-disable-line
       // return all props
       // @ts-ignore
       getProps: () => props, // eslint-disable-line
       getState: key => {
-        console.log(key,state,state[key])
+        //console.log(key,state,state[key])
         return state[key]
       }, // eslint-disable-line
       getStates: () => state, // eslint-disable-line

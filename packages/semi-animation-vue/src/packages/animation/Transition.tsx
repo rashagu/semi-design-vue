@@ -62,7 +62,6 @@ const Transition = defineComponent<TransitionProps>((props, {slots}) => {
 
   onMounted(() => {
 
-    console.log('ccccc', props)
     if (instance) {
       instance.destroy();
       instance = null;
@@ -77,8 +76,6 @@ const Transition = defineComponent<TransitionProps>((props, {slots}) => {
   };
 
   const onRest = (funcProps: any) => {
-    console.log('t', 'onRest')
-
     if (state.value === 'enter') {
       props.didEnter(funcProps);
     } else if (state.value === 'leave') {
@@ -91,7 +88,6 @@ const Transition = defineComponent<TransitionProps>((props, {slots}) => {
   };
 
   const onStart = (funcProps: any) => {
-    console.log('t', 'onStart', props)
 
     if (state.value === 'enter') {
       props.willEnter(funcProps);

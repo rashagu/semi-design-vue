@@ -11,6 +11,9 @@ export interface TooltipTransitionProps {
   position:string,
   willEnter:any,
   didLeave:any,
+  didEnter:any,
+  state:any,
+  transitionState: string,
 
   [key: string]: any;
   children?: (arg: any) => any;
@@ -19,9 +22,11 @@ export interface TooltipTransitionProps {
 
 export const vuePropsType = {
   className: String,
+  transitionState: String,
   name: String,
   position: String,
   willEnter: Function,
+  didEnter: Function,
   didLeave: Function,
   motion: [Boolean],
 }
@@ -33,10 +38,10 @@ const TooltipStyledTransition = defineComponent<TooltipTransitionProps>((props, 
     return (
       <StyledTransition {...props} enter={enterCls} leave={leaveCls} duration={'100ms'} {...motion}>
         {{
-          default: (p:{ animateCls:any, animateEvents:any, animateStyle:any }) => {
+          default: slots.default?(p:{ animateCls:any, animateEvents:any, animateStyle:any }) => {
             const { animateCls, animateEvents, animateStyle } = p
             return slots.default({ animateCls, animateEvents, animateStyle })
-          }
+          }:null
         }}
       </StyledTransition>
     )

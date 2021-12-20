@@ -292,7 +292,7 @@ export default class Tooltip<P = Record<string, any>, S = Record<string, any>> e
 
     _togglePortalVisible(isVisible: boolean) {
         const nowVisible = this.getState('visible');
-        console.log('nowVisible',nowVisible)
+        // console.log('nowVisible',nowVisible)
         if (nowVisible !== isVisible) {
             this._adapter.togglePortalVisible(isVisible, () => this._adapter.notifyVisibleChange(isVisible));
         }

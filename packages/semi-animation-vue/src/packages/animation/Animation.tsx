@@ -123,8 +123,6 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
   })
 
   watch([() => props.from, () => props.to], (n, [prevPropsFrom, prevPropsTo]) => {
-    console.log('props.from to', prevPropsFrom, prevPropsTo)
-    console.log(props)
 
     if (props.reset) {
       if (props.from !== prevPropsFrom || props.to !== prevPropsTo) {
@@ -157,7 +155,6 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
       [from, to] = [to, from];
     }
 
-    console.log(from, to)
     const initState = new SemiAnimation(
       {
         from: {...from},
@@ -167,7 +164,6 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
         ...config,
       }
     )
-    console.log(initState)
     animation.value = initState;
 
     events.forEach((event: string) => {

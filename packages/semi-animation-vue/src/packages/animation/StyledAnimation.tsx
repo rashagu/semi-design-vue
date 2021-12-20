@@ -20,6 +20,7 @@ export interface StyledAnimationProps {
   timing?: string;
   duration?: string | number;
   fillMode?: string;
+  transitionState?: string,
 }
 
 const types: any = Object.values(styledTypes).reduce((arr, cur) => [...arr as any, ...cur as any], []);
@@ -35,7 +36,7 @@ export const vuePropsType = {
   motion: [Object, String, Boolean, Function],
   name: [Object, String, Boolean, Function],
   position: [Object, String, Boolean, Function],
-
+  transitionState: String,
 
   className: String,
   type: [Object, String],
@@ -97,7 +98,6 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
   const hasDelayClass = _hasDelayClass();
   const hasLoopClass = _hasLoopClass();
 
-  console.log(type)
   const animateCls =
     className ||
     classnames(`${prefixCls}-animated`, {
@@ -106,7 +106,6 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
       [`${prefixCls}-delay-${delay}`]: hasDelayClass,
       [`${prefixCls}-loop-${loop}`]: hasLoopClass,
     });
-  console.log(type)
 
   const animateStyle = {
     animationTimingFunction: timing,
@@ -120,13 +119,12 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
 
 
 
-  // return  ()=>{
-  //   return slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
-  // }
+  return  ()=>{
+    return slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
+  }
 
   return () => {
     if (slots.default && isVNode(slots.default)) {
-      debugger
       return slots.default().map(slots.default, (child: any) => {
         const animateEvents = _generateAnimateEvents(child, props);
         let style = props.style ? props.style : {}
