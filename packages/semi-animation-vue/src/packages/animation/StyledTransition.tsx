@@ -85,20 +85,30 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
 
 
 
+  // TODO getDerivedStateFromProps
+  // onMounted(()=>{
+  //   if (slots.default !== currentChildren.value) {
+  //     lastChildren.value = currentChildren.value;
+  //     currentChildren.value = slots.default;
+  //
+  //
+  //     if (slots.default == null) {
+  //       state.value = 'leave';
+  //     } else {
+  //       state.value = 'enter';
+  //     }
+  //   }
+  // })
 
   // TODO getDerivedStateFromProps
-  watch([()=>props.transitionState], (newData, preData)=>{
+  watch(()=>props.transitionState, (newData, preData)=>{
     console.error(newData, preData)
     if (slots.default !== currentChildren.value) {
       lastChildren.value = currentChildren.value;
       currentChildren.value = slots.default;
 
 
-      if (slots.default == null) {
-        state.value = 'leave';
-      } else {
-        state.value = 'enter';
-      }
+      state.value = newData;
 
     }
     console.log(state.value)
@@ -179,12 +189,15 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
     }
 
     const props_ =  {...{...restProps,type,onStart,onRest}}
-    return (typeof children === 'function'?
-      <StyledAnimation {...props_}>
+    console.log(thisSate,type)
+    return (
+      <StyledAnimation {...{...restProps,type,onStart,onRest}}>
         {{
-          default: (arg:any)=>children(arg)
+          default: typeof children === 'function'?(arg:any)=>children(arg):
+            // @ts-ignore
+            ()=>null
         }}
-      </StyledAnimation>:null
+      </StyledAnimation>
     )
   };
 })

@@ -576,14 +576,15 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
           style={portalInnerStyle}
           ref={setContainerEl}
           onClick={handlePortalInnerClick}
-        >
+        >{state.transitionState}
           {motion ? (
             <TooltipTransition transitionState={state.transitionState} position={placement} willEnter={willEnter} didLeave={didLeave} motion={motion}>
-              {{
-                default: state.transitionState === 'enter' ? ({animateCls, animateStyle, animateEvents}: any) => {
+              {{//state.transitionState === 'enter'
+                default: true ? ({animateCls, animateStyle, animateEvents}: any) => {
                   //console.log({animateCls, animateStyle, animateEvents, portalEventSet})
                   // console.error(className)
-                   console.error(animateStyle)
+                  // TODO 离开时 先 改变 样式再消失
+                   console.error(state.transitionState,animateStyle)
 
                   return (<div
                     className={classNames(className, animateCls)}

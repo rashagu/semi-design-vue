@@ -80,46 +80,47 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
   const _hasLoopClass = (loop = props.loop) => loop != null && loops.includes(loop as string);
 
 
-  let {
-    type,
-    speed,
-    duration,
-    delay,
-    loop,
-    reverse,
-    prefixCls,
-    timing,
-    className,
-    fillMode,
-  } = props;
-
-  const hasTypeClass = _hasTypeClass();
-  const hasSpeedClass = _hasSpeedClass();
-  const hasDelayClass = _hasDelayClass();
-  const hasLoopClass = _hasLoopClass();
-
-  const animateCls =
-    className ||
-    classnames(`${prefixCls}-animated`, {
-      [`${prefixCls}-${type}`]: Boolean(type), // How to use it before compatibility
-      [`${prefixCls}-speed-${speed}`]: hasSpeedClass,
-      [`${prefixCls}-delay-${delay}`]: hasDelayClass,
-      [`${prefixCls}-loop-${loop}`]: hasLoopClass,
-    });
-
-  const animateStyle = {
-    animationTimingFunction: timing,
-    animationName: !hasTypeClass && type,
-    animationDuration: duration,
-    animationDelay: !hasDelayClass && delay,
-    animationIterationCount: !hasLoopClass && loop,
-    animationDirection: reverse ? 'alternate' : 'normal',
-    animationFillMode: fillMode,
-  };
 
 
 
   return  ()=>{
+
+    let {
+      type,
+      speed,
+      duration,
+      delay,
+      loop,
+      reverse,
+      prefixCls,
+      timing,
+      className,
+      fillMode,
+    } = props;
+
+    const hasTypeClass = _hasTypeClass();
+    const hasSpeedClass = _hasSpeedClass();
+    const hasDelayClass = _hasDelayClass();
+    const hasLoopClass = _hasLoopClass();
+
+    const animateCls =
+      className ||
+      classnames(`${prefixCls}-animated`, {
+        [`${prefixCls}-${type}`]: Boolean(type), // How to use it before compatibility
+        [`${prefixCls}-speed-${speed}`]: hasSpeedClass,
+        [`${prefixCls}-delay-${delay}`]: hasDelayClass,
+        [`${prefixCls}-loop-${loop}`]: hasLoopClass,
+      });
+
+    const animateStyle = {
+      animationTimingFunction: timing,
+      animationName: !hasTypeClass && type,
+      animationDuration: duration,
+      animationDelay: !hasDelayClass && delay,
+      animationIterationCount: !hasLoopClass && loop,
+      animationDirection: reverse ? 'alternate' : 'normal',
+      animationFillMode: fillMode,
+    };
     return slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
   }
 
