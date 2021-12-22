@@ -67,7 +67,7 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
     onAnimationstart: (...args: any) =>
       invokeFns([child && child.props && child.props.onAnimationstart, props.onStart], args),
     onAnimationend: (...args: any) =>{
-      console.error(props.onRest)
+      // console.error(props.onRest)
 
       return invokeFns([child && child.props && child.props.onAnimationend, props.onRest], args)
     },
@@ -123,23 +123,23 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
     };
     return slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
   }
-
-  return () => {
-    if (slots.default && isVNode(slots.default)) {
-      return slots.default().map(slots.default, (child: any) => {
-        const animateEvents = _generateAnimateEvents(child, props);
-        let style = props.style ? props.style : {}
-        return (cloneVNode(child, {
-            className: classnames(child.props.className, animateCls),
-            style: {...child.props.style, ...style},
-            ...animateEvents,
-          })
-        );
-      });
-    } else {
-      return slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
-    }
-  };
+  //
+  // return () => {
+  //   if (slots.default && isVNode(slots.default)) {
+  //     return slots.default().map(slots.default, (child: any) => {
+  //       const animateEvents = _generateAnimateEvents(child, props);
+  //       let style = props.style ? props.style : {}
+  //       return (cloneVNode(child, {
+  //           className: classnames(child.props.className, animateCls),
+  //           style: {...child.props.style, ...style},
+  //           ...animateEvents,
+  //         })
+  //       );
+  //     });
+  //   } else {
+  //     return slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
+  //   }
+  // };
 })
 
 StyledAnimation.props = vuePropsType

@@ -39,8 +39,12 @@ const TooltipStyledTransition = defineComponent<TooltipTransitionProps>((props, 
       <StyledTransition {...props} enter={enterCls} leave={leaveCls} duration={'100ms'} {...motion}>
         {{
           default: slots.default?(p:{ animateCls:any, animateEvents:any, animateStyle:any }) => {
-            const { animateCls, animateEvents, animateStyle } = p
-            return slots.default({ animateCls, animateEvents, animateStyle })
+            if (p){
+              const { animateCls, animateEvents, animateStyle } = p
+              return slots.default({ animateCls, animateEvents, animateStyle })
+            }else{
+              return  null
+            }
           }:null
         }}
       </StyledTransition>

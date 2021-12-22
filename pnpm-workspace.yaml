@@ -1,2 +1,4 @@
 packages:
-  - 'packages/**'
+  - 'packages/semi-animation-vue'
+  - 'packages/semi-icons-vue'
+  - 'packages/semi-ui-vue'

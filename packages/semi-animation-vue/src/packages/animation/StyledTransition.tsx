@@ -2,8 +2,6 @@ import {defineComponent, ref, h, onActivated, Fragment, onMounted, watch} from '
 import PropTypes from 'prop-types';
 import StyledAnimation, {StyledAnimationProps} from './StyledAnimation';
 import noop from './utils/noop';
-import {Slot} from "@vue/test-utils/dist/types";
-import {SpinProps} from "@kousum/semi-ui-vue/src/packages/components/spin";
 
 export interface StyledTransitionProps extends StyledAnimationProps {
   state?: string | boolean;
@@ -101,18 +99,19 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
   // })
 
   // TODO getDerivedStateFromProps
-  watch(()=>props.transitionState, (newData, preData)=>{
-    console.error(newData, preData)
+  watch([()=>props.transitionState, currentChildren,lastChildren], (newData, preData)=>{
+    // console.log(props, state);
+    // console.error(newData, preData)
     if (slots.default !== currentChildren.value) {
       lastChildren.value = currentChildren.value;
       currentChildren.value = slots.default;
 
-
-      state.value = newData;
+      state.value = props.transitionState;
 
     }
-    console.log(state.value)
+    // console.log(state.value)
   }, {immediate: true})
+
 
   watch(()=>props.state , ()=>{
     if (props.state != null) {
@@ -129,7 +128,7 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
   };
 
   const onRest = (thisProps: any) => {
-    console.log(state.value )
+    // console.log(state.value )
 
     if (state.value === 'enter') {
       props.didEnter(thisProps);
@@ -155,7 +154,6 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
 
 
   return ()=>{
-
 
     const { enter, leave, ...restProps } = props;
 
@@ -189,7 +187,7 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
     }
 
     const props_ =  {...{...restProps,type,onStart,onRest}}
-    console.log(thisSate,type)
+    // console.log(thisSate,type)
     return (
       <StyledAnimation {...{...restProps,type,onStart,onRest}}>
         {{

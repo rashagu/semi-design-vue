@@ -235,7 +235,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         state.isInsert = true;
         state.transitionState = 'enter';
         // @ts-ignore
-        state.containerStyle = { ...state.containerStyle, ...{...containerStyle,left: containerStyle.left + 'px', top: containerStyle.top + 'px'} };
+        state.containerStyle = containerStyle;
         console.log()
 
 
@@ -273,7 +273,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         let triggerDOM = triggerEl.value;
         if (!isHTMLElement(triggerEl.value)) {
           const realDomNode = triggerEl.value;
-          (triggerEl as any).current = realDomNode;
+          (triggerEl.value as any).current = realDomNode;
           triggerDOM = realDomNode;
         }
         return triggerDOM && (triggerDOM as Element).getBoundingClientRect();
@@ -308,7 +308,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       containerIsRelativeOrAbsolute: () => ['relative', 'absolute'].includes(containerPosition),
       // Get the size of the pop-up layer
       getWrapperBounding: () => {
-        const el = containerEl && containerEl.current;
+        const el = containerEl.value && containerEl.value.current;
         return el && (el as Element).getBoundingClientRect();
       },
       getDocumentElementBounding: () => document.documentElement.getBoundingClientRect(),
@@ -316,6 +316,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         state.containerStyle = { ...state.containerStyle, ...style }
         state.placement = position
         nextTick(()=>{
+          console.log('positionUpdated')
           eventManager.value.emit('positionUpdated');
         })
 
@@ -327,6 +328,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         const willUpdateStates: Partial<TooltipState> = {};
 
         if (theAdapter.canMotion()) {
+          console.log(visible ? 'enter' : 'leave');
           willUpdateStates.transitionState = visible ? 'enter' : 'leave';
           willUpdateStates.visible = visible;
         } else {
@@ -351,10 +353,8 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
           if (!mounted) {
             return false;
           }
-          let el = triggerEl && triggerEl.value;
-          let popupEl = containerEl && containerEl.current;
-          el = el;
-          popupEl = popupEl;
+          let el = triggerEl.value && triggerEl.value;
+          let popupEl = containerEl.value && containerEl.value.current;
           if (
             (el && !(el as any).contains(e.target) && popupEl && !(popupEl as any).contains(e.target)) ||
             props.clickTriggerToHide
@@ -486,7 +486,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     // this.setState({ visible: true });
   };
   const didLeave = () => {
-    console.error('didLeave')
+    // console.error('didLeave')
     theAdapter.unregisterClickOutsideHandler();
     theAdapter.unregisterScrollHandler();
     theAdapter.unregisterResizeHandler();
@@ -516,6 +516,10 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
   })
   watch(()=>props.rePosKey, ()=>{
     rePosition();
+  })
+
+  watch(state, ()=>{
+    // console.log(state)
   })
 
 
@@ -564,27 +568,30 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       [`${prefixCls}-rtl`]: direction === 'rtl',
     });
     const icon = renderIcon();
-    const portalInnerStyle = omit(containerStyle, motion ? ['transformOrigin'] : undefined);
+    let portalInnerStyle:CSSProperties = omit(containerStyle, motion ? ['transformOrigin'] : undefined);
     const transformOrigin = get(containerStyle, 'transformOrigin');
 
     // console.error(visible)
+    console.error(portalInnerStyle)
+    portalInnerStyle = { ...portalInnerStyle, ...{...portalInnerStyle,left: portalInnerStyle.left + 'px', top: portalInnerStyle.top + 'px'} }
     return (
       <Portal getPopupContainer={props.getPopupContainer} style={{ zIndex }}>
         <div
-
           class={`${BASE_CLASS_PREFIX}-portal-inner`}
           style={portalInnerStyle}
           ref={setContainerEl}
           onClick={handlePortalInnerClick}
-        >{state.transitionState}
+        >
           {motion ? (
             <TooltipTransition transitionState={state.transitionState} position={placement} willEnter={willEnter} didLeave={didLeave} motion={motion}>
               {{//state.transitionState === 'enter'
-                default: true ? ({animateCls, animateStyle, animateEvents}: any) => {
+                // TODO 离开时 先 改变 样式再消失
+                // default: state.transitionState === 'enter' ? ({animateCls, animateStyle, animateEvents}: any) => {
+                default: ({animateCls, animateStyle, animateEvents}: any) => {
+
                   //console.log({animateCls, animateStyle, animateEvents, portalEventSet})
                   // console.error(className)
-                  // TODO 离开时 先 改变 样式再消失
-                   console.error(state.transitionState,animateStyle)
+                  //  console.error(state.transitionState,animateStyle)
 
                   return (<div
                     className={classNames(className, animateCls)}
@@ -601,9 +608,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
                     {content}
                     {icon}
                   </div>)
-                  } :
-                  // @ts-ignore
-                  ()=>null
+                }
               }}
             </TooltipTransition>
           ) : (
@@ -712,7 +717,6 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     // So if the user adds ref to the content, you need to use callback ref: https://github.com/facebook/react/issues/8873
     return (
       <div>
-        {JSON.stringify(state.isInsert)}
         {state.isInsert ? renderPortal() : null}
         {newChild}
       </div>

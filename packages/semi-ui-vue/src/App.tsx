@@ -13,7 +13,7 @@ export const VuePropsType = {
 const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   return () => (
-    <div id={'a'}  style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap',padding:'10rem'}}>
+    <div id={'a'}  style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
       {/*<Button />*/}
 
       {/*<IconTest />*/}

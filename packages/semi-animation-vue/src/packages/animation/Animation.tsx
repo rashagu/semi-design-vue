@@ -107,7 +107,7 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
     _mounted = true;
     const {forwardInstance} = props;
     if (typeof forwardInstance === 'function') {
-      console.error(forwardInstance)
+      // console.error(forwardInstance)
       forwardInstance(animation.value);
     }
 
