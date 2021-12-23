@@ -15,7 +15,7 @@ export const vuePropsType = {
 }
 const DropdownMenu = defineComponent<DropdownMenuProps>((props, {slots}) => {
   const { className, style, ...rest } = props;
-  return (
+  return ()=>(
     <ul {...rest} class={classnames(`${prefixCls}-menu`, className)} style={style}>
       {slots.default?slots.default():null}
     </ul>

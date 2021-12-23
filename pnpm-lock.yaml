@@ -146,7 +146,7 @@ importers:
       ts-node: ^10.4.0
       typescript: ^4.4.4
       utility-types: ^3.10.0
-      vite: ^2.7.0
+      vite: 2.7.4
       vue: ^3.2.23
       vue-tsc: ^0.28.10
     dependencies:
@@ -169,7 +169,7 @@ importers:
     devDependencies:
       '@types/jest': 27.0.3
       '@types/prop-types': 15.7.4
-      '@vitejs/plugin-vue': 1.10.2_vite@2.7.5
+      '@vitejs/plugin-vue': 1.10.2_vite@2.7.4
       '@vitejs/plugin-vue-jsx': 1.3.3
       '@vue/test-utils': 2.0.0-rc.18_vue@3.2.26
       '@vue/vue3-jest': 27.0.0-alpha.4_125e3f238a30c362b838d36f450e3b91
@@ -180,7 +180,7 @@ importers:
       ts-jest: 27.1.2_dee0b726dbd276697ee4962bafb31db0
       ts-node: 10.4.0_3fe8d9d895bdd4dd9a3533ca7d84518e
       typescript: 4.5.4
-      vite: 2.7.5_sass@1.45.1
+      vite: 2.7.4_sass@1.45.1
       vue-tsc: 0.28.10_typescript@4.5.4
 
 packages:
@@ -1913,6 +1913,15 @@ packages:
       hash-sum: 2.0.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@vitejs/plugin-vue/1.10.2_vite@2.7.4:
+    resolution: {integrity: sha512-/QJ0Z9qfhAFtKRY+r57ziY4BSbGUTGsPRMpB/Ron3QPwBZM4OZAZHdTa4a8PafCwU5DTatXG8TMDoP8z+oDqJw==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      vite: ^2.5.10
+    dependencies:
+      vite: 2.7.4_sass@1.45.1
     dev: true
 
   /@vitejs/plugin-vue/1.10.2_vite@2.7.5:
@@ -7284,6 +7293,31 @@ packages:
       assert-plus: 1.0.0
       core-util-is: 1.0.2
       extsprintf: 1.3.0
+    dev: true
+
+  /vite/2.7.4_sass@1.45.1:
+    resolution: {integrity: sha512-f+0426k9R/roz5mRNwJlQ+6UOnhCwIypJSbfgCmsVzVJe9jTTM5iRX2GWYUean+iqPBWaU/dYLryx9AoH2pmrw==}
+    engines: {node: '>=12.2.0'}
+    hasBin: true
+    peerDependencies:
+      less: '*'
+      sass: '*'
+      stylus: '*'
+    peerDependenciesMeta:
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+    dependencies:
+      esbuild: 0.13.15
+      postcss: 8.4.5
+      resolve: 1.20.0
+      rollup: 2.61.1
+      sass: 1.45.1
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /vite/2.7.5_sass@1.45.1:

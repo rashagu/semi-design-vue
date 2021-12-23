@@ -108,7 +108,7 @@ export const vuePropsType = {
     type: String,
     default: 'top'
   },
-  getPopupContainer: () => HTMLElement,
+  getPopupContainer: Function,
   mouseEnterDelay: {
     type: Number,
     default: numbers.MOUSE_ENTER_DELAY
@@ -125,7 +125,7 @@ export const vuePropsType = {
   clickToHide: Boolean,
   visible: Boolean,
   style: [Object,  String],
-  content: [Object,  String],
+  content: [Object,  String, Number],
   prefixCls: {
     type: String,
     default: prefix,
@@ -178,7 +178,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
 
 
   const eventManager = ref<Event>(new Event);
-  const triggerEl = ref(null);
+  let triggerEl = ref(null);
   const containerEl = ref(null);
   const resizeHandler = ref(null);
   let isWrapped: boolean;
@@ -271,11 +271,6 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         // It may be a React component or an html element
         // There is no guarantee that triggerE l.current can get the real dom, so call findDOMNode to ensure that you can get the real dom
         let triggerDOM = triggerEl.value;
-        if (!isHTMLElement(triggerEl.value)) {
-          const realDomNode = triggerEl.value;
-          (triggerEl.value as any).current = realDomNode;
-          triggerDOM = realDomNode;
-        }
         return triggerDOM && (triggerDOM as Element).getBoundingClientRect();
       },
       // Gets the outer size of the specified container
@@ -353,7 +348,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
           if (!mounted) {
             return false;
           }
-          let el = triggerEl.value && triggerEl.value;
+          let el = triggerEl.value;
           let popupEl = containerEl.value && containerEl.value.current;
           if (
             (el && !(el as any).contains(e.target) && popupEl && !(popupEl as any).contains(e.target)) ||
@@ -699,6 +694,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       ),
       // to maintain refs with callback
       ref: (node: any) => {
+        console.log(node)
         // Keep your own reference
         triggerEl.value = node;
         // Call the original ref, if any
@@ -727,4 +723,5 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
 Index.props = vuePropsType
 
 export default Index
+
 

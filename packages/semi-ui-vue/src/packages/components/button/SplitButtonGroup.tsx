@@ -17,7 +17,7 @@ export const vuePropsType = {
 const SplitButtonGroup = defineComponent<SplitButtonGroupProps>((props, {slots}) => {
   const { style, className } = props;
   const cls = classNames(`${prefixCls}-split`, className);
-  return (
+  return ()=>(
     <div class={cls} style={style}>
       {slots.default?slots.default():null}
     </div>

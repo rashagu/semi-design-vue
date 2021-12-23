@@ -64,6 +64,7 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
 
     const getContainer = props.getPopupContainer || context.getPopupContainer || defaultGetContainer;
     const container = getContainer();
+    console.log(container)
     if (container !== containerRef.value) {
       // const computedStyle = window.getComputedStyle(container);
       // if (computedStyle.position !== 'relative') {

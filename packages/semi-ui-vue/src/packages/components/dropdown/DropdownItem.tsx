@@ -17,7 +17,6 @@ export interface DropdownItemProps extends BaseProps {
   onMouseEnter?: (payload: MouseEvent) => void;
   onMouseLeave?: (payload: MouseEvent) => void;
   onContextMenu?: (payload: MouseEvent) => void;
-  forwardRef?: (ele: any) => void;
   type?: Type;
   active?: boolean;
   icon?: JSX.Element;
@@ -27,11 +26,20 @@ export interface DropdownItemProps extends BaseProps {
 const prefixCls = css.PREFIX;
 
 export const vuePropsType = {
-  name: String
+  name: String,
+  disabled:Boolean,
+  selected:Boolean,
+  onClick: Function,
+  onMouseEnter: Function,
+  onMouseLeave: Function,
+  onContextMenu: Function,
+  type: String,
+  active: Boolean,
+  icon: Object,
 }
 const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
 
-  const { children, disabled, className, forwardRef, style, type, active, icon } = props;
+  const { disabled, className, style, type, active, icon } = props;
 
   const context = inject('DropdownContext', DropdownContext);
 
@@ -50,7 +58,7 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
       events[eventName] = props[eventName];
     });
   }
-  let tick = null;
+  let tick:any = null;
   switch (true) {
     case showTick && active:
       tick = <IconTick />;
@@ -62,7 +70,7 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
       tick = null;
       break;
   }
-  let iconContent = null;
+  let iconContent:any = null;
   if (icon) {
     iconContent = (
       <div class={`${prefixCls}-item-icon`}>
@@ -70,11 +78,11 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
       </div>
     );
   }
-  return (
-    <li {...events} ref={(ref) => forwardRef(ref)} class={itemclass} style={style}>
+  return ()=>(
+    <li {...events} class={itemclass} style={style}>
       {tick}
       {iconContent}
-      {children}
+      {slots.default?slots.default():null}
     </li>
   );
 })

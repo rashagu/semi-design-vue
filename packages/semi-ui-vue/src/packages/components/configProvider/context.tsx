@@ -7,6 +7,7 @@ export interface ContextValue {
     locale?: Locale;
     children?: JSX.Element;
     getPopupContainer?(): HTMLElement;
+    level?:number
 }
 
 const ConfigContext:ContextValue = {};

@@ -3,11 +3,10 @@ import BaseButton, { ButtonProps as BaseButtonProps, vuePropsType} from './Butto
 import {noop} from "@douyinfe/semi-foundation/utils/function";
 import {cssClasses} from "@douyinfe/semi-foundation/button/constants";
 import IconButton, { IconButtonProps } from '../iconButton/Index';
-export { SplitButtonGroupProps } from './SplitButtonGroup';
 
 
 
-// eslint-disable-next-line 
+// eslint-disable-next-line
 export interface ButtonProps extends IconButtonProps,BaseButtonProps {} // TODO check
 
 

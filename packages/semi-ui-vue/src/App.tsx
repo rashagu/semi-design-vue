@@ -1,7 +1,8 @@
-import {defineComponent, ref, h, onMounted,} from 'vue'
-// import Button from "./packages/components/button/Demo";
+import {defineComponent, ref, h, onMounted, watch,} from 'vue'
+import Button from "./packages/components/button/Demo";
 import IconTest from "./__test__/IconTest";
 import TootipDemo from "./packages/components/tooltip/__test__/TootipDemo";
+import DropdownDemo1 from "./packages/components/dropdown/__test__/DropdownDemo1";
 export interface ExampleProps {
   name?: string
 }
@@ -12,12 +13,20 @@ export const VuePropsType = {
 
 const App = defineComponent<ExampleProps>((props, {slots}) => {
 
+  const a = ref(null)
+  watch(a, ()=>{
+    console.log(a)
+  })
   return () => (
-    <div id={'a'}  style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
-      {/*<Button />*/}
+    <div>
+      <div ref={a}>123</div>
+      <div id={'a'}  style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
+        <Button />
 
-      {/*<IconTest />*/}
-      <TootipDemo />
+        {/*<IconTest />*/}
+        {/*<TootipDemo />*/}
+      </div>
+      <DropdownDemo1/>
     </div>
   )
 })

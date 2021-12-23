@@ -19,7 +19,7 @@ const DropdownTitle = defineComponent<DropdownTitleProps>((props, {slots}) => {
     [`${prefixCls}-title`]: true,
     [`${prefixCls}-title-withTick`]: showTick,
   }, className);
-  return (
+  return ()=>(
     <div class={titleCls} style={style}>
       {slots.default?slots.default():null}
     </div>

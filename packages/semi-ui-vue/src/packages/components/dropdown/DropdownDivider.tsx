@@ -8,7 +8,10 @@ import { BaseProps } from '../_base/baseComponent';
 
 const prefixCls = cssClasses.PREFIX;
 
-export type DropdownDividerProps = BaseProps;
+export interface DropdownDividerProps extends BaseProps {
+
+
+}
 
 
 export const vuePropsType = {
@@ -18,7 +21,7 @@ export const vuePropsType = {
 const DropdownDivider = defineComponent<DropdownDividerProps>((props, {slots}) => {
 
   const { style, className } = props;
-  return <div class={classnames(`${prefixCls}-divider`, className)} style={style} />;
+  return ()=> <div class={classnames(`${prefixCls}-divider`, className)} style={style}/>;
 })
 
 DropdownDivider.props = vuePropsType
