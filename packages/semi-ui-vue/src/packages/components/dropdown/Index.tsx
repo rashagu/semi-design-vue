@@ -142,6 +142,7 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
   provide('contextValue', contextValue)
   function renderContent() {
     const { render, menu } = props;
+    console.log(props)
     let content:any = null;
     if (isVNode(render)) {
       content = render;
@@ -192,6 +193,7 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
           return null;
       }
     });
+    console.log(content)
     return <DropdownMenu>{{default:()=>content}}</DropdownMenu>;
   }
 
@@ -220,6 +222,10 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
       motion,
       style,
       prefixCls,
+      menu,
+      render,
+      showTick,
+      contentClassName,
       ...attr
     } = props;
     let { spacing } = props;

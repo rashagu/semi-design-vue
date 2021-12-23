@@ -20,6 +20,7 @@ export interface ButtonProps {
     circle?: boolean;
     disabled?: boolean;
     className?: string;
+    htmlType?:"button" | "reset" | "submit",
     icon?: any;
     iconPosition?: 'left' | 'right';
     loading?: boolean;
@@ -49,11 +50,13 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
         type,
         prefixCls,
         iconPosition,
+        htmlType,
         ...attr
     } = props;
 
     const baseProps = {
         disabled,
+        type:htmlType,
         ...attr,
         className: classNames(
           prefixCls,
@@ -72,8 +75,8 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
         ),
     };
 
+    console.log(baseProps)
     return ()=>(
-      // eslint-disable-next-line react/button-has-type
       <button
         {...baseProps}
         onClick={props.onClick}

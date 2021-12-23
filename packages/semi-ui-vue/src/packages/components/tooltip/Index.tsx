@@ -236,7 +236,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         state.transitionState = 'enter';
         // @ts-ignore
         state.containerStyle = containerStyle;
-        console.log()
+        // console.log()
 
 
         nextTick(()=>{
@@ -270,8 +270,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         // eslint-disable-next-line
         // It may be a React component or an html element
         // There is no guarantee that triggerE l.current can get the real dom, so call findDOMNode to ensure that you can get the real dom
-        let triggerDOM = triggerEl.value;
-        return triggerDOM && (triggerDOM as Element).getBoundingClientRect();
+        return triggerEl.value && triggerEl.value.getBoundingClientRect();
       },
       // Gets the outer size of the specified container
       getPopupContainerRect: () => {
@@ -311,7 +310,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         state.containerStyle = { ...state.containerStyle, ...style }
         state.placement = position
         nextTick(()=>{
-          console.log('positionUpdated')
+          // console.log('positionUpdated')
           eventManager.value.emit('positionUpdated');
         })
 
@@ -323,7 +322,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         const willUpdateStates: Partial<TooltipState> = {};
 
         if (theAdapter.canMotion()) {
-          console.log(visible ? 'enter' : 'leave');
+          // console.log(visible ? 'enter' : 'leave');
           willUpdateStates.transitionState = visible ? 'enter' : 'leave';
           willUpdateStates.visible = visible;
         } else {
@@ -694,9 +693,10 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       ),
       // to maintain refs with callback
       ref: (node: any) => {
-        console.log(node)
+        // console.log(node)
         // Keep your own reference
-        triggerEl.value = node;
+        // TODO 与 react 不同的地方
+        triggerEl.value = node && (node.$el || node);
         // Call the original ref, if any
         const { ref } = children as any;
         // this.log('tooltip render() - get ref', ref);
@@ -712,10 +712,10 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     // If you do not add a layer of div, in order to bind the events and className in the tooltip, you need to cloneElement children, but this time it may overwrite the children's original ref reference
     // So if the user adds ref to the content, you need to use callback ref: https://github.com/facebook/react/issues/8873
     return (
-      <div>
+      <>
         {state.isInsert ? renderPortal() : null}
         {newChild}
-      </div>
+      </>
     );
   }
 })
