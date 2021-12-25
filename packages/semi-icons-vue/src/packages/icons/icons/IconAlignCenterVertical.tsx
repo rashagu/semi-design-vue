@@ -35,14 +35,16 @@ focusable={false}
     })
     SvgComponent.props = vuePropsType
 
-    const IconComponent = defineComponent<IconProps>((props, {slots}) => {
+    const IconComponent = defineComponent<IconProps>({
+    name:'semi_icon-align_center_vertical',
+    setup(props, {slots}){
       return ()=>
         <ConvertIcon iconType={'align_center_vertical'} {...props} >
           {{
             default:()=><SvgComponent/>
           }}
     </ConvertIcon>;
-})
+}})
 IconComponent.props = iconVuePropsType
 export default IconComponent
     

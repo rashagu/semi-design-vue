@@ -35,14 +35,16 @@ focusable={false}
     })
     SvgComponent.props = vuePropsType
 
-    const IconComponent = defineComponent<IconProps>((props, {slots}) => {
+    const IconComponent = defineComponent<IconProps>({
+    name:'semi_icon-like_heart',
+    setup(props, {slots}){
       return ()=>
         <ConvertIcon iconType={'like_heart'} {...props} >
           {{
             default:()=><SvgComponent/>
           }}
     </ConvertIcon>;
-})
+}})
 IconComponent.props = iconVuePropsType
 export default IconComponent
     

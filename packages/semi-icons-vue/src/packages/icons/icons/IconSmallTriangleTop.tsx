@@ -33,14 +33,16 @@ focusable={false}
     })
     SvgComponent.props = vuePropsType
 
-    const IconComponent = defineComponent<IconProps>((props, {slots}) => {
+    const IconComponent = defineComponent<IconProps>({
+    name:'semi_icon-small_triangle_top',
+    setup(props, {slots}){
       return ()=>
         <ConvertIcon iconType={'small_triangle_top'} {...props} >
           {{
             default:()=><SvgComponent/>
           }}
     </ConvertIcon>;
-})
+}})
 IconComponent.props = iconVuePropsType
 export default IconComponent
     

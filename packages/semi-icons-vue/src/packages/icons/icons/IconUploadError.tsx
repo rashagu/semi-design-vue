@@ -35,14 +35,16 @@ focusable={false}
     })
     SvgComponent.props = vuePropsType
 
-    const IconComponent = defineComponent<IconProps>((props, {slots}) => {
+    const IconComponent = defineComponent<IconProps>({
+    name:'semi_icon-upload_error',
+    setup(props, {slots}){
       return ()=>
         <ConvertIcon iconType={'upload_error'} {...props} >
           {{
             default:()=><SvgComponent/>
           }}
     </ConvertIcon>;
-})
+}})
 IconComponent.props = iconVuePropsType
 export default IconComponent
     

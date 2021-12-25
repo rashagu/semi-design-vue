@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, onMounted,} from 'vue'
-import * as icons  from "@kousum/semi-icons-vue";
+import * as icons  from "../../../semi-icons-vue/src/packages/icons/icons";
 
 export interface ExampleProps {
   name?: string
@@ -11,22 +11,23 @@ export const VuePropsType = {
 
 const App = defineComponent<ExampleProps>((props, {slots}) => {
 
-  const domArr = ref<JSX.Element[]>([])
+  const domArr = ref<{vNode:JSX.Element,name:string}[]>([])
 
   onMounted(()=>{
     const iconsObj:any = icons;
     for(let i in icons){
       const Dom = iconsObj[i];
-      domArr.value.push(<Dom size={'extra-large'} />)
+      domArr.value.push({vNode:<Dom size={'extra-large'} />,name:Dom.name.replaceAll('semi_icon-','')})
     }
   })
   return () => (
     <div id={'a'}  style={{color:'#E91E63', display:'flex', flexWrap:'wrap',}}>
       {/*<Button />*/}
-      {domArr.value.map((item:any, index:any)=>{
+      {domArr.value.map((item, index)=>{
         return (
-          <div key={index}>
-            {item}
+          <div key={index} style={{width:'20%'}}>
+            {item.vNode}：
+            {item.name}
           </div>
         )
       })}

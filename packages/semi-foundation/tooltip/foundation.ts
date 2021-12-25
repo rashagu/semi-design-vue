@@ -257,7 +257,6 @@ export default class Tooltip<P = Record<string, any>, S = Record<string, any>> e
          */
         this._adapter.on('portalInserted', () => {
             this.calcPosition();
-            console.log('portalInserted')
         });
 
         this._adapter.on('positionUpdated', () => {
@@ -293,7 +292,6 @@ export default class Tooltip<P = Record<string, any>, S = Record<string, any>> e
 
     _togglePortalVisible(isVisible: boolean) {
         const nowVisible = this.getState('visible');
-        // console.log('nowVisible',nowVisible)
         if (nowVisible !== isVisible) {
             this._adapter.togglePortalVisible(isVisible, () => this._adapter.notifyVisibleChange(isVisible));
         }
@@ -523,7 +521,7 @@ export default class Tooltip<P = Record<string, any>, S = Record<string, any>> e
      * - 根据 trigger 和 wrapper 的 boundingClient 计算当前的 left、top、transform-origin
      * - 根据当前的 position 和 wrapper 的 boundingClient 决定是否需要自动调整位置
      * - 根据当前的 position、trigger 的 boundingClient 以及 motion.handleStyle 调整当前的 style
-     *
+     * 
      * There are many coupling things, a little list:
      *
      * - calculate the current left, top, and transfer-origin according to the boundingClient of trigger and wrapper
@@ -559,7 +557,6 @@ export default class Tooltip<P = Record<string, any>, S = Record<string, any>> e
             this._adapter.setPosition({ ...style, position });
         }
 
-        console.log(style);
         return style;
     };
 
@@ -711,7 +708,6 @@ export default class Tooltip<P = Record<string, any>, S = Record<string, any>> e
 
         this.clearDelayTimer();
 
-        // console.log(mouseLeaveDelay)
         if (mouseLeaveDelay > 0) {
             this._timer = setTimeout(() => {
                 // console.log('delayHide for ', mouseLeaveDelay, ' ms, ', ...args);

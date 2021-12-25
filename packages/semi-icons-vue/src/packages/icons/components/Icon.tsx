@@ -3,7 +3,7 @@ import { BASE_CLASS_PREFIX } from '../env';
 import cls from 'classnames';
 import '../styles/icons.scss';
 
-export type IconSize = 'extra-small' | 'small' | 'default' | 'large' | 'extra-large';
+export type IconSize = 'inherit' | 'extra-small' | 'small' | 'default' | 'large' | 'extra-large';
 
 export interface IconProps  {
   size?: IconSize,
@@ -43,7 +43,7 @@ const Icon = defineComponent<IconProps>((props, {slots}) => {
   Object.assign(outerStyle, style);
 
 
-  return ()=> <span role="img" ref={ref} class={classes} style={outerStyle} {...restProps}>{slots.default ? slots.default() : null}</span>;
+  return ()=> <span role="img" ref={ref} class={classes} style={outerStyle}>{slots.default ? slots.default() : null}</span>;
 
 })
 

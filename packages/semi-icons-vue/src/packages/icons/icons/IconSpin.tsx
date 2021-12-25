@@ -44,9 +44,9 @@ focusable={false}
                     <stop offset={0.301257} stop-opacity={0} stop-color="currentColor" />
                     <stop offset={0.466753} stop-opacity={1} stop-color="currentColor" />
                 </radialGradient>
-                <clip-path id="clip0">
+                <clipPath id="clip0">
                     <rect width={24} height={24} fill="currentColor" />
-                </clip-path>
+                </clipPath>
             </defs>
         </svg>
 
@@ -54,14 +54,16 @@ focusable={false}
     })
     SvgComponent.props = vuePropsType
 
-    const IconComponent = defineComponent<IconProps>((props, {slots}) => {
+    const IconComponent = defineComponent<IconProps>({
+    name:'semi_icon-spin',
+    setup(props, {slots}){
       return ()=>
         <ConvertIcon iconType={'spin'} {...props} >
           {{
             default:()=><SvgComponent/>
           }}
     </ConvertIcon>;
-})
+}})
 IconComponent.props = iconVuePropsType
 export default IconComponent
     

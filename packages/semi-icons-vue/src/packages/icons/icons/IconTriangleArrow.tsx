@@ -30,9 +30,9 @@ focusable={false}
                 />
             </g>
             <defs>
-                <clip-path id="clip0">
+                <clipPath id="clip0">
                     <rect width={24} height={24} fill="currentColor" transform="translate(24) rotate(90)" />
-                </clip-path>
+                </clipPath>
             </defs>
         </svg>
 
@@ -40,14 +40,16 @@ focusable={false}
     })
     SvgComponent.props = vuePropsType
 
-    const IconComponent = defineComponent<IconProps>((props, {slots}) => {
+    const IconComponent = defineComponent<IconProps>({
+    name:'semi_icon-triangle_arrow',
+    setup(props, {slots}){
       return ()=>
         <ConvertIcon iconType={'triangle_arrow'} {...props} >
           {{
             default:()=><SvgComponent/>
           }}
     </ConvertIcon>;
-})
+}})
 IconComponent.props = iconVuePropsType
 export default IconComponent
     

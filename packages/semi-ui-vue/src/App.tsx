@@ -23,8 +23,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
       <div id={'a'}  style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
         <Button />
 
-        {/*<IconTest />*/}
-        {/*<TootipDemo />*/}
+        <IconTest />
+        <TootipDemo />
       </div>
       <DropdownDemo1/>
     </div>
