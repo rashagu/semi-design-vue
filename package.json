@@ -5,7 +5,9 @@
     "dev": "lerna run --scope @kousum/semi-ui-vue dev"
   },
   "workspaces": [
-    "packages/*"
+    "packages/semi-animation-vue",
+    "packages/semi-icons-vue",
+    "packages/semi-ui-vue"
   ],
   "devDependencies": {
     "@babel/core": "^7.16.5",

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { cssClasses as css, strings } from '@douyinfe/semi-foundation/dropdown/constants';
 
 import BaseComponent, { BaseProps } from '../_base/baseComponent';
-import { IconTick } from '@kousum/semi-icons-vue';
+import { IconTick } from '../../../../../semi-icons-vue/src/packages/icons/icons';
 import { noop } from 'lodash';
 import {DropdownContext} from "./context";
 
