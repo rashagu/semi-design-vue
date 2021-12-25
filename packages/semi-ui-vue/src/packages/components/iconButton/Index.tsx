@@ -79,7 +79,7 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
           } else if (isVNode(icon)) {
             IconElem = ()=>icon;
           }
-          const children = ()=>slots.default != null? <span class={IconElem()?btnTextCls:''}>{slots.default()}</span> : null;
+          const children = ()=>slots.default() && slots.default()[0]?.children? <span class={IconElem()?btnTextCls:''}>{slots.default()}</span> : null;
           if (iconPosition === 'left') {
             return ()=>(
               <>

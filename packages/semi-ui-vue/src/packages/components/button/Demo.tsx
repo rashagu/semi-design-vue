@@ -54,7 +54,7 @@ const Demo = () => {
                 { node: 'divider' },
                 { node: 'item', name: '删除项目', type: 'danger' },
               ]} trigger="click" position="bottomRight">
-                <Button style={{background:'var(--semi-color-primary-hover)',padding:'8px 4px'}} theme="solid" type="primary" icon={<IconTreeTriangleDown />} />
+                <Button style={{padding:'8px 4px'}} theme="solid" type="primary" icon={<IconTreeTriangleDown />} />
               </Dropdown>
             </SplitButtonGroup>
           </div>
