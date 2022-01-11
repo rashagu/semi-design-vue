@@ -1,7 +1,7 @@
 {
     "useWorkspaces": true,
     "npmClient": "pnpm",
-    "version": "2.1.5",
+    "version": "2.1.6",
     "packages": [
         "packages/semi-animation-vue",
         "packages/semi-icons-vue",
