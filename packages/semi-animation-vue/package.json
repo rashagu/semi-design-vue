@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-animation-vue",
-  "version": "2.1.6",
+  "version": "2.2.2",
   "main": "./dist/es/animation/index.js",
   "module": "./dist/es/animation/index.js",
   "exports": {
