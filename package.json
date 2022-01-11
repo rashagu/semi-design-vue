@@ -4,6 +4,9 @@
   "scripts": {
     "dev": "lerna run --scope @kousum/semi-ui-vue dev"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "workspaces": [
     "packages/semi-animation-vue",
     "packages/semi-icons-vue",
