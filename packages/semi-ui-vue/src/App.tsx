@@ -13,20 +13,17 @@ export const VuePropsType = {
 
 const App = defineComponent<ExampleProps>((props, {slots}) => {
 
-  const a = ref(null)
-  watch(a, ()=>{
-    console.log(a)
-  })
   return () => (
     <div>
-      <div ref={a}>123</div>
-      <div id={'a'}  style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
-        <Button />
+      {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
+      {/*  <Button />*/}
 
-        <IconTest />
-        <TootipDemo />
-      </div>
-      <DropdownDemo1/>
+      {/*  <IconTest />*/}
+      {/*  <TootipDemo />*/}
+      {/*</div>*/}
+      {/*<DropdownDemo1/>*/}
+
+
     </div>
   )
 })
