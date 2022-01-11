@@ -17,7 +17,7 @@ import warning from '@douyinfe/semi-foundation/utils/warning';
 import Event from '@douyinfe/semi-foundation/utils/Event';
 import { ArrayElement } from '@douyinfe/semi-foundation/utils/type';
 import { convertDOMRectToObject, DOMRectLikeType } from '@douyinfe/semi-foundation/utils/dom';
-import TooltipFoundation, { TooltipAdapter, Position, PopupContainerDOMRect } from '../../../../../semi-foundation/tooltip/foundation';
+import TooltipFoundation, { TooltipAdapter, Position, PopupContainerDOMRect } from '@douyinfe/semi-foundation/tooltip/foundation';
 import { strings, cssClasses, numbers } from '@douyinfe/semi-foundation/tooltip/constants';
 import '@douyinfe/semi-foundation/tooltip/tooltip.scss';
 

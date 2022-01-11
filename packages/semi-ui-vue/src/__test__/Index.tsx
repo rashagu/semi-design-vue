@@ -1,6 +1,4 @@
 import {defineComponent, ref, h} from 'vue';
-import styles from './index.module.scss';
-import logo from '../assets/logo.png';
 
 interface ExampleProps {
     name?: string
@@ -9,10 +7,7 @@ interface ExampleProps {
 const MainCate = defineComponent<ExampleProps>(props => {
 
     return () => (
-        <div id={'a'} class={styles.aa}>
-            <img src={logo} alt={''}/>
-            12323
-        </div>
+      <div>123</div>
     );
 });
 

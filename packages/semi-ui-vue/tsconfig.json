@@ -8,6 +8,7 @@
     "jsx": "react",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
+    "suppressImplicitAnyIndexErrors": true,
     "strictNullChecks": false,
     "sourceMap": true,
     "declaration": true,
@@ -16,5 +17,5 @@
     "lib": ["esnext", "dom"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["**/*.spec.ts", "**/semi-foundation/**/*.ts", "**/__test__/*"]
+  "exclude": ["node_modules", "**/*.spec.ts", "**/semi-foundation/**/*.ts", "**/__test__/*"]
 }

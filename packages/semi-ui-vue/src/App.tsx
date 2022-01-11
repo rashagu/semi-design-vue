@@ -15,15 +15,13 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   return () => (
     <div>
-      {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
-      {/*  <Button />*/}
+      <div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
+        <Button />
 
-      {/*  <IconTest />*/}
-      {/*  <TootipDemo />*/}
-      {/*</div>*/}
-      {/*<DropdownDemo1/>*/}
-
-
+        {/*<IconTest />*/}
+        <TootipDemo />
+      </div>
+      <DropdownDemo1/>
     </div>
   )
 })

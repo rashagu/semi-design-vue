@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, onMounted,} from 'vue'
-import * as icons  from "../../../semi-icons-vue/src/packages/icons/icons";
+import * as icons  from "@kousum/semi-icons-vue";
 
 export interface ExampleProps {
   name?: string

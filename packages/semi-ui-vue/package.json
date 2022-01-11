@@ -1,6 +1,17 @@
 {
   "name": "@kousum/semi-ui-vue",
-  "version": "2.1.5-beta.1",
+  "version": "2.2.2-beta.1",
+  "main": "./dist/es/components/index.js",
+  "module": "./dist/es/components/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/es/components/index.js"
+    }
+  },
+  "files": [
+    "dist/es",
+    "package.json"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -10,8 +21,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.2.0",
-    "@douyinfe/semi-theme-default": "2.2.0",
+    "@douyinfe/semi-foundation": "2.2.2",
+    "@douyinfe/semi-theme-default": "2.2.2",
     "@kousum/semi-animation-vue": "^2.2.0-beta.1",
     "@kousum/semi-icons-vue": "^2.2.0-beta.1",
     "@types/lodash": "^4.14.178",
