@@ -1,23 +1,7 @@
-import {defineComponent, ref, h, Fragment} from 'vue'
+import Row from './row';
+import Col from './col';
 
-interface ExampleProps {
-  name?: string
-}
+export { Row, Col };
 
-export const vuePropsType = {
-  name: String
-}
-const Index = defineComponent<ExampleProps>((props, {slots}) => {
-
-
-  return () => (
-    <div>
-      Index
-    </div>
-  )
-})
-
-Index.props = vuePropsType
-
-export default Index
-
+export { ColSize, ColProps } from './col';
+export { Breakpoint, Gutter, RowProps } from './row';

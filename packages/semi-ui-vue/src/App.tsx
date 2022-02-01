@@ -3,6 +3,7 @@ import Button from "./packages/components/button/Demo";
 import IconTest from "./__test__/IconTest";
 import TootipDemo from "./packages/components/tooltip/__test__/TootipDemo";
 import DropdownDemo1 from "./packages/components/dropdown/__test__/DropdownDemo1";
+import GridTest from "./packages/components/grid/__test__/GridTest";
 export interface ExampleProps {
   name?: string
 }
@@ -22,6 +23,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         <TootipDemo />
       </div>
       <DropdownDemo1/>
+      <GridTest />
     </div>
   )
 })

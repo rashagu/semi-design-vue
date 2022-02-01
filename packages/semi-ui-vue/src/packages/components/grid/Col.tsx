@@ -1,13 +1,11 @@
 /**
  * Implementation reference from: https://github.com/ant-design/ant-design/blob/master/components/grid/col.tsx
  */
-import {defineComponent, ref, h, Fragment, CSSProperties} from 'vue'
-import PropTypes from 'prop-types';
+import {defineComponent, ref, h, Fragment, CSSProperties, inject} from 'vue'
 // import { RowContext } from './row';
 import classnames from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/grid/constants';
 
-const objectOrNumber = PropTypes.oneOfType([PropTypes.object, PropTypes.number]);
 
 
 export interface ColSize {
@@ -27,7 +25,6 @@ export interface ColProps {
   className?: string;
   prefixCls?: string;
   style?: CSSProperties;
-  children?: any;
   xs?: number | ColSize;
   sm?: number | ColSize;
   md?: number | ColSize;
@@ -39,63 +36,26 @@ export interface ColProps {
 
 export const vuePropsType = {
   name: String,
-  span:{
-    type:Number,
-    default: PropTypes.number
-  },
-  order:{
-    type:Number,
-    default: PropTypes.number
-  },
-  offset:{
-    type:Number,
-    default: PropTypes.number
-  },
-  push:{
-    type:Number,
-    default: PropTypes.number
-  },
-  pull:{
-    type:Number,
-    default: PropTypes.number
-  },
-  className:{
-    type:String,
-    default: PropTypes.string
-  },
-  prefixCls:{
-    type:String,
-    default: PropTypes.string
+  span:Number,
+  order:Number,
+  offset:Number,
+  push:Number,
+  pull:Number,
+  className:String,
+  prefixCls: {
+    type: String,
+    default: cssClasses.PREFIX
   },
   style: [Object, String,],
-  children: [Object,Array,String,Number],
-  xs: {
-    type: [Number, Object],
-    default: objectOrNumber,
-  },
-  sm: {
-    type: [Number, Object],
-    default: objectOrNumber,
-  },
-  md: {
-    type: [Number, Object],
-    default: objectOrNumber,
-  },
-  lg: {
-    type: [Number, Object],
-    default: objectOrNumber,
-  },
-  xl: {
-    type: [Number, Object],
-    default: objectOrNumber,
-  },
-  xxl: {
-    type: [Number, Object],
-    default: objectOrNumber,
-  },
+  xs: [Number, Object],
+  sm: [Number, Object],
+  md: [Number, Object],
+  lg: [Number, Object],
+  xl: [Number, Object],
+  xxl: [Number, Object],
 }
 const Col = defineComponent<ColProps>((props, {slots}) => {
-  const { prefixCls, span, order, offset, push, pull, className, children, ...others } = props;
+  const { prefixCls, span, order, offset, push, pull, className, ...others } = props;
 
   let sizeClassObj = {};
   const prefix = `${prefixCls}-col`;
@@ -133,34 +93,33 @@ const Col = defineComponent<ColProps>((props, {slots}) => {
     sizeClassObj
   );
   let { style } = others;
-  let gutters:any = [];
-  try {
-    // gutters = this.context.gutters;
-  } catch (error) {
-    throw new Error('please make sure <Col> inside <Row>');
-  }
+  const gutters = inject('gutters', [])
+  console.log(gutters)
 
   style = {
     ...(gutters[0] > 0 ?
       {
-        paddingLeft: gutters[0] / 2,
-        paddingRight: gutters[0] / 2,
+        paddingLeft: (gutters[0] / 2) + 'px',
+        paddingRight: (gutters[0] / 2) + 'px',
       } :
       {}),
     ...(gutters[1] > 0 ?
       {
-        paddingTop: gutters[1] / 2,
-        paddingBottom: gutters[1] / 2,
+        paddingTop: (gutters[1] / 2) + 'px',
+        paddingBottom: (gutters[1] / 2) + 'px',
       } :
       {}),
     ...style,
   };
 
-  return () => (
-    <div>
-      Col
-    </div>
-  )
+  console.log(style)
+  return () => {
+    return (
+        <div {...others} style={style} class={classes}>
+          {slots.default?slots.default():null}
+        </div>
+    )
+  }
 })
 
 Col.props = vuePropsType
