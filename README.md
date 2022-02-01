@@ -7,5 +7,7 @@
 
 `lerna add @kousum/semi-animation-vue --scope=@kousum/semi-ui-vue`
 
+`lerna add @douyinfe/semi-foundation --scope=@kousum/semi-ui-vue`
+
 
 `lerna run --scope @kousum/semi-ui-vue dev`

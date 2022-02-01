@@ -24,13 +24,13 @@
     "test": "jest"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "^2.2.2",
+    "@douyinfe/semi-foundation": "^2.3.1",
     "classnames": "^2.3.1",
     "sass": "^1.44.0",
     "vue": "^3.2.23"
   },
   "devDependencies": {
-    "@douyinfe/semi-theme-default": "^2.2.0",
+    "@douyinfe/semi-theme-default": "^2.3.1",
     "@types/jest": "^27.0.3",
     "@types/prop-types": "^15.7.4",
     "@vitejs/plugin-vue": "^2.0.1",

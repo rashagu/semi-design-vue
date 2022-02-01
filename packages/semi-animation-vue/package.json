@@ -24,16 +24,16 @@
     "test": "jest"
   },
   "dependencies": {
-    "@douyinfe/semi-animation": "^2.2.0",
-    "@douyinfe/semi-animation-styled": "^2.2.0",
-    "@douyinfe/semi-foundation": "^2.2.0",
+    "@douyinfe/semi-animation": "^2.3.1",
+    "@douyinfe/semi-animation-styled": "^2.3.1",
+    "@douyinfe/semi-foundation": "^2.3.1",
     "classnames": "^2.3.1",
     "sass": "^1.44.0",
     "vue": "^3.2.26"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
-    "@douyinfe/semi-theme-default": "2.1.5",
+    "@douyinfe/semi-theme-default": "2.3.1",
     "@types/jest": "^27.0.3",
     "@types/node": "^17.0.0",
     "@types/prop-types": "^15.7.4",
