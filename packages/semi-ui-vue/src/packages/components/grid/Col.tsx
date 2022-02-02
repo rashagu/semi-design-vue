@@ -94,7 +94,7 @@ const Col = defineComponent<ColProps>((props, {slots}) => {
   );
   let { style } = others;
   const gutters = inject('gutters', [])
-  console.log(gutters)
+  // console.log(gutters)
 
   style = {
     ...(gutters[0] > 0 ?
@@ -112,7 +112,7 @@ const Col = defineComponent<ColProps>((props, {slots}) => {
     ...style,
   };
 
-  console.log(style)
+  // console.log(style)
   return () => {
     return (
         <div {...others} style={style} class={classes}>

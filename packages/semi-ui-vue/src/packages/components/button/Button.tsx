@@ -75,7 +75,7 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
         ),
     };
 
-    console.log(baseProps)
+    // console.log(baseProps)
     return ()=>(
       <button
         {...baseProps}

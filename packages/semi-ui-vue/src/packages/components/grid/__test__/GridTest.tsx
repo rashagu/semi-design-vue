@@ -13,18 +13,34 @@ const GridTest = defineComponent<ExampleProps>((props, {slots}) => {
 
 
   return () => (
-    <div>
+    <div class="grid grid-gutter">
       <Row gutter={[16, 24]}>
-        <Col span={24}>
-          <div style={{background: 'red'}}>col-24</div>
+        <Col span={6}>
+          <div class="col-content">col-6</div>
         </Col>
-        <Col span={12}>
-          <div style={{background: 'red'}}>col-24</div>
+        <Col span={6}>
+          <div class="col-content">col-6</div>
         </Col>
-        <Col span={6} offset={6}>
-          <div style={{background: 'red'}}>col-24</div>
+        <Col span={6}>
+          <div class="col-content">col-6</div>
+        </Col>
+        <Col span={6}>
+          <div class="col-content">col-6</div>
+        </Col>
+        <Col span={6}>
+          <div class="col-content">col-6</div>
+        </Col>
+        <Col span={6}>
+          <div class="col-content">col-6</div>
+        </Col>
+        <Col span={6}>
+          <div class="col-content">col-6</div>
+        </Col>
+        <Col span={6}>
+          <div class="col-content">col-6</div>
         </Col>
       </Row>
+      <br/>
       <Row type="flex" justify="center">
         <Col span={4}><div class="col-content">col-4</div></Col>
         <Col span={4}><div class="col-content">col-4</div></Col>
