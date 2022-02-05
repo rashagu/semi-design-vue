@@ -1,23 +1,5 @@
-import {defineComponent, ref, h} from 'vue'
+import Icon, { IconProps, IconSize } from '@kousum/semi-icons-vue';
 
+export { IconProps, IconSize };
 
-interface ExampleProps {
-  name?: string
-}
-
-const Index = defineComponent<ExampleProps>((props, {slots}) => {
-
-  return () => (
-    <div id={'a'}>
-      Index
-    </div>
-  )
-})
-
-export const VuePropsType = {
-  name: String
-}
-
-Index.props = VuePropsType
-
-export default Index
+export default Icon;

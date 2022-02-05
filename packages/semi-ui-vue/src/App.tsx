@@ -7,6 +7,7 @@ import GridTest from "./packages/components/grid/__test__/GridTest";
 import LayoutTest from "./packages/components/layout/__test__/LayoutTest";
 import './docDemo.scss'
 import SpaceTest from "./packages/components/space/__test__/SpaceTest";
+import PopoverTest from "./packages/components/popover/__test__/PopoverTest";
 export interface ExampleProps {
   name?: string
 }
@@ -32,6 +33,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
       <GridTest />
       <LayoutTest/>
       <SpaceTest/>
+      <PopoverTest />
     </div>
   )
 })

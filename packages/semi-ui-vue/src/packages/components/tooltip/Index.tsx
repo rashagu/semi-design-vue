@@ -84,6 +84,10 @@ interface TooltipState {
   isInsert: boolean;
   placement: Position;
   transitionStyle: Record<string, any>;
+  cancelText: string,
+  okText: string,
+  contentClassName: string,
+  role: string
 }
 
 const prefix = cssClasses.PREFIX;
@@ -150,7 +154,7 @@ export const vuePropsType = {
     type: Number,
     default: numbers.DEFAULT_Z_INDEX,
   },
-  rePosKey: [String, Number],
+  rePosKey: [String, Number, Boolean],
   arrowBounding: {
     type: Object,
     default: numbers.ARROW_BOUNDING
@@ -170,6 +174,11 @@ export const vuePropsType = {
   stopPropagation: Boolean,
   clickTriggerToHide: Boolean,
   wrapperClassName: String,
+
+  cancelText: String,
+  okText: String,
+  contentClassName: String,
+  role: String
 }
 
 
@@ -566,7 +575,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     const transformOrigin = get(containerStyle, 'transformOrigin');
 
     // console.error(visible)
-    console.error(portalInnerStyle)
+    // console.error(portalInnerStyle)
     portalInnerStyle = { ...portalInnerStyle, ...{...portalInnerStyle,left: portalInnerStyle.left + 'px', top: portalInnerStyle.top + 'px'} }
     return (
       <Portal getPopupContainer={props.getPopupContainer} style={{ zIndex }}>

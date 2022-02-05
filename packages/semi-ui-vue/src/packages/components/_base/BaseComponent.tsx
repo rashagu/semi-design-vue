@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, StyleValue, cloneVNode, provide, reactive, inject} from 'vue'
+import {defineComponent, ref, h, StyleValue, cloneVNode, provide, reactive, inject, CSSProperties} from 'vue'
 import baseLog from '@douyinfe/semi-foundation/utils/log';
 import {DefaultAdapter} from '@douyinfe/semi-foundation/base/foundation';
 import {VALIDATE_STATUS} from '@douyinfe/semi-foundation/base/constants';
@@ -10,7 +10,7 @@ const {hasOwnProperty} = Object.prototype;
 export type ValidateStatus = ArrayElement<typeof VALIDATE_STATUS>;
 
 export interface BaseProps {
-  style?: StyleValue;
+  style?: CSSProperties;
   className?: string;
 
   [key: string]: any,

@@ -101,7 +101,7 @@ export const vuePropsType = {
     type: Function,
     default: noop,
   },
-  rePosKey: [String, Number],
+  rePosKey: [String, Number, Boolean],
   showTick: {
     type: Boolean,
     default: false,

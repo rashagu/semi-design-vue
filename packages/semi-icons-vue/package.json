@@ -1,11 +1,11 @@
 {
   "name": "@kousum/semi-icons-vue",
   "version": "2.2.2",
-  "main": "./dist/es/icons/index.js",
-  "module": "./dist/es/icons/index.js",
+  "main": "./dist/es/index.js",
+  "module": "./dist/es/index.js",
   "exports": {
     ".": {
-      "import": "./dist/es/icons/index.js"
+      "import": "./dist/es/index.js"
     }
   },
   "files": [
