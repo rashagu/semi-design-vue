@@ -6,6 +6,7 @@ import DropdownDemo1 from "./packages/components/dropdown/__test__/DropdownDemo1
 import GridTest from "./packages/components/grid/__test__/GridTest";
 import LayoutTest from "./packages/components/layout/__test__/LayoutTest";
 import './docDemo.scss'
+import SpaceTest from "./packages/components/space/__test__/SpaceTest";
 export interface ExampleProps {
   name?: string
 }
@@ -30,6 +31,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
       <br/>
       <GridTest />
       <LayoutTest/>
+      <SpaceTest/>
     </div>
   )
 })
