@@ -1,5 +1,6 @@
 node_modules
 .DS_Store
+lib
 dist-ssr
 *.local
 /packages/semi-foundation/

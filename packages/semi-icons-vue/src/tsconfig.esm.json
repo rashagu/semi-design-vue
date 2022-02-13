@@ -5,12 +5,24 @@
     "./Comp1",
     "./App.tsx",
     "./__test__",
+    "./**/__test__",
     "../scripts"
   ],
   "compilerOptions": {
     "outDir": "../lib",
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
     "strictNullChecks": false,
-    "module": "ES6",
-    "target": "ES6"
+    "sourceMap": true,
+    "declaration": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"]
   }
 }
