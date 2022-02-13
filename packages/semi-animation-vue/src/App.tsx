@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, onMounted,} from 'vue'
-import { Transition } from "./packages/animation/index";
+import { Transition } from "./animation/index";
 export interface ExampleProps {
   name?: string
 }

@@ -5,4 +5,4 @@ dist-ssr
 *.local
 
 # 项目排除路径
-/src/packages/icons/svgs/
+/src/icons/svgs/

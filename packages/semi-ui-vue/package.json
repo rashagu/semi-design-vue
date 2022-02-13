@@ -1,15 +1,11 @@
 {
   "name": "@kousum/semi-ui-vue",
   "version": "2.2.2",
-  "main": "./dist/es/components/index.js",
-  "module": "./dist/es/components/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/es/components/index.js"
-    }
-  },
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "files": [
-    "dist/es",
+    "lib",
     "package.json"
   ],
   "publishConfig": {
@@ -18,9 +14,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build_lib": "rimraf dist && tsc -b --force tsconfig.esm.json",
-    "lib-vue-tsc": "vue-tsc --noEmit && rimraf dist && tsc -b --force tsconfig.esm.json",
-    "tt": "sass --watch ./src/packages/components/default_style",
+    "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json",
+    "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json",
+    "tt": "sass --watch src/components/default_style",
     "preview": "vite preview",
     "test": "jest"
   },

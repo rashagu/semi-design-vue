@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, onMounted,} from 'vue'
 // import {IconActivity} from "../../dist/es/icons";
-import {IconActivity} from "../../src/packages/icons/icons";
+import {IconActivity} from "../icons/icons";
 // import * as icons  from "../packages/icons/icons/index";
 
 export interface ExampleProps {

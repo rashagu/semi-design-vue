@@ -7,9 +7,9 @@
     "./__test__",
     "../scripts"
   ],
+  "include": ["../index.ts"],
   "compilerOptions": {
-    "rootDir": "./packages/",
-    "outDir": "../dist/es",
+    "outDir": "../lib",
     "strictNullChecks": false,
     "module": "ES6",
     "target": "ES6"

@@ -6,6 +6,10 @@
     "moduleResolution": "node",
     "strict": true,
     "jsx": "react",
+    "paths": {
+      "@kousum/semi-foundation/*": ["../semi-foundation/*"],
+      "@kousum/semi-icons-vue": ["../semi-icons-vue/src"]
+    },
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "suppressImplicitAnyIndexErrors": true,
