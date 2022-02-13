@@ -8,7 +8,7 @@
     "semi-ui"
   ],
   "files": [
-    "lib/*"
+    "lib/"
   ],
   "license": "MIT",
   "main": "index.ts",

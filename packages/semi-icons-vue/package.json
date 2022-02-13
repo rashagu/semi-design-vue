@@ -4,7 +4,7 @@
   "main": "index.ts",
   "module": "index.ts",
   "files": [
-    "lib/*"
+    "lib/"
   ],
   "publishConfig": {
     "access": "public"
