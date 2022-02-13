@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-ui-vue",
-  "version": "2.2.2",
+  "version": "2.1.7",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -23,8 +23,8 @@
   "dependencies": {
     "@douyinfe/semi-foundation": "2.3.1",
     "@douyinfe/semi-theme-default": "2.3.1",
-    "@kousum/semi-animation-vue": "^2.1.6",
-    "@kousum/semi-icons-vue": "^2.1.6",
+    "@kousum/semi-animation-vue": "^2.1.7",
+    "@kousum/semi-icons-vue": "^2.1.7",
     "@types/lodash": "^4.14.178",
     "async-validator": "^4.0.7",
     "classnames": "^2.3.1",

@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-icons-vue",
-  "version": "2.2.2",
+  "version": "2.1.7",
   "main": "index.ts",
   "module": "index.ts",
   "files": [
