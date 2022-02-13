@@ -1,0 +1,41 @@
+import { defineComponent, ref, h, onActivated } from 'vue';
+import { ConvertIcon, IconProps, vuePropsType as iconVuePropsType } from '../components/Icon';
+const SvgComponent = defineComponent((props, { slots }) => {
+    return () => (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            // @ts-ignore
+            focusable={false}
+            aria-hidden={true}
+            {...props}
+        >
+            <path
+                d="M12 16C13.9818 16 15.7453 14.3394 16.7142 11.8589C17.3163 11.6122 17.8892 10.8644 18.1508 9.88823C18.4909 8.61881 18.4234 7.48536 17.4964 7.13266C17.4064 2.7111 15.6617 1 12 1C8.33858 1 6.59387 2.71088 6.50372 7.13179C5.57454 7.48354 5.50668 8.61777 5.84709 9.8882C6.10904 10.8658 6.68318 11.6143 7.28626 11.8599C8.2552 14.3398 10.0186 16 12 16Z"
+                fill="currentColor"
+            />
+            <path
+                d="M19.6049 22C20.8385 22 21.7171 20.8487 20.867 19.9547C19.1971 18.1985 15.853 17 12 17C8.14699 17 4.80292 18.1985 3.133 19.9547C2.2829 20.8487 3.16148 22 4.39513 22H19.6049Z"
+                fill="currentColor"
+            />
+        </svg>
+    );
+});
+const IconComponent = defineComponent({
+    name: 'semi_icon-activity',
+
+    setup(props, { slots }) {
+        return () => (
+            <ConvertIcon iconType={'activity'} {...props}>
+                {{
+                    default: () => <SvgComponent />,
+                }}
+            </ConvertIcon>
+        );
+    },
+});
+IconComponent.props = iconVuePropsType;
+export default IconComponent;
