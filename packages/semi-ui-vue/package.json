@@ -3,10 +3,8 @@
   "version": "2.1.8",
   "main": "lib/index.js",
   "module": "lib/index.js",
-  "typings": "lib/index.d.ts",
   "files": [
-    "lib",
-    "package.json"
+    "lib/"
   ],
   "publishConfig": {
     "access": "public"

@@ -1,8 +1,8 @@
 {
   "name": "@kousum/semi-icons-vue",
   "version": "2.1.8",
-  "main": "index.ts",
-  "module": "index.ts",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
   "files": [
     "lib/"
   ],
@@ -12,9 +12,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/copyStyles.js && node scripts/mkPackage.js",
+    "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/copyStyles.js",
     "build:icon": "node scripts/build-icon ",
-    "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/copyStyles.js && node scripts/mkPackage.js",
+    "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/copyStyles.js",
     "preview": "vite preview",
     "test": "jest"
   },

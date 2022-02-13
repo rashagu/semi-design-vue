@@ -11,8 +11,8 @@
     "lib/"
   ],
   "license": "MIT",
-  "main": "index.ts",
-  "module": "index.ts",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/rashagu/semi-design-vue"
@@ -23,8 +23,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/mkPackage.js",
-    "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/mkPackage.js",
+    "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json",
+    "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json",
     "preview": "vite preview",
     "test": "jest"
   },
