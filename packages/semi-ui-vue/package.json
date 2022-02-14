@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "build:lib2": "rimraf lib && tsc -b --force tsconfig.esm.json && node ./scripts/compileLib.js",
     "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node ./scripts/compileLib.js",
     "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json",
     "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json",
