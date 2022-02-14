@@ -5,6 +5,7 @@ importers:
   .:
     specifiers:
       '@babel/core': ^7.16.5
+      '@douyinfe/semi-theme-default': ''
       '@svgr/babel-plugin-add-jsx-attribute': 5.4.0
       '@svgr/babel-plugin-remove-jsx-attribute': 5.4.0
       '@svgr/babel-plugin-remove-jsx-empty-expression': 5.0.1
@@ -26,6 +27,7 @@ importers:
       svgo: 2.7.0
     devDependencies:
       '@babel/core': 7.16.5
+      '@douyinfe/semi-theme-default': 2.4.0
       '@svgr/babel-plugin-add-jsx-attribute': 5.4.0
       '@svgr/babel-plugin-remove-jsx-attribute': 5.4.0
       '@svgr/babel-plugin-remove-jsx-empty-expression': 5.0.1
@@ -76,9 +78,11 @@ importers:
       gulp-typescript: ^6.0.0-alpha.1
       identity-obj-proxy: ^3.0.0
       jest: ^27.4.3
+      merge2: ^1.4.1
       prop-types: ^15.7.2
       rimraf: ^3.0.2
       sass: ^1.44.0
+      through2: ^4.0.2
       ts-jest: ^27.1.0
       ts-node: ^10.4.0
       typescript: ^4.4.4
@@ -117,8 +121,10 @@ importers:
       gulp-typescript: 6.0.0-alpha.1_typescript@4.5.4
       identity-obj-proxy: 3.0.0
       jest: 27.4.5_ts-node@10.4.0
+      merge2: 1.4.1
       prop-types: 15.7.2
       rimraf: 3.0.2
+      through2: 4.0.2
       ts-jest: 27.1.2_dee0b726dbd276697ee4962bafb31db0
       ts-node: 10.4.0_3fe8d9d895bdd4dd9a3533ca7d84518e
       typescript: 4.5.4
@@ -150,9 +156,11 @@ importers:
       gulp-typescript: ^6.0.0-alpha.1
       identity-obj-proxy: ^3.0.0
       jest: ^27.4.3
+      merge2: ^1.4.1
       prop-types: ^15.7.2
       rimraf: ^3.0.2
       sass: ^1.44.0
+      through2: ^4.0.2
       ts-jest: ^27.1.0
       ts-node: ^10.4.0
       typescript: ^4.4.4
@@ -186,8 +194,10 @@ importers:
       gulp-typescript: 6.0.0-alpha.1_typescript@4.5.4
       identity-obj-proxy: 3.0.0
       jest: 27.4.5_ts-node@10.4.0
+      merge2: 1.4.1
       prop-types: 15.7.2
       rimraf: 3.0.2
+      through2: 4.0.2
       ts-jest: 27.1.2_dee0b726dbd276697ee4962bafb31db0
       ts-node: 10.4.0_3fe8d9d895bdd4dd9a3533ca7d84518e
       typescript: 4.5.4
@@ -227,11 +237,13 @@ importers:
       identity-obj-proxy: ^3.0.0
       jest: ^27.4.3
       lodash: ^4.17.21
+      merge2: ^1.4.1
       prop-types: ^15.7.2
       resize-observer-polyfill: ^1.5.1
       rimraf: ^3.0.2
       sass: ^1.44.0
       scroll-into-view-if-needed: ^2.2.28
+      through2: ^4.0.2
       ts-jest: ^27.1.0
       ts-node: ^10.4.0
       typescript: ^4.4.4
@@ -277,8 +289,10 @@ importers:
       gulp-typescript: 6.0.0-alpha.1_typescript@4.5.4
       identity-obj-proxy: 3.0.0
       jest: 27.4.5_ts-node@10.4.0
+      merge2: 1.4.1
       prop-types: 15.7.2
       rimraf: 3.0.2
+      through2: 4.0.2
       ts-jest: 27.1.2_dee0b726dbd276697ee4962bafb31db0
       ts-node: 10.4.0_3fe8d9d895bdd4dd9a3533ca7d84518e
       typescript: 4.5.4
@@ -1833,6 +1847,12 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@cspotcode/source-map-consumer': 0.8.0
+    dev: true
+
+  /@douyinfe/semi-theme-default/2.4.0:
+    resolution: {integrity: sha512-CYr9KDDfF31g8CTEhP66TwnnAJ81sppF+QK27DSduLoFyaVNpUJH12T1zm+TeuQ1z/C1ZfWunXSMY22zBfmigw==}
+    dependencies:
+      glob: 7.2.0
     dev: true
 
   /@emmetio/abbreviation/2.2.2:
@@ -6367,7 +6387,6 @@ packages:
 
   /inherits/2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
-    dev: true
 
   /ini/1.3.8:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
@@ -11344,7 +11363,7 @@ packages:
     dependencies:
       fs.realpath: registry.npmmirror.com/fs.realpath/1.0.0
       inflight: registry.npmmirror.com/inflight/1.0.6
-      inherits: registry.npmmirror.com/inherits/2.0.4
+      inherits: 2.0.4
       minimatch: registry.npmmirror.com/minimatch/3.0.4
       once: registry.npmmirror.com/once/1.4.0
       path-is-absolute: registry.npmmirror.com/path-is-absolute/1.0.1
@@ -11363,12 +11382,6 @@ packages:
     dependencies:
       once: registry.npmmirror.com/once/1.4.0
       wrappy: registry.npmmirror.com/wrappy/1.0.2
-    dev: false
-
-  registry.npmmirror.com/inherits/2.0.4:
-    resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/inherits/-/inherits-2.0.4.tgz}
-    name: inherits
-    version: 2.0.4
     dev: false
 
   registry.npmmirror.com/lodash/4.17.21:
