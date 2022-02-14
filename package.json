@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "lerna run --scope @kousum/semi-ui-vue dev",
     "build:lib": "lerna run --scope @kousum/semi-animation-vue build:lib & lerna run --scope @kousum/semi-icons-vue build:lib & lerna run --scope @kousum/semi-ui-vue build:lib",
-    "publish": "pnpm build:lib & npm publish"
+    "build:publish": "pnpm build:lib & lerna publish",
+    "publish": "lerna publish"
   },
   "publishConfig": {
     "access": "public"
