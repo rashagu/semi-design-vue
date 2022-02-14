@@ -13,12 +13,15 @@ const getBabelConfig = require('./getBabelConfig');
 gulp.task('cleanLib', function cleanLib() {
     return del(['lib/**/*']);
 });
+
 function compileTSX(isESM) {
-    const jsStream = gulp.src(['lib/**/*.js'])
-        .pipe(replace(/(require\(['"])([^'"]+)(\.scss)(['"]\))/g, '$1$2.css$4'))
-        .pipe(replace(/(import\s+)['"]([^'"]+)(\.scss)['"]/, '$1\'$2.css\''))
-        .pipe(gulp.dest('lib'));
-    return merge2([jsStream]);
+  const jsStream = gulp.src(['lib/**/*.js'])
+    .pipe(replace(/(require\(['"])([^'"]+)(\.scss)(['"]\))/g, '$1$2.css$4'))
+    .pipe(replace(/(import\s+)['"]([^'"]+)(\.scss)['"]/, '$1\'$2.css\''))
+    .pipe(replace(/(import\s+)['"]@douyinfe\/semi-foundation\/([^'"]+)(\.css)['"]/, '$1\'@douyinfe/semi-foundation/lib/$2.css\''))
+    .pipe(gulp.dest('lib'));
+
+  return merge2([jsStream]);
 }
 
 gulp.task('compileTSXForESM', function compileTSXForESM() {

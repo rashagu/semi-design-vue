@@ -16,7 +16,9 @@
 > `lerna run --scope @kousum/semi-ui-vue dev`
 
 
-### 其他
+### lerna
+> `lerna publish`
+> 
 > `lerna add @kousum/semi-icons-vue --scope=@kousum/semi-ui-vue`
 
 > `lerna add @kousum/semi-animation-vue --scope=@kousum/semi-ui-vue`
