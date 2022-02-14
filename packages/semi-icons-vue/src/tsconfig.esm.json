@@ -10,19 +10,8 @@
   ],
   "compilerOptions": {
     "outDir": "../lib",
-    "target": "esnext",
-    "useDefineForClassFields": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
-    "jsx": "react",
-    "jsxFactory": "h",
-    "jsxFragmentFactory": "Fragment",
     "strictNullChecks": false,
-    "sourceMap": true,
-    "declaration": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "lib": ["esnext", "dom"]
+    "module": "ES6",
+    "target": "ES6"
   }
 }

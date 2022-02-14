@@ -68,7 +68,7 @@ const ConvertIcon = defineComponent<convertIconType>((props, {slots}) => {
   return () => (
     <Icon type={props.iconType} ref={ref as any} {...props} >
       {{
-        default:()=>slots.default(),
+        default:()=>slots.default ? slots.default() : null,
       }}
     </Icon>
   )

@@ -39,7 +39,7 @@ gulp.task('compileScss', function compileScss() {
         const cssVarStr = `@import "${rootPath}node_modules/@douyinfe/semi-theme-default/scss/global.scss";\n`;
         const scssBuffer = Buffer.from(scssVarStr);
         const buffers = [scssBuffer];
-        if (/_base\/base\.scss/.test(chunk.path) || /_base\\base\.scss/.test(chunk.path)) {
+        if (/_base\/base\.scss/.test(chunk.path) || /_base\\base\.scss/.test(chunk.path) || /base\/base\.scss/.test(chunk.path) || /base\\base\.scss/.test(chunk.path)) {
           buffers.push(Buffer.from(cssVarStr));
         }
         chunk.contents = Buffer.concat([...buffers, chunk.contents]);
