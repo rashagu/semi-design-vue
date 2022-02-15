@@ -19,13 +19,17 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
     if (hasIcon || (isLoading && !isDisabled)) {
         return ()=>(
           <IconButton {...props}>
-              {slots.default?slots.default():null}
+              {{
+                  default: slots.default?slots.default():null
+              }}
           </IconButton>
         );
     } else {
         return ()=>(
           <BaseButton {...props}>
-              {slots.default?slots.default():null}
+              {{
+                  default: slots.default?slots.default():null
+              }}
           </BaseButton>
         );
     }
