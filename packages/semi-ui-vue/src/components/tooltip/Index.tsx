@@ -664,7 +664,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
 
     const { triggerEventSet } = state;
     const { wrapWhenSpecial } = props;
-    let children:any = slots.default()[0];
+    let children:any = slots.default?slots.default()[0]:null;
     const childrenStyle = { ...get(children, 'props.style') };
     const extraStyle: CSSProperties = {};
 

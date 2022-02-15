@@ -239,7 +239,7 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
       spacing = numbers.SPACING;
     }
 
-    let children:any = slots.default()[0];
+    let children:any = slots.default?slots.default()[0]:null;
 
     return (
       <Tooltip

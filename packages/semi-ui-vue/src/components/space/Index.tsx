@@ -86,7 +86,7 @@ const Index = defineComponent<SpaceProps>((props, {slots}) => {
     [`${prefixCls}-loose-vertical`]: spacingVerticalType === strings.SPACING_LOOSE,
   });
   return ()=>{
-    const childrenNodes = flatten(slots.default());
+    const childrenNodes = slots.default?flatten(slots.default()):null;
     return <div class={classNames} style={realStyle}>
       {childrenNodes}
     </div>

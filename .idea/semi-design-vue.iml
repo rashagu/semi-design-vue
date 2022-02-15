@@ -3,6 +3,9 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/packages/semi-ui-vue/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/semi-ui-vue/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/semi-icons-vue/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/semi-animation-vue/lib" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

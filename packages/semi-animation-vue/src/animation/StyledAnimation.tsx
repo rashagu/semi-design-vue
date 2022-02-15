@@ -121,7 +121,7 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
       animationDirection: reverse ? 'alternate' : 'normal',
       animationFillMode: fillMode,
     };
-    return slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
+    return slots.default?slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)}):null
   }
   //
   // return () => {

@@ -108,7 +108,7 @@ const KeyFrames = defineComponent<KeyFramesProps>((props, {slots}) => {
       onFrame={onFrame}
       onRest={next}
     >
-      {typeof slots.default() === 'function' ? slots.default(currentStyle) : slots.default()}
+      {slots.default?(typeof slots.default() === 'function' ? slots.default(currentStyle) : slots.default()):null}
     </Animation>
   );
 })

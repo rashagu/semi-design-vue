@@ -14,7 +14,7 @@ export interface ContextValue {
 const ConfigContext:ContextValue = {};
 const ConfigContextVNode_ = defineComponent<{value:any}>((props, {slots}) => {
     provide('ConfigContext', props.value || null)
-    return slots.default()
+    return slots.default?slots.default():null
 })
 ConfigContextVNode_.props = {
     value:Object

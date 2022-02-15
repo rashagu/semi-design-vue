@@ -40,7 +40,7 @@ const Basic = defineComponent<BasicProps>((props, {slots}) => {
     const { prefixCls, type, className, tagName, ...others } = props;
     const classString = cls(className, `${prefixCls}-${type}`);
     console.log(tagName)
-    return h(tagName, { className: classString, ...others }, slots.default());
+    return h(tagName, { className: classString, ...others }, slots.default?slots.default():null);
   }
 })
 Basic.props = BasicVuePropsType

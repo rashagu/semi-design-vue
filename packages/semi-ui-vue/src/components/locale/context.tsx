@@ -4,7 +4,7 @@ import {defineComponent, provide} from "vue";
 const LocaleContext: Locale = null;
 export const LocaleContextVNode_ = defineComponent<{value:any}>((props, {slots}) => {
   provide('LocaleContext', props.value)
-  return slots.default()
+  return slots.default?slots.default():null
 })
 LocaleContextVNode_.props = {
   value:{
