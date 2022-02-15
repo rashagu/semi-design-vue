@@ -3,7 +3,7 @@
 > 基于`semi-design`的`Vue3`适配
 
 
-# 🔥 Install
+# 🔥 安装
 
 ```sh
 # with npm
@@ -16,9 +16,7 @@ yarn add @douyinfe/semi-icons-vue
 
 ```
 
-# 👍 Usage
-
-Here is a quick example to get you started, it's all you need:
+# 👍 使用
 
 ```jsx
 #main.js
