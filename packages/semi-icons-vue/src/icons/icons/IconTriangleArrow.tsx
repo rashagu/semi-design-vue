@@ -28,7 +28,7 @@ const SvgComponent = defineComponent((props, { slots }) => {
     );
 });
 const IconComponent = defineComponent({
-    name: 'semi_icon-activity',
+    name: 'IconTriangleArrow',
 
     setup(props, { slots }) {
         return () => (

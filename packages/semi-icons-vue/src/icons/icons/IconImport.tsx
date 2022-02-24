@@ -25,7 +25,7 @@ const SvgComponent = defineComponent((props, { slots }) => {
     );
 });
 const IconComponent = defineComponent({
-    name: 'semi_icon-activity',
+    name: 'IconImport',
 
     setup(props, { slots }) {
         return () => (

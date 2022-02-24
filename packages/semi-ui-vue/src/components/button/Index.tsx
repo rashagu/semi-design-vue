@@ -20,7 +20,7 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
         return ()=>(
           <IconButton {...props}>
               {{
-                  default: slots.default?slots.default():null
+                  default: ()=>slots.default?slots.default():null
               }}
           </IconButton>
         );
@@ -28,7 +28,7 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
         return ()=>(
           <BaseButton {...props}>
               {{
-                  default: slots.default?slots.default():null
+                  default: ()=>slots.default?slots.default():null
               }}
           </BaseButton>
         );
