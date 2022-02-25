@@ -70,7 +70,7 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
       [`${prefixCls}-loading`]: loading,
     })} theme={theme} style={style}>
       {{
-        default: () => (() => {
+        default: () => {
           let IconElem = (): any => null;
 
           if (loading && !otherProps.disabled) {
@@ -81,25 +81,17 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
           const children = () => slots.default && slots.default() && slots.default()[0]?.children ?
             <span class={IconElem() ? btnTextCls : ''}>{slots.default ? slots.default() : null}</span> : null;
           if (iconPosition === 'left') {
-            return {
-              default: () => (
-                <>
-                  {IconElem()}
-                  {children ? children() : null}
-                </>
-              )
-            };
+            return <>
+              {IconElem()}
+              {children ? children() : null}
+            </>;
           } else {
-            return {
-              default: () => (
-                <>
-                  {children ? children() : null}
-                  {IconElem()}
-                </>
-              )
-            };
+            return <>
+              {children ? children() : null}
+              {IconElem()}
+            </>;
           }
-        })()
+        }
       }}
     </Button>
   );

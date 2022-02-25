@@ -1,8 +1,8 @@
 import {defineComponent, ref, h, onMounted, watch,} from 'vue'
 import Button from "./components/button/Demo";
 import './docDemo.scss'
-// import IconTest from "./__test__/IconTest";
-// import TootipDemo from "./components/tooltip/__test__/TootipDemo";
+import IconTest from "./__test__/IconTest";
+import TootipDemo from "./components/tooltip/__test__/TootipDemo";
 // import DropdownDemo1 from "./components/dropdown/__test__/DropdownDemo1";
 // import GridTest from "./components/grid/__test__/GridTest";
 // import LayoutTest from "./components/layout/__test__/LayoutTest";

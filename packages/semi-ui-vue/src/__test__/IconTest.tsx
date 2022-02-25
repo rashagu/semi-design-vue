@@ -17,7 +17,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
     const iconsObj:any = icons;
     for(let i in icons){
       const Dom = iconsObj[i];
-      domArr.value.push({vNode:<Dom size={'extra-large'} />,name:Dom.name.replaceAll('semi_icon-','')})
+      domArr.value.push({vNode:<Dom size={'extra-large'} />,name:Dom.name})
     }
   })
   return () => (
