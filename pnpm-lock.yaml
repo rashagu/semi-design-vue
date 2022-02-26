@@ -236,8 +236,8 @@ importers:
       '@babel/preset-react': ^7.16.7
       '@douyinfe/semi-foundation': ^2.5.0
       '@douyinfe/semi-theme-default': ^2.5.0
-      '@kousum/semi-animation-vue': ^2.1.15-alpha.0
-      '@kousum/semi-icons-vue': ^2.1.17-alpha.0
+      '@kousum/semi-animation-vue': ^2.1.19-alpha.0
+      '@kousum/semi-icons-vue': ^2.1.19-alpha.0
       '@types/jest': ^27.4.1
       '@types/lodash': ^4.14.178
       '@types/prop-types': ^15.7.4
@@ -1889,13 +1889,6 @@ packages:
       '@babel/runtime-corejs3': 7.16.5
     dev: false
 
-  /@douyinfe/semi-animation/2.3.1:
-    resolution: {integrity: sha512-sDd9hSTGCvSb6JPls0XgrLXPMRjjjn1bWbW6Y1XJcdge/KPEyL7zYo216yq89YVUsbuhwtfzfcKCfK+aIE7F5g==}
-    dependencies:
-      '@babel/runtime-corejs3': 7.16.5
-      bezier-easing: 2.1.0
-    dev: false
-
   /@douyinfe/semi-animation/2.5.0:
     resolution: {integrity: sha512-JXjJ5yoRD+iNmWrkb3v0jXw6ybAeLD4qXS8IGm2CmGyMQQFocOj3XeziCUVwQJkV/f6ZrgvAPt1K2hpUqN6R4g==}
     dependencies:
@@ -2198,7 +2191,7 @@ packages:
   /@kousum/semi-animation-vue/2.2.2:
     resolution: {integrity: sha512-orFQC7zMXyP7E/vWNYZnOiCjVewLxuDVCSq7yl9JWfVz1eI7Cz8HLTAwABKeJ99yh8eLx2b8uSthGnyRVDVcrQ==}
     dependencies:
-      '@douyinfe/semi-animation': 2.3.1
+      '@douyinfe/semi-animation': 2.5.0
       '@douyinfe/semi-animation-styled': 2.3.1
       '@douyinfe/semi-foundation': 2.5.0
       classnames: 2.3.1
