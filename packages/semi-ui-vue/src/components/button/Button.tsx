@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/button/constants';
 import '@douyinfe/semi-foundation/button/button.scss';
 import {noop} from '@douyinfe/semi-foundation/utils/function';
-import PropTypes from 'prop-types'
 
 const btnSizes = typeof strings.sizes;
 const {htmlTypes, btnTypes} = strings;
