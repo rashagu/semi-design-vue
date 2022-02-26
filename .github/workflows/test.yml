@@ -19,11 +19,11 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Run install
-        run: npm i -g lerna && lerna bootstrap --hoist
-
       - name: Run install pnpm
         run: npm i -g pnpm
+        
+      - name: Run install
+        run: npm i -g lerna && lerna bootstrap --hoist
         
       - name: Run test
         run: lerna test
