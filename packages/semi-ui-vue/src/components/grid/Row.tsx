@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import {cssClasses} from '@douyinfe/semi-foundation/grid/constants';
 import '@douyinfe/semi-foundation/grid/grid.scss';
-import {registerMediaQuery} from '../_utils';
+import {registerMediaQuery} from '../_utils/index';
 
 const responsiveArray = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
 

@@ -1,5 +1,5 @@
-import { PopoverProps } from '../popover';
-import { TooltipProps } from '../tooltip';
+import { PopoverProps } from '../popover/Index';
+import { TooltipProps } from '../tooltip/Index';
 import { ArrayElement } from '../_base/base';
 import { strings } from '@douyinfe/semi-foundation/typography/constants';
 

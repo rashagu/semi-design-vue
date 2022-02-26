@@ -27,7 +27,7 @@ import {Locale} from '../locale/interface';
 import {Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseType} from './interface';
 import {CopyableConfig, LinkType} from './Title';
 import {BaseProps} from '../_base/BaseComponent';
-import {isSemiIcon} from '../_utils';
+import {isSemiIcon} from '../_utils/index';
 
 const LocaleConsumer = LocaleConsumer_()
 
