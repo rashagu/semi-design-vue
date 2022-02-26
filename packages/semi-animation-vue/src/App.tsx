@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, onMounted,} from 'vue'
+import {defineComponent, ref, h} from 'vue'
 import { Transition } from "./animation/index";
 export interface ExampleProps {
   name?: string
@@ -7,10 +7,7 @@ export interface ExampleProps {
 export const VuePropsType = {
   name: String
 }
-
 const App = defineComponent<ExampleProps>((props, {slots}) => {
-
-
   const visible = ref(false);
   return ()=>(
     <div class="App">
