@@ -30,6 +30,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
       <button onClick={() => {
         visible.value = !visible.value;
       }}>toggle</button>
+      <div class={'aa'}>123</div>
     </div>
   );
 })
