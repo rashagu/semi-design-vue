@@ -59,8 +59,8 @@ export interface DropdownProps extends TooltipProps {
   onVisibleChange?: (visible: boolean) => void;
   rePosKey?: string | number;
   showTick?: boolean;
-  prefixCls: string,
-  spacing: number;
+  prefixCls?: string,
+  spacing?: number;
 }
 
 interface DropdownState {
