@@ -3,11 +3,11 @@ import Button from "./components/button/Demo";
 import './docDemo.scss'
 import IconTest from "./__test__/IconTest";
 import TootipDemo from "./components/tooltip/__test__/TootipDemo";
-// import DropdownDemo1 from "./components/dropdown/__test__/DropdownDemo1";
-// import GridTest from "./components/grid/__test__/GridTest";
-// import LayoutTest from "./components/layout/__test__/LayoutTest";
-// import SpaceTest from "./components/space/__test__/SpaceTest";
-// import PopoverTest from "./components/popover/__test__/PopoverTest";
+import DropdownDemo1 from "./components/dropdown/__test__/DropdownDemo1";
+import GridTest from "./components/grid/__test__/GridTest";
+import LayoutTest from "./components/layout/__test__/LayoutTest";
+import SpaceTest from "./components/space/__test__/SpaceTest";
+import PopoverTest from "./components/popover/__test__/PopoverTest";
 export interface ExampleProps {
   name?: string
 }
@@ -24,17 +24,17 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         <Button />
       </div>
 
-      {/*<IconTest />*/}
-      {/*<br/>*/}
-      {/*<TootipDemo />*/}
-      {/*<br/>*/}
-      {/*<br/>*/}
-      {/*<DropdownDemo1/>*/}
-      {/*<br/>*/}
-      {/*<GridTest />*/}
-      {/*<LayoutTest/>*/}
-      {/*<SpaceTest/>*/}
-      {/*<PopoverTest />*/}
+      <IconTest />
+      <br/>
+      <TootipDemo />
+      <br/>
+      <br/>
+      <DropdownDemo1/>
+      <br/>
+      <GridTest />
+      <LayoutTest/>
+      <SpaceTest/>
+      <PopoverTest />
       <div class={'aa'}>123</div>
     </div>
   )
