@@ -3,6 +3,16 @@
 > 基于`semi-design`的`Vue3`适配
 
 
+[![NPM][npm-badge]][npm-url]  [![LICENSE][license-badge]][license-url] [![codecov](https://codecov.io/gh/rashagu/semi-design-vue/branch/dev/graph/badge.svg?token=MOL39F8RO4)](https://codecov.io/gh/rashagu/semi-design-vue)
+
+
+[npm-badge]: https://img.shields.io/npm/v/@kousum/semi-ui-vue.svg
+[npm-url]: https://www.npmjs.com/package/@kousum/semi-ui-vue
+
+[license-badge]: https://img.shields.io/npm/l/@kousum/semi-ui-vue
+[license-url]: https://github.com/@kousum/semi-ui-vue/blob/main/LICENSE
+
+
 # 🔥 安装
 
 ```sh
