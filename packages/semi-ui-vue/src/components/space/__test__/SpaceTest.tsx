@@ -23,7 +23,7 @@ const SpaceTest = defineComponent<ExampleProps>((props, {slots}) => {
           display: 'flex',
           alignItems: 'center'
         }}>div</div>
-        <>asd</>
+        <div>asd</div>
       </Space>
     </div>
   )
