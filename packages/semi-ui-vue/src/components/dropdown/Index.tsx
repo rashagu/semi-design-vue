@@ -269,5 +269,6 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
 
 Dropdown.props = vuePropsType
 
+export {DropdownMenu, DropdownItem, DropdownDivider, DropdownTitle,Dropdown}
 export default Dropdown
 

@@ -5,7 +5,6 @@ import IconButton from "../iconButton/Index";
 import {IconCamera, IconClose, IconDelete, IconEdit, IconTreeTriangleDown} from "@kousum/semi-icons-vue";
 import SplitButtonGroup from "./SplitButtonGroup";
 import Dropdown, {DropDownMenuItem} from "../dropdown/Index";
-import {ExampleProps} from "../../App";
 
 
 
