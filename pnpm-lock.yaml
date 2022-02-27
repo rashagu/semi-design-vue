@@ -236,8 +236,8 @@ importers:
       '@babel/preset-react': ^7.16.7
       '@douyinfe/semi-foundation': ^2.5.0
       '@douyinfe/semi-theme-default': ^2.5.0
-      '@kousum/semi-animation-vue': ^2.1.19-alpha.0
-      '@kousum/semi-icons-vue': ^2.1.19-alpha.0
+      '@kousum/semi-animation-vue': ^2.1.20-alpha.0
+      '@kousum/semi-icons-vue': ^2.1.20-alpha.0
       '@types/jest': ^27.4.1
       '@types/lodash': ^4.14.178
       '@types/prop-types': ^15.7.4

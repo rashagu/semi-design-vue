@@ -6,6 +6,7 @@
   "files": [
     "lib/"
   ],
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
