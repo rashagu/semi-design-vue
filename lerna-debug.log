@@ -1,4 +1,0 @@
-44 error Error: Command failed with exit code 128: git push --follow-tags --no-verify --atomic origin master
-44 error fatal: unable to access 'https://github.com/rashagu/semi-design-vue.git/': OpenSSL SSL_read: Connection was reset, errno 10054
-44 error     at makeError (D:\sumw\codeMy\semi-design-vue\node_modules\.pnpm\execa@5.1.1\node_modules\execa\lib\error.js:60:11)
-44 error     at handlePromise (D:\sumw\codeMy\semi-design-vue\node_modules\.pnpm\execa@5.1.1\node_modules\execa\index.js:118:26)
