@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-icons-vue",
-  "version": "2.1.20-alpha.0",
+  "version": "2.1.21-alpha.0",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "files": [
