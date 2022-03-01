@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
 import Popover from '../Index'
 import Button from "../../button/Button";
-import Space from '../../space'
+import Space from '../../space/Index'
 
 interface ExampleProps {
   name?: string

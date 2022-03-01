@@ -1,12 +1,13 @@
 {
   "extends": "../tsconfig.json",
-  "exclude": ["./**/*.spec.*","./**/_stories/.*","./**/typography/.*","./**/__test__/.*",
-    "./main.ts", "../script/*", "../components",
+  "exclude": ["./**/*.spec.*","./**/_stories/.*","./**/_stories/.*",
+    "./main.ts", "../script/*",
     "./Comp1",
     "./App.tsx",
-    "./__test__"
+    "./**/__test__"
   ],
   "compilerOptions": {
+    "rootDir": "./components",
     "outDir": "../lib",
     "strictNullChecks": false,
     "module": "ES6",

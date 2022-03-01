@@ -3,9 +3,9 @@
  */
 
 const svgr = require('@svgr/core').default;
-const { optimize } = require('svgo');
+const {optimize} = require('svgo');
 const fs = require('fs');
-const { resolve, basename, extname } = require('path');
+const {resolve, basename, extname} = require('path');
 const camelCase = require('camelcase');
 const prettier = require('prettier');
 
@@ -18,55 +18,57 @@ const prettier = require('prettier');
  * @param {*} suffix 图标后缀
  */
 async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOptions = {}) {
-    const prettierConfig = require('../.prettierrc.js');
-    fs.rmSync(outDir, { recursive: true });
-    fs.mkdirSync(outDir);
-    // 读取svg文件夹下的文件，转译成React组件，并输出
-    const files = fs.readdirSync(entryDir, 'utf-8');
-    const indexFileName = 'index.ts';
-    const batches = files.filter(f => extname(f) === '.svg').map(async file => {
-        try {
-            const svgFileName = basename(file, '.svg');
-            const componentName = `${prefix}${camelCase(svgFileName, { pascalCase: true })}${suffix}`;
-            const reactFileName = `${componentName}.tsx`;
-            const svgContent = fs.readFileSync(resolve(entryDir, file), 'utf-8');
-            const svgProps = {
-                focusable: '{false}',
-                'aria-hidden': true
-            };
-            const result = optimize(svgContent, {
-                plugins: svgoPlugins,
-            });
-            // console.log(svgr)
-            const jsxCode = await svgr(result.data, {
-                plugins: ['@svgr/plugin-jsx'],
-                svgProps,
-                iconType: svgFileName,
-                ...svgrOptions,
-            });
-            const formattedCode = prettier.format(jsxCode, prettierConfig);
-            const newFormattedCode = formattedCode
-                .replaceAll('focusable={false}', `// @ts-ignore
+  const prettierConfig = require('../.prettierrc.js');
+  fs.rmSync(outDir, {recursive: true});
+  fs.mkdirSync(outDir);
+  // 读取svg文件夹下的文件，转译成React组件，并输出
+  const files = fs.readdirSync(entryDir, 'utf-8');
+  const indexFileName = 'index.ts';
+  const batches = files.filter(f => extname(f) === '.svg').map(async file => {
+    try {
+      const svgFileName = basename(file, '.svg');
+      const componentName = `${prefix}${camelCase(svgFileName, {pascalCase: true})}${suffix}`;
+      const reactFileName = `${componentName}.tsx`;
+      const svgContent = fs.readFileSync(resolve(entryDir, file), 'utf-8');
+      const svgProps = {
+        focusable: '{false}',
+        'aria-hidden': true
+      };
+      const result = optimize(svgContent, {
+        plugins: svgoPlugins,
+      });
+      // console.log(svgr)
+      const jsxCode = await svgr(result.data, {
+        plugins: ['@svgr/plugin-jsx'],
+        svgProps,
+        iconType: svgFileName,
+        ...svgrOptions,
+      });
+      const formattedCode = prettier.format(jsxCode, prettierConfig);
+      const newFormattedCode = formattedCode
+        .replaceAll('focusable={false}', `// @ts-ignore
             focusable={false}`, 1)
-                .replaceAll('fillRule','fill-rule')
-                .replaceAll('clipRule','clip-rule')
-                .replaceAll('strokeWidth','stroke-width')
-                .replaceAll('clipPath','clip-path')
-                .replaceAll('stopOpacity','stop-opacity')
-                .replaceAll('strokeLinecap','stroke-linecap')
-                .replaceAll('strokeLinejoin','stroke-linejoin')
-                .replaceAll('stopColor','stop-colo')
-            fs.writeFileSync(resolve(outDir, reactFileName), newFormattedCode, 'utf-8');
-            return { fileName: reactFileName, componentName };
-        } catch (error) {
-            console.error(error);
-            throw error;
-        }
-    });
-    const arr = await Promise.all(batches);
-    const indexFileContent = arr.map(a => `export { default as ${a.componentName} } from './${a.componentName}';`).join('\n');
-    fs.writeFileSync(resolve(outDir, indexFileName), indexFileContent, 'utf-8');
-    return arr;
+        .replaceAll('fillRule', 'fill-rule')
+        .replaceAll('clipRule', 'clip-rule')
+        .replaceAll('strokeWidth', 'stroke-width')
+        .replaceAll('clipPath', 'clip-path')
+        .replaceAll('stopOpacity', 'stop-opacity')
+        .replaceAll('strokeLinecap', 'stroke-linecap')
+        .replaceAll('strokeLinejoin', 'stroke-linejoin')
+        .replaceAll('stopColor', 'stop-colo')
+        .replaceAll('semi_icon-activity', componentName)
+
+      fs.writeFileSync(resolve(outDir, reactFileName), newFormattedCode, 'utf-8');
+      return {fileName: reactFileName, componentName};
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  });
+  const arr = await Promise.all(batches);
+  const indexFileContent = arr.map(a => `export { default as ${a.componentName} } from './${a.componentName}';`).join('\n');
+  fs.writeFileSync(resolve(outDir, indexFileName), indexFileContent, 'utf-8');
+  return arr;
 }
 
 module.exports = build;

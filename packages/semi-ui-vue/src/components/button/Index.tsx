@@ -2,7 +2,7 @@ import {defineComponent, ref, h} from 'vue'
 import BaseButton, { ButtonProps as BaseButtonProps, vuePropsType} from './Button';
 import {noop} from "@douyinfe/semi-foundation/utils/function";
 import {cssClasses} from "@douyinfe/semi-foundation/button/constants";
-import IconButton, { IconButtonProps } from '../iconButton';
+import IconButton, { IconButtonProps } from '../iconButton/Index';
 
 
 
@@ -20,7 +20,7 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
         return ()=>(
           <IconButton {...props}>
               {{
-                  default: slots.default?slots.default():null
+                  default: ()=>slots.default?slots.default():null
               }}
           </IconButton>
         );
@@ -28,7 +28,7 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
         return ()=>(
           <BaseButton {...props}>
               {{
-                  default: slots.default?slots.default():null
+                  default: ()=>slots.default?slots.default():null
               }}
           </BaseButton>
         );

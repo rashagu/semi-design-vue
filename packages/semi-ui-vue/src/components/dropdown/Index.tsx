@@ -17,7 +17,7 @@ import { cssClasses, strings, numbers } from '@douyinfe/semi-foundation/dropdown
 import BaseComponent, {useBaseComponent} from '../_base/BaseComponent';
 
 
- import Tooltip, { TooltipProps, Trigger } from '../tooltip';
+import Tooltip, { TooltipProps, Trigger } from '../tooltip/Index';
 
 import { numbers as tooltipNumbers } from '@douyinfe/semi-foundation/tooltip/constants';
 import Foundation from '@douyinfe/semi-foundation/dropdown/foundation';
@@ -59,8 +59,8 @@ export interface DropdownProps extends TooltipProps {
   onVisibleChange?: (visible: boolean) => void;
   rePosKey?: string | number;
   showTick?: boolean;
-  prefixCls: string,
-  spacing: number;
+  prefixCls?: string,
+  spacing?: number;
 }
 
 interface DropdownState {
@@ -269,5 +269,6 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
 
 Dropdown.props = vuePropsType
 
+export {DropdownMenu, DropdownItem, DropdownDivider, DropdownTitle,Dropdown}
 export default Dropdown
 

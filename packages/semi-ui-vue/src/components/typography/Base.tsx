@@ -17,8 +17,8 @@ import Typography from './Typography';
 import Copyable from './Copyable';
 import {IconSize as Size} from '../icons';
 import {isUndefined, omit, merge, isString} from 'lodash';
-import Tooltip from '../tooltip';
-import Popover from '../popover';
+import Tooltip from '../tooltip/Index';
+import Popover from '../popover/Index';
 import getRenderText from './util';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
@@ -27,7 +27,7 @@ import {Locale} from '../locale/interface';
 import {Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseType} from './interface';
 import {CopyableConfig, LinkType} from './Title';
 import {BaseProps} from '../_base/BaseComponent';
-import {isSemiIcon} from '../_utils';
+import {isSemiIcon} from '../_utils/index';
 
 const LocaleConsumer = LocaleConsumer_()
 

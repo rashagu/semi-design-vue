@@ -1,11 +1,11 @@
 import {defineComponent, ref, h, StyleValue, isVNode, Fragment} from 'vue'
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { cssClasses, strings } from '@douyinfe/semi-foundation/button/constants';
-import { strings as iconStrings } from '@douyinfe/semi-foundation/icons/constants';
-import Button, { Theme, ButtonProps } from '../button/Button';
+import {cssClasses, strings} from '@douyinfe/semi-foundation/button/constants';
+import {strings as iconStrings} from '@douyinfe/semi-foundation/icons/constants';
+import Button, {Theme, ButtonProps} from '../button/Button';
 import SpinIcon from '../spin/Icon';
-import { noop } from 'lodash';
+import {noop} from 'lodash';
 import '@douyinfe/semi-foundation/button/iconButton.scss';
 
 
@@ -45,7 +45,7 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
     ...otherProps
   } = props;
 
-  const style:any = originStyle;
+  const style: any = originStyle;
   // TODO: review check
   if (Array.isArray(noHorizontalPadding)) {
     noHorizontalPadding.includes('left') && (style.paddingLeft = 0);
@@ -58,45 +58,41 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
   let finalChildren = null;
 
 
-
   const btnTextCls = classNames({
     [`${prefixCls}-content-left`]: iconPosition === 'right',
     [`${prefixCls}-content-right`]: iconPosition === 'left',
   });
 
 
-  return ()=>(
+  return () => (
     <Button {...otherProps} className={classNames(className, `${prefixCls}-with-icon`, {
       [`${prefixCls}-with-icon-only`]: slots.default == null || (slots.default as any) === '',
       [`${prefixCls}-loading`]: loading,
     })} theme={theme} style={style}>
-      {
-        (()=>{
-          let IconElem = ():any=>null;
+      {{
+        default: () => {
+          let IconElem = (): any => null;
 
           if (loading && !otherProps.disabled) {
-            IconElem = ()=><SpinIcon />;
+            IconElem = () => <SpinIcon/>;
           } else if (isVNode(icon)) {
-            IconElem = ()=>icon;
+            IconElem = () => icon;
           }
-          const children = ()=>slots.default && slots.default() && slots.default()[0]?.children? <span class={IconElem()?btnTextCls:''}>{slots.default()}</span> : null;
+          const children = () => slots.default && slots.default() && slots.default()[0]?.children ?
+            <span class={IconElem() ? btnTextCls : ''}>{slots.default ? slots.default() : null}</span> : null;
           if (iconPosition === 'left') {
-            return ()=>(
-              <>
-                {IconElem()}
-                {children()}
-              </>
-            );
+            return <>
+              {IconElem()}
+              {children ? children() : null}
+            </>;
           } else {
-            return ()=>(
-              <>
-                {children()}
-                {IconElem()}
-              </>
-            );
+            return <>
+              {children ? children() : null}
+              {IconElem()}
+            </>;
           }
-        })()
-      }
+        }
+      }}
     </Button>
   );
 })
@@ -104,13 +100,13 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
 export const VuePropsType = {
   icon: [Object, String],
   iconPosition: {
-    type:String,
+    type: String,
     default: strings.DEFAULT_ICON_POSITION,
   },
   iconSize: String,
   iconStyle: Object,
-  loading:{
-    type:Boolean,
+  loading: {
+    type: Boolean,
     default: false,
   },
   theme: String,

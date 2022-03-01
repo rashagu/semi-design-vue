@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "react",
+    "paths": {
+      "@kousum/semi-foundation/*": ["../semi-foundation/*"],
+      "@kousum/semi-icons-vue": ["../semi-icons-vue/src"]
+    },
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "suppressImplicitAnyIndexErrors": true,
+    "strictNullChecks": false,
+    "sourceMap": true,
+    "declaration": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/semi-foundation/**/*.ts", "**/__test__/*"]
+}

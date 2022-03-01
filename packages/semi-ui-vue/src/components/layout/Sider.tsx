@@ -2,7 +2,7 @@ import {defineComponent, ref, h, Fragment, CSSProperties, onMounted, inject} fro
 import cls from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/layout/constants';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
-import {registerMediaQuery} from '../_utils';
+import {registerMediaQuery} from '../_utils/index';
 import LayoutContext from "./layoutContext";
 
 export interface ResponsiveMap {

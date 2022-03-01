@@ -23,8 +23,8 @@ import '@douyinfe/semi-foundation/tooltip/tooltip.scss';
 
 import BaseComponent, {BaseProps, useBaseComponent} from '../_base/BaseComponent';
 import { isHTMLElement } from '../_base/reactUtils';
-import { stopPropagation } from '../_utils';
-import Portal from '../_portal';
+import { stopPropagation } from '../_utils/index';
+import Portal from '../_portal/Index';
 import ConfigContext, {ContextValue} from '../configProvider/context';
 import TriangleArrow from './TriangleArrow';
 import TriangleArrowVertical from './TriangleArrowVertical';
