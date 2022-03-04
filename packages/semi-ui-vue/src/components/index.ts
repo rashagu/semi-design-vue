@@ -14,3 +14,11 @@ export { default as SplitButtonGroup } from './button/splitButtonGroup';
 export { default as Tooltip } from './tooltip/Index';
 
 export { default as LocaleProvider } from './locale/localeProvider';
+
+
+export {
+  Typography,
+  Text,
+  Title,
+  Paragraph,
+} from './typography/Index';

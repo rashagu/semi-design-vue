@@ -1,10 +1,12 @@
 import {Locale} from './interface';
-import {defineComponent, provide} from "vue";
+import {defineComponent, provide, ref} from "vue";
 
 const LocaleContext: Locale = null;
 export const LocaleContextVNode_ = defineComponent<{value:any}>((props, {slots}) => {
-  provide('LocaleContext', props.value)
-  return slots.default?slots.default():null
+  const ConfigContext = ref<Locale>(null);
+  // console.log(ConfigContext.value)
+  provide('ConfigContext', ConfigContext)
+  return ()=>slots.default?slots.default(ConfigContext.value):null
 })
 LocaleContextVNode_.props = {
   value:{

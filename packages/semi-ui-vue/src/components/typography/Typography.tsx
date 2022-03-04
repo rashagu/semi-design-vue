@@ -5,15 +5,15 @@ import '@douyinfe/semi-foundation/typography/typography.scss';
 import { BaseProps } from '../_base/BaseComponent';
 const prefixCls = cssClasses.PREFIX;
 interface TypographyProps extends BaseProps{
-  component?: any;
+  component_?: any;
   forwardRef?: Ref<any>;
   style?: CSSProperties
   className?: string
 }
 
 export const vuePropsType = {
-  component: {
-    type: [Object,String,Array],
+  component_: {
+    component_: [String, Array, Boolean, Object,Number],
     default: 'article'
   },
   style: [String, Object],
@@ -23,18 +23,14 @@ export const vuePropsType = {
 const Typography = defineComponent<TypographyProps>((props, {slots}) => {
 
 
-  const { component, className, children, forwardRef, ...rest } = props;
-  const Component = component;
+  const { component_, className, children, forwardRef, ...rest } = props;
   const classNames = cls(prefixCls, className);
-  return ()=>(
-    <Component
-      className={classNames}
-      ref={forwardRef}
-      {...rest}
-    >
-      {slots.default?slots.default():null}
-    </Component>
-  );
+  // console.debug(component_,{class:classNames,ref:forwardRef,...rest})
+  return ()=>{
+    const children = slots.default?slots.default():null
+    // console.log(children)
+    return component_?h(component_, {class:classNames,ref:forwardRef,...rest}, children):<span />
+  };
 })
 
 Typography.props = vuePropsType

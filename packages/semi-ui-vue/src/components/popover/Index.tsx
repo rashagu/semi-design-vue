@@ -20,7 +20,7 @@ declare interface ArrowStyle {
 }
 
 export interface PopoverProps extends BaseProps {
-  content?: VNode;
+  content?: VNode | string;
   visible?: boolean;
   autoAdjustOverflow?: boolean;
   motion?: Motion;

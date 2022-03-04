@@ -47,7 +47,7 @@ export interface BaseTypographyProps extends BaseProps {
   className?: string;
   code?: boolean;
   children?: VNode;
-  component?: any;
+  component_?: any;
   spacing?: string;
   heading?: string;
 }
@@ -122,7 +122,7 @@ export const vuePropsType = {
     default: 'normal',
   },
   code: Boolean,
-  component: [String, Array, Boolean, Object,Number],
+  component_: [String, Array, Boolean, Object,Number],
   spacing:{
     type: String,
     default: 'normal',
@@ -462,8 +462,10 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
 
   const renderEllipsisText = (opt: Ellipsis) => {
     const { suffix } = opt;
-    const { children } = props;
+    const children = slots.default?slots.default():null;
+
     const { isTruncated, expanded, isOverflowed, ellipsisContent } = state;
+    // console.debug(suffix)
     if (expanded || !isTruncated) {
       return (
         <>
@@ -484,15 +486,17 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
 
   function renderOperations() {
     return (
-      <>
+      <Fragment>
         {renderExpandable()}
         {renderCopy()}
-      </>
+      </Fragment>
     );
   }
 
   function renderCopy() {
-    const { copyable, children } = props;
+    const { copyable,  } = props;
+    const children = slots.default?slots.default():null
+    // console.log(children)
     if (!copyable) {
       return null;
     }
@@ -501,14 +505,17 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
     if (Array.isArray(children)) {
       copyContent = '';
       children.forEach(value => {
-        if (typeof value === 'object') {
+         // console.debug(value.children)
+        if (typeof value.children === 'object') {
           hasObject = true;
         }
-        copyContent += String(value);
+        // // console.debug(value.children)
+        copyContent += String(value.children);
       });
     } else if (typeof children !== 'object') {
       copyContent = String(children);
     } else {
+       console.debug(children)
       hasObject = true;
       copyContent = String(children);
     }
@@ -540,9 +547,9 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
   }
 
   function renderContent() {
+    // console.log(props)
     const {
-      component,
-      children,
+      component_,
       className,
       type,
       spacing,
@@ -555,6 +562,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
       heading,
       ...rest
     } = props;
+    const children = slots.default?slots.default():null;
     const textProps = omit(rest, [
       'strong',
       'editable',
@@ -567,6 +575,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
     ]);
     const iconNode = renderIcon();
     const ellipsisOpt = getEllipsisOpt();
+    // console.debug(ellipsisOpt)
     const { ellipsisCls, ellipsisStyle } = getEllipsisStyle();
     let textNode = ellipsis ? renderEllipsisText(ellipsisOpt) : children;
     const linkCls = cls({
@@ -594,32 +603,38 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
       <Typography
         className={wrapperCls}
         style={{ ...style, ...ellipsisStyle }}
-        component={component}
+        component_={component_}
         forwardRef={wrapperRef}
         {...textProps}
       >
-        {textNode}
-        {renderOperations()}
+        {{
+          default:()=>{
+            return <>
+              {textNode}
+              {renderOperations()}
+            </>
+          }
+        }}
       </Typography>
     );
   }
 
 
   function renderTipWrapper() {
-    const { children } = props;
+    const children = slots.default?slots.default():null;
     const showTooltip_ = showTooltip();
     const content = renderContent();
     if (showTooltip_) {
       const { type, opts } = showTooltip_ as ShowTooltip;
       if (type.toLowerCase() === 'popover') {
         return (
-          <Popover content={children} position="top" {...opts}>
+          <Popover content={children?children[0]:null} position="top" {...opts}>
             {content}
           </Popover>
         );
       }
       return (
-        <Tooltip content={children} position="top" {...opts}>
+        <Tooltip content={children?children[0]:null} position="top" {...opts}>
           {content}
         </Tooltip>
       );
@@ -630,13 +645,15 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
 
 
   return () => {
-
     return (
       <LocaleConsumer componentName={"Typography"}>
-        {(locale: Locale['Typography']) => {
-          expandStr = locale.expand;
-          collapseStr = locale.collapse;
-          return renderTipWrapper();
+        {{
+          default:(locale: Locale['Typography']) => {
+            expandStr = locale.expand;
+            collapseStr = locale.collapse;
+            // // console.debug(locale)
+            return renderTipWrapper();
+          }
         }}
       </LocaleConsumer>
     );

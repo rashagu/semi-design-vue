@@ -1,6 +1,6 @@
 
 import { Locale } from '../locale/interface';
-import {defineComponent, provide} from "vue";
+import {defineComponent, provide, ref} from "vue";
 
 export interface ContextValue {
     direction?: 'ltr' | 'rtl';
@@ -11,13 +11,13 @@ export interface ContextValue {
     level?:number
 }
 
-const ConfigContext:ContextValue = {};
 const ConfigContextVNode_ = defineComponent<{value:any}>((props, {slots}) => {
-    provide('ConfigContext', props.value || null)
-    return slots.default?slots.default():null
+    const ConfigContext = ref<ContextValue>({});
+    provide('ConfigContext', ConfigContext)
+    return ()=>slots.default?slots.default(ConfigContext.value):null
 })
 ConfigContextVNode_.props = {
     value:Object
 }
 export const ConfigContextVNode = ConfigContextVNode_
-export default ConfigContext;
+export default ConfigContextVNode_;

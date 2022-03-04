@@ -3,8 +3,10 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from "@vitejs/plugin-vue-jsx"
 
 // https://vitejs.dev/config/
-// @ts-ignore
 export default defineConfig({
+  server: {
+    port: 8888
+  },
   css: {
     preprocessorOptions: {
       scss: {
@@ -28,4 +30,4 @@ export default defineConfig({
       {find: /^~/, replacement: ''},
     ]
   }
-})
+});

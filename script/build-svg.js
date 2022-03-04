@@ -1,5 +1,5 @@
 /**
- * 转换svg元素成React组件
+ * 转换svg元素成Vue3TSX组件
  */
 
 const svgr = require('@svgr/core').default;
@@ -12,7 +12,7 @@ const prettier = require('prettier');
 /**
  *
  * @param {*} entryDir 存放svg文件夹
- * @param {*} outDir 输出React组件文件夹
+ * @param {*} outDir 输出Vue3TSX组件文件夹
  * @param {*} decolorize 是否去色
  * @param {*} prefix 图标前缀
  * @param {*} suffix 图标后缀
@@ -21,7 +21,7 @@ async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOpt
   const prettierConfig = require('../.prettierrc.js');
   fs.rmSync(outDir, {recursive: true});
   fs.mkdirSync(outDir);
-  // 读取svg文件夹下的文件，转译成React组件，并输出
+  // 读取svg文件夹下的文件，转译成Vue3TSX组件，并输出
   const files = fs.readdirSync(entryDir, 'utf-8');
   const indexFileName = 'index.ts';
   const batches = files.filter(f => extname(f) === '.svg').map(async file => {

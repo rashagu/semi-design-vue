@@ -19,3 +19,10 @@ export { default as Tooltip } from './src/components/tooltip';
 
 export { default as LocaleProvider } from './src/components/locale/localeProvider';
 
+
+export {
+  Typography,
+  Text,
+  Title,
+  Paragraph,
+} from './src/components/typography/Index';

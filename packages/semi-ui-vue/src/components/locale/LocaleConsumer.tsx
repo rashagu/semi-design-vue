@@ -42,17 +42,27 @@ function LocaleConsumer<T>(){
        */
       const defaultFnsLocale = get(DefaultLocale, 'dateFnsLocale');
       const dateFnsLocale = get(locale, 'dateFnsLocale', defaultFnsLocale);
+      // console.log(locale)
       return children(locale[componentName], locale.code, dateFnsLocale);
     }
 
     return () => {
       return (
         <ConfigContextVNode>
-          {({ locale }:{locale:any}) => (
-            <LocaleContextVNode>
-              {(localeData:any) => renderChildren(locale || localeData, slots.default)}
-            </LocaleContextVNode>
-          )}
+          {{
+            default: ({ locale }:{locale:any}) => {
+              return (
+                <LocaleContextVNode>
+                  {{
+                    default:(localeData:any) => {
+                      // console.log(locale, localeData)
+                      return renderChildren(locale || localeData, slots.default)
+                    }
+                  }}
+                </LocaleContextVNode>
+              )
+            }
+          }}
         </ConfigContextVNode>
       );
     }

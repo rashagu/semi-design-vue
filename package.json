@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "semi-ui-vue",
   "private": true,
   "scripts": {
     "dev": "lerna run --scope @kousum/semi-ui-vue dev",

@@ -8,6 +8,7 @@ import GridTest from "./components/grid/__test__/GridTest";
 import LayoutTest from "./components/layout/__test__/LayoutTest";
 import SpaceTest from "./components/space/__test__/SpaceTest";
 import PopoverTest from "./components/popover/__test__/PopoverTest";
+import TypeDemo from './components/typography/__test__/TypoDemo'
 export interface ExampleProps {
   name?: string
 }
@@ -20,21 +21,24 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   return () => (
     <div>
-      <div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
-        <Button />
-      </div>
 
-      <IconTest />
-      <br/>
-      <TootipDemo />
-      <br/>
-      <br/>
-      <DropdownDemo1/>
-      <br/>
-      <GridTest />
-      <LayoutTest/>
-      <SpaceTest/>
-      <PopoverTest />
+      <TypeDemo />
+
+      {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
+      {/*  <Button />*/}
+      {/*</div>*/}
+
+      {/*<IconTest />*/}
+      {/*<br/>*/}
+      {/*<TootipDemo />*/}
+      {/*<br/>*/}
+      {/*<br/>*/}
+      {/*<DropdownDemo1/>*/}
+      {/*<br/>*/}
+      {/*<GridTest />*/}
+      {/*<LayoutTest/>*/}
+      {/*<SpaceTest/>*/}
+      {/*<PopoverTest />*/}
       <div class={'aa'}>123</div>
     </div>
   )

@@ -1,29 +1,37 @@
-import {defineComponent, ref, h, Fragment, HTMLAttributes, CSSProperties} from 'vue'
-import { strings } from '@douyinfe/semi-foundation/typography/constants';
+import {defineComponent, ref, h, Fragment, CSSProperties, HTMLAttributes} from 'vue'
+import cls from 'classnames';
+import { strings, cssClasses } from '@douyinfe/semi-foundation/typography/constants';
 import Base from './base';
-import { Ellipsis, TypographyBaseSize, TypographyBaseType, OmitTypographyProps } from './interface';
+import {
+  Ellipsis,
+  TypographyBaseSize,
+  TypographyBaseSpacing,
+  TypographyBaseType,
+  OmitTypographyProps
+} from './interface';
 import { CopyableConfig, LinkType } from './title';
 
-type OmitTextProps = OmitTypographyProps;
 
-export interface TextProps extends Omit<HTMLAttributes, OmitTextProps> {
-  children?: any;
+type OmitParagraphProps = OmitTypographyProps;
+
+export interface ParagraphProps extends Omit<HTMLAttributes, OmitParagraphProps>{
   className?: string;
-  code?: boolean;
   component_?: any;
   copyable?: CopyableConfig | boolean;
   delete?: boolean;
   disabled?: boolean;
   ellipsis?: Ellipsis | boolean;
-  icon?: any | string;
   link?: LinkType;
   mark?: boolean;
   size?: TypographyBaseSize;
+  spacing?: TypographyBaseSpacing;
   strong?: boolean;
   style?: CSSProperties;
   type?: TypographyBaseType;
   underline?: boolean;
 }
+
+const prefixCls = cssClasses.PREFIX;
 
 
 export const vuePropsType = {
@@ -38,10 +46,6 @@ export const vuePropsType = {
   disabled: {
     type: Boolean,
     default: false,
-  },
-  icon: {
-    type: [Object,String],
-    default: '',
   },
   // editable: false,
   ellipsis: {
@@ -68,33 +72,36 @@ export const vuePropsType = {
     type: String,
     default: 'primary',
   },
-  style: {
-    type: Object,
-    default: {},
-  },
   size: {
     type: String,
     default: 'normal',
+  },
+  spacing: {
+    type: String,
+    default: 'normal',
+  },
+  style: {
+    type: Object,
+    default: {},
   },
   className: {
     type: String,
     default: '',
   },
 }
+const paragraph = defineComponent<ParagraphProps>((props, {slots}) => {
 
 
-const Text = defineComponent<TextProps>((props, {slots}) => {
-
-  return () => {
-    return <Base component_={'span'} {...props} >
-      {{
-        default:()=>slots.default?slots.default():null
-      }}
-    </Base>;
-  }
+  const { className } = props;
+  const paragraphCls = cls(className, `${prefixCls}-paragraph`);
+  return ()=><Base component_={'p'} {...props} className={paragraphCls} >
+    {{
+      default:()=>slots.default?slots.default():null
+    }}
+  </Base>;
 })
 
-Text.props = vuePropsType
+paragraph.props = vuePropsType
 
-export default Text
+export default paragraph
 
