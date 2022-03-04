@@ -11,7 +11,6 @@ import {
   onUnmounted, cloneVNode
 } from 'vue'
 import cls from 'classnames';
-import PropTypes, {func} from 'prop-types';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/typography/constants';
 import Typography from './Typography';
 import Copyable from './Copyable';
@@ -22,14 +21,14 @@ import Popover from '../popover/Index';
 import getRenderText from './util';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
-import LocaleConsumer_ from '../locale/LocaleConsumer';
+import LocaleConsumer from '../locale/LocaleConsumer';
 import {Locale} from '../locale/interface';
 import {Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseType} from './interface';
 import {CopyableConfig, LinkType} from './Title';
 import {BaseProps} from '../_base/BaseComponent';
 import {isSemiIcon} from '../_utils/index';
 
-const LocaleConsumer = LocaleConsumer_()
+const LocaleConsumerDom = LocaleConsumer()
 
 export interface BaseTypographyProps extends BaseProps {
   copyable?: CopyableConfig | boolean;
@@ -646,7 +645,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
 
   return () => {
     return (
-      <LocaleConsumer componentName={"Typography"}>
+      <LocaleConsumerDom componentName={"Typography"}>
         {{
           default:(locale: Locale['Typography']) => {
             expandStr = locale.expand;
@@ -655,7 +654,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
             return renderTipWrapper();
           }
         }}
-      </LocaleConsumer>
+      </LocaleConsumerDom>
     );
   }
 })

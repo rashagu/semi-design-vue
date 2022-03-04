@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, Fragment, CSSProperties, HTMLAttributes} from 'vue'
 import cls from 'classnames';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/typography/constants';
-import Base from './base';
+import Base from './Base';
 import {
   Ellipsis,
   TypographyBaseSize,
