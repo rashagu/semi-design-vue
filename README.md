@@ -84,7 +84,7 @@ import Button from "@kousum/semi-ui-vue"
 - [x] Layout
 - [ ] Tokens
 - [x] Space
-- [ ] Typography
+- [x] Typography
 
 ### 输入类
 
