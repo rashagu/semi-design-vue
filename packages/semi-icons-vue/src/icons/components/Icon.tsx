@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, onActivated, StyleValue} from 'vue'
+import {defineComponent, ref, h, onActivated, StyleValue, VNode} from 'vue'
 import { BASE_CLASS_PREFIX } from '../env';
 import cls from 'classnames';
 import '../styles/icons.scss';
@@ -12,6 +12,7 @@ export interface IconProps  {
   prefixCls?: string,
   type?: string,
   className?: string,
+  svg: VNode,
   style?: StyleValue,
 }
 export const vuePropsType = {
@@ -22,6 +23,7 @@ export const vuePropsType = {
   type: String,
   className: String,
   style: Object,
+  svg: Object,
 }
 
 const Icon = defineComponent<IconProps>((props, {slots}) => {

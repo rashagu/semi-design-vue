@@ -8,7 +8,8 @@ export { default as DropdownItem } from './src/components/dropdown/dropdownItem'
 export { default as DropdownDivider } from './src/components/dropdown/dropdownDivider';
 
 export { Row, Col } from './src/components/grid';
-import {default as Layout} from "./src/components/layout/Index";
+export {LayoutContent, LayoutFooter, LayoutHeader, LayoutSider} from "./src/components/layout/Index";
+export {default as Layout} from "./src/components/layout/Index";
 export { default as IconButton } from './src/components/iconButton';
 export { default as Icon } from './src/components/icons';
 export { default as Popover } from './src/components/popover';
