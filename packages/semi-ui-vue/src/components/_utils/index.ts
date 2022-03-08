@@ -155,4 +155,7 @@ export interface HighLightTextHTMLChunk {
  * @param icon 元素
  * @returns boolean
  */
-export const isSemiIcon = (icon: any): boolean => isVNode(icon) && get(icon.type, 'elementType') === 'Icon';
+export const isSemiIcon = (icon: any): boolean => {
+    // @ts-ignore
+    return  isVNode(icon) && icon.type?.name?.indexOf('Icon') > -1
+};

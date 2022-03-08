@@ -48,7 +48,15 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
       }, // eslint-disable-line
       // return all props
       // @ts-ignore
-      getProps: () => props, // eslint-disable-line
+      getProps: () => {
+        let newProps:any = {}
+        for(let i in props){
+          if (props[i] !== undefined){
+            newProps[i] = props[i]
+          }
+        }
+        return  newProps
+      }, // eslint-disable-line
       getState: key => {
         //console.log(key,state,state[key])
         return state[key]
@@ -111,7 +119,12 @@ const BaseComponent = defineComponent<BaseProps>((props, {slots}) => {
       getContexts: () => context, // eslint-disable-line
       getProp: key => props[key], // eslint-disable-line
       // return all props
-      getProps: () => props as P, // eslint-disable-line
+      getProps: () => {
+        let newProps = {}
+        console.debug(props)
+
+        return  props as P
+      }, // eslint-disable-line
       getState: key => state[key], // eslint-disable-line
       getStates: () => state, // eslint-disable-line
       setState: (states, cb) => {

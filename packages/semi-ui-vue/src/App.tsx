@@ -9,6 +9,7 @@ import LayoutTest from "./components/layout/__test__/LayoutTest";
 import SpaceTest from "./components/space/__test__/SpaceTest";
 import PopoverTest from "./components/popover/__test__/PopoverTest";
 import TypeDemo from './components/typography/__test__/TypoDemo'
+import InputDemo from "./components/input/__test__/InputDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -22,7 +23,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
 
-      <TypeDemo />
+      <InputDemo />
+      {/*<TypeDemo />*/}
 
       {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
       {/*  <Button />*/}
