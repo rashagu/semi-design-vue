@@ -242,13 +242,13 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
     return willUpdateStates;
   }
 
-
-  function componentDidUpdate(prevProps: InputProps) {
-    const { mode } = props;
-    if (prevProps.mode !== mode) {
-      handleModeChange(mode);
+  watch(() => props.mode, (prevPropsMode, nextPropsMode) => {
+    if (prevPropsMode !== nextPropsMode) {
+      handleModeChange(nextPropsMode);
     }
-  }
+  })
+
+
 
   const handleClear = (e: any) => {
     foundation.handleClear(e);
