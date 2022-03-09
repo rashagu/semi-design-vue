@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, InputHTMLAttributes, VNode, CSSProperties, reactive, watch} from 'vue'
+import {defineComponent, ref, h, InputHTMLAttributes, VNode, CSSProperties, reactive, watch, onMounted} from 'vue'
 import cls from 'classnames';
 import InputFoundation from '@douyinfe/semi-foundation/input/foundation';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/input/constants';
@@ -135,6 +135,7 @@ export const VuePropsType = {
   },
   style: Object,
   validateStatus: {type:String,default:'default'},
+  'onUpdate:value': Function,
   onClear: {type:Function, default:noop},
   onChange: {type:Function, default:noop},
   onBlur: {type:Function, default:noop},
@@ -164,10 +165,13 @@ export interface InputState {
   minlength: number;
   maxlength: number;
 }
+
+// Vue在这里的话 state 更新会导致整体重新渲染 导致value 无法更新到最新的
 const Input = defineComponent<InputProps>((props, {slots}) => {
 
+  const onUpdateValueFunc = props["onUpdate:value"]
   const state = reactive<InputState>({
-    value: 123,
+    value: props.value || props.defaultValue ,
     cachedValue: null, // Cache current props.value value
     disabled: false,
     props: {},
@@ -181,15 +185,18 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
   const {cache, adapter: adapterInject, log, context} = useBaseComponent<InputProps>(props, state)
 
   const theAdapter = adapter()
-  watch(()=>state.value,()=>{
-    console.log(state.value)
-  })
+  // watch(()=>state.value,()=>{
+  //   console.log(state.value)
+  // })
 
   function adapter() {
     return {
       ...adapterInject<InputProps, InputState>(),
       setValue: (value: string) => {
-        console.debug(value)
+        // console.log('setValue',value)
+        if (onUpdateValueFunc){
+          onUpdateValueFunc(value)
+        }
         state.value = value
       },
       setEyeClosed: (value: boolean) => state.eyeClosed = value,
@@ -319,8 +326,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
 
   function renderClearBtn() {
     const clearCls = cls(`${prefixCls}-clearbtn`);
-    const allowClear = state.value && props.showClear && !props.disabled && (state.isFocus || state.isHovering);
-    return  null
+    const allowClear = foundation.isAllowClear()
     // use onMousedown to fix issue 1203
     // console.debug(allowClear)
     if (allowClear) {
@@ -407,103 +413,112 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
 
 
 
-  const {
-    addonAfter,
-    addonBefore,
-    autofocus,
-    className,
-    disabled,
-    placeholder,
-    prefix,
-    mode,
-    insetLabel,
-    insetLabelId,
-    validateStatus,
-    type,
-    readonly,
-    size,
-    suffix,
-    style,
-    showClear,
-    onEnterPress,
-    onClear,
-    hideSuffix,
-    inputStyle,
-    forwardRef,
-    maxlength,
-    getValueLength,
-    value: propsValue,
-    defaultValue: propsDefaultValue,
-    ...rest
-  } = props;
-  const { value, paddingLeft, isFocus, minlength: stateMinLength } = state;
-  const suffixAllowClear = showClearBtn();
-  const suffixIsIcon = isSemiIcon(suffix);
-  const ref_ = forwardRef || inputRef;
-  const wrapperPrefix = `${prefixCls}-wrapper`;
-  const wrapperCls = cls(wrapperPrefix, className, {
-    [`${prefixCls}-wrapper__with-prefix`]: prefix || insetLabel,
-    [`${prefixCls}-wrapper__with-suffix`]: suffix,
-    [`${prefixCls}-wrapper__with-suffix-hidden`]: suffixAllowClear && Boolean(hideSuffix),
-    [`${prefixCls}-wrapper__with-suffix-icon`]: suffixIsIcon,
-    [`${prefixCls}-wrapper__with-append`]: addonBefore,
-    [`${prefixCls}-wrapper__with-prepend`]: addonAfter,
-    [`${prefixCls}-wrapper__with-append-only`]: addonBefore && !addonAfter,
-    [`${prefixCls}-wrapper__with-prepend-only`]: !addonBefore && addonAfter,
-    [`${wrapperPrefix}-readonly`]: readonly,
-    [`${wrapperPrefix}-disabled`]: disabled,
-    [`${wrapperPrefix}-warning`]: validateStatus === 'warning',
-    [`${wrapperPrefix}-error`]: validateStatus === 'error',
-    [`${wrapperPrefix}-focus`]: isFocus,
-    [`${wrapperPrefix}-clearable`]: showClear,
-    [`${wrapperPrefix}-modebtn`]: mode === 'password',
-    [`${wrapperPrefix}-hidden`]: type === 'hidden',
-    [`${wrapperPrefix}-${size}`]: size,
-  });
-  const inputCls = cls(prefixCls, {
-    [`${prefixCls}-${size}`]: size,
-    [`${prefixCls}-disabled`]: disabled,
-    [`${prefixCls}-sibling-clearbtn`]: foundation.isAllowClear(),
-    [`${prefixCls}-sibling-modebtn`]: mode === 'password',
-  });
-  // console.debug(value === null || value === undefined)
-  const inputValue = value === null || value === undefined ? '' : value;
-  const inputProps: InputHTMLAttributes = {
-    ...rest,
-    style: { paddingLeft, ...inputStyle },
-    autofocus: autofocus,
-    class: inputCls,
-    disabled,
-    readonly: readonly,
-    type: foundation.handleInputType(type),
-    placeholder: placeholder as string,
-    onInput: (e:any) => {
-      console.log(state)
-      // state.value = e.target.value
-      foundation.handleInput(e)
-    },
-    onChange: (e:any) => {
-      console.debug(e.target.value, e, props)
-      foundation.handleChange(e.target.value, e)
-    },
-    onFocus: (e:any) => foundation.handleFocus(e),
-    onBlur: (e:any) => foundation.handleBlur(e),
-    onKeyup: (e:any) => foundation.handleKeyUp(e),
-    onKeydown: (e:any) => foundation.handleKeyDown(e),
-    onKeypress: (e:any) => foundation.handleKeyPress(e),
-  };
-  if (!isFunction(getValueLength)) {
-    inputProps.maxlength = maxlength;
-  }
-  if (stateMinLength) {
-    inputProps.minlength = stateMinLength;
-  }
-  if (validateStatus === 'error') {
-    inputProps['aria-invalid'] = "true";
-  }
+  //
+  watch(()=>props.value, ()=>{
+    if (props.value!==null && props.value!==undefined){
+      state.value = props.value
+    }
+  })
 
+  // onMounted(()=>{
+  //   console.log(props, props["onUpdate:value"])
+  // })
   return () => {
-    // console.log(inputProps,ref_.value?.value)
+
+    const {
+      addonAfter,
+      addonBefore,
+      autofocus,
+      className,
+      disabled,
+      placeholder,
+      prefix,
+      mode,
+      insetLabel,
+      insetLabelId,
+      validateStatus,
+      type,
+      readonly,
+      size,
+      suffix,
+      style,
+      showClear,
+      onEnterPress,
+      onClear,
+      hideSuffix,
+      inputStyle,
+      forwardRef,
+      maxlength,
+      getValueLength,
+      value: propsValue,
+      defaultValue: propsDefaultValue,
+      ...rest
+    } = props;
+    const { value, paddingLeft, isFocus, minlength: stateMinLength } = state;
+    const suffixAllowClear = showClearBtn();
+    const suffixIsIcon = isSemiIcon(suffix);
+    const ref_ = forwardRef || inputRef;
+    const wrapperPrefix = `${prefixCls}-wrapper`;
+    const wrapperCls = cls(wrapperPrefix, className, {
+      [`${prefixCls}-wrapper__with-prefix`]: prefix || insetLabel,
+      [`${prefixCls}-wrapper__with-suffix`]: suffix,
+      [`${prefixCls}-wrapper__with-suffix-hidden`]: suffixAllowClear && Boolean(hideSuffix),
+      [`${prefixCls}-wrapper__with-suffix-icon`]: suffixIsIcon,
+      [`${prefixCls}-wrapper__with-append`]: addonBefore,
+      [`${prefixCls}-wrapper__with-prepend`]: addonAfter,
+      [`${prefixCls}-wrapper__with-append-only`]: addonBefore && !addonAfter,
+      [`${prefixCls}-wrapper__with-prepend-only`]: !addonBefore && addonAfter,
+      [`${wrapperPrefix}-readonly`]: readonly,
+      [`${wrapperPrefix}-disabled`]: disabled,
+      [`${wrapperPrefix}-warning`]: validateStatus === 'warning',
+      [`${wrapperPrefix}-error`]: validateStatus === 'error',
+      [`${wrapperPrefix}-focus`]: isFocus,
+      [`${wrapperPrefix}-clearable`]: showClear,
+      [`${wrapperPrefix}-modebtn`]: mode === 'password',
+      [`${wrapperPrefix}-hidden`]: type === 'hidden',
+      [`${wrapperPrefix}-${size}`]: size,
+    });
+    const inputCls = cls(prefixCls, {
+      [`${prefixCls}-${size}`]: size,
+      [`${prefixCls}-disabled`]: disabled,
+      [`${prefixCls}-sibling-clearbtn`]: foundation.isAllowClear(),
+      [`${prefixCls}-sibling-modebtn`]: mode === 'password',
+    });
+    // console.debug(value === null || value === undefined)
+    // const inputValue = value === null || value === undefined ? '' : value;
+    const inputProps: InputHTMLAttributes = {
+      ...rest,
+      style: { paddingLeft, ...inputStyle },
+      autofocus: autofocus,
+      class: inputCls,
+      disabled,
+      readonly: readonly,
+      type: foundation.handleInputType(type),
+      placeholder: placeholder as string,
+      onInput: (e:any) => {
+        // console.log(e.target.value)
+        foundation.setValue(e.target.value)
+        foundation.handleInput(e);
+      },
+      onChange: (e:any) => {
+        // console.debug(e.target.value, e, props)
+        foundation.handleChange(e.target.value, e)
+      },
+      onFocus: (e:any) => foundation.handleFocus(e),
+      onBlur: (e:any) => foundation.handleBlur(e),
+      onKeyup: (e:any) => foundation.handleKeyUp(e),
+      onKeydown: (e:any) => foundation.handleKeyDown(e),
+      onKeypress: (e:any) => foundation.handleKeyPress(e),
+    };
+    if (!isFunction(getValueLength)) {
+      inputProps.maxlength = maxlength;
+    }
+    if (stateMinLength) {
+      inputProps.minlength = stateMinLength;
+    }
+    if (validateStatus === 'error') {
+      inputProps['aria-invalid'] = "true";
+    }
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
       <div
@@ -515,13 +530,10 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       >
         {renderPrepend()}
         {renderPrefix()}
-        <input {...inputProps} value={(props.value !== null && props.value !== undefined)?props.value:inputValue} ref={(e)=>{
-          console.debug(e.value)
-          ref_.value = e
-        }}/>
+        <input {...inputProps} value={state.value} ref={ref_}/>
         {renderClearBtn()}
-        {/*{renderSuffix(suffixAllowClear)}*/}
-        {/*{renderModeBtn()}*/}
+        {renderSuffix(suffixAllowClear)}
+        {renderModeBtn()}
         {renderAppend()}
       </div>
     );

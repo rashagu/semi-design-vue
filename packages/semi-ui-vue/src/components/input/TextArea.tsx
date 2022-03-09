@@ -80,13 +80,21 @@ export interface TextAreaState {
 export const VuePropsType = {
   autosize: {type:Boolean, default: false},
   placeholder: String,
-  value: String,
   class: {type:String,default:''},
   rows: {type:Number,default:4},
   cols: {type:Number,default:20},
   maxCount: Number,
   validateStatus: String,
-  defaultValue: String,
+  value: {
+    type:[String,Boolean, Object,Array, undefined],
+// @ts-ignore
+    default: undefined,
+  },
+  defaultValue: {
+    type:[String,Boolean, Object,Array, undefined],
+// @ts-ignore
+    default: undefined,
+  },
   disabled: Boolean,
   readonly: Boolean,
   autofocus: Boolean,
@@ -94,6 +102,7 @@ export const VuePropsType = {
   showClear: {type:Boolean, default: false},
   minlength: Number,
   maxlength: Number,
+  'onUpdate:value': Function,
   onClear: {
     type:Function,
     default: noop,
@@ -138,21 +147,19 @@ export const VuePropsType = {
     type:Function,
     default: noop,
   },
-  getValueLength: {
-    type:Function,
-    default: noop,
-  },
+  getValueLength: Function,
   forwardRef: {
     type:Function,
     default: noop,
   },
 }
-const Textarea = defineComponent<TextAreaProps>((props, {slots}) => {
+const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
   let focusing = false;
   let libRef = ref(null);
   let _resizeLock = false;
   let _resizeListener: any;
 
+  const onUpdateValueFunc = props["onUpdate:value"]
   const state = reactive({
     value: '',
     isFocus: false,
@@ -172,6 +179,9 @@ const Textarea = defineComponent<TextAreaProps>((props, {slots}) => {
     return {
       ...adapterInject(),
       setValue: (value: string) => {
+        if (onUpdateValueFunc){
+          onUpdateValueFunc(value)
+        }
         state.value = value
       },
       getRef: () => libRef.value,
@@ -295,7 +305,7 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
       );
       counter = (
         <div
-          aria-label="Textarea value length counter"
+          aria-label="TextArea value length counter"
           aria-valuemax={maxCount}
           aria-valuenow={current}
           class={countCls}
@@ -309,7 +319,7 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
     return counter;
   }
 
-  // TODO later 
+  // TODO later
   const setRef = (node: any) => {
     (libRef.value as any) = node;
     const { forwardRef } = props;
@@ -321,9 +331,14 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
   };
 
 
-  let foundation: TextAreaFoundation = new TextAreaFoundation(theAdapter);;
-  return () => {
+  let foundation: TextAreaFoundation = new TextAreaFoundation(theAdapter);
+  watch(()=>props.value, ()=>{
+    if (props.value!==null && props.value!==undefined){
+      state.value = props.value
+    }
+  })
 
+  return () => {
     const {
       autosize,
       placeholder,
@@ -373,11 +388,20 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
       disabled,
       readOnly: readonly,
       placeholder: !placeholder ? null : placeholder,
+      onInput:(e:any)=> {
+        // console.log(e)
+        foundation._adapter.setValue(e.target.value)
+      },
       onChange: (e: any) => foundation.handleChange(e.target.value, e),
       onFocus: (e: Event) => foundation.handleFocus(e),
       onBlur: (e: any) => foundation.handleBlur(e.nativeEvent),
-      onKeyDown: (e: Event) => foundation.handleKeyDown(e),
-      value: value === null || value === undefined ? '' : value,
+      onKeydown: (e: any) => {
+        // console.log(e.target, foundation)
+        // foundation.setInitValue()
+        // foundation._adapter.setValue(e.target.value)
+        foundation.handleKeyDown(e)
+      },
+      value: value,
     };
     if (!isFunction(getValueLength)) {
       (itemProps as any).maxLength = maxlength;
@@ -402,6 +426,6 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
 })
 
 
-Textarea.props = VuePropsType
+TextArea.props = VuePropsType
 
-export default Textarea
+export default TextArea

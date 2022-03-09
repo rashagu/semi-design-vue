@@ -55,6 +55,7 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
             newProps[i] = props[i]
           }
         }
+        // console.log('value' in newProps)
         return  newProps
       }, // eslint-disable-line
       getState: key => {
@@ -63,6 +64,12 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
       }, // eslint-disable-line
       getStates: () => state, // eslint-disable-line
       setState: (states, cb) => {
+        // console.log('setState', states)
+        for (let i in states){
+          if (states.hasOwnProperty(i)){
+           state[i] = states[i]
+          }
+        }
         // this.setState({ ...states }, cb)
       }, // eslint-disable-line
       getCache: key => key && cache[key], // eslint-disable-line

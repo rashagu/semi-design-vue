@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, onMounted,} from 'vue'
 import Input from '../Index'
-import Textarea from "../Textarea";
+import TextArea from "../TextArea";
 import {IconSearch} from '@kousum/semi-icons-vue'
 import {Text} from '../../typography'
 
@@ -13,26 +13,39 @@ export const VuePropsType = {
 }
 const InputDemo = defineComponent<ExampleProps>((props, {slots}) => {
 
-  const defaultValue = ref('')
+  const defaultValue = ref('asd')
   onMounted(()=>{
-    console.log(defaultValue.value)
+    // console.log(defaultValue.value)
     // setInterval(()=>{
     //   defaultValue.value = JSON.stringify((new Date))
-    //   console.log(defaultValue.value)
+    //   // console.log(defaultValue.value)
     // }, 1000)
   })
   return () => (
     <div id={'a'}>
-      <Input  prefix={<IconSearch />} showClear></Input>
+
+      {/*<Input  prefix={<IconSearch />} placeholder={'请输入'} showClear></Input>*/}
+      {/*<br/><br/>*/}
+      {/*<Input prefix="Prefix" showClear></Input>*/}
+      {/*<br/><br/>*/}
+      {/*<Input suffix={<IconSearch />} showClear></Input>*/}
+      {/*<br/><br/>*/}
+      <Input disabled suffix={<Text strong type='secondary' style={{ marginRight: 8 }}>Suffix</Text>} showClear></Input>
       <br/><br/>
-      <Input prefix="Prefix" showClear></Input>
+      <Input showClear mode={'password'} placeholder={'click to clear'}></Input>
+      <Input showClear defaultValue={'defaultValue.value'} value={defaultValue.value}  placeholder={'click to clear'}></Input>
+      <Input showClear defaultValue={defaultValue.value} placeholder={'click to clear'}></Input>
+      {defaultValue.value}
+      <TextArea defaultValue={defaultValue.value} placeholder={'请输入'} />
+      <TextArea value={defaultValue.value} placeholder={'请输入'} />
+      <TextArea v-model={[defaultValue.value,'value']} placeholder={'请输入'} />
+      <TextArea maxCount={100} showClear/>
+
+      <Input defaultValue='ies' validateStatus='warning'></Input>
       <br/><br/>
-      <Input suffix={<IconSearch />} showClear></Input>
+      <Input defaultValue='ies' validateStatus='error'></Input>
       <br/><br/>
-      <Input suffix={<Text strong type='secondary' style={{ marginRight: 8 }}>Suffix</Text>} showClear></Input>
-      <br/><br/>
-      <Input showClear defaultValue={'defaultValue.value'} value={defaultValue.value} placeholder={'click to clear'}></Input>
-      <Textarea placeholder={'请输入'} />
+      <Input defaultValue='ies'></Input>
     </div>
   )
 })
