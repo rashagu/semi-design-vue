@@ -7,18 +7,17 @@ import {
   watch,
   CSSProperties,
   onMounted,
-  onUnmounted, watchEffect, VNode
+  onUnmounted, VNode
 } from 'vue'
 
 import cls from 'classnames';
-import PropTypes, {func} from 'prop-types';
 import TextAreaFoundation from '@douyinfe/semi-foundation/input/textareaFoundation';
 import { cssClasses } from '@douyinfe/semi-foundation/input/constants';
-import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
+import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/BaseComponent';
 import '@douyinfe/semi-foundation/input/textarea.scss';
 import { noop, omit, isFunction } from 'lodash';
 import { IconClear } from '@kousum/semi-icons-vue';
-import {TooltipProps} from "../tooltip";
+import {TooltipProps} from "../tooltip/Index";
 
 const prefixCls = cssClasses.PREFIX;
 

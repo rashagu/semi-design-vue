@@ -1,8 +1,8 @@
 import {defineComponent, ref, h, Fragment, reactive, onMounted, watch, onUnmounted} from 'vue'
 import RadioInnerFoundation, { RadioChangeEvent, RadioInnerAdapter } from '@douyinfe/semi-foundation/radio/radioInnerFoundation';
-import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import BaseComponent, {BaseProps, useBaseComponent} from '../_base/BaseComponent';
 import { radioClasses as css } from '@douyinfe/semi-foundation/radio/constants';
-import Context from './context';
+import Context from './Context';
 import classnames from 'classnames';
 import { IconRadio } from '@kousum/semi-icons-vue';
 import { noop } from 'lodash';
