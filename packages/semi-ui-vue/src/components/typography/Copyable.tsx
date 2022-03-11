@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, reactive, onMounted} from 'vue'
+import {defineComponent, ref, h, Fragment, reactive, onMounted, CSSProperties} from 'vue'
 import Tooltip from '../tooltip/Index';
 import { cssClasses } from '@douyinfe/semi-foundation/typography/constants';
 import copyModel from 'copy-text-to-clipboard';
@@ -6,18 +6,20 @@ import cls from 'classnames';
 import { noop } from '@douyinfe/semi-foundation/utils/function';
 import LocaleConsumer from '../locale/LocaleConsumer';
 import { IconCopy, IconTick } from '@kousum/semi-icons-vue';
-import { BaseProps } from '../_base/baseComponent';
+import type { BaseProps } from '../_base/baseComponent';
 import { Locale } from '../locale/interface';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 
 const prefixCls = cssClasses.PREFIX;
 export interface CopyableProps extends BaseProps {
+  style: CSSProperties,
   content?: string;
   copyTip?: any;
   duration?: number;
   forwardRef?: any;
   successTip?: any;
   onCopy?: (e: any, content: string, res: boolean) => void;
+  className?: string,
 }
 interface CopyableState {
   copied: boolean;
