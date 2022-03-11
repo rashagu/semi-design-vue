@@ -5,3 +5,5 @@ dist-ssr
 *.local
 /packages/semi-foundation/
 /packages/semi-animation/
+/coverage/
+coverage/

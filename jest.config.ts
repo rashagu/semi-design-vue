@@ -178,6 +178,7 @@ export default {
 
   // A map from regular expressions to paths to transformers
   transform: {
+    '^.+\\.js$': 'ts-jest',
     '^.+\\.ts$': 'ts-jest',
     '^.+\\.vue$': '@vue/vue3-jest',
     '^.+\\.tsx$': 'ts-jest',
