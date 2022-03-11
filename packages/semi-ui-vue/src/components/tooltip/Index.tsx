@@ -25,7 +25,7 @@ import BaseComponent, {BaseProps, useBaseComponent} from '../_base/BaseComponent
 import { isHTMLElement } from '../_base/reactUtils';
 import { stopPropagation } from '../_utils/index';
 import Portal from '../_portal/Index';
-import ConfigContext, {ContextValue} from '../configProvider/context';
+import ConfigContext, {ContextValue} from '../configProvider/Context';
 import TriangleArrow from './TriangleArrow';
 import TriangleArrowVertical from './TriangleArrowVertical';
 import TooltipTransition from './TooltipStyledTransition';

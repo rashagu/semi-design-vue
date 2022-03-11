@@ -9,7 +9,7 @@ import '@douyinfe/semi-foundation/radio/radio.scss';
 
 import BaseComponent, {useBaseComponent} from '../_base/BaseComponent';
 import RadioInner from './RadioInner';
-import Context, { RadioContextValue, RadioMode } from './context';
+import Context, { RadioContextValue, RadioMode } from './Context';
 import {InputProps, InputState} from "../input";
 
 export type RadioDisplayMode = 'vertical' | '';
