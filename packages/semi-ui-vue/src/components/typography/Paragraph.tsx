@@ -9,7 +9,7 @@ import {
   TypographyBaseType,
   OmitTypographyProps
 } from './interface';
-import { CopyableConfig, LinkType } from './title';
+import { CopyableConfig, LinkType } from './Title';
 
 
 type OmitParagraphProps = OmitTypographyProps;
