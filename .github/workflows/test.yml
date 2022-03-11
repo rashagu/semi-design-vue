@@ -26,6 +26,6 @@ jobs:
         run: npm i -g lerna && lerna bootstrap --hoist
         
       - name: Run test
-        run: lerna run test
+        run: pnpm test
       - name: Run codecov
         run: npx codecov --token=${{ secrets.CODECOV_TOKEN }}
