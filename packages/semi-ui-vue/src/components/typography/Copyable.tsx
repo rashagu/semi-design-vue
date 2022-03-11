@@ -12,7 +12,7 @@ import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 
 const prefixCls = cssClasses.PREFIX;
 export interface CopyableProps extends BaseProps {
-  style: CSSProperties,
+  style?: CSSProperties,
   content?: string;
   copyTip?: any;
   duration?: number;
