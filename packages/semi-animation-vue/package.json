@@ -26,8 +26,7 @@
     "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json",
     "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json",
     "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json",
-    "preview": "vite preview",
-    "test": "jest"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@douyinfe/semi-animation": "^2.3.1",

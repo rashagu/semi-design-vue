@@ -18,8 +18,7 @@
     "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json",
     "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json",
     "tt": "sass --watch src/components/default_style",
-    "preview": "vite preview",
-    "test": "jest"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@douyinfe/semi-foundation": "^2.5.0",
