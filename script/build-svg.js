@@ -66,8 +66,17 @@ async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOpt
     }
   });
   const arr = await Promise.all(batches);
-  const indexFileContent = arr.map(a => `export { default as ${a.componentName} } from './${a.componentName}';`).join('\n');
+  const indexFileContent = arr.map((a, index) => `export { default as ${a.componentName} } from './${a.componentName}';`).join('\n');
   fs.writeFileSync(resolve(outDir, indexFileName), indexFileContent, 'utf-8');
+
+  const testFileContent = `import {shallowMount, mount} from "@vue/test-utils";\n` + (arr.map((a, index) => `import {default as ${a.componentName}, SvgComponent as SvgComponent${index} }  from "./icons/${a.componentName}";`).join('\n')) + `
+test('render with scoped-slot', async () => {
+  ${(arr.map((a,index) => `const wrapper${index} = shallowMount(${a.componentName}, {});
+  const wrapperSvgComponent${index} = shallowMount(SvgComponent${index}, {});
+  `).join('\n'))}
+})
+  `;
+  fs.writeFileSync(resolve(outDir, '../testIcon.spec.ts'), testFileContent, 'utf-8');
   return arr;
 }
 
