@@ -14,7 +14,7 @@ import cls from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/typography/constants';
 import Typography from './Typography';
 import Copyable from './Copyable';
-import {IconSize as Size} from '../icons';
+import {IconSize as Size} from '../icons/Index';
 import {isUndefined, omit, merge, isString} from 'lodash';
 import Tooltip from '../tooltip/Index';
 import Popover from '../popover/Index';

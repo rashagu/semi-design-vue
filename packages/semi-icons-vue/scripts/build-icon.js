@@ -37,9 +37,9 @@ const IconComponent = defineComponent({
           }}
     </ConvertIcon>;
 }})
-
 IconComponent.props = iconVuePropsType
 export default IconComponent
+export {SvgComponent}
 `;
 };
 

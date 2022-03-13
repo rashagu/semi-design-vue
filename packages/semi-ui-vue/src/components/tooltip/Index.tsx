@@ -24,8 +24,9 @@ import '@douyinfe/semi-foundation/tooltip/tooltip.scss';
 import BaseComponent, {BaseProps, useBaseComponent} from '../_base/BaseComponent';
 import { isHTMLElement } from '../_base/reactUtils';
 import { stopPropagation } from '../_utils/index';
+import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
 import Portal from '../_portal/Index';
-import ConfigContext, {ContextValue} from '../configProvider/context';
+import ConfigContext, {ContextValue} from '../configProvider/Context';
 import TriangleArrow from './TriangleArrow';
 import TriangleArrowVertical from './TriangleArrowVertical';
 import TooltipTransition from './TooltipStyledTransition';
@@ -225,6 +226,9 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     transitionStyle: {},
     willUpdateStates:{
     },
+    isPositionUpdated: false,
+    id: getUuidShort(), // auto generate id, will be used by children.aria-describedby & content.id, improve a11y
+
   })
   const {cache, adapter: adapterInject, log, context} = useBaseComponent<TooltipProps>(props, state)
 
@@ -244,7 +248,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         state.isInsert = true;
         state.transitionState = 'enter';
         // @ts-ignore
-        state.containerStyle = containerStyle;
+        state.containerStyle = {...state.containerStyle,containerStyle};
         // console.log()
 
 
@@ -279,6 +283,8 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         // eslint-disable-next-line
         // It may be a React component or an html element
         // There is no guarantee that triggerE l.current can get the real dom, so call findDOMNode to ensure that you can get the real dom
+
+
         return triggerEl.value && triggerEl.value.getBoundingClientRect();
       },
       // Gets the outer size of the specified container
@@ -318,6 +324,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       setPosition: ({ position, ...style }: { position: Position }) => {
         state.containerStyle = { ...state.containerStyle, ...style }
         state.placement = position
+        state.isPositionUpdated = true
         nextTick(()=>{
           // console.log('positionUpdated')
           eventManager.value.emit('positionUpdated');
@@ -478,16 +485,16 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     return false;
   };
 
-  const willEnter = () => {
-    foundationRef.value.calcPosition();
-    /**
-     * Dangerous: remove setState in motion fix #1379
-     * because togglePortalVisible callback function will use visible state to notifyVisibleChange
-     * if visible state is old value, then notifyVisibleChange function will not be called
-     * we should ensure that after calling togglePortalVisible, callback function can get right visible value
-     */
-    // this.setState({ visible: true });
-  };
+  // const willEnter = () => {
+  //   foundationRef.value.calcPosition();
+  //   /**
+  //    * Dangerous: remove setState in motion fix #1379
+  //    * because togglePortalVisible callback function will use visible state to notifyVisibleChange
+  //    * if visible state is old value, then notifyVisibleChange function will not be called
+  //    * we should ensure that after calling togglePortalVisible, callback function can get right visible value
+  //    */
+  //   // this.setState({ visible: true });
+  // };
   const didLeave = () => {
     // console.error('didLeave')
     theAdapter.unregisterClickOutsideHandler();
@@ -586,7 +593,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
           onClick={handlePortalInnerClick}
         >
           {motion ? (
-            <TooltipTransition transitionState={state.transitionState} position={placement} willEnter={willEnter} didLeave={didLeave} motion={motion}>
+            <TooltipTransition transitionState={state.transitionState} position={placement} didLeave={didLeave} motion={motion}>
               {{//state.transitionState === 'enter'
                 // TODO 离开时 先 改变 样式再消失
                 // default: state.transitionState === 'enter' ? ({animateCls, animateStyle, animateEvents}: any) => {
@@ -607,6 +614,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
                     {...portalEventSet}
                     {...animateEvents}
                     x-placement={placement}
+                    id={state.id}
                   >
                     {content}
                     {icon}
@@ -662,8 +670,8 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
 
   return () => {
 
-    const { triggerEventSet } = state;
-    const { wrapWhenSpecial } = props;
+    const { triggerEventSet, visible, id } = state;
+    const { wrapWhenSpecial, role } = props;
     let children:any = slots.default?slots.default()[0]:null;
     const childrenStyle = { ...get(children, 'props.style') };
     const extraStyle: CSSProperties = {};
@@ -686,6 +694,18 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         isWrapped = true;
       }
     }
+    // eslint-disable-next-line prefer-const
+    let ariaAttribute = {};
+
+    // Take effect when used by Popover component
+    if (role === 'dialog') {
+      ariaAttribute['aria-expanded'] = visible ? 'true' : 'false';
+      ariaAttribute['aria-haspopup'] = 'dialog';
+      ariaAttribute['aria-controls'] = id;
+    } else {
+      ariaAttribute['aria-describedby'] = id;
+    }
+
 
     //console.log(children.props)
     // The incoming children is a single valid element, otherwise wrap a layer with span

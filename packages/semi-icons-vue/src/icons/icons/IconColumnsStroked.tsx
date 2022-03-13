@@ -43,3 +43,4 @@ const IconComponent = defineComponent({
 });
 IconComponent.props = iconVuePropsType;
 export default IconComponent;
+export { SvgComponent };

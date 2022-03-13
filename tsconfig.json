@@ -6,6 +6,7 @@
     "moduleResolution": "node",
     "strict": true,
     "jsx": "react",
+    "allowJs": true,
     "paths": {
       "@kousum/semi-foundation/*": ["../semi-foundation/*"],
       "@kousum/semi-icons-vue": ["../semi-icons-vue/src"]
@@ -18,7 +19,10 @@
     "declaration": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom"],
+
+
+    "noImplicitAny": false
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/semi-foundation/**/*.ts", "**/__test__/*"]

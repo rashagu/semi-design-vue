@@ -36,6 +36,7 @@ importers:
       svgo: 2.7.0
       ts-jest: ^27.1.3
       ts-node: ^10.5.0
+      tslib: ^2.3.1
     devDependencies:
       '@babel/core': 7.17.5
       '@babel/plugin-proposal-decorators': 7.17.2_@babel+core@7.17.5
@@ -69,6 +70,7 @@ importers:
       svgo: 2.7.0
       ts-jest: 27.1.3_e7866fc91a49d24bb2f2d7defa96f591
       ts-node: 10.5.0_@types+node@17.0.21
+      tslib: 2.3.1
 
   packages/semi-animation-vue:
     specifiers:
@@ -236,8 +238,8 @@ importers:
       '@babel/preset-react': ^7.16.7
       '@douyinfe/semi-foundation': ^2.5.0
       '@douyinfe/semi-theme-default': ^2.5.0
-      '@kousum/semi-animation-vue': ^2.1.22-alpha.0
-      '@kousum/semi-icons-vue': ^2.1.22-alpha.0
+      '@kousum/semi-animation-vue': ^2.1.24-alpha.0
+      '@kousum/semi-icons-vue': ^2.1.24-alpha.0
       '@types/jest': ^27.4.1
       '@types/lodash': ^4.14.178
       '@types/prop-types': ^15.7.4
@@ -10547,6 +10549,10 @@ packages:
 
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
+    dev: true
+
+  /tslib/2.3.1:
+    resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
     dev: true
 
   /tunnel-agent/0.6.0:

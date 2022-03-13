@@ -2,7 +2,7 @@ import {defineComponent, ref, h, Fragment, HTMLAttributes, CSSProperties} from '
 import { strings } from '@douyinfe/semi-foundation/typography/constants';
 import Base from './Base';
 import { Ellipsis, TypographyBaseSize, TypographyBaseType, OmitTypographyProps } from './interface';
-import { CopyableConfig, LinkType } from './title';
+import { CopyableConfig, LinkType } from './Title';
 
 type OmitTextProps = OmitTypographyProps;
 

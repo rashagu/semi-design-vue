@@ -10,6 +10,7 @@ import SpaceTest from "./components/space/__test__/SpaceTest";
 import PopoverTest from "./components/popover/__test__/PopoverTest";
 import TypeDemo from './components/typography/__test__/TypoDemo'
 import InputDemo from "./components/input/__test__/InputDemo";
+import RadioDemo from "./components/radio/__test__/RadioDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -22,6 +23,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   return () => (
     <div>
+      <RadioDemo />
 
       <InputDemo />
       <TypeDemo />

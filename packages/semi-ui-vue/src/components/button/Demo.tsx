@@ -18,16 +18,25 @@ const Demo = defineComponent(() => {
     { node: 'divider' },
     { node: 'item', name: '删除项目', type: 'danger' },
   ]
+  const disabled= ref(false)
   return () => {
     return (
       <div style={{width:'50%'}}>
+        <Button
+          disabled={disabled.value}
+        >
+          disabled
+        </Button>
+        <div
+          onClick={()=>disabled.value=true}>123</div>
+        <Button
+          onClick={()=>disabled.value=false}
+          type={'primary'}
+          theme={'light'}
+        >
+          I am a Button
+        </Button>
         <div style={{padding:'1rem'}}>
-          <Button
-            type={'primary'}
-            theme={'light'}
-          >
-            I am a Button
-          </Button>
           <Button loading={true} icon={<IconCamera />} size='large' theme={'solid'}>
             large
           </Button>

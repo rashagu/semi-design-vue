@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
 import { BASE_CLASS_PREFIX } from '@douyinfe/semi-foundation/base/constants';
 import DefaultLocale from '../locale/source/zh_CN';
-import Context, {ConfigContextVNode, ContextValue} from './context';
+import Context, {ConfigContextVNode, ContextValue} from './Context';
 
 
 // eslint-disable-next-line

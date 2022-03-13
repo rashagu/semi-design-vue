@@ -54,41 +54,40 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
     ...attr
   } = props;
 
-  const baseProps = {
-    disabled,
-    type: htmlType,
-    ...attr,
-    className: classNames(
-      prefixCls,
-      {
-        [`${prefixCls}-${type}`]: !disabled && type,
-        [`${prefixCls}-disabled`]: disabled,
-        [`${prefixCls}-size-large`]: size === 'large',
-        [`${prefixCls}-size-small`]: size === 'small',
-        // [`${prefixCls}-loading`]: loading,
-        [`${prefixCls}-light`]: theme === 'light',
-        [`${prefixCls}-block`]: block,
-        [`${prefixCls}-circle`]: circle,
-        [`${prefixCls}-borderless`]: theme === 'borderless',
-      },
-      className
-    ),
-  };
-
-  // console.log(baseProps)
-  return () => (
-    <button
-      {...baseProps}
-      onClick={props.onClick}
-      onMousedown={props.onMouseDown}
-      style={style}
-    >
+  return () => {
+    const baseProps = {
+      type: htmlType,
+      ...attr,
+      className: classNames(
+        prefixCls,
+        {
+          [`${prefixCls}-${type}`]: !props.disabled && type,
+          [`${prefixCls}-disabled`]: props.disabled,
+          [`${prefixCls}-size-large`]: size === 'large',
+          [`${prefixCls}-size-small`]: size === 'small',
+          // [`${prefixCls}-loading`]: loading,
+          [`${prefixCls}-light`]: theme === 'light',
+          [`${prefixCls}-block`]: block,
+          [`${prefixCls}-circle`]: circle,
+          [`${prefixCls}-borderless`]: theme === 'borderless',
+        },
+        className
+      ),
+    };
+    return (
+      <button
+        {...baseProps}
+        onClick={props.onClick}
+        onMousedown={props.onMouseDown}
+        style={style}
+      >
       <span class={`${prefixCls}-content`}
-           onClick={e => disabled && e.stopPropagation()}>
+            onClick={e => props.disabled && e.stopPropagation()}>
                     {slots.default ? slots.default() : null}
           </span>
-    </button>
-  );
+      </button>
+    )
+  };
 })
 
 export const vuePropsType = {

@@ -23,3 +23,7 @@ export {
   Title,
   Paragraph,
 } from './typography/Index';
+
+export { default as Input } from './input/Index';
+export { default as TextArea } from './input/TextArea';
+export { Group as RadioGroup, Radio } from './radio/Index';

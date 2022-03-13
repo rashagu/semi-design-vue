@@ -96,7 +96,7 @@ import Button from "@kousum/semi-ui-vue"
 - [ ] Form
 - [ ] Input
 - [ ] InputNumber
-- [ ] Radio
+- [x] Radio
 - [ ] Rating
 - [ ] Select
 - [ ] Slider

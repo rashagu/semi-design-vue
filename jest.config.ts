@@ -27,7 +27,8 @@ export default {
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
-  //   "\\\\node_modules\\\\"
+  //   "\\\\node_modules\\\\",
+  //   "\\\\icons/icons\\\\"
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
@@ -178,6 +179,7 @@ export default {
 
   // A map from regular expressions to paths to transformers
   transform: {
+    '^.+\\.js$': 'ts-jest',
     '^.+\\.ts$': 'ts-jest',
     '^.+\\.vue$': '@vue/vue3-jest',
     '^.+\\.tsx$': 'ts-jest',

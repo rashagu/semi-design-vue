@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-icons-vue",
-  "version": "2.1.22-alpha.0",
+  "version": "2.1.24-alpha.0",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "files": [
@@ -17,8 +17,7 @@
     "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/copyStyles.js",
     "build:icon": "node scripts/build-icon ",
     "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/copyStyles.js",
-    "preview": "vite preview",
-    "test": "jest"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@douyinfe/semi-foundation": "^2.3.1",

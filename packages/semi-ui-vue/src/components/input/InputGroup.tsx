@@ -3,7 +3,7 @@ import {defineComponent, ref, h, cloneVNode, VNode} from 'vue'
 import cls from 'classnames';
 import PropTypes from 'prop-types';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/input/constants';
-import BaseComponent from '../_base/baseComponent';
+import BaseComponent from '../_base/BaseComponent';
 import Label, { LabelProps } from '../form/Label';
 
 import { noop } from '@douyinfe/semi-foundation/utils/function';
