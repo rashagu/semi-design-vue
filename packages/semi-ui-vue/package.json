@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-ui-vue",
-  "version": "2.1.24-alpha.0",
+  "version": "2.1.25-alpha.0",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "files": [
