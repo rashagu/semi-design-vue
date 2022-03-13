@@ -180,9 +180,11 @@ const Index = defineComponent<PopoverProps>((props, {slots}) => {
         arrowBounding={arrowBounding}
         role={role}
       >
-        <div>
-          {slots.default ? slots.default() : null}
-        </div>
+        {{
+          default:()=> <div>
+              {slots.default ? slots.default() : null}
+            </div>
+        }}
       </Tooltip>
     );
   }

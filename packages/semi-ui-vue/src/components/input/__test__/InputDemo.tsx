@@ -21,6 +21,10 @@ const InputDemo = defineComponent<ExampleProps>((props, {slots}) => {
     //   // console.log(defaultValue.value)
     // }, 1000)
   })
+
+  function onChange(v:any) {
+    console.log(v)
+  }
   return () => (
     <div id={'a'}>
 
@@ -30,9 +34,9 @@ const InputDemo = defineComponent<ExampleProps>((props, {slots}) => {
       {/*<br/><br/>*/}
       {/*<Input suffix={<IconSearch />} showClear></Input>*/}
       {/*<br/><br/>*/}
-      <Input disabled suffix={<Text strong type='secondary' style={{ marginRight: 8 }}>Suffix</Text>} showClear></Input>
+      {/*<Input disabled suffix={<Text strong type='secondary' style={{ marginRight: 8 }}>Suffix</Text>} showClear></Input>*/}
       <br/><br/>
-      <Input showClear mode={'password'} placeholder={'click to clear'}></Input>
+      <Input showClear mode={'password'} placeholder={'click to clear'} onChange={onChange}></Input>
       <Input showClear defaultValue={'defaultValue.value'} value={defaultValue.value}  placeholder={'click to clear'}></Input>
       <Input showClear defaultValue={defaultValue.value} placeholder={'click to clear'}></Input>
       {defaultValue.value}
