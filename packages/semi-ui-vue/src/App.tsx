@@ -1,4 +1,5 @@
 import {defineComponent, ref, h, onMounted, watch,} from 'vue'
+import AvatarDemo from './components/avatar/__test__/AvatarDemo'
 import Button from "./components/button/Demo";
 import './docDemo.scss'
 import IconTest from "./components/__test__/IconTest";
@@ -23,27 +24,28 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   return () => (
     <div>
-      <RadioDemo />
+      <AvatarDemo/>
+      {/*<RadioDemo />*/}
 
-      <InputDemo />
-      <TypeDemo />
+      {/*<InputDemo />*/}
+      {/*<TypeDemo />*/}
 
-      <div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
-        <Button />
-      </div>
+      {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
+      {/*  <Button />*/}
+      {/*</div>*/}
 
-      <IconTest />
-      <br/>
-      <TootipDemo />
-      <br/>
-      <br/>
-      <DropdownDemo1/>
-      <br/>
-      <GridTest />
-      <LayoutTest/>
-      <SpaceTest/>
-      <PopoverTest />
-      <div class={'aa'}>123</div>
+      {/*<IconTest />*/}
+      {/*<br/>*/}
+      {/*<TootipDemo />*/}
+      {/*<br/>*/}
+      {/*<br/>*/}
+      {/*<DropdownDemo1/>*/}
+      {/*<br/>*/}
+      {/*<GridTest />*/}
+      {/*<LayoutTest/>*/}
+      {/*<SpaceTest/>*/}
+      {/*<PopoverTest />*/}
+      {/*<div class={'aa'}>123</div>*/}
     </div>
   )
 })
