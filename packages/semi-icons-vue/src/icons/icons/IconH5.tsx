@@ -26,7 +26,7 @@ const SvgComponent = defineComponent((props, { slots }) => {
         </svg>
     );
 });
-const IconComponent = defineComponent({
+const IconComponent = defineComponent<IconProps>({
     name: 'IconH5',
 
     setup(props, { slots }) {

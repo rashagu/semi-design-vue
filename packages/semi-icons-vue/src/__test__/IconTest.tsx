@@ -25,7 +25,6 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div id={'a'}  style={{color:'#E91E63', display:'flex', flexWrap:'wrap',}}>
       {/*<Button />*/}
-      <IconActivity />
       {domArr.value.map((item, index)=>{
         return (
           <div key={index} style={{width:'20%'}}>

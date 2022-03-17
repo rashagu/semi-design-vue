@@ -28,7 +28,7 @@ const SvgComponent = defineComponent((props, {slots}) => {
     return ()=>(${jsx});
 })
 
-const IconComponent = defineComponent({
+const IconComponent = defineComponent_({
     name:'semi_icon-activity',
     setup(props, {slots}){
         return ()=><ConvertIcon iconType={'activity'} {...props} >

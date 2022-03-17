@@ -24,7 +24,7 @@ const SvgComponent = defineComponent((props, { slots }) => {
         </svg>
     );
 });
-const IconComponent = defineComponent({
+const IconComponent = defineComponent<IconProps>({
     name: 'IconPause',
 
     setup(props, { slots }) {

@@ -22,7 +22,7 @@ const SvgComponent = defineComponent((props, { slots }) => {
         </svg>
     );
 });
-const IconComponent = defineComponent({
+const IconComponent = defineComponent<IconProps>({
     name: 'IconAlignVBotStroked',
 
     setup(props, { slots }) {

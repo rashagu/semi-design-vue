@@ -12,6 +12,7 @@ import PopoverTest from "./components/popover/__test__/PopoverTest";
 import TypeDemo from './components/typography/__test__/TypoDemo'
 import InputDemo from "./components/input/__test__/InputDemo";
 import RadioDemo from "./components/radio/__test__/RadioDemo";
+import TagDemo from "./components/tag/__test__/TagDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -24,7 +25,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   return () => (
     <div>
-      <AvatarDemo/>
+      <TagDemo/>
+      {/*<AvatarDemo/>*/}
       {/*<RadioDemo />*/}
 
       {/*<InputDemo />*/}

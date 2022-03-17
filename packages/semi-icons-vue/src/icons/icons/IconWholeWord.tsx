@@ -40,7 +40,7 @@ const SvgComponent = defineComponent((props, { slots }) => {
         </svg>
     );
 });
-const IconComponent = defineComponent({
+const IconComponent = defineComponent<IconProps>({
     name: 'IconWholeWord',
 
     setup(props, { slots }) {

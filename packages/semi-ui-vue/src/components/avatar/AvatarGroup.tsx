@@ -1,11 +1,9 @@
 import {defineComponent, ref, h, Fragment, VNode, cloneVNode} from 'vue'
-
 import cls from 'classnames';
 import { get as lodashGet, isFunction, isNumber } from 'lodash';
-import Avatar, {AvatarGroupOverlapFrom, AvatarGroupShape, AvatarGroupSize} from './index';
+import Avatar, {AvatarGroupOverlapFrom, AvatarGroupShape, AvatarGroupSize} from './Index';
 import { AvatarGroupProps } from './interface';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/avatar/constants';
-import {func} from "prop-types";
 
 const sizeSet = strings.SIZE;
 const shapeSet = strings.SHAPE;

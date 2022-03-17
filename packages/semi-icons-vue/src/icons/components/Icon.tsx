@@ -12,7 +12,7 @@ export interface IconProps  {
   prefixCls?: string,
   type?: string,
   className?: string,
-  svg: VNode,
+  svg?: VNode,
   style?: StyleValue,
 }
 export const vuePropsType = {
