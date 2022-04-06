@@ -240,7 +240,7 @@ importers:
       '@douyinfe/semi-theme-default': ^2.7.1
       '@kousum/semi-animation-vue': ^2.1.24-alpha.0
       '@kousum/semi-icons-vue': ^2.1.24-alpha.0
-      '@kousum/vue3-window': ^0.0.2
+      '@kousum/vue3-window': ^0.0.3
       '@types/jest': ^27.4.1
       '@types/lodash': ^4.14.178
       '@types/prop-types': ^15.7.4
@@ -286,7 +286,7 @@ importers:
       '@douyinfe/semi-theme-default': 2.7.1
       '@kousum/semi-animation-vue': link:../semi-animation-vue
       '@kousum/semi-icons-vue': link:../semi-icons-vue
-      '@kousum/vue3-window': 0.0.2
+      '@kousum/vue3-window': 0.0.3
       '@types/lodash': 4.14.179
       '@vueuse/components': 8.1.2_vue@3.2.31
       '@vueuse/core': 8.1.1_vue@3.2.31
@@ -1949,8 +1949,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.11
     dev: true
 
-  /@kousum/vue3-window/0.0.2:
-    resolution: {integrity: sha512-r0IRNnPWgK7u/qIv+mKB5HoNtNW2F2oaQnBbIJw5TIlzrhJgdhKjBcysxGdE4em/Rgm7qid8PaHtUSOgIKtJfQ==}
+  /@kousum/vue3-window/0.0.3:
+    resolution: {integrity: sha512-yWH3FZRJUap69Q2MbNSqj2mSvjQhMQuHL+62E3y344rukAu4Vq08ISofSQpnjzg0TtaK68CcPexlkMJHnxxaPA==}
     dependencies:
       '@babel/runtime': 7.17.8
       memoize-one: 6.0.0

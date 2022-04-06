@@ -25,7 +25,7 @@
     "@douyinfe/semi-theme-default": "^2.7.1",
     "@kousum/semi-animation-vue": "^2.1.24-alpha.0",
     "@kousum/semi-icons-vue": "^2.1.24-alpha.0",
-    "@kousum/vue3-window": "^0.0.2",
+    "@kousum/vue3-window": "^0.0.3",
     "@types/lodash": "^4.14.178",
     "@vueuse/components": "^8.1.2",
     "@vueuse/core": "^8.1.1",
