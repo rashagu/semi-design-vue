@@ -13,6 +13,8 @@ import TypeDemo from './components/typography/__test__/TypoDemo'
 import InputDemo from "./components/input/__test__/InputDemo";
 import RadioDemo from "./components/radio/__test__/RadioDemo";
 import TagDemo from "./components/tag/__test__/TagDemo";
+import SelectDemo from "./components/select/__test__/SelectDemo";
+// import {UseVirtualList} from "@vueuse/components";
 export interface ExampleProps {
   name?: string
 }
@@ -25,7 +27,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   return () => (
     <div>
-      <TagDemo/>
+      <SelectDemo/>
+      {/*<TagDemo/>*/}
       {/*<AvatarDemo/>*/}
       {/*<RadioDemo />*/}
 

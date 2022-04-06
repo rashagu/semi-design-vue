@@ -13,6 +13,7 @@ export interface TagGroupProps {
   style?: CSSProperties;
   className?: string;
   maxTagCount?: number;
+  restCount?: number;
   tagList?: (TagProps | VNode)[];
   size?: 'small' | 'large';
   showPopover?: boolean;
@@ -24,6 +25,7 @@ export interface TagGroupProps {
 
 export const vuePropsType = {
   maxTagCount:Number,
+  restCount:Number,
   tagList:Array,
   showPopover:Boolean,
   popoverProps:Object,
@@ -81,8 +83,8 @@ const Group = defineComponent<TagGroupProps>((props, {slots}) => {
   }
 
   function renderMergeTags(tags: (TagProps | VNode)[]) {
-    const { maxTagCount, tagList } = props;
-    const n = tagList.length - maxTagCount;
+    const { maxTagCount, tagList, restCount } = props;
+    const n = restCount ? restCount : tagList.length - maxTagCount;
     let renderTags: (TagProps | VNode)[] = tags;
 
     const normalTags: (TagProps | VNode)[] = tags.slice(0, maxTagCount);
@@ -95,6 +97,8 @@ const Group = defineComponent<TagGroupProps>((props, {slots}) => {
     }
     return renderTags;
   }
+
+
 
   function renderAllTags() {
     const { tagList, size, mode, avatarShape } = props;
@@ -120,7 +124,6 @@ const Group = defineComponent<TagGroupProps>((props, {slots}) => {
   return () => {
 
     const { style, className, maxTagCount, size } = props;
-    console.log(maxTagCount)
 
     const groupCls = classNames({
       [`${prefixCls}-group`]: true,

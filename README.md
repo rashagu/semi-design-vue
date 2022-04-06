@@ -98,7 +98,7 @@ import Button from "@kousum/semi-ui-vue"
 - [ ] InputNumber
 - [x] Radio
 - [ ] Rating
-- [ ] Select
+- [x] Select
 - [ ] Slider
 - [ ] Switch
 - [ ] TagInput
@@ -119,7 +119,7 @@ import Button from "@kousum/semi-ui-vue"
 
 ### 展示类
 
-- [ ] Avatar
+- [x] Avatar
 - [ ] Badge
 - [ ] Calendar
 - [ ] Card
@@ -135,7 +135,7 @@ import Button from "@kousum/semi-ui-vue"
 - [ ] ScrollList
 - [ ] SideSheet
 - [ ] Table
-- [ ] Tag
+- [x] Tag
 - [ ] Timeline
 - [x] Tooltip
 

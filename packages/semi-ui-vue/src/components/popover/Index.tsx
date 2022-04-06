@@ -181,7 +181,7 @@ const Index = defineComponent<PopoverProps>((props, {slots}) => {
         role={role}
       >
         {{
-          default:()=> <div>
+          default:()=> <div style={{display:'inline-block'}}>
               {slots.default ? slots.default() : null}
             </div>
         }}

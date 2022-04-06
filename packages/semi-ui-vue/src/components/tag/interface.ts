@@ -29,7 +29,7 @@ export interface TagProps {
     type?: TagType;
     closable?: boolean;
     visible?: boolean;
-    onClose?: (tagChildren: VNode, event: Event) => void;
+    onClose?: (tagChildren: VNode, event: MouseEvent) => void;
     onClick?: (e:Event)=>void;
     style?: CSSProperties;
     className?: string;
