@@ -33,10 +33,10 @@ export interface InputProps extends
   'aria-invalid'?: any;
   'aria-labelledby'?: any;
   'aria-required'?: any;
-  addonBefore?: VNode;
-  addonAfter?: VNode;
+  addonBefore?: VNode | string;
+  addonAfter?: VNode | string;
   prefix?: VNode | string;
-  suffix?: VNode;
+  suffix?: VNode | string;
   mode?: InputMode;
   value?: string | number;
   defaultValue?: string | number;
@@ -47,7 +47,7 @@ export interface InputProps extends
   showClear?: boolean;
   hideSuffix?: boolean;
   placeholder?: string;
-  insetLabel?: VNode;
+  insetLabel?: VNode | string;
   insetLabelId?: string;
   size?: InputSize;
   className?: string;
@@ -211,7 +211,10 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       },
       toggleHovering: (isHovering: boolean) => state.isHovering = isHovering,
       getIfFocusing: () => state.isFocus,
-      notifyChange: (cbValue: string, e: any) => props.onChange(cbValue, e),
+      notifyChange: (cbValue: string, e: any) => {
+        // console.log('notifyChange')
+        props.onChange(cbValue, e)
+      },
       notifyBlur: (val: string, e: any) => props.onBlur(e),
       notifyFocus: (val: string, e: any) => props.onFocus(e),
       notifyInput: (e: any) => props.onInput(e),
@@ -499,6 +502,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
         // console.log(e.target.value)
         foundation.setValue(e.target.value)
         foundation.handleInput(e);
+        foundation.handleChange(e.target.value, e);
       },
       onChange: (e:any) => {
         // console.debug(e.target.value, e, props)

@@ -88,7 +88,7 @@ import Button from "@kousum/semi-ui-vue"
 
 ### 输入类
 
-- [ ] AutoComplete
+- [x] AutoComplete
 - [x] Button
 - [ ] Cascader
 - [ ] Checkbox
@@ -146,7 +146,7 @@ import Button from "@kousum/semi-ui-vue"
 - [ ] Popconfirm
 - [ ] Progress
 - [ ] Skeleton
-- [ ] Spin
+- [x] Spin
 - [ ] Toast
 
 ### 其他

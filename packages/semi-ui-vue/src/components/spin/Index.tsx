@@ -4,7 +4,6 @@ import { cssClasses as css, strings } from '@douyinfe/semi-foundation/spin/const
 import SpinFoundation from '@douyinfe/semi-foundation/spin/foundation';
 import SpinIcon from './Icon';
 import '@douyinfe/semi-foundation/spin/spin.scss';
-import {func} from "prop-types";
 
 const prefixCls = css.PREFIX;
 
@@ -27,6 +26,33 @@ interface SpinState {
 }
 
 
+/***
+ *
+ *         size: 'middle',
+ *         spinning: true,
+ *         children: null,
+ *         indicator: null,
+ *         delay: 0,
+ */
+export const VuePropsType = {
+  size: {
+    type: String,
+    default: 'middle',
+  },
+  spinning: {
+    type: Boolean,
+    default: true,
+  },
+  indicator: Object,
+  delay: {
+    type: Number,
+    default: 0,
+  },
+  tip: Object,
+  wrapperClassName: String,
+  style: Object,
+  childStyle: Object,
+}
 const Index = defineComponent<SpinProps>((props, {slots}) => {
   const loading = ref(true)
   const delay = ref(props.delay)
@@ -80,52 +106,27 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
 
 
 
-  foundation.value.updateLoadingIfNeedDelay();
-  const { style, wrapperClassName, childStyle, size } = props;
 
-  return ()=>(
-    <div class={cls(
-      prefixCls,
-      wrapperClassName,
-      {
-        [`${prefixCls}-${size}`]: size,
-        [`${prefixCls}-block`]: slots.default,
-        [`${prefixCls}-hidden`]: !loading.value,
-      }
-    )} style={style}>
-      {renderSpin()}
-      <div class={`${prefixCls}-children`} style={childStyle}>{slots.default?slots.default():null}</div>
-    </div>
-  );
+  return ()=>{
+    foundation.value.updateLoadingIfNeedDelay();
+    const { style, wrapperClassName, childStyle, size } = props;
+    return (
+      <div class={cls(
+        prefixCls,
+        wrapperClassName,
+        {
+          [`${prefixCls}-${size}`]: size,
+          [`${prefixCls}-block`]: slots.default,
+          [`${prefixCls}-hidden`]: !loading.value,
+        }
+      )} style={style}>
+        {renderSpin()}
+        <div class={`${prefixCls}-children`} style={childStyle}>{slots.default?slots.default():null}</div>
+      </div>
+    );
+  }
 })
 
-/***
- *
- *         size: 'middle',
- *         spinning: true,
- *         children: null,
- *         indicator: null,
- *         delay: 0,
- */
-export const VuePropsType = {
-  size: {
-    type: String,
-    default: 'middle',
-  },
-  spinning: {
-    type: Boolean,
-    default: true,
-  },
-  indicator: Object,
-  delay: {
-    type: Number,
-    default: 0,
-  },
-  tip: Object,
-  wrapperClassName: String,
-  style: Object,
-  childStyle: Object,
-}
 
 Index.props = VuePropsType
 
