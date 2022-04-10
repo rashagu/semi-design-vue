@@ -87,6 +87,7 @@ export default {
     "\\.(css|less|scss)$": "identity-obj-proxy",
     '@kousum/semi-animation-vue(.*)$': '<rootDir>/packages/semi-animation-vue/src/animation/$1',
     '@kousum/semi-icons-vue(.*)$': '<rootDir>/packages/semi-icons-vue/src/icons/$1',
+    '@kousum/semi-illustrations-vue(.*)$': '<rootDir>/packages/semi-illustrations-vue/src/illustrations/$1',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

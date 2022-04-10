@@ -17,7 +17,7 @@ const prettier = require('prettier');
  * @param {*} prefix 图标前缀
  * @param {*} suffix 图标后缀
  */
-async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOptions = {}) {
+async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOptions = {}, type) {
   const prettierConfig = require('../.prettierrc.js');
   fs.rmSync(outDir, {recursive: true});
   fs.mkdirSync(outDir);
@@ -57,6 +57,9 @@ async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOpt
         .replaceAll('strokeLinecap', 'stroke-linecap')
         .replaceAll('strokeLinejoin', 'stroke-linejoin')
         .replaceAll('stopColor', 'stop-colo')
+        .replaceAll('strokeMiterlimit', 'stroke-miterlimit')
+        .replaceAll('fillOpacity', 'fill-opacity')
+
         .replaceAll('semi_icon-activity', componentName)
 
       fs.writeFileSync(resolve(outDir, reactFileName), newFormattedCode, 'utf-8');
@@ -70,7 +73,8 @@ async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOpt
   const indexFileContent = arr.map((a, index) => `export { default as ${a.componentName} } from './${a.componentName}';`).join('\n');
   fs.writeFileSync(resolve(outDir, indexFileName), indexFileContent, 'utf-8');
 
-  const testFileContent = `import {shallowMount, mount} from "@vue/test-utils";\n` + (arr.map((a, index) => `import {default as ${a.componentName}, SvgComponent as SvgComponent${index} }  from "./icons/${a.componentName}";`).join('\n')) + `
+
+  const testFileContent = `import {shallowMount, mount} from "@vue/test-utils";\n` + (arr.map((a, index) => `import {default as ${a.componentName}, SvgComponent as SvgComponent${index} }  from "./${type}/${a.componentName}";`).join('\n')) + `
 test('render with scoped-slot', async () => {
   ${(arr.map((a,index) => `const wrapper${index} = shallowMount(${a.componentName}, {});
   const wrapperSvgComponent${index} = shallowMount(SvgComponent${index}, {});

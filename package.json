@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "lerna run --scope @kousum/semi-ui-vue dev",
     "test": "jest",
-    "build:lib": "lerna run --scope @kousum/semi-animation-vue build:lib & lerna run --scope @kousum/semi-icons-vue build:lib & lerna run --scope @kousum/semi-ui-vue build:lib",
+    "build:lib": "lerna run --scope @kousum/semi-animation-vue build:lib & lerna run --scope @kousum/semi-icons-vue build:lib & lerna run --scope @kousum/semi-illustrations-vue build:lib & lerna run --scope @kousum/semi-ui-vue build:lib",
     "build:publish": "pnpm build:lib & lerna publish"
   },
   "publishConfig": {
@@ -13,7 +13,8 @@
   "workspaces": [
     "packages/semi-animation-vue",
     "packages/semi-icons-vue",
-    "packages/semi-ui-vue"
+    "packages/semi-ui-vue",
+    "packages/semi-illustrations-vue"
   ],
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.17.2",

@@ -67,7 +67,7 @@ const svgoPlugins = [
 ];
 
 // Semi icon library decolor
-build(entryDir, outDir, 'Icon', '', svgoPlugins, { typescript: true, icon: true, template: customTemplate }, 'icons');
+build(entryDir, outDir, 'Icon', '', svgoPlugins, { typescript: true, icon: true, template: customTemplate });
 
 
 
