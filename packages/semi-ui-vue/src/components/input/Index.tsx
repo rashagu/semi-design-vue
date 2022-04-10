@@ -506,7 +506,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       },
       onChange: (e:any) => {
         // console.debug(e.target.value, e, props)
-        foundation.handleChange(e.target.value, e)
+        //foundation.handleChange(e.target.value, e)
       },
       onFocus: (e:any) => foundation.handleFocus(e),
       onBlur: (e:any) => foundation.handleBlur(e),

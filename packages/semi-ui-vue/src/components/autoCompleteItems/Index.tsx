@@ -285,22 +285,23 @@ const Index = defineComponent<AutoCompleteProps<any>>((props, {slots}) => {
       ...adapterInject<AutoCompleteProps<any>, AutoCompleteState>(),
       ...keyboardAdapter,
       getTriggerWidth: () => {
-        // console.log(triggerRef.value)
+        // //console.log(triggerRef.value)
         const el = triggerRef.value;
         return el && el.getBoundingClientRect().width;
       },
       setOptionWrapperWidth: width => {
-        // console.log(width)
+        // //console.log(width)
         state.dropdownMinWidth = width
       },
       updateInputValue: inputValue => {
         state.inputValue = inputValue
       },
       toggleListVisible: isShow => {
+        //console.log(isShow)
         state.visible = isShow
       },
       updateOptionList: optionList => {
-        // console.log(optionList)
+        // //console.log(optionList)
         state.options = optionList
       },
       updateSelection: selection => {
@@ -336,7 +337,7 @@ const Index = defineComponent<AutoCompleteProps<any>>((props, {slots}) => {
   }
 
   onMounted(()=>{
-    // console.log(props.dropdownMatchSelectWidth)
+    // //console.log(props.dropdownMatchSelectWidth)
     foundation.init();
   })
   onUnmounted(()=>{
@@ -352,6 +353,7 @@ const Index = defineComponent<AutoCompleteProps<any>>((props, {slots}) => {
 
 
   const onSelect = (option: StateOptionItem, optionIndex: number, e: MouseEvent | KeyboardEvent): void => {
+    //console.log('onSelect')
     foundation.handleSelect(option, optionIndex);
   };
 
@@ -364,7 +366,7 @@ const Index = defineComponent<AutoCompleteProps<any>>((props, {slots}) => {
   const onFocus = (e:FocusEvent): void => foundation.handleFocus(e);
 
   const onInputClear = (): void =>{
-    // console.log('onInputClear')
+    // //console.log('onInputClear')
     foundation.handleClear()
   };
 
@@ -496,7 +498,7 @@ const Index = defineComponent<AutoCompleteProps<any>>((props, {slots}) => {
       optionsNode = options.filter(option => option.show).map((option, i) => renderOption(option, i));
     }
 
-    console.log(dropdownMinWidth)
+    //console.log(dropdownMinWidth)
     const style = {
       maxHeight: typeof maxHeight === 'number'?maxHeight+'px':maxHeight,
       minWidth: typeof dropdownMinWidth === 'number'?dropdownMinWidth+'px':dropdownMinWidth,
@@ -531,7 +533,7 @@ const Index = defineComponent<AutoCompleteProps<any>>((props, {slots}) => {
         autoAdjustOverflow={autoAdjustOverflow}
         trigger="custom"
         motion={motion}
-        visible={true}
+        visible={visible}
         content={optionList}
         position={position}
         ref={optionsRef}
