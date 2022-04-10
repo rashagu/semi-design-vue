@@ -2,6 +2,8 @@ import {defineComponent, ref, h, Fragment} from 'vue'
 import AutoComplete from '../Index'
 import {IconSearch} from '@kousum/semi-icons-vue'
 import Input from "../../input/Index";
+import RenderItem from "./RenderItem ";
+import Empty from "../../empty";
 interface ExampleProps {
   name?: string
 }
@@ -42,7 +44,17 @@ const AutoCompleteItemsDemo = defineComponent<ExampleProps>((props, {slots}) => 
           onChange={handleChange}
           style={{ width: '200px' }}
         />
-        <Input showClear onClear={()=>console.log('clear')} />
+
+        <h1>renderItem</h1>
+
+        <RenderItem/>
+
+
+        <AutoComplete
+          data={[]}
+          emptyContent={<Empty style={{ padding: 12, width: 300 }} image={<span>123</span>} description={'暂无内容'} />}
+
+        />
       </div>
     )
   };
