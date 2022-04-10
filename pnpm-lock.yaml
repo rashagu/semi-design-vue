@@ -313,8 +313,9 @@ importers:
       '@babel/preset-react': ^7.16.7
       '@douyinfe/semi-foundation': ^2.7.1
       '@douyinfe/semi-theme-default': ^2.7.1
-      '@kousum/semi-animation-vue': ^2.1.24-alpha.0
-      '@kousum/semi-icons-vue': ^2.1.24-alpha.0
+      '@kousum/semi-animation-vue': ^2.1.26-alpha.0
+      '@kousum/semi-icons-vue': ^2.1.26-alpha.0
+      '@kousum/semi-illustrations-vue': ^2.1.26-alpha.0
       '@kousum/vue3-window': ^0.0.3
       '@types/jest': ^27.4.1
       '@types/lodash': ^4.14.178
@@ -361,6 +362,7 @@ importers:
       '@douyinfe/semi-theme-default': 2.7.1
       '@kousum/semi-animation-vue': link:../semi-animation-vue
       '@kousum/semi-icons-vue': link:../semi-icons-vue
+      '@kousum/semi-illustrations-vue': link:../semi-illustrations-vue
       '@kousum/vue3-window': 0.0.3
       '@types/lodash': 4.14.179
       '@vueuse/components': 8.1.2_vue@3.2.31

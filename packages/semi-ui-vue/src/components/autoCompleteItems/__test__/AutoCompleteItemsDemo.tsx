@@ -4,6 +4,7 @@ import {IconSearch} from '@kousum/semi-icons-vue'
 import Input from "../../input/Index";
 import RenderItem from "./RenderItem ";
 import Empty from "../../empty";
+import {IllustrationNoContent} from "@kousum/semi-illustrations-vue";
 interface ExampleProps {
   name?: string
 }
@@ -52,7 +53,7 @@ const AutoCompleteItemsDemo = defineComponent<ExampleProps>((props, {slots}) => 
 
         <AutoComplete
           data={[]}
-          emptyContent={<Empty style={{ padding: 12, width: 300 }} image={<span>123</span>} description={'暂无内容'} />}
+          emptyContent={<Empty style={{ padding: 12, width: 300 }} image={<IllustrationNoContent style={{width: '150px', height: '150px'}}/>} description={'暂无内容'} />}
 
         />
       </div>

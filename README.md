@@ -72,7 +72,7 @@ import Button from "@kousum/semi-ui-vue"
 
 > `lerna add @douyinfe/semi-foundation --scope=@kousum/semi-ui-vue`
 
-
+> `lerna add @kousum/semi-illustrations-vue --scope=@kousum/semi-ui-vue`
 
 
 ## TODO
