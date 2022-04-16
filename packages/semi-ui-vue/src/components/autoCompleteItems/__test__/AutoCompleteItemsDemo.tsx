@@ -3,7 +3,7 @@ import AutoComplete from '../Index'
 import {IconSearch} from '@kousum/semi-icons-vue'
 import Input from "../../input/Index";
 import RenderItem from "./RenderItem ";
-import Empty from "../../empty";
+import Empty from "../../empty/Index";
 import {IllustrationNoContent} from "@kousum/semi-illustrations-vue";
 interface ExampleProps {
   name?: string

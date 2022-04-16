@@ -4,7 +4,7 @@ import { isEqual, noop } from 'lodash';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/autoComplete/constants';
 import AutoCompleteFoundation, { AutoCompleteAdapter, StateOptionItem, DataItem } from '@douyinfe/semi-foundation/autoComplete/foundation';
 import { numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/constants';
-import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
+import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/BaseComponent';
 
 import { Position } from '@douyinfe/semi-foundation/tooltip/foundation';
 import Spin from '../spin/Index';
@@ -17,7 +17,7 @@ import warning from '@douyinfe/semi-foundation/utils/warning';
 import '@douyinfe/semi-foundation/autoComplete/autoComplete.scss';
 import { Motion } from '../_base/base';
 import {AriaAttributes} from "../AriaAttributes";
-import {TooltipProps} from "../tooltip";
+import {TooltipProps} from "../tooltip/Index";
 
 const prefixCls = cssClasses.PREFIX;
 const sizeSet = strings.SIZE;

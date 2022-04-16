@@ -1,7 +1,6 @@
 import {defineComponent, ref, h, Fragment, VNode, CSSProperties} from 'vue'
 import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/select/constants';
-import BaseComponent from '../_base/baseComponent';
 
 export interface OptionGroupProps {
   children?: string | number | VNode | VNode[];
