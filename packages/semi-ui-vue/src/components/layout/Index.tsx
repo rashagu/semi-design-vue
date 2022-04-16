@@ -120,7 +120,6 @@ const Layout = defineComponent<BasicLayoutProps>((props, {slots}) => {
     );
   }
 })
-// TODO 这里修改需要, 重新启动vite
 
 Layout.props = vuePropsType
 

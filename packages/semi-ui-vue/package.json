@@ -21,8 +21,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "^2.7.1",
-    "@douyinfe/semi-theme-default": "^2.7.1",
+    "@douyinfe/semi-foundation": "^2.8.0",
+    "@douyinfe/semi-theme-default": "^2.8.0",
     "@kousum/semi-animation-vue": "^2.1.26-alpha.0",
     "@kousum/semi-icons-vue": "^2.1.26-alpha.0",
     "@kousum/semi-illustrations-vue": "^2.1.26-alpha.0",
