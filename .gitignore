@@ -7,3 +7,4 @@ dist-ssr
 /packages/semi-animation/
 /coverage/
 coverage/
+.idea
