@@ -10,7 +10,7 @@ import {
 } from 'vue'
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { throttle, noop, get, omit, each, isEmpty } from 'lodash';
+import {throttle, noop, get, omit, each, isEmpty, isFunction} from 'lodash';
 
 import { BASE_CLASS_PREFIX } from '@douyinfe/semi-foundation/base/constants';
 import warning from '@douyinfe/semi-foundation/utils/warning';
@@ -20,10 +20,9 @@ import { convertDOMRectToObject, DOMRectLikeType } from '@douyinfe/semi-foundati
 import TooltipFoundation, { TooltipAdapter, Position, PopupContainerDOMRect } from '@douyinfe/semi-foundation/tooltip/foundation';
 import { strings, cssClasses, numbers } from '@douyinfe/semi-foundation/tooltip/constants';
 import '@douyinfe/semi-foundation/tooltip/tooltip.scss';
-
 import BaseComponent, {BaseProps, useBaseComponent} from '../_base/BaseComponent';
 import { isHTMLElement } from '../_base/reactUtils';
-import { stopPropagation } from '../_utils/index';
+import { getActiveElement, getFocusableElements, stopPropagation } from '../_utils/index';
 import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
 import Portal from '../_portal/Index';
 import ConfigContext, {ContextValue} from '../configProvider/Context';
@@ -190,6 +189,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
   const eventManager = ref<Event>(new Event);
   let triggerEl = ref(null);
   const containerEl = ref(null);
+  const  initialFocusRef = ref(null);
   const resizeHandler = ref(null);
   let isWrapped: boolean;
   let mounted: any;
@@ -268,6 +268,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         click: 'onClick',
         focus: 'onFocus',
         blur: 'onBlur',
+        keydown: 'onKeydown',
       }),
       registerTriggerEvent: (triggerEventSet: Record<string, any>) => {
         //console.log(triggerEventSet)
@@ -440,11 +441,34 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         }
       },
       getContainerPosition: () => containerPosition,
+      getContainer: () => containerEl.value,
+      getTriggerNode: () => {
+        let triggerDOM = triggerEl.value;
+        if (!isHTMLElement(triggerEl.value)) {
+          triggerDOM = triggerEl.value;
+        }
+        return triggerDOM as Element;
+      },
+      getFocusableElements: (node: HTMLDivElement) => {
+        return getFocusableElements(node);
+      },
+      getActiveElement: () => {
+        return getActiveElement();
+      },
+      setInitialFocus: () => {
+        const focusRefNode = initialFocusRef.value;
+        if (focusRefNode && focusRefNode.focus) {
+          focusRefNode.focus();
+        }
+      },
+      notifyEscKeydown: (event: KeyboardEvent) => {
+        props.onEscKeyDown(event);
+      }
     };
   }
 
 
-  const foundationRef = ref(new TooltipFoundation(theAdapter));
+  const foundation = new TooltipFoundation(theAdapter);
 
   const setContainerEl = (node: any) => (containerEl.value = { current: node });
 
@@ -452,12 +476,12 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
   onMounted(()=>{
     mounted = true;
     getPopupContainer = props.getPopupContainer || context.getPopupContainer || defaultGetContainer;
-    foundationRef.value.init();
+    foundation.init();
   })
 
   onUnmounted(()=>{
     mounted = false;
-    foundationRef.value.destroy();
+    foundation.destroy();
   })
 
   const isSpecial = (elem: JSX.Element | HTMLElement | any) => {
@@ -486,7 +510,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
   };
 
   // const willEnter = () => {
-  //   foundationRef.value.calcPosition();
+  //   foundation.calcPosition();
   //   /**
   //    * Dangerous: remove setState in motion fix #1379
   //    * because togglePortalVisible callback function will use visible state to notifyVisibleChange
@@ -506,7 +530,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
   /** for transition - end */
 
   function rePosition() {
-    return foundationRef.value.calcPosition();
+    return foundation.calcPosition();
   }
 
   watchEffect(()=>{
@@ -522,7 +546,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     );
   })
   watch(()=>props.visible, ()=>{
-    props.visible ? foundationRef.value.delayShow() : foundationRef.value.delayHide();
+    props.visible ? foundation.delayShow() : foundation.delayHide();
   })
   watch(()=>props.rePosKey, ()=>{
     rePosition();
@@ -556,19 +580,31 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
 
   const handlePortalInnerClick = (e: any) => {
     if (props.clickToHide) {
-      foundationRef.value.hide();
+      foundation.hide();
     }
     if (props.stopPropagation) {
       stopPropagation(e);
     }
   };
 
+  const handlePortalInnerKeyDown = (e: KeyboardEvent) => {
+    foundation.handleContainerKeydown(e);
+  }
+
+  const renderContentNode = (content: TooltipProps['content']) => {
+    const contentProps = {
+      initialFocusRef: initialFocusRef
+    };
+    return !isFunction(content) ? content : content(contentProps);
+  };
+  
   watch(()=>state.visible, ()=>{
     //console.log(state.visible);
   }, {immediate:true})
   const renderPortal = () => {
     const { containerStyle = {}, visible, portalEventSet, placement, transitionState } = state;
     const { prefixCls, content, showArrow, style, motion, zIndex } = props;
+    const contentNode = renderContentNode(content);
     const { className: propClassName } = props;
     const direction = context.direction;
     const className = classNames(propClassName, {

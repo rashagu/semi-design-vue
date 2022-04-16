@@ -29,7 +29,7 @@ const statusSet = strings.STATUS;
  * AutoComplete is an enhanced Input (candidates suggest that users can choose or not),
  * and the Select positioning that supports Search is still a selector.
  * 1. When you click to expand, Select will clear all input values, but AutoComplete will not
- * 2. AutoComplete's renderSelectedItem only supports simple string returns, while Select's renderSelectedItem can return ReactNode
+ * 2. AutoComplete's renderSelectedItem only supports simple string returns, while Select's renderSelectedItem can return VNode | string
  * 3. Select props.value supports incoming object, but autoComplete only supports string (because the value needs to be displayed in Input)
  */
 

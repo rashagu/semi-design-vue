@@ -8,3 +8,4 @@ dist-ssr
 /coverage/
 coverage/
 .idea
+*.log

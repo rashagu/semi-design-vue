@@ -4,6 +4,7 @@ import { cloneDeepWith, set, get } from 'lodash';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import { findAll } from '@douyinfe/semi-foundation/utils/getHighlight';
 import {h, isVNode} from "vue";
+import { isHTMLElement } from '@douyinfe/semi-foundation/utils/dom';
 /**
  * stop propagation
  *
@@ -159,3 +160,37 @@ export const isSemiIcon = (icon: any): boolean => {
     // @ts-ignore
     return  isVNode(icon) && icon.type?.name?.indexOf('Icon') > -1
 };
+
+
+export function getActiveElement(): HTMLElement | null {
+    return document ? document.activeElement as HTMLElement : null;
+}
+
+export function isNodeContainsFocus(node: HTMLElement) {
+    const activeElement = getActiveElement();
+    return activeElement === node || node.contains(activeElement);
+}
+
+
+
+export function getFocusableElements(node: HTMLElement) {
+    if (!isHTMLElement(node)) {
+        return [];
+    }
+    const focusableSelectorsList = [
+        "input:not([disabled]):not([tabindex='-1'])",
+        "textarea:not([disabled]):not([tabindex='-1'])",
+        "button:not([disabled]):not([tabindex='-1'])",
+        "a[href]:not([tabindex='-1'])",
+        "select:not([disabled]):not([tabindex='-1'])",
+        "area[href]:not([tabindex='-1'])",
+        "iframe:not([tabindex='-1'])",
+        "object:not([tabindex='-1'])",
+        "*[tabindex]:not([tabindex='-1'])",
+        "*[contenteditable]:not([tabindex='-1'])",
+    ];
+    const focusableSelectorsStr = focusableSelectorsList.join(',');
+    // we are not filtered elements which are invisible
+    const focusableElements = Array.from(node.querySelectorAll<HTMLElement>(focusableSelectorsStr));
+    return focusableElements;
+}

@@ -62,6 +62,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 # 开发
 1. 需要同时掌握vue3(vue tsx)与react的开发知识.
 2. 使用`typescript`,`lerna`
+3. `node: last version`
 
 ### 安装lerna
 > `pnpm add --global lerna`

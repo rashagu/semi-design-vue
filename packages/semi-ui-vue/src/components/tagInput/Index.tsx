@@ -12,7 +12,7 @@ import {cssClasses, strings} from '@douyinfe/semi-foundation/tagInput/constants'
 import '@douyinfe/semi-foundation/tagInput/tagInput.scss';
 import TagInputFoundation, {TagInputAdapter} from '@douyinfe/semi-foundation/tagInput/foundation';
 import {ArrayElement} from '../_base/base';
-import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
+import BaseComponent, {useBaseComponent} from '../_base/BaseComponent';
 import Tag from '../tag';
 import Input from '../input';
 import Popover, {PopoverProps} from '../popover';
