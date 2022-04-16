@@ -49,7 +49,17 @@ import Button from "@kousum/semi-ui-vue"
 ```
 
 
-### 开发
+# 💖 Thanks
+
+<div>
+<a href="https://jb.gg/OpenSourceSupport" style="color:inherit"><img style="width: 70px;" src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" alt="JetBrains Logo (Main) logo."></a>
+</div>
+
+Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source development license(s).
+
+
+
+# 开发
 1. 需要同时掌握vue3(vue tsx)与react的开发知识.
 2. 使用`typescript`,`lerna`
 
@@ -75,7 +85,8 @@ import Button from "@kousum/semi-ui-vue"
 > `lerna add @kousum/semi-illustrations-vue --scope=@kousum/semi-ui-vue`
 
 
-## TODO
+
+# TODO
 
 ### 基础
 
@@ -153,3 +164,6 @@ import Button from "@kousum/semi-ui-vue"
 
 - [ ] ConfigProvider
 - [ ] LocaleProvider
+
+
+
