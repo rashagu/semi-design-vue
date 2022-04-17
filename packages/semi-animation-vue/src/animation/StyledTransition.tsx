@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, onActivated, Fragment, onMounted, watch} from 'vue'
-import PropTypes from 'prop-types';
+
 import StyledAnimation, {StyledAnimationProps} from './StyledAnimation';
 import noop from './utils/noop';
 

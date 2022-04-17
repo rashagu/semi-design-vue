@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, StyleValue, isVNode, Fragment} from 'vue'
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+
 import {cssClasses, strings} from '@douyinfe/semi-foundation/button/constants';
 import {strings as iconStrings} from '@douyinfe/semi-foundation/icons/constants';
 import Button, {Theme, ButtonProps} from '../button/Button';

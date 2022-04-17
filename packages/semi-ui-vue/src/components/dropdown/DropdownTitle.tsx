@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, onActivated, Fragment, inject} from 'vue'
-import PropTypes from 'prop-types';
+
 import { cssClasses } from '@douyinfe/semi-foundation/dropdown/constants';
 import cls from 'classnames';
 import { BaseProps } from '../_base/BaseComponent';

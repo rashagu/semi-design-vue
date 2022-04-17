@@ -12,7 +12,7 @@ import {
   onUnmounted, cloneVNode
 } from 'vue'
 
-import PropTypes from 'prop-types';
+
 import classnames from 'classnames';
 import { checkboxGroupClasses as css, strings } from '@douyinfe/semi-foundation/checkbox/constants';
 import CheckboxGroupFoundation, { CheckboxGroupAdapter } from '@douyinfe/semi-foundation/checkbox/checkboxGroupFoundation';

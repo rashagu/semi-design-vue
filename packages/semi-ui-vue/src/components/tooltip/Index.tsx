@@ -9,7 +9,7 @@ import {
   nextTick, onMounted, onUnmounted, isVNode, watch, cloneVNode, provide, inject, watchEffect,
 } from 'vue'
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+
 import {throttle, noop, get, omit, each, isEmpty, isFunction} from 'lodash';
 
 import {BASE_CLASS_PREFIX} from '@douyinfe/semi-foundation/base/constants';

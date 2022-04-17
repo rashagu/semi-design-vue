@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, onActivated, Fragment, StyleValue, isVNode, cloneVNode} from 'vue'
-import PropTypes from 'prop-types';
+
 import classnames from 'classnames';
 import {types as styledTypes, loops, delays, speeds} from '@douyinfe/semi-animation-styled';
 import noop from './utils/noop';

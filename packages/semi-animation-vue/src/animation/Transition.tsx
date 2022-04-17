@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, onActivated, Fragment, onMounted, isVNode, watch} from 'vue'
 import Animation, {AnimationProps} from './Animation';
-import PropTypes from 'prop-types';
+
 import noop from './utils/noop';
 
 export interface TransitionProps extends AnimationProps {

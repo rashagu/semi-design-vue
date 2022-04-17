@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, onActivated, Fragment, onMounted} from 'vue'
 
-import PropTypes from 'prop-types';
+
 import noop from './utils/noop';
 import Animation from './Animation';
 

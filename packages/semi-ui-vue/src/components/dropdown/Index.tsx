@@ -11,7 +11,7 @@ import {
   cloneVNode, inject, provide
 } from 'vue'
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
+
 import { cssClasses, strings, numbers } from '@douyinfe/semi-foundation/dropdown/constants';
 
 import BaseComponent, {useBaseComponent} from '../_base/BaseComponent';

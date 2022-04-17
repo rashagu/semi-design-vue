@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, CSSProperties, VNode, Fragment} from 'vue'
 
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+
 import { cssClasses } from '@douyinfe/semi-foundation/form/constants';
 
 const prefixCls = cssClasses.PREFIX;

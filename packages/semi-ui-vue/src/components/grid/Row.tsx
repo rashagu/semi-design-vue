@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment, CSSProperties, reactive, onMounted, onUnmounted, provide} from 'vue'
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
+
 import {cssClasses} from '@douyinfe/semi-foundation/grid/constants';
 import '@douyinfe/semi-foundation/grid/grid.scss';
 import {registerMediaQuery} from '../_utils/index';

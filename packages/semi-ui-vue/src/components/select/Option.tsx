@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment, VNode, CSSProperties} from 'vue'
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+
 import {isString} from 'lodash';
 import {cssClasses} from '@douyinfe/semi-foundation/select/constants';
 import LocaleConsumer_ from '../locale/LocaleConsumer';

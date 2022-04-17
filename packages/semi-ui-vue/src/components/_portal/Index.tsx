@@ -12,7 +12,7 @@ import {
   Teleport
 } from 'vue'
 import { BASE_CLASS_PREFIX } from '@douyinfe/semi-foundation/base/constants';
-import PropTypes from 'prop-types';
+
 import classnames from 'classnames';
 import ConfigContext from '../configProvider/Context';
 import '@douyinfe/semi-foundation/_portal/portal.scss';

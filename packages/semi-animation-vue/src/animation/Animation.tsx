@@ -10,7 +10,7 @@ import {
   watch,
   onBeforeMount
 } from 'vue'
-import PropTypes from 'prop-types';
+
 import {Animation as SemiAnimation, events} from '@douyinfe/semi-animation';
 import noop from './utils/noop';
 
