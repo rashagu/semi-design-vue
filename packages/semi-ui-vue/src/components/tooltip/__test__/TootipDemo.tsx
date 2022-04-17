@@ -1,5 +1,6 @@
 import {defineComponent, ref, h, onActivated, Fragment} from 'vue'
 import Tooltip from "../Index"
+import Input from '../../input/Index'
 interface ExampleProps {
   name?: string
 }
@@ -23,7 +24,7 @@ const TootipDemo = defineComponent<ExampleProps>((props, {slots}) => {
       </div>
       <div>
         <Tooltip content={'hi bytedance'} motion trigger={'focus'}>
-          <input />
+          <Input />
         </Tooltip>
       </div>
     </div>

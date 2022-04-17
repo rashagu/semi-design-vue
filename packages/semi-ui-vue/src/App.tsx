@@ -31,7 +31,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   return () => (
     <div>
-      <CascaderDemo/>
+      {/*<CascaderDemo/>*/}
       {/*<CheckboxDemo />*/}
       {/*<TagInputDemo />*/}
       {/*<AutoCompleteItemsDemo/>*/}
@@ -49,7 +49,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
       {/*<IconTest />*/}
       {/*<br/>*/}
-      {/*<TootipDemo />*/}
+      <TootipDemo />
       {/*<br/>*/}
       {/*<br/>*/}
       {/*<DropdownDemo1/>*/}
