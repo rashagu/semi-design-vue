@@ -12,7 +12,11 @@ import {
   watch
 } from 'vue'
 import cls from 'classnames';
-import CascaderFoundation from '@douyinfe/semi-foundation/cascader/foundation';
+import CascaderFoundation, {
+  BasicCascaderData, BasicEntity,
+  BasicValue,
+  ShowNextType
+} from '@douyinfe/semi-foundation/cascader/foundation';
 import type {
   /* Corresponding to the state of react */
   BasicCascaderInnerData,
@@ -111,14 +115,15 @@ export const vuePropsType = {
   'aria-invalid': String,
   'aria-labelledby': String,
   'aria-required': String,
-  defaultValue: [Object,Boolean,String,Number],
+  defaultValue: [Object,String,Number],
   dropdownStyle: [Object, String],
   emptyContent: [Object, String],
   children: [Object, String],
-  value: [Object,Boolean,String,Number],
+  // TODO 当type中包含Boolean时，默认值为false而不是undefined
+  value: [Object,String,Number],
   prefix: [Object, String],
   suffix: [Object, String],
-  id: [ String],
+  id: [ String ],
   insetLabel: [Object, String],
   insetLabelId: [String],
   style: [Object, String],
@@ -244,10 +249,24 @@ export const vuePropsType = {
     type: Boolean,
     default: false
   },
+  placeholder: String,
   'aria-label': {
     type: String,
     default: 'Cascader'
-  }
+  },
+
+  mouseEnterDelay: Number,
+  mouseLeaveDelay: Number,
+  dropdownClassName: String,
+  searchPlaceholder: String,
+  className: String,
+  maxTagCount: Number,
+  max: Number,
+  autoAdjustOverflow: Boolean,
+  onChangeWithObject: Boolean,
+  getPopupContainer: Function,
+  onSearch: Function,
+  onSelect: Function,
 }
 const Index = defineComponent<CascaderProps>((props, {}) => {
   const slots = useSlots()
@@ -322,9 +341,9 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       > = {
       registerClickOutsideHandler: cb => {
         const clickOutsideHandler_ = (e: Event) => {
-          const optionInstance = optionsRef.value && optionsRef.current;
-          const triggerDom = triggerRef.value && triggerRef.current;
-          const optionsDom = optionInstance;
+          const optionInstance = optionsRef.value;
+          const triggerDom = triggerRef.value;
+          const optionsDom = optionInstance.content.el;
           const target = e.target as Element;
           if (
             optionsDom &&
@@ -360,10 +379,12 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
         state.isOpen = true
       },
       closeMenu: cb => {
-        state.isOpen = true
+        state.isOpen = false
         cb && cb()
       },
-      updateSelection: selectedKeys => state.selectedKeys = selectedKeys,
+      updateSelection: selectedKeys => {
+        state.selectedKeys = selectedKeys
+      },
       notifyChange: value => {
         props.onChange && props.onChange(value);
       },
@@ -990,7 +1011,6 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
   };
 
   return () => {
-
     const {
       zIndex,
       getPopupContainer,

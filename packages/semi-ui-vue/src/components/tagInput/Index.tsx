@@ -480,6 +480,7 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
               handleKeyDown(e);
             }}
             onChange={(v: string, e: any) => {
+              console.log(v,e)
               handleInputChange(e);
             }}
             onBlur={(e: FocusEvent) => {

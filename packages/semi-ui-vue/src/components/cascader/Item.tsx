@@ -323,6 +323,7 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
         renderFlattenOption(data as Data[]) :
         renderItem(data as Entity[]);
     }
+    console.log(props)
     return (
       <div class={listsCls}>
         {content}
