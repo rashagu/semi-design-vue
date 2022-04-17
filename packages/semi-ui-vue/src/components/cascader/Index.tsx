@@ -30,7 +30,6 @@ import '@douyinfe/semi-foundation/cascader/cascader.scss';
 import { IconClear, IconChevronDown } from '@kousum/semi-icons-vue';
 import { findKeysForValues, convertDataToEntities, calcMergeType } from '@douyinfe/semi-foundation/cascader/util';
 import { calcCheckedKeys, normalizeKeyList, calcDisabledKeys } from '@douyinfe/semi-foundation/tree/treeUtil';
-import ConfigContext from '../configProvider/context';
 import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/BaseComponent';
 import Input from '../input/Index';
 import Popover, { PopoverProps } from '../popover/Index';

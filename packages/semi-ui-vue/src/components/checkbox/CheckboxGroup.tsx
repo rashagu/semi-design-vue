@@ -19,7 +19,8 @@ import CheckboxGroupFoundation, { CheckboxGroupAdapter } from '@douyinfe/semi-fo
 import BaseComponent, {useBaseComponent} from '../_base/BaseComponent';
 import CheckboxContextProvider, { Context } from './Context';
 import { isEqual } from 'lodash';
-import Checkbox, { CheckboxEvent } from './checkbox';
+import Checkbox from './Checkbox';
+import type { CheckboxEvent } from './Checkbox';
 import {AriaAttributes} from "../AriaAttributes";
 
 export type CheckboxDirection = 'horizontal' | 'vertical';

@@ -16,7 +16,7 @@ import BaseComponent, {useBaseComponent} from '../_base/BaseComponent';
 import Tag from '../tag/Index';
 import Input from '../input/Index';
 import Popover, {PopoverProps} from '../popover/Index';
-import Paragraph from '../typography/paragraph';
+import Paragraph from '../typography/Paragraph';
 import {IconClear} from '@kousum/semi-icons-vue';
 // import {TooltipProps} from "../tooltip/Index";
 // import {AvatarProps, AvatarState} from "../avatar/Index";
