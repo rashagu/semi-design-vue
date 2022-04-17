@@ -1,10 +1,7 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
-
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 import { noop } from 'lodash';
 import { checkboxClasses as css } from '@douyinfe/semi-foundation/checkbox/constants';
-import { Context } from './context';
 import { IconCheckboxTick, IconCheckboxIndeterminate } from '@kousum/semi-icons-vue';
 import {AriaAttributes} from "../AriaAttributes";
 

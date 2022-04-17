@@ -13,13 +13,13 @@ import '@douyinfe/semi-foundation/tagInput/tagInput.scss';
 import TagInputFoundation, {TagInputAdapter} from '@douyinfe/semi-foundation/tagInput/foundation';
 import {ArrayElement} from '../_base/base';
 import BaseComponent, {useBaseComponent} from '../_base/BaseComponent';
-import Tag from '../tag';
-import Input from '../input';
-import Popover, {PopoverProps} from '../popover';
+import Tag from '../tag/Index';
+import Input from '../input/Index';
+import Popover, {PopoverProps} from '../popover/Index';
 import Paragraph from '../typography/paragraph';
 import {IconClear} from '@kousum/semi-icons-vue';
-import {TooltipProps} from "../tooltip";
-import {AvatarProps, AvatarState} from "../avatar";
+// import {TooltipProps} from "../tooltip/Index";
+// import {AvatarProps, AvatarState} from "../avatar/Index";
 
 export type Size = ArrayElement<typeof strings.SIZE_SET>;
 export type RestTagsPopoverProps = PopoverProps;
@@ -49,7 +49,7 @@ export interface TagInputProps {
   onRemove?: (removedValue: string, idx: number) => void;
   placeholder?: string;
   prefix?: VNode | string;
-  renderTagItem?: (value: string, index: number) => VNode;
+  renderTagItem?: (value: string, index: number) => VNode | string;
   separator?: string | string[] | null;
   showClear?: boolean;
   size?: Size;

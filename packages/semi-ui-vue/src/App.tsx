@@ -17,6 +17,7 @@ import SelectDemo from "./components/select/__test__/SelectDemo";
 import AutoCompleteItemsDemo from "./components/autoCompleteItems/__test__/AutoCompleteItemsDemo";
 import TagInputDemo from "./components/tagInput/__test__/TagInputDemo";
 import CheckboxDemo from "./components/checkbox/__test__/CheckboxDemo";
+import CascaderDemo from "./components/cascader/__test__/CascaderDemo";
 // import {UseVirtualList} from "@vueuse/components";
 export interface ExampleProps {
   name?: string
@@ -30,7 +31,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   return () => (
     <div>
-      <CheckboxDemo />
+      <CascaderDemo/>
+      {/*<CheckboxDemo />*/}
       {/*<TagInputDemo />*/}
       {/*<AutoCompleteItemsDemo/>*/}
       {/*<SelectDemo/>*/}

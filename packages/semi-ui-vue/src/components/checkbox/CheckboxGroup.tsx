@@ -21,8 +21,6 @@ import CheckboxContextProvider, { Context } from './Context';
 import { isEqual } from 'lodash';
 import Checkbox, { CheckboxEvent } from './checkbox';
 import {AriaAttributes} from "../AriaAttributes";
-import {TooltipProps} from "../tooltip";
-import {TagInputProps, TagInputState} from "../tagInput";
 
 export type CheckboxDirection = 'horizontal' | 'vertical';
 export type CheckboxType = 'default' | 'card' | 'pureCard';

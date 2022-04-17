@@ -17,7 +17,7 @@ import {getUuidShort} from '@douyinfe/semi-foundation/utils/uuid';
 export type CheckboxEvent = BasicCheckboxEvent;
 export type TargetObject = BasicTargetObject;
 import {AriaAttributes} from "../AriaAttributes";
-import {TagInputProps} from "../tagInput";
+// import {TagInputProps} from "../tagInput/Index";
 
 export interface CheckboxProps extends BaseCheckboxProps {
   'aria-describedby'?: AriaAttributes['aria-describedby'];
