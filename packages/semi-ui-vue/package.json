@@ -20,6 +20,9 @@
     "tt": "sass --watch src/components/default_style",
     "preview": "vite preview"
   },
+  "repository": {
+    "url": "https://github.com/rashagu/semi-design-vue"
+  },
   "dependencies": {
     "@douyinfe/semi-foundation": "^2.8.0",
     "@douyinfe/semi-theme-default": "^2.8.0",

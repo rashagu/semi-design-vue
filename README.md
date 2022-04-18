@@ -20,21 +20,17 @@
 
 ```sh
 # with npm
-npm install @lousum/semi-ui-vue
-npm install @lousum/semi-icons-vue
+npm install @kousum/semi-ui-vue
+npm install @kousum/semi-icons-vue
 
 # with yarn
-yarn add @douyinfe/semi-ui-vue
-yarn add @douyinfe/semi-icons-vue
+yarn add @kousum/semi-ui-vue
+yarn add @kousum/semi-icons-vue
 
 ```
 
 # 👍 使用
 
-```jsx
-#main.js
-import '@kousum/semi-ui-vue/lib/_base/base.css'
-```
 ```vue
 #Component.vue
 <script setup>
@@ -71,7 +67,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 > `lerna bootstrap --hoist`
 
 ### 运行
-> `lerna run --scope @kousum/semi-ui-vue dev`
+> `lerna run build:lib && lerna run --scope @kousum/semi-ui-vue dev`
 
 
 ### lerna

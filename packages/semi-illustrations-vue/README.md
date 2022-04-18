@@ -1,1 +1,1 @@
-# semi-icons of vue3
+# semi-illustrations-vue of vue3

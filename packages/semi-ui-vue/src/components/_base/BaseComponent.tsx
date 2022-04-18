@@ -9,7 +9,7 @@ const {hasOwnProperty} = Object.prototype;
 
 export type ValidateStatus = ArrayElement<typeof VALIDATE_STATUS>;
 
-export interface BaseProps {
+export type BaseProps =  {
   style?: CSSProperties;
   className?: string;
 

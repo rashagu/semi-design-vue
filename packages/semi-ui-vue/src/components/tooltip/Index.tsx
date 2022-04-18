@@ -33,7 +33,6 @@ import ConfigContext, {ContextValue} from '../configProvider/Context';
 import TriangleArrow from './TriangleArrow';
 import TriangleArrowVertical from './TriangleArrowVertical';
 import TooltipTransition from './TooltipStyledTransition';
-import ArrowBoundingShape from './ArrowBoundingShape';
 import {Motion} from '../_base/base';
 import {DefaultAdapter} from "@douyinfe/semi-foundation/base/foundation";
 
