@@ -1,10 +1,10 @@
 import {defineComponent, ref, h} from 'vue'
-import Button from './Index';
+import Button from './index';
 import ButtonGroup from './ButtonGroup';
-import IconButton from "../iconButton/Index";
+import IconButton from "../iconButton";
 import {IconCamera, IconClose, IconDelete, IconEdit, IconTreeTriangleDown} from "@kousum/semi-icons-vue";
 import SplitButtonGroup from "./SplitButtonGroup";
-import Dropdown, {DropDownMenuItem} from "../dropdown/Index";
+import Dropdown, {DropDownMenuItem} from "../dropdown";
 
 
 

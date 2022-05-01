@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
-import Checkbox from '../Index'
+import Checkbox from '../index'
 interface ExampleProps {
   name?: string
 }

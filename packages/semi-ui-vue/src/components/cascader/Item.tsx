@@ -6,8 +6,8 @@ import { includes } from 'lodash';
 import LocaleConsumer_ from '../locale/LocaleConsumer';
 import { IconChevronRight, IconTick } from '@kousum/semi-icons-vue';
 import { Locale } from '../locale/interface';
-import Spin from '../spin/Index';
-import Checkbox, { CheckboxEvent } from '../checkbox/Index';
+import Spin from '../spin';
+import Checkbox, { CheckboxEvent } from '../checkbox';
 import {
   BasicCascaderData,
   BasicEntity,
@@ -15,7 +15,7 @@ import {
   BasicData
 } from '@douyinfe/semi-foundation/cascader/foundation';
 import {useBaseComponent} from "../_base/BaseComponent";
-import {CascaderProps} from "./Index";
+import {CascaderProps} from "./index";
 const LocaleConsumer = LocaleConsumer_()
 export interface CascaderData extends BasicCascaderData {
   label: VNode | string;

@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
-import {Radio, Group as RadioGroup} from '../Index'
-import Space from '../../space/Index'
+import {Radio, Group as RadioGroup} from '../index'
+import Space from '../../space'
 
 interface ExampleProps {
   name?: string

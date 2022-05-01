@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
-import TagInput from '../Index'
+import TagInput from '../index'
 interface ExampleProps {
   name?: string
 }

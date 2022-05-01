@@ -2,7 +2,7 @@ import {defineComponent, ref, h, onActivated, Fragment} from 'vue'
 import DropdownMenu from "../DropdownMenu";
 import DropdownItem from "../DropdownItem";
 import DropdownDivider from "../DropdownDivider";
-import Dropdown from "../Index";
+import Dropdown from "../index";
 
 interface ExampleProps {
   name?: string

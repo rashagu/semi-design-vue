@@ -7,7 +7,7 @@ import BaseComponent, {useBaseComponent} from '../_base/BaseComponent';
 import '@douyinfe/semi-foundation/input/input.scss';
 import { isString, noop, isFunction } from 'lodash';
 import { IconClear, IconEyeOpened, IconEyeClosedSolid } from '@kousum/semi-icons-vue';
-import {TooltipProps} from "../tooltip/Index";
+import {TooltipProps} from "../tooltip";
 
 const prefixCls = cssClasses.PREFIX;
 

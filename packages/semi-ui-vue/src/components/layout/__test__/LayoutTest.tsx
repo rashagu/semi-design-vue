@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
-import Layout, { LayoutHeader,LayoutContent,LayoutFooter,LayoutSider } from '../Index';
+import Layout, { LayoutHeader,LayoutContent,LayoutFooter,LayoutSider } from '../index';
 
 interface ExampleProps {
   name?: string

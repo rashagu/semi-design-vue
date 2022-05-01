@@ -7,17 +7,17 @@ import { numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/con
 import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/BaseComponent';
 
 import { Position } from '@douyinfe/semi-foundation/tooltip/foundation';
-import Spin from '../spin/Index';
-import Popover from '../popover/Index';
-import Input from '../input/Index';
-import Trigger from '../trigger/Index';
+import Spin from '../spin';
+import Popover from '../popover';
+import Input from '../input';
+import Trigger from '../trigger';
 
 import Option from '../select/Option';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import '@douyinfe/semi-foundation/autoComplete/autoComplete.scss';
 import { Motion } from '../_base/base';
 import {AriaAttributes} from "../AriaAttributes";
-import {TooltipProps} from "../tooltip/Index";
+import {TooltipProps} from "../tooltip";
 
 const prefixCls = cssClasses.PREFIX;
 const sizeSet = strings.SIZE;

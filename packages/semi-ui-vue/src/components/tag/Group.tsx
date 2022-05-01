@@ -1,8 +1,8 @@
 import {defineComponent, ref, h, Fragment, CSSProperties, VNode} from 'vue'
 import classNames from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/tag/constants';
-import Tag from './Index';
-import Popover, { PopoverProps } from '../popover/Index';
+import Tag from './index';
+import Popover, { PopoverProps } from '../popover';
 import { AvatarShape, TagProps } from './interface';
 
 const prefixCls = cssClasses.PREFIX;

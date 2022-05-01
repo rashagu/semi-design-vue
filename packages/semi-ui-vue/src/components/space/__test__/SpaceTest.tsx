@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
-import Space from '../Index'
-import Button from "../../button/Index";
+import Space from '../index'
+import Button from "../../button";
 interface ExampleProps {
   name?: string
 }

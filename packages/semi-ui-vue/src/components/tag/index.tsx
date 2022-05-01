@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, Fragment, VNode, CSSProperties, reactive} from 'vue'
 import classNames from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/tag/constants';
-import Avatar from '../avatar/Index';
+import Avatar from '../avatar';
 import { IconClose } from '@kousum/semi-icons-vue';
 import {TagProps, TagSize, TagColor, TagType, AvatarShape} from './interface';
 import '@douyinfe/semi-foundation/tag/tag.scss';

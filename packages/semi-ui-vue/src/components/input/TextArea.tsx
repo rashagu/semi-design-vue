@@ -17,7 +17,7 @@ import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/BaseComp
 import '@douyinfe/semi-foundation/input/textarea.scss';
 import { noop, omit, isFunction } from 'lodash';
 import { IconClear } from '@kousum/semi-icons-vue';
-import {TooltipProps} from "../tooltip/Index";
+import {TooltipProps} from "../tooltip";
 
 const prefixCls = cssClasses.PREFIX;
 

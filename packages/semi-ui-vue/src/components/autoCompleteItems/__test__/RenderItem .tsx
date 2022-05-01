@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment, reactive} from 'vue'
-import Avatar from '../../avatar/Index'
-import AutoComplete from '../Index'
+import Avatar from '../../avatar'
+import AutoComplete from '../index'
 import {IconSearch} from '@kousum/semi-icons-vue'
 interface ExampleProps {
   name?: string

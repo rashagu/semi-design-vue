@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, Fragment, reactive} from 'vue'
-import Select, {optionRenderProps} from '../Index'
+import Select, {optionRenderProps} from '../index'
 import Option from '../Option'
 import OptGroup from '../OptionGroup'
 import classNames from "classnames";

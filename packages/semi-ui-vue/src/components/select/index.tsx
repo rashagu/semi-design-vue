@@ -18,20 +18,20 @@ import SelectFoundation, {SelectAdapter} from '@douyinfe/semi-foundation/select/
 import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/select/constants';
 import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/BaseComponent';
 import {isEqual, isString, noop, get, isNumber} from 'lodash';
-import Tag from '../tag/Index';
+import Tag from '../tag';
 import TagGroup from '../tag/Group';
 import LocaleConsumer_ from '../locale/LocaleConsumer';
-import Popover from '../popover/Index';
+import Popover from '../popover';
 import {numbers as popoverNumbers} from '@douyinfe/semi-foundation/popover/constants';
 import {getOptionsFromGroup} from './Utils';
 import VirtualRow from './VirtualRow';
 
-import Input, {InputProps, InputState} from '../input/Index';
+import Input, {InputProps, InputState} from '../input';
 import Option from './Option';
 import type {OptionProps} from './Option';
 import OptionGroup from './OptionGroup';
-import Spin from '../spin/Index';
-import Trigger from '../trigger/Index';
+import Spin from '../spin';
+import Trigger from '../trigger';
 import {IconChevronDown, IconClear} from '@kousum/semi-icons-vue';
 import {isSemiIcon} from '../_utils';
 import {Subtract} from 'utility-types';
@@ -41,7 +41,7 @@ import warning from '@douyinfe/semi-foundation/utils/warning';
 import '@douyinfe/semi-foundation/select/select.scss';
 import {Locale} from '../locale/interface';
 import type {Position} from '@douyinfe/semi-foundation/tooltip/foundation';
-import type {TooltipProps} from '../tooltip/Index';
+import type {TooltipProps} from '../tooltip';
 import {RadioGroupProps} from "../radio/RadioGroup";
 
 export type {OptionGroupProps} from './OptionGroup';

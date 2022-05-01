@@ -2,7 +2,7 @@ import {defineComponent, ref, h, Fragment, CSSProperties, VNode, reactive, onMou
 import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/empty/constants';
 import '@douyinfe/semi-foundation/empty/empty.scss';
-import {Title} from '../typography/Index';
+import {Title} from '../typography';
 import { ArrayElement } from '../_base/base';
 
 const prefixCls = cssClasses.PREFIX;

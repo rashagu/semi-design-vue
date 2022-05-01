@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
-import Cascader from '../Index'
+import Cascader from '../index'
 interface ExampleProps {
   name?: string
 }

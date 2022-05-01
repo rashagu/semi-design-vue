@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, Fragment, reactive, onMounted} from 'vue'
-import Tooltip from '../tooltip/Index';
+import Tooltip from '../tooltip';
 import { cssClasses } from '@douyinfe/semi-foundation/typography/constants';
 import copyModel from 'copy-text-to-clipboard';
 import cls from 'classnames';

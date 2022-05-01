@@ -1,9 +1,9 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
-import AutoComplete from '../Index'
+import AutoComplete from '../index'
 import {IconSearch} from '@kousum/semi-icons-vue'
-import Input from "../../input/Index";
+import Input from "../../input";
 import RenderItem from "./RenderItem ";
-import Empty from "../../empty/Index";
+import Empty from "../../empty";
 import {IllustrationNoContent} from "@kousum/semi-illustrations-vue";
 interface ExampleProps {
   name?: string

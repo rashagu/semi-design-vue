@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import ConfigContext from '../configProvider/Context';
 import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/popover/constants';
-import Tooltip, {ArrowBounding,  Trigger} from '../tooltip/Index';
+import Tooltip, {ArrowBounding,  Trigger} from '../tooltip';
 import { Position } from '@douyinfe/semi-foundation/tooltip/foundation';
 
 import Arrow from './Arrow';

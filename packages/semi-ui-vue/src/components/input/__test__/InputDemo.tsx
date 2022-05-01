@@ -1,8 +1,8 @@
 import {defineComponent, ref, h, onMounted,} from 'vue'
-import Input from '../Index'
+import Input from '../index'
 import TextArea from "../TextArea";
 import {IconSearch} from '@kousum/semi-icons-vue'
-import {Text} from '../../typography/Index'
+import {Text} from '../../typography'
 
 interface ExampleProps {
   name?: string

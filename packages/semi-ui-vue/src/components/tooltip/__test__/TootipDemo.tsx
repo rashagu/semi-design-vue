@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, onActivated, Fragment} from 'vue'
-import Tooltip from "../Index"
-import Input from '../../input/Index'
+import Tooltip from "../index"
+import Input from '../../input'
 interface ExampleProps {
   name?: string
 }

@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment, VNode} from 'vue'
-import Space from '../../space/Index'
-import Tag, {TagProps} from '../Index'
+import Space from '../../space'
+import Tag, {TagProps} from '../index'
 import TagGroup from '../Group'
 interface ExampleProps {
   name?: string
