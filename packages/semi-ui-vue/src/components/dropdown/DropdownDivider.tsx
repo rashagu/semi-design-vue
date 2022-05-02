@@ -2,7 +2,7 @@ import {defineComponent, ref, h, onActivated, Fragment} from 'vue'
 import classnames from 'classnames';
 
 import { cssClasses } from '@douyinfe/semi-foundation/dropdown/constants';
-import { BaseProps } from '../_base/BaseComponent';
+import { BaseProps } from '../_base/baseComponent';
 
 
 

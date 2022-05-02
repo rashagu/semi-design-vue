@@ -2,7 +2,7 @@ import {defineComponent, ref, h, onActivated, Fragment, inject} from 'vue'
 
 import { cssClasses } from '@douyinfe/semi-foundation/dropdown/constants';
 import cls from 'classnames';
-import { BaseProps } from '../_base/BaseComponent';
+import { BaseProps } from '../_base/baseComponent';
 import {DropdownContext} from "./context";
 
 const prefixCls = cssClasses.PREFIX;

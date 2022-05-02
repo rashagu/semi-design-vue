@@ -25,7 +25,7 @@ import LocaleConsumer from '../locale/LocaleConsumer';
 import {Locale} from '../locale/interface';
 import {Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseType} from './interface';
 import {CopyableConfig, LinkType} from './Title';
-import {BaseProps} from '../_base/BaseComponent';
+import {BaseProps} from '../_base/baseComponent';
 import {isSemiIcon} from '../_utils/index';
 
 const LocaleConsumerDom = LocaleConsumer()

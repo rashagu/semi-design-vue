@@ -3,7 +3,7 @@ import {defineComponent, ref, h, onActivated, Fragment} from 'vue'
 import classnames from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/dropdown/constants';
 
-import BaseComponent, { BaseProps } from '../_base/BaseComponent';
+import BaseComponent, { BaseProps } from '../_base/baseComponent';
 
 const prefixCls = cssClasses.PREFIX;
 export type DropdownMenuProps = BaseProps;

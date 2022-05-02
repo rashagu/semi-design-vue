@@ -13,7 +13,7 @@ import {
 import cls from 'classnames';
 import TextAreaFoundation from '@douyinfe/semi-foundation/input/textareaFoundation';
 import { cssClasses } from '@douyinfe/semi-foundation/input/constants';
-import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/BaseComponent';
+import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/input/textarea.scss';
 import { noop, omit, isFunction } from 'lodash';
 import { IconClear } from '@kousum/semi-icons-vue';

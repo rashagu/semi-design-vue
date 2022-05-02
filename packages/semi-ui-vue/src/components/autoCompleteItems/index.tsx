@@ -4,7 +4,7 @@ import { isEqual, noop } from 'lodash';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/autoComplete/constants';
 import AutoCompleteFoundation, { AutoCompleteAdapter, StateOptionItem, DataItem } from '@douyinfe/semi-foundation/autoComplete/foundation';
 import { numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/constants';
-import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/BaseComponent';
+import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 
 import { Position } from '@douyinfe/semi-foundation/tooltip/foundation';
 import Spin from '../spin';

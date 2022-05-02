@@ -1,5 +1,5 @@
 
-import { BaseProps } from '../_base/BaseComponent';
+import { BaseProps } from '../_base/baseComponent';
 import {ImgHTMLAttributes, VNode} from "vue";
 
 export type AvatarShape = 'circle' | 'square';

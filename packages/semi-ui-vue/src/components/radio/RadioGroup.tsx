@@ -19,7 +19,7 @@ import { radioGroupClasses as css, strings } from '@douyinfe/semi-foundation/rad
 import RadioGroupFoundation, { RadioGroupAdapter } from '@douyinfe/semi-foundation/radio/radioGroupFoundation';
 import { RadioChangeEvent } from '@douyinfe/semi-foundation/radio/radioInnerFoundation';
 
-import BaseComponent, {useBaseComponent} from '../_base/BaseComponent';
+import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
 import { ArrayElement } from '../_base/base';
 import Radio, {RadioProps, RadioState, RadioType} from './Radio';
 import Context, { RadioGroupButtonSize, RadioMode } from './Context';

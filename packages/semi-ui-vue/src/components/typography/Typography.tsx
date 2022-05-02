@@ -2,7 +2,7 @@ import {defineComponent, ref, h, Fragment, CSSProperties, Ref} from 'vue'
 import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/typography/constants';
 import '@douyinfe/semi-foundation/typography/typography.scss';
-import { BaseProps } from '../_base/BaseComponent';
+import { BaseProps } from '../_base/baseComponent';
 const prefixCls = cssClasses.PREFIX;
 interface TypographyProps extends BaseProps{
   component_?: any;

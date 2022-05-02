@@ -7,7 +7,7 @@ import { strings, radioClasses as css } from '@douyinfe/semi-foundation/radio/co
 import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
 import '@douyinfe/semi-foundation/radio/radio.scss';
 
-import BaseComponent, {useBaseComponent} from '../_base/BaseComponent';
+import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
 import RadioInner from './RadioInner';
 import Context, { RadioContextValue, RadioMode } from './Context';
 

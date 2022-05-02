@@ -16,7 +16,7 @@ import {
 import classnames from 'classnames';
 import { checkboxGroupClasses as css, strings } from '@douyinfe/semi-foundation/checkbox/constants';
 import CheckboxGroupFoundation, { CheckboxGroupAdapter } from '@douyinfe/semi-foundation/checkbox/checkboxGroupFoundation';
-import BaseComponent, {useBaseComponent} from '../_base/BaseComponent';
+import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
 import CheckboxContextProvider, { Context } from './Context';
 import { isEqual } from 'lodash';
 import Checkbox from './Checkbox';

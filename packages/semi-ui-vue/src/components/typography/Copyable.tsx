@@ -6,7 +6,7 @@ import cls from 'classnames';
 import { noop } from '@douyinfe/semi-foundation/utils/function';
 import LocaleConsumer from '../locale/LocaleConsumer';
 import { IconCopy, IconTick } from '@kousum/semi-icons-vue';
-import { BaseProps } from '../_base/BaseComponent';
+import { BaseProps } from '../_base/baseComponent';
 import { Locale } from '../locale/interface';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 

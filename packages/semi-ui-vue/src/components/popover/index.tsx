@@ -9,7 +9,7 @@ import { Position } from '@douyinfe/semi-foundation/tooltip/foundation';
 
 import Arrow from './Arrow';
 import '@douyinfe/semi-foundation/popover/popover.scss';
-import {BaseProps} from '../_base/BaseComponent';
+import {BaseProps} from '../_base/baseComponent';
 import {Motion} from '../_base/base';
 import {noop} from 'lodash';
 
