@@ -18,6 +18,7 @@ import AutoCompleteItemsDemo from "./components/autoCompleteItems/__test__/AutoC
 import TagInputDemo from "./components/tagInput/__test__/TagInputDemo";
 import CheckboxDemo from "./components/checkbox/__test__/CheckboxDemo";
 import CascaderDemo from "./components/cascader/__test__/CascaderDemo";
+import ScrollListDemo from "./components/scrollList/__test__/ScrollListDemo";
 // import {UseVirtualList} from "@vueuse/components";
 export interface ExampleProps {
   name?: string
@@ -31,33 +32,34 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   return () => (
     <div>
-      <CascaderDemo/>
-      <CheckboxDemo />
-      <TagInputDemo />
-      <AutoCompleteItemsDemo/>
-      <SelectDemo/>
-      <TagDemo/>
-      <AvatarDemo/>
-      <RadioDemo />
+      <ScrollListDemo />
+      {/*<CascaderDemo/>*/}
+      {/*<CheckboxDemo />*/}
+      {/*<TagInputDemo />*/}
+      {/*<AutoCompleteItemsDemo/>*/}
+      {/*<SelectDemo/>*/}
+      {/*<TagDemo/>*/}
+      {/*<AvatarDemo/>*/}
+      {/*<RadioDemo />*/}
 
-      <InputDemo />
-      <TypeDemo />
+      {/*<InputDemo />*/}
+      {/*<TypeDemo />*/}
 
-      <div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
-        <Button />
-      </div>
+      {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
+      {/*  <Button />*/}
+      {/*</div>*/}
 
-      <IconTest />
-      <br/>
-      <TootipDemo />
-      <br/>
-      <br/>
-      <DropdownDemo1/>
-      <br/>
-      <GridTest />
-      <LayoutTest/>
-      <SpaceTest/>
-      <PopoverTest />
+      {/*<IconTest />*/}
+      {/*<br/>*/}
+      {/*<TootipDemo />*/}
+      {/*<br/>*/}
+      {/*<br/>*/}
+      {/*<DropdownDemo1/>*/}
+      {/*<br/>*/}
+      {/*<GridTest />*/}
+      {/*<LayoutTest/>*/}
+      {/*<SpaceTest/>*/}
+      {/*<PopoverTest />*/}
       <div class={'aa'}>123</div>
     </div>
   )
