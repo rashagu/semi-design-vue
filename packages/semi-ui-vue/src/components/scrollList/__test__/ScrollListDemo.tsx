@@ -36,7 +36,7 @@ const ScrollListDemo = defineComponent<ExampleProps>((props, {}) => {
   const minutes = new Array(60).fill(0).map((itm, index) => {
     return {
       value: index,
-      disabled: Math.random() > 0.5 ? true : false,
+      disabled: false,
     };
   });
 

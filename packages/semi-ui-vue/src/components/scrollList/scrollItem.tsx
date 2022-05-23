@@ -1,4 +1,16 @@
-import {defineComponent, ref, h, Fragment, useSlots, CSSProperties, reactive, onUnmounted, onMounted, watch} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  useSlots,
+  CSSProperties,
+  reactive,
+  onUnmounted,
+  onMounted,
+  watch,
+  watchEffect, nextTick
+} from 'vue'
 
 import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
 import PropTypes from 'prop-types';
@@ -100,20 +112,23 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
    *
    * reset position to center of the scrollWrapper
    *
-   * @param {HTMLElement} selectedNode
+   * @param selectedNode_
    * @param scrollWrapper
    * @param {number} duration
    */
-  const scrollToCenter: ScrollItemAdapter['scrollToCenter'] = (selectedNode, scrollWrapper, duration) => {
-    selectedNode = selectedNode || selectedNode;
+  const scrollToCenter: ScrollItemAdapter['scrollToCenter'] = (selectedNode_, scrollWrapper, duration) => {
+
+    selectedNode_ = selectedNode_ || selectedNode.value;
+
     scrollWrapper = scrollWrapper || wrapper.value;
-    if (isElement(selectedNode) && isElement(scrollWrapper)) {
+    if (isElement(selectedNode_) && isElement(scrollWrapper)) {
       const scrollRect = scrollWrapper.getBoundingClientRect();
-      const selectedRect = selectedNode.getBoundingClientRect();
+      const selectedRect = selectedNode_.getBoundingClientRect();
 
       const targetTop =
         scrollWrapper.scrollTop +
         (selectedRect.top - (scrollRect.top + scrollRect.height / 2 - selectedRect.height / 2));
+
 
       scrollToPos(targetTop, typeof duration === 'number' ? duration : numbers.DEFAULT_SCROLL_DURATION);
     }
@@ -121,13 +136,12 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
 
 
   const isDisabledIndex = (index: number) => {
-    const {list} = props;
 
-    if (Array.isArray(list) && list.length && index > -1) {
-      const size = list.length;
+    if (Array.isArray(props.list) && props.list.length && index > -1) {
+      const size = props.list.length;
       const indexInData = index % size;
 
-      return isDisabledData(list[indexInData]);
+      return isDisabledData(props.list[indexInData]);
     }
 
     return false;
@@ -141,12 +155,16 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
             state[statesKey] = states_[statesKey]
           }
         }
-        callback()
+
+        // TODO callback需要nextTick
+        nextTick(()=>{
+          callback()
+        })
       },
       setPrependCount: prependCount => state.prependCount = prependCount,
       setAppendCount: appendCount => state.appendCount = appendCount,
       isDisabledIndex: isDisabledIndex,
-      setSelectedNode: selectedNode => _cacheWillSelectNode(selectedNode),
+      setSelectedNode: selectedNode_ => _cacheWillSelectNode(selectedNode_),
       notifySelectItem: (...args) => props.onSelect(...args),
       scrollToCenter: scrollToCenter,
     };
@@ -158,24 +176,25 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
 
     foundation.init();
 
-    const {mode, cycled, selectedIndex, list} = props;
+    const {mode, cycled, selectedIndex} = props;
 
-    const selectedNode = getNodeByIndex(
+    const selectedNode_ = getNodeByIndex(
       typeof selectedIndex === 'number' && selectedIndex > -1 ? selectedIndex : 0
     ) as HTMLElement;
 
-    _cacheSelectedNode(selectedNode);
-    _cacheWillSelectNode(selectedNode);
+    _cacheSelectedNode(selectedNode_);
+    _cacheWillSelectNode(selectedNode_);
+
 
     if (mode === wheelMode && cycled) {
-      foundation.initWheelList(list, wrapper, () => {
+      foundation.initWheelList(list.value, wrapper.value, () => {
         // we have to scroll in next tick
         // setTimeout(() => {
-        scrollToNode(selectedNode, 0);
+        scrollToNode(selectedNode_, 0);
         // });
       });
     } else {
-      scrollToNode(selectedNode, 0);
+      scrollToNode(selectedNode_, 0);
     }
   })
   onUnmounted(() => {
@@ -196,25 +215,29 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
   }, msPerFrame * 5);
 
 
-  watch(() => props.selectedIndex, (prevPropsSelectedIndex) => {
+  watch([() => props.selectedIndex, willSelectNode, list], ([prevPropsSelectedIndex]) => {
+
     const {selectedIndex} = props;
 
-    // smooth scroll to selected option
-    const willSelectIndex = getIndexByNode(willSelectNode.value);
+    if (props.selectedIndex !== selectedIndex) {
+      // smooth scroll to selected option
+      const willSelectIndex = getIndexByNode(willSelectNode.value);
 
-    if (!indexIsSame(willSelectIndex, selectedIndex)) {
-      const newSelectedNode = getNodeByOffset(
-        selectedNode.value,
-        selectedIndex - prevPropsSelectedIndex,
-        list.value
-      );
-      _cacheWillSelectNode(newSelectedNode);
+      if (!indexIsSame(willSelectIndex, selectedIndex)) {
+        const newSelectedNode = getNodeByOffset(
+          selectedNode.value,
+          selectedIndex - prevPropsSelectedIndex,
+          list.value
+        );
+        _cacheWillSelectNode(newSelectedNode);
+      }
+
+      _cacheSelectedNode(willSelectNode.value);
+
+      scrollToIndex(selectedIndex);
     }
-
-    _cacheSelectedNode(willSelectNode);
-
-    scrollToIndex(selectedIndex);
   })
+
 
 
 
@@ -243,7 +266,7 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
     }
   };
 
-  const _cacheSelectedNode = (selectedNode: any) => _cacheNode('selectedNode', selectedNode);
+  const _cacheSelectedNode = (selectedNode_: any) => _cacheNode('selectedNode', selectedNode_);
 
   const _cacheWillSelectNode = (node: any) => _cacheNode('willSelectNode', node);
 
@@ -340,13 +363,11 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
 
   const isWheelMode = () => props.mode === wheelMode;
 
-  const addClassToNode = (selectedNode: Element, selectedCls = cssClasses.SELECTED) => {
-    const list_ = list.value;
-    selectedNode = selectedNode || selectedNode;
+  const addClassToNode = (selectedNode_: Element, selectedCls = cssClasses.SELECTED) => {
+    selectedNode_ = selectedNode_ || selectedNode.value;
 
-    if (isElement(selectedNode) && isElement(list_)) {
-      const {children} = list_;
-      console.log(children)
+    if (isElement(selectedNode_) && isElement(list.value)) {
+      const {children} = list.value;
       const reg = new RegExp(`\\s*${selectedCls}\\s*`, 'g');
 
       map(children, node => {
@@ -357,10 +378,10 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
         }
       });
 
-      if (selectedNode.className && !blankReg.test(selectedNode.className)) {
-        selectedNode.className += ` ${selectedCls}`;
+      if (selectedNode_.className && !blankReg.test(selectedNode_.className)) {
+        selectedNode_.className += ` ${selectedCls}`;
       } else {
-        selectedNode.className = selectedCls;
+        selectedNode_.className = selectedCls;
       }
     }
   };
@@ -369,7 +390,12 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
 
   const getNodeByIndex = (index: number) => {
     if (index > -1) {
-      return find(list.value.children, (node, idx) => idx === index);
+      return find(list.value.children, (node, idx:number) => {
+        if (idx === index){
+          node.scrollTop
+        }
+        return idx === index
+      });
     }
 
     const defaultSelectedNode = find(list.value.children, child => !isDisabledNode(child));
@@ -388,16 +414,15 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
   };
 
   const scrollToNode = (node: HTMLElement, duration: number) => {
-    const wrapper_ = wrapper.value;
-    const wrapperHeight = wrapper_.offsetHeight;
+    const wrapperHeight = wrapper.value.offsetHeight;
     const itemHeight = getItmHeight(node);
+    // TODO 问题点 node.offsetTop 这个是负的？？？？
     const targetTop = (node.offsetTop || list.value.children.length * itemHeight / 2) - (wrapperHeight - itemHeight) / 2;
 
     scrollToPos(targetTop, duration);
   };
 
   const scrollToPos = (targetTop: number, duration = numbers.DEFAULT_SCROLL_DURATION) => {
-    const wrapper_ = wrapper.value;
 
     // isWheelMode() && addClassToNode();
 
@@ -407,13 +432,13 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
         scrolling = false;
       }
 
-      if (wrapper_.scrollTop === targetTop) {
+      if (wrapper.value.scrollTop === targetTop) {
         if (isWheelMode()) {
           const nodeInfo = foundation.getNearestNodeInfo(list.value, selector.value);
           addClassToNode(nodeInfo.nearestNode);
         }
       } else {
-        scrollAnimation = animatedScrollTo(wrapper_, targetTop, duration);
+        scrollAnimation = animatedScrollTo(wrapper.value, targetTop, duration);
         scrollAnimation.on('rest', () => {
           if (isWheelMode()) {
             const nodeInfo = foundation.getNearestNodeInfo(list.value, selector.value);
@@ -423,7 +448,7 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
         scrollAnimation.start();
       }
     } else {
-      wrapper_.scrollTop = targetTop;
+      wrapper.value.scrollTop = targetTop;
     }
   };
 
@@ -451,9 +476,9 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
   const getItmHeight = (itm: HTMLElement) => (itm && itm.offsetHeight) || numbers.DEFAULT_ITEM_HEIGHT;
 
   const renderItemList = (prefixKey = '') => {
-    const {selectedIndex, mode, transform: commonTrans, list} = props;
+    const {selectedIndex, mode, transform: commonTrans} = props;
 
-    return list.map((item, index) => {
+    return props.list.map((item, index) => {
       const {transform: itemTrans} = item;
 
       const transform = typeof itemTrans === 'function' ? itemTrans : commonTrans;
@@ -480,7 +505,7 @@ const scrollItem = defineComponent<ScrollItemProps<any>>((props, {}) => {
       const events: { onClick?: () => void } = {};
 
       if (!isWheelMode() && !item.disabled) {
-        events.onClick = () => foundation.selectIndex(index, list);
+        events.onClick = () => foundation.selectIndex(index, list.value);
       }
 
       return (
