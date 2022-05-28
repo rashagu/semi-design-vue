@@ -75,10 +75,10 @@ export interface AutoCompleteProps<T extends AutoCompleteItems> {
   onChangeWithObject?: boolean;
   onSelectWithObject?: boolean;
   onDropdownVisibleChange?: (visible: boolean) => void;
-  prefix?: VNode | string;
+  prefix?: VNode | string | JSX.Element;
   placeholder?: string;
   position?: Position;
-  renderItem?: (option: T) => VNode | string;
+  renderItem?: (option: T) => VNode | string | JSX.Element;
   renderSelectedItem?: (option: T) => string;
   size?: 'small' | 'default' | 'large';
   style?: CSSProperties;
@@ -461,7 +461,7 @@ const Index = defineComponent<AutoCompleteProps<any>>((props, {slots}) => {
     );
   }
 
-  function renderOption(option: StateOptionItem, optionIndex: number): VNode | string {
+  function renderOption(option: StateOptionItem, optionIndex: number): VNode | string | JSX.Element {
     const { focusIndex } = state;
     const isFocused = optionIndex === focusIndex;
 

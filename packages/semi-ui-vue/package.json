@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-ui-vue",
-  "version": "3.0.1",
+  "version": "0.0.1",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "files": [
@@ -26,9 +26,9 @@
   "dependencies": {
     "@douyinfe/semi-foundation": "^2.8.0",
     "@douyinfe/semi-theme-default": "^2.8.0",
-    "@kousum/semi-animation-vue": "^3.0.1",
-    "@kousum/semi-icons-vue": "^3.0.1",
-    "@kousum/semi-illustrations-vue": "^3.0.1",
+    "@kousum/semi-animation-vue": "^0.0.1",
+    "@kousum/semi-icons-vue": "^0.0.1",
+    "@kousum/semi-illustrations-vue": "^0.0.1",
     "@kousum/vue3-window": "^0.0.3",
     "@types/lodash": "^4.14.178",
     "@vueuse/components": "^8.1.2",
@@ -43,7 +43,7 @@
     "sass": "^1.44.0",
     "scroll-into-view-if-needed": "^2.2.28",
     "utility-types": "^3.10.0",
-    "vue": "^3.2.23"
+    "vue": "^3.2.36"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.17.2",
@@ -52,10 +52,10 @@
     "@babel/preset-react": "^7.16.7",
     "@types/jest": "^27.4.1",
     "@types/prop-types": "^15.7.4",
-    "@vitejs/plugin-vue": "^2.3.1",
+    "@vitejs/plugin-vue": "^2.3.3",
     "@vitejs/plugin-vue-jsx": "^1.3.10",
-    "@vue/test-utils": "^2.0.0-rc.17",
-    "@vue/vue3-jest": "^27.0.0-alpha.4",
+    "@vue/test-utils": "^2.0.0",
+    "@vue/vue3-jest": "^27.0.0",
     "babel-jest": "^27.5.1",
     "del": "^6.0.0",
     "fs": "^0.0.1-security",
@@ -74,7 +74,7 @@
     "ts-jest": "^27.1.3",
     "ts-node": "^10.5.0",
     "typescript": "^4.6.3",
-    "vite": "^2.9.5",
+    "vite": "^2.9.9",
     "vue-tsc": "^0.34.7"
   },
   "gitHead": "a9bb1553bd45dcf99595a45df0adf0d967083f1e"

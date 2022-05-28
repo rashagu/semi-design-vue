@@ -9,7 +9,8 @@
     "pre": "build:lib",
     "build:publish": "pnpm build:lib & pnpm publish -r",
     "change": "pnpm changeset",
-    "version": "pnpm changeset version"
+    "version": "pnpm changeset version",
+    "publish": "pnpm changeset publish"
   },
   "publishConfig": {
     "access": "public"
@@ -21,7 +22,7 @@
     "packages/semi-illustrations-vue"
   ],
   "devDependencies": {
-    "@babel/core": "^7.16.5",
+    "@babel/core": "^7.17.5",
     "@babel/plugin-proposal-decorators": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",

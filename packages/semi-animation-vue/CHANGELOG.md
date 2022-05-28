@@ -1,13 +1,7 @@
 # @kousum/semi-animation-vue
 
-## 3.0.1
+## 0.0.1
 
 ### Patch Changes
 
--   patch test
-
-## 3.0.0
-
-### Major Changes
-
--   changeSets 测试
+-   本地 package 引入问题

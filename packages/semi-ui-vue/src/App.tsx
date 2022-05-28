@@ -33,33 +33,33 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ScrollListDemo />
-      {/*<CascaderDemo/>*/}
-      {/*<CheckboxDemo />*/}
-      {/*<TagInputDemo />*/}
-      {/*<AutoCompleteItemsDemo/>*/}
-      {/*<SelectDemo/>*/}
-      {/*<TagDemo/>*/}
-      {/*<AvatarDemo/>*/}
-      {/*<RadioDemo />*/}
+      <CascaderDemo/>
+      <CheckboxDemo />
+      <TagInputDemo />
+      <AutoCompleteItemsDemo/>
+      <SelectDemo/>
+      <TagDemo/>
+      <AvatarDemo/>
+      <RadioDemo />
 
-      {/*<InputDemo />*/}
-      {/*<TypeDemo />*/}
+      <InputDemo />
+      <TypeDemo />
 
-      {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
-      {/*  <Button />*/}
-      {/*</div>*/}
+      <div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
+        <Button />
+      </div>
 
-      {/*<IconTest />*/}
-      {/*<br/>*/}
-      {/*<TootipDemo />*/}
-      {/*<br/>*/}
-      {/*<br/>*/}
-      {/*<DropdownDemo1/>*/}
-      {/*<br/>*/}
-      {/*<GridTest />*/}
-      {/*<LayoutTest/>*/}
-      {/*<SpaceTest/>*/}
-      {/*<PopoverTest />*/}
+      <IconTest />
+      <br/>
+      <TootipDemo />
+      <br/>
+      <br/>
+      <DropdownDemo1/>
+      <br/>
+      <GridTest />
+      <LayoutTest/>
+      <SpaceTest/>
+      <PopoverTest />
       <div class={'aa'}>123</div>
     </div>
   )
