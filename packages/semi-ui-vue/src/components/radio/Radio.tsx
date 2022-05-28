@@ -37,10 +37,14 @@ export type RadioProps = {
   addonClassName?: string;
   type?: RadioType;
   'aria-label'?: any;
+  addonId?: string;
+  extraId?: string;
 };
 
 export interface RadioState {
   hover?: boolean;
+  addonId?: string;
+  extraId?: string;
 }
 
 export const vuePropsType = {
@@ -72,15 +76,17 @@ export const vuePropsType = {
   addonClassName: String,
   type: {type:String, default:'default'},
   'aria-label': String,
+  addonId: String,
+  extraId: String,
 }
 const Radio = defineComponent<RadioProps>((props, {slots}) => {
   let radioEntity: any;
   let context!: Ref<RadioContextValue>;
   let foundation: RadioFoundation;
-  let addonId: string;
-  let extraId: string;
   const state = reactive({
     hover: false,
+    addonId: props.addonId,
+    extraId: props.extraId,
   });
   const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<RadioProps>(props, state)
   context = inject('RadioContextValue', ref<RadioContextValue>(null))
@@ -91,13 +97,17 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
       ...adapterInject<RadioProps, RadioState>(),
       setHover: (hover: boolean) => {
         state.hover = hover
+      },
+      setAddonId: () => {
+        state.addonId = getUuidShort({ prefix: 'addon' })
+      },
+      setExtraId: () => {
+        state.extraId = getUuidShort({ prefix: 'extra' })
       }
     };
   }
   foundation = new RadioFoundation(theAdapter);
   radioEntity = null;
-  addonId = getUuidShort({ prefix: 'addon' });
-  extraId = getUuidShort({ prefix: 'extra' });
 
 
   function isInGroup() {
@@ -162,7 +172,7 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
       isButtonRadioComponent,
       buttonSize,
       realPrefixCls;
-    const isHover = state.hover;
+    const { hover: isHover, addonId, extraId } = state;
     let props_:{ checked?: boolean, disabled?: boolean } = {};
 
     // console.log(context.value)
