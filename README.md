@@ -60,26 +60,12 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 2. 使用`typescript`,`lerna`
 3. `node: last version`
 
-### 安装lerna
-> `pnpm add --global lerna`
 
 ### 安装依赖
-> `lerna bootstrap --hoist`
+> `pnpm install`
 
 ### 运行
-> `lerna run build:lib && lerna run --scope @kousum/semi-ui-vue dev`
-
-
-### lerna
-> `lerna publish`
-> 
-> `lerna add @kousum/semi-icons-vue --scope=@kousum/semi-ui-vue`
-
-> `lerna add @kousum/semi-animation-vue --scope=@kousum/semi-ui-vue`
-
-> `lerna add @douyinfe/semi-foundation --scope=@kousum/semi-ui-vue`
-
-> `lerna add @kousum/semi-illustrations-vue --scope=@kousum/semi-ui-vue`
+> `pnpm dev`
 
 
 
@@ -140,7 +126,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [ ] Modal
 - [ ] OverflowList
 - [x] Popover
-- [ ] ScrollList
+- [x] ScrollList
 - [ ] SideSheet
 - [ ] Table
 - [x] Tag
