@@ -34,10 +34,14 @@ export interface CheckboxProps extends BaseCheckboxProps {
   'aria-label'?: AriaAttributes['aria-label'];
   role?: any; // a11y: wrapper role
   tabIndex?: number; // a11y: wrapper tabIndex
+  addonId?: string;
+  extraId?: string;
 }
 
 interface CheckboxState {
   checked: boolean;
+  addonId?: string;
+  extraId?: string;
 }
 
 export const vuePropsType = {
@@ -66,6 +70,8 @@ export const vuePropsType = {
   tabIndex: Number,
   defaultChecked: false,
   indeterminate: false,
+  addonId: String,
+  extraId: String,
 }
 const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
   const slots = useSlots()
@@ -73,10 +79,10 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
   const checked = false;
   const state = reactive({
     checked: props.checked || props.defaultChecked || checked,
+    addonId: props.addonId,
+    extraId: props.extraId,
   });
   const checkboxEntity = ref(null);
-  const addonId: string = getUuidShort({prefix: 'addon'});
-  const extraId: string = getUuidShort({prefix: 'extra'});
   const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<CheckboxProps>(props, state)
 
   const context = inject('CheckboxContext', ref<CheckboxContext>({}))
@@ -96,7 +102,13 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
       notifyGroupChange: cbContent => {
         context.value.checkboxGroup.onChange(cbContent);
       },
-      getGroupDisabled: () => (context && context.value.checkboxGroup.disabled)
+      getGroupDisabled: () => (context && context.value.checkboxGroup.disabled),
+      setAddonId: () => {
+        state.addonId = getUuidShort({ prefix: 'addon' })
+      },
+      setExtraId: () => {
+        state.extraId = getUuidShort({ prefix: 'extra' })
+      }
     };
   }
 
@@ -146,7 +158,7 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
       tabIndex,
       id
     } = props;
-    const {checked} = state;
+    const { checked, addonId, extraId } = state;
     const props_: Record<string, any> = {
       checked,
       disabled,
