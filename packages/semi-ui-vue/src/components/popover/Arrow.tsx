@@ -1,12 +1,14 @@
 import {defineComponent, ref, h, Fragment, CSSProperties} from 'vue'
 import classnames from 'classnames';
 import { get } from 'lodash';
+import { Position } from '@douyinfe/semi-foundation/tooltip/foundation';
 import { numbers, cssClasses, strings } from '@douyinfe/semi-foundation/popover/constants';
+import {ArrowStyle} from "./index";
 
 export interface ArrowProps {
-  position?: string;
+  position?: Position;
   className?: string;
-  arrowStyle?: CSSProperties;
+  arrowStyle?: ArrowStyle;
   popStyle?: CSSProperties;
 }
 

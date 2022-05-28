@@ -13,7 +13,7 @@ import {BaseProps} from '../_base/baseComponent';
 import {Motion} from '../_base/base';
 import {noop} from 'lodash';
 
-declare interface ArrowStyle {
+export declare interface ArrowStyle {
   borderColor?: string;
   backgroundColor?: string;
   borderOpacity?: string | number;

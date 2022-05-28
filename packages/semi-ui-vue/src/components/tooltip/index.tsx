@@ -73,6 +73,11 @@ export interface TooltipProps extends BaseProps {
   stopPropagation?: boolean;
   clickTriggerToHide?: boolean;
   wrapperClassName?: string;
+  closeOnEsc?: boolean;
+  guardFocus?: boolean;
+  returnFocusOnClose?: boolean;
+  onEscKeyDown?: (e: KeyboardEvent) => void;
+  wrapperId?: string;
 }
 
 interface TooltipState {
@@ -182,7 +187,24 @@ export const vuePropsType = {
   cancelText: String,
   okText: String,
   contentClassName: String,
-  role: String
+  role: String,
+  closeOnEsc:{
+    type: Boolean,
+    default: false
+  },
+  guardFocus:{
+    type: Boolean,
+    default: false
+  },
+  returnFocusOnClose:{
+    type: Boolean,
+    default: false
+  },
+  onEscKeyDown:{
+    type: Function,
+    default: noop
+  },
+  wrapperId: String
 }
 
 
@@ -229,7 +251,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
     transitionStyle: {},
     willUpdateStates: {},
     isPositionUpdated: false,
-    id: getUuidShort(), // auto generate id, will be used by children.aria-describedby & content.id, improve a11y
+    id: props.wrapperId, // auto generate id, will be used by children.aria-describedby & content.id, improve a11y
 
   })
   const {cache, adapter: adapterInject, log, context} = useBaseComponent<TooltipProps>(props, state)
@@ -280,7 +302,6 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       unregisterTriggerEvent: () => {
       },
       registerPortalEvent: (portalEventSet: Record<string, any>) => {
-
         state.portalEventSet = portalEventSet
       },
       unregisterPortalEvent: () => {
@@ -467,6 +488,9 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
       },
       notifyEscKeydown: (event: KeyboardEvent) => {
         props.onEscKeyDown(event);
+      },
+      setId: () => {
+        state.id = getUuidShort()
       }
     };
   }
