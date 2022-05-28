@@ -23,7 +23,7 @@ jobs:
         run: npm i -g pnpm
 
       - name: Run install
-        run: npm i -g lerna && lerna bootstrap --hoist
+        run: pnpm install
         
       - name: Run test
         run: pnpm test
