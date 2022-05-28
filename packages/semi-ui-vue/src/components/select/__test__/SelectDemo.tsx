@@ -110,11 +110,13 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
     <span style={{color: 'var(--semi-color-link)'}}>未找到应用?</span>
   </div>);
   let newOptions = Array.from({ length: 3000 }, (v, i) => ({ label: `option-${i}`, value: i }));
+  let newOptions2 = Array.from({ length: 30 }, (v, i) => ({ label: `option-${i}`, value: i }));
   const state = reactive({
     optionList: newOptions,
+    optionList2: newOptions2,
   });
   return () => {
-    let { optionList } = state;
+    let { optionList, optionList2 } = state;
     let virtualize = {
       height: 300,
       width: '100%',
@@ -127,7 +129,7 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
       <div>
         <div>
           <Select
-            placeholder="拥有3k个Option的Select"
+            placeholder="拥有3k个Option的Select 虚拟滚动"
             style={{ width: '260px' }}
             filter
             onSearch={handleSearch}
@@ -139,7 +141,7 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
           placeholder={'请选择'}
           filter
           dropdownClassName="components-select-demo-renderOptionItem"
-          optionList={optionList}
+          optionList={optionList2}
           style={{ width: '300px' }}
           renderOptionItem={renderOptionItem}
         />
