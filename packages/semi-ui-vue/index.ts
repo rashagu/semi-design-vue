@@ -27,3 +27,7 @@ export {
   Title,
   Paragraph,
 } from './src/components/typography';
+
+export { default as Input} from './src/components/input'
+export { Radio, Group as RadioGroup} from './src/components/radio'
+

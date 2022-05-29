@@ -13,9 +13,11 @@ const prettier = require('prettier');
  *
  * @param {*} entryDir 存放svg文件夹
  * @param {*} outDir 输出Vue3TSX组件文件夹
- * @param {*} decolorize 是否去色
  * @param {*} prefix 图标前缀
  * @param {*} suffix 图标后缀
+ * @param svgoPlugins
+ * @param svgrOptions
+ * @param type
  */
 async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOptions = {}, type) {
   const prettierConfig = require('../.prettierrc.js');

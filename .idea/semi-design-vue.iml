@@ -10,6 +10,7 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/semi-foundation" />
       <excludeFolder url="file://$MODULE_DIR$/packages/semi-illustrations-vue/src/svgs" />
       <excludeFolder url="file://$MODULE_DIR$/packages/semi-illustrations-vue/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/docs" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

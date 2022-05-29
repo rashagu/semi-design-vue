@@ -23,7 +23,8 @@ const customTemplate = ({ template }, opts, { imports, interfaces, componentName
     const typeScriptTpl = template.smart({ plugins });
     return typeScriptTpl.ast`
 import {defineComponent, ref, h, onActivated} from 'vue'
-import { ConvertIcon, IconProps, vuePropsType as iconVuePropsType} from '../components/Icon';
+import { ConvertIcon, vuePropsType as iconVuePropsType} from '../components/Icon';
+import type {IconProps} from '../components/Icon'
 const SvgComponent = defineComponent((props, {slots}) => {
     return ()=>(${jsx});
 })
