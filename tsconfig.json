@@ -5,7 +5,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "allowJs": true,
     "paths": {
       "@kousum/semi-foundation/*": ["../semi-foundation/*"],
