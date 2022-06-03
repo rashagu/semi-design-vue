@@ -1,0 +1,10 @@
+export const any = [Array, Object, String, Number, Boolean];
+export const array = Array;
+export const bool = Boolean;
+export const func = Function;
+export const number = Number;
+export const object = Object
+export const string = String;
+export const node = [Array, Object, String, Number];
+export const element = [Array, Object, String, Number];
+export const symbol = Object;

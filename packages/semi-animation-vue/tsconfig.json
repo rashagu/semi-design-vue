@@ -6,7 +6,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "strictNullChecks": false,
