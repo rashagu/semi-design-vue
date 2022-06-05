@@ -37,7 +37,7 @@ import {Motion} from '../_base/base';
 import {DefaultAdapter} from "@douyinfe/semi-foundation/base/foundation";
 
 export type Trigger = ArrayElement<typeof strings.TRIGGER_SET>;
-
+export {Position}
 export interface ArrowBounding {
   offsetX?: number;
   offsetY?: number;

@@ -8,3 +8,20 @@ export const string = String;
 export const node = [Array, Object, String, Number];
 export const element = [Array, Object, String, Number];
 export const symbol = Object;
+
+
+
+export function vuePropsMake(typeObj:{[key:string]: any}, defaultProps:{[key:string]: any}) {
+  const obj = {}
+  for (const typeKey in typeObj) {
+    if (typeObj.hasOwnProperty('default') || !defaultProps.hasOwnProperty(typeKey)) {
+      obj[typeKey] = typeObj[typeKey]
+    } else {
+      obj[typeKey] = {
+        type: typeObj[typeKey],
+        default: typeof defaultProps[typeKey] === 'object' ? () => defaultProps[typeKey] : defaultProps[typeKey],
+      }
+    }
+  }
+  return obj
+}
