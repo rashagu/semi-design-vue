@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-ui-vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "files": [
@@ -26,9 +26,9 @@
   "dependencies": {
     "@douyinfe/semi-foundation": "^2.13.0",
     "@douyinfe/semi-theme-default": "^2.13.0",
-    "@kousum/semi-animation-vue": "^0.0.1",
-    "@kousum/semi-icons-vue": "^0.0.1",
-    "@kousum/semi-illustrations-vue": "^0.0.1",
+    "@kousum/semi-animation-vue": "^0.0.2",
+    "@kousum/semi-icons-vue": "^0.0.2",
+    "@kousum/semi-illustrations-vue": "^0.0.2",
     "@kousum/vue3-window": "^0.0.3",
     "@types/lodash": "^4.14.178",
     "@vueuse/components": "^8.1.2",
