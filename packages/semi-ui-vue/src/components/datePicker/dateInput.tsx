@@ -19,8 +19,6 @@ import Input from '../input/index';
 import { InsetDateInput, InsetTimeInput } from './insetInput';
 import * as PropTypes from "../PropTypes";
 import {CheckboxProps} from "../checkbox";
-import {AvatarAdapter} from "@douyinfe/semi-foundation/avatar/foundation";
-import {AvatarProps, AvatarState} from "../avatar";
 
 export interface DateInputProps extends DateInputFoundationProps, BaseProps {
   insetLabel?: VNode;
@@ -425,30 +423,33 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
     const isRangeType = /range/i.test(type);
     const rangeProps = { ...props, text, suffix, inputCls };
 
+    const inputProps = {
+      ...rest,
+      insetLabel: insetLabel,
+      disabled: disabled,
+      readonly: inputReadOnly,
+      className: inputCls,
+      style: inputStyle as CSSProperties,
+      hideSuffix: showClear,
+      placeholder: placeholder,
+      onEnterPress: handleEnterPress,
+      onChange: handleChange,
+      onClear: handleInputClear,
+      suffix: suffix,
+      showClear: showClear,
+      value: text,
+      validateStatus: validateStatus,
+      prefix: prefix,
+      autofocus: autofocus,
+      size: size,
+      onBlur: onBlur as any,
+      onFocus: onFocus as any,
+    }
     return isRangeType ? (
       renderRangeInput(rangeProps)
     ) : (
       <Input
-        {...rest}
-        insetLabel={insetLabel}
-        disabled={disabled}
-        readonly={inputReadOnly}
-        className={inputCls}
-        style={inputStyle as CSSProperties}
-        hideSuffix={showClear}
-        placeholder={placeholder}
-        onEnterPress={handleEnterPress}
-        onChange={handleChange}
-        onClear={handleInputClear}
-        suffix={suffix}
-        showClear={showClear}
-        value={text}
-        validateStatus={validateStatus}
-        prefix={prefix}
-        autofocus={autofocus}
-        size={size}
-        onBlur={onBlur as any}
-        onFocus={onFocus as any}
+        {...inputProps}
       />
     );
   }

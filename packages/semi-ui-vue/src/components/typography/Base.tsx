@@ -21,14 +21,14 @@ import Popover from '../popover';
 import getRenderText from './util';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
-import LocaleConsumer from '../locale/LocaleConsumer';
+import LocaleConsumer_ from '../locale/LocaleConsumer';
 import {Locale} from '../locale/interface';
 import {Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseType} from './interface';
 import {CopyableConfig, LinkType} from './Title';
 import {BaseProps} from '../_base/baseComponent';
 import {isSemiIcon} from '../_utils/index';
 
-const LocaleConsumerDom = LocaleConsumer()
+const LocaleConsumerDom = LocaleConsumer_()
 
 export interface BaseTypographyProps extends BaseProps {
   copyable?: CopyableConfig | boolean;

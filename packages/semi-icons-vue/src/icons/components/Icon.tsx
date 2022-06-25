@@ -14,6 +14,7 @@ export interface IconProps  {
   className?: string,
   svg?: VNode,
   style?: StyleValue,
+  onClick?:()=>void
 }
 export const vuePropsType = {
   size: String,
@@ -24,6 +25,7 @@ export const vuePropsType = {
   className: String,
   style: Object,
   svg: Object,
+  onClick:Function
 }
 
 const Icon = defineComponent<IconProps>((props, {slots}) => {

@@ -17,7 +17,8 @@ import warning from '@douyinfe/semi-foundation/utils/warning';
 import Event from '@douyinfe/semi-foundation/utils/Event';
 import {ArrayElement} from '@douyinfe/semi-foundation/utils/type';
 import {convertDOMRectToObject, DOMRectLikeType} from '@douyinfe/semi-foundation/utils/dom';
-import TooltipFoundation, {
+import TooltipFoundation from '@douyinfe/semi-foundation/tooltip/foundation';
+import type {
   TooltipAdapter,
   Position,
   PopupContainerDOMRect
@@ -26,10 +27,10 @@ import {strings, cssClasses, numbers} from '@douyinfe/semi-foundation/tooltip/co
 import '@douyinfe/semi-foundation/tooltip/tooltip.scss';
 import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import {isHTMLElement} from '../_base/reactUtils';
-import {getActiveElement, getFocusableElements, stopPropagation} from '../_utils/index';
+import {getActiveElement, getFocusableElements, stopPropagation} from '../_utils';
 import {getUuidShort} from '@douyinfe/semi-foundation/utils/uuid';
 import Portal from '../_portal/Index';
-import ConfigContext, {ContextValue} from '../configProvider/Context';
+import ConfigContext, {ContextValue} from '../configProvider/ConfigContextProvider';
 import TriangleArrow from './TriangleArrow';
 import TriangleArrowVertical from './TriangleArrowVertical';
 import TooltipTransition from './TooltipStyledTransition';
@@ -211,6 +212,7 @@ export const vuePropsType = {
 const Index = defineComponent<TooltipProps>((props, {slots}) => {
 
 
+  console.log(props)
   const eventManager = ref<Event>(new Event);
   let triggerEl = ref(null);
   const containerEl = ref(null);

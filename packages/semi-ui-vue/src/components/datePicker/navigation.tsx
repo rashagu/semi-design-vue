@@ -15,7 +15,7 @@ interface NavigationProps {
   forwardRef?: any;
   monthText?: string;
   density?: string;
-  onMonthClick?: (e: React.MouseEvent) => void;
+  onMonthClick?: (e: MouseEvent) => void;
   onNextMonth?: () => void;
   onPrevMonth?: () => void;
   onNextYear?: () => void;

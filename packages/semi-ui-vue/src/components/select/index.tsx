@@ -13,7 +13,7 @@ import {
 } from 'vue'
 import {FixedSizeList as List} from '@kousum/vue3-window'
 import cls from 'classnames';
-import ConfigContext from '../configProvider/Context';
+import ConfigContext from '../configProvider/ConfigContextProvider';
 import SelectFoundation, {SelectAdapter} from '@douyinfe/semi-foundation/select/foundation';
 import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/select/constants';
 import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/baseComponent';

@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, reactive, onMounted, watch, nextTick, CSSProperties} from 'vue'
+import {defineComponent, ref, h, Fragment, reactive, onMounted, watch, nextTick, CSSProperties, VNode} from 'vue'
 
 import classnames from 'classnames';
 import * as PropTypes from '../PropTypes';
@@ -16,20 +16,24 @@ import YearAndMonth from './yearAndMonth';
 import { IconClock, IconCalendar } from '@kousum/semi-icons-vue';
 import { getDefaultFormatTokenByType } from '@douyinfe/semi-foundation/datePicker/_utils/getDefaultFormatToken';
 import getDefaultPickerDate from '@douyinfe/semi-foundation/datePicker/_utils/getDefaultPickerDate';
+import {ValueType} from "@douyinfe/semi-foundation/datePicker/foundation";
+import {WeekStartNumber} from "@douyinfe/semi-foundation/datePicker/_utils/getMonthTable";
 
 const prefixCls = cssClasses.PREFIX;
 
 export interface MonthsGridProps extends MonthsGridFoundationProps, BaseProps {
-  navPrev?: React.ReactNode;
-  navNext?: React.ReactNode;
-  renderDate?: () => React.ReactNode;
-  renderFullDate?: () => React.ReactNode;
-  focusRecordsRef?: React.RefObject<{ rangeStart: boolean; rangeEnd: boolean }>;
+  navPrev?: VNode | string;
+  navNext?: VNode | string;
+  renderDate?: () => VNode | string;
+  renderFullDate?: () => VNode | string;
+  focusRecordsRef?: any;
 }
 
 export type MonthsGridState = MonthsGridFoundationState;
 
 export const vuePropsType = {
+  style: [Object,String],
+  className: String,
   type: {type: PropTypes.string, default: 'date'},
   defaultValue: [PropTypes.string, PropTypes.number, PropTypes.object, PropTypes.array],
   defaultPickerValue: [
@@ -71,6 +75,11 @@ export const vuePropsType = {
   onPanelChange: PropTypes.func,
   focusRecordsRef: PropTypes.object,
   triggerRender: PropTypes.func,
+  splitPanels: Boolean,
+  onChange: Function,
+  setRangeInputFocus: Function,
+  isAnotherPanelHasOpened: Function,
+  insetInput: Boolean,
 }
 const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
 
@@ -191,14 +200,14 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
 
 
 
-  const cacheRefCurrent = (key: string, current: Combobox | YearAndMonth | HTMLDivElement) => {
+  const cacheRefCurrent = (key: string, current: any) => {
     if (typeof key === 'string' && key.length) {
       adapter().setCache(key, current);
     }
   };
 
-  const leftIsYearOrTime = (state?: MonthsGridState) => {
-    const { monthLeft } = state || state;
+  const leftIsYearOrTime = (state_?: MonthsGridState) => {
+    const { monthLeft } = state_ || state;
 
     if (monthLeft && (monthLeft.isTimePickerOpen || monthLeft.isYearPickerOpen)) {
       return true;
@@ -310,7 +319,7 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
     );
   }
 
-  function showYearPicker(panelType: PanelType, e: React.MouseEvent) {
+  function showYearPicker(panelType: PanelType, e: MouseEvent) {
     // e.stopPropagation();
     // When switching to the year and month, the e.target at this time is generated from Navigation, and the Navigation module will be removed from the DOM after switching
     // If you do not prevent the event from spreading to index.jsx, panel.contain (e.target) in clickOutSide will call closePanel because there is no Nav in the Panel and think this click is clickOutSide
@@ -318,7 +327,9 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
     // console.log(this.navRef.current.clientHeight, this.monthRef.current.clientHeight);
     // this.wrapRef.current.style.height = this.wrapRef.current.clientHeight + 'px';
     // this.wrapRef.current.style.overflow = 'hidden';
-    e.nativeEvent.stopImmediatePropagation();
+    // TODO
+    console.log(e)
+    e.stopImmediatePropagation();
     foundation.showYearPicker(panelType);
   }
 
@@ -332,10 +343,10 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
       const yearNumber = month ? formatFn(month, 'yyyy') : '';
       const monthNumber = month ? formatFn(month, 'L') : '';
       // Display the month as the corresponding language text
-      const mText = locale.months[monthNumber];
+      const mText = locale && locale.months && locale.months[monthNumber];
       const monthFormatToken = locale.monthText;
       // Display the year and month in a specific language format order
-      monthText = monthFormatToken.replace('${year}', yearNumber).replace('${month}', mText);
+      monthText = monthFormatToken && monthFormatToken.replace('${year}', yearNumber).replace('${month}', mText);
     }
 
     let style = {};
@@ -353,6 +364,7 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
       };
     }
 
+    // TODO forwardRef
     return (
       <div ref={current => cacheRefCurrent(`wrap-${panelType}`, current)} style={style}>
         <Navigation

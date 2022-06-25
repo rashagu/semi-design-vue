@@ -44,6 +44,7 @@ export type TimeInputProps = Pick<TimePickerProps,
 
 
 export const vuePropsType = {
+  value:String,
   format: {type: PropTypes.string, default:strings.DEFAULT_FORMAT},
   prefixCls: PropTypes.string,
   placeholder: PropTypes.string,
@@ -125,6 +126,7 @@ const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
       timeZone,
       defaultOpen,
       dateFnsLocale,
+      onBlur,
       ...rest
     } = props;
     // const { focusing } = state;
@@ -133,6 +135,8 @@ const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
       [`${prefixCls}-input-readonly`]: inputReadOnly,
     });
     const mergeValidateStatus = invalid ? 'error' : validateStatus;
+    console.log(value)
+    // debugger
     return (
       <Input
         {...rest}
@@ -144,7 +148,7 @@ const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
         readonly={Boolean(inputReadOnly)}
         onChange={handleChange}
         onFocus={handleFocus}
-        onBlur={handleBlur}
+        onBlur={onBlur || handleBlur}
         suffix={<IconClock onClick={handleClick} />}
         validateStatus={mergeValidateStatus}
         disabled={disabled}

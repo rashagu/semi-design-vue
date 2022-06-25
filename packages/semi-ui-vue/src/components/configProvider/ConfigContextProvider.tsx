@@ -12,7 +12,8 @@ export interface ContextValue {
 }
 
 const ConfigContextVNode_ = defineComponent<{value:any}>((props, {slots}) => {
-    const ConfigContext = ref<ContextValue>({});
+    const ConfigContext = ref<ContextValue>(props.value || {});
+
     provide('ConfigContext', ConfigContext)
     return ()=>slots.default?slots.default(ConfigContext.value):null
 })

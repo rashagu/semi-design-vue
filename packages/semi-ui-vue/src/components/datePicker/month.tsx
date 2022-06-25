@@ -43,6 +43,7 @@ export const vuePropsType = {
   rangeInputFocus: [PropTypes.string, PropTypes.bool],
   focusRecordsRef: PropTypes.object,
   multiple: PropTypes.bool,
+  locale:Object
 }
 const month = defineComponent<MonthProps>((props, {slots}) => {
 

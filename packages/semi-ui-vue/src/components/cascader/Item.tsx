@@ -122,8 +122,8 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
     const { onItemCheckboxClick } = props;
     // Prevent Checkbox's click event bubbling to trigger the li click event
     e.stopPropagation();
-    if (e.nativeEvent && typeof e.nativeEvent.stopImmediatePropagation === 'function') {
-      e.nativeEvent.stopImmediatePropagation();
+    if (e && typeof e.stopImmediatePropagation === 'function') {
+      e.stopImmediatePropagation();
     }
     onItemCheckboxClick(item);
   };

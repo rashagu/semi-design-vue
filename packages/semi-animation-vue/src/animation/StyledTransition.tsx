@@ -21,7 +21,7 @@ export const vuePropsType = {
   className: String,
   name: String,
   position: String,
-  motion: [Boolean],
+  motion: [Object, String, Boolean, Function],
   transitionState: String,
 
   state: {

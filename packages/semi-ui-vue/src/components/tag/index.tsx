@@ -5,7 +5,6 @@ import Avatar from '../avatar';
 import { IconClose } from '@kousum/semi-icons-vue';
 import {TagProps, TagSize, TagColor, TagType, AvatarShape} from './interface';
 import '@douyinfe/semi-foundation/tag/tag.scss';
-import {func} from "prop-types";
 
 export * from './interface';
 

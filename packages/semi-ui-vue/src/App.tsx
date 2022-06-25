@@ -19,7 +19,11 @@ import TagInputDemo from "./components/tagInput/__test__/TagInputDemo";
 import CheckboxDemo from "./components/checkbox/__test__/CheckboxDemo";
 import CascaderDemo from "./components/cascader/__test__/CascaderDemo";
 import ScrollListDemo from "./components/scrollList/__test__/ScrollListDemo";
+import TimePickerDemo from "./components/timePicker/__test__/TimePickerDemo";
+import DatePickerDemo from "./components/datePicker/__test__/DatePickerDemo";
+import ConfigProvider from "./components/configProvider";
 // import {UseVirtualList} from "@vueuse/components";
+import zh_CN from './components/locale/source/zh_CN';
 export interface ExampleProps {
   name?: string
 }
@@ -32,35 +36,39 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   return () => (
     <div>
-      <ScrollListDemo />
-      <CascaderDemo/>
-      <CheckboxDemo />
-      <TagInputDemo />
-      <AutoCompleteItemsDemo/>
-      <SelectDemo/>
-      <TagDemo/>
-      <AvatarDemo/>
-      <RadioDemo />
+      <ConfigProvider getPopupContainer={() => document.querySelector('.test')} locale={zh_CN}>
+        <DatePickerDemo />
+        {/*<TimePickerDemo />*/}
+        {/*<ScrollListDemo />*/}
+        {/*<CascaderDemo/>*/}
+        {/*<CheckboxDemo />*/}
+        {/*<TagInputDemo />*/}
+        {/*<AutoCompleteItemsDemo/>*/}
+        {/*<SelectDemo/>*/}
+        {/*<TagDemo/>*/}
+        {/*<AvatarDemo/>*/}
+        {/*<RadioDemo />*/}
 
-      <InputDemo />
-      <TypeDemo />
+        {/*<InputDemo />*/}
+        {/*<TypeDemo />*/}
 
-      <div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
-        <Button />
-      </div>
+        {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
+        {/*  <Button />*/}
+        {/*</div>*/}
 
-      <IconTest />
-      <br/>
-      <TootipDemo />
-      <br/>
-      <br/>
-      <DropdownDemo1/>
-      <br/>
-      <GridTest />
-      <LayoutTest/>
-      <SpaceTest/>
-      <PopoverTest />
-      <div class={'aa'}>123</div>
+        {/*<IconTest />*/}
+        {/*<br/>*/}
+        {/*<TootipDemo />*/}
+        {/*<br/>*/}
+        {/*<br/>*/}
+        {/*<DropdownDemo1/>*/}
+        {/*<br/>*/}
+        {/*<GridTest />*/}
+        {/*<LayoutTest/>*/}
+        {/*<SpaceTest/>*/}
+        {/*<PopoverTest />*/}
+        {/*<div class={'aa'}>123</div>*/}
+      </ConfigProvider>
     </div>
   )
 })

@@ -1,16 +1,19 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
 
+import LocaleConsumer_ from '../locale/LocaleConsumer';
+import BaseTimePicker, {defaultProps, propTypes} from './TimePicker';
+import type {TimePickerProps as BasePickerProps, BaseValueType } from './TimePicker';
 
-import LocaleConsumer from '../locale/localeConsumer';
-import BaseTimePicker, { TimePickerProps as BasePickerProps, BaseValueType } from './TimePicker';
-import { ValidateStatus } from '../_base/baseComponent';
-import { ScrollItemProps } from '../scrollList/scrollItem';
-import ConfigContext from '../configProvider/context';
+import type { ValidateStatus } from '../_base/baseComponent';
+import type { ScrollItemProps } from '../scrollList';
+import {ConfigContextVNode} from '../configProvider/ConfigContextProvider';
 import { get } from 'lodash';
 import { Locale } from '../locale/interface';
+import {vuePropsMake} from "../PropTypes";
+const LocaleConsumer = LocaleConsumer_()
 
-export { TimeInputProps } from './TimeInput';
-export { TimePickerProps } from './TimePicker';
+export type { TimeInputProps } from './TimeInput';
+export type { TimePickerProps } from './TimePicker';
 
 export {
   BaseValueType,
@@ -20,18 +23,31 @@ export {
 
 export type LocalePickerProps = BasePickerProps;
 
-
-export const vuePropsType = {
-  name: String
-}
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const index = defineComponent<LocalePickerProps>((props, {}) => {
   const slots = useSlots()
 
-  return () => (
-    <div>
-      index
-    </div>
-  )
+  return () =>  {
+    const { type } = props;
+    return (
+      <ConfigContextVNode>
+        {({ timeZone }: { timeZone?: string | number }) => (
+          <LocaleConsumer componentName="TimePicker">
+            {(locale: Locale['TimePicker'], localeCode: string, dateFnsLocale: Locale['dateFnsLocale']) => (
+              <BaseTimePicker
+                timeZone={timeZone}
+                placeholder={get(locale, ['placeholder', type])}
+                {...props}
+                locale={locale}
+                localeCode={localeCode}
+                dateFnsLocale={dateFnsLocale}
+              />
+            )}
+          </LocaleConsumer>
+        )}
+      </ConfigContextVNode>
+    );
+  }
 })
 
 index.props = vuePropsType
