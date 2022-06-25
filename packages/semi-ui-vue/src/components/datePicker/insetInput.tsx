@@ -1,3 +1,5 @@
+import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
+
 import { get } from 'lodash';
 
 import {
@@ -7,6 +9,7 @@ import {
 } from '@douyinfe/semi-foundation/datePicker/inputFoundation';
 import Input, { InputProps } from '../input';
 
+
 export interface InsetDateInputProps {
   forwardRef: InputProps['forwardRef'];
   insetInputValue: InsetInputValue;
@@ -14,23 +17,25 @@ export interface InsetDateInputProps {
   valuePath: string;
   onChange: (options: InsetInputChangeFoundationProps) => void;
   onFocus: InputProps['onFocus'];
+
 }
 
-export interface InsetTimeInputProps {
-  disabled: boolean;
-  insetInputValue: InsetInputValue;
-  placeholder: string;
-  valuePath: string;
-  type: Type;
-  onChange: (options: InsetInputChangeFoundationProps) => void;
-  onFocus: InputProps['onFocus'];
-}
 
-export function InsetDateInput(props: InsetDateInputProps) {
+
+
+export const vuePropsTypeInsetDateInput = {
+  forwardRef: [Function, Object],
+  insetInputValue: Object,
+  placeholder: String,
+  valuePath: String,
+  onChange: Function,
+  onFocus: Function
+}
+const InsetDateInput = defineComponent<InsetDateInputProps>((props, {}) => {
   const { insetInputValue, valuePath, onFocus, onChange, placeholder, forwardRef } = props;
   const value = get(insetInputValue, valuePath);
 
-  return (
+  return () => (
     <Input
       value={value}
       onChange={(value, event) => {
@@ -45,10 +50,32 @@ export function InsetDateInput(props: InsetDateInputProps) {
       placeholder={placeholder}
       ref={forwardRef}
     />
-  );
-}
+  )
+})
 
-export function InsetTimeInput(props: InsetTimeInputProps) {
+InsetDateInput.props = vuePropsTypeInsetDateInput
+
+
+
+export interface InsetTimeInputProps {
+  disabled: boolean;
+  insetInputValue: InsetInputValue;
+  placeholder: string;
+  valuePath: string;
+  type: Type;
+  onChange: (options: InsetInputChangeFoundationProps) => void;
+  onFocus: InputProps['onFocus'];
+}
+export const vuePropsTypeInsetTimeInput = {
+  disabled: Boolean,
+  insetInputValue: Object,
+  placeholder: String,
+  valuePath: String,
+  type: String,
+  onChange: Function,
+  onFocus: Function
+}
+const InsetTimeInput = defineComponent<InsetTimeInputProps>((props, {}) => {
   const { insetInputValue, valuePath, type, onFocus, onChange, placeholder, disabled } = props;
   const _isTimeType = type.includes('Time');
   if (!_isTimeType) {
@@ -56,7 +83,7 @@ export function InsetTimeInput(props: InsetTimeInputProps) {
   }
   const value = get(insetInputValue, valuePath);
 
-  return (
+  return () => (
     <Input
       value={value}
       onChange={(value, event) => {
@@ -72,4 +99,14 @@ export function InsetTimeInput(props: InsetTimeInputProps) {
       disabled={disabled}
     />
   );
+})
+
+InsetTimeInput.props = vuePropsTypeInsetTimeInput
+
+
+
+export {
+  InsetDateInput,
+  InsetTimeInput
 }
+

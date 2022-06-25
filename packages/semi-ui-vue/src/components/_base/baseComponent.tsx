@@ -3,7 +3,7 @@ import baseLog from '@douyinfe/semi-foundation/utils/log';
 import {DefaultAdapter} from '@douyinfe/semi-foundation/base/foundation';
 import {VALIDATE_STATUS} from '@douyinfe/semi-foundation/base/constants';
 import {ArrayElement} from './base';
-import {ContextValue} from "../configProvider/Context";
+import {ContextValue} from "../configProvider/ConfigContextProvider";
 
 const {hasOwnProperty} = Object.prototype;
 
@@ -78,7 +78,7 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
       stopPropagation: e => { // eslint-disable-line
         try {
           e.stopPropagation();
-          e.nativeEvent && e.nativeEvent.stopImmediatePropagation();
+          e && e.stopImmediatePropagation && e.stopImmediatePropagation();
         } catch (error) {
 
         }
@@ -143,7 +143,7 @@ const BaseComponent = defineComponent<BaseProps>((props, {slots}) => {
       stopPropagation: e => { // eslint-disable-line
         try {
           e.stopPropagation();
-          e.nativeEvent && e.nativeEvent.stopImmediatePropagation();
+          e.stopImmediatePropagation && e.stopImmediatePropagation()
         } catch (error) {
 
         }

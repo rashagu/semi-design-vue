@@ -190,6 +190,15 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
       setFocusing: (focusing: boolean) => {
         state.focusing = focusing
       },
+      toggleFocusing: (isFocus: boolean) => {
+        const input = inputRef.value;
+        if (isFocus) {
+          input && input.focus();
+        } else {
+          input && input.blur();
+        }
+        state.focusing = isFocus
+      },
       setHovering: (hovering: boolean) => {
         state.hovering = hovering
       },

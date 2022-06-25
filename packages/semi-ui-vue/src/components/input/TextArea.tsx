@@ -393,7 +393,7 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
       },
       onChange: (e: any) => foundation.handleChange(e.target.value, e),
       onFocus: (e: Event) => foundation.handleFocus(e),
-      onBlur: (e: any) => foundation.handleBlur(e.nativeEvent),
+      onBlur: (e: any) => foundation.handleBlur(e),
       onKeydown: (e: any) => {
         // console.log(e.target, foundation)
         // foundation.setInitValue()

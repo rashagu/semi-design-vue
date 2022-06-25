@@ -14,7 +14,7 @@ import {
 import { BASE_CLASS_PREFIX } from '@douyinfe/semi-foundation/base/constants';
 
 import classnames from 'classnames';
-import ConfigContext from '../configProvider/Context';
+import ConfigContext from '../configProvider/ConfigContextProvider';
 import '@douyinfe/semi-foundation/_portal/portal.scss';
 
 export interface PortalProps {

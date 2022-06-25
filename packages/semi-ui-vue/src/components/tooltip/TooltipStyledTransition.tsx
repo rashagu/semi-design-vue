@@ -28,11 +28,19 @@ export const vuePropsType = {
   willEnter: Function,
   didEnter: Function,
   didLeave: Function,
-  motion: [Boolean],
+  motion: [Object, String, Boolean, Function],
 }
 const TooltipStyledTransition = defineComponent<TooltipTransitionProps>((props, {slots}) => {
 
-  const motion = getMotionObjFromProps(props);
+  // console.log(props)
+  let newProps:any = {}
+  for(let i in props){
+    if (props[i] !== undefined){
+      newProps[i] = props[i]
+    }
+  }
+  const motion = getMotionObjFromProps(newProps);
+  // debugger
 
   return ()=>{
     return (

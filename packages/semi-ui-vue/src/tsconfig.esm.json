@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "exclude": ["./**/*.spec.*","./**/_stories/.*","./**/_stories/.*",
+  "exclude": ["./**/*.spec.*","./**/_stories/.*","./**/_stories/.*","./**/__stories__/.*",
     "./main.ts", "../script/*",
     "./Comp1",
     "./App.tsx",

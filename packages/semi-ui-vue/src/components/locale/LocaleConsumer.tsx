@@ -1,9 +1,9 @@
-import {defineComponent, ref, h, Fragment, VNode} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, inject} from 'vue'
 import { Locale as dateFns } from 'date-fns';
 
 import { get } from 'lodash';
 import LocaleContext, {LocaleContextVNode} from './Context';
-import ConfigContext, {ConfigContextVNode, } from '../configProvider/Context';
+import {ConfigContextVNode, ContextValue} from '../configProvider/ConfigContextProvider';
 
 import DefaultLocale from './source/zh_CN';
 import { Locale } from './interface';
@@ -25,6 +25,7 @@ export const vuePropsType = {
 function LocaleConsumer<T>(){
   const vn = defineComponent<LocaleConsumerProps<T>>((props, {slots}) => {
 
+    const config = inject('ConfigContext', ref<ContextValue>({}))
     function renderChildren(localeData: Locale, children:any) {
       const { componentName } = props;
       let locale = localeData;
@@ -46,25 +47,18 @@ function LocaleConsumer<T>(){
       return children(locale[componentName], locale.code, dateFnsLocale);
     }
 
+
     return () => {
       return (
-        <ConfigContextVNode>
+        <LocaleContextVNode>
           {{
-            default: ({ locale }:{locale:any}) => {
-              return (
-                <LocaleContextVNode>
-                  {{
-                    default:(localeData:any) => {
-                      // console.log(locale, localeData)
-                      return renderChildren(locale || localeData, slots.default)
-                    }
-                  }}
-                </LocaleContextVNode>
-              )
+            default:(localeData:any) => {
+              // console.log(locale, localeData)
+              return renderChildren(config.value.locale || localeData, slots.default)
             }
           }}
-        </ConfigContextVNode>
-      );
+        </LocaleContextVNode>
+      )
     }
   })
 

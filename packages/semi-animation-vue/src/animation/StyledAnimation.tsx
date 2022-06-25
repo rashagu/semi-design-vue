@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, onActivated, Fragment, StyleValue, isVNode, cloneVNode} from 'vue'
+import {defineComponent, ref, h, onActivated, Fragment, StyleValue, isVNode, cloneVNode, CSSProperties} from 'vue'
 
 import classnames from 'classnames';
 import {types as styledTypes, loops, delays, speeds} from '@douyinfe/semi-animation-styled';
@@ -8,7 +8,7 @@ import invokeFns from './utils/invokeFns';
 export interface StyledAnimationProps {
   className?: string;
   type?: any;
-  style?: any;
+  style?: CSSProperties;
   speed?: string | number;
   delay?: string | number;
   reverse?: boolean | string;
@@ -21,6 +21,16 @@ export interface StyledAnimationProps {
   duration?: string | number;
   fillMode?: string;
   transitionState?: string,
+}
+
+export interface StyledAnimateStyleType {
+  animationTimingFunction: string;
+  animationName: any;
+  animationDuration: string | number;
+  animationDelay: string | number;
+  animationIterationCount: string | number;
+  animationDirection: string;
+  animationFillMode: string;
 }
 
 const types: any = Object.values(styledTypes).reduce((arr, cur) => [...arr as any, ...cur as any], []);
@@ -62,16 +72,16 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
   })
   const _generateAnimateEvents = (child: any, props: StyledAnimationProps = {}) => (
     {
-    onAnimationiteration: (...args: any) =>
-      invokeFns([child && child.props && child.props.onAnimationiteration, props.onFrame], args),
-    onAnimationstart: (...args: any) =>
-      invokeFns([child && child.props && child.props.onAnimationstart, props.onStart], args),
-    onAnimationend: (...args: any) =>{
-      // console.error(props.onRest)
+      onAnimationiteration: (...args: any) =>
+        invokeFns([child && child.props && child.props.onAnimationiteration, props.onFrame], args),
+      onAnimationstart: (...args: any) =>
+        invokeFns([child && child.props && child.props.onAnimationstart, props.onStart], args),
+      onAnimationend: (...args: any) => {
+        // console.error(props.onRest)
 
-      return invokeFns([child && child.props && child.props.onAnimationend, props.onRest], args)
-    },
-  }
+        return invokeFns([child && child.props && child.props.onAnimationend, props.onRest], args)
+      },
+    }
   );
 
   const _hasSpeedClass = (speed = props.speed) => speed != null && speeds.includes(speed as string);
@@ -80,10 +90,7 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
   const _hasLoopClass = (loop = props.loop) => loop != null && loops.includes(loop as string);
 
 
-
-
-
-  return  ()=>{
+  return () => {
 
     let {
       type,
@@ -121,8 +128,14 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
       animationDirection: reverse ? 'alternate' : 'normal',
       animationFillMode: fillMode,
     };
-    return slots.default?slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)}):null
+    return slots.default ? slots.default({
+      animateCls,
+      animateStyle,
+      animateEvents: _generateAnimateEvents(null, props)
+    }) : null
   }
+
+
   //
   // return () => {
   //   if (slots.default && isVNode(slots.default)) {

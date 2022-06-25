@@ -16,8 +16,8 @@ export function stopPropagation(e: any, noImmediate?: boolean) {
         e.stopPropagation();
     }
 
-    if (!noImmediate && e.nativeEvent && typeof e.nativeEvent.stopImmediatePropagation === 'function') {
-        e.nativeEvent.stopImmediatePropagation();
+    if (!noImmediate && e && typeof e.stopImmediatePropagation === 'function') {
+        e.stopImmediatePropagation();
     }
 }
 
