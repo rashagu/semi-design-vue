@@ -14,7 +14,7 @@ export interface IconProps  {
   className?: string,
   svg?: VNode,
   style?: StyleValue,
-  onClick?:()=>void
+  onClick?:(e:any)=>void
 }
 export const vuePropsType = {
   size: String,

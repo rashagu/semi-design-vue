@@ -42,6 +42,7 @@ interface CheckboxState {
   checked: boolean;
   addonId?: string;
   extraId?: string;
+  focusVisible?: boolean;
 }
 
 export const vuePropsType = {
@@ -77,7 +78,7 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
   const slots = useSlots()
 
   const checked = false;
-  const state = reactive({
+  const state = reactive<CheckboxState>({
     checked: props.checked || props.defaultChecked || checked,
     addonId: props.addonId,
     extraId: props.extraId,
@@ -108,7 +109,13 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
       },
       setExtraId: () => {
         state.extraId = getUuidShort({ prefix: 'extra' })
-      }
+      },
+      setFocusVisible: (focusVisible: boolean): void => {
+        state.focusVisible = focusVisible;
+      },
+      focusCheckboxEntity: () => {
+        focus();
+      },
     };
   }
 
