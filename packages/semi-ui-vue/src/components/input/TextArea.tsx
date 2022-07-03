@@ -258,10 +258,6 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
     foundation.handleClear(e);
   };
 
-  const handleClearEnterPress = (e: Event) => {
-    foundation.handleClearEnterPress(e);
-  }
-
   function renderClearBtn() {
     const { showClear } = props;
     const displayClearBtn = foundation.isAllowClear();
@@ -271,12 +267,8 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
     if (showClear) {
       return (
         <div
-          role="button"
-          tabindex={0}
-          aria-label="Clear textarea value"
           class={clearCls}
           onClick={handleClear}
-          onKeypress={handleClearEnterPress}
         >
           <IconClear />
         </div>

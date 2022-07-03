@@ -257,10 +257,6 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
     foundation.handleClear(e);
   };
 
-  const handleClearEnterPress = (e: any) => {
-    foundation.handleClearEnterPress(e);
-  };
-
   const handleClick = (e: any) => {
     foundation.handleClick(e);
   };
@@ -335,12 +331,8 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
     if (allowClear) {
       return (
         <div
-          role="button"
-          tabindex={0}
-          aria-label="Clear input value"
           class={clearCls}
           onMousedown={handleClear}
-          onKeypress={handleClearEnterPress}
         >
           <IconClear />
         </div>

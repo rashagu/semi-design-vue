@@ -45,6 +45,7 @@ export interface RadioState {
   hover?: boolean;
   addonId?: string;
   extraId?: string;
+  focusVisible?: boolean;
 }
 
 export const vuePropsType = {
@@ -83,7 +84,7 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
   let radioEntity: any;
   let context!: Ref<RadioContextValue>;
   let foundation: RadioFoundation;
-  const state = reactive({
+  const state = reactive<RadioState>({
     hover: false,
     addonId: props.addonId,
     extraId: props.extraId,
@@ -103,6 +104,9 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
       },
       setExtraId: () => {
         state.extraId = getUuidShort({ prefix: 'extra' })
+      },
+      setFocusVisible: (focusVisible: boolean): void => {
+        state.focusVisible = focusVisible;
       }
     };
   }
@@ -144,6 +148,14 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
     foundation.setHover(false);
   };
 
+  const handleFocusVisible = (event: FocusEvent) => {
+    foundation.handleFocusVisible(event);
+  }
+
+  const handleBlur = (event: FocusEvent) => {
+    foundation.handleBlur();
+  }
+
 
   return () => {
 
@@ -172,7 +184,7 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
       isButtonRadioComponent,
       buttonSize,
       realPrefixCls;
-    const { hover: isHover, addonId, extraId } = state;
+    const { hover: isHover, addonId, extraId, focusVisible } = state;
     let props_:{ checked?: boolean, disabled?: boolean } = {};
 
     // console.log(context.value)
@@ -198,6 +210,8 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
 
     const prefix = realPrefixCls || css.PREFIX;
 
+    const focusOuter = isCardRadioGroup || isPureCardRadioGroup || isButtonRadio;
+
     const wrapper = cls(prefix, {
       [`${prefix}-disabled`]: isDisabled,
       [`${prefix}-checked`]: realChecked,
@@ -211,6 +225,7 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
       [`${prefix}-cardRadioGroup_checked_disabled`]: isCardRadioGroup && realChecked && isDisabled,
       [`${prefix}-cardRadioGroup_hover`]: isCardRadioGroup && !realChecked && isHover && !isDisabled,
       [className]: Boolean(className),
+      [`${prefix}-focus`]: focusVisible && (isCardRadioGroup || isPureCardRadioGroup),
     });
 
     const name = isInGroup() && context.value.radioGroup.name;
@@ -221,6 +236,7 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
       [`${prefix}-addon-buttonRadio-disabled`]: isButtonRadio && isDisabled,
       [`${prefix}-addon-buttonRadio-hover`]: isButtonRadio && !realChecked && !isDisabled && isHover,
       [`${prefix}-addon-buttonRadio-${buttonSize}`]: isButtonRadio && buttonSize,
+      [`${prefix}-focus`]: focusVisible && isButtonRadio,
     }, addonClassName);
     const renderContent = () => (
       <>
@@ -247,6 +263,9 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
           }}
           addonId={children && addonId}
           extraId={extra && extraId}
+          focusInner={focusVisible && !focusOuter}
+          onInputFocus={handleFocusVisible}
+          onInputBlur={handleBlur}
         />
         {
           isCardRadioGroup ?

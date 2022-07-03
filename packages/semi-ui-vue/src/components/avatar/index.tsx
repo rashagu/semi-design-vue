@@ -31,6 +31,7 @@ export * from './interface';
 export interface AvatarState {
   isImgExist: boolean;
   hoverContent: VNode | string;
+  focusVisible: boolean
 }
 
 
@@ -67,6 +68,7 @@ const Index = defineComponent<AvatarProps>((props, {slots}) => {
   const state = reactive<AvatarState>({
     isImgExist: true,
     hoverContent: '',
+    focusVisible: false,
   });
 
   watch(()=>props.src,()=>{
@@ -102,6 +104,9 @@ const Index = defineComponent<AvatarProps>((props, {slots}) => {
         state.hoverContent = ''
         const { onMouseLeave } = props;
         onMouseLeave && onMouseLeave(e);
+      },
+      setFocusVisible: (focusVisible: boolean): void => {
+        state.focusVisible = focusVisible;
       }
     };
   }
@@ -131,7 +136,7 @@ const Index = defineComponent<AvatarProps>((props, {slots}) => {
     // eslint-disable-next-line max-len, no-unused-vars
     const { shape, size, color, className, hoverMask, onClick, imgAttr, src, srcSet, style, alt, ...others } = props;
     const children = slots.default?slots.default():null
-    const { isImgExist, hoverContent } = state;
+    const { isImgExist, hoverContent, focusVisible } = state;
     const isImg = src && isImgExist;
     const avatarCls = cls(
       prefixCls,
@@ -140,6 +145,7 @@ const Index = defineComponent<AvatarProps>((props, {slots}) => {
         [`${prefixCls}-${size}`]: size,
         [`${prefixCls}-${color}`]: color && !isImg,
         [`${prefixCls}-img`]: isImg,
+        [`${prefixCls}-focus`]: focusVisible,
       },
       className
     );
