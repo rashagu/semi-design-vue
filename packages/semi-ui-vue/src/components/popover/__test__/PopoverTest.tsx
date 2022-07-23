@@ -2,6 +2,7 @@ import {defineComponent, ref, h, Fragment} from 'vue'
 import Popover from '../index'
 import Button from "../../button/Button";
 import Space from '../../space'
+import Input from "../../input";
 
 interface ExampleProps {
   name?: string
@@ -56,6 +57,18 @@ const PopoverTest = defineComponent<ExampleProps>((props, {slots}) => {
             </Popover>
           ))}
         </Space>
+        <Popover
+          content={
+            <div style={{padding: '20px'}}>
+              <p>Hi Bytedancer!</p>
+              <Input />
+            </div>
+          }
+          trigger="click"
+          position={'top'}
+        >
+          <Input />
+        </Popover>
       </div>
     </div>
   )
