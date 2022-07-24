@@ -1,6 +1,6 @@
 import {h} from 'vue'
 import {shallowMount, mount} from "@vue/test-utils";
-
+import { expect, test } from 'vitest'
 test('render with scoped-slot', async () => {
   const HelloWorld: any = {
     render() {

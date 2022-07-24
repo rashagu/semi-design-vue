@@ -5,6 +5,8 @@
     "preinstall": "npx only-allow pnpm",
     "dev": "pnpm -C ./packages/semi-ui-vue dev",
     "test": "jest",
+    "testv": "vitest",
+    "coverage": "vitest run --coverage",
     "build:lib": "pnpm -C ./packages/semi-animation-vue build:lib & pnpm -C ./packages/semi-icons-vue build:lib & pnpm -C ./packages/semi-illustrations-vue build:lib & pnpm -C ./packages/semi-ui-vue build:lib",
     "pre": "build:lib",
     "build:publish": "pnpm build:lib & pnpm publish -r",
@@ -27,21 +29,21 @@
   "dependencies": {
     "@douyinfe/semi-foundation": "^2.14.0",
     "@douyinfe/semi-theme-default": "^2.14.0",
+    "@vitejs/plugin-vue": "^2.3.3",
     "@vitejs/plugin-vue-jsx": "^1.3.10",
-    "sass": "^1.52.1",
-    "sass-loader": "^13.0.0",
-    "postcss-loader": "^7.0.0",
+    "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
-    "style-loader": "^3.3.1",
     "lodash": "^4.17.21",
     "pinyin-pro": "^3.10.0",
-    "@vitejs/plugin-vue": "^2.3.3",
-    "babel-loader": "^8.2.5",
+    "postcss-loader": "^7.0.0",
+    "sass": "^1.52.1",
+    "sass-loader": "^13.0.0",
+    "style-loader": "^3.3.1",
     "typescript": "^4.5.4",
     "vite": "^2.9.9",
+    "vue": "^3.2.25",
     "vue-loader": "^16.8.3",
-    "vue-tsc": "^0.34.7",
-    "vue": "^3.2.25"
+    "vue-tsc": "^0.34.7"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
@@ -76,6 +78,8 @@
     "svgo": "2.7.0",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.5.0",
-    "tslib": "^2.3.1"
+    "tslib": "^2.3.1",
+    "vitest": "^0.18.1",
+    "jsdom": "latest"
   }
 }
