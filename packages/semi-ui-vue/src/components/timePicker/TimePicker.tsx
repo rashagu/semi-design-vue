@@ -258,7 +258,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
 
           if (!isInTimepicker && !isInPanel) {
             const clickedOutside = true;
-            foundation.hanldePanelClose(clickedOutside, e);
+            foundation.handlePanelClose(clickedOutside, e);
           }
         };
         document.addEventListener('mousedown', clickOutSideHandler);

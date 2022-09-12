@@ -167,11 +167,14 @@ export const vuePropsType = {
 const Index = defineComponent<TagInputProps>((props, {}) => {
   const slots = useSlots()
   const inputRef = ref(null);
+  const tagInputRef = ref<any>(null);
+  let clickOutsideHandler:any = null;
   const state = reactive({
     tagsArray: props.defaultValue || [],
     inputValue: '',
     focusing: false,
-    hovering: false
+    hovering: false,
+    active: false,
   });
 
   const {cache, adapter: adapterInject, log, context} = useBaseComponent<TagInputProps>(props, state)
@@ -202,6 +205,12 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
       setHovering: (hovering: boolean) => {
         state.hovering = hovering
       },
+      setActive: (active: boolean) => {
+        state.active = active
+      },
+      getClickOutsideHandler: () => {
+        return clickOutsideHandler;
+      },
       notifyBlur: (e: MouseEvent) => {
         props.onBlur(e);
       },
@@ -222,6 +231,20 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
       },
       notifyKeyDown: e => {
         props.onKeyDown(e);
+      },
+      registerClickOutsideHandler: cb => {
+        clickOutsideHandler = (e: Event) => {
+          const tagInputDom = tagInputRef.value;
+          const target = e.target as Element;
+          if (tagInputDom && !tagInputDom.contains(target)) {
+            cb(e);
+          }
+        };
+        document.addEventListener('click', clickOutsideHandler, false);
+      },
+      unregisterClickOutsideHandler: () => {
+        document.removeEventListener('click', clickOutsideHandler, false);
+        clickOutsideHandler = null;
       },
     };
   }

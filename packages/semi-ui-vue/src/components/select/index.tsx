@@ -33,7 +33,7 @@ import OptionGroup from './OptionGroup';
 import Spin from '../spin';
 import Trigger from '../trigger';
 import {IconChevronDown, IconClear} from '@kousum/semi-icons-vue';
-import {isSemiIcon} from '../_utils';
+import { isSemiIcon, getFocusableElements, getActiveElement } from '../_utils';
 import {Subtract} from 'utility-types';
 
 import warning from '@douyinfe/semi-foundation/utils/warning';
@@ -186,6 +186,7 @@ export interface SelectState {
   keyboardEventSet: any; // {}
   optionGroups: Array<any>;
   isHovering: boolean;
+  isFocusInContainer: boolean;
 }
 
 // Notes: Use the label of the option as the identifier, that is, the option in Select, the value is allowed to be the same, but the label must be unique
@@ -383,10 +384,12 @@ const Index = defineComponent<SelectProps>((props, {slots}) => {
     keyboardEventSet: {},
     optionGroups: [],
     isHovering: false,
+    isFocusInContainer: false,
   })
   let inputRef = ref(null)
   let triggerRef = ref(null)
   let optionsRef = ref<InstanceType<typeof Popover> | null>(null)
+  const optionContainerEl = ref()
   let virtualizeListRef = ref(null)
   let selectOptionListID = Math.random().toString(36).slice(2);
   let clickOutsideHandler: (e: MouseEvent) => void;
@@ -399,6 +402,7 @@ const Index = defineComponent<SelectProps>((props, {slots}) => {
   );
 
   const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<SelectProps>(props, state)
+  const setOptionContainerEl = (node: HTMLDivElement) => (optionContainerEl.value = node);
 
   function adapter(): SelectAdapter<SelectProps, SelectState> {
     const keyboardAdapter = {
@@ -572,6 +576,21 @@ const Index = defineComponent<SelectProps>((props, {slots}) => {
         } catch (error) {
 
         }
+      },
+      getContainer: () => {
+        return optionContainerEl.value;
+      },
+      getFocusableElements: (node: HTMLDivElement) => {
+        return getFocusableElements(node);
+      },
+      getActiveElement: () => {
+        return getActiveElement();
+      },
+      setIsFocusInContainer: (isFocusInContainer: boolean) => {
+        state.isFocusInContainer = isFocusInContainer
+      },
+      getIsFocusInContainer: () => {
+        return state.isFocusInContainer;
       },
       updateScrollTop: (index?: number) => {
         // eslint-disable-next-line max-len

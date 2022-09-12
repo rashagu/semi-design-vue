@@ -39,6 +39,8 @@ export type RadioProps = {
   'aria-label'?: any;
   addonId?: string;
   extraId?: string;
+  name?: string;
+  preventScroll?: boolean;
 };
 
 export interface RadioState {
@@ -46,6 +48,7 @@ export interface RadioState {
   addonId?: string;
   extraId?: string;
   focusVisible?: boolean;
+  checked?: boolean;
 }
 
 export const vuePropsType = {
@@ -79,6 +82,8 @@ export const vuePropsType = {
   'aria-label': String,
   addonId: String,
   extraId: String,
+  name: String,
+  preventScroll: Boolean
 }
 const Radio = defineComponent<RadioProps>((props, {slots}) => {
   let radioEntity: any;
@@ -88,6 +93,7 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
     hover: false,
     addonId: props.addonId,
     extraId: props.extraId,
+    checked: props.checked || props.defaultChecked || false,
   });
   const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<RadioProps>(props, state)
   context = inject('RadioContextValue', ref<RadioContextValue>(null))
@@ -101,6 +107,9 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
       },
       setAddonId: () => {
         state.addonId = getUuidShort({ prefix: 'addon' })
+      },
+      setChecked: (checked: boolean) => {
+        state.checked = checked
       },
       setExtraId: () => {
         state.extraId = getUuidShort({ prefix: 'extra' })
@@ -171,7 +180,8 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
       extra,
       mode,
       type,
-      value: propValue
+      value: propValue,
+      name
     } = props;
     const children = slots.default?slots.default():null;
 
@@ -228,7 +238,7 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
       [`${prefix}-focus`]: focusVisible && (isCardRadioGroup || isPureCardRadioGroup),
     });
 
-    const name = isInGroup() && context.value.radioGroup.name;
+    const groupName = isInGroup() && context.value.radioGroup.name;
     const addonCls = cls({
       [`${prefix}-addon`]: !isButtonRadio,
       [`${prefix}-addon-buttonRadio`]: isButtonRadio,
@@ -254,7 +264,7 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
           {...props}
           {...props_}
           mode={realMode}
-          name={name}
+          name={name ?? groupName}
           isButtonRadio={isButtonRadio}
           isPureCardRadioGroup={isPureCardRadioGroup}
           onChange={onChange}

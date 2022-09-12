@@ -9,7 +9,7 @@ import {
   reactive,
   onMounted,
   onUnmounted,
-  watch
+  watch, nextTick
 } from 'vue'
 import cls from 'classnames';
 import CascaderFoundation, {
@@ -427,6 +427,15 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       },
       notifyOnExceed: data => props.onExceed(data),
       notifyClear: () => props.onClear(),
+      toggleInputShow: (showInput: boolean, cb: (...args: any) => void) => {
+        state.showInput = showInput
+        nextTick(()=>{
+          cb();
+        })
+      },
+      updateFocusState: (isFocus: boolean) => {
+        state.isFocus = isFocus
+      },
     };
   }
 
