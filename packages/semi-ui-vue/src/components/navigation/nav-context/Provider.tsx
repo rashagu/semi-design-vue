@@ -1,17 +1,17 @@
 import {defineComponent, ref, h, Fragment, provide, watch} from 'vue'
-import {Locale} from '../interface';
+import {NavContextType} from "../nav-context";
 
 
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:Locale}>((props, {slots}) => {
-  const ConfigContext = ref<Locale>(props.value);
+const Provider = defineComponent<{value:NavContextType}>((props, {slots}) => {
+  const ConfigContext = ref<NavContextType>(props.value);
 
   watch(()=>props.value, ()=>{
     ConfigContext.value = props.value
   })
-  provide('LocalContext', ConfigContext)
+  provide('NavContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
 })
 

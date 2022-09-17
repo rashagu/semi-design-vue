@@ -24,6 +24,7 @@ import DatePickerDemo from "./components/datePicker/__test__/DatePickerDemo";
 import ConfigProvider from "./components/configProvider";
 // import {UseVirtualList} from "@vueuse/components";
 import zh_CN from './components/locale/source/zh_CN';
+import NavigationDemo from "./components/navigation/__test__/NavigationDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -66,7 +67,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<GridTest />*/}
         {/*<LayoutTest/>*/}
         {/*<SpaceTest/>*/}
-        <PopoverTest />
+        {/*<PopoverTest />*/}
+        <NavigationDemo />
         <div class={'aa'}>123</div>
       </ConfigProvider>
     </div>

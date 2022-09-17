@@ -72,7 +72,7 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
         }
         // this.setState({ ...states }, cb)
       }, // eslint-disable-line
-      getCache: key => key && cache[key], // eslint-disable-line
+      getCache: key => key && cache.value[key], // eslint-disable-line
       getCaches: () => cache.value, // eslint-disable-line
       setCache: (key, value) => key && (cache.value[key] = value), // eslint-disable-line
       stopPropagation: e => { // eslint-disable-line

@@ -32,7 +32,7 @@ export interface AnimationProps {
   forwardInstance?: (value: any) => void;
   immediate?: boolean;
 
-  [key: string]: any,
+
 }
 
 export const vuePropsType = {
@@ -76,6 +76,29 @@ export const vuePropsType = {
   },
   forwardInstance: Function,
   immediate: Boolean,
+
+
+
+  enter: Object,
+  leave: Object,
+  state: [String, Boolean],
+
+  willEnter: {
+    type: Function,
+    default: noop,
+  },
+  didEnter: {
+    type: Function,
+    default: noop,
+  },
+  willLeave: {
+    type: Function,
+    default: noop,
+  },
+  didLeave: {
+    type: Function,
+    default: noop,
+  },
 }
 const Index = defineComponent<AnimationProps>((props, {slots}) => {
   // 在keep-alive = true时  相当于 onShow
@@ -174,6 +197,7 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
         //console.log(_mounted,_destroyed)
         if (_mounted && !_destroyed) {
           currentStyle.value = {...propsAnimation}
+          // @ts-ignore
           props[propName](propsAnimation);
         }
       });
@@ -224,18 +248,16 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
   };
 
 
-  return () => <div>
-    {(() => {
-      const children: any = slots.default;
-      if (typeof children === 'function' && animation.value) {
-        return children(animation.value.getCurrentStates());
-      } else if (isVNode(children)) {
-        return children;
-      } else {
-        return null;
-      }
-    })()}
-  </div>
+  return () => {
+    const children = slots.default;
+    if (typeof children === 'function' && animation.value) {
+      return children(animation.value.getCurrentStates());
+    } else if (isVNode(children)) {
+      return children;
+    } else {
+      return null;
+    }
+  }
 })
 
 Index.props = vuePropsType
