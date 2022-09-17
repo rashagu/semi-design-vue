@@ -290,10 +290,10 @@ const index = defineComponent<NavProps>((props, {slots}) => {
   setWatcher()
 
   watch(() => props.items, (value, oldValue, onCleanup) => {
-    foundation.init();
     stopSelectedKeys?.()
     stopOpenKeys?.()
     stopStateSelectedKeys?.()
+    foundation.init();
     setWatcher()
   })
 
