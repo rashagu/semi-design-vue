@@ -37,8 +37,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider getPopupContainer={() => document.querySelector('.test')} locale={zh_CN}>
-        <DatePickerDemo />
-        <TimePickerDemo />
+        {/*<DatePickerDemo />*/}
+        {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
         {/*<CheckboxDemo />*/}
@@ -66,7 +66,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<GridTest />*/}
         {/*<LayoutTest/>*/}
         {/*<SpaceTest/>*/}
-        {/*<PopoverTest />*/}
+        <PopoverTest />
         <div class={'aa'}>123</div>
       </ConfigProvider>
     </div>

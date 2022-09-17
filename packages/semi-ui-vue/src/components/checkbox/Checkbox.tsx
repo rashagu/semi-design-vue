@@ -137,11 +137,11 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
   }
 
   function focus() {
-    checkboxEntity && checkboxEntity.focus();
+    checkboxEntity.value && checkboxEntity.value.focus();
   }
 
   function blur() {
-    checkboxEntity && checkboxEntity.blur();
+    checkboxEntity.value && checkboxEntity.value.blur();
   }
 
   const handleChange: any = e => foundation.handleChange(e);
