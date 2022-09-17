@@ -540,7 +540,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
         class={classNames({[prefixCls]: true}, className)}
         style={style}
         {...outerProps}
-      >{state.inputValue}
+      >
         <Popover
           getPopupContainer={getPopupContainer}
           zIndex={zIndex as number}

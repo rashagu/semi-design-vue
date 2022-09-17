@@ -1,19 +1,22 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
+import DefaultLocale from './source/zh_CN';
+import LocaleContext from './Context';
+import { Locale } from './interface';
 
 interface ExampleProps {
-  name?: string
+  locale?: Locale;
 }
 
 export const vuePropsType = {
-  name: String
+  locale: { type: Object, default: DefaultLocale }
 }
 const LocaleProvider = defineComponent<ExampleProps>((props, {slots}) => {
 
 
   return () => (
-    <div>
-      LocaleProvider
-    </div>
+    <LocaleContext.Provider value={props.locale}>
+      {slots.default?.()}
+    </LocaleContext.Provider>
   )
 })
 

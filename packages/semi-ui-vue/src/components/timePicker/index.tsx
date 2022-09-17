@@ -6,10 +6,10 @@ import type {TimePickerProps as BasePickerProps, BaseValueType } from './TimePic
 
 import type { ValidateStatus } from '../_base/baseComponent';
 import type { ScrollItemProps } from '../scrollList';
-import {ConfigContextVNode} from '../configProvider/ConfigContextProvider';
 import { get } from 'lodash';
 import { Locale } from '../locale/interface';
 import {vuePropsMake} from "../PropTypes";
+import ConfigContextConsumer from "../configProvider/ConfigContextConsumer";
 const LocaleConsumer = LocaleConsumer_()
 
 export type { TimeInputProps } from './TimeInput';
@@ -30,7 +30,7 @@ const index = defineComponent<LocalePickerProps>((props, {}) => {
   return () =>  {
     const { type } = props;
     return (
-      <ConfigContextVNode>
+      <ConfigContextConsumer>
         {({ timeZone }: { timeZone?: string | number }) => (
           <LocaleConsumer componentName="TimePicker">
             {(locale: Locale['TimePicker'], localeCode: string, dateFnsLocale: Locale['dateFnsLocale']) => (
@@ -45,7 +45,7 @@ const index = defineComponent<LocalePickerProps>((props, {}) => {
             )}
           </LocaleConsumer>
         )}
-      </ConfigContextVNode>
+      </ConfigContextConsumer>
     );
   }
 })
