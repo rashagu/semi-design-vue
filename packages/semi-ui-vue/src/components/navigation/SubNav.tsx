@@ -279,6 +279,7 @@ const SubNav = defineComponent<SubNavProps>((props, {slots}) => {
         });
 
         console.log(subNavMotion)
+        // TODO 没有动画
         const ulWithMotion = (
           <SubNavTransition motion={subNavMotion} isCollapsed={isCollapsed} maxHeight={maxHeight}>
               {{

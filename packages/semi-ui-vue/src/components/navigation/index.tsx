@@ -437,7 +437,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
               canUpdateOpenKeys: true,
               selectedKeys,
               selectedKeysIsControlled: isControlled('selectedKeys'),
-              // TODO
+              // TODO 切换无效ee
               isCollapsed,
               onCollapseChange: onCollapseChange,
               mode,

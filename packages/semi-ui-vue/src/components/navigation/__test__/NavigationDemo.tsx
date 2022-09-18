@@ -13,6 +13,7 @@ export const vuePropsType = {
 const Test = defineComponent<ExampleProps>((props, {slots}) => {
 
   const openKeys = ref([])
+  const isCollapsed = ref(false)
   return ()=>(
     <div>
       <div>
@@ -22,9 +23,15 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
         <button onClick={()=>openKeys.value = []}>
           rm
         </button>
+        <button onClick={()=>isCollapsed.value = !isCollapsed.value}>
+          isCollapsed {JSON.stringify(isCollapsed.value)}
+        </button>
       </div>
       <Nav
-        isCollapsed={true}
+        footer={{
+          collapseButton: true,
+        }}
+        isCollapsed={isCollapsed.value}
         bodyStyle={{height: 320}}
         items={[
           {itemKey: 'user', text: '用户管理', icon: <IconUser/>},
