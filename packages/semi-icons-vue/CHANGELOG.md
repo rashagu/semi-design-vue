@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.0.3
+
+### Patch Changes
+
+-   导航菜单组件
+
 ## 0.0.2
 
 ### Patch Changes

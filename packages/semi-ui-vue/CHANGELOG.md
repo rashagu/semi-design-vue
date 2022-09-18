@@ -1,5 +1,20 @@
 # @kousum/semi-ui-vue
 
+## 0.0.3
+
+### Patch Changes
+
+-   导航菜单组件
+-   Updated dependencies
+    -   @kousum/semi-animation-vue@0.0.3
+    -   @kousum/semi-icons-vue@0.0.3
+    -   @kousum/semi-illustrations-vue@0.0.3
+
+### Patch Changes
+
+-   Updated dependencies [261dc8b]
+    -   @kousum/semi-animation-vue@1.0.0
+
 ## 0.0.2
 
 ### Patch Changes

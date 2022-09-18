@@ -1,5 +1,5 @@
-// import {Transition} from '@kousum/semi-animation-vue/src/animation/index';
-import {Transition} from '../../../../semi-animation-vue/src/animation/index';
+import {Transition} from '@kousum/semi-animation-vue/src/animation/index';
+// import {Transition} from '../../../../semi-animation-vue/src/animation/index';
 import * as PropTypes from '../PropTypes';
 import {Motion} from '@douyinfe/semi-foundation/utils/type';
 import {ref, h, VNode, FunctionalComponent, useSlots, defineComponent} from "vue";
