@@ -19,13 +19,9 @@ import {noop, get, isEqual} from 'lodash';
 import NavigationFoundation, {NavigationAdapter} from '@douyinfe/semi-foundation/navigation/foundation';
 import {strings, cssClasses, numbers} from '@douyinfe/semi-foundation/navigation/constants';
 
-// @ts-ignore
 import SubNav from './SubNav';
-// @ts-ignore
 import Item from './Item';
-// @ts-ignore
 import Footer from './Footer';
-// @ts-ignore
 import Header from './Header';
 import NavContext from './nav-context';
 import '@douyinfe/semi-foundation/navigation/navigation.scss';
@@ -33,24 +29,24 @@ import {Motion} from '../_base/base';
 import {vuePropsMake} from "../PropTypes";
 import LocaleConsumer_ from "../locale/LocaleConsumer";
 const LocaleConsumer = LocaleConsumer_()
-// @ts-ignore
-export type {CollapseButtonProps} from './CollapseButton';
-// @ts-ignore
-export type {NavFooterProps} from './Footer';
-// @ts-ignore
-export type {NavHeaderProps} from './Header';
-// @ts-ignore
-export type {NavItemProps} from './Item';
-// @ts-ignore
-export type {OpenIconTransitionProps} from './OpenIconTransition';
-// @ts-ignore
-export type {ToggleIcon, SubNavProps} from './SubNav';
-// @ts-ignore
-export type {SubNavTransitionProps} from './SubNavTransition';
+import type {CollapseButtonProps} from './CollapseButton';
+import type {NavFooterProps} from './Footer';
+import type {NavHeaderProps} from './Header';
+import type {NavItemProps} from './Item';
+import type {OpenIconTransitionProps} from './OpenIconTransition';
+import type {ToggleIcon, SubNavProps} from './SubNav';
+import type {SubNavTransitionProps} from './SubNavTransition';
 export type Mode = 'vertical' | 'horizontal';
+export {
+  NavFooterProps,
+  NavHeaderProps,
+  OpenIconTransitionProps,
+  ToggleIcon, SubNavProps,
+  SubNavTransitionProps
+}
 
 export interface OnSelectedData {
-  itemKey: string;
+  itemKey: string | number;
   selectedKeys: (string | number)[];
   selectedItems: (NavItemProps | SubNavProps)[];
   domEvent: MouseEvent;
@@ -278,6 +274,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
     })
     stopOpenKeys = watch(() => props.openKeys, (value) => {
       if (value){
+        console.log(props.openKeys)
         adapter().updateOpenKeys(props.openKeys);
       }
     })
@@ -293,7 +290,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
     stopSelectedKeys?.()
     stopOpenKeys?.()
     stopStateSelectedKeys?.()
-    foundation.init();
+    foundation.init('');
     setWatcher()
   })
 

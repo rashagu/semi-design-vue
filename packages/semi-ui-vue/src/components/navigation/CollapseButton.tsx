@@ -13,7 +13,7 @@ export interface CollapseButtonProps {
     onClick?(e: boolean): void;
 }
 
-const CollapseButton:FunctionalComponent<CollapseButtonProps> = function ({ prefixCls, locale, collapseText, isCollapsed, onClick = noop }) {
+const CollapseButton:FunctionalComponent<CollapseButtonProps> = function ({ prefixCls, locale, collapseText, isCollapsed, onClick = noop }, ctx) {
     const handleClick = () => {
         if (typeof onClick === 'function') {
             onClick(!isCollapsed);

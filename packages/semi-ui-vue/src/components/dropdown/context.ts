@@ -1,5 +1,14 @@
+import type { TooltipProps } from '../tooltip';
+import Consumer from "./context/Consumer";
+import Provider from "./context/Provider";
+
+export interface DropdownContextType {
+    level?: number;
+    showTick?: boolean;
+    trigger?: TooltipProps['trigger'];
+}
 
 export const DropdownContext = {
-    showTick: true,
-    level: 0,
+    Consumer: Consumer,
+    Provider: Provider,
 };

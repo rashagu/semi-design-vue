@@ -1,26 +1,21 @@
-
-import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
-import { noop, times } from 'lodash';
+import {noop, times} from 'lodash';
 
 import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
-import { cloneDeep, isSemiIcon } from '../_utils';
+import {cloneDeep, isSemiIcon} from '../_utils';
 import ItemFoundation, {
     ItemAdapter,
     ItemProps,
     SelectedItemProps
 } from '@douyinfe/semi-foundation/navigation/itemFoundation';
-import { cssClasses, strings } from '@douyinfe/semi-foundation/navigation/constants';
+import {cssClasses, strings} from '@douyinfe/semi-foundation/navigation/constants';
 
 import Tooltip from '../tooltip';
-import NavContext, { NavContextType } from './nav-context';
-import Dropdown from '../dropdown';
+import Dropdown, {DropdownItem} from '../dropdown';
 import {AnchorHTMLAttributes, cloneVNode, defineComponent, h, reactive, VNode, Fragment} from "vue";
 import {useNavContext} from "./nav-context/Consumer";
-import DatePickerFoundation from "@douyinfe/semi-foundation/datePicker/foundation";
-import {DatePickerProps} from "../datePicker";
-import {RadioProps, RadioState} from "../radio/Radio";
 
 const clsPrefix = `${cssClasses.PREFIX}-item`;
 
@@ -90,8 +85,12 @@ export const vuePropsType = {
         type: PropTypes.bool,
         default: false
     },
+
+
+    items: Array,
+    level: Number
 }
-const NavItem = defineComponent<NavItemProps>((props, {slots}) => {
+const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
 
     const {context} = useNavContext()
     const state = reactive<NavItemState>({
@@ -173,7 +172,7 @@ const NavItem = defineComponent<NavItemProps>((props, {slots}) => {
             mouseEnterDelay={tooltipShowDelay}
             mouseLeaveDelay={tooltipHideDelay}
           >
-              {node}
+              <div>{node}</div>
           </Tooltip>
         );
     };
@@ -229,7 +228,7 @@ const NavItem = defineComponent<NavItemProps>((props, {slots}) => {
 
         if (typeof link === 'string') {
             itemChildren = (
-              <a className={`${prefixCls}-item-link`} href={link} {...(linkOptions as any)}>
+              <a class={`${prefixCls}-item-link`} href={link} {...(linkOptions as any)}>
                   {itemChildren}
               </a>
             );
@@ -247,10 +246,10 @@ const NavItem = defineComponent<NavItemProps>((props, {slots}) => {
             });
 
             itemDom = (
-              <Dropdown.Item
+              <DropdownItem
                 selected={selected}
                 active={selected}
-                forwardRef={setItemRef}
+                ref={setItemRef}
                 className={popoverItemCls}
                 onClick={handleClick}
                 onMouseEnter={onMouseEnter}
@@ -258,7 +257,7 @@ const NavItem = defineComponent<NavItemProps>((props, {slots}) => {
                 disabled={disabled}
               >
                   {itemChildren}
-              </Dropdown.Item>
+              </DropdownItem>
             );
         } else {
             // Items are divided into normal and sub-wrap

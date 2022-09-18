@@ -16,11 +16,15 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
   return ()=>(
     <div>
       <div>
-        <button onClick={()=>openKeys.value = []}>
+        <button onClick={()=>openKeys.value = ['job']}>
           {JSON.stringify(openKeys.value)}
+        </button>
+        <button onClick={()=>openKeys.value = []}>
+          rm
         </button>
       </div>
       <Nav
+        isCollapsed={true}
         bodyStyle={{height: 320}}
         items={[
           {itemKey: 'user', text: '用户管理', icon: <IconUser/>},

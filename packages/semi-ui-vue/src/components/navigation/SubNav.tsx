@@ -14,7 +14,8 @@ import { IconChevronDown, IconChevronUp, IconChevronRight } from '@kousum/semi-i
 import NavItem from './Item';
 // @ts-ignore
 import type {NavItemProps, NavItemState} from './Item'
-import Dropdown, { DropdownProps } from '../dropdown';
+import Dropdown, {DropdownMenu} from '../dropdown';
+import type {DropdownProps} from '../dropdown';
 import NavContext, { NavContextType } from './nav-context';
 
 import { times, get } from 'lodash';
@@ -118,7 +119,7 @@ const SubNav = defineComponent<SubNavProps>((props, {slots}) => {
         isHovered: false,
     })
 
-    const {cache, adapter: adapterInject, log, context: context_, isControlled} = useBaseComponent<NavItemProps>(props, state)
+    const {cache, adapter: adapterInject, log, context: context_, isControlled} = useBaseComponent<SubNavProps>(props, state)
 
     const foundation = new SubNavFoundation(adapter());
     const setItemRef = (ref: any) => {
@@ -277,6 +278,7 @@ const SubNav = defineComponent<SubNavProps>((props, {slots}) => {
             [`${prefixCls}-sub-popover`]: isCollapsed || isHorizontal,
         });
 
+        console.log(subNavMotion)
         const ulWithMotion = (
           <SubNavTransition motion={subNavMotion} isCollapsed={isCollapsed} maxHeight={maxHeight}>
               {{
@@ -329,23 +331,25 @@ const SubNav = defineComponent<SubNavProps>((props, {slots}) => {
         }
 
         if (isCollapsed || mode === strings.MODE_HORIZONTAL) {
+            console.log(dropdownProps, _elem)
             // Do not show dropdown when disabled
-            _elem = !disabled ? (
+            return !disabled ? (
               <Dropdown
                 className={subNavCls}
                 render={(
-                  <Dropdown.Menu>
+                  <DropdownMenu>
                       <li class={`${prefixCls}-popover-crumb`} />
                       {children}
-                  </Dropdown.Menu>
+                  </DropdownMenu>
                 )}
                 position={mode === strings.MODE_HORIZONTAL && !isInSubNav ? 'bottomLeft' : 'rightTop'}
                 mouseEnterDelay={subNavOpenDelay}
                 mouseLeaveDelay={subNavCloseDelay}
                 onVisibleChange={handleDropdownVisible}
                 {...dropdownProps}
+                trigger="click"
               >
-                  {_elem}
+                  <div>{_elem}</div>
               </Dropdown>
             ) : _elem;
         }
