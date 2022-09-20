@@ -121,10 +121,19 @@ const propTypes = {
   // Array of options (nested options can continue)
   items: PropTypes.array,
   // Is it in the state of being stowed to the sidebar
-  isCollapsed: PropTypes.bool,
-  defaultIsCollapsed: PropTypes.bool,
+  isCollapsed: {
+    type: PropTypes.bool,
+    default: undefined
+  },
+  defaultIsCollapsed: {
+    type: PropTypes.bool,
+    default: undefined
+  },
   onCollapseChange: PropTypes.func,
-  multiple: PropTypes.bool,
+  multiple: {
+    type: PropTypes.bool,
+    default: undefined
+  },
   onDeselect: PropTypes.func,
   subNavMotion: [PropTypes.bool, PropTypes.object, PropTypes.func],
   subNavCloseDelay: PropTypes.number,
@@ -139,7 +148,10 @@ const propTypes = {
   prefixCls: PropTypes.string,
   header: [PropTypes.node, PropTypes.object],
   footer: [PropTypes.node, PropTypes.object],
-  limitIndent: PropTypes.bool
+  limitIndent: {
+    type: PropTypes.bool,
+    default: undefined
+  },
 };
 
 const defaultProps = {
@@ -221,8 +233,12 @@ const index = defineComponent<NavProps>((props, {slots}) => {
       ...adapterInject<NavProps, NavState>(),
       notifySelect: (...args) => props.onSelect(...args),
       notifyOpenChange: (...args) => props.onOpenChange(...args),
-      setIsCollapsed: isCollapsed => state.isCollapsed = isCollapsed,
-      notifyCollapseChange: (...args) => props.onCollapseChange(...args),
+      setIsCollapsed: isCollapsed => {
+        return state.isCollapsed = isCollapsed
+      },
+      notifyCollapseChange: (...args) => {
+        props.onCollapseChange(...args)
+      },
       updateItems: items => state.items = [...items],
       setItemKeysMap: itemKeysMap => state.itemKeysMap = {...itemKeysMap},
       addSelectedKeys: createAddKeysFn('selectedKeys'),

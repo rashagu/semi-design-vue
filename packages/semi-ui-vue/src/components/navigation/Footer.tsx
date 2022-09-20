@@ -37,13 +37,14 @@ const NavFooter = defineComponent<NavFooterProps>((props, {slots}) => {
 
     const {onCollapseChange, prefixCls, locale, isCollapsed} = context.value;
 
-    // TODO 点击无效
     return (
       <CollapseButton
         prefixCls={prefixCls}
         isCollapsed={isCollapsed}
         locale={locale}
-        onClick={onCollapseChange}
+        onClick={(val)=>{
+          onCollapseChange(val)
+        }}
         collapseText={collapseText}
         {...(typeof collapseButton === 'object' ? collapseButton : {})}
       />

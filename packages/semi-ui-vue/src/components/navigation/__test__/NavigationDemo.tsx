@@ -20,7 +20,10 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
         <button onClick={()=>openKeys.value = ['job']}>
           {JSON.stringify(openKeys.value)}
         </button>
-        <button onClick={()=>openKeys.value = []}>
+        <button onClick={()=>{
+          openKeys.value = []
+
+        }}>
           rm
         </button>
         <button onClick={()=>isCollapsed.value = !isCollapsed.value}>
@@ -31,7 +34,7 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
         footer={{
           collapseButton: true,
         }}
-        isCollapsed={isCollapsed.value}
+        // isCollapsed={isCollapsed.value}
         bodyStyle={{height: 320}}
         items={[
           {itemKey: 'user', text: '用户管理', icon: <IconUser/>},
@@ -46,6 +49,9 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
         onOpenChange={data => {
           // console.log(data)
           openKeys.value = data.openKeys
+        }}
+        onCollapseChange={(val)=>{
+          console.log(val)
         }}
         openKeys={openKeys.value}
         onSelect={data => console.log('trigger onSelect: ', data)}

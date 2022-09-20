@@ -172,7 +172,7 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
             mouseEnterDelay={tooltipShowDelay}
             mouseLeaveDelay={tooltipHideDelay}
           >
-              <div>{node}</div>
+              <>{node}</>
           </Tooltip>
         );
     };

@@ -34,7 +34,7 @@ yarn add @kousum/semi-icons-vue
 ```vue
 #Component.vue
 <script setup>
-import Button from "@kousum/semi-ui-vue"
+import { Button } from "@kousum/semi-ui-vue"
 </script>
 
 <template>

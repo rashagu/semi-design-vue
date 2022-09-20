@@ -114,7 +114,7 @@ const SubNav = defineComponent<SubNavProps>((props, {slots}) => {
 
     const titleRef = ref();
     const itemRef = ref();
-    
+
     const state = reactive<SubNavState>({
         isHovered: false,
     })
@@ -138,7 +138,7 @@ const SubNav = defineComponent<SubNavProps>((props, {slots}) => {
         return null;
     }
 
-    
+
     function adapter(): SubNavAdapter<SubNavProps, SubNavState> {
         return {
             ...adapterInject<SubNavProps, SubNavState>(),
@@ -357,8 +357,8 @@ const SubNav = defineComponent<SubNavProps>((props, {slots}) => {
         return _elem;
     }
 
-    
-    
+
+
     return () => {
         const { itemKey, style, onMouseEnter, onMouseLeave, disabled, text } = props;
 

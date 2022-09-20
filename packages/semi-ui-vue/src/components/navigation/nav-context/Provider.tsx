@@ -10,7 +10,7 @@ const Provider = defineComponent<{value:NavContextType}>((props, {slots}) => {
 
   watch(()=>props.value, ()=>{
     ConfigContext.value = props.value
-  })
+  }, { deep: true})
   provide('NavContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
 })
