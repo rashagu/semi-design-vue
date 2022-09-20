@@ -267,15 +267,12 @@ const index = defineComponent<NavProps>((props, {slots}) => {
   }
 
 
-  function getDerivedStateFromProps(props: NavProps, state: NavState) {
-    const willUpdateState: Partial<NavState> = {};
+  // getDerivedStateFromProps 的存在只有一个目的：让组件在 props 变化时更新 state
+  watch(()=>props.isCollapsed, (val)=>{
+    state.isCollapsed = val;
+  })
 
-    if (hasOwnProperty.call(props, 'isCollapsed') && props.isCollapsed !== state.isCollapsed) {
-      willUpdateState.isCollapsed = props.isCollapsed;
-    }
 
-    return willUpdateState;
-  }
 
 
   let stopSelectedKeys: WatchStopHandle
@@ -453,7 +450,6 @@ const index = defineComponent<NavProps>((props, {slots}) => {
               canUpdateOpenKeys: true,
               selectedKeys,
               selectedKeysIsControlled: isControlled('selectedKeys'),
-              // TODO 切换无效ee
               isCollapsed,
               onCollapseChange: onCollapseChange,
               mode,

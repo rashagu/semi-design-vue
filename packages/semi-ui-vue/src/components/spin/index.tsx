@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, StyleValue, onUnmounted} from 'vue'
+import {defineComponent, ref, h, StyleValue, onUnmounted, watch} from 'vue'
 import cls from 'classnames';
 import { cssClasses as css, strings } from '@douyinfe/semi-foundation/spin/constants';
 import SpinFoundation from '@douyinfe/semi-foundation/spin/foundation';
@@ -59,6 +59,7 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
   const foundation = ref(new SpinFoundation(adapter()))
 
 
+  // ok
   function getDerivedStateFromProps(props: SpinProps) {
     if (!props.delay) {
       return {
@@ -75,6 +76,15 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
       delay: props.delay
     };
   }
+  // 没有 state
+  // watch(()=>props, (val)=>{
+  //   const newState = getDerivedStateFromProps(props, state)
+  //   if (newState){
+  //     Object.keys(newState).forEach(key=>{
+  //       state[key] = newState[key]
+  //     })
+  //   }
+  // }, {deep: true})
 
   function adapter() {
     return {

@@ -283,6 +283,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
     };
   }
 
+  // ok
   function getDerivedStateFromProps(nextProps: TimePickerProps, prevState: TimePickerState) {
     if ('open' in nextProps && nextProps.open !== prevState.open) {
       return {
@@ -291,6 +292,14 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
     }
     return null;
   }
+  watch(()=>props.open, (val)=>{
+    const newState = getDerivedStateFromProps(props, state)
+    if (newState){
+      Object.keys(newState).forEach(key=>{
+        state[key] = newState[key]
+      })
+    }
+  })
 
 
   watch([() => props.value, () => props.timeZone], (value, oldValue) => {

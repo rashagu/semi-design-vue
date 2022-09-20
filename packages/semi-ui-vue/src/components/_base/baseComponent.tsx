@@ -28,9 +28,9 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
   const cache = ref<any>({});
   const foundation = ref<any>(null);
 
-  // eslint-disable-next-line
   const isControlled = (key: any) => {
-    return Boolean(key && props && typeof props === 'object' && hasOwnProperty.call(props, key))
+
+    return Boolean(key && props && typeof props === 'object' && hasOwnProperty.call(adapter().getProps(), key))
   };
 
   const context = inject<ContextValue>('context',{})

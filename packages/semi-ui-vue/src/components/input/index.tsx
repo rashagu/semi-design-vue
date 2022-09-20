@@ -234,6 +234,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
   let foundation =  new InputFoundation(theAdapter);
 
 
+  // ok
   function getDerivedStateFromProps(props: InputProps, state: InputState) {
     const willUpdateStates: Partial<InputState> = {};
 
@@ -244,6 +245,14 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
 
     return willUpdateStates;
   }
+  watch(()=>props.value, (val)=>{
+    const newState = getDerivedStateFromProps(props, state)
+    if (newState){
+      Object.keys(newState).forEach(key=>{
+        state[key] = newState[key]
+      })
+    }
+  })
 
   watch(() => props.mode, (prevPropsMode, nextPropsMode) => {
     if (prevPropsMode !== nextPropsMode) {

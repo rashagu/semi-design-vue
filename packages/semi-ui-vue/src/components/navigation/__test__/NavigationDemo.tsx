@@ -22,7 +22,6 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
         </button>
         <button onClick={()=>{
           openKeys.value = []
-
         }}>
           rm
         </button>
@@ -34,7 +33,7 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
         footer={{
           collapseButton: true,
         }}
-        // isCollapsed={isCollapsed.value}
+        isCollapsed={isCollapsed.value}
         bodyStyle={{height: 320}}
         items={[
           {itemKey: 'user', text: '用户管理', icon: <IconUser/>},

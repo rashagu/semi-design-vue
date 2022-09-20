@@ -38,36 +38,38 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider getPopupContainer={() => document.querySelector('.test')} locale={zh_CN}>
-        {/*<DatePickerDemo />*/}
-        {/*<TimePickerDemo />*/}
-        {/*<ScrollListDemo />*/}
-        {/*<CascaderDemo/>*/}
-        {/*<CheckboxDemo />*/}
-        {/*<TagInputDemo />*/}
-        {/*<AutoCompleteItemsDemo/>*/}
-        {/*<SelectDemo/>*/}
-        {/*<TagDemo/>*/}
-        {/*<AvatarDemo/>*/}
-        {/*<RadioDemo />*/}
+        <DatePickerDemo />
+        <TimePickerDemo />
+        <ScrollListDemo />
+        <CascaderDemo/>
+        <CheckboxDemo />
+        <TagInputDemo />
 
-        {/*<InputDemo />*/}
-        {/*<TypeDemo />*/}
+        {/*// TODO 样式好像有问题*/}
+        <AutoCompleteItemsDemo/>
+        <SelectDemo/>
+        <TagDemo/>
+        <AvatarDemo/>
+        <RadioDemo />
 
-        {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
-        {/*  <Button />*/}
-        {/*</div>*/}
+        <InputDemo />
+        <TypeDemo />
 
-        {/*<IconTest />*/}
-        {/*<br/>*/}
-        {/*<TootipDemo />*/}
-        {/*<br/>*/}
-        {/*<br/>*/}
-        {/*<DropdownDemo1/>*/}
-        {/*<br/>*/}
-        {/*<GridTest />*/}
-        {/*<LayoutTest/>*/}
-        {/*<SpaceTest/>*/}
-        {/*<PopoverTest />*/}
+        <div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
+          <Button />
+        </div>
+
+        <IconTest />
+        <br/>
+        <TootipDemo />
+        <br/>
+        <br/>
+        <DropdownDemo1/>
+        <br/>
+        <GridTest />
+        <LayoutTest/>
+        <SpaceTest/>
+        <PopoverTest />
         <NavigationDemo />
         <div class={'aa'}>123</div>
       </ConfigProvider>

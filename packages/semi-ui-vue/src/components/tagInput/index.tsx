@@ -1,4 +1,16 @@
-import {defineComponent, ref, h, Fragment, useSlots, VNode, CSSProperties, reactive, onMounted, isVNode} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  useSlots,
+  VNode,
+  CSSProperties,
+  reactive,
+  onMounted,
+  isVNode,
+  watch
+} from 'vue'
 import cls from 'classnames';
 import {
   noop,
@@ -249,6 +261,7 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
     };
   }
 
+  // ok
   function getDerivedStateFromProps(nextProps: TagInputProps, prevState: TagInputState) {
     const {value, inputValue} = nextProps;
     const {tagsArray: prevTagsArray} = prevState;
@@ -265,6 +278,14 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
       inputValue: isString(inputValue) ? inputValue : prevState.inputValue
     };
   }
+  watch(()=>props, (val)=>{
+    const newState = getDerivedStateFromProps(props, state)
+    if (newState){
+      Object.keys(newState).forEach(key=>{
+        state[key] = newState[key]
+      })
+    }
+  }, {deep: true})
 
   onMounted(()=>{
     const { disabled, autoFocus } = props;

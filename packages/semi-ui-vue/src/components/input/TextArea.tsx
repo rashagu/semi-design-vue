@@ -12,11 +12,11 @@ import {
 
 import cls from 'classnames';
 import TextAreaFoundation from '@douyinfe/semi-foundation/input/textareaFoundation';
-import { cssClasses } from '@douyinfe/semi-foundation/input/constants';
+import {cssClasses} from '@douyinfe/semi-foundation/input/constants';
 import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/input/textarea.scss';
-import { noop, omit, isFunction } from 'lodash';
-import { IconClear } from '@kousum/semi-icons-vue';
+import {noop, omit, isFunction} from 'lodash';
+import {IconClear} from '@kousum/semi-icons-vue';
 import {TooltipProps} from "../tooltip";
 
 const prefixCls = cssClasses.PREFIX;
@@ -32,8 +32,7 @@ type OmitTextareaAttr =
   | 'onKeypress'
   | 'onKeyup';
 
-export interface TextAreaProps extends
-  Omit<TextareaHTMLAttributes, OmitTextareaAttr> {
+export interface TextAreaProps extends Omit<TextareaHTMLAttributes, OmitTextareaAttr> {
   style?: CSSProperties;
   autosize?: boolean;
   placeholder?: string;
@@ -58,7 +57,7 @@ export interface TextAreaProps extends
   onKeyPress?: (e: Event) => void;
   onEnterPress?: (e: Event) => void;
   onPressEnter?: (e: Event) => void;
-  onResize?: (data: {height: number}) => void;
+  onResize?: (data: { height: number }) => void;
   getValueLength?: (value: string) => number;
   forwardRef?: ((instance: HTMLTextAreaElement) => void) | any | null;
   minlength?: number,
@@ -77,78 +76,78 @@ export interface TextAreaState {
 }
 
 export const VuePropsType = {
-  autosize: {type:Boolean, default: false},
+  autosize: {type: Boolean, default: false},
   placeholder: String,
-  class: {type:String,default:''},
-  rows: {type:Number,default:4},
-  cols: {type:Number,default:20},
+  class: {type: String, default: ''},
+  rows: {type: Number, default: 4},
+  cols: {type: Number, default: 20},
   maxCount: Number,
   validateStatus: String,
   value: {
-    type:[String,Boolean, Object,Array, undefined],
+    type: [String, Boolean, Object, Array, undefined],
 // @ts-ignore
     default: undefined,
   },
   defaultValue: {
-    type:[String,Boolean, Object,Array, undefined],
+    type: [String, Boolean, Object, Array, undefined],
 // @ts-ignore
     default: undefined,
   },
   disabled: Boolean,
   readonly: Boolean,
   autofocus: Boolean,
-  showCounter: {type:Boolean, default: false},
-  showClear: {type:Boolean, default: false},
+  showCounter: {type: Boolean, default: false},
+  showClear: {type: Boolean, default: false},
   minlength: Number,
   maxlength: Number,
   'onUpdate:value': Function,
   onClear: {
-    type:Function,
+    type: Function,
     default: noop,
   },
   onChange: {
-    type:Function,
+    type: Function,
     default: noop,
   },
   onBlur: {
-    type:Function,
+    type: Function,
     default: noop,
   },
   onFocus: {
-    type:Function,
+    type: Function,
     default: noop,
   },
   onInput: {
-    type:Function,
+    type: Function,
     default: noop,
   },
   onKeyDown: {
-    type:Function,
+    type: Function,
     default: noop,
   },
   onKeyUp: {
-    type:Function,
+    type: Function,
     default: noop,
   },
   onKeyPress: {
-    type:Function,
+    type: Function,
     default: noop,
   },
   onEnterPress: {
-    type:Function,
+    type: Function,
     default: noop,
   },
   onPressEnter: {
-    type:Function,
+    type: Function,
     default: noop,
   },
   onResize: {
-    type:Function,
+    type: Function,
     default: noop,
   },
   getValueLength: Function,
   forwardRef: {
-    type:Function,
+    type: Function,
     default: noop,
   },
 }
@@ -159,26 +158,27 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
   let _resizeListener: any;
 
   const onUpdateValueFunc = props["onUpdate:value"]
-  const state = reactive({
+  const state = reactive<TextAreaState>({
     value: '',
-    isFocus: false,
+    isFocus: false, maxlength: 0,
     isHover: false,
     height: 0,
-    minlength: props.minlength,
+    minlength: props.minlength
   })
   const {cache, adapter: adapterInject, log, context} = useBaseComponent<TextAreaProps>(props, state)
 
   const theAdapter = adapter()
-  watch(()=>state.value,()=>{
+  watch(() => state.value, () => {
     if (props.autosize) {
       foundation.resizeTextarea();
     }
   })
-  function adapter(){
+
+  function adapter() {
     return {
       ...adapterInject(),
       setValue: (value: string) => {
-        if (onUpdateValueFunc){
+        if (onUpdateValueFunc) {
           onUpdateValueFunc(value)
         }
         state.value = value
@@ -197,7 +197,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
       },
       notifyHeightUpdate: (height: number) => {
         state.height = height
-        props.onResize({ height });
+        props.onResize({height});
       },
       notifyPressEnter: (e: any) => {
         props.onEnterPress && props.onEnterPress(e);
@@ -207,7 +207,8 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
   }
 
 
-function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
+  // ok
+  function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
     const willUpdateStates: Partial<TextAreaState> = {};
 
     if (props.value !== state.cachedValue) {
@@ -217,8 +218,16 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
 
     return willUpdateStates;
   }
+  watch(()=>props.value, (val)=>{
+    const newState = getDerivedStateFromProps(props, state)
+    if (newState){
+      Object.keys(newState).forEach(key=>{
+        state[key] = newState[key]
+      })
+    }
+  })
 
-  onMounted(()=>{
+  onMounted(() => {
 
     foundation.init();
     _resizeListener = null;
@@ -241,12 +250,12 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
   })
 
 
-  onUnmounted(()=>{
+  onUnmounted(() => {
     foundation.destroy();
     _resizeListener && window.removeEventListener('resize', _resizeListener);
   })
 
-  watch([()=>props.value, ()=>props.autosize,],([prevValue,prevAutosize],[])=>{
+  watch([() => props.value, () => props.autosize,], ([prevValue, prevAutosize], []) => {
 
     if (props.value !== prevValue && props.autosize) {
       foundation.resizeTextarea();
@@ -259,7 +268,7 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
   };
 
   function renderClearBtn() {
-    const { showClear } = props;
+    const {showClear} = props;
     const displayClearBtn = foundation.isAllowClear();
     const clearCls = cls(`${prefixCls}-clearbtn`, {
       [`${prefixCls}-clearbtn-hidden`]: !displayClearBtn,
@@ -270,7 +279,7 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
           class={clearCls}
           onClick={handleClear}
         >
-          <IconClear />
+          <IconClear/>
         </div>
       );
     }
@@ -282,9 +291,9 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
       current: number,
       total: number,
       countCls: string;
-    const { showCounter, maxCount, getValueLength } = props;
+    const {showCounter, maxCount, getValueLength} = props;
     if (showCounter || maxCount) {
-      const { value } = state;
+      const {value} = state;
       // eslint-disable-next-line no-nested-ternary
       current = value ? isFunction(getValueLength) ? getValueLength(value) : value.length : 0;
       total = maxCount || null;
@@ -313,7 +322,7 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
   // TODO later
   const setRef = (node: any) => {
     (libRef.value as any) = node;
-    const { forwardRef } = props;
+    const {forwardRef} = props;
     if (typeof forwardRef === 'function') {
       forwardRef(node);
     } else if (forwardRef && typeof forwardRef === 'object') {
@@ -323,8 +332,8 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
 
 
   let foundation: TextAreaFoundation = new TextAreaFoundation(theAdapter);
-  watch(()=>props.value, ()=>{
-    if (props.value!==null && props.value!==undefined){
+  watch(() => props.value, () => {
+    if (props.value !== null && props.value !== undefined) {
       state.value = props.value
     }
   })
@@ -338,7 +347,7 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
       // resize,
       disabled,
       readonly,
-      class:className,
+      class: className,
       showCounter,
       validateStatus,
       maxCount,
@@ -351,7 +360,7 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
       showClear,
       ...rest
     } = props;
-    const { isFocus, value, minlength: stateMinLength } = state;
+    const {isFocus, value, minlength: stateMinLength} = state;
     const wrapperCls = cls(
       className,
       `${prefixCls}-textarea-wrapper`,
@@ -379,7 +388,7 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
       disabled,
       readOnly: readonly,
       placeholder: !placeholder ? null : placeholder,
-      onInput:(e:any)=> {
+      onInput: (e: any) => {
         // console.log(e)
         foundation._adapter.setValue(e.target.value)
       },
@@ -408,7 +417,7 @@ function getDerivedStateFromProps(props: TextAreaProps, state: TextAreaState) {
         onMouseenter={e => foundation.handleMouseEnter(e)}
         onMouseleave={e => foundation.handleMouseLeave(e)}
       >
-        <textarea {...itemProps} ref={setRef} />
+        <textarea {...itemProps} ref={setRef}/>
         {renderClearBtn()}
         {renderCounter()}
       </div>

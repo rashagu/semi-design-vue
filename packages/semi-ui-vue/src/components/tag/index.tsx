@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties, reactive} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, CSSProperties, reactive, watch} from 'vue'
 import classNames from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/tag/constants';
 import Avatar from '../avatar';
@@ -51,9 +51,10 @@ export const vuePropsType = {
 }
 const Index = defineComponent<TagProps>((props, {slots}) => {
 
-  const state = reactive({
+  const state = reactive<TagState>({
     visible: true,
   });
+  // ok
   function getDerivedStateFromProps(nextProps: TagProps) {
     if ('visible' in nextProps) {
       return {
@@ -62,6 +63,14 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
     }
     return null;
   }
+  watch(()=>props.visible, (val)=>{
+    const newState = getDerivedStateFromProps(props)
+    if (newState){
+      Object.keys(newState).forEach(key=>{
+        state[key] = newState[key]
+      })
+    }
+  })
 
   function setVisible(visible: boolean) {
     if (!('visible' in props)) {

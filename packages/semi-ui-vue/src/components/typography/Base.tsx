@@ -8,7 +8,7 @@ import {
   reactive,
   onMounted,
   watchEffect,
-  onUnmounted, cloneVNode
+  onUnmounted, cloneVNode, watch
 } from 'vue'
 import cls from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/typography/constants';
@@ -112,17 +112,17 @@ export const vuePropsType = {
     type: Boolean,
     default: false,
   },
-  type:{
+  type: {
     type: String,
     default: 'primary',
   },
-  size:{
+  size: {
     type: String,
     default: 'normal',
   },
   code: Boolean,
-  component_: [String, Array, Boolean, Object,Number],
-  spacing:{
+  component_: [String, Array, Boolean, Object, Number],
+  spacing: {
     type: String,
     default: 'normal',
   },
@@ -177,14 +177,16 @@ const Base = defineComponent<BaseTypographyProps>((props, {slots}) => {
     prevChildren: null,
   })
 
-  onMounted(()=>{
+  onMounted(() => {
     if (props.ellipsis) {
       getEllipsisState();
       window.addEventListener('resize', onResize);
     }
   })
-function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTypographyState) {
-    const { prevChildren } = prevState;
+
+  // ok
+  function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTypographyState) {
+    const {prevChildren} = prevState;
     const newState: Partial<BaseTypographyState> = {};
     newState.prevChildren = props.children;
 
@@ -198,6 +200,13 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
     }
     return newState;
   }
+  watch(()=>props.ellipsis, (val)=>{
+    const newState = getDerivedStateFromProps(props, state)
+    Object.keys(newState).forEach(key=>{
+      state[key] = newState[key]
+    })
+  })
+
 
   // watchEffect(()=>{
   //   // Render was based on outdated refs and needs to be rerun
@@ -209,7 +218,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
   //   }
   // })
 
-  onUnmounted(()=>{
+  onUnmounted(() => {
     if (props.ellipsis) {
       window.removeEventListener('resize', onResize);
     }
@@ -225,8 +234,8 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
   };
 
   const canUseCSSEllipsis = () => {
-    const { copyable } = props;
-    const { expandable, expandText, pos, suffix } = getEllipsisOpt();
+    const {copyable} = props;
+    const {expandable, expandText, pos, suffix} = getEllipsisOpt();
     return !expandable && isUndefined(expandText) && !copyable && pos === 'end' && !suffix.length;
   };
 
@@ -249,8 +258,8 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
   };
 
   const showTooltip = () => {
-    const { isOverflowed, isTruncated, expanded } = state;
-    const { showTooltip, expandable, expandText } = getEllipsisOpt();
+    const {isOverflowed, isTruncated, expanded} = state;
+    const {showTooltip, expandable, expandText} = getEllipsisOpt();
     const overflowed = !expanded && (isOverflowed || isTruncated);
     const noExpandText = !expandable && isUndefined(expandText);
     const show = noExpandText && overflowed && showTooltip;
@@ -266,27 +275,27 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
         return merge(
           {
             opts: {
-              style: { width: '240px' },
+              style: {width: '240px'},
               showArrow: true,
             },
           },
           showTooltip
         );
       }
-      return { ...defaultOpts, ...showTooltip };
+      return {...defaultOpts, ...showTooltip};
     }
     return defaultOpts;
   };
 
   function getEllipsisState() {
-    const { rows, suffix, pos } = getEllipsisOpt();
-    const { children } = props;
+    const {rows, suffix, pos} = getEllipsisOpt();
+    const {children} = props;
     // wait until element mounted
     if (!wrapperRef || !wrapperRef.current) {
       onResize();
       return false;
     }
-    const { ellipsisContent, isOverflowed, isTruncated, expanded } = state;
+    const {ellipsisContent, isOverflowed, isTruncated, expanded} = state;
     const updateOverflow = shouldTruncated(rows);
     const canUseCSSEllipsis_ = canUseCSSEllipsis();
     const needUpdate = updateOverflow !== isOverflowed;
@@ -307,7 +316,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
       'children' in props && typeof children !== 'string',
       "[Semi Typography] 'Only children with pure text could be used with ellipsis at this moment."
     );
-    const content:any = getRenderText(
+    const content: any = getRenderText(
       wrapperRef.current,
       rows,
       children as any,
@@ -333,8 +342,8 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
    * @param {Event} e
    */
   const toggleOverflow = (e: any) => {
-    const { onExpand, expandable, collapsible } = getEllipsisOpt();
-    const { expanded } = state;
+    const {onExpand, expandable, collapsible} = getEllipsisOpt();
+    const {expanded} = state;
     onExpand && onExpand(!expanded, e);
     if ((expandable && !expanded) || (collapsible && expanded)) {
       state.expanded = !expanded
@@ -343,7 +352,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
   };
 
   const getEllipsisOpt = (): Ellipsis => {
-    const { ellipsis } = props;
+    const {ellipsis} = props;
     if (!ellipsis) {
       return {};
     }
@@ -363,8 +372,8 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
 
 
   const renderExpandable = () => {
-    const { expandText, expandable, collapseText, collapsible } = getEllipsisOpt();
-    const { expanded, first } = state;
+    const {expandText, expandable, collapseText, collapsible} = getEllipsisOpt();
+    const {expanded, first} = state;
     const noExpandText = !expandable && isUndefined(expandText);
     const noCollapseText = !collapsible && isUndefined(collapseText);
     let text;
@@ -434,8 +443,8 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
    * @returns {Object}
    */
   const getEllipsisStyle = () => {
-    const { ellipsis } = props;
-    const { expandable } = getEllipsisOpt();
+    const {ellipsis} = props;
+    const {expandable} = getEllipsisOpt();
     if (!ellipsis) {
       return {
         ellipsisCls: '',
@@ -443,8 +452,8 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
         // ellipsisAttr: {}
       };
     }
-    const { rows } = getEllipsisOpt();
-    const { isOverflowed, expanded, isTruncated } = state;
+    const {rows} = getEllipsisOpt();
+    const {isOverflowed, expanded, isTruncated} = state;
     const useCSS = !expanded && canUseCSSEllipsis();
     const ellipsisCls = cls({
       [`${prefixCls}-ellipsis`]: true,
@@ -452,7 +461,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
       [`${prefixCls}-ellipsis-multiple-line`]: rows > 1,
       [`${prefixCls}-ellipsis-overflow-ellipsis`]: rows === 1 && useCSS,
     });
-    const ellipsisStyle = useCSS && rows > 1 ? { WebkitLineClamp: rows } : {};
+    const ellipsisStyle = useCSS && rows > 1 ? {WebkitLineClamp: rows} : {};
     return {
       ellipsisCls,
       ellipsisStyle: isOverflowed ? ellipsisStyle : {},
@@ -460,10 +469,10 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
   };
 
   const renderEllipsisText = (opt: Ellipsis) => {
-    const { suffix } = opt;
-    const children = slots.default?slots.default():null;
+    const {suffix} = opt;
+    const children = slots.default ? slots.default() : null;
 
-    const { isTruncated, expanded, isOverflowed, ellipsisContent } = state;
+    const {isTruncated, expanded, isOverflowed, ellipsisContent} = state;
     // console.debug(suffix)
     if (expanded || !isTruncated) {
       return (
@@ -493,8 +502,8 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
   }
 
   function renderCopy() {
-    const { copyable,  } = props;
-    const children = slots.default?slots.default():null
+    const {copyable,} = props;
+    const children = slots.default ? slots.default() : null
     // console.log(children)
     if (!copyable) {
       return null;
@@ -504,7 +513,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
     if (Array.isArray(children)) {
       copyContent = '';
       children.forEach(value => {
-         // console.debug(value.children)
+        // console.debug(value.children)
         if (typeof value.children === 'object') {
           hasObject = true;
         }
@@ -514,7 +523,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
     } else if (typeof children !== 'object') {
       copyContent = String(children);
     } else {
-       console.debug(children)
+      console.debug(children)
       hasObject = true;
       copyContent = String(children);
     }
@@ -528,19 +537,19 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
       duration: 3,
       ...(typeof copyable === 'object' ? copyable : null),
     };
-    return <Copyable {...copyConfig} forwardRef={copyRef} />;
+    return <Copyable {...copyConfig} forwardRef={copyRef}/>;
   }
 
 
   function renderIcon() {
-    const { icon, size } = props;
+    const {icon, size} = props;
     if (!icon) {
       return null;
     }
     const iconSize: Size = size === 'small' ? 'small' : 'default';
     return (
       <span class={`${prefixCls}-icon`}>
-                {isSemiIcon(icon) ? cloneVNode((icon as any), { size: iconSize }) : icon}
+                {isSemiIcon(icon) ? cloneVNode((icon as any), {size: iconSize}) : icon}
             </span>
     );
   }
@@ -561,7 +570,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
       heading,
       ...rest
     } = props;
-    const children = slots.default?slots.default():null;
+    const children = slots.default ? slots.default() : null;
     const textProps = omit(rest, [
       'strong',
       'editable',
@@ -575,7 +584,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
     const iconNode = renderIcon();
     const ellipsisOpt = getEllipsisOpt();
     // console.debug(ellipsisOpt)
-    const { ellipsisCls, ellipsisStyle } = getEllipsisStyle();
+    const {ellipsisCls, ellipsisStyle} = getEllipsisStyle();
     let textNode = ellipsis ? renderEllipsisText(ellipsisOpt) : children;
     const linkCls = cls({
       [`${prefixCls}-link-text`]: link,
@@ -601,13 +610,13 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
     return (
       <Typography
         className={wrapperCls}
-        style={{ ...style, ...ellipsisStyle }}
+        style={{...style, ...ellipsisStyle}}
         component_={component_}
         forwardRef={wrapperRef}
         {...textProps}
       >
         {{
-          default:()=>{
+          default: () => {
             return <>
               {textNode}
               {renderOperations()}
@@ -620,20 +629,20 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
 
 
   function renderTipWrapper() {
-    const children = slots.default?slots.default():null;
+    const children = slots.default ? slots.default() : null;
     const showTooltip_ = showTooltip();
     const content = renderContent();
     if (showTooltip_) {
-      const { type, opts } = showTooltip_ as ShowTooltip;
+      const {type, opts} = showTooltip_ as ShowTooltip;
       if (type.toLowerCase() === 'popover') {
         return (
-          <Popover content={children?children[0]:null} position="top" {...opts}>
+          <Popover content={children ? children[0] : null} position="top" {...opts}>
             {content}
           </Popover>
         );
       }
       return (
-        <Tooltip content={children?children[0]:null} position="top" {...opts}>
+        <Tooltip content={children ? children[0] : null} position="top" {...opts}>
           {content}
         </Tooltip>
       );
@@ -647,7 +656,7 @@ function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTyp
     return (
       <LocaleConsumerDom componentName={"Typography"}>
         {{
-          default:(locale: Locale['Typography']) => {
+          default: (locale: Locale['Typography']) => {
             expandStr = locale.expand;
             collapseStr = locale.collapse;
             // // console.debug(locale)

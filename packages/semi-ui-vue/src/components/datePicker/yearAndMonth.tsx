@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, useSlots, reactive} from 'vue'
+import {defineComponent, ref, h, Fragment, useSlots, reactive, watch} from 'vue'
 
 import YearAndMonthFoundation, { MonthScrollItem, YearAndMonthAdapter, YearAndMonthFoundationProps, YearAndMonthFoundationState, YearScrollItem } from '@douyinfe/semi-foundation/datePicker/yearAndMonthFoundation';
 import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
@@ -97,6 +97,7 @@ const yearAndMonth = defineComponent<YearAndMonthProps>((props, {}) => {
     };
   }
 
+  // ok
   function getDerivedStateFromProps(props: YearAndMonthProps, state: YearAndMonthState) {
     const willUpdateStates: Partial<YearAndMonthState> = {};
     const now = new Date();
@@ -111,6 +112,14 @@ const yearAndMonth = defineComponent<YearAndMonthProps>((props, {}) => {
 
     return willUpdateStates;
   }
+  watch([()=>props.currentMonth, ()=>props.currentYear], (val)=>{
+    const newState = getDerivedStateFromProps(props, state)
+    if (newState){
+      Object.keys(newState).forEach(key=>{
+        state[key] = newState[key]
+      })
+    }
+  })
 
   function renderColYear() {
     const { years, currentYear, currentMonth } = state;

@@ -439,6 +439,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     };
   }
 
+  // watch props OK
   function getDerivedStateFromProps(props: CascaderProps, prevState: CascaderState) {
     const {
       multiple,
@@ -521,6 +522,12 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     }
     return newState;
   }
+  watch(()=>props, (val)=>{
+    const newState = getDerivedStateFromProps(props, state)
+    Object.keys(newState).forEach(key=>{
+      state[key] = newState[key]
+    })
+  }, {deep: true})
 
   onMounted(()=>{
     foundation.init();
