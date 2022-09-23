@@ -63,6 +63,9 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 ### 安装依赖
 > `pnpm install`
 
+### 打包
+> `pnpm build:lib`
+
 ### 运行
 > `pnpm dev`
 
@@ -103,7 +106,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 
 - [ ] Anchor
 - [ ] BackTop
-- [ ] Breadcrumb
+- [x] Breadcrumb
 - [x] Navigation
 - [ ] Pagination
 - [ ] Steps
@@ -144,8 +147,8 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 
 ### 其他
 
-- [ ] ConfigProvider
-- [ ] LocaleProvider
+- [x] ConfigProvider
+- [x] LocaleProvider
 
 
 
