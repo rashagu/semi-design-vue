@@ -1,6 +1,6 @@
 import './_base/base.scss';
 export { default as Button } from './button';
-export { default as ButtonGroup } from './button/buttonGroup';
+export { default as ButtonGroup } from './button/ButtonGroup';
 export { default as ConfigProvider } from './configProvider';
 export { DropdownMenu, DropdownItem, DropdownDivider, DropdownTitle,Dropdown } from './dropdown';
 export { Row, Col } from './grid';
@@ -11,9 +11,9 @@ export { default as Icon } from './icons';
 export { default as Popover } from './popover';
 export { default as Space } from './space';
 export { default as Spin } from './spin';
-export { default as SplitButtonGroup } from './button/splitButtonGroup';
+export { default as SplitButtonGroup } from './button/SplitButtonGroup';
 export { default as Tooltip } from './tooltip';
-export { default as LocaleProvider } from './locale/localeProvider';
+export { default as LocaleProvider } from './locale/LocaleProvider';
 
 
 export {
@@ -41,3 +41,4 @@ export { default as Select  } from './select';
 export { default as Tag  } from './tag';
 export { default as TagInput  } from './tagInput';
 export { default as TimePicker  } from './timePicker';
+export { default as Nav  } from './navigation/index';
