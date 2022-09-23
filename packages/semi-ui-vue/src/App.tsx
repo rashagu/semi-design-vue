@@ -25,6 +25,7 @@ import ConfigProvider from "./components/configProvider";
 // import {UseVirtualList} from "@vueuse/components";
 import zh_CN from './components/locale/source/zh_CN';
 import NavigationDemo from "./components/navigation/__test__/NavigationDemo";
+import BreadcrumbDemo from "./components/breadcrumb/__test__/BreadcrumbDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -38,39 +39,40 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider getPopupContainer={() => document.querySelector('.test')} locale={zh_CN}>
-        <DatePickerDemo />
-        <TimePickerDemo />
-        <ScrollListDemo />
-        <CascaderDemo/>
-        <CheckboxDemo />
-        <TagInputDemo />
+        <BreadcrumbDemo/>
+        {/*<DatePickerDemo />*/}
+        {/*<TimePickerDemo />*/}
+        {/*<ScrollListDemo />*/}
+        {/*<CascaderDemo/>*/}
+        {/*<CheckboxDemo />*/}
+        {/*<TagInputDemo />*/}
 
         {/*// TODO 样式好像有问题*/}
-        <AutoCompleteItemsDemo/>
-        <SelectDemo/>
-        <TagDemo/>
-        <AvatarDemo/>
-        <RadioDemo />
+        {/*<AutoCompleteItemsDemo/>*/}
+        {/*<SelectDemo/>*/}
+        {/*<TagDemo/>*/}
+        {/*<AvatarDemo/>*/}
+        {/*<RadioDemo />*/}
 
-        <InputDemo />
-        <TypeDemo />
+        {/*<InputDemo />*/}
+        {/*<TypeDemo />*/}
 
-        <div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>
-          <Button />
-        </div>
+        {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
+        {/*  <Button />*/}
+        {/*</div>*/}
 
-        <IconTest />
-        <br/>
-        <TootipDemo />
-        <br/>
-        <br/>
-        <DropdownDemo1/>
-        <br/>
-        <GridTest />
-        <LayoutTest/>
-        <SpaceTest/>
-        <PopoverTest />
-        <NavigationDemo />
+        {/*<IconTest />*/}
+        {/*<br/>*/}
+        {/*<TootipDemo />*/}
+        {/*<br/>*/}
+        {/*<br/>*/}
+        {/*<DropdownDemo1/>*/}
+        {/*<br/>*/}
+        {/*<GridTest />*/}
+        {/*<LayoutTest/>*/}
+        {/*<SpaceTest/>*/}
+        {/*<PopoverTest />*/}
+        {/*<NavigationDemo />*/}
         <div class={'aa'}>123</div>
       </ConfigProvider>
     </div>
