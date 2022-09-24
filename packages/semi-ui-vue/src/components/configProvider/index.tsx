@@ -16,7 +16,7 @@ export const vuePropsType = {
   getPopupContainer: Function,
   direction: {type:String, default:'ltr'},
 }
-const Index = defineComponent<ConfigProviderProps>((props, {slots}) => {
+const ConfigProvider = defineComponent<ConfigProviderProps>((props, {slots}) => {
 
   function renderChildren() {
     const { direction,} = props;
@@ -45,7 +45,7 @@ const Index = defineComponent<ConfigProviderProps>((props, {slots}) => {
   }
 })
 
-Index.props = vuePropsType
-
-export default Index
+ConfigProvider.props = vuePropsType
+ConfigProvider.name = 'ConfigProvider'
+export default ConfigProvider
 
