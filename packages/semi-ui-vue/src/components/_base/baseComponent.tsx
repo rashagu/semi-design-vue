@@ -3,7 +3,7 @@ import baseLog from '@douyinfe/semi-foundation/utils/log';
 import {DefaultAdapter} from '@douyinfe/semi-foundation/base/foundation';
 import {VALIDATE_STATUS} from '@douyinfe/semi-foundation/base/constants';
 import {ArrayElement} from './base';
-import {ContextValue} from "../configProvider/ConfigContextProvider";
+import type {ContextValue} from "../configProvider/context";
 
 const {hasOwnProperty} = Object.prototype;
 

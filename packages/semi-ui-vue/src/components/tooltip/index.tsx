@@ -30,7 +30,6 @@ import {isHTMLElement} from '../_base/reactUtils';
 import {getActiveElement, getFocusableElements, stopPropagation} from '../_utils';
 import {getUuidShort} from '@douyinfe/semi-foundation/utils/uuid';
 import Portal from '../_portal/Index';
-import ConfigContext, {ContextValue} from '../configProvider/ConfigContextProvider';
 import TriangleArrow from './TriangleArrow';
 import TriangleArrowVertical from './TriangleArrowVertical';
 import TooltipTransition from './TooltipStyledTransition';

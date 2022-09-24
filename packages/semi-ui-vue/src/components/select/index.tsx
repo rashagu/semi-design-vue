@@ -13,7 +13,6 @@ import {
 } from 'vue'
 import {FixedSizeList as List} from '@kousum/vue3-window'
 import cls from 'classnames';
-import ConfigContext from '../configProvider/ConfigContextProvider';
 import SelectFoundation, {SelectAdapter} from '@douyinfe/semi-foundation/select/foundation';
 import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/select/constants';
 import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
@@ -368,8 +367,6 @@ export const vuePropsType = {
   // renderCreateItem: (input) => input
 }
 const Index = defineComponent<SelectProps>((props, {slots}) => {
-  let contextType = ConfigContext;
-  let OptGroup = OptionGroup;
 
   const state = reactive({
     isOpen: false,

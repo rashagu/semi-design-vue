@@ -2,7 +2,6 @@ import {defineComponent, ref, h, Fragment, VNode, CSSProperties, inject} from 'v
 
 import classNames from 'classnames';
 
-import ConfigContext from '../configProvider/ConfigContextProvider';
 import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/popover/constants';
 import Tooltip, {ArrowBounding,  Trigger} from '../tooltip';
 import { Position } from '@douyinfe/semi-foundation/tooltip/foundation';

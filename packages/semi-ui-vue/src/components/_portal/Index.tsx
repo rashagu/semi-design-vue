@@ -14,8 +14,8 @@ import {
 import { BASE_CLASS_PREFIX } from '@douyinfe/semi-foundation/base/constants';
 
 import classnames from 'classnames';
-import ConfigContext from '../configProvider/ConfigContextProvider';
 import '@douyinfe/semi-foundation/_portal/portal.scss';
+import {useConfigContext} from "../configProvider/context/Consumer";
 
 export interface PortalProps {
   style?: CSSProperties;
@@ -45,8 +45,7 @@ export const vuePropsType = {
 }
 
 const Index = defineComponent<PortalProps>((props, {slots}) => {
-  const contextType = ConfigContext;
-  const context = ConfigContext
+  const {context} = useConfigContext()
   let el: HTMLElement;
   const containerRef = ref(undefined);
   onBeforeMount(()=>{
@@ -62,7 +61,7 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
       el = document.createElement('div');
     }
 
-    const getContainer = props.getPopupContainer || context.getPopupContainer || defaultGetContainer;
+    const getContainer = props.getPopupContainer || context.value.getPopupContainer || defaultGetContainer;
     const container = getContainer();
     // console.log(container)
     if (container !== containerRef.value) {
@@ -97,7 +96,7 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
     }
   };
   const addClass = (prefixCls: string, ...classNames: string[]) => {
-    const { direction } = context;
+    const { direction } = context.value;
     const cls = classnames(prefixCls, ...classNames, {
       [`${prefixCls}-rtl`]: direction === 'rtl'
     });

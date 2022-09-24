@@ -3,7 +3,6 @@ import * as PropTypes from '../PropTypes';
 import classNames from 'classnames';
 import {noop, get, values} from 'lodash';
 
-import ConfigContext from '../configProvider/ConfigContextProvider';
 import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import {strings, cssClasses} from '@douyinfe/semi-foundation/timePicker/constants';
 import Popover from '../popover';

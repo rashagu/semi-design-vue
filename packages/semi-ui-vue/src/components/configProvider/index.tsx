@@ -1,10 +1,11 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
 import { BASE_CLASS_PREFIX } from '@douyinfe/semi-foundation/base/constants';
 import DefaultLocale from '../locale/source/zh_CN';
-import Context, {ConfigContextVNode, ContextValue} from './ConfigContextProvider';
+import Context from './context';
+import type {ContextValue} from './context';
 
 
-// eslint-disable-next-line
+
 export interface ConfigProviderProps extends ContextValue {}
 
 export const vuePropsType = {
@@ -32,15 +33,18 @@ const ConfigProvider = defineComponent<ConfigProviderProps>((props, {slots}) => 
   return () => {
 
     const { direction, ...rest } = props;
+    console.log(props)
     return (
-      <ConfigContextVNode
+      <Context.Provider
         value={{
           direction,
           ...rest,
         }}
       >
-        {renderChildren()}
-      </ConfigContextVNode>
+        {{
+          default: renderChildren
+        }}
+      </Context.Provider>
     );
   }
 })

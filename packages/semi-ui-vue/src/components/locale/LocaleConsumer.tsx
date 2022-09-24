@@ -1,9 +1,9 @@
-import {defineComponent, ref, h, Fragment, VNode, inject} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, inject, Ref} from 'vue'
 import { Locale as dateFns } from 'date-fns';
 
 import { get } from 'lodash';
 import LocaleContext from './Context';
-import ConfigContextConsumer from '../configProvider/ConfigContextConsumer';
+import Context, {ContextValue} from '../configProvider/context';
 
 import DefaultLocale from './source/zh_CN';
 import { Locale } from './interface';
@@ -50,17 +50,19 @@ function LocaleConsumer<T>(){
 
     return () => {
       return (
-        <ConfigContextConsumer>
+        <Context.Consumer>
           {{
-            default:(locale:any) => (
-              <LocaleContext.Consumer>
-                {{
-                  default: localeData => renderChildren(locale || localeData, slots.default)
-                }}
-              </LocaleContext.Consumer>
-            )
+            default:(locale: Ref<ContextValue>) => {
+              return (
+                <LocaleContext.Consumer>
+                  {{
+                    default: localeData => renderChildren(locale.value.locale || localeData, slots.default)
+                  }}
+                </LocaleContext.Consumer>
+              )
+            }
           }}
-        </ConfigContextConsumer>
+        </Context.Consumer>
       )
     }
   })

@@ -4,7 +4,7 @@ import { numbers, strings } from '@douyinfe/semi-foundation/datePicker/constants
 import DatePicker, {DatePickerProps, vuePropsTypeDatePickerProps} from './datePicker';
 import LocaleConsumer_ from '../locale/LocaleConsumer';
 import type { Locale } from '../locale/interface';
-import ConfigContextConsumer from "../configProvider/ConfigContextConsumer";
+import Context from "../configProvider/context";
 
 export type { DateInputProps } from './dateInput';
 export type { DatePickerProps } from './datePicker';
@@ -53,7 +53,7 @@ const index = defineComponent<DatePickerProps>((props, {}) => {
 
 
   return () => (
-    <ConfigContextConsumer>
+    <Context.Consumer>
       {({ timeZone }: { timeZone?: string | number }) => (
         <LocaleConsumer componentName={'DatePicker'}>
           {(locale: Locale['DatePicker'], localeCode: string, dateFnsLocale: Locale['dateFnsLocale']) => {
@@ -71,7 +71,7 @@ const index = defineComponent<DatePickerProps>((props, {}) => {
           }}
         </LocaleConsumer>
       )}
-    </ConfigContextConsumer>
+    </Context.Consumer>
   )
 })
 
