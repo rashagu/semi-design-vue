@@ -15,8 +15,8 @@ const sizeSet = strings.SIZE;
 const statusSet = strings.STATUS;
 const modeSet = strings.MODE;
 
-import type { InputGroupProps } from './inputGroup';
-import type { TextAreaProps } from './textarea';
+import type { InputGroupProps } from './InputGroup';
+import type { TextAreaProps } from './TextArea';
 export type { TextAreaProps , InputGroupProps}
 
 export type InputSize = 'small' | 'large' | 'default';
