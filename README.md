@@ -11,7 +11,7 @@
 [license-badge]: https://img.shields.io/npm/l/@kousum/semi-ui-vue
 [license-url]: https://github.com/rashagu/semi-design-vue/blob/dev/LICENSE
 
-[ci-badge]: https://github.com/rashagu/semi-design-vue/workflows/test/badge.svg?branch=dev&event=push
+[ci-badge]: https://github.com/rashagu/semi-design-vue/workflows/test/badge.svg?branch=master&event=push
 [ci-url]: https://github.com/rashagu/semi-design-vue/actions?query=branch%3Adev+event%3Apush
 
 
