@@ -70,6 +70,7 @@ export interface InputProps extends
   forwardRef?: ((instance: any) => void) | any | null;
   minlength?: number,
   maxlength?: number,
+  preventScroll?: boolean,
 }
 
 export interface InputState {
@@ -154,6 +155,10 @@ export const VuePropsType = {
   getValueLength: {type:Function, default:noop},
   minlength: Number,
   maxlength: Number,
+  preventScroll: {
+    type: Boolean,
+    default: undefined
+  }
 }
 
 export interface InputState {
