@@ -4,7 +4,9 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "pnpm -C ./packages/semi-ui-vue dev",
-    "test": "vitest",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest watch",
+    "test:watch": "vitest watch",
     "build:lib": "pnpm -C ./packages/semi-animation-vue build:lib & pnpm -C ./packages/semi-icons-vue build:lib & pnpm -C ./packages/semi-illustrations-vue build:lib & pnpm -C ./packages/semi-ui-vue build:lib",
     "pre": "build:lib",
     "build:publish": "pnpm build:lib & pnpm publish -r",
