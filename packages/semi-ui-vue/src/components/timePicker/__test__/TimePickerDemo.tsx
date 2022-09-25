@@ -13,7 +13,7 @@ const TimePickerDemo = defineComponent<ExampleProps>((props, {}) => {
 
   return () => (
     <div>
-      <TimePicker />
+      <TimePicker placeholder={'请选择时间'} />
     </div>
   )
 })

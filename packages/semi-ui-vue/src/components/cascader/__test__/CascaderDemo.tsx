@@ -8,7 +8,6 @@ export const vuePropsType = {
   name: String
 }
 const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
-  const slots = useSlots()
   const treeData = [
     {
       label: '浙江省',

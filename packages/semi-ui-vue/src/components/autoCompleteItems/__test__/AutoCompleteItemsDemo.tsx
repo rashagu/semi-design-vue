@@ -34,7 +34,6 @@ const AutoCompleteItemsDemo = defineComponent<ExampleProps>((props, {slots}) => 
   return ()=>{
     return (
       <div>
-
         <AutoComplete
           data={stringData.value}
           value={value.value}
