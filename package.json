@@ -6,7 +6,6 @@
     "dev": "pnpm -C ./packages/semi-ui-vue dev",
     "test": "vitest run --coverage",
     "test:watch": "vitest watch",
-    "test:watch": "vitest watch",
     "build:lib": "pnpm -C ./packages/semi-animation-vue build:lib & pnpm -C ./packages/semi-icons-vue build:lib & pnpm -C ./packages/semi-illustrations-vue build:lib & pnpm -C ./packages/semi-ui-vue build:lib",
     "pre": "build:lib",
     "build:publish": "pnpm build:lib & pnpm publish -r",
@@ -65,16 +64,17 @@
     "@svgr/plugin-svgo": "5.5.0",
     "@svgr/webpack": "5.5.0",
     "@types/node": "^17.0.36",
-    "@vue/test-utils": "^2.0.2",
-    "jsdom": "^20.0.0",
     "@vitejs/plugin-vue": "^3.1.0",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
-    "vite": "^3.1.0",
+    "@vitest/coverage-c8": "^0.23.4",
+    "@vue/test-utils": "^2.0.2",
     "camelcase": "^6.3.0",
+    "jsdom": "^20.0.0",
     "prettier": "^1.19.1",
     "svgo": "2.7.0",
     "ts-node": "^10.5.0",
     "tslib": "^2.3.1",
+    "vite": "^3.1.0",
     "vitest": "^0.23.4"
   }
 }
