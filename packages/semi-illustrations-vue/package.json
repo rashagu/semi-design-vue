@@ -19,7 +19,7 @@
     "@douyinfe/semi-foundation": "2.20.3",
     "@douyinfe/semi-theme-default": "2.20.3",
     "classnames": "^2.3.1",
-    "vue": "^3.2.23"
+    "vue": "^3.2.40"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.17.2",

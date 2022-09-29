@@ -35,7 +35,7 @@
     "@douyinfe/semi-theme-default": "^2.7.1",
     "classnames": "^2.3.1",
     "sass": "^1.44.0",
-    "vue": "^3.2.26"
+    "vue": "^3.2.40"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
