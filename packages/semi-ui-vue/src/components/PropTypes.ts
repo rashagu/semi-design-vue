@@ -12,6 +12,9 @@ export const node = [Array, Object, String, Number];
 export const element = [Array, Object, String, Number];
 export const symbol = Object;
 
+export function oneOfType(arr:any[]) {
+  return [...arr]
+}
 
 
 export function vuePropsMake(typeObj:{[key:string]: any}, defaultProps:{[key:string]: any}) {
@@ -20,9 +23,10 @@ export function vuePropsMake(typeObj:{[key:string]: any}, defaultProps:{[key:str
     if (typeObj[typeKey].hasOwnProperty('default') || !defaultProps.hasOwnProperty(typeKey)) {
         obj[typeKey] = typeObj[typeKey]
     } else {
+      let defaultValue = typeof defaultProps[typeKey] === 'object' || typeof defaultProps[typeKey] === 'function' ? () => defaultProps[typeKey] : defaultProps[typeKey]
       obj[typeKey] = {
         type: typeObj[typeKey],
-        default: typeof defaultProps[typeKey] === 'object' ? () => defaultProps[typeKey] : defaultProps[typeKey],
+        default: defaultValue,
       }
       // if (obj[typeKey].type.type){
       //   console.log(obj,typeObj,typeObj.hasOwnProperty('default'))
