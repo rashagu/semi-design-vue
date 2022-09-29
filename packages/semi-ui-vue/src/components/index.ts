@@ -13,7 +13,7 @@ export { default as Space } from './space';
 export { default as Spin } from './spin';
 export { default as SplitButtonGroup } from './button/SplitButtonGroup';
 export { default as Tooltip } from './tooltip';
-export { default as LocaleProvider } from './locale/LocaleProvider';
+export { default as LocaleProvider } from './locale/localeProvider';
 
 
 export {

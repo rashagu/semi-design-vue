@@ -21,7 +21,7 @@ import Popover from '../popover';
 import getRenderText from './util';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
-import LocaleConsumer_ from '../locale/LocaleConsumer';
+import LocaleConsumer_ from '../locale/localeConsumer';
 import {Locale} from '../locale/interface';
 import {Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseType} from './interface';
 import {CopyableConfig, LinkType} from './Title';

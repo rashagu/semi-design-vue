@@ -3,7 +3,7 @@ import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/cascader/constants';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 import { includes } from 'lodash';
-import LocaleConsumer_ from '../locale/LocaleConsumer';
+import LocaleConsumer_ from '../locale/localeConsumer';
 import { IconChevronRight, IconTick } from '@kousum/semi-icons-vue';
 import { Locale } from '../locale/interface';
 import Spin from '../spin';

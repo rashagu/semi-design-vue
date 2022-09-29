@@ -27,7 +27,7 @@ import NavContext from './nav-context';
 import '@douyinfe/semi-foundation/navigation/navigation.scss';
 import {Motion} from '../_base/base';
 import {vuePropsMake} from "../PropTypes";
-import LocaleConsumer_ from "../locale/LocaleConsumer";
+import LocaleConsumer_ from "../locale/localeConsumer";
 const LocaleConsumer = LocaleConsumer_()
 import type {CollapseButtonProps} from './CollapseButton';
 import type {NavFooterProps} from './Footer';

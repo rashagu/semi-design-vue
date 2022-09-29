@@ -4,7 +4,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/typography/constants';
 import copyModel from 'copy-text-to-clipboard';
 import cls from 'classnames';
 import { noop } from '@douyinfe/semi-foundation/utils/function';
-import LocaleConsumer from '../locale/LocaleConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import { IconCopy, IconTick } from '@kousum/semi-icons-vue';
 import { BaseProps } from '../_base/baseComponent';
 import { Locale } from '../locale/interface';
