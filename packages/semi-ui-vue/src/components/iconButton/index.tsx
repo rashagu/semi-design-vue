@@ -65,7 +65,6 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
 
 
   return () => {
-    console.log(slots.default, slots.default?.())
     return (
       <Button {...otherProps} className={classNames(className, `${prefixCls}-with-icon`, {
         [`${prefixCls}-with-icon-only`]: !slots.default || !slots.default(),
