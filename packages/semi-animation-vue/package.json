@@ -29,9 +29,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@douyinfe/semi-animation": "2.20.0",
-    "@douyinfe/semi-animation-styled": "2.20.0",
-    "@douyinfe/semi-foundation": "2.20.0",
+    "@douyinfe/semi-animation": "2.20.3",
+    "@douyinfe/semi-animation-styled": "2.20.3",
+    "@douyinfe/semi-foundation": "2.20.3",
     "@douyinfe/semi-theme-default": "^2.7.1",
     "classnames": "^2.3.1",
     "sass": "^1.44.0",

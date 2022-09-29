@@ -10,8 +10,8 @@ importers:
       '@babel/preset-env': ^7.18.2
       '@babel/preset-react': ^7.16.7
       '@changesets/cli': ^2.22.0
-      '@douyinfe/semi-foundation': 2.20.0
-      '@douyinfe/semi-theme-default': 2.20.0
+      '@douyinfe/semi-foundation': 2.20.3
+      '@douyinfe/semi-theme-default': 2.20.3
       '@svgr/babel-plugin-add-jsx-attribute': 5.4.0
       '@svgr/babel-plugin-remove-jsx-attribute': 5.4.0
       '@svgr/babel-plugin-remove-jsx-empty-expression': 5.0.1
@@ -52,8 +52,8 @@ importers:
       vue-loader: ^16.8.3
       vue-tsc: ^0.40.13
     dependencies:
-      '@douyinfe/semi-foundation': 2.20.0
-      '@douyinfe/semi-theme-default': 2.20.0
+      '@douyinfe/semi-foundation': 2.20.3
+      '@douyinfe/semi-theme-default': 2.20.3
       babel-loader: 8.2.5_z22tmofudeh3tyeifpjvwjl5ei
       css-loader: 6.7.1_webpack@5.74.0
       lodash: 4.17.21
@@ -108,9 +108,9 @@ importers:
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/preset-react': ^7.16.7
-      '@douyinfe/semi-animation': 2.20.0
-      '@douyinfe/semi-animation-styled': 2.20.0
-      '@douyinfe/semi-foundation': 2.20.0
+      '@douyinfe/semi-animation': 2.20.3
+      '@douyinfe/semi-animation-styled': 2.20.3
+      '@douyinfe/semi-foundation': 2.20.3
       '@douyinfe/semi-theme-default': ^2.7.1
       '@types/node': ^17.0.0
       '@vitejs/plugin-vue': ^3.1.0
@@ -135,9 +135,9 @@ importers:
       vue: ^3.2.26
       vue-tsc: ^0.40.13
     dependencies:
-      '@douyinfe/semi-animation': 2.20.0
-      '@douyinfe/semi-animation-styled': 2.20.0
-      '@douyinfe/semi-foundation': 2.20.0
+      '@douyinfe/semi-animation': 2.20.3
+      '@douyinfe/semi-animation-styled': 2.20.3
+      '@douyinfe/semi-foundation': 2.20.3
       '@douyinfe/semi-theme-default': 2.19.0
       classnames: 2.3.1
       sass: 1.54.9
@@ -174,8 +174,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/preset-react': ^7.16.7
-      '@douyinfe/semi-foundation': 2.20.0
-      '@douyinfe/semi-theme-default': 2.20.0
+      '@douyinfe/semi-foundation': 2.20.3
+      '@douyinfe/semi-theme-default': 2.20.3
       '@vitejs/plugin-vue': ^3.1.0
       '@vitejs/plugin-vue-jsx': ^2.0.1
       camelcase: ^6.3.0
@@ -198,8 +198,8 @@ importers:
       vue: ^3.2.23
       vue-tsc: ^0.40.13
     dependencies:
-      '@douyinfe/semi-foundation': 2.20.0
-      '@douyinfe/semi-theme-default': 2.20.0
+      '@douyinfe/semi-foundation': 2.20.3
+      '@douyinfe/semi-theme-default': 2.20.3
       classnames: 2.3.1
       sass: 1.54.9
       vue: 3.2.39
@@ -233,8 +233,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/preset-react': ^7.16.7
-      '@douyinfe/semi-foundation': 2.20.0
-      '@douyinfe/semi-theme-default': 2.20.0
+      '@douyinfe/semi-foundation': 2.20.3
+      '@douyinfe/semi-theme-default': 2.20.3
       '@vitejs/plugin-vue': ^3.1.0
       '@vitejs/plugin-vue-jsx': ^2.0.1
       camelcase: ^6.3.0
@@ -257,8 +257,8 @@ importers:
       vue: ^3.2.23
       vue-tsc: ^0.40.13
     dependencies:
-      '@douyinfe/semi-foundation': 2.20.0
-      '@douyinfe/semi-theme-default': 2.20.0
+      '@douyinfe/semi-foundation': 2.20.3
+      '@douyinfe/semi-theme-default': 2.20.3
       classnames: 2.3.1
       vue: 3.2.39
     devDependencies:
@@ -292,8 +292,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/preset-react': ^7.16.7
-      '@douyinfe/semi-foundation': 2.20.0
-      '@douyinfe/semi-theme-default': 2.20.0
+      '@douyinfe/semi-foundation': 2.20.3
+      '@douyinfe/semi-theme-default': 2.20.3
       '@kousum/semi-animation-vue': ^0.0.3
       '@kousum/semi-icons-vue': ^0.0.3
       '@kousum/semi-illustrations-vue': ^0.0.3
@@ -331,8 +331,8 @@ importers:
       vue: ^3.2.39
       vue-tsc: ^0.40.13
     dependencies:
-      '@douyinfe/semi-foundation': 2.20.0
-      '@douyinfe/semi-theme-default': 2.20.0
+      '@douyinfe/semi-foundation': 2.20.3
+      '@douyinfe/semi-theme-default': 2.20.3
       '@kousum/semi-animation-vue': link:../semi-animation-vue
       '@kousum/semi-icons-vue': link:../semi-icons-vue
       '@kousum/semi-illustrations-vue': link:../semi-illustrations-vue
@@ -1860,8 +1860,8 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
-  /@douyinfe/semi-animation-styled/2.20.0:
-    resolution: {integrity: sha512-j53k17IdftLvgw0Ww3BSwzAX9IdKr1P6nPLsCIqnIppjesLJ0lwfc64kHVyRPtcEIs1mkc/GlIzloDTkyGXmLw==}
+  /@douyinfe/semi-animation-styled/2.20.3:
+    resolution: {integrity: sha512-a99dAfr7+LkXBZwMzx5Lr2sMmucuzV5y3ht10nIfOMQ5jn2qJNaR/duBjKickzVVf5TGkNxhOf10/f2nOTfW+Q==}
     dev: false
 
   /@douyinfe/semi-animation/2.12.0:
@@ -1871,14 +1871,14 @@ packages:
       bezier-easing: 2.1.0
     dev: false
 
-  /@douyinfe/semi-animation/2.20.0:
-    resolution: {integrity: sha512-UUxJQiLKHIn2+RAQ09ORCWaPqGjtVLj0Gu5MYrL15CQDWQkdk2FZRjk4zgXqZ8Xmsf0M/NBRhd20MHlGj/cemA==}
+  /@douyinfe/semi-animation/2.20.3:
+    resolution: {integrity: sha512-IJ7BoR1fzv9bKp6nn7qSLfWrQztclfi7rTyehtSLG7qJH+YzXuCmqR1sday4W8Gr2FSpABEQDUe+AqMquTh1+g==}
     dependencies:
       bezier-easing: 2.1.0
     dev: false
 
-  /@douyinfe/semi-foundation/2.20.0:
-    resolution: {integrity: sha512-TssBXYPf3ySu7oCt58aeku2ZovxFSkzfJVPB3UpnKNNBnusBzqbUQxjz7YRZES93gyBBRgEnrWk975jUQEjlgw==}
+  /@douyinfe/semi-foundation/2.20.3:
+    resolution: {integrity: sha512-/FFXaP0tzkthshv/tEbuPBlYHTp+H6CQEqVFLydK4i2JPa3nKMx1cmvd52WkyZPBiTbhYY/bdG0sHn5TKqP+bQ==}
     dependencies:
       '@douyinfe/semi-animation': 2.12.0
       async-validator: 3.5.2
@@ -1896,8 +1896,8 @@ packages:
       glob: 7.2.3
     dev: false
 
-  /@douyinfe/semi-theme-default/2.20.0:
-    resolution: {integrity: sha512-rFV+QAR4zXx7qmQnE2o/hVTUjvQKKLMaiUiflWynEXkfQsokv5AGht5fyKcOh/nHrigCk+sQOAysGK/FOVkObQ==}
+  /@douyinfe/semi-theme-default/2.20.3:
+    resolution: {integrity: sha512-G0j4ZbkSQvc6eetZV3P39ly5YhSMo+CqOyHnctoV1EZhMIrUQ+RC3SPFnXrP61oNl9ETZZBRhkzB8HhDJQ0eFA==}
     dependencies:
       glob: 7.2.3
     dev: false
