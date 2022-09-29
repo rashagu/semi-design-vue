@@ -26,6 +26,7 @@
   "dependencies": {
     "@douyinfe/semi-foundation": "2.20.3",
     "@douyinfe/semi-theme-default": "2.20.3",
+    "@douyinfe/semi-animation": "2.20.3",
     "@kousum/semi-animation-vue": "^0.0.3",
     "@kousum/semi-icons-vue": "^0.0.3",
     "@kousum/semi-illustrations-vue": "^0.0.3",
@@ -43,7 +44,7 @@
     "sass": "^1.44.0",
     "scroll-into-view-if-needed": "^2.2.28",
     "utility-types": "^3.10.0",
-    "vue": "^3.2.39"
+    "vue": "^3.2.40"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.17.2",
