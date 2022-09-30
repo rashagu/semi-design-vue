@@ -313,6 +313,8 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         // There is no guarantee that triggerE l.current can get the real dom, so call findDOMNode to ensure that you can get the real dom
 
 
+
+        console.log(triggerEl.value)
         return triggerEl.value && triggerEl.value.getBoundingClientRect();
       },
       // Gets the outer size of the specified container
@@ -772,7 +774,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         ...get(children, 'props.style'),
         ...extraStyle,
       },
-      className: classNames(
+      class: classNames(
         get(children, 'props.className')
         // `${prefixCls}-trigger`
       ),

@@ -27,6 +27,7 @@ import zh_CN from './components/locale/source/zh_CN';
 import NavigationDemo from "./components/navigation/__test__/NavigationDemo";
 import BreadcrumbDemo from "./components/breadcrumb/__test__/BreadcrumbDemo";
 import InputNumberDemo from "./components/inputNumber/__test__/InputNumberDemo";
+import SliderDemo from "./components/slider/__test__/SliderDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -40,7 +41,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <InputNumberDemo />
+        <SliderDemo />
+        {/*<InputNumberDemo />*/}
         {/*<BreadcrumbDemo/>*/}
         {/*<DatePickerDemo />*/}
         {/*<TimePickerDemo />*/}
