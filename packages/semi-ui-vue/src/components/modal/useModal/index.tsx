@@ -1,7 +1,7 @@
 import HookModal from './HookModal';
 import {ConfirmProps, withConfirm, withError, withInfo, withSuccess, withWarning} from '../confirm';
 import {ModalReactProps} from '../Modal';
-import {h, Ref, ref, VNode, Fragment, watch} from "vue";
+import {h, Ref, ref, VNode, Fragment, watch } from "vue";
 
 type Node = VNode
 let uuid = 0;
@@ -54,12 +54,13 @@ export default function useModal(): [{
 
       return {
         destroy: () => {
-          console.log(modal.component)
-          if (modal) {
+          const index = elements.value.findIndex(item=>item === modal)
+          elements.value.splice(index, 1)
+          // if (modal) {
             // 没有销毁方法 ？
             // console.log(modal.destroy)
             // modal.destroy();
-          }
+          // }
         },
         update: (newConfig: ConfirmProps) => {
           if (modal) {
@@ -70,9 +71,7 @@ export default function useModal(): [{
     };
   }
 
-  watch(elements, () => {
-    console.log(elements.value)
-  })
+
 
   return [
     {

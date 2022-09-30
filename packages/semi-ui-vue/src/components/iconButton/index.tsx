@@ -119,8 +119,16 @@ export const VuePropsType = {
   },
   className: String,
   disabled: Boolean,
-  noHorizontalPadding: [Boolean, String, Array],
-  prefixCls: String,
+  noHorizontalPadding: {
+    type: [Boolean, String, Array],
+    default: false //  true same as ['left', 'right']
+  },
+  prefixCls: {
+    type: String,
+    default : cssClasses.PREFIX,
+  },
+  onMouseEnter: noop,
+  onMouseLeave: noop,
 }
 
 Index.props = VuePropsType

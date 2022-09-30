@@ -93,10 +93,12 @@ const propTypes = {
     lazyRender: PropTypes.bool,
     keepDOM: PropTypes.bool,
     direction: PropTypes.any,
-    fullScreen: PropTypes.bool
+    fullScreen: PropTypes.bool,
+    onClose: Function
 };
 const defaultProps = {
     close: noop,
+    onClose: noop,
     getContainerContext: noop,
     contentClassName: '',
     maskClassName: ''

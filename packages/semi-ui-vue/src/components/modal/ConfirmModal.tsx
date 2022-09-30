@@ -183,9 +183,6 @@ const ConfirmModal = defineComponent<ConfirmProps>((props, {}) => {
     }
   );
 
-  onUnmounted(()=>{
-    console.log('销毁')
-  })
 
   return () => {
 
@@ -207,7 +204,6 @@ const ConfirmModal = defineComponent<ConfirmProps>((props, {}) => {
       [`${confirmCls}-content-withIcon`]: props.icon,
     });
 
-    console.log(rest)
     return (
       <Modal
         {

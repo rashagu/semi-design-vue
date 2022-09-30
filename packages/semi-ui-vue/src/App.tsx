@@ -45,9 +45,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        {/*<ModalDemoHook />*/}
+        <ModalDemoHook />
         <ModalDemoConfirm/>
-        {/*<ModalDemo/>*/}
+        <ModalDemo/>
         {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}

@@ -2,7 +2,7 @@ import ConfirmModal from '../ConfirmModal';
 import { get } from 'lodash';
 import { ConfirmProps } from '../confirm';
 import { Motion } from '../../_base/base';
-import {defineComponent, h, onUnmounted, ref, unref, useSlots} from "vue";
+import {defineComponent, h, ref, useSlots} from "vue";
 
 interface HookModalProps {
     afterClose: (...args: any[]) => void;
@@ -30,9 +30,6 @@ const HookModal = defineComponent<HookModalProps>((props_, {expose}) => {
     const { afterClose, config, ...props } = props_
     const innerConfig = ref<ConfirmProps>(config);
 
-    onUnmounted(()=>{
-
-    })
     expose({
         destroy: () => {
             innerConfig.value = {

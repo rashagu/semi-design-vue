@@ -11,7 +11,11 @@ import {
   IconTickCircle
 } from '@kousum/semi-icons-vue';
 import {Motion} from '../_base/base';
-import {createVNode, h, ref, render as vueRender, Component, getCurrentInstance, VNode, nextTick} from "vue";
+import {
+  h,
+  createApp,
+  App
+} from "vue";
 
 export interface ConfirmProps extends ModalReactProps {
   type: 'success' | 'info' | 'warning' | 'error' | 'confirm';
@@ -22,21 +26,12 @@ export default function confirm<T>(props: ConfirmProps) {
   const div = document.createElement('div');
   document.body.appendChild(div);
 
-  let com: VNode
+  let app: App<Element>
 
   let currentConfig = {...props};
 
   const destroy = () => {
-    // const unmountResult = ReactDOM.unmountComponentAtNode(div);
-
-    // @ts-ignore
-    const ums = com.component.um
-    // TODO 这里只是执行onUnmounted
-    if (ums && Array.isArray(ums)){
-      ums.forEach((um:any)=>{
-        um?.()
-      })
-    }
+    app.unmount()
     if (div.parentNode) {
       setTimeout(() => {
         div.parentNode.removeChild(div);
@@ -69,8 +64,8 @@ export default function confirm<T>(props: ConfirmProps) {
   } : false;
 
   function render(renderProps: ConfirmProps) {
-    com = h(ConfirmModal, {...renderProps, motion: mergedMotion})
-    vueRender(com, div)
+    app = createApp(h(ConfirmModal, {...renderProps, motion: mergedMotion}))
+    app.mount(div)
   }
 
   function close() {

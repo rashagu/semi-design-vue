@@ -16,6 +16,7 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
     const isLoading = Boolean(props.loading);
     const isDisabled = Boolean(props.disabled);
 
+
     if (hasIcon || (isLoading && !isDisabled)) {
         return ()=>(
           <IconButton {...props}>

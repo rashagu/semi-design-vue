@@ -18,7 +18,7 @@ const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
   function onClick() {
     let a = modal.confirm(config);
     setTimeout(()=>{
-      a.destroy()
+      // a.destroy()
       console.log(a)
     }, 3000)
   }
