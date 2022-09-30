@@ -29,6 +29,9 @@ import BreadcrumbDemo from "./components/breadcrumb/__test__/BreadcrumbDemo";
 import SwitchDemo from "./components/switch/__test__/SwitchDemo";
 import ProgressDemo from "./components/progress/__test__/ProgressDemo";
 import UploadDemo from "./components/upload/__test__/UploadDemo";
+import ModalDemo from "./components/modal/__test__/ModalDemo";
+import ModalDemoConfirm from "./components/modal/__test__/ModalDemoConfirm";
+import ModalDemoHook from "./components/modal/__test__/ModalDemoHook";
 export interface ExampleProps {
   name?: string
 }
@@ -42,7 +45,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <UploadDemo/>
+        <ModalDemoHook />
+        <ModalDemoConfirm/>
+        <ModalDemo/>
+        {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}

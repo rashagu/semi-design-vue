@@ -33,7 +33,6 @@ const ConfigProvider = defineComponent<ConfigProviderProps>((props, {slots}) => 
   return () => {
 
     const { direction, ...rest } = props;
-    console.log(props)
     return (
       <Context.Provider
         value={{
