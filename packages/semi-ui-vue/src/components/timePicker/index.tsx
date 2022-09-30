@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
 
-import LocaleConsumer_ from '../locale/LocaleConsumer';
+import LocaleConsumer_ from '../locale/localeConsumer';
 import BaseTimePicker, {defaultProps, propTypes} from './TimePicker';
 import type {TimePickerProps as BasePickerProps, BaseValueType } from './TimePicker';
 

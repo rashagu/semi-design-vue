@@ -1,9 +1,10 @@
-import {defineComponent, ref, h, StyleValue, onUnmounted, watch} from 'vue'
+import {defineComponent, ref, h, StyleValue, onUnmounted, watch, reactive} from 'vue'
 import cls from 'classnames';
 import { cssClasses as css, strings } from '@douyinfe/semi-foundation/spin/constants';
 import SpinFoundation from '@douyinfe/semi-foundation/spin/foundation';
 import SpinIcon from './Icon';
 import '@douyinfe/semi-foundation/spin/spin.scss';
+import {useBaseComponent} from "../_base/baseComponent";
 
 const prefixCls = css.PREFIX;
 
@@ -54,10 +55,11 @@ export const VuePropsType = {
   childStyle: Object,
 }
 const Index = defineComponent<SpinProps>((props, {slots}) => {
-  const loading = ref(true)
-  const delay = ref(props.delay)
-  const foundation = ref(new SpinFoundation(adapter()))
 
+  const state = reactive<SpinState>({
+    delay: props.delay,
+    loading: true,
+  })
 
   // ok
   function getDerivedStateFromProps(props: SpinProps) {
@@ -85,14 +87,17 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
   //     })
   //   }
   // }, {deep: true})
-
+  const {cache, adapter: adapterInject, log, context} = useBaseComponent<SpinProps>(props, state)
   function adapter() {
     return {
+      ...adapterInject<SpinProps, SpinState>(),
       setLoading: (value: boolean) => {
-        loading.value = value
+        state.loading = value
       }
     };
   }
+
+  const foundation = ref(new SpinFoundation(adapter()))
 
 
   onUnmounted(()=>{
@@ -100,15 +105,16 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
   })
   function renderSpin() {
     const { indicator, tip } = props;
+    const { loading } = state;
     const spinIconCls = cls({
-      [`${prefixCls}-animate`]: loading.value,
+      [`${prefixCls}-animate`]: loading,
     });
 
     return (
-      loading.value ? (
+      state.loading ? (
         <div class={`${prefixCls}-wrapper`}>
-          {indicator ? <div class={spinIconCls}>{indicator}</div> : <SpinIcon />}
-          {tip ? <div>{tip}</div> : null}
+          {indicator ? <div class={spinIconCls} x-semi-prop="indicator">{indicator}</div> : <SpinIcon />}
+          {tip ? <div x-semi-prop="tip">{tip}</div> : null}
         </div>
       ) : null
     );
@@ -120,6 +126,7 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
   return ()=>{
     foundation.value.updateLoadingIfNeedDelay();
     const { style, wrapperClassName, childStyle, size } = props;
+    const { loading } = state;
     return (
       <div class={cls(
         prefixCls,
@@ -127,11 +134,11 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
         {
           [`${prefixCls}-${size}`]: size,
           [`${prefixCls}-block`]: slots.default,
-          [`${prefixCls}-hidden`]: !loading.value,
+          [`${prefixCls}-hidden`]: !loading,
         }
       )} style={style}>
         {renderSpin()}
-        <div class={`${prefixCls}-children`} style={childStyle}>{slots.default?slots.default():null}</div>
+        <div class={`${prefixCls}-children`} style={childStyle} x-semi-prop="children">{slots.default?slots.default():null}</div>
       </div>
     );
   }

@@ -26,8 +26,8 @@
     "packages/semi-illustrations-vue"
   ],
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.20.0",
-    "@douyinfe/semi-theme-default": "2.20.0",
+    "@douyinfe/semi-foundation": "2.20.3",
+    "@douyinfe/semi-theme-default": "2.20.3",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
     "lodash": "^4.17.21",
@@ -37,7 +37,7 @@
     "sass-loader": "^13.0.0",
     "style-loader": "^3.3.1",
     "typescript": "^4.8.3",
-    "vue": "^3.2.25",
+    "vue": "^3.2.40",
     "vue-loader": "^16.8.3",
     "vue-tsc": "^0.40.13"
   },

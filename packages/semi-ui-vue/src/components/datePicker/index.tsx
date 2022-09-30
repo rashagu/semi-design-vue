@@ -2,7 +2,7 @@ import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
 
 import { numbers, strings } from '@douyinfe/semi-foundation/datePicker/constants';
 import DatePicker, {DatePickerProps, vuePropsTypeDatePickerProps} from './datePicker';
-import LocaleConsumer_ from '../locale/LocaleConsumer';
+import LocaleConsumer_ from '../locale/localeConsumer';
 import type { Locale } from '../locale/interface';
 import Context from "../configProvider/context";
 

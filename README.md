@@ -96,11 +96,11 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [ ] Rating
 - [x] Select
 - [ ] Slider
-- [ ] Switch
+- [x] Switch
 - [x] TagInput 5f0912f
 - [x] TimePicker
 - [ ] TreeSelect
-- [ ] Upload
+- [x] Upload
 
 ### 导航类
 
@@ -140,7 +140,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [ ] Banner
 - [ ] Notification
 - [ ] Popconfirm
-- [ ] Progress
+- [x] Progress
 - [ ] Skeleton
 - [x] Spin
 - [ ] Toast

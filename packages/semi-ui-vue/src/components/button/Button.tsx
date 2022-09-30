@@ -58,7 +58,7 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
     const baseProps = {
       type: htmlType,
       ...attr,
-      className: classNames(
+      class: classNames(
         prefixCls,
         {
           [`${prefixCls}-${type}`]: !props.disabled && type,

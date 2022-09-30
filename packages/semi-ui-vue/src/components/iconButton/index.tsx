@@ -64,37 +64,39 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
   });
 
 
-  return () => (
-    <Button {...otherProps} className={classNames(className, `${prefixCls}-with-icon`, {
-      [`${prefixCls}-with-icon-only`]: slots.default == null || (slots.default as any) === '',
-      [`${prefixCls}-loading`]: loading,
-    })} theme={theme} style={style}>
-      {{
-        default: () => {
-          let IconElem = (): any => null;
+  return () => {
+    return (
+      <Button {...otherProps} className={classNames(className, `${prefixCls}-with-icon`, {
+        [`${prefixCls}-with-icon-only`]: !slots.default || !slots.default(),
+        [`${prefixCls}-loading`]: loading,
+      })} theme={theme} style={style}>
+        {{
+          default: () => {
+            let IconElem = (): any => null;
 
-          if (loading && !otherProps.disabled) {
-            IconElem = () => <SpinIcon/>;
-          } else if (isVNode(icon)) {
-            IconElem = () => icon;
+            if (loading && !otherProps.disabled) {
+              IconElem = () => <SpinIcon/>;
+            } else if (isVNode(icon)) {
+              IconElem = () => icon;
+            }
+            const children = () => slots.default && slots.default() && slots.default()[0]?.children ?
+              <span class={IconElem() ? btnTextCls : ''}>{slots.default ? slots.default() : null}</span> : null;
+            if (iconPosition === 'left') {
+              return <>
+                {IconElem()}
+                {children ? children() : null}
+              </>;
+            } else {
+              return <>
+                {children ? children() : null}
+                {IconElem()}
+              </>;
+            }
           }
-          const children = () => slots.default && slots.default() && slots.default()[0]?.children ?
-            <span class={IconElem() ? btnTextCls : ''}>{slots.default ? slots.default() : null}</span> : null;
-          if (iconPosition === 'left') {
-            return <>
-              {IconElem()}
-              {children ? children() : null}
-            </>;
-          } else {
-            return <>
-              {children ? children() : null}
-              {IconElem()}
-            </>;
-          }
-        }
-      }}
-    </Button>
-  );
+        }}
+      </Button>
+    )
+  };
 })
 
 export const VuePropsType = {

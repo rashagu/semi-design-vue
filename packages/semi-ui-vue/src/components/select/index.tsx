@@ -19,7 +19,7 @@ import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/baseComp
 import {isEqual, isString, noop, get, isNumber} from 'lodash';
 import Tag from '../tag';
 import TagGroup from '../tag/Group';
-import LocaleConsumer_ from '../locale/LocaleConsumer';
+import LocaleConsumer_ from '../locale/localeConsumer';
 import Popover from '../popover';
 import {numbers as popoverNumbers} from '@douyinfe/semi-foundation/popover/constants';
 import {getOptionsFromGroup} from './Utils';

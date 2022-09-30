@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import {isString} from 'lodash';
 import {cssClasses} from '@douyinfe/semi-foundation/select/constants';
-import LocaleConsumer_ from '../locale/LocaleConsumer';
+import LocaleConsumer_ from '../locale/localeConsumer';
 import {IconTick} from '@kousum/semi-icons-vue';
 import {getHighLightTextHTML} from '../_utils/index';
 import {Locale} from '../locale/interface';
