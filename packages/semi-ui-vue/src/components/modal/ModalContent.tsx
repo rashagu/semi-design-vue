@@ -1,12 +1,11 @@
 /* eslint-disable eqeqeq */
-import React, { CSSProperties } from 'react';
-import PropTypes from 'prop-types';
+import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/modal/constants';
 import ConfigContext, { ContextValue } from '../configProvider/context';
 import Button from '../iconButton';
-import Typography from '../typography';
-import BaseComponent from '../_base/baseComponent';
+import {Title as TypographyTitle} from '../typography';
+import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
 // eslint-disable-next-line max-len
 import ModalContentFoundation, {
     ModalContentAdapter,
@@ -14,239 +13,301 @@ import ModalContentFoundation, {
     ModalContentState
 } from '@douyinfe/semi-foundation/modal/modalContentFoundation';
 import { get, isFunction, noop } from 'lodash';
-import { IconClose } from '@douyinfe/semi-icons';
+import { IconClose } from '@kousum/semi-icons-vue';
 import FocusTrapHandle from "@douyinfe/semi-foundation/utils/FocusHandle";
+import {
+    CSSProperties,
+    defineComponent,
+    h,
+    onBeforeUnmount,
+    onMounted,
+    onUnmounted,
+    reactive,
+    ref,
+    useSlots,
+    VNode
+} from "vue";
+import {vuePropsMake} from "../PropTypes";
+import {AutoCompleteProps} from "../autoCompleteItems";
+import {useConfigContext} from "../configProvider/context/Consumer";
+import {Motion} from "@douyinfe/semi-foundation/utils/type";
+import {OKType, Size} from "@douyinfe/semi-foundation/modal/modalFoundation";
 
 let uuid = 0;
 
 
 export interface ModalContentReactProps extends ModalContentProps {
-    children?: React.ReactNode;
 }
 
-export default class ModalContent extends BaseComponent<ModalContentReactProps, ModalContentState> {
-    static contextType = ConfigContext;
-    static propTypes = {
-        close: PropTypes.func,
-        getContainerContext: PropTypes.func,
-        contentClassName: PropTypes.string,
-        maskClassName: PropTypes.string,
-        onAnimationEnd: PropTypes.func,
-        preventScroll: PropTypes.bool,
-    };
 
-    static defaultProps = {
-        close: noop,
-        getContainerContext: noop,
-        contentClassName: '',
-        maskClassName: ''
-    };
-    dialogId: string;
-    private timeoutId: NodeJS.Timeout;
+const propTypes = {
+    close: PropTypes.func,
+    getContainerContext: PropTypes.func,
+    contentClassName: PropTypes.string,
+    maskClassName: PropTypes.string,
+    onAnimationEnd: PropTypes.func,
+    preventScroll: PropTypes.bool,
+    title: PropTypes.any,
+    afterClose: Function,
+    bodyStyle: Object,
+    cancelButtonProps: PropTypes.any,
+    cancelText: PropTypes.string,
+    centered: PropTypes.bool,
+    className: PropTypes.string,
+    closable: PropTypes.bool,
+    confirmLoading: PropTypes.bool,
+    cancelLoading: PropTypes.bool,
+    content: {
+        type: PropTypes.any,
+        default: undefined
+    },
+    footer: {
+        type: PropTypes.any,
+        default: undefined
+    },
+    hasCancel: PropTypes.bool,
+    header: {
+        type: PropTypes.any,
+        default: undefined
+    },
+    height: [PropTypes.bool,PropTypes.string],
+    mask: PropTypes.bool,
+    maskClosable: PropTypes.bool,
+    maskStyle: Object,
+    maskFixed: PropTypes.bool,
+    motion: PropTypes.any,
+    okButtonProps: PropTypes.any,
+    okText: String,
+    okType: String,
+    onCancel: Function,
+    onOk: Function,
+    style: Object,
+    visible: PropTypes.bool,
+    width: [String, Number],
+    zIndex: Number,
+    icon: PropTypes.any,
+    getPopupContainer: () => HTMLElement,
+    closeIcon: PropTypes.any,
+    closeOnEsc: PropTypes.bool,
+    size: String,
+    lazyRender: PropTypes.bool,
+    keepDOM: PropTypes.bool,
+    direction: PropTypes.any,
+    fullScreen: PropTypes.bool
+};
+const defaultProps = {
+    close: noop,
+    getContainerContext: noop,
+    contentClassName: '',
+    maskClassName: ''
+};
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
 
-    modalDialogRef: React.MutableRefObject<HTMLDivElement>;
-    foundation: ModalContentFoundation;
-    context: ContextValue;
-    focusTrapHandle: FocusTrapHandle;
+    const slots = useSlots()
+    let timeoutId: NodeJS.Timeout;
 
-    constructor(props: ModalContentProps) {
-        super(props);
-        this.state = {
-            dialogMouseDown: false,
-            prevFocusElement: FocusTrapHandle.getActiveElement(),
-        };
-        this.foundation = new ModalContentFoundation(this.adapter);
-        this.dialogId = `dialog-${uuid++}`;
-        this.modalDialogRef = React.createRef();
-    }
+    let {context} = useConfigContext();
+    let focusTrapHandle: FocusTrapHandle;
 
-    get adapter(): ModalContentAdapter {
+    const state = reactive<ModalContentState>({
+        dialogMouseDown: false,
+        prevFocusElement: FocusTrapHandle.getActiveElement(),
+    });
+    let dialogId: string = `dialog-${uuid++}`;
+    const modalDialogRef = ref();
+
+    const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<ModalContentReactProps>(props, state)
+    function adapter_(): ModalContentAdapter {
         return {
-            ...super.adapter,
-            notifyClose: (e: React.MouseEvent) => {
-                this.props.onClose(e);
+            ...adapterInject<ModalContentReactProps, ModalContentState>(),
+            notifyClose: (e: MouseEvent) => {
+                props.onClose(e);
             },
             notifyDialogMouseDown: () => {
-                this.setState({ dialogMouseDown: true });
+                state.dialogMouseDown = true
             },
             notifyDialogMouseUp: () => {
-                if (this.state.dialogMouseDown) {
+                if (state.dialogMouseDown) {
                     // Not setting setTimeout triggers close when modal external mouseUp
-                    this.timeoutId = setTimeout(() => {
-                        this.setState({ dialogMouseDown: false });
+                    timeoutId = setTimeout(() => {
+                        state.dialogMouseDown = false
                     }, 0);
                 }
             },
             addKeyDownEventListener: () => {
-                if (this.props.closeOnEsc) {
-                    document.addEventListener('keydown', this.foundation.handleKeyDown.bind(this.foundation));
+                if (props.closeOnEsc) {
+                    document.addEventListener('keydown', foundation.handleKeyDown.bind(foundation));
                 }
             },
             removeKeyDownEventListener: () => {
-                if (this.props.closeOnEsc) {
-                    document.removeEventListener('keydown', this.foundation.handleKeyDown.bind(this.foundation));
+                if (props.closeOnEsc) {
+                    document.removeEventListener('keydown', foundation.handleKeyDown.bind(foundation));
                 }
             },
-            getMouseState: () => this.state.dialogMouseDown,
+            getMouseState: () => state.dialogMouseDown,
             modalDialogFocus: () => {
-                const { preventScroll } = this.props;
+                const { preventScroll } = props;
                 let activeElementInDialog;
-                if (this.modalDialogRef) {
+                if (modalDialogRef.value) {
                     const activeElement = FocusTrapHandle.getActiveElement();
-                    activeElementInDialog = this.modalDialogRef.current.contains(activeElement);
-                    this.focusTrapHandle?.destroy();
-                    this.focusTrapHandle = new FocusTrapHandle(this.modalDialogRef.current, { preventScroll });
+                    activeElementInDialog = modalDialogRef.value.contains(activeElement);
+                    focusTrapHandle?.destroy();
+                    focusTrapHandle = new FocusTrapHandle(modalDialogRef.value, { preventScroll });
                 }
                 if (!activeElementInDialog) {
-                    this.modalDialogRef?.current?.focus({ preventScroll });
+                    modalDialogRef?.value.focus({ preventScroll });
                 }
             },
             modalDialogBlur: () => {
-                this.modalDialogRef?.current.blur();
-                this.focusTrapHandle?.destroy();
+                modalDialogRef.value.blur();
+                focusTrapHandle?.destroy();
             },
             prevFocusElementReFocus: () => {
-                const { prevFocusElement } = this.state;
-                const { preventScroll } = this.props;
+                const { prevFocusElement } = state;
+                const { preventScroll } = props;
                 const focus = get(prevFocusElement, 'focus');
                 isFunction(focus) && prevFocusElement.focus({ preventScroll });
             }
         };
     }
+    const adapter = adapter_()
+    const foundation = new ModalContentFoundation(adapter);
 
-    componentDidMount() {
-        this.foundation.handleKeyDownEventListenerMount();
-        this.foundation.modalDialogFocus();
-        const nodes = FocusTrapHandle.getFocusableElements(this.modalDialogRef.current);
-        if (!this.modalDialogRef.current.contains(document.activeElement)) {
+    onMounted(()=>{
+        foundation.handleKeyDownEventListenerMount();
+        foundation.modalDialogFocus();
+        const nodes = FocusTrapHandle.getFocusableElements(modalDialogRef.value);
+        if (!modalDialogRef.value.contains(document.activeElement)) {
             // focus on first focusable element
             nodes[0]?.focus();
         }
-    }
+    })
 
-    componentWillUnmount() {
-        clearTimeout(this.timeoutId);
-        this.foundation.destroy();
-    }
+    onBeforeUnmount(()=>{
 
-    onKeyDown = (e: React.MouseEvent) => {
-        this.foundation.handleKeyDown(e);
+        clearTimeout(timeoutId);
+        foundation.destroy();
+    })
+
+
+
+    const onKeyDown = (e: MouseEvent) => {
+        foundation.handleKeyDown(e);
     };
 
     // Record when clicking the modal box
-    onDialogMouseDown = () => {
-        this.foundation.handleDialogMouseDown();
+    const onDialogMouseDown = () => {
+        foundation.handleDialogMouseDown();
     };
 
     // Cancel recording when clicking the modal box at the end
-    onMaskMouseUp = () => {
-        this.foundation.handleMaskMouseUp();
+    const onMaskMouseUp = () => {
+        foundation.handleMaskMouseUp();
     };
 
     // onMaskClick will judge dialogMouseDown before onMaskMouseUp updates dialogMouseDown
-    onMaskClick = (e: React.MouseEvent) => {
-        this.foundation.handleMaskClick(e);
+    const onMaskClick = (e: MouseEvent) => {
+        foundation.handleMaskClick(e);
     };
 
-    close = (e: React.MouseEvent) => {
-        this.foundation.close(e);
+    const close = (e: MouseEvent) => {
+        foundation.close(e);
     };
 
-    getMaskElement = () => {
-        const { ...props } = this.props;
+    const getMaskElement = () => {
         const { mask, maskClassName } = props;
         if (mask) {
             const className = cls(`${cssClasses.DIALOG}-mask`, {
                 // [`${cssClasses.DIALOG}-mask-hidden`]: !props.visible,
             });
-            return <div key="mask" className={cls(className, maskClassName)} style={props.maskStyle}/>;
+            return <div key="mask" class={cls(className, maskClassName)} style={props.maskStyle}/>;
         }
         return null;
     };
 
-    renderCloseBtn = () => {
+    const renderCloseBtn = () => {
         const {
             closable,
             closeIcon,
-        } = this.props;
+        } = props;
         let closer;
         if (closable) {
             const iconType = closeIcon || <IconClose x-semi-prop="closeIcon"/>;
             closer = (
-                <Button
-                    aria-label="close"
-                    className={`${cssClasses.DIALOG}-close`}
-                    key="close-btn"
-                    onClick={this.close}
-                    type="tertiary"
-                    icon={iconType}
-                    theme="borderless"
-                    size="small"
-                />
+              <Button
+                aria-label="close"
+                class={`${cssClasses.DIALOG}-close`}
+                key="close-btn"
+                onClick={close}
+                type="tertiary"
+                icon={iconType}
+                theme="borderless"
+                size="small"
+              />
             );
         }
         return closer;
     };
 
-    renderIcon = () => {
-        const { icon } = this.props;
-        return icon ? <span className={`${cssClasses.DIALOG}-icon-wrapper`} x-semi-prop="icon">{icon}</span> : null;
+    const renderIcon = () => {
+        const { icon } = props;
+        return icon ? <span class={`${cssClasses.DIALOG}-icon-wrapper`} x-semi-prop="icon">{icon}</span> : null;
     };
 
-    renderHeader = () => {
-        if ('header' in this.props) {
-            return this.props.header;
+    const renderHeader = () => {
+        if ('header' in adapter.getProps()) {
+            return props.header;
         }
-        const { title } = this.props;
-        const closer = this.renderCloseBtn();
-        const icon = this.renderIcon();
+        const { title } = props;
+        const closer = renderCloseBtn();
+        const icon = renderIcon();
         return (title === null || title === undefined) ?
-            null :
-            (
-                <div className={`${cssClasses.DIALOG}-header`}>
-                    {icon}
-                    <Typography.Title
-                        heading={5}
-                        className={`${cssClasses.DIALOG}-title`}
-                        id={`${cssClasses.DIALOG}-title`}
-                        x-semi-prop="title"
-                    >
-                        {title}
-                    </Typography.Title>
-                    {closer}
-                </div>
-            );
-    };
-
-    renderBody = () => {
-        const {
-            bodyStyle,
-            children,
-            title,
-        } = this.props;
-        const bodyCls = cls(`${cssClasses.DIALOG}-body`, {
-            [`${cssClasses.DIALOG}-withIcon`]: this.props.icon,
-        });
-        const closer = this.renderCloseBtn();
-        const icon = this.renderIcon();
-        const hasHeader = title !== null && title !== undefined || 'header' in this.props;
-        return hasHeader ? (
-            <div className={bodyCls} id={`${cssClasses.DIALOG}-body`} style={bodyStyle} x-semi-prop="children">
-                {children}
-            </div>
-        ) : (
-            <div className={`${cssClasses.DIALOG}-body-wrapper`}>
+          null :
+          (
+            <div class={`${cssClasses.DIALOG}-header`}>
                 {icon}
-                <div className={bodyCls} style={bodyStyle} x-semi-prop="children">
-                    {children}
-                </div>
+                <TypographyTitle
+                  heading={5}
+                  class={`${cssClasses.DIALOG}-title`}
+                  id={`${cssClasses.DIALOG}-title`}
+                  x-semi-prop="title"
+                >
+                    {title}
+                </TypographyTitle>
                 {closer}
             </div>
+          );
+    };
+
+    const renderBody = () => {
+        const children = slots.default?.()
+        const {
+            bodyStyle,
+            title,
+        } = props;
+        const bodyCls = cls(`${cssClasses.DIALOG}-body`, {
+            [`${cssClasses.DIALOG}-withIcon`]: props.icon,
+        });
+        const closer = renderCloseBtn();
+        const icon = renderIcon();
+        const hasHeader = title !== null && title !== undefined || 'header' in props;
+        return hasHeader ? (
+          <div class={bodyCls} id={`${cssClasses.DIALOG}-body`} style={bodyStyle} x-semi-prop="children">
+              {children}
+          </div>
+        ) : (
+          <div class={`${cssClasses.DIALOG}-body-wrapper`}>
+              {icon}
+              <div class={bodyCls} style={bodyStyle} x-semi-prop="children">
+                  {children}
+              </div>
+              {closer}
+          </div>
         );
     };
 
-    getDialogElement = () => {
-        const { ...props } = this.props;
+    const getDialogElement = () => {
         const style: CSSProperties = {};
         const digCls = cls(`${cssClasses.DIALOG}`, {
             [`${cssClasses.DIALOG}-centered`]: props.centered,
@@ -263,51 +324,52 @@ export default class ModalContent extends BaseComponent<ModalContentReactProps, 
             style.height = '100%';
             style.margin = 'unset';
         }
-        const body = this.renderBody();
-        const header = this.renderHeader();
+        const body = renderBody();
+        const header = renderHeader();
         const footer = props.footer ? (
-            <div className={`${cssClasses.DIALOG}-footer`} x-semi-prop="footer">
-                {props.footer}
-            </div>
+          <div class={`${cssClasses.DIALOG}-footer`} x-semi-prop="footer">
+              {props.footer}
+          </div>
         ) : null;
         const dialogElement = (
-            // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-            <div
-                key="dialog-element"
-                className={digCls}
-                onMouseDown={this.onDialogMouseDown}
-                style={{ ...props.style, ...style }}
-                id={this.dialogId}
-            >
-                <div
-                    role="dialog"
-                    ref={this.modalDialogRef}
-                    aria-modal="true"
-                    aria-labelledby={`${cssClasses.DIALOG}-title`}
-                    aria-describedby={`${cssClasses.DIALOG}-body`}
-                    onAnimationEnd={props.onAnimationEnd}
-                    className={cls([`${cssClasses.DIALOG}-content`,
-                        props.contentClassName,
-                        { [`${cssClasses.DIALOG}-content-fullScreen`]: props.isFullScreen }])}>
-                    {header}
-                    {body}
-                    {footer}
-                </div>
-            </div>
-        ); 
+          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+          <div
+            key="dialog-element"
+            class={digCls}
+            onMousedown={onDialogMouseDown}
+            style={{ ...props.style, ...style }}
+            id={dialogId}
+          >
+              <div
+                role="dialog"
+                ref={modalDialogRef}
+                aria-modal="true"
+                aria-labelledby={`${cssClasses.DIALOG}-title`}
+                aria-describedby={`${cssClasses.DIALOG}-body`}
+                onAnimationend={props.onAnimationEnd}
+                class={cls([`${cssClasses.DIALOG}-content`,
+                    props.contentClassName,
+                    { [`${cssClasses.DIALOG}-content-fullScreen`]: props.isFullScreen }])}>
+                  {header}
+                  {body}
+                  {footer}
+              </div>
+          </div>
+        );
         // return props.visible ? dialogElement : null;
         return dialogElement;
     };
 
-    render() {
+
+    return () => {
         const {
             maskClosable,
             className,
             getPopupContainer,
             maskFixed,
             getContainerContext,
-        } = this.props;
-        const { direction } = this.context;
+        } = props;
+        const { direction } = context.value;
         const classList = cls(className, {
             [`${cssClasses.DIALOG}-popup`]: getPopupContainer && !maskFixed,
             [`${cssClasses.DIALOG}-fixed`]: maskFixed,
@@ -317,24 +379,30 @@ export default class ModalContent extends BaseComponent<ModalContentReactProps, 
         const containerContext = getContainerContext();
 
         const elem = (
-            <div className={classList}>
-                {this.getMaskElement()}
-                <div
-                    role="none"
-                    className={cls({
-                        [`${cssClasses.DIALOG}-wrap`]: true,
-                        [`${cssClasses.DIALOG}-wrap-center`]: this.props.centered
-                    })}
-                    onClick={maskClosable ? this.onMaskClick : null}
-                    onMouseUp={maskClosable ? this.onMaskMouseUp : null}
-                >
-                    {this.getDialogElement()}
-                </div>
-            </div>
+          <div class={classList}>
+              {getMaskElement()}
+              <div
+                role="none"
+                class={cls({
+                    [`${cssClasses.DIALOG}-wrap`]: true,
+                    [`${cssClasses.DIALOG}-wrap-center`]: props.centered
+                })}
+                onClick={maskClosable ? onMaskClick : null}
+                onMouseup={maskClosable ? onMaskMouseUp : null}
+              >
+                  {getDialogElement()}
+              </div>
+          </div>
         );
 
         // eslint-disable-next-line max-len
         return containerContext && containerContext.Provider ?
-            <containerContext.Provider value={containerContext.value}>{elem}</containerContext.Provider> : elem;
+          <containerContext.Provider value={containerContext.value}>{elem}</containerContext.Provider> : elem;
     }
-}
+})
+
+ModalContent.props = vuePropsType
+ModalContent.name = 'ModalContent'
+
+export default ModalContent
+

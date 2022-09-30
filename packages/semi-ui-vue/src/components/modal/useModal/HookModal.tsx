@@ -2,7 +2,7 @@ import ConfirmModal from '../ConfirmModal';
 import { get } from 'lodash';
 import { ConfirmProps } from '../confirm';
 import { Motion } from '../../_base/base';
-import {defineComponent, h, ref, useSlots} from "vue";
+import {defineComponent, h, onUnmounted, ref, unref, useSlots} from "vue";
 
 interface HookModalProps {
     afterClose: (...args: any[]) => void;
@@ -28,8 +28,11 @@ const HookModal = defineComponent<HookModalProps>((props_, {expose}) => {
     const slots = useSlots()
 
     const { afterClose, config, ...props } = props_
-    const innerConfig = ref(config);
+    const innerConfig = ref<ConfirmProps>(config);
 
+    onUnmounted(()=>{
+
+    })
     expose({
         destroy: () => {
             innerConfig.value = {
@@ -64,9 +67,11 @@ const HookModal = defineComponent<HookModalProps>((props_, {expose}) => {
             } :
             false;
 
+        // @ts-ignore
+        const innerConfig_ = innerConfig.value as ConfirmProps
         return (
           <ConfirmModal
-            {...innerConfig}
+            {...innerConfig_}
             // visible={!visible ? visible : undefined}
             motion={mergedMotion}
           />

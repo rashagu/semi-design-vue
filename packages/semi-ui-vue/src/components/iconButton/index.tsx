@@ -25,6 +25,7 @@ export interface IconButtonProps extends ButtonProps {
   disabled?: boolean;
   noHorizontalPadding?: boolean | HorizontalPaddingType | HorizontalPaddingType[];
   prefixCls?: string;
+  autoFocus?: boolean
 }
 
 // TODO: add a buttonGroup component

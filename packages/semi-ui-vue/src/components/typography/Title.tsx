@@ -18,7 +18,7 @@ export type LinkType = any | boolean;
 
 
 export interface TitleProps extends Omit<any, OmitTitleProps>{
-  className?: string;
+  class?: string;
   component_?: any;
   copyable?: CopyableConfig | boolean;
   delete?: boolean;
@@ -34,6 +34,18 @@ export interface TitleProps extends Omit<any, OmitTitleProps>{
 }
 export const vuePropsType = {
   className: {
+    type: String,
+    default: ''
+  },
+  class: {
+    type: String,
+    default:''
+  },
+  id: {
+    type: String,
+    default:''
+  },
+  'x-semi-prop': {
     type: String,
     default:''
   },
@@ -84,13 +96,13 @@ const Title = defineComponent<TitleProps>((props, {slots}) => {
 
 
   return () => {
-    const { heading, ...rest } = props;
+    const { heading, component_, ...rest } = props;
     const component = strings.HEADING.indexOf(heading) !== -1 ? `h${heading}` : 'h1';
     // Passing headings to support custom components
     // console.log(props)
-    return <Base component_={component as any} heading={component} {...rest} >
+    return <Base component_={component_ || component as any} heading={component} {...rest} >
       {{
-        default:()=>slots.default?slots.default():null
+        default: slots.default
       }}
     </Base>;
   }

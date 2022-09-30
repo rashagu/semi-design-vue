@@ -8,7 +8,7 @@ import {
   reactive,
   onMounted,
   watchEffect,
-  onUnmounted, cloneVNode, watch
+  onUnmounted, cloneVNode, watch, useSlots
 } from 'vue'
 import cls from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/typography/constants';
@@ -45,7 +45,6 @@ export interface BaseTypographyProps extends BaseProps {
   style?: CSSProperties;
   className?: string;
   code?: boolean;
-  children?: VNode;
   component_?: any;
   spacing?: string;
   heading?: string;
@@ -59,7 +58,7 @@ interface BaseTypographyState {
   expanded: boolean;
   isTruncated: boolean;
   first: boolean;
-  prevChildren: VNode;
+  prevChildren: VNode | VNode[];
 }
 
 const prefixCls = cssClasses.PREFIX;
@@ -75,7 +74,18 @@ export const vuePropsType = {
     type: String,
     default: ''
   },
-
+  class: {
+    type: String,
+    default:''
+  },
+  id: {
+    type: String,
+    default:''
+  },
+  'x-semi-prop': {
+    type: String,
+    default:''
+  },
   copyable: {
     type: [Object, Boolean],
     default: false,
@@ -151,7 +161,8 @@ const wrapperDecorations = (props: BaseTypographyProps, content: VNode) => {
   wrap(link, disabled ? 'span' : 'a');
   return wrapped;
 };
-const Base = defineComponent<BaseTypographyProps>((props, {slots}) => {
+const Base = defineComponent<BaseTypographyProps>((props, {}) => {
+  const slots = useSlots()
 
 
   const wrapperRef = ref<any>(null)
@@ -188,9 +199,10 @@ const Base = defineComponent<BaseTypographyProps>((props, {slots}) => {
   function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTypographyState) {
     const {prevChildren} = prevState;
     const newState: Partial<BaseTypographyState> = {};
-    newState.prevChildren = props.children;
+    const children = slots.default?.()
+    newState.prevChildren = children;
 
-    if (props.ellipsis && prevChildren !== props.children) {
+    if (props.ellipsis && prevChildren !== children) {
       // reset ellipsis state if children update
       newState.isOverflowed = true;
       newState.ellipsisContent = null;
@@ -289,7 +301,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {slots}) => {
 
   function getEllipsisState() {
     const {rows, suffix, pos} = getEllipsisOpt();
-    const {children} = props;
+    const children = slots.default?.()
     // wait until element mounted
     if (!wrapperRef || !wrapperRef.current) {
       onResize();
@@ -585,16 +597,16 @@ const Base = defineComponent<BaseTypographyProps>((props, {slots}) => {
     const ellipsisOpt = getEllipsisOpt();
     // console.debug(ellipsisOpt)
     const {ellipsisCls, ellipsisStyle} = getEllipsisStyle();
-    let textNode = ellipsis ? renderEllipsisText(ellipsisOpt) : children;
+    let textNode_ = ellipsis ? renderEllipsisText(ellipsisOpt) : children;
     const linkCls = cls({
       [`${prefixCls}-link-text`]: link,
       [`${prefixCls}-link-underline`]: props.underline && link,
     });
-    textNode = wrapperDecorations(
+    let textNode = wrapperDecorations(
       props,
       <>
         {iconNode}
-        {props.link ? <span class={linkCls}>{textNode}</span> : textNode}
+        {props.link ? <span class={linkCls}>{textNode_}</span> : textNode_}
       </>
     );
     const hTagReg = /^h[1-6]$/;

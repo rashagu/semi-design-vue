@@ -13,10 +13,19 @@ export type BaseProps =  {
   style?: CSSProperties;
   className?: string;
 
-  [key: string]: any,
+  // [key: string]: any,
 }
 
-
+export function getProps (props:Record<string, any>) {
+  let newProps:any = {}
+  for(let i in props){
+    if (props[i] !== undefined){
+      newProps[i] = props[i]
+    }
+  }
+  // console.log('value' in newProps)
+  return  newProps
+}
 export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
   {
     isControlled: (key: any) => boolean,
@@ -50,16 +59,7 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
       }, // eslint-disable-line
       // return all props
       // @ts-ignore
-      getProps: () => {
-        let newProps:any = {}
-        for(let i in props){
-          if (props[i] !== undefined){
-            newProps[i] = props[i]
-          }
-        }
-        // console.log('value' in newProps)
-        return  newProps
-      }, // eslint-disable-line
+      getProps: ()=>getProps(props), // eslint-disable-line
       getState: key => {
         //console.log(key,state,state[key])
         return state[key]

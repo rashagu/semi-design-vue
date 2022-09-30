@@ -33,6 +33,7 @@ export interface ButtonProps {
   onMouseDown?: any;
   onMouseEnter?: any;
   onMouseLeave?: any;
+  autoFocus?: boolean
 }
 
 
@@ -142,6 +143,10 @@ export const vuePropsType = {
     type: String,
     default: cssClasses.PREFIX,
   },
+  autoFocus: {
+    type: Boolean,
+    default: undefined
+  }
 }
 
 Button.props = vuePropsType
