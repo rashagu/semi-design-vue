@@ -17,16 +17,16 @@ const TootipDemo = defineComponent<ExampleProps>((props, {slots}) => {
           <div style={{color:'red'}}>click</div>
         </Tooltip>
       </div>
-      <div>
-        <Tooltip content={'hi bytedance'} motion>
-          <div style={{color:'red'}}>hover</div>
-        </Tooltip>
-      </div>
-      <div>
-        <Tooltip content={'hi bytedance'} motion trigger={'focus'}>
-          <Input />
-        </Tooltip>
-      </div>
+      {/*<div>*/}
+      {/*  <Tooltip content={'hi bytedance'} motion>*/}
+      {/*    <div style={{color:'red'}}>hover</div>*/}
+      {/*  </Tooltip>*/}
+      {/*</div>*/}
+      {/*<div>*/}
+      {/*  <Tooltip content={'hi bytedance'} motion trigger={'focus'}>*/}
+      {/*    <Input />*/}
+      {/*  </Tooltip>*/}
+      {/*</div>*/}
     </div>
   );
 })

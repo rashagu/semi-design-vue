@@ -38,4 +38,5 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
 
 
 Button.props = vuePropsType
+Button.name = 'Button'
 export default Button;

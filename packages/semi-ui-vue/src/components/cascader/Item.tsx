@@ -14,7 +14,7 @@ import {
   ShowNextType,
   BasicData
 } from '@douyinfe/semi-foundation/cascader/foundation';
-import {useBaseComponent} from "../_base/baseComponent";
+import {BaseProps, useBaseComponent} from "../_base/baseComponent";
 import {CascaderProps} from "./index";
 const LocaleConsumer = LocaleConsumer_()
 export interface CascaderData extends BasicCascaderData {
@@ -39,7 +39,7 @@ export interface Data extends BasicData {
   searchText: VNode[] | string[];
 }
 
-export interface CascaderItemProps {
+export interface CascaderItemProps extends BaseProps{
   activeKeys: Set<string>;
   selectedKeys: Set<string>;
   loadedKeys: Set<string>;

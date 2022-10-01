@@ -12,19 +12,19 @@ export const vuePropsType = {
 }
 const POSITION_SET: string[] = [
   'top',
-  'topLeft',
-  'topRight',
-  'left',
-  'leftTop',
-  'leftBottom',
-  'right',
-  'rightTop',
-  'rightBottom',
-  'bottom',
-  'bottomLeft',
-  'bottomRight',
-  'leftTopOver',
-  'rightTopOver',
+  // 'topLeft',
+  // 'topRight',
+  // 'left',
+  // 'leftTop',
+  // 'leftBottom',
+  // 'right',
+  // 'rightTop',
+  // 'rightBottom',
+  // 'bottom',
+  // 'bottomLeft',
+  // 'bottomRight',
+  // 'leftTopOver',
+  // 'rightTopOver',
 ]
 const PopoverTest = defineComponent<ExampleProps>((props, {slots}) => {
 

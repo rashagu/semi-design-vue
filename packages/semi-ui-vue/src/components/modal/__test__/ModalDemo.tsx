@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
+import {defineComponent, ref, h, Fragment, useSlots, onMounted} from 'vue'
 import Modal from "../index";
 import Button from "../../button";
 
@@ -12,7 +12,7 @@ export const vuePropsType = {
 const ModalDemo = defineComponent<ModalDemoProps>((props, {}) => {
 
   const slots = useSlots()
-  const visible = ref(false);
+  const visible = ref(true);
   function setVisible(val) {
     visible.value = val
   }
@@ -31,10 +31,15 @@ const ModalDemo = defineComponent<ModalDemoProps>((props, {}) => {
     console.log('After Close callback executed');
   };
 
+  const vv = ref('content')
+  const Demo = ()=><div id="content">{vv.value}</div>
+
+  const popupContainer = ref()
   return () => (
-    <div>
+    <div ref={popupContainer}>
       <Button onClick={showDialog}>打开弹窗</Button>
       <Modal
+        getPopupContainer={()=>popupContainer.value}
         title="基本对话框"
         visible={visible.value}
         onOk={handleOk}
@@ -42,6 +47,8 @@ const ModalDemo = defineComponent<ModalDemoProps>((props, {}) => {
         onCancel={handleCancel}
         closeOnEsc={true}
       >
+        <Button onClick={()=>vv.value = 'qweqwe'}>test</Button>
+        <Demo/>
         This is the content of a basic modal.
         <br />
         More content...

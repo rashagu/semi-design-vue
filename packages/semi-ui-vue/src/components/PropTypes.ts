@@ -19,32 +19,30 @@ export function oneOfType(arr:any[]) {
 
 export function vuePropsMake(typeObj:{[key:string]: any}, defaultProps:{[key:string]: any}) {
   const obj = {}
-  for (const typeKey in typeObj) {
-    // console.log()
-    // if (typeKey === 'included'){
-    //   console.log('included', (typeObj[typeKey].hasOwnProperty('default') && typeObj[typeKey].default !== undefined) || !defaultProps.hasOwnProperty(typeKey))
-    // }
-    if (typeObj[typeKey].hasOwnProperty('default') || !defaultProps.hasOwnProperty(typeKey)) {
-      if (typeObj[typeKey].default === undefined){
+  Object.keys(typeObj).forEach(typeKey=>{
+    if (defaultProps.hasOwnProperty(typeKey)){
+      if (typeObj[typeKey].hasOwnProperty('type')) {
         obj[typeKey] = {
           type: typeObj[typeKey].type,
           default: defaultProps[typeKey],
         }
       }else{
-        obj[typeKey] = typeObj[typeKey]
+        let defaultValue = typeof defaultProps[typeKey] === 'object' ? () => defaultProps[typeKey] : defaultProps[typeKey]
+        obj[typeKey] = {
+          type: typeObj[typeKey],
+          default: defaultValue,
+        }
+        if (typeKey === 'getPopupContainer'){
+          console.log('getPopupContainer')
+        }
       }
-    } else {
-      let defaultValue = typeof defaultProps[typeKey] === 'object' || typeof defaultProps[typeKey] === 'function' ? () => defaultProps[typeKey] : defaultProps[typeKey]
-      obj[typeKey] = {
-        type: typeObj[typeKey],
-        default: defaultValue,
-      }
-      // if (obj[typeKey].type.type){
-      //   console.log(obj,typeObj,typeObj.hasOwnProperty('default'))
-      //   debugger
-      // }
+    }else{
+      obj[typeKey] = typeObj[typeKey]
     }
-  }
-  // console.log(obj)
+
+
+
+
+  })
   return obj
 }

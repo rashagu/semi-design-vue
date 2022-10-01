@@ -110,7 +110,7 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
       return  (
         <Teleport to={el}>
           {{
-            default:()=> slots.default?slots.default():null,
+            default: slots.default,
           }}
         </Teleport>
       )
@@ -120,6 +120,6 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
 })
 
 Index.props = vuePropsType
-
+Index.name = 'Portal'
 export default Index
 

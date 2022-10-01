@@ -29,7 +29,7 @@ const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
           <Button
             onClick={onClick}
           >
-            Confirm Modal
+            Confirm Modal Hook
           </Button>
         </div>
         {contextHolder.value}

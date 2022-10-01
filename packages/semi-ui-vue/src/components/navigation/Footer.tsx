@@ -8,10 +8,11 @@ import '@douyinfe/semi-foundation/navigation/navigation.scss';
 import {BaseProps} from '../_base/baseComponent';
 import {defineComponent, h, isVNode, VNode} from "vue";
 import {useNavContext} from "./nav-context/Consumer";
+import {VueJsxNode} from "../interface";
 
 export interface NavFooterProps extends BaseProps {
-  collapseButton?: VNode;
-  collapseText?: (collapsed?: boolean) => VNode;
+  collapseButton?: VueJsxNode;
+  collapseText?: (collapsed?: boolean) => VueJsxNode;
 }
 
 export const vuePropsType = {
@@ -19,7 +20,7 @@ export const vuePropsType = {
   style: PropTypes.object,
   className: PropTypes.string,
   collapseButton: {
-    type: [PropTypes.node, PropTypes.bool],
+    type: PropTypes.any,
     default: false
   },
   collapseText: PropTypes.func,

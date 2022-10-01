@@ -16,6 +16,7 @@ import Tooltip from '../tooltip';
 import Dropdown, {DropdownItem} from '../dropdown';
 import {AnchorHTMLAttributes, cloneVNode, defineComponent, h, reactive, VNode, Fragment} from "vue";
 import {useNavContext} from "./nav-context/Consumer";
+import {VueJsxNode} from "../interface";
 
 const clsPrefix = `${cssClasses.PREFIX}-item`;
 
@@ -23,11 +24,11 @@ export interface NavItemProps extends ItemProps, BaseProps {
     disabled?: boolean;
     forwardRef?: (ele: HTMLLIElement) => void;
     icon?: VNode;
-    itemKey?: string;
+    itemKey?: string | number;
     level?: number;
     link?: string;
     linkOptions?: AnchorHTMLAttributes;
-    text?: VNode;
+    text?: VueJsxNode;
     tooltipHideDelay?: number;
     tooltipShowDelay?: number;
     onClick?(clickItems: SelectedData): void;

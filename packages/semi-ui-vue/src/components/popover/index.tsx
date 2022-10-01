@@ -3,7 +3,7 @@ import {defineComponent, ref, h, Fragment, VNode, CSSProperties, inject} from 'v
 import classNames from 'classnames';
 
 import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/popover/constants';
-import Tooltip, {ArrowBounding,  Trigger} from '../tooltip';
+import Tooltip, {ArrowBounding, TooltipProps, Trigger} from '../tooltip';
 import { Position } from '@douyinfe/semi-foundation/tooltip/foundation';
 
 import Arrow from './Arrow';
@@ -11,6 +11,7 @@ import '@douyinfe/semi-foundation/popover/popover.scss';
 import {BaseProps} from '../_base/baseComponent';
 import {Motion} from '../_base/base';
 import {noop} from 'lodash';
+import {VueJsxNode} from "../interface";
 
 export declare interface ArrowStyle {
   borderColor?: string;
@@ -19,7 +20,7 @@ export declare interface ArrowStyle {
 }
 
 export interface PopoverProps extends BaseProps {
-  content?: VNode | string;
+  content?: TooltipProps['content'];
   visible?: boolean;
   autoAdjustOverflow?: boolean;
   motion?: Motion;
@@ -138,7 +139,6 @@ const Index = defineComponent<PopoverProps>((props, {slots}) => {
   return () => {
 
     const {
-      children,
       prefixCls,
       showArrow,
       arrowStyle = {},

@@ -86,7 +86,7 @@ const propTypes = {
     width: [String, Number],
     zIndex: Number,
     icon: PropTypes.any,
-    getPopupContainer: () => HTMLElement,
+    getPopupContainer: Function,
     closeIcon: PropTypes.any,
     closeOnEsc: PropTypes.bool,
     size: String,
@@ -104,6 +104,7 @@ const defaultProps = {
     maskClassName: ''
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+console.log(vuePropsType)
 const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
 
     const slots = useSlots()

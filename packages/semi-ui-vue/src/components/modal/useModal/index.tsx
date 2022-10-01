@@ -10,10 +10,9 @@ function usePatchElement(): ([Ref<Node[]>, (element: Node) => () => void]) {
   const elements = ref<Node[]>([]);
 
   function patchElement(element: Node) {
-    elements.value = [...elements.value, element]
+    elements.value = [...Array.from(elements.value), element]
     return () => {
-      elements.value = elements.value.filter(ele => {
-        console.log(ele !== element)
+      elements.value = Array.from(elements.value).filter(ele => {
         return ele !== element
       })
     };

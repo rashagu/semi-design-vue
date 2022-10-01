@@ -227,7 +227,7 @@ const ConfirmModal = defineComponent<ConfirmProps>((props, {}) => {
   }
 })
 
-ConfirmModal.props = vuePropsType
+ConfirmModal.props
 ConfirmModal.name = 'ConfirmModal'
 
 export default ConfirmModal

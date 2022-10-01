@@ -44,6 +44,7 @@ import TagInput, {TagInputProps} from '../tagInput';
 import { Motion } from '../_base/base';
 import { isSemiIcon } from '../_utils/index';
 import {AriaAttributes} from "../AriaAttributes";
+import {VueJsxNode} from "../interface";
 
 export type { CascaderType, ShowNextType } from '@douyinfe/semi-foundation/cascader/foundation';
 export type { CascaderData, Entity, Data, CascaderItemProps } from './Item';
@@ -736,7 +737,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     return content;
   };
 
-  const renderPlusN = (hiddenTag: Array<VNode | string>) => {
+  const renderPlusN = (hiddenTag: (VNode | string)[]) => {
     const { disabled, showRestTagsPopover, restTagsPopoverProps } = props;
     const plusNCls = cls(`${prefixcls}-selection-n`, {
       [`${prefixcls}-selection-n-disabled`]: disabled

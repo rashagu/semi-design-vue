@@ -68,6 +68,7 @@ function LocaleConsumer<T>(){
   })
 
   vn.props = vuePropsType
+  vn.name = 'LocaleConsumer'
   return vn
 }
 

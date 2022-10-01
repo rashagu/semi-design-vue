@@ -16,16 +16,17 @@ import YearAndMonth from './yearAndMonth';
 import { IconClock, IconCalendar } from '@kousum/semi-icons-vue';
 import { getDefaultFormatTokenByType } from '@douyinfe/semi-foundation/datePicker/_utils/getDefaultFormatToken';
 import getDefaultPickerDate from '@douyinfe/semi-foundation/datePicker/_utils/getDefaultPickerDate';
-import {ValueType} from "@douyinfe/semi-foundation/datePicker/foundation";
+import {DayStatusType, ValueType} from "@douyinfe/semi-foundation/datePicker/foundation";
 import {WeekStartNumber} from "@douyinfe/semi-foundation/datePicker/_utils/getMonthTable";
+import {VueJsxNode} from "../interface";
 
 const prefixCls = cssClasses.PREFIX;
 
 export interface MonthsGridProps extends MonthsGridFoundationProps, BaseProps {
-  navPrev?: VNode | string;
-  navNext?: VNode | string;
-  renderDate?: () => VNode | string;
-  renderFullDate?: () => VNode | string;
+  navPrev?: VueJsxNode;
+  navNext?: VueJsxNode;
+  renderDate?: (dayNumber?: number, fullDate?: string) => VueJsxNode;
+  renderFullDate?: (dayNumber?: number, fullDate?: string, dayStatus?: DayStatusType) => VueJsxNode;
   focusRecordsRef?: any;
 }
 

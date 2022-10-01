@@ -25,6 +25,7 @@ import type {AriaAttributes} from "../AriaAttributes";
 import * as PropTypes from '../PropTypes'
 import {vuePropsMake} from "../PropTypes";
 import {RadioInnerProps} from "../radio/RadioInner";
+import {VueJsxNode} from "../interface";
 
 
 export interface DatePickerProps extends DatePickerFoundationProps {
@@ -34,14 +35,14 @@ export interface DatePickerProps extends DatePickerFoundationProps {
   'aria-labelledby'?: AriaAttributes['aria-labelledby'];
   'aria-required'?: AriaAttributes['aria-required'];
   timePickerOpts?: TimePickerProps;
-  bottomSlot?: VNode | String;
-  insetLabel?: VNode | String;
+  bottomSlot?: VueJsxNode;
+  insetLabel?: VueJsxNode;
   insetLabelId?: string;
-  prefix?: VNode | String;
-  topSlot?: VNode | String;
-  renderDate?: (dayNumber?: number, fullDate?: string) => VNode | String;
-  renderFullDate?: (dayNumber?: number, fullDate?: string, dayStatus?: DayStatusType) => VNode | String;
-  triggerRender?: (props: DatePickerProps) => VNode | String;
+  prefix?: VueJsxNode;
+  topSlot?: VueJsxNode;
+  renderDate?: (dayNumber?: number, fullDate?: string) => VueJsxNode;
+  renderFullDate?: (dayNumber?: number, fullDate?: string, dayStatus?: DayStatusType) => VueJsxNode;
+  triggerRender?: (props: DatePickerProps) => VueJsxNode;
   onBlur?: any;
   onClear?: any;
   onFocus?: (e: MouseEvent, rangeType: RangeType) => void;
@@ -697,7 +698,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     );
   };
 
-  const wrapPopover = (children: VNode | String) => {
+  const wrapPopover = (children: VueJsxNode) => {
     const { panelShow } = state;
     // rtl changes the default position
     // const { direction } = context;

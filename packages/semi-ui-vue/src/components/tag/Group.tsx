@@ -4,6 +4,7 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/tag/constants';
 import Tag from './index';
 import Popover, { PopoverProps } from '../popover';
 import { AvatarShape, TagProps } from './interface';
+import {VueJsxNode} from "../interface";
 
 const prefixCls = cssClasses.PREFIX;
 const tagSize = strings.TAG_SIZE;
@@ -67,7 +68,7 @@ const Group = defineComponent<TagGroupProps>((props, {slots}) => {
       nTag = (
         <Popover
           showArrow
-          content={restTags}
+          content={restTags as VueJsxNode}
           trigger="hover"
           position="top"
           autoAdjustOverflow

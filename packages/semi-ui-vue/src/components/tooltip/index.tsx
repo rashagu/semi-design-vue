@@ -35,6 +35,7 @@ import TriangleArrowVertical from './TriangleArrowVertical';
 import TooltipTransition from './TooltipStyledTransition';
 import {Motion} from '../_base/base';
 import {DefaultAdapter} from "@douyinfe/semi-foundation/base/foundation";
+import {VueJsxNode} from "../interface";
 
 export type Trigger = ArrayElement<typeof strings.TRIGGER_SET>;
 export {Position}
@@ -58,7 +59,7 @@ export interface TooltipProps extends BaseProps {
   clickToHide?: boolean;
   visible?: boolean;
   style?: CSSProperties;
-  content?: JSX.Element | string;
+  content?: VueJsxNode;
   prefixCls?: string;
   onVisibleChange?: (visible: boolean) => void;
   onClickOutSide?: (e: MouseEvent) => void;
@@ -78,6 +79,7 @@ export interface TooltipProps extends BaseProps {
   returnFocusOnClose?: boolean;
   onEscKeyDown?: (e: KeyboardEvent) => void;
   wrapperId?: string;
+  role?: string
 }
 
 interface TooltipState {
@@ -626,7 +628,7 @@ const Tooltip = defineComponent<TooltipProps>((props, {slots}) => {
 
   const renderPortal = () => {
     const {containerStyle = {}, visible, portalEventSet, placement, transitionState, id, isPositionUpdated} = state;
-    const {prefixCls, content, showArrow, style, motion, role, zIndex} = props;
+    const {prefixCls, content, showArrow, style, motion, zIndex} = props;
     const contentNode = renderContentNode(content);
     const {className: propClassName} = props;
     const direction = context.direction;
@@ -785,10 +787,13 @@ const Tooltip = defineComponent<TooltipProps>((props, {slots}) => {
         // Call the original ref, if any
         const {ref} = children as any;
         // this.log('tooltip render() - get ref', ref);
-        if (typeof ref.r === 'function') {
-          ref(node);
-        } else if (ref.r && typeof ref.r === 'object' && isRef(ref.r)) {
-          ref.r.value = node;
+        console.log(ref)
+        if(ref){
+          if (typeof ref.r === 'function') {
+            ref(node);
+          } else if (ref.r && typeof ref.r === 'object' && isRef(ref.r)) {
+            ref.r.value = node;
+          }
         }
       },
     });

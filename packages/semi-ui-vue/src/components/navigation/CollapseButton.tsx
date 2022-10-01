@@ -4,12 +4,13 @@ import {IconSidebar} from '@kousum/semi-icons-vue';
 import Button from '../button';
 import Tooltip from '../tooltip';
 import {Locale} from '../locale/interface';
+import {VueJsxNode} from "../interface";
 
 export interface CollapseButtonProps {
   prefixCls?: string;
   locale?: Locale['Navigation'];
 
-  collapseText?(isCollapsed: boolean): VNode;
+  collapseText?(isCollapsed: boolean): VueJsxNode;
 
   isCollapsed?: boolean;
 
@@ -52,7 +53,7 @@ const CollapseButton = defineComponent<CollapseButtonProps>((props, ctx) => {
       isCollapsed,
       onClick = noop
     } = props
-    let finalCollapseText: VNode | string = isCollapsed ? locale?.expandText : locale?.collapseText;
+    let finalCollapseText: VueJsxNode = isCollapsed ? locale?.expandText : locale?.collapseText;
 
     if (typeof collapseText === 'function') {
       finalCollapseText = collapseText(isCollapsed);
