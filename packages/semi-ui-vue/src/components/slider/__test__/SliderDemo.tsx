@@ -16,23 +16,23 @@ const SliderDemo = defineComponent<SliderDemoProps>((props, {}) => {
     <div>
       <div>
         <div style={{ height: '300px', marginLeft: '30px', marginTop: '10px', paddingRight: '30px', display: 'inline-block' }}>
-          <Slider vertical={true}></Slider>
+          <Slider vertical></Slider>
         </div>
-        {/*<div style={{ height: '300px', marginLeft: '30px', marginTop: '10px', paddingRight: '30px', display: 'inline-block' }}>*/}
-        {/*  <Slider vertical verticalReverse></Slider>*/}
-        {/*</div>*/}
-        {/*<div style={{ height: '300px', marginLeft: '30px', marginTop: '10px', paddingRight: '30px', display: 'inline-block' }}>*/}
-        {/*  <Slider vertical range defaultValue={[20, 60]}></Slider>*/}
-        {/*</div>*/}
-        {/*<div style={{ height: '300px', marginLeft: '30px', marginTop: '10px', paddingRight: '30px', display: 'inline-block' }}>*/}
-        {/*  <Slider vertical verticalReverse range defaultValue={[20, 60]}></Slider>*/}
-        {/*</div>*/}
-        {/*<div style={{ height: '300px', marginLeft: '30px', marginTop: '10px', paddingRight: '30px', display: 'inline-block' }}>*/}
-        {/*  <Slider vertical range marks={{ 20: '20°C', 40: '40°C' }} step={10} defaultValue={[20, 60]}></Slider>*/}
-        {/*</div>*/}
-        {/*<div style={{ height: '300px', marginLeft: '30px', marginTop: '10px', paddingRight: '30px', display: 'inline-block' }}>*/}
-        {/*  <Slider vertical verticalReverse range marks={{ 20: '20°C', 40: '40°C' }} step={10} defaultValue={[20, 60]}></Slider>*/}
-        {/*</div>*/}
+        <div style={{ height: '300px', marginLeft: '30px', marginTop: '10px', paddingRight: '30px', display: 'inline-block' }}>
+          <Slider vertical verticalReverse></Slider>
+        </div>
+        <div style={{ height: '300px', marginLeft: '30px', marginTop: '10px', paddingRight: '30px', display: 'inline-block' }}>
+          <Slider vertical range defaultValue={[20, 60]}></Slider>
+        </div>
+        <div style={{ height: '300px', marginLeft: '30px', marginTop: '10px', paddingRight: '30px', display: 'inline-block' }}>
+          <Slider vertical verticalReverse range defaultValue={[20, 60]}></Slider>
+        </div>
+        <div style={{ height: '300px', marginLeft: '30px', marginTop: '10px', paddingRight: '30px', display: 'inline-block' }}>
+          <Slider vertical range marks={{ 20: '20°C', 40: '40°C' }} step={10} defaultValue={[20, 60]}></Slider>
+        </div>
+        <div style={{ height: '300px', marginLeft: '30px', marginTop: '10px', paddingRight: '30px', display: 'inline-block' }}>
+          <Slider vertical verticalReverse range marks={{ 20: '20°C', 40: '40°C' }} step={10} defaultValue={[20, 60]}></Slider>
+        </div>
       </div>
     </div>
   )

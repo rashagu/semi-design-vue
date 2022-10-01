@@ -50,24 +50,45 @@ function domIsInRenderTree(e: HTMLElement) {
 const propTypes = {
   // allowClear: PropTypes.bool,
   defaultValue: [PropTypes.number, PropTypes.array],
-  disabled: PropTypes.bool,
-  included: PropTypes.bool, // Whether to juxtapose. Allow dragging
+  disabled: {
+    type: PropTypes.bool,
+    default: undefined
+  },
+  included: {
+    type: PropTypes.bool,
+    default: undefined
+  }, // Whether to juxtapose. Allow dragging
   marks: PropTypes.object, // Scale
   max: PropTypes.number,
   min: PropTypes.number,
-  range: PropTypes.bool, // Whether both sides
+  range: {
+    type: PropTypes.bool,
+    default: undefined
+  }, // Whether both sides
   step: PropTypes.number,
   tipFormatter: PropTypes.func,
   value: [PropTypes.number, PropTypes.array],
-  vertical: PropTypes.bool,
+  vertical: {
+    type: PropTypes.bool,
+    default: undefined
+  },
   onAfterChange: PropTypes.func, // OnmouseUp and triggered when clicked
   onChange: PropTypes.func,
-  tooltipVisible: PropTypes.bool,
+  tooltipVisible: {
+    type: PropTypes.bool,
+    default: undefined
+  },
   style: PropTypes.object,
   className: PropTypes.string,
-  showBoundary: PropTypes.bool,
+  showBoundary: {
+    type: PropTypes.bool,
+    default: undefined
+  },
   railStyle: PropTypes.object,
-  verticalReverse: PropTypes.bool,
+  verticalReverse: {
+    type: PropTypes.bool,
+    default: undefined
+  },
   getAriaValueText: PropTypes.func,
 };
 
@@ -119,14 +140,12 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   })
   const sliderEl = ref();
   const minHanleEl = ref();
-  watch(()=>state.currentValue, (val)=>{
-    console.log(val)
-  })
+
   const maxHanleEl = ref();
   let dragging = [false, false];
   const eventListenerSet = new Set();
 
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<SliderProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<SliderProps>(props, state)
 
 
   const adapter = adapter_()
@@ -173,12 +192,10 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         const handles = [minHanleEl, maxHanleEl];
         let flag = false;
         handles.forEach(handle => {
-          if (!handle) {
+          if (!handle.value) {
             return;
           }
-          const handleInstance = handle && handle.value;
-          console.log(minHanleEl.value, maxHanleEl.value)
-          if (handleInstance.contains(e.target as Node)) {
+          if (handle.value.contains(e.target as Node)) {
             flag = true;
           }
         });
@@ -213,8 +230,8 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         // this[key] = value;
         console.error('smw: 用途 未知')
       },
-      getMinHandleEl: () => minHanleEl.value,
-      getMaxHandleEl: () => maxHanleEl.value,
+      getMinHandleEl: () => ({current: minHanleEl.value}),
+      getMaxHandleEl: () => ({current: maxHanleEl.value}),
       onHandleDown: (e: MouseEvent) => {
         _addEventListener(document.body, 'mousemove', foundation.onHandleMove, false);
         _addEventListener(document.body, 'mouseup', foundation.onHandleUp, false);
@@ -294,6 +311,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   watch([
     () => props.value,
     () => props.disabled,
+    ()=>state.currentValue
   ], (val, [prevPropsValue, prevPropsDisabled]) => {
 
     const hasPropValueChange = !isEqual(props.value, prevPropsValue);
@@ -342,7 +360,6 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
       tipFormatter,
       range
     );
-    console.log({tipVisible, tipChildren}, tooltipVisible && isInRenderTree, state )
     const transform = {top: 'translateY(-50%)', left: 'translateX(-50%)'};
     const minClass = cls(cssClasses.HANDLE, {
       [`${cssClasses.HANDLE}-clicked`]: chooseMovePos === 'min' && isDrag,
@@ -359,7 +376,6 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
     };
     vertical && Object.assign(commonAria, {'aria-orientation': 'vertical'});
 
-    console.log(isInRenderTree,tipVisible.min,firstDotFocusVisible)
     const handleContents = !range ? (
       <Tooltip
         content={tipChildren.min}
@@ -650,7 +666,6 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
       [cssClasses.VERTICAL]: vertical,
     });
     const ariaLabel = range ? `Range: ${_getAriaValueText(currentValue[0], 0)} to ${_getAriaValueText(currentValue[1], 1)}` : undefined;
-    console.log(wrapperClass, props)
     const slider = (
       <div
         class={wrapperClass}

@@ -17,8 +17,19 @@ export const symbol = Object;
 export function vuePropsMake(typeObj:{[key:string]: any}, defaultProps:{[key:string]: any}) {
   const obj = {}
   for (const typeKey in typeObj) {
+    // console.log()
+    // if (typeKey === 'included'){
+    //   console.log('included', (typeObj[typeKey].hasOwnProperty('default') && typeObj[typeKey].default !== undefined) || !defaultProps.hasOwnProperty(typeKey))
+    // }
     if (typeObj[typeKey].hasOwnProperty('default') || !defaultProps.hasOwnProperty(typeKey)) {
+      if (typeObj[typeKey].default === undefined){
+        obj[typeKey] = {
+          type: typeObj[typeKey].type,
+          default: defaultProps[typeKey],
+        }
+      }else{
         obj[typeKey] = typeObj[typeKey]
+      }
     } else {
       obj[typeKey] = {
         type: typeObj[typeKey],
@@ -30,5 +41,6 @@ export function vuePropsMake(typeObj:{[key:string]: any}, defaultProps:{[key:str
       // }
     }
   }
+  // console.log(obj)
   return obj
 }

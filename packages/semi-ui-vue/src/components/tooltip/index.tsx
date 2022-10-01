@@ -6,7 +6,7 @@ import {
   Fragment,
   CSSProperties,
   reactive,
-  nextTick, onMounted, onUnmounted, isVNode, watch, cloneVNode, provide, inject, watchEffect,
+  nextTick, onMounted, onUnmounted, isVNode, watch, cloneVNode, provide, inject, watchEffect, isRef,
 } from 'vue'
 import classNames from 'classnames';
 
@@ -208,10 +208,9 @@ export const vuePropsType = {
 }
 
 
-const Index = defineComponent<TooltipProps>((props, {slots}) => {
+const Tooltip = defineComponent<TooltipProps>((props, {slots}) => {
 
 
-  console.log(props)
   const eventManager = ref<Event>(new Event);
   let triggerEl = ref(null);
   const containerEl = ref(null);
@@ -314,7 +313,7 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
 
 
 
-        console.log(triggerEl.value)
+        // console.log(triggerEl.value)
         return triggerEl.value && triggerEl.value.getBoundingClientRect();
       },
       // Gets the outer size of the specified container
@@ -786,10 +785,10 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
         // Call the original ref, if any
         const {ref} = children as any;
         // this.log('tooltip render() - get ref', ref);
-        if (typeof ref === 'function') {
+        if (typeof ref.r === 'function') {
           ref(node);
-        } else if (ref && typeof ref === 'object') {
-          ref.current = node;
+        } else if (ref.r && typeof ref.r === 'object' && isRef(ref.r)) {
+          ref.r.value = node;
         }
       },
     });
@@ -806,8 +805,9 @@ const Index = defineComponent<TooltipProps>((props, {slots}) => {
   }
 })
 
-Index.props = vuePropsType
+Tooltip.props = vuePropsType
+Tooltip.name = 'Tooltip'
 
-export default Index
+export default Tooltip
 
 

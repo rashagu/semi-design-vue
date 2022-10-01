@@ -95,7 +95,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Radio
 - [ ] Rating
 - [x] Select
-- [ ] Slider
+- [x] Slider
 - [ ] Switch
 - [x] TagInput 5f0912f
 - [x] TimePicker
