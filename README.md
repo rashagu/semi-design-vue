@@ -95,7 +95,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Radio
 - [ ] Rating
 - [x] Select
-- [ ] Slider
+- [x] Slider
 - [x] Switch
 - [x] TagInput 5f0912f
 - [x] TimePicker
@@ -125,7 +125,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Dropdown
 - [x] Empty
 - [ ] List
-- [ ] Modal
+- [x] Modal
 - [ ] OverflowList
 - [x] Popover
 - [x] ScrollList
