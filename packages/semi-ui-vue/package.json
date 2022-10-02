@@ -63,8 +63,7 @@
     "gulp-typescript": "^6.0.0-alpha.1",
     "identity-obj-proxy": "^3.0.0",
     "merge2": "^1.4.1",
-
-
+    "@vue/runtime-core": "^3.2.40",
     "rimraf": "^3.0.2",
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",

@@ -75,7 +75,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 
 ### 基础
 
-- [ ] Divider
+- [x] Divider
 - [x] Grid
 - [x] Icon
 - [x] Layout
@@ -92,7 +92,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] DatePicker
 - [ ] Form
 - [x] Input
-- [ ] InputNumber
+- [x] InputNumber
 - [x] Radio
 - [ ] Rating
 - [x] Select
