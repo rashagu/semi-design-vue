@@ -75,6 +75,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 
 ### 基础
 
+- [ ] Divider
 - [x] Grid
 - [x] Icon
 - [x] Layout
@@ -119,11 +120,13 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [ ] Badge
 - [x] Calendar
 - [ ] Card
+- [ ] Carousel
 - [ ] Collapse
 - [ ] Collapsible
 - [ ] Descriptions
 - [x] Dropdown
 - [x] Empty
+- [ ] Image
 - [ ] List
 - [x] Modal
 - [ ] OverflowList

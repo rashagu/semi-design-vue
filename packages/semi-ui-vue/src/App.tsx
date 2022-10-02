@@ -34,6 +34,7 @@ import ModalDemoConfirm from "./components/modal/__test__/ModalDemoConfirm";
 import ModalDemoHook from "./components/modal/__test__/ModalDemoHook";
 import InputNumberDemo from "./components/inputNumber/__test__/InputNumberDemo";
 import SliderDemo from "./components/slider/__test__/SliderDemo";
+import DividerDemo from "./components/divider/__test__/DividerDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -47,11 +48,12 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
+        <DividerDemo/>
         {/*<SliderDemo />*/}
         {/*<InputNumberDemo />*/}
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
-        <ModalDemo/>
+        {/*<ModalDemo/>*/}
         {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
