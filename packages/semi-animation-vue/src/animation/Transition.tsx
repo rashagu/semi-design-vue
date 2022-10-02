@@ -35,12 +35,15 @@ export interface TransitionProps extends AnimationProps {
   onStart?: (value: any) => void;
 }
 
-
 export const vuePropsType = {
   from: Object,
   enter: Object,
   leave: Object,
-  state: [String, Boolean],
+  state: {
+    type: [String, Boolean],
+// @ts-ignore
+    default: undefined
+  },
 
   willEnter: {
     type: Function,
@@ -82,7 +85,7 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
   })
 
   function getDerivedStateFromProps(props: TransitionProps, state: TransitionState) {
-    const willUpdateStates: TransitionState = {...state};
+    const willUpdateStates: Partial<TransitionState> = {};
     const children = slots.default
     if (
       children !== state.currentChildren
@@ -105,9 +108,9 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
     return willUpdateStates;
   }
 
-  watch([()=>props.state, ()=>slots.defautl], ()=>{
+  watch([() => props.state, () => slots.defautl], () => {
     const newState = getDerivedStateFromProps(props, state)
-    Object.keys(newState).forEach((key)=>{
+    Object.keys(newState).forEach((key) => {
       // @ts-ignore
       state[key] = newState[key]
     })
@@ -158,6 +161,7 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
     let to = {};
 
     const isControlled = _isControlled();
+    console.log(isControlled, state)
     let children: any;
 
     if (isControlled) {
@@ -191,8 +195,7 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
       <Animation {...finalProps} force>
         {
           (propsRender: Record<string, any>) => (
-            typeof children === 'function' ?
-              children(propsRender) : isVNode(children) ? children : null
+            typeof children === 'function' ? children(propsRender) : isVNode(children) ? children : null
           )
         }
       </Animation>

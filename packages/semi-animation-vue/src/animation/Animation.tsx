@@ -8,7 +8,7 @@ import {
   onMounted,
   onUnmounted,
   watch,
-  onBeforeMount
+  onBeforeMount, reactive, onBeforeUnmount
 } from 'vue'
 
 import {Animation as SemiAnimation, events} from '@douyinfe/semi-animation';
@@ -115,20 +115,28 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
   let pause: () => void;
   let start: () => void;
 
-  const currentStyle = ref({})
+  const state = reactive({
+    currentStyle: {},
+  })
 
   let startOrNot: any = function () {
     throw new Error('Method not implemented.');
   }
 
-  onBeforeMount(()=>{
-    initAnimation();
-    bindEvents();
-  })
+  initAnimation();
+  bindEvents();
 
   onMounted(() => {
     _mounted = true;
     const {forwardInstance} = props;
+
+    if (animation.value === null) {
+      // didmount/willUnmount may be called twice when React.StrictMode is true in React 18, we need to ensure that this.animation is correct
+      initAnimation();
+      bindEvents();
+    }
+
+
     if (typeof forwardInstance === 'function') {
       // console.error(forwardInstance)
       forwardInstance(animation.value);
@@ -137,7 +145,7 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
     startOrNot();
   })
 
-  onUnmounted(() => {
+  onBeforeUnmount(() => {
     _mounted = false;
     if (animation.value) {
       animation.value.destroy();
@@ -145,7 +153,7 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
     }
   })
 
-  watch([() => props.from, () => props.to], (n, [prevPropsFrom, prevPropsTo]) => {
+  watch([() => props.from, () => props.to, ()=>props.reset, ()=>props.force], (n, [prevPropsFrom, prevPropsTo]) => {
 
     if (props.reset) {
       if (props.from !== prevPropsFrom || props.to !== prevPropsTo) {
@@ -168,7 +176,7 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
 
   })
 
-  const initAnimation = (props0?: AnimationProps) => {
+  function initAnimation (props0?: AnimationProps) {
     // eslint-disable-next-line eqeqeq
     props0 = props0 == null ? props : props0;
     // eslint-disable-next-line prefer-const
@@ -178,7 +186,7 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
       [from, to] = [to, from];
     }
 
-    const initState = new SemiAnimation(
+    animation.value = new SemiAnimation(
       {
         from: {...from},
         to: {...to},
@@ -187,7 +195,6 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
         ...config,
       }
     )
-    animation.value = initState;
 
     events.forEach((event: string) => {
       const propName = `on${event[0].toUpperCase() + event.slice(1)}`;
@@ -196,7 +203,7 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
         // avoid memory leak
         //console.log(_mounted,_destroyed)
         if (_mounted && !_destroyed) {
-          currentStyle.value = {...propsAnimation}
+          state.currentStyle = {...propsAnimation}
           // @ts-ignore
           props[propName](propsAnimation);
         }
@@ -205,7 +212,7 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
 
     _destroyed = false;
   };
-  const bindEvents = () => {
+  function bindEvents() {
     startOrNot = () => {
       const {immediate, autoStart} = props;
       if (immediate) {
@@ -250,8 +257,16 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
 
   return () => {
     const children = slots.default;
+    const styles = animation.value.getCurrentStates()
+    Object.keys(styles).forEach(key=>{
+      if (['height',  'width', 'left', 'right', 'top', 'bottom', 'maxHeight', 'minHeight', 'maxWidth', 'minWidth'].includes(key)){
+        if (typeof styles[key] === 'number'){
+          styles[key] = styles[key] + 'px'
+        }
+      }
+    })
     if (typeof children === 'function' && animation.value) {
-      return children(animation.value.getCurrentStates());
+      return children(styles);
     } else if (isVNode(children)) {
       return children;
     } else {
