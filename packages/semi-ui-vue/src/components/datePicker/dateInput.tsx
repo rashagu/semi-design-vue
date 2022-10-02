@@ -14,7 +14,7 @@ import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined
 import { IconCalendar, IconCalendarClock, IconClear } from '@kousum/semi-icons-vue';
 import { BaseValueType, ValueType } from '@douyinfe/semi-foundation/datePicker/foundation';
 
-import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import Input from '../input/index';
 import { InsetDateInput, InsetTimeInput } from './insetInput';
 import * as PropTypes from "../PropTypes";

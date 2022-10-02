@@ -6,7 +6,7 @@ import type { DatePickerAdapter, DatePickerFoundationProps, DatePickerFoundation
 
 import { cssClasses, strings, numbers } from '@douyinfe/semi-foundation/datePicker/constants';
 import { strings as popoverStrings, numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/constants';
-import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
+import {useBaseComponent} from '../_base/baseComponent';
 import Popover from '../popover/index';
 import DateInput from './dateInput';
 import type { DateInputProps }from './dateInput';

@@ -5,7 +5,7 @@ import { strings } from '@douyinfe/semi-foundation/timePicker/constants';
 import { noop } from 'lodash';
 
 import Input from '../input';
-import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import InputFoundation, { TimeInputAdapter } from '@douyinfe/semi-foundation/timePicker/inputFoundation';
 import { IconClock } from '@kousum/semi-icons-vue';
 import { TimePickerProps } from './TimePicker';

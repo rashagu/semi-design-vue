@@ -14,7 +14,7 @@ import classnames from 'classnames';
 
 import { cssClasses, strings, numbers } from '@douyinfe/semi-foundation/dropdown/constants';
 
-import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
+import {useBaseComponent} from '../_base/baseComponent';
 
 
 import Tooltip, { TooltipProps, Trigger } from '../tooltip';

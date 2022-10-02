@@ -12,7 +12,7 @@ import {
   watchEffect, nextTick
 } from 'vue'
 
-import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
+import {useBaseComponent} from '../_base/baseComponent';
 import classnames from 'classnames';
 import {noop, debounce, throttle, find, map, findIndex, times} from 'lodash';
 

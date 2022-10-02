@@ -5,7 +5,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/modal/constants';
 import ConfigContext, { ContextValue } from '../configProvider/context';
 import Button from '../iconButton';
 import {Title as TypographyTitle} from '../typography';
-import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
+import {useBaseComponent} from '../_base/baseComponent';
 // eslint-disable-next-line max-len
 import ModalContentFoundation, {
     ModalContentAdapter,

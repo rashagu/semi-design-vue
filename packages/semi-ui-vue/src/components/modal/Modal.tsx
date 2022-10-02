@@ -8,7 +8,7 @@ import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import {noop} from 'lodash';
 import '@douyinfe/semi-foundation/modal/modal.scss';
-import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
+import {useBaseComponent} from '../_base/baseComponent';
 import confirm, {withConfirm, withError, withInfo, withSuccess, withWarning} from './confirm';
 import {Locale} from '../locale/interface';
 import useModal from './useModal';

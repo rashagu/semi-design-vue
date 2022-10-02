@@ -3,7 +3,7 @@ import {defineComponent, ref, h, Fragment, useSlots, reactive, onMounted, watch}
 import { format as dateFnsFormat } from 'date-fns';
 import { noop } from 'lodash';
 
-import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import { strings } from '@douyinfe/semi-foundation/timePicker/constants';
 import ScrollList from '../scrollList/index';
 import {scrollItemFunc} from '../scrollList/scrollItem';

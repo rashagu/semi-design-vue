@@ -5,7 +5,7 @@ import { noop, pick } from 'lodash';
 import UploadFoundation from '@douyinfe/semi-foundation/upload/foundation';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/upload/constants';
 import FileCard from './fileCard';
-import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
+import {useBaseComponent} from '../_base/baseComponent';
 import LocaleConsumer_  from '../locale/localeConsumer';
 import { IconUpload } from '@kousum/semi-icons-vue';
 import type {

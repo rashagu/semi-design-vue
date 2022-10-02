@@ -25,7 +25,7 @@ import type {
 } from '@douyinfe/semi-foundation/tooltip/foundation';
 import {strings, cssClasses, numbers} from '@douyinfe/semi-foundation/tooltip/constants';
 import '@douyinfe/semi-foundation/tooltip/tooltip.scss';
-import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import {isHTMLElement} from '../_base/reactUtils';
 import {getActiveElement, getFocusableElements, stopPropagation} from '../_utils';
 import {getUuidShort} from '@douyinfe/semi-foundation/utils/uuid';

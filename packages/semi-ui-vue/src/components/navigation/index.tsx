@@ -11,7 +11,7 @@ import {
   useSlots,
   CSSProperties, WatchStopHandle
 } from 'vue'
-import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
 import {noop, get, isEqual} from 'lodash';

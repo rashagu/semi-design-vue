@@ -8,7 +8,7 @@ import CheckboxFoundation, {
   BaseCheckboxProps
 } from '@douyinfe/semi-foundation/checkbox/checkboxFoundation';
 import CheckboxInner from './CheckboxInner';
-import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
+import {useBaseComponent} from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/checkbox/checkbox.scss';
 import {CheckboxContext, Context} from './Context';
 import {isUndefined, isBoolean, noop} from 'lodash';

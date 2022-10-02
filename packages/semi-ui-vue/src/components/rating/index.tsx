@@ -1,4 +1,4 @@
-import BaseComponent, {getProps, useBaseComponent} from '../_base/baseComponent';
+import {getProps, useBaseComponent} from '../_base/baseComponent';
 import cls from 'classnames';
 import ConfigContext from '../configProvider/context';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/rating/constants';

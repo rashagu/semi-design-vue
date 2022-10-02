@@ -8,7 +8,7 @@ import InputNumberFoundation, {
   BaseInputNumberState,
   InputNumberAdapter
 } from '@douyinfe/semi-foundation/inputNumber/foundation';
-import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
+import {useBaseComponent} from '../_base/baseComponent';
 import {cssClasses, numbers, strings} from '@douyinfe/semi-foundation/inputNumber/constants';
 import {IconChevronUp, IconChevronDown} from '@kousum/semi-icons-vue';
 

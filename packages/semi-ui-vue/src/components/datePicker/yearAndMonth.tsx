@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, Fragment, useSlots, reactive, watch} from 'vue'
 
 import YearAndMonthFoundation, { MonthScrollItem, YearAndMonthAdapter, YearAndMonthFoundationProps, YearAndMonthFoundationState, YearScrollItem } from '@douyinfe/semi-foundation/datePicker/yearAndMonthFoundation';
-import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import ScrollList from '../scrollList/index';
 import ScrollItem from '../scrollList/scrollItem';
 import { getYears } from '@douyinfe/semi-foundation/datePicker/_utils/index';

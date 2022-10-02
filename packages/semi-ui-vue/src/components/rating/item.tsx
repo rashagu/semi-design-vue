@@ -4,7 +4,7 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/rating/constants'
 import '@douyinfe/semi-foundation/rating/rating.scss';
 import { IconStar } from '@kousum/semi-icons-vue';
 import { RatingItemFoundation, RatingItemAdapter } from '@douyinfe/semi-foundation/rating/foundation';
-import BaseComponent, { BaseProps, useBaseComponent } from '../_base/baseComponent';
+import { BaseProps, useBaseComponent } from '../_base/baseComponent';
 import {defineComponent, h, reactive, ref, useSlots} from 'vue';
 import {VueHTMLAttributes, VueJsxNode} from '../interface';
 import { AriaAttributes } from '../AriaAttributes';

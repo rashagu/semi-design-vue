@@ -3,7 +3,7 @@ import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import SwitchFoudation, { SwitchAdapter } from '@douyinfe/semi-foundation/switch/foundation';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/switch/constants';
-import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
+import {useBaseComponent} from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/switch/switch.scss';
 
 import { noop } from 'lodash';

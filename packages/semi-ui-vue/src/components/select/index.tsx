@@ -15,7 +15,7 @@ import {FixedSizeList as List} from '@kousum/vue3-window'
 import cls from 'classnames';
 import SelectFoundation, {SelectAdapter} from '@douyinfe/semi-foundation/select/foundation';
 import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/select/constants';
-import BaseComponent, {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
+import {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import {isEqual, isString, noop, get, isNumber} from 'lodash';
 import Tag from '../tag';
 import TagGroup from '../tag/Group';

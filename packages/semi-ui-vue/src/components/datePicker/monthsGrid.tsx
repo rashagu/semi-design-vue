@@ -8,7 +8,7 @@ import MonthsGridFoundation, { MonthInfo, MonthsGridAdapter, MonthsGridDateAdapt
 import { strings, numbers, cssClasses } from '@douyinfe/semi-foundation/datePicker/constants';
 import { compatibleParse } from '@douyinfe/semi-foundation/datePicker/_utils/parser';
 import { noop, stubFalse } from 'lodash';
-import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import Navigation from './navigation';
 import Month from './month';
 import Combobox from '../timePicker/Combobox';

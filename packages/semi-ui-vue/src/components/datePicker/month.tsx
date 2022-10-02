@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import * as PropTypes from '../PropTypes';
 import MonthFoundation, { MonthAdapter, MonthDayInfo, MonthFoundationProps, MonthFoundationState } from '@douyinfe/semi-foundation/datePicker/monthFoundation';
 import { cssClasses, numbers } from '@douyinfe/semi-foundation/datePicker/constants';
-import BaseComponent, {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import { isBefore, isAfter, isBetween, isSameDay } from '@douyinfe/semi-foundation/datePicker/_utils/index';
 import { noop, stubFalse, isFunction } from 'lodash';
 import { parseISO } from 'date-fns';

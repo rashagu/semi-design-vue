@@ -16,7 +16,7 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/avatar/constants'
 import AvatarFoundation, { AvatarAdapter } from '@douyinfe/semi-foundation/avatar/foundation';
 import '@douyinfe/semi-foundation/avatar/avatar.scss';
 import { noop } from '@douyinfe/semi-foundation/utils/function';
-import BaseComponent, {useBaseComponent} from '../_base/baseComponent';
+import {useBaseComponent} from '../_base/baseComponent';
 import type { AvatarProps } from './interface';
 // import {AvatarColor, AvatarShape, AvatarSize} from "./interface";
 // import {TooltipProps} from "../tooltip";
