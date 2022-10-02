@@ -1,7 +1,26 @@
-import {defineComponent, ref, h, onActivated, Fragment, onMounted, isVNode, watch} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  onActivated,
+  Fragment,
+  onMounted,
+  isVNode,
+  watch,
+  reactive,
+  VNode,
+  useSlots,
+  onBeforeUnmount
+} from 'vue'
 import Animation, {AnimationProps} from './Animation';
 
 import noop from './utils/noop';
+
+export interface TransitionState {
+  state: string | boolean;
+  lastChildren: VNode | ((TransitionProps: any) => VNode | any) | VNode[];
+  currentChildren: VNode | ((TransitionProps: any) => VNode | any) | VNode[];
+}
 
 export interface TransitionProps extends AnimationProps {
   from?: Record<string, any>;
@@ -48,20 +67,53 @@ export const vuePropsType = {
     default: noop,
   },
 }
-const Transition = defineComponent<TransitionProps>((props, {slots}) => {
+const Transition = defineComponent<TransitionProps>((props, {}) => {
+  const slots = useSlots()
   // 在keep-alive = true时  相当于 onShow
   onActivated(() => {
 
   })
 
   let instance: any;
-  const state = ref('')
-  const lastChildren = ref(null)
-  const currentChildren = ref(null)
+  const state = reactive<TransitionState>({
+    state: '',
+    lastChildren: null,
+    currentChildren: null,
+  })
 
+  function getDerivedStateFromProps(props: TransitionProps, state: TransitionState) {
+    const willUpdateStates: TransitionState = {...state};
+    const children = slots.default
+    if (
+      children !== state.currentChildren
+      // && (props.children == null || state.currentChildren == null)
+    ) {
+      willUpdateStates.lastChildren = state.currentChildren;
+      willUpdateStates.currentChildren = children;
 
-  onMounted(() => {
+      if (children == null) {
+        willUpdateStates.state = 'leave';
+      } else {
+        willUpdateStates.state = 'enter';
+      }
+    }
 
+    if (props.state != null) {
+      willUpdateStates.state = props.state;
+    }
+
+    return willUpdateStates;
+  }
+
+  watch([()=>props.state, ()=>slots.defautl], ()=>{
+    const newState = getDerivedStateFromProps(props, state)
+    Object.keys(newState).forEach((key)=>{
+      // @ts-ignore
+      state[key] = newState[key]
+    })
+  })
+
+  onBeforeUnmount(() => {
     if (instance) {
       instance.destroy();
       instance = null;
@@ -76,22 +128,22 @@ const Transition = defineComponent<TransitionProps>((props, {slots}) => {
   };
 
   const onRest = (funcProps: any) => {
-    if (state.value === 'enter') {
+    if (state.state === 'enter') {
       props.didEnter(funcProps);
-    } else if (state.value === 'leave') {
-      currentChildren.value = null
-      lastChildren.value = null
+    } else if (state.state === 'leave') {
+      state.currentChildren = null
+      state.lastChildren = null
       props.didLeave(funcProps);
     }
-
+    console.log(state.state)
     props.onRest(funcProps);
   };
 
   const onStart = (funcProps: any) => {
 
-    if (state.value === 'enter') {
+    if (state.state === 'enter') {
       props.willEnter(funcProps);
-    } else if (state.value === 'leave') {
+    } else if (state.state === 'leave') {
       props.willLeave(funcProps);
     }
 
@@ -99,42 +151,41 @@ const Transition = defineComponent<TransitionProps>((props, {slots}) => {
   };
 
 
-  const {from: propsFrom, enter, leave, ...restProps} = props;
-
-  let from = {};
-  let to = {};
-
-  const isControlled = _isControlled();
-  let children: any;
   return () => {
+    const {from: propsFrom, enter, leave, ...restProps} = props;
 
-    let stateProps: any;
+    let from = {};
+    let to = {};
+
+    const isControlled = _isControlled();
+    let children: any;
+
     if (isControlled) {
       children = slots.default;
-      stateProps = props.state;
-    } else if (currentChildren == null && lastChildren == null) {
+      state.state = props.state;
+    } else if (state.currentChildren == null && state.lastChildren == null) {
       return null;
     }
 
-    if (stateProps === 'enter') {
+    if (state.state === 'enter') {
       from = propsFrom;
       to = enter;
 
       if (!isControlled) {
-        children = currentChildren;
+        children = state.currentChildren;
       }
-    } else if (stateProps === 'leave') {
+    } else if (state.state === 'leave') {
       from = enter;
       to = leave;
 
       if (!isControlled) {
-        children = lastChildren;
+        children = state.lastChildren;
       }
     }
 
     // TODO vue 这里的相同的 props 传给子组件 不会覆盖 而是会合并成数组。
     //  so ...
-    const finalProps = {...restProps, onRest,onStart,from,to}
+    const finalProps = {...restProps, onRest, onStart, from, to}
 
     return (
       <Animation {...finalProps} force>
