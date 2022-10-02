@@ -27,10 +27,7 @@ const propTypes = {
     default: undefined
   },
   visible: {
-    type: {
-      type: PropTypes.bool,
-      default: undefined
-    },
+    type: PropTypes.bool,
     default: undefined
   },
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -75,7 +72,7 @@ const propTypes = {
     type: PropTypes.bool,
     default: undefined
   },
-  closeIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  closeIcon: PropTypes.node,
   closeOnEsc: {
     type: PropTypes.bool,
     default: undefined

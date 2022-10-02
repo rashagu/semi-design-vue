@@ -62,7 +62,7 @@ const propTypes_ = {
   children: propTypes.node,
   active: propTypes.bool,
   shouldRenderSeparator: propTypes.bool,
-  icon: [propTypes.string, propTypes.node],
+  icon: propTypes.node,
   separator: propTypes.node,
   noLink: propTypes.bool,
 };

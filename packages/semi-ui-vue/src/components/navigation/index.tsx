@@ -146,8 +146,8 @@ const propTypes = {
   className: PropTypes.string,
   toggleIconPosition: PropTypes.string,
   prefixCls: PropTypes.string,
-  header: [PropTypes.node, PropTypes.object],
-  footer: [PropTypes.node, PropTypes.object],
+  header: PropTypes.node,
+  footer: PropTypes.node,
   limitIndent: {
     type: PropTypes.bool,
     default: undefined

@@ -46,7 +46,7 @@ export interface NavItemState {
 
 
 export const vuePropsType = {
-    text: [PropTypes.string, PropTypes.node],
+    text: PropTypes.node,
     itemKey: [PropTypes.string, PropTypes.number],
     onClick: {
         type: PropTypes.func,

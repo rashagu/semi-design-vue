@@ -62,7 +62,7 @@ const propTypes = {
     /**
      * Copywriting
      */
-    text: [PropTypes.string, PropTypes.node],
+    text: PropTypes.node,
     /**
      * Whether child navigation is expanded
      */
