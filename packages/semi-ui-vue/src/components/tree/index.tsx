@@ -44,7 +44,7 @@ import CheckboxGroup from '../checkbox/checkboxGroup';
 import {CSSProperties, defineComponent, h, nextTick, reactive, ref, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
-import {useBaseComponent} from "../_base/baseComponent";
+import {getProps, useBaseComponent} from "../_base/baseComponent";
 import {RatingItemProps} from "../rating";
 
 const LocaleConsumer = LocaleConsumer_()
@@ -137,7 +137,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Tree = defineComponent<TreeProps>((props, {}) => {
     const slots = useSlots()
-    
+
     let onNodeClick: any;
     let onMotionEnd: any;
     const {context} = useConfigContext()
@@ -193,6 +193,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
             ...adapterInject<TreeProps, TreeState>(),
             ...filterAdapter,
             updateState: states => {
+                // console.log(states.expandedKeys)
                 Object.keys(states).forEach(key=>{
                     state[key] = states[key]
                 })
@@ -245,18 +246,18 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
         const newState: Partial<TreeState> = {
             prevProps: props,
         };
-        const isExpandControlled = 'expandedKeys' in props;
+        const isExpandControlled = 'expandedKeys' in getProps(props);
 
         // Accept a props field as a parameter to determine whether to update the field
         const needUpdate = (name: string) => {
-            const firstInProps = !prevProps && name in props;
+            const firstInProps = !prevProps && name in getProps(props);
             const nameHasChange = prevProps && !isEqual(prevProps[name], props[name]);
             return firstInProps || nameHasChange;
         };
 
         // Determine whether treeData has changed
         const needUpdateData = () => {
-            const firstInProps = !prevProps && 'treeData' in props;
+            const firstInProps = !prevProps && 'treeData' in getProps(props);
             const treeDataHasChange = prevProps && prevProps.treeData !== props.treeData;
             return firstInProps || treeDataHasChange;
         };
@@ -415,6 +416,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
                         newState.motionType = motionType;
                     }
                 }
+
 
                 newState.flattenNodes = flattenTreeData(
                   treeData || prevState.treeData,
@@ -586,7 +588,6 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
     };
 
     const onNodeSelect = (e: MouseEvent | KeyboardEvent, treeNode: TreeNodeProps) => {
-        console.log(treeNode)
         foundation.handleNodeSelect(e, treeNode);
     };
 
@@ -643,6 +644,9 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
         foundation.handleNodeDrop(e, treeNode, dragNode);
     };
 
+    watch(()=>state.expandedKeys, (v)=>{
+        console.log(v)
+    })
     const getTreeNodeRequiredProps = () => {
         const { expandedKeys, selectedKeys, checkedKeys, halfCheckedKeys, keyEntities, filteredKeys } = state;
         return {
@@ -669,7 +673,6 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
         if (!treeNodeProps) {
             return null;
         }
-        console.log({...{...treeNodeProps, ...data}})
         return <TreeNode {...{...treeNodeProps, ...data}} key={key} data={data} style={isEmpty(style) ? {} : style} />;
     };
 
@@ -687,6 +690,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
         if (isEmpty(flattenNodes)) {
             return undefined;
         }
+        console.log(flattenNodes)
         if (!virtualize || isEmpty(virtualize)) {
             return (
               <NodeList
@@ -725,9 +729,6 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
     }
 
 
-    watch(()=>state.keyEntities, (v)=>{
-        console.log(v)
-    })
     return () => {
         const {
             keyEntities,

@@ -153,13 +153,13 @@ export interface FlattenNode extends BasicFlattenNode {
     parent?: null | FlattenNode;
 }
 export interface NodeListProps {
-    [x: string]: any;
     flattenNodes: FlattenNode[];
     motionKeys: Set<string>;
     motionType: string;
     flattenList: FlattenNode[] | undefined;
     searchTargetIsDeep?: boolean;
     renderTreeNode: (treeNode: FlattenNode, ind?: number, style?: CSSProperties) => VueJsxNode;
+    onMotionEnd: ()=>void
 }
 export type TransitionNodes<T> = Array<T | Array<T>>;
 export interface NodeListState {

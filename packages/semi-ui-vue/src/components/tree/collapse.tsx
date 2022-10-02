@@ -8,9 +8,7 @@ import {defineComponent, h, useSlots, ref, watch, computed} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 export interface CollapseProps {
-    [x: string]: any;
     motion?: boolean;
-    children?: VueJsxNode[];
     duration?: number;
     onMotionEnd?: () => void;
     motionType?: string;
@@ -29,6 +27,7 @@ export const vuePropsType = vuePropsMake({
     motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
     duration: PropTypes.number,
     onMotionEnd: PropTypes.func,
+    motionType: String
 }, {
     duration: 250,
     motion: true,
@@ -58,12 +57,12 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
 
     watch(()=>props.motionType, ()=>{
         if (props.motionType === 'enter') {
-            !open && setOpen(true);
-            left && setLeft(false);
+            !open.value && setOpen(true);
+            left.value && setLeft(false);
         } else if (props.motionType === 'leave') {
-            !open && setOpen(true);
-            !immediateAttr && setImmediateAttr(true);
-            left && setLeft(false);
+            !open.value && setOpen(true);
+            !immediateAttr.value && setImmediateAttr(true);
+            left.value && setLeft(false);
         }
     })
 
@@ -72,7 +71,6 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
         if (currHeight && maxHeight !== currHeight) {
             setMaxHeight(currHeight);
         }
-        console.log(left)
     });
 
 
@@ -98,8 +96,8 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
         };
         const children = slots.default?.()
         return (
-          <div style={style} class={`${cssClasses.PREFIX}-wrapper`} ref={ref}>
-              <div ref={setHeight}>{children}</div>
+          <div style={style} class={`${cssClasses.PREFIX}-wrapper`} ref={ref_}>
+              <div ref={setHeight.value}>{children}</div>
           </div>
         );
     };
@@ -110,18 +108,18 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
     };
 
     const onImmediateEnter = () => {
-        open && setOpen(false);
+        open.value && setOpen(false);
         setImmediateAttr(false);
     };
 
     const didEnter = () => {
         resetHeight();
-        immediateAttr && onImmediateEnter();
+        immediateAttr.value && onImmediateEnter();
         props.motionType === 'enter' && props.onMotionEnd();
     };
 
     return () => {
-        if (left) {
+        if (left.value) {
             return null;
         }
 
@@ -131,12 +129,13 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
             motion: props.motion,
         });
 
+        console.log(props.motion)
         return props.motion ? (
           <Transition
-            state={open ? 'enter' : 'leave'}
+            state={open.value ? 'enter' : 'leave'}
             immediate={immediateAttr.value}
             from={{ maxHeight: 0 }}
-            enter={{ maxHeight: { val: maxHeight, easing: ease, duration: props.duration } }}
+            enter={{ maxHeight: { val: maxHeight.value, easing: ease, duration: props.duration } }}
             leave={{ maxHeight: { val: 0, easing: ease, duration: props.duration } }}
             {...mergeMotion}
           >

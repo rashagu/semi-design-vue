@@ -90,7 +90,6 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
   const { context } = useTreeContext();
   const state = reactive<TreeNodeState>({});
 
-  console.log(props)
   const onSelect = (e: MouseEvent | KeyboardEvent) => {
     const { onNodeSelect } = context.value;
     onNodeSelect(e, props);
@@ -106,6 +105,7 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
     e && e.stopPropagation();
     e.stopImmediatePropagation();
     onNodeExpand(e, props);
+    console.log(e, props)
   };
 
   const onCheck = (e: MouseEvent | KeyboardEvent) => {
@@ -138,7 +138,6 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
       debounceSelect(e);
       return;
     }
-    console.log(e)
     onSelect(e);
     if (expandAction === 'click') {
       onExpand(e);
@@ -214,7 +213,7 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
   };
 
   const getNodeChildren = () => {
-    const children = slots.default?.();
+    const { children } = props;
     return children || [];
   };
 
@@ -226,7 +225,6 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
     if (isLeaf === false) {
       return false;
     }
-
     return isLeaf || (!loadData && !hasChildren) || (loadData && loaded && !hasChildren);
   };
 
@@ -435,7 +433,6 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
     });
     const setsize = get(rest, ['data', 'length']);
     const posinset = isString(rest.pos) ? Number(rest.pos.split('-')[level + 1]) + 1 : 1;
-    console.log(props)
     return (
       <li
         class={nodeCls}

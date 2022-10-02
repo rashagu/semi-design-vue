@@ -53,7 +53,15 @@ const Icon = defineComponent<IconProps>((props, {slots}) => {
   Object.assign(outerStyle, style);
 
 
-  return ()=> <span role="img" ref={ref} class={classes} style={outerStyle}>{slots.default ? slots.default() : null}</span>;
+  return ()=> <span
+    role="img"
+    ref={ref}
+    class={classes}
+    style={outerStyle}
+    {...restProps}
+  >
+    {slots.default ? slots.default() : null}
+  </span>;
 
 })
 
