@@ -94,7 +94,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Input
 - [x] InputNumber
 - [x] Radio
-- [ ] Rating
+- [x] Rating
 - [x] Select
 - [x] Slider
 - [x] Switch

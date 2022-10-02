@@ -180,7 +180,10 @@ const Rating = defineComponent<RatingProps>((props, {}) => {
     }
 
     watch(()=>props.value, ()=>{
-        getDerivedStateFromProps(getProps(props), state)
+        const newState = getDerivedStateFromProps(getProps(props), state)
+        Object.keys(newState).forEach(key=>{
+            state[key] = newState[key]
+        })
     })
 
     onMounted(()=>{

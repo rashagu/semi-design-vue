@@ -199,7 +199,10 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
   }
 
   watch(() => props.fullScreen, (value) => {
-    getDerivedStateFromProps(props, state)
+    const newState = getDerivedStateFromProps(props, state)
+    Object.keys(newState).forEach(key=>{
+      state[key] = newState[key]
+    })
   })
 
   function getScrollbarWidth() {
