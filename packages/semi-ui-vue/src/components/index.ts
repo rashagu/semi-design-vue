@@ -18,9 +18,9 @@ export { default as LocaleProvider } from './locale/localeProvider';
 
 export {
   Typography,
-  Text,
-  Title,
-  Paragraph,
+  Text as TypographyText,
+  Title as TypographyTitle,
+  Paragraph as TypographyParagraph,
 } from './typography';
 
 export { default as Input } from './input';
@@ -30,7 +30,7 @@ export { default as AreaSelect } from './areaSelect/AreaSelect';
 export { default as AutoCompleteItems } from './autoCompleteItems';
 export { default as Avatar } from './avatar';
 export { default as Cascader } from './cascader';
-export { default as Checkbox } from './checkbox';
+export { default as Checkbox, CheckboxGroup } from './checkbox';
 export { default as DatePicker } from './datePicker';
 export { default as Empty } from './empty';
 export { default as iconButton  } from './iconButton';
@@ -48,3 +48,4 @@ export { default as Upload  } from './upload/index';
 export { default as Slider  } from './slider/index';
 export { default as Divider  } from './divider/index';
 export { default as Rating  } from './rating/index';
+export { default as Tree, TreeNode  } from './tree/index';
