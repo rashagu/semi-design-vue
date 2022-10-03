@@ -37,12 +37,15 @@ export function vuePropsMake(typeObj:Record<any, {
           type: typeObj[typeKey],
           default: defaultValue,
         }
-        if (typeKey === 'getPopupContainer'){
-          console.log('getPopupContainer')
-        }
       }
     }else{
-      obj[typeKey] = typeObj[typeKey]
+      obj[typeKey] = {
+        type: typeObj[typeKey].hasOwnProperty('type')?
+          // @ts-ignore
+          typeObj[typeKey].type:
+          typeObj[typeKey],
+        default: undefined
+      }
     }
 
 
