@@ -44,6 +44,7 @@
     "sass": "^1.44.0",
     "scroll-into-view-if-needed": "^2.2.28",
     "utility-types": "^3.10.0",
+    "pinyin-pro": "^3.11.0",
     "vue": "^3.2.40"
   },
   "devDependencies": {

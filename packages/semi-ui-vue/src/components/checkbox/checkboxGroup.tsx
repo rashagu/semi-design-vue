@@ -18,10 +18,10 @@ import classnames from 'classnames';
 import { checkboxGroupClasses as css, strings } from '@douyinfe/semi-foundation/checkbox/constants';
 import CheckboxGroupFoundation, { CheckboxGroupAdapter } from '@douyinfe/semi-foundation/checkbox/checkboxGroupFoundation';
 import {useBaseComponent} from '../_base/baseComponent';
-import { Context } from './Context';
+import { Context } from './context';
 import { isEqual } from 'lodash';
-import Checkbox from './Checkbox';
-import type { CheckboxEvent } from './Checkbox';
+import Checkbox from './checkbox';
+import type { CheckboxEvent } from './checkbox';
 import {AriaAttributes} from "../AriaAttributes";
 import {vuePropsMake} from "../PropTypes";
 
@@ -40,7 +40,6 @@ export type CheckboxGroupProps = {
   options?: any[];
   value?: any[];
   onChange?: (value: any[]) => void;
-  children?: VNode | string;
   prefixCls?: string;
   direction?: CheckboxDirection;
   style?: CSSProperties;
@@ -66,7 +65,6 @@ const propTypes = {
   options: PropTypes.array,
   value: PropTypes.array,
   onChange: PropTypes.func,
-  children: PropTypes.node,
   prefixCls: PropTypes.string,
   direction: String,
   className: PropTypes.string,
@@ -128,7 +126,8 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
 
 
   return () => {
-    const { children, options, prefixCls, direction, className, id, style, type, disabled } = props;
+    const children = slots.default?.()
+    const { options, prefixCls, direction, className, id, style, type, disabled } = props;
 
     const isPureCardType = type === strings.TYPE_PURECARD;
     const isCardType = type === strings.TYPE_CARD || isPureCardType;

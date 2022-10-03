@@ -68,7 +68,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
-        <CheckboxDemo />
+        {/*<CheckboxDemo />*/}
         {/*<TagInputDemo />*/}
 
         {/*// TODO 样式好像有问题*/}
