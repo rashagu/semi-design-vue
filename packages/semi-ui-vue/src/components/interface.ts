@@ -7,6 +7,10 @@ export type VueHTMLAttributes = HTMLAttributes & {
   ref?: VNodeRef
   ref_for?: boolean
   ref_key?: string
+} & {
+  checked?: boolean
+  disabled?: boolean
+  type?: string
 }
 
 export type RefElement = Element | ComponentPublicInstance | null

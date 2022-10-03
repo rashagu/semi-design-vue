@@ -1,6 +1,7 @@
 import {defineComponent, ref, h, Fragment, useSlots, CSSProperties, VNode, reactive, inject, watch} from 'vue'
 import classnames from 'classnames';
-import {checkboxClasses as css} from '@douyinfe/semi-foundation/checkbox/constants';
+import * as PropTypes from '../PropTypes'
+import {checkboxClasses as css, strings} from '@douyinfe/semi-foundation/checkbox/constants';
 import CheckboxFoundation, {
   CheckboxAdapter,
   BasicCheckboxEvent,
@@ -8,15 +9,20 @@ import CheckboxFoundation, {
   BaseCheckboxProps
 } from '@douyinfe/semi-foundation/checkbox/checkboxFoundation';
 import CheckboxInner from './CheckboxInner';
-import {useBaseComponent} from '../_base/baseComponent';
+import {getProps, useBaseComponent} from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/checkbox/checkbox.scss';
 import {CheckboxContext, Context} from './Context';
 import {isUndefined, isBoolean, noop} from 'lodash';
 import {getUuidShort} from '@douyinfe/semi-foundation/utils/uuid';
+import {CheckboxType} from './checkboxGroup';
 
 export type CheckboxEvent = BasicCheckboxEvent;
 export type TargetObject = BasicTargetObject;
 import {AriaAttributes} from "../AriaAttributes";
+import {useCheckboxContext} from "./context/Consumer";
+import {vuePropsMake} from "../PropTypes";
+import {propTypesCheckbox} from "./propType";
+
 // import {TagInputProps} from "../tagInput/Index";
 
 export interface CheckboxProps extends BaseCheckboxProps {
@@ -36,6 +42,7 @@ export interface CheckboxProps extends BaseCheckboxProps {
   tabIndex?: number; // a11y: wrapper tabIndex
   addonId?: string;
   extraId?: string;
+  type?: CheckboxType;
 }
 
 interface CheckboxState {
@@ -45,35 +52,16 @@ interface CheckboxState {
   focusVisible?: boolean;
 }
 
-export const vuePropsType = {
-  'aria-describedby': String,
-  'aria-errormessage': String,
-  'aria-invalid': String,
-  'aria-labelledby': String,
-  'aria-required': String,
-  onChange: {
-    type: Function,
-    default: noop,
-  },
-  // TODO, docs
-  style: [Object, String],
-  onMouseEnter: {
-    type: Function,
-    default: noop,
-  },
-  onMouseLeave: {
-    type: Function,
-    default: noop,
-  },
-  extra: [Object, String],
-  'aria-label': String,
-  role: String,
-  tabIndex: Number,
+
+const defaultProps = {
   defaultChecked: false,
   indeterminate: false,
-  addonId: String,
-  extraId: String,
-}
+  onChange: noop,
+  onMouseEnter: noop,
+  onMouseLeave: noop,
+  type: 'default',
+};
+export const vuePropsType = vuePropsMake(propTypesCheckbox, defaultProps)
 const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
   const slots = useSlots()
 
@@ -82,11 +70,12 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
     checked: props.checked || props.defaultChecked || checked,
     addonId: props.addonId,
     extraId: props.extraId,
+    focusVisible: false
   });
   const checkboxEntity = ref(null);
   const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<CheckboxProps>(props, state)
 
-  const context = inject('CheckboxContext', ref<CheckboxContext>({}))
+  const {context} = useCheckboxContext()
 
   function adapter(): CheckboxAdapter<CheckboxProps, CheckboxState> {
     return {
@@ -105,10 +94,10 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
       },
       getGroupDisabled: () => (context && context.value.checkboxGroup.disabled),
       setAddonId: () => {
-        state.addonId = getUuidShort({ prefix: 'addon' })
+        state.addonId = getUuidShort({prefix: 'addon'})
       },
       setExtraId: () => {
-        state.extraId = getUuidShort({ prefix: 'extra' })
+        state.extraId = getUuidShort({prefix: 'extra'})
       },
       setFocusVisible: (focusVisible: boolean): void => {
         state.focusVisible = focusVisible;
@@ -133,7 +122,10 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
 
 
   function isInGroup(): boolean {
-    return !!(context.value && context.value.checkboxGroup);
+    // Why do we need to determine whether there is a value in props?
+    // If there is no value in the props of the checkbox in the context of the checkboxGroup,
+    // it will be considered not to belong to the checkboxGroup。
+    return Boolean(context && context.value.checkboxGroup && ('value' in getProps(props)));
   }
 
   function focus() {
@@ -148,6 +140,13 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
 
   const handleEnterPress = (e: any) => foundation.handleEnterPress(e);
 
+  const handleFocusVisible = (event: FocusEvent) => {
+    foundation.handleFocusVisible(event);
+  }
+
+  const handleBlur = (event: FocusEvent) => {
+    foundation.handleBlur();
+  }
 
   return () => {
     const children = slots.default ? slots.default() : null
@@ -163,9 +162,10 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
       value,
       role,
       tabIndex,
-      id
+      id,
+      type,
     } = props;
-    const { checked, addonId, extraId } = state;
+    const {checked, addonId, extraId, focusVisible} = state;
     const props_: Record<string, any> = {
       checked,
       disabled,
@@ -183,10 +183,14 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
       const {isCardType, isPureCardType} = context.value.checkboxGroup;
       props_.isCardType = isCardType;
       props_.isPureCardType = isPureCardType;
+    } else {
+      props_.isPureCardType = type === strings.TYPE_PURECARD;
+      props_.isCardType = type === strings.TYPE_CARD || props_.isPureCardType;
     }
 
     const prefix = prefixCls || css.PREFIX;
 
+    const focusOuter = props_.isCardType || props_.isPureCardType;
     const wrapper = classnames(prefix, {
       [`${prefix}-disabled`]: props_.disabled,
       [`${prefix}-indeterminate`]: indeterminate,
@@ -198,20 +202,37 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
       [`${prefix}-cardType_checked`]: props_.isCardType && props_.checked && !props_.disabled,
       [`${prefix}-cardType_checked_disabled`]: props_.isCardType && props_.checked && props_.disabled,
       [className]: Boolean(className),
+      [`${prefix}-focus`]: focusVisible && focusOuter,
     });
 
     const extraCls = classnames(`${prefix}-extra`, {
       [`${prefix}-cardType_extra_noChildren`]: props_.isCardType && !children,
     });
 
-    const name = inGroup? context.value.checkboxGroup.name:undefined;
+    const name = inGroup ? context.value.checkboxGroup.name : undefined;
+    const xSemiPropChildren = props['x-semi-children-alias'] || 'children';
 
-    const renderContent = () => (
-      <>
-        {children ? <span id={addonId} class={`${prefix}-addon`}>{children}</span> : null}
-        {extra ? <div id={extraId} class={extraCls}>{extra}</div> : null}
-      </>
-    );
+
+    const renderContent = () => {
+      if (!children && !extra) {
+        return null;
+      }
+
+      return (
+        <div class={`${prefix}-content`}>
+          {children ? (
+            <span id={addonId} class={`${prefix}-addon`} x-semi-prop={xSemiPropChildren}>
+                            {children}
+                        </span>
+          ) : null}
+          {extra ? (
+            <div id={extraId} class={extraCls} x-semi-prop="extra">
+              {extra}
+            </div>
+          ) : null}
+        </div>
+      );
+    };
     return (
       // label is better than span, however span is here which is to solve gitlab issue #364
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
@@ -227,26 +248,27 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
         onKeypress={handleEnterPress}
         aria-labelledby={props['aria-labelledby']}
       >
-                <CheckboxInner
-                  {...props}
-                  {...props_}
-                  addonId={children && addonId}
-                  extraId={extra && extraId}
-                  name={name}
-                  isPureCardType={props_.isPureCardType}
-                  ref={checkboxEntity}
-                />
-        {
-          props_.isCardType ?
-            <div>{renderContent()}</div> :
-            renderContent()
-        }
-            </span>
+        <CheckboxInner
+          {...{
+            ...props,
+            ...props_,
+            addonId: children && addonId,
+            extraId: extra && extraId,
+            isPureCardType: props_.isPureCardType,
+            ref: checkboxEntity,
+            focusInner: focusVisible && !focusOuter,
+            onInputFocus: handleFocusVisible,
+            onInputBlur: handleBlur
+          }}
+        />
+        {renderContent()}
+      </span>
     );
   }
 })
 
 Checkbox.props = vuePropsType
+Checkbox.name = 'Checkbox'
 
 export default Checkbox
 

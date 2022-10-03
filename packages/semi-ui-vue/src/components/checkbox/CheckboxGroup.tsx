@@ -12,16 +12,18 @@ import {
   onUnmounted, cloneVNode
 } from 'vue'
 
+import * as PropTypes from '../PropTypes'
 
 import classnames from 'classnames';
 import { checkboxGroupClasses as css, strings } from '@douyinfe/semi-foundation/checkbox/constants';
 import CheckboxGroupFoundation, { CheckboxGroupAdapter } from '@douyinfe/semi-foundation/checkbox/checkboxGroupFoundation';
 import {useBaseComponent} from '../_base/baseComponent';
-import CheckboxContextProvider, { Context } from './Context';
+import { Context } from './Context';
 import { isEqual } from 'lodash';
 import Checkbox from './Checkbox';
 import type { CheckboxEvent } from './Checkbox';
 import {AriaAttributes} from "../AriaAttributes";
+import {vuePropsMake} from "../PropTypes";
 
 export type CheckboxDirection = 'horizontal' | 'vertical';
 export type CheckboxType = 'default' | 'card' | 'pureCard';
@@ -52,35 +54,39 @@ export type CheckboxGroupState = {
   value?: any[];
 };
 
-export const vuePropsType = {
-  'aria-describedby': String,
-  'aria-errormessage': String,
-  'aria-invalid': String,
-  'aria-labelledby': String,
-  'aria-required': String,
-  defaultValue: {
-    type: Array,
-    default: [],
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  name: String,
-  options: Array,
-  value: Array,
-  onChange: {
-    type: Function,
-    default: () => {},
-  },
-  prefixCls: String,
-  direction: {type:String, default:strings.DEFAULT_DIRECTION},
-  style: [Object,String],
-  className:String,
-  type: {type:String,default:strings.TYPE_DEFAULT},
+const propTypes = {
+  'aria-describedby': PropTypes.string,
+  'aria-errormessage': PropTypes.string,
+  'aria-invalid': PropTypes.bool,
+  'aria-labelledby': PropTypes.string,
+  'aria-required': PropTypes.bool,
+  defaultValue: PropTypes.array,
+  disabled: PropTypes.bool,
+  name: PropTypes.string,
+  options: PropTypes.array,
+  value: PropTypes.array,
+  onChange: PropTypes.func,
+  children: PropTypes.node,
+  prefixCls: PropTypes.string,
+  direction: String,
+  className: PropTypes.string,
+  type: String,
+  style: PropTypes.object,
+
   id: String,
   'aria-label': String,
-}
+};
+
+const defaultProps: Partial<CheckboxGroupProps> = {
+  disabled: false,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChange: () => {},
+  type: strings.TYPE_DEFAULT,
+  defaultValue: [] as any,
+  direction: strings.DEFAULT_DIRECTION,
+};
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+
 const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
   const slots = useSlots()
 
@@ -106,9 +112,11 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
      foundation.init();
   })
 
-  watch(()=>props.value,()=>{
-    foundation.handlePropValueChange(props.value);
-  })
+  watch(()=>props.value,(value, oldValue)=>{
+    if (!isEqual(value, oldValue)) {
+      foundation.handlePropValueChange(props.value);
+    }
+  }, {deep: true})
 
   onUnmounted(()=>{
      foundation.destroy();
@@ -120,7 +128,6 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
 
 
   return () => {
-
     const { children, options, prefixCls, direction, className, id, style, type, disabled } = props;
 
     const isPureCardType = type === strings.TYPE_PURECARD;
@@ -132,6 +139,7 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
       [`${prefix }-wrapper`]: true,
       [`${prefix }-${ direction}`]: direction,
       [`${prefix}-${direction}-cardType`]: direction && isCardType,
+      [`${prefix}-${direction}-pureCardType`]: direction && isPureCardType,
     }, className);
 
     const realValue = state.value.slice();
@@ -187,7 +195,7 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
         // aria-invalid={props['aria-invalid']}
         // aria-required={props['aria-required']}
       >
-        <CheckboxContextProvider
+        <Context.Provider
           value={{
             checkboxGroup: {
               onChange: onChange,
@@ -200,7 +208,7 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
           }}
         >
           {inner}
-        </CheckboxContextProvider>
+        </Context.Provider>
       </div>
     );
   }

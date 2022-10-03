@@ -10,11 +10,14 @@ const CheckboxWithGroup  = Checkbox
 export {
   CheckboxWithGroup,
   Checkbox,
+};
+
+export type {
   CheckboxProps,
   CheckboxGroupProps,
   CheckboxEvent,
   CheckboxType,
   CheckboxDirection
-};
+}
 
 export default CheckboxWithGroup;

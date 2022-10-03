@@ -1,5 +1,7 @@
 import {defineComponent, ref, h, Fragment, useSlots, provide} from 'vue'
 import {  BasicCheckboxEvent } from '@douyinfe/semi-foundation/checkbox/checkboxFoundation';
+import Provider from "./context/Provider";
+import Consumer from "./context/Consumer";
 export type CheckboxContext = {
   checkboxGroup?: {
     onChange: (evt: BasicCheckboxEvent) => void;
@@ -12,21 +14,8 @@ export type CheckboxContext = {
 };
 
 
-const CheckboxContextProvider = defineComponent<{value:any}>((props, {}) => {
-  const slots = useSlots()
-  const ConfigContext = ref<CheckboxContext>(null);
-  // console.log(ConfigContext.value)
-  provide('CheckboxContext', ConfigContext)
-  return ()=>slots.default?slots.default(ConfigContext.value):null
-})
-
-CheckboxContextProvider.props = {
-  value:{
-    type: Object,
-    default: null
-  }
-}
-
-export default CheckboxContextProvider
-const Context = {};
+const Context = {
+  Provider,
+  Consumer
+};
 export { Context };
