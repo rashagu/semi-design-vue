@@ -30,6 +30,7 @@ import Input from '../input';
 import Popover, {PopoverProps} from '../popover';
 import Paragraph from '../typography/Paragraph';
 import {IconClear} from '@kousum/semi-icons-vue';
+import {VueJsxNode} from "../interface";
 // import {TooltipProps} from "../tooltip/Index";
 // import {AvatarProps, AvatarState} from "../avatar/Index";
 
@@ -61,7 +62,7 @@ export interface TagInputProps {
   onRemove?: (removedValue: string, idx: number) => void;
   placeholder?: string;
   prefix?: VNode | string;
-  renderTagItem?: (value: string, index: number) => VNode | string;
+  renderTagItem?: (value: string, index: number) => VueJsxNode;
   separator?: string | string[] | null;
   showClear?: boolean;
   size?: Size;

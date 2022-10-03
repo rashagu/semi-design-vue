@@ -1,17 +1,19 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties, inject} from 'vue'
-
+import {defineComponent, ref, h, Fragment, VNode, CSSProperties, inject, Ref} from 'vue'
+import * as PropTypes from '../PropTypes'
 import classNames from 'classnames';
 
 import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/popover/constants';
-import Tooltip, {ArrowBounding, TooltipProps, Trigger} from '../tooltip';
-import { Position } from '@douyinfe/semi-foundation/tooltip/foundation';
+import Tooltip from '../tooltip';
+import type { ArrowBounding, Position, TooltipProps, Trigger } from '../tooltip'
 
 import Arrow from './Arrow';
 import '@douyinfe/semi-foundation/popover/popover.scss';
 import {BaseProps} from '../_base/baseComponent';
 import {Motion} from '../_base/base';
-import {noop} from 'lodash';
+import { isFunction, noop } from 'lodash';
 import {VueJsxNode} from "../interface";
+import {vuePropsMake} from "../PropTypes";
+import {useConfigContext} from "../configProvider/context/Consumer";
 
 export declare interface ArrowStyle {
   borderColor?: string;
@@ -30,7 +32,7 @@ export interface PopoverProps extends BaseProps {
   trigger?: Trigger;
   contentClassName?: string | any[];
   onVisibleChange?: (visible: boolean) => void;
-  onClickOutSide?: (e: any) => void;
+  onClickOutSide?: (e: MouseEvent) => void;
   showArrow?: boolean;
   spacing?: number;
   stopPropagation?: boolean | string;
@@ -41,9 +43,12 @@ export interface PopoverProps extends BaseProps {
   rePosKey?: string | number;
   getPopupContainer?: () => HTMLElement;
   zIndex?: number;
-  cancelText?: string
-  okText?: string
-  role?: string
+  closeOnEsc?: TooltipProps['closeOnEsc'];
+  guardFocus?: TooltipProps['guardFocus'];
+  returnFocusOnClose?: TooltipProps['returnFocusOnClose'];
+  onEscKeyDown?: TooltipProps['onEscKeyDown'];
+  clickToHide?:TooltipProps['clickToHide'];
+  disableFocusListener?: boolean
 }
 
 export interface PopoverState {
@@ -53,57 +58,35 @@ export interface PopoverState {
 const positionSet = strings.POSITION_SET;
 const triggerSet = strings.TRIGGER_SET;
 
-export const vuePropsType = {
-  style: [String, Object],
-  className: String,
-  content: Object,
-  visible: Boolean,
-  autoAdjustOverflow: {
-    type: Boolean,
-    default: true
-  },
-  motion: {
-    type: [String, Object, Boolean],
-    default: true
-  },
-  position: {
-    type: [String, Object],
-    default: 'bottom'
-  },
-  mouseEnterDelay: Number,
-  mouseLeaveDelay: Number,
-  trigger: {
-    type: String,
-    default: 'hover'
-  },
-  contentClassName: [String, Array],
-  onVisibleChange: Function,
-  onClickOutSide: {
-    type:Function,
-    default: noop
-  },
-  showArrow: {
-    type: Boolean,
-    default: false
-  },
-  spacing: Number,
-  stopPropagation: [Boolean, String],
+const propTypes = {
+  content: [...PropTypes.node, PropTypes.func],
+  visible: PropTypes.bool,
+  autoAdjustOverflow: PropTypes.bool,
+  motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
+  position: String,
+  // getPopupContainer: PropTypes.func,
+  mouseEnterDelay: PropTypes.number,
+  mouseLeaveDelay: PropTypes.number,
+  trigger: [Boolean, String],
+  contentClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  onVisibleChange: PropTypes.func,
+  onClickOutSide: PropTypes.func,
+  style: PropTypes.object,
+  spacing: PropTypes.number,
+  zIndex: PropTypes.number,
+  showArrow: PropTypes.bool,
   arrowStyle: Object,
-  arrowBounding: {
-    type: Object,
-    default: numbers.ARROW_BOUNDING
-  },
-  arrowPointAtCenter: Boolean,
-  prefixCls: {
-    type:String,
-    default: cssClasses.PREFIX
-  },
+  arrowPointAtCenter: PropTypes.bool,
+  arrowBounding: PropTypes.object,
+  prefixCls: PropTypes.string,
+  guardFocus: PropTypes.bool,
+  disableArrowKeyDown: PropTypes.bool,
+
+  className: String,
+  class: String,
+  stopPropagation: [Boolean, String],
   rePosKey: [String, Number, Boolean],
   getPopupContainer: Function,
-  zIndex: {
-    type: Number,
-    default: numbers.DEFAULT_Z_INDEX
-  },
   cancelText: {
     type: String,
     default: 'No',
@@ -113,13 +96,34 @@ export const vuePropsType = {
     default: 'Yes',
   },
   role:String
-}
+};
 
-const Index = defineComponent<PopoverProps>((props, {slots}) => {
+const defaultProps = {
+  arrowBounding: numbers.ARROW_BOUNDING,
+  showArrow: false,
+  autoAdjustOverflow: true,
+  zIndex: numbers.DEFAULT_Z_INDEX,
+  motion: true,
+  trigger: 'hover',
+  cancelText: 'No',
+  okText: 'Yes',
+  position: 'bottom',
+  prefixCls: cssClasses.PREFIX,
+  onClickOutSide: noop,
+  onEscKeyDown: noop,
+  closeOnEsc: true,
+  returnFocusOnClose: true,
+  guardFocus: true,
+  disableFocusListener: true
+};
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 
-  const direction = inject('direction','ltr')
-  function renderPopCard() {
+const Popover = defineComponent<PopoverProps>((props, {slots}) => {
+
+  const {context} = useConfigContext()
+  function renderPopCard ({ initialFocusRef }: { initialFocusRef: any }) {
     const { content, contentClassName, prefixCls } = props;
+    const { direction } = context.value;
     const popCardCls = classNames(
       prefixCls,
       contentClassName,
@@ -128,13 +132,19 @@ const Index = defineComponent<PopoverProps>((props, {slots}) => {
         [`${prefixCls}-rtl`]: direction === 'rtl',
       }
     );
+    const contentNode = renderContentNode({ initialFocusRef, content });
     return (
       <div class={popCardCls}>
-        <div class={`${prefixCls}-content`}>{content}</div>
+        <div class={`${prefixCls}-content`}>{contentNode}</div>
       </div>
     );
   }
 
+  const renderContentNode = (props: { content: TooltipProps['content'], initialFocusRef: any }) => {
+    const { initialFocusRef, content } = props;
+    const contentProps = { initialFocusRef };
+    return !isFunction(content) ? content : content(contentProps);
+  };
 
   return () => {
 
@@ -149,7 +159,6 @@ const Index = defineComponent<PopoverProps>((props, {slots}) => {
       ...attr
     } = props;
     let { spacing } = props;
-    const popContent = renderPopCard();
 
     const arrowProps = {
       position,
@@ -172,7 +181,7 @@ const Index = defineComponent<PopoverProps>((props, {slots}) => {
         trigger={trigger}
         position={position}
         style={style}
-        content={popContent}
+        content={renderPopCard}
         prefixCls={prefixCls}
         spacing={spacing}
         showArrow={arrow}
@@ -180,16 +189,14 @@ const Index = defineComponent<PopoverProps>((props, {slots}) => {
         role={role}
       >
         {{
-          default:()=> <div style={{display:'inline-block'}}>
-              {slots.default ? slots.default() : null}
-            </div>
+          default: slots.default
         }}
       </Tooltip>
     );
   }
 })
 
-Index.props = vuePropsType
-
-export default Index
+Popover.props = vuePropsType
+Popover.name = 'Popover'
+export default Popover
 

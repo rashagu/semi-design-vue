@@ -38,6 +38,7 @@ import DividerDemo from "./components/divider/__test__/DividerDemo";
 import RatingDemo from "./components/rating/__test__/RatingDemo";
 import TreeDemo from "./components/tree/__test__/TreeDemo";
 import TreeCheckDemo from "./components/tree/__test__/TreeCheckDemo";
+import TreeSelectDemo from "./components/treeSelect/__test__/TreeSelectDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -51,7 +52,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <TreeCheckDemo />
+        <TreeSelectDemo/>
+        {/*<TreeCheckDemo />*/}
         {/*<TreeDemo />*/}
         {/*<RatingDemo />*/}
         {/*<DividerDemo/>*/}
@@ -72,7 +74,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*// TODO 样式好像有问题*/}
-        {/*<AutoCompleteItemsDemo/>*/}
+        <AutoCompleteItemsDemo/>
         {/*<SelectDemo/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}

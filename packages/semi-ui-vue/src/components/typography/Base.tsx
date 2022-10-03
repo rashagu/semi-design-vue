@@ -214,7 +214,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
   }
   watch(()=>props.ellipsis, (val)=>{
     const newState = getDerivedStateFromProps(props, state)
-    Object.keys(newState).forEach(key=>{
+    newState && Object.keys(newState).forEach(key=>{
       state[key] = newState[key]
     })
   })

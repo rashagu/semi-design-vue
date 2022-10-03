@@ -193,7 +193,6 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
           return null;
       }
     });
-    console.log(content)
     return <DropdownMenu>{{default:()=>content}}</DropdownMenu>;
   }
 

@@ -508,7 +508,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
     
     watch(()=>props, ()=>{
         const newState = getDerivedStateFromProps(props, state)
-        Object.keys(newState).forEach(key=>{
+        newState && Object.keys(newState).forEach(key=>{
             state[key] = newState[key]
         })
     }, {deep: true, immediate: true})

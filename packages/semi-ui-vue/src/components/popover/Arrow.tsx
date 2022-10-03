@@ -22,32 +22,32 @@ export const vuePropsType = {
 }
 const Arrow = defineComponent<ArrowProps>((props, {slots}) => {
 
-  const { position = '', className, arrowStyle, popStyle, ...rest } = props;
-  const isVertical = position.indexOf('top') === 0 || position.indexOf('bottom') === 0;
-  const cls = classnames(className, cssClasses.ARROW);
-
-  const borderOpacity = get(arrowStyle, 'borderOpacity', strings.DEFAULT_ARROW_STYLE.borderOpacity);
-  const bgColor = get(
-    arrowStyle,
-    'backgroundColor',
-    get(popStyle, 'backgroundColor', strings.DEFAULT_ARROW_STYLE.backgroundColor)
-  );
-  const borderColor = get(
-    arrowStyle,
-    'borderColor',
-    get(popStyle, 'borderColor', strings.DEFAULT_ARROW_STYLE.borderColor)
-  );
-
-  const wrapProps = {
-    ...rest,
-    width: numbers.ARROW_BOUNDING.width,
-    height: numbers.ARROW_BOUNDING.height,
-    xmlns: 'http://www.w3.org/2000/svg',
-    className: cls,
-  };
-
-
   return ()=>{
+
+    const { position = '', className, arrowStyle, popStyle, ...rest } = props;
+    const isVertical = position.indexOf('top') === 0 || position.indexOf('bottom') === 0;
+    const cls = classnames(className, cssClasses.ARROW);
+
+    const borderOpacity = get(arrowStyle, 'borderOpacity', strings.DEFAULT_ARROW_STYLE.borderOpacity);
+    const bgColor = get(
+      arrowStyle,
+      'backgroundColor',
+      get(popStyle, 'backgroundColor', strings.DEFAULT_ARROW_STYLE.backgroundColor)
+    );
+    const borderColor = get(
+      arrowStyle,
+      'borderColor',
+      get(popStyle, 'borderColor', strings.DEFAULT_ARROW_STYLE.borderColor)
+    );
+
+    const wrapProps = {
+      ...rest,
+      width: numbers.ARROW_BOUNDING.width,
+      height: numbers.ARROW_BOUNDING.height,
+      xmlns: 'http://www.w3.org/2000/svg',
+      className: cls,
+    };
+
     return isVertical ? (
       <svg {...wrapProps}>
         <path

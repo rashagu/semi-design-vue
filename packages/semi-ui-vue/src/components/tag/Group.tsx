@@ -4,7 +4,7 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/tag/constants';
 import Tag from './index';
 import Popover, { PopoverProps } from '../popover';
 import { AvatarShape, TagProps } from './interface';
-import {VueJsxNode} from "../interface";
+import {VueJsxNode, VueJsxNodeSingle} from "../interface";
 
 const prefixCls = cssClasses.PREFIX;
 const tagSize = strings.TAG_SIZE;
@@ -15,7 +15,7 @@ export interface TagGroupProps {
   className?: string;
   maxTagCount?: number;
   restCount?: number;
-  tagList?: (TagProps | VNode)[];
+  tagList?: any[];
   size?: 'small' | 'large';
   showPopover?: boolean;
   popoverProps?: PopoverProps;
