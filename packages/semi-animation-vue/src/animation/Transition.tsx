@@ -138,7 +138,6 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
       state.lastChildren = null
       props.didLeave(funcProps);
     }
-    console.log(state.state)
     props.onRest(funcProps);
   };
 
@@ -161,7 +160,6 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
     let to = {};
 
     const isControlled = _isControlled();
-    console.log(isControlled, state)
     let children: any;
 
     if (isControlled) {

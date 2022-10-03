@@ -3,8 +3,8 @@ import * as PropTypes from '../PropTypes';
 import { noop } from 'lodash';
 import { cssClasses } from '@douyinfe/semi-foundation/collapsible/constants';
 import getMotionObjFromProps from '@douyinfe/semi-foundation/utils/getMotionObjFromProps';
-import {VueJsxNode} from "../interface";
-import {defineComponent, h, useSlots, ref, watch, computed} from "vue";
+import {RefElement, VueJsxNode} from "../interface";
+import {defineComponent, h, useSlots, ref, watch, computed, onUnmounted, CSSProperties, nextTick, onMounted} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 export interface CollapseProps {
@@ -55,7 +55,15 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
         immediateAttr.value = val
     }
 
+    // onMounted(()=>{
+    //     useEffect()
+    // })
+
     watch(()=>props.motionType, ()=>{
+        useEffect()
+    })
+
+    function useEffect() {
         if (props.motionType === 'enter') {
             !open.value && setOpen(true);
             left.value && setLeft(false);
@@ -64,14 +72,22 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
             !immediateAttr.value && setImmediateAttr(true);
             left.value && setLeft(false);
         }
-    })
+    }
 
-    const setHeight = computed(()=>(node) => {
-        const currHeight = node && node.scrollHeight;
-        if (currHeight && maxHeight !== currHeight) {
-            setMaxHeight(currHeight);
+    let motionType = ''
+    const setHeight = (node:any) => {
+        // TODO 渲染时机不同 watch 在setHeight 之前执行了
+        if (props.motionType !== motionType){
+            useEffect()
+            motionType = props.motionType
         }
-    });
+        nextTick(()=>{
+            const currHeight = node && node.scrollHeight;
+            if (currHeight && maxHeight.value !== currHeight) {
+                setMaxHeight(currHeight);
+            }
+        })
+    };
 
 
     const resetHeight = () => {
@@ -89,15 +105,15 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
         const transition =
           transitionStyle && typeof transitionStyle === 'object' ? formatStyle(transitionStyle) : {};
 
-        const style = {
+        const style: CSSProperties = {
             overflow: 'hidden',
-            maxHeight: open ? 'none' : 0,
+            maxHeight: open.value ? 'none' : 0,
             ...transition,
         };
         const children = slots.default?.()
         return (
           <div style={style} class={`${cssClasses.PREFIX}-wrapper`} ref={ref_}>
-              <div ref={setHeight.value}>{children}</div>
+              <div ref={setHeight}>{children}</div>
           </div>
         );
     };
@@ -129,7 +145,6 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
             motion: props.motion,
         });
 
-        console.log(props.motion)
         return props.motion ? (
           <Transition
             state={open.value ? 'enter' : 'leave'}

@@ -37,6 +37,7 @@ import SliderDemo from "./components/slider/__test__/SliderDemo";
 import DividerDemo from "./components/divider/__test__/DividerDemo";
 import RatingDemo from "./components/rating/__test__/RatingDemo";
 import TreeDemo from "./components/tree/__test__/TreeDemo";
+import TreeCheckDemo from "./components/tree/__test__/TreeCheckDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -50,7 +51,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <TreeDemo />
+        <TreeCheckDemo />
+        {/*<TreeDemo />*/}
         {/*<RatingDemo />*/}
         {/*<DividerDemo/>*/}
         {/*<SliderDemo />*/}

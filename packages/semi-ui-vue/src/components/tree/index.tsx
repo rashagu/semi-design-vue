@@ -193,7 +193,6 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
             ...adapterInject<TreeProps, TreeState>(),
             ...filterAdapter,
             updateState: states => {
-                // console.log(states.expandedKeys)
                 Object.keys(states).forEach(key=>{
                     state[key] = states[key]
                 })
@@ -644,9 +643,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
         foundation.handleNodeDrop(e, treeNode, dragNode);
     };
 
-    watch(()=>state.expandedKeys, (v)=>{
-        console.log(v)
-    })
+
     const getTreeNodeRequiredProps = () => {
         const { expandedKeys, selectedKeys, checkedKeys, halfCheckedKeys, keyEntities, filteredKeys } = state;
         return {
@@ -690,7 +687,6 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
         if (isEmpty(flattenNodes)) {
             return undefined;
         }
-        console.log(flattenNodes)
         if (!virtualize || isEmpty(virtualize)) {
             return (
               <NodeList

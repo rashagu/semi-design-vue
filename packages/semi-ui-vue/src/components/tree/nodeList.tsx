@@ -79,16 +79,13 @@ const NodeList = defineComponent<NodeListProps>((props, {}) => {
         const { flattenNodes, motionType, searchTargetIsDeep, renderTreeNode } = props;
         const { transitionNodes } = state;
         const mapData = transitionNodes.length && !searchTargetIsDeep ? transitionNodes : flattenNodes;
-        console.log(motionType)
         const options = mapData.map(treeNode => {
             const isMotionNode = Array.isArray(treeNode);
             if (isMotionNode && !(treeNode as FlattenNode[]).length) {
                 return null;
             }
-            // console.log(treeNode)
             if (isMotionNode && (treeNode as FlattenNode[]).length) {
                 const nodeKey = getTreeNodeKey(treeNode[0]);
-                console.log(nodeKey)
                 return (
                   <Collapse
                     motionType={motionType === 'show' ? 'enter' : 'leave'}

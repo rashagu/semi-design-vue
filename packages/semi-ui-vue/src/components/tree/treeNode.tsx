@@ -105,7 +105,6 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
     e && e.stopPropagation();
     e.stopImmediatePropagation();
     onNodeExpand(e, props);
-    console.log(e, props)
   };
 
   const onCheck = (e: MouseEvent | KeyboardEvent) => {
