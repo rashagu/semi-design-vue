@@ -12,7 +12,16 @@ export const element = [Array, Object, String, Number];
 export const symbol = Object;
 
 export function oneOfType(arr:any[]) {
-  return [...arr]
+  let newArr = []
+  arr.map(item=>{
+    if (Array.isArray(item)){
+      newArr = [...newArr, ...item]
+    }else{
+      newArr.push(item)
+    }
+  })
+
+  return newArr
 }
 
 type Prop = ArrayConstructor | ObjectConstructor | StringConstructor | NumberConstructor | BooleanConstructor | FunctionConstructor | typeof any

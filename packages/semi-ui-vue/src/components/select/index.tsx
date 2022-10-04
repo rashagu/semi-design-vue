@@ -9,8 +9,9 @@ import {
   onMounted,
   onUnmounted,
   watch,
-  getCurrentInstance, Component, ComponentPublicInstance
+  getCurrentInstance, Component, ComponentPublicInstance, nextTick, useSlots
 } from 'vue'
+import * as PropTypes from '../PropTypes'
 import {FixedSizeList as List} from '@kousum/vue3-window'
 import cls from 'classnames';
 import SelectFoundation, {SelectAdapter} from '@douyinfe/semi-foundation/select/foundation';
@@ -41,7 +42,8 @@ import '@douyinfe/semi-foundation/select/select.scss';
 import {Locale} from '../locale/interface';
 import type {Position} from '@douyinfe/semi-foundation/tooltip/foundation';
 import type {TooltipProps} from '../tooltip';
-import {RadioGroupProps} from "../radio/RadioGroup";
+import {AriaAttributes} from "../AriaAttributes";
+import {vuePropsMake} from "../PropTypes";
 
 export type {OptionGroupProps} from './OptionGroup';
 export type {VirtualRowProps} from './VirtualRow';
@@ -97,11 +99,11 @@ export type RenderMultipleSelectedItemFn = (optionNode: Record<string, any>, mul
 export type RenderSelectedItemFn = RenderSingleSelectedItemFn | RenderMultipleSelectedItemFn;
 
 export type SelectProps = {
-  'aria-describedby'?: any;
-  'aria-errormessage'?: any;
-  'aria-invalid'?: any;
-  'aria-labelledby'?: any;
-  'aria-required'?: any;
+  'aria-describedby'?: AriaAttributes['aria-describedby'];
+  'aria-errormessage'?: AriaAttributes['aria-errormessage'];
+  'aria-invalid'?: AriaAttributes['aria-invalid'];
+  'aria-labelledby'?: AriaAttributes['aria-labelledby'];
+  'aria-required'?: AriaAttributes['aria-required'];
   id?: string;
   autoFocus?: boolean;
   autoClearSearchValue?: boolean;
@@ -162,7 +164,7 @@ export type SelectProps = {
   onFocus?: (e: FocusEvent) => void;
   onBlur?: (e: FocusEvent) => void;
   onListScroll?: (e: Event) => void;
-  children?: VNode[];
+  preventScroll?: boolean;
 } & Pick<TooltipProps,
   | 'spacing'
   | 'getPopupContainer'
@@ -191,182 +193,138 @@ export interface SelectState {
 // Notes: Use the label of the option as the identifier, that is, the option in Select, the value is allowed to be the same, but the label must be unique
 
 
-export const vuePropsType = {
-  stopPropagation: {
-    type: Boolean,
-    default: true,
-  },
-  motion: {
-    type: Boolean,
-    default: true,
-  },
-  zIndex: {
-    type: Number,
-    default: popoverNumbers.DEFAULT_Z_INDEX,
-  },
-  // position: 'bottomLeft',
-  filter: {
-    type: Boolean,
-    default: false,
-  },
-  multiple: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  defaultOpen: {
-    type: Boolean,
-    default: false,
-  },
-  allowCreate: {
-    type: Boolean,
-    default: false,
-  },
-  placeholder: {
-    type: String,
-    default: '',
-  },
-  onDropdownVisibleChange: {
-    type: Function,
-    default: noop
-  },
-  onChangeWithObject: {
-    type: Boolean,
-    default: false,
-  },
-  onChange: {
-    type: Function,
-    default: noop
-  },
-  onSearch: {
-    type: Function,
-    default: noop
-  },
-  onMouseEnter: {
-    type: Function,
-    default: noop
-  },
-  onMouseLeave: {
-    type: Function,
-    default: noop
-  },
-  onDeselect: {
-    type: Function,
-    default: noop
-  },
-  onSelect: {
-    type: Function,
-    default: noop
-  },
-  onCreate: {
-    type: Function,
-    default: noop
-  },
-  onExceed: {
-    type: Function,
-    default: noop
-  },
-  onFocus: {
-    type: Function,
-    default: noop
-  },
-  onBlur: {
-    type: Function,
-    default: noop
-  },
-  onClear: {
-    type: Function,
-    default: noop
-  },
-  onListScroll: {
-    type: Function,
-    default: noop
-  },
-  maxHeight: {
-    type: Number,
-    default: 300,
-  },
-  dropdownMatchSelectWidth: {
-    type: Boolean,
-    default: true,
-  },
-  defaultActiveFirstOption: {
-    type: Boolean,
-    default: false,
-  },
-  showArrow: {
-    type: Boolean,
-    default: true,
-  },
-  showClear: {
-    type: Boolean,
-    default: false,
-  },
-  remote: {
-    type: Boolean,
-    default: false,
-  },
-  autoAdjustOverflow: {
-    type: Boolean,
-    default: true,
-  },
-  autoClearSearchValue: {
-    type: Boolean,
-    default: true,
-  },
-  arrowIcon: {
-    type: Object,
-    default: <IconChevronDown/>
-  },
-
-
-  'aria-describedby': String,
-  'aria-errormessage': String,
-  'aria-invalid': String,
-  'aria-labelledby': String,
-  'aria-required': String,
-  id: String,
-  autoFocus: Boolean,
-  defaultValue: [Object, Array, Number, String],
-  value: [Object, Array, Number, String],
-  max: Number,
-  maxTagCount: Number,
-  style: [Object, String],
-  className: String,
+const propTypes = {
+  'aria-describedby': PropTypes.string,
+  'aria-errormessage': PropTypes.string,
+  'aria-invalid': PropTypes.bool,
+  'aria-labelledby': PropTypes.string,
+  'aria-required': PropTypes.bool,
+  autoFocus: PropTypes.bool,
+  autoClearSearchValue: PropTypes.bool,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.object]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.object]),
+  placeholder: PropTypes.node,
+  onChange: PropTypes.func,
+  multiple: PropTypes.bool,
+  // Whether to turn on the input box filtering function, when it is a function, it represents a custom filtering function
+  filter: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  // How many tags can you choose?
+  max: PropTypes.number,
+  // How many tabs are displayed at most, and the rest are displayed in + N
+  maxTagCount: PropTypes.number,
+  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  style: PropTypes.object,
+  className: PropTypes.string,
   size: String,
-  emptyContent: [Object, String],
+  disabled: PropTypes.bool,
+  emptyContent: PropTypes.node,
+  onDropdownVisibleChange: PropTypes.func,
+  zIndex: PropTypes.number,
   position: String,
-  dropdownClassName: String,
-  dropdownStyle: [Object, String],
-  outerTopSlot: [Object, String],
-  innerTopSlot: [Object, String],
-  outerBottomSlot: [Object, String],
-  innerBottomSlot: [Object, String],
-  optionList: [Object, Array],
-  loading: Boolean,
+  onSearch: PropTypes.func,
+  getPopupContainer: PropTypes.func,
+  dropdownClassName: PropTypes.string,
+  dropdownStyle: PropTypes.object,
+  outerTopSlot: PropTypes.node,
+  innerTopSlot: PropTypes.node,
+  inputProps: PropTypes.object,
+  outerBottomSlot: PropTypes.node,
+  innerBottomSlot: PropTypes.node, // Options slot
+  optionList: PropTypes.array,
+  dropdownMatchSelectWidth: PropTypes.bool,
+  loading: PropTypes.bool,
+  defaultOpen: PropTypes.bool,
   validateStatus: String,
-  suffix: [Object, String],
-  prefix: [Object, String],
-  insetLabel: [Object, String],
-  insetLabelId: String,
-  inputProps: [Object, String],
-  renderSelectedItem: Function,
-  renderCreateItem: Function,
-  renderOptionItem: Function,
-  clickToHide: Boolean,
-  triggerRender: Function,
-  virtualize: [Object, String],
+  defaultActiveFirstOption: PropTypes.bool,
+  triggerRender: PropTypes.func,
+  stopPropagation: PropTypes.bool,
+  // motion doesn't need to be exposed
+  motion: PropTypes.oneOfType([PropTypes.func, PropTypes.bool, PropTypes.object]),
 
+  onChangeWithObject: PropTypes.bool,
 
+  suffix: PropTypes.node,
+  prefix: PropTypes.node,
+  insetLabel: PropTypes.node,
+  insetLabelId: PropTypes.string,
+  showClear: PropTypes.bool,
+  showArrow: PropTypes.bool,
+
+  renderSelectedItem: PropTypes.func,
+
+  allowCreate: PropTypes.bool,
+  renderCreateItem: PropTypes.func,
+
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+  clickToHide: PropTypes.bool,
+  onExceed: PropTypes.func,
+  onCreate: PropTypes.func,
+  remote: PropTypes.bool,
+  onDeselect: PropTypes.func,
+  // The main difference between onSelect and onChange is that when multiple selections are selected, onChange contains all options, while onSelect only contains items for the current operation
+  onSelect: PropTypes.func,
+  autoAdjustOverflow: PropTypes.bool,
+  mouseEnterDelay: PropTypes.number,
+  mouseLeaveDelay: PropTypes.number,
+  spacing: PropTypes.number,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  onClear: PropTypes.func,
+
+  virtualize: PropTypes.object,
+  renderOptionItem: PropTypes.func,
+  onListScroll: PropTypes.func,
+  arrowIcon: PropTypes.node,
+  preventScroll: PropTypes.bool,
+  // open: PropTypes.bool,
+  // tagClosable: PropTypes.bool,
+
+  id: String,
+};
+
+const defaultProps: Partial<SelectProps> = {
+  stopPropagation: true,
+  motion: true,
+  zIndex: popoverNumbers.DEFAULT_Z_INDEX,
+  // position: 'bottomLeft',
+  filter: false,
+  multiple: false,
+  disabled: false,
+  defaultOpen: false,
+  allowCreate: false,
+  placeholder: '',
+  onDropdownVisibleChange: noop,
+  onChangeWithObject: false,
+  onChange: noop,
+  onSearch: noop,
+  onMouseEnter: noop,
+  onMouseLeave: noop,
+  onDeselect: noop,
+  onSelect: noop,
+  onCreate: noop,
+  onExceed: noop,
+  onFocus: noop,
+  onBlur: noop,
+  onClear: noop,
+  onListScroll: noop,
+  maxHeight: 300,
+  dropdownMatchSelectWidth: true,
+  defaultActiveFirstOption: true, // In order to meet the needs of A11y, change to true
+  showArrow: true,
+  showClear: false,
+  remote: false,
+  autoAdjustOverflow: true,
+  autoClearSearchValue: true,
+  arrowIcon: <IconChevronDown aria-label='' />
   // Radio selection is different from the default renderSelectedItem for multiple selection, so it is not declared here
   // renderSelectedItem: (optionNode) => optionNode.label,
   // The default creator rendering is related to i18, so it is not declared here
   // renderCreateItem: (input) => input
-}
-const Index = defineComponent<SelectProps>((props, {slots}) => {
+};
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+const Index = defineComponent<SelectProps>((props, {}) => {
+  const slots = useSlots()
 
   const state = reactive({
     isOpen: false,
@@ -383,16 +341,22 @@ const Index = defineComponent<SelectProps>((props, {slots}) => {
     isHovering: false,
     isFocusInContainer: false,
   })
-  let inputRef = ref(null)
-  let triggerRef = ref(null)
-  let optionsRef = ref<InstanceType<typeof Popover> | null>(null)
+  let selectOptionListID = '';
+  let selectID = '';
+  let virtualizeListRef = ref()
+  let inputRef = ref()
+  let triggerRef = ref()
+  let optionsRef = ref<InstanceType<typeof Popover> | null>()
   const optionContainerEl = ref()
-  let virtualizeListRef = ref(null)
-  let selectOptionListID = Math.random().toString(36).slice(2);
   let clickOutsideHandler: (e: MouseEvent) => void;
   let foundation: SelectFoundation;
   /* Generate random string */
   clickOutsideHandler = null;
+  warning(
+    'optionLabelProp' in props,
+    '[Semi Select] \'optionLabelProp\' has already been deprecated, please use \'renderSelectedItem\' instead.'
+  );
+
   warning(
     'labelInValue' in props,
     '[Semi Select] \'labelInValue\' has already been deprecated, please use \'onChangeWithObject\' instead.'
@@ -426,7 +390,9 @@ const Index = defineComponent<SelectProps>((props, {slots}) => {
       },
       toggleInputShow: (showInput: boolean, cb: (...args: any) => void) => {
         state.showInput = showInput
-        cb();
+        nextTick(()=>{
+          cb?.()
+        })
       },
       focusInput: () => {
         if (inputRef.value && inputRef.value.$el) {
@@ -477,14 +443,14 @@ const Index = defineComponent<SelectProps>((props, {slots}) => {
       ...multipleAdapter,
       // Collect all subitems, each item is visible by default when collected, and is not selected
       //slots.default?slots.default():null
-      getOptionsFromChildren: (children = props.children) => {
-        if (!children) {
-          // @ts-ignore
-          children = getCurrentInstance()?.vnode?.children?.default ? getCurrentInstance().vnode.children.default() : null
-          if (children && Array.isArray(children[0])){
-            children = children[0]
-          }
-        }
+      getOptionsFromChildren: (children = slots.default?.()) => {
+        // if (!children) {
+        //   // @ts-ignore
+        //   // children = getCurrentInstance()?.vnode?.children?.default ? getCurrentInstance().vnode.children.default() : null
+        //   if (children && Array.isArray(children[0])){
+        //     children = children[0]
+        //   }
+        // }
         let optionGroups = [];
         let options = [];
         const {optionList} = props;
@@ -518,6 +484,7 @@ const Index = defineComponent<SelectProps>((props, {slots}) => {
         return el && el.getBoundingClientRect().width;
       },
       setOptionWrapperWidth: (width: number) => {
+        console.log(width)
         state.dropdownMinWidth = width
       },
       updateSelection: (selections: Map<OptionProps['label'], any>) => {
@@ -890,7 +857,8 @@ const Index = defineComponent<SelectProps>((props, {slots}) => {
       listContent = renderVirtualizeList(visibleOptions);
     }
 
-    const style = {minWidth: dropdownMinWidth, ...dropdownStyle};
+    const style = {minWidth: dropdownMinWidth + 'px', ...dropdownStyle};
+    console.log(style)
 
     const optionListCls = cls({
       [`${prefixcls}-option-list`]: true,

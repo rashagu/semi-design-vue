@@ -1,9 +1,12 @@
 import {defineComponent, ref, h, CSSProperties, VNode, Fragment} from 'vue'
-
 import classNames from 'classnames';
-
+import * as PropTypes from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/form/constants';
+import LocaleConsumer_ from '../locale/localeConsumer';
+import { Locale } from '../locale/interface';
+import {vuePropsMake} from "../PropTypes";
 
+const LocaleConsumer = LocaleConsumer_<Locale['Form']>()
 const prefixCls = cssClasses.PREFIX;
 
 export interface LabelProps {
@@ -22,35 +25,39 @@ export interface LabelProps {
   style?: CSSProperties;
   className?: string;
   extra?: VNode;
+
+  optional?: boolean;
 }
 
-export const VuePropsType = {
-  id: String,
-  /** Whether to display the required * symbol */
-  required: {type:Boolean,default:false},
-  /** Content of label */
-  text: [String, Object],
-  disabled: Boolean,
-  /** Used to configure the htmlFor attribute of the label tag */
-  name: {
-    type:String,
-    default:''
-  },
-  /** text-align of label */
-  align: {type:String,default:'left'},
-  /** width of label */
-  width: [Number, String],
-  style:[String, Object],
-  className: {
-    type: String,
-    default: ''
-  },
-}
+
+const propTypes = {
+  id: PropTypes.string,
+  children: PropTypes.node,
+  required: PropTypes.bool,
+  text: PropTypes.node,
+  disabled: PropTypes.bool,
+  name: PropTypes.string,
+  align: PropTypes.string,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  style: PropTypes.object,
+  className: PropTypes.string,
+  extra: PropTypes.node,
+  optional: PropTypes.bool,
+};
+const defaultProps = {
+  required: false,
+  name: '',
+  align: 'left',
+  className: '',
+  optional: false,
+};
+export const VuePropsType = vuePropsMake(propTypes, defaultProps)
 const Label = defineComponent<LabelProps>((props, {slots}) => {
 
   return () => {
     const children = slots.default?slots.default():null
-    const { required, text, disabled, name, width, align, style, className, extra, id } = props;
+    const { required, text, disabled, name, width, align, style, className, extra, id, optional } = props;
+
 
     const labelCls = classNames(className, {
       [`${prefixCls}-field-label`]: true,
@@ -63,9 +70,22 @@ const Label = defineComponent<LabelProps>((props, {slots}) => {
     const labelStyle = style ? style : {};
     width ? labelStyle.width = width : null;
 
+    const optionalText = (
+      <LocaleConsumer componentName="Form" >
+        {{
+          default: (locale: Locale['Form']) => {
+            return (
+              <span class={`${prefixCls}-field-label-optional-text`}>{locale.optional}</span>
+            )
+          }
+        }}
+      </LocaleConsumer>
+    );
+
     const textContent = (
-      <div class={`${prefixCls}-field-label-text`}>
+      <div class={`${prefixCls}-field-label-text`} x-semi-prop="label">
         {typeof text !== 'undefined' ? text : children}
+        {optional ? optionalText : null}
       </div>
     );
 
@@ -86,5 +106,6 @@ const Label = defineComponent<LabelProps>((props, {slots}) => {
 
 
 Label.props = VuePropsType
+Label.name = 'Label'
 
 export default Label

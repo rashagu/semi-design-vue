@@ -92,7 +92,7 @@ export const vuePropsType = {
   'aria-errormessage': String,
   'aria-invalid': String,
   'aria-labelledby': String,
-  'aria-required': String,
+  'aria-required': [String, Boolean],
   id: String,
 }
 

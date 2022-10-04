@@ -2,7 +2,7 @@ import {defineComponent, ref, h, Fragment, CSSProperties, VNode, reactive, injec
 import cls from 'classnames';
 import { noop } from 'lodash';
 import RadioFoundation, { RadioAdapter } from '@douyinfe/semi-foundation/radio/radioFoundation';
-import { RadioChangeEvent } from '@douyinfe/semi-foundation/radio/radioInnerFoundation';
+import type { RadioChangeEvent } from '@douyinfe/semi-foundation/radio/radioInnerFoundation';
 import { strings, radioClasses as css } from '@douyinfe/semi-foundation/radio/constants';
 import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
 import '@douyinfe/semi-foundation/radio/radio.scss';
@@ -11,6 +11,7 @@ import {useBaseComponent} from '../_base/baseComponent';
 import RadioInner from './RadioInner';
 import Context, { RadioContextValue, RadioMode } from './Context';
 
+export type {RadioChangeEvent}
 export type RadioDisplayMode = 'vertical' | '';
 export type RadioType =
   typeof strings.TYPE_DEFAULT |

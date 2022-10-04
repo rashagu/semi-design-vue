@@ -43,7 +43,6 @@ function LocaleConsumer<T>(){
        */
       const defaultFnsLocale = get(DefaultLocale, 'dateFnsLocale');
       const dateFnsLocale = get(locale, 'dateFnsLocale', defaultFnsLocale);
-      // console.log(locale)
       return children?.(locale[componentName], locale.code, dateFnsLocale);
     }
 

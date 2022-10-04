@@ -116,7 +116,7 @@ export const vuePropsType = {
   'aria-invalid': String,
   'aria-label': String,
   'aria-labelledby': String,
-  'aria-required': String,
+  'aria-required': [String, Boolean],
   autoAdjustOverflow: Boolean,
   autoFocus:{
     type: Boolean,

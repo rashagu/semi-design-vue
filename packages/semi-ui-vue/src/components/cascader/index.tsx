@@ -115,7 +115,7 @@ export const vuePropsType = {
   'aria-errormessage': String,
   'aria-invalid': String,
   'aria-labelledby': String,
-  'aria-required': String,
+  'aria-required': [String, Boolean],
   defaultValue: [Object,String,Number],
   dropdownStyle: [Object, String],
   emptyContent: [Object, String],

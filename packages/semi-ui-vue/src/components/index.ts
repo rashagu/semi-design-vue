@@ -49,3 +49,36 @@ export { default as Slider  } from './slider/index';
 export { default as Divider  } from './divider/index';
 export { default as Rating  } from './rating/index';
 export { default as Tree, TreeNode  } from './tree/index';
+export { default as TreeSelect  } from './treeSelect/index';
+export {
+  FormTextArea,
+  FormInputNumber,
+  FormSelect,
+  FormInput,
+  FormSelectOption,
+  FormSelectSelectOptionGroup,
+
+  FormAutoComplete,
+  FormCascader,
+  FormCheckbox,
+  FormCheckboxGroup, FormDatePicker,
+  FormRadio,
+  FormRadioGroup,
+  FormRating,
+  FormSlider,
+  FormSwitch,
+  FormTagInput,
+  FormTimePicker,
+  FormTreeSelect,
+  FormUpload,
+
+  Form,
+  ArrayField,
+  withField,
+  useFormApi,
+  useFormState,
+  useFieldApi,
+  useFieldState,
+  withFormState,
+  withFormApi,
+} from './form/index';

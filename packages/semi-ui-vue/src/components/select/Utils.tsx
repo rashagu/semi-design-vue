@@ -25,16 +25,18 @@ const generateOption = (child: VNode, parent: any, index: number): OptionProps =
   return option;
 };
 
-const getOptionsFromGroup = (selectChildren_: VNode[]) => {
-  let selectChildren = selectChildren_
+const getOptionsFromGroup = (selectChildren: VNode[]) => {
   let optionGroups: OptionGroupProps[] = [];
   let options: OptionProps[] = [];
 
   const emptyGroup = { label: '', children: [], _show: false };
+
+
   // TODO 不同点
-  if (Array.isArray(selectChildren_[0].children)){
-    selectChildren = selectChildren_[0].children as VNode[]
-  }
+  // if (!Array.isArray(selectChildren)){
+  //   selectChildren = selectChildren[0].children as VNode[]
+  // }
+
 
 
   // avoid null

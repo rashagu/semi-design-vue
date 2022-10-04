@@ -4,7 +4,7 @@ import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
 
 import { cssClasses, strings } from '@douyinfe/semi-foundation/input/constants';
-import Label, { LabelProps } from '../form/Label';
+import Label, { LabelProps } from '../form/label';
 
 import { noop } from '@douyinfe/semi-foundation/utils/function';
 import { get, isFunction } from 'lodash';

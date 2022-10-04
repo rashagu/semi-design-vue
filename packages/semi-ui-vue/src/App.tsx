@@ -39,6 +39,7 @@ import RatingDemo from "./components/rating/__test__/RatingDemo";
 import TreeDemo from "./components/tree/__test__/TreeDemo";
 import TreeCheckDemo from "./components/tree/__test__/TreeCheckDemo";
 import TreeSelectDemo from "./components/treeSelect/__test__/TreeSelectDemo";
+import FormDemo from "./components/form/__test__/FormDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -49,9 +50,11 @@ export const VuePropsType = {
 
 const App = defineComponent<ExampleProps>((props, {slots}) => {
 
+
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
+        <FormDemo />
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
         {/*<TreeDemo />*/}
@@ -80,7 +83,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}
 
-        <InputDemo />
+        {/*<InputDemo />*/}
         {/*<TypeDemo />*/}
 
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}

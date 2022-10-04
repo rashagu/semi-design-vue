@@ -6,7 +6,7 @@ import {
   Fragment,
   CSSProperties,
   reactive,
-  nextTick, onMounted, onUnmounted, isVNode, watch, cloneVNode, provide, inject, watchEffect, isRef,
+  nextTick, onMounted, onUnmounted, isVNode, watch, cloneVNode, provide, inject, watchEffect, isRef, useSlots,
 } from 'vue'
 import classNames from 'classnames';
 import * as PropTypes from '../PropTypes'
@@ -194,9 +194,9 @@ const defaultProps = {
 
 const vuePropsType = vuePropsMake(propTypes, defaultProps)
 
-const Tooltip = defineComponent<TooltipProps>((props, {slots}) => {
+const Tooltip = defineComponent<TooltipProps>((props, {}) => {
 
-
+  const slots = useSlots()
   const eventManager = ref<Event>(new Event);
   let triggerEl = ref();
   const containerEl = ref();
@@ -787,7 +787,7 @@ const Tooltip = defineComponent<TooltipProps>((props, {slots}) => {
         // this.log('tooltip render() - get ref', ref);
         if(ref){
           if (typeof ref.r === 'function') {
-            ref(node);
+            ref.r(node);
           } else if (ref.r && typeof ref.r === 'object' && isRef(ref.r)) {
             ref.r.value = node;
           }
