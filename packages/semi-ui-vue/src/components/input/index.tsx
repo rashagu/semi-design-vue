@@ -1,5 +1,6 @@
 import {defineComponent, ref, h, InputHTMLAttributes, VNode, CSSProperties, reactive, watch, onMounted} from 'vue'
 import cls from 'classnames';
+import * as PropTypes from '../PropTypes';
 import InputFoundation from '@douyinfe/semi-foundation/input/foundation';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/input/constants';
 import { isSemiIcon } from '../_utils';
@@ -7,7 +8,7 @@ import {useBaseComponent} from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/input/input.scss';
 import { isString, noop, isFunction } from 'lodash';
 import { IconClear, IconEyeOpened, IconEyeClosedSolid } from '@kousum/semi-icons-vue';
-import {TooltipProps} from "../tooltip";
+
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -17,6 +18,8 @@ const modeSet = strings.MODE;
 
 import type { InputGroupProps } from './InputGroup';
 import type { TextAreaProps } from './TextArea';
+import {AriaAttributes} from "../AriaAttributes";
+import {vuePropsMake} from "../PropTypes";
 export type { TextAreaProps , InputGroupProps}
 
 export type InputSize = 'small' | 'large' | 'default';
@@ -30,12 +33,12 @@ export type ValidateStatus = "default" | "error" | "warning" | "success";
 
 export interface InputProps extends
   Omit<InputHTMLAttributes, 'onChange' | 'prefix' | 'size' | 'autoFocus' | 'placeholder' | 'onFocus' | 'onBlur'> {
-  'aria-label'?: any;
-  'aria-describedby'?: any;
-  'aria-errormessage'?: any;
-  'aria-invalid'?: any;
-  'aria-labelledby'?: any;
-  'aria-required'?: any;
+  'aria-label'?: AriaAttributes['aria-label'];
+  'aria-describedby'?: AriaAttributes['aria-describedby'];
+  'aria-errormessage'?: AriaAttributes['aria-errormessage'];
+  'aria-invalid'?: AriaAttributes['aria-invalid'];
+  'aria-labelledby'?: AriaAttributes['aria-labelledby'];
+  'aria-required'?: AriaAttributes['aria-required'];
   addonBefore?: VNode | string;
   addonAfter?: VNode | string;
   prefix?: VNode | string;
@@ -88,91 +91,76 @@ export interface InputState {
 
 
 
-export const VuePropsType = {
-  'aria-label': String,
-  'aria-labelledby': String,
-  'aria-invalid': Boolean,
-  'aria-errormessage': String,
-  'aria-describedby': String,
-  'aria-required': Boolean,
-  addonBefore: {
-    type: [String, Object],
-    default:''
-  },
-  addonAfter: {
-    type: [String, Object],
-    default:''
-  },
-  prefix: {
-    type: [String, Object],
-    default:''
-  },
-  suffix: {
-    type: [String, Object],
-    default:''
-  },
+const propTypes = {
+  'aria-label': PropTypes.string,
+  'aria-labelledby': PropTypes.string,
+  'aria-invalid': PropTypes.bool,
+  'aria-errormessage': PropTypes.string,
+  'aria-describedby': PropTypes.string,
+  'aria-required': PropTypes.bool,
+  addonBefore: PropTypes.node,
+  addonAfter: PropTypes.node,
+  prefix: PropTypes.node,
+  suffix: PropTypes.node,
   mode: String,
-  value: {
-    type:[String,Boolean, Object,Array, undefined],
-// @ts-ignore
-    default: undefined,
-  },
-  defaultValue: {
-    type:[String,Boolean, Object,Array, undefined],
-// @ts-ignore
-    default: undefined,
-  },
-  disabled: {type:Boolean,default:false},
-  readonly: {type:Boolean,default:false},
-  autofocus: Boolean,
-  type: {type:String,default:'text'},
-  showClear: {type:Boolean,default:false},
-  hideSuffix: {type:Boolean,default:false},
-  placeholder: {
-    type: String,
-    default:''
-  },
-  size: {type:String,default:'default'},
-  className: {
-    type: [String, Object],
-    default:''
-  },
-  style: Object,
-  validateStatus: {type:String,default:'default'},
-  'onUpdate:value': Function,
-  onClear: {type:Function, default:noop},
-  onChange: {type:Function, default:noop},
-  onBlur: {type:Function, default:noop},
-  onFocus: {type:Function, default:noop},
-  onInput: {type:Function, default:noop},
-  onKeyDown: {type:Function, default:noop},
-  onKeyUp: {type:Function, default:noop},
-  onKeyPress: {type:Function, default:noop},
-  onEnterPress: {type:Function, default:noop},
-  insetLabel: Object,
-  insetLabelId: String,
-  inputStyle: Object,
-  getValueLength: {type:Function, default:noop},
-  minlength: Number,
-  maxlength: Number,
-  preventScroll: {
-    type: Boolean,
-    default: undefined
-  }
-}
+  value: PropTypes.any,
+  defaultValue: PropTypes.any,
+  disabled: PropTypes.bool,
+  readonly: PropTypes.bool,
+  autofocus: PropTypes.bool,
+  type: PropTypes.string,
+  showClear: PropTypes.bool,
+  hideSuffix: PropTypes.bool,
+  placeholder: PropTypes.any,
+  size: String,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  validateStatus: String,
+  onClear: PropTypes.func,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  onInput: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onKeyUp: PropTypes.func,
+  onKeyPress: PropTypes.func,
+  onEnterPress: PropTypes.func,
+  insetLabel: PropTypes.node,
+  insetLabelId: PropTypes.string,
+  inputStyle: PropTypes.object,
+  getValueLength: PropTypes.func,
+  preventScroll: PropTypes.bool,
 
-export interface InputState {
-  value: string|number;
-  cachedValue: string|number;
-  disabled: boolean;
-  props: Record<string, any>;
-  paddingLeft: string;
-  isFocus: boolean;
-  isHovering: boolean;
-  eyeClosed: boolean;
-  minlength: number;
-  maxlength: number;
-}
+
+  minlength: Number,
+  maxlength: Number
+};
+
+const defaultProps = {
+  addonBefore: '',
+  addonAfter: '',
+  prefix: '',
+  suffix: '',
+  readonly: false,
+  type: 'text',
+  showClear: false,
+  hideSuffix: false,
+  placeholder: '',
+  size: 'default',
+  className: '',
+  onClear: noop,
+  onChange: noop,
+  onBlur: noop,
+  onFocus: noop,
+  onInput: noop,
+  onKeyDown: noop,
+  onKeyUp: noop,
+  onKeyPress: noop,
+  onEnterPress: noop,
+  validateStatus: 'default',
+};
+export const VuePropsType = vuePropsMake(propTypes, defaultProps)
+
 
 // Vue在这里的话 state 更新会导致整体重新渲染 导致value 无法更新到最新的
 const Input = defineComponent<InputProps>((props, {slots}) => {
@@ -209,9 +197,10 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       },
       setEyeClosed: (value: boolean) => state.eyeClosed = value,
       toggleFocusing: (isFocus: boolean) => {
+        const { preventScroll } = props;
         const input = inputRef.value
         if (isFocus) {
-          input && input.focus();
+          input && input.focus({ preventScroll });
         } else {
           input && input.blur();
         }
@@ -260,7 +249,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
         state[key] = newState[key]
       })
     }
-  })
+  }, {immediate:true})
 
   watch(() => props.mode, (prevPropsMode, nextPropsMode) => {
     if (prevPropsMode !== nextPropsMode) {
@@ -322,7 +311,11 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
         [`${prefixCls}-prepend-text`]: addonBefore && isString(addonBefore),
         [`${prefixCls}-prepend-icon`]: isSemiIcon(addonBefore),
       });
-      return <div class={prefixWrapperCls}>{addonBefore}</div>;
+      return (
+        <div class={prefixWrapperCls} x-semi-prop="addonBefore">
+          {addonBefore}
+        </div>
+      );
     }
     return null;
   }
@@ -335,7 +328,11 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
         [`${prefixCls}-append-text`]: addonAfter && isString(addonAfter),
         [`${prefixCls}-append-icon`]: isSemiIcon(addonAfter),
       });
-      return <div class={prefixWrapperCls}>{addonAfter}</div>;
+      return (
+        <div class={prefixWrapperCls} x-semi-prop="addonAfter">
+          {addonAfter}
+        </div>
+      );
     }
     return null;
   }
@@ -359,11 +356,12 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
   }
 
   function renderModeBtn() {
-    const { value, isFocus, isHovering, eyeClosed } = state;
+    const { eyeClosed } = state;
     const { mode, disabled } = props;
     const modeCls = cls(`${prefixCls}-modebtn`);
     const modeIcon = eyeClosed ? <IconEyeClosedSolid /> : <IconEyeOpened />;
-    const showModeBtn = mode === 'password' && value && !disabled && (isFocus || isHovering);
+    // alway show password button for a11y
+    const showModeBtn = mode === 'password' && !disabled;
     const ariaLabel = eyeClosed ? 'Show password' : 'Hidden password';
     if (showModeBtn) {
       return (
@@ -398,7 +396,17 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
     });
 
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-    return <div class={prefixWrapperCls} onMousedown={handlePreventMouseDown} onClick={handleClickPrefixOrSuffix} id={insetLabelId}>{labelNode}</div>;
+    return (
+      <div
+        class={prefixWrapperCls}
+        onMousedown={handlePreventMouseDown}
+        onClick={handleClickPrefixOrSuffix}
+        id={insetLabelId}
+        x-semi-prop="prefix,insetLabel"
+      >
+        {labelNode}
+      </div>
+    );
   }
 
   function showClearBtn() {
@@ -419,18 +427,12 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       [`${prefixCls}-suffix-hidden`]: suffixAllowClear && Boolean(hideSuffix),
     });
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-    return <div class={suffixWrapperCls} onMousedown={handlePreventMouseDown} onClick={handleClickPrefixOrSuffix}>{suffix}</div>;
+    return (<div class={suffixWrapperCls} onMousedown={handlePreventMouseDown}
+                 onClick={handleClickPrefixOrSuffix} x-semi-prop="suffix">{suffix}</div>);
   }
 
 
 
-
-  //
-  watch(()=>props.value, ()=>{
-    if (props.value!==null && props.value!==undefined){
-      state.value = props.value
-    }
-  })
 
   // onMounted(()=>{
   //   console.log(props, props["onUpdate:value"])
@@ -462,8 +464,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       forwardRef,
       maxlength,
       getValueLength,
-      value: propsValue,
-      defaultValue: propsDefaultValue,
+      defaultValue,
       ...rest
     } = props;
     const { value, paddingLeft, isFocus, minlength: stateMinLength } = state;
@@ -498,6 +499,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
     });
     // console.debug(value === null || value === undefined)
     // const inputValue = value === null || value === undefined ? '' : value;
+    const inputValue = value === null || value === undefined ? '' : value;
     const inputProps: InputHTMLAttributes = {
       ...rest,
       style: { paddingLeft, ...inputStyle },
@@ -522,6 +524,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       onKeyup: (e:any) => foundation.handleKeyUp(e),
       onKeydown: (e:any) => foundation.handleKeyDown(e),
       onKeypress: (e:any) => foundation.handleKeyPress(e),
+      value: inputValue,
     };
     if (!isFunction(getValueLength)) {
       inputProps.maxlength = maxlength;
@@ -543,7 +546,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       >
         {renderPrepend()}
         {renderPrefix()}
-        <input {...inputProps} value={state.value} ref={ref_}/>
+        <input {...inputProps} ref={ref_}/>
         {renderClearBtn()}
         {renderSuffix(suffixAllowClear)}
         {renderModeBtn()}
@@ -561,7 +564,7 @@ Input.props = VuePropsType
 //   console.log(props.ref)
 //   return <Input {...props} forwardRef={ref} />
 // })
-// const ForwardInput = React.forwardRef<HTMLInputElement, Omit<InputProps, 'forwardRef'>>((props, ref) => <Input {...props} forwardRef={ref} />);
+// const ForwardInput = forwardRef<HTMLInputElement, Omit<InputProps, 'forwardRef'>>((props, ref) => <Input {...props} forwardRef={ref} />);
 
 // export default ForwardInput;
 

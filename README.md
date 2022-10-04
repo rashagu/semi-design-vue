@@ -100,7 +100,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Switch
 - [x] TagInput 5f0912f
 - [x] TimePicker
-- [ ] TreeSelect
+- [x] TreeSelect
 - [x] Upload
 
 ### 导航类

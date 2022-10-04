@@ -52,7 +52,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <TreeSelectDemo/>
+        {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
         {/*<TreeDemo />*/}
         {/*<RatingDemo />*/}
@@ -74,13 +74,13 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*// TODO 样式好像有问题*/}
-        <AutoCompleteItemsDemo/>
+        {/*<AutoCompleteItemsDemo/>*/}
         {/*<SelectDemo/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}
 
-        {/*<InputDemo />*/}
+        <InputDemo />
         {/*<TypeDemo />*/}
 
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}

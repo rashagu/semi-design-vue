@@ -9,6 +9,7 @@ import {
   onMounted,
   onUnmounted, VNode
 } from 'vue'
+import * as PropTypes from '../PropTypes';
 
 import cls from 'classnames';
 import TextAreaFoundation from '@douyinfe/semi-foundation/input/textareaFoundation';
@@ -17,7 +18,7 @@ import {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/input/textarea.scss';
 import {noop, omit, isFunction} from 'lodash';
 import {IconClear} from '@kousum/semi-icons-vue';
-import {TooltipProps} from "../tooltip";
+import {vuePropsMake} from "../PropTypes";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -63,6 +64,7 @@ export interface TextAreaProps extends Omit<TextareaHTMLAttributes, OmitTextarea
   minlength?: number,
   maxlength?: number,
   class?: string,
+
 }
 
 export interface TextAreaState {
@@ -75,19 +77,26 @@ export interface TextAreaState {
   cachedValue?: string;
 }
 
-export const VuePropsType = {
-  autosize: {type: Boolean, default: false},
-  placeholder: String,
+const propTypes = {
+  autosize: PropTypes.bool,
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  rows: PropTypes.number,
+  cols: PropTypes.number,
+  maxCount: PropTypes.number,
+  onEnterPress: PropTypes.func,
+  validateStatus: PropTypes.string,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  showClear: PropTypes.bool,
+  onClear: PropTypes.func,
+  onResize: PropTypes.func,
+  getValueLength: PropTypes.func,
+  // TODO
+  // resize: PropTypes.bool,
+
+
   class: {type: String, default: ''},
-  rows: {type: Number, default: 4},
-  cols: {type: Number, default: 20},
-  maxCount: Number,
-  validateStatus: String,
-  value: {
-    type: [String, Boolean, Object, Array, undefined],
-// @ts-ignore
-    default: undefined,
-  },
   defaultValue: {
     type: [String, Boolean, Object, Array, undefined],
 // @ts-ignore
@@ -97,14 +106,9 @@ export const VuePropsType = {
   readonly: Boolean,
   autofocus: Boolean,
   showCounter: {type: Boolean, default: false},
-  showClear: {type: Boolean, default: false},
   minlength: Number,
   maxlength: Number,
   'onUpdate:value': Function,
-  onClear: {
-    type: Function,
-    default: noop,
-  },
   onChange: {
     type: Function,
     default: noop,
@@ -133,24 +137,33 @@ export const VuePropsType = {
     type: Function,
     default: noop,
   },
-  onEnterPress: {
-    type: Function,
-    default: noop,
-  },
   onPressEnter: {
     type: Function,
     default: noop,
   },
-  onResize: {
-    type: Function,
-    default: noop,
-  },
-  getValueLength: Function,
   forwardRef: {
     type: Function,
     default: noop,
   },
-}
+};
+
+const defaultProps = {
+  autosize: false,
+  rows: 4,
+  cols: 20,
+  showCounter: false,
+  showClear: false,
+  onEnterPress: noop,
+  onChange: noop,
+  onBlur: noop,
+  onFocus: noop,
+  onKeyDown: noop,
+  onResize: noop,
+  onClear: noop,
+  // resize: false,
+};
+
+const VuePropsType = vuePropsMake(propTypes, defaultProps)
 const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
   let focusing = false;
   let libRef = ref(null);
@@ -225,7 +238,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
         state[key] = newState[key]
       })
     }
-  })
+  }, {immediate: true})
 
   onMounted(() => {
 
@@ -305,9 +318,6 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
       );
       counter = (
         <div
-          aria-label="TextArea value length counter"
-          aria-valuemax={maxCount}
-          aria-valuenow={current}
           class={countCls}
         >
           {current}{total ? '/' : null}{total}
@@ -326,17 +336,14 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
     if (typeof forwardRef === 'function') {
       forwardRef(node);
     } else if (forwardRef && typeof forwardRef === 'object') {
+      // TODO
       forwardRef.current = node;
     }
   };
 
 
   let foundation: TextAreaFoundation = new TextAreaFoundation(theAdapter);
-  watch(() => props.value, () => {
-    if (props.value !== null && props.value !== undefined) {
-      state.value = props.value
-    }
-  })
+
 
   return () => {
     const {
@@ -401,7 +408,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
         // foundation._adapter.setValue(e.target.value)
         foundation.handleKeyDown(e)
       },
-      value: value,
+      value: value === null || value === undefined ? '' : value,
     };
     if (!isFunction(getValueLength)) {
       (itemProps as any).maxLength = maxlength;

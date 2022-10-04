@@ -1,12 +1,13 @@
-import {defineComponent, ref, h, cloneVNode, VNode} from 'vue'
+import { defineComponent, ref, h, cloneVNode, VNode } from 'vue';
 
+import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
 
 import { cssClasses, strings } from '@douyinfe/semi-foundation/input/constants';
 import Label, { LabelProps } from '../form/Label';
 
 import { noop } from '@douyinfe/semi-foundation/utils/function';
-import { isFunction } from 'lodash';
+import { get, isFunction } from 'lodash';
 
 const prefixCls = cssClasses.PREFIX;
 const sizeSet = strings.SIZE;
@@ -28,8 +29,8 @@ export interface InputGroupProps {
 export interface InputGroupState {}
 
 export const VuePropsType = {
-  className: {type:String, default:''},
-  size: {type:String,default:'default'},
+  className: { type: String, default: '' },
+  size: { type: String, default: 'default' },
   style: [String, Object],
   onBlur: {
     type: Function,
@@ -42,12 +43,11 @@ export const VuePropsType = {
   label: Object,
   labelPosition: String,
   disabled: Boolean,
-}
+};
 // eslint-disable-next-line
 export interface InputGroupState {}
 
-const InputGroup = defineComponent<InputGroupProps>((props, {slots}) => {
-
+const InputGroup = defineComponent<InputGroupProps>((props, { slots }) => {
   function renderGroupWithLabel(inner: VNode[]) {
     // eslint-disable-next-line no-unused-vars
     const { size, className, label, labelPosition, ...rest } = props;
@@ -56,34 +56,31 @@ const InputGroup = defineComponent<InputGroupProps>((props, {slots}) => {
       [`${prefixCls}-group-wrapper-with-top-label`]: labelPosition === 'top',
       [`${prefixCls}-group-wrapper-with-left-label`]: labelPosition === 'left',
     });
-    const groupCls = cls(
-      `${prefixCls}-group`,
-      className,
-      {
-        [`${prefixCls}-${size}`]: size !== 'default',
-      }
-    );
+    const groupCls = cls(`${prefixCls}-group`, className, {
+      [`${prefixCls}-${size}`]: size !== 'default',
+    });
     // const labelCls = cls(label.className, '');
     const defaultName = 'input-group';
     return (
-      <div role="group" aria-label="Input group" aria-disabled={props.disabled} class={groupWrapperCls}>
+      <div class={groupWrapperCls}>
         {label && label.text ? <Label name={defaultName} {...label} /> : null}
         <span
-          id={label && label.name || defaultName}
+          role="group"
+          aria-disabled={props.disabled}
+          id={(label && label.name) || defaultName}
           class={groupCls}
           style={props.style}
           onFocus={props.onFocus}
           onBlur={props.onBlur}
         >
-                    {inner}
-                </span>
+          {inner}
+        </span>
       </div>
     );
   }
   return () => {
-
-    const { size, style, className, label, onBlur: groupOnBlur, onFocus: groupOnFocus, ...rest } = props;
-    const children = slots.default? slots.default():null
+    const { size, style, className, label, onBlur: groupOnBlur, onFocus: groupOnFocus, disabled: groupDisabled, ...rest } = props;
+    const children = slots.default ? slots.default() : null;
     const groupCls = cls(
       `${prefixCls}-group`,
       {
@@ -95,10 +92,11 @@ const InputGroup = defineComponent<InputGroupProps>((props, {slots}) => {
     if (children) {
       inner = (Array.isArray(children) ? children : [children]).map((item, index) => {
         if (item) {
-          const { onBlur: itemOnBlur, onFocus: itemOnFocus } = (item as any).props;
-          const onBlur = isFunction(itemOnBlur) ? itemOnBlur : groupOnBlur;
-          const onFocus = isFunction(itemOnFocus) ? itemOnFocus : groupOnFocus;
-          return cloneVNode(item as any, { key: index, size, onBlur, onFocus, ...rest });
+          const { onBlur: itemOnBlur, onFocus: itemOnFocus, disabled: itemDisabled } = (item as any).props;
+          const onBlur = isFunction(itemOnBlur) && get(itemOnBlur, 'name') !== 'noop' ? itemOnBlur : groupOnBlur;
+          const onFocus = isFunction(itemOnFocus) && get(itemOnFocus, 'name') !== 'noop' ? itemOnFocus : groupOnFocus;
+          const disabled = typeof itemDisabled === 'boolean' ? itemDisabled : groupDisabled;
+          return cloneVNode(item as any, { key: index, ...rest, size, onBlur, onFocus, disabled });
         }
         return null;
       });
@@ -118,13 +116,12 @@ const InputGroup = defineComponent<InputGroupProps>((props, {slots}) => {
         onFocus={props.onFocus}
         onBlur={props.onBlur}
       >
-                {inner}
-            </span>
+        {inner}
+      </span>
     );
-  }
-})
+  };
+});
 
+InputGroup.props = VuePropsType;
 
-InputGroup.props = VuePropsType
-
-export default InputGroup
+export default InputGroup;
