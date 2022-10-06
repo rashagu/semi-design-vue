@@ -19,17 +19,17 @@ import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/select/con
 import {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import {isEqual, isString, noop, get, isNumber} from 'lodash';
 import Tag from '../tag';
-import TagGroup from '../tag/Group';
+import TagGroup from '../tag/group';
 import LocaleConsumer_ from '../locale/localeConsumer';
 import Popover from '../popover';
 import {numbers as popoverNumbers} from '@douyinfe/semi-foundation/popover/constants';
-import {getOptionsFromGroup} from './Utils';
-import VirtualRow from './VirtualRow';
+import {getOptionsFromGroup} from './utils';
+import VirtualRow from './virtualRow';
 
 import Input, {InputProps, InputState} from '../input';
-import Option from './Option';
-import type {OptionProps} from './Option';
-import OptionGroup from './OptionGroup';
+import Option from './option';
+import type {OptionProps} from './option';
+import OptionGroup from './optionGroup';
 import Spin from '../spin';
 import Trigger from '../trigger';
 import {IconChevronDown, IconClear} from '@kousum/semi-icons-vue';
@@ -45,8 +45,8 @@ import type {TooltipProps} from '../tooltip';
 import {AriaAttributes} from "../AriaAttributes";
 import {vuePropsMake} from "../PropTypes";
 
-export type {OptionGroupProps} from './OptionGroup';
-export type {VirtualRowProps} from './VirtualRow';
+export type {OptionGroupProps} from './optionGroup';
+export type {VirtualRowProps} from './virtualRow';
 
 const prefixcls = cssClasses.PREFIX;
 const LocaleConsumer = LocaleConsumer_<Locale['Select']>()

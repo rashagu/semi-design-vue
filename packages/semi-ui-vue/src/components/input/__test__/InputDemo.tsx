@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, onMounted,} from 'vue'
 import Input from '../index'
-import TextArea from "../TextArea";
+import TextArea from "../textArea";
 import {IconSearch} from '@kousum/semi-icons-vue'
 import {Text} from '../../typography'
 

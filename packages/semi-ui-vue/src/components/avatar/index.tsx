@@ -20,7 +20,7 @@ import {useBaseComponent} from '../_base/baseComponent';
 import type { AvatarProps } from './interface';
 // import {AvatarColor, AvatarShape, AvatarSize} from "./interface";
 // import {TooltipProps} from "../tooltip";
-import {RadioInnerProps} from "../radio/RadioInner";
+import {RadioInnerProps} from "../radio/radioInner";
 
 const sizeSet = strings.SIZE;
 const shapeSet = strings.SHAPE;

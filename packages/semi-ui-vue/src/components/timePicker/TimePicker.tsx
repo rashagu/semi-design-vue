@@ -25,7 +25,7 @@ import {Locale} from '../locale/interface';
 import {Motion} from '../_base/base';
 import {vuePropsMake} from "../PropTypes";
 import {AriaAttributes} from "../AriaAttributes";
-import {RadioGroupProps} from "../radio/RadioGroup";
+import {RadioGroupProps} from "../radio/radioGroup";
 import {AutoCompleteProps} from "../autoCompleteItems";
 
 export interface Panel {

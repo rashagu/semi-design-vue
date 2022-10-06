@@ -9,7 +9,7 @@ import Context from './Context';
 import classnames from 'classnames';
 import { IconRadio } from '@kousum/semi-icons-vue';
 import { noop } from 'lodash';
-import { RadioProps, RadioState } from './Radio';
+import { RadioProps, RadioState } from './radio';
 
 export type RadioInnerMode = 'advanced' | '';
 export interface RadioInnerProps extends BaseProps {

@@ -40,7 +40,7 @@
     "date-fns": "^2.27.0",
     "date-fns-tz": "^1.1.6",
     "lodash": "^4.17.21",
-    "resize-observer-polyfill": "^1.5.1",
+    "@kousum/resize-observer-polyfill": "^1.5.2",
     "sass": "^1.44.0",
     "scroll-into-view-if-needed": "^2.2.28",
     "utility-types": "^3.10.0",

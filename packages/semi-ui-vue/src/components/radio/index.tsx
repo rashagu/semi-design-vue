@@ -1,5 +1,5 @@
-import Group from './RadioGroup';
-import Radio from './Radio';
+import Group from './radioGroup';
+import Radio from './radio';
 
 
 export { Group, Radio };

@@ -21,7 +21,7 @@ import { RadioChangeEvent } from '@douyinfe/semi-foundation/radio/radioInnerFoun
 
 import {useBaseComponent} from '../_base/baseComponent';
 import { ArrayElement } from '../_base/base';
-import Radio, {RadioProps, RadioState, RadioType} from './Radio';
+import Radio, {RadioProps, RadioState, RadioType} from './radio';
 import Context, { RadioGroupButtonSize, RadioMode } from './Context';
 
 export interface OptionItem {

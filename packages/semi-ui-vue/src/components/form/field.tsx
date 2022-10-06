@@ -4,11 +4,11 @@ import withField from './hoc/withField';
 
 // Basic component
 import Input from '../input/index';
-import TextArea from '../input/textarea';
+import TextArea from '../input/textArea';
 import InputNumber from '../inputNumber/index';
 import Select from '../select/index';
-import SelectOption from "../select/Option";
-import SelectOptionGroup from "../select/OptionGroup";
+import SelectOption from "../select/option";
+import SelectOptionGroup from "../select/optionGroup";
 import { Checkbox } from '../checkbox/index';
 import CheckboxGroup from '../checkbox/checkboxGroup';
 import { Radio } from '../radio/index';

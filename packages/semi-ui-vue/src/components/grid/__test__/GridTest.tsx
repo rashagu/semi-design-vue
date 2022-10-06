@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
-import Row from '../Row'
+import Row from '../row'
 import Col from '../Col'
 
 interface ExampleProps {

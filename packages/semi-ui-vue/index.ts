@@ -25,7 +25,7 @@ export {
 } from './src/components/typography';
 
 export {default as Input} from './src/components/input';
-export {default as TextArea} from './src/components/input/TextArea';
+export {default as TextArea} from './src/components/input/textArea';
 export {Group as RadioGroup, Radio} from './src/components/radio';
 export {default as AreaSelect} from './src/components/areaSelect/AreaSelect';
 export {default as AutoCompleteItems} from './src/components/autoCompleteItems';

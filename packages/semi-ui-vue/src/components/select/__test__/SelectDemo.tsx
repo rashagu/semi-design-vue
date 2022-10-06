@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, Fragment, reactive} from 'vue'
 import Select, {optionRenderProps} from '../index'
-import Option from '../Option'
-import OptGroup from '../OptionGroup'
+import Option from '../option'
+import OptGroup from '../optionGroup'
 import classNames from "classnames";
 import {IconGift, IconVigoLogo} from "@kousum/semi-icons-vue";
 

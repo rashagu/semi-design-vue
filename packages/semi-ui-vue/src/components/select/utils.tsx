@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, Fragment, VNode} from 'vue'
 import warning from '@douyinfe/semi-foundation/utils/warning';
-import type { OptionProps } from './Option';
-import type { OptionGroupProps } from './OptionGroup';
+import type { OptionProps } from './option';
+import type { OptionGroupProps } from './optionGroup';
 
 
 const generateOption = (child: VNode, parent: any, index: number): OptionProps => {

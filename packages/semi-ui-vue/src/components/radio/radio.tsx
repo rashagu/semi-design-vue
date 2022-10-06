@@ -8,7 +8,7 @@ import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
 import '@douyinfe/semi-foundation/radio/radio.scss';
 
 import {useBaseComponent} from '../_base/baseComponent';
-import RadioInner from './RadioInner';
+import RadioInner from './radioInner';
 import Context, { RadioContextValue, RadioMode } from './Context';
 
 export type {RadioChangeEvent}

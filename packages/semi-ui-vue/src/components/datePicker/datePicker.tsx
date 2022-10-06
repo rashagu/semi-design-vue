@@ -24,7 +24,7 @@ import type { InsetInputValue, InsetInputChangeProps } from '@douyinfe/semi-foun
 import type {AriaAttributes} from "../AriaAttributes";
 import * as PropTypes from '../PropTypes'
 import {vuePropsMake} from "../PropTypes";
-import {RadioInnerProps} from "../radio/RadioInner";
+import {RadioInnerProps} from "../radio/radioInner";
 import {VueJsxNode} from "../interface";
 
 
