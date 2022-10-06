@@ -1,6 +1,6 @@
 import * as PropTypes from '../PropTypes';
 import { BaseProps } from '../_base/baseComponent';
-import ResizeObserver from 'resize-observer-polyfill';
+import ResizeObserver from '@kousum/resize-observer-polyfill';
 import {cloneVNode, defineComponent, h, onBeforeUnmount, onMounted, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
