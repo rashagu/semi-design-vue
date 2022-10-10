@@ -1,4 +1,4 @@
-import {Transition} from '../../../../semi-animation-vue/src/animation/index';
+import {Transition} from '@kousum/semi-animation-vue';
 // import {Transition} from '../../../../semi-animation-vue/src/animation/index';
 import * as PropTypes from '../PropTypes';
 import {Motion} from '@douyinfe/semi-foundation/utils/type';

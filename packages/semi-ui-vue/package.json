@@ -1,7 +1,7 @@
 {
   "name": "@kousum/semi-ui-vue",
   "version": "0.0.5",
-  "main": "lib/index.js",
+  "main": "dist/semi-ui-vue.mjs",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
