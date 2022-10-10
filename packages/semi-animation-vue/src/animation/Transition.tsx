@@ -164,7 +164,7 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
 
   return () => {
 
-    const {from: propsFrom, enter, leave, ...restProps} = props;
+    const {from: propsFrom, enter, leave, children:noNeed, ...restProps} = props;
 
     let from = {};
     let to = {};

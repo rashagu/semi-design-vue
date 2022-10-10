@@ -9,7 +9,7 @@ import {
   VNode,
   isVNode,
   useSlots,
-  CSSProperties, WatchStopHandle
+  CSSProperties, WatchStopHandle, nextTick, unref
 } from 'vue'
 import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import * as PropTypes from '../PropTypes';
@@ -276,36 +276,27 @@ const index = defineComponent<NavProps>((props, {slots}) => {
 
 
 
-  let stopSelectedKeys: WatchStopHandle
-  let stopOpenKeys: WatchStopHandle
-  let stopStateSelectedKeys: WatchStopHandle
+  watch(() => props.selectedKeys, (value) => {
+    if (value){
+      adapter.updateSelectedKeys(props.selectedKeys);
+    }
+  })
+  watch(() => props.openKeys, (value) => {
+    if (value){
+      console.log(props.openKeys)
+      adapter.updateOpenKeys(props.openKeys);
+    }
+  })
 
-  function setWatcher() {
-    stopSelectedKeys = watch(() => props.selectedKeys, (value) => {
-      if (value){
-        adapter.updateSelectedKeys(props.selectedKeys);
-      }
-    })
-    stopOpenKeys = watch(() => props.openKeys, (value) => {
-      if (value){
-        console.log(props.openKeys)
-        adapter.updateOpenKeys(props.openKeys);
-      }
-    })
-
-    stopStateSelectedKeys = watch(() => state.selectedKeys, (value) => {
+  watch(() => state.selectedKeys, (value,oldValue) => {
+    if (!isEqual(value,oldValue)){
       const parentSelectKeys = foundation.selectLevelZeroParentKeys(null, ...state.selectedKeys);
       adapter.addSelectedKeys(...parentSelectKeys);
-    })
-  }
-  setWatcher()
+    }
+  })
 
   watch(() => props.items, (value, oldValue, onCleanup) => {
-    stopSelectedKeys?.()
-    stopOpenKeys?.()
-    stopStateSelectedKeys?.()
     foundation.init('');
-    setWatcher()
   }, {deep: true, immediate: true})
 
   watch([

@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.0.6
+
+### Patch Changes
+
+- fix Nav watch
+
 ## 0.0.5
 
 ### Patch Changes

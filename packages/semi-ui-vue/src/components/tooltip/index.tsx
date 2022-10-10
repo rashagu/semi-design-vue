@@ -136,7 +136,7 @@ const propTypes = {
   spacing: PropTypes.number,
   showArrow: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   zIndex: PropTypes.number,
-  rePosKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  rePosKey: [String, Number, Boolean],
   arrowBounding: Object,
   transformFromCenter: PropTypes.bool, // Whether to change from the center of the trigger (for dynamic effects)
   arrowPointAtCenter: PropTypes.bool,
