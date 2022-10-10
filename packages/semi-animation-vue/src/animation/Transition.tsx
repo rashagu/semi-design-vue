@@ -10,7 +10,7 @@ import {
   reactive,
   VNode,
   useSlots,
-  onBeforeUnmount
+  onBeforeUnmount, watchEffect, computed, getCurrentInstance
 } from 'vue'
 import Animation, {AnimationProps} from './Animation';
 
@@ -23,6 +23,7 @@ export interface TransitionState {
 }
 
 export interface TransitionProps extends AnimationProps {
+  children?: VNode | ((TransitionProps: any) => any);
   from?: Record<string, any>;
   enter?: Record<string, any>;
   leave?: Record<string, any>;
@@ -36,6 +37,7 @@ export interface TransitionProps extends AnimationProps {
 }
 
 export const vuePropsType = {
+  children: [Object, Function],
   from: Object,
   enter: Object,
   leave: Object,
@@ -86,7 +88,7 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
 
   function getDerivedStateFromProps(props: TransitionProps, state: TransitionState) {
     const willUpdateStates: Partial<TransitionState> = {};
-    const children = slots.default
+    const children = props.children || slots.default
     if (
       children !== state.currentChildren
       // && (props.children == null || state.currentChildren == null)
@@ -108,13 +110,20 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
     return willUpdateStates;
   }
 
-  watch([() => props.state, () => slots.defautl], () => {
+  // const defaultSlot = computed(()=>{
+  //   return slots.default
+  // })
+  // const internalInstance = getCurrentInstance();
+
+  watch([() => props.state, ()=>props.children], () => {
+    console.log('ww')
     const newState = getDerivedStateFromProps(props, state)
     Object.keys(newState).forEach((key) => {
       // @ts-ignore
       state[key] = newState[key]
     })
-  })
+  }, {immediate: true})
+
 
   onBeforeUnmount(() => {
     if (instance) {
@@ -154,6 +163,7 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
 
 
   return () => {
+
     const {from: propsFrom, enter, leave, ...restProps} = props;
 
     let from = {};
@@ -163,7 +173,7 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
     let children: any;
 
     if (isControlled) {
-      children = slots.default;
+      children = props.children || slots.default;
       state.state = props.state;
     } else if (state.currentChildren == null && state.lastChildren == null) {
       return null;
@@ -184,17 +194,22 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
         children = state.lastChildren;
       }
     }
-
     // TODO vue 这里的相同的 props 传给子组件 不会覆盖 而是会合并成数组。
     //  so ...
     const finalProps = {...restProps, onRest, onStart, from, to}
 
+    console.log(finalProps,123)
+
+
     return (
       <Animation {...finalProps} force>
         {
-          (propsRender: Record<string, any>) => (
-            typeof children === 'function' ? children(propsRender) : isVNode(children) ? children : null
-          )
+          (propsRender: Record<string, any>) => {
+            console.log(propsRender)
+            return (
+              typeof children === 'function' ? children(propsRender) : isVNode(children) ? children : null
+            )
+          }
         }
       </Animation>
     )

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import * as  PropTypes from '../PropTypes';
-import FormFoundation, { BaseFormAdapter } from '@douyinfe/semi-foundation/form/foundation';
+import FormFoundation from '@douyinfe/semi-foundation/form/foundation';
+import type { BaseFormAdapter } from '@douyinfe/semi-foundation/form/foundation';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/form/constants';
 import { getUuidv4 } from '@douyinfe/semi-foundation/utils/uuid';
 import warning from '@douyinfe/semi-foundation/utils/warning';
@@ -145,15 +146,15 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
     const adapter = adapter_()
     const foundation = new FormFoundation(adapter);
     let formApi = foundation.getFormApi();
-    
+
     if (props.getFormApi) {
        props.getFormApi(formApi as FormApi);
     }
-    
+
     onMounted(()=>{
         foundation.init();
     })
-    
+
     onUnmounted(()=>{
         foundation.destroy();
     })

@@ -108,8 +108,9 @@ const defaultProps = {
     disabled: false,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const SubNav = defineComponent<SubNavProps>((props, {slots}) => {
+const SubNav = defineComponent<SubNavProps>((props, {}) => {
 
+    const slots = useSlots()
     const {context} = useNavContext()
 
     const titleRef = ref();
@@ -278,20 +279,24 @@ const SubNav = defineComponent<SubNavProps>((props, {slots}) => {
             [`${prefixCls}-sub-popover`]: isCollapsed || isHorizontal,
         });
 
-        console.log(subNavMotion)
+        console.log()
         // TODO 没有动画
         const ulWithMotion = (
           <SubNavTransition motion={subNavMotion} isCollapsed={isCollapsed} maxHeight={maxHeight}>
               {{
-                  default: !isCollapsed && isOpen
-                    ? (transitionStyle: any) => (
-                      <ul
-                        style={{ ...transitionStyle, visibility: isCollapsed ? 'hidden' : 'visible' }}
-                        class={subNavCls}
-                      >
-                          {useSlots().default?.()}
-                      </ul>
-                    )
+                  default:  !isCollapsed && isOpen?(transitionStyle: any) => {
+                        console.log(transitionStyle)
+                        return (
+                          <ul
+                            style={{ ...transitionStyle, visibility: isCollapsed ? 'hidden' : 'visible' }}
+                            class={subNavCls}
+                          >
+                              {{
+                                  default: slots.default
+                              }}
+                          </ul>
+                        )
+                    }
                     : ()=>null
               }}
           </SubNavTransition>

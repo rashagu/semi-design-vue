@@ -191,7 +191,6 @@ const index = defineComponent<NavProps>((props, {slots}) => {
 
   const {cache, adapter: adapterInject, log, context: context_, isControlled} = useBaseComponent<NavProps>(props, state)
 
-  const foundation = new NavigationFoundation(adapter());
 
   let initState = {
     isCollapsed: Boolean(isControlled('isCollapsed') ? props.isCollapsed : props.defaultIsCollapsed),
@@ -228,7 +227,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
   }
 
 
-  function adapter(): NavigationAdapter<NavProps, NavState> {
+  function adapter_(): NavigationAdapter<NavProps, NavState> {
     return {
       ...adapterInject<NavProps, NavState>(),
       notifySelect: (...args) => props.onSelect(...args),
@@ -253,7 +252,9 @@ const index = defineComponent<NavProps>((props, {slots}) => {
     };
   }
 
+  const adapter = adapter_()
 
+  const foundation = new NavigationFoundation(adapter);
   if (props.items && props.items.length || slots_.default?.()) {
     const calcState = foundation.init('constructor');
     let newInitState = {
@@ -282,19 +283,19 @@ const index = defineComponent<NavProps>((props, {slots}) => {
   function setWatcher() {
     stopSelectedKeys = watch(() => props.selectedKeys, (value) => {
       if (value){
-        adapter().updateSelectedKeys(props.selectedKeys);
+        adapter.updateSelectedKeys(props.selectedKeys);
       }
     })
     stopOpenKeys = watch(() => props.openKeys, (value) => {
       if (value){
         console.log(props.openKeys)
-        adapter().updateOpenKeys(props.openKeys);
+        adapter.updateOpenKeys(props.openKeys);
       }
     })
 
     stopStateSelectedKeys = watch(() => state.selectedKeys, (value) => {
       const parentSelectKeys = foundation.selectLevelZeroParentKeys(null, ...state.selectedKeys);
-      adapter().addSelectedKeys(...parentSelectKeys);
+      adapter.addSelectedKeys(...parentSelectKeys);
     })
   }
   setWatcher()
@@ -305,15 +306,15 @@ const index = defineComponent<NavProps>((props, {slots}) => {
     stopStateSelectedKeys?.()
     foundation.init('');
     setWatcher()
-  })
+  }, {deep: true, immediate: true})
 
-  // watch([
-  //   () => state.selectedKeys,// 0
-  //   () => props.openKeys, // 1
-  //   () => props.selectedKeys, // 2
-  // ], (value, oldValue, onCleanup) => {
-  //   foundation.handleItemsChange(false);
-  // })
+  watch([
+    // () => state.selectedKeys,// 0
+    () => props.openKeys, // 1
+    // () => props.selectedKeys, // 2
+  ], (value, oldValue, onCleanup) => {
+    console.log(value)
+  })
 
 
   /**
@@ -379,7 +380,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
       updateSelectedKeys,
       addSelectedKeys,
       removeSelectedKeys,
-    } = adapter();
+    } = adapter;
 
     const finalStyle = { ...style };
 
@@ -431,7 +432,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
     });
 
     if (itemsChanged) {
-      adapter().setCache('itemElems', renderItems(items));
+      adapter.setCache('itemElems', renderItems(items));
     }
 
     return (
@@ -474,7 +475,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
                   {headers}
                   <div style={bodyStyle} class={`${prefixCls}-list-wrapper`}>
                     <ul role="menu" aria-orientation={mode} class={`${prefixCls}-list`}>
-                      {adapter().getCache('itemElems')}
+                      {adapter.getCache('itemElems')}
                       {children}
                     </ul>
                   </div>

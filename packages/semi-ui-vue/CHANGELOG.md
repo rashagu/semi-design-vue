@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.0.5
+
+### Patch Changes
+
+- fix: Nav
+- Updated dependencies
+  - @kousum/semi-animation-vue@0.0.5
+  - @kousum/semi-icons-vue@0.0.5
+  - @kousum/semi-illustrations-vue@0.0.5
+
 ## 0.0.4
 
 ### Patch Changes

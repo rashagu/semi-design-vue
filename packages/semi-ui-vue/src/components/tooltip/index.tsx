@@ -793,7 +793,7 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
           }
         }
       },
-      tabIndex: children.props.tabIndex || 0, // a11y keyboard, in some condition select's tabindex need to -1 or 0
+      tabIndex: children.props?.tabIndex || 0, // a11y keyboard, in some condition select's tabindex need to -1 or 0
       'data-popupid': id
     });
 

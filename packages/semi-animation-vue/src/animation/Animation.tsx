@@ -8,7 +8,7 @@ import {
   onMounted,
   onUnmounted,
   watch,
-  onBeforeMount, reactive, onBeforeUnmount
+  onBeforeMount, reactive, onBeforeUnmount, shallowRef
 } from 'vue'
 
 import {Animation as SemiAnimation, events} from '@douyinfe/semi-animation';
@@ -105,7 +105,7 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
 
   let _mounted: boolean = false;
   let _destroyed: boolean = false;
-  const animation = ref<SemiAnimation>(null);
+  const animation = shallowRef<SemiAnimation>(null);
   let reverse: () => void;
   let destroy: () => void;
   let reset: () => void;
@@ -265,6 +265,7 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
         }
       }
     })
+    console.log(styles)
     if (typeof children === 'function' && animation.value) {
       return children(styles);
     } else if (isVNode(children)) {

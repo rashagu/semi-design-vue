@@ -19,18 +19,29 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return ()=>(
     <div class="App">
       <Transition
-        state={visible.value ? "enter" : "leave"}
-        from={{ opacity: 0, scale: 0}}
-        enter={{ opacity: 1, scale: 1 }}
-        leave={{ opacity: 0, scale: 0 }}
-        didLeave={didLeave}
-        didEnter={didEnter}
+        from={{ maxHeight: 0, opacity: 0 }}
+        enter={{
+          maxHeight: { val: 999, easing: 'easeInQuad', duration: 250 },
+          opacity: { val: 1, duration: 200, easing: 'cubic-bezier(0.5, -0.1, 1, 0.4)' },
+        }}
+        leave={{
+          maxHeight: { val: 0, duration: 250 },
+          opacity: {
+            val: 0,
+            duration: 200, // Need to be fast and transparent when put away, otherwise there will be jumping
+            easing: 'cubic-bezier(0.5, -0.1, 1, 0.4)',
+          },
+        }}
+        immediate={false}
       >
-        {({scale,opacity }:any) => (
-          <h2 style={{transform: `scale(${scale})`, opacity}}>
-            Toggle to see some animation happen!
-          </h2>
-        )}
+        {({scale,opacity }:any) => {
+          console.log(scale)
+          return (
+            <h2 style={{transform: `scale(${scale})`, opacity}}>
+              Toggle to see some animation happen!
+            </h2>
+          )
+        }}
       </Transition>
 
       <button onClick={() => {

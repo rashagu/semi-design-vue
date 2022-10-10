@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.0.5
+
+### Patch Changes
+
+- fix: Nav
+
 ## 0.0.4
 
 ### Patch Changes

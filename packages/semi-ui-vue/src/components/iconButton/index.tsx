@@ -127,8 +127,8 @@ export const VuePropsType = {
     type: String,
     default : cssClasses.PREFIX,
   },
-  onMouseEnter: noop,
-  onMouseLeave: noop,
+  onMouseEnter: Function,
+  onMouseLeave: Function,
 }
 
 Index.props = VuePropsType
