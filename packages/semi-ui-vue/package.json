@@ -2,9 +2,10 @@
   "name": "@kousum/semi-ui-vue",
   "version": "0.0.6",
   "main": "dist/semi-ui-vue.mjs",
-  "module": "lib/index.js",
+  "module": "dist/semi-ui-vue.mjs",
   "types": "lib/index.d.ts",
   "files": [
+    "dist/",
     "lib/"
   ],
   "license": "MIT",

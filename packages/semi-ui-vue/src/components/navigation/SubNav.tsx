@@ -279,13 +279,11 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
             [`${prefixCls}-sub-popover`]: isCollapsed || isHorizontal,
         });
 
-        console.log()
-        // TODO 没有动画
-        const ulWithMotion = (
+
+        const ulWithMotion = !isCollapsed && isOpen?(
           <SubNavTransition motion={subNavMotion} isCollapsed={isCollapsed} maxHeight={maxHeight}>
               {{
-                  default:  !isCollapsed && isOpen?(transitionStyle: any) => {
-                        console.log(transitionStyle)
+                  default:  (transitionStyle: any) => {
                         return (
                           <ul
                             style={{ ...transitionStyle, visibility: isCollapsed ? 'hidden' : 'visible' }}
@@ -297,10 +295,9 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
                           </ul>
                         )
                     }
-                    : ()=>null
               }}
           </SubNavTransition>
-        );
+        ): null;
         // console.log(ulWithMotion)
 
         const finalDom = isHorizontal ? null : subNavMotion ? (
@@ -337,7 +334,6 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
         }
 
         if (isCollapsed || mode === strings.MODE_HORIZONTAL) {
-            console.log(dropdownProps, _elem)
             // Do not show dropdown when disabled
             return !disabled ? (
               <Dropdown

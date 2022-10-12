@@ -3,7 +3,7 @@
 import withField from './hoc/withField';
 
 // Basic component
-import Input from '../input/index';
+import Input, {InputProps} from '../input/index';
 import TextArea from '../input/textArea';
 import InputNumber from '../inputNumber/index';
 import Select from '../select/index';

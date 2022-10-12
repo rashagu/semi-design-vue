@@ -17,8 +17,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
     console.log('didEnter')
   }
   return ()=>(
-    <div class="App">
-      <Transition
+    <div class="App">123
+      {visible.value?<Transition
         from={{ maxHeight: 0, opacity: 0 }}
         enter={{
           maxHeight: { val: 999, easing: 'easeInQuad', duration: 250 },
@@ -35,14 +35,14 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         immediate={false}
       >
         {({scale,opacity }:any) => {
-          console.log(scale)
+          console.log({scale,opacity })
           return (
             <h2 style={{transform: `scale(${scale})`, opacity}}>
               Toggle to see some animation happen!
             </h2>
           )
         }}
-      </Transition>
+      </Transition>:null}
 
       <button onClick={() => {
         visible.value = !visible.value;

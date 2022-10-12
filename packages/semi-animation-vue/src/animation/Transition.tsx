@@ -114,16 +114,19 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
   //   return slots.default
   // })
   // const internalInstance = getCurrentInstance();
-
-  watch([() => props.state, ()=>props.children], () => {
-    console.log('ww')
+  function updateState() {
     const newState = getDerivedStateFromProps(props, state)
     Object.keys(newState).forEach((key) => {
       // @ts-ignore
       state[key] = newState[key]
     })
+  }
+  watch(()=>props.children, () => {
+    updateState()
   }, {immediate: true})
-
+  watch(() => props.state, () => {
+    updateState()
+  }, {immediate: true})
 
   onBeforeUnmount(() => {
     if (instance) {
@@ -176,6 +179,7 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
       children = props.children || slots.default;
       state.state = props.state;
     } else if (state.currentChildren == null && state.lastChildren == null) {
+      console.log('transition: no children')
       return null;
     }
 
@@ -198,14 +202,14 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
     //  so ...
     const finalProps = {...restProps, onRest, onStart, from, to}
 
-    console.log(finalProps,123)
+    // console.log(finalProps,123)
 
 
     return (
       <Animation {...finalProps} force>
         {
           (propsRender: Record<string, any>) => {
-            console.log(propsRender)
+            // console.log(propsRender)
             return (
               typeof children === 'function' ? children(propsRender) : isVNode(children) ? children : null
             )

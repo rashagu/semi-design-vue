@@ -30,6 +30,7 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
         </button>
       </div>
       <Nav
+        limitIndent={false}
         footer={{
           collapseButton: true,
         }}

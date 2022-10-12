@@ -283,7 +283,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
   })
   watch(() => props.openKeys, (value) => {
     if (value){
-      console.log(props.openKeys)
+      // console.log(props.openKeys)
       adapter.updateOpenKeys(props.openKeys);
     }
   })
@@ -299,13 +299,13 @@ const index = defineComponent<NavProps>((props, {slots}) => {
     foundation.init('');
   }, {deep: true, immediate: true})
 
-  watch([
-    // () => state.selectedKeys,// 0
-    () => props.openKeys, // 1
-    // () => props.selectedKeys, // 2
-  ], (value, oldValue, onCleanup) => {
-    console.log(value)
-  })
+  // watch([
+  //   // () => state.selectedKeys,// 0
+  //   () => props.openKeys, // 1
+  //   // () => props.selectedKeys, // 2
+  // ], (value, oldValue, onCleanup) => {
+  //   console.log(value)
+  // })
 
 
   /**

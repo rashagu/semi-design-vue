@@ -17,7 +17,7 @@ import type {VueJsxNode} from "../interface";
 import type {CSSProperties, VNode} from "vue";
 import type {AriaAttributes} from "../AriaAttributes";
 
-export { FormState, FormApi, WithFieldOption };
+export type { FormState, FormApi, WithFieldOption, RuleItem };
 
 export type CommonFieldProps = {
     /** Field is required (except Form. Checkbox within the Group, Form. Radio) */

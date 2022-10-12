@@ -8,7 +8,7 @@ import {
   onMounted,
   onUnmounted,
   watch,
-  onBeforeMount, reactive, onBeforeUnmount, shallowRef
+  onBeforeMount, reactive, onBeforeUnmount, shallowRef, CSSProperties
 } from 'vue'
 
 import {Animation as SemiAnimation, events} from '@douyinfe/semi-animation';
@@ -115,7 +115,7 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
   let pause: () => void;
   let start: () => void;
 
-  const state = reactive({
+  const state = reactive<{currentStyle:Record<string, any>}>({
     currentStyle: {},
   })
 
@@ -257,15 +257,16 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
 
   return () => {
     const children = slots.default;
-    const styles = animation.value.getCurrentStates()
-    Object.keys(styles).forEach(key=>{
+    const styles:any = {}
+    Object.keys(state.currentStyle).forEach(key=>{
       if (['height',  'width', 'left', 'right', 'top', 'bottom', 'maxHeight', 'minHeight', 'maxWidth', 'minWidth'].includes(key)){
-        if (typeof styles[key] === 'number'){
-          styles[key] = styles[key] + 'px'
+        if (typeof state.currentStyle[key] === 'number'){
+          styles[key] = state.currentStyle[key] + 'px'
         }
+      }else{
+        styles[key] = state.currentStyle[key]
       }
     })
-    console.log(styles)
     if (typeof children === 'function' && animation.value) {
       return children(styles);
     } else if (isVNode(children)) {
