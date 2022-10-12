@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.0.7
+
+### Patch Changes
+
+- 修复动画问题
+
 ## 0.0.6
 
 ### Patch Changes

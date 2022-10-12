@@ -90,7 +90,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Cascader 5f0912f
 - [x] Checkbox 5f0912f
 - [x] DatePicker
-- [ ] Form
+- [x] Form
 - [x] Input
 - [x] InputNumber
 - [x] Radio
