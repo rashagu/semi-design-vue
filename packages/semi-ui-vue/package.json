@@ -1,12 +1,11 @@
 {
   "name": "@kousum/semi-ui-vue",
-  "version": "0.0.8",
-  "main": "dist/index.mjs",
-  "module": "dist/index.mjs",
-  "types": "lib/index.d.ts",
+  "version": "0.0.10",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "files": [
-    "dist/",
-    "lib/**/*.d.ts"
+    "dist/"
   ],
   "license": "MIT",
   "publishConfig": {
@@ -15,12 +14,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build:vite": "vue-tsc --noEmit && rimraf lib && rimraf dist && tsc -b --force tsconfig.esm.json && node ./scripts/compileLib.js && node build.js",
+    "build:vite": "rimraf lib && rimraf dist && vue-tsc --noEmit && tsc -b --force tsconfig.esm.json && node build.js && node ./scripts/compileLib.js",
     "build:lib2": "rimraf lib && tsc -b --force tsconfig.esm.json && node ./scripts/compileLib.js",
-    "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node ./scripts/compileLib.js",
+    "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && ",
     "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json",
     "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json",
-    "tt": "sass --watch src/components/default_style",
     "preview": "vite preview"
   },
   "repository": {
@@ -30,9 +28,9 @@
     "@douyinfe/semi-foundation": "2.20.3",
     "@douyinfe/semi-theme-default": "2.20.3",
     "@douyinfe/semi-animation": "2.20.3",
-    "@kousum/semi-animation-vue": "^0.0.8",
-    "@kousum/semi-icons-vue": "^0.0.8",
-    "@kousum/semi-illustrations-vue": "^0.0.8",
+    "@kousum/semi-animation-vue": "^0.0.10",
+    "@kousum/semi-icons-vue": "^0.0.10",
+    "@kousum/semi-illustrations-vue": "^0.0.10",
     "@kousum/vue3-window": "^0.0.3",
     "async-validator": "^4.0.7",
     "classnames": "^2.3.1",
@@ -44,9 +42,14 @@
     "sass": "^1.44.0",
     "scroll-into-view-if-needed": "^2.2.28",
     "utility-types": "^3.10.0",
-    "pinyin-pro": "^3.11.0",
     "vue": "^3.2.40"
   },
+  "sideEffects": [
+    "*.scss",
+    "*.css",
+    "dist/index.js",
+    "./index.ts"
+  ],
   "devDependencies": {
     "@types/lodash": "^4.14.178",
     "@babel/plugin-proposal-decorators": "^7.17.2",

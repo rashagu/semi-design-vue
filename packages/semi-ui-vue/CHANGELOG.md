@@ -1,5 +1,25 @@
 # @kousum/semi-ui-vue
 
+## 0.0.10
+
+### Patch Changes
+
+- js
+- Updated dependencies
+  - @kousum/semi-animation-vue@0.0.10
+  - @kousum/semi-icons-vue@0.0.10
+  - @kousum/semi-illustrations-vue@0.0.10
+
+## 0.0.9
+
+### Patch Changes
+
+- tree shaking
+- Updated dependencies
+  - @kousum/semi-animation-vue@0.0.9
+  - @kousum/semi-icons-vue@0.0.9
+  - @kousum/semi-illustrations-vue@0.0.9
+
 ## 0.0.8
 
 ### Patch Changes

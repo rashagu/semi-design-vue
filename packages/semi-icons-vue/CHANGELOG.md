@@ -1,5 +1,17 @@
 # @kousum/semi-icons-vue
 
+## 0.0.10
+
+### Patch Changes
+
+- js
+
+## 0.0.9
+
+### Patch Changes
+
+- tree shaking
+
 ## 0.0.8
 
 ### Patch Changes
