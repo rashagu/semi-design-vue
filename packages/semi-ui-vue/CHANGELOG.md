@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.0.8
+
+### Patch Changes
+
+- 使用 vite build
+- Updated dependencies
+  - @kousum/semi-animation-vue@0.0.8
+  - @kousum/semi-icons-vue@0.0.8
+  - @kousum/semi-illustrations-vue@0.0.8
+
 ## 0.0.7
 
 ### Patch Changes

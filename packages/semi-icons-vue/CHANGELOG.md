@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.0.8
+
+### Patch Changes
+
+- 使用 vite build
+
 ## 0.0.7
 
 ### Patch Changes

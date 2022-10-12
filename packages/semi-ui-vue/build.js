@@ -4,6 +4,7 @@ const vue = require("@vitejs/plugin-vue");
 const vueJsx = require("@vitejs/plugin-vue-jsx");
 const path = require("path");
 const gulp = require("gulp");
+const fs = require("fs");
 
 
 
@@ -13,7 +14,7 @@ gulp.task('buildSS', async function moveScss() {
   const srcFilePaths = fg.sync([`lib/**/*.js`], {
     ignore: [`**/*.spec.*`, '**/*.test.*', '**/*.d.ts', '**/__tests__/**'],
   });
-  return Promise.all(srcFilePaths.map(item=>{
+  await Promise.all(srcFilePaths.map(item=>{
     const pathSS = path.resolve(__dirname, item)
     const outDir = item.split('/')
     const filename = outDir.splice(outDir.length-1, 1)
@@ -52,9 +53,20 @@ gulp.task('buildSS', async function moveScss() {
       ],
     })
   }))
+  // fs.copyFileSync(path.resolve(__dirname, 'lib/_base/base.css'), './dist/_base/base.css');
 });
 
-const taskInstance = gulp.task('buildSS');
+
+
+gulp.task('moveScss2', function moveScss() {
+  return gulp.src(['lib/**/*.css'])
+    .pipe(gulp.dest('dist'))
+});
+
+gulp.task('compileBuild', gulp.series(['buildSS', 'moveScss2']));
+
+
+const taskInstance = gulp.task('compileBuild');
 if (taskInstance === undefined) {
   console.error('no task named compileLib registered');
   return;

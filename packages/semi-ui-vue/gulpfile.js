@@ -17,6 +17,8 @@ function compileTSX(isESM) {
     .pipe(replace(/((?:import|export)\s+.+from\s+)['"]@douyinfe\/semi-foundation\/([^'"]+)['"]/g, '$1\'@douyinfe/semi-foundation/lib/es/$2\''))
     .pipe(replace(/(import\(['"])@douyinfe\/semi-foundation\/(.+)/g, '$1@douyinfe/semi-foundation/lib/es/$2'))
     .pipe(replace(/(import\s+)['"]([^'"]+)(\.scss)['"]/g, '$1\'$2.css\''))
+    .pipe(replace(/(import\s+)['"]([^'"]+)(\.module\.scss)['"]/g, '$1\'$2.module.css\''))
+
     .pipe(gulp.dest('lib'));
 
   return merge2([jsStream]);
