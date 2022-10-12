@@ -1,12 +1,12 @@
 {
   "name": "@kousum/semi-ui-vue",
   "version": "0.0.7",
-  "main": "dist/semi-ui-vue.mjs",
-  "module": "dist/semi-ui-vue.mjs",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
   "types": "lib/index.d.ts",
   "files": [
     "dist/",
-    "lib/"
+    "lib/**/*.d.ts"
   ],
   "license": "MIT",
   "publishConfig": {
@@ -15,8 +15,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "build:vite": "vue-tsc --noEmit && rimraf lib && rimraf dist && tsc -b --force tsconfig.esm.json && node ./scripts/compileLib.js && node build.js",
     "build:lib2": "rimraf lib && tsc -b --force tsconfig.esm.json && node ./scripts/compileLib.js",
-    "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node ./scripts/compileLib.js && pnpm build",
+    "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node ./scripts/compileLib.js",
     "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json",
     "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json",
     "tt": "sass --watch src/components/default_style",
@@ -68,6 +69,7 @@
     "rimraf": "^3.0.2",
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
+    "fast-glob": "^3.2.12",
     "typescript": "^4.8.3",
     "vite": "^3.1.4",
     "terser": "^5.15.1",
