@@ -296,9 +296,9 @@ importers:
       '@douyinfe/semi-foundation': 2.20.3
       '@douyinfe/semi-theme-default': 2.20.3
       '@kousum/resize-observer-polyfill': ^1.5.2
-      '@kousum/semi-animation-vue': ^0.0.8
-      '@kousum/semi-icons-vue': ^0.0.8
-      '@kousum/semi-illustrations-vue': ^0.0.8
+      '@kousum/semi-animation-vue': ^0.0.10
+      '@kousum/semi-icons-vue': ^0.0.10
+      '@kousum/semi-illustrations-vue': ^0.0.10
       '@kousum/vue3-window': ^0.0.3
       '@types/lodash': ^4.14.178
       '@vitejs/plugin-vue': ^3.1.0
