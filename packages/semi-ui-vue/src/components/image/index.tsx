@@ -7,9 +7,9 @@ export default Image;
 export {
     PreviewInner,
     Preview,
-}; 
+};
 
-export {
+export type {
     ImageProps,
     PreviewImageProps,
     PreviewProps,

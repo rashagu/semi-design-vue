@@ -9,7 +9,7 @@ import { isObject } from "lodash";
 import "@douyinfe/semi-foundation/image/image.scss";
 import {defineComponent, h, reactive, useSlots, ref, Fragment, onMounted, watch, cloneVNode} from "vue";
 import {vuePropsMake} from "../PropTypes";
-import {useBaseComponent} from "../_base/baseComponent";
+import {getProps, useBaseComponent} from "../_base/baseComponent";
 import {VueJsxNode} from "../interface";
 
 const prefixCls = cssClasses.PREFIX;
@@ -107,10 +107,10 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
 
     function getDerivedStateFromProps(props: PreviewProps, state: PreviewState) {
         const willUpdateStates: Partial<PreviewState> = {};
-        if (("currentIndex" in props) && (props.currentIndex !== state.currentIndex)) {
+        if (("currentIndex" in getProps(props)) && (props.currentIndex !== state.currentIndex)) {
             willUpdateStates.currentIndex = props.currentIndex;
         }
-        if (("visible" in props) && (props.visible !== state.visible)) {
+        if (("visible" in getProps(props)) && (props.visible !== state.visible)) {
             willUpdateStates.visible = props.visible;
         }
         return willUpdateStates;
@@ -132,7 +132,7 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
     };
 
     const loopImageIndex = () => {
-        const children = slots.default?.()
+        const children = slots.default?.()[0].children
         let index = 0;
         const srcListInChildren = [];
         const titles: VueJsxNode = [];
@@ -141,7 +141,7 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
                 if (child && child.props && child.type) {
                     if (child.type.isSemiImage) {
                         const { src, preview, alt } = child.props;
-                        if (preview) {
+                        if (preview || preview === undefined) {
                             const previewSrc = isObject(preview) ? ((preview as any).src ?? src) : src;
                             srcListInChildren.push(previewSrc);
                             titles.push(preview?.previewTitle);
@@ -169,6 +169,7 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
     };
 
 
+    // TODO 关闭后再次打开图片不显示
     return () => {
         const { src, style, lazyLoad, ...restProps } = props;
         const { currentIndex, visible } = state;

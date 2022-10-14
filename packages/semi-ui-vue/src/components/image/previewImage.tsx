@@ -3,7 +3,7 @@ import {PreviewImageProps, PreviewImageStates, PreviewProps} from "./interface";
 import * as PropTypes from "../PropTypes";
 import Spin from "../spin";
 import PreviewImageFoundation, { PreviewImageAdapter } from "@douyinfe/semi-foundation/image/previewImageFoundation";
-import {defineComponent, h, onMounted, onUnmounted, reactive, ref, useSlots, watch} from "vue";
+import {CSSProperties, defineComponent, h, onMounted, onUnmounted, reactive, ref, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
 
@@ -63,19 +63,18 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
                 originImageHeight = size.originImageHeight;
             },
             getContainerRef: () => {
-                return containerRef;
+                return {current: containerRef.value};
             },
             getImageRef: () => {
-                return imageRef;
+                console.log(imageRef.value)
+                return imageRef.value;
             },
             getMouseMove: () => startMouseMove,
             setStartMouseMove: (move: boolean) => { startMouseMove = move; },
             getMouseOffset: () => startMouseOffset,
             setStartMouseOffset: (offset: { x: number; y: number }) => { startMouseOffset = offset; },
             setLoading: (loading: boolean) => {
-                setState({
-                    loading,
-                });
+                state.loading = loading
             },
         };
     }
@@ -100,16 +99,18 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
     // else if it"s adaptation is realSize, then onZoom(1) is called to make the image size the original size;
     // When the incoming rotation angle of the image changes, it needs to be resized to make the image fit on the page
     watch(()=>props.src, (value, oldValue, onCleanup)=>{
-        if (value && oldValue !== onCleanup) {
+        if (value && oldValue !== value) {
             foundation.setLoading(true);
         }
     })
+
     watch(()=>props.zoom, (value, oldValue, onCleanup)=>{
         if ("zoom" in getProps(props) && value !== oldValue) {
             handleZoomChange(props.zoom, null);
         }
     })
-    watch(()=>props.zoom, (value, oldValue, onCleanup)=>{
+
+    watch(()=>props.ratio, (value, oldValue, onCleanup)=>{
         if ("ratio" in getProps(props) && props.ratio !== oldValue) {
             if (originImageWidth && originImageHeight) {
                 if (props.ratio === "adaptation") {
@@ -120,6 +121,7 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
             }
         }
     })
+
     watch(()=>props.rotation, (value, oldValue, onCleanup)=>{
         if ("rotation" in getProps(props) && props.rotation !== oldValue) {
             onWindowResize();
@@ -169,16 +171,16 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
     // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#improving_scrolling_performance_with_passive_listeners。
 
     const registryImageRef = (ref): void => {
-        if (imageRef && imageRef.current) {
-            (imageRef as any).removeEventListener("wheel", handleWheel);
+        if (imageRef && imageRef.value) {
+            imageRef.value.removeEventListener("wheel", handleWheel);
         }
         if (ref) {
             ref.addEventListener("wheel", handleWheel, { passive: false });
         }
-        imageRef = ref;
+        imageRef.value = ref;
     };
 
-    const onImageMouseDown = (e: React.MouseEvent<HTMLImageElement>): void => {
+    const onImageMouseDown = (e: any): void => {
         foundation.handleImageMouseDown(e);
     };
 
@@ -189,18 +191,18 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
     return () => {
         const { src, rotation } = props;
         const { loading, width, height, top, left } = state;
-        const imgStyle = {
+        const imgStyle:CSSProperties = {
             position: "absolute",
             visibility: loading ? "hidden" : "visible",
             transform: `rotate(${-rotation}deg)`,
-            top,
-            left,
+            top: top + 'px',
+            left: left + 'px',
             width: loading ? "auto" : `${width}px`,
             height: loading ? "auto" : `${height}px`,
         };
         return (
           <div
-            className={`${preViewImgPrefixCls}`}
+            class={`${preViewImgPrefixCls}`}
             ref={containerRef}
           >
               {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
@@ -208,16 +210,16 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
                 ref={registryImageRef}
                 src={src}
                 alt="previewImag"
-                className={`${preViewImgPrefixCls}-img`}
+                class={`${preViewImgPrefixCls}-img`}
                 key={src}
-                onMouseMove={handleMoveImage}
-                onMouseDown={onImageMouseDown}
-                onMouseUp={onImageMouseUp}
-                onContextMenu={handleRightClickImage}
-                onDragStart={(e): void => e.preventDefault()}
+                onMousemove={handleMoveImage}
+                onMousedown={onImageMouseDown}
+                onMouseup={onImageMouseUp}
+                onContextmenu={handleRightClickImage}
+                onDragstart={(e): void => e.preventDefault()}
                 onLoad={handleLoad}
                 onError={handleError}
-                style={imgStyle as React.CSSProperties}
+                style={imgStyle}
               />
               {loading && <Spin size={"large"} wrapperClassName={`${preViewImgPrefixCls}-spin`}/>}
           </div>

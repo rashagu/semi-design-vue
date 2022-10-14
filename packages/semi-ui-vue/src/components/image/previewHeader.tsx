@@ -4,7 +4,8 @@ import { cssClasses } from "@douyinfe/semi-foundation/image/constants";
 import cls from "classnames";
 import { HeaderProps } from "./interface";
 import { PreviewContext } from "./previewContext";
-import {FunctionalComponent, h} from "vue";
+import {CSSProperties, FunctionalComponent, h, PropType} from "vue";
+import {VueJsxNode} from "../interface";
 
 const prefixCls = `${cssClasses.PREFIX}-preview-header`;
 
@@ -27,5 +28,13 @@ const Header: FunctionalComponent<HeaderProps> = ({ onClose, titleStyle, classNa
         }}
     </PreviewContext.Consumer>
 );
+
+Header.props = {
+    renderHeader:Function as PropType<(info: any) => VueJsxNode>,
+    title: String,
+    titleStyle: Object as PropType<CSSProperties>,
+    className: String,
+    onClose:Function as PropType< () => void>,
+}
 
 export default Header;

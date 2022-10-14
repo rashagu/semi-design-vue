@@ -250,6 +250,7 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
             );
         }
 
+        // TODO 部分按钮点击无效
         return (
           <section class={cls(footerPrefixCls, `${footerPrefixCls}-wrapper`, className)}>
               {getIconChevronLeft()}

@@ -26,8 +26,8 @@
     "packages/semi-illustrations-vue"
   ],
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.20.3",
-    "@douyinfe/semi-theme-default": "2.20.3",
+    "@douyinfe/semi-foundation": "2.21.1",
+    "@douyinfe/semi-theme-default": "2.21.1",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
     "lodash": "^4.17.21",
@@ -64,7 +64,7 @@
     "@svgr/plugin-svgo": "5.5.0",
     "@svgr/webpack": "5.5.0",
     "@types/node": "^17.0.36",
-    "@vitejs/plugin-vue": "^3.1.0",
+    "@vitejs/plugin-vue": "^3.1.2",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
     "@vitest/coverage-c8": "^0.23.4",
     "@vue/test-utils": "^2.1.0",
@@ -74,7 +74,7 @@
     "svgo": "2.7.0",
     "ts-node": "^10.5.0",
     "tslib": "^2.3.1",
-    "vite": "^3.1.4",
+    "vite": "^3.1.8",
     "vitest": "^0.23.4"
   }
 }

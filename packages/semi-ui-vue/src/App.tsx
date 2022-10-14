@@ -40,6 +40,8 @@ import TreeDemo from "./components/tree/__test__/TreeDemo";
 import TreeCheckDemo from "./components/tree/__test__/TreeCheckDemo";
 import TreeSelectDemo from "./components/treeSelect/__test__/TreeSelectDemo";
 import FormDemo from "./components/form/__test__/FormDemo";
+import SkeletonDemo from "./components/skeleton/__test__/SkeletonDemo";
+import ImageDemo from "./components/image/__test__/ImageDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -54,6 +56,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
+        <ImageDemo/>
+        {/*<SkeletonDemo/>*/}
         {/*<FormDemo />*/}
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
@@ -101,7 +105,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<LayoutTest/>*/}
         {/*<SpaceTest/>*/}
         {/*<PopoverTest />*/}
-        <NavigationDemo />
+        {/*<NavigationDemo />*/}
         <div class={'aa'}>123</div>
       </ConfigProvider>
     </div>

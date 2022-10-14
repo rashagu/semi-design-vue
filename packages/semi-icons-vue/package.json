@@ -20,8 +20,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.20.3",
-    "@douyinfe/semi-theme-default": "2.20.3",
+    "@douyinfe/semi-foundation": "2.21.1",
+    "@douyinfe/semi-theme-default": "2.21.1",
     "classnames": "^2.3.1",
     "sass": "^1.44.0",
     "vue": "^3.2.40"
@@ -31,7 +31,7 @@
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
-    "@vitejs/plugin-vue": "^3.1.0",
+    "@vitejs/plugin-vue": "^3.1.2",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
     "camelcase": "^6.3.0",
     "del": "^6.0.0",
@@ -47,7 +47,7 @@
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
     "typescript": "^4.8.3",
-    "vite": "^3.1.4",
+    "vite": "^3.1.8",
     "vue-tsc": "^0.40.13"
   },
   "gitHead": "a9bb1553bd45dcf99595a45df0adf0d967083f1e"
