@@ -3,7 +3,7 @@ import {h} from 'vue'
 
 const withFormApi = (Component: any) => (props) => (
   <FormApiContext.Consumer>
-    {formApi => <Component formApi={formApi} {...props} />}
+    {formApi => <Component formApi={formApi.value} {...props} />}
   </FormApiContext.Consumer>
 )
 

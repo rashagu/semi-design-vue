@@ -99,6 +99,7 @@ function withField<
 
         const updateValue = (val: any, callOpts?: CallOpts) => {
 
+            console.error(val,callOpts)
             let {
                 field,
                 allowEmpty,
@@ -397,7 +398,7 @@ function withField<
             onCleanup(()=>{
                 updater.value.unRegister(mergeProps(props).field);
             })
-        })
+        }, {immediate: true})
 
 
 

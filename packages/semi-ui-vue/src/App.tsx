@@ -42,6 +42,8 @@ import TreeSelectDemo from "./components/treeSelect/__test__/TreeSelectDemo";
 import FormDemo from "./components/form/__test__/FormDemo";
 import SkeletonDemo from "./components/skeleton/__test__/SkeletonDemo";
 import ImageDemo from "./components/image/__test__/ImageDemo";
+import WithFormApiDemo from "./components/form/__test__/WithFormApiDemo";
+import WithFormStateDemo from "./components/form/__test__/WithFormStateDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -59,6 +61,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         <ImageDemo/>
         {/*<SkeletonDemo/>*/}
         {/*<FormDemo />*/}
+        {/*<WithFormApiDemo />*/}
+        <WithFormStateDemo/>
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
         {/*<TreeDemo />*/}

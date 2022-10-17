@@ -17,7 +17,17 @@ import type {
     FormApi,
     ErrorMsg, FormFCChild
 } from './interface';
-import {createVNode, CSSProperties, defineComponent, h, onMounted, onUnmounted, reactive, useSlots} from "vue";
+import {
+    createVNode,
+    CSSProperties,
+    defineComponent,
+    getCurrentInstance,
+    h,
+    onMounted,
+    onUnmounted,
+    reactive,
+    useSlots,
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 const prefix = cssClasses.PREFIX;
@@ -72,7 +82,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Form = defineComponent<BaseFormProps>((props, {}) => {
     const slots = useSlots()
-
+    let currentInstance = getCurrentInstance()
 
 
     const state = reactive<BaseFormState>({
@@ -105,7 +115,9 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
                 props.onSubmitFail(errors, values);
             },
             forceUpdate: (callback?: () => void) => {
+                // TODO 重新渲染
                 // adapter.forceUpdate(callback);
+                currentInstance.update()
             },
             notifyChange: (formState: FormState) => {
                 props.onChange(formState);
@@ -223,6 +235,7 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
             [prefix + '-vertical']: layout === 'vertical',
             [prefix + '-horizontal']: layout === 'horizontal',
         });
+
         const showldAppendRow = wrapperCol && labelCol;
 
         const formContent = (
