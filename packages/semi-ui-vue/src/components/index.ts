@@ -26,7 +26,7 @@ export {
 export { default as Input } from './input';
 export { default as TextArea } from './input/textArea';
 export { Group as RadioGroup, Radio } from './radio';
-export { default as AutoCompleteItems } from './autoCompleteItems';
+export { default as AutoCompleteItems } from './autoComplete';
 export { default as Avatar } from './avatar';
 export { default as Cascader } from './cascader';
 export { default as Checkbox, CheckboxGroup } from './checkbox';

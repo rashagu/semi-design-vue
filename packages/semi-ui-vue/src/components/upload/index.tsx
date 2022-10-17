@@ -43,7 +43,6 @@ import type {
 } from '@douyinfe/semi-foundation/upload/foundation';
 import type { ValidateStatus } from '../_base/baseComponent';
 import {vuePropsMake} from "../PropTypes";
-import {AutoCompleteProps} from "../autoCompleteItems";
 
 const LocaleConsumer = LocaleConsumer_()
 const prefixCls = cssClasses.PREFIX;

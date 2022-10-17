@@ -1,10 +1,12 @@
 import {defineComponent, ref, h, Fragment, reactive} from 'vue'
 import Avatar from '../../avatar'
-import AutoComplete from '../index'
+import {AutoCompleteFunc} from '../index'
 import {IconSearch} from '@kousum/semi-icons-vue'
 interface ExampleProps {
   name?: string
 }
+
+const AutoComplete = AutoCompleteFunc<{name: string, email: string, abbr: string, color: string}>()
 
 export const vuePropsType = {
   name: String
@@ -71,5 +73,5 @@ const RenderItem = defineComponent<ExampleProps>((props, {slots}) => {
 
 RenderItem.props = vuePropsType
 
-export default RenderItem 
+export default RenderItem
 

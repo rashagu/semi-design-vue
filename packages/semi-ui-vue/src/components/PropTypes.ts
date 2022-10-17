@@ -25,6 +25,12 @@ export function oneOfType(arr:any[]) {
 }
 
 type Prop = ArrayConstructor | ObjectConstructor | StringConstructor | NumberConstructor | BooleanConstructor | FunctionConstructor | typeof any
+export type PropObj = Record<any, {
+  type: Prop;
+  required?: boolean;
+  default?: any;
+  validator?(value: unknown): boolean;
+} | Prop>
 export function vuePropsMake(typeObj:Record<any, {
   type: Prop;
   required?: boolean;

@@ -14,7 +14,7 @@ import InputDemo from "./components/input/__test__/InputDemo";
 import RadioDemo from "./components/radio/__test__/RadioDemo";
 import TagDemo from "./components/tag/__test__/TagDemo";
 import SelectDemo from "./components/select/__test__/SelectDemo";
-import AutoCompleteItemsDemo from "./components/autoCompleteItems/__test__/AutoCompleteItemsDemo";
+import AutoCompleteDemo from "./components/autoComplete/__test__/AutoCompleteItemsDemo";
 import TagInputDemo from "./components/tagInput/__test__/TagInputDemo";
 import CheckboxDemo from "./components/checkbox/__test__/CheckboxDemo";
 import CascaderDemo from "./components/cascader/__test__/CascaderDemo";
@@ -80,8 +80,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<CheckboxDemo />*/}
         {/*<TagInputDemo />*/}
 
-        {/*// TODO 样式好像有问题*/}
-        {/*<AutoCompleteItemsDemo/>*/}
+        {/*<AutoCompleteDemo/>*/}
         {/*<SelectDemo/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}

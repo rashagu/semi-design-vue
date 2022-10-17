@@ -20,6 +20,7 @@ import type { InputGroupProps } from './inputGroup';
 import type { TextAreaProps } from './textArea';
 import {AriaAttributes} from "../AriaAttributes";
 import {vuePropsMake} from "../PropTypes";
+import {VueJsxNode} from "../interface";
 export type { TextAreaProps , InputGroupProps}
 
 export type InputSize = 'small' | 'large' | 'default';
@@ -39,10 +40,10 @@ export interface InputProps extends
   'aria-invalid'?: AriaAttributes['aria-invalid'];
   'aria-labelledby'?: AriaAttributes['aria-labelledby'];
   'aria-required'?: AriaAttributes['aria-required'];
-  addonBefore?: VNode | string;
-  addonAfter?: VNode | string;
-  prefix?: VNode | string;
-  suffix?: VNode | string;
+  addonBefore?: VueJsxNode;
+  addonAfter?: VueJsxNode;
+  prefix?: VueJsxNode;
+  suffix?: VueJsxNode;
   mode?: InputMode;
   value?: string | number;
   defaultValue?: string | number;
@@ -53,7 +54,7 @@ export interface InputProps extends
   showClear?: boolean;
   hideSuffix?: boolean;
   placeholder?: string;
-  insetLabel?: VNode | string;
+  insetLabel?: VueJsxNode;
   insetLabelId?: string;
   size?: InputSize;
   className?: string;

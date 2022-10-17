@@ -21,7 +21,7 @@ import TimePicker from '../timePicker/index';
 import TreeSelect from '../treeSelect/index';
 import Cascader from '../cascader/index';
 import Rating from '../rating/index';
-import AutoComplete from '../autoCompleteItems/index';
+import AutoComplete from '../autoComplete/index';
 import Upload from '../upload/index';
 import TagInput from '../tagInput/index';
 import { FormCheckboxType, FormRadioType, FormSelectType } from './interface';

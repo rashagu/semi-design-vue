@@ -27,8 +27,7 @@ import {
     useSlots
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
-import {AutoCompleteProps} from "../autoCompleteItems";
-import {TimeInputProps} from "../timePicker";
+
 import {AriaAttributes} from "../AriaAttributes";
 
 const clsPrefix = cssClasses.PREFIX;
@@ -110,7 +109,7 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
         isCollapsed: true,
     });
 
-    const {cache, adapter: adapterInject, log, context} = useBaseComponent<AutoCompleteProps<any>>(props, state)
+    const {cache, adapter: adapterInject, log, context} = useBaseComponent<BreadcrumbProps>(props, state)
     function adapter(): BreadcrumbAdapter<BreadcrumbProps, BreadcrumbState> {
         return {
             ...adapterInject<BreadcrumbProps, BreadcrumbState>(),

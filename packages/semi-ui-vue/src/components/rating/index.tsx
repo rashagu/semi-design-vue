@@ -12,7 +12,6 @@ import '@douyinfe/semi-foundation/rating/rating.scss';
 import {CSSProperties, defineComponent, h, onMounted, onUnmounted, reactive, ref, useSlots, VNode, watch} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
-import {AutoCompleteProps} from "../autoCompleteItems";
 
 export type { RatingItemProps } from './item';
 export interface RatingProps {

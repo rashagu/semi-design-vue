@@ -28,10 +28,7 @@ import {
     VNode
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
-import {AutoCompleteProps} from "../autoCompleteItems";
 import {useConfigContext} from "../configProvider/context/Consumer";
-import {Motion} from "@douyinfe/semi-foundation/utils/type";
-import {OKType, Size} from "@douyinfe/semi-foundation/modal/modalFoundation";
 
 let uuid = 0;
 

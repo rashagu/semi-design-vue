@@ -28,7 +28,7 @@ export {default as Input} from './src/components/input';
 export {default as TextArea} from './src/components/input/textArea';
 export {Group as RadioGroup, Radio} from './src/components/radio';
 export {default as AreaSelect} from './src/components/areaSelect/AreaSelect';
-export {default as AutoCompleteItems} from './src/components/autoCompleteItems';
+export {default as AutoCompleteItems} from './src/components/autoComplete';
 export {default as Avatar} from './src/components/avatar';
 export {default as Cascader} from './src/components/cascader';
 export {default as Checkbox} from './src/components/checkbox';
