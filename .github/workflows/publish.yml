@@ -1,12 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
-name: test
+name: publish
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: [ release ]
 
   workflow_dispatch:
 
@@ -18,6 +16,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Run install pnpm
         run: npm i -g pnpm
@@ -30,5 +29,8 @@ jobs:
 
       - name: Run test
         run: pnpm test
-      - name: Run codecov
-        run: npx codecov --token=${{ secrets.CODECOV_TOKEN }}
+
+      - name: Run publish
+        run: pnpm changeset publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
