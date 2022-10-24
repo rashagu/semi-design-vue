@@ -125,6 +125,10 @@ const Toast = defineComponent<ToastReactProps>((props, {expose}) => {
         return null;
     }
 
+    // onUnmounted(()=>{
+    //     console.log('toast 销毁')
+    // })
+
     expose({
         foundation
     })
@@ -140,6 +144,7 @@ const Toast = defineComponent<ToastReactProps>((props, {expose}) => {
         textStyle.maxWidth = textMaxWidth;
         const btnTheme = 'borderless';
         const btnSize = 'small';
+
         return (
           <div
             role="alert"
@@ -157,7 +162,9 @@ const Toast = defineComponent<ToastReactProps>((props, {expose}) => {
                   {showClose && (
                     <div class={`${prefixCls}-close-button`}>
                         <Button
-                          onClick={e => close(e)}
+                          onClick={e => {
+                              close(e)
+                          }}
                           type="tertiary"
                           icon={<IconClose x-semi-prop="icon" />}
                           theme={btnTheme}

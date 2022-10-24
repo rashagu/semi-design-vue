@@ -137,17 +137,26 @@ const ToastList = defineComponent<ToastListProps>((props, {expose}) => {
                 transitionStyle => {
                   return (
                     <Toast
-                      {...item}
-                      style={{...transitionStyle, ...item.style}}
-                      close={id => remove(id)}
-                      ref={refFn}
+                      {...{
+                        ...item,
+                        style: {...transitionStyle, ...item.style},
+                        close: id => remove(id),
+                        ref: refFn
+                      }}
                     />
                   )
                 }}
               >
               </ToastTransition>
             ) : (
-              <Toast {...item} style={{...item.style}} close={id => remove(id)} ref={refFn}/>
+              <Toast
+                {...{
+                  ...item,
+                  style: {...item.style},
+                  close: id => remove(id),
+                  ref: refFn
+                }}
+              />
             ))
           }
         )}
@@ -206,7 +215,6 @@ export function useToastHook(configProps?: ConfigProps) {
       createApp_ = createApp(() => createVNode(
         ToastList,
         {
-          icon: 'asd',
           ref: (instance: any) => {
             if (!ToastListRef) {
               instance.add({...opts, id});

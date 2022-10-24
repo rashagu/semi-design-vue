@@ -67,8 +67,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<FormDemo />*/}
         {/*<WithFormApiDemo />*/}
         {/*<WithFormStateDemo/>*/}
-        <WithFieldDemo/>
-        <WithFieldDemo2/>
+        {/*<WithFieldDemo/>*/}
+        {/*<WithFieldDemo2/>*/}
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
         {/*<TreeDemo />*/}

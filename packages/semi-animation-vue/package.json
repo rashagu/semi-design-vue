@@ -29,13 +29,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@douyinfe/semi-animation": "2.21.1",
-    "@douyinfe/semi-animation-styled": "2.21.1",
-    "@douyinfe/semi-foundation": "2.21.1",
+    "@douyinfe/semi-animation": "2.21.2",
+    "@douyinfe/semi-animation-styled": "2.21.2",
+    "@douyinfe/semi-foundation": "2.21.2",
     "@douyinfe/semi-theme-default": "^2.7.1",
     "classnames": "^2.3.1",
     "sass": "^1.44.0",
-    "vue": "^3.2.40"
+    "vue": "^3.2.41"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
