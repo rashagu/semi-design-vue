@@ -29,7 +29,7 @@ import {
     defineComponent, useSlots, withMemo, watchEffect, watch
 } from "vue";
 import {VueHTMLAttributes, VueJsxNode} from "../../interface";
-import {DefineComponent} from "@vue/runtime-core";
+import {DefineComponent} from "vue";
 import {useFormUpdaterContext} from "../context/FormUpdaterContext/Consumer";
 
 const prefix = cssClasses.PREFIX;
