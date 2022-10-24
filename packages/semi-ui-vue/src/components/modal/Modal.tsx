@@ -125,6 +125,7 @@ export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 console.log(vuePropsType)
 const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
 
+  console.log(props)
   const slots = useSlots()
 
   const state = reactive<ModalState>({
@@ -393,6 +394,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
       </Portal>
     );
   };
+
   return () => {
     const {
       visible,
@@ -401,6 +403,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
     } = props;
     _active = _active || visible;
     const shouldRender = ((visible || keepDOM) && (!lazyRender || _active)) || !state.hidden;
+
     if (shouldRender) {
       return renderDialog();
     }
@@ -441,12 +444,48 @@ const destroyAll = function destroyAllFn() {
     }
   }
 };
-Modal.info = info
-Modal.success = success
-Modal.error = error
-Modal.warning = warning
-Modal.confirm = confirm_
-Modal.destroyAll = destroyAll
-Modal.useModal = useModal
+
+export class ModalConfirm {
+  static useModal = useModal
+
+  static info = function (props: ModalReactProps) {
+    return confirm<ReturnType<typeof withInfo>>(withInfo(props));
+  };
+
+  static success = function (props: ModalReactProps) {
+    return confirm<ReturnType<typeof withSuccess>>(withSuccess(props));
+  };
+
+  static error = function (props: ModalReactProps) {
+    return confirm<ReturnType<typeof withError>>(withError(props));
+  };
+
+  static warning = function (props: ModalReactProps) {
+    return confirm<ReturnType<typeof withWarning>>(withWarning(props));
+  };
+
+  static confirm = function (props: ModalReactProps) {
+    return confirm<ReturnType<typeof withConfirm>>(withConfirm(props));
+  };
+
+  static destroyAll = function destroyAllFn() {
+    while (destroyFns.length) {
+      const close = destroyFns.pop();
+      if (close) {
+        close();
+      }
+    }
+  };
+
+
+}
+// Modal.info = info
+// Modal.success = success
+// Modal.error = error
+// Modal.warning = warning
+// Modal.confirm = confirm_
+// Modal.destroyAll = destroyAll
+// Modal.useModal = useModal
+
 export default Modal
 

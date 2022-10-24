@@ -91,28 +91,9 @@ const propTypes = {
     type: PropTypes.bool,
     default: undefined
   },
+  content: String
 };
 const defaultProps = {
-  zIndex: 1000,
-  motion: true,
-  mask: true,
-  centered: false,
-  closable: true,
-  visible: false,
-  confirmLoading: false,
-  cancelLoading: false,
-  okType: 'primary',
-  maskClosable: true,
-  hasCancel: true,
-  onCancel: noop,
-  onOk: noop,
-  afterClose: noop,
-  maskFixed: false,
-  closeOnEsc: true,
-  size: 'small',
-  keepDOM: false,
-  lazyRender: true,
-  fullScreen: false,
 };
 export const vuePropsType = {
   ...vuePropsMake(propTypes, defaultProps),
@@ -224,7 +205,7 @@ const ConfirmModal = defineComponent<ConfirmProps>((props, {}) => {
   }
 })
 
-ConfirmModal.props
+ConfirmModal.props = vuePropsType
 ConfirmModal.name = 'ConfirmModal'
 
 export default ConfirmModal

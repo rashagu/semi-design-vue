@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
 import Button from "../../button";
-import Modal from "../index";
+import {ModalConfirm} from "../index";
 import {IconSend} from "@kousum/semi-icons-vue";
 
 interface ModalDemoConfirmProps {
@@ -14,27 +14,27 @@ const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
 
   const slots = useSlots()
   function success() {
-    Modal.success({ title: 'This is a success message', content: 'bla bla bla...' });
+    ModalConfirm.success({ title: 'This is a success message', content: 'bla bla bla...' });
   }
 
   function info() {
-    Modal.info({ title: 'Here is some info', content: 'bla bla bla...' });
+    ModalConfirm.info({ title: 'Here is some info', content: 'bla bla bla...' });
   }
 
   function error() {
-    Modal.error({ title: 'Unfortunately, there is an error', content: 'bla bla bla...' });
+    ModalConfirm.error({ title: 'Unfortunately, there is an error', content: 'bla bla bla...' });
   }
 
   function warning() {
-    Modal.warning({ title: 'Warning: be cautious ahead', content: 'bla bla bla...' });
+    ModalConfirm.warning({ title: 'Warning: be cautious ahead', content: 'bla bla bla...' });
   }
 
   function confirm() {
-    Modal.confirm({ title: 'Are you sure ?', content: 'bla bla bla...' });
+    ModalConfirm.confirm({ title: 'Are you sure ?', content: 'bla bla bla...' });
   }
 
   function custom() {
-    Modal.info({
+    ModalConfirm.info({
       title: 'This is a custom modal',
       content: 'bla bla bla...',
       icon: <IconSend />,

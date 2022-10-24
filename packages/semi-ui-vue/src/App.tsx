@@ -61,7 +61,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <ToastDemo/>
+        {/*<ToastDemo/>*/}
         {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
         {/*<FormDemo />*/}
@@ -77,7 +77,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SliderDemo />*/}
         {/*<InputNumberDemo />*/}
         {/*<ModalDemoHook />*/}
-        {/*<ModalDemoConfirm/>*/}
+        <ModalDemoConfirm/>
         {/*<ModalDemo/>*/}
         {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}

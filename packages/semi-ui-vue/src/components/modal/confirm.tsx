@@ -64,6 +64,7 @@ export default function confirm<T>(props: ConfirmProps) {
   } : false;
 
   function render(renderProps: ConfirmProps) {
+    console.log({...renderProps, motion: mergedMotion})
     app = createApp(h(ConfirmModal, {...renderProps, motion: mergedMotion}))
     app.mount(div)
   }
