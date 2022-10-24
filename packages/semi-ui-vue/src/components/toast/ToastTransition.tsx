@@ -6,7 +6,7 @@ import {defineComponent, h, useSlots, VNode, watch} from "vue";
 
 export interface ToastTransitionProps {
   motion?: Motion<ToastTransitionProps>;
-  children: VNode | ((TransitionProps: any) => any)
+  children: VNode | ((TransitionProps: any) => any) | VNode[]
 }
 
 export const vuePropsType = {

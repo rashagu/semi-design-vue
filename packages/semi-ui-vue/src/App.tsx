@@ -47,6 +47,8 @@ import WithFormStateDemo from "./components/form/__test__/WithFormStateDemo";
 import WithFieldDemo from "./components/form/__test__/WithFieldDemo";
 import WithFieldDemo2 from "./components/form/__test__/WithFieldDemo2";
 import ToastDemo from "./components/toast/__test__/ToastDemo";
+import BannerDemo from "./components/banner/__test__/BannerDemo";
+import NotificationDemo from "./components/notification/__test__/NotificationDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -61,6 +63,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
+        <NotificationDemo/>
+        {/*<BannerDemo/>*/}
         {/*<ToastDemo/>*/}
         {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
@@ -77,7 +81,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SliderDemo />*/}
         {/*<InputNumberDemo />*/}
         {/*<ModalDemoHook />*/}
-        <ModalDemoConfirm/>
+        {/*<ModalDemoConfirm/>*/}
         {/*<ModalDemo/>*/}
         {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}

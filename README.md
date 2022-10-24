@@ -126,7 +126,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [ ] Descriptions
 - [x] Dropdown
 - [x] Empty
-- [ ] Image
+- [x] Image
 - [ ] List
 - [x] Modal
 - [ ] OverflowList
@@ -140,13 +140,13 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 
 ### 反馈类
 
-- [ ] Banner
+- [x] Banner
 - [ ] Notification
 - [ ] Popconfirm
 - [x] Progress
 - [ ] Skeleton
 - [x] Spin
-- [ ] Toast
+- [x] Toast
 
 ### 其他
 
