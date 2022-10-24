@@ -37,6 +37,7 @@ import { isSemiIcon, getFocusableElements, getActiveElement } from '../_utils';
 import {Subtract} from 'utility-types';
 
 import warning from '@douyinfe/semi-foundation/utils/warning';
+import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
 
 import '@douyinfe/semi-foundation/select/select.scss';
 import {Locale} from '../locale/interface';
@@ -281,9 +282,13 @@ const propTypes = {
   // tagClosable: PropTypes.bool,
 
   id: String,
+
+
+
 };
 
 const defaultProps: Partial<SelectProps> = {
+
   stopPropagation: true,
   motion: true,
   zIndex: popoverNumbers.DEFAULT_Z_INDEX,
@@ -308,7 +313,7 @@ const defaultProps: Partial<SelectProps> = {
   onBlur: noop,
   onClear: noop,
   onListScroll: noop,
-  maxHeight: 300,
+  maxHeight: numbers.LIST_HEIGHT,
   dropdownMatchSelectWidth: true,
   defaultActiveFirstOption: true, // In order to meet the needs of A11y, change to true
   showArrow: true,
@@ -316,7 +321,8 @@ const defaultProps: Partial<SelectProps> = {
   remote: false,
   autoAdjustOverflow: true,
   autoClearSearchValue: true,
-  arrowIcon: <IconChevronDown aria-label='' />
+  arrowIcon: <IconChevronDown aria-label='' />,
+
   // Radio selection is different from the default renderSelectedItem for multiple selection, so it is not declared here
   // renderSelectedItem: (optionNode) => optionNode.label,
   // The default creator rendering is related to i18, so it is not declared here
@@ -488,12 +494,16 @@ const Index = defineComponent<SelectProps>((props, {}) => {
         state.dropdownMinWidth = width
       },
       updateSelection: (selections: Map<OptionProps['label'], any>) => {
-        state.selections = selections
+        // TODO 直接赋值会有问题
+        setTimeout(()=>{
+          state.selections = selections
+        })
       },
       // clone Map, important!!!, prevent unexpected modify on state
       getSelections: () => new Map(state.selections),
 
       notifyChange: (value: OnChangeValueType | OnChangeValueType[]) => {
+        console.log(props)
         props.onChange(value);
       },
       notifySelect: (value: OptionProps['value'], option: OptionProps) => {
@@ -587,10 +597,15 @@ const Index = defineComponent<SelectProps>((props, {}) => {
 
   onMounted(() => {
     foundation.init();
+    selectOptionListID = getUuidShort();
+    selectID = props.id || getUuidShort();
   })
 
   onUnmounted(() => {
     foundation.destroy();
+  })
+  watch(()=>slots.default, ()=>{
+    console.log(slots.default)
   })
 
   watch([() => props.value, () => props.optionList], ([prevPropsValue, prevPropsOptionList],) => {
@@ -857,8 +872,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       listContent = renderVirtualizeList(visibleOptions);
     }
 
-    const style = {minWidth: dropdownMinWidth + 'px', ...dropdownStyle};
-    console.log(style)
+    const style = {minWidth: dropdownMinWidth, ...dropdownStyle};
 
     const optionListCls = cls({
       [`${prefixcls}-option-list`]: true,

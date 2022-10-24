@@ -44,6 +44,8 @@ import SkeletonDemo from "./components/skeleton/__test__/SkeletonDemo";
 import ImageDemo from "./components/image/__test__/ImageDemo";
 import WithFormApiDemo from "./components/form/__test__/WithFormApiDemo";
 import WithFormStateDemo from "./components/form/__test__/WithFormStateDemo";
+import WithFieldDemo from "./components/form/__test__/WithFieldDemo";
+import WithFieldDemo2 from "./components/form/__test__/WithFieldDemo2";
 export interface ExampleProps {
   name?: string
 }
@@ -58,11 +60,13 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <ImageDemo/>
+        {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
         {/*<FormDemo />*/}
         {/*<WithFormApiDemo />*/}
-        <WithFormStateDemo/>
+        {/*<WithFormStateDemo/>*/}
+        <WithFieldDemo/>
+        <WithFieldDemo2/>
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
         {/*<TreeDemo />*/}
