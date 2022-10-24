@@ -46,6 +46,7 @@ import WithFormApiDemo from "./components/form/__test__/WithFormApiDemo";
 import WithFormStateDemo from "./components/form/__test__/WithFormStateDemo";
 import WithFieldDemo from "./components/form/__test__/WithFieldDemo";
 import WithFieldDemo2 from "./components/form/__test__/WithFieldDemo2";
+import ToastDemo from "./components/toast/__test__/ToastDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -60,6 +61,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
+        <ToastDemo/>
         {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
         {/*<FormDemo />*/}
