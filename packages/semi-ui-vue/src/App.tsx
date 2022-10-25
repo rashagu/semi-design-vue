@@ -44,6 +44,11 @@ import SkeletonDemo from "./components/skeleton/__test__/SkeletonDemo";
 import ImageDemo from "./components/image/__test__/ImageDemo";
 import WithFormApiDemo from "./components/form/__test__/WithFormApiDemo";
 import WithFormStateDemo from "./components/form/__test__/WithFormStateDemo";
+import WithFieldDemo from "./components/form/__test__/WithFieldDemo";
+import WithFieldDemo2 from "./components/form/__test__/WithFieldDemo2";
+import ToastDemo from "./components/toast/__test__/ToastDemo";
+import BannerDemo from "./components/banner/__test__/BannerDemo";
+import NotificationDemo from "./components/notification/__test__/NotificationDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -58,11 +63,16 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <ImageDemo/>
+        <NotificationDemo/>
+        {/*<BannerDemo/>*/}
+        {/*<ToastDemo/>*/}
+        {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
         {/*<FormDemo />*/}
         {/*<WithFormApiDemo />*/}
-        <WithFormStateDemo/>
+        {/*<WithFormStateDemo/>*/}
+        {/*<WithFieldDemo/>*/}
+        {/*<WithFieldDemo2/>*/}
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
         {/*<TreeDemo />*/}

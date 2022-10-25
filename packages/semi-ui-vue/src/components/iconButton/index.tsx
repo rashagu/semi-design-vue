@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import {cssClasses, strings} from '@douyinfe/semi-foundation/button/constants';
 import {strings as iconStrings} from '@douyinfe/semi-foundation/icons/constants';
-import Button, {Theme, ButtonProps} from '../button/Button';
+import Button, {Theme, ButtonProps, Size, Type} from '../button/Button';
 import SpinIcon from '../spin/Icon';
 import {noop} from 'lodash';
 import '@douyinfe/semi-foundation/button/iconButton.scss';
@@ -129,6 +129,18 @@ export const VuePropsType = {
   },
   onMouseEnter: Function,
   onMouseLeave: Function,
+
+
+  id: String,
+  block: Boolean,
+  circle: Boolean,
+  htmlType: String,
+  size: String,
+  type: String,
+  // 否则会出现重复执行的情况
+  onClick:Function,
+  onMouseDown:Function,
+  autoFocus:Function,
 }
 
 Index.props = VuePropsType

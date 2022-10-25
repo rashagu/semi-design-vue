@@ -29,7 +29,7 @@ import {
     defineComponent, useSlots, withMemo, watchEffect, watch
 } from "vue";
 import {VueHTMLAttributes, VueJsxNode} from "../../interface";
-import {DefineComponent} from "@vue/runtime-core";
+import {DefineComponent} from "vue";
 import {useFormUpdaterContext} from "../context/FormUpdaterContext/Consumer";
 
 const prefix = cssClasses.PREFIX;
@@ -48,7 +48,7 @@ const useIsomorphicEffect = typeof window !== 'undefined' ? onBeforeMount : onMo
 function withField<
     C,
     T extends Subtract<VueHTMLAttributes, CommonexcludeType> & CommonFieldProps & VueHTMLAttributes & C,
->(Component: DefineComponent<C>, opts?: WithFieldOption): DefineComponent<T> {
+>(Component: DefineComponent<C> | FunctionalComponent<C>, opts?: WithFieldOption): DefineComponent<T> {
     const SemiField = defineComponent<T>((truthProps, {attrs: props}) => {
         const slots = useSlots()
 
@@ -238,6 +238,11 @@ function withField<
          */
         const handleChange = (newValue: any, e: any, ...other: any[]) => {
 
+            // 不明来源事件触发过滤 😂
+            if (newValue[Symbol.toStringTag] && newValue[Symbol.toStringTag] === 'Event'){
+                return
+            }
+
             let {
                 trigger,
                 emptyValue,
@@ -294,6 +299,7 @@ function withField<
 
             updateTouched(true, { notNotify: true, notUpdate: true });
             updateValue(val);
+            console.error(val)
             // only validate when trigger includes change
             if (trigger.includes('change')) {
                 fieldValidate(val);
@@ -541,6 +547,7 @@ function withField<
                 ...rest,
                 onBlur: handleBlur,
                 [options.onKeyChangeFnName]: handleChange,
+                // value 为Ref 对象
                 [options.valueKey]: value,
                 validateStatus: blockStatus,
                 'aria-required': required,
@@ -581,6 +588,7 @@ function withField<
                 }
             }
 
+            console.log(newProps)
             // @ts-ignore
             const com = <Component {...(newProps as any)} >
                 {{default: slots.default}}

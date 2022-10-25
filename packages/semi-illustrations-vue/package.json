@@ -16,10 +16,10 @@
     "build:icon": "node scripts/build-illustration"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.21.1",
-    "@douyinfe/semi-theme-default": "2.21.1",
+    "@douyinfe/semi-foundation": "2.21.2",
+    "@douyinfe/semi-theme-default": "2.21.2",
     "classnames": "^2.3.1",
-    "vue": "^3.2.40"
+    "vue": "^3.2.41"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.17.2",

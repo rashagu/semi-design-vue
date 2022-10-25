@@ -23,7 +23,7 @@ export interface TransitionState {
 }
 
 export interface TransitionProps extends AnimationProps {
-  children?: VNode | ((TransitionProps: any) => any);
+  children?: VNode | ((TransitionProps: any) => any) | VNode[];
   from?: Record<string, any>;
   enter?: Record<string, any>;
   leave?: Record<string, any>;
