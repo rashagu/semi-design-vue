@@ -39,13 +39,17 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: get version
-        run: echo "RELEASE_VERSION="$(node scripts/version.js)"" >> $GITHUB_ENV
+        run: echo "RELEASE_VERSION="$(node ./script/version.js)"" >> $GITHUB_ENV
+
+      - name: echo version
+        run: echo "${{ env.RELEASE_VERSION }}"
 
       - name: Commit files
         run: |
           git config --local user.email "kousumwork@outlook.com"
           git config --local user.name "rashagu"
-          git commit -m "$RELEASE_VERSION"
+          git add .
+          git commit -m "${{ env.RELEASE_VERSION }}"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
