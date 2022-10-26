@@ -28,7 +28,7 @@ const PopconfirmDemo = defineComponent<PopconfirmDemoProps>((props, {}) => {
         onConfirm={onConfirm}
         onCancel={onCancel}
       >
-        <Button>保存</Button>
+        <Button className={'test'}>保存</Button>
       </Popconfirm>
     </div>
   )

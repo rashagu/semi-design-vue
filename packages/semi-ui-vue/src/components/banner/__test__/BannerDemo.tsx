@@ -41,7 +41,7 @@ const BannerDemo = () => {
             >
               <div class="semi-modal-footer">
                 <button class="semi-button semi-button-tertiary semi-button-light" type="button">No, thanks.</button>
-                <button class="semi-button semi-button-warning" type="button">Sounds great!</button>
+                <button class="semi-button semi-button-warning test" type="button">Sounds great!</button>
               </div>
             </Banner>
             <br/>

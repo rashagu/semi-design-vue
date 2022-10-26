@@ -4,7 +4,9 @@ name: publish
 
 on:
   push:
-    branches: [ release ]
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
   workflow_dispatch:
 
@@ -29,6 +31,8 @@ jobs:
 
       - name: Run test
         run: pnpm test
+      - name: Run codecov
+        run: npx codecov --token=${{ secrets.CODECOV_TOKEN }}
 
       - name: Run publish
         run: pnpm changeset version

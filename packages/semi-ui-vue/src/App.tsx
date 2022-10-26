@@ -64,7 +64,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <PopconfirmDemo/>
+        {/*<PopconfirmDemo/>*/}
         {/*<NotificationDemo/>*/}
         {/*<BannerDemo/>*/}
         {/*<ToastDemo/>*/}

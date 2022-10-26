@@ -166,7 +166,9 @@ const ToastList = defineComponent<ToastListProps>((props, {expose}) => {
 })
 ToastList.props = vuePropsType
 ToastList.name = 'ToastList'
-
+export {
+  ToastList
+}
 
 const createBaseToast = () => {
   return ToastList
