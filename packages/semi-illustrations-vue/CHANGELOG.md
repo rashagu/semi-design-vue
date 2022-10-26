@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.0.11
+
+### Patch Changes
+
+- 3e54b59: 更新一些组件
+
 ## 0.0.10
 
 ### Patch Changes

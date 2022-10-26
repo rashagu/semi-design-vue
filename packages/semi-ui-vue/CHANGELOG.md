@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.0.11
+
+### Patch Changes
+
+- 3e54b59: 更新一些组件
+- Updated dependencies [3e54b59]
+  - @kousum/semi-animation-vue@0.0.11
+  - @kousum/semi-icons-vue@0.0.11
+  - @kousum/semi-illustrations-vue@0.0.11
+
 ## 0.0.10
 
 ### Patch Changes
