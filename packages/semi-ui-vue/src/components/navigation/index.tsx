@@ -482,6 +482,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
 })
 
 index.props = vuePropsType
+index.name = 'Navigation'
 
 export default index
 

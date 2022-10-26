@@ -142,9 +142,9 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 
 - [x] Banner
 - [x] Notification
-- [ ] Popconfirm
+- [x] Popconfirm
 - [x] Progress
-- [ ] Skeleton
+- [x] Skeleton
 - [x] Spin
 - [x] Toast
 

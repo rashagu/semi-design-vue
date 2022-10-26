@@ -1,4 +1,4 @@
-import {Transition} from '../../../../semi-animation-vue/src/animation/index';
+import {Transition} from '@kousum/semi-animation-vue';
 import {Motion} from '../_base/base';
 import {VueJsxNode} from "../interface";
 import {defineComponent, h, useSlots, VNode, watch} from "vue";

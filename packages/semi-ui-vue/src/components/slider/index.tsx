@@ -230,8 +230,8 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         // this[key] = value;
         console.error('smw: 用途 未知')
       },
-      getMinHandleEl: () => ({current: minHanleEl.value}),
-      getMaxHandleEl: () => ({current: maxHanleEl.value}),
+      getMinHandleEl: () => minHanleEl.value,
+      getMaxHandleEl: () => maxHanleEl.value,
       onHandleDown: (e: MouseEvent) => {
         _addEventListener(document.body, 'mousemove', foundation.onHandleMove, false);
         _addEventListener(document.body, 'mouseup', foundation.onHandleUp, false);

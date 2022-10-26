@@ -63,6 +63,9 @@ async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOpt
         .replaceAll('fillOpacity', 'fill-opacity')
 
         .replaceAll('semi_icon-activity', componentName)
+        .replaceAll("iconType={'activity'}", `iconType={'${svgFileName}'}`)
+
+
 
       fs.writeFileSync(resolve(outDir, reactFileName), newFormattedCode, 'utf-8');
       return {fileName: reactFileName, componentName};

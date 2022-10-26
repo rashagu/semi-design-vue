@@ -2,37 +2,37 @@ import { defineComponent, ref, h, onActivated } from 'vue';
 import { ConvertIcon, vuePropsType as iconVuePropsType } from '../components/Icon';
 import type { IconProps } from '../components/Icon';
 const SvgComponent = defineComponent((props, { slots }) => {
-    return () => (
-        <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            width="1em"
-            height="1em"
-            // @ts-ignore
+  return () => (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      // @ts-ignore
             focusable={false}
-            aria-hidden={true}
-            {...props}
-        >
-            <path
-                d="M1 2C1 1.44772 1.44772 1 2 1H10C10.5523 1 11 1.44772 11 2V10C11 10.5523 10.5523 11 10 11H7.5V15C7.5 15.8284 8.17157 16.5 9 16.5H13V14C13 13.4477 13.4477 13 14 13H22C22.5523 13 23 13.4477 23 14V22C23 22.5523 22.5523 23 22 23H14C13.4477 23 13 22.5523 13 22V19.5H9C6.51472 19.5 4.5 17.4853 4.5 15V11H2C1.44772 11 1 10.5523 1 10V2Z"
-                fill="currentColor"
-            />
-        </svg>
-    );
+      aria-hidden={true}
+      {...props}
+    >
+      <path
+        d="M1 2C1 1.44772 1.44772 1 2 1H10C10.5523 1 11 1.44772 11 2V10C11 10.5523 10.5523 11 10 11H7.5V15C7.5 15.8284 8.17157 16.5 9 16.5H13V14C13 13.4477 13.4477 13 14 13H22C22.5523 13 23 13.4477 23 14V22C23 22.5523 22.5523 23 22 23H14C13.4477 23 13 22.5523 13 22V19.5H9C6.51472 19.5 4.5 17.4853 4.5 15V11H2C1.44772 11 1 10.5523 1 10V2Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
 });
 const IconComponent = defineComponent<IconProps>({
-    name: 'IconInherit',
+  name: 'IconInherit',
 
-    setup(props, { slots }) {
-        return () => (
-            <ConvertIcon iconType={'activity'} {...props}>
-                {{
-                    default: () => <SvgComponent />,
-                }}
-            </ConvertIcon>
-        );
-    },
+  setup(props, { slots }) {
+    return () => (
+      <ConvertIcon iconType={'inherit'} {...props}>
+        {{
+          default: () => <SvgComponent />,
+        }}
+      </ConvertIcon>
+    );
+  },
 });
 IconComponent.props = iconVuePropsType;
 export default IconComponent;

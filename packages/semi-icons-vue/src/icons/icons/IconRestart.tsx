@@ -2,41 +2,41 @@ import { defineComponent, ref, h, onActivated } from 'vue';
 import { ConvertIcon, vuePropsType as iconVuePropsType } from '../components/Icon';
 import type { IconProps } from '../components/Icon';
 const SvgComponent = defineComponent((props, { slots }) => {
-    return () => (
-        <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            width="1em"
-            height="1em"
-            // @ts-ignore
+  return () => (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      // @ts-ignore
             focusable={false}
-            aria-hidden={true}
-            {...props}
-        >
-            <path
-                d="M4.5 2C3.67157 2 3 2.67157 3 3.5V20.5C3 21.3284 3.67157 22 4.5 22C5.32843 22 6 21.3284 6 20.5V3.5C6 2.67157 5.32843 2 4.5 2Z"
-                fill="currentColor"
-            />
-            <path
-                d="M8.00083 11.2137L19.3822 2.27115C20.0384 1.75562 21.0001 2.22303 21.0001 3.05746V20.9425C21.0001 21.777 20.0384 22.2444 19.3822 21.7289L8.00083 12.7863C7.49126 12.3859 7.49126 11.6141 8.00083 11.2137Z"
-                fill="currentColor"
-            />
-        </svg>
-    );
+      aria-hidden={true}
+      {...props}
+    >
+      <path
+        d="M4.5 2C3.67157 2 3 2.67157 3 3.5V20.5C3 21.3284 3.67157 22 4.5 22C5.32843 22 6 21.3284 6 20.5V3.5C6 2.67157 5.32843 2 4.5 2Z"
+        fill="currentColor"
+      />
+      <path
+        d="M8.00083 11.2137L19.3822 2.27115C20.0384 1.75562 21.0001 2.22303 21.0001 3.05746V20.9425C21.0001 21.777 20.0384 22.2444 19.3822 21.7289L8.00083 12.7863C7.49126 12.3859 7.49126 11.6141 8.00083 11.2137Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
 });
 const IconComponent = defineComponent<IconProps>({
-    name: 'IconRestart',
+  name: 'IconRestart',
 
-    setup(props, { slots }) {
-        return () => (
-            <ConvertIcon iconType={'activity'} {...props}>
-                {{
-                    default: () => <SvgComponent />,
-                }}
-            </ConvertIcon>
-        );
-    },
+  setup(props, { slots }) {
+    return () => (
+      <ConvertIcon iconType={'restart'} {...props}>
+        {{
+          default: () => <SvgComponent />,
+        }}
+      </ConvertIcon>
+    );
+  },
 });
 IconComponent.props = iconVuePropsType;
 export default IconComponent;

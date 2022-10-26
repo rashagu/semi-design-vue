@@ -84,6 +84,9 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
         } catch (error) {
 
         }
+      },
+      persistEvent: (e: KeyboardEvent | MouseEvent) => {
+        // e && e.persist && typeof e.persist === 'function' ? e.persist() : null;
       }
     };
   }
