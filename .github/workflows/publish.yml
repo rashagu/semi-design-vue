@@ -43,7 +43,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: get version
-        run: echo "RELEASE_VERSION="$(node ./script/version.js)"" >> $GITHUB_ENV
+        run: echo "RELEASE_VERSION="v$(node ./script/version.js)"" >> $GITHUB_ENV
 
       - name: echo version
         run: echo "${{ env.RELEASE_VERSION }}"
@@ -60,3 +60,4 @@ jobs:
         with:
           github_token: ${{ secrets.PUSH_TOKEN }}
           branch: ${{ github.ref }}
+          tags: true
