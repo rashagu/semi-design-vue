@@ -141,10 +141,10 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 ### 反馈类
 
 - [x] Banner
-- [ ] Notification
-- [ ] Popconfirm
+- [x] Notification
+- [x] Popconfirm
 - [x] Progress
-- [ ] Skeleton
+- [x] Skeleton
 - [x] Spin
 - [x] Toast
 

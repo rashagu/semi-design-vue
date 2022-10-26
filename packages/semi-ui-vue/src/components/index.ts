@@ -81,3 +81,7 @@ export {
   withFormState,
   withFormApi,
 } from './form/index';
+
+import {default as Toast} from './toast'
+import {NotificationListClass as NotificationList} from './notification'
+import {default as Popconfirm} from './popconfirm'

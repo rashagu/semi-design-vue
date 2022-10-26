@@ -45,6 +45,7 @@ const Icon = defineComponent<IconProps>((props, {slots}) => {
     [`${prefixCls}-icon-spinning`]: spin,
     [`${prefixCls}-icon-${type}`]: Boolean(type)
   }, className);
+  console.log(type, classes)
   const outerStyle: StyleValue = {
   };
   if (Number.isSafeInteger(rotate)) {
@@ -79,17 +80,28 @@ export interface convertIconType extends IconProps{
 }
 const ConvertIcon = defineComponent<convertIconType>((props, {slots}) => {
 
+  console.log(props)
   onActivated(() => {
 
   })
 
-  return () => (
-    <Icon type={props.iconType} ref={ref as any} {...props} >
-      {{
-        default:()=>slots.default ? slots.default() : null,
-      }}
-    </Icon>
-  )
+  return () => {
+    const propsUn = {}
+    Object.keys(props).forEach(key=>{
+      // @ts-ignore
+      if (props[key]){
+        // @ts-ignore
+        propsUn[key] = props[key]
+      }
+    })
+    return (
+      <Icon type={props.iconType} ref={ref as any} {...propsUn} >
+        {{
+          default:()=>slots.default ? slots.default() : null,
+        }}
+      </Icon>
+    )
+  }
 })
 ConvertIcon.props = {
   ...vuePropsType,

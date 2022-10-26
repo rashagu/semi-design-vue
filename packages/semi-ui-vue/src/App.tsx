@@ -49,6 +49,7 @@ import WithFieldDemo2 from "./components/form/__test__/WithFieldDemo2";
 import ToastDemo from "./components/toast/__test__/ToastDemo";
 import BannerDemo from "./components/banner/__test__/BannerDemo";
 import NotificationDemo from "./components/notification/__test__/NotificationDemo";
+import PopconfirmDemo from "./components/popconfirm/__test__/PopconfirmDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -63,7 +64,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <NotificationDemo/>
+        <PopconfirmDemo/>
+        {/*<NotificationDemo/>*/}
         {/*<BannerDemo/>*/}
         {/*<ToastDemo/>*/}
         {/*<ImageDemo/>*/}
@@ -117,7 +119,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<GridTest />*/}
         {/*<LayoutTest/>*/}
         {/*<SpaceTest/>*/}
-        {/*<PopoverTest />*/}
+        <PopoverTest />
         {/*<NavigationDemo />*/}
         <div class={'aa'}>123</div>
       </ConfigProvider>

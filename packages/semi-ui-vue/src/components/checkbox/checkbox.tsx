@@ -25,6 +25,7 @@ import {propTypesCheckbox} from "./propType";
 
 // import {TagInputProps} from "../tagInput/Index";
 
+
 export interface CheckboxProps extends BaseCheckboxProps {
   'aria-describedby'?: AriaAttributes['aria-describedby'];
   'aria-errormessage'?: AriaAttributes['aria-errormessage'];
@@ -86,6 +87,29 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
       notifyChange: cbContent => {
         const {onChange} = props;
         onChange && onChange(cbContent);
+      },
+
+      generateEvent: (checked, e) => {
+        const cbValue = {
+          target: {
+            ...props,
+            checked,
+          },
+          stopPropagation: () => {
+            e.stopPropagation();
+          },
+          preventDefault: () => {
+            e.preventDefault();
+          },
+          nativeEvent: {
+            stopImmediatePropagation: () => {
+              if (e.nativeEvent && typeof e.nativeEvent.stopImmediatePropagation === 'function') {
+                e.nativeEvent.stopImmediatePropagation();
+              }
+            }
+          },
+        };
+        return cbValue;
       },
       getIsInGroup: () => isInGroup(),
       getGroupValue: () => (context && context.value.checkboxGroup.value) || [],

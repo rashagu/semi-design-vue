@@ -62,11 +62,10 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
                 originImageWidth = size.originImageWidth;
                 originImageHeight = size.originImageHeight;
             },
-            getContainerRef: () => {
-                return {current: containerRef.value};
+            getContainer: () => {
+                return containerRef.value;
             },
-            getImageRef: () => {
-                console.log(imageRef.value)
+            getImage: () => {
                 return imageRef.value;
             },
             getMouseMove: () => startMouseMove,
@@ -76,6 +75,9 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
             setLoading: (loading: boolean) => {
                 state.loading = loading
             },
+            setImageCursor: (canDrag: boolean) => {
+                imageRef.value.style.cursor = canDrag ? "grab" : "default";
+            }
         };
     }
     const adapter = adapter_()

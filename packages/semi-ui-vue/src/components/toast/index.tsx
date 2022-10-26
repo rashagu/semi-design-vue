@@ -318,6 +318,8 @@ export function useToastHook(configProps?: ConfigProps) {
     error,
     success,
     config,
+
+    useToast,
   }
 }
 
@@ -328,6 +330,7 @@ export class ToastFactory {
     return useToastHook(config);
   }
 }
+
 
 export default ToastFactory.create();
 

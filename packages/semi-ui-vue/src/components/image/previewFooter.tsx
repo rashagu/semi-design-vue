@@ -1,4 +1,6 @@
-import { IconChevronLeft, IconChevronRight, IconMinus, IconPlus, IconRotate, IconDownload, IconWindowAdaptionStroked, IconRealSizeStroked, IconSize } from "@kousum/semi-icons-vue";
+import { IconChevronLeft, IconChevronRight, IconMinus, IconPlus,
+    IconRotate, IconDownload, IconWindowAdaptionStroked, IconRealSizeStroked } from "@kousum/semi-icons-vue";
+import type { IconSize } from "@kousum/semi-icons-vue";
 import {FooterProps, ImageProps} from "./interface";
 import * as PropTypes from "../PropTypes";
 import Tooltip from "../tooltip";
