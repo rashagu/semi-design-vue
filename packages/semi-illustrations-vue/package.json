@@ -21,6 +21,9 @@
     "classnames": "^2.3.1",
     "vue": "^3.2.41"
   },
+  "peerDependencies": {
+    "vue": ">=3.2.41"
+  },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",

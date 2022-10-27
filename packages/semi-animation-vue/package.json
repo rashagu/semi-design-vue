@@ -37,6 +37,9 @@
     "sass": "^1.44.0",
     "vue": "^3.2.41"
   },
+  "peerDependencies": {
+    "vue": ">=3.2.41"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/plugin-proposal-decorators": "^7.17.2",

@@ -53,7 +53,7 @@ jobs:
           git config --local user.email "kousumwork@outlook.com"
           git config --local user.name "rashagu"
           git add .
-          git commit -m "${{ env.RELEASE_VERSION }}"
+          git commit -m "[github action]: ${{ env.RELEASE_VERSION }}"
 
       - name: Push changes
         uses: ad-m/github-push-action@master

@@ -40,6 +40,9 @@
     "utility-types": "^3.10.0",
     "vue": "^3.2.41"
   },
+  "peerDependencies": {
+    "vue": ">=3.2.41"
+  },
   "sideEffects": [
     "*.scss",
     "*.css",
