@@ -63,7 +63,7 @@ const propTypes = {
 const defaultProps = {
     className: '',
     direction: strings.DEFAULT_DIRECTION,
-    format: (text: string): string => `${text}%`,
+    format: ()=>((text: string): string => `${text}%`),
     motion: true,
     orbitStroke: 'var(--semi-color-fill-0)',
     percent: 0,
@@ -185,6 +185,7 @@ const Progress = defineComponent<ProgressProps>((props, {}) => {
         const strokeDashoffset = (1 - perc / 100) * circumference; // Offset
         const strokeDasharray = `${circumference} ${circumference}`;
 
+        console.log(props)
         const text = format(percNumber);
 
         return (
@@ -298,6 +299,7 @@ const Progress = defineComponent<ProgressProps>((props, {}) => {
             innerStyle.height = `${perc}%`;
         }
 
+        console.log(props)
         const text = format(percNumber);
 
         return (
