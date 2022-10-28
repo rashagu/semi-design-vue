@@ -29,8 +29,8 @@
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
-    "@vitejs/plugin-vue": "^3.1.2",
-    "@vitejs/plugin-vue-jsx": "^2.0.1",
+    "@vitejs/plugin-vue": "^3.2.0",
+    "@vitejs/plugin-vue-jsx": "^2.1.0",
     "camelcase": "^6.3.0",
     "del": "^6.0.0",
     "fs-extra": "^10.0.0",
@@ -46,7 +46,7 @@
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
     "typescript": "^4.8.3",
-    "vite": "^3.1.8",
+    "vite": "^3.2.0",
     "vue-tsc": "^0.40.13"
   },
   "gitHead": "a9bb1553bd45dcf99595a45df0adf0d967083f1e"
