@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.0.12
+
+### Patch Changes
+
+- ce54825: 添加 peerDependencies 依赖配置文件
+
 ## 0.0.11
 
 ### Patch Changes
