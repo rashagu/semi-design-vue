@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties, inject, Ref} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, CSSProperties, inject, Ref, watch} from 'vue'
 import * as PropTypes from '../PropTypes'
 import classNames from 'classnames';
 
@@ -49,6 +49,7 @@ export interface PopoverProps extends BaseProps {
   onEscKeyDown?: TooltipProps['onEscKeyDown'];
   clickToHide?:TooltipProps['clickToHide'];
   disableFocusListener?: boolean
+  afterClose?:()=>void
 }
 
 export interface PopoverState {
@@ -59,11 +60,13 @@ const positionSet = strings.POSITION_SET;
 const triggerSet = strings.TRIGGER_SET;
 
 const propTypes = {
-  content: [...PropTypes.node, PropTypes.func],
+
+  children: PropTypes.node,
+  content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   visible: PropTypes.bool,
   autoAdjustOverflow: PropTypes.bool,
-  motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
-  position: String,
+  motion: PropTypes.bool,
+  position: PropTypes.string,
   // getPopupContainer: PropTypes.func,
   mouseEnterDelay: PropTypes.number,
   mouseLeaveDelay: PropTypes.number,
@@ -178,6 +181,7 @@ const Popover = defineComponent<PopoverProps>((props, {slots}) => {
     console.log(attr)
     return (
       <Tooltip
+        guardFocus
         {...(attr as any)}
         trigger={trigger}
         position={position}

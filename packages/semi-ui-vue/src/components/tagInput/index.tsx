@@ -11,6 +11,7 @@ import {
   isVNode,
   watch
 } from 'vue'
+import * as PropTypes from '../PropTypes'
 import cls from 'classnames';
 import {
   noop,
@@ -22,7 +23,7 @@ import {
 } from 'lodash';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/tagInput/constants';
 import '@douyinfe/semi-foundation/tagInput/tagInput.scss';
-import TagInputFoundation, {TagInputAdapter} from '@douyinfe/semi-foundation/tagInput/foundation';
+import TagInputFoundation, {TagInputAdapter, OnSortEndProps} from '@douyinfe/semi-foundation/tagInput/foundation';
 import {ArrayElement} from '../_base/base';
 import {useBaseComponent} from '../_base/baseComponent';
 import Tag from '../tag';
@@ -31,6 +32,8 @@ import Popover, {PopoverProps} from '../popover';
 import Paragraph from '../typography/Paragraph';
 import {IconClear} from '@kousum/semi-icons-vue';
 import {VueJsxNode} from "../interface";
+import {vuePropsMake} from "../PropTypes";
+import {isSemiIcon} from "../_utils";
 // import {TooltipProps} from "../tooltip/Index";
 // import {AvatarProps, AvatarState} from "../avatar/Index";
 
@@ -51,6 +54,8 @@ export interface TagInputProps {
   showContentTooltip?: boolean;
   allowDuplicates?: boolean;
   addOnBlur?: boolean;
+  draggable?: boolean;
+  expandRestTagsOnClick?: boolean;
   onAdd?: (addedValue: string[]) => void;
   onBlur?: (e: MouseEvent) => void;
   onChange?: (value: string[]) => void;
@@ -61,8 +66,10 @@ export interface TagInputProps {
   onKeyDown?: (e: MouseEvent) => void;
   onRemove?: (removedValue: string, idx: number) => void;
   placeholder?: string;
+  insetLabel?: VNode | string;
+  insetLabelId?: string;
   prefix?: VNode | string;
-  renderTagItem?: (value: string, index: number) => VueJsxNode;
+  renderTagItem?: (value: string, index: number, onClose: () => void) => VueJsxNode;
   separator?: string | string[] | null;
   showClear?: boolean;
   size?: Size;
@@ -72,6 +79,9 @@ export interface TagInputProps {
   value?: string[] | undefined;
   autoFocus?: boolean;
   'aria-label'?: string;
+  preventScroll?: boolean
+
+
 }
 
 export interface TagInputState {
@@ -79,105 +89,75 @@ export interface TagInputState {
   inputValue?: string;
   focusing?: boolean;
   hovering?: boolean;
+  active?: boolean
 }
 
 const prefixCls = cssClasses.PREFIX;
 
+const propTypes = {
+  children: PropTypes.node,
+  style: PropTypes.object,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  allowDuplicates: PropTypes.bool,
+  max: PropTypes.number,
+  maxTagCount: PropTypes.number,
+  maxLength: PropTypes.number,
+  showRestTagsPopover: PropTypes.bool,
+  restTagsPopoverProps: PropTypes.object,
+  showContentTooltip: PropTypes.bool,
+  defaultValue: PropTypes.array,
+  value: PropTypes.array,
+  inputValue: PropTypes.string,
+  placeholder: PropTypes.string,
+  separator: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  showClear: PropTypes.bool,
+  addOnBlur: PropTypes.bool,
+  draggable: PropTypes.bool,
+  expandRestTagsOnClick: PropTypes.bool,
+  autoFocus: PropTypes.bool,
+  renderTagItem: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  onChange: PropTypes.func,
+  onInputChange: PropTypes.func,
+  onExceed: PropTypes.func,
+  onInputExceed: PropTypes.func,
+  onAdd: PropTypes.func,
+  onRemove: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  size: PropTypes.string,
+  validateStatus: PropTypes.string,
+  prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  'aria-label': PropTypes.string,
+  preventScroll: PropTypes.bool,
 
-export const vuePropsType = {
-
-
-  showClear: {
-    type: Boolean,
-    default: false
-  },
-  addOnBlur: {
-    type: Boolean,
-    default: false
-  },
-  allowDuplicates: {
-    type: Boolean,
-    default: true
-  },
-  showRestTagsPopover: {
-    type: Boolean,
-    default: true
-  },
-  autoFocus: {
-    type: Boolean,
-    default: false
-  },
-  showContentTooltip: {
-    type: Boolean,
-    default: true
-  },
-  separator: {
-    type: [String, Array],
-    default: ','
-  },
-  size: {
-    type: String,
-    default: 'default'
-  },
-  validateStatus: {
-    type: String,
-    default: 'default'
-  },
-  onBlur: {
-    type: Function,
-    default: noop
-  },
-  onFocus: {
-    type: Function,
-    default: noop
-  },
-  onChange: {
-    type: Function,
-    default: noop
-  },
-  onInputChange: {
-    type: Function,
-    default: noop
-  },
-  onExceed: {
-    type: Function,
-    default: noop
-  },
-  onInputExceed: {
-    type: Function,
-    default: noop
-  },
-  onAdd: {
-    type: Function,
-    default: noop
-  },
-  onRemove: {
-    type: Function,
-    default: noop
-  },
-  onKeyDown: {
-    type: Function,
-    default: noop
-  },
-
-
-  className: String,
-  defaultValue: Array,
-  disabled: Boolean,
-  inputValue: String,
-  maxLength: Number,
-  max: Number,
-  maxTagCount: Number,
-  restTagsPopoverProps: Object,
-  placeholder: String,
-  prefix: [String, Object],
-  renderTagItem: Function,
-  style: [Object, String],
-  suffix: [Object, String],
-  value: Array,
-  'aria-label': String,
 }
-const Index = defineComponent<TagInputProps>((props, {}) => {
+const defaultProps = {
+  showClear: false,
+  addOnBlur: false,
+  allowDuplicates: true,
+  showRestTagsPopover: true,
+  autoFocus: false,
+  draggable: false,
+  expandRestTagsOnClick: true,
+  showContentTooltip: true,
+  separator: ',',
+  size: 'default' as const,
+  validateStatus: 'default' as const,
+  onBlur: noop,
+  onFocus: noop,
+  onChange: noop,
+  onInputChange: noop,
+  onExceed: noop,
+  onInputExceed: noop,
+  onAdd: noop,
+  onRemove: noop,
+  onKeyDown: noop,
+};
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+const Index = defineComponent<TagInputProps>((props, {expose}) => {
   const slots = useSlots()
   const inputRef = ref(null);
   const tagInputRef = ref<any>(null);
@@ -207,9 +187,10 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
         state.focusing = focusing
       },
       toggleFocusing: (isFocus: boolean) => {
+        const { preventScroll } = props;
         const input = inputRef.value;
         if (isFocus) {
-          input && input.focus();
+          input && input.focus({ preventScroll });
         } else {
           input && input.blur();
         }
@@ -289,10 +270,12 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
   }, {deep: true})
 
   onMounted(()=>{
-    const { disabled, autoFocus } = props;
+    const { disabled, autoFocus, preventScroll } = props;
     if (!disabled && autoFocus) {
-      inputRef.value.focus();
+      inputRef.value.focus({ preventScroll });
+      foundation.handleClick();
     }
+    foundation.init();
   })
 
   const handleInputChange = (e: any) => {
@@ -327,8 +310,20 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
     foundation.handleInputMouseLeave();
   };
 
+  const handleClick = (e: MouseEvent) => {
+    foundation.handleClick(e);
+  };
+
   const handleInputMouseEnter = (e: MouseEvent) => {
     foundation.handleInputMouseEnter();
+  };
+
+  const handleClickPrefixOrSuffix = (e: MouseEvent) => {
+    foundation.handleClickPrefixOrSuffix(e);
+  };
+
+  const handlePreventMouseDown = (e: MouseEvent) => {
+    foundation.handlePreventMouseDown(e);
   };
 
   function renderClearBtn() {
@@ -355,16 +350,28 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
   }
 
   function renderPrefix() {
-    const { prefix } = props;
+    const { prefix, insetLabel, insetLabelId } = props;
+    const labelNode = prefix || insetLabel;
     if (isNull(prefix) || isUndefined(prefix)) {
       return null;
     }
     const prefixWrapperCls = cls(`${prefixCls}-prefix`, {
-      [`${prefixCls}-prefix-text`]: prefix && isString(prefix),
+      [`${prefixCls}-inset-label`]: insetLabel,
+      [`${prefixCls}-prefix-text`]: labelNode && isString(labelNode),
       // eslint-disable-next-line max-len
-      [`${prefixCls}-prefix-icon`]: isVNode(prefix) && !(prefix && isString(prefix)),
+      [`${prefixCls}-prefix-icon`]: isSemiIcon(labelNode),
     });
-    return <div class={prefixWrapperCls}>{prefix}</div>;
+    return (
+      // eslint-disable-next-line jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events
+      <div
+        class={prefixWrapperCls}
+        onMousedown={handlePreventMouseDown}
+        onClick={handleClickPrefixOrSuffix}
+        id={insetLabelId} x-semi-prop="prefix"
+      >
+        {labelNode}
+      </div>
+    );
   }
 
   function renderSuffix() {
@@ -375,51 +382,66 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
     const suffixWrapperCls = cls(`${prefixCls}-suffix`, {
       [`${prefixCls}-suffix-text`]: suffix && isString(suffix),
       // eslint-disable-next-line max-len
-      [`${prefixCls}-suffix-icon`]: isVNode(suffix) && !(suffix && isString(suffix)),
+      [`${prefixCls}-suffix-icon`]: isSemiIcon(suffix),
     });
-    return <div class={suffixWrapperCls}>{suffix}</div>;
+    return (
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
+      <div
+        class={suffixWrapperCls}
+        onMousedown={handlePreventMouseDown}
+        onClick={handleClickPrefixOrSuffix}
+        x-semi-prop="suffix"
+      >
+        {suffix}
+      </div>
+    );
   }
-
-  function renderTags() {
+  const getAllTags = () => {
     const {
       size,
       disabled,
       renderTagItem,
-      maxTagCount,
       showContentTooltip,
-      showRestTagsPopover,
-      restTagsPopoverProps = {},
+      draggable,
     } = props;
-    const { tagsArray } = state;
+    const { tagsArray, active } = state;
+    const showIconHandler = active && draggable;
     const tagCls = cls(`${prefixCls}-wrapper-tag`, {
       [`${prefixCls}-wrapper-tag-size-${size}`]: size,
+      [`${prefixCls}-wrapper-tag-icon`]: showIconHandler,
     });
     const typoCls = cls(`${prefixCls}-wrapper-typo`, {
-      [`${prefixCls}-wrapper-typo-disabled`]: disabled
+      [`${prefixCls}-wrapper-typo-disabled`]: disabled,
     });
-    const spanNotWithPopoverCls = cls(`${prefixCls}-wrapper-n`, {
-      [`${prefixCls}-wrapper-n-disabled`]: disabled
+    const itemWrapperCls = cls({
+      [`${prefixCls}-drag-item`]: showIconHandler,
+      [`${prefixCls}-wrapper-tag-icon`]: showIconHandler,
     });
-    const restTags: Array<VNode | string> = [];
-    const tags: Array<VNode | string> = [];
-    tagsArray.forEach((value, index) => {
-      let item = null;
+    const DragHandle = SortableHandle(() => <IconHandle className={`${prefixCls}-drag-handler`}></IconHandle>);
+    return tagsArray.map((value, index) => {
+      const elementKey = showIconHandler ? value : `${index}${value}`;
+      const onClose = () => {
+        !disabled && handleTagClose(index);
+      };
       if (isFunction(renderTagItem)) {
-        item = renderTagItem(value, index);
+        return showIconHandler? (<div class={itemWrapperCls} key={elementKey}>
+          <DragHandle />
+          {renderTagItem(value, index, onClose)}
+        </div>) : renderTagItem(value, index, onClose);
       } else {
-        item = (
+        return (
           <Tag
             className={tagCls}
             color="white"
             size={size === 'small' ? 'small' : 'large'}
             type="light"
-            onClose={() => {
-              !disabled && handleTagClose(index);
-            }}
+            onClose={onClose}
             closable={!disabled}
-            key={`${index}${value}`}
+            key={elementKey}
             visible
+            aria-label={`${!disabled ? 'Closable ' : ''}Tag: ${value}`}
           >
+            {showIconHandler && <DragHandle />}
             <Paragraph
               className={typoCls}
               ellipsis={{ showTooltip: showContentTooltip, rows: 1 }}
@@ -429,38 +451,66 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
           </Tag>
         );
       }
-      if (maxTagCount && index >= maxTagCount) {
-        restTags.push(item);
-      } else {
-        tags.push(item);
-      }
     });
+  }
+
+  const onSortEnd = (callbackProps: OnSortEndProps) => {
+    foundation.handleSortEnd(callbackProps);
+  }
+  function renderTags() {
+    const {
+      disabled,
+      maxTagCount,
+      showRestTagsPopover,
+      restTagsPopoverProps = {},
+      draggable,
+      expandRestTagsOnClick,
+    } = props;
+    const { tagsArray, active } = state;
+    const restTagsCls = cls(`${prefixCls}-wrapper-n`, {
+      [`${prefixCls}-wrapper-n-disabled`]: disabled,
+    });
+    const allTags = getAllTags();
+    let restTags: Array<VueJsxNode> = [];
+    let tags: Array<VueJsxNode> = [...allTags];
+    if (( !active || !expandRestTagsOnClick) && maxTagCount && maxTagCount < allTags.length){
+      tags = allTags.slice(0, maxTagCount);
+      restTags = allTags.slice(maxTagCount);
+    }
+
+    const restTagsContent = (
+      <span class={restTagsCls}>+{tagsArray.length - maxTagCount}</span>
+    );
+
+    const sortableListItems = allTags.map((item, index) => ({
+      item: item,
+      key: tagsArray[index],
+    }));
+
+    if (active && draggable && sortableListItems.length > 0) {
+      // helperClass：add styles to the helper(item being dragged) https://github.com/clauderic/react-sortable-hoc/issues/87
+      // @ts-ignore skip SortableItem type check
+      return <SortableList useDragHandle helperClass={`${prefixCls}-drag-item-move`} items={sortableListItems} onSortEnd={onSortEnd} axis={"xy"} />;
+    }
     return (
       <>
         {tags}
         {
           restTags.length > 0 &&
           (
-            showRestTagsPopover && !disabled ?
+            showRestTagsPopover ?
               (
                 <Popover
-                  content={restTags}
+                  content={restTags as VueJsxNode}
                   showArrow
                   trigger="hover"
                   position="top"
                   autoAdjustOverflow
                   {...restTagsPopoverProps}
                 >
-                                    <span class={cls(`${prefixCls}-wrapper-n`)}>
-                                        +{tagsArray.length - maxTagCount}
-                                    </span>
+                  {restTagsContent}
                 </Popover>
-              ) :
-              (
-                <span class={spanNotWithPopoverCls}>
-                                    {`+${tagsArray.length - maxTagCount}`}
-                                </span>
-              )
+              ) : restTagsContent
           )
         }
       </>
@@ -474,6 +524,11 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
   function focus() {
     inputRef.current.focus();
   }
+
+  expose({
+    blur,
+    focus,
+  })
 
   return () => {
 
@@ -490,7 +545,8 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
       focusing,
       hovering,
       tagsArray,
-      inputValue
+      inputValue,
+      active,
     } = state;
 
     const tagInputCls = cls(prefixCls, className, {
@@ -501,12 +557,14 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
       [`${prefixCls}-warning`]: validateStatus === 'warning'
     });
 
-    const inputCls = cls(`${prefixCls}-wrapper-input`);
+    const inputCls = cls(`${prefixCls}-wrapper-input`, `${prefixCls}-wrapper-input-${size}`);
 
-    const wrapperCls = cls(`${prefixCls}-wrapper`);
+    const wrapperCls = cls(`${prefixCls}-wrapper`, `${prefixCls}-wrapper-${size}`);
+
 
     return (
       <div
+        ref={tagInputRef}
         style={style}
         class={tagInputCls}
         aria-disabled={disabled}
@@ -517,6 +575,9 @@ const Index = defineComponent<TagInputProps>((props, {}) => {
         }}
         onMouseleave={e => {
           handleInputMouseLeave(e);
+        }}
+        onClick={e => {
+          handleClick(e);
         }}
       >
         {renderPrefix()}
