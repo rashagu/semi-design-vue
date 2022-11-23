@@ -74,7 +74,7 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
     focusVisible: false
   });
   const checkboxEntity = ref(null);
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<CheckboxProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<CheckboxProps>(props, state)
 
   const {context} = useCheckboxContext()
 

@@ -30,7 +30,6 @@ import { FixedSizeList as VirtualList } from '@kousum/vue3-window';
 import '@douyinfe/semi-foundation/tree/tree.scss';
 import '@douyinfe/semi-foundation/treeSelect/treeSelect.scss';
 import {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
-import ConfigContext, { ContextValue } from '../configProvider/context';
 import TagGroup from '../tag/group';
 import Tag, { TagProps } from '../tag/index';
 import Input, { InputProps } from '../input/index';
@@ -335,7 +334,8 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
     let onNodeClick
     let onNodeDoubleClick
 
-    const {cache, adapter: adapterInject, log, context} = useBaseComponent<TreeSelectProps>(props, state)
+    // TODO context
+    const {adapter: adapterInject, context} = useBaseComponent<TreeSelectProps>(props, state)
     function adapter_(): TreeSelectAdapter<TreeSelectProps, TreeSelectState> {
         const filterAdapter: Pick<TreeSelectAdapter, 'updateInputValue'> = {
             updateInputValue: value => {
@@ -655,11 +655,11 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             state[key] = newState[key]
         })
     }, {deep: true, immediate: true})
-    
+
     onMounted(()=>{
         foundation.init();
     })
-    
+
     onUnmounted(()=>{
         foundation.destroy();
     })
@@ -1282,7 +1282,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
 
     const renderNodeList = () => {
         const { flattenNodes, motionKeys, motionType, filteredKeys } = state;
-        const { direction } = context;
+        const { direction } = context.value;
         const { virtualize, motionExpand } = props;
         const isExpandControlled = 'expandedKeys' in props;
         if (!virtualize || isEmpty(virtualize)) {
@@ -1404,7 +1404,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
         );
     };
 
-    
+
     return () => {
         const content = renderContent();
         const {

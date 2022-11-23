@@ -170,7 +170,7 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
     active: false,
   });
 
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<TagInputProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<TagInputProps>(props, state)
 
   const foundation = new TagInputFoundation(adapter());
 
@@ -417,7 +417,8 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
       [`${prefixCls}-drag-item`]: showIconHandler,
       [`${prefixCls}-wrapper-tag-icon`]: showIconHandler,
     });
-    const DragHandle = SortableHandle(() => <IconHandle className={`${prefixCls}-drag-handler`}></IconHandle>);
+    // const DragHandle = SortableHandle(() => <IconHandle className={`${prefixCls}-drag-handler`}></IconHandle>);
+    const DragHandle = ()=><></>
     return tagsArray.map((value, index) => {
       const elementKey = showIconHandler ? value : `${index}${value}`;
       const onClose = () => {

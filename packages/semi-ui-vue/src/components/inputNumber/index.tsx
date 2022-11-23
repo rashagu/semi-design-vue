@@ -138,7 +138,7 @@ const InputNumber = defineComponent<InputNumberProps>((props, {}) => {
   let inputNode = null;
   let clickUpOrDown = false;
 
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<InputNumberProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<InputNumberProps>(props, state)
 
   function adapter_(): InputNumberAdapter {
     return {

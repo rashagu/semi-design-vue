@@ -179,7 +179,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
     minlength: props.minlength,
     maxlength: props.maxlength,
   })
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<InputProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<InputProps>(props, state)
 
   const theAdapter = adapter()
   // watch(()=>state.value,()=>{

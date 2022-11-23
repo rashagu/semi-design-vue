@@ -222,10 +222,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
 
   let clickOutSideHandler: (e: MouseEvent) => void;
   const {
-    cache,
     adapter: adapterInject,
-    log,
-    context: context_,
     isControlled
   } = useBaseComponent<TimePickerProps>(props, state)
 

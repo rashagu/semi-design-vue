@@ -235,7 +235,8 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
     isPositionUpdated: false,
     id: props.wrapperId, // auto generate id, will be used by children.aria-describedby & content.id, improve a11y
   })
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<TooltipProps>(props, state)
+  // TODO context
+  const {adapter: adapterInject, context} = useBaseComponent<TooltipProps>(props, state)
 
   const theAdapter = adapter()
 
@@ -466,7 +467,7 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
 
   onMounted(() => {
     mounted = true;
-    getPopupContainer = props.getPopupContainer || context.getPopupContainer || defaultGetContainer;
+    getPopupContainer = props.getPopupContainer || context.value.getPopupContainer || defaultGetContainer;
     foundation.init();
   })
 
@@ -593,7 +594,7 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
     const { prefixCls, content, showArrow, style, motion, role, zIndex }  = props;
     const contentNode = renderContentNode(content);
     const {className: propClassName} = props;
-    const direction = context.direction;
+    const direction = context.value.direction;
     const className = classNames(propClassName, {
       [`${prefixCls}-wrapper`]: true,
       [`${prefixCls}-wrapper-show`]: visible,

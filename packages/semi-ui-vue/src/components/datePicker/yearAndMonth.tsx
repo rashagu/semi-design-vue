@@ -71,7 +71,7 @@ const yearAndMonth = defineComponent<YearAndMonthProps>((props, {}) => {
     currentMonth,
   });
 
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<YearAndMonthProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<YearAndMonthProps>(props, state)
   const yearRef = ref();
   const monthRef = ref();
   const foundation = new YearAndMonthFoundation(adapter());

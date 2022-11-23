@@ -368,7 +368,8 @@ const Index = defineComponent<SelectProps>((props, {}) => {
     '[Semi Select] \'labelInValue\' has already been deprecated, please use \'onChangeWithObject\' instead.'
   );
 
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<SelectProps>(props, state)
+  // TODO context
+  const {adapter: adapterInject, context: context_} = useBaseComponent<SelectProps>(props, state)
   const setOptionContainerEl = (node: HTMLDivElement) => (optionContainerEl.value = node);
 
   function adapter(): SelectAdapter<SelectProps, SelectState> {
@@ -831,7 +832,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
 
   function renderVirtualizeList(visibleOptions: OptionProps[]) {
     const {virtualize} = props;
-    const {direction} = context_;
+    const {direction} = context_.value;
     const {height, width, itemSize} = virtualize;
 
     return (
@@ -1200,7 +1201,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
 
 
   return () => {
-    const {direction} = context_;
+    const {direction} = context_.value;
     const defaultPosition = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
     const {
       position = defaultPosition,

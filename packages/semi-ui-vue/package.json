@@ -38,7 +38,7 @@
     "sass": "^1.44.0",
     "scroll-into-view-if-needed": "^2.2.28",
     "utility-types": "^3.10.0",
-    "vue": "^3.2.41"
+    "vue": "^3.2.45"
   },
   "peerDependencies": {
     "vue": ">=3.2.41"

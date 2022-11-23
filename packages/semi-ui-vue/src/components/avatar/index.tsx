@@ -84,7 +84,7 @@ const Index = defineComponent<AvatarProps>((props, {slots}) => {
       state.isImgExist = false
     };
   })
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<RadioInnerProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<RadioInnerProps>(props, state)
 
   const theAdapter = adapter()
   function adapter(): AvatarAdapter<AvatarProps, AvatarState> {

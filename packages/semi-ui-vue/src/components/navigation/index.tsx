@@ -189,7 +189,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
       selectedKeys: []
     });
 
-  const {cache, adapter: adapterInject, log, context: context_, isControlled} = useBaseComponent<NavProps>(props, state)
+  const {adapter: adapterInject, isControlled} = useBaseComponent<NavProps>(props, state)
 
 
   let initState = {

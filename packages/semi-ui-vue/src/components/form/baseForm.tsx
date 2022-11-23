@@ -103,7 +103,7 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
     );
 
 
-    const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<BaseFormProps>(props, state)
+    const {adapter: adapterInject} = useBaseComponent<BaseFormProps>(props, state)
     function adapter_(): BaseFormAdapter<BaseFormProps, BaseFormState> {
         return {
             ...adapterInject<BaseFormProps, BaseFormState>(),

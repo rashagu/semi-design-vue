@@ -96,7 +96,7 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
     extraId: props.extraId,
     checked: props.checked || props.defaultChecked || false,
   });
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<RadioProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<RadioProps>(props, state)
   context = inject('RadioContextValue', ref<RadioContextValue>(null))
   // console.log(context)
   const theAdapter = adapter()

@@ -93,7 +93,7 @@ const Switch = defineComponent<SwitchProps>((props, {}) => {
     })
 
     const switchRef = ref()
-    const {cache, adapter: adapterInject, log, context} = useBaseComponent<SwitchProps>(props, state)
+    const {adapter: adapterInject} = useBaseComponent<SwitchProps>(props, state)
 
 
     function adapter_(): SwitchAdapter<SwitchProps, SwitchState> {

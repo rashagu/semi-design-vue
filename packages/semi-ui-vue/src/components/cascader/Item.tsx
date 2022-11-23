@@ -90,6 +90,7 @@ export const vuePropsType = {
 const Item = defineComponent<CascaderItemProps>((props, {}) => {
   const slots = useSlots()
 
+  // TODO context
   const {context} = useBaseComponent<CascaderItemProps>(props, {})
   const onClick = (e: MouseEvent | KeyboardEvent, item: Entity | Data) => {
     const { onItemClick } = props;
@@ -312,7 +313,7 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
   return () => {
 
     const { data, searchable } = props;
-    const { direction } = context;
+    const { direction } = context.value;
     const isEmpty = !data || !data.length;
     let content;
     const listsCls = cls({

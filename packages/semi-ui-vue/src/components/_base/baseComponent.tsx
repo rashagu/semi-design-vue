@@ -1,9 +1,10 @@
-import {defineComponent, ref, h, StyleValue, cloneVNode, provide, reactive, inject, CSSProperties} from 'vue'
+import {defineComponent, ref, h, CSSProperties, Ref, getCurrentInstance,} from 'vue'
 import baseLog from '@douyinfe/semi-foundation/utils/log';
 import {DefaultAdapter} from '@douyinfe/semi-foundation/base/foundation';
 import {VALIDATE_STATUS} from '@douyinfe/semi-foundation/base/constants';
 import {ArrayElement} from './base';
 import type {ContextValue} from "../configProvider/context";
+import {useConfigContext} from "../configProvider/context/Consumer";
 
 const {hasOwnProperty} = Object.prototype;
 
@@ -32,7 +33,7 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
     cache: any,
     adapter: <P extends BaseProps, S={}>() => DefaultAdapter<P, S>,
     log: (text: string, ...rest: any) => any,
-    context: ContextValue, foundation: any, state: any
+    context: Ref<ContextValue>, foundation: any, state: any
   }= (props,state)=> {
   const cache = ref<any>({});
   const foundation = ref<any>(null);
@@ -42,17 +43,35 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
     return Boolean(key && props && typeof props === 'object' && hasOwnProperty.call(adapter().getProps(), key))
   };
 
-  const context = inject<ContextValue>('context',{})
+  const { context } = useConfigContext()
 
+  const currentInstance = getCurrentInstance()
   function adapter<P extends BaseProps = {}, S = {}>(): DefaultAdapter<P, S> {
+
     return {
       getContext: key => { // eslint-disable-line
-        if (context && key) {
+        // @ts-ignore
+        const contexts:Record<string, Ref> = currentInstance.provides
+        let context_ = {...context.value}
+        Object.keys(contexts).forEach(key=>{
+          context_ = {...context_, ...contexts[key].value}
+        })
+
+        if (context_ && key) {
           // @ts-ignore
-          return context[key];
+          return context_[key];
         }
       },
-      getContexts: () => context, // eslint-disable-line
+      getContexts: () => {
+        // @ts-ignore
+        const contexts:Record<string, Ref> = currentInstance.provides
+        let context_ = {...context.value}
+        Object.keys(contexts).forEach(key=>{
+          context_ = {...context_, ...contexts[key].value}
+        })
+
+        return context_
+      }, // eslint-disable-line
       getProp: key => {
         // //console.log(key,props,props[key])
         return props[key]

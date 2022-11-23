@@ -178,7 +178,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
     height: 0,
     minlength: props.minlength
   })
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<TextAreaProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<TextAreaProps>(props, state)
 
   const theAdapter = adapter()
   watch(() => state.value, () => {

@@ -66,6 +66,7 @@ const propTypes = {
   onDownload: PropTypes.func,
   onRatioChange: PropTypes.func,
   onRotateChange: PropTypes.func,
+  onRotateLeft: PropTypes.func,
 }
 
 const defaultProps = {
@@ -102,18 +103,16 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
 
   function adapter_(): PreviewInnerAdapter<PreviewInnerProps, PreviewInnerStates> {
     return {
-      ...adapterInject<PreviewInnerProps, PreviewInnerStates>(),
-      getContexts: () => context.value,
-      getContext: key => { // eslint-disable-line
-        if (context.value && key) {
-          // @ts-ignore
-          return context.value[key];
-        }
-      },
+      ...adapterInject(),
       getIsInGroup: () => isInGroup(),
-      notifyChange: (index: number) => {
-        const {onChange} = props;
+      notifyChange: (index: number, direction: string) => {
+        const { onChange, onPrev, onNext } = props;
         isFunction(onChange) && onChange(index);
+        if (direction === "prev") {
+          onPrev && onPrev(index);
+        } else {
+          onNext && onNext(index);
+        }
       },
       notifyZoom: (zoom: number, increase: boolean) => {
         const {onZoomIn, onZoomOut} = props;
@@ -261,7 +260,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
   }
 
   const handleMouseUp = (e): void => {
-    foundation.handleMouseUp({nativeEvent:e});
+    foundation.handleMouseUp(e);
   }
 
   const handleMouseMove = (e): void => {
@@ -269,7 +268,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
   }
 
   const handleMouseEvent = (e, event: string) => {
-    foundation.handleMouseMoveEvent({nativeEvent:e}, event);
+    foundation.handleMouseMoveEvent(e, event);
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {

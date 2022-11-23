@@ -249,7 +249,7 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
     const inputRef = ref();
     const replaceInputRef = ref();
 
-    const {cache, adapter: adapterInject, log, context} = useBaseComponent<UploadProps>(props, state)
+    const {adapter: adapterInject} = useBaseComponent<UploadProps>(props, state)
     function adapter_(): UploadAdapter<UploadProps, UploadState> {
         return {
             ...adapterInject<UploadProps, UploadState>(),

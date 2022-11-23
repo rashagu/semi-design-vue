@@ -109,7 +109,7 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
         isCollapsed: true,
     });
 
-    const {cache, adapter: adapterInject, log, context} = useBaseComponent<BreadcrumbProps>(props, state)
+    const {adapter: adapterInject} = useBaseComponent<BreadcrumbProps>(props, state)
     function adapter(): BreadcrumbAdapter<BreadcrumbProps, BreadcrumbState> {
         return {
             ...adapterInject<BreadcrumbProps, BreadcrumbState>(),

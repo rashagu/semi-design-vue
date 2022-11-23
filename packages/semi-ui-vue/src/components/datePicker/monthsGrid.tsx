@@ -136,7 +136,7 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
     ...dateState,
     ...rangeState,
   });
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<MonthsGridProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<MonthsGridProps>(props, state)
   const foundation: MonthsGridFoundation = new MonthsGridFoundation(adapter());
 
   function dateAdapter(): MonthsGridDateAdapter {

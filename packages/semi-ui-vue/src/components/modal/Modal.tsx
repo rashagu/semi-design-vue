@@ -13,6 +13,7 @@ import confirm, {withConfirm, withError, withInfo, withSuccess, withWarning} fro
 import {Locale} from '../locale/interface';
 import useModal from './useModal';
 import {ButtonProps} from '../button/Button';
+import CSSAnimation from "../_cssAnimation";
 import {MotionObject} from "@douyinfe/semi-foundation/utils/type";
 import {
   CSSProperties,
@@ -25,7 +26,8 @@ import {
   ref,
   useSlots,
   VNode,
-  watch
+  watch,
+  Fragment
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {CascaderProps} from "../cascader";
@@ -129,18 +131,17 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
   const slots = useSlots()
 
   const state = reactive<ModalState>({
-    hidden: !props.visible,
+    displayNone: !props.visible,
     isFullScreen: props.fullScreen,
   });
   const modalRef = ref();
   let bodyOverflow = '';
   let scrollBarWidth = 0;
   let originBodyWith = '100%';
+  let _haveRendered: boolean;
 
-  let _active: boolean;
 
-
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<ModalReactProps>(props, state)
+  const { adapter: adapterInject} = useBaseComponent<ModalReactProps>(props, state)
 
   function adapter_(): ModalAdapter {
     return {
@@ -168,13 +169,14 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
         props.onOk(e);
       },
       notifyClose: () => {
-        (props.motion as MotionObject)?.didLeave?.();
         props.afterClose();
       },
-      toggleHidden: (hidden: boolean, callback?: (hidden: boolean) => void) => {
-        if (hidden !== state.hidden) {
-          state.hidden = hidden
-          nextTick(callback || noop)
+      toggleDisplayNone: (displayNone: boolean, callback?: (hidden: boolean) => void) => {
+        if (displayNone !== state.displayNone) {
+          state.displayNone = displayNone
+          nextTick(()=>{
+            (callback || noop)()
+          })
         }
       },
       notifyFullScreen: (isFullScreen: boolean) => {
@@ -195,6 +197,9 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
       newState.isFullScreen = props.fullScreen;
     }
 
+    if (props.visible && prevState.displayNone) {
+      newState.displayNone = false;
+    }
 
     return newState;
   }
@@ -223,7 +228,6 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
     originBodyWith = document.body.style.width;
     if (props.visible) {
       foundation.beforeShow();
-      _active = _active || props.visible;
     }
   })
 
@@ -239,11 +243,6 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
 
   })
 
-  watch(() => props.motion, () => {
-    if (!props.motion) {
-      updateHiddenState();
-    }
-  })
 
   onUnmounted(() => {
     if (props.visible) {
@@ -259,15 +258,11 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
     foundation.handleOk(e);
   };
 
-  const updateHiddenState = () => {
-    const {visible} = props;
-    const {hidden} = state;
-    if (!visible && !hidden) {
-      foundation.toggleHidden(true, () => foundation.afterClose());
-    } else if (visible && state.hidden) {
-      foundation.toggleHidden(false);
-    }
+  const updateState = () => {
+    const { visible } = props;
+    foundation.toggleDisplayNone(!visible);
   };
+
 
   const renderFooter = (): VNode => {
     const {
@@ -348,8 +343,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
     const maskStyle = maskStyleFromProps;
     const renderFooter_ = 'footer' in adapter.getProps() ? footer : renderFooter();
     let wrapperStyle: CSSProperties = {
-      zIndex,
-      width: '10px'
+      zIndex
     };
     if (getPopupContainer) {
       wrapperStyle = {
@@ -359,38 +353,63 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
     }
 
     const classList = cls(className, {
-      [`${cssClasses.DIALOG}-displayNone`]: keepDOM && state.hidden && !visible,
+      [`${cssClasses.DIALOG}-displayNone`]: keepDOM && state.displayNone,
     });
-    const contentClassName = motion ? cls({
-      [`${cssClasses.DIALOG}-content-animate-hide`]: !visible,
-      [`${cssClasses.DIALOG}-content-animate-show`]: visible
-    }) : null;
-    const maskClassName = motion ? cls({
-      [`${cssClasses.DIALOG}-mask-animate-hide`]: !visible,
-      [`${cssClasses.DIALOG}-mask-animate-show`]: visible
-    }) : null;
+
+    const shouldRender =props.visible || (props.keepDOM && (!props.lazyRender || _haveRendered)) || (props.motion && !state.displayNone /* When there is animation, we use displayNone to judge whether animation is ended and judge whether to unmount content */);
+
+    if (shouldRender){
+      _haveRendered = true;
+    }
     return (
       <Portal style={wrapperStyle} getPopupContainer={getPopupContainer}>
-        <ModalContent
-          getContainerContext={()=>{}}
-          {...restProps}
-          isFullScreen={state.isFullScreen}
-          contentClassName={contentClassName}
-          maskClassName={maskClassName}
-          className={classList}
-          getPopupContainer={getPopupContainer}
-          maskStyle={maskStyle}
-          style={style}
-          ref={modalRef}
-          onAnimationEnd={() => {
-            updateHiddenState();
+        <CSSAnimation
+          motion={props.motion}
+          animationState={visible?'enter':'leave'}
+          startClassName={visible?`${cssClasses.DIALOG}-content-animate-show`:`${cssClasses.DIALOG}-content-animate-hide`}
+          onAnimationEnd={()=>{
+            updateState();
           }}
-          footer={renderFooter_}
-          onClose={handleCancel}>
-          {{
-            default: slots.default
-          }}
-        </ModalContent>
+          children={
+            ({ animationClassName, animationEventsNeedBind })=>{
+              return (
+                <CSSAnimation
+                  motion={props.motion} animationState={visible ? 'enter' : 'leave'}
+                  startClassName={visible ? `${cssClasses.DIALOG}-mask-animate-show` : `${cssClasses.DIALOG}-mask-animate-hide`}
+                  onAnimationEnd={() => {
+                    updateState();
+                  }}
+                  children={
+                    ({ animationClassName: maskAnimationClassName, animationEventsNeedBind: maskAnimationEventsNeedBind })=>{
+                      return shouldRender ? <ModalContent
+                        {...restProps}
+                        getContainerContext={getContainerContext}
+                        contentExtraProps={animationEventsNeedBind}
+                        maskExtraProps={maskAnimationEventsNeedBind}
+                        isFullScreen={state.isFullScreen}
+                        contentClassName={animationClassName}
+                        maskClassName={maskAnimationClassName}
+                        className={classList}
+                        getPopupContainer={getPopupContainer}
+                        maskStyle={maskStyle}
+                        style={style}
+                        ref={modalRef}
+                        footer={renderFooter_}
+                        onClose={handleCancel}
+                      >
+                        {{default: slots.default}}
+                      </ModalContent>:<></>;
+                    }
+                  }
+                >
+
+                </CSSAnimation>
+              );
+            }
+          }
+        >
+
+        </CSSAnimation>
       </Portal>
     );
   };
@@ -401,14 +420,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
       keepDOM,
       lazyRender,
     } = props;
-    _active = _active || visible;
-    const shouldRender = ((visible || keepDOM) && (!lazyRender || _active)) || !state.hidden;
-
-    if (shouldRender) {
-      return renderDialog();
-    }
-
-    return null;
+    return renderDialog();
   }
 })
 

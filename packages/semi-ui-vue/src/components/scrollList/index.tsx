@@ -27,7 +27,7 @@ export const vuePropsType = {
 }
 const index = defineComponent<ScrollListProps>((props, {}) => {
   const slots = useSlots()
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<CheckboxProps>(props, {})
+  const {adapter: adapterInject} = useBaseComponent<CheckboxProps>(props, {})
 
   const foundation = new Foundation(adapterInject<CheckboxProps>());
 

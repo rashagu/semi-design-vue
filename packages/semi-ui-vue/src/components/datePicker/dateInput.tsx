@@ -92,7 +92,7 @@ export const vuePropsType = {
 const dateInput = defineComponent<DateInputProps>((props, {}) => {
   const slots = useSlots()
   const state = reactive({isFocusing: false})
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<DateInputProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<DateInputProps>(props, state)
 
   function adapter(): DateInputAdapter {
     return {

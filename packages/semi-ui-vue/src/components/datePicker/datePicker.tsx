@@ -208,7 +208,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     }
   });
 
-  const {cache, adapter: adapterInject, log, context: context_, isControlled} = useBaseComponent<DatePickerProps>(props, state)
+  const {adapter: adapterInject, isControlled} = useBaseComponent<DatePickerProps>(props, state)
 
   const foundation = new DatePickerFoundation(adapter());
 

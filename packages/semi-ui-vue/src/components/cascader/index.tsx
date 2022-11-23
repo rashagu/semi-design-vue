@@ -271,7 +271,8 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
   const triggerRef = ref(null);
   const optionsRef = ref(null);
   let clickOutsideHandler: any = null;
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<CascaderProps>(props, state)
+  // TODO context
+  const {adapter: adapterInject, context} = useBaseComponent<CascaderProps>(props, state)
 
   const foundation = new CascaderFoundation(adapter());
   function adapter(): CascaderAdapter {
@@ -1017,7 +1018,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       motion
     } = props;
     const { isOpen, rePosKey } = state;
-    const { direction } = context;
+    const { direction } = context.value;
     const content = renderContent();
     const selection = renderSelection();
     const pos = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';

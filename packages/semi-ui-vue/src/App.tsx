@@ -86,10 +86,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemoConfirm/>*/}
         {/*<ModalDemo/>*/}
         {/*<UploadDemo/>*/}
-        <ProgressDemo/>
+        {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}
-        <DatePickerDemo />
+        {/*<DatePickerDemo />*/}
         {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
@@ -97,7 +97,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        {/*<SelectDemo/>*/}
+        <SelectDemo/>
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}
