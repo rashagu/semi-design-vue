@@ -117,8 +117,8 @@ const CSSAnimation = defineComponent<AnimationProps>((props, {}) => {
                 animationClassName: state.currentClassName ?? "",
                 animationStyle: state.extraStyle,
                 animationEventsNeedBind: {
-                    onAnimationStart: handleAnimationStart,
-                    onAnimationEnd: handleAnimationEnd
+                    onAnimationstart: handleAnimationStart,
+                    onAnimationend: handleAnimationEnd
                 },
                 isAnimating: state.isAnimating
             });
