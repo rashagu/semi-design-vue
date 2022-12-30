@@ -30,16 +30,33 @@ import Tag from '../tag';
 import Input from '../input';
 import Popover, {PopoverProps} from '../popover';
 import Paragraph from '../typography/Paragraph';
-import {IconClear} from '@kousum/semi-icons-vue';
+import {IconClear, IconHandle} from '@kousum/semi-icons-vue';
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import {isSemiIcon} from "../_utils";
+import SortableList from "./SortableList";
+import {
+  DragEndEvent, DraggableAttributes,
+} from '@dnd-kit-vue/core';
+import {arrayMove} from "@dnd-kit-vue/sortable";
+
+
 // import {TooltipProps} from "../tooltip/Index";
 // import {AvatarProps, AvatarState} from "../avatar/Index";
 
 export type Size = ArrayElement<typeof strings.SIZE_SET>;
 export type RestTagsPopoverProps = PopoverProps;
 type ValidateStatus = "default" | "error" | "warning";
+
+
+type SortableItemFuncArg = {
+  setNodeRef?: (node: HTMLElement) => void,
+  style?:CSSProperties,
+  attributes?: DraggableAttributes,
+  listeners?: any
+}
+
+
 
 export interface TagInputProps {
   className?: string;
@@ -418,45 +435,65 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
       [`${prefixCls}-wrapper-tag-icon`]: showIconHandler,
     });
     // const DragHandle = SortableHandle(() => <IconHandle className={`${prefixCls}-drag-handler`}></IconHandle>);
-    const DragHandle = ()=><></>
+    const DragHandle = ()=><IconHandle className={`${prefixCls}-drag-handler`}></IconHandle>
     return tagsArray.map((value, index) => {
       const elementKey = showIconHandler ? value : `${index}${value}`;
       const onClose = () => {
         !disabled && handleTagClose(index);
       };
       if (isFunction(renderTagItem)) {
-        return showIconHandler? (<div class={itemWrapperCls} key={elementKey}>
-          <DragHandle />
-          {renderTagItem(value, index, onClose)}
-        </div>) : renderTagItem(value, index, onClose);
+        return (arg: SortableItemFuncArg)=>{
+          return showIconHandler? (
+            <div class={itemWrapperCls} key={elementKey} ref={arg.setNodeRef as any} style={arg.style} {...arg.attributes}>
+              <IconHandle className={`${prefixCls}-drag-handler`} {...arg.listeners}></IconHandle>
+              {renderTagItem(value, index, onClose)}
+            </div>) : renderTagItem(value, index, onClose)
+        };
       } else {
-        return (
-          <Tag
-            className={tagCls}
-            color="white"
-            size={size === 'small' ? 'small' : 'large'}
-            type="light"
-            onClose={onClose}
-            closable={!disabled}
-            key={elementKey}
-            visible
-            aria-label={`${!disabled ? 'Closable ' : ''}Tag: ${value}`}
-          >
-            {showIconHandler && <DragHandle />}
-            <Paragraph
-              className={typoCls}
-              ellipsis={{ showTooltip: showContentTooltip, rows: 1 }}
-            >
-              {value}
-            </Paragraph>
-          </Tag>
-        );
+        return (arg: SortableItemFuncArg)=>{
+          return (
+            <div key={elementKey} ref={arg.setNodeRef} style={arg.style} {...arg.attributes} {...(showIconHandler?{}:arg.listeners)}>
+              <Tag
+                className={tagCls}
+                color="white"
+                size={size === 'small' ? 'small' : 'large'}
+                type="light"
+                onClose={onClose}
+                closable={!disabled}
+                key={elementKey}
+                visible
+                aria-label={`${!disabled ? 'Closable ' : ''}Tag: ${value}`}
+              >
+                {showIconHandler && (
+                  <IconHandle
+                    className={`${prefixCls}-drag-handler`}
+                    {...arg.listeners}>
+                  </IconHandle>
+                )}
+                <Paragraph
+                  className={typoCls}
+                  ellipsis={{ showTooltip: showContentTooltip, rows: 1 }}
+                >
+                  {value}
+                </Paragraph>
+              </Tag>
+            </div>
+          )
+        };
+
       }
     });
   }
 
-  const onSortEnd = (callbackProps: OnSortEndProps) => {
-    foundation.handleSortEnd(callbackProps);
+  const onSortEnd = (event:DragEndEvent) => {
+    const tagsArray = state.tagsArray;
+    const {active, over} = event;
+
+    if (active.id !== over.id) {
+      const oldIndex = tagsArray.indexOf(''+active.id);
+      const newIndex = tagsArray.indexOf(''+over.id);
+      adapter().setTagsArray(arrayMove(tagsArray, oldIndex, newIndex))
+    }
   }
   function renderTags() {
     const {
@@ -471,8 +508,9 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
     const restTagsCls = cls(`${prefixCls}-wrapper-n`, {
       [`${prefixCls}-wrapper-n-disabled`]: disabled,
     });
-    const allTags = getAllTags();
+    const allTagsFunc = getAllTags();
     let restTags: Array<VueJsxNode> = [];
+    const allTags = allTagsFunc.map(item=>item({}))
     let tags: Array<VueJsxNode> = [...allTags];
     if (( !active || !expandRestTagsOnClick) && maxTagCount && maxTagCount < allTags.length){
       tags = allTags.slice(0, maxTagCount);
@@ -483,15 +521,24 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
       <span class={restTagsCls}>+{tagsArray.length - maxTagCount}</span>
     );
 
-    const sortableListItems = allTags.map((item, index) => ({
+    const sortableListItems = allTagsFunc.map((item, index) => ({
       item: item,
       key: tagsArray[index],
+      id: tagsArray[index],
     }));
 
     if (active && draggable && sortableListItems.length > 0) {
       // helperClass：add styles to the helper(item being dragged) https://github.com/clauderic/react-sortable-hoc/issues/87
       // @ts-ignore skip SortableItem type check
-      return <SortableList useDragHandle helperClass={`${prefixCls}-drag-item-move`} items={sortableListItems} onSortEnd={onSortEnd} axis={"xy"} />;
+      return <SortableList
+        useDragHandle
+        items={sortableListItems}
+        helperClass={`${prefixCls}-drag-item-move`}
+        onSortEnd={onSortEnd}
+        axis={"xy"}
+      >
+        {sortableListItems}
+      </SortableList>;
     }
     return (
       <>

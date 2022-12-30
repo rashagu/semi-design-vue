@@ -331,7 +331,6 @@ const index = defineComponent<NavProps>((props, {slots}) => {
         })}
       </>
     );
-    // console.log(state)
     return finalDom;
   }
 

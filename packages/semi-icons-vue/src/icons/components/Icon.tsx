@@ -45,7 +45,6 @@ const Icon = defineComponent<IconProps>((props, {slots}) => {
     [`${prefixCls}-icon-spinning`]: spin,
     [`${prefixCls}-icon-${type}`]: Boolean(type)
   }, className);
-  console.log(type, classes)
   const outerStyle: StyleValue = {
   };
   if (Number.isSafeInteger(rotate)) {
@@ -80,7 +79,6 @@ export interface convertIconType extends IconProps{
 }
 const ConvertIcon = defineComponent<convertIconType>((props, {slots}) => {
 
-  console.log(props)
   onActivated(() => {
 
   })

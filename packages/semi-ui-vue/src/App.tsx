@@ -94,10 +94,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
         {/*<CheckboxDemo />*/}
-        {/*<TagInputDemo />*/}
+        <TagInputDemo />
 
         {/*<AutoCompleteDemo/>*/}
-        <SelectDemo/>
+        {/*<SelectDemo/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}

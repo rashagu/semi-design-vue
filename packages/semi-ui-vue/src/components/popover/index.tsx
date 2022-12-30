@@ -98,7 +98,8 @@ const propTypes = {
     type: String,
     default: 'Yes',
   },
-  role:String
+  role:String,
+  afterClose: Function
 };
 
 const defaultProps = {
@@ -122,7 +123,6 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 
 const Popover = defineComponent<PopoverProps>((props, {slots}) => {
-  console.log(props)
   const {context} = useConfigContext()
   function renderPopCard ({ initialFocusRef }: { initialFocusRef: any }) {
     const { content, contentClassName, prefixCls } = props;
@@ -178,7 +178,6 @@ const Popover = defineComponent<PopoverProps>((props, {slots}) => {
 
     const role = trigger === 'click' || trigger === 'custom' ? 'dialog' : 'tooltip';
 
-    console.log(attr)
     return (
       <Tooltip
         guardFocus

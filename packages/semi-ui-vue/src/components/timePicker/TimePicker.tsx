@@ -357,7 +357,6 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
   function getPanelElement() {
     const {prefixCls, type} = props;
     const {isAM, value} = state;
-    console.log(state)
 
     const format = foundation.getDefaultFormatIfNeed();
 

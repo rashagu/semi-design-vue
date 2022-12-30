@@ -49,11 +49,17 @@ const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
     }
   ];
   return () => (
-    <Cascader
-      style={{ width: 300 }}
-      treeData={treeData}
-      placeholder="请选择所在地区"
-    />
+<div>
+  <Cascader
+    treeData={treeData}
+    placeholder="请选择所在地区"
+  />
+  <Cascader
+    treeData={treeData}
+    multiple={true}
+    placeholder="请选择所在地区"
+  />
+</div>
   )
 })
 

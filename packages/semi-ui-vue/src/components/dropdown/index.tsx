@@ -255,7 +255,6 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots, expose}) => {
 
     let children:any = slots.default?slots.default()[0]:null;
 
-    // console.log(attr)
     return (
       <Tooltip
         zIndex={zIndex}

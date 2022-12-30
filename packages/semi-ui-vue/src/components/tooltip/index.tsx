@@ -167,7 +167,8 @@ const propTypes = {
     default: noop
   },
   wrapperId: String,
-  disableArrowKeyDown: Boolean
+  disableArrowKeyDown: Boolean,
+  afterClose: Function
 };
 
 const defaultProps = {
@@ -610,7 +611,6 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
       left: portalInnerStyle.left + 'px',
       top: portalInnerStyle.top + 'px'
     }
-    console.log(state)
     const inner =
       <CSSAnimation
         fillMode="forwards"
