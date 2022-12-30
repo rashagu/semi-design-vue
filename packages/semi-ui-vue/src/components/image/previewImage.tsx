@@ -95,42 +95,6 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
 
 
 
-    // If src changes, start a new loading
-    // If the incoming zoom changes, other content changes are determined based on the new zoom value
-    // When the incoming ratio is changed, if it"s adaptation, then resizeImage is triggered to make the image adapt to the page
-    // else if it"s adaptation is realSize, then onZoom(1) is called to make the image size the original size;
-    // When the incoming rotation angle of the image changes, it needs to be resized to make the image fit on the page
-    watch(()=>props.src, (value, oldValue, onCleanup)=>{
-        if (value && oldValue !== value) {
-            foundation.setLoading(true);
-        }
-    })
-
-    watch(()=>props.zoom, (value, oldValue, onCleanup)=>{
-        if ("zoom" in getProps(props) && value !== oldValue) {
-            handleZoomChange(props.zoom, null);
-        }
-    })
-
-    watch(()=>props.ratio, (value, oldValue, onCleanup)=>{
-        if ("ratio" in getProps(props) && props.ratio !== oldValue) {
-            if (originImageWidth && originImageHeight) {
-                if (props.ratio === "adaptation") {
-                    resizeImage();
-                } else {
-                    props.onZoom(1);
-                }
-            }
-        }
-    })
-
-    watch(()=>props.rotation, (value, oldValue, onCleanup)=>{
-        if ("rotation" in getProps(props) && props.rotation !== oldValue) {
-            onWindowResize();
-        }
-    })
-
-
     const onWindowResize = (): void => {
         foundation.handleWindowResize();
     };
@@ -190,8 +154,47 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
         foundation.handleImageMouseUp();
     };
 
+
+
+
+
+    // If src changes, start a new loading
+    // If the incoming zoom changes, other content changes are determined based on the new zoom value
+    // When the incoming ratio is changed, if it"s adaptation, then resizeImage is triggered to make the image adapt to the page
+    // else if it"s adaptation is realSize, then onZoom(1) is called to make the image size the original size;
+    // When the incoming rotation angle of the image changes, it needs to be resized to make the image fit on the page
+    watch(()=>props.src, (value, oldValue, onCleanup)=>{
+        if (value && oldValue !== value) {
+            foundation.setLoading(true);
+        }
+    })
+
+    watch(()=>props.zoom, (value, oldValue, onCleanup)=>{
+        if ("zoom" in getProps(props) && value !== oldValue) {
+            handleZoomChange(props.zoom, null);
+        }
+    }, {immediate: true})
+
+    watch(()=>props.ratio, (value, oldValue, onCleanup)=>{
+        if ("ratio" in getProps(props) && props.ratio !== oldValue) {
+            if (originImageWidth && originImageHeight) {
+                if (props.ratio === "adaptation") {
+                    resizeImage();
+                } else {
+                    props.onZoom(1);
+                }
+            }
+        }
+    })
+
+    watch(()=>props.rotation, (value, oldValue, onCleanup)=>{
+        if ("rotation" in getProps(props) && props.rotation !== oldValue) {
+            onWindowResize();
+        }
+    })
+
     return () => {
-        const { src, rotation } = props;
+        const { src, rotation, crossOrigin } = props;
         const { loading, width, height, top, left } = state;
         const imgStyle:CSSProperties = {
             position: "absolute",
@@ -202,6 +205,7 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
             width: loading ? "auto" : `${width}px`,
             height: loading ? "auto" : `${height}px`,
         };
+        console.log(imgStyle)
         return (
           <div
             class={`${preViewImgPrefixCls}`}
@@ -222,6 +226,7 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
                 onLoad={handleLoad}
                 onError={handleError}
                 style={imgStyle}
+                crossorigin={crossOrigin}
               />
               {loading && <Spin size={"large"} wrapperClassName={`${preViewImgPrefixCls}-spin`}/>}
           </div>

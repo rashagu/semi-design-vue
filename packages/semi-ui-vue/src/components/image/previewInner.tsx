@@ -10,7 +10,7 @@ import Footer from "./previewFooter";
 import PreviewImage from "./previewImage";
 import PreviewInnerFoundation, {PreviewInnerAdapter} from "@douyinfe/semi-foundation/image/previewInnerFoundation";
 import {PreviewContext, PreviewContextProps} from "./previewContext";
-import {CSSProperties, defineComponent, h, onBeforeUnmount, reactive, useSlots, watch} from "vue";
+import {CSSProperties, defineComponent, h, onBeforeUnmount, onMounted, reactive, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {usePreviewContext} from "./previewContext/Consumer";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
@@ -86,6 +86,9 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
 
   const slots = useSlots()
 
+  let bodyOverflow: string;
+  let scrollBarWidth: number;
+  let originBodyWidth: string;
   const state = reactive<PreviewInnerStates>({
     imgSrc: [],
     imgLoadStatus: new Map(),
@@ -105,6 +108,21 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     return {
       ...adapterInject(),
       getIsInGroup: () => isInGroup(),
+      disabledBodyScroll: () => {
+        const { getPopupContainer } = props;
+        bodyOverflow = document.body.style.overflow || '';
+        if (!getPopupContainer && bodyOverflow !== 'hidden') {
+          document.body.style.overflow = 'hidden';
+          document.body.style.width = `calc(${originBodyWidth || '100%'} - ${scrollBarWidth}px)`;
+        }
+      },
+      enabledBodyScroll: () => {
+        const { getPopupContainer } = props;
+        if (!getPopupContainer && bodyOverflow !== 'hidden') {
+          document.body.style.overflow = bodyOverflow;
+          document.body.style.width = originBodyWidth;
+        }
+      },
       notifyChange: (index: number, direction: string) => {
         const { onChange, onPrev, onNext } = props;
         isFunction(onChange) && onChange(index);
@@ -196,7 +214,19 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     return willUpdateStates;
   }
 
-
+  function getScrollbarWidth() {
+    if (globalThis && Object.prototype.toString.call(globalThis) === '[object Window]') {
+      return window.innerWidth - document.documentElement.clientWidth;
+    }
+    return 0;
+  }
+  onMounted(()=>{
+    scrollBarWidth = getScrollbarWidth();
+    originBodyWidth = document.body.style.width;
+    if (props.visible) {
+      foundation.beforeShow();
+    }
+  })
   watch(() => props, (val) => {
     const newState = getDerivedStateFromProps(props, state)
     if (newState) {
@@ -301,6 +331,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
       style,
       infinite,
       zoomStep,
+      crossOrigin,
       prevTip,
       nextTip,
       zoomInTip,
@@ -335,6 +366,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     );
     const hideViewerCls = !viewerVisible ? `${previewPrefixCls}-hide` : "";
     const total = imgSrc.length;
+    console.log(total,infinite,currentIndex)
     const showPrev = total !== 1 && (infinite || currentIndex !== 0);
     const showNext = total !== 1 && (infinite || currentIndex !== total - 1);
     return (
@@ -363,6 +395,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
               ratio={ratio}
               zoomStep={zoomStep}
               rotation={rotation}
+              crossOrigin={crossOrigin}
               onError={onImageError}
               onLoad={onImageLoad}
             />

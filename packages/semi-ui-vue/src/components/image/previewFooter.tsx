@@ -143,6 +143,7 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
 
     const getIconChevronLeft = () => {
         const { disabledPrev, onPrev, prevTip } = props;
+        console.log(disabledPrev)
         const icon = <IconChevronLeft
           size="large"
           className={disabledPrev ? `${footerPrefixCls}-disabled` : ""}

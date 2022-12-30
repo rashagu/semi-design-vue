@@ -60,6 +60,7 @@ type SortableItemFuncArg = {
 
 export interface TagInputProps {
   className?: string;
+  clearIcon?: VueJsxNode;
   defaultValue?: string[];
   disabled?: boolean;
   inputValue?: string;
@@ -106,13 +107,16 @@ export interface TagInputState {
   inputValue?: string;
   focusing?: boolean;
   hovering?: boolean;
-  active?: boolean
+  active?: boolean;
+  // entering: Used to identify whether the user is in a new composition session（eg，Input Chinese）
+  entering?: boolean;
 }
 
 const prefixCls = cssClasses.PREFIX;
 
 const propTypes = {
   children: PropTypes.node,
+  clearIcon: PropTypes.node,
   style: PropTypes.object,
   className: PropTypes.string,
   disabled: PropTypes.bool,
@@ -172,6 +176,7 @@ const defaultProps = {
   onAdd: noop,
   onRemove: noop,
   onKeyDown: noop,
+
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Index = defineComponent<TagInputProps>((props, {expose}) => {
@@ -185,6 +190,7 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
     focusing: false,
     hovering: false,
     active: false,
+    entering: false,
   });
 
   const {adapter: adapterInject} = useBaseComponent<TagInputProps>(props, state)
@@ -218,6 +224,9 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
       },
       setActive: (active: boolean) => {
         state.active = active
+      },
+      setEntering: (entering: boolean) => {
+        state.entering = entering
       },
       getClickOutsideHandler: () => {
         return clickOutsideHandler;
@@ -345,7 +354,7 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
 
   function renderClearBtn() {
     const { hovering, tagsArray, inputValue } = state;
-    const { showClear, disabled } = props;
+    const { showClear, disabled, clearIcon } = props;
     const clearCls = cls(`${prefixCls}-clearBtn`, {
       [`${prefixCls}-clearBtn-invisible`]: !hovering || (inputValue === '' && tagsArray.length === 0) || disabled,
     });
@@ -359,7 +368,7 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
           onClick={e => handleClearBtn(e)}
           onKeypress={e => handleClearEnterPress(e)}
         >
-          <IconClear />
+          { clearIcon ? clearIcon : <IconClear />}
         </div>
       );
     }
@@ -434,8 +443,7 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
       [`${prefixCls}-drag-item`]: showIconHandler,
       [`${prefixCls}-wrapper-tag-icon`]: showIconHandler,
     });
-    // const DragHandle = SortableHandle(() => <IconHandle className={`${prefixCls}-drag-handler`}></IconHandle>);
-    const DragHandle = ()=><IconHandle className={`${prefixCls}-drag-handler`}></IconHandle>
+    // const DragHandle = SortableHandle(() => <IconHandle className={`${prefixCls}-drag-h
     return tagsArray.map((value, index) => {
       const elementKey = showIconHandler ? value : `${index}${value}`;
       const onClose = () => {
@@ -463,19 +471,21 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
                 key={elementKey}
                 visible
                 aria-label={`${!disabled ? 'Closable ' : ''}Tag: ${value}`}
-              >
-                {showIconHandler && (
-                  <IconHandle
-                    className={`${prefixCls}-drag-handler`}
-                    {...arg.listeners}>
-                  </IconHandle>
-                )}
-                <Paragraph
-                  className={typoCls}
-                  ellipsis={{ showTooltip: showContentTooltip, rows: 1 }}
-                >
-                  {value}
-                </Paragraph>
+              >                        {/* Wrap a layer of div outside IconHandler and Value to ensure that the two are aligned */}
+                <div class={`${prefixCls}-tag-content-wrapper`}>
+                  {showIconHandler && (
+                    <IconHandle
+                      className={`${prefixCls}-drag-handler`}
+                      {...arg.listeners}>
+                    </IconHandle>
+                  )}
+                  <Paragraph
+                    className={typoCls}
+                    ellipsis={{ showTooltip: showContentTooltip, rows: 1 }}
+                  >
+                    {value}
+                  </Paragraph>
+                </div>
               </Tag>
             </div>
           )
@@ -567,10 +577,24 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
 
   function blur() {
     inputRef.current.blur();
+    foundation.clickOutsideCallBack();
   }
 
   function focus() {
+    const { preventScroll, disabled } = props;
     inputRef.current.focus();
+    if (!disabled) {
+      // register clickOutside event
+      foundation.handleClick();
+    }
+  }
+
+  const handleInputCompositionStart = (e) => {
+    foundation.handleInputCompositionStart(e);
+  }
+
+  const handleInputCompositionEnd = (e) => {
+    foundation.handleInputCompositionEnd(e);
   }
 
   expose({
@@ -598,16 +622,18 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
     } = state;
 
     const tagInputCls = cls(prefixCls, className, {
-      [`${prefixCls}-focus`]: focusing,
+      [`${prefixCls}-focus`]: focusing || active,
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-hover`]: hovering && !disabled,
       [`${prefixCls}-error`]: validateStatus === 'error',
-      [`${prefixCls}-warning`]: validateStatus === 'warning'
+      [`${prefixCls}-warning`]: validateStatus === 'warning',
+      [`${prefixCls}-small`]: size === 'small',
+      [`${prefixCls}-large`]: size === 'large',
     });
 
     const inputCls = cls(`${prefixCls}-wrapper-input`, `${prefixCls}-wrapper-input-${size}`);
 
-    const wrapperCls = cls(`${prefixCls}-wrapper`, `${prefixCls}-wrapper-${size}`);
+    const wrapperCls = cls(`${prefixCls}-wrapper`);
 
 
     return (
@@ -643,7 +669,6 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
               handleKeyDown(e);
             }}
             onChange={(v: string, e: any) => {
-              console.log(v,e)
               handleInputChange(e);
             }}
             onBlur={(e: FocusEvent) => {
@@ -652,6 +677,8 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
             onFocus={(e: FocusEvent) => {
               handleInputFocus(e as any);
             }}
+            onCompositionstart={handleInputCompositionStart}
+            onCompositionend={handleInputCompositionEnd}
           />
         </div>
         {renderClearBtn()}

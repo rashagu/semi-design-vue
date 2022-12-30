@@ -53,6 +53,7 @@ export interface PreviewProps extends BaseProps {
     disableDownload?: boolean;
     zIndex?: number;
     children?: VueJsxNode,
+    crossOrigin?: "anonymous"| "use-credentials";
     renderHeader?: (info: any) => VueJsxNode;
     renderPreviewMenu?: (props: MenuProps) => VueJsxNode;
     getPopupContainer?: () => HTMLElement;
@@ -157,6 +158,7 @@ export interface PreviewImageProps {
     ratio?: RatioType;
     disableDownload?: boolean;
     clickZoom?: number;
+    crossOrigin?: "anonymous"| "use-credentials";
     setRatio?: (type: RatioType) => void;
     onZoom?: (zoom: number) => void;
     onLoad?: (src: string) => void;

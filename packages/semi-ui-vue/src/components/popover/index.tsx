@@ -26,6 +26,7 @@ export interface PopoverProps extends BaseProps {
   visible?: boolean;
   autoAdjustOverflow?: boolean;
   motion?: Motion;
+  margin?: TooltipProps['margin'];
   position?: Position;
   mouseEnterDelay?: number;
   mouseLeaveDelay?: number;
@@ -49,7 +50,8 @@ export interface PopoverProps extends BaseProps {
   onEscKeyDown?: TooltipProps['onEscKeyDown'];
   clickToHide?:TooltipProps['clickToHide'];
   disableFocusListener?: boolean
-  afterClose?:()=>void
+  afterClose?:()=>void,
+  disableArrowKeyDown?: boolean
 }
 
 export interface PopoverState {

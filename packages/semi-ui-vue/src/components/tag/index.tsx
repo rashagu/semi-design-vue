@@ -1,10 +1,16 @@
 import {defineComponent, ref, h, Fragment, VNode, CSSProperties, reactive, watch} from 'vue'
+import * as PropTypes from '../PropTypes'
 import classNames from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/tag/constants';
 import Avatar from '../avatar';
 import { IconClose } from '@kousum/semi-icons-vue';
-import {TagProps, TagSize, TagColor, TagType, AvatarShape} from './interface';
+import {TagProps, TagSize, TagColor, TagType, AvatarShape, TagShape} from './interface';
+import { handlePrevent } from '@douyinfe/semi-foundation/utils/a11y';
 import '@douyinfe/semi-foundation/tag/tag.scss';
+import {AriaAttributes} from "../AriaAttributes";
+import {VueJsxNode} from "../interface";
+import {vuePropsMake} from "../PropTypes";
+import {isString} from "lodash";
 
 export * from './interface';
 
@@ -20,35 +26,42 @@ export interface TagState {
   visible: boolean;
 }
 
-export const vuePropsType = {
-  children: [Object,Number,String],
-  size: {
-    type: String,
-    default: tagSize[0]
-  },
-  color: {
-    type: String,
-    default: tagColors[0]
-  },
-  type: {
-    type: String,
-    default: tagType[0]
-  },
-  closable:{type: Boolean, default:false},
-  visible: Boolean,
-  onClose:{
-    type: Function,
-    default: () => undefined
-  },
-  onClick:{
-    type: Function,
-    default: () => undefined
-  },
-  style: [Object, String],
-  className: {type:String,default:''},
-  avatarSrc: String,
-  avatarShape: {type:String, default: 'square'},
-}
+const propTypes = {
+  children: PropTypes.node,
+  tagKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  size: String,
+  color: String,
+  type: String,
+  closable: PropTypes.bool,
+  visible: PropTypes.bool,
+  onClose: PropTypes.func,
+  onClick: PropTypes.func,
+  style: PropTypes.object,
+  className: PropTypes.string,
+  avatarSrc: PropTypes.string,
+  avatarShape: String,
+  'aria-label': PropTypes.string,
+
+  shape: {type: String, default: 'square'},
+  onKeydown: Function,
+  tabIndex: Number, // use internal, when tag in taInput, we want to use left arrow and right arrow to control the tag focus, so the tabIndex need to be -1.
+  onMouseenter: Function
+};
+const defaultProps: TagProps = {
+  size: tagSize[0] as TagSize,
+  color: tagColors[0] as TagColor,
+  closable: false,
+  // visible: true,
+  type: tagType[0] as TagType,
+  onClose: () => undefined,
+  onClick: () => undefined,
+  onMouseenter: () => undefined,
+  style: {},
+  className: '',
+  shape: 'square',
+  avatarShape: 'square',
+};
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Index = defineComponent<TagProps>((props, {slots}) => {
 
   const state = reactive<TagState>({
@@ -78,11 +91,11 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
     }
   }
 
-  function close(e: MouseEvent, value: VNode) {
+  function close(e: MouseEvent, value: VueJsxNode, tagKey: string | number) {
     const { onClose } = props;
     e.stopPropagation();
     e.stopImmediatePropagation();
-    onClose && onClose(value, e);
+    onClose && onClose(value, e, tagKey);
     // when user call e.preventDefault() in onClick callback, tag will not hidden
     if (e.defaultPrevented) {
       return;
@@ -90,6 +103,26 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
     setVisible(false);
   }
 
+  function handleKeyDown(event: any) {
+    const { closable, onClick, onKeydown } = props;
+    switch (event.key) {
+      case "Backspace":
+      case "Delete":
+        closable && close(event, slots.default?.(), props.tagKey);
+        handlePrevent(event);
+        break;
+      case "Enter":
+        onClick(event);
+        handlePrevent(event);
+        break;
+      case 'Escape':
+        event.target.blur();
+        break;
+      default:
+        break;
+    }
+    onKeydown && onKeydown(event);
+  }
   function renderAvatar() {
     const { avatarShape, avatarSrc } = props;
     const avatar = <Avatar src={avatarSrc} shape={avatarShape} />;
@@ -97,16 +130,22 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
   }
   return () => {
     const children = slots.default?slots.default():null;
-    const { size, color, closable, visible, onClose, className, type, avatarSrc, avatarShape, children: tagChildren, ...attr } = props;
+    const {tagKey, size, color, closable, visible, onClose, className, onClick, type, shape, avatarSrc, avatarShape, tabIndex, children: tagChildren, ...attr } = props;
     const { visible: isVisible } = state;
+    const clickable = onClick !== defaultProps.onClick || closable;
+    // only when the Tag is clickable or closable, the value of tabIndex is allowed to be passed in.
+    const a11yProps = { role: 'button', tabIndex: tabIndex | 0, onKeydown: handleKeyDown };
     const baseProps = {
       ...attr,
+      onClick,
       className: classNames(
         prefixCls,
         {
           [`${prefixCls}-default`]: size === 'default',
           [`${prefixCls}-small`]: size === 'small',
           [`${prefixCls}-large`]: size === 'large',
+          [`${prefixCls}-square`]: shape === 'square',
+          [`${prefixCls}-circle`]: shape === 'circle',
           [`${prefixCls}-${type}`]: type,
           [`${prefixCls}-${color}-${type}`]: color && type,
           [`${prefixCls}-closable`]: closable,
@@ -116,18 +155,21 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
         className
       ),
     };
+    const wrapProps = clickable ? ({ ...baseProps, ...a11yProps }) : baseProps;
     const closeIcon = closable ? (
-      <div class={`${prefixCls}-close`} onClick={e => close(e, children[0])}>
+      <div class={`${prefixCls}-close`} onClick={e => close(e, children[0], tagKey)}>
         <IconClose size="small" />
       </div>
     ) : null;
     return (
-      <div {...baseProps}>
+
+      <div
+        aria-label={props['aria-label'] || isString(children) ? `${closable ? 'Closable ' : ''}Tag: ${children}` : ''} {...wrapProps}>
+        {avatarSrc ? renderAvatar() : null}
         <div class={`${prefixCls}-content`}>
-          {avatarSrc ? renderAvatar() : null}
           {children}
-          {closeIcon}
         </div>
+        {closeIcon}
       </div>
     );
   }
