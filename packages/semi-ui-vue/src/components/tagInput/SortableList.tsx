@@ -64,7 +64,6 @@ const SortableList = defineComponent<SortableListProps>((props, {}) => {
 
 
 
-  console.log(props)
   return () => {
     return (
       <DndContext

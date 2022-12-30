@@ -100,7 +100,7 @@ const Title = defineComponent<TitleProps>((props, {slots}) => {
     const component = strings.HEADING.indexOf(heading) !== -1 ? `h${heading}` : 'h1';
     // Passing headings to support custom components
     // console.log(props)
-    return <Base component_={component_ || component as any} heading={component} {...rest} >
+    return <Base children={slots.default?.()} component_={component_ || component as any} heading={component} {...rest} >
       {{
         default: slots.default
       }}
