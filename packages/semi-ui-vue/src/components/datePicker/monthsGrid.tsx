@@ -345,7 +345,6 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
     // this.wrapRef.current.style.height = this.wrapRef.current.clientHeight + 'px';
     // this.wrapRef.current.style.overflow = 'hidden';
     // TODO
-    console.log(e)
     e.stopImmediatePropagation();
     foundation.showYearPicker(panelType);
   }

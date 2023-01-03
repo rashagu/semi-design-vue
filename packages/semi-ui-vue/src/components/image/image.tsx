@@ -53,7 +53,6 @@ const Image = defineComponent<ImageProps>((props, {}) => {
 
   const {adapter: adapterInject} = useBaseComponent<ImageProps>(props, state)
 
-  console.log()
   function adapter_(): ImageAdapter<ImageProps, ImageStates> {
     return {
       ...adapterInject<ImageProps, ImageStates>(),

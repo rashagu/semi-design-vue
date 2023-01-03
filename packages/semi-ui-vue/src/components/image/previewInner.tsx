@@ -366,7 +366,6 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     );
     const hideViewerCls = !viewerVisible ? `${previewPrefixCls}-hide` : "";
     const total = imgSrc.length;
-    console.log(total,infinite,currentIndex)
     const showPrev = total !== 1 && (infinite || currentIndex !== 0);
     const showNext = total !== 1 && (infinite || currentIndex !== total - 1);
     return (

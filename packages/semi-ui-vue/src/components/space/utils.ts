@@ -22,6 +22,5 @@ export const flatten = (children: VNode[]): Array<VNode> => {
         }
     })
 
-console.log(res)
     return res;
 };

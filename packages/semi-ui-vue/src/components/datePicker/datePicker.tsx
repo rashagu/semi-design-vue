@@ -174,10 +174,9 @@ const defaultProps = {
   insetInput: false
 };
 export const vuePropsTypeDatePickerProps = vuePropsMake(propTypes, defaultProps)
-console.log(vuePropsTypeDatePickerProps)
+
 const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   const slots = useSlots()
-  console.log(props)
 
   let clickOutSideHandler: (e: MouseEvent) => void;
   let _mounted: boolean;
@@ -246,7 +245,6 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       },
       notifyBlur: (...args) => props.onBlur(...args),
       notifyFocus: (...args) => {
-        console.log(props.onFocus)
         props.onFocus(...args)
       },
       notifyClear: (...args) => props.onClear(...args),
@@ -334,7 +332,6 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
         const { rangeInputFocus } = state;
         switch (rangeInputFocus) {
           case 'rangeEnd':
-            console.log(rangeInputEndRef.value)
             if (document.activeElement !== rangeInputEndRef.value) {
               const inputEndNode = rangeInputEndRef.value;
               inputEndNode && inputEndNode.focus();
@@ -342,7 +339,6 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
             break;
           case 'rangeStart':
           default:
-            console.log(rangeInputEndRef.value)
             if (document.activeElement !== rangeInputEndRef.value) {
               const inputStartNode = rangeInputStartRef.value;
               inputStartNode && inputStartNode.focus({ preventScroll });
@@ -518,7 +514,6 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   const handleInputComplete: DatePickerFoundation['handleInputComplete'] = v => foundation.handleInputComplete(v);
   const handleInputBlur: DateInputProps['onBlur'] = e => foundation.handleInputBlur(get(e, 'target.value'), e);
   const handleInputFocus: DatePickerFoundation['handleInputFocus'] = (...args) => {
-    console.log(args)
     foundation.handleInputFocus(...args)
   };
   const handleInputClear: DatePickerFoundation['handleInputClear'] = e => foundation.handleInputClear(e);
@@ -552,7 +547,6 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     }
   }
   const handlePanelVisibleChange = (visible: boolean) => {
-    console.log(visible, state.panelShow)
     foundation.handlePanelVisibleChange(visible);
   }
 

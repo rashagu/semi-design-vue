@@ -522,7 +522,6 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       getSelections: () => new Map(state.selections),
 
       notifyChange: (value: OnChangeValueType | OnChangeValueType[]) => {
-        console.log(props)
         props.onChange(value);
       },
       notifySelect: (value: OptionProps['value'], option: OptionProps) => {

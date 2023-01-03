@@ -205,7 +205,6 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
             width: loading ? "auto" : `${width}px`,
             height: loading ? "auto" : `${height}px`,
         };
-        console.log(imgStyle)
         return (
           <div
             class={`${preViewImgPrefixCls}`}

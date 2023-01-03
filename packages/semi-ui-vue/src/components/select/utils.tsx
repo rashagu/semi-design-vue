@@ -9,7 +9,6 @@ const generateOption = (child: VNode, parent: any, index: number): OptionProps =
   if (!child || !childProps) {
     return null;
   }
-  console.log(parent)
 
   const option = {
     value: childProps.value,
@@ -64,7 +63,6 @@ const getOptionsFromGroup = (selectChildren: VNode[]) => {
       // Avoid saving children (reactNode) by... removing other props from the group except children, causing performance problems
       // eslint-disable-next-line prefer-const
       let { ...restGroupProps } = child.props;
-      console.log(child.props)
       // @ts-ignore
       let children = child.children.default?child.children.default():[]
       // children = React.Children.toArray(children);

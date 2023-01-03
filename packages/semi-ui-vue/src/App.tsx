@@ -68,7 +68,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<NotificationDemo/>*/}
         {/*<BannerDemo/>*/}
         {/*<ToastDemo/>*/}
-        <ImageDemo/>
+        {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
         {/*<FormDemo />*/}
         {/*<WithFormApiDemo />*/}
@@ -84,7 +84,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<InputNumberDemo />*/}
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
-        {/*<ModalDemo/>*/}
+        <ModalDemo/>
         {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
@@ -120,7 +120,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<LayoutTest/>*/}
         {/*<SpaceTest/>*/}
         {/*<PopoverTest />*/}
-        {/*<NavigationDemo />*/}
+        <NavigationDemo />
         <div class={'aa'}>123</div>
       </ConfigProvider>
     </div>

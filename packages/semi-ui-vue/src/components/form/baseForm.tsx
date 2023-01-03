@@ -186,7 +186,6 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
         if (render) {
             return render(props_ as FormFCChild);
         }
-        console.log(slots.default())
         return slots.default?.(props_);
     }
 

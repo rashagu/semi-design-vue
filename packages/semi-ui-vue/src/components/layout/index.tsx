@@ -39,7 +39,6 @@ const Basic = defineComponent<BasicProps>((props, {slots}) => {
   return () => {
     const { prefixCls, type, className, tagName, ...others } = props;
     const classString = cls(className, `${prefixCls}-${type}`);
-    console.log(tagName)
     return h(tagName, { className: classString, ...others }, slots.default?slots.default():null);
   }
 })
@@ -108,7 +107,6 @@ const Layout = defineComponent<BasicLayoutProps>((props, {slots}) => {
   return () => {
     const { prefixCls, className, hasSider, tagName, ...others } = props;
     const { siders } = state;
-    console.log(hasSider,siders)
     const classString = cls(className, prefixCls, {
       [`${prefixCls}-has-sider`]: hasSider ? hasSider : siders.length > 0,
     });

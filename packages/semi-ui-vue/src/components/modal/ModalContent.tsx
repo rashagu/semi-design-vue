@@ -105,7 +105,6 @@ const defaultProps = {
     maskClassName: ''
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-console.log(vuePropsType)
 const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
 
     const slots = useSlots()

@@ -124,10 +124,8 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 
-console.log(vuePropsType)
 const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
 
-  console.log(props)
   const slots = useSlots()
 
   const state = reactive<ModalState>({

@@ -185,7 +185,6 @@ const Progress = defineComponent<ProgressProps>((props, {}) => {
         const strokeDashoffset = (1 - perc / 100) * circumference; // Offset
         const strokeDasharray = `${circumference} ${circumference}`;
 
-        console.log(props)
         const text = format(percNumber);
 
         return (
@@ -299,7 +298,6 @@ const Progress = defineComponent<ProgressProps>((props, {}) => {
             innerStyle.height = `${perc}%`;
         }
 
-        console.log(props)
         const text = format(percNumber);
 
         return (
