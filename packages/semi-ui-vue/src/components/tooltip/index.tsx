@@ -32,6 +32,7 @@ import {getUuidShort} from '@douyinfe/semi-foundation/utils/uuid';
 import Portal from '../_portal';
 import TriangleArrow from './TriangleArrow';
 import TriangleArrowVertical from './TriangleArrowVertical';
+import CSSAnimation from "../_cssAnimation";
 import TooltipTransition from './TooltipStyledTransition';
 import {Motion} from '../_base/base';
 import {DefaultAdapter} from "@douyinfe/semi-foundation/base/foundation";
@@ -68,6 +69,7 @@ export interface TooltipProps extends BaseProps {
   onVisibleChange?: (visible: boolean) => void;
   onClickOutSide?: (e: MouseEvent) => void;
   spacing?: number;
+  margin?: number | { marginLeft: number; marginTop: number; marginRight: number; marginBottom: number };
   showArrow?: boolean | VueJsxNode;
   zIndex?: number;
   rePosKey?: string | number;
@@ -87,6 +89,7 @@ export interface TooltipProps extends BaseProps {
   wrapperId?: string;
   preventScroll?: boolean;
   disableFocusListener?: boolean;
+  afterClose?: () => void
 }
 
 interface TooltipState {
@@ -134,6 +137,7 @@ const propTypes = {
   onVisibleChange: PropTypes.func,
   onClickOutSide: PropTypes.func,
   spacing: PropTypes.number,
+  margin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   showArrow: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   zIndex: PropTypes.number,
   rePosKey: [String, Number, Boolean],
@@ -163,7 +167,8 @@ const propTypes = {
     default: noop
   },
   wrapperId: String,
-  disableArrowKeyDown: Boolean
+  disableArrowKeyDown: Boolean,
+  afterClose: Function
 };
 
 const defaultProps = {
@@ -181,6 +186,7 @@ const defaultProps = {
   onVisibleChange: noop,
   onClickOutSide: noop,
   spacing: numbers.SPACING,
+  margin: numbers.MARGIN,
   showArrow: true,
   wrapWhenSpecial: true,
   zIndex: numbers.DEFAULT_Z_INDEX,
@@ -194,7 +200,7 @@ const defaultProps = {
 
 const vuePropsType = vuePropsMake(propTypes, defaultProps)
 
-const Tooltip = defineComponent<TooltipProps>((props, {}) => {
+const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
 
   const slots = useSlots()
   const eventManager = ref<Event>(new Event);
@@ -208,17 +214,9 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
   let getPopupContainer: () => HTMLElement;
   let containerPosition: string;
 
-  const eventManagerRef = new Event();
-  const triggerElRef = ref(null);
-  const containerElRef = ref(null);
-  const clickOutsideHandler = ref();
-  const resizeHandlerRef = ref(null);
-  const isWrappedRef = ref(false); // Identifies whether a span element is wrapped
-  const containerPositionRef = ref(undefined);
 
-  const isInsertRef = ref(undefined)
-  const transitionStateRef = ref(undefined)
-  const containerStyleRef = ref(undefined)
+  let clickOutsideHandler;
+
 
   const state = reactive({
     visible: false,
@@ -238,7 +236,8 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
     isPositionUpdated: false,
     id: props.wrapperId, // auto generate id, will be used by children.aria-describedby & content.id, improve a11y
   })
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<TooltipProps>(props, state)
+  // TODO context
+  const {adapter: adapterInject, context} = useBaseComponent<TooltipProps>(props, state)
 
   const theAdapter = adapter()
 
@@ -251,22 +250,19 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       off: (...args: any[]) => eventManager.value.off(...args),
-      insertPortal: (content: string, {position, ...containerStyle}: { position: Position }) => {
-
-
+      insertPortal: (content: TooltipProps['content'], {position, ...containerStyle}: { position: Position }) => {
         state.isInsert = true;
         state.transitionState = 'enter';
         // @ts-ignore
         state.containerStyle = {...state.containerStyle, containerStyle};
-        // console.log()
-
 
         nextTick(() => {
-          eventManager.value.emit('portalInserted');
+          setTimeout(() => {
+            eventManager.value.emit('portalInserted');
+          }, 0)
         })
       },
       removePortal: () => {
-        //console.log('removePortal')
         state.isInsert = false;
         state.isPositionUpdated = false;
       },
@@ -281,25 +277,17 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
         keydown: 'onKeydown',
       }),
       registerTriggerEvent: (triggerEventSet: Record<string, any>) => {
-        //console.log(triggerEventSet)
         state.triggerEventSet = triggerEventSet
-      },
-      unregisterTriggerEvent: () => {
       },
       registerPortalEvent: (portalEventSet: Record<string, any>) => {
         state.portalEventSet = portalEventSet
-      },
-      unregisterPortalEvent: () => {
       },
       getTriggerBounding: () => {
         // eslint-disable-next-line
         // It may be a React component or an html element
         // There is no guarantee that triggerE l.current can get the real dom, so call findDOMNode to ensure that you can get the real dom
-
-
         const triggerDOM = theAdapter.getTriggerNode();
         triggerEl.value = triggerDOM
-        // console.log(triggerEl.value)
         return triggerDOM && triggerDOM.getBoundingClientRect();
       },
       // Gets the outer size of the specified container
@@ -341,7 +329,6 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
         state.placement = position
         state.isPositionUpdated = true
         nextTick(() => {
-          // console.log('positionUpdated')
           eventManager.value.emit('positionUpdated');
         })
 
@@ -352,28 +339,24 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
       togglePortalVisible: (visible: boolean, cb: () => void) => {
         const willUpdateStates: Partial<TooltipState> = {};
 
-        if (theAdapter.canMotion()) {
-          // console.log(visible ? 'enter' : 'leave');
-          willUpdateStates.transitionState = visible ? 'enter' : 'leave';
-          willUpdateStates.visible = visible;
-        } else {
-          willUpdateStates.visible = visible;
-        }
+
+
+        willUpdateStates.transitionState = visible ? 'enter' : 'leave';
+        willUpdateStates.visible = visible;
 
         if (mounted){
           state.transitionState = willUpdateStates.transitionState
           state.visible = willUpdateStates.visible
-          //console.log('willUpdateStates')
           nextTick(() => {
             cb();
           })
         }
       },
       registerClickOutsideHandler: (cb: () => void) => {
-        if (clickOutsideHandler.value) {
+        if (clickOutsideHandler) {
           theAdapter.unregisterClickOutsideHandler();
         }
-        clickOutsideHandler.value = (e: any): any => {
+        clickOutsideHandler = (e: any): any => {
           if (!mounted) {
             return false;
           }
@@ -387,12 +370,12 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
             cb();
           }
         };
-        document.addEventListener('mousedown', clickOutsideHandler.value, {capture: true});
+        document.addEventListener('mousedown', clickOutsideHandler, {capture: true});
       },
       unregisterClickOutsideHandler: () => {
-        if (clickOutsideHandler.value) {
-          document.removeEventListener('mousedown', clickOutsideHandler.value, {capture: true});
-          clickOutsideHandler.value = null;
+        if (clickOutsideHandler) {
+          document.removeEventListener('mousedown', clickOutsideHandler, {capture: true});
+          clickOutsideHandler = null;
         }
       },
       registerResizeHandler: (cb: (e: any) => void) => {
@@ -446,7 +429,6 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
           // getComputedStyle need first parameter is Element type
           const computedStyle = window.getComputedStyle(container);
           const position = computedStyle.getPropertyValue('position');
-          //console.log(position)
           containerPosition = position;
         }
       },
@@ -468,8 +450,8 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
       setInitialFocus: () => {
         const { preventScroll } = props;
         const focusRefNode = initialFocusRef.value;
-        if (focusRefNode && focusRefNode.focus) {
-          focusRefNode.focus(preventScroll);
+        if (focusRefNode && 'focus' in focusRefNode) {
+          focusRefNode.focus({ preventScroll });
         }
       },
       notifyEscKeydown: (event: KeyboardEvent) => {
@@ -481,14 +463,12 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
     };
   }
 
-  const setContainerEl = (node: HTMLDivElement) => (containerEl.value = { current: node });
-
 
   const foundation = new TooltipFoundation(theAdapter);
 
   onMounted(() => {
     mounted = true;
-    getPopupContainer = props.getPopupContainer || context.getPopupContainer || defaultGetContainer;
+    getPopupContainer = props.getPopupContainer || context.value.getPopupContainer || defaultGetContainer;
     foundation.init();
   })
 
@@ -533,11 +513,9 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
   //   // this.setState({ visible: true });
   // };
   const didLeave = () => {
-    // console.error('didLeave')
-    theAdapter.unregisterClickOutsideHandler();
-    theAdapter.unregisterScrollHandler();
-    theAdapter.unregisterResizeHandler();
-    theAdapter.removePortal();
+    console.error('didLeave')
+    foundation.removePortal();
+    foundation.unBindEvent();
   };
 
   /** for transition - end */
@@ -546,9 +524,7 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
     return foundation.calcPosition();
   }
 
-  watchEffect(() => {
-    //console.log(state.willUpdateStates,props.visible,props.rePosKey);
-  })
+
 
 
   watch([() => props.mouseLeaveDelay, () => props.mouseEnterDelay], () => {
@@ -564,9 +540,7 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
     rePosition();
   })
 
-  watch(state, () => {
-    // console.log(state)
-  })
+
 
 
   const renderIcon = () => {
@@ -621,7 +595,7 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
     const { prefixCls, content, showArrow, style, motion, role, zIndex }  = props;
     const contentNode = renderContentNode(content);
     const {className: propClassName} = props;
-    const direction = context.direction;
+    const direction = context.value.direction;
     const className = classNames(propClassName, {
       [`${prefixCls}-wrapper`]: true,
       [`${prefixCls}-wrapper-show`]: visible,
@@ -633,12 +607,44 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
     const transformOrigin = get(containerStyle, 'transformOrigin');
 
     portalInnerStyle = {
-      ...portalInnerStyle, ...{
-        ...portalInnerStyle,
-        left: portalInnerStyle.left + 'px',
-        top: portalInnerStyle.top + 'px'
-      }
+      ...portalInnerStyle,
+      left: portalInnerStyle.left + 'px',
+      top: portalInnerStyle.top + 'px'
     }
+    const inner =
+      <CSSAnimation
+        fillMode="forwards"
+        animationState={transitionState as "enter" | "leave"}
+        motion={motion && isPositionUpdated}
+        startClassName={transitionState === 'enter' ? `${prefix}-animation-show` : `${prefix}-animation-hide`}
+        onAnimationEnd={() => {
+          if (transitionState === 'leave') {
+            didLeave();
+            props.afterClose?.();
+          }
+        }}
+        children={({ animationStyle, animationClassName, animationEventsNeedBind }) => {
+          return <div
+            class={classNames(className, animationClassName)}
+            style={{
+              opacity: isPositionUpdated ? '1' : "0",
+              ...animationStyle,
+              transformOrigin,
+              ...style,
+            }}
+            {...portalEventSet}
+            {...animationEventsNeedBind}
+            role={role}
+            x-placement={placement}
+            id={id}
+          >
+            {contentNode}
+            {icon}
+          </div>;
+        }}
+      >
+      </CSSAnimation>;
+
     return (
       <Portal getPopupContainer={props.getPopupContainer} style={{zIndex}}>
         <div
@@ -649,40 +655,7 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
           onMousedown={handlePortalMouseDown}
           onKeydown={handlePortalInnerKeyDown}
         >
-          {motion && isPositionUpdated ? (
-            <TooltipTransition
-              transitionState={state.transitionState}
-              position={placement}
-              didLeave={didLeave}
-              motion={motion}
-            >
-              {{
-                default: transitionState === 'enter' ? ({animateCls, animateStyle, animateEvents}: any) => {
-                  return (<div
-                    className={classNames(className, animateCls)}
-                    style={{
-                      visibility: 'visible',
-                      ...animateStyle,
-                      transformOrigin,
-                      ...style,
-                    }}
-                    {...portalEventSet}
-                    {...animateEvents}
-                    x-placement={placement}
-                    id={state.id}
-                  >
-                    {contentNode}
-                    {icon}
-                  </div>)
-                } : null
-              }}
-            </TooltipTransition>
-          ) : (
-            <div class={className} {...portalEventSet} x-placement={placement}  style={{ visibility: motion ? 'hidden' : 'visible', ...style }}>
-              {contentNode}
-              {icon}
-            </div>
-          )}
+          {inner}
         </div>
       </Portal>
     );
@@ -721,7 +694,13 @@ const Tooltip = defineComponent<TooltipProps>((props, {}) => {
     return mergedEvents;
   };
 
+  const getPopupId = () => {
+    return state.id;
+  }
 
+  expose({
+    getPopupId
+  })
   return () => {
 
     const { isInsert, triggerEventSet, visible, id } = state;

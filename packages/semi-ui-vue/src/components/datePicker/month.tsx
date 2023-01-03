@@ -55,7 +55,7 @@ const month = defineComponent<MonthProps>((props, {slots}) => {
     weeksRowNum: props.weeksRowNum,
   });
 
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<MonthProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<MonthProps>(props, state)
   let foundation: MonthFoundation;
   function adapter(): MonthAdapter {
     return {

@@ -57,7 +57,6 @@ const index = defineComponent<DatePickerProps>((props, {}) => {
       {({ timeZone }: { timeZone?: string | number }) => (
         <LocaleConsumer componentName={'DatePicker'}>
           {(locale: Locale['DatePicker'], localeCode: string, dateFnsLocale: Locale['dateFnsLocale']) => {
-            console.log(locale)
             return (
               <DatePicker
                 {...propsObj}

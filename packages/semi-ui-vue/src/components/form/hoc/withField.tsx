@@ -509,7 +509,6 @@ function withField<
                 'showValidateIcon',
                 'extraTextPosition',
             ]);
-            console.log(formProps)
             let mergeLabelPos = labelPosition || formProps.labelPosition;
             let mergeLabelWidth = labelWidth || formProps.labelWidth;
             let mergeLabelAlign = labelAlign || formProps.labelAlign;
@@ -579,7 +578,6 @@ function withField<
             if (mergeLabelPos === 'inset' && !noLabel) {
                 newProps.insetLabel = label || field;
                 newProps.insetLabelId = labelId;
-                console.log(label)
                 if (typeof label === 'object' && !isElement(label)) {
                     // TODO
                     // @ts-ignore
@@ -588,7 +586,6 @@ function withField<
                 }
             }
 
-            console.log(newProps)
             // @ts-ignore
             const com = <Component {...(newProps as any)} >
                 {{default: slots.default}}

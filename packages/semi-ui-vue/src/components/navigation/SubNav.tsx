@@ -120,7 +120,7 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
         isHovered: false,
     })
 
-    const {cache, adapter: adapterInject, log, context: context_, isControlled} = useBaseComponent<SubNavProps>(props, state)
+    const {adapter: adapterInject} = useBaseComponent<SubNavProps>(props, state)
 
     const foundation = new SubNavFoundation(adapter());
     const setItemRef = (ref: any) => {

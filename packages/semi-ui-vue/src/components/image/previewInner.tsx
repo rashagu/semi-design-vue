@@ -10,7 +10,7 @@ import Footer from "./previewFooter";
 import PreviewImage from "./previewImage";
 import PreviewInnerFoundation, {PreviewInnerAdapter} from "@douyinfe/semi-foundation/image/previewInnerFoundation";
 import {PreviewContext, PreviewContextProps} from "./previewContext";
-import {CSSProperties, defineComponent, h, onBeforeUnmount, reactive, useSlots, watch} from "vue";
+import {CSSProperties, defineComponent, h, onBeforeUnmount, onMounted, reactive, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {usePreviewContext} from "./previewContext/Consumer";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
@@ -66,6 +66,7 @@ const propTypes = {
   onDownload: PropTypes.func,
   onRatioChange: PropTypes.func,
   onRotateChange: PropTypes.func,
+  onRotateLeft: PropTypes.func,
 }
 
 const defaultProps = {
@@ -85,6 +86,9 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
 
   const slots = useSlots()
 
+  let bodyOverflow: string;
+  let scrollBarWidth: number;
+  let originBodyWidth: string;
   const state = reactive<PreviewInnerStates>({
     imgSrc: [],
     imgLoadStatus: new Map(),
@@ -102,18 +106,31 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
 
   function adapter_(): PreviewInnerAdapter<PreviewInnerProps, PreviewInnerStates> {
     return {
-      ...adapterInject<PreviewInnerProps, PreviewInnerStates>(),
-      getContexts: () => context.value,
-      getContext: key => { // eslint-disable-line
-        if (context.value && key) {
-          // @ts-ignore
-          return context.value[key];
+      ...adapterInject(),
+      getIsInGroup: () => isInGroup(),
+      disabledBodyScroll: () => {
+        const { getPopupContainer } = props;
+        bodyOverflow = document.body.style.overflow || '';
+        if (!getPopupContainer && bodyOverflow !== 'hidden') {
+          document.body.style.overflow = 'hidden';
+          document.body.style.width = `calc(${originBodyWidth || '100%'} - ${scrollBarWidth}px)`;
         }
       },
-      getIsInGroup: () => isInGroup(),
-      notifyChange: (index: number) => {
-        const {onChange} = props;
+      enabledBodyScroll: () => {
+        const { getPopupContainer } = props;
+        if (!getPopupContainer && bodyOverflow !== 'hidden') {
+          document.body.style.overflow = bodyOverflow;
+          document.body.style.width = originBodyWidth;
+        }
+      },
+      notifyChange: (index: number, direction: string) => {
+        const { onChange, onPrev, onNext } = props;
         isFunction(onChange) && onChange(index);
+        if (direction === "prev") {
+          onPrev && onPrev(index);
+        } else {
+          onNext && onNext(index);
+        }
       },
       notifyZoom: (zoom: number, increase: boolean) => {
         const {onZoomIn, onZoomOut} = props;
@@ -197,7 +214,19 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     return willUpdateStates;
   }
 
-
+  function getScrollbarWidth() {
+    if (globalThis && Object.prototype.toString.call(globalThis) === '[object Window]') {
+      return window.innerWidth - document.documentElement.clientWidth;
+    }
+    return 0;
+  }
+  onMounted(()=>{
+    scrollBarWidth = getScrollbarWidth();
+    originBodyWidth = document.body.style.width;
+    if (props.visible) {
+      foundation.beforeShow();
+    }
+  })
   watch(() => props, (val) => {
     const newState = getDerivedStateFromProps(props, state)
     if (newState) {
@@ -261,7 +290,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
   }
 
   const handleMouseUp = (e): void => {
-    foundation.handleMouseUp({nativeEvent:e});
+    foundation.handleMouseUp(e);
   }
 
   const handleMouseMove = (e): void => {
@@ -269,7 +298,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
   }
 
   const handleMouseEvent = (e, event: string) => {
-    foundation.handleMouseMoveEvent({nativeEvent:e}, event);
+    foundation.handleMouseMoveEvent(e, event);
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -302,6 +331,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
       style,
       infinite,
       zoomStep,
+      crossOrigin,
       prevTip,
       nextTip,
       zoomInTip,
@@ -364,6 +394,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
               ratio={ratio}
               zoomStep={zoomStep}
               rotation={rotation}
+              crossOrigin={crossOrigin}
               onError={onImageError}
               onLoad={onImageLoad}
             />

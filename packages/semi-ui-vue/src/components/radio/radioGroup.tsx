@@ -105,7 +105,7 @@ const RadioGroup = defineComponent<RadioGroupProps>((props, {slots}) => {
   const state = reactive({
     value: undefined,
   })
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<RadioGroupProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<RadioGroupProps>(props, state)
 
   const theAdapter = adapter()
   function adapter(): RadioGroupAdapter {

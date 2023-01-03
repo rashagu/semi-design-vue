@@ -11,6 +11,7 @@ import {
   onUnmounted,
   watch, nextTick
 } from 'vue'
+import  * as PropTypes from '../PropTypes'
 import cls from 'classnames';
 import CascaderFoundation, {
   BasicCascaderData, BasicEntity,
@@ -34,7 +35,7 @@ import '@douyinfe/semi-foundation/cascader/cascader.scss';
 import { IconClear, IconChevronDown } from '@kousum/semi-icons-vue';
 import { findKeysForValues, convertDataToEntities, calcMergeType } from '@douyinfe/semi-foundation/cascader/util';
 import { calcCheckedKeys, normalizeKeyList, calcDisabledKeys } from '@douyinfe/semi-foundation/tree/treeUtil';
-import {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
+import {getProps, useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import Input from '../input';
 import Popover, { PopoverProps } from '../popover';
 import Item, { CascaderData, Entities, Entity, Data } from './Item';
@@ -43,8 +44,9 @@ import Tag from '../tag';
 import TagInput, {TagInputProps} from '../tagInput';
 import { Motion } from '../_base/base';
 import { isSemiIcon } from '../_utils/index';
+import { Position } from '../tooltip/index';
 import {AriaAttributes} from "../AriaAttributes";
-import {VueJsxNode} from "../interface";
+import {vuePropsMake} from "../PropTypes";
 
 export type { CascaderType, ShowNextType } from '@douyinfe/semi-foundation/cascader/foundation';
 export type { CascaderData, Entity, Data, CascaderItemProps } from './Item';
@@ -75,7 +77,7 @@ export interface CascaderProps extends BasicCascaderProps {
   defaultValue?: Value;
   dropdownStyle?: CSSProperties;
   emptyContent?: VNode | string;
-  motion?: Motion;
+  motion?: boolean;
   treeData?: Array<CascaderData>;
   restTagsPopoverProps?: PopoverProps;
   children?: VNode | string;
@@ -98,6 +100,7 @@ export interface CascaderProps extends BasicCascaderProps {
   onBlur?: (e: MouseEvent) => void;
   onFocus?: (e: MouseEvent) => void;
   validateStatus?: ValidateStatus;
+  position?: Position
 }
 
 export interface CascaderState extends BasicCascaderInnerData {
@@ -109,166 +112,117 @@ export interface CascaderState extends BasicCascaderInnerData {
 const prefixcls = cssClasses.PREFIX;
 const resetkey = 0;
 
+const propTypes = {
+  'aria-labelledby': PropTypes.string,
+  'aria-invalid': PropTypes.bool,
+  'aria-errormessage': PropTypes.string,
+  'aria-describedby': PropTypes.string,
+  'aria-required': PropTypes.bool,
+  'aria-label': PropTypes.string,
+  arrowIcon: PropTypes.node,
+  changeOnSelect: PropTypes.bool,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  disabled: PropTypes.bool,
+  dropdownClassName: PropTypes.string,
+  dropdownStyle: PropTypes.object,
+  emptyContent: PropTypes.node,
+  motion: PropTypes.bool,
+  /* show search input, if passed in a function, used as custom filter */
+  filterTreeNode: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  filterLeafOnly: PropTypes.bool,
+  placeholder: PropTypes.string,
+  searchPlaceholder: PropTypes.string,
+  size: String,
+  style: PropTypes.object,
+  className: PropTypes.string,
+  treeData: [String, Number, Object, Array],
+  treeNodeFilterProp: PropTypes.string,
+  suffix: PropTypes.node,
+  prefix: PropTypes.node,
+  insetLabel: PropTypes.node,
+  insetLabelId: PropTypes.string,
+  id: PropTypes.string,
+  displayProp: PropTypes.string,
+  displayRender: PropTypes.func,
+  onChange: PropTypes.func,
+  onSearch: PropTypes.func,
+  onSelect: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  children: PropTypes.node,
+  getPopupContainer: PropTypes.func,
+  zIndex: PropTypes.number,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]),
+  validateStatus: PropTypes.string,
+  showNext: PropTypes.string,
+  stopPropagation: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  showClear: PropTypes.bool,
+  defaultOpen: PropTypes.bool,
+  autoAdjustOverflow: PropTypes.bool,
+  onDropdownVisibleChange: PropTypes.func,
+  triggerRender: PropTypes.func,
+  onListScroll: PropTypes.func,
+  onChangeWithObject: PropTypes.bool,
+  bottomSlot: PropTypes.node,
+  topSlot: PropTypes.node,
+  multiple: PropTypes.bool,
+  autoMergeValue: PropTypes.bool,
+  maxTagCount: PropTypes.number,
+  showRestTagsPopover: PropTypes.bool,
+  restTagsPopoverProps: PropTypes.object,
+  max: PropTypes.number,
+  separator: PropTypes.string,
+  onExceed: PropTypes.func,
+  onClear: PropTypes.func,
+  loadData: PropTypes.func,
+  onLoad: PropTypes.func,
+  loadedKeys: PropTypes.array,
+  disableStrictly: PropTypes.bool,
+  leafOnly: PropTypes.bool,
+  enableLeafClick: PropTypes.bool,
+  preventScroll: PropTypes.bool,
+  position: PropTypes.string,
 
-export const vuePropsType = {
-  'aria-describedby': String,
-  'aria-errormessage': String,
-  'aria-invalid': String,
-  'aria-labelledby': String,
-  'aria-required': [String, Boolean],
-  defaultValue: [Object,String,Number],
-  dropdownStyle: [Object, String],
-  emptyContent: [Object, String],
-  children: [Object, String],
-  // TODO 当type中包含Boolean时，默认值为false而不是undefined
-  value: [Object,String,Number],
-  prefix: [Object, String],
-  suffix: [Object, String],
-  id: [ String ],
-  insetLabel: [Object, String],
-  insetLabelId: [String],
-  style: [Object, String],
-  bottomSlot: [Object, String],
-  topSlot: [Object, String],
-  triggerRender: Function,
-  loadData: Function,
-  onLoad: Function,
-  onChange: Function,
-  displayRender: Function,
-  onBlur: Function,
-  onFocus: Function,
-
-  leafOnly: {
-    type: Boolean,
-    default: false
-  },
-  arrowIcon: {
-    type: Object,
-    default: <IconChevronDown />
-  },
-  stopPropagation: {
-    type: Boolean,
-    default: true
-  },
-  motion: {
-    type: [Object,Boolean,String,Number],
-    default: true
-  },
-  defaultOpen: {
-    type: Boolean,
-    default: false
-  },
-  zIndex: {
-    type: Number,
-    default: popoverNumbers.DEFAULT_Z_INDEX
-  },
-  showClear: {
-    type: Boolean,
-    default: false
-  },
   autoClearSearchValue: {
     type: Boolean,
     default: true
   },
-  changeOnSelect: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  disableStrictly: {
-    type: Boolean,
-    default: false
-  },
-  autoMergeValue: {
-    type: Boolean,
-    default: true
-  },
-  multiple: {
-    type: Boolean,
-    default: false
-  },
-  filterTreeNode: {
-    type: Boolean,
-    default: false
-  },
-  filterLeafOnly: {
-    type: Boolean,
-    default: true
-  },
-  showRestTagsPopover: {
-    type: Boolean,
-    default: false
-  },
-  restTagsPopoverProps: {
-    type: Object,
-    default: {}
-  },
-  separator: {
-    type: String,
-    default: '/'
-  },
-  size: {
-    type: String,
-    default: 'default'
-  },
-  treeNodeFilterProp: {
-    type: String,
-    default: 'label'
-  },
-  displayProp: {
-    type: String,
-    default: 'label'
-  },
-  treeData: {
-    type: Array,
-    default: []
-  },
-  showNext: {
-    type: String,
-    default: strings.SHOW_NEXT_BY_CLICK,
-  },
-  onExceed: {
-    type: Function,
-    default: noop
-  },
-  onClear: {
-    type: Function,
-    default: noop
-  },
-  onDropdownVisibleChange: {
-    type: Function,
-    default: noop
-  },
-  onListScroll: {
-    type: Function,
-    default: noop
-  },
-  enableLeafClick: {
-    type: Boolean,
-    default: false
-  },
-  placeholder: String,
-  'aria-label': {
-    type: String,
-    default: 'Cascader'
-  },
 
   mouseEnterDelay: Number,
   mouseLeaveDelay: Number,
-  dropdownClassName: String,
-  searchPlaceholder: String,
-  className: String,
-  maxTagCount: Number,
-  max: Number,
-  autoAdjustOverflow: Boolean,
-  onChangeWithObject: Boolean,
-  getPopupContainer: Function,
-  onSearch: Function,
-  onSelect: Function,
 }
+const defaultProps = {
+  leafOnly: false,
+  arrowIcon: <IconChevronDown />,
+  stopPropagation: true,
+  motion: true,
+  defaultOpen: false,
+  zIndex: popoverNumbers.DEFAULT_Z_INDEX,
+  showClear: false,
+  autoClearSearchValue: true,
+  changeOnSelect: false,
+  disableStrictly: false,
+  autoMergeValue: true,
+  multiple: false,
+  filterTreeNode: false,
+  filterLeafOnly: true,
+  showRestTagsPopover: false,
+  restTagsPopoverProps: {},
+  separator: ' / ',
+  size: 'default' as const,
+  treeNodeFilterProp: 'label' as const,
+  displayProp: 'label' as const,
+  treeData: [] as Array<CascaderData>,
+  showNext: strings.SHOW_NEXT_BY_CLICK,
+  onExceed: noop,
+  onClear: noop,
+  onDropdownVisibleChange: noop,
+  onListScroll: noop,
+  enableLeafClick: false,
+  'aria-label': 'Cascader',
+};
+
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Index = defineComponent<CascaderProps>((props, {}) => {
   const slots = useSlots()
 
@@ -317,7 +271,8 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
   const triggerRef = ref(null);
   const optionsRef = ref(null);
   let clickOutsideHandler: any = null;
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<CascaderProps>(props, state)
+  // TODO context
+  const {adapter: adapterInject, context} = useBaseComponent<CascaderProps>(props, state)
 
   const foundation = new CascaderFoundation(adapter());
   function adapter(): CascaderAdapter {
@@ -463,6 +418,34 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       const treeDataHasChange = prevProps && prevProps.treeData !== props.treeData;
       return firstInProps || treeDataHasChange;
     };
+    const getRealKeys = (realValue: Value, keyEntities: Entities) => {
+      // normallizedValue is used to save the value in two-dimensional array format
+      let normallizedValue: SimpleValueType[][] = [];
+      if (Array.isArray(realValue)) {
+        normallizedValue = Array.isArray(realValue[0])
+          ? (realValue as SimpleValueType[][])
+          : ([realValue] as SimpleValueType[][]);
+      } else {
+        if (realValue !== undefined) {
+          normallizedValue = [[realValue]];
+        }
+      }
+      // formatValuePath is used to save value of valuePath
+      const formatValuePath: (string | number)[][] = [];
+      normallizedValue.forEach((valueItem: SimpleValueType[]) => {
+        const formatItem: (string | number)[] = onChangeWithObject ?
+          (valueItem as CascaderData[]).map(i => i?.value) :
+          valueItem as (string | number)[];
+        formatValuePath.push(formatItem);
+      });
+      // formatKeys is used to save key of value
+      const formatKeys: any[] = [];
+      formatValuePath.forEach(v => {
+        const formatKeyItem = findKeysForValues(v, keyEntities);
+        !isEmpty(formatKeyItem) && formatKeys.push(formatKeyItem);
+      });
+      return formatKeys;
+    };
     const needUpdateTreeData = needUpdate('treeData') || needUpdateData();
     const needUpdateValue = needUpdate('value') || (isEmpty(prevProps) && defaultValue);
     if (multiple) {
@@ -477,32 +460,15 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
         let realKeys: Array<string> | Set<string> = prevState.checkedKeys;
         // when data was updated
         if (needUpdateValue) {
-          // normallizedValue is used to save the value in two-dimensional array format
-          let normallizedValue: SimpleValueType[][] = [];
           const realValue = needUpdate('value') ? value : defaultValue;
-          // eslint-disable-next-line max-depth
-          if (Array.isArray(realValue)) {
-            normallizedValue = Array.isArray(realValue[0]) ?
-              realValue as SimpleValueType[][] :
-              [realValue] as SimpleValueType[][];
-          } else {
-            normallizedValue = [[realValue]];
+          realKeys = getRealKeys(realValue, keyEntities);
+        } else {
+          // needUpdateValue is false
+          // if treeData is updated & Cascader is controlled, realKeys should be recalculated
+          if (needUpdateTreeData && 'value' in getProps(props)) {
+            const realValue = value;
+            realKeys = getRealKeys(realValue, keyEntities);
           }
-          // formatValuePath is used to save value of valuePath
-          const formatValuePath: (string | number)[][] = [];
-          normallizedValue.forEach((valueItem: SimpleValueType[]) => {
-            const formatItem: (string | number)[] = onChangeWithObject ?
-              (valueItem as CascaderData[]).map(i => i.value) :
-              valueItem as (string | number)[];
-            formatValuePath.push(formatItem);
-          });
-          // formatKeys is used to save key of value
-          const formatKeys: any[] = [];
-          formatValuePath.forEach(v => {
-            const formatKeyItem = findKeysForValues(v, keyEntities);
-            !isEmpty(formatKeyItem) && formatKeys.push(formatKeyItem);
-          });
-          realKeys = formatKeys;
         }
         if (isSet(realKeys)) {
           realKeys = [...realKeys];
@@ -539,13 +505,17 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     foundation.destroy();
   })
 
-  watch(()=>props.treeData,()=>{
-    foundation.collectOptions();
+  watch([()=>props.treeData, ()=>props.value],([prevPropsTreeData, prevPropsValue])=>{
+    let isOptionsChanged = false;
+    if (!isEqual(prevPropsTreeData, props.treeData)) {
+      isOptionsChanged = true;
+      foundation.collectOptions();
+    }
+    if (prevPropsValue !== props.value && !isOptionsChanged) {
+      foundation.handleValueChange(props.value);
+    }
   })
 
-  watch(()=>props.value,()=>{
-    foundation.handleValueChange(props.value);
-  })
 
   const handleInputChange = (value: string) => {
     foundation.handleInputChange(value);
@@ -586,8 +556,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
               handleTagRemove(e, keyEntities[nodeKey].valuePath);
             }}
           >
-            {displayProp === 'label' && keyEntities[nodeKey].data.label}
-            {displayProp === 'value' && keyEntities[nodeKey].data.value}
+            {keyEntities[nodeKey].data[displayProp]}
           </Tag>
         );
       }
@@ -637,6 +606,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
         // TODO Modify logic, not modify type
         onRemove={v => handleTagRemove(null, v as unknown as (string | number)[])}
         placeholder={placeholder}
+        expandRestTagsOnClick={false}
       />
     );
   }
@@ -644,24 +614,28 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
   function renderInput() {
     const { size, disabled } = props;
     const inputcls = cls(`${prefixcls}-input`);
-    const { inputValue, inputPlaceHolder } = state;
+    const { inputValue, inputPlaceHolder, showInput } = state;
     const inputProps = {
       disabled,
       value: inputValue,
       className: inputcls,
       onChange: handleInputChange,
-      placeholder: inputPlaceHolder,
     };
     const wrappercls = cls({
       [`${prefixcls}-search-wrapper`]: true,
     });
+
+    const displayText = renderDisplayText();
+    const spanCls = cls({
+      [`${prefixcls}-selection-placeholder`]: !displayText,
+      [`${prefixcls}-selection-text-hide`]: showInput && inputValue,
+      [`${prefixcls}-selection-text-inactive`]: showInput && !inputValue,
+    });
+
     return (
       <div class={wrappercls}>
-        <Input
-          ref={inputRef as any}
-          size={size}
-          {...inputProps}
-        />
+        <span class={spanCls}>{displayText ? displayText : inputPlaceHolder}</span>
+        {showInput && <Input ref={inputRef} size={size} {...inputProps} />}
       </div>
     );
   }
@@ -801,11 +775,14 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       } else {
         displayText = displayPath.map((path: VNode |string, index: number)=>(
           <Fragment key={`${path}-${index}`}>
-            {
-              index<displayPath.length-1
-                ? <>{path}{separator}</>
-                : path
-            }
+            {index < displayPath.length - 1 ? (
+              <>
+                {path}
+                {separator}
+              </>
+            ) : (
+              path
+            )}
           </Fragment>
         ));
       }
@@ -842,7 +819,9 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       [`${prefixcls}-suffix-text`]: suffix && isString(suffix),
       [`${prefixcls}-suffix-icon`]: isSemiIcon(suffix),
     });
-    return <div class={suffixWrapperCls}>{suffix}</div>;
+    return <div class={suffixWrapperCls} x-semi-prop="suffix">
+      {suffix}
+    </div>;
   };
 
   const renderPrefix = () => {
@@ -857,7 +836,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       [`${prefixcls}-prefix-icon`]: isSemiIcon(labelNode),
     });
 
-    return <div class={prefixWrapperCls} id={insetLabelId}>{labelNode}</div>;
+    return <div class={prefixWrapperCls} id={insetLabelId} x-semi-prop="prefix,insetLabel">{labelNode}</div>;
   };
 
   const renderCustomTrigger = () => {
@@ -943,7 +922,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     if (showClearBtn_) {
       return null;
     }
-    return arrowIcon ? <div class={cls(`${prefixcls}-arrow`)}>{arrowIcon}</div> : null;
+    return arrowIcon ? <div class={cls(`${prefixcls}-arrow`)} x-semi-prop="arrowIcon">{arrowIcon}</div> : null;
   };
 
   const renderSelection = () => {
@@ -1035,18 +1014,19 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       stopPropagation,
       mouseLeaveDelay,
       mouseEnterDelay,
+      position,
+      motion
     } = props;
     const { isOpen, rePosKey } = state;
-    const { direction } = context;
+    const { direction } = context.value;
     const content = renderContent();
     const selection = renderSelection();
     const pos = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
-    const mergedMotion: Motion = foundation.getMergedMotion();
     return (
       <Popover
         getPopupContainer={getPopupContainer}
         zIndex={zIndex}
-        motion={mergedMotion}
+        motion={motion}
         ref={optionsRef}
         content={content}
         visible={isOpen}
@@ -1057,6 +1037,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
         stopPropagation={stopPropagation}
         mouseLeaveDelay={mouseLeaveDelay}
         mouseEnterDelay={mouseEnterDelay}
+        afterClose={()=>foundation.updateSearching(false)}
       >
         {selection}
       </Popover>

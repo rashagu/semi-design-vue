@@ -12,7 +12,7 @@ import ModalContentFoundation, {
     ModalContentProps,
     ModalContentState
 } from '@douyinfe/semi-foundation/modal/modalContentFoundation';
-import { get, isFunction, noop } from 'lodash';
+import {get, isFunction, isNumber, noop} from 'lodash';
 import { IconClose } from '@kousum/semi-icons-vue';
 import FocusTrapHandle from "@douyinfe/semi-foundation/utils/FocusHandle";
 import {
@@ -25,7 +25,7 @@ import {
     reactive,
     ref,
     useSlots,
-    VNode
+    VNode, VNodeRef
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
@@ -38,12 +38,17 @@ export interface ModalContentReactProps extends ModalContentProps {
 
 
 const propTypes = {
+    onClose: Function,
     close: PropTypes.func,
     getContainerContext: PropTypes.func,
     contentClassName: PropTypes.string,
     maskClassName: PropTypes.string,
     onAnimationEnd: PropTypes.func,
     preventScroll: PropTypes.bool,
+    isFullScreen: PropTypes.bool,
+    maskExtraProps: Object,
+    contentExtraProps: Object,
+
     title: PropTypes.any,
     afterClose: Function,
     bodyStyle: Object,
@@ -91,7 +96,6 @@ const propTypes = {
     keepDOM: PropTypes.bool,
     direction: PropTypes.any,
     fullScreen: PropTypes.bool,
-    onClose: Function
 };
 const defaultProps = {
     close: noop,
@@ -101,7 +105,6 @@ const defaultProps = {
     maskClassName: ''
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-console.log(vuePropsType)
 const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
 
     const slots = useSlots()
@@ -117,7 +120,7 @@ const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
     let dialogId: string = `dialog-${uuid++}`;
     const modalDialogRef = ref();
 
-    const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<ModalContentReactProps>(props, state)
+    const {adapter: adapterInject} = useBaseComponent<ModalContentReactProps>(props, state)
     function adapter_(): ModalContentAdapter {
         return {
             ...adapterInject<ModalContentReactProps, ModalContentState>(),
@@ -281,7 +284,6 @@ const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
     };
 
     const renderBody = () => {
-        const children = slots.default?.()
         const {
             bodyStyle,
             title,
@@ -294,13 +296,17 @@ const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
         const hasHeader = title !== null && title !== undefined || 'header' in props;
         return hasHeader ? (
           <div class={bodyCls} id={`${cssClasses.DIALOG}-body`} style={bodyStyle} x-semi-prop="children">
-              {children}
+              {{
+                  default: slots.default
+              }}
           </div>
         ) : (
           <div class={`${cssClasses.DIALOG}-body-wrapper`}>
               {icon}
               <div class={bodyCls} style={bodyStyle} x-semi-prop="children">
-                  {children}
+                  {{
+                      default: slots.default
+                  }}
               </div>
               {closer}
           </div>
@@ -314,10 +320,10 @@ const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
             [`${cssClasses.DIALOG}-${props.size}`]: props.size,
         });
         if (props.width) {
-            style.width = props.width;
+            style.width = isNumber(props.width)?props.width + 'px':props.width;
         }
         if (props.height) {
-            style.height = props.height;
+            style.height = isNumber(props.height)?props.height + 'px':props.height;
         }
         if (props.isFullScreen) {
             style.width = '100%';
@@ -389,6 +395,7 @@ const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
                 })}
                 onClick={maskClosable ? onMaskClick : null}
                 onMouseup={maskClosable ? onMaskMouseUp : null}
+                {...props.contentExtraProps}
               >
                   {getDialogElement()}
               </div>

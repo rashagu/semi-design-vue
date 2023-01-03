@@ -86,9 +86,9 @@ export const vuePropsType = {
 const Text = defineComponent<TextProps>((props, {slots}) => {
 
   return () => {
-    return <Base component_={'span'} {...props} >
+    return <Base children={slots.default?.()} component_={'span'} {...props} >
       {{
-        default:()=>slots.default?slots.default():null
+        default: slots.default
       }}
     </Base>;
   }

@@ -97,7 +97,7 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
     const state = reactive<NavItemState>({
         tooltipShow: false,
     })
-    const {cache, adapter: adapterInject, log, context: context_, isControlled} = useBaseComponent<NavItemProps>(props, state)
+    const {adapter: adapterInject} = useBaseComponent<NavItemProps>(props, state)
 
     const foundation = new ItemFoundation(adapter());
 

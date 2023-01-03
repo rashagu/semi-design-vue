@@ -21,6 +21,8 @@ export interface TagGroupProps {
   popoverProps?: PopoverProps;
   avatarShape?: AvatarShape;
   mode?: string; // TODO: This API is not in the check file
+  onTagClose?: (tagChildren: VueJsxNode, event: MouseEvent, tagKey: string | number) => void;
+  onPlusNMouseEnter?: () => void
 }
 
 
@@ -47,6 +49,8 @@ export const vuePropsType = {
     type: String,
     default: 'square'
   },
+  onTagClose: Function,
+  onPlusNMouseEnter: Function,
 }
 const Group = defineComponent<TagGroupProps>((props, {slots}) => {
 

@@ -87,7 +87,7 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
   //     })
   //   }
   // }, {deep: true})
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<SpinProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<SpinProps>(props, state)
   function adapter() {
     return {
       ...adapterInject<SpinProps, SpinState>(),

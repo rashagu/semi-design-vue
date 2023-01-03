@@ -31,6 +31,7 @@ import {isSemiIcon} from '../_utils/index';
 const LocaleConsumerDom = LocaleConsumer_()
 
 export interface BaseTypographyProps extends BaseProps {
+  children: any,
   copyable?: CopyableConfig | boolean;
   delete?: boolean;
   disabled?: boolean;
@@ -66,6 +67,7 @@ const ELLIPSIS_STR = '...';
 
 
 export const vuePropsType = {
+  children: [Object, Array, Function],
   style: {
     type: [Object, String],
     default: {}
@@ -199,7 +201,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
   function getDerivedStateFromProps(props: BaseTypographyProps, prevState: BaseTypographyState) {
     const {prevChildren} = prevState;
     const newState: Partial<BaseTypographyState> = {};
-    const children = slots.default?.()
+    const children = props.children
     newState.prevChildren = children;
 
     if (props.ellipsis && prevChildren !== children) {
@@ -301,7 +303,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
   function getEllipsisState() {
     const {rows, suffix, pos} = getEllipsisOpt();
-    const children = slots.default?.()
+    const children = props.children
     // wait until element mounted
     if (!wrapperRef || !wrapperRef.current) {
       onResize();
@@ -482,7 +484,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
   const renderEllipsisText = (opt: Ellipsis) => {
     const {suffix} = opt;
-    const children = slots.default ? slots.default() : null;
+    const children = props.children
 
     const {isTruncated, expanded, isOverflowed, ellipsisContent} = state;
     // console.debug(suffix)
@@ -515,7 +517,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
   function renderCopy() {
     const {copyable,} = props;
-    const children = slots.default ? slots.default() : null
+    const children = props.children
     // console.log(children)
     if (!copyable) {
       return null;
@@ -582,7 +584,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       heading,
       ...rest
     } = props;
-    const children = slots.default ? slots.default() : null;
+    const children = props.children
     const textProps = omit(rest, [
       'strong',
       'editable',
@@ -590,6 +592,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       'copyable',
       'underline',
       'code',
+      'children',
       // 'link',
       'delete',
     ]);
@@ -641,7 +644,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
 
   function renderTipWrapper() {
-    const children = slots.default ? slots.default() : null;
+    const children = props.children
     const showTooltip_ = showTooltip();
     const content = renderContent();
     if (showTooltip_) {

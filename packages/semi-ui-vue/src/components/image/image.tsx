@@ -7,10 +7,10 @@ import PreviewInner from "./previewInner";
 import ImageFoundation, {ImageAdapter} from "@douyinfe/semi-foundation/image/imageFoundation";
 import LocaleConsumer_ from "../locale/localeConsumer";
 import {Locale} from "../locale/interface";
-import {isObject} from "lodash";
+import {isBoolean, isObject, isUndefined} from "lodash";
 import Skeleton from "../skeleton";
 import "@douyinfe/semi-foundation/image/image.scss";
-import {defineComponent, h, reactive, useSlots, watch} from "vue";
+import {defineComponent, getCurrentInstance, h, reactive, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {usePreviewContext} from "./previewContext/Consumer";
 import {useBaseComponent} from "../_base/baseComponent";
@@ -57,13 +57,13 @@ const Image = defineComponent<ImageProps>((props, {}) => {
     return {
       ...adapterInject<ImageProps, ImageStates>(),
       getIsInGroup: () => isInGroup(),
-      getContexts: () => context.value,
-      getContext: key => { // eslint-disable-line
-        if (context.value && key) {
-          // @ts-ignore
-          return context.value[key];
-        }
-      }
+      // getContexts: () => context.value,
+      // getContext: key => { // eslint-disable-line
+      //   if (context.value && key) {
+      //     // @ts-ignore
+      //     return context.value[key];
+      //   }
+      // }
     };
   }
 
@@ -79,17 +79,23 @@ const Image = defineComponent<ImageProps>((props, {}) => {
       willUpdateStates.loadStatus = "loading";
     }
 
+    if (isObject(props.preview)) {
+      const { visible } = props.preview;
+      if (isBoolean(visible)) {
+        willUpdateStates.previewVisible = visible;
+      }
+    }
     return willUpdateStates;
   }
 
-  watch(() => props.src, (val) => {
+  watch([() => props.src, ()=>props.preview], () => {
     const newState = getDerivedStateFromProps(props, state)
     if (newState) {
       Object.keys(newState).forEach(key => {
         state[key] = newState[key]
       })
     }
-  }, {immediate: true})
+  }, {immediate: true, deep: true})
 
   function isInGroup() {
     return Boolean(context && context.value.isGroup);
@@ -186,7 +192,7 @@ const Image = defineComponent<ImageProps>((props, {}) => {
 
   return () => {
     const {src, loadStatus, previewVisible} = state;
-    const {width, height, alt, style, className, crossOrigin, preview} = props;
+    const { src: picSrc, width, height, alt, style, className, crossOrigin, preview, fallback, placeholder, imageID, ...restProps } = props;
     const outerStyle = Object.assign({width, height}, style);
     const outerCls = cls(prefixCls, className);
     const canPreview = loadStatus === "success" && preview && !isInGroup();
@@ -202,6 +208,7 @@ const Image = defineComponent<ImageProps>((props, {}) => {
         onClick={handleClick}
       >
         <img
+          {...restProps}
           src={isInGroup() && isLazyLoad() ? undefined : src}
           data-src={src}
           alt={alt}
@@ -222,6 +229,7 @@ const Image = defineComponent<ImageProps>((props, {}) => {
             src={previewSrc}
             visible={previewVisible}
             onVisibleChange={handlePreviewVisibleChange}
+            crossOrigin={!isUndefined(crossOrigin) ? crossOrigin : previewProps?.crossOrigin}
           />
         }
       </div>

@@ -96,7 +96,7 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
     showSecond: false
   })
 
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<ComboboxProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<ComboboxProps>(props, state)
 
   const foundation = new ComboboxFoundation(adapterInject());
 

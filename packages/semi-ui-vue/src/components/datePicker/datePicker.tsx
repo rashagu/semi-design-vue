@@ -20,12 +20,13 @@ import type { YearAndMonthProps } from './yearAndMonth';
 import '@douyinfe/semi-foundation/datePicker/datePicker.scss';
 import { Locale } from '../locale/interface';
 import type { TimePickerProps } from '../timePicker';
+import type { ScrollItemProps } from '../scrollList';
 import type { InsetInputValue, InsetInputChangeProps } from '@douyinfe/semi-foundation/datePicker/inputFoundation';
 import type {AriaAttributes} from "../AriaAttributes";
 import * as PropTypes from '../PropTypes'
 import {vuePropsMake} from "../PropTypes";
-import {RadioInnerProps} from "../radio/radioInner";
 import {VueJsxNode} from "../interface";
+import {useConfigContext} from "../configProvider/context/Consumer";
 
 
 export interface DatePickerProps extends DatePickerFoundationProps {
@@ -49,6 +50,7 @@ export interface DatePickerProps extends DatePickerFoundationProps {
   onPresetClick?: (item: PresetType, e: MouseEvent) => void;
   locale?: Locale['DatePicker'];
   dateFnsLocale?: Locale['dateFnsLocale'];
+  yearAndMonthOpts?: ScrollItemProps<any>
 }
 
 export type DatePickerState = DatePickerFoundationState;
@@ -128,6 +130,8 @@ const propTypes = {
   // Callback function for panel date switching
   onPanelChange: PropTypes.func,
   rangeSeparator: PropTypes.string,
+  preventScroll: PropTypes.bool,
+  yearAndMonthOpts: PropTypes.object,
   locale: Object,
 };
 
@@ -170,10 +174,9 @@ const defaultProps = {
   insetInput: false
 };
 export const vuePropsTypeDatePickerProps = vuePropsMake(propTypes, defaultProps)
-console.log(vuePropsTypeDatePickerProps)
+
 const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   const slots = useSlots()
-  console.log(props)
 
   let clickOutSideHandler: (e: MouseEvent) => void;
   let _mounted: boolean;
@@ -184,7 +187,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     value: [], // The currently selected date, each date is a Date object
     cachedSelectedValue: null, // Save last selected date, maybe include null
     prevTimeZone: null,
-    motionEnd: false, // Monitor if popover animation ends
+    // motionEnd: false, // Monitor if popover animation ends
     rangeInputFocus: undefined, // Optional'rangeStart ',' rangeEnd ', false
     autofocus: props.autoFocus || (isRangeType(props.type, props.triggerRender) && (props.open || props.defaultOpen)),
     insetInputValue: null,
@@ -204,7 +207,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     }
   });
 
-  const {cache, adapter: adapterInject, log, context: context_, isControlled} = useBaseComponent<DatePickerProps>(props, state)
+  const {adapter: adapterInject, isControlled} = useBaseComponent<DatePickerProps>(props, state)
 
   const foundation = new DatePickerFoundation(adapter());
 
@@ -242,7 +245,6 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       },
       notifyBlur: (...args) => props.onBlur(...args),
       notifyFocus: (...args) => {
-        console.log(props.onFocus)
         props.onFocus(...args)
       },
       notifyClear: (...args) => props.onClear(...args),
@@ -272,7 +274,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       needConfirm: () =>
         ['dateTime', 'dateTimeRange'].includes(props.type) && props.needConfirm === true,
       typeIsYearOrMonth: () => ['month', 'year'].includes(props.type),
-      setMotionEnd: motionEnd => state.motionEnd = motionEnd,
+      // setMotionEnd: motionEnd => state.motionEnd = motionEnd,
       setRangeInputFocus: rangeInputFocus => {
         if (rangeInputFocus !== state.rangeInputFocus) {
           state.rangeInputFocus = rangeInputFocus;
@@ -299,7 +301,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
             }, 0);
             break;
           case 'rangeEnd':
-            console.log(rangeInputEndRef.value)
+            // console.log(rangeInputEndRef.value)
             const inputEndNode = rangeInputEndRef.value;
             inputEndNode && inputEndNode.focus();
             /**
@@ -326,10 +328,10 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       couldPanelClosed: () => focusRecordsRef.value.current.rangeStart && focusRecordsRef.value.current.rangeEnd,
       isEventTarget: e => e && e.target === e.currentTarget,
       setInsetInputFocus: () => {
+        const { preventScroll } = props;
         const { rangeInputFocus } = state;
         switch (rangeInputFocus) {
           case 'rangeEnd':
-            console.log(rangeInputEndRef.value)
             if (document.activeElement !== rangeInputEndRef.value) {
               const inputEndNode = rangeInputEndRef.value;
               inputEndNode && inputEndNode.focus();
@@ -337,10 +339,9 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
             break;
           case 'rangeStart':
           default:
-            console.log(rangeInputEndRef.value)
             if (document.activeElement !== rangeInputEndRef.value) {
               const inputStartNode = rangeInputStartRef.value;
-              inputStartNode && inputStartNode.focus();
+              inputStartNode && inputStartNode.focus({ preventScroll });
             }
             break;
         }
@@ -357,10 +358,18 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     return /range/i.test(type) && !isFunction(triggerRender);
   }
 
-  watch(()=>props.value, ()=>{
-    foundation.initFromProps({
-      ...props,
-    });
+  watch([()=>props.value, ()=>props.timeZone], ([prevPropsValue, prevPropsTimeZone])=>{
+    if (prevPropsValue !== props.value) {
+      foundation.initFromProps({
+        ...props,
+      });
+    }else if (props.timeZone !== prevPropsTimeZone) {
+      foundation.initFromProps({
+        value: state.value,
+        timeZone: props.timeZone,
+        prevTimeZone: prevPropsTimeZone,
+      });
+    }
   })
 
   watch(()=>props.open, ()=>{
@@ -415,9 +424,11 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       onPanelChange,
       timeZone,
       triggerRender,
-      insetInput
+      insetInput,
+      presetPosition,
+      yearAndMonthOpts
     } = props;
-    const { cachedSelectedValue, motionEnd, rangeInputFocus } = state;
+    const { cachedSelectedValue, rangeInputFocus } = state;
 
     const defaultValue = cachedSelectedValue;
     return (
@@ -445,7 +456,6 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
         startDateOffset={startDateOffset}
         endDateOffset={endDateOffset}
         autoSwitchDate={autoSwitchDate}
-        motionEnd={motionEnd}
         density={density}
         rangeInputFocus={rangeInputFocus}
         setRangeInputFocus={handleSetRangeFocus}
@@ -456,6 +466,10 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
         focusRecordsRef={focusRecordsRef}
         triggerRender={triggerRender}
         insetInput={insetInput}
+        presetPosition={presetPosition}
+        renderQuickControls={renderQuickControls()}
+        renderDateInput={renderDateInput()}
+        yearAndMonthOpts={yearAndMonthOpts}
       />
     );
   }
@@ -470,6 +484,29 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       />
     );
   }
+  function renderDateInput() {
+    const { insetInput, dateFnsLocale, density, type, format, rangeSeparator, defaultPickerValue } = props;
+    const { insetInputValue, value } = state;
+
+    const insetInputProps = {
+      dateFnsLocale,
+      format,
+      insetInputValue,
+      rangeSeparator,
+      type,
+      value: value as Date[],
+      handleInsetDateFocus: handleInsetDateFocus,
+      handleInsetTimeFocus: handleInsetTimeFocus,
+      onInsetInputChange: handleInsetInputChange,
+      rangeInputStartRef: rangeInputStartRef.value,
+      rangeInputEndRef: rangeInputEndRef.value,
+      density,
+      defaultPickerValue
+    };
+
+    return insetInput ? <DateInput {...insetInputProps} insetInput={true} /> : null;
+  }
+
 
   const handleOpenPanel = () => foundation.openPanel();
   const handleInputChange: DatePickerFoundation['handleInputChange'] = (...args) => foundation.handleInputChange(...args);
@@ -477,7 +514,6 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   const handleInputComplete: DatePickerFoundation['handleInputComplete'] = v => foundation.handleInputComplete(v);
   const handleInputBlur: DateInputProps['onBlur'] = e => foundation.handleInputBlur(get(e, 'target.value'), e);
   const handleInputFocus: DatePickerFoundation['handleInputFocus'] = (...args) => {
-    console.log(args)
     foundation.handleInputFocus(...args)
   };
   const handleInputClear: DatePickerFoundation['handleInputClear'] = e => foundation.handleInputClear(e);
@@ -701,9 +737,9 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   const wrapPopover = (children: VueJsxNode) => {
     const { panelShow } = state;
     // rtl changes the default position
-    // const { direction } = context;
+    const { context } = useConfigContext();
     // TODO
-    let direction = 'rtl'
+    let direction = context.value.direction
     const defaultPosition = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
     const {
       motion,
@@ -717,14 +753,14 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       autoAdjustOverflow,
       spacing,
     } = props;
-    const mergedMotion = foundation.getMergedMotion(motion);
+    // const mergedMotion = foundation.getMergedMotion(motion);
     return (
       <Popover
         getPopupContainer={getPopupContainer}
         // wrapWhenSpecial={false}
         autoAdjustOverflow={autoAdjustOverflow}
         zIndex={zIndex}
-        motion={mergedMotion}
+        motion={motion}
         content={renderPanel(locale, localeCode, dateFnsLocale)}
         trigger="custom"
         position={position}

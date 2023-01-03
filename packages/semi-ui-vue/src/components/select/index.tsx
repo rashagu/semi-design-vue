@@ -21,8 +21,10 @@ import {isEqual, isString, noop, get, isNumber} from 'lodash';
 import Tag from '../tag';
 import TagGroup from '../tag/group';
 import LocaleConsumer_ from '../locale/localeConsumer';
-import Popover from '../popover';
+import Popover from '../popover/index';
+import type { PopoverProps } from '../popover';
 import {numbers as popoverNumbers} from '@douyinfe/semi-foundation/popover/constants';
+import Event from '@douyinfe/semi-foundation/utils/Event';
 import {getOptionsFromGroup} from './utils';
 import VirtualRow from './virtualRow';
 
@@ -45,6 +47,7 @@ import type {Position} from '@douyinfe/semi-foundation/tooltip/foundation';
 import type {TooltipProps} from '../tooltip';
 import {AriaAttributes} from "../AriaAttributes";
 import {vuePropsMake} from "../PropTypes";
+import {VueJsxNode} from "../interface";
 
 export type {OptionGroupProps} from './optionGroup';
 export type {VirtualRowProps} from './virtualRow';
@@ -108,7 +111,8 @@ export type SelectProps = {
   id?: string;
   autoFocus?: boolean;
   autoClearSearchValue?: boolean;
-  arrowIcon?: VNode;
+  arrowIcon?: VueJsxNode;
+  clearIcon?: VueJsxNode;
   defaultValue?: string | number | any[] | Record<string, any>;
   value?: string | number | any[] | Record<string, any>;
   placeholder?: VNode | string;
@@ -129,6 +133,7 @@ export type SelectProps = {
   onSearch?: (value: string) => void;
   dropdownClassName?: string;
   dropdownStyle?: CSSProperties;
+  dropdownMargin?: PopoverProps['margin'];
   outerTopSlot?: VNode;
   innerTopSlot?: VNode;
   outerBottomSlot?: VNode;
@@ -166,6 +171,8 @@ export type SelectProps = {
   onBlur?: (e: FocusEvent) => void;
   onListScroll?: (e: Event) => void;
   preventScroll?: boolean;
+  showRestTagsPopover?: boolean;
+  restTagsPopoverProps?: PopoverProps
 } & Pick<TooltipProps,
   | 'spacing'
   | 'getPopupContainer'
@@ -281,9 +288,10 @@ const propTypes = {
   // open: PropTypes.bool,
   // tagClosable: PropTypes.bool,
 
+  showRestTagsPopover: PropTypes.bool,
+  restTagsPopoverProps: PropTypes.object,
+
   id: String,
-
-
 
 };
 
@@ -327,6 +335,10 @@ const defaultProps: Partial<SelectProps> = {
   // renderSelectedItem: (optionNode) => optionNode.label,
   // The default creator rendering is related to i18, so it is not declared here
   // renderCreateItem: (input) => input
+
+
+  showRestTagsPopover: false,
+  restTagsPopoverProps: {},
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Index = defineComponent<SelectProps>((props, {}) => {
@@ -346,6 +358,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
     optionGroups: [],
     isHovering: false,
     isFocusInContainer: false,
+    isFullTags: false,
   })
   let selectOptionListID = '';
   let selectID = '';
@@ -368,7 +381,9 @@ const Index = defineComponent<SelectProps>((props, {}) => {
     '[Semi Select] \'labelInValue\' has already been deprecated, please use \'onChangeWithObject\' instead.'
   );
 
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<SelectProps>(props, state)
+  const eventManager = new Event();
+  // TODO context
+  const {adapter: adapterInject, context: context_} = useBaseComponent<SelectProps>(props, state)
   const setOptionContainerEl = (node: HTMLDivElement) => (optionContainerEl.value = node);
 
   function adapter(): SelectAdapter<SelectProps, SelectState> {
@@ -401,8 +416,9 @@ const Index = defineComponent<SelectProps>((props, {}) => {
         })
       },
       focusInput: () => {
+        const { preventScroll } = props;
         if (inputRef.value && inputRef.value.$el) {
-          inputRef.value.$el.children[0].focus();
+          inputRef.value.$el.children[0].focus({preventScroll});
         }
       },
     };
@@ -447,6 +463,10 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       ...keyboardAdapter,
       ...filterAdapter,
       ...multipleAdapter,
+      on: (eventName, eventCallback) => eventManager.on(eventName, eventCallback),
+      off: (eventName) => eventManager.off(eventName),
+      once: (eventName, eventCallback) => eventManager.once(eventName, eventCallback),
+      emit: (eventName) => eventManager.emit(eventName),
       // Collect all subitems, each item is visible by default when collected, and is not selected
       //slots.default?slots.default():null
       getOptionsFromChildren: (children = slots.default?.()) => {
@@ -490,7 +510,6 @@ const Index = defineComponent<SelectProps>((props, {}) => {
         return el && el.getBoundingClientRect().width;
       },
       setOptionWrapperWidth: (width: number) => {
-        console.log(width)
         state.dropdownMinWidth = width
       },
       updateSelection: (selections: Map<OptionProps['label'], any>) => {
@@ -503,7 +522,6 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       getSelections: () => new Map(state.selections),
 
       notifyChange: (value: OnChangeValueType | OnChangeValueType[]) => {
-        console.log(props)
         props.onChange(value);
       },
       notifySelect: (value: OptionProps['value'], option: OptionProps) => {
@@ -545,8 +563,9 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       },
       focusTrigger: () => {
         try {
+          const { preventScroll } = props;
           const el = (triggerRef.value) as any;
-          el.focus();
+          el.focus({preventScroll});
         } catch (error) {
 
         }
@@ -604,9 +623,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
   onUnmounted(() => {
     foundation.destroy();
   })
-  watch(()=>slots.default, ()=>{
-    console.log(slots.default)
-  })
+
 
   watch([() => props.value, () => props.optionList], ([prevPropsValue, prevPropsOptionList],) => {
     const instance = getCurrentInstance()
@@ -640,13 +657,13 @@ const Index = defineComponent<SelectProps>((props, {}) => {
   };
 
   function renderInput() {
-    const {size, multiple, disabled, inputProps} = props;
+    const {size, multiple, disabled, inputProps, filter} = props;
     const inputPropsCls = get(inputProps, 'className');
     const inputcls = cls(`${prefixcls}-input`, {
       [`${prefixcls}-input-single`]: !multiple,
       [`${prefixcls}-input-multiple`]: multiple,
     }, inputPropsCls);
-    const {inputValue} = state;
+    const { inputValue, focusIndex } = state;
 
     const selectInputProps: Record<string, any> = {
       value: inputValue,
@@ -668,7 +685,11 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       <Input
         ref={inputRef as any}
         size={size}
+        aria-activedescendant={focusIndex !== -1 ? `${selectID}-option-${focusIndex}`: ''}
         onFocus={(e: FocusEvent) => {
+          if (multiple && Boolean(filter)){
+            state.isFocus = true
+          }
           // prevent event bubbling which will fire trigger onFocus event
           e.stopPropagation();
           // e.nativeEvent.stopImmediatePropagation();
@@ -756,6 +777,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
           key={option.key || option.label as string + option.value as string + optionIndex}
           renderOptionItem={renderOptionItem}
           inputValue={inputValue}
+          id={`${selectID}-option-${optionIndex}`}
         >
           {option.label}
         </Option>
@@ -831,7 +853,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
 
   function renderVirtualizeList(visibleOptions: OptionProps[]) {
     const {virtualize} = props;
-    const {direction} = context_;
+    const {direction} = context_.value;
     const {height, width, itemSize} = virtualize;
 
     return (
@@ -862,6 +884,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       loading,
       virtualize,
       multiple,
+      emptyContent
     } = props;
 
 
@@ -881,7 +904,13 @@ const Index = defineComponent<SelectProps>((props, {}) => {
 
     const isEmpty = !options.length || !options.some(item => item._show);
     return (
-      <div id={`${prefixcls}-${selectOptionListID}`} class={dropdownClassName} style={style}>
+      <div
+        id={`${prefixcls}-${selectOptionListID}`}
+        class={dropdownClassName}
+        style={style}
+        ref={setOptionContainerEl as any}
+        onKeydown={e => foundation.handleContainerKeyDown(e)}
+      >
         {outerTopSlot}
         <div
           style={{maxHeight: `${maxHeight}px`}}
@@ -891,8 +920,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
           onScroll={e => foundation.handleListScroll(e)}
         >
           {innerTopSlot}
-          {!loading ? listContent : renderLoading()}
-          {isEmpty && !loading ? renderEmpty() : null}
+          {loading ? renderLoading() : isEmpty ? renderEmpty() : listContent}
           {innerBottomSlot}
         </div>
         {outerBottomSlot}
@@ -926,18 +954,52 @@ const Index = defineComponent<SelectProps>((props, {}) => {
 
     const contentWrapperCls = `${prefixcls}-content-wrapper`;
     return (
-      <div class={contentWrapperCls}>
-        {<span class={spanCls}>{renderText || renderText === 0 ? renderText : placeholder}</span>}
-        {filterable && showInput ? renderInput() : null}
-      </div>
+      <Fragment>
+        <div class={contentWrapperCls}>
+          {
+            <span class={spanCls} x-semi-prop="placeholder">
+              {renderText || renderText === 0 ? renderText : placeholder}
+            </span>
+          }
+          {filterable && showInput ? renderInput() : null}
+        </div>
+      </Fragment>
     );
+  }
+
+
+  const getTagItem = (item: any, i: number, renderSelectedItem: RenderSelectedItemFn) => {
+    const { size, disabled: selectDisabled } = props;
+    const label = item[0];
+    const { value } = item[1];
+    const disabled = item[1].disabled || selectDisabled;
+    const onClose = (tagContent: VueJsxNode, e: MouseEvent) => {
+      if (e && typeof e.preventDefault === 'function') {
+        e.preventDefault(); // make sure that tag will not hidden immediately in controlled mode
+      }
+      foundation.removeTag({ label, value });
+    };
+    const { content, isRenderInTag } = (renderSelectedItem as RenderMultipleSelectedItemFn)(item[1], { index: i, disabled, onClose });
+    const basic = {
+      disabled,
+      closable: !disabled,
+      onClose,
+    };
+    if (isRenderInTag) {
+      return (
+        <Tag {...basic} color="white" size={size || 'large'} key={value} tabIndex={-1}>
+          {content}
+        </Tag>
+      );
+    } else {
+      return <Fragment key={value}>{content}</Fragment>;
+    }
   }
 
   function renderMultipleSelection(selections: Map<OptionProps['label'], any>, filterable: boolean) {
     let {renderSelectedItem} = props;
-    const {placeholder, maxTagCount, size} = props;
-    const {inputValue} = state;
-    const selectDisabled = props.disabled;
+    const { showRestTagsPopover, restTagsPopoverProps, placeholder, maxTagCount } = props;
+    const { inputValue, isFullTags } = state;
     const renderTags = [];
 
     const selectedItems = [...selections];
@@ -949,39 +1011,62 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       });
     }
 
-    const mapItems = maxTagCount ? selectedItems.slice(0, maxTagCount) : selectedItems; // no need to render rest tag when maxTagCount is setting
 
-    const tags = mapItems.map((item, i) => {
-      const label = item[0];
-      const {value} = item[1];
-      const disabled = item[1].disabled || selectDisabled;
-      const onClose = (tagContent: VNode, e: MouseEvent) => {
-        if (e && typeof e.preventDefault === 'function') {
-          e.preventDefault(); // make sure that tag will not hidden immediately in controlled mode
-        }
-        foundation.removeTag({label, value});
-      };
-      const {content, isRenderInTag} = (renderSelectedItem as RenderMultipleSelectedItemFn)(item[1], {
-        index: i,
-        disabled,
-        onClose
+    let mapItems = [];
+    let tags = [];
+    let tagContent: VueJsxNode;
+    if (!isNumber(maxTagCount)) {
+      // maxTagCount is not set, all tags are displayed
+      mapItems = selectedItems;
+      tags = mapItems.map((item, i) => {
+        return getTagItem(item, i, renderSelectedItem);
       });
-      const basic = {
-        disabled,
-        closable: !disabled,
-        onClose,
-      };
-      if (isRenderInTag) {
-        return (
-          <Tag {...basic} color="white" size={size || 'large'} key={value}>
-            {content}
-          </Tag>
+      tagContent = tags;
+    } else {
+      // maxTagCount is set
+      if (showRestTagsPopover) {
+        // showRestTagsPopover = true，
+        mapItems = isFullTags ? selectedItems : selectedItems.slice(0, maxTagCount);
+        tags = mapItems.map((item, i) => {
+          return getTagItem(item, i, renderSelectedItem);
+        });
+        const n = selectedItems.length > maxTagCount ? maxTagCount : undefined;
+
+        tagContent = (
+          <TagGroup
+            tagList={tags}
+            maxTagCount={n}
+            restCount={isFullTags ? undefined : (selectedItems.length - maxTagCount)}
+            size="large"
+            mode="custom"
+            showPopover={showRestTagsPopover}
+            popoverProps={restTagsPopoverProps}
+            onPlusNMouseEnter={() => {
+              foundation.updateIsFullTags();
+            }}
+          />
         );
       } else {
-        return <Fragment key={value}>{content}</Fragment>;
-      }
-    });
+        // If maxTagCount is set, showRestTagsPopover is false/undefined,
+        // then there is no popover when hovering, no extra Tags are displayed,
+        // only the tags and restCount displayed in the trigger need to be passed in
+        mapItems = selectedItems.slice(0, maxTagCount);
+        const n = selectedItems.length > maxTagCount ? maxTagCount : undefined;
+        tags = mapItems.map((item, i) => {
+          return getTagItem(item, i, renderSelectedItem);
+        });
 
+        tagContent = (
+          <TagGroup
+            tagList={tags}
+            maxTagCount={n}
+            restCount={selectedItems.length - maxTagCount}
+            size="large"
+            mode="custom"
+          />
+        );
+      }
+    }
     const contentWrapperCls = cls({
       [`${prefixcls}-content-wrapper`]: true,
       [`${prefixcls}-content-wrapper-one-line`]: maxTagCount,
@@ -995,13 +1080,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       // [prefixcls + '-selection-text-inactive']: !inputValue && !tags.length,
     });
     const placeholderText = placeholder && !inputValue ? <span class={spanCls}>{placeholder}</span> : null;
-    const n = selectedItems.length > maxTagCount ? maxTagCount : undefined;
 
-    const NotOneLine = !maxTagCount; // Multiple lines (that is, do not set maxTagCount), do not use TagGroup, directly traverse with Tag, otherwise Input cannot follow the correct position
-
-    const tagContent = NotOneLine ? tags :
-      <TagGroup tagList={tags} maxTagCount={n} restCount={maxTagCount ? selectedItems.length - maxTagCount : undefined}
-                size="large" mode="custom"/>;
 
     return (
       <div class={contentWrapperCls}>
@@ -1059,7 +1138,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       [`${prefixcls}-suffix-text`]: suffix && isString(suffix),
       [`${prefixcls}-suffix-icon`]: isSemiIcon(suffix),
     });
-    return <div class={suffixWrapperCls}>{suffix}</div>;
+    return <div class={suffixWrapperCls} x-semi-prop="suffix">{suffix}</div>;
   }
 
   function renderPrefix() {
@@ -1073,7 +1152,9 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       [`${prefixcls}-prefix-icon`]: isSemiIcon(labelNode),
     });
 
-    return <div class={prefixWrapperCls} id={insetLabelId}>{labelNode}</div>;
+    return <div class={prefixWrapperCls} id={insetLabelId} x-semi-prop="prefix,insetLabel">
+      {labelNode}
+    </div>;
   }
 
   function renderSelection() {
@@ -1093,9 +1174,10 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       placeholder,
       triggerRender,
       arrowIcon,
+      clearIcon
     } = props;
 
-    const {selections, isOpen, keyboardEventSet, inputValue, isHovering, isFocus} = state;
+    const { selections, isOpen, keyboardEventSet, inputValue, isHovering, isFocus, showInput, focusIndex } = state;
     const useCustomTrigger = typeof triggerRender === 'function';
     const filterable = Boolean(filter); // filter（boolean || function）
     const selectionCls = useCustomTrigger ?
@@ -1120,12 +1202,13 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       (selections.size || inputValue) && !disabled && (isHovering || isOpen);
 
     const arrowContent = showArrow ? (
-      <div class={`${prefixcls}-arrow`}>
+      <div class={`${prefixcls}-arrow`} x-semi-prop="arrowIcon">
         {arrowIcon}
       </div>
     ) : (
       <div class={`${prefixcls}-arrow-empty`}/>
     );
+    const clear = clearIcon ? clearIcon : <IconClear />;
     const inner = useCustomTrigger ? (
       <Trigger
         value={Array.from(selections.values())}
@@ -1149,24 +1232,27 @@ const Index = defineComponent<SelectProps>((props, {}) => {
           </div>
         </Fragment>,
         <Fragment key="clearicon">
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
           {showClear ? (
             <div
-              role="button"
-              aria-label="Clear selected value"
-              tabindex={0}
               class={cls(`${prefixcls}-clear`)}
               onClick={onClear}
-              onKeypress={onClearBtnEnterPress}
-            >
-              <IconClear/>
-            </div>
-          ) : arrowContent}
+            >{clear}
+            </div>) : arrowContent}
         </Fragment>,
         <Fragment key="suffix">{suffix ? renderSuffix() : null}</Fragment>,
       ]
     );
+    /**
+     *
+     * In disabled, searchable single-selection and display input, and searchable multi-selection
+     * make combobox not focusable by tab key
+     *
+     * 在disabled，可搜索单选且显示input框，以及可搜索多选情况下
+     * 让combobox无法通过tab聚焦
+     */
+    const tabIndex = (disabled || (filterable && showInput) || (filterable && multiple)) ? -1 : 0;
 
-    const tabIndex = disabled ? null : 0;
     return (
       <div
         role="combobox"
@@ -1186,9 +1272,10 @@ const Index = defineComponent<SelectProps>((props, {}) => {
         style={style}
         id={id}
         tabindex={tabIndex}
+        aria-activedescendant={focusIndex !== -1 ? `${selectID}-option-${focusIndex}`: ''}
         onMouseenter={onMouseEnter}
         onMouseleave={onMouseLeave}
-        // onFocus={e => foundation.handleTriggerFocus(e)}
+        onFocus={e => foundation.handleTriggerFocus(e)}
         onBlur={e => foundation.handleTriggerBlur(e as any)}
         onKeypress={onKeyPress}
         {...keyboardEventSet}
@@ -1200,7 +1287,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
 
 
   return () => {
-    const {direction} = context_;
+    const {direction} = context_.value;
     const defaultPosition = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
     const {
       position = defaultPosition,
@@ -1212,6 +1299,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       mouseEnterDelay,
       spacing,
       stopPropagation,
+      dropdownMargin,
     } = props;
     const {isOpen, optionKey} = state;
     const optionList = renderOptions(slots.default ? slots.default() : null);
@@ -1233,7 +1321,9 @@ const Index = defineComponent<SelectProps>((props, {}) => {
         position={position}
         spacing={spacing}
         stopPropagation={stopPropagation}
+        disableArrowKeyDown={true}
         onVisibleChange={status => handlePopoverVisibleChange(status)}
+        afterClose={() => foundation.handlePopoverClose()}
       >
         {selection}
       </Popover>

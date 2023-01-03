@@ -111,7 +111,7 @@ function scrollItemFunc<T extends Item>() {
     scrollAnimation = null;
 
     // cache if select action comes from outside
-    const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<ScrollItemProps<any>>(props, state)
+    const {adapter: adapterInject} = useBaseComponent<ScrollItemProps<any>>(props, state)
 
     /**
      *

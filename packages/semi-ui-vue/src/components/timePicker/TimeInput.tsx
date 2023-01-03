@@ -74,7 +74,7 @@ const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
   const state = reactive({
     // focusing: props.focusOnOpen,
   });
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<TimeInputProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<TimeInputProps>(props, state)
 
   function adapter(): TimeInputAdapter {
     return {

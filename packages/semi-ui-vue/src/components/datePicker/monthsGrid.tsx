@@ -19,6 +19,8 @@ import getDefaultPickerDate from '@douyinfe/semi-foundation/datePicker/_utils/ge
 import {DayStatusType, ValueType} from "@douyinfe/semi-foundation/datePicker/foundation";
 import {WeekStartNumber} from "@douyinfe/semi-foundation/datePicker/_utils/getMonthTable";
 import {VueJsxNode} from "../interface";
+import type { ScrollItemProps } from '../scrollList';
+import {vuePropsMake} from "../PropTypes";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -28,37 +30,36 @@ export interface MonthsGridProps extends MonthsGridFoundationProps, BaseProps {
   renderDate?: (dayNumber?: number, fullDate?: string) => VueJsxNode;
   renderFullDate?: (dayNumber?: number, fullDate?: string, dayStatus?: DayStatusType) => VueJsxNode;
   focusRecordsRef?: any;
+  yearAndMonthOpts?: ScrollItemProps<any>
 }
 
 export type MonthsGridState = MonthsGridFoundationState;
 
-export const vuePropsType = {
-  style: [Object,String],
-  className: String,
-  type: {type: PropTypes.string, default: 'date'},
-  defaultValue: [PropTypes.string, PropTypes.number, PropTypes.object, PropTypes.array],
-  defaultPickerValue: [
+const propTypes = {
+  type: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object, PropTypes.array]),
+  defaultPickerValue: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
     PropTypes.object,
     PropTypes.array,
-  ],
-  multiple: {type: PropTypes.bool, default: false},
+  ]),
+  multiple: PropTypes.bool,
   max: PropTypes.number, // only work when multiple is true
-  weekStartsOn: {type: PropTypes.number, default: numbers.WEEK_START_ON},
-  disabledDate: {type: PropTypes.func, default: stubFalse},
+  weekStartsOn: PropTypes.number,
+  disabledDate: PropTypes.func,
   disabledTime: PropTypes.func,
   disabledTimePicker: PropTypes.bool,
   hideDisabledOptions: PropTypes.bool,
   navPrev: PropTypes.node,
   navNext: PropTypes.node,
-  onMaxSelect: {type: PropTypes.func, default: noop},
+  onMaxSelect: PropTypes.func,
   timePickerOpts: PropTypes.object,
   // Whether the outer datePicker is a controlled component
   isControlledComponent: PropTypes.bool,
-  rangeStart: {type:PropTypes.string, default: ''},
-  rangeInputFocus: [PropTypes.bool, PropTypes.string],
-  locale: {type:PropTypes.object, default:()=>({})},
+  rangeStart: PropTypes.oneOfType([PropTypes.string]),
+  rangeInputFocus: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  locale: PropTypes.object,
   localeCode: PropTypes.string,
   format: PropTypes.string,
   renderDate: PropTypes.func,
@@ -66,22 +67,41 @@ export const vuePropsType = {
   startDateOffset: PropTypes.func,
   endDateOffset: PropTypes.func,
   autoSwitchDate: PropTypes.bool,
-  motionEnd: PropTypes.bool,
   density: PropTypes.string,
-  dateFnsLocale: PropTypes.object,
-  timeZone: [PropTypes.string, PropTypes.number],
+  dateFnsLocale: PropTypes.any,
+  timeZone: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   // Support synchronous switching of months
   syncSwitchMonth: PropTypes.bool,
   // Callback function for panel date switching
   onPanelChange: PropTypes.func,
   focusRecordsRef: PropTypes.object,
   triggerRender: PropTypes.func,
+  presetPosition: PropTypes.string,
+  renderQuickControls: PropTypes.node,
+  renderDateInput: PropTypes.node,
+
+  style: [Object,String],
+  className: String,
+  motionEnd: PropTypes.bool,
   splitPanels: Boolean,
   onChange: Function,
   setRangeInputFocus: Function,
   isAnotherPanelHasOpened: Function,
   insetInput: Boolean,
-}
+
+
+};
+
+const defaultProps = {
+  type: 'date',
+  rangeStart: '',
+  multiple: false,
+  weekStartsOn: numbers.WEEK_START_ON,
+  disabledDate: stubFalse,
+  onMaxSelect: noop,
+  locale: {},
+};
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
 
   const validFormat = props.format || getDefaultFormatTokenByType(props.type);
@@ -116,7 +136,7 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
     ...dateState,
     ...rangeState,
   });
-  const {cache, adapter: adapterInject, log, context: context_} = useBaseComponent<MonthsGridProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<MonthsGridProps>(props, state)
   const foundation: MonthsGridFoundation = new MonthsGridFoundation(adapter());
 
   function dateAdapter(): MonthsGridDateAdapter {
@@ -162,14 +182,14 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
     foundation.initDefaultPickerValue();
   })
 
-  watch(()=>props.motionEnd, (value)=>{
-    if (value === true){
-      if (foundation.isRangeType()) {
-        const currentPanelHeight = calcScrollListHeight();
-        state.currentPanelHeight = currentPanelHeight
-      }
-    }
-  })
+  // watch(()=>props.motionEnd, (value)=>{
+  //   if (value === true){
+  //     if (foundation.isRangeType()) {
+  //       const currentPanelHeight = calcScrollListHeight();
+  //       state.currentPanelHeight = currentPanelHeight
+  //     }
+  //   }
+  // })
 
   watch(state, (value, prevState, onCleanup)=>{
     const isRange = foundation.isRangeType();
@@ -231,14 +251,10 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
    * Calculate the height of the scrolling list, if the animation is not over, return 0
    */
   const calcScrollListHeight = () => {
-    const { motionEnd } = props;
-    let wrapLeft, wrapRight, switchLeft, switchRight;
-    if (motionEnd) {
-      wrapLeft = adapter().getCache(`wrap-${strings.PANEL_TYPE_LEFT}`);
-      wrapRight = adapter().getCache(`wrap-${strings.PANEL_TYPE_RIGHT}`);
-      switchLeft = adapter().getCache(`switch-${strings.PANEL_TYPE_LEFT}`);
-      switchRight = adapter().getCache(`switch-${strings.PANEL_TYPE_RIGHT}`);
-    }
+    const wrapLeft = adapter().getCache(`wrap-${strings.PANEL_TYPE_LEFT}`);
+    const wrapRight = adapter().getCache(`wrap-${strings.PANEL_TYPE_RIGHT}`);
+    const switchLeft = adapter().getCache(`switch-${strings.PANEL_TYPE_LEFT}`);
+    const switchRight = adapter().getCache(`switch-${strings.PANEL_TYPE_RIGHT}`);
 
     const leftRect = wrapLeft && wrapLeft.getBoundingClientRect();
     const rightRect = wrapRight && wrapRight.getBoundingClientRect();
@@ -329,7 +345,6 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
     // this.wrapRef.current.style.height = this.wrapRef.current.clientHeight + 'px';
     // this.wrapRef.current.style.overflow = 'hidden';
     // TODO
-    console.log(e)
     e.stopImmediatePropagation();
     foundation.showYearPicker(panelType);
   }

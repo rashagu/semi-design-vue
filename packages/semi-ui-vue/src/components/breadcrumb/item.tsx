@@ -78,11 +78,7 @@ const BreadcrumbItem = defineComponent<BreadcrumbItemProps>((props, {}) => {
   const state = reactive<BreadcrumbItemState>({})
   const {context} = useBreadContext()
   const {
-    cache,
     adapter: adapterInject,
-    log,
-    context: context_,
-    isControlled
   } = useBaseComponent<BreadcrumbItemProps>(props, state)
 
   function adapter(): BreadcrumbItemAdapter<BreadcrumbItemProps, BreadcrumbItemState> {

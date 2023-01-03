@@ -222,10 +222,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
 
   let clickOutSideHandler: (e: MouseEvent) => void;
   const {
-    cache,
     adapter: adapterInject,
-    log,
-    context: context_,
     isControlled
   } = useBaseComponent<TimePickerProps>(props, state)
 
@@ -360,7 +357,6 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
   function getPanelElement() {
     const {prefixCls, type} = props;
     const {isAM, value} = state;
-    console.log(state)
 
     const format = foundation.getDefaultFormatIfNeed();
 

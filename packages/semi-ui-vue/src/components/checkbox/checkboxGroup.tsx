@@ -93,7 +93,7 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
     value: props.value || props.defaultValue,
   });
 
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<CheckboxGroupProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<CheckboxGroupProps>(props, state)
   function adapter(): CheckboxGroupAdapter {
     return {
       ...adapterInject<CheckboxGroupProps, CheckboxGroupState>(),

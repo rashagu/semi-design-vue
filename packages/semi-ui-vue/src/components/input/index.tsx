@@ -6,7 +6,7 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/input/constants';
 import { isSemiIcon } from '../_utils';
 import {useBaseComponent} from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/input/input.scss';
-import { isString, noop, isFunction } from 'lodash';
+import { isString, noop, isFunction, isUndefined } from 'lodash';
 import { IconClear, IconEyeOpened, IconEyeClosedSolid } from '@kousum/semi-icons-vue';
 
 
@@ -58,6 +58,7 @@ export interface InputProps extends
   insetLabelId?: string;
   size?: InputSize;
   className?: string;
+  clearIcon?: VueJsxNode;
   style?: CSSProperties;
   validateStatus?: ValidateStatus;
   onClear?: (e: MouseEvent) => void;
@@ -101,6 +102,7 @@ const propTypes = {
   'aria-required': PropTypes.bool,
   addonBefore: PropTypes.node,
   addonAfter: PropTypes.node,
+  clearIcon: PropTypes.node,
   prefix: PropTypes.node,
   suffix: PropTypes.node,
   mode: String,
@@ -179,7 +181,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
     minlength: props.minlength,
     maxlength: props.maxlength,
   })
-  const {cache, adapter: adapterInject, log, context} = useBaseComponent<InputProps>(props, state)
+  const {adapter: adapterInject} = useBaseComponent<InputProps>(props, state)
 
   const theAdapter = adapter()
   // watch(()=>state.value,()=>{
@@ -207,6 +209,11 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
         }
         state.isFocus = isFocus;
       },
+      focusInput: () => {
+        const { preventScroll } = props;
+        const input = inputRef && inputRef.value;
+        input && input.focus({ preventScroll });
+      },
       toggleHovering: (isHovering: boolean) => state.isHovering = isHovering,
       getIfFocusing: () => state.isFocus,
       notifyChange: (cbValue: string, e: any) => {
@@ -221,7 +228,6 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       notifyKeyUp: (e: any) => props.onKeyUp(e),
       notifyEnterPress: (e: any) => props.onEnterPress(e),
       notifyClear: (e: any) => props.onClear(e),
-      setPaddingLeft: (paddingLeft: string) => state.paddingLeft = paddingLeft,
       setMinLength: (minlength: number) => state.minlength,
       isEventTarget: (e: any) => e && e.target === e.currentTarget
     };
@@ -340,6 +346,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
 
   function renderClearBtn() {
     const clearCls = cls(`${prefixCls}-clearbtn`);
+    const { clearIcon } = props;
     const allowClear = foundation.isAllowClear()
     // use onMousedown to fix issue 1203
     // console.debug(allowClear)
@@ -349,7 +356,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
           class={clearCls}
           onMousedown={handleClear}
         >
-          <IconClear />
+          { clearIcon ? clearIcon : <IconClear />}
         </div>
       );
     }
@@ -433,6 +440,21 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
   }
 
 
+  function getInputRef() {
+    const { forwardRef } = props;
+    if (!isUndefined(forwardRef)) {
+      if (typeof forwardRef === 'function') {
+        return (node: HTMLInputElement) => {
+          forwardRef(node);
+          inputRef.value = node ;
+        };
+      } else if (Object.prototype.toString.call(forwardRef) === '[object Object]') {
+        inputRef.value = forwardRef;
+        return forwardRef;
+      }
+    }
+    return inputRef.value;
+  }
 
 
   // onMounted(()=>{
@@ -466,12 +488,13 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       maxlength,
       getValueLength,
       defaultValue,
+      preventScroll,
       ...rest
     } = props;
-    const { value, paddingLeft, isFocus, minlength: stateMinLength } = state;
+    const { value, isFocus, minlength: stateMinLength } = state;
     const suffixAllowClear = showClearBtn();
     const suffixIsIcon = isSemiIcon(suffix);
-    const ref_ = forwardRef || inputRef;
+    const ref_ = getInputRef();
     const wrapperPrefix = `${prefixCls}-wrapper`;
     const wrapperCls = cls(wrapperPrefix, className, {
       [`${prefixCls}-wrapper__with-prefix`]: prefix || insetLabel,
@@ -503,7 +526,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
     const inputValue = value === null || value === undefined ? '' : value;
     const inputProps: InputHTMLAttributes = {
       ...rest,
-      style: { paddingLeft, ...inputStyle },
+      style: { ...inputStyle },
       autofocus: autofocus,
       class: inputCls,
       disabled,
@@ -559,6 +582,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
 
 
 Input.props = VuePropsType
+Input.name = 'Input'
 
 
 // const ForwardInput = defineComponent<InputProps>((props, {slots}) => {

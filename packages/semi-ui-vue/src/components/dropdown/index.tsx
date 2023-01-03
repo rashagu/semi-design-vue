@@ -11,7 +11,7 @@ import {
   cloneVNode, inject, provide
 } from 'vue'
 import classnames from 'classnames';
-
+import * as PropTypes from '../PropTypes'
 import { cssClasses, strings, numbers } from '@douyinfe/semi-foundation/dropdown/constants';
 
 import {useBaseComponent} from '../_base/baseComponent';
@@ -31,16 +31,31 @@ import '@douyinfe/semi-foundation/dropdown/dropdown.scss';
 import { noop, get } from 'lodash';
 import { Motion } from '../_base/base';
 import {ArrayElement} from "@douyinfe/semi-foundation/utils/type";
+import {vuePropsMake} from "../PropTypes";
+import {useDropdownContext} from "./context/Consumer";
+import {DropdownContext} from "./context";
 
 const positionSet = strings.POSITION_SET;
 const triggerSet = strings.TRIGGER_SET;
 
-export interface DropDownMenuItemBasic {
-  node: 'title' | 'item' | 'divider';
-  name?: string;
+export type { DropdownDividerProps } from './DropdownDivider';
+export type { DropdownItemProps, Type } from './DropdownItem';
+export type { DropdownMenuProps } from './DropdownMenu';
+export type { DropdownTitleProps } from './DropdownTitle';
+
+export interface DropDownMenuItemItem extends DropdownItemProps {
+  node: 'item';
+  name?: string
+}
+export interface DropDownMenuItemDivider extends DropdownDividerProps {
+  node: 'divider'
+}
+export interface DropDownMenuItemTitle extends DropdownTitleProps {
+  node: 'title';
+  name?: string
 }
 
-export type DropDownMenuItem = DropDownMenuItemBasic & DropdownItemProps & DropdownDividerProps & DropdownTitleProps;
+export type DropDownMenuItem = DropDownMenuItemItem | DropDownMenuItemDivider | DropDownMenuItemTitle;
 
 export interface DropdownProps extends TooltipProps {
   render?: any;
@@ -61,100 +76,95 @@ export interface DropdownProps extends TooltipProps {
   showTick?: boolean;
   prefixCls?: string,
   spacing?: number;
+
+  closeOnEsc?: TooltipProps['closeOnEsc'];
+  onEscKeyDown?: TooltipProps['onEscKeyDown']
 }
 
 interface DropdownState {
   popVisible: boolean;
 }
-
-export const vuePropsType = {
+const propTypes = {
+  render: PropTypes.node,
+  children: PropTypes.node,
+  visible: PropTypes.bool,
+  position: PropTypes.string,
+  getPopupContainer: PropTypes.func,
+  mouseEnterDelay: PropTypes.number,
+  mouseLeaveDelay: PropTypes.number,
+  trigger: PropTypes.string,
+  zIndex: PropTypes.number,
+  motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
+  className: PropTypes.string,
+  contentClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  style: PropTypes.object,
+  onVisibleChange: PropTypes.func,
+  rePosKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  showTick: PropTypes.bool,
+  prefixCls: PropTypes.string,
+  spacing: PropTypes.number,
+  menu: PropTypes.array,
   name: String,
-  render: [Object,],
-  visible: Boolean,
-  position: {
-    type: String,
-    default: 'bottom',
-  },
-  getPopupContainer: Function,
-  mouseEnterDelay: Number,
-  mouseLeaveDelay: {
-    type: Number,
-    default: strings.DEFAULT_LEAVE_DELAY,
-  },
-  menu: Array,
-  trigger: {
-    type:String,
-    default: 'hover',
-  },
-  zIndex: {
-    type:Number,
-    default: tooltipNumbers.DEFAULT_Z_INDEX,
-  },
-  motion: {
-    type: [Object, Boolean],
-    default: true,
-  },
-  className: String,
-  contentClassName: [String, Array],
-  style: [Object, String],
-  onVisibleChange: {
-    type: Function,
-    default: noop,
-  },
-  rePosKey: [String, Number, Boolean],
-  showTick: {
-    type: Boolean,
-    default: false,
-  },
-  prefixCls: {
-    type:String,
-    default: cssClasses.PREFIX,
-  },
-  spacing: Number,
 }
 
+const defaultProps = {
+  onVisibleChange: noop,
+  prefixCls: cssClasses.PREFIX,
+  zIndex: tooltipNumbers.DEFAULT_Z_INDEX,
+  motion: true,
+  trigger: 'hover',
+  position: 'bottom',
+  mouseLeaveDelay: strings.DEFAULT_LEAVE_DELAY,
+  showTick: false,
+  closeOnEsc: true,
+  onEscKeyDown: noop,
+};
 
-const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 
+
+const Dropdown = defineComponent<DropdownProps>((props, {slots, expose}) => {
 
   const state = reactive({
     popVisible: props.visible,
   })
-  const {cache, adapter: adapterInject, log} = useBaseComponent<TooltipProps>(props, state)
+  const tooltipRef = ref()
+  const {adapter: adapterInject} = useBaseComponent<TooltipProps>(props, state)
 
   const adapterFunc = function (){
     return {
       ...adapterInject(),
       setPopVisible: (popVisible: boolean) => state.popVisible = popVisible,
       notifyVisibleChange: (visible: boolean) => props.onVisibleChange(visible),
+      getPopupId: () => tooltipRef.value.getPopupId()
     };
   }
   const adapter = adapterFunc()
   const foundation = new Foundation(adapter);
+
   const handleVisibleChange = (visible: boolean) => {
     foundation.handleVisibleChange(visible)
   };
 
-  const context = inject<{level:number, showTick?:boolean}>('contextValue', {level:0})
-  const { level = 0 } = context;
-  const { showTick } = props;
-  const contextValue = { showTick, level: level + 1 };
-  provide('contextValue', contextValue)
+  const {context} = useDropdownContext()
+  const { level = 0 } = context.value;
+
   function renderContent() {
-    const { render, menu } = props;
-    console.log(props)
+    const { render, menu, contentClassName, style, showTick, prefixCls, trigger } = props;
+    const className = classnames(prefixCls, contentClassName);
+    const contextValue = { showTick, level: level + 1, trigger };
     let content:any = null;
     if (isVNode(render)) {
       content = render;
     } else if (Array.isArray(menu)) {
       content = renderMenu();
     }
-    const { contentClassName, style,  prefixCls} = props;
-    const className = classnames(prefixCls, contentClassName);
     return (
-      <div class={className} style={style}>
-        <div class={`${prefixCls}-content`}>{content}</div>
-      </div>
+      <DropdownContext.Provider value={contextValue}>
+        <div class={className} style={style}>
+          <div class={`${prefixCls}-content`} x-semi-prop="render">{content}</div>
+        </div>
+      </DropdownContext.Provider>
     );
   }
 
@@ -196,19 +206,23 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
     return <DropdownMenu>{{default:()=>content}}</DropdownMenu>;
   }
 
-  // function renderPopCard() {
-  //   const { render, contentClassName, style, showTick, prefixCls } = props;
-  //   const className = classnames(prefixCls, contentClassName);
-  //   const { level = 0 } = context;
-  //   const contextValue = { showTick, level: level + 1 };
-  //   return (
-  //     <DropdownContext.Provider value={contextValue}>
-  //       <div class={className} style={style}>
-  //         <div class={`${prefixCls}-content`}>{render}</div>
-  //       </div>
-  //     </DropdownContext.Provider>
-  //   );
-  // }
+  function renderPopCard() {
+    const { render, contentClassName, style, showTick, prefixCls } = props;
+    const className = classnames(prefixCls, contentClassName);
+    const { level = 0 } = context.value;
+    const contextValue = { showTick, level: level + 1 };
+    return (
+      <DropdownContext.Provider value={contextValue}>
+        <div class={className} style={style}>
+          <div class={`${prefixCls}-content`}>{render}</div>
+        </div>
+      </DropdownContext.Provider>
+    );
+  }
+
+  expose({
+    renderPopCard
+  })
 
   return () => {
 
@@ -221,14 +235,15 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
       motion,
       style,
       prefixCls,
-      menu,
+
       render,
+      menu,
       showTick,
-      contentClassName,
+
       ...attr
     } = props;
     let { spacing } = props;
-    const { level } = context;
+    const { level } = context.value;
     const { popVisible } = state;
     const pop = renderContent();
 
@@ -240,7 +255,6 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
 
     let children:any = slots.default?slots.default()[0]:null;
 
-    // console.log(attr)
     return (
       <Tooltip
         zIndex={zIndex}
@@ -253,6 +267,8 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
         trigger={trigger}
         onVisibleChange={handleVisibleChange}
         showArrow={false}
+        returnFocusOnClose={true}
+        ref={tooltipRef}
         {...attr}
       >
         {
@@ -260,6 +276,13 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
             className: classnames(get(children, 'props.className'), {
               [`${prefixCls}-showing`]: popVisible,
             }),
+            'aria-haspopup': true,
+            'aria-expanded': popVisible,
+            onKeyDown: (e: KeyboardEvent) => {
+              foundation.handleKeyDown(e);
+              const childrenKeyDown: (e: KeyboardEvent) => void = get(children, 'props.onKeyDown');
+              childrenKeyDown && childrenKeyDown(e);
+            }
           })}
       </Tooltip>
     )
@@ -268,6 +291,7 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots}) => {
 
 
 Dropdown.props = vuePropsType
+Dropdown.name = 'Dropdown'
 
 export {DropdownMenu, DropdownItem, DropdownDivider, DropdownTitle,Dropdown}
 export default Dropdown

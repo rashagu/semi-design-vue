@@ -198,7 +198,6 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
         const showTitle = title !== null && typeof title !== 'undefined';
         const showContent = !(content === null || typeof content === 'undefined');
 
-        console.log(icon)
         return (
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
           <div class={popCardCls} onClick={stopImmediatePropagation} style={style}>
