@@ -38,10 +38,10 @@ import {DropdownContext} from "./context";
 const positionSet = strings.POSITION_SET;
 const triggerSet = strings.TRIGGER_SET;
 
-export type { DropdownDividerProps } from './dropdownDivider';
-export type { DropdownItemProps, Type } from './dropdownItem';
-export type { DropdownMenuProps } from './dropdownMenu';
-export type { DropdownTitleProps } from './dropdownTitle';
+export type { DropdownDividerProps } from './DropdownDivider';
+export type { DropdownItemProps, Type } from './DropdownItem';
+export type { DropdownMenuProps } from './DropdownMenu';
+export type { DropdownTitleProps } from './DropdownTitle';
 
 export interface DropDownMenuItemItem extends DropdownItemProps {
   node: 'item';
