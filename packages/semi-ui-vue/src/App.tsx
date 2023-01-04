@@ -84,7 +84,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<InputNumberDemo />*/}
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
-        <ModalDemo/>
+        {/*<ModalDemo/>*/}
         {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
@@ -114,13 +114,13 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TootipDemo />*/}
         {/*<br/>*/}
         {/*<br/>*/}
-        {/*<DropdownDemo1/>*/}
+        <DropdownDemo1/>
         {/*<br/>*/}
         {/*<GridTest />*/}
         {/*<LayoutTest/>*/}
         {/*<SpaceTest/>*/}
         {/*<PopoverTest />*/}
-        <NavigationDemo />
+        {/*<NavigationDemo />*/}
         <div class={'aa'}>123</div>
       </ConfigProvider>
     </div>

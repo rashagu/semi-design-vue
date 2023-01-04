@@ -98,8 +98,6 @@ function withField<
         };
 
         const updateValue = (val: any, callOpts?: CallOpts) => {
-
-            console.error(val,callOpts)
             let {
                 field,
                 allowEmpty,
@@ -299,7 +297,6 @@ function withField<
 
             updateTouched(true, { notNotify: true, notUpdate: true });
             updateValue(val);
-            console.error(val)
             // only validate when trigger includes change
             if (trigger.includes('change')) {
                 fieldValidate(val);
