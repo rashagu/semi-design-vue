@@ -41,7 +41,7 @@ export interface BaseRowProps {
     fixed?: Fixed;
     height?: string | number;
     hideExpandedColumn?: boolean;
-    hovered: boolean; // required
+    hovered?: boolean; // required
     indent?: number;
     indentSize?: number;
     index?: number;
@@ -64,7 +64,7 @@ export interface BaseRowProps {
     store?: Store;
     style?: CSSProperties;
     virtualized?: Virtualized;
-    visible: boolean; // required
+    visible?: boolean; // required
 }
 
 const propTypes = {
@@ -245,6 +245,7 @@ const TableRow = defineComponent<BaseRowProps>((props, {}) => {
             }
 
             if (isExpandedColumn(column) && !displayExpandedColumn) {
+
                 cells.push(<TableCell key={columnIndex} colIndex={columnIndex} isSection={isSection} />);
             } else if (!isScrollbarColumn(column)) {
                 const diyProps: { width?: number } = {};
@@ -255,8 +256,10 @@ const TableRow = defineComponent<BaseRowProps>((props, {}) => {
                 cells.push(
                   <TableCell
                     colIndex={columnIndex}
-                    {...expandableProps}
-                    {...diyProps}
+                    {...{
+                        ...expandableProps,
+                        ...diyProps,
+                    }}
                     hideExpandedColumn={hideExpandedColumn}
                     indentSize={indentSize}
                     isSection={isSection}

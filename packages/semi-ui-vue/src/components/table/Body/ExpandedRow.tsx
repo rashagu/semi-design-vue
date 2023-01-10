@@ -118,7 +118,7 @@ const TableExpandedRow = defineComponent<TableExpandedRowProps>((props, {}) => {
         const columns = [
             {
                 render: () => ({
-                    props_,
+                    props: props_,
                     children: (
                       <div
                         class={classnames(`${prefixCls}-expand-inner`)}

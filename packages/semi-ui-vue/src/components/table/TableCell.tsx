@@ -78,6 +78,8 @@ const propTypes = {
     selected: PropTypes.bool,
     expanded: PropTypes.bool,
     colIndex: PropTypes.number,
+
+    disabled: PropTypes.bool,
 };
 const defaultProps = {
     indent: 0,
