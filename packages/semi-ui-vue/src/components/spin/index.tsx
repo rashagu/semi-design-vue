@@ -78,15 +78,16 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
       delay: props.delay
     };
   }
-  // 没有 state
-  // watch(()=>props, (val)=>{
-  //   const newState = getDerivedStateFromProps(props, state)
-  //   if (newState){
-  //     Object.keys(newState).forEach(key=>{
-  //       state[key] = newState[key]
-  //     })
-  //   }
-  // }, {deep: true})
+  watch(()=>props, (val)=>{
+    const newState = getDerivedStateFromProps(props)
+    if (newState){
+      Object.keys(newState).forEach(key=>{
+        state[key] = newState[key]
+      })
+    }
+  }, {deep: true, immediate: true})
+
+
   const {adapter: adapterInject} = useBaseComponent<SpinProps>(props, state)
   function adapter() {
     return {

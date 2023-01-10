@@ -22,7 +22,8 @@ const Typography = BaseTypography as TypographyType;
 export * from './interface';
 export {
     Typography,
-    Text,
+    Text as TypographyText,
     Title,
+    Text,
     Paragraph,
 };

@@ -109,7 +109,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [ ] BackTop
 - [x] Breadcrumb
 - [x] Navigation
-- [ ] Pagination
+- [x] Pagination
 - [ ] Steps
 - [ ] Tabs
 - [x] Tree
@@ -133,7 +133,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Popover
 - [x] ScrollList
 - [ ] SideSheet
-- [ ] Table
+- [x] Table
 - [x] Tag
 - [ ] Timeline
 - [x] Tooltip

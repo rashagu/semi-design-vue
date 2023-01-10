@@ -45,7 +45,7 @@ importers:
       svgo: 2.7.0
       ts-node: ^10.5.0
       tslib: ^2.3.1
-      typescript: ^4.8.3
+      typescript: ^4.9.4
       vite: ^3.2.0
       vitest: ^0.24.3
       vue: ^3.2.45
@@ -62,10 +62,10 @@ importers:
       sass: 1.54.9
       sass-loader: 13.0.2_sass@1.54.9+webpack@5.74.0
       style-loader: 3.3.1_webpack@5.74.0
-      typescript: 4.8.3
+      typescript: 4.9.4
       vue: 3.2.45
       vue-loader: 16.8.3_vue@3.2.45+webpack@5.74.0
-      vue-tsc: 1.0.9_typescript@4.8.3
+      vue-tsc: 1.0.9_typescript@4.9.4
     devDependencies:
       '@babel/core': 7.19.0
       '@babel/plugin-proposal-decorators': 7.19.0_@babel+core@7.19.0
@@ -96,7 +96,7 @@ importers:
       jsdom: 20.0.1
       prettier: 1.19.1
       svgo: 2.7.0
-      ts-node: 10.9.1_rb7lfb2dlgdf5f7m6mcvvespxa
+      ts-node: 10.9.1_zpb5kzpnyozdjq4cwaojlul57u
       tslib: 2.4.0
       vite: 3.2.0_sass@1.54.9
       vitest: 0.24.3_jsdom@20.0.1+sass@1.54.9
@@ -193,7 +193,7 @@ importers:
       sass: ^1.44.0
       through2: ^4.0.2
       ts-node: ^10.5.0
-      typescript: ^4.8.3
+      typescript: ^4.9.4
       vite: ^3.2.0
       vue: ^3.2.45
       vue-tsc: ^0.40.13
@@ -217,15 +217,15 @@ importers:
       gulp-babel: 8.0.0_@babel+core@7.19.6
       gulp-replace: 1.1.3
       gulp-sass: 5.1.0
-      gulp-typescript: 6.0.0-alpha.1_typescript@4.8.3
+      gulp-typescript: 6.0.0-alpha.1_typescript@4.9.4
       identity-obj-proxy: 3.0.0
       merge2: 1.4.1
       rimraf: 3.0.2
       through2: 4.0.2
-      ts-node: 10.9.1_jq3ovzqw3j7j4aj2v37zonaj5u
-      typescript: 4.8.3
+      ts-node: 10.9.1_fqntgjkqvy73g7myopo4bshtee
+      typescript: 4.9.4
       vite: 3.2.0_sass@1.54.9
-      vue-tsc: 0.40.13_typescript@4.8.3
+      vue-tsc: 0.40.13_typescript@4.9.4
 
   packages/semi-illustrations-vue:
     specifiers:
@@ -252,7 +252,7 @@ importers:
       sass: ^1.44.0
       through2: ^4.0.2
       ts-node: ^10.5.0
-      typescript: ^4.8.3
+      typescript: ^4.9.4
       vite: ^3.2.0
       vue: ^3.2.45
       vue-tsc: ^0.40.13
@@ -275,16 +275,16 @@ importers:
       gulp-babel: 8.0.0_@babel+core@7.19.6
       gulp-replace: 1.1.3
       gulp-sass: 5.1.0
-      gulp-typescript: 6.0.0-alpha.1_typescript@4.8.3
+      gulp-typescript: 6.0.0-alpha.1_typescript@4.9.4
       identity-obj-proxy: 3.0.0
       merge2: 1.4.1
       rimraf: 3.0.2
       sass: 1.54.9
       through2: 4.0.2
-      ts-node: 10.9.1_jq3ovzqw3j7j4aj2v37zonaj5u
-      typescript: 4.8.3
+      ts-node: 10.9.1_fqntgjkqvy73g7myopo4bshtee
+      typescript: 4.9.4
       vite: 3.2.0_sass@1.54.9
-      vue-tsc: 0.40.13_typescript@4.8.3
+      vue-tsc: 0.40.13_typescript@4.9.4
 
   packages/semi-ui-vue:
     specifiers:
@@ -304,7 +304,9 @@ importers:
       '@kousum/semi-animation-vue': ^0.0.12
       '@kousum/semi-icons-vue': ^0.0.12
       '@kousum/semi-illustrations-vue': ^0.0.12
-      '@kousum/vue3-window': ^0.0.3
+      '@kousum/vue-draggable': 1.0.2
+      '@kousum/vue-resizable': 1.0.2
+      '@kousum/vue3-window': ^0.0.4
       '@types/lodash': ^4.14.178
       '@vitejs/plugin-vue': ^3.2.0
       '@vitejs/plugin-vue-jsx': ^2.1.0
@@ -331,7 +333,7 @@ importers:
       terser: ^5.15.1
       through2: ^4.0.2
       ts-node: ^10.5.0
-      typescript: ^4.8.3
+      typescript: ^4.9.4
       utility-types: ^3.10.0
       vite: ^3.2.0
       vue: ^3.2.45
@@ -349,7 +351,9 @@ importers:
       '@kousum/semi-animation-vue': link:../semi-animation-vue
       '@kousum/semi-icons-vue': link:../semi-icons-vue
       '@kousum/semi-illustrations-vue': link:../semi-illustrations-vue
-      '@kousum/vue3-window': 0.0.3
+      '@kousum/vue-draggable': 1.0.2_lodash@4.17.21+vue@3.2.45
+      '@kousum/vue-resizable': 1.0.2_lodash@4.17.21+vue@3.2.45
+      '@kousum/vue3-window': 0.0.4_vue@3.2.45
       async-validator: 4.2.5
       classnames: 2.3.1
       copy-text-to-clipboard: 3.0.1
@@ -376,16 +380,16 @@ importers:
       gulp-babel: 8.0.0_@babel+core@7.19.6
       gulp-replace: 1.1.3
       gulp-sass: 5.1.0
-      gulp-typescript: 6.0.0-alpha.1_typescript@4.8.3
+      gulp-typescript: 6.0.0-alpha.1_typescript@4.9.4
       identity-obj-proxy: 3.0.0
       merge2: 1.4.1
       rimraf: 3.0.2
       terser: 5.15.1
       through2: 4.0.2
-      ts-node: 10.9.1_jq3ovzqw3j7j4aj2v37zonaj5u
-      typescript: 4.8.3
+      ts-node: 10.9.1_fqntgjkqvy73g7myopo4bshtee
+      typescript: 4.9.4
       vite: 3.2.0_sass@1.54.9+terser@5.15.1
-      vue-tsc: 0.40.13_typescript@4.8.3
+      vue-tsc: 0.40.13_typescript@4.9.4
 
 packages:
 
@@ -3163,8 +3167,32 @@ packages:
     resolution: {integrity: sha512-vfcvottM80surHGXtpXxBH9mTsTLu+H1IWGI/YxTcNOlOnwpyr03Uohzcr4sans+fVFOTgRWs0nSh2xukOb3cA==}
     dev: false
 
-  /@kousum/vue3-window/0.0.3:
-    resolution: {integrity: sha512-yWH3FZRJUap69Q2MbNSqj2mSvjQhMQuHL+62E3y344rukAu4Vq08ISofSQpnjzg0TtaK68CcPexlkMJHnxxaPA==}
+  /@kousum/vue-draggable/1.0.2_lodash@4.17.21+vue@3.2.45:
+    resolution: {integrity: sha512-5RGFjJ65YRRdOIeMgZS6IrWUh65I2fr27Npp0acN0Nl4tfo9AvSkSZtjKhTmwX949bha6VTn8k/acDemFVEczA==}
+    peerDependencies:
+      lodash: ^4.17.21
+      vue: ^3.2.45
+    dependencies:
+      clsx: 1.2.1
+      lodash: 4.17.21
+      vue: 3.2.45
+    dev: false
+
+  /@kousum/vue-resizable/1.0.2_lodash@4.17.21+vue@3.2.45:
+    resolution: {integrity: sha512-yZHNm4Djcwpo8JjCY9Aa4tn61wDjrGkPp05SeeWCoByO/X2rJfelReOrcARi6CWFyr+tXKDNJcM3pt/Dp/MZgQ==}
+    peerDependencies:
+      lodash: ^4.17.21
+      vue: ^3.2.45
+    dependencies:
+      '@kousum/vue-draggable': 1.0.2_lodash@4.17.21+vue@3.2.45
+      lodash: 4.17.21
+      vue: 3.2.45
+    dev: false
+
+  /@kousum/vue3-window/0.0.4_vue@3.2.45:
+    resolution: {integrity: sha512-FF6dBbZDfw/4wmlDqaN0+DYUzDxwSlJ+S/E96ej6U6HWooFwcRilwN8LPKcftzR/aZYgL44w1MOhFZ/zkLlHcg==}
+    peerDependencies:
+      vue: ^3.2.45
     dependencies:
       '@babel/runtime': 7.19.0
       memoize-one: 6.0.0
@@ -4590,6 +4618,11 @@ packages:
       process-nextick-args: 2.0.1
       readable-stream: 2.3.7
     dev: true
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
+    dev: false
 
   /coa/2.0.2:
     resolution: {integrity: sha512-q5/jG+YQnSy4nRTV4F7lPepBJZ8qBNJJDBuJdoejDyLXgmL7IEo+Le2JDZudFTFt7mrCqIRaSjws4ygRCTCAXA==}
@@ -6102,6 +6135,21 @@ packages:
       source-map: 0.7.4
       through2: 3.0.2
       typescript: 4.8.3
+      vinyl: 2.2.1
+      vinyl-fs: 3.0.3
+    dev: true
+
+  /gulp-typescript/6.0.0-alpha.1_typescript@4.9.4:
+    resolution: {integrity: sha512-KoT0TTfjfT7w3JItHkgFH1T/zK4oXWC+a8xxKfniRfVcA0Fa1bKrIhztYelYmb+95RB80OLMBreknYkdwzdi2Q==}
+    engines: {node: '>= 8'}
+    peerDependencies:
+      typescript: '~2.7.1 || >=2.8.0-dev || >=2.9.0-dev || ~3.0.0 || >=3.0.0-dev || >=3.1.0-dev || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.7.0-dev '
+    dependencies:
+      ansi-colors: 4.1.3
+      plugin-error: 1.0.1
+      source-map: 0.7.4
+      through2: 3.0.2
+      typescript: 4.9.4
       vinyl: 2.2.1
       vinyl-fs: 3.0.3
     dev: true
@@ -8765,7 +8813,7 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /ts-node/10.9.1_jq3ovzqw3j7j4aj2v37zonaj5u:
+  /ts-node/10.9.1_fqntgjkqvy73g7myopo4bshtee:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -8791,7 +8839,7 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 4.8.3
+      typescript: 4.9.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
@@ -8823,6 +8871,37 @@ packages:
       diff: 4.0.2
       make-error: 1.3.6
       typescript: 4.8.3
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    dev: true
+
+  /ts-node/10.9.1_zpb5kzpnyozdjq4cwaojlul57u:
+    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.3
+      '@types/node': 17.0.45
+      acorn: 8.8.0
+      acorn-walk: 8.2.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 4.9.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
@@ -8885,6 +8964,12 @@ packages:
 
   /typescript/4.8.3:
     resolution: {integrity: sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
+  /typescript/4.9.4:
+    resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
 
@@ -9274,7 +9359,18 @@ packages:
       typescript: 4.8.3
     dev: true
 
-  /vue-tsc/1.0.9_typescript@4.8.3:
+  /vue-tsc/0.40.13_typescript@4.9.4:
+    resolution: {integrity: sha512-xzuN3g5PnKfJcNrLv4+mAjteMd5wLm5fRhW0034OfNJZY4WhB07vhngea/XeGn7wNYt16r7syonzvW/54dcNiA==}
+    hasBin: true
+    peerDependencies:
+      typescript: '*'
+    dependencies:
+      '@volar/vue-language-core': 0.40.13
+      '@volar/vue-typescript': 0.40.13
+      typescript: 4.9.4
+    dev: true
+
+  /vue-tsc/1.0.9_typescript@4.9.4:
     resolution: {integrity: sha512-vRmHD1K6DmBymNhoHjQy/aYKTRQNLGOu2/ESasChG9Vy113K6CdP0NlhR0bzgFJfv2eFB9Ez/9L5kIciUajBxQ==}
     hasBin: true
     peerDependencies:
@@ -9282,7 +9378,7 @@ packages:
     dependencies:
       '@volar/vue-language-core': 1.0.9
       '@volar/vue-typescript': 1.0.9
-      typescript: 4.8.3
+      typescript: 4.9.4
     dev: false
 
   /vue/3.2.45:

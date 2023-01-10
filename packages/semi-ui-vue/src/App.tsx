@@ -50,6 +50,14 @@ import ToastDemo from "./components/toast/__test__/ToastDemo";
 import BannerDemo from "./components/banner/__test__/BannerDemo";
 import NotificationDemo from "./components/notification/__test__/NotificationDemo";
 import PopconfirmDemo from "./components/popconfirm/__test__/PopconfirmDemo";
+import PaginationDemo from "./components/pagination/__test__/PaginationDemo";
+import TableDemo1 from "./components/table/__test__/TableDemo1";
+import TableDemo2 from "./components/table/__test__/TableDemo2";
+import TableDemo3 from "./components/table/__test__/TableDemo3";
+import TableDemo4 from "./components/table/__test__/TableDemo4";
+import TableDemo5 from "./components/table/__test__/TableDemo5";
+import TableDemo6 from "./components/table/__test__/TableDemo6";
+import TableDemo7 from "./components/table/__test__/TableDemo7";
 export interface ExampleProps {
   name?: string
 }
@@ -64,6 +72,14 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
+        {/*<TableDemo1 />*/}
+        {/*<TableDemo2 />*/}
+        {/*<TableDemo3 />*/}
+        {/*<TableDemo4 />*/}
+        {/*<TableDemo5 />*/}
+        {/*<TableDemo6 />*/}
+        <TableDemo7 />
+        {/*<PaginationDemo />*/}
         {/*<PopconfirmDemo/>*/}
         {/*<NotificationDemo/>*/}
         {/*<BannerDemo/>*/}
@@ -114,7 +130,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TootipDemo />*/}
         {/*<br/>*/}
         {/*<br/>*/}
-        <DropdownDemo1/>
+        {/*<DropdownDemo1/>*/}
         {/*<br/>*/}
         {/*<GridTest />*/}
         {/*<LayoutTest/>*/}

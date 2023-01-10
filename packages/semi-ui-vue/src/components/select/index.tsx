@@ -35,7 +35,7 @@ import OptionGroup from './optionGroup';
 import Spin from '../spin';
 import Trigger from '../trigger';
 import {IconChevronDown, IconClear} from '@kousum/semi-icons-vue';
-import { isSemiIcon, getFocusableElements, getActiveElement } from '../_utils';
+import {isSemiIcon, getFocusableElements, getActiveElement, getChildrenVNode} from '../_utils';
 import {Subtract} from 'utility-types';
 
 import warning from '@douyinfe/semi-foundation/utils/warning';
@@ -206,6 +206,7 @@ const propTypes = {
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,
   'aria-labelledby': PropTypes.string,
+  'aria-label': PropTypes.string,
   'aria-required': PropTypes.bool,
   autoFocus: PropTypes.bool,
   autoClearSearchValue: PropTypes.bool,
@@ -386,6 +387,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
   const {adapter: adapterInject, context: context_} = useBaseComponent<SelectProps>(props, state)
   const setOptionContainerEl = (node: HTMLDivElement) => (optionContainerEl.value = node);
 
+  const instance = getCurrentInstance()
   function adapter(): SelectAdapter<SelectProps, SelectState> {
     const keyboardAdapter = {
       registerKeyDown: (cb: () => void) => {
@@ -469,14 +471,8 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       emit: (eventName) => eventManager.emit(eventName),
       // Collect all subitems, each item is visible by default when collected, and is not selected
       //slots.default?slots.default():null
-      getOptionsFromChildren: (children = slots.default?.()) => {
-        // if (!children) {
-        //   // @ts-ignore
-        //   // children = getCurrentInstance()?.vnode?.children?.default ? getCurrentInstance().vnode.children.default() : null
-        //   if (children && Array.isArray(children[0])){
-        //     children = children[0]
-        //   }
-        // }
+      getOptionsFromChildren: () => {
+        let children:VueJsxNode = getChildrenVNode(instance)
         let optionGroups = [];
         let options = [];
         const {optionList} = props;
@@ -489,7 +485,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
           }));
           optionGroups[0] = {children: options, label: ''};
         } else {
-          const result = getOptionsFromGroup(children);
+          const result = getOptionsFromGroup(children as any);
           optionGroups = result.optionGroups;
           options = result.options;
         }
@@ -625,6 +621,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
   })
 
 
+
   watch([() => props.value, () => props.optionList], ([prevPropsValue, prevPropsOptionList],) => {
     const instance = getCurrentInstance()
     // TODO Children VNode 更新时
@@ -647,6 +644,13 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       } else {
         foundation.handleOptionListChangeHadDefaultValue();
       }
+    }
+  })
+  watch(() => props.value, ()=>{
+    if ('value' in props) {
+      foundation.handleValueChange(props.value as any);
+    } else {
+      foundation.handleOptionListChangeHadDefaultValue();
     }
   })
 
@@ -943,6 +947,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
     if (selectedItems.length) {
       const selectedItem = selectedItems[0][1];
       renderText = (renderSelectedItem as RenderSingleSelectedItemFn)(selectedItem);
+
     }
 
     const spanCls = cls({
@@ -1335,3 +1340,7 @@ Index.props = vuePropsType
 
 export default Index
 
+export {
+  Option as SelectOption,
+  OptionGroup as SelectOptionGroup
+}

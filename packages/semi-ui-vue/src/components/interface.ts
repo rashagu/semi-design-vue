@@ -2,7 +2,7 @@ import {HTMLAttributes, VNode} from "vue";
 import {ComponentPublicInstance, VNodeRef} from "vue";
 
 export type VueJsxNodeSingle = VNode | string | boolean | number
-export type VueJsxNode = VNode | string | boolean | number | (VNode | string | boolean | number)[]
+export type VueJsxNode = VNode | string | boolean | number | JSX.Element | VueJsxNode[]
 export type VueHTMLAttributes = HTMLAttributes & {
   key?: string | number | symbol
   ref?: VNodeRef

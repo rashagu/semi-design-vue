@@ -58,6 +58,11 @@ export interface DropDownMenuItemTitle extends DropdownTitleProps {
 export type DropDownMenuItem = DropDownMenuItemItem | DropDownMenuItemDivider | DropDownMenuItemTitle;
 
 export interface DropdownProps extends TooltipProps {
+  //
+  onFilter?: any;
+  onFilterDropdownVisibleChange?: any;
+  onSelect?: any;
+
   render?: any;
   visible?: boolean;
   position?: ArrayElement<typeof strings.POSITION_SET>;
@@ -85,6 +90,11 @@ interface DropdownState {
   popVisible: boolean;
 }
 const propTypes = {
+  onFilter: PropTypes.func,
+  onFilterDropdownVisibleChange: PropTypes.func,
+  onSelect: PropTypes.func,
+
+
   render: PropTypes.node,
   children: PropTypes.node,
   visible: PropTypes.bool,
@@ -239,7 +249,10 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots, expose}) => {
       render,
       menu,
       showTick,
-
+      //
+      onFilter,
+      onFilterDropdownVisibleChange,
+      onSelect,
       ...attr
     } = props;
     let { spacing } = props;
@@ -273,7 +286,7 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots, expose}) => {
       >
         {
           cloneVNode(children, {
-            className: classnames(get(children, 'props.className'), {
+            className: classnames(get(children, 'props.class'), {
               [`${prefixCls}-showing`]: popVisible,
             }),
             'aria-haspopup': true,

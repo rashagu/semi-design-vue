@@ -753,7 +753,7 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
         ...extraStyle,
       },
       class: classNames(
-        get(children, 'props.className')
+        get(children, 'props.class')
         // `${prefixCls}-trigger`
       ),
       // to maintain refs with callback
