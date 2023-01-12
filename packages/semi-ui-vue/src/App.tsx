@@ -59,6 +59,8 @@ import TableDemo5 from "./components/table/__test__/TableDemo5";
 import TableDemo6 from "./components/table/__test__/TableDemo6";
 import TableDemo7 from "./components/table/__test__/TableDemo7";
 import TableDemo8 from "./components/table/__test__/TableDemo8";
+import TableDemo9 from "./components/table/__test__/TableDemo9";
+import TableDemo10 from "./components/table/__test__/TableDemo10";
 export interface ExampleProps {
   name?: string
 }
@@ -80,7 +82,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TableDemo5 />*/}
         {/*<TableDemo6 />*/}
         {/*<TableDemo7 />*/}
-        <TableDemo8 />
+        {/*<TableDemo8 />*/}
+        {/*<TableDemo9 />*/}
+        <TableDemo10 />
         {/*<PaginationDemo />*/}
         {/*<PopconfirmDemo/>*/}
         {/*<NotificationDemo/>*/}

@@ -27,10 +27,10 @@ const ResizableHeaderCell = defineComponent<ResizableHeaderCellProps>((props, {a
             return <th {...domProps} />;
         }
 
-        let { children } = restProps;
+        let children = slots.default?.();
 
         // Fragment must be used here, otherwise there will be an error (seemingly a react-resizable@1.9.0 problem)
-        children = children.forEach((child, index) => <Fragment key={index}>{child}</Fragment>);
+        children = children.map((child, index) => <Fragment key={index}>{child}</Fragment>);
 
         return (
           // @ts-ignore

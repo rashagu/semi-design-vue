@@ -47,7 +47,7 @@ export const vuePropsType = {
     prefixCls: PropTypes.string,
     renderGroupSection: PropTypes.element,
     renderPagination: PropTypes.element,
-    resizable: PropTypes.object,
+    resizable: [PropTypes.bool, PropTypes.object],
     rowExpandable: PropTypes.any,
     rowKey: PropTypes.string,
     rowSelection: PropTypes.element,
@@ -70,7 +70,12 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
     const childrenColumnName = 'children';
 
     const columns = ref<Record<string, any>[]>([]);
-    watch([()=>props.columns, ()=>props.expandedRowRender, ()=>props.hideExpandedColumn, ()=>props.rowSelection], () => {
+    watch([
+        () => props.columns,
+        () => props.expandedRowRender,
+        () => props.hideExpandedColumn,
+        () => props.rowSelection
+    ], () => {
 
         const { columns: propColumns } = props;
         /**
@@ -116,7 +121,7 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
         // If there is a resize value, the width does not use the default value fix#1072
         const _newColumns = withResizeWidth(oldColumns, newColumns);
         columns.value = mergeColumns(oldColumns, _newColumns)
-    }, {deep: true});
+    }, {deep: true, immediate: true});
 
 
     const components = computed(()=>{
@@ -134,7 +139,7 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
     const handleResize = (column: ColumnProps) => (e: MouseEvent, { size }: { size: { width: number } }) => {
         const onResize = get(props.resizable, 'onResize', noop);
 
-        const nextColumns = cloneDeep(columns);
+        const nextColumns = cloneDeep(columns.value);
         const curColumn: ColumnProps = findColumn(nextColumns, column, childrenColumnName);
         let nextColumn = {
             ...curColumn,
@@ -156,7 +161,7 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
         const onResizeStart = get(props.resizable, 'onResizeStart', noop);
         const handlerClassName = get(props.resizable, 'handlerClassName', 'resizing');
 
-        const nextColumns = cloneDeep(columns);
+        const nextColumns = cloneDeep(columns.value);
 
         const curColumn: ColumnProps = findColumn(nextColumns, column, childrenColumnName);
 
@@ -180,7 +185,7 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
     const handleResizeStop = (column: ColumnProps) => (e: MouseEvent) => {
         const onResizeStop = get(props.resizable, 'onResizeStop', noop);
         const handlerClassName = get(props.resizable, 'handlerClassName', 'resizing');
-        const nextColumns = cloneDeep(columns);
+        const nextColumns = cloneDeep(columns.value);
 
         const curColumn: ColumnProps = findColumn(nextColumns, column, childrenColumnName);
 

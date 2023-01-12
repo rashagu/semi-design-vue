@@ -74,7 +74,7 @@ import {
     onBeforeUnmount,
     onMounted,
     reactive,
-    ref,
+    ref, toRaw,
     useSlots,
     watch
 } from "vue";
@@ -469,14 +469,17 @@ function Table<RecordType extends Record<string, any>>() {
             if (rowSelection !== state.prePropRowSelection) {
                 let newSelectionStates: TableStateRowSelection<RecordType> = {};
                 if (isObject(state.rowSelection)) {
+                    // @ts-ignore
                     newSelectionStates = {...newSelectionStates, ...state.rowSelection};
                 }
                 if (isObject(rowSelection)) {
+                    // @ts-ignore
                     newSelectionStates = {...newSelectionStates, ...rowSelection};
                 }
                 const selectedRowKeys = get(rowSelection, 'selectedRowKeys');
                 const getCheckboxProps = get(rowSelection, 'getCheckboxProps');
                 if (selectedRowKeys && Array.isArray(selectedRowKeys)) {
+                    // @ts-ignore
                     newSelectionStates.selectedRowKeysSet = new Set(selectedRowKeys);
                 }
                 // The return value of getCheckboxProps affects the disabled rows
@@ -496,9 +499,11 @@ function Table<RecordType extends Record<string, any>>() {
             if (pagination !== state.prePagination) {
                 let newPagination: Pagination = {};
                 if (isObject(state.pagination)) {
+                    // @ts-ignore
                     newPagination = {...newPagination, ...state.pagination};
                 }
                 if (isObject(pagination)) {
+                    // @ts-ignore
                     newPagination = {...newPagination, ...pagination};
                 }
                 willUpdateStates.pagination = newPagination;
@@ -621,6 +626,7 @@ function Table<RecordType extends Record<string, any>>() {
 
             // when dataSource has change, should reset currentPage
             if (dataSource !== prevPropsDataSource) {
+                // @ts-ignore
                 states.pagination = isObject(statePagination) ? {
                     ...statePagination,
                     currentPage: isObject(propsPagination) && propsPagination.currentPage ? propsPagination.currentPage : 1,
@@ -1384,10 +1390,12 @@ function Table<RecordType extends Record<string, any>>() {
                 state.dataSource = pageData.dataSource as any;
                 state.pagination = pageData.pagination;
             }
+            // TODO 拿到state的原始数据
+            const stateObj = {...toRaw(state)}
 
             const props_ = {
                 ...rest,
-                ...(state as any),
+                ...stateObj,
                 // props not in rest
                 virtualized,
                 scroll,

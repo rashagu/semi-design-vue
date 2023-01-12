@@ -44,7 +44,17 @@ import {
     RowKey
 } from '../interface';
 import {VueJsxNode} from "../../interface";
-import {CSSProperties, defineComponent, FunctionalComponent, h, nextTick, reactive, ref, useSlots, watch} from "vue";
+import {
+    CSSProperties,
+    defineComponent,
+    FunctionalComponent,
+    h,
+    nextTick,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../../PropTypes";
 import {useTableContext} from "../tableContext/Consumer";
 import {FooterProps} from "../../image/interface";

@@ -9,7 +9,7 @@ import {vuePropsMake} from "../PropTypes";
 
 const propTypes = {
   ...TablePropTypes,
-  resizable: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  resizable: [PropTypes.bool, PropTypes.object],
 };
 
 const defaultProps = {

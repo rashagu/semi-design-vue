@@ -23,7 +23,7 @@ import type {FunctionalComponent} from "vue";
 
 
 function renderDropdown(props_: RenderDropdownProps = {}, nestedElem: VueJsxNode = null, level = 0) {
-    const props = omit(props_, 'title', 'dataIndex', 'width', 'filters', 'filteredValue', 'fixed')
+    const props = omit(props_, 'title', 'dataIndex', 'width', 'filters', 'filteredValue', 'fixed', )
     const {
         filterMultiple = true,
         filters = [],

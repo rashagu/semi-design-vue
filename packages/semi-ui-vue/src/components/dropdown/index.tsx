@@ -62,6 +62,7 @@ export interface DropdownProps extends TooltipProps {
   onFilter?: any;
   onFilterDropdownVisibleChange?: any;
   onSelect?: any;
+  onHeaderCell?: any;
 
   render?: any;
   visible?: boolean;
@@ -93,7 +94,7 @@ const propTypes = {
   onFilter: PropTypes.func,
   onFilterDropdownVisibleChange: PropTypes.func,
   onSelect: PropTypes.func,
-
+  onHeaderCell: PropTypes.func,
 
   render: PropTypes.node,
   children: PropTypes.node,
@@ -253,6 +254,7 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots, expose}) => {
       onFilter,
       onFilterDropdownVisibleChange,
       onSelect,
+      onHeaderCell,
       ...attr
     } = props;
     let { spacing } = props;
