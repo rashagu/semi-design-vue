@@ -21,7 +21,8 @@ interface SortableItemProps {
   id: number | string,
   moveRow: any,
   index: number,
-  style:any
+  style:any,
+  componentsTag: string
 }
 
 export const vuePropsType = {
@@ -29,14 +30,19 @@ export const vuePropsType = {
   children: [Object, Function],
   moveRow: Function,
   index: Number,
-  style: [Object, String]
+  style: [Object, String],
+  componentsTag: {
+    type: String,
+    default: 'tr'
+  }
 }
 
 const SortableItem = defineComponent<SortableItemProps>((props, {attrs}) => {
 
   const slots = useSlots()
 
-  const params: Arguments = {id: computed(() => props.index) as any}
+
+  const params: Arguments = {id: computed(() => props.id) as any}
   const {
     attributes,
     listeners,
@@ -54,24 +60,20 @@ const SortableItem = defineComponent<SortableItemProps>((props, {attrs}) => {
       transform: CSS.Transform.toString(transform.value),
       transition: transition.value,
     };
-    const {currentPage, style: A, onMouseEnter, onMouseLeave, ...restProps} = attrs;
+    const {currentPage, onMouseEnter, onMouseLeave, ...restProps} = attrs;
     // moveRow.moveRow(dragIndex, hoverIndex)
     if (index === 0) {
       // console.log(attrs, props)
       index++
     }
-    return (
-      <tr
-        id={'asd_' + props.index}
-        ref={setNodeRef as any}
-        {...attributes.value}
-        {...listeners?.value}
-        {...restProps}
-        style={style}
-      >
-        {slots.default?.()}
-      </tr>
-    )
+    return h(props.componentsTag as any, {
+      id: 'asd_' + props.id,
+      ref: setNodeRef as any,
+      ...attributes.value,
+      ...listeners?.value,
+      ...restProps,
+      style
+    }, slots.default?.())
 
   }
 })
