@@ -86,7 +86,8 @@ export interface BodyProps extends BaseProps {
     rowExpandable?: RowExpandable<Record<string, any>>;
     renderExpandIcon: (record: Record<string, any>, isNested: boolean) => VueJsxNode | null;
     headerRef?: any;
-    onScroll?: VirtualizedOnScroll
+    onScroll?: VirtualizedOnScroll,
+    bodyWrapperRef?: any
 }
 
 export interface BodyState {
@@ -170,6 +171,9 @@ const propTypes = {
     onExpandedRowsChange: PropTypes.func,
     onExpand: PropTypes.func,
     onChange: PropTypes.func,
+
+    onRow: PropTypes.func,
+    bodyWrapperRef: [PropTypes.func, PropTypes.object],
 };
 export {
     propTypes as BodyPropTypes
@@ -881,7 +885,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
                   {includeHeader && showHeader ? (
                     <TableHeader {...props} ref={headerRef} components={components} columns={columns} />
                   ) : null}
-                  <BodyWrapper className={`${prefixCls}-tbody`} onScroll={onScroll}>
+                  <BodyWrapper ref={props.bodyWrapperRef} className={`${prefixCls}-tbody`} onScroll={onScroll}>
                       {isMap(groups) ? renderGroupedRows() : renderBodyRows(dataSource)}
                   </BodyWrapper>
               </Table>
@@ -902,8 +906,6 @@ const Body = defineComponent<BodyProps>((props, {}) => {
 
 
     return () => {
-
-
         const { virtualized } = props;
         return (
           <ConfigContext.Consumer>

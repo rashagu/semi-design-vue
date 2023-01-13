@@ -25,6 +25,7 @@ import type {CSSProperties, HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes} 
 
 export interface TableProps<RecordType extends Record<string, any> = any> extends BaseProps {
     bordered?: boolean;
+    bodyWrapperRef?: any;
     children?: VueJsxNode;
     childrenRecordName?: string;
     className?: string;

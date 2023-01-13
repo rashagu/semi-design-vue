@@ -147,5 +147,6 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
 
 
 Index.props = VuePropsType
+Index.name = 'Spin'
 
 export default Index

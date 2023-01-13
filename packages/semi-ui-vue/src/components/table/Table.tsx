@@ -166,6 +166,7 @@ const propTypes = {
     expandRowByClick: PropTypes.bool, // TODO: future api
     getVirtualizedListRef: PropTypes.func, // TODO: future api
 
+    bodyWrapperRef: [PropTypes.func, PropTypes.object],
 
 };
 export {
