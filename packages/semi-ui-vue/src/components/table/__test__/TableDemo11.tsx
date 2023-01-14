@@ -1,5 +1,5 @@
-import {computed, defineComponent, h, ref, Teleport, VNode, watch} from 'vue';
-import Table_, {TableComponents} from '../index';
+import { computed, defineComponent, h, ref, Teleport, VNode, watch } from 'vue';
+import Table_, { TableComponents } from '../index';
 import Avatar from '../../avatar';
 import {
   closestCenter,
@@ -20,13 +20,12 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit-vue/sortable';
 import * as dateFns from 'date-fns';
-import SortableItem from "./demo11/SortableItem";
-import {isNull} from "lodash";
+import SortableItem from './demo11/SortableItem';
+import { isNull } from 'lodash';
 
 interface TableDemo1Props {
   name?: string;
 }
-
 
 let draggingIndex = -1;
 const PAGE_SIZE = 5;
@@ -41,7 +40,7 @@ const columns = [
     render: (text, record, index) => {
       return (
         <div>
-          <Avatar size="small" shape="square" src={figmaIconUrl} style={{marginRight: '12px'}}></Avatar>
+          <Avatar size="small" shape="square" src={figmaIconUrl} style={{ marginRight: '12px' }}></Avatar>
           {text}
         </div>
       );
@@ -72,7 +71,7 @@ const columns = [
     render: (text, record, index) => {
       return (
         <div>
-          <Avatar size="small" color={record.avatarBg} style={{marginRight: '4px'}}>
+          <Avatar size="small" color={record.avatarBg} style={{ marginRight: '4px' }}>
             {typeof text === 'string' && text.slice(0, 1)}
           </Avatar>
           {text}
@@ -105,20 +104,18 @@ for (let i = 0; i < 46; i++) {
   });
 }
 
-
 export const vuePropsType = {
   name: String,
 };
 const Table = Table_();
 const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
-
   const sensors = useSensors(
     useSensor(PointerSensor, {
-      activationConstraint: {
-        // distance: 5,
-        delay: 100,
-        tolerance: 100
-      }
+      // activationConstraint: {
+      //   // distance: 5,
+      //   // delay: 100,
+      //   // tolerance: 100
+      // }
     }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
@@ -127,65 +124,67 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
 
   function handleDragEnd(event: DragEndEvent) {
     // console.log(event)
-    const {active, over} = event;
+    const { active, over } = event;
 
     if (active && over && active.id !== over?.id) {
-      const oldIndex = data.value.indexOf(+active.id);
-      const newIndex = data.value.indexOf(+over!.id);
-      data.value = arrayMove(data.value, oldIndex, newIndex)
+      const oldIndex = pageData.value.findIndex(item => item.id === +active.id);
+      const newIndex = pageData.value.findIndex(item => item.id === +over.id);
+      pageData.value = arrayMove(pageData.value, oldIndex, newIndex);
+      const newData = Array.from(data.value);
+      newData.splice((currentPage.value - 1) * PAGE_SIZE, 0, ...pageData.value);
+      data.value = newData;
     }
   }
 
-  const dragIngIndex = ref()
+  const dragIngIndex = ref();
 
-  const dragOverlayRef = ref()
-  const tableDragOverlayRef = ref()
+  const dragOverlayRef = ref();
+  const tableDragOverlayRef = ref();
   function onDragStart(event: DragEndEvent) {
-    const {active, over} = event;
-    dragIngIndex.value = active.id
-
+    const { active, over } = event;
+    dragIngIndex.value = active.id;
   }
 
-  watch([tableDragOverlayRef, dragOverlayRef, dragIngIndex], ([tableDragOverlayRefValue, dragOverlayRefValue, dragIngIndexValue])=>{
-    if (tableDragOverlayRefValue && dragOverlayRefValue && !isNull(dragIngIndexValue)){
-      const colgroupDom = document.getElementById('table_asd').getElementsByClassName('semi-table-colgroup')[0]
-      const dom = document.getElementById('asd_' + dragIngIndexValue)
-      dom.setAttribute('style', '')
-      tableDragOverlayRefValue.insertBefore(colgroupDom.cloneNode(true), dragOverlayRefValue)
-      dragOverlayRefValue.append(dom.cloneNode(true))
+  watch(
+    [tableDragOverlayRef, dragOverlayRef, dragIngIndex],
+    ([tableDragOverlayRefValue, dragOverlayRefValue, dragIngIndexValue]) => {
+      if (tableDragOverlayRefValue && dragOverlayRefValue && !isNull(dragIngIndexValue)) {
+        const colgroupDom = document.getElementById('table_asd').getElementsByClassName('semi-table-colgroup')[0];
+        const dom = document.getElementById('asd_' + dragIngIndexValue);
+        dom.setAttribute('style', 'background-color: #ffffff');
+        tableDragOverlayRefValue.insertBefore(colgroupDom.cloneNode(true), dragOverlayRefValue);
+        dragOverlayRefValue.append(dom.cloneNode(true));
+      }
     }
-  })
-
+  );
 
   const data = ref([...initData]);
   const currentPage = ref(1);
   const pageData = ref(data.value.slice(0, PAGE_SIZE));
 
   const DraggableBodyRow = SortableItem as unknown;
-  const components = computed<TableComponents>(
-    () => ({
-      body: {
-        row: DraggableBodyRow as VNode,
-      },
-    })
-  );
+  const components = computed<TableComponents>(() => ({
+    body: {
+      row: DraggableBodyRow as VNode,
+    },
+  }));
 
   const moveRow = (dragIndex, hoverIndex) => {
-    console.log(dragIndex)
+    console.log(dragIndex);
     const totalDragIndex = (currentPage.value - 1) * PAGE_SIZE + dragIndex;
     const totalHoverIndex = (currentPage.value - 1) * PAGE_SIZE + hoverIndex;
     const dragRow = data[totalDragIndex];
     const newData = [...data.value];
     newData.splice(totalDragIndex, 1);
     newData.splice(totalHoverIndex, 0, dragRow);
-    data.value = newData
-    pageData.value = newData.slice((currentPage.value - 1) * PAGE_SIZE, currentPage.value * PAGE_SIZE)
+    data.value = newData;
+    pageData.value = newData.slice((currentPage.value - 1) * PAGE_SIZE, currentPage.value * PAGE_SIZE);
   };
 
   const handlePageChange = pageNum => {
     console.log(pageNum);
-    currentPage.value = pageNum
-    pageData.value = data.value.slice((pageNum - 1) * PAGE_SIZE, pageNum * PAGE_SIZE)
+    currentPage.value = pageNum;
+    pageData.value = data.value.slice((pageNum - 1) * PAGE_SIZE, pageNum * PAGE_SIZE);
   };
 
   const dropAnimationConfig: DropAnimation = {
@@ -198,11 +197,10 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
     }),
   };
 
-  const SortableData = computed(()=>{
-    return data.value.slice((currentPage.value - 1) * 5, ((currentPage.value - 1) * 5) + 5)
-  })
+  const SortableData = computed(() => {
+    return pageData.value.slice((currentPage.value - 1) * 5, (currentPage.value - 1) * 5 + 5);
+  });
   return () => {
-
     return (
       <div id="components-table-demo-drag-sorting">
         <DndContext
@@ -211,10 +209,7 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
           onDragEnd={handleDragEnd}
           onDragStart={onDragStart}
         >
-          <SortableContext
-            items={SortableData.value}
-            strategy={verticalListSortingStrategy}
-          >
+          <SortableContext items={SortableData.value} strategy={verticalListSortingStrategy}>
             <Table
               id={'table_asd'}
               columns={columns}
@@ -229,21 +224,26 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
               onRow={(record, index) => ({
                 index,
                 moveRow,
-                id: record.id
+                id: record.id,
               })}
             />
           </SortableContext>
           <Teleport to={document.body}>
-            <DragOverlay
-              adjustScale={false}
-              dropAnimation={dropAnimationConfig}
-            >
-              <SortableItem index={dragIngIndex.value} style={{}} moveRow={() => {
-              }} id={''} componentsTag={'div'}>
-                <table ref={tableDragOverlayRef} role="grid" aria-rowcount="5" aria-colcount="4" class="semi-table" style={{backgroundColor: '#fff', width: '100%'}}>
-
-                  <tbody class="semi-table-tbody" ref={dragOverlayRef} id={'asd_DragOverlay'}>
-                  </tbody>
+            <DragOverlay adjustScale={false} dropAnimation={dropAnimationConfig}>
+              <SortableItem index={dragIngIndex.value} style={{}} moveRow={() => {}} id={''} componentsTag={'div'}>
+                <table
+                  ref={tableDragOverlayRef}
+                  role="grid"
+                  aria-rowcount="5"
+                  aria-colcount="4"
+                  class="semi-table semi-table-demo11_DragOverlay"
+                  style={{
+                    backgroundColor: '#fff',
+                    width: '100%',
+                    boxShadow: '0 0 0 2px rgba(63, 63, 68, 0.05), 0 1px 2px 0 rgba(34, 33, 81, 0.15)'
+                  }}
+                >
+                  <tbody class="semi-table-tbody" ref={dragOverlayRef} id={'asd_DragOverlay'}></tbody>
                 </table>
               </SortableItem>
             </DragOverlay>
@@ -258,6 +258,3 @@ TableDemo1.props = vuePropsType;
 TableDemo1.name = 'TableDemo1';
 
 export default TableDemo1;
-
-
-
