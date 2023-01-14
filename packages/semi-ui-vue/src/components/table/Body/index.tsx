@@ -1,8 +1,8 @@
 
 import * as PropTypes from '../../PropTypes';
-import { get, size, isMap, each, isEqual, pick, isNull, isFunction } from 'lodash';
+import {get, size, isMap, each, isEqual, pick, isNull, isFunction, omit} from 'lodash';
 import classnames from 'classnames';
-import { VariableSizeList as List } from '@kousum/vue3-window';
+import { VariableSizeList as List } from '@kousum/vue3-window/src/components/index';
 
 import {
     arrayAdd,
@@ -24,7 +24,8 @@ import { logger } from '../utils';
 import ColGroup from '../ColGroup';
 import BaseRow, {BaseRowPropTypes} from './BaseRow';
 import ExpandedRow from './ExpandedRow';
-import SectionRow from './SectionRow';
+import SectionRow, {SectionRowPropTypes} from './SectionRow';
+
 import TableHeader from '../TableHeader';
 import ConfigContext from '../../configProvider/context';
 import TableContext, { TableContextProps } from '../table-context';
@@ -46,14 +47,14 @@ import {
 import {VueJsxNode} from "../../interface";
 import {
     CSSProperties,
-    defineComponent,
+    defineComponent, Fragment,
     FunctionalComponent,
     h,
     nextTick,
     reactive,
     ref,
     useSlots,
-    watch
+    watch, WatchStopHandle
 } from "vue";
 import {vuePropsMake} from "../../PropTypes";
 import {useTableContext} from "../tableContext/Consumer";
@@ -174,6 +175,7 @@ const propTypes = {
 
     onRow: PropTypes.func,
     bodyWrapperRef: [PropTypes.func, PropTypes.object],
+    onGroupedRow: PropTypes.func,
 };
 export {
     propTypes as BodyPropTypes
@@ -199,21 +201,19 @@ const Body = defineComponent<BodyProps>((props, {}) => {
     })
 
 
-    const one1 = watch(()=>context.value.getVirtualizedListRef, (value)=>{
-        const { getVirtualizedListRef, flattenedColumns: flattenedColumns_, getCellWidths } = context.value;
-        if (value){
-            if (getVirtualizedListRef) {
-                if (props.virtualized) {
-                    getVirtualizedListRef(listRef.value);
-                } else {
-                    console.warn('getVirtualizedListRef only works with virtualized. ' +
-                      'See https://semi.design/zh-CN/show/table for more information.');
-                }
-            }
-            flattenedColumns = flattenedColumns_ as any;
-            cellWidths = getCellWidths(flattenedColumns);
-            one1()
+    watch([listRef, ()=>context.value.getVirtualizedListRef], ()=>{
+        if (props.virtualized) {
+            context.value.getVirtualizedListRef?.(listRef.value)
+        } else {
+            console.warn('getVirtualizedListRef only works with virtualized. ' +
+              'See https://semi.design/zh-CN/show/table for more information.');
         }
+    })
+    let one1: WatchStopHandle
+    one1 = watch(()=>context.value.getVirtualizedListRef, (value)=>{
+        flattenedColumns = context.value.flattenedColumns as any;
+        cellWidths = context.value.getCellWidths(flattenedColumns);
+        one1?.()
     }, {immediate: true})
     observer = null;
     const {adapter: adapterInject} = useBaseComponent<BodyProps>(props, {})
@@ -286,6 +286,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
             prevStateCachedExpandRelatedProps
         ]) => {
         const { virtualized, dataSource, expandedRowKeys, columns, scroll } = props;
+
         if (virtualized) {
             if (
               prevPropsDataSource !== dataSource ||
@@ -304,10 +305,10 @@ const Body = defineComponent<BodyProps>((props, {}) => {
 
         const scrollY = get(scroll, 'y');
         const bodyWrapDOM = nodeRef.value;
-        if (scrollY && scrollY !== prevPropsScroll.y) {
+        if (scrollY && scrollY !== prevPropsScroll?.y) {
             foundation.observeBodyResize(bodyWrapDOM);
         }
-    })
+    }, {immediate: true})
 
 
 
@@ -321,7 +322,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
         if (typeof forwardedRef === 'function') {
             forwardedRef(node);
         } else if (forwardedRef && typeof forwardedRef === 'object') {
-            forwardedRef.current = node;
+            forwardedRef.value = node;
         }
     };
 
@@ -408,7 +409,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
             ...props,
             style: {
                 ...style,
-                width: rowWidth,
+                width: rowWidth + 'px',
             },
             ...rest,
             columns: flattenedColumns,
@@ -424,24 +425,28 @@ const Body = defineComponent<BodyProps>((props, {}) => {
     };
 
     // virtualized List innerElementType
-    const renderTbody: FunctionalComponent = ((props: any = {}) => (
-      <div
-        {...props}
-        onScroll={(...args) => {
-            if (props.onScroll) {
-                props.onScroll(...args);
-            }
-        }}
-        // eslint-disable-next-line react/no-this-in-sfc,react/destructuring-assignment
-        className={classnames(props.className, `${props.prefixCls}-tbody`)}
-        style={{ ...props.style }}
-        ref={ref}
-      />
-    ));
+    const renderTbody: FunctionalComponent<any> = ((props_, {slots}) => {
+
+        return (
+          <div
+            {...props_}
+            onScroll={(...args) => {
+                if (props_.onScroll) {
+                    props_.onScroll(...args);
+                }
+            }}
+            class={classnames(props_.className, `${props.prefixCls}-tbody`)}
+            style={{ ...props_.style }}
+            ref={ref}
+          >
+              {slots?.default?.()}
+          </div>
+        )
+    });
 
     // virtualized List outerElementType
-    const renderOuter: FunctionalComponent = ((props: any) => {
-        const { children, ...rest } = props;
+    const renderOuter: FunctionalComponent<any> = ((props_, {slots}) => {
+        const {...rest } = props_;
         // eslint-disable-next-line react/no-this-in-sfc
         const { handleWheel, prefixCls, emptySlot, dataSource } = props;
 
@@ -470,7 +475,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
             }}
           >
               <div style={{ width: tableWidth + 'px' }} class={tableCls}>
-                  {children}
+                  {slots.default?.()}
               </div>
               {size(dataSource) === 0 && emptySlot}
           </div>
@@ -503,7 +508,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
 
         const listStyle = {
             width: '100%',
-            height: virtualizedData?.length ? y : null,
+            height: virtualizedData?.length ? y + 'px' : null,
             overflowX: 'auto',
             overflowY: 'auto',
         } as const;
@@ -530,32 +535,34 @@ const Body = defineComponent<BodyProps>((props, {}) => {
             style={{ ...listStyle, direction }}
             direction={direction}
           >
-              {renderVirtualizedRow}
+              {{default: renderVirtualizedRow}}
           </List>
         );
     };
 
     /**
      * render group title
-     * @param {*} props
+     * @param props_
      */
     const renderSectionRow = (props_: RenderSectionRowProps = { groupKey: undefined }) => {
         const { dataSource, rowKey, group, groupKey, index } = props_;
-        const sectionRowPickKeys = Object.keys(SectionRow.propTypes);
+        const sectionRowPickKeys = Object.keys(SectionRowPropTypes);
         const sectionRowProps: any = pick(props_, sectionRowPickKeys);
 
         const { handleRowExpanded } = context.value;
 
         return (
           <SectionRow
-            {...sectionRowProps}
-            record={{
-                groupKey,
-                records: [...group].map(recordKey => getRecord(dataSource, recordKey, rowKey)),
+            {...{
+                ...sectionRowProps,
+                onExpand: handleRowExpanded,
+                record: {
+                    groupKey,
+                    records: [...group].map(recordKey => getRecord(dataSource, recordKey, rowKey)),
+                },
+                index,
+                data: dataSource
             }}
-            index={index}
-            onExpand={handleRowExpanded}
-            data={dataSource}
             key={groupKey || index}
           />
         );
@@ -611,6 +618,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
      * @returns
      */
     function renderBaseRow(props: any = {}) {
+        // console.log(ctx)
         const {
             rowKey,
             columns,
@@ -662,19 +670,21 @@ const Body = defineComponent<BodyProps>((props, {}) => {
 
         const { getCellWidths } = context.value;
         const cellWidths = getCellWidths(columns, null, true);
-
         return (
-          // @ts-ignore
-          <BaseRow
-            {...{
-                ...baseRowProps,
-                ...expandableProps,
-                ...selectionProps,
-                key,
-                rowKey: key,
-                cellWidths: cellWidths
-            }}
-          />
+          // 这里必须加Fragment，不然BaseRow会传入一个默认的props，来历不明？
+          <Fragment>
+              {/*// @ts-ignore*/}
+              <BaseRow
+                {...{
+                    ...baseRowProps,
+                    ...expandableProps,
+                    ...selectionProps,
+                    key,
+                    rowKey: key,
+                    cellWidths: cellWidths
+                }}
+              />
+          </Fragment>
         );
     }
 

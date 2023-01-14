@@ -68,6 +68,9 @@ const propTypes = {
     store: PropTypes.object,
     rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.func]),
 };
+export {
+    propTypes as SectionRowPropTypes
+}
 const defaultProps = {
     prefixCls: cssClasses.PREFIX,
     components: {
@@ -176,6 +179,7 @@ const SectionRow = defineComponent<SectionRowProps>((props, {}) => {
 
         const { getCellWidths } = context.value;
         const baseRowCellWidths = getCellWidths(columns, null, true);
+
 
         return (
           // @ts-ignore

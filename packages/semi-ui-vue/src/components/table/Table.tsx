@@ -65,7 +65,7 @@ import {
 import { ArrayElement } from '../_base/base';
 import {VueJsxNode} from "../interface";
 import {
-    ComponentInternalInstance,
+    ComponentInternalInstance, CSSProperties,
     defineComponent,
     Fragment,
     getCurrentInstance,
@@ -165,9 +165,7 @@ const propTypes = {
     dropdownPrefixCls: PropTypes.string, // TODO: future api
     expandRowByClick: PropTypes.bool, // TODO: future api
     getVirtualizedListRef: PropTypes.func, // TODO: future api
-
     bodyWrapperRef: [PropTypes.func, PropTypes.object],
-
 };
 export {
     propTypes as TablePropTypes
@@ -773,7 +771,7 @@ function Table<RecordType extends Record<string, any>>() {
             }
             const { target } = e;
             // const { headTable, bodyTable } = this;
-            const headTable = headerWrapRef.value;
+            const headTable = headerWrapRef.value?.$el;
             const bodyTable = bodyWrapRef.value;
             if (target.scrollLeft !== lastScrollLeft) {
                 if (target === bodyTable && headTable) {
@@ -1203,7 +1201,7 @@ function Table<RecordType extends Record<string, any>>() {
               <BodyTable
                 {...omit(props_, ['rowSelection', 'headWidths']) as any}
                 key="body"
-                ref={bodyRef}
+                forwardedRef={bodyRef}
                 columns={filteredColumns}
                 fixed={fixed}
                 prefixCls={prefixCls}
@@ -1325,7 +1323,7 @@ function Table<RecordType extends Record<string, any>>() {
                 scroll,
                 prefixCls,
                 className,
-                style: wrapStyle = {},
+                style = {},
                 bordered,
                 id,
                 pagination: propPagination,
@@ -1340,8 +1338,11 @@ function Table<RecordType extends Record<string, any>>() {
                 ...rest
             } = props;
 
+            const wrapStyle:CSSProperties = {
+                ...props.style
+            }
 
-            wrapStyle = { ...wrapStyle };
+
 
             let columns: ColumnProps<RecordType>[];
             /**
@@ -1420,8 +1421,10 @@ function Table<RecordType extends Record<string, any>>() {
             const y = get(scroll, 'y');
 
             if (virtualized) {
-                if (typeof wrapStyle.width !== 'number') {
-                    wrapStyle.width = x;
+                if (isNaN(parseInt(''+wrapStyle.width))) {
+                    wrapStyle.width = x + 'px';
+                } else {
+                    wrapStyle.width = typeof wrapStyle.width === 'string' ? wrapStyle.width : wrapStyle.width + 'px';
                 }
             }
 

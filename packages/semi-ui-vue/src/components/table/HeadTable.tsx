@@ -80,6 +80,7 @@ const HeadTable = defineComponent<HeadTableProps>((props, {}) => {
         const headStyle: Partial<CSSProperties> = {};
         const tableStyle: { width?: number | string } = {};
 
+
         if (x && !fixed) {
             tableStyle.width = x + 'px';
         }

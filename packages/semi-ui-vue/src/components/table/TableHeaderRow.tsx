@@ -144,13 +144,13 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
                         cellStyle = {
                             ...cellStyle,
                             position: 'sticky',
-                            left: arrayAdd(headWidths, 0, indexOfSlicedColumns),
+                            left: arrayAdd(headWidths, 0, indexOfSlicedColumns) + 'px',
                         };
                     } else if (isFixedRight(column)) {
                         cellStyle = {
                             ...cellStyle,
                             position: 'sticky',
-                            right: arrayAdd(headWidths, indexOfSlicedColumns + 1),
+                            right: arrayAdd(headWidths, indexOfSlicedColumns + 1) + 'px',
                         };
                     }
                 }

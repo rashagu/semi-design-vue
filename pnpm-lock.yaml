@@ -307,7 +307,7 @@ importers:
       '@kousum/vue-dnd': 1.0.1
       '@kousum/vue-draggable': 1.0.2
       '@kousum/vue-resizable': 1.0.2
-      '@kousum/vue3-window': ^0.0.4
+      '@kousum/vue3-window': D:\project\rashagu\vue3-window
       '@types/lodash': ^4.14.178
       '@vitejs/plugin-vue': ^3.2.0
       '@vitejs/plugin-vue-jsx': ^2.1.0
@@ -357,7 +357,7 @@ importers:
       '@kousum/vue-dnd': 1.0.1_qdoyk5eenwllnfricokasubibi
       '@kousum/vue-draggable': 1.0.2_lodash@4.17.21+vue@3.2.45
       '@kousum/vue-resizable': 1.0.2_lodash@4.17.21+vue@3.2.45
-      '@kousum/vue3-window': 0.0.4_vue@3.2.45
+      '@kousum/vue3-window': link:../../../vue3-window
       async-validator: 4.2.5
       classnames: 2.3.1
       copy-text-to-clipboard: 3.0.1
@@ -3154,16 +3154,6 @@ packages:
     dependencies:
       '@kousum/vue-draggable': 1.0.2_lodash@4.17.21+vue@3.2.45
       lodash: 4.17.21
-      vue: 3.2.45
-    dev: false
-
-  /@kousum/vue3-window/0.0.4_vue@3.2.45:
-    resolution: {integrity: sha512-FF6dBbZDfw/4wmlDqaN0+DYUzDxwSlJ+S/E96ej6U6HWooFwcRilwN8LPKcftzR/aZYgL44w1MOhFZ/zkLlHcg==}
-    peerDependencies:
-      vue: ^3.2.45
-    dependencies:
-      '@babel/runtime': 7.19.0
-      memoize-one: 6.0.0
       vue: 3.2.45
     dev: false
 
@@ -6848,10 +6838,6 @@ packages:
 
   /memoize-one/5.2.1:
     resolution: {integrity: sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==}
-    dev: false
-
-  /memoize-one/6.0.0:
-    resolution: {integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==}
     dev: false
 
   /meow/6.1.1:

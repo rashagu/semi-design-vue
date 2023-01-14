@@ -21,7 +21,7 @@ import { BaseRowKeyType } from '@douyinfe/semi-foundation/table/foundation';
 
 import TableCell from '../TableCell';
 import { ColumnProps, Fixed, TableComponents, Virtualized, ExpandIcon, OnRow, RowExpandable } from '../interface';
-import {CSSProperties, defineComponent, h, ref, useSlots} from "vue";
+import {CSSProperties, defineComponent, getCurrentInstance, h, ref, useSlots, watch} from "vue";
 import {vuePropsMake} from "../../PropTypes";
 import {useBaseComponent} from "../../_base/baseComponent";
 import {FooterProps} from "../../image/interface";
@@ -106,6 +106,7 @@ const propTypes = {
     style: PropTypes.object,
     virtualized: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     visible: PropTypes.bool,
+    data: [Array]
 };
 
 export {
@@ -134,7 +135,7 @@ const defaultProps = {
     disabled: false,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const TableRow = defineComponent<BaseRowProps>((props, {}) => {
+const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
     const slots = useSlots();
     const nodeRef = ref()
 
@@ -158,9 +159,12 @@ const TableRow = defineComponent<BaseRowProps>((props, {}) => {
     const adapter = adapter_()
     const foundation = new TableRowFoundation(adapter);
 
+    const instance = getCurrentInstance()
 
+    // TODO
     //组件是否需要更新，需要返回一个布尔值，返回true则更新，返回flase不更新，这是一个关键点
     function shouldComponentUpdate(nextProps: BaseRowProps) {
+        console.log('shouldComponentUpdate')
         /**
          * Shallow comparison of incoming props to simulate PureComponent
          * Deep comparison cellWidths
@@ -175,6 +179,13 @@ const TableRow = defineComponent<BaseRowProps>((props, {}) => {
         }
         return false;
     }
+    // watch([()=>props], (value)=>{
+    //     if (shouldComponentUpdate(value)){
+    //         // @ts-ignore
+    //         instance.ctx?.$forceUpdate?.()
+    //         console.log(props.styleTrue)
+    //     }
+    // }, {deep: true})
 
     const _cacheNode = (node: any) => {
         nodeRef.value = node;
