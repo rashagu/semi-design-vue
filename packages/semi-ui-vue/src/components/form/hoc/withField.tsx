@@ -26,7 +26,7 @@ import {
     VNode,
     FunctionalComponent,
 
-    defineComponent, useSlots, withMemo, watchEffect, watch
+    defineComponent, useSlots, withMemo, watchEffect, watch, shallowRef
 } from "vue";
 import {VueHTMLAttributes, VueJsxNode} from "../../interface";
 import {DefineComponent} from "vue";
@@ -64,6 +64,7 @@ function withField<
 
         const rulesRef:Ref = ref(mergeProps(props).rules);
         const validateRef:Ref = ref(mergeProps(props).validate);
+        const validatePromise = shallowRef<Promise<any> | null>(null);
 
 
 
@@ -138,7 +139,7 @@ function withField<
                 [mergeProps(props).field]: val,
             };
 
-            return new Promise((resolve, reject) => {
+            const rootPromise = new Promise((resolve, reject) => {
                 validator
                   .validate(
                     model,
@@ -149,12 +150,19 @@ function withField<
                     (errors, fields) => {}
                   )
                   .then(res => {
+                      if (validatePromise.value !== rootPromise) {
+                          return;
+                      }
                       // validation passed
                       setStatus('success');
                       updateError(undefined, callOpts);
                       resolve({});
                   })
                   .catch(err => {
+                      if (validatePromise.value !== rootPromise) {
+                          return;
+                      }
+
                       let { errors, fields } = err;
                       if (errors && fields) {
                           let messages = errors.map((e: any) => e.message);
@@ -176,44 +184,58 @@ function withField<
                       }
                   });
             });
+            validatePromise.value = rootPromise;
+
+            return rootPromise;
         };
 
         // execute custom validate function
-        const _validate = (val: any, values: any, callOpts: CallOpts) =>
-          new Promise(resolve => {
-              let maybePromisedErrors;
-              // let errorThrowSync;
-              try {
-                  maybePromisedErrors = validateRef.value(val, values);
-              } catch (err) {
-                  // error throw by syncValidate
-                  maybePromisedErrors = err;
-              }
-              if (maybePromisedErrors === undefined) {
-                  resolve({});
-                  updateError(undefined, callOpts);
-              } else if (isPromise(maybePromisedErrors)) {
-                  maybePromisedErrors.then((result: any) => {
-                      if (isValid(result)) {
-                          // validate success，no need to do anything with result
-                          updateError(undefined, callOpts);
-                          resolve(null);
-                      } else {
-                          // validate failed
-                          updateError(result, callOpts);
-                          resolve(result);
-                      }
-                  });
-              } else {
-                  if (isValid(maybePromisedErrors)) {
-                      updateError(undefined, callOpts);
-                      resolve(null);
-                  } else {
-                      updateError(maybePromisedErrors, callOpts);
-                      resolve(maybePromisedErrors);
-                  }
-              }
-          });
+        const _validate = (val: any, values: any, callOpts: CallOpts) => {
+            const rootPromise = new Promise(resolve => {
+                let maybePromisedErrors;
+                // let errorThrowSync;
+                try {
+                    maybePromisedErrors = validateRef.value(val, values);
+                } catch (err) {
+                    // error throw by syncValidate
+                    maybePromisedErrors = err;
+                }
+                if (maybePromisedErrors === undefined) {
+                    resolve({});
+                    updateError(undefined, callOpts);
+                } else if (isPromise(maybePromisedErrors)) {
+                    maybePromisedErrors.then((result: any) => {
+                        // If the async validate is outdated (a newer validate occurs), the result should be discarded
+                        if (validatePromise.value !== rootPromise) {
+                            return;
+                        }
+
+
+                        if (isValid(result)) {
+                            // validate success，no need to do anything with result
+                            updateError(undefined, callOpts);
+                            resolve(null);
+                        } else {
+                            // validate failed
+                            updateError(result, callOpts);
+                            resolve(result);
+                        }
+                    });
+                } else {
+                    if (isValid(maybePromisedErrors)) {
+                        updateError(undefined, callOpts);
+                        resolve(null);
+                    } else {
+                        updateError(maybePromisedErrors, callOpts);
+                        resolve(maybePromisedErrors);
+                    }
+                }
+            })
+
+            validatePromise.value = rootPromise;
+
+            return rootPromise;
+        };
 
         const fieldValidate = (val: any, callOpts?: CallOpts) => {
             let finalVal = val;

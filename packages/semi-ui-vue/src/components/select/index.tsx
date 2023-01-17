@@ -915,7 +915,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
         ref={setOptionContainerEl as any}
         onKeydown={e => foundation.handleContainerKeyDown(e)}
       >
-        {outerTopSlot}
+        {outerTopSlot ? <div class={`${prefixcls}-option-list-outer-top-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{outerTopSlot}</div> : null }
         <div
           style={{maxHeight: `${maxHeight}px`}}
           class={optionListCls}
@@ -923,11 +923,11 @@ const Index = defineComponent<SelectProps>((props, {}) => {
           aria-multiselectable={multiple}
           onScroll={e => foundation.handleListScroll(e)}
         >
-          {innerTopSlot}
+          {innerTopSlot ? <div class={`${prefixcls}-option-list-inner-top-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{innerTopSlot}</div> : null }
           {loading ? renderLoading() : isEmpty ? renderEmpty() : listContent}
-          {innerBottomSlot}
+          {innerBottomSlot ? <div class={`${prefixcls}-option-list-inner-bottom-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{innerBottomSlot}</div> : null }
         </div>
-        {outerBottomSlot}
+        {outerBottomSlot ? <div class={`${prefixcls}-option-list-outer-bottom-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{outerBottomSlot}</div> : null }
       </div>
     );
   }

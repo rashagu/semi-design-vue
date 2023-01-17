@@ -26,8 +26,8 @@
     "packages/semi-illustrations-vue"
   ],
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.26.0",
-    "@douyinfe/semi-theme-default": "2.26.0",
+    "@douyinfe/semi-foundation": "2.27.1",
+    "@douyinfe/semi-theme-default": "2.27.1",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
     "lodash": "^4.17.21",
@@ -48,7 +48,7 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.16.7",
     "@changesets/cli": "^2.22.0",
-    "@douyinfe/semi-theme-default": "^2.24.2",
+    "@douyinfe/semi-theme-default": "2.27.1",
     "@svgr/babel-plugin-add-jsx-attribute": "5.4.0",
     "@svgr/babel-plugin-remove-jsx-attribute": "5.4.0",
     "@svgr/babel-plugin-remove-jsx-empty-expression": "5.0.1",
@@ -64,17 +64,17 @@
     "@svgr/plugin-svgo": "5.5.0",
     "@svgr/webpack": "5.5.0",
     "@types/node": "^18.11.18",
-    "@vitejs/plugin-vue": "^3.2.0",
-    "@vitejs/plugin-vue-jsx": "^2.1.0",
-    "@vitest/coverage-c8": "^0.24.3",
-    "@vue/test-utils": "^2.2.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.0",
+    "@vitest/coverage-c8": "^0.27.1",
+    "@vue/test-utils": "^2.2.7",
     "camelcase": "^6.3.0",
-    "jsdom": "^20.0.1",
-    "prettier": "^1.19.1",
+    "jsdom": "^21.0.0",
+    "prettier": "^2.8.3",
     "svgo": "2.7.0",
     "ts-node": "^10.5.0",
-    "tslib": "^2.3.1",
-    "vite": "^3.2.0",
-    "vitest": "^0.24.3"
+    "tslib": "^2.4.1",
+    "vite": "^4.0.4",
+    "vitest": "^0.27.1"
   }
 }

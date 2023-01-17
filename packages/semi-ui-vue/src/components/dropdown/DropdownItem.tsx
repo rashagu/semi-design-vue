@@ -12,6 +12,7 @@ import {useDropdownContext} from "./context/Consumer";
 export type Type = 'primary' | 'secondary' | 'tertiary' | 'warning' | 'danger';
 
 export interface DropdownItemProps extends BaseProps {
+  forwardRef?: any,
   disabled?: boolean;
   selected?: boolean;
   onClick?: (payload: MouseEvent) => void;
@@ -21,7 +22,10 @@ export interface DropdownItemProps extends BaseProps {
   type?: Type;
   active?: boolean;
   icon?: JSX.Element;
-  [key:string]:any;
+  onKeyDown?: (e: KeyboardEvent) => void;
+  showTick?: boolean;
+  /** internal prop, please do not use  */
+  hover?: boolean
 }
 
 const prefixCls = css.PREFIX;
@@ -35,10 +39,14 @@ const propTypes = {
   onContextMenu: PropTypes.func,
   className: PropTypes.string,
   style: PropTypes.object,
-  forwardRef: PropTypes.func,
+  forwardRef: [PropTypes.object, PropTypes.func],
   type: String,
   active: PropTypes.bool,
-  icon: PropTypes.node
+  icon: PropTypes.node,
+  onKeyDown: PropTypes.func,
+  showTick: PropTypes.bool,
+  /** internal prop, please do not use  */
+  hover: PropTypes.bool,
 };
 const defaultProps = {
   disabled: false,
@@ -53,14 +61,16 @@ export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
 
   const {context} = useDropdownContext();
+  let elementType: string = 'Dropdown.Item'
 
   return ()=>{
-    const { disabled, className, forwardRef, style, type, active, icon } = props;
-    const { showTick } = context.value;
+    const { disabled, className, forwardRef, style, type, active, icon, showTick, hover } = props;
+    const { showTick: contextShowTick } = context.value;
     const itemclass = cls(className, {
       [`${prefixCls}-item`]: true,
       [`${prefixCls}-item-disabled`]: disabled,
-      [`${prefixCls}-item-withTick`]: showTick,
+      [`${prefixCls}-item-hover`]: hover,
+      [`${prefixCls}-item-withTick`]: contextShowTick ?? showTick,
       [`${prefixCls}-item-${type}`]: type,
       [`${prefixCls}-item-active`]: active,
     });
@@ -92,7 +102,7 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
       );
     }
     return (
-      <li role="menuitem" tabindex={-1} aria-disabled={disabled} {...events} ref={ref => forwardRef(ref)} class={itemclass} style={style}>
+      <li role="menuitem" tabindex={-1} aria-disabled={disabled} {...events} ref={forwardRef} class={itemclass} style={style}>
         {tick}
         {iconContent}
         {slots.default?.()}
@@ -102,6 +112,7 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
 })
 
 DropdownItem.props = vuePropsType
+DropdownItem.name = 'Dropdown.Item'
 
 export default DropdownItem
 

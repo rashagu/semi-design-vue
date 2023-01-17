@@ -2,7 +2,7 @@
 import * as PropTypes from '../../PropTypes';
 import {get, size, isMap, each, isEqual, pick, isNull, isFunction, omit} from 'lodash';
 import classnames from 'classnames';
-import { VariableSizeList as List } from '@kousum/vue3-window/src/components/index';
+import { VariableSizeList as List } from '@kousum/vue3-window';
 
 import {
     arrayAdd,

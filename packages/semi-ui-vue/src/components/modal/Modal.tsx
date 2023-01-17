@@ -106,8 +106,6 @@ const defaultProps = {
   centered: false,
   closable: true,
   visible: false,
-  confirmLoading: false,
-  cancelLoading: false,
   okType: 'primary',
   maskClosable: true,
   hasCancel: true,
@@ -161,10 +159,10 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
         }
       },
       notifyCancel: (e: MouseEvent) => {
-        props.onCancel(e);
+        return props.onCancel(e);
       },
       notifyOk: (e: MouseEvent) => {
-        props.onOk(e);
+        return props.onOk(e);
       },
       notifyClose: () => {
         props.afterClose();
@@ -279,7 +277,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
           <Button
             aria-label="cancel"
             onClick={handleCancel}
-            loading={cancelLoading}
+            loading={cancelLoading === undefined ? state.onCancelReturnPromiseStatus === "pending" : cancelLoading}
             type="tertiary"
             autoFocus={true}
             {...props.cancelButtonProps}
@@ -300,7 +298,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
               aria-label="confirm"
               type={okType}
               theme="solid"
-              loading={confirmLoading}
+              loading={confirmLoading === undefined ? state.onOKReturnPromiseStatus === "pending" : confirmLoading}
               onClick={handleOk}
               {...props.okButtonProps}
               x-semi-children-alias="okText"

@@ -90,7 +90,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TableDemo10 />*/}
         {/*<TableDemo11 />*/}
         {/*<TableDemo12 />*/}
-        <TableDemo13Virtualized />
+        {/*<TableDemo13Virtualized />*/}
         {/*<PaginationDemo />*/}
         {/*<PopconfirmDemo/>*/}
         {/*<NotificationDemo/>*/}
@@ -142,7 +142,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TootipDemo />*/}
         {/*<br/>*/}
         {/*<br/>*/}
-        {/*<DropdownDemo1/>*/}
+        <DropdownDemo1/>
         {/*<br/>*/}
         {/*<GridTest />*/}
         {/*<LayoutTest/>*/}
