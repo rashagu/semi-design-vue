@@ -105,6 +105,6 @@ const Sider = defineComponent<SiderProps>((props, {slots}) => {
 })
 
 Sider.props = vuePropsType
-
+Sider.name = 'Layout.Sider'
 export default Sider
 

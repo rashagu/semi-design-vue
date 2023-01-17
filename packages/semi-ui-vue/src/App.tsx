@@ -64,6 +64,8 @@ import TableDemo9 from "./components/table/__test__/TableDemo9";
 // import TableDemo11 from "./components/table/__test__/TableDemo11";
 import TableDemo12 from "./components/table/__test__/TableDemo12";
 import TableDemo13Virtualized from "./components/table/__test__/TableDemo13Virtualized";
+import OverflowListDemo1 from "./components/overflowList/__test__/OverflowListDemo";
+import OverflowListDemoScroll from "./components/overflowList/__test__/OverflowListDemoScroll";
 export interface ExampleProps {
   name?: string
 }
@@ -78,6 +80,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
+        {/*<OverflowListDemo1 />*/}
+        {/*<OverflowListDemoScroll />*/}
         {/*<TableDemo1 />*/}
         {/*<TableDemo2 />*/}
         {/*<TableDemo3 />*/}
@@ -108,7 +112,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TreeDemo />*/}
         {/*<RatingDemo />*/}
         {/*<DividerDemo/>*/}
-        {/*<SliderDemo />*/}
+        <SliderDemo />
         {/*<InputNumberDemo />*/}
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
@@ -125,7 +129,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        {/*<SelectDemo/>*/}
+        <SelectDemo/>
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}
@@ -142,7 +146,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TootipDemo />*/}
         {/*<br/>*/}
         {/*<br/>*/}
-        <DropdownDemo1/>
+        {/*<DropdownDemo1/>*/}
         {/*<br/>*/}
         {/*<GridTest />*/}
         {/*<LayoutTest/>*/}

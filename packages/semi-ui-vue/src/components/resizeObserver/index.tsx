@@ -31,14 +31,14 @@ const ReactResizeObserver = defineComponent<ReactResizeObserverProps>((props, {}
     let childNode: any;
     let element: Element;
     let _parentNode: HTMLElement;
-    
+
     onMounted(()=>{
         observeElement();
     })
     watch(()=>props.observeParent, (value, oldValue)=>{
         observeElement(value !== oldValue);
     })
-    
+
     onBeforeUnmount(()=>{
         if (observer) {
             observer.disconnect();
@@ -102,14 +102,14 @@ const ReactResizeObserver = defineComponent<ReactResizeObserverProps>((props, {}
         }
     };
 
-    
-    
+
+
     return () => {
         const child = slots.default?.();
         const { ref } = child as any;
         return cloneVNode(child[0], {
             ref: (node: any) => mergeRef(ref, node),
-        });
+        }, );
     }
 })
 

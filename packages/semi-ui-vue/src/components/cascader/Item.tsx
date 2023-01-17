@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, useSlots, VNode} from 'vue'
+import { defineComponent, ref, h, Fragment, useSlots, VNode, cloneVNode } from 'vue';
 import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/cascader/constants';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
@@ -8,15 +8,11 @@ import { IconChevronRight, IconTick } from '@kousum/semi-icons-vue';
 import { Locale } from '../locale/interface';
 import Spin from '../spin';
 import Checkbox, { CheckboxEvent } from '../checkbox';
-import {
-  BasicCascaderData,
-  BasicEntity,
-  ShowNextType,
-  BasicData
-} from '@douyinfe/semi-foundation/cascader/foundation';
-import {BaseProps, useBaseComponent} from "../_base/baseComponent";
-import {CascaderProps} from "./index";
-const LocaleConsumer = LocaleConsumer_()
+import { BasicCascaderData, BasicEntity, ShowNextType, BasicData } from '@douyinfe/semi-foundation/cascader/foundation';
+import { BaseProps, useBaseComponent } from '../_base/baseComponent';
+import { CascaderProps } from './index';
+import { VueJsxNode } from '../interface';
+const LocaleConsumer = LocaleConsumer_();
 export interface CascaderData extends BasicCascaderData {
   label: VNode | string;
 }
@@ -39,7 +35,21 @@ export interface Data extends BasicData {
   searchText: VNode[] | string[];
 }
 
-export interface CascaderItemProps extends BaseProps{
+export interface FilterRenderProps {
+  className: string;
+  inputValue: string;
+  disabled: boolean;
+  data: CascaderData[];
+  checkStatus: {
+    checked: boolean;
+    halfChecked: boolean;
+  };
+  selected: boolean;
+  onClick: (e: MouseEvent) => void;
+  onCheck: (e: MouseEvent) => void;
+}
+
+export interface CascaderItemProps extends BaseProps {
   activeKeys: Set<string>;
   selectedKeys: Set<string>;
   loadedKeys: Set<string>;
@@ -59,6 +69,7 @@ export interface CascaderItemProps extends BaseProps{
   multiple: boolean;
   checkedKeys: Set<string>;
   halfCheckedKeys: Set<string>;
+  filterRender?: (props: FilterRenderProps) => VueJsxNode;
 }
 
 const prefixcls = cssClasses.PREFIX_OPTION;
@@ -84,14 +95,14 @@ export const vuePropsType = {
   halfCheckedKeys: Object,
   empty: {
     type: Boolean,
-    default:false
+    default: false,
   },
-}
+};
 const Item = defineComponent<CascaderItemProps>((props, {}) => {
-  const slots = useSlots()
+  const slots = useSlots();
 
   // TODO context
-  const {context} = useBaseComponent<CascaderItemProps>(props, {})
+  const { context } = useBaseComponent<CascaderItemProps>(props, {});
   const onClick = (e: MouseEvent | KeyboardEvent, item: Entity | Data) => {
     const { onItemClick } = props;
     if (item.data.disabled || ('disabled' in item && item.disabled)) {
@@ -107,7 +118,7 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
     if (isEnterPress(keyboardEvent)) {
       onClick(keyboardEvent, item);
     }
-  }
+  };
 
   const onHover = (e: MouseEvent, item: Entity) => {
     const { showNext, onItemHover } = props;
@@ -152,13 +163,13 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
   const renderIcon = (type: string) => {
     switch (type) {
       case 'child':
-        return (<IconChevronRight className={`${prefixcls}-icon ${prefixcls}-icon-expand`} />);
+        return <IconChevronRight className={`${prefixcls}-icon ${prefixcls}-icon-expand`} />;
       case 'tick':
-        return (<IconTick className={`${prefixcls}-icon ${prefixcls}-icon-active`} />);
+        return <IconTick className={`${prefixcls}-icon ${prefixcls}-icon-active`} />;
       case 'loading':
         return <Spin wrapperClassName={`${prefixcls}-spin-icon`} />;
       case 'empty':
-        return (<span aria-hidden={true} class={`${prefixcls}-icon ${prefixcls}-icon-empty`} />);
+        return <span aria-hidden={true} class={`${prefixcls}-icon ${prefixcls}-icon-empty`} />;
       default:
         return null;
     }
@@ -173,8 +184,8 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
           if (index > 0) {
             content.push(
               <span class={`${prefixcls}-label-highlight`} key={`${index}-${idx}`}>
-                                {keyword}
-                            </span>
+                {keyword}
+              </span>
             );
           }
           content.push(node);
@@ -190,38 +201,53 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
   };
 
   const renderFlattenOption = (data: Data[]) => {
-    const { multiple, checkedKeys, halfCheckedKeys } = props;
+    const { multiple, selectedKeys, checkedKeys, halfCheckedKeys, keyword, filterRender } = props;
     const content = (
       <ul class={`${prefixcls}-list`} key={'flatten-list'}>
-        {data.map(item => {
-          const { searchText, key, disabled } = item;
+        {data.map((item) => {
+          const { searchText, key, disabled, pathData } = item;
+          const selected = selectedKeys.has(key);
           const className = cls(prefixcls, {
-            [`${prefixcls}-flatten`]: true,
-            [`${prefixcls}-disabled`]: disabled
+            [`${prefixcls}-flatten`]: true && !filterRender,
+            [`${prefixcls}-disabled`]: disabled,
+            [`${prefixcls}-select`]: selected && !multiple,
           });
+          const onClick_ = (e) => {
+            onClick(e, item);
+          };
+          const onKeyPress = (e) => handleItemEnterPress(e, item);
+          const onCheck = (e: CheckboxEvent) => onCheckboxChange(e, item);
+          if (filterRender) {
+            const props = {
+              className,
+              inputValue: keyword,
+              disabled,
+              data: pathData,
+              checkStatus: {
+                checked: checkedKeys.has(item.key),
+                halfChecked: halfCheckedKeys.has(item.key),
+              },
+              selected,
+              onClick: onClick_,
+              onCheck,
+            };
+            return cloneVNode(filterRender(props) as any, { key });
+          }
           return (
-            <li
-              role='menuitem'
-              class={className}
-              key={key}
-              onClick={e => {
-                onClick(e, item);
-              }}
-              onKeypress={e => handleItemEnterPress(e, item)}
-            >
-                            <span class={`${prefixcls}-label`}>
-                                {!multiple && renderIcon('empty')}
-                              {multiple && (
-                                <Checkbox
-                                  onChange={(e: CheckboxEvent) => onCheckboxChange(e, item)}
-                                  disabled={disabled}
-                                  indeterminate={halfCheckedKeys.has(item.key)}
-                                  checked={checkedKeys.has(item.key)}
-                                  className={`${prefixcls}-label-checkbox`}
-                                />
-                              )}
-                              {highlight(searchText)}
-                            </span>
+            <li role="menuitem" class={className} key={key} onClick={onClick_} onKeypress={onKeyPress}>
+              <span class={`${prefixcls}-label`}>
+                {!multiple && renderIcon('empty')}
+                {multiple && (
+                  <Checkbox
+                    onChange={onCheck}
+                    disabled={disabled}
+                    indeterminate={halfCheckedKeys.has(item.key)}
+                    checked={checkedKeys.has(item.key)}
+                    className={`${prefixcls}-label-checkbox`}
+                  />
+                )}
+                {highlight(searchText)}
+              </span>
             </li>
           );
         })}
@@ -235,8 +261,8 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
     let showChildItem: Entity;
     const ind = content.length;
     content.push(
-      <ul role='menu' class={`${prefixcls}-list`} key={renderData[0].key} onScroll={e => props.onListScroll(e, ind)}>
-        {renderData.map(item => {
+      <ul role="menu" class={`${prefixcls}-list`} key={renderData[0].key} onScroll={(e) => props.onListScroll(e, ind)}>
+        {renderData.map((item) => {
           const { data, key, parentKey } = item;
           const { children, label, disabled, isLeaf } = data;
           const { active, selected, loading } = getItemStatus(key);
@@ -248,12 +274,12 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
           const className = cls(prefixcls, {
             [`${prefixcls}-active`]: active && !selected,
             [`${prefixcls}-select`]: selected && !multiple,
-            [`${prefixcls}-disabled`]: disabled
+            [`${prefixcls}-disabled`]: disabled,
           });
           const otherAriaProps = parentKey ? { ['aria-owns']: `cascaderItem-${parentKey}` } : {};
           return (
             <li
-              role='menuitem'
+              role="menuitem"
               id={`cascaderItem-${key}`}
               aria-expanded={active}
               aria-haspopup={Boolean(showExpand)}
@@ -261,28 +287,28 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
               {...otherAriaProps}
               class={className}
               key={key}
-              onClick={e => {
+              onClick={(e) => {
                 onClick(e, item);
               }}
-              onKeypress={e => handleItemEnterPress(e, item)}
-              onMouseenter={e => {
+              onKeypress={(e) => handleItemEnterPress(e, item)}
+              onMouseenter={(e) => {
                 onHover(e, item);
               }}
             >
-                            <span class={`${prefixcls}-label`}>
-                                {selected && !multiple && renderIcon('tick')}
-                              {!selected && !multiple && renderIcon('empty')}
-                              {multiple && (
-                                <Checkbox
-                                  onChange={(e: CheckboxEvent) => onCheckboxChange(e, item)}
-                                  disabled={disabled}
-                                  indeterminate={halfCheckedKeys.has(item.key)}
-                                  checked={checkedKeys.has(item.key)}
-                                  className={`${prefixcls}-label-checkbox`}
-                                />
-                              )}
-                              <span>{label}</span>
-                            </span>
+              <span class={`${prefixcls}-label`}>
+                {selected && !multiple && renderIcon('tick')}
+                {!selected && !multiple && renderIcon('empty')}
+                {multiple && (
+                  <Checkbox
+                    onChange={(e: CheckboxEvent) => onCheckboxChange(e, item)}
+                    disabled={disabled}
+                    indeterminate={halfCheckedKeys.has(item.key)}
+                    checked={checkedKeys.has(item.key)}
+                    className={`${prefixcls}-label-checkbox`}
+                  />
+                )}
+                <span>{label}</span>
+              </span>
               {showExpand ? renderIcon(loading ? 'loading' : 'child') : null}
             </li>
           );
@@ -301,9 +327,7 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
       <LocaleConsumer componentName="CascaderDemo">
         {(locale: Locale['Cascader']) => (
           <ul class={`${prefixcls} ${prefixcls}-empty`} key={'empty-list'}>
-                        <span class={`${prefixcls}-label`}>
-                            {emptyContent || locale.emptyText}
-                        </span>
+            <span class={`${prefixcls}-label`}>{emptyContent || locale.emptyText}</span>
           </ul>
         )}
       </LocaleConsumer>
@@ -311,7 +335,6 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
   }
 
   return () => {
-
     const { data, searchable } = props;
     const { direction } = context.value;
     const isEmpty = !data || !data.length;
@@ -325,19 +348,12 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
     if (isEmpty) {
       content = renderEmpty();
     } else {
-      content = searchable ?
-        renderFlattenOption(data as Data[]) :
-        renderItem(data as Entity[]);
+      content = searchable ? renderFlattenOption(data as Data[]) : renderItem(data as Entity[]);
     }
-    return (
-      <div class={listsCls}>
-        {content}
-      </div>
-    );
-  }
-})
+    return <div class={listsCls}>{content}</div>;
+  };
+});
 
-Item.props = vuePropsType
+Item.props = vuePropsType;
 
-export default Item
-
+export default Item;
