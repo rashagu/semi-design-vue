@@ -22,10 +22,10 @@ import Tooltip, { TooltipProps, Trigger } from '../tooltip';
 import { numbers as tooltipNumbers } from '@douyinfe/semi-foundation/tooltip/constants';
 import Foundation from '@douyinfe/semi-foundation/dropdown/foundation';
 
-import DropdownMenu from './DropdownMenu';
-import DropdownItem, { DropdownItemProps } from './DropdownItem';
-import DropdownDivider, { DropdownDividerProps } from './DropdownDivider';
-import DropdownTitle, { DropdownTitleProps } from './DropdownTitle';
+import DropdownMenu from './dropdownMenu';
+import DropdownItem, { DropdownItemProps } from './dropdownItem';
+import DropdownDivider, { DropdownDividerProps } from './dropdownDivider';
+import DropdownTitle, { DropdownTitleProps } from './dropdownTitle';
 
 import '@douyinfe/semi-foundation/dropdown/dropdown.scss';
 import { noop, get } from 'lodash';
@@ -38,10 +38,10 @@ import {DropdownContext} from "./context";
 const positionSet = strings.POSITION_SET;
 const triggerSet = strings.TRIGGER_SET;
 
-export type { DropdownDividerProps } from './DropdownDivider';
-export type { DropdownItemProps, Type } from './DropdownItem';
-export type { DropdownMenuProps } from './DropdownMenu';
-export type { DropdownTitleProps } from './DropdownTitle';
+export type { DropdownDividerProps } from './dropdownDivider';
+export type { DropdownItemProps, Type } from './dropdownItem';
+export type { DropdownMenuProps } from './dropdownMenu';
+export type { DropdownTitleProps } from './dropdownTitle';
 
 export interface DropDownMenuItemItem extends DropdownItemProps {
   node: 'item';

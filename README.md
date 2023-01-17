@@ -129,7 +129,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Image
 - [ ] List
 - [x] Modal
-- [ ] OverflowList
+- [x] OverflowList
 - [x] Popover
 - [x] ScrollList
 - [ ] SideSheet

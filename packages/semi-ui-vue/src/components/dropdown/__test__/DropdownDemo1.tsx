@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, onActivated, Fragment} from 'vue'
-import DropdownMenu from "../DropdownMenu";
-import DropdownItem from "../DropdownItem";
-import DropdownDivider from "../DropdownDivider";
+import DropdownMenu from "../dropdownMenu";
+import DropdownItem from "../dropdownItem";
+import DropdownDivider from "../dropdownDivider";
 import Dropdown from "../index";
 import {Button} from "../../index";
 import {IconMore} from "@kousum/semi-icons-vue";
