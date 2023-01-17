@@ -117,7 +117,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 ### 展示类
 
 - [x] Avatar
-- [ ] Badge
+- [x] Badge
 - [x] Calendar
 - [ ] Card
 - [ ] Carousel
