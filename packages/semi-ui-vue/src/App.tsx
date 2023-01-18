@@ -70,6 +70,7 @@ import BadgeDemo from "./components/badge/__test__/BadgeDemo";
 import CardDemo from "./components/card/__test__/CardDemo";
 import TabsDemo from "./components/tabs/__test__/TabsDemo";
 import AnchorDemo from "./components/anchor/__test__/AnchorDemo";
+import BacktopDemo from "./components/backtop/__test__/BacktopDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -89,7 +90,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <AnchorDemo />
+        <BacktopDemo />
+        {/*<AnchorDemo />*/}
         {/*<TabsDemo />*/}
         {/*<CardDemo >*/}
         {/*  {a.value}*/}

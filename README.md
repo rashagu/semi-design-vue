@@ -105,8 +105,8 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 
 ### 导航类
 
-- [ ] Anchor
-- [ ] BackTop
+- [x] Anchor
+- [x] BackTop
 - [x] Breadcrumb
 - [x] Navigation
 - [x] Pagination
