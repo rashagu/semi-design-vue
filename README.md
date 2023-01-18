@@ -111,7 +111,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Navigation
 - [x] Pagination
 - [ ] Steps
-- [ ] Tabs
+- [x] Tabs
 - [x] Tree
 
 ### 展示类

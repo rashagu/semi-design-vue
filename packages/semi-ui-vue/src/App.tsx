@@ -66,6 +66,9 @@ import TableDemo12 from "./components/table/__test__/TableDemo12";
 import TableDemo13Virtualized from "./components/table/__test__/TableDemo13Virtualized";
 import OverflowListDemo1 from "./components/overflowList/__test__/OverflowListDemo";
 import OverflowListDemoScroll from "./components/overflowList/__test__/OverflowListDemoScroll";
+import BadgeDemo from "./components/badge/__test__/BadgeDemo";
+import CardDemo from "./components/card/__test__/CardDemo";
+import TabsDemo from "./components/tabs/__test__/TabsDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -76,10 +79,20 @@ export const VuePropsType = {
 
 const App = defineComponent<ExampleProps>((props, {slots}) => {
 
-
+  // const a= ref(0)
+  // onMounted(()=>{
+  //   setInterval(()=>{
+  //     a.value ++
+  //   }, 1000)
+  // })
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
+        {/*<TabsDemo />*/}
+        {/*<CardDemo >*/}
+        {/*  {a.value}*/}
+        {/*</CardDemo>*/}
+        {/*<BadgeDemo />*/}
         {/*<OverflowListDemo1 />*/}
         {/*<OverflowListDemoScroll />*/}
         {/*<TableDemo1 />*/}
@@ -112,7 +125,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TreeDemo />*/}
         {/*<RatingDemo />*/}
         {/*<DividerDemo/>*/}
-        <SliderDemo />
+        {/*<SliderDemo />*/}
         {/*<InputNumberDemo />*/}
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
@@ -129,7 +142,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        <SelectDemo/>
+        {/*<SelectDemo/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}

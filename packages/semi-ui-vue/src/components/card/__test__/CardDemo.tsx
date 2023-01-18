@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
+import {defineComponent, ref, h, Fragment, useSlots, watch, computed} from 'vue'
 import CardGroup from "../cardGroup";
 import Slider from "../../slider";
 import Card from "../index";
@@ -16,9 +16,13 @@ const CardDemo = defineComponent<CardDemoProps>((props, {}) => {
 
   const spacing = ref(12);
 
+  const childrenRef = ref()
+  watch(childrenRef, (value, oldValue, onCleanup)=>{
+    console.log(value, oldValue)
+  }, {immediate: true})
   return () => {
 
-
+    childrenRef.value = slots.default?.()
     return (
       <>
         <TypographyText>滑动调节 Card 间距</TypographyText>
