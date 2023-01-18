@@ -110,7 +110,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Breadcrumb
 - [x] Navigation
 - [x] Pagination
-- [ ] Steps
+- [x] Steps
 - [x] Tabs
 - [x] Tree
 
