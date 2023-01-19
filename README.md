@@ -121,8 +121,8 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Calendar
 - [x] Card
 - [x] Carousel
-- [ ] Collapse
-- [ ] Collapsible
+- [x] Collapse
+- [x] Collapsible
 - [ ] Descriptions
 - [x] Dropdown
 - [x] Empty
