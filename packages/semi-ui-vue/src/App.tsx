@@ -73,6 +73,13 @@ import AnchorDemo from "./components/anchor/__test__/AnchorDemo";
 import BacktopDemo from "./components/backtop/__test__/BacktopDemo";
 import StepsDemo from "./components/steps/__test__/StepsDemo";
 import CarouselDemo from "./components/carousel/__test__/CarouselDemo";
+import CollapseDemo from "./components/collapse/__test__/CollapseDemo";
+import CollapsibleDemo from "./components/collapsible/__test__/CollapsibleDemo";
+import DescriptionsDemo from "./components/descriptions/__test__/DescriptionsDemo";
+import ListDemo from "./components/list/__test__/ListDemo";
+import SideSheetDemo from "./components/sideSheet/__test__/SideSheetDemo";
+import TimelineDemo from "./components/timeline/__test__/TimelineDemo";
+import HighlightDemo from "./components/highlight/__test__/HighlightDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -92,7 +99,14 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <CarouselDemo/>
+        <HighlightDemo />
+        {/*<TimelineDemo/>*/}
+        {/*<SideSheetDemo />*/}
+        {/*<ListDemo />*/}
+        {/*<DescriptionsDemo />*/}
+        {/*<CollapseDemo />*/}
+        {/*<CollapsibleDemo />*/}
+        {/*<CarouselDemo/>*/}
         {/*<StepsDemo />*/}
         {/*<BacktopDemo />*/}
         {/*<AnchorDemo />*/}
@@ -182,5 +196,6 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
 
 App.props = VuePropsType
+App.name = 'App'
 
 export default App

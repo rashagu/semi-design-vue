@@ -126,7 +126,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Descriptions
 - [x] Dropdown
 - [x] Empty
-- [ ] Highlight
+- [x] Highlight
 - [x] Image
 - [x] List
 - [x] Modal
