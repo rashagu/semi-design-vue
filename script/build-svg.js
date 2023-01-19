@@ -4,7 +4,7 @@
 
 const svgr = require('@svgr/core').default;
 const {optimize} = require('svgo');
-const fs = require('fs');
+const fs = require('node:fs');
 const {resolve, basename, extname} = require('path');
 const camelCase = require('camelcase');
 const prettier = require('prettier');

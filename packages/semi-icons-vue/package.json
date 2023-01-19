@@ -14,9 +14,7 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node ./scripts/compileLib.js",
-    "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/copyStyles.js",
     "build:icon": "node scripts/build-icon ",
-    "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/copyStyles.js",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -38,7 +36,6 @@
     "@vitejs/plugin-vue-jsx": "^3.0.0",
     "camelcase": "^6.3.0",
     "del": "^6.0.0",
-    "fs-extra": "^10.0.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-replace": "^1.1.4",

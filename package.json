@@ -4,7 +4,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "pnpm -C ./packages/semi-ui-vue dev",
-    "test:unit": "vitest --environment jsdom --root src/",
+    "test:unit": "vitest --environment jsdom",
     "test": "vitest run --coverage",
     "test:watch": "vitest watch",
     "build:lib": "pnpm -C ./packages/semi-animation-vue build:lib & pnpm -C ./packages/semi-icons-vue build:lib & pnpm -C ./packages/semi-illustrations-vue build:lib & pnpm -C ./packages/semi-ui-vue build:vite",

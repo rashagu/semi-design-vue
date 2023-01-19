@@ -50,8 +50,6 @@
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
     "del": "^6.0.0",
-    "fs": "^0.0.1-security",
-    "fs-extra": "^10.0.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-replace": "^1.1.4",
