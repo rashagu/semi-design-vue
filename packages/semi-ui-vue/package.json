@@ -21,9 +21,9 @@
     "url": "https://github.com/rashagu/semi-design-vue"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "D:\\newWork2\\semi-design\\packages\\semi-foundation",
-    "@douyinfe/semi-theme-default": "2.28.0-beta.1",
-    "@douyinfe/semi-animation": "2.28.0-beta.1",
+    "@douyinfe/semi-foundation": "2.28.0",
+    "@douyinfe/semi-theme-default": "2.28.0",
+    "@douyinfe/semi-animation": "2.28.0",
     "@kousum/semi-animation-vue": "^0.0.12",
     "@kousum/semi-icons-vue": "^0.0.12",
     "@kousum/semi-illustrations-vue": "^0.0.12",
