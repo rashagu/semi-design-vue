@@ -123,7 +123,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Carousel
 - [x] Collapse
 - [x] Collapsible
-- [ ] Descriptions
+- [x] Descriptions
 - [x] Dropdown
 - [x] Empty
 - [x] Image
