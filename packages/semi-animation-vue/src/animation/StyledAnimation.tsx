@@ -143,7 +143,7 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
   //       const animateEvents = _generateAnimateEvents(child, props);
   //       let style = props.style ? props.style : {}
   //       return (cloneVNode(child, {
-  //           className: classnames(child.props.className, animateCls),
+  //           className: classnames(child.props.class, animateCls),
   //           style: {...child.props.style, ...style},
   //           ...animateEvents,
   //         })

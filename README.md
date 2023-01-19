@@ -126,6 +126,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Descriptions
 - [x] Dropdown
 - [x] Empty
+- [ ] Highlight
 - [x] Image
 - [x] List
 - [x] Modal
@@ -135,7 +136,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] SideSheet
 - [x] Table
 - [x] Tag
-- [ ] Timeline
+- [x] Timeline
 - [x] Tooltip
 
 ### 反馈类

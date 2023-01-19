@@ -237,7 +237,7 @@ const Carousel = defineComponent<CarouselProps>((props, {expose}) => {
               ...child.props.style,
               ...animateStyle,
             },
-            className: cls(child.props.className, {
+            className: cls(child.props.class, {
               [`${cssClasses.CAROUSEL_CONTENT}-item-prev`]: isPrev,
               [`${cssClasses.CAROUSEL_CONTENT}-item-next`]: isNext,
               [`${cssClasses.CAROUSEL_CONTENT}-item-current`]: isCurrent,
