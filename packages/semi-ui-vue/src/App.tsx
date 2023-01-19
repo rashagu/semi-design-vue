@@ -72,6 +72,7 @@ import TabsDemo from "./components/tabs/__test__/TabsDemo";
 import AnchorDemo from "./components/anchor/__test__/AnchorDemo";
 import BacktopDemo from "./components/backtop/__test__/BacktopDemo";
 import StepsDemo from "./components/steps/__test__/StepsDemo";
+import CarouselDemo from "./components/carousel/__test__/CarouselDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -91,7 +92,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <StepsDemo />
+        <CarouselDemo/>
+        {/*<StepsDemo />*/}
         {/*<BacktopDemo />*/}
         {/*<AnchorDemo />*/}
         {/*<TabsDemo />*/}

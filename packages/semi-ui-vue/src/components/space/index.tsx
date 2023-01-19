@@ -33,7 +33,7 @@ export const vuePropsType = {
     default: false
   },
   spacing: {
-    type: [Number, Array],
+    type: [Number, Array, String],
     default: 'tight',
   },
   style: [String, Object],

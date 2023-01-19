@@ -120,7 +120,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Badge
 - [x] Calendar
 - [x] Card
-- [ ] Carousel
+- [x] Carousel
 - [ ] Collapse
 - [ ] Collapsible
 - [ ] Descriptions
