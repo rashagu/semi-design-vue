@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
 import Row from '../row'
-import Col from '../Col'
+import Col from '../col'
 
 interface ExampleProps {
   name?: string

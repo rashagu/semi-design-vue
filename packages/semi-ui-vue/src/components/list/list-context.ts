@@ -1,6 +1,6 @@
 
-import { RowProps } from '../grid/row';
-import { ColProps } from '../grid/col';
+import type { RowProps } from '../grid';
+import type { ColProps } from '../grid';
 import Provider from "./context/Provider";
 import Consumer from "./context/Consumer";
 

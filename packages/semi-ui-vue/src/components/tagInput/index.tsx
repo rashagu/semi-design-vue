@@ -9,7 +9,7 @@ import {
   reactive,
   onMounted,
   isVNode,
-  watch
+  watch, VNodeRef
 } from 'vue'
 import * as PropTypes from '../PropTypes'
 import cls from 'classnames';
@@ -49,8 +49,8 @@ export type RestTagsPopoverProps = PopoverProps;
 type ValidateStatus = "default" | "error" | "warning";
 
 
-type SortableItemFuncArg = {
-  setNodeRef?: (node: HTMLElement) => void,
+export type SortableItemFuncArg = {
+  setNodeRef?: VNodeRef,
   style?:CSSProperties,
   attributes?: DraggableAttributes,
   listeners?: any
