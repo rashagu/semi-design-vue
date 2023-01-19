@@ -127,12 +127,12 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Dropdown
 - [x] Empty
 - [x] Image
-- [ ] List
+- [x] List
 - [x] Modal
 - [x] OverflowList
 - [x] Popover
 - [x] ScrollList
-- [ ] SideSheet
+- [x] SideSheet
 - [x] Table
 - [x] Tag
 - [ ] Timeline
