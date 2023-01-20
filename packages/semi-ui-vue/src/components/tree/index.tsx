@@ -1,6 +1,5 @@
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
-import ConfigContext, { ContextValue } from '../configProvider/context';
 import TreeFoundation, { TreeAdapter } from '@douyinfe/semi-foundation/tree/foundation';
 import {
     convertDataToEntities,
@@ -41,7 +40,7 @@ import {
     ScrollData,
 } from './interface';
 import CheckboxGroup from '../checkbox/checkboxGroup';
-import {CSSProperties, defineComponent, h, nextTick, reactive, ref, useSlots, watch} from "vue";
+import {CSSProperties, defineComponent, Fragment, h, nextTick, reactive, ref, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
@@ -112,6 +111,7 @@ const propTypes = {
     checkRelation: PropTypes.string,
     'aria-label': PropTypes.string,
     preventScroll: PropTypes.bool,
+    role: PropTypes.string,
 };
 
 const defaultProps = {
@@ -236,14 +236,16 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
      * https://github.com/react-component/tree
      */
 
-    function getDerivedStateFromProps(props: TreeProps, prevState: TreeState) {
-        const {prevProps} = prevState;
+    function getDerivedStateFromProps(props: TreeProps) {
+        const {prevProps} = state;
         let treeData;
-        let keyEntities = prevState.keyEntities || {};
-        let valueEntities = prevState.cachedKeyValuePairs || {};
-        const isSeaching = Boolean(props.filterTreeNode && prevState.inputValue && prevState.inputValue.length);
+        let keyEntities = state.keyEntities || {};
+        let valueEntities = state.cachedKeyValuePairs || {};
+        const isSeaching = Boolean(props.filterTreeNode && state.inputValue && state.inputValue.length);
         const newState: Partial<TreeState> = {
-            prevProps: props,
+            prevProps: {
+                ...props
+            },
         };
         const isExpandControlled = 'expandedKeys' in getProps(props);
 
@@ -257,7 +259,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
         // Determine whether treeData has changed
         const needUpdateData = () => {
             const firstInProps = !prevProps && 'treeData' in getProps(props);
-            const treeDataHasChange = prevProps && prevProps.treeData !== props.treeData;
+            const treeDataHasChange = prevProps && prevProps.treeData as any !== props.treeData;
             return firstInProps || treeDataHasChange;
         };
         // Update the data of tree in state
@@ -305,7 +307,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
                 // only show animation when treeData does not change
                 if (prevProps && props.motion && !treeData) {
                     const {motionKeys, motionType} = calcMotionKeys(
-                      prevState.expandedKeys,
+                      state.expandedKeys,
                       newState.expandedKeys,
                       keyEntities
                     );
@@ -313,7 +315,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
                     newState.motionType = motionType;
                     if (motionType === 'hide') {
                         // cache flatten nodes: expandedKeys changed may not be triggered by interaction
-                        newState.cachedFlattenNodes = cloneDeep(prevState.flattenNodes);
+                        newState.cachedFlattenNodes = cloneDeep(state.flattenNodes);
                     }
                 }
             } else if ((!prevProps && (props.defaultExpandAll || props.expandAll)) || expandAllWhenDataChange) {
@@ -341,7 +343,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
                 // When treeData has a specific value and props.loadData is set, it is considered that the update of treeData is caused by loadData
                 // If the treeData is changed because of loadData, recalculating the key here will cause the unselected expanded items to be collapsed
                 // So there is no need to recalculate expandedKeys at this time, because the expanded item has been added to expandedKeys when the expand button is clicked
-                if (!(prevState.treeData && prevState.treeData?.length > 0 && props.loadData)) {
+                if (!(state.treeData && state.treeData?.length > 0 && props.loadData)) {
                     newState.expandedKeys = calcExpandedKeysForValues(
                       props.value,
                       keyEntities,
@@ -358,8 +360,8 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
             // Update flattenNodes
             if (treeData || newState.expandedKeys) {
                 const flattenNodes = flattenTreeData(
-                  treeData || prevState.treeData,
-                  newState.expandedKeys || prevState.expandedKeys
+                  treeData || state.treeData,
+                  newState.expandedKeys || state.expandedKeys
                 );
                 newState.flattenNodes = flattenNodes;
             }
@@ -370,12 +372,12 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
                 // Get filter data
                 filteredState = filterTreeData({
                     treeData,
-                    inputValue: prevState.inputValue,
+                    inputValue: state.inputValue,
                     filterTreeNode: props.filterTreeNode,
                     filterProps: props.treeNodeFilterProp,
                     showFilteredOnly: props.showFilteredOnly,
                     keyEntities: newState.keyEntities,
-                    prevExpandedKeys: [...prevState.filteredExpandedKeys],
+                    prevExpandedKeys: [...state.filteredExpandedKeys],
                 });
                 newState.flattenNodes = filteredState.flattenNodes;
                 newState.motionKeys = new Set([]);
@@ -393,7 +395,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
                 );
 
                 if (prevProps && props.motion) {
-                    const prevKeys = prevState ? prevState.filteredExpandedKeys : new Set([]);
+                    const prevKeys = state ? state.filteredExpandedKeys : new Set([]);
                     // only show animation when treeData does not change
                     if (!treeData) {
                         const motionResult = calcMotionKeys(
@@ -405,11 +407,11 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
                         let {motionKeys} = motionResult;
                         const {motionType} = motionResult;
                         if (props.showFilteredOnly) {
-                            motionKeys = motionKeys.filter(key => prevState.filteredShownKeys.has(key));
+                            motionKeys = motionKeys.filter(key => state.filteredShownKeys.has(key));
                         }
                         if (motionType === 'hide') {
                             // cache flatten nodes: expandedKeys changed may not be triggered by interaction
-                            newState.cachedFlattenNodes = cloneDeep(prevState.flattenNodes);
+                            newState.cachedFlattenNodes = cloneDeep(state.flattenNodes);
                         }
                         newState.motionKeys = new Set(motionKeys);
                         newState.motionType = motionType;
@@ -418,9 +420,9 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
 
 
                 newState.flattenNodes = flattenTreeData(
-                  treeData || prevState.treeData,
-                  newState.filteredExpandedKeys || prevState.filteredExpandedKeys,
-                  props.showFilteredOnly && prevState.filteredShownKeys
+                  treeData || state.treeData,
+                  newState.filteredExpandedKeys || state.filteredExpandedKeys,
+                  props.showFilteredOnly && state.filteredShownKeys
                 );
             }
         }
@@ -446,6 +448,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
             } else if (treeData) {
                 // If `treeData` changed, we also need check it
                 if (props.value) {
+
                     newState.selectedKeys = findKeysForValues(
                       normalizeValue(props.value, withObject) || '',
                       valueEntities,
@@ -477,7 +480,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
                       isMultiple
                     );
                 } else {
-                    checkedKeyValues = updateKeys(prevState.checkedKeys, keyEntities);
+                    checkedKeyValues = updateKeys(state.checkedKeys, keyEntities);
                 }
             }
 
@@ -505,13 +508,44 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
 
         return newState;
     }
-    
-    watch(()=>props, ()=>{
-        const newState = getDerivedStateFromProps(props, state)
+
+    watch([
+        () => props.filterTreeNode,
+        () => props.expandedKeys,
+        () => props.treeData,
+        () => props.draggable,
+        () => props.treeDataSimpleJson,
+        () => props.motion,
+        () => props.expandAll,
+        () => props.autoExpandParent,
+        () => props.defaultExpandAll,
+        () => props.defaultExpandedKeys,
+        () => props.multiple,
+        () => props.value,
+        () => props.treeNodeFilterProp,
+        () => props.showFilteredOnly,
+        () => props.onChangeWithObject,
+        () => props.defaultValue,
+        () => props.loadedKeys,
+        () => props.disableStrictly,
+        () => props.checkRelation,
+
+
+        () => state.keyEntities,
+        () => state.cachedKeyValuePairs,
+        () => state.inputValue,
+        () => state.expandedKeys,
+        () => state.flattenNodes,
+        () => state.treeData,
+        () => state.filteredExpandedKeys,
+        () => state.filteredShownKeys,
+        () => state.checkedKeys,
+    ], (value, oldValue, onCleanup)=>{
+        const newState = getDerivedStateFromProps(props)
         newState && Object.keys(newState).forEach(key=>{
             state[key] = newState[key]
         })
-    }, {deep: true, immediate: true})
+    }, {immediate: true})
 
 
 
@@ -689,14 +723,16 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
         }
         if (!virtualize || isEmpty(virtualize)) {
             return (
-              <NodeList
-                flattenNodes={flattenNodes}
-                flattenList={cachedFlattenNodes}
-                motionKeys={motion ? motionKeys : new Set([])}
-                motionType={motionType}
-                onMotionEnd={onMotionEnd}
-                renderTreeNode={renderTreeNode}
-              />
+              <Fragment>
+                  <NodeList
+                    flattenNodes={flattenNodes}
+                    flattenList={cachedFlattenNodes}
+                    motionKeys={motion ? motionKeys : new Set([])}
+                    motionType={motionType}
+                    onMotionEnd={onMotionEnd}
+                    renderTreeNode={renderTreeNode}
+                  />
+              </Fragment>
             );
         }
         const option = ({ index, style, data }: OptionProps) => (

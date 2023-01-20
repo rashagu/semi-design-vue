@@ -3,8 +3,9 @@
 import { cloneDeepWith, set, get } from 'lodash';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import { findAll } from '@douyinfe/semi-foundation/utils/getHighlight';
-import {h, isVNode} from "vue";
+import {ComponentInternalInstance, h, isVNode} from "vue";
 import { isHTMLElement } from '@douyinfe/semi-foundation/utils/dom';
+import {VueJsxNode} from "../interface";
 /**
  * stop propagation
  *
@@ -193,4 +194,15 @@ export function getFocusableElements(node: HTMLElement) {
     // we are not filtered elements which are invisible
     const focusableElements = Array.from(node.querySelectorAll<HTMLElement>(focusableSelectorsStr));
     return focusableElements;
+}
+
+
+export function getChildrenVNode(instance: ComponentInternalInstance) {
+    let children:VueJsxNode = []
+    // @ts-ignore
+    children = instance?.vnode?.children?.default ? instance.vnode.children.default() : null
+    if (children && Array.isArray(children[0])){
+        children = children[0]
+    }
+    return children
 }

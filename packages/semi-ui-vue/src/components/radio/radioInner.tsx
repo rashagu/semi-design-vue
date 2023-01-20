@@ -5,7 +5,7 @@ import RadioInnerFoundation, {
 } from '@douyinfe/semi-foundation/radio/radioInnerFoundation';
 import { BaseProps, useBaseComponent } from '../_base/baseComponent';
 import { radioClasses as css } from '@douyinfe/semi-foundation/radio/constants';
-import Context from './Context';
+import Context from './context';
 import classnames from 'classnames';
 import { IconRadio } from '@kousum/semi-icons-vue';
 import { noop } from 'lodash';

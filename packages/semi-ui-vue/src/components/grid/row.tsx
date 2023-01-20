@@ -43,7 +43,7 @@ export const vuePropsType = {
   justify: String,
   className: String,
   style: [String, Object],
-  gutter: Object,
+  gutter: [Number],
   prefixCls: {
     type: String,
     default: cssClasses.PREFIX
@@ -155,6 +155,7 @@ const Row = defineComponent<RowProps>((props, {slots}) => {
 })
 
 Row.props = vuePropsType
+Row.name = 'Row'
 
 export default Row
 

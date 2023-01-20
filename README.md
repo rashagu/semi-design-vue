@@ -100,42 +100,44 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Switch
 - [x] TagInput 5f0912f
 - [x] TimePicker
+- [x] Transfer
 - [x] TreeSelect
 - [x] Upload
 
 ### 导航类
 
-- [ ] Anchor
-- [ ] BackTop
+- [x] Anchor
+- [x] BackTop
 - [x] Breadcrumb
 - [x] Navigation
-- [ ] Pagination
-- [ ] Steps
-- [ ] Tabs
+- [x] Pagination
+- [x] Steps
+- [x] Tabs
 - [x] Tree
 
 ### 展示类
 
 - [x] Avatar
-- [ ] Badge
+- [x] Badge
 - [x] Calendar
-- [ ] Card
-- [ ] Carousel
-- [ ] Collapse
-- [ ] Collapsible
-- [ ] Descriptions
+- [x] Card
+- [x] Carousel
+- [x] Collapse
+- [x] Collapsible
+- [x] Descriptions
 - [x] Dropdown
 - [x] Empty
+- [x] Highlight
 - [x] Image
-- [ ] List
+- [x] List
 - [x] Modal
-- [ ] OverflowList
+- [x] OverflowList
 - [x] Popover
 - [x] ScrollList
-- [ ] SideSheet
-- [ ] Table
+- [x] SideSheet
+- [x] Table
 - [x] Tag
-- [ ] Timeline
+- [x] Timeline
 - [x] Tooltip
 
 ### 反馈类

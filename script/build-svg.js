@@ -4,7 +4,7 @@
 
 const svgr = require('@svgr/core').default;
 const {optimize} = require('svgo');
-const fs = require('fs');
+const fs = require('node:fs');
 const {resolve, basename, extname} = require('path');
 const camelCase = require('camelcase');
 const prettier = require('prettier');
@@ -54,7 +54,7 @@ async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOpt
         .replaceAll('fillRule', 'fill-rule')
         .replaceAll('clipRule', 'clip-rule')
         .replaceAll('strokeWidth', 'stroke-width')
-        .replaceAll('clipPath', 'clip-path')
+        .replaceAll('clipPath=', 'clip-path=')
         .replaceAll('stopOpacity', 'stop-opacity')
         .replaceAll('strokeLinecap', 'stroke-linecap')
         .replaceAll('strokeLinejoin', 'stroke-linejoin')
@@ -75,8 +75,25 @@ async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOpt
     }
   });
   const arr = await Promise.all(batches);
-  const indexFileContent = arr.map((a, index) => `export { default as ${a.componentName} } from './${a.componentName}';`).join('\n');
-  fs.writeFileSync(resolve(outDir, indexFileName), indexFileContent, 'utf-8');
+  // const indexFileContent = arr.map((a, index) => `export { default as ${a.componentName} } from './${a.componentName}';`).join('\n');
+  // fs.writeFileSync(resolve(outDir, indexFileName), indexFileContent, 'utf-8');
+
+  const o = `import Icon, {ConvertIcon} from './components/Icon';
+
+export type {
+  IconSize,
+  IconProps,
+  convertIconType
+} from './components/Icon';
+
+
+export default Icon;
+export {
+  ConvertIcon
+}
+`
+  const indexFileContent = arr.map((a, index) => `export { default as ${a.componentName} } from './icons/${a.componentName}';`).join('\n');
+  fs.writeFileSync(resolve(outDir, '../' + indexFileName), o + '\n' + indexFileContent, 'utf-8');
 
 
   const testFileContent = `import {shallowMount, mount} from "@vue/test-utils";\nimport { expect, test } from 'vitest';\n` + (arr.map((a, index) => `import {default as ${a.componentName}, SvgComponent as SvgComponent${index} }  from "./${type}/${a.componentName}";`).join('\n')) + `

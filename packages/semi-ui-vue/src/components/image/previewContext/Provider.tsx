@@ -9,6 +9,7 @@ const Provider = defineComponent<{value:PreviewContextProps}>((props, {slots}) =
   const ConfigContext = ref<PreviewContextProps>(props.value);
 
   watch(()=>props.value, ()=>{
+    // @ts-ignore
     ConfigContext.value = props.value
   }, { deep: true})
   provide('PreviewContext', ConfigContext)

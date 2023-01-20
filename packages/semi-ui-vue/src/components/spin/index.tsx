@@ -2,7 +2,7 @@ import {defineComponent, ref, h, StyleValue, onUnmounted, watch, reactive} from 
 import cls from 'classnames';
 import { cssClasses as css, strings } from '@douyinfe/semi-foundation/spin/constants';
 import SpinFoundation from '@douyinfe/semi-foundation/spin/foundation';
-import SpinIcon from './Icon';
+import SpinIcon from './icon';
 import '@douyinfe/semi-foundation/spin/spin.scss';
 import {useBaseComponent} from "../_base/baseComponent";
 
@@ -78,15 +78,16 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
       delay: props.delay
     };
   }
-  // 没有 state
-  // watch(()=>props, (val)=>{
-  //   const newState = getDerivedStateFromProps(props, state)
-  //   if (newState){
-  //     Object.keys(newState).forEach(key=>{
-  //       state[key] = newState[key]
-  //     })
-  //   }
-  // }, {deep: true})
+  watch(()=>props, (val)=>{
+    const newState = getDerivedStateFromProps(props)
+    if (newState){
+      Object.keys(newState).forEach(key=>{
+        state[key] = newState[key]
+      })
+    }
+  }, {deep: true, immediate: true})
+
+
   const {adapter: adapterInject} = useBaseComponent<SpinProps>(props, state)
   function adapter() {
     return {
@@ -146,5 +147,6 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
 
 
 Index.props = VuePropsType
+Index.name = 'Spin'
 
 export default Index

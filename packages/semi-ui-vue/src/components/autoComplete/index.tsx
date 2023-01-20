@@ -265,7 +265,6 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
                     props.onSelect(option as T);
                 },
                 notifyDropdownVisibleChange: (isVisible: boolean): void => {
-                    console.log(props)
                     props.onDropdownVisibleChange(isVisible);
                 },
                 notifyClear: () => {

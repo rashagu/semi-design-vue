@@ -17,9 +17,12 @@ import cls from 'classnames';
 import SelectFoundation, {SelectAdapter} from '@douyinfe/semi-foundation/select/foundation';
 import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/select/constants';
 import {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
-import {isEqual, isString, noop, get, isNumber} from 'lodash';
+import {isEqual, isString, noop, get, isNumber, isFunction} from 'lodash';
 import Tag from '../tag';
 import TagGroup from '../tag/group';
+import OverflowList from '../overflowList/index';
+import Space from '../space/index';
+import Text from '../typography/text';
 import LocaleConsumer_ from '../locale/localeConsumer';
 import Popover from '../popover/index';
 import type { PopoverProps } from '../popover';
@@ -35,7 +38,7 @@ import OptionGroup from './optionGroup';
 import Spin from '../spin';
 import Trigger from '../trigger';
 import {IconChevronDown, IconClear} from '@kousum/semi-icons-vue';
-import { isSemiIcon, getFocusableElements, getActiveElement } from '../_utils';
+import {isSemiIcon, getFocusableElements, getActiveElement, getChildrenVNode} from '../_utils';
 import {Subtract} from 'utility-types';
 
 import warning from '@douyinfe/semi-foundation/utils/warning';
@@ -127,6 +130,7 @@ export type SelectProps = {
   size?: SelectSize;
   disabled?: boolean;
   emptyContent?: VNode;
+  expandRestTagsOnClick?: boolean;
   onDropdownVisibleChange?: (visible: boolean) => void;
   zIndex?: number;
   position?: Position;
@@ -134,6 +138,7 @@ export type SelectProps = {
   dropdownClassName?: string;
   dropdownStyle?: CSSProperties;
   dropdownMargin?: PopoverProps['margin'];
+  ellipsisTrigger?: boolean;
   outerTopSlot?: VNode;
   innerTopSlot?: VNode;
   outerBottomSlot?: VNode;
@@ -196,6 +201,9 @@ export interface SelectState {
   optionGroups: Array<any>;
   isHovering: boolean;
   isFocusInContainer: boolean;
+  isFullTags: boolean,
+  // The number of really-hidden items when maxTagCount is set
+  overflowItemCount: number
 }
 
 // Notes: Use the label of the option as the identifier, that is, the option in Select, the value is allowed to be the same, but the label must be unique
@@ -206,6 +214,7 @@ const propTypes = {
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,
   'aria-labelledby': PropTypes.string,
+  'aria-label': PropTypes.string,
   'aria-required': PropTypes.bool,
   autoFocus: PropTypes.bool,
   autoClearSearchValue: PropTypes.bool,
@@ -292,6 +301,8 @@ const propTypes = {
   restTagsPopoverProps: PropTypes.object,
 
   id: String,
+  expandRestTagsOnClick: PropTypes.bool,
+  ellipsisTrigger: PropTypes.bool,
 
 };
 
@@ -339,6 +350,8 @@ const defaultProps: Partial<SelectProps> = {
 
   showRestTagsPopover: false,
   restTagsPopoverProps: {},
+  expandRestTagsOnClick: false,
+  ellipsisTrigger: false,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Index = defineComponent<SelectProps>((props, {}) => {
@@ -359,6 +372,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
     isHovering: false,
     isFocusInContainer: false,
     isFullTags: false,
+    overflowItemCount: 0
   })
   let selectOptionListID = '';
   let selectID = '';
@@ -386,6 +400,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
   const {adapter: adapterInject, context: context_} = useBaseComponent<SelectProps>(props, state)
   const setOptionContainerEl = (node: HTMLDivElement) => (optionContainerEl.value = node);
 
+  const instance = getCurrentInstance()
   function adapter(): SelectAdapter<SelectProps, SelectState> {
     const keyboardAdapter = {
       registerKeyDown: (cb: () => void) => {
@@ -469,14 +484,8 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       emit: (eventName) => eventManager.emit(eventName),
       // Collect all subitems, each item is visible by default when collected, and is not selected
       //slots.default?slots.default():null
-      getOptionsFromChildren: (children = slots.default?.()) => {
-        // if (!children) {
-        //   // @ts-ignore
-        //   // children = getCurrentInstance()?.vnode?.children?.default ? getCurrentInstance().vnode.children.default() : null
-        //   if (children && Array.isArray(children[0])){
-        //     children = children[0]
-        //   }
-        // }
+      getOptionsFromChildren: () => {
+        let children:VueJsxNode = getChildrenVNode(instance)
         let optionGroups = [];
         let options = [];
         const {optionList} = props;
@@ -489,7 +498,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
           }));
           optionGroups[0] = {children: options, label: ''};
         } else {
-          const result = getOptionsFromGroup(children);
+          const result = getOptionsFromGroup(children as any);
           optionGroups = result.optionGroups;
           options = result.options;
         }
@@ -561,6 +570,9 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       updateFocusState: (isFocus: boolean) => {
         state.isFocus = isFocus;
       },
+      updateOverflowItemCount: (overflowItemCount: number) => {
+        state.overflowItemCount = overflowItemCount
+      },
       focusTrigger: () => {
         try {
           const { preventScroll } = props;
@@ -625,6 +637,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
   })
 
 
+
   watch([() => props.value, () => props.optionList], ([prevPropsValue, prevPropsOptionList],) => {
     const instance = getCurrentInstance()
     // TODO Children VNode 更新时
@@ -647,6 +660,13 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       } else {
         foundation.handleOptionListChangeHadDefaultValue();
       }
+    }
+  })
+  watch(() => props.value, ()=>{
+    if ('value' in props) {
+      foundation.handleValueChange(props.value as any);
+    } else {
+      foundation.handleOptionListChangeHadDefaultValue();
     }
   })
 
@@ -685,9 +705,9 @@ const Index = defineComponent<SelectProps>((props, {}) => {
       <Input
         ref={inputRef as any}
         size={size}
-        aria-activedescendant={focusIndex !== -1 ? `${selectID}-option-${focusIndex}`: ''}
+        aria-activedescendant={focusIndex !== -1 ? `${selectID}-option-${focusIndex}` : ''}
         onFocus={(e: FocusEvent) => {
-          if (multiple && Boolean(filter)){
+          if (multiple && Boolean(filter)) {
             state.isFocus = true
           }
           // prevent event bubbling which will fire trigger onFocus event
@@ -911,7 +931,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
         ref={setOptionContainerEl as any}
         onKeydown={e => foundation.handleContainerKeyDown(e)}
       >
-        {outerTopSlot}
+        {outerTopSlot ? <div class={`${prefixcls}-option-list-outer-top-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{outerTopSlot}</div> : null }
         <div
           style={{maxHeight: `${maxHeight}px`}}
           class={optionListCls}
@@ -919,11 +939,11 @@ const Index = defineComponent<SelectProps>((props, {}) => {
           aria-multiselectable={multiple}
           onScroll={e => foundation.handleListScroll(e)}
         >
-          {innerTopSlot}
+          {innerTopSlot ? <div class={`${prefixcls}-option-list-inner-top-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{innerTopSlot}</div> : null }
           {loading ? renderLoading() : isEmpty ? renderEmpty() : listContent}
-          {innerBottomSlot}
+          {innerBottomSlot ? <div class={`${prefixcls}-option-list-inner-bottom-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{innerBottomSlot}</div> : null }
         </div>
-        {outerBottomSlot}
+        {outerBottomSlot ? <div class={`${prefixcls}-option-list-outer-bottom-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{outerBottomSlot}</div> : null }
       </div>
     );
   }
@@ -943,6 +963,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
     if (selectedItems.length) {
       const selectedItem = selectedItems[0][1];
       renderText = (renderSelectedItem as RenderSingleSelectedItemFn)(selectedItem);
+
     }
 
     const spanCls = cls({
@@ -996,97 +1017,220 @@ const Index = defineComponent<SelectProps>((props, {}) => {
     }
   }
 
+  function renderTag(item: [VueJsxNode, any], i: number, isCollapseItem?: boolean) {
+    const { size, disabled: selectDisabled } = props;
+    let { renderSelectedItem } = props;
+    const label = item[0];
+    const { value } = item[1];
+    const disabled = item[1].disabled || selectDisabled;
+    const onClose = (tagContent: VueJsxNode, e: MouseEvent) => {
+      if (e && typeof e.preventDefault === 'function') {
+        e.preventDefault(); // make sure that tag will not hidden immediately in controlled mode
+      }
+      foundation.removeTag({ label, value });
+    };
+
+    if (typeof renderSelectedItem === 'undefined') {
+      renderSelectedItem = (optionNode: OptionProps) => ({
+        isRenderInTag: true,
+        content: optionNode.label,
+      }) as any;
+    }
+    const { content, isRenderInTag } = (renderSelectedItem as RenderMultipleSelectedItemFn)(item[1], { index: i, disabled, onClose });
+    const basic = {
+      disabled,
+      closable: !disabled,
+      onClose,
+    };
+    const realContent = isCollapseItem && !isFunction(props.renderSelectedItem)
+      ? (
+        <Text size='small' ellipsis={{ rows: 1, showTooltip: { type: 'popover', opts: { style: { width: 'auto', fontSize: 12 } } } }} >
+          {content}
+        </Text>
+      )
+      : content;
+    if (isRenderInTag) {
+      return (
+        <Tag {...basic} color="white" size={size || 'large'} key={value} style={{ maxWidth: '100%' }}>
+          {realContent}
+        </Tag>
+      );
+    } else {
+      return <Fragment key={value}>{realContent}</Fragment>;
+    }
+  }
+
+
+  function renderNTag(n: number, restTags: [VueJsxNode, any][]) {
+    const { size, showRestTagsPopover, restTagsPopoverProps } = props;
+    let nTag = (
+      <Tag
+        closable={false}
+        size={size || 'large'}
+        color='grey'
+        className={`${prefixcls}-content-wrapper-collapse-tag`}
+        key={`_+${n}`}
+        style={{ marginRight: 0, flexShrink: 0 }}
+      >
+        +{n}
+      </Tag>
+    );
+
+    if (showRestTagsPopover) {
+      nTag = (
+        <Popover
+          showArrow
+          content={
+            <Space spacing={2} wrap style={{ maxWidth: '400px' }}>
+              {restTags.map((tag, index) => (renderTag(tag, index)))}
+            </Space>
+          }
+          trigger="hover"
+          position="top"
+          autoAdjustOverflow
+          {...restTagsPopoverProps}
+          key={`_+${n}_Popover`}
+        >
+          {nTag}
+        </Popover>
+      );
+    }
+    return nTag;
+  }
+
+
+  function renderOverflow(items: [VueJsxNode, any][], index: number) {
+    const isCollapse = true;
+    return items.length && items[0]
+      ? renderTag(items[0], index, isCollapse)
+      : null;
+  }
+
+  function handleOverflow(items: [VueJsxNode, any][]) {
+    const { overflowItemCount, selections } = state;
+    const { maxTagCount } = props;
+    const maxVisibleCount = selections.size - maxTagCount;
+    const newOverFlowItemCount = maxVisibleCount > 0 ? maxVisibleCount + items.length - 1 : items.length - 1;
+    if (items.length > 1 && overflowItemCount !== newOverFlowItemCount) {
+      foundation.updateOverflowItemCount(selections.size, newOverFlowItemCount);
+    }
+  }
+
+
+  function renderCollapsedTags(selections: [VueJsxNode, any][], length: number | undefined) {
+    const { overflowItemCount } = state;
+    const normalTags = typeof length === 'number' ? selections.slice(0, length) : selections;
+    return (
+      <div class={`${prefixcls}-content-wrapper-collapse`}>
+        <OverflowList
+          items={normalTags}
+          overflowRenderer={overflowItems => renderOverflow(overflowItems as [VueJsxNode, any][], length - 1)}
+          onOverflow={overflowItems => handleOverflow(overflowItems as [VueJsxNode, any][])}
+          visibleItemRenderer={(item, index) => renderTag(item as [VueJsxNode, any], index)}
+        />
+        {overflowItemCount > 0 && renderNTag(overflowItemCount, selections.slice(selections.length - overflowItemCount))}
+      </div>
+    );
+  }
+
+
+  function renderOneLineTags(selectedItems: [VueJsxNode, any][], n: number | undefined) {
+    let { renderSelectedItem } = props;
+    const { showRestTagsPopover, restTagsPopoverProps, maxTagCount } = props;
+    const { isFullTags } = state;
+    let tagContent: VueJsxNode;
+
+    if (typeof renderSelectedItem === 'undefined') {
+      renderSelectedItem = (optionNode: OptionProps) => ({
+        isRenderInTag: true,
+        content: optionNode.label,
+      }) as any;
+    }
+    if (showRestTagsPopover) {
+      // showRestTagsPopover = true，
+      const mapItems = isFullTags ? selectedItems : selectedItems.slice(0, maxTagCount);
+      const tags = mapItems.map((item, i) => {
+        return getTagItem(item, i, renderSelectedItem);
+      });
+
+      tagContent = (
+        <TagGroup
+          tagList={tags}
+          maxTagCount={n}
+          restCount={isFullTags ? undefined : (selectedItems.length - maxTagCount)}
+          size="large"
+          mode="custom"
+          showPopover={showRestTagsPopover}
+          popoverProps={restTagsPopoverProps}
+          onPlusNMouseEnter={() => {
+            foundation.updateIsFullTags();
+          }}
+        />
+      );
+    } else {
+      // If maxTagCount is set, showRestTagsPopover is false/undefined,
+      // then there is no popover when hovering, no extra Tags are displayed,
+      // only the tags and restCount displayed in the trigger need to be passed in
+      const mapItems = selectedItems.slice(0, maxTagCount);
+      const tags = mapItems.map((item, i) => {
+        return getTagItem(item, i, renderSelectedItem);
+      });
+      tagContent = (
+        <TagGroup
+          tagList={tags}
+          maxTagCount={n}
+          restCount={selectedItems.length - maxTagCount}
+          size="large"
+          mode="custom"
+        />
+      );
+    }
+    return tagContent;
+  }
+
+
   function renderMultipleSelection(selections: Map<OptionProps['label'], any>, filterable: boolean) {
-    let {renderSelectedItem} = props;
-    const { showRestTagsPopover, restTagsPopoverProps, placeholder, maxTagCount } = props;
-    const { inputValue, isFullTags } = state;
-    const renderTags = [];
+    let { renderSelectedItem } = props;
+    const { placeholder, maxTagCount, expandRestTagsOnClick, ellipsisTrigger } = props;
+    const { inputValue, isOpen } = state;
 
     const selectedItems = [...selections];
 
     if (typeof renderSelectedItem === 'undefined') {
-      renderSelectedItem = (optionNode) => ({
-        isRenderInTag: true,
-        content: optionNode.label,
-      });
+      // renderSelectedItem = (optionNode: OptionProps) => ({
+      //   isRenderInTag: true,
+      //   content: optionNode.label,
+      // });
     }
 
-
-    let mapItems = [];
-    let tags = [];
-    let tagContent: VueJsxNode;
-    if (!isNumber(maxTagCount)) {
-      // maxTagCount is not set, all tags are displayed
-      mapItems = selectedItems;
-      tags = mapItems.map((item, i) => {
-        return getTagItem(item, i, renderSelectedItem);
-      });
-      tagContent = tags;
-    } else {
-      // maxTagCount is set
-      if (showRestTagsPopover) {
-        // showRestTagsPopover = true，
-        mapItems = isFullTags ? selectedItems : selectedItems.slice(0, maxTagCount);
-        tags = mapItems.map((item, i) => {
-          return getTagItem(item, i, renderSelectedItem);
-        });
-        const n = selectedItems.length > maxTagCount ? maxTagCount : undefined;
-
-        tagContent = (
-          <TagGroup
-            tagList={tags}
-            maxTagCount={n}
-            restCount={isFullTags ? undefined : (selectedItems.length - maxTagCount)}
-            size="large"
-            mode="custom"
-            showPopover={showRestTagsPopover}
-            popoverProps={restTagsPopoverProps}
-            onPlusNMouseEnter={() => {
-              foundation.updateIsFullTags();
-            }}
-          />
-        );
-      } else {
-        // If maxTagCount is set, showRestTagsPopover is false/undefined,
-        // then there is no popover when hovering, no extra Tags are displayed,
-        // only the tags and restCount displayed in the trigger need to be passed in
-        mapItems = selectedItems.slice(0, maxTagCount);
-        const n = selectedItems.length > maxTagCount ? maxTagCount : undefined;
-        tags = mapItems.map((item, i) => {
-          return getTagItem(item, i, renderSelectedItem);
-        });
-
-        tagContent = (
-          <TagGroup
-            tagList={tags}
-            maxTagCount={n}
-            restCount={selectedItems.length - maxTagCount}
-            size="large"
-            mode="custom"
-          />
-        );
-      }
-    }
     const contentWrapperCls = cls({
       [`${prefixcls}-content-wrapper`]: true,
-      [`${prefixcls}-content-wrapper-one-line`]: maxTagCount,
-      [`${prefixcls}-content-wrapper-empty`]: !tags.length,
+      [`${prefixcls}-content-wrapper-one-line`]: maxTagCount && !isOpen,
+      [`${prefixcls}-content-wrapper-empty`]: !selectedItems.length,
     });
 
     const spanCls = cls({
       [`${prefixcls}-selection-text`]: true,
-      [`${prefixcls}-selection-placeholder`]: !tags.length,
-      [`${prefixcls}-selection-text-hide`]: tags && tags.length,
-      // [prefixcls + '-selection-text-inactive']: !inputValue && !tags.length,
+      [`${prefixcls}-selection-placeholder`]: !selectedItems.length,
+      [`${prefixcls}-selection-text-hide`]: selectedItems && selectedItems.length,
     });
     const placeholderText = placeholder && !inputValue ? <span class={spanCls}>{placeholder}</span> : null;
+    const n = selectedItems.length > maxTagCount ? maxTagCount : undefined;
+    const NotOneLine = !maxTagCount;
 
+    const oneLineTags = ellipsisTrigger ? renderCollapsedTags(selectedItems, n) : renderOneLineTags(selectedItems, n);
+
+    const tagContent = NotOneLine || (expandRestTagsOnClick && isOpen)
+      ? selectedItems.map((item, i) => renderTag(item, i))
+      : oneLineTags;
 
     return (
-      <div class={contentWrapperCls}>
-        {tags && tags.length ? tagContent : placeholderText}
-        {!filterable ? null : renderInput()}
-      </div>
+      <>
+        <div class={contentWrapperCls}>
+          {selectedItems && selectedItems.length ? tagContent : placeholderText}
+          {!filterable ? null : renderInput()}
+        </div>
+      </>
     );
   }
 
@@ -1335,3 +1479,7 @@ Index.props = vuePropsType
 
 export default Index
 
+export {
+  Option as SelectOption,
+  OptionGroup as SelectOptionGroup
+}

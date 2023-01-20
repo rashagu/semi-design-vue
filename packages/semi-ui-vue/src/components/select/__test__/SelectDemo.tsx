@@ -127,16 +127,16 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
     }
     return (
       <div>
-        {/*<div>*/}
-        {/*  <Select*/}
-        {/*    placeholder="拥有3k个Option的Select 虚拟滚动"*/}
-        {/*    style={{ width: '260px' }}*/}
-        {/*    filter*/}
-        {/*    onSearch={handleSearch}*/}
-        {/*    virtualize={virtualize}*/}
-        {/*    optionList={optionList}*/}
-        {/*  ></Select>*/}
-        {/*</div>*/}
+        <div>
+          <Select
+            placeholder="拥有3k个Option的Select 虚拟滚动"
+            style={{ width: '260px' }}
+            filter
+            onSearch={handleSearch}
+            virtualize={virtualize}
+            optionList={optionList}
+          ></Select>
+        </div>
         <Select
           placeholder={'请选择'}
           filter
@@ -147,201 +147,201 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
           renderOptionItem={renderOptionItem}
         />
 
-        {/*<Select defaultValue='abc' style={{ width: 120 }}>*/}
-        {/*  <Option value='abc'>抖音</Option>*/}
-        {/*  <Option value='hotsoon'>火山</Option>*/}
-        {/*  <Option value='jianying' disabled>剪映</Option>*/}
-        {/*  <Option value='xigua'>西瓜视频</Option>*/}
-        {/*</Select>*/}
-        {/*<br/><br/>*/}
-        {/*<Select defaultValue='abc' disabled style={{ width: 120 }}>*/}
-        {/*  <Option value='abc'>抖音</Option>*/}
-        {/*  <Option value='hotsoon'>火山</Option>*/}
-        {/*</Select>*/}
-        {/*<br/><br/>*/}
-        {/*<Select placeholder='请选择业务线' style={{ width: 120 }}>*/}
-        {/*  <Option value='abc'>抖音</Option>*/}
-        {/*  <Option value='hotsoon'>火山</Option>*/}
-        {/*  <Option value='jianying' disabled>剪映</Option>*/}
-        {/*  <Option value='xigua'>西瓜视频</Option>*/}
-        {/*</Select>*/}
-        {/*<Select placeholder='请选择业务线' style={{ width: 180 }} optionList={list}>*/}
-        {/*</Select>*/}
-        {/*<Select multiple style={{ width: '320px' }} defaultValue={['abc','hotsoon']}>*/}
-        {/*  <Option value='abc'>抖音</Option>*/}
-        {/*  <Option value='hotsoon'>火山</Option>*/}
-        {/*  <Option value='jianying'>剪映</Option>*/}
-        {/*  <Option value='xigua'>西瓜视频</Option>*/}
-        {/*</Select>*/}
-        {/*<br/><br/>*/}
-        {/*<Select multiple style={{ width: '320px' }} defaultValue={['abc','hotsoon', 'jianying']} maxTagCount={2}>*/}
-        {/*  <Option value='abc'>抖音</Option>*/}
-        {/*  <Option value='hotsoon'>火山</Option>*/}
-        {/*  <Option value='jianying'>剪映</Option>*/}
-        {/*  <Option value='xigua'>西瓜视频</Option>*/}
-        {/*</Select>*/}
+        <Select defaultValue='abc' style={{ width: 120 }}>
+          <Option value='abc'>抖音</Option>
+          <Option value='hotsoon'>火山</Option>
+          <Option value='jianying' disabled>剪映</Option>
+          <Option value='xigua'>西瓜视频</Option>
+        </Select>
+        <br/><br/>
+        <Select defaultValue='abc' disabled style={{ width: 120 }}>
+          <Option value='abc'>抖音</Option>
+          <Option value='hotsoon'>火山</Option>
+        </Select>
+        <br/><br/>
+        <Select placeholder='请选择业务线' style={{ width: 120 }}>
+          <Option value='abc'>抖音</Option>
+          <Option value='hotsoon'>火山</Option>
+          <Option value='jianying' disabled>剪映</Option>
+          <Option value='xigua'>西瓜视频</Option>
+        </Select>
+        <Select placeholder='请选择业务线' style={{ width: 180 }} optionList={list}>
+        </Select>
+        <Select multiple style={{ width: '320px' }} defaultValue={['abc','hotsoon']}>
+          <Option value='abc'>抖音</Option>
+          <Option value='hotsoon'>火山</Option>
+          <Option value='jianying'>剪映</Option>
+          <Option value='xigua'>西瓜视频</Option>
+        </Select>
+        <br/><br/>
+        <Select multiple style={{ width: '320px' }} defaultValue={['abc','hotsoon', 'jianying']} maxTagCount={2}>
+          <Option value='abc'>抖音</Option>
+          <Option value='hotsoon'>火山</Option>
+          <Option value='jianying'>剪映</Option>
+          <Option value='xigua'>西瓜视频</Option>
+        </Select>
 
-        {/*<br/><br/>*/}
-        {/*<Select multiple style={{ width: '320px' }} defaultValue={['abc']} max={2}>*/}
-        {/*  <Option value='abc'>抖音</Option>*/}
-        {/*  <Option value='hotsoon'>火山</Option>*/}
-        {/*  <Option value='jianying'>剪映</Option>*/}
-        {/*  <Option value='xigua'>西瓜视频</Option>*/}
-        {/*</Select>*/}
+        <br/><br/>
+        <Select multiple style={{ width: '320px' }} defaultValue={['abc']} max={2}>
+          <Option value='abc'>抖音</Option>
+          <Option value='hotsoon'>火山</Option>
+          <Option value='jianying'>剪映</Option>
+          <Option value='xigua'>西瓜视频</Option>
+        </Select>
 
-        {/*<div>*/}
-        {/*  <Select placeholder="" style={{ width: '180px' }} filter>*/}
-        {/*    <OptGroup label="Asia">*/}
-        {/*      <Option value="a-1">China</Option>*/}
-        {/*      <Option value="a-2">Koera</Option>*/}
-        {/*    </OptGroup>*/}
-        {/*    <OptGroup label="Europe">*/}
-        {/*      <Option value="b-1">Germany</Option>*/}
-        {/*      <Option value="b-2">France</Option>*/}
-        {/*    </OptGroup>*/}
-        {/*    <OptGroup label="South America">*/}
-        {/*      <Option value="c-1">Peru</Option>*/}
-        {/*    </OptGroup>*/}
-        {/*  </Select>*/}
-        {/*</div>*/}
-        {/*<div>*/}
-        {/*  <Select placeholder="" style={{ width: '180px' }} filter>*/}
-        {/*    {*/}
-        {/*      data.map((group, index) => (*/}
-        {/*        <OptGroup label={group.label} key={`${index}-${group.label}`}>*/}
-        {/*          {*/}
-        {/*            group.children.map((option, index2) => (*/}
-        {/*              <Option value={option.value} key={`${index2}-${group.label}`}>*/}
-        {/*                {option.label}*/}
-        {/*              </Option>*/}
-        {/*            ))*/}
-        {/*          }*/}
-        {/*        </OptGroup>*/}
-        {/*      ))*/}
-        {/*    }*/}
-        {/*  </Select>*/}
-        {/*</div>*/}
-        {/*<div>*/}
-        {/*  <div>不同尺寸</div>*/}
-        {/*  <Select placeholder='请选择业务线' style={{ width: '180px' }} size='small'>*/}
-        {/*    <Option value='hotsoon'>火山</Option>*/}
-        {/*  </Select>*/}
-        {/*  <br/><br/>*/}
-        {/*  <Select placeholder='请选择业务线' style={{ width: '180px' }}>*/}
-        {/*    <Option value='hotsoon'>火山</Option>*/}
-        {/*  </Select>*/}
-        {/*  <br/><br/>*/}
-        {/*  <Select placeholder='请选择业务线' style={{ width: '180px' }} size='large'>*/}
-        {/*    <Option value='hotsoon'>火山</Option>*/}
-        {/*  </Select>*/}
-        {/*</div>*/}
+        <div>
+          <Select placeholder="" style={{ width: '180px' }} filter>
+            <OptGroup label="Asia">
+              <Option value="a-1">China</Option>
+              <Option value="a-2">Koera</Option>
+            </OptGroup>
+            <OptGroup label="Europe">
+              <Option value="b-1">Germany</Option>
+              <Option value="b-2">France</Option>
+            </OptGroup>
+            <OptGroup label="South America">
+              <Option value="c-1">Peru</Option>
+            </OptGroup>
+          </Select>
+        </div>
+        <div>
+          <Select placeholder="" style={{ width: '180px' }} filter>
+            {
+              data.map((group, index) => (
+                <OptGroup label={group.label} key={`${index}-${group.label}`}>
+                  {
+                    group.children.map((option, index2) => (
+                      <Option value={option.value} key={`${index2}-${group.label}`}>
+                        {option.label}
+                      </Option>
+                    ))
+                  }
+                </OptGroup>
+              ))
+            }
+          </Select>
+        </div>
+        <div>
+          <div>不同尺寸</div>
+          <Select placeholder='请选择业务线' style={{ width: '180px' }} size='small'>
+            <Option value='hotsoon'>火山</Option>
+          </Select>
+          <br/><br/>
+          <Select placeholder='请选择业务线' style={{ width: '180px' }}>
+            <Option value='hotsoon'>火山</Option>
+          </Select>
+          <br/><br/>
+          <Select placeholder='请选择业务线' style={{ width: '180px' }} size='large'>
+            <Option value='hotsoon'>火山</Option>
+          </Select>
+        </div>
 
-        {/*<div>*/}
-        {/*  <Select style={{ width: '180px' }}>*/}
-        {/*    <Option value='hotsoon'>火山</Option>*/}
-        {/*  </Select>*/}
-        {/*  <br/><br/>*/}
-        {/*  <Select style={{ width: '180px' }} validateStatus='warning'>*/}
-        {/*    <Option value='hotsoon'>火山</Option>*/}
-        {/*  </Select>*/}
-        {/*  <br/><br/>*/}
-        {/*  <Select style={{ width: '180px' }} validateStatus='error'>*/}
-        {/*    <Option value='hotsoon'>火山</Option>*/}
-        {/*  </Select>*/}
-        {/*</div>*/}
+        <div>
+          <Select style={{ width: '180px' }}>
+            <Option value='hotsoon'>火山</Option>
+          </Select>
+          <br/><br/>
+          <Select style={{ width: '180px' }} validateStatus='warning'>
+            <Option value='hotsoon'>火山</Option>
+          </Select>
+          <br/><br/>
+          <Select style={{ width: '180px' }} validateStatus='error'>
+            <Option value='hotsoon'>火山</Option>
+          </Select>
+        </div>
 
-        {/*<div>*/}
-        {/*  <Select*/}
-        {/*    style={{ width: '320px' }}*/}
-        {/*    defaultValue={'hotsoon'}*/}
-        {/*    prefix={<IconVigoLogo />}*/}
-        {/*    showClear={true}*/}
-        {/*  >*/}
-        {/*    <Option value='abc'>抖音</Option>*/}
-        {/*    <Option value='hotsoon'>火山</Option>*/}
-        {/*    <Option value='jianying'>剪映</Option>*/}
-        {/*    <Option value='xigua'>西瓜视频</Option>*/}
-        {/*  </Select>*/}
-        {/*  <br/><br/>*/}
-        {/*  <Select*/}
-        {/*    style={{ width: '320px' }}*/}
-        {/*    defaultValue={'hotsoon'}*/}
-        {/*    prefix={<IconVigoLogo />}*/}
-        {/*    suffix={<IconGift />}*/}
-        {/*    showArrow={false}*/}
-        {/*  >*/}
-        {/*    <Option value='abc'>抖音</Option>*/}
-        {/*    <Option value='hotsoon'>火山</Option>*/}
-        {/*    <Option value='jianying'>剪映</Option>*/}
-        {/*    <Option value='xigua'>西瓜视频</Option>*/}
-        {/*  </Select>*/}
-        {/*</div>*/}
+        <div>
+          <Select
+            style={{ width: '320px' }}
+            defaultValue={'hotsoon'}
+            prefix={<IconVigoLogo />}
+            showClear={true}
+          >
+            <Option value='abc'>抖音</Option>
+            <Option value='hotsoon'>火山</Option>
+            <Option value='jianying'>剪映</Option>
+            <Option value='xigua'>西瓜视频</Option>
+          </Select>
+          <br/><br/>
+          <Select
+            style={{ width: '320px' }}
+            defaultValue={'hotsoon'}
+            prefix={<IconVigoLogo />}
+            suffix={<IconGift />}
+            showArrow={false}
+          >
+            <Option value='abc'>抖音</Option>
+            <Option value='hotsoon'>火山</Option>
+            <Option value='jianying'>剪映</Option>
+            <Option value='xigua'>西瓜视频</Option>
+          </Select>
+        </div>
 
-        {/*<div>*/}
-        {/*  <Select style={{ width: '300px' }} optionList={list} insetLabel='业务线' defaultValue='abc'>*/}
-        {/*  </Select>*/}
-        {/*  <br/><br/>*/}
-        {/*  <Select*/}
-        {/*    style={{ width: '300px' }}*/}
-        {/*    optionList={list} placeholder='请选择业务线'*/}
-        {/*    insetLabel={<span style={{marginRight: 0, marginLeft: '10px', color: "var(--semi-color-text-2)"}}>业务线</span>}>*/}
-        {/*  </Select>*/}
-        {/*</div>*/}
-
-
-
-        {/*<div>*/}
-        {/*  <p>outerBottomSlot:</p>*/}
-        {/*  <Select*/}
-        {/*    style={{ width: '300px' }}*/}
-        {/*    dropdownStyle={{ width: '180px' }}*/}
-        {/*    maxHeight={150}*/}
-        {/*    outerBottomSlot={outSlotNode}*/}
-        {/*    placeholder='自定义外侧底部slot，始终显示'*/}
-        {/*    defaultOpen*/}
-        {/*    autoAdjustOverflow={false}*/}
-        {/*    position='bottom'*/}
-        {/*  >*/}
-        {/*    <Option value='abc'>抖音</Option>*/}
-        {/*    <Option value='hotsoon'>火山</Option>*/}
-        {/*    <Option value='jianying'>剪映</Option>*/}
-        {/*    <Option value='duoshan'>多闪</Option>*/}
-        {/*    <Option value='xigua'>西瓜视频</Option>*/}
-        {/*  </Select>*/}
-        {/*  <p style={{ marginTop: '200px' }}>innerBottomSlot:</p>*/}
-        {/*  <Select*/}
-        {/*    style={{ width: '300px' }}*/}
-        {/*    dropdownStyle={{ width: '180px' }}*/}
-        {/*    maxHeight={150}*/}
-        {/*    innerBottomSlot={innerSlotNode}*/}
-        {/*    placeholder='自定义内侧底部slot，滚动至底部显示'*/}
-        {/*  >*/}
-        {/*    <Option value='abc'>抖音</Option>*/}
-        {/*    <Option value='hotsoon'>火山</Option>*/}
-        {/*    <Option value='jianying'>剪映</Option>*/}
-        {/*    <Option value='duoshan'>多闪</Option>*/}
-        {/*    <Option value='xigua'>西瓜视频</Option>*/}
-        {/*  </Select>*/}
-        {/*</div>*/}
+        <div>
+          <Select style={{ width: '300px' }} optionList={list} insetLabel='业务线' defaultValue='abc'>
+          </Select>
+          <br/><br/>
+          <Select
+            style={{ width: '300px' }}
+            optionList={list} placeholder='请选择业务线'
+            insetLabel={<span style={{marginRight: 0, marginLeft: '10px', color: "var(--semi-color-text-2)"}}>业务线</span>}>
+          </Select>
+        </div>
 
 
-        {/*<div>*/}
-        {/*  <p>搜索</p>*/}
-        {/*  <Select filter style={{ width: '180px' }} placeholder='带搜索功能的单选'>*/}
-        {/*    <Option value='abc'>抖音</Option>*/}
-        {/*    <Option value='hotsoon'>火山</Option>*/}
-        {/*    <Option value='jianying'>剪映</Option>*/}
-        {/*    <Option value='xigua'>西瓜视频</Option>*/}
-        {/*  </Select>*/}
-        {/*  <br/><br/>*/}
-        {/*  <Select filter multiple style={{ width: '300px' }} placeholder='带搜索功能的多选' autoClearSearchValue={false}>*/}
-        {/*    <Option value='semi-0'>Semi-0</Option>*/}
-        {/*    <Option value='semi-1'>Semi-1</Option>*/}
-        {/*    <Option value='semi-2'>Semi-2</Option>*/}
-        {/*    <Option value='semi-3'>Semi-3</Option>*/}
-        {/*    <Option value='semi-4'>Semi-4</Option>*/}
-        {/*  </Select>*/}
-        {/*</div>*/}
+
+        <div>
+          <p>outerBottomSlot:</p>
+          <Select
+            style={{ width: '300px' }}
+            dropdownStyle={{ width: '180px' }}
+            maxHeight={150}
+            outerBottomSlot={outSlotNode}
+            placeholder='自定义外侧底部slot，始终显示'
+            defaultOpen
+            autoAdjustOverflow={false}
+            position='bottom'
+          >
+            <Option value='abc'>抖音</Option>
+            <Option value='hotsoon'>火山</Option>
+            <Option value='jianying'>剪映</Option>
+            <Option value='duoshan'>多闪</Option>
+            <Option value='xigua'>西瓜视频</Option>
+          </Select>
+          <p style={{ marginTop: '200px' }}>innerBottomSlot:</p>
+          <Select
+            style={{ width: '300px' }}
+            dropdownStyle={{ width: '180px' }}
+            maxHeight={150}
+            innerBottomSlot={innerSlotNode}
+            placeholder='自定义内侧底部slot，滚动至底部显示'
+          >
+            <Option value='abc'>抖音</Option>
+            <Option value='hotsoon'>火山</Option>
+            <Option value='jianying'>剪映</Option>
+            <Option value='duoshan'>多闪</Option>
+            <Option value='xigua'>西瓜视频</Option>
+          </Select>
+        </div>
+
+
+        <div>
+          <p>搜索</p>
+          <Select filter style={{ width: '180px' }} placeholder='带搜索功能的单选'>
+            <Option value='abc'>抖音</Option>
+            <Option value='hotsoon'>火山</Option>
+            <Option value='jianying'>剪映</Option>
+            <Option value='xigua'>西瓜视频</Option>
+          </Select>
+          <br/><br/>
+          <Select filter multiple style={{ width: '300px' }} placeholder='带搜索功能的多选' autoClearSearchValue={false}>
+            <Option value='semi-0'>Semi-0</Option>
+            <Option value='semi-1'>Semi-1</Option>
+            <Option value='semi-2'>Semi-2</Option>
+            <Option value='semi-3'>Semi-3</Option>
+            <Option value='semi-4'>Semi-4</Option>
+          </Select>
+        </div>
       </div>
     )
   }

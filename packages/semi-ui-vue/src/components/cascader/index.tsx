@@ -38,7 +38,7 @@ import { calcCheckedKeys, normalizeKeyList, calcDisabledKeys } from '@douyinfe/s
 import {getProps, useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import Input from '../input';
 import Popover, { PopoverProps } from '../popover';
-import Item, { CascaderData, Entities, Entity, Data } from './Item';
+import Item, { CascaderData, Entities, Entity, Data, FilterRenderProps } from './item';
 import Trigger from '../trigger';
 import Tag from '../tag';
 import TagInput, {TagInputProps} from '../tagInput';
@@ -47,9 +47,10 @@ import { isSemiIcon } from '../_utils/index';
 import { Position } from '../tooltip/index';
 import {AriaAttributes} from "../AriaAttributes";
 import {vuePropsMake} from "../PropTypes";
+import {VueJsxNode} from "../interface";
 
 export type { CascaderType, ShowNextType } from '@douyinfe/semi-foundation/cascader/foundation';
-export type { CascaderData, Entity, Data, CascaderItemProps } from './Item';
+export type { CascaderData, Entity, Data, CascaderItemProps, FilterRenderProps } from './item';
 
 export interface ScrollPanelProps extends BasicScrollPanelProps {
   activeNode: CascaderData;
@@ -78,6 +79,9 @@ export interface CascaderProps extends BasicCascaderProps {
   dropdownStyle?: CSSProperties;
   emptyContent?: VNode | string;
   motion?: boolean;
+  filterTreeNode?: ((inputValue: string, treeNodeString: string, data?: CascaderData) => boolean) | boolean;
+  filterSorter?: (first: CascaderData, second: CascaderData, inputValue: string) => number;
+  filterRender?: (props: FilterRenderProps) => VueJsxNode;
   treeData?: Array<CascaderData>;
   restTagsPopoverProps?: PopoverProps;
   children?: VNode | string;
@@ -396,7 +400,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
   }
 
   // watch props OK
-  function getDerivedStateFromProps(props: CascaderProps, prevState: CascaderState) {
+  function getDerivedStateFromProps(props: CascaderProps) {
     const {
       multiple,
       value,
@@ -405,8 +409,8 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       leafOnly,
       autoMergeValue,
     } = props;
-    const { prevProps } = prevState;
-    let keyEntities = prevState.keyEntities || {};
+    const { prevProps } = state;
+    let keyEntities = state.keyEntities || {};
     const newState: Partial<CascaderState> = { };
     const needUpdate = (name: string) => {
       const firstInProps = isEmpty(prevProps) && name in props;
@@ -457,7 +461,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
           keyEntities = convertDataToEntities(props.treeData);
           newState.keyEntities = keyEntities;
         }
-        let realKeys: Array<string> | Set<string> = prevState.checkedKeys;
+        let realKeys: Array<string> | Set<string> = state.checkedKeys;
         // when data was updated
         if (needUpdateValue) {
           const realValue = needUpdate('value') ? value : defaultValue;
@@ -490,7 +494,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     return newState;
   }
   watch(()=>props, (val)=>{
-    const newState = getDerivedStateFromProps(props, state)
+    const newState = getDerivedStateFromProps(props)
     newState && Object.keys(newState).forEach(key=>{
       state[key] = newState[key]
     })
@@ -677,7 +681,8 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       topSlot,
       bottomSlot,
       showNext,
-      multiple
+      multiple,
+      filterRender
     } = props;
     const searchable = Boolean(filterTreeNode) && isSearching;
     const popoverCls = cls(dropdownClassName, `${prefixcls}-popover`);
@@ -704,6 +709,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
           multiple={multiple}
           checkedKeys={checkedKeys}
           halfCheckedKeys={halfCheckedKeys}
+          filterRender={filterRender}
         />
         {bottomSlot}
       </div>

@@ -9,7 +9,7 @@ import {
   reactive,
   onMounted,
   isVNode,
-  watch
+  watch, VNodeRef
 } from 'vue'
 import * as PropTypes from '../PropTypes'
 import cls from 'classnames';
@@ -29,7 +29,7 @@ import {useBaseComponent} from '../_base/baseComponent';
 import Tag from '../tag';
 import Input from '../input';
 import Popover, {PopoverProps} from '../popover';
-import Paragraph from '../typography/Paragraph';
+import Paragraph from '../typography/paragraph';
 import {IconClear, IconHandle} from '@kousum/semi-icons-vue';
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
@@ -49,8 +49,8 @@ export type RestTagsPopoverProps = PopoverProps;
 type ValidateStatus = "default" | "error" | "warning";
 
 
-type SortableItemFuncArg = {
-  setNodeRef?: (node: HTMLElement) => void,
+export type SortableItemFuncArg = {
+  setNodeRef?: VNodeRef,
   style?:CSSProperties,
   attributes?: DraggableAttributes,
   listeners?: any

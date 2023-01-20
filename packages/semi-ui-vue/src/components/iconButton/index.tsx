@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/button/constants';
 import {strings as iconStrings} from '@douyinfe/semi-foundation/icons/constants';
 import Button, {Theme, ButtonProps, Size, Type} from '../button/Button';
-import SpinIcon from '../spin/Icon';
+import SpinIcon from '../spin/icon';
 import {noop} from 'lodash';
 import '@douyinfe/semi-foundation/button/iconButton.scss';
 
@@ -32,40 +32,42 @@ export interface IconButtonProps extends ButtonProps {
 // TODO: icon configuration
 const Index = defineComponent<IconButtonProps>((props, {slots}) => {
 
-  const {
-    iconPosition,
-    iconSize,
-    iconStyle,
-    style: originStyle,
-    icon,
-    noHorizontalPadding,
-    theme,
-    className,
-    prefixCls,
-    loading,
-    ...otherProps
-  } = props;
-
-  const style: any = originStyle;
-  // TODO: review check
-  if (Array.isArray(noHorizontalPadding)) {
-    noHorizontalPadding.includes('left') && (style.paddingLeft = 0);
-    noHorizontalPadding.includes('right') && (style.paddingRight = 0);
-  } else if (noHorizontalPadding === true) {
-    style.paddingLeft = 0;
-    style.paddingRight = 0;
-  }
-
-  let finalChildren = null;
-
-
-  const btnTextCls = classNames({
-    [`${prefixCls}-content-left`]: iconPosition === 'right',
-    [`${prefixCls}-content-right`]: iconPosition === 'left',
-  });
-
 
   return () => {
+
+    const {
+      iconPosition,
+      iconSize,
+      iconStyle,
+      style: originStyle,
+      icon,
+      noHorizontalPadding,
+      theme,
+      className,
+      prefixCls,
+      loading,
+      ...otherProps
+    } = props;
+
+    const style: any = originStyle;
+    // TODO: review check
+    if (Array.isArray(noHorizontalPadding)) {
+      noHorizontalPadding.includes('left') && (style.paddingLeft = 0);
+      noHorizontalPadding.includes('right') && (style.paddingRight = 0);
+    } else if (noHorizontalPadding === true) {
+      style.paddingLeft = 0;
+      style.paddingRight = 0;
+    }
+
+    let finalChildren = null;
+
+
+    const btnTextCls = classNames({
+      [`${prefixCls}-content-left`]: iconPosition === 'right',
+      [`${prefixCls}-content-right`]: iconPosition === 'left',
+    });
+
+
     return (
       <Button {...otherProps} className={classNames(className, `${prefixCls}-with-icon`, {
         [`${prefixCls}-with-icon-only`]: !slots.default || !slots.default(),

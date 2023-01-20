@@ -1,8 +1,8 @@
-import {defineComponent, ref, h, Fragment, CSSProperties, DefineComponent, reactive, provide,} from 'vue'
+import {defineComponent, ref, h, Fragment, CSSProperties, DefineComponent, reactive, provide, isVNode,} from 'vue'
 import cls from 'classnames';
 import {cssClasses} from '@douyinfe/semi-foundation/layout/constants';
 import '@douyinfe/semi-foundation/layout/layout.scss';
-import { ContextType } from './layoutContext';
+import LayoutContext, { ContextType } from './layoutContext';
 import Sider from './Sider';
 
 
@@ -103,23 +103,29 @@ const Layout = defineComponent<BasicLayoutProps>((props, {slots}) => {
       },
     };
   }
-  provide('LayoutContext', { siderHook: getSiderHook() })
+
   return () => {
+    const children = slots.default?.() || []
     const { prefixCls, className, hasSider, tagName, ...others } = props;
     const { siders } = state;
     const classString = cls(className, prefixCls, {
-      [`${prefixCls}-has-sider`]: hasSider ? hasSider : siders.length > 0,
+      [`${prefixCls}-has-sider`]: typeof hasSider === 'boolean' && hasSider || siders.length > 0 || children.some((child) => {
+        return isVNode(child) && child.type && (child.type as any).name === "Layout.Sider";
+      }),
     });
     const Tag: any = tagName;
     return (
-      <Tag className={classString} {...others}>
-        {slots.default?slots.default():null}
-      </Tag>
+      <LayoutContext.Provider value={{ siderHook: getSiderHook() }}>
+        <Tag className={classString} {...others}>
+          {slots.default?slots.default():null}
+        </Tag>
+      </LayoutContext.Provider>
     );
   }
 })
 
 Layout.props = vuePropsType
+Layout.name = 'Layout'
 
 export {
   LayoutHeader,

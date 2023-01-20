@@ -60,6 +60,7 @@ export interface SearchRenderProps extends BasicSearchRenderProps {
 export interface TreeProps extends BasicTreeProps {
     defaultValue?: Value;
     emptyContent?: VueJsxNode;
+    filterTreeNode?: boolean | ((inputValue: string, treeNodeString: string, data?: TreeNodeData) => boolean);
     searchRender?: ((searchRenderProps: SearchRenderProps) => VueJsxNode) | false;
     searchStyle?: CSSProperties;
     style?: CSSProperties;

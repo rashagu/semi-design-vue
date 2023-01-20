@@ -14,7 +14,7 @@ const SvgComponent = defineComponent((props, { slots }) => {
       aria-hidden={true}
       {...props}
     >
-      <g clip-path="url(#clip0)">
+      <g clip-path="url(#clip_spin)">
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -35,9 +35,9 @@ const SvgComponent = defineComponent((props, { slots }) => {
           <stop offset={0.301257} stop-opacity={0} stop-colo="currentColor" />
           <stop offset={0.466753} stop-opacity={1} stop-colo="currentColor" />
         </radialGradient>
-        <clip-path id="clip0">
+        <clipPath id="clip_spin">
           <rect width={24} height={24} fill="currentColor" />
-        </clip-path>
+        </clipPath>
       </defs>
     </svg>
   );

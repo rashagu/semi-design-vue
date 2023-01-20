@@ -50,6 +50,39 @@ import ToastDemo from "./components/toast/__test__/ToastDemo";
 import BannerDemo from "./components/banner/__test__/BannerDemo";
 import NotificationDemo from "./components/notification/__test__/NotificationDemo";
 import PopconfirmDemo from "./components/popconfirm/__test__/PopconfirmDemo";
+import PaginationDemo from "./components/pagination/__test__/PaginationDemo";
+import TableDemo1 from "./components/table/__test__/TableDemo1";
+import TableDemo2 from "./components/table/__test__/TableDemo2";
+import TableDemo3 from "./components/table/__test__/TableDemo3";
+import TableDemo4 from "./components/table/__test__/TableDemo4";
+import TableDemo5 from "./components/table/__test__/TableDemo5";
+import TableDemo6 from "./components/table/__test__/TableDemo6";
+import TableDemo7 from "./components/table/__test__/TableDemo7";
+import TableDemo8 from "./components/table/__test__/TableDemo8";
+import TableDemo9 from "./components/table/__test__/TableDemo9";
+// import TableDemo10 from "./components/table/__test__/TableDemo10";
+// import TableDemo11 from "./components/table/__test__/TableDemo11";
+import TableDemo12 from "./components/table/__test__/TableDemo12";
+import TableDemo13Virtualized from "./components/table/__test__/TableDemo13Virtualized";
+import OverflowListDemo1 from "./components/overflowList/__test__/OverflowListDemo";
+import OverflowListDemoScroll from "./components/overflowList/__test__/OverflowListDemoScroll";
+import BadgeDemo from "./components/badge/__test__/BadgeDemo";
+import CardDemo from "./components/card/__test__/CardDemo";
+import TabsDemo from "./components/tabs/__test__/TabsDemo";
+import AnchorDemo from "./components/anchor/__test__/AnchorDemo";
+import BacktopDemo from "./components/backtop/__test__/BacktopDemo";
+import StepsDemo from "./components/steps/__test__/StepsDemo";
+import CarouselDemo from "./components/carousel/__test__/CarouselDemo";
+import CollapseDemo from "./components/collapse/__test__/CollapseDemo";
+import CollapsibleDemo from "./components/collapsible/__test__/CollapsibleDemo";
+import DescriptionsDemo from "./components/descriptions/__test__/DescriptionsDemo";
+import ListDemo from "./components/list/__test__/ListDemo";
+import SideSheetDemo from "./components/sideSheet/__test__/SideSheetDemo";
+import TimelineDemo from "./components/timeline/__test__/TimelineDemo";
+import HighlightDemo from "./components/highlight/__test__/HighlightDemo";
+import TransferDemo from "./components/transfer/__test__/TransferDemo";
+import CalenderDemo from "./components/calendar/__test__/CalenderDemo";
+import TransferTreeDemo from "./components/transfer/__test__/TransferTreeDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -60,10 +93,50 @@ export const VuePropsType = {
 
 const App = defineComponent<ExampleProps>((props, {slots}) => {
 
-
+  // const a= ref(0)
+  // onMounted(()=>{
+  //   setInterval(()=>{
+  //     a.value ++
+  //   }, 1000)
+  // })
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
+        {/*<CalenderDemo />*/}
+        {/*<TransferDemo/>*/}
+        {/*<TransferTreeDemo />*/}
+        {/*<HighlightDemo />*/}
+        {/*<TimelineDemo/>*/}
+        {/*<SideSheetDemo />*/}
+        {/*<ListDemo />*/}
+        {/*<DescriptionsDemo />*/}
+        {/*<CollapseDemo />*/}
+        {/*<CollapsibleDemo />*/}
+        {/*<CarouselDemo/>*/}
+        {/*<StepsDemo />*/}
+        {/*<BacktopDemo />*/}
+        {/*<AnchorDemo />*/}
+        {/*<TabsDemo />*/}
+        {/*<CardDemo >*/}
+        {/*  {a.value}*/}
+        {/*</CardDemo>*/}
+        {/*<BadgeDemo />*/}
+        {/*<OverflowListDemo1 />*/}
+        {/*<OverflowListDemoScroll />*/}
+        {/*<TableDemo1 />*/}
+        {/*<TableDemo2 />*/}
+        {/*<TableDemo3 />*/}
+        {/*<TableDemo4 />*/}
+        {/*<TableDemo5 />*/}
+        {/*<TableDemo6 />*/}
+        {/*<TableDemo7 />*/}
+        {/*<TableDemo8 />*/}
+        {/*<TableDemo9 />*/}
+        {/*<TableDemo10 />*/}
+        {/*<TableDemo11 />*/}
+        {/*<TableDemo12 />*/}
+        {/*<TableDemo13Virtualized />*/}
+        {/*<PaginationDemo />*/}
         {/*<PopconfirmDemo/>*/}
         {/*<NotificationDemo/>*/}
         {/*<BannerDemo/>*/}
@@ -84,7 +157,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<InputNumberDemo />*/}
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
-        <ModalDemo/>
+        {/*<ModalDemo/>*/}
         {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
@@ -117,7 +190,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DropdownDemo1/>*/}
         {/*<br/>*/}
         {/*<GridTest />*/}
-        {/*<LayoutTest/>*/}
+        <LayoutTest/>
         {/*<SpaceTest/>*/}
         {/*<PopoverTest />*/}
         <NavigationDemo />
@@ -129,5 +202,6 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
 
 App.props = VuePropsType
+App.name = 'App'
 
 export default App

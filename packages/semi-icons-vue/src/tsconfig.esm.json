@@ -9,6 +9,7 @@
     "../scripts"
   ],
   "compilerOptions": {
+    "rootDir": "./icons",
     "outDir": "../lib",
     "strictNullChecks": false,
     "module": "ES6",

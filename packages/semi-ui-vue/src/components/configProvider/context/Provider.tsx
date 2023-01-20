@@ -16,6 +16,7 @@ const Provider = defineComponent<{value:ContextValue}>((props, {slots}) => {
 })
 
 Provider.props = vuePropsType
+Provider.name = 'ConfigProvider'
 
 export default Provider
 

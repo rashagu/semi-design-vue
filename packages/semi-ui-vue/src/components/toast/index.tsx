@@ -1,17 +1,18 @@
-import * as PropTypes from '../PropTypes'
+import * as PropTypes from '../PropTypes';
 import ToastListFoundation, {
   ToastListAdapter,
   ToastListProps,
-  ToastListState
+  ToastListState,
 } from '@douyinfe/semi-foundation/toast/toastListFoundation';
-import {cssClasses, strings} from '@douyinfe/semi-foundation/toast/constants';
+import { cssClasses, strings } from '@douyinfe/semi-foundation/toast/constants';
 import Toast from './toast';
 import '@douyinfe/semi-foundation/toast/toast.scss';
-import ToastTransition from './ToastTransition';
 import getUuid from '@douyinfe/semi-foundation/utils/uuid';
 import useToast from './useToast';
-import {ConfigProps, ToastInstance, ToastProps, ToastState} from '@douyinfe/semi-foundation/toast/toastFoundation';
-import {Motion} from '../_base/base';
+import { ConfigProps, ToastInstance, ToastProps, ToastState } from '@douyinfe/semi-foundation/toast/toastFoundation';
+import CSSAnimation from '../_cssAnimation';
+import cls from 'classnames';
+import { Motion } from '../_base/base';
 import {
   CSSProperties,
   defineComponent,
@@ -23,13 +24,12 @@ import {
   createApp,
   App,
   ref,
-  createVNode
-} from "vue";
-import {VueJsxNode} from "../interface";
-import {vuePropsMake} from "../PropTypes";
-import {useBaseComponent} from "../_base/baseComponent";
+  createVNode,
+} from 'vue';
+import { VueJsxNode } from '../interface';
+import { vuePropsMake } from '../PropTypes';
+import { useBaseComponent } from '../_base/baseComponent';
 
-export type {ToastTransitionProps} from './ToastTransition';
 
 export interface ToastReactProps extends ToastProps {
   id?: string;
@@ -38,13 +38,7 @@ export interface ToastReactProps extends ToastProps {
   content: VueJsxNode;
 }
 
-export type {
-  ConfigProps,
-  ToastListProps,
-  ToastListState,
-  ToastState
-};
-
+export type { ConfigProps, ToastListProps, ToastListState, ToastState };
 
 const propTypes = {
   content: PropTypes.node,
@@ -52,37 +46,35 @@ const propTypes = {
   onClose: PropTypes.func,
   icon: PropTypes.node,
   direction: String,
-  ref: [Function, Object]
+  ref: [Function, Object],
 };
 const defaultProps = {};
-const vuePropsType = vuePropsMake(propTypes, defaultProps)
+const vuePropsType = vuePropsMake(propTypes, defaultProps);
 
-const ToastList = defineComponent<ToastListProps>((props, {expose}) => {
-  const slots = useSlots()
-
+const ToastList = defineComponent<ToastListProps>((props, { expose }) => {
+  const slots = useSlots();
 
   const state = reactive<ToastListState>({
     list: [],
     removedItems: [],
-    updatedItems: []
-  })
+    updatedItems: [],
+  });
 
-  const {adapter: adapterInject} = useBaseComponent<ToastListProps>(props, state)
+  const { adapter: adapterInject } = useBaseComponent<ToastListProps>(props, state);
 
   function adapter_(): ToastListAdapter {
     return {
       ...adapterInject<ToastListProps, ToastListState>(),
       updateToast: (list: ToastInstance[], removedItems: ToastInstance[], updatedItems: ToastInstance[]) => {
-        state.list = list
-        state.removedItems = removedItems
-        state.updatedItems = updatedItems
+        state.list = list;
+        state.removedItems = removedItems;
+        state.updatedItems = updatedItems;
       },
     };
   }
 
-  const adapter = adapter_()
+  const adapter = adapter_();
   const foundation = new ToastListFoundation(adapter);
-
 
   function has(id: string) {
     return foundation.hasToast(id);
@@ -110,76 +102,72 @@ const ToastList = defineComponent<ToastListProps>((props, {expose}) => {
     update,
     remove,
     destroyAll,
-  })
-
+  });
 
   return () => {
-    let {list} = state;
-    const {removedItems, updatedItems} = state;
+    let { list } = state;
+    const { removedItems, updatedItems } = state;
     list = Array.from(new Set([...list, ...removedItems]));
-    const updatedIds = updatedItems.map(({id}) => id);
+    const updatedIds = updatedItems.map(({ id }) => id);
 
     const refFn = (toast) => {
       if (toast?.foundation?._id && updatedIds.includes(toast.foundation._id)) {
-        toast.foundation.setState({duration: toast.props.duration});
+        toast.foundation.setState({ duration: toast.props.duration });
         toast.foundation.restartCloseTimer();
       }
     };
 
-
     return (
       <Fragment>
         {list.map((item, index) => {
-            return (item.motion ? (
-              <ToastTransition key={item.id || index} motion={item.motion}
-              children={removedItems.find(removedItem => removedItem.id === item.id) ?
-                null :
-                transitionStyle => {
-                  return (
-                    <Toast
-                      {...{
-                        ...item,
-                        style: {...transitionStyle, ...item.style},
-                        close: id => remove(id),
-                        ref: refFn
-                      }}
-                    />
-                  )
-                }}
-              >
-              </ToastTransition>
-            ) : (
-              <Toast
-                {...{
-                  ...item,
-                  style: {...item.style},
-                  close: id => remove(id),
-                  ref: refFn
-                }}
-              />
-            ))
-          }
-        )}
+          const isRemoved = removedItems.find((removedItem) => removedItem.id === item.id) !== undefined;
+          return (
+            <CSSAnimation
+              key={item.id}
+              motion={item.motion}
+              animationState={isRemoved ? 'leave' : 'enter'}
+              startClassName={isRemoved ? `${cssClasses.PREFIX}-animation-hide` : `${cssClasses.PREFIX}-animation-show`}
+              children={({ animationClassName, animationEventsNeedBind, isAnimating }) => {
+                return isRemoved && !isAnimating ? null : (
+                  <Toast
+                    {...item}
+                    className={cls({
+                      [item.className]: Boolean(item.className),
+                      [animationClassName]: true,
+                    })}
+                    {...animationEventsNeedBind}
+                    style={{ ...item.style }}
+                    close={(id) => remove(id)}
+                    ref={refFn}
+                  />
+                );
+              }}
+            >
+            </CSSAnimation>
+          );
+        })}
       </Fragment>
     );
-  }
-})
-ToastList.props = vuePropsType
-ToastList.name = 'ToastList'
-export {
-  ToastList
-}
+  };
+});
+ToastList.props = vuePropsType;
+ToastList.name = 'ToastList';
+export { ToastList };
 
 const createBaseToast = () => {
-  return ToastList
+  return ToastList;
 };
 
-
-
-export type ToastListType = {has: (id: string) => boolean, add: (opts: ToastInstance) => void, update: (id: string, opts: ToastInstance) => void, remove: (id: string) => void, destroyAll: () => void}
+export type ToastListType = {
+  has: (id: string) => boolean;
+  add: (opts: ToastInstance) => void;
+  update: (id: string, opts: ToastInstance) => void;
+  remove: (id: string) => void;
+  destroyAll: () => void;
+};
 export function useToastHook(configProps?: ConfigProps) {
-  let createApp_: App<Element>
-  let ToastListRef: ToastListType
+  let createApp_: App<Element>;
+  let ToastListRef: ToastListType;
   const defaultOpts: ToastReactProps & { motion: Motion } = {
     motion: true,
     zIndex: 1010,
@@ -187,7 +175,7 @@ export function useToastHook(configProps?: ConfigProps) {
   };
   let wrapperId: null | string;
 
-  configProps && config(configProps)
+  configProps && config(configProps);
 
   function create(opts: ToastReactProps) {
     const id = opts.id ?? getUuid('toast');
@@ -199,9 +187,8 @@ export function useToastHook(configProps?: ConfigProps) {
       }
       div.className = cssClasses.WRAPPER;
       div.id = wrapperId;
-      div.style.zIndex = String(typeof opts.zIndex === 'number' ?
-        opts.zIndex : defaultOpts.zIndex);
-      ['top', 'left', 'bottom', 'right'].map(pos => {
+      div.style.zIndex = String(typeof opts.zIndex === 'number' ? opts.zIndex : defaultOpts.zIndex);
+      ['top', 'left', 'bottom', 'right'].map((pos) => {
         if (pos in defaultOpts || pos in opts) {
           const val = opts[pos] ? opts[pos] : defaultOpts[pos];
           div.style[pos] = typeof val === 'number' ? `${val}px` : val;
@@ -214,29 +201,28 @@ export function useToastHook(configProps?: ConfigProps) {
       } else {
         document.body.appendChild(div);
       }
-      createApp_ = createApp(() => createVNode(
-        ToastList,
-        {
+      createApp_ = createApp(() =>
+        createVNode(ToastList, {
           ref: (instance: any) => {
             if (!ToastListRef) {
-              instance.add({...opts, id});
+              instance.add({ ...opts, id });
             }
-            ToastListRef = instance
+            ToastListRef = instance;
           },
-        }
-      ));
-      createApp_.mount(div)
+        })
+      );
+      createApp_.mount(div);
     } else {
       const node = document.querySelector(`#${wrapperId}`) as HTMLElement;
-      ['top', 'left', 'bottom', 'right'].map(pos => {
+      ['top', 'left', 'bottom', 'right'].map((pos) => {
         if (pos in opts) {
           node.style[pos] = typeof opts[pos] === 'number' ? `${opts[pos]}px` : opts[pos];
         }
       });
       if (ToastListRef.has(id)) {
-        ToastListRef.update(id, {...opts, id});
+        ToastListRef.update(id, { ...opts, id });
       } else {
-        ToastListRef.add({...opts, id});
+        ToastListRef.add({ ...opts, id });
       }
     }
     return id;
@@ -252,7 +238,7 @@ export function useToastHook(configProps?: ConfigProps) {
     if (ToastListRef) {
       ToastListRef.destroyAll();
       const wrapper = document.querySelector(`#${wrapperId}`);
-      createApp_.unmount()
+      createApp_.unmount();
       // ReactDOM.unmountComponentAtNode(wrapper);
       wrapper && wrapper.parentNode.removeChild(wrapper);
       ToastListRef = null;
@@ -266,34 +252,34 @@ export function useToastHook(configProps?: ConfigProps) {
 
   function info(opts: Omit<ToastReactProps, 'type'> | string) {
     if (typeof opts === 'string') {
-      opts = {content: opts};
+      opts = { content: opts };
     }
-    return create({...defaultOpts, ...opts, type: 'info'});
+    return create({ ...defaultOpts, ...opts, type: 'info' });
   }
 
   function warning(opts: Omit<ToastReactProps, 'type'> | string) {
     if (typeof opts === 'string') {
-      opts = {content: opts};
+      opts = { content: opts };
     }
-    return create({...defaultOpts, ...opts, type: 'warning'});
+    return create({ ...defaultOpts, ...opts, type: 'warning' });
   }
 
   function error(opts: Omit<ToastReactProps, 'type'> | string) {
     if (typeof opts === 'string') {
-      opts = {content: opts};
+      opts = { content: opts };
     }
-    return create({...defaultOpts, ...opts, type: 'error'});
+    return create({ ...defaultOpts, ...opts, type: 'error' });
   }
 
   function success(opts: Omit<ToastReactProps, 'type'> | string) {
     if (typeof opts === 'string') {
-      opts = {content: opts};
+      opts = { content: opts };
     }
-    return create({...defaultOpts, ...opts, type: 'success'});
+    return create({ ...defaultOpts, ...opts, type: 'success' });
   }
 
   function config(opts: ConfigProps) {
-    ['top', 'left', 'bottom', 'right'].forEach(pos => {
+    ['top', 'left', 'bottom', 'right'].forEach((pos) => {
       if (pos in opts) {
         defaultOpts[pos] = opts[pos];
       }
@@ -322,10 +308,8 @@ export function useToastHook(configProps?: ConfigProps) {
     config,
 
     useToast,
-  }
+  };
 }
-
-
 
 export class ToastFactory {
   static create(config?: ConfigProps): ReturnType<typeof useToastHook> {
@@ -333,7 +317,4 @@ export class ToastFactory {
   }
 }
 
-
 export default ToastFactory.create();
-
-

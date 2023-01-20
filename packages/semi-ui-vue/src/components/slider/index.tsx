@@ -360,7 +360,6 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
       tipFormatter,
       range
     );
-    const transform = {top: 'translateY(-50%)', left: 'translateX(-50%)'};
     const minClass = cls(cssClasses.HANDLE, {
       [`${cssClasses.HANDLE}-clicked`]: chooseMovePos === 'min' && isDrag,
     });
@@ -391,8 +390,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
                   class={minClass}
                   style={{
                     [stylePos]: `${minPercent * 100}%`,
-                    zIndex: chooseMovePos === 'min' && isDrag ? 2 : 1,
-                    transform: transform[stylePos],
+                    zIndex: chooseMovePos === 'min' && isDrag ? 2 : 1
                   }}
                   onMousedown={e => {
                     foundation.onHandleDown(e, 'min');
@@ -448,8 +446,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
                       class={minClass}
                       style={{
                         [stylePos]: `${minPercent * 100}%`,
-                        zIndex: chooseMovePos === 'min' ? 2 : 1,
-                        transform: transform[stylePos],
+                        zIndex: chooseMovePos === 'min' ? 2 : 1
                       }}
                       onMousedown={e => {
                         foundation.onHandleDown(e, 'min');
@@ -503,8 +500,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
                       class={maxClass}
                       style={{
                         [stylePos]: `${maxPercent * 100}%`,
-                        zIndex: chooseMovePos === 'max' ? 2 : 1,
-                        transform: transform[stylePos],
+                        zIndex: chooseMovePos === 'max' ? 2 : 1
                       }}
                       onMousedown={e => {
                         foundation.onHandleDown(e, 'max');

@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
-import Title from '../Title'
-import Text from '../Text'
-import Paragraph from '../Paragraph'
+import Title from '../title'
+import Text from '../text'
+import Paragraph from '../paragraph'
 import {IconLink} from "@kousum/semi-icons-vue";
 interface ExampleProps {
   name?: string

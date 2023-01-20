@@ -6,7 +6,7 @@ import {
   Fragment,
   CSSProperties,
   reactive,
-  nextTick, onMounted, onUnmounted, isVNode, watch, cloneVNode, provide, inject, watchEffect, isRef, useSlots,
+  nextTick, onMounted, onUnmounted, isVNode, watch, cloneVNode, provide, inject, watchEffect, isRef, useSlots, getCurrentInstance
 } from 'vue'
 import classNames from 'classnames';
 import * as PropTypes from '../PropTypes'
@@ -33,9 +33,7 @@ import Portal from '../_portal';
 import TriangleArrow from './TriangleArrow';
 import TriangleArrowVertical from './TriangleArrowVertical';
 import CSSAnimation from "../_cssAnimation";
-import TooltipTransition from './TooltipStyledTransition';
 import {Motion} from '../_base/base';
-import {DefaultAdapter} from "@douyinfe/semi-foundation/base/foundation";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 
@@ -364,7 +362,7 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
           let popupEl = containerEl.value;
           if (
             (el && !(el as any).contains(e.target) && popupEl && !(popupEl as any).contains(e.target)) ||
-            props.clickTriggerToHide
+            (props.clickTriggerToHide && el && (el as any).contains(e.target))
           ) {
             props.onClickOutSide(e);
             cb();
@@ -513,7 +511,6 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
   //   // this.setState({ visible: true });
   // };
   const didLeave = () => {
-    console.error('didLeave')
     foundation.removePortal();
     foundation.unBindEvent();
   };
@@ -703,7 +700,8 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
   })
   return () => {
 
-    const { isInsert, triggerEventSet, visible, id } = state;
+    // 这里取的话，值可能会被缓存或者可能不是最新的
+    // const { isInsert, triggerEventSet, visible, id } = state;
     const { wrapWhenSpecial, role, trigger } = props;
     let children: any = slots.default ? slots.default()[0] : null;
     const childrenStyle = {...get(children, 'props.style')};
@@ -735,11 +733,11 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
 
     // Take effect when used by Popover component
     if (role === 'dialog') {
-      ariaAttribute['aria-expanded'] = visible ? 'true' : 'false';
+      ariaAttribute['aria-expanded'] = state.visible ? 'true' : 'false';
       ariaAttribute['aria-haspopup'] = 'dialog';
-      ariaAttribute['aria-controls'] = id;
+      ariaAttribute['aria-controls'] = state.id;
     } else {
-      ariaAttribute['aria-describedby'] = id;
+      ariaAttribute['aria-describedby'] = state.id;
     }
 
 
@@ -747,13 +745,13 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
     const newChild = cloneVNode(children, {
       ...ariaAttribute,
       ...children.props,
-      ...mergeEvents((children).props, triggerEventSet),
+      ...mergeEvents((children).props, state.triggerEventSet),
       style: {
         ...get(children, 'props.style'),
         ...extraStyle,
       },
       class: classNames(
-        get(children, 'props.className')
+        get(children, 'props.class')
         // `${prefixCls}-trigger`
       ),
       // to maintain refs with callback
@@ -773,10 +771,8 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
         }
       },
       tabIndex: children.props?.tabIndex || 0, // a11y keyboard, in some condition select's tabindex need to -1 or 0
-      'data-popupid': id
+      'data-popupid': state.id
     });
-
-    //console.log(children.props, {...mergeEvents((children).props, triggerEventSet)})
     // If you do not add a layer of div, in order to bind the events and className in the tooltip, you need to cloneElement children, but this time it may overwrite the children's original ref reference
     // So if the user adds ref to the content, you need to use callback ref: https://github.com/facebook/react/issues/8873
     return (

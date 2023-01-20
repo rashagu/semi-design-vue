@@ -34,7 +34,7 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
         footer={{
           collapseButton: true,
         }}
-        // isCollapsed={isCollapsed.value}
+        isCollapsed={isCollapsed.value}
         bodyStyle={{height: 320}}
         items={[
           {itemKey: 'user', text: '用户管理', icon: <IconUser/>},
@@ -52,6 +52,7 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
         }}
         onCollapseChange={(val)=>{
           console.log(val)
+          isCollapsed.value = val
         }}
         openKeys={openKeys.value}
         onSelect={data => console.log('trigger onSelect: ', data)}

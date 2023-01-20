@@ -214,6 +214,7 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
 })
 
 CheckboxGroup.props = vuePropsType
+CheckboxGroup.name = 'CheckboxGroup'
 
 export default CheckboxGroup
 

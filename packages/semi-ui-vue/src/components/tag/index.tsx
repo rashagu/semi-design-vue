@@ -176,6 +176,7 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
 })
 
 Index.props = vuePropsType
+Index.name = 'Tag'
 
 export default Index
 

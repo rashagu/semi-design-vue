@@ -66,6 +66,9 @@ export default defineConfig({
       // options are passed on to @vue/babel-plugin-jsx
     }),
   ],
+  optimizeDeps: {
+    needsInterop: [],
+  },
   resolve: {
     alias: [
       {find: /^~/, replacement: ''},

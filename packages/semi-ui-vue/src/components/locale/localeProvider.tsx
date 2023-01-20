@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
 import DefaultLocale from './source/zh_CN';
-import LocaleContext from './Context';
+import LocaleContext from './context';
 import { Locale } from './interface';
 
 interface ExampleProps {

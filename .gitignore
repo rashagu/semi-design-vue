@@ -9,3 +9,5 @@ dist-ssr
 coverage/
 .idea
 *.log
+/.npmrc
+/docs/
