@@ -119,7 +119,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 
 - [x] Avatar
 - [x] Badge
-- [ ] Calendar
+- [x] Calendar
 - [x] Card
 - [x] Carousel
 - [x] Collapse

@@ -81,6 +81,7 @@ import SideSheetDemo from "./components/sideSheet/__test__/SideSheetDemo";
 import TimelineDemo from "./components/timeline/__test__/TimelineDemo";
 import HighlightDemo from "./components/highlight/__test__/HighlightDemo";
 import TransferDemo from "./components/transfer/__test__/TransferDemo";
+import CalenderDemo from "./components/calendar/__test__/CalenderDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -100,7 +101,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <TransferDemo/>
+        <CalenderDemo />
+        {/*<TransferDemo/>*/}
         {/*<HighlightDemo />*/}
         {/*<TimelineDemo/>*/}
         {/*<SideSheetDemo />*/}
