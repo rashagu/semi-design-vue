@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
 import Avatar from '../index'
-import AvatarGroup from '../AvatarGroup'
+import AvatarGroup from '../avatarGroup'
 
 interface ExampleProps {
   name?: string
