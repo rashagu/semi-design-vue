@@ -1,4 +1,5 @@
-import { noop } from '@douyinfe/semi-foundation/utils/function';
+import Provider from "./context/Provider";
+import Consumer from "./context/Consumer";
 
 export interface ContextType{
     siderHook: {
@@ -8,10 +9,8 @@ export interface ContextType{
 }
 
 const LayoutContext = {
-    siderHook: {
-        addSider: noop,
-        removeSider: noop,
-    },
+    Provider,
+    Consumer
 }
 
 export default LayoutContext;

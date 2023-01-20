@@ -8,7 +8,7 @@ interface TreeDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const TreeDemo = defineComponent<TreeDemoProps>((props, {}) => {
+const TransferTreeDemo = defineComponent<TreeDemoProps>((props, {}) => {
   const slots = useSlots();
 
   const treeData = [
@@ -84,14 +84,18 @@ const TreeDemo = defineComponent<TreeDemoProps>((props, {}) => {
   ];
 
   const v = ref<any[]>(['Shanghai']);
+  function onChange(val: (string | number)[]) {
+    console.log(val)
+    v.value = val
+  }
   return () => (
     <div style={{ margin: 10, padding: 10, width: 600 }}>
-      <Transfer dataSource={treeData} type="treeList" value={v.value} onChange={(val) => (v.value = val)}></Transfer>
+      <Transfer dataSource={treeData} type="treeList" value={v.value} onChange={onChange}></Transfer>
     </div>
   );
 });
 
-TreeDemo.props = vuePropsType;
-TreeDemo.name = 'TreeDemo';
+TransferTreeDemo.props = vuePropsType;
+TransferTreeDemo.name = 'TransferTreeDemo';
 
-export default TreeDemo;
+export default TransferTreeDemo;

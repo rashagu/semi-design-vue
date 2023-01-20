@@ -11,7 +11,7 @@ export { default as Icon } from './icons';
 export { default as Popover } from './popover';
 export { default as Space } from './space';
 export { default as Spin } from './spin';
-export { default as SplitButtonGroup } from './button/SplitButtonGroup';
+export { default as SplitButtonGroup } from './button/splitButtonGroup';
 export { default as Tooltip } from './tooltip';
 export { default as LocaleProvider } from './locale/localeProvider';
 

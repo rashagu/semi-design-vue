@@ -1,7 +1,7 @@
-import BaseTypography from './Typography';
-import Text from './Text';
-import Title from './Title';
-import Paragraph from './Paragraph';
+import BaseTypography from './typography';
+import Text from './text';
+import Title from './title';
+import Paragraph from './paragraph';
 
 export type TypographyType = typeof BaseTypography & {
     Text: typeof Text;

@@ -2,7 +2,7 @@ import {defineComponent, ref, h, StyleValue, onUnmounted, watch, reactive} from 
 import cls from 'classnames';
 import { cssClasses as css, strings } from '@douyinfe/semi-foundation/spin/constants';
 import SpinFoundation from '@douyinfe/semi-foundation/spin/foundation';
-import SpinIcon from './Icon';
+import SpinIcon from './icon';
 import '@douyinfe/semi-foundation/spin/spin.scss';
 import {useBaseComponent} from "../_base/baseComponent";
 

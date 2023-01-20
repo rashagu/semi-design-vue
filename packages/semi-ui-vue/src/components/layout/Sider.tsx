@@ -4,6 +4,7 @@ import {cssClasses, strings} from '@douyinfe/semi-foundation/layout/constants';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import {registerMediaQuery} from '../_utils/index';
 import LayoutContext from "./layoutContext";
+import {useLayoutContext} from "./context/Consumer";
 
 export interface ResponsiveMap {
   xs: string;
@@ -62,7 +63,7 @@ const Sider = defineComponent<SiderProps>((props, {slots}) => {
 
   let unRegisters: Array<() => void> = [];
   const uniqueId = generateId();
-  const context = inject<any>('LayoutContext', LayoutContext)
+  const {context} = useLayoutContext()
 
   onMounted(()=>{
     const { breakpoint } = props;
@@ -77,8 +78,8 @@ const Sider = defineComponent<SiderProps>((props, {slots}) => {
     }));
     unRegisters = unRegisters_;
 
-    if (context.siderHook) {
-      context.siderHook.addSider(uniqueId);
+    if (context.value.siderHook) {
+      context.value.siderHook.addSider(uniqueId);
     }
   })
 

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/button/constants';
 import {strings as iconStrings} from '@douyinfe/semi-foundation/icons/constants';
 import Button, {Theme, ButtonProps, Size, Type} from '../button/Button';
-import SpinIcon from '../spin/Icon';
+import SpinIcon from '../spin/icon';
 import {noop} from 'lodash';
 import '@douyinfe/semi-foundation/button/iconButton.scss';
 

@@ -38,7 +38,7 @@ import { calcCheckedKeys, normalizeKeyList, calcDisabledKeys } from '@douyinfe/s
 import {getProps, useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import Input from '../input';
 import Popover, { PopoverProps } from '../popover';
-import Item, { CascaderData, Entities, Entity, Data, FilterRenderProps } from './Item';
+import Item, { CascaderData, Entities, Entity, Data, FilterRenderProps } from './item';
 import Trigger from '../trigger';
 import Tag from '../tag';
 import TagInput, {TagInputProps} from '../tagInput';
@@ -50,7 +50,7 @@ import {vuePropsMake} from "../PropTypes";
 import {VueJsxNode} from "../interface";
 
 export type { CascaderType, ShowNextType } from '@douyinfe/semi-foundation/cascader/foundation';
-export type { CascaderData, Entity, Data, CascaderItemProps, FilterRenderProps } from './Item';
+export type { CascaderData, Entity, Data, CascaderItemProps, FilterRenderProps } from './item';
 
 export interface ScrollPanelProps extends BasicScrollPanelProps {
   activeNode: CascaderData;

@@ -12,8 +12,8 @@ import {
 } from 'vue'
 import cls from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/typography/constants';
-import Typography from './Typography';
-import Copyable from './Copyable';
+import Typography from './typography';
+import Copyable from './copyable';
 import {IconSize as Size} from '../icons';
 import {isUndefined, omit, merge, isString} from 'lodash';
 import Tooltip from '../tooltip';
@@ -24,7 +24,7 @@ import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 import LocaleConsumer_ from '../locale/localeConsumer';
 import {Locale} from '../locale/interface';
 import {Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseType} from './interface';
-import {CopyableConfig, LinkType} from './Title';
+import {CopyableConfig, LinkType} from './title';
 import {BaseProps} from '../_base/baseComponent';
 import {isSemiIcon} from '../_utils/index';
 

@@ -3,7 +3,7 @@ import Transfer from "../index";
 import {IconClose} from "@kousum/semi-icons-vue";
 import {Avatar} from "../../index";
 import {Checkbox} from "../../checkbox";
-import TreeDemo from "./TreeDemo";
+import TransferTreeDemo from "./TransferTreeDemo";
 
 interface TransferDemoProps {
   name?: string
@@ -136,7 +136,7 @@ const TransferDemo = defineComponent<TransferDemoProps>((props, {}) => {
       {/*  inputProps={{ placeholder: '搜索姓名或邮箱' }}*/}
       {/*  onChange={(values, items) => console.log(values, items)}*/}
       {/*/>*/}
-      <TreeDemo/>
+      <TransferTreeDemo/>
     </div>
   )
 })

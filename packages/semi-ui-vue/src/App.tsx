@@ -82,6 +82,7 @@ import TimelineDemo from "./components/timeline/__test__/TimelineDemo";
 import HighlightDemo from "./components/highlight/__test__/HighlightDemo";
 import TransferDemo from "./components/transfer/__test__/TransferDemo";
 import CalenderDemo from "./components/calendar/__test__/CalenderDemo";
+import TransferTreeDemo from "./components/transfer/__test__/TransferTreeDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -101,8 +102,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <CalenderDemo />
+        {/*<CalenderDemo />*/}
         {/*<TransferDemo/>*/}
+        {/*<TransferTreeDemo />*/}
         {/*<HighlightDemo />*/}
         {/*<TimelineDemo/>*/}
         {/*<SideSheetDemo />*/}
@@ -188,10 +190,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DropdownDemo1/>*/}
         {/*<br/>*/}
         {/*<GridTest />*/}
-        {/*<LayoutTest/>*/}
+        <LayoutTest/>
         {/*<SpaceTest/>*/}
         {/*<PopoverTest />*/}
-        {/*<NavigationDemo />*/}
+        <NavigationDemo />
         <div class={'aa'}>123</div>
       </ConfigProvider>
     </div>

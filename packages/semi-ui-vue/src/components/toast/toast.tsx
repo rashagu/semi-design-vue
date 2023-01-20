@@ -31,6 +31,8 @@ export interface ToastReactProps extends ToastProps {
     style?: CSSProperties;
     icon?: VueJsxNode;
     content: VueJsxNode;
+    onAnimationEnd?: (e: AnimationEvent) => void;
+    onAnimationStart?: (e: AnimationEvent) => void
 }
 
 const propTypes = {
@@ -129,8 +131,10 @@ const Toast = defineComponent<ToastReactProps>((props, {expose}) => {
     //     console.log('toast 销毁')
     // })
 
+    // TODO
     expose({
-        foundation
+        foundation,
+        close
     })
     return () => {
         const { content, type, theme, showClose, textMaxWidth, className, style } = props;
@@ -153,6 +157,8 @@ const Toast = defineComponent<ToastReactProps>((props, {expose}) => {
             style={style}
             onMouseenter={clearCloseTimer}
             onMouseleave={startCloseTimer}
+            onAnimationstart={props.onAnimationStart}
+            onAnimationend={props.onAnimationEnd}
           >
               <div class={`${prefixCls}-content`}>
                   {renderIcon()}

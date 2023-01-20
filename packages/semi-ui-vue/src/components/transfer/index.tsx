@@ -226,11 +226,10 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
   function getDerivedStateFromProps(props: TransferProps) {
     const { value, dataSource, type, filter } = props;
     const mergedState = {} as TransferState;
-    let newData = state.data;
+    let newData:ResolvedDataItem[] = state.data as any;
     let newSelectedItems = state.selectedItems;
     if (Boolean(dataSource) && Array.isArray(dataSource)) {
       newData = _generateDataByType(dataSource, type);
-      // @ts-ignore
       mergedState.data = newData;
     }
     if (Boolean(value) && Array.isArray(value)) {
@@ -263,6 +262,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
       () => props.filter,
     ],
     (value, oldValue, onCleanup) => {
+
       if (!isEqual(value, oldValue)){
         const newState = getDerivedStateFromProps(props);
         if (newState) {
@@ -271,7 +271,8 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
           });
         }
       }
-    }
+    },
+    {immediate: true}
   );
   const { adapter: adapterInject } = useBaseComponent<TransferProps>(props, state);
   function adapter_(): TransferAdapter<TransferProps, TransferState> {
@@ -419,6 +420,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
     const totalToken = locale.total;
     const inSearchMode = inputValue !== '';
     const showNumber = inSearchMode ? searchResult.size : data.length;
+    // @ts-ignore
     const filterData = inSearchMode ? data.filter((item) => searchResult.has(item.key)) : data;
     // Whether to select all should be a judgment, whether the filtered data on the left is a subset of the selected items
     // For example, the filtered data on the left is 1, 3, 4;

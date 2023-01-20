@@ -29,20 +29,15 @@ import {Motion} from '../_base/base';
 import {vuePropsMake} from "../PropTypes";
 import LocaleConsumer_ from "../locale/localeConsumer";
 const LocaleConsumer = LocaleConsumer_()
-import type {CollapseButtonProps} from './CollapseButton';
 import type {NavFooterProps} from './Footer';
 import type {NavHeaderProps} from './Header';
 import type {NavItemProps} from './Item';
-import type {OpenIconTransitionProps} from './OpenIconTransition';
 import type {ToggleIcon, SubNavProps} from './SubNav';
-import type {SubNavTransitionProps} from './SubNavTransition';
 export type Mode = 'vertical' | 'horizontal';
 export {
   NavFooterProps,
   NavHeaderProps,
-  OpenIconTransitionProps,
   ToggleIcon, SubNavProps,
-  SubNavTransitionProps
 }
 
 export interface OnSelectedData {

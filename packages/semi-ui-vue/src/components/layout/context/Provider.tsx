@@ -1,22 +1,22 @@
 import {defineComponent, ref, h, Fragment, provide, watch} from 'vue'
-import {CheckboxContext} from "../context";
+import {ContextType} from "../layoutContext";
 
 
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:CheckboxContext}>((props, {slots}) => {
-  const ConfigContext = ref<CheckboxContext>(props.value);
+const Provider = defineComponent<{value:ContextType}>((props, {slots}) => {
+  const ConfigContext = ref<ContextType>(props.value);
 
   watch(()=>props.value, ()=>{
     ConfigContext.value = props.value
   }, { deep: true})
-  provide('CheckboxContext', ConfigContext)
+  provide('LayoutContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
 })
 
 Provider.props = vuePropsType
-Provider.name = 'CheckboxContextProvider'
+Provider.name = 'ConfigProvider'
 
 export default Provider
 

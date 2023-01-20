@@ -1,8 +1,8 @@
 import {defineComponent, ref, h, Fragment, HTMLAttributes, CSSProperties} from 'vue'
 import { strings } from '@douyinfe/semi-foundation/typography/constants';
-import Base from './Base';
+import Base from './base';
 import { Ellipsis, TypographyBaseSize, TypographyBaseType, OmitTypographyProps } from './interface';
-import { CopyableConfig, LinkType } from './Title';
+import { CopyableConfig, LinkType } from './title';
 
 type OmitTextProps = OmitTypographyProps;
 

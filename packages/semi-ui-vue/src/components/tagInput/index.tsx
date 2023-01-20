@@ -29,7 +29,7 @@ import {useBaseComponent} from '../_base/baseComponent';
 import Tag from '../tag';
 import Input from '../input';
 import Popover, {PopoverProps} from '../popover';
-import Paragraph from '../typography/Paragraph';
+import Paragraph from '../typography/paragraph';
 import {IconClear, IconHandle} from '@kousum/semi-icons-vue';
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";

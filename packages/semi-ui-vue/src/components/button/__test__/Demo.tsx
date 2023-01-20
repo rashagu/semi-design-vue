@@ -3,7 +3,7 @@ import Button from '../index';
 import ButtonGroup from '../ButtonGroup';
 import IconButton from "../../iconButton";
 import {IconCamera, IconClose, IconDelete, IconEdit, IconTreeTriangleDown} from "@kousum/semi-icons-vue";
-import SplitButtonGroup from "../SplitButtonGroup";
+import SplitButtonGroup from "../splitButtonGroup";
 import Dropdown, {DropDownMenuItem} from "../../dropdown";
 
 

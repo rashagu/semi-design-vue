@@ -33,9 +33,7 @@ import Portal from '../_portal';
 import TriangleArrow from './TriangleArrow';
 import TriangleArrowVertical from './TriangleArrowVertical';
 import CSSAnimation from "../_cssAnimation";
-import TooltipTransition from './TooltipStyledTransition';
 import {Motion} from '../_base/base';
-import {DefaultAdapter} from "@douyinfe/semi-foundation/base/foundation";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 

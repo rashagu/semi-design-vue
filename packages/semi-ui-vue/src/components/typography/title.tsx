@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment, VNode, CSSProperties} from 'vue'
 import { strings } from '@douyinfe/semi-foundation/typography/constants';
-import Base from './Base';
+import Base from './base';
 import { Ellipsis, TypographyBaseType, OmitTypographyProps } from './interface';
 import { ArrayElement } from '@douyinfe/semi-foundation/utils/type';
 
