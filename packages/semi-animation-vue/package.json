@@ -40,6 +40,11 @@
   "peerDependencies": {
     "vue": ">=3.2.45"
   },
+  "sideEffects": [
+    "*.scss",
+    "*.css",
+    "lib/index.js"
+  ],
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/plugin-proposal-decorators": "^7.17.2",
