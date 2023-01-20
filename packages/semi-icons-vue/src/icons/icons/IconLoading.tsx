@@ -14,7 +14,7 @@ const SvgComponent = defineComponent((props, { slots }) => {
       aria-hidden={true}
       {...props}
     >
-      <g clip-path="url(#clip0)">
+      <g clip-path="url(#clip_loading)">
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -23,9 +23,9 @@ const SvgComponent = defineComponent((props, { slots }) => {
         />
       </g>
       <defs>
-        <clip-path id="clip0">
+        <clipPath id="clip_loading">
           <rect width={24} height={24} fill="currentColor" />
-        </clip-path>
+        </clipPath>
       </defs>
     </svg>
   );

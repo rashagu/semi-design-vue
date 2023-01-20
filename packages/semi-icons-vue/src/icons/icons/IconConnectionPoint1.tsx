@@ -14,26 +14,21 @@ const SvgComponent = defineComponent((props, { slots }) => {
       aria-hidden={true}
       {...props}
     >
-      <g clip-path="url(#clip_triangle_arrow)">
-        <path
-          d="M24 9L24 10C20 10 18.5 11 16.5 13C14.5 15 14 16 12 16C10 16 9.5 15 7.5 13C5.5 11 4 10 -4.37115e-08 10L0 9L24 9Z"
-          fill="currentColor"
-        />
-      </g>
-      <defs>
-        <clipPath id="clip_triangle_arrow">
-          <rect width={24} height={24} fill="currentColor" transform="translate(24) rotate(90)" />
-        </clipPath>
-      </defs>
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M1 3C1 1.89543 1.89543 1 3 1H21C22.1045 1 23 1.89543 23 3V9C23 10.1046 22.1045 11 21 11H7.5V15C7.5 15.8284 8.17157 16.5 9 16.5H13V15C13 13.8954 13.8954 13 15 13H21C22.1046 13 23 13.8954 23 15V21C23 22.1046 22.1046 23 21 23H15C13.8954 23 13 22.1046 13 21V19.5H9C6.51472 19.5 4.5 17.4853 4.5 15V11H3C1.89543 11 1 10.1046 1 9V3Z"
+        fill="currentColor"
+      />
     </svg>
   );
 });
 const IconComponent = defineComponent<IconProps>({
-  name: 'IconTriangleArrow',
+  name: 'IconConnectionPoint1',
 
   setup(props, { slots }) {
     return () => (
-      <ConvertIcon iconType={'triangle_arrow'} {...props}>
+      <ConvertIcon iconType={'connection_point_1'} {...props}>
         {{
           default: () => <SvgComponent />,
         }}

@@ -2,7 +2,7 @@ import {defineComponent, ref, h, Fragment, VNode, inject, Ref} from 'vue'
 import { Locale as dateFns } from 'date-fns';
 
 import { get } from 'lodash';
-import LocaleContext from './Context';
+import LocaleContext from './context';
 import Context, {ContextValue} from '../configProvider/context';
 
 import DefaultLocale from './source/zh_CN';

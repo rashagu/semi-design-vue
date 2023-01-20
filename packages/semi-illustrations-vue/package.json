@@ -22,7 +22,7 @@
     "vue": "^3.2.45"
   },
   "peerDependencies": {
-    "vue": ">=3.2.41"
+    "vue": ">=3.2.45"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.17.2",

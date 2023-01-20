@@ -48,13 +48,13 @@
     "vue": "^3.2.45"
   },
   "peerDependencies": {
-    "vue": ">=3.2.41"
+    "vue": ">=3.2.45"
   },
   "sideEffects": [
     "*.scss",
     "*.css",
     "dist/index.js",
-    "./index.ts"
+    "./src/component/index.ts"
   ],
   "devDependencies": {
     "@types/lodash": "^4.14.178",
