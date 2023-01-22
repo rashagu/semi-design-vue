@@ -1,5 +1,5 @@
 import { computed, defineComponent, h, ref, Teleport, VNode, watch } from 'vue';
-import Table_, { TableComponents } from '../index';
+import {TableMaker, TableComponents } from '../index';
 import Avatar from '../../avatar';
 import {
   closestCenter,
@@ -94,7 +94,7 @@ for (let i = 0; i < 46; i++) {
   const isSemiDesign = i % 2 === 0;
   const randomNumber = (i * 1000) % 199;
   initData.push({
-    id: i,
+    id: ''+i,
     key: '' + i,
     name: isSemiDesign ? `Semi Design 设计稿${i}.fig` : `Semi Pro 设计稿${i}.fig`,
     owner: isSemiDesign ? '姜鹏志' : '郝宣',
@@ -107,7 +107,7 @@ for (let i = 0; i < 46; i++) {
 export const vuePropsType = {
   name: String,
 };
-const Table = Table_();
+const Table = TableMaker();
 const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -127,11 +127,11 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
     const { active, over } = event;
 
     if (active && over && active.id !== over?.id) {
-      const oldIndex = pageData.value.findIndex(item => item.id === +active.id);
-      const newIndex = pageData.value.findIndex(item => item.id === +over.id);
+      const oldIndex = pageData.value.findIndex(item => item.id === active.id);
+      const newIndex = pageData.value.findIndex(item => item.id === over.id);
       pageData.value = arrayMove(pageData.value, oldIndex, newIndex);
       const newData = Array.from(data.value);
-      newData.splice((currentPage.value - 1) * PAGE_SIZE, 0, ...pageData.value);
+      newData.splice((currentPage.value - 1) * PAGE_SIZE, PAGE_SIZE, ...pageData.value);
       data.value = newData;
     }
   }
@@ -142,7 +142,7 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
   const tableDragOverlayRef = ref();
   function onDragStart(event: DragEndEvent) {
     const { active, over } = event;
-    dragIngIndex.value = active.id;
+    dragIngIndex.value = +active.id;
   }
 
   watch(
@@ -182,7 +182,6 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
   };
 
   const handlePageChange = pageNum => {
-    console.log(pageNum);
     currentPage.value = pageNum;
     pageData.value = data.value.slice((pageNum - 1) * PAGE_SIZE, pageNum * PAGE_SIZE);
   };
@@ -198,7 +197,7 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
   };
 
   const SortableData = computed(() => {
-    return pageData.value.slice((currentPage.value - 1) * 5, (currentPage.value - 1) * 5 + 5);
+    return data.value.slice((currentPage.value - 1) * PAGE_SIZE, currentPage.value * PAGE_SIZE);
   });
   return () => {
     return (
@@ -209,7 +208,7 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
           onDragEnd={handleDragEnd}
           onDragStart={onDragStart}
         >
-          <SortableContext items={SortableData.value} strategy={verticalListSortingStrategy}>
+          <SortableContext items={pageData.value} strategy={verticalListSortingStrategy}>
             <Table
               id={'table_asd'}
               columns={columns}

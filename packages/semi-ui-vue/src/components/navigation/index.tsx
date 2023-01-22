@@ -37,9 +37,10 @@ export type Mode = 'vertical' | 'horizontal';
 export {
   NavFooterProps,
   NavHeaderProps,
-  ToggleIcon, SubNavProps,
+  ToggleIcon,
+  SubNavProps,
+  NavItemProps,
 }
-
 export interface OnSelectedData {
   itemKey: string | number;
   selectedKeys: (string | number)[];

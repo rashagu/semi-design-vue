@@ -20,9 +20,9 @@ import {omit} from "lodash";
 interface SortableItemProps {
   id: number | string,
   moveRow: any,
-  index: number,
+  index?: number,
   style:any,
-  componentsTag: string
+  componentsTag?: string
 }
 
 export const vuePropsType = {

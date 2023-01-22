@@ -57,8 +57,8 @@ const SortableDemo1 = defineComponent<Demo1Props>((props, {}) => {
     const {active, over} = event;
 
     if (active && over && active.id !== over?.id) {
-      const oldIndex = items.value.indexOf(+active.id);
-      const newIndex = items.value.indexOf(+over!.id);
+      const oldIndex = items.value.indexOf(active.id);
+      const newIndex = items.value.indexOf(over.id);
       setItems(arrayMove(items.value, oldIndex, newIndex));
     }
   }

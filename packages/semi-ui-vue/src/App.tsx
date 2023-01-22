@@ -83,6 +83,8 @@ import HighlightDemo from "./components/highlight/__test__/HighlightDemo";
 import TransferDemo from "./components/transfer/__test__/TransferDemo";
 import CalenderDemo from "./components/calendar/__test__/CalenderDemo";
 import TransferTreeDemo from "./components/transfer/__test__/TransferTreeDemo";
+import TableDemo10 from "./components/table/__test__/TableDemo10";
+import TableDemo11 from "./components/table/__test__/TableDemo11";
 export interface ExampleProps {
   name?: string
 }
@@ -127,7 +129,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TableDemo2 />*/}
         {/*<TableDemo3 />*/}
         {/*<TableDemo4 />*/}
-        {/*<TableDemo5 />*/}
+        <TableDemo5 />
         {/*<TableDemo6 />*/}
         {/*<TableDemo7 />*/}
         {/*<TableDemo8 />*/}
@@ -190,10 +192,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DropdownDemo1/>*/}
         {/*<br/>*/}
         {/*<GridTest />*/}
-        <LayoutTest/>
+        {/*<LayoutTest/>*/}
         {/*<SpaceTest/>*/}
         {/*<PopoverTest />*/}
-        <NavigationDemo />
+        {/*<NavigationDemo />*/}
         <div class={'aa'}>123</div>
       </ConfigProvider>
     </div>

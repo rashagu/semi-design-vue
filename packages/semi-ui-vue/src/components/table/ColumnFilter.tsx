@@ -1,5 +1,4 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable eqeqeq */
+
 import cls from 'classnames';
 import {noop, omit} from 'lodash';
 import { IconFilter } from '@kousum/semi-icons-vue';

@@ -40,13 +40,13 @@ function Table<RecordType extends Record<string, any> = Data>() {
   return Table
 }
 
-export default Table;
 
 const Table_ = Table()
+export default Table_;
 const DEFAULT_KEY_COLUMN_SELECTION = strings.DEFAULT_KEY_COLUMN_SELECTION
 const DEFAULT_KEY_COLUMN_EXPAND = strings.DEFAULT_KEY_COLUMN_EXPAND;
 export {
-  Table_ as Table,
+  Table as TableMaker,
   Column as TableColumn,
   DEFAULT_KEY_COLUMN_SELECTION,
   DEFAULT_KEY_COLUMN_EXPAND

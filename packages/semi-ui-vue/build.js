@@ -52,8 +52,6 @@ gulp.task('buildSS', async function moveScss() {
       },
       plugins: [
         vue(),
-
-        // @ts-ignore
         vueJsx({
           // options are passed on to @vue/babel-plugin-jsx
         }),

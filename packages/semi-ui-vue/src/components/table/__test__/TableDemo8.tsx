@@ -1,5 +1,5 @@
 import { defineComponent, ref, h, Fragment, useSlots, computed, onMounted } from 'vue';
-import Table_, {ColumnProps, RowSelection, TableColumn} from '../index';
+import {TableMaker, ColumnProps, RowSelection, TableColumn} from '../index';
 import Avatar from '../../avatar';
 import { IconMore } from '@kousum/semi-icons-vue';
 import { IllustrationNoResult, IllustrationNoResultDark } from '@kousum/semi-illustrations-vue';
@@ -19,7 +19,7 @@ export const vuePropsType = {
   name: String,
 };
 interface ColType {key: string, name: string, nameIconSrc: string, size: string, owner: string, updateTime: string, avatarBg: string}
-const Table = Table_<ColType>();
+const Table = TableMaker<ColType>();
 const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
 
   const DAY = 24 * 60 * 60 * 1000;

@@ -1,5 +1,5 @@
 import { defineComponent, ref, h, Fragment, useSlots, computed, onMounted } from 'vue';
-import Table_, { RowSelection, TableColumn } from '../index';
+import {TableMaker, RowSelection, TableColumn } from '../index';
 import Avatar from '../../avatar';
 import { IconMore } from '@kousum/semi-icons-vue';
 import { IllustrationNoResult, IllustrationNoResultDark } from '@kousum/semi-illustrations-vue';
@@ -108,7 +108,7 @@ interface ColType {
   updateTime: number;
   key: string;
 }
-const Table = Table_<ColType>();
+const Table = TableMaker<ColType>();
 const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
   const dataSource = ref<ColType[]>([]);
   const loading = ref(false);

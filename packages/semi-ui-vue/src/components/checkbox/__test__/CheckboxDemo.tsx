@@ -1,6 +1,7 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
 import Checkbox from '../index'
 import {CheckboxGroup} from "../index";
+import ContrlDemo from "./ContrlDemo";
 interface ExampleProps {
   name?: string
 }
@@ -28,20 +29,21 @@ const CheckboxDemo = defineComponent<ExampleProps>((props, {}) => {
   ];
   return () => (
     <div>
-      <Checkbox onChange={checked => console.log(checked)} aria-label="Checkbox 示例">Semi Design</Checkbox>
-      <div>
-        <CheckboxGroup options={plainOptions} defaultValue={['抖音']} onChange={onChange} aria-label="CheckboxGroup 示例" />
-        <br/><br/>
-        <CheckboxGroup options={options} defaultValue={[]} onChange={onChange} aria-label="CheckboxGroup 示例" />
-        <br/><br/>
-        <CheckboxGroup
-          options={optionsWithDisabled}
-          disabled
-          defaultValue={['Photography']}
-          onChange={onChange}
-          aria-label="Checkbox 示例"
-        />
-      </div>
+      <ContrlDemo />
+      {/*<Checkbox onChange={checked => console.log(checked)} aria-label="Checkbox 示例">Semi Design</Checkbox>*/}
+      {/*<div>*/}
+      {/*  <CheckboxGroup options={plainOptions} defaultValue={['抖音']} onChange={onChange} aria-label="CheckboxGroup 示例" />*/}
+      {/*  <br/><br/>*/}
+      {/*  <CheckboxGroup options={options} defaultValue={[]} onChange={onChange} aria-label="CheckboxGroup 示例" />*/}
+      {/*  <br/><br/>*/}
+      {/*  <CheckboxGroup*/}
+      {/*    options={optionsWithDisabled}*/}
+      {/*    disabled*/}
+      {/*    defaultValue={['Photography']}*/}
+      {/*    onChange={onChange}*/}
+      {/*    aria-label="Checkbox 示例"*/}
+      {/*  />*/}
+      {/*</div>*/}
     </div>
   )
 })

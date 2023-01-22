@@ -1,5 +1,5 @@
 import { defineComponent, ref, h, Fragment, useSlots, computed, onMounted } from 'vue';
-import Table_, {ColumnProps, RowSelection, TableColumn} from '../index';
+import Table, {ColumnProps, RowSelection, TableColumn} from '../index';
 import Avatar from '../../avatar';
 import { IconMore } from '@kousum/semi-icons-vue';
 import { IllustrationNoResult, IllustrationNoResultDark } from '@kousum/semi-illustrations-vue';
@@ -95,7 +95,6 @@ const data = getData();
 export const vuePropsType = {
   name: String,
 };
-const Table = Table_();
 const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
 
   return () => {

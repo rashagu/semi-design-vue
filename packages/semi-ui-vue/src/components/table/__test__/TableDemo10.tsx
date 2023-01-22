@@ -1,5 +1,5 @@
 import { defineComponent, ref, h, Fragment, useSlots, computed, onMounted } from 'vue';
-import Table_, {ColumnProps, RowSelection, TableColumn} from '../index';
+import Table, {ColumnProps, RowSelection, TableColumn} from '../index';
 import Avatar from '../../avatar';
 import { IconMore } from '@kousum/semi-icons-vue';
 import { IllustrationNoResult, IllustrationNoResultDark } from '@kousum/semi-illustrations-vue';
@@ -18,7 +18,6 @@ interface TableDemo1Props {
 export const vuePropsType = {
   name: String,
 };
-const Table = Table_();
 const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
   const DAY = 24 * 60 * 60 * 1000;
   const figmaIconUrl = 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/figma-icon.png';

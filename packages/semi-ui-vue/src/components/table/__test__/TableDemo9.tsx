@@ -1,5 +1,5 @@
 import { defineComponent, ref, h, Fragment, useSlots, computed, onMounted } from 'vue';
-import Table_, {ColumnProps, RowSelection, TableColumn} from '../index';
+import {TableMaker, ColumnProps, RowSelection, TableColumn} from '../index';
 import Avatar from '../../avatar';
 import { IconMore } from '@kousum/semi-icons-vue';
 import { IllustrationNoResult, IllustrationNoResultDark } from '@kousum/semi-illustrations-vue';
@@ -18,7 +18,7 @@ interface TableDemo1Props {
 export const vuePropsType = {
   name: String,
 };
-const Table = Table_();
+const Table = TableMaker();
 const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
   const columns = [
     {

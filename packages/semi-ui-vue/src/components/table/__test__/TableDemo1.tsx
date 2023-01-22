@@ -1,5 +1,5 @@
 import { defineComponent, ref, h, Fragment, useSlots } from "vue";
-import {Table} from '../index'
+import Table from '../index'
 import Avatar from '../../avatar'
 import {IconMore} from "@kousum/semi-icons-vue";
 interface TableDemo1Props {

@@ -404,8 +404,11 @@ function Table<RecordType extends Record<string, any>>() {
                       (!(hasExpandedRowRender || hasChildren) && strictExpandableResult)
                     );
                 },
-                isAnyColumnUseFullRender: (columns: ColumnProps<RecordType>[]) =>
-                  some(columns, column => Boolean(column.useFullRender)),
+                isAnyColumnUseFullRender: (columns: ColumnProps<RecordType>[]) => {
+                    return some(columns, column => {
+                        Boolean(column.useFullRender)
+                    })
+                },
                 getNormalizeColumns: () => normalizeColumns,
                 getHandleColumns: () => handleColumns as any,
                 getMergePagination: () => mergePagination,
@@ -1034,8 +1037,12 @@ function Table<RecordType extends Record<string, any>>() {
                         key={strings.DEFAULT_KEY_COLUMN_FILTER}
                         {...curQuery}
                         filteredValue={filteredValue}
-                        onFilterDropdownVisibleChange={(visible: boolean) => foundation.toggleShowFilter(dataIndex, visible)}
-                        onSelect={(data: OnSelectData) => foundation.handleFilterSelect(dataIndex, data)}
+                        onFilterDropdownVisibleChange={(visible: boolean) => {
+                            foundation.toggleShowFilter(dataIndex, visible)
+                        }}
+                        onSelect={(data: OnSelectData) => {
+                            foundation.handleFilterSelect(dataIndex, data)
+                        }}
                       />
                     );
                     useFullRender && (titleMap.filter = filter);
@@ -1361,10 +1368,10 @@ function Table<RecordType extends Record<string, any>>() {
              * useFullRender需要传给用户selection VueJsxNode，因此需要每次selectedRowKeys变化时重新计算columns
              * TODO: 未来可以将传给用户的selection改为函数类型，让用户执行函数获取selection title的实时状态
              */
-            if (!adapter.isAnyColumnUseFullRender(queries)) {
+            if (!adapter.isAnyColumnUseFullRender(state.queries as any)) {
                 const rowSelectionUpdate: boolean = propRowSelection && !get(propRowSelection, 'hidden');
                 columns = foundation.memoizedWithFnsColumns(
-                  queries,
+                  state.queries as any,
                   state.cachedColumns as any,
                   rowSelectionUpdate,
                   hideExpandedColumn,
@@ -1372,7 +1379,7 @@ function Table<RecordType extends Record<string, any>>() {
                   state.bodyHasScrollBar
                 );
             } else {
-                columns = handleColumns(queries, state.cachedColumns as any);
+                columns = handleColumns(state.queries, state.cachedColumns as any);
             }
             const filteredColumns: ColumnProps<RecordType>[] = foundation.memoizedFilterColumns(columns as any);
             const flattenFnsColumns: ColumnProps<RecordType>[] = foundation.memoizedFlattenFnsColumns(columns as any);

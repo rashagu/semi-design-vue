@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, Fragment, useSlots, computed, onMounted} from 'vue';
-import { Table, TableColumn } from '../index';
+import Table, { TableColumn } from '../index';
 import Avatar from '../../avatar';
 import { IconMore } from '@kousum/semi-icons-vue';
 import { IllustrationNoResult, IllustrationNoResultDark } from '@kousum/semi-illustrations-vue';
