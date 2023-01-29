@@ -214,6 +214,14 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     return willUpdateStates;
   }
 
+  watch(() => props, (val) => {
+    const newState = getDerivedStateFromProps(props, state)
+    if (newState) {
+      Object.keys(newState).forEach(key => {
+        state[key] = newState[key]
+      })
+    }
+  }, {deep: true, immediate: true})
   function getScrollbarWidth() {
     if (globalThis && Object.prototype.toString.call(globalThis) === '[object Window]') {
       return window.innerWidth - document.documentElement.clientWidth;
@@ -227,14 +235,6 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
       foundation.beforeShow();
     }
   })
-  watch(() => props, (val) => {
-    const newState = getDerivedStateFromProps(props, state)
-    if (newState) {
-      Object.keys(newState).forEach(key => {
-        state[key] = newState[key]
-      })
-    }
-  }, {deep: true, immediate: true})
 
   watch([() => state.visible, () => props.visible], (value, [prevStateVisible, prevPropsVisible], onCleanup) => {
     if (prevStateVisible !== props.visible && props.visible) {
@@ -250,7 +250,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     if (prevStateVisible && !props.visible) {
       foundation.afterHide();
     }
-  })
+  }, {immediate: true})
 
   onBeforeUnmount(() => {
     timer && clearInterval(timer);

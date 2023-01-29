@@ -163,20 +163,31 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
     // When the incoming ratio is changed, if it"s adaptation, then resizeImage is triggered to make the image adapt to the page
     // else if it"s adaptation is realSize, then onZoom(1) is called to make the image size the original size;
     // When the incoming rotation angle of the image changes, it needs to be resized to make the image fit on the page
-    watch(()=>props.src, (value, oldValue, onCleanup)=>{
-        if (value && oldValue !== value) {
+    watch([
+        ()=>props.src,
+        ()=>props.zoom,
+        ()=>props.ratio,
+        ()=>props.rotation,
+        ()=>state.currZoom,
+        ()=>containerRef.value
+    ], (value, [
+        prevPropsSrc,
+        prevPropsZoom,
+        prevPropsRatio,
+        prevPropsRotation,
+        prevStatesCurrZoom,
+    ], onCleanup)=>{
+        // If src changes, start a new loading
+        if (props.src && props.src !== prevPropsSrc) {
             foundation.setLoading(true);
         }
-    })
-
-    watch(()=>props.zoom, (value, oldValue, onCleanup)=>{
-        if ("zoom" in getProps(props) && value !== oldValue) {
+        // If the incoming zoom changes, other content changes are determined based on the new zoom value
+        if ("zoom" in getProps(props) && props.zoom !== prevStatesCurrZoom && containerRef.value) {
             handleZoomChange(props.zoom, null);
         }
-    }, {immediate: true})
-
-    watch(()=>props.ratio, (value, oldValue, onCleanup)=>{
-        if ("ratio" in getProps(props) && props.ratio !== oldValue) {
+        // When the incoming ratio is changed, if it"s adaptation, then resizeImage is triggered to make the image adapt to the page
+        // else if it"s adaptation is realSize, then onZoom(1) is called to make the image size the original size;
+        if ("ratio" in getProps(props) && props.ratio !== prevPropsRatio) {
             if (originImageWidth && originImageHeight) {
                 if (props.ratio === "adaptation") {
                     resizeImage();
@@ -185,10 +196,8 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
                 }
             }
         }
-    })
-
-    watch(()=>props.rotation, (value, oldValue, onCleanup)=>{
-        if ("rotation" in getProps(props) && props.rotation !== oldValue) {
+        // When the incoming rotation angle of the image changes, it needs to be resized to make the image fit on the page
+        if ("rotation" in getProps(props) && props.rotation !== prevPropsRotation) {
             onWindowResize();
         }
     })

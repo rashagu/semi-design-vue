@@ -1,7 +1,7 @@
 import { IconChevronLeft, IconChevronRight, IconMinus, IconPlus,
     IconRotate, IconDownload, IconWindowAdaptionStroked, IconRealSizeStroked } from "@kousum/semi-icons-vue";
 import type { IconSize } from "@kousum/semi-icons-vue";
-import {FooterProps, ImageProps} from "./interface";
+import {FooterProps, ImageProps, MenuProps, RatioType} from "./interface";
 import * as PropTypes from "../PropTypes";
 import Tooltip from "../tooltip";
 import Divider from "../divider";
@@ -49,6 +49,12 @@ const propTypes = {
     onAdjustRatio: PropTypes.func,
     onRotateLeft: PropTypes.func,
     onDownload: PropTypes.func,
+
+    min: PropTypes.number,
+    max: PropTypes.number,
+    step: PropTypes.number,
+    onRotate: PropTypes.func,
+    renderPreviewMenu: PropTypes.func,
 }
 
 const defaultProps = {
