@@ -1,5 +1,16 @@
 # @kousum/semi-illustrations-vue
 
+## 0.2.0
+
+### Minor Changes
+
+- d87eb23: 所有组件可以准备测试了 All components are ready for testing
+
+### Patch Changes
+
+- b76f7f3: fix icons & images
+- 862f0fa: clear console.log & semi 2.26.0
+
 ## 0.0.12
 
 ### Patch Changes
