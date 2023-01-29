@@ -35,33 +35,34 @@ export const vuePropsType = {
 }
 
 const Icon = defineComponent<IconProps>((props, {slots}) => {
-  const { spin = false, rotate, style, className, prefixCls = BASE_CLASS_PREFIX, type, size = 'default', ...restProps } = props;
-  const classes = cls(`${prefixCls}-icon`, {
-    [`${prefixCls}-icon-extra-small`]: size === 'extra-small', // 8x8
-    [`${prefixCls}-icon-small`]: size === 'small', // 12x12
-    [`${prefixCls}-icon-default`]: size === 'default', // 16x16
-    [`${prefixCls}-icon-large`]: size === 'large', // 20x20
-    [`${prefixCls}-icon-extra-large`]: size === 'extra-large', // 24x24
-    [`${prefixCls}-icon-spinning`]: spin,
-    [`${prefixCls}-icon-${type}`]: Boolean(type)
-  }, className);
-  const outerStyle: StyleValue = {
-  };
-  if (Number.isSafeInteger(rotate)) {
-    outerStyle.transform = `rotate(${rotate}deg)`;
-  }
-  Object.assign(outerStyle, style);
 
-
-  return ()=> <span
-    role="img"
-    ref={ref}
-    class={classes}
-    style={outerStyle}
-    {...restProps}
-  >
+  return ()=> {
+    const { spin = false, rotate, style, className, prefixCls = BASE_CLASS_PREFIX, type, size = 'default', ...restProps } = props;
+    const classes = cls(`${prefixCls}-icon`, {
+      [`${prefixCls}-icon-extra-small`]: size === 'extra-small', // 8x8
+      [`${prefixCls}-icon-small`]: size === 'small', // 12x12
+      [`${prefixCls}-icon-default`]: size === 'default', // 16x16
+      [`${prefixCls}-icon-large`]: size === 'large', // 20x20
+      [`${prefixCls}-icon-extra-large`]: size === 'extra-large', // 24x24
+      [`${prefixCls}-icon-spinning`]: spin,
+      [`${prefixCls}-icon-${type}`]: Boolean(type)
+    }, className);
+    const outerStyle: StyleValue = {
+    };
+    if (Number.isSafeInteger(rotate)) {
+      outerStyle.transform = `rotate(${rotate}deg)`;
+    }
+    Object.assign(outerStyle, style);
+    return <span
+      role="img"
+      ref={ref}
+      class={classes}
+      style={outerStyle}
+      {...restProps}
+    >
     {slots.default ? slots.default() : null}
-  </span>;
+  </span>
+  };
 
 })
 
