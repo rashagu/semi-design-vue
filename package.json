@@ -13,9 +13,8 @@
     "change": "pnpm changeset",
     "version": "pnpm changeset version",
     "publish": "pnpm changeset publish",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook:vite": "build-storybook -o ./docs",
-    "build-storybook": "build-storybook -c ./.storybook/build/ -o ./docs"
+    "storybook": "pnpm build:lib && start-storybook -p 6006",
+    "build-storybook:vite": "build-storybook -o ./docs"
   },
   "publishConfig": {
     "access": "public"
@@ -33,6 +32,23 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@kousum/semi-icons-vue": "^0.2.0",
+    "@kousum/semi-ui-vue": "^0.2.0",
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/builder-vite": "^0.3.0",
+    "@storybook/testing-library": "^0.0.13",
+    "@storybook/vue3": "^6.5.16",
+    "@storybook/client-api": "^6.5.16",
+    "@storybook/client-logger": "^6.5.16",
+    "@storybook/addon-docs": "^6.5.16",
+    "@storybook/addon-backgrounds": "^6.5.16",
+    "@storybook/addon-measure": "^6.5.16",
+    "@storybook/addon-outline": "^6.5.16",
+
+
     "@babel/core": "^7.18.2",
     "@babel/plugin-proposal-decorators": "^7.18.2",
     "@babel/plugin-transform-runtime": "^7.18.2",
@@ -59,7 +75,7 @@
     "@vitejs/plugin-vue-jsx": "^3.0.0",
     "@vitest/coverage-c8": "^0.27.2",
     "@vue/test-utils": "^2.2.7",
-    "babel-loader": "^8.2.5",
+    "babel-loader": "^8.3.0",
     "css-loader": "^6.7.1",
     "postcss-loader": "^7.0.0",
     "sass": "^1.52.1",
