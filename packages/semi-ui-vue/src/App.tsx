@@ -3,7 +3,7 @@ import AvatarDemo from './components/avatar/__test__/AvatarDemo'
 import Button from "./components/button/__test__/Demo";
 import './docDemo.scss'
 import IconTest from "./components/__test__/IconTest";
-import TootipDemo from "./components/tooltip/__test__/TootipDemo";
+import TooltipDemo from "./components/tooltip/__test__/TooltipDemo";
 import DropdownDemo1 from "./components/dropdown/__test__/DropdownDemo1";
 import GridTest from "./components/grid/__test__/GridTest";
 import LayoutTest from "./components/layout/__test__/LayoutTest";
@@ -186,7 +186,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
         {/*<IconTest />*/}
         {/*<br/>*/}
-        {/*<TootipDemo />*/}
+        {/*<TooltipDemo />*/}
         {/*<br/>*/}
         {/*<br/>*/}
         {/*<DropdownDemo1/>*/}

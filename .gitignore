@@ -11,3 +11,4 @@ coverage/
 *.log
 /.npmrc
 /docs/
+/storybook-static/

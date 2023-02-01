@@ -8,7 +8,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const TootipDemo = defineComponent<ExampleProps>((props, {slots}) => {
+const TooltipDemo = defineComponent<ExampleProps>((props, {slots}) => {
 
   return ()=>(
     <div>
@@ -31,7 +31,7 @@ const TootipDemo = defineComponent<ExampleProps>((props, {slots}) => {
   );
 })
 
-TootipDemo.props = vuePropsType
+TooltipDemo.props = vuePropsType
 
-export default TootipDemo
+export default TooltipDemo
 

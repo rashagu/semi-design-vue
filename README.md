@@ -87,7 +87,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 
 - [x] AutoComplete
 - [x] Button
-- [x] Cascader 5f0912f
+- [x] Checkbox 5f0912f
 - [x] Checkbox 5f0912f
 - [x] DatePicker
 - [x] Form

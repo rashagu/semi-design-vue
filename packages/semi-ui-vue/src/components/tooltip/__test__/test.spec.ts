@@ -1,6 +1,6 @@
 import { expect, test, describe } from 'vitest'
-import Comp from "./TootipDemo";
+import Comp from "./TooltipDemo";
 
-test('TootipDemo test', async () => {
+test('TooltipDemo test', async () => {
   expect(Comp).toBeTruthy()
 })
