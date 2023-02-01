@@ -13,8 +13,8 @@
     "change": "pnpm changeset",
     "version": "pnpm changeset version",
     "publish": "pnpm changeset publish",
-    "storybook": "pnpm build:lib && start-storybook -p 6006",
-    "build-storybook:vite": "build-storybook -o ./docs"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook:vite": "storybook build"
   },
   "publishConfig": {
     "access": "public"
@@ -34,19 +34,17 @@
   "devDependencies": {
     "@kousum/semi-icons-vue": "^0.2.0",
     "@kousum/semi-ui-vue": "^0.2.0",
-    "@storybook/addon-actions": "^6.5.16",
-    "@storybook/addon-essentials": "^6.5.16",
-    "@storybook/addon-interactions": "^6.5.16",
-    "@storybook/addon-links": "^6.5.16",
-    "@storybook/builder-vite": "^0.3.0",
-    "@storybook/testing-library": "^0.0.13",
-    "@storybook/vue3": "^6.5.16",
-    "@storybook/client-api": "^6.5.16",
-    "@storybook/client-logger": "^6.5.16",
-    "@storybook/addon-docs": "^6.5.16",
-    "@storybook/addon-backgrounds": "^6.5.16",
-    "@storybook/addon-measure": "^6.5.16",
-    "@storybook/addon-outline": "^6.5.16",
+    "@storybook/addon-essentials": "^7.0.0-beta.38",
+    "@storybook/addon-interactions": "^7.0.0-beta.38",
+    "@storybook/addon-links": "^7.0.0-beta.38",
+    "@storybook/blocks": "^7.0.0-beta.38",
+    "@storybook/testing-library": "^0.0.14-next.1",
+    "@storybook/vue3": "^7.0.0-beta.38",
+    "@storybook/vue3-vite": "^7.0.0-beta.38",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.0.0-beta.38",
+
 
 
     "@babel/core": "^7.18.2",

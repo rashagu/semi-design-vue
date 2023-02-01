@@ -18,9 +18,10 @@
     "declaration": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "types": ["vite/client", "node"],
     "lib": ["esnext", "dom"],
     "noImplicitAny": false
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/semi-foundation/**/*.ts", "**/__test__/*"]
+  "exclude": ["node_modules", "**/*.spec.ts", "**/semi-foundation/**/*.ts", "**/__test__/*", "**/__stories__/*"]
 }
