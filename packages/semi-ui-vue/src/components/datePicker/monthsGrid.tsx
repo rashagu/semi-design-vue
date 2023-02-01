@@ -37,7 +37,7 @@ export type MonthsGridState = MonthsGridFoundationState;
 
 const propTypes = {
   type: PropTypes.string,
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object, PropTypes.array]),
+  defaultValue: PropTypes.array,
   defaultPickerValue: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,

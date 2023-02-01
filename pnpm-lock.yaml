@@ -10,8 +10,8 @@ importers:
       '@babel/preset-env': ^7.18.2
       '@babel/preset-react': ^7.16.7
       '@changesets/cli': ^2.26.0
-      '@douyinfe/semi-foundation': 2.28.0
-      '@douyinfe/semi-theme-default': 2.28.0
+      '@douyinfe/semi-foundation': 2.28.1
+      '@douyinfe/semi-theme-default': 2.28.1
       '@kousum/semi-icons-vue': ^0.2.0
       '@kousum/semi-ui-vue': ^0.2.0
       '@storybook/addon-essentials': ^7.0.0-beta.38
@@ -63,8 +63,8 @@ importers:
       vue-loader: ^16.8.3
       vue-tsc: ^1.0.12
     dependencies:
-      '@douyinfe/semi-foundation': 2.28.0
-      '@douyinfe/semi-theme-default': 2.28.0
+      '@douyinfe/semi-foundation': 2.28.1
+      '@douyinfe/semi-theme-default': 2.28.1
       lodash: 4.17.21
       vue: 3.2.45
     devDependencies:
@@ -130,10 +130,10 @@ importers:
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/preset-react': ^7.16.7
-      '@douyinfe/semi-animation': 2.28.0
-      '@douyinfe/semi-animation-styled': 2.28.0
-      '@douyinfe/semi-foundation': 2.28.0
-      '@douyinfe/semi-theme-default': 2.28.0
+      '@douyinfe/semi-animation': 2.28.1
+      '@douyinfe/semi-animation-styled': 2.28.1
+      '@douyinfe/semi-foundation': 2.28.1
+      '@douyinfe/semi-theme-default': 2.28.1
       '@types/node': ^18.11.18
       '@vitejs/plugin-vue': ^4.0.0
       '@vitejs/plugin-vue-jsx': ^3.0.0
@@ -155,10 +155,10 @@ importers:
       vue: ^3.2.45
       vue-tsc: ^1.0.24
     dependencies:
-      '@douyinfe/semi-animation': 2.28.0
-      '@douyinfe/semi-animation-styled': 2.28.0
-      '@douyinfe/semi-foundation': 2.28.0
-      '@douyinfe/semi-theme-default': 2.28.0
+      '@douyinfe/semi-animation': 2.28.1
+      '@douyinfe/semi-animation-styled': 2.28.1
+      '@douyinfe/semi-foundation': 2.28.1
+      '@douyinfe/semi-theme-default': 2.28.1
       classnames: 2.3.2
       sass: 1.57.1
       vue: 3.2.45
@@ -192,8 +192,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/preset-react': ^7.16.7
-      '@douyinfe/semi-foundation': 2.28.0
-      '@douyinfe/semi-theme-default': 2.28.0
+      '@douyinfe/semi-foundation': 2.28.1
+      '@douyinfe/semi-theme-default': 2.28.1
       '@vitejs/plugin-vue': ^4.0.0
       '@vitejs/plugin-vue-jsx': ^3.0.0
       camelcase: ^6.3.0
@@ -215,8 +215,8 @@ importers:
       vue: ^3.2.45
       vue-tsc: ^1.0.24
     dependencies:
-      '@douyinfe/semi-foundation': 2.28.0
-      '@douyinfe/semi-theme-default': 2.28.0
+      '@douyinfe/semi-foundation': 2.28.1
+      '@douyinfe/semi-theme-default': 2.28.1
       classnames: 2.3.2
       sass: 1.57.1
       vue: 3.2.45
@@ -249,8 +249,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/preset-react': ^7.16.7
-      '@douyinfe/semi-foundation': 2.28.0
-      '@douyinfe/semi-theme-default': 2.28.0
+      '@douyinfe/semi-foundation': 2.28.1
+      '@douyinfe/semi-theme-default': 2.28.1
       '@vitejs/plugin-vue': ^4.0.0
       '@vitejs/plugin-vue-jsx': ^3.0.0
       camelcase: ^6.3.0
@@ -272,8 +272,8 @@ importers:
       vue: ^3.2.45
       vue-tsc: ^1.0.24
     dependencies:
-      '@douyinfe/semi-foundation': 2.28.0
-      '@douyinfe/semi-theme-default': 2.28.0
+      '@douyinfe/semi-foundation': 2.28.1
+      '@douyinfe/semi-theme-default': 2.28.1
       classnames: 2.3.2
       vue: 3.2.45
     devDependencies:
@@ -311,9 +311,9 @@ importers:
       '@dnd-kit-vue/modifiers': 0.0.5
       '@dnd-kit-vue/sortable': 0.0.5
       '@dnd-kit-vue/utilities': 0.0.5
-      '@douyinfe/semi-animation': 2.28.0
-      '@douyinfe/semi-foundation': 2.28.0
-      '@douyinfe/semi-theme-default': 2.28.0
+      '@douyinfe/semi-animation': 2.28.1
+      '@douyinfe/semi-foundation': 2.28.1
+      '@douyinfe/semi-theme-default': 2.28.1
       '@kousum/resize-observer-polyfill': ^1.5.2
       '@kousum/semi-animation-vue': ^0.2.0
       '@kousum/semi-icons-vue': ^0.2.0
@@ -357,9 +357,9 @@ importers:
       '@dnd-kit-vue/modifiers': 0.0.5_vij2kaad7mp5ix6twniugvlwuq
       '@dnd-kit-vue/sortable': 0.0.5_4avwj6bv44boyfuhxhglzlyfhy
       '@dnd-kit-vue/utilities': 0.0.5_vue@3.2.45
-      '@douyinfe/semi-animation': 2.28.0
-      '@douyinfe/semi-foundation': 2.28.0
-      '@douyinfe/semi-theme-default': 2.28.0
+      '@douyinfe/semi-animation': 2.28.1
+      '@douyinfe/semi-foundation': 2.28.1
+      '@douyinfe/semi-theme-default': 2.28.1
       '@kousum/resize-observer-polyfill': 1.5.2
       '@kousum/semi-animation-vue': link:../semi-animation-vue
       '@kousum/semi-icons-vue': link:../semi-icons-vue
@@ -3501,8 +3501,8 @@ packages:
       vue: 3.2.45
     dev: false
 
-  /@douyinfe/semi-animation-styled/2.28.0:
-    resolution: {integrity: sha512-cceEm9zsT74qvlFkOtXKCsZXcGAMPJvPcBqlGaxJE4JvOY+P47gbIHjCtGjxS0LdQzn4HM/d2G4+r/Me3DxrtA==}
+  /@douyinfe/semi-animation-styled/2.28.1:
+    resolution: {integrity: sha512-i4eS8oyip2XAuQj8KAqfi+2Cg5XElhWkSI9YAWtzu/RzOOqYYp6SXamgSU12r5fjNyjFD0MaR3dzDesO/mewQw==}
     dev: false
 
   /@douyinfe/semi-animation/2.12.0:
@@ -3512,14 +3512,14 @@ packages:
       bezier-easing: 2.1.0
     dev: false
 
-  /@douyinfe/semi-animation/2.28.0:
-    resolution: {integrity: sha512-aUbNpOylc5dVrwLTle6BOeFP6+8ee/MxuoBI8TVTNmJFf+e2iMRhTgckZ5kdDiYP8H8N5ihUxvvQk71VGX9Vcg==}
+  /@douyinfe/semi-animation/2.28.1:
+    resolution: {integrity: sha512-ChsTCjNwFEmZHv8Ip/Bm/hUnpYVVK0mT6W9pGpXB4UHe2TXowjeTdhNF9pthVFbdEqyXPTUVon9YHARemcoLmg==}
     dependencies:
       bezier-easing: 2.1.0
     dev: false
 
-  /@douyinfe/semi-foundation/2.28.0:
-    resolution: {integrity: sha512-hoGAdbv/nMWCPnlDDHSppb1cbgvUO0Pv4+M9f8WXz/9+xAXCQ3sKN75ZQoDQDB6K8To1Ssd+OOTK7DfZ5Vzy4A==}
+  /@douyinfe/semi-foundation/2.28.1:
+    resolution: {integrity: sha512-hEprE0FtwBrDIOjaJlfAYc2wcxi6n8lfPcfLzRgka3pcXaf0SFoOvDJg3IkmvfygmKVTiiQATDpON4NWyB11/w==}
     dependencies:
       '@douyinfe/semi-animation': 2.12.0
       async-validator: 3.5.2
@@ -3531,8 +3531,8 @@ packages:
       scroll-into-view-if-needed: 2.2.29
     dev: false
 
-  /@douyinfe/semi-theme-default/2.28.0:
-    resolution: {integrity: sha512-VnMA2myv77x7qIh+s872It3WhbwKgciZEhVuZGD677h4Rmbc2/mDxjmJK9EPHQoN/Kr3phZGeU6MpKIaV500Rw==}
+  /@douyinfe/semi-theme-default/2.28.1:
+    resolution: {integrity: sha512-fLIzi7Q2eotZVY2I7RbRORalM8h/U1lIepbx4yI0mVMvqBXsDOS1v0jZ5EBP0cEWT6DChXnw/rWleNomzSrrew==}
     dependencies:
       glob: 7.2.3
     dev: false

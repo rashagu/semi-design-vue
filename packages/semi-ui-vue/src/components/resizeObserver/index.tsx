@@ -43,6 +43,7 @@ const ReactResizeObserver = defineComponent<ReactResizeObserverProps>((props, {}
         if (observer) {
             observer.disconnect();
             observer = null;
+            element = null;
         }
     })
 
@@ -62,6 +63,9 @@ const ReactResizeObserver = defineComponent<ReactResizeObserverProps>((props, {}
 
     function observeElement(force = false) {
         const element_ = getElement();
+        if (!observer) {
+            observer = new ResizeObserver(props.onResize);
+        }
         if (!(element_ && element_ instanceof Element)) {
             // stop everything if not defined
             observer.disconnect();
