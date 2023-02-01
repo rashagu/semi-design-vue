@@ -11,7 +11,7 @@
 [license-badge]: https://img.shields.io/npm/l/@kousum/semi-ui-vue
 [license-url]: https://github.com/rashagu/semi-design-vue/blob/dev/LICENSE
 
-[ci-badge]: https://github.com/rashagu/semi-design-vue/workflows/test/badge.svg?branch=master&event=push
+[ci-badge]: https://github.com/rashagu/semi-design-vue/workflows/publish/badge.svg?branch=master&event=push
 [ci-url]: https://github.com/rashagu/semi-design-vue/actions?query=branch%3Amaster+event%3Apush
 
 
@@ -57,7 +57,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 
 # 开发
 1. 使用`typescript`,`changeSets`
-2. `node: > 16`
+2. `node: >= 16`
 
 
 ### 安装依赖
@@ -69,91 +69,15 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 ### 运行
 > `pnpm dev`
 
+### 运行 storybook
+> `pnpm storybook`
 
 
-# TODO
 
-### 基础
-
-- [x] Divider
-- [x] Grid
-- [x] Icon
-- [x] Layout
-- [x] Tokens
-- [x] Space
-- [x] Typography
-
-### 输入类
-
-- [x] AutoComplete
-- [x] Button
-- [x] Checkbox 5f0912f
-- [x] Checkbox 5f0912f
-- [x] DatePicker
-- [x] Form
-- [x] Input
-- [x] InputNumber
-- [x] Radio
-- [x] Rating
-- [x] Select
-- [x] Slider
-- [x] Switch
-- [x] TagInput 5f0912f
-- [x] TimePicker
-- [x] Transfer
-- [x] TreeSelect
-- [x] Upload
-
-### 导航类
-
-- [x] Anchor
-- [x] BackTop
-- [x] Breadcrumb
-- [x] Navigation
-- [x] Pagination
-- [x] Steps
-- [x] Tabs
-- [x] Tree
-
-### 展示类
-
-- [x] Avatar
-- [x] Badge
-- [x] Calendar
-- [x] Card
-- [x] Carousel
-- [x] Collapse
-- [x] Collapsible
-- [x] Descriptions
-- [x] Dropdown
-- [x] Empty
-- [x] Highlight
-- [x] Image
-- [x] List
-- [x] Modal
-- [x] OverflowList
-- [x] Popover
-- [x] ScrollList
-- [x] SideSheet
-- [x] Table
-- [x] Tag
-- [x] Timeline
-- [x] Tooltip
-
-### 反馈类
-
-- [x] Banner
-- [x] Notification
-- [x] Popconfirm
-- [x] Progress
-- [x] Skeleton
-- [x] Spin
-- [x] Toast
-
-### 其他
-
-- [x] ConfigProvider
-- [x] LocaleProvider
+## TODO
+ 
+- [ ] bug fix & 单元测试覆盖
+- [ ] Vue版的文档（也可以直接参考 [官方文档](https://semi.design/zh-CN/)）
 
 
 
