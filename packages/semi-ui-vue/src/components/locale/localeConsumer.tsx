@@ -55,7 +55,7 @@ function LocaleConsumer<T>(){
               return (
                 <LocaleContext.Consumer>
                   {{
-                    default: localeData => renderChildren(locale.value.locale || localeData, slots.default)
+                    default: localeData => renderChildren(locale.value.locale || localeData.value, slots.default)
                   }}
                 </LocaleContext.Consumer>
               )
