@@ -52,8 +52,12 @@ jobs:
         run: |
           git config --local user.email "kousumwork@outlook.com"
           git config --local user.name "rashagu"
+          if [ -n "$(git status --porcelain)" ]; then
           git add .
           git commit -m "[github action]: ${{ env.RELEASE_VERSION }}"
+          else
+          echo "no changes";
+          fi
 
       - name: Push changes
         uses: ad-m/github-push-action@master

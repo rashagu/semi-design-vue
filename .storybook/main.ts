@@ -18,6 +18,17 @@ const config: StorybookConfig = {
     // Add your configuration here
     return {
       ...config,
+      build: {
+        ...config.build,
+        rollupOptions: {
+          external: [ './sb-preview/runtime.mjs' ],
+          output: {
+            // 入口文件名
+            // 块文件名
+            chunkFileNames: 'assets/github_[name]-[hash].js',
+          },
+        },
+      },
       css: {
         preprocessorOptions: {
           scss: {
