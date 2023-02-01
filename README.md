@@ -12,7 +12,7 @@
 [license-url]: https://github.com/rashagu/semi-design-vue/blob/dev/LICENSE
 
 [ci-badge]: https://github.com/rashagu/semi-design-vue/workflows/test/badge.svg?branch=master&event=push
-[ci-url]: https://github.com/rashagu/semi-design-vue/actions?query=branch%3Adev+event%3Apush
+[ci-url]: https://github.com/rashagu/semi-design-vue/actions?query=branch%3Amaster+event%3Apush
 
 
 
@@ -79,7 +79,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 - [x] Grid
 - [x] Icon
 - [x] Layout
-- [ ] Tokens
+- [x] Tokens
 - [x] Space
 - [x] Typography
 
