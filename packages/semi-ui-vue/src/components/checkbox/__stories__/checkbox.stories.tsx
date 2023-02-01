@@ -8,7 +8,7 @@ const meta = {
    * See https://storybook.js.org/docs/7.0/vue/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: '输入类/Checkbox',
+  title: 'B输入类/Checkbox',
   component: Checkbox,
   render: (args: any) => ({
     setup() {

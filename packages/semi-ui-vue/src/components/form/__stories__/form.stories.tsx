@@ -11,7 +11,7 @@ const meta = {
    * See https://storybook.js.org/docs/7.0/vue/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: '输入类/Form',
+  title: 'B输入类/Form',
   render: (args: any) => ({
     setup() {
       const comp = {

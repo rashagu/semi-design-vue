@@ -1,21 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
-import ModalDemo from "../__test__/ModalDemo";
-import ModalDemoHook from "../__test__/ModalDemoHook";
-import ModalDemoConfirm from "../__test__/ModalDemoConfirm";
+import LayoutTest from "../__test__/LayoutTest";
 
 const meta = {
   /* 👇 The title prop is optional.
    * See https://storybook.js.org/docs/7.0/vue/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: 'D展示类/Modal',
+  title: 'A基础/Layout',
   render: (args: any) => ({
     setup() {
       return ()=>(<div style={{padding: '10px'}}>
-        {args.name === 'ModalDemo'? <ModalDemo/>:null}
-        {args.name === 'ModalDemoHook'? <ModalDemoHook/>:null}
-        {args.name === 'ModalDemoConfirm'? <ModalDemoConfirm/>:null}
+        <LayoutTest />
       </div>);
     },
   }),
@@ -30,20 +26,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Modal: Story = {
+export const Layout: Story = {
   args: {
-    name: 'ModalDemo'
   },
 };
-export const ModalHook: Story = {
-  args: {
-    name: 'ModalDemoHook'
-  },
-};
-export const ModalConfirm: Story = {
-  args: {
-    name: 'ModalDemoConfirm'
-  },
-};
-
-

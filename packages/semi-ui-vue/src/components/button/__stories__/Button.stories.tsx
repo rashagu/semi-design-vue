@@ -7,7 +7,7 @@ const meta = {
    * See https://storybook.js.org/docs/7.0/vue/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: '输入类/Button',
+  title: 'B输入类/Button',
   component: Button,
   render: (args: any) => ({
     components: { Button: Button },

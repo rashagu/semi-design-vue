@@ -7,7 +7,7 @@ const meta = {
    * See https://storybook.js.org/docs/7.0/vue/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: '导航类/Breadcrumb',
+  title: 'C导航类/Breadcrumb',
   render: (args: any) => ({
     setup() {
       return ()=>(<div style={{padding: '10px'}}>

@@ -8,7 +8,7 @@ const meta = {
    * See https://storybook.js.org/docs/7.0/vue/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: '输入类/Input',
+  title: 'B输入类/Input',
   component: Input,
   render: (args: any) => ({
     setup() {

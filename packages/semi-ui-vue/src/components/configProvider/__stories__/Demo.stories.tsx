@@ -7,7 +7,7 @@ const meta = {
    * See https://storybook.js.org/docs/7.0/vue/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: '其他/ConfigProvider',
+  title: 'F其他/ConfigProvider',
   render: (args: any) => ({
     setup() {
       return ()=>(<div style={{padding: '10px'}}>

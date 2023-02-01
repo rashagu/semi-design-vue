@@ -8,7 +8,7 @@ const meta = {
    * See https://storybook.js.org/docs/7.0/vue/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: '输入类/DatePicker',
+  title: 'B输入类/DatePicker',
   component: DatePicker,
   render: (args: any) => ({
     setup() {

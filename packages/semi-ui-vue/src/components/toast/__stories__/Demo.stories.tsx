@@ -7,7 +7,7 @@ const meta = {
    * See https://storybook.js.org/docs/7.0/vue/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: '反馈类/Toast',
+  title: 'E反馈类/Toast',
   render: (args: any) => ({
     setup() {
       return ()=>(<div style={{padding: '10px'}}>
