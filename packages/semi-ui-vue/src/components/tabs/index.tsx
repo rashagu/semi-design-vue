@@ -268,8 +268,13 @@ const Tabs = defineComponent<TabsProps>((props, {}) => {
     }
 
     return () => {
-        childrenRef.value = slots.default?.()?.[0]?.children as any  | []
         const children = slots.default?.()
+        // for Vitest
+        if (typeof children[0].type === 'symbol' && children[0].type.toString() === 'Symbol(Fragment)'){
+            childrenRef.value = slots.default?.()?.[0]?.children as any || []
+        }else{
+            childrenRef.value = slots.default?.() as any || []
+        }
 
         const {
             className,
