@@ -28,10 +28,10 @@ const NodeList = defineComponent<NodeListProps>((props, {}) => {
         transitionNodes: [],
     })
 
-    function getDerivedStateFromProps(props: NodeListProps, prevState: NodeListState) {
+    function getDerivedStateFromProps(props: NodeListProps) {
         const { flattenNodes = [], motionKeys, motionType, flattenList = [] } = props;
-        const hasChanged = !isEqual(prevState.cachedMotionKeys, motionKeys) ||
-          !isEqual(prevState.cachedData.map(i => i.key), flattenNodes.map(i => i.key));
+        const hasChanged = !isEqual(state.cachedMotionKeys, motionKeys) ||
+          !isEqual(state.cachedData.map(i => i.key), flattenNodes.map(i => i.key));
         const motionArr = [...motionKeys];
         if (!hasChanged || !motionArr.length) {
             return null;
@@ -63,7 +63,7 @@ const NodeList = defineComponent<NodeListProps>((props, {}) => {
     }
 
     watch(()=>props, ()=>{
-        const newState = getDerivedStateFromProps(props, state)
+        const newState = getDerivedStateFromProps(props)
         newState && Object.keys(newState).forEach(key=>{
             state[key] = newState[key]
         })
@@ -78,7 +78,8 @@ const NodeList = defineComponent<NodeListProps>((props, {}) => {
     return () => {
         const { flattenNodes, motionType, searchTargetIsDeep, renderTreeNode } = props;
         const { transitionNodes } = state;
-        const mapData = transitionNodes.length && !searchTargetIsDeep ? transitionNodes : flattenNodes;
+        // @ts-ignore
+        const mapData:TransitionNodes<FlattenNode> | FlattenNode[] = transitionNodes.length && !searchTargetIsDeep ? transitionNodes : flattenNodes;
         const options = mapData.map(treeNode => {
             const isMotionNode = Array.isArray(treeNode);
             if (isMotionNode && !(treeNode as FlattenNode[]).length) {

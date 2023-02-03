@@ -1,12 +1,12 @@
-import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
-import Cascader from '../index'
+import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
+import Cascader from '../index';
 interface ExampleProps {
-  name?: string
+  name?: string;
 }
 
 export const vuePropsType = {
-  name: String
-}
+  name: String,
+};
 const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
   const treeData = [
     {
@@ -42,28 +42,20 @@ const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
             {
               label: '江北区',
               value: 'jiangbei',
-            }
-          ]
+            },
+          ],
         },
       ],
-    }
+    },
   ];
   return () => (
-<div>
-  <Cascader
-    treeData={treeData}
-    placeholder="请选择所在地区"
-  />
-  <Cascader
-    treeData={treeData}
-    multiple={true}
-    placeholder="请选择所在地区"
-  />
-</div>
-  )
-})
+    <div>
+      <Cascader defaultOpen={true} treeData={treeData} placeholder="请选择所在地区" />
+      <Cascader treeData={treeData} multiple={true} placeholder="请选择所在地区" />
+    </div>
+  );
+});
 
-CascaderDemo.props = vuePropsType
+CascaderDemo.props = vuePropsType;
 
-export default CascaderDemo
-
+export default CascaderDemo;

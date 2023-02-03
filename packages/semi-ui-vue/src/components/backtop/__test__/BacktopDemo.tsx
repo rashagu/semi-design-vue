@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
+import {defineComponent, ref, h, Fragment, useSlots, onMounted} from 'vue'
 import BackTop from "../index";
 import {IconArrowUp} from "@kousum/semi-icons-vue";
 
@@ -23,15 +23,22 @@ const BacktopDemo = defineComponent<BacktopDeemoProps>((props, {}) => {
     color: '#fff',
     bottom: '100px',
   };
+
+  const containerDiv = ref()
+  onMounted(()=>{
+    (containerDiv.value as HTMLElement).scrollTop = 9999
+  })
   return () => (
-    <div  style={{height: '9999px'}}>
-      <div>
+    <div ref={containerDiv} style={{height: '500px', overflow: 'auto'}}>
+      <div style={{height: '9999px'}}>
+        <div>
                 <span>
                     Scroll down to see the bottom-right <span style={{ color: '#0077fa' }}>blue circular</span> button.
                 </span>
-        <BackTop style={style}>
-          <IconArrowUp />
-        </BackTop>
+          <BackTop target={()=>containerDiv.value} style={style}>
+            <IconArrowUp />
+          </BackTop>
+        </div>
       </div>
     </div>
   )

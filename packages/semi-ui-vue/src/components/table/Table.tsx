@@ -1379,7 +1379,7 @@ function Table<RecordType extends Record<string, any>>() {
                   state.bodyHasScrollBar
                 );
             } else {
-                columns = handleColumns(state.queries, state.cachedColumns as any);
+                columns = handleColumns(state.queries as any, state.cachedColumns as any);
             }
             const filteredColumns: ColumnProps<RecordType>[] = foundation.memoizedFilterColumns(columns as any);
             const flattenFnsColumns: ColumnProps<RecordType>[] = foundation.memoizedFlattenFnsColumns(columns as any);

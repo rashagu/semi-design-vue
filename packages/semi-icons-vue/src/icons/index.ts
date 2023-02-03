@@ -417,6 +417,7 @@ export { default as IconTrueFalseStroked } from './icons/IconTrueFalseStroked';
 export { default as IconTvCheckedStroked } from './icons/IconTvCheckedStroked';
 export { default as IconTwitter } from './icons/IconTwitter';
 export { default as IconTypograph } from './icons/IconTypograph';
+
 export { default as IconUnderline } from './icons/IconUnderline';
 export { default as IconUndo } from './icons/IconUndo';
 export { default as IconUnlink } from './icons/IconUnlink';

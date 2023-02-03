@@ -45,10 +45,10 @@
     "sass": "^1.57.1",
     "scroll-into-view-if-needed": "^2.2.28",
     "utility-types": "^3.10.0",
-    "vue": "^3.2.45"
+    "vue": "^3.2.47"
   },
   "peerDependencies": {
-    "vue": ">=3.2.45",
+    "vue": ">=3.2.47",
     "lodash": ">=4.17.21"
   },
   "sideEffects": [

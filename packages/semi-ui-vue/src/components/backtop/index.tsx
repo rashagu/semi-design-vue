@@ -51,7 +51,7 @@ const BackTop = defineComponent<BackTopProps>((props, {}) => {
     const slots = useSlots()
 
 
-    const state = reactive({
+    const state = reactive<BackTopState>({
         visible: false
     })
     const {adapter: adapterInject} = useBaseComponent<TabsProps>(props, state)

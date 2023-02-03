@@ -129,7 +129,7 @@ interface HeaderConfig {
 }
 
 export interface TransferState {
-  data: Array<ResolvedDataItem>;
+  data: ResolvedDataItem[];
   selectedItems: Map<number | string, ResolvedDataItem>;
   searchResult: Set<number | string>;
   inputValue: string;
@@ -421,7 +421,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
     const inSearchMode = inputValue !== '';
     const showNumber = inSearchMode ? searchResult.size : data.length;
     // @ts-ignore
-    const filterData = inSearchMode ? data.filter((item) => searchResult.has(item.key)) : data;
+    const filterData: ResolvedDataItem[] = inSearchMode ? data.filter((item) => searchResult.has(item.key)) : data;
     // Whether to select all should be a judgment, whether the filtered data on the left is a subset of the selected items
     // For example, the filtered data on the left is 1, 3, 4;
     // The selected option is 1,2,3,4, it is true
@@ -485,7 +485,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
       loading,
       noMatch,
       filterData,
-      sourceData: data,
+      sourceData: data as ResolvedDataItem[],
       propsDataSource: dataSource,
       allChecked: !leftContainesNotInSelected,
       showNumber,

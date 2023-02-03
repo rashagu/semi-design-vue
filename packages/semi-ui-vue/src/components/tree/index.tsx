@@ -725,8 +725,8 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
             return (
               <Fragment>
                   <NodeList
-                    flattenNodes={flattenNodes}
-                    flattenList={cachedFlattenNodes}
+                    flattenNodes={flattenNodes as FlattenNode[]}
+                    flattenList={cachedFlattenNodes as (FlattenNode[] | undefined)}
                     motionKeys={motion ? motionKeys : new Set([])}
                     motionType={motionType}
                     onMotionEnd={onMotionEnd}

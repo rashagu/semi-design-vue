@@ -28,7 +28,7 @@
   "dependencies": {
     "@douyinfe/semi-foundation": "2.28.1",
     "@douyinfe/semi-theme-default": "2.28.1",
-    "vue": "^3.2.45",
+    "vue": "^3.2.47",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
@@ -71,8 +71,8 @@
     "@types/node": "^18.11.18",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
-    "@vitest/coverage-c8": "^0.27.2",
-    "@vue/test-utils": "^2.2.7",
+    "@vitest/coverage-c8": "^0.28.3",
+    "@vue/test-utils": "^2.2.10",
     "babel-loader": "^8.3.0",
     "css-loader": "^6.7.1",
     "postcss-loader": "^7.0.0",
@@ -87,8 +87,8 @@
     "svgo": "2.7.0",
     "ts-node": "^10.5.0",
     "tslib": "^2.4.1",
-    "vite": "^4.0.4",
-    "vitest": "^0.27.2",
-    "vue-tsc": "^1.0.12"
+    "vite": "^4.1.1",
+    "vitest": "^0.28.3",
+    "vue-tsc": "^1.0.24"
   }
 }

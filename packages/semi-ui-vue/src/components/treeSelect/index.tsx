@@ -477,8 +477,8 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
     };
 
     // eslint-disable-next-line max-lines-per-function
-    function getDerivedStateFromProps(props: TreeSelectProps, prevState: TreeSelectState) {
-        const {prevProps, rePosKey} = prevState;
+    function getDerivedStateFromProps(props: TreeSelectProps) {
+        const {prevProps, rePosKey} = state;
         const needUpdate = (name: string) => (
           (!prevProps && name in props) ||
           (prevProps && !isEqual(prevProps[name], props[name]))
@@ -486,8 +486,8 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
 
         let treeData;
         const withObject = props.onChangeWithObject;
-        let keyEntities = prevState.keyEntities || {};
-        let valueEntities = prevState.cachedKeyValuePairs || {};
+        let keyEntities = state.keyEntities || {};
+        let valueEntities = state.cachedKeyValuePairs || {};
         const newState: Partial<TreeSelectState> = {
             prevProps: props,
         };
@@ -509,7 +509,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
         if (
           treeData &&
           props.motion &&
-          !isEqual(Object.keys(newState.keyEntities), Object.keys(prevState.keyEntities))
+          !isEqual(Object.keys(newState.keyEntities), Object.keys(state.keyEntities))
         ) {
             if (prevProps && props.motion) {
                 newState.motionKeys = new Set([]);
@@ -527,7 +527,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             // only show animation when treeData does not change
             if (prevProps && props.motion && !treeData) {
                 const {motionKeys, motionType} = calcMotionKeys(
-                  prevState.expandedKeys,
+                  state.expandedKeys,
                   newState.expandedKeys,
                   keyEntities
                 );
@@ -556,8 +556,8 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
         // flattenNodes
         if (treeData || needUpdate('expandedKeys')) {
             const flattenNodes = flattenTreeData(
-              treeData || prevState.treeData,
-              newState.expandedKeys || prevState.expandedKeys
+              treeData || state.treeData,
+              newState.expandedKeys || state.expandedKeys
             );
             newState.flattenNodes = flattenNodes;
         }
@@ -586,7 +586,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
                       isMultiple
                     );
                 } else {
-                    newState.selectedKeys = updateKeys(prevState.selectedKeys, keyEntities);
+                    newState.selectedKeys = updateKeys(state.selectedKeys, keyEntities);
                 }
             }
         } else {
@@ -614,7 +614,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
                       isMultiple
                     );
                 } else {
-                    checkedKeyValues = updateKeys(prevState.checkedKeys, keyEntities);
+                    checkedKeyValues = updateKeys(state.checkedKeys, keyEntities);
                 }
             }
 
@@ -649,7 +649,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
     }
 
     watch([() => props, () => slots.defautl], () => {
-        const newState = getDerivedStateFromProps(props, state)
+        const newState = getDerivedStateFromProps(props)
         Object.keys(newState).forEach((key) => {
             // @ts-ignore
             state[key] = newState[key]
@@ -1288,7 +1288,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
         if (!virtualize || isEmpty(virtualize)) {
             return (
               <NodeList
-                flattenNodes={flattenNodes}
+                flattenNodes={flattenNodes as FlattenNode[]}
                 flattenList={_flattenNodes}
                 motionKeys={motionExpand ? motionKeys : new Set([])}
                 motionType={motionType}

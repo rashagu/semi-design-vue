@@ -16,9 +16,9 @@ const CollapseDemo = defineComponent<CollapseDemoProps>((props, {}) => {
 
   return () => (
     <div>
-      <Collapse accordion>
+      <Collapse accordion activeKey={["1"]}>
         <CollapsePanel header="This is panel header 1" itemKey="1" extra="1234">
-          <p>Hi, bytedance dance dance. This is the docsite of Semi UI. </p>
+          <p class={"test_text"}>Hi, bytedance dance dance. This is the docsite of Semi UI. </p>
         </CollapsePanel>
         <CollapsePanel header="This is panel header 2" itemKey="2" extra={<IconCopy />}>
           <p>Hi, bytedance dance dance. This is the docsite of Semi UI. </p>

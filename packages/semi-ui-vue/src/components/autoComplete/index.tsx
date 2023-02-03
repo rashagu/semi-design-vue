@@ -434,6 +434,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
             const { focusIndex } = state;
             const isFocused = optionIndex === focusIndex;
 
+            console.log(option)
             return (
               <Option
                 showTick={false}

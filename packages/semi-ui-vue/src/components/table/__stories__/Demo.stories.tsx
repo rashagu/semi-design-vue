@@ -50,11 +50,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const SideSheet: Story = {
-  args: {
-    name: 'SideSheetDemo'
-  },
-};
+
 export const Table1: Story = {
   args: {
     name: 'TableDemo1'
