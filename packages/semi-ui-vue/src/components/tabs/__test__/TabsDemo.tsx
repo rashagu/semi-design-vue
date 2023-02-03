@@ -2,11 +2,13 @@ import {defineComponent, ref, h, Fragment, useSlots, reactive} from 'vue'
 import Tabs, {TabPane} from "../index";
 
 interface TabsDemoProps {
-  name?: string
+  name?: string,
+  isVitest?: boolean
 }
 
 export const vuePropsType = {
-  name: String
+  name: String,
+  isVitest: Boolean
 }
 const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
   const slots = useSlots()
@@ -26,9 +28,7 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
   return () => {
     return (
       <Tabs type="card" defaultActiveKey="1" onTabClose={close.bind(this)}>
-        {
-          state.tabList.map(t=><TabPane closable={t.closable as any} tab={t.tab} itemKey={t.itemKey} key={t.itemKey}>{t.text}</TabPane>)
-        }
+        {state.tabList.map(t=><TabPane closable={t.closable as any} tab={t.tab} itemKey={t.itemKey} key={t.itemKey}>{t.text}</TabPane>)}
       </Tabs>
     );
   }

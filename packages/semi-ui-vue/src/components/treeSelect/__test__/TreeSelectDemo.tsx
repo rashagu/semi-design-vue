@@ -44,6 +44,7 @@ const TreeSelectDemo = defineComponent<ExampleProps>((props, {}) => {
   return () => (
     <div>
       <TreeSelect
+        defaultOpen={true}
         style={{ width: 300 }}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         treeData={treeData}

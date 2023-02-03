@@ -7,4 +7,5 @@ test('ToastDemo test', async () => {
 
   const profileLink = wrapper.get('.Throttled').text()
   expect(profileLink).toEqual('Throttled Toast')
+
 })

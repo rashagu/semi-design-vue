@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment, useSlots, onMounted} from 'vue'
 import Button from "../../button";
-import Toast, {ToastList} from "../index";
+import Toast, {ToastList, useToastHook} from "../index";
 import {throttle} from "lodash";
 
 interface ExampleProps {
@@ -12,7 +12,10 @@ export const vuePropsType = {
 }
 const ToastDemo = defineComponent<ExampleProps>((props, {}) => {
   const slots = useSlots()
-  // const Toast = useToastHook()
+  const Toast = useToastHook()
+  Toast.info({
+    content:<div class={"test_class1"}>useToastHook</div>
+  })
   const opts = ref({
     content: 'Hi, Bytedance dance dance',
     duration: 3,
