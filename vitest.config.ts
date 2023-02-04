@@ -1,13 +1,17 @@
 import { defineConfig } from 'vitest/config';
 import path from "path";
+import Vue from "@vitejs/plugin-vue";
+import Jsx from "@vitejs/plugin-vue-jsx";
 
 export default defineConfig({
+  plugins: [Vue(), Jsx()],
   test: {
     globals: true,
     environment: 'jsdom',
     coverage: {
       provider: "c8",
       exclude:[
+        "**/icons/**",
         "**/__tests__/**",
         "**/__test__/**",
         "**/__stories__/**",
