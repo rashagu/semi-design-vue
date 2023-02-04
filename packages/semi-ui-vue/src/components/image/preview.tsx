@@ -7,10 +7,11 @@ import { getUuidShort } from "@douyinfe/semi-foundation/utils/uuid";
 import { cssClasses } from "@douyinfe/semi-foundation/image/constants";
 import { isObject } from "lodash";
 import "@douyinfe/semi-foundation/image/image.scss";
-import {defineComponent, h, reactive, useSlots, ref, Fragment, onMounted, watch, cloneVNode} from "vue";
+import {defineComponent, h, reactive, useSlots, ref, Fragment, onMounted, watch, cloneVNode, VNode} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
 import {VueJsxNode} from "../interface";
+import {getFragmentChildren} from "../_utils";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -132,13 +133,14 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
     };
 
     const loopImageIndex = () => {
-        const children = slots.default?.()[0].children
+        const children = getFragmentChildren(slots)
         let index = 0;
         const srcListInChildren = [];
         const titles: VueJsxNode = [];
-        const loop = (children) => {
+        const loop = (children:VNode[]) => {
             return children.map((child) => {
                 if (child && child.props && child.type) {
+                    // @ts-ignore
                     if (child.type.isSemiImage) {
                         const { src, preview, alt } = child.props;
                         if (preview || preview === undefined) {

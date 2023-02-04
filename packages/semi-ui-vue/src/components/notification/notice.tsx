@@ -45,6 +45,7 @@ const propTypes = {
     // private props
     close: PropTypes.func,
     direction: String,
+    onHookClose: PropTypes.func,
 };
 const defaultProps = {
     duration,
@@ -73,7 +74,6 @@ const Notice = defineComponent<NoticeReactProps>((props, {}) => {
         return {
             ...adapterInject(),
             notifyWrapperToRemove: (id: string) => {
-                console.log(id)
                 props.close(id);
             },
             notifyClose: () => {

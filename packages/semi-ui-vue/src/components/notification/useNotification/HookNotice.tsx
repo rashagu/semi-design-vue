@@ -7,10 +7,11 @@ export interface HookNoticeProps extends NoticeInstance{
 }
 
 export const vuePropsType = {
+    id: String,
     afterClose: Function,
     motion: [Object, String, Boolean,]
 }
-const HookNotice = defineComponent<HookNoticeProps>((props, {expose}) => {
+const HookNotice = defineComponent<HookNoticeProps>((props, {expose, attrs}) => {
 
     const slots = useSlots()
     const visible = ref(true);
@@ -29,7 +30,7 @@ const HookNotice = defineComponent<HookNoticeProps>((props, {expose}) => {
 
     return () => {
 
-        const { afterClose, ...config } = props
+        const { afterClose, ...config } = attrs
 
         return visible ? (
           <Notice

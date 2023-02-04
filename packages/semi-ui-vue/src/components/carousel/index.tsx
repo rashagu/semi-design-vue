@@ -25,6 +25,7 @@ import {
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {ToastReactProps} from "../toast/toast";
+import {getFragmentChildren} from "../_utils";
 
 export interface CarouselState {
   activeIndex: number;
@@ -298,7 +299,7 @@ const Carousel = defineComponent<CarouselProps>((props, {expose}) => {
 
 
   return () => {
-    preChildren = slots.default?.()?.[0].children as any  || [];
+    preChildren = getFragmentChildren(slots);
 
     const {animation, className, style, slideDirection} = props;
     const {isReverse} = state;

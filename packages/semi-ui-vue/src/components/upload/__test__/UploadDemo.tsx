@@ -2,6 +2,7 @@ import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
 import Upload from "../index";
 import Button from "../../button";
 import {IconUpload} from "@kousum/semi-icons-vue";
+import FileCard from "../fileCard";
 
 interface UploadDemoProps {
   name?: string
@@ -21,6 +22,8 @@ const UploadDemo = defineComponent<UploadDemoProps>((props, {}) => {
           点击上传
         </Button>
       </Upload>
+
+      <FileCard />
     </div>
   )
 })

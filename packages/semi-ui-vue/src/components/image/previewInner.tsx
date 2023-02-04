@@ -261,7 +261,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     return Boolean(context && context.value.isGroup);
   }
 
-  const viewVisibleChange = () => {
+  function viewVisibleChange(){
     foundation.handleViewVisibleChange();
   }
 
@@ -301,23 +301,23 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     foundation.handleMouseMoveEvent(e, event);
   }
 
-  const handleKeyDown = (e: KeyboardEvent) => {
+  function handleKeyDown (e: KeyboardEvent) {
     foundation.handleKeyDown(e);
-  };
+  }
 
-  const onImageError = () => {
+  function onImageError() {
     foundation.preloadSingleImage();
   }
 
-  const onImageLoad = (src) => {
+  function onImageLoad(src) {
     foundation.onImageLoad(src);
   }
 
-  const handleMouseDown = (e): void => {
+  function handleMouseDown(e): void {
     foundation.handleMouseDown(e);
   }
 
-  const handleRatio = (type: RatioType): void => {
+  function handleRatio(type: RatioType): void {
     foundation.handleRatio(type);
   }
 

@@ -1,8 +1,7 @@
-import {defineComponent, ref, h, Fragment, VNode} from 'vue'
+import { defineComponent, ref, h, Fragment, VNode } from 'vue';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import type { OptionProps } from './option';
 import type { OptionGroupProps } from './optionGroup';
-
 
 const generateOption = (child: VNode, parent: any, index: number): OptionProps => {
   const childProps = child.props;
@@ -13,8 +12,11 @@ const generateOption = (child: VNode, parent: any, index: number): OptionProps =
   const option = {
     value: childProps.value,
     // Drop-down menu rendering priority label value, children, value in turn downgrade
-    // @ts-ignore
-    label: childProps.label || (typeof child.children === 'object' && child.children.default?(child.children.default()[0].children):null) || childProps.value,
+    label:
+      childProps.label ||
+      // @ts-ignore
+      (typeof child.children === 'object' && child.children.default ? child.children.default()[0].children : null) ||
+      childProps.value,
     _show: true,
     _selected: false,
     _scrollIndex: index,
@@ -30,26 +32,22 @@ const getOptionsFromGroup = (selectChildren: VNode[]) => {
 
   const emptyGroup = { label: '', children: [], _show: false };
 
-
   // TODO 不同点
   // if (!Array.isArray(selectChildren)){
   //   selectChildren = selectChildren[0].children as VNode[]
   // }
 
-
-
   // avoid null
   // eslint-disable-next-line max-len
   // let childNodes = React.Children.toArray(selectChildren) as React.ReactElement[];
   let childNodes = selectChildren.filter((childNode) => {
-    return childNode && childNode.props
+    return childNode && childNode.props;
   });
 
   let type = '';
   let optionIndex = -1;
 
   childNodes.forEach((child: VNode) => {
-
     // @ts-ignore
     if (child.type?.name === 'isSelectOption') {
       type = 'option';
@@ -64,10 +62,10 @@ const getOptionsFromGroup = (selectChildren: VNode[]) => {
       // eslint-disable-next-line prefer-const
       let { ...restGroupProps } = child.props;
       // @ts-ignore
-      let children = child.children.default?child.children.default():[]
+      let children = child.children.default ? child.children.default() : [];
       // children = React.Children.toArray(children);
-      if (Array.isArray(children[0])){
-        children = children[0]
+      if (Array.isArray(children[0])) {
+        children = children[0];
       }
 
       const childrenOption = children.map((option: VNode) => {
@@ -92,5 +90,3 @@ const getOptionsFromGroup = (selectChildren: VNode[]) => {
 };
 
 export { generateOption, getOptionsFromGroup };
-
-

@@ -43,6 +43,7 @@ const PopoverTest = defineComponent<ExampleProps>((props, {slots}) => {
         <Space align='baseline'>
           {POSITION_SET.map((pos: any) => (
             <Popover
+              showArrow={true}
               key={pos}
               content={
                 <div style={{padding: '20px'}}>

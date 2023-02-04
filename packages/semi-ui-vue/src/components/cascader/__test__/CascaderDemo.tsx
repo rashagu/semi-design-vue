@@ -1,5 +1,7 @@
 import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
 import Cascader from '../index';
+import Item from '../item';
+import {noop} from "lodash";
 interface ExampleProps {
   name?: string;
 }
@@ -52,6 +54,8 @@ const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
     <div>
       <Cascader defaultOpen={true} treeData={treeData} placeholder="请选择所在地区" />
       <Cascader treeData={treeData} multiple={true} placeholder="请选择所在地区" />
+
+      <ItemDdemo />
     </div>
   );
 });
@@ -59,3 +63,41 @@ const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
 CascaderDemo.props = vuePropsType;
 
 export default CascaderDemo;
+export const ItemDdemo = defineComponent(() => {
+  const props_ = {
+    activeKeys: new Set(),
+    selectedKeys: new Set(),
+    halfCheckedKeys: new Set(),
+    checkedKeys: new Set(),
+    loadedKeys: new Set(),
+    loadingKeys: new Set(),
+    onItemClick: noop,
+    separator: ' / ',
+    showNext: 'click',
+    searchable: false,
+    inputValue: '',
+    data: [],
+    multiple: false,
+  };
+  const a = [
+    {
+      children: [],
+      data: { label: '浙江省', value: 'zhejiang', children: [] },
+      ind: 0,
+      key: '0',
+      level: 0,
+      parent: undefined,
+      parentKey: null,
+      path: ['0'],
+      valuePath: ['zhejiang'],
+    }
+  ];
+  return () => (
+    <div>
+      {/*// @ts-ignore*/}
+      <Item {...props_}></Item>
+      {/*// @ts-ignore*/}
+      <Item {...props_} data={a}></Item>
+    </div>
+  );
+});

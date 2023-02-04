@@ -32,6 +32,17 @@ const ToastDemo = defineComponent<ExampleProps>((props, {}) => {
   const throttled = throttle(() => Toast.info(throttleOpts), 10000, {trailing: false});
 
   Toast.info(opts.value)
+
+
+
+
+  // 有bug，而且没有动画，不建议使用
+  const [toast_, contextHolder] = Toast.useToast();
+  const config = {
+    duration: 0,
+    title: 'This is a success message',
+    content: 123,
+  };
   return () => (
     <div>
 
@@ -58,6 +69,17 @@ const ToastDemo = defineComponent<ExampleProps>((props, {}) => {
         <br/>
         <Button onClick={throttled} className={'Throttled'}>Throttled Toast</Button>
 
+
+        <div>
+          <Button
+            onClick={() => {
+              toast_.success(config);
+            }}
+          >
+            Hook Toast
+          </Button>
+        </div>
+        {contextHolder.value}
       </div>
     </div>
   )

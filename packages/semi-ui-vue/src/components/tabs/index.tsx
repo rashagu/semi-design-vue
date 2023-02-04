@@ -17,6 +17,7 @@ import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 import {AutoCompleteProps} from "../autoComplete";
 import {VueJsxNode} from "../interface";
+import {getFragmentChildren} from "../_utils";
 
 const panePickKeys = ['className', 'style', 'disabled', 'itemKey', 'tab', 'icon'];
 
@@ -269,12 +270,7 @@ const Tabs = defineComponent<TabsProps>((props, {}) => {
 
     return () => {
         const children = slots.default?.()
-        // for Vitest
-        if (typeof children?.[0]?.type === 'symbol' && children[0].type.toString() === 'Symbol(Fragment)'){
-            childrenRef.value = slots.default?.()?.[0]?.children as any || []
-        }else{
-            childrenRef.value = slots.default?.() as any || []
-        }
+        childrenRef.value = getFragmentChildren(slots)
 
         const {
             className,

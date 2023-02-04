@@ -143,7 +143,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<NotificationDemo/>*/}
         {/*<BannerDemo/>*/}
         {/*<ToastDemo/>*/}
-        <ImageDemo/>
+        {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
         {/*<FormDemo />*/}
         {/*<WithFormApiDemo />*/}
@@ -160,7 +160,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
         {/*<ModalDemo/>*/}
-        {/*<UploadDemo/>*/}
+        <UploadDemo/>
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}

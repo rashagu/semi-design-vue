@@ -206,14 +206,14 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
       const position = notice.position || defaultPosition;
       noticesInPosition[position].push(notice);
     });
-    console.log(noticesInPosition)
+
     const noticesList = Object.entries(noticesInPosition).map(obj => {
       const pos = obj[0];
       const noticesInPos = obj[1];
       return renderNoticeInPosition(noticesInPos, pos as NoticePosition, removedItems);
     });
 
-    console.log(noticesList)
+
 
     return <Fragment>{noticesList}</Fragment>;
   }

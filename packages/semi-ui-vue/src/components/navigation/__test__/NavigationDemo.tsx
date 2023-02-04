@@ -15,7 +15,13 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
   const openKeys = ref([])
   const isCollapsed = ref(false)
   return ()=>(
-    <div>
+    <div
+      id="container"
+      style={{
+        height: '400px',
+        position: "relative"
+      }}
+    >
       <div>
         <button onClick={()=>openKeys.value = ['job']}>
           {JSON.stringify(openKeys.value)}

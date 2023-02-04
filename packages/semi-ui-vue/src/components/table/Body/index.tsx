@@ -212,7 +212,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
     let one1: WatchStopHandle
     one1 = watch(()=>context.value.getVirtualizedListRef, (value)=>{
         flattenedColumns = context.value.flattenedColumns as any;
-        cellWidths = context.value.getCellWidths(flattenedColumns);
+        cellWidths = context.value.getCellWidths?.(flattenedColumns);
         one1?.()
     }, {immediate: true})
     observer = null;
@@ -285,6 +285,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
             prevPropsScroll,
             prevStateCachedExpandRelatedProps
         ]) => {
+
         const { virtualized, dataSource, expandedRowKeys, columns, scroll } = props;
 
         if (virtualized) {
@@ -299,7 +300,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
 
         const expandRelatedProps = strings.EXPAND_RELATED_PROPS;
         const newExpandRelatedProps = expandRelatedProps.map(key => get(props, key, undefined));
-        if (!isEqual(newExpandRelatedProps, prevStateCachedExpandRelatedProps)) {
+        if (prevStateCachedExpandRelatedProps && !isEqual(newExpandRelatedProps, prevStateCachedExpandRelatedProps)) {
             foundation.initExpandBtnShouldInRow(newExpandRelatedProps);
         }
 

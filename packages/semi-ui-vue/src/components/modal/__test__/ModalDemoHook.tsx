@@ -15,6 +15,7 @@ const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
   const [modal, contextHolder] = useModal();
   const config = { title: 'This is a success message', content: 'Context consumer' };
 
+  modal.confirm(config);
   function onClick() {
     let a = modal.confirm(config);
     setTimeout(()=>{

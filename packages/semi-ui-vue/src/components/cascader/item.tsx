@@ -324,7 +324,7 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
   function renderEmpty() {
     const { emptyContent } = props;
     return (
-      <LocaleConsumer componentName="CascaderDemo">
+      <LocaleConsumer componentName="Cascader">
         {(locale: Locale['Cascader']) => (
           <ul class={`${prefixcls} ${prefixcls}-empty`} key={'empty-list'}>
             <span class={`${prefixcls}-label`}>{emptyContent || locale.emptyText}</span>

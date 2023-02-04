@@ -1042,7 +1042,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             aria-required={props['aria-required']}
             {...mouseEvent}
           >
-              {inner}
+              {{default:()=>inner}}
           </div>
         );
     };

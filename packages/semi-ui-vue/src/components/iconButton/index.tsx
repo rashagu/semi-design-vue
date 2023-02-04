@@ -7,6 +7,7 @@ import Button, {Theme, ButtonProps, Size, Type} from '../button/Button';
 import SpinIcon from '../spin/icon';
 import {noop} from 'lodash';
 import '@douyinfe/semi-foundation/button/iconButton.scss';
+import {getFragmentChildren} from "../_utils";
 
 
 const iconSizes = iconStrings.SIZE;
@@ -82,7 +83,7 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
             } else if (isVNode(icon)) {
               IconElem = () => icon;
             }
-            const children = () => slots.default && slots.default() && slots.default()[0]?.children ?
+            const children = () => getFragmentChildren(slots) ?
               <span class={IconElem() ? btnTextCls : ''}>{slots.default ? slots.default() : null}</span> : null;
             if (iconPosition === 'left') {
               return <>
