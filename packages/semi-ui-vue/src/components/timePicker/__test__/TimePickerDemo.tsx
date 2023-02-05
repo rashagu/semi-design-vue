@@ -1,5 +1,9 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
 import TimePicker from '../index';
+import Combobox from "../Combobox";
+import Provider from "../../configProvider/context/Provider";
+import zh_CN from "../../locale/source/zh_CN";
+import {Locale} from "../../locale/interface";
 
 interface ExampleProps {
   name?: string
@@ -13,7 +17,7 @@ const TimePickerDemo = defineComponent<ExampleProps>((props, {}) => {
 
   return () => (
     <div>
-      <TimePicker placeholder={'请选择时间'} />
+      <TimePicker defaultOpen={true} placeholder={'请选择时间'} />
     </div>
   )
 })

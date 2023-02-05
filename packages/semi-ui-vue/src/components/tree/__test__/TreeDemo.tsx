@@ -52,6 +52,9 @@ const TreeDemo = defineComponent<ExampleProps>((props, {}) => {
         treeData={treeData}
         defaultExpandAll
         style={style}
+        virtualize={{
+          itemSize: 28,
+        }}
       />
     </div>
   )

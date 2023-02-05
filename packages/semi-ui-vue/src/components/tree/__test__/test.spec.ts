@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest'
-import Comp from "./TreeDemo";
+import Comp from "./TreeAllDemo";
 import {mount} from "@vue/test-utils";
 
 test('Tree test', async () => {

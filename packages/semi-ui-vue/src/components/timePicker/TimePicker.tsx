@@ -5,7 +5,7 @@ import {noop, get, values} from 'lodash';
 
 import {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import {strings, cssClasses} from '@douyinfe/semi-foundation/timePicker/constants';
-import Popover from '../popover';
+import Popover, { PopoverProps } from '../popover';
 import {numbers as popoverNumbers} from '@douyinfe/semi-foundation/popover/constants';
 import TimePickerFoundation, {TimePickerAdapter} from '@douyinfe/semi-foundation/timePicker/foundation';
 import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
@@ -25,6 +25,7 @@ import {Locale} from '../locale/interface';
 import {Motion} from '../_base/base';
 import {vuePropsMake} from "../PropTypes";
 import {AriaAttributes} from "../AriaAttributes";
+import {VueJsxNode} from "../interface";
 
 export interface Panel {
   panelHeader?: VNode | string;
@@ -93,6 +94,11 @@ export type TimePickerProps = {
   onChangeWithDateFirst?: boolean;
   onFocus?: any;
   onOpenChange?: (open: boolean) => void;
+
+
+  clearIcon?: VueJsxNode;
+  dropdownMargin?: PopoverProps['margin'];
+  preventScroll?: boolean;
 };
 
 export interface TimePickerState {
@@ -104,7 +110,7 @@ export interface TimePickerState {
   showHour: boolean;
   showMinute: boolean;
   showSecond: boolean;
-  invalid: boolean;
+  invalid: boolean
 }
 
 export const propTypes = {
@@ -165,6 +171,13 @@ export const propTypes = {
   autoAdjustOverflow: {type: PropTypes.bool, default: true},
   ...PanelShape,
   inputStyle: PropTypes.object,
+
+
+
+  clearIcon: PropTypes.node,
+  dropdownMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  ...PanelShape,
+  preventScroll: PropTypes.bool,
 }
 export const defaultProps = {
   autoAdjustOverflow: true,
@@ -179,7 +192,7 @@ export const defaultProps = {
   style: {},
   className: '',
   popupClassName: '',
-  popupStyle: {left: '0px', top: '0px'},
+  popupStyle: { left: '0px', top: '0px' },
   disabledHours: () => [] as number[],
   disabledMinutes: () => [] as number[],
   disabledSeconds: () => [] as number[],
@@ -194,7 +207,7 @@ export const defaultProps = {
   onKeyDown: noop,
   size: 'default' as const,
   type: strings.DEFAULT_TYPE,
-  open: undefined,
+  motion: true,
   ...PanelShapeDefaults,
   // format: strings.DEFAULT_FORMAT,
   // open and value controlled
@@ -204,7 +217,6 @@ export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 // debugger
 const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
 
-  console.log(props,'value' in (props as any))
   const {format = strings.DEFAULT_FORMAT} = props;
   const state = reactive<TimePickerState>({
     open: props.open || props.defaultOpen || false,
@@ -240,7 +252,6 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
         }
         clickOutSideHandler = e => {
           // const panel = this.savePanelRef && this.savePanelRef.current;
-          console.log(savePanelRef.value, e.target)
           const panel = savePanelRef.value;
           const isInPanel = e.target && panel && panel.contains(e.target as Node);
           // const isInTimepicker =
@@ -286,17 +297,17 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
     }
     return null;
   }
-  watch(()=>props.open, (val)=>{
-    const newState = getDerivedStateFromProps(props, state)
-    if (newState){
-      Object.keys(newState).forEach(key=>{
-        state[key] = newState[key]
-      })
-    }
-  })
+  // watch(()=>props.open, (val)=>{
+  //   const newState = getDerivedStateFromProps(props, state)
+  //   if (newState){
+  //     Object.keys(newState).forEach(key=>{
+  //       state[key] = newState[key]
+  //     })
+  //   }
+  // })
 
 
-  watch([() => props.value, () => props.timeZone], (value, oldValue) => {
+  watch([() => props.value, () => props.timeZone, ()=>state.value], (value, oldValue) => {
 
     if (isControlled('value') && value[0] !== oldValue[0]) {
       foundation.refreshProps({
@@ -320,12 +331,10 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
     value: { isAM: boolean; value: string; timeStampValue: number },
     index: number
   ) => {
-    console.log(value)
     foundation.handlePanelChange(value, index)
   };
 
   const handleInput = (value: string) => {
-    console.log(value)
     foundation.handleInputChange(value)
   };
 
@@ -360,38 +369,36 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
 
     const format = foundation.getDefaultFormatIfNeed();
 
-    const props0 = {
-      ...props,
-      key: 0,
-      format,
-      isAM: isAM[0],
-      timeStampValue: value[0],
-      prefixCls: `${prefixCls}-panel`,
-      onCurrentSelectPanelChange: onCurrentSelectPanelChange,
-      ...createPanelProps(0),
-      onChange: v => handlePanelChange(v, 0)
-    }
     const timePanels = [
       <Combobox
-        {...props0}
+        {...{
+          ...props,
+          key: 0,
+          format,
+          isAM: isAM[0],
+          timeStampValue: value[0],
+          prefixCls: `${prefixCls}-panel`,
+          onChange: v => handlePanelChange(v, 0),
+          onCurrentSelectPanelChange: onCurrentSelectPanelChange,
+          ...createPanelProps(0),
+        }}
       />,
     ];
 
     if (type === strings.TYPE_TIME_RANGE_PICKER) {
-      const props1 = {
-        ...props,
-        key: 1,
-        format,
-        isAM: isAM[1],
-        timeStampValue: value[1],
-        prefixCls: `${prefixCls}-panel`,
-        onChange: v => handlePanelChange(v, 1),
-        onCurrentSelectPanelChange: onCurrentSelectPanelChange,
-        ...createPanelProps(1),
-      }
       timePanels.push(
         <Combobox
-          {...props1}
+          {...{
+            ...props,
+            key: 1,
+            format,
+            isAM: isAM[1],
+            timeStampValue: value[1],
+            prefixCls: `${prefixCls}-panel`,
+            onChange: v => handlePanelChange(v, 1),
+            onCurrentSelectPanelChange: onCurrentSelectPanelChange,
+            ...createPanelProps(1),
+          }}
         />
       );
     }
@@ -465,6 +472,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
       placeholder,
       disabled,
       defaultValue,
+      dropdownMargin,
       className,
       popupStyle,
       size,
@@ -537,12 +545,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
     }
 
     return (
-      <div
-        ref={setTimePickerRef}
-        class={classNames({[prefixCls]: true}, className)}
-        style={style}
-        {...outerProps}
-      >
+      <div ref={setTimePickerRef} class={classNames({ [prefixCls]: true }, className)} style={style} {...outerProps}>
         <Popover
           getPopupContainer={getPopupContainer}
           zIndex={zIndex as number}
@@ -554,6 +557,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
           position={position}
           visible={disabled ? false : Boolean(open)}
           motion={motion}
+          margin={dropdownMargin}
           autoAdjustOverflow={autoAdjustOverflow}
         >
           {useCustomTrigger ? (
@@ -565,12 +569,12 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
               onChange={handleInput}
               placeholder={placeholder}
               componentName={'TimePicker'}
-              componentProps={{...props}}
+              componentProps={{ ...props }}
             />
           ) : (
             <span class={headerPrefix}>
-                            <TimeInput {...inputProps} />
-                        </span>
+              <TimeInput {...inputProps} />
+            </span>
           )}
         </Popover>
       </div>
