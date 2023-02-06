@@ -80,7 +80,7 @@ const Tabs = defineComponent<TabsProps>((props, {}) => {
         forceDisableMotion: false
     });
 
-    const childrenRef = ref<VNode[]>()
+    const childrenRef = ref<VNode[]>([])
     const {adapter: adapterInject} = useBaseComponent<TabsProps>(props, state)
     function adapter_(): TabsAdapter<TabsProps, TabsState> {
         return {
