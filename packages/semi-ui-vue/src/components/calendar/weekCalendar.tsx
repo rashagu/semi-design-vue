@@ -3,7 +3,6 @@ import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import CalendarFoundation, { CalendarAdapter, EventObject, ParsedEvents, ParsedEventsType, ParsedRangeEvent, WeeklyData } from '@douyinfe/semi-foundation/calendar/foundation';
 import LocaleConsumer from '../locale/localeConsumer';
-import localeContext from '../locale/context';
 import { cssClasses } from '@douyinfe/semi-foundation/calendar/constants';
 import DayCol from './dayCol';
 import TimeCol from './timeCol';

@@ -2,7 +2,6 @@ import {defineComponent, ref, h, Fragment, useSlots, VNode} from 'vue'
 import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import { cssClasses } from '@douyinfe/semi-foundation/scrollList/constants';
 import classnames from 'classnames';
-import ScrollItem from './scrollItem';
 import Foundation from '@douyinfe/semi-foundation/scrollList/foundation';
 
 import '@douyinfe/semi-foundation/scrollList/scrollList.scss';

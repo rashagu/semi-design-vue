@@ -11,7 +11,6 @@ import '@douyinfe/semi-foundation/popover/popover.scss';
 import {BaseProps} from '../_base/baseComponent';
 import {Motion} from '../_base/base';
 import { isFunction, noop } from 'lodash';
-import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
 

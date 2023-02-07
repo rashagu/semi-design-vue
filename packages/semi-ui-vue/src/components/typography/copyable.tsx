@@ -92,21 +92,20 @@ const Copyable = defineComponent<CopyableProps>((props, {slots}) => {
     }
   };
 
-  const LocaleConsumerDom = LocaleConsumer()
   const renderSuccessTip = () => {
     const { successTip } = props;
     if (typeof successTip !== 'undefined') {
       return successTip;
     }
     return (
-      <LocaleConsumerDom componentName="Typography">
+      <LocaleConsumer componentName="Typography">
         {(locale: Locale['Typography']) => (
           <span>
             <IconTick />
             {locale.copied}
           </span>
         )}
-      </LocaleConsumerDom>
+      </LocaleConsumer>
     );
   };
 
@@ -118,7 +117,7 @@ const Copyable = defineComponent<CopyableProps>((props, {slots}) => {
       [`${prefixCls}-action-copied`]: copied,
     });
     return (
-      <LocaleConsumerDom componentName="Typography">
+      <LocaleConsumer componentName="Typography">
         {(locale: Locale['Typography']) => (
           <span style={{ marginLeft: '4px', ...style }} class={finalCls} ref={forwardRef}>
                         {copied ? (
@@ -141,7 +140,7 @@ const Copyable = defineComponent<CopyableProps>((props, {slots}) => {
                         )}
                     </span>
         )}
-      </LocaleConsumerDom>
+      </LocaleConsumer>
     );
   }
 })

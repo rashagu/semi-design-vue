@@ -24,7 +24,6 @@ import {VueJsxNode} from "../interface";
 import {CSSProperties, defineComponent, h, onMounted, onUnmounted, reactive, useSlots, watch} from "vue";
 import {useConfigContext} from "../configProvider/context/Consumer";
 import {useBaseComponent} from "../_base/baseComponent";
-import {TableSelectionCellProps} from "../table/ColumnSelection";
 import {vuePropsMake} from "../PropTypes";
 
 
