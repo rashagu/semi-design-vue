@@ -7,7 +7,7 @@ test('TimePickerDemo test', async () => {
   render(Comp)
   const input = await screen.findByPlaceholderText("请选择时间")
   await fireEvent.click(input)
-  // const value = await screen.findByPlaceholderText("00时间")
+  // const value = await screen.findByText("00时间")
 
 
   const wrapper = mount(Comp, {})

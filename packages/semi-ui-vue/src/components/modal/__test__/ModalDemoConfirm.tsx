@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
+import {defineComponent, ref, h, Fragment, useSlots, onMounted} from 'vue'
 import Button from "../../button";
 import {ModalConfirm} from "../index";
 import {IconSend} from "@kousum/semi-icons-vue";
@@ -29,8 +29,13 @@ const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
     ModalConfirm.warning({ title: 'Warning: be cautious ahead', content: 'bla bla bla...' });
   }
 
+  const container = ref()
   function confirm() {
-    ModalConfirm.confirm({ title: 'Are you sure ?', content: 'bla bla bla...' });
+    ModalConfirm.confirm({
+      getContainerContext: ()=>container.value,
+      title: 'Are you sure ?',
+      content: 'bla bla bla...',
+    });
   }
 
   function custom() {
@@ -42,6 +47,7 @@ const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
       okButtonProps: { theme: 'solid' },
     });
   }
+
 
   return () => (
     <div>
@@ -64,10 +70,14 @@ const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
         <br />
         <Button onClick={confirm} type="primary">
           Confirm
+          <div data-testid="custom-element" >Confirm</div>
         </Button>
         <br />
         <br />
         <Button onClick={custom}>Custom</Button>
+      </div>
+      <div ref={container}>
+
       </div>
     </div>
   )

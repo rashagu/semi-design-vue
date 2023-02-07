@@ -86,6 +86,7 @@ import TransferTreeDemo from "./components/transfer/__test__/TransferTreeDemo";
 import TableDemo10 from "./components/table/__test__/TableDemo10";
 import TableDemo11 from "./components/table/__test__/TableDemo11";
 import VirtualizeTreeDemo from "./components/tree/__test__/VirtualizeTreeDemo";
+import FormAllDemo from "./components/form/__test__/FormAllDemo";
 export interface ExampleProps {
   name?: string
 }
@@ -146,6 +147,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ToastDemo/>*/}
         {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
+        {/*<FormAllDemo />*/}
         {/*<FormDemo />*/}
         {/*<WithFormApiDemo />*/}
         {/*<WithFormStateDemo/>*/}
@@ -160,14 +162,14 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SliderDemo />*/}
         {/*<InputNumberDemo />*/}
         {/*<ModalDemoHook />*/}
-        {/*<ModalDemoConfirm/>*/}
+        <ModalDemoConfirm/>
         {/*<ModalDemo/>*/}
         {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}
         {/*<DatePickerDemo />*/}
-        <TimePickerDemo />
+        {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
         {/*<CheckboxDemo />*/}

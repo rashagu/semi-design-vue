@@ -3,7 +3,7 @@ import FormDemo from "./FormDemo";
 import WithFormApiDemo from "./WithFormApiDemo";
 import WithFormStateDemo from "./WithFormStateDemo";
 import WithFieldDemo from "./WithFieldDemo";
-import WithFieldDemo2Vitest from "./WithFieldDemo2Vitest";
+import WithFieldDemo2 from "./WithFieldDemo2";
 
 interface FormAllDemoProps {
   name?: string
@@ -22,7 +22,7 @@ const FormAllDemo = defineComponent<FormAllDemoProps>((props, {}) => {
       <WithFormApiDemo />
       <WithFormStateDemo/>
       <WithFieldDemo/>
-      <WithFieldDemo2Vitest/>
+      <WithFieldDemo2/>
     </div>
   )
 })

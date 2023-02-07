@@ -5,6 +5,7 @@ import { Image, ImagePreview } from '../../index';
 import {defineComponent, h, provide, ref} from "vue";
 import PreviewInner from "../previewInner";
 import {noop} from "lodash";
+import {fireEvent, render, screen} from "@testing-library/vue";
 
 beforeAll(()=>{
   const intersectionObserverMock = () => ({
@@ -55,3 +56,12 @@ test('ImageDemo qwe', async () => {
   const profileLink = wrapper.find('.semi-image-overlay');
   expect(profileLink.exists()).toEqual(true);
 });
+
+test('ImageDemo inner qwe', async () => {
+
+  render(Comp)
+  const img = await screen.findAllByAltText("lamp1")
+  await fireEvent.click(img[0])
+  const value = await screen.findByAltText("previewImag")
+
+})
