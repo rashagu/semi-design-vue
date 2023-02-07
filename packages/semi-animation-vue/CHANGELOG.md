@@ -1,5 +1,12 @@
 # @kousum/semi-animation-vue
 
+## 0.2.1
+
+### Patch Changes
+
+- 880da16: fix: 修复一些 bug
+- 2c4405d: 修复 LocaleConsumer 用法
+
 ## 0.2.0
 
 ### Minor Changes

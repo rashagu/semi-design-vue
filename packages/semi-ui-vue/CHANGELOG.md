@@ -1,5 +1,17 @@
 # @kousum/semi-ui-vue
 
+## 0.2.1
+
+### Patch Changes
+
+- 880da16: fix: 修复一些 bug
+- 2c4405d: 修复 LocaleConsumer 用法
+- Updated dependencies [880da16]
+- Updated dependencies [2c4405d]
+  - @kousum/semi-animation-vue@0.2.1
+  - @kousum/semi-icons-vue@0.2.1
+  - @kousum/semi-illustrations-vue@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
