@@ -740,22 +740,26 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
         );
 
         return (
-          <AutoSizer defaultHeight={parseInt(''+virtualize.height)} defaultWidth={parseInt(''+virtualize.width)}>
-              {({ height, width }: { width: string | number; height: string | number }) => (
-                <VirtualList
-                  ref={virtualizedListRef}
-                  itemCount={flattenNodes.length}
-                  itemSize={virtualize.itemSize}
-                  height={parseInt(''+height)}
-                  width={width}
-                  itemKey={itemKey}
-                  itemData={flattenNodes as any}
-                  className={`${prefixcls}-virtual-list`}
-                  style={{ direction }}
-                >
-                    {option}
-                </VirtualList>
-              )}
+          <AutoSizer
+            defaultHeight={parseInt('' + virtualize.height)}
+            defaultWidth={parseInt('' + virtualize.width)}
+            children={({ height, width }: { width: string | number; height: string | number }) => (
+              <VirtualList
+                ref={virtualizedListRef}
+                itemCount={flattenNodes.length}
+                itemSize={virtualize.itemSize}
+                height={parseInt(''+height)}
+                width={width}
+                itemKey={itemKey}
+                itemData={flattenNodes as any}
+                className={`${prefixcls}-virtual-list`}
+                style={{ direction }}
+              >
+                  {option}
+              </VirtualList>
+            )}
+          >
+
           </AutoSizer>
         );
     }

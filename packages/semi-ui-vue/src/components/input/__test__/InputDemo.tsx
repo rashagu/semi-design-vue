@@ -3,6 +3,8 @@ import Input from '../index'
 import TextArea from "../textArea";
 import {IconSearch} from '@kousum/semi-icons-vue'
 import {Text} from '../../typography'
+import {InputGroup} from "../../index";
+import InputNumber from "../../inputNumber";
 
 interface ExampleProps {
   name?: string
@@ -50,6 +52,12 @@ const InputDemo = defineComponent<ExampleProps>((props, {slots}) => {
       <Input defaultValue='ies' validateStatus='error'></Input>
       <br/><br/>
       <Input defaultValue='ies'></Input>
+
+
+      <InputGroup>
+        <Input placeholder="Name" style={{ width: '100px' }} />
+        <InputNumber placeholder="Score" style={{ width: '140px' }} />
+      </InputGroup>
     </div>
   )
 })

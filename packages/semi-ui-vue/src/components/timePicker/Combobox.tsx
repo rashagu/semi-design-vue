@@ -51,12 +51,6 @@ export interface AMPMOptionItem {
 }
 
 
-const defaultProps = {
-  disabledHours: noop,
-  disabledMinutes: noop,
-  disabledSeconds: noop,
-  format: strings.DEFAULT_FORMAT,
-};
 
 
 const staticPropTypes = {
@@ -102,17 +96,18 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
 
   function setState() {
     const foundationState = foundation.initData()
-    for (const foundationKey in foundationState) {
-      state[foundationKey] = foundationState[foundationKey]
-    }
+    Object.keys(foundationState).forEach(key=>{
+      state[key] = foundationState[key]
+    })
   }
+
   setState()
 
-  watch([()=>props.timeStampValue, ()=>props.format], ()=>{
-    setState()
+  watch([()=>props.timeStampValue, ()=>props.format], ([],[prevPropsTimeStampValue, prevPropsFormat])=>{
+    if (prevPropsTimeStampValue !== props.timeStampValue || prevPropsFormat !== props.format) {
+      setState()
+    }
   })
-
-
 
 
 
@@ -134,8 +129,7 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
     });
   };
 
-  const  onItemChange = ({ type, value, disabled }: { type?: string; value: string; disabled?: boolean; }) => {
-    console.log({ type, value, disabled })
+  const onItemChange = ({ type, value, disabled }: { type?: string; value: string; disabled?: boolean; }) => {
     // eslint-disable-next-line prefer-const
     let { onChange, use12Hours, isAM, format, timeStampValue } = props;
     const transformValue = foundation.getDisplayDateFromTimeStamp(timeStampValue);
@@ -204,17 +198,14 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
       hourAdj = hour;
     }
 
-    console.log(hourAdj)
     const transformHour = (value: string) => value + locale.hour;
 
     const className = `${prefixCls}-list-hour`;
     return (
       <ScrollItemFormatOptionReturn
-        key={1}
         ref={current => cacheRefCurrent('hour', current)}
         mode={'wheel'}
         transform={transformHour}
-        cycled={true}
         className={className}
         list={hourOptionsAdj.map(option => formatOption(option, disabledOptions))}
         selectedIndex={hourOptionsAdj.indexOf(hourAdj)}
@@ -242,11 +233,9 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
 
     return (
       <ScrollItemFormatOptionReturn
-        key={2}
         ref={current => cacheRefCurrent('minute', current)}
         mode={'wheel'}
         transform={transformMinute}
-        cycled={true}
         list={minuteOptions.map(option => formatOption(option, disabledOptions))}
         selectedIndex={minuteOptions.indexOf(minute)}
         type="minute"
@@ -275,11 +264,9 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
 
     return (
       <ScrollItemFormatOptionReturn
-        key={3}
         ref={current => cacheRefCurrent('second', current)}
         mode={'wheel'}
         transform={transformSecond}
-        cycled={true}
         list={secondOptions.map(option => formatOption(option, disabledOptions))}
         selectedIndex={secondOptions.indexOf(second)}
         className={className}
@@ -313,11 +300,9 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
 
     return (
       <ScrollItemAMPMOptionItem
-        key={0}
         ref={current => cacheRefCurrent('ampm', current)}
         mode={'wheel'}
         className={className}
-        cycled={false}
         list={AMPMOptions}
         selectedIndex={selected}
         type="ampm"
@@ -334,13 +319,17 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
   return () => {
     const { timeStampValue, panelHeader, panelFooter } = props;
 
-    console.log(timeStampValue)
     const value = getDisplayDateFromTimeStamp(timeStampValue);
     return (
       <div>
         <LocaleConsumer componentName="TimePicker">
           {(locale: Locale['TimePicker'], localeCode: Locale['code']) => (
-            <ScrollList header={panelHeader} footer={panelFooter}>
+            <ScrollList
+              header={panelHeader}
+              footer={panelFooter}
+              x-semi-header-alias="panelHeader"
+              x-semi-footer-alias="panelFooter"
+            >
               {renderAMPMSelect(locale, localeCode)}
               {renderHourSelect(value.getHours(), locale)}
               {renderMinuteSelect(value.getMinutes(), locale)}

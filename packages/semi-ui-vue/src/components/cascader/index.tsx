@@ -94,7 +94,7 @@ export interface CascaderProps extends BasicCascaderProps {
   style?: CSSProperties;
   bottomSlot?: VNode | string;
   topSlot?: VNode | string;
-  triggerRender?: (props: TriggerRenderProps) => VNode | string;
+  triggerRender?: (props: TriggerRenderProps) => VueJsxNode;
   onListScroll?: (e: any, panel: ScrollPanelProps) => void;
   loadData?: (selectOptions: CascaderData[]) => Promise<void>;
   onLoad?: (newLoadedKeys: Set<string>, data: CascaderData) => void;

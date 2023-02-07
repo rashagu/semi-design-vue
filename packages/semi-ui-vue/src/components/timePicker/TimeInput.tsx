@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, reactive} from 'vue'
+import {defineComponent, ref, h, Fragment, reactive, onMounted, watch} from 'vue'
 import * as PropTypes from '../PropTypes';
 import classNames from 'classnames';
 import { strings } from '@douyinfe/semi-foundation/timePicker/constants';
@@ -9,6 +9,7 @@ import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import InputFoundation, { TimeInputAdapter } from '@douyinfe/semi-foundation/timePicker/inputFoundation';
 import { IconClock } from '@kousum/semi-icons-vue';
 import { TimePickerProps } from './TimePicker';
+import {vuePropsMake} from "../PropTypes";
 
 
 export type TimeInputProps = Pick<TimePickerProps,
@@ -32,7 +33,8 @@ export type TimeInputProps = Pick<TimePickerProps,
   'locale' |
   'localeCode' |
   'insetLabel' |
-  'validateStatus'> & BaseProps & {
+  'validateStatus' |
+  'preventScroll'> & BaseProps & {
   onChange?: (value: string) => void;
   onEsc?: () => void;
   onClick?: any;
@@ -43,7 +45,7 @@ export type TimeInputProps = Pick<TimePickerProps,
 };
 
 
-export const vuePropsType = {
+const propTypes = {
   value:String,
   format: {type: PropTypes.string, default:strings.DEFAULT_FORMAT},
   prefixCls: PropTypes.string,
@@ -69,14 +71,27 @@ export const vuePropsType = {
   localeCode: PropTypes.string,
   insetLabel: PropTypes.node,
   validateStatus: PropTypes.string,
+  preventScroll: PropTypes.bool,
 }
+const defaultProps = {
+  inputReadOnly: false,
+  onChange: noop,
+  onBlur: noop,
+  onFocus: noop,
+  onClick: noop,
+  disabledHours: noop,
+  disabledMinutes: noop,
+  disabledSeconds: noop,
+  format: strings.DEFAULT_FORMAT,
+};
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
-  const state = reactive({
+  const state = reactive<Record<any, any>>({
     // focusing: props.focusOnOpen,
   });
-  const {adapter: adapterInject} = useBaseComponent<TimeInputProps>(props, state)
+  const {adapter: adapterInject, isControlled} = useBaseComponent<TimeInputProps>(props, state)
 
-  function adapter(): TimeInputAdapter {
+  function adapter_(): TimeInputAdapter {
     return {
       ...adapterInject<TimeInputProps>(),
       notifyChange: (...args) => props.onChange(...args),
@@ -84,11 +99,40 @@ const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
       notifyBlur: (...args) => props.onBlur(...args),
     };
   }
-  const foundation: InputFoundation = new InputFoundation(adapter());
+  const adapter = adapter_()
+  const foundation: InputFoundation = new InputFoundation(adapter);
 
+  onMounted(()=>{
+    const { focusOnOpen, preventScroll } = props;
+    if (focusOnOpen) {
+      const requestAnimationFrame = window.requestAnimationFrame || window.setTimeout;
+      requestAnimationFrame(() => {
+        const inputNode = adapter.getCache('inputNode');
+        if (inputNode) {
+          inputNode.focus({ preventScroll });
+          inputNode.select();
+        }
+      });
+    }
+  })
 
+  watch([
+    ()=>props.timeStampValue,
+    ()=>state.timeStampValue,
+    ()=>props.value,
+  ], (value, [a,b,prevPropsValue])=>{
+    const { timeStampValue } = props;
 
-  const setRef = (node: HTMLElement) => adapter().setCache('inputNode', node);
+    if (isControlled('timeStampValue') && timeStampValue !== state.timeStampValue) {
+      foundation.restoreCursor();
+    }
+
+    if (props.value !== prevPropsValue) {
+      foundation.restoreCursor();
+    }
+  })
+
+  const setRef = (node: HTMLElement) => adapter.setCache('inputNode', node);
 
   const handleClick: any = e => props.onClick(e);
 
@@ -126,7 +170,6 @@ const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
       timeZone,
       defaultOpen,
       dateFnsLocale,
-      onBlur,
       ...rest
     } = props;
     // const { focusing } = state;
@@ -135,7 +178,6 @@ const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
       [`${prefixCls}-input-readonly`]: inputReadOnly,
     });
     const mergeValidateStatus = invalid ? 'error' : validateStatus;
-    console.log(value)
     // debugger
     return (
       <Input
@@ -148,7 +190,7 @@ const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
         readonly={Boolean(inputReadOnly)}
         onChange={handleChange}
         onFocus={handleFocus}
-        onBlur={onBlur || handleBlur}
+        onBlur={handleBlur}
         suffix={<IconClock onClick={handleClick} />}
         validateStatus={mergeValidateStatus}
         disabled={disabled}

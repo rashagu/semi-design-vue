@@ -1,7 +1,9 @@
-import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
-import Cascader from '../index';
+import {defineComponent, ref, h, Fragment, useSlots, computed} from 'vue';
+import Cascader, {TriggerRenderProps} from '../index';
 import Item from '../item';
 import {noop} from "lodash";
+import {IconChevronDown, IconClose, IconHome} from "@kousum/semi-icons-vue";
+import Button from "../../button";
 interface ExampleProps {
   name?: string;
 }
@@ -56,6 +58,11 @@ const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
       <Cascader treeData={treeData} multiple={true} placeholder="请选择所在地区" />
 
       <ItemDdemo />
+
+
+      <TriggerRenderDemo />
+
+
     </div>
   );
 });
@@ -98,6 +105,88 @@ export const ItemDdemo = defineComponent(() => {
       <Item {...props_}></Item>
       {/*// @ts-ignore*/}
       <Item {...props_} data={a}></Item>
+    </div>
+  );
+});
+
+
+
+export const TriggerRenderDemo = defineComponent(() => {
+
+  const value = ref([]);
+  const treeData = computed(() => [
+    {
+      label: '浙江省',
+      value: 'zhejiang',
+      children: [
+        {
+          label: '杭州市',
+          value: 'hangzhou',
+          children: [
+            {
+              label: '西湖区',
+              value: 'xihu',
+            },
+            {
+              label: '萧山区',
+              value: 'xiaoshan',
+            },
+            {
+              label: '临安区',
+              value: 'linan',
+            },
+          ],
+        },
+        {
+          label: '宁波市',
+          value: 'ningbo',
+          children: [
+            {
+              label: '海曙区',
+              value: 'haishu',
+            },
+            {
+              label: '江北区',
+              value: 'jiangbei',
+            }
+          ]
+        },
+      ],
+    }
+  ]);
+  const onChange = (val) => {
+    value.value = val
+  }
+  const onClear = e => {
+    e && e.stopPropagation();
+    value.value = []
+  }
+
+  const closeIcon = computed(() => {
+    return value.value && value.value.length ? <IconClose onClick={onClear} /> : <IconChevronDown />;
+  });
+
+  const triggerRender = ({ value: innerStateValue, placeholder, ...rest }:TriggerRenderProps) => {
+    console.log(value);
+    console.log(rest);
+    return (
+      <Button theme={'light'} icon={closeIcon} iconPosition={'right'}>
+        {value.value && value.value.length ? value.value.join('/') : placeholder}
+      </Button>
+    );
+  };
+  return () => (
+    <div>
+      <Cascader
+        defaultOpen={true}
+        onChange={onChange}
+        value={value.value}
+        treeData={treeData.value}
+        placeholder='Custom Trigger'
+        triggerRender={triggerRender}
+        suffix={<IconHome/>}
+        prefix={<IconHome/>}
+      />
     </div>
   );
 });

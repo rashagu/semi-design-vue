@@ -5,10 +5,14 @@ import type { ResizeEntry } from '../resizeObserver';
 import { get } from 'lodash';
 import {defineComponent, h, onMounted, reactive, useSlots} from "vue";
 import {VueJsxNode} from "../interface";
+import {vuePropsMake} from "../PropTypes";
 
 export interface AutoSizerProps {
     defaultHeight?: number;
     defaultWidth?: number;
+
+    children?: (info: { width: string | number; height: string | number }) => VueJsxNode;
+
 }
 
 export interface AutoSizerState {
@@ -20,22 +24,21 @@ const prefixcls = cssClasses.PREFIX;
 const propTypes = {
     defaultHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     defaultWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    children: PropTypes.func
 };
 
 const defaultProps = {
     defaultHeight: '100%',
     defaultWidth: '100%',
 };
-export const vuePropsType = {
-    name: String
-}
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const AutoSizer = defineComponent<AutoSizerProps>((props, {}) => {
     const slots = useSlots()
 
     const state = reactive<AutoSizerState>({
         height: props.defaultHeight || 0,
     });
-    
+
     onMounted(()=>{
         const { height } = state;
         // if height is a number, pass it directly to virtual-list
@@ -78,7 +81,7 @@ const AutoSizer = defineComponent<AutoSizerProps>((props, {}) => {
                 }}
                 class={`${prefixcls}-auto-wrapper`}
               >
-                  {!bailoutOnChildren && slots.default?.({ height, width: defaultWidth })}
+                  {!bailoutOnChildren && props.children?.({ height, width: defaultWidth })}
               </div>
           </ResizeObserver>
         );

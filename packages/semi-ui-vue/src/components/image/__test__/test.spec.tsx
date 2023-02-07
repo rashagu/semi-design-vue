@@ -11,6 +11,10 @@ beforeAll(()=>{
     observe: () => null
   })
   window.IntersectionObserver = vi.fn().mockImplementation(intersectionObserverMock);
+
+  const div = document.createElement('div');
+  div.setAttribute('id', 'container');
+  document.body.appendChild(div);
 })
 
 const getImagePreview = defineComponent(()=>{
@@ -40,6 +44,12 @@ const getImagePreview = defineComponent(()=>{
 })
 test('ImageDemo qwe', async () => {
   expect(Comp).toBeTruthy();
+  const wrapper0 = mount(Comp, { attachTo: document.getElementById('container') });
+
+  const profileLink0 = wrapper0.find('.semi-image-overlay');
+  expect(profileLink0.exists()).toEqual(true);
+
+
   const wrapper = mount(getImagePreview, { attachTo: document.getElementById('container') });
 
   const profileLink = wrapper.find('.semi-image-overlay');
