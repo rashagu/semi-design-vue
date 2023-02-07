@@ -28,9 +28,9 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
   return () => {
     return (
       <div>
-        {/*<Tabs type="card" defaultActiveKey="1" onTabClose={close.bind(this)}>*/}
-        {/*  {state.tabList.map(t=><TabPane closable={t.closable as any} tab={t.tab} itemKey={t.itemKey} key={t.itemKey}>{t.text}</TabPane>)}*/}
-        {/*</Tabs>*/}
+        <Tabs type="card" defaultActiveKey="1" onTabClose={close.bind(this)}>
+          {state.tabList.map(t=><TabPane closable={t.closable as any} tab={t.tab} itemKey={t.itemKey} key={t.itemKey}>{t.text}</TabPane>)}
+        </Tabs>
         <Tabs type="button">
           <TabPane tab="文档" itemKey="1">
             文档

@@ -24,6 +24,7 @@ import CSSAnimation from '../_cssAnimation';
 import { cloneVNode, CSSProperties, defineComponent, h, isVNode, reactive, ref, useSlots, VNode } from 'vue';
 import { useNavContext } from './nav-context/Consumer';
 import { vuePropsMake } from '../PropTypes';
+import {VueJsxNode} from "../interface";
 
 export interface ToggleIcon {
   open?: string;
@@ -33,7 +34,7 @@ export interface ToggleIcon {
 export interface SubNavProps extends BaseProps {
   disabled?: boolean;
   dropdownStyle?: CSSProperties;
-  icon?: VNode;
+  icon?: VueJsxNode;
   indent?: boolean | number;
   isCollapsed?: boolean;
   isOpen?: boolean;
@@ -42,7 +43,7 @@ export interface SubNavProps extends BaseProps {
   maxHeight?: number;
   onMouseEnter?: any;
   onMouseLeave?: any;
-  text?: VNode;
+  text?: VueJsxNode;
   toggleIcon?: ToggleIcon;
 }
 
@@ -172,7 +173,7 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
   const handleDropdownVisible = (visible: boolean) => foundation.handleDropdownVisibleChange(visible);
 
   function renderIcon(
-    icon: VNode | string,
+    icon: VueJsxNode,
     pos: string,
     withTransition?: boolean,
     isToggleIcon = false,
@@ -226,7 +227,7 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
     });
 
     let withTransition = false;
-    let toggleIconType: VNode | string = '';
+    let toggleIconType: VueJsxNode = '';
 
     if (isCollapsed) {
       if (isInSubNav) {
@@ -328,8 +329,8 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
     return finalDom;
   }
 
-  function wrapDropdown(elem: VNode | string = '') {
-    let _elem: VNode | string = elem;
+  function wrapDropdown(elem: VueJsxNode = '') {
+    let _elem: VueJsxNode = elem;
     const children = useSlots().default?.();
     const { dropdownStyle, disabled } = props;
 
@@ -384,7 +385,7 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
 
     const { mode, isCollapsed, prefixCls } = context.value;
 
-    let titleDiv: VNode | string = renderTitleDiv();
+    let titleDiv: VueJsxNode = renderTitleDiv();
     const subUl = renderSubUl();
 
     // When mode=horizontal, it is displayed in Dropdown
