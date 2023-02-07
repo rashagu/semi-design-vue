@@ -22,7 +22,7 @@ export const vuePropsType = {
   children: [String, Boolean,Object,Array],
 }
 
-function LocaleConsumer<T>(){
+function LocaleConsumerFunc<T>(){
   const vn = defineComponent<LocaleConsumerProps<T>>((props, {slots}) => {
 
     // const config = inject('ConfigContext', ref<ContextValue>({}))
@@ -71,5 +71,7 @@ function LocaleConsumer<T>(){
   return vn
 }
 
+const LocaleConsumer = LocaleConsumerFunc()
 export default LocaleConsumer
+export { LocaleConsumerFunc }
 

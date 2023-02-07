@@ -27,12 +27,12 @@ import NavContext from './nav-context';
 import '@douyinfe/semi-foundation/navigation/navigation.scss';
 import {Motion} from '../_base/base';
 import {vuePropsMake} from "../PropTypes";
-import LocaleConsumer_ from "../locale/localeConsumer";
-const LocaleConsumer = LocaleConsumer_()
+import LocaleConsumer from "../locale/localeConsumer";
 import type {NavFooterProps} from './Footer';
 import type {NavHeaderProps} from './Header';
 import type {NavItemProps} from './Item';
 import type {ToggleIcon, SubNavProps} from './SubNav';
+
 export type Mode = 'vertical' | 'horizontal';
 export {
   NavFooterProps,

@@ -39,7 +39,7 @@ import TreeContext from '../tree/treeContext';
 import TreeNode from '../tree/treeNode';
 import NodeList from '../tree/nodeList';
 import { cloneDeep } from '../tree/treeUtil';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
 import Trigger from '../trigger';
 import TagInput from '../tagInput';
@@ -65,7 +65,6 @@ import {AriaAttributes} from '../AriaAttributes'
 import {VueHTMLAttributes, VueJsxNode, VueJsxNodeSingle} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 
-const LocaleConsumer = LocaleConsumer_()
 export type ListItemKeySelector<T = any> = (index: number, data: T) => string | number;
 export type ExpandAction = false | 'click' | 'doubleClick';
 

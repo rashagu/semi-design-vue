@@ -2,7 +2,7 @@
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import CalendarFoundation, { CalendarAdapter, EventObject, ParsedEvents, ParsedEventsType, ParsedRangeEvent, WeeklyData } from '@douyinfe/semi-foundation/calendar/foundation';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import localeContext from '../locale/context';
 import { cssClasses } from '@douyinfe/semi-foundation/calendar/constants';
 import DayCol from './dayCol';
@@ -17,7 +17,6 @@ import {defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots,
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 
-const LocaleConsumer = LocaleConsumer_()
 const toPercent = (num: number) => {
     const res = num < 1 ? num * 100 : 100;
     return `${res}%`;

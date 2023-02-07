@@ -3,13 +3,13 @@ import classNames from 'classnames';
 
 import {isString} from 'lodash';
 import {cssClasses} from '@douyinfe/semi-foundation/select/constants';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import {LocaleConsumerFunc} from '../locale/localeConsumer';
 import {IconTick} from '@kousum/semi-icons-vue';
 import {getHighLightTextHTML} from '../_utils/index';
 import {Locale} from '../locale/interface';
 import {BasicOptionProps} from '@douyinfe/semi-foundation/select/optionFoundation';
 
-const LocaleConsumer = LocaleConsumer_<Locale['Select']>()
+const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>()
 
 export interface OptionProps extends BasicOptionProps {
   value?: string | number;

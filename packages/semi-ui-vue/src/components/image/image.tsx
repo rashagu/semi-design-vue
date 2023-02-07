@@ -5,17 +5,17 @@ import cls from "classnames";
 import {IconUploadError, IconEyeOpened} from "@kousum/semi-icons-vue";
 import PreviewInner from "./previewInner";
 import ImageFoundation, {ImageAdapter} from "@douyinfe/semi-foundation/image/imageFoundation";
-import LocaleConsumer_ from "../locale/localeConsumer";
+import {LocaleConsumerFunc} from "../locale/localeConsumer";
 import {Locale} from "../locale/interface";
 import {isBoolean, isObject, isUndefined} from "lodash";
 import Skeleton from "../skeleton";
 import "@douyinfe/semi-foundation/image/image.scss";
-import {defineComponent, getCurrentInstance, h, reactive, useSlots, watch} from "vue";
+import {defineComponent, h, reactive, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {usePreviewContext} from "./previewContext/Consumer";
 import {useBaseComponent} from "../_base/baseComponent";
 
-const LocaleConsumer = LocaleConsumer_<Locale["Image"]>()
+const LocaleConsumer = LocaleConsumerFunc<Locale["Image"]>()
 const prefixCls = cssClasses.PREFIX;
 
 

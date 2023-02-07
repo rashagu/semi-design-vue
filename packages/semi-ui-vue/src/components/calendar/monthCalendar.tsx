@@ -6,7 +6,7 @@ import { IconClose } from '@kousum/semi-icons-vue';
 import CalendarFoundation, { CalendarAdapter, EventObject, MonthData, MonthlyEvent, ParsedEventsType, ParsedEventsWithArray, ParsedRangeEvent } from '@douyinfe/semi-foundation/calendar/foundation';
 import { cssClasses } from '@douyinfe/semi-foundation/calendar/constants';
 import { DateObj } from '@douyinfe/semi-foundation/calendar/eventUtil';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import {useBaseComponent} from '../_base/baseComponent';
 import Popover from '../popover';
 import Button from '../iconButton';
@@ -17,7 +17,6 @@ import '@douyinfe/semi-foundation/calendar/calendar.scss';
 import {defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
-const LocaleConsumer = LocaleConsumer_()
 const toPercent = (num: number) => {
     const res = num < 1 ? num * 100 : 100;
     return `${res}%`;

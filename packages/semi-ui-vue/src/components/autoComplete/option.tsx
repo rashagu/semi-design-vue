@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { isString } from 'lodash';
 import { cssClasses } from '@douyinfe/semi-foundation/autoComplete/constants';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import {LocaleConsumerFunc} from '../locale/localeConsumer';
 import { IconTick } from '@kousum/semi-icons-vue';
 import { getHighLightTextHTML } from '../_utils/index';
 import { Locale } from '../locale/interface';
@@ -11,7 +11,7 @@ import {VueJsxNode} from "../interface";
 import {CSSProperties, defineComponent, h, useSlots} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
-const LocaleConsumer = LocaleConsumer_<Locale['Select']>()
+const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>()
 
 export interface OptionProps extends BasicOptionProps {
     [x: string]: any;

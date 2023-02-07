@@ -3,7 +3,7 @@ import Button from '../button';
 import ModalFoundation, {ModalAdapter, ModalProps, ModalState} from '@douyinfe/semi-foundation/modal/modalFoundation';
 import ModalContent from './ModalContent';
 import Portal from '../_portal';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import {noop} from 'lodash';
@@ -14,7 +14,7 @@ import {Locale} from '../locale/interface';
 import useModal from './useModal';
 import {ButtonProps} from '../button/Button';
 import CSSAnimation from "../_cssAnimation";
-import {MotionObject} from "@douyinfe/semi-foundation/utils/type";
+
 import {
   CSSProperties,
   defineComponent,
@@ -55,7 +55,6 @@ export interface ModalReactProps extends ModalProps {
 }
 
 
-const LocaleConsumer = LocaleConsumer_()
 
 const propTypes = {
   mask: PropTypes.bool,

@@ -8,7 +8,7 @@ import { strings } from '@douyinfe/semi-foundation/timePicker/constants';
 import ScrollList from '../scrollList/index';
 import {scrollItemFunc} from '../scrollList/scrollItem';
 import ComboboxFoundation, { formatOption } from '@douyinfe/semi-foundation/timePicker/ComboxFoundation';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import { TimePickerProps } from './TimePicker';
 import { Locale } from '../locale/interface';
 import {vuePropsMake} from "../PropTypes";
@@ -16,7 +16,7 @@ import * as PropTypes from "../PropTypes";
 import {InputProps} from "../input";
 const ScrollItemFormatOptionReturn = scrollItemFunc<FormatOptionReturn>()
 const ScrollItemAMPMOptionItem = scrollItemFunc<AMPMOptionItem>()
-const LocaleConsumer = LocaleConsumer_()
+
 export type ComboboxProps = Pick<TimePickerProps, 'format' | 'prefixCls' | 'disabledHours' |
   'disabledMinutes' |
   'disabledSeconds' |

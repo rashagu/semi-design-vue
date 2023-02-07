@@ -1,8 +1,7 @@
 
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
-import LocaleConsumer_ from '../locale/localeConsumer';
-import localeContext from '../locale/context';
+import LocaleConsumer from '../locale/localeConsumer';
 import { cssClasses } from '@douyinfe/semi-foundation/calendar/constants';
 
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
@@ -11,7 +10,6 @@ import { Locale } from '../locale/interface';
 import {defineComponent, h, useSlots} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
-const LocaleConsumer = LocaleConsumer_()
 const prefixCls = `${cssClasses.PREFIX}-time`;
 
 const propTypes = {

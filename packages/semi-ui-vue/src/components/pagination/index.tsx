@@ -14,7 +14,7 @@ import { numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/con
 import { IconChevronLeft, IconChevronRight } from '@kousum/semi-icons-vue';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
 import Select, {SelectOption} from '../select/index';
 import InputNumber from '../inputNumber/index';
@@ -27,7 +27,7 @@ import {useBaseComponent} from "../_base/baseComponent";
 import {TableSelectionCellProps} from "../table/ColumnSelection";
 import {vuePropsMake} from "../PropTypes";
 
-const LocaleConsumer = LocaleConsumer_()
+
 const prefixCls = cssClasses.PREFIX;
 
 export interface PaginationProps {

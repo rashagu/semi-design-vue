@@ -6,7 +6,7 @@ import UploadFoundation from '@douyinfe/semi-foundation/upload/foundation';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/upload/constants';
 import FileCard from './fileCard';
 import {useBaseComponent} from '../_base/baseComponent';
-import LocaleConsumer_  from '../locale/localeConsumer';
+import LocaleConsumer  from '../locale/localeConsumer';
 import { IconUpload } from '@kousum/semi-icons-vue';
 import type {
     FileItem,
@@ -44,7 +44,6 @@ import type {
 import type { ValidateStatus } from '../_base/baseComponent';
 import {vuePropsMake} from "../PropTypes";
 
-const LocaleConsumer = LocaleConsumer_()
 const prefixCls = cssClasses.PREFIX;
 
 export {

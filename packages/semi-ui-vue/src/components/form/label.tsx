@@ -2,11 +2,11 @@ import {defineComponent, ref, h, CSSProperties, VNode, Fragment} from 'vue'
 import classNames from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/form/constants';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import { LocaleConsumerFunc } from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
 import {vuePropsMake} from "../PropTypes";
 
-const LocaleConsumer = LocaleConsumer_<Locale['Form']>()
+const LocaleConsumer = LocaleConsumerFunc<Locale['Form']>()
 const prefixCls = cssClasses.PREFIX;
 
 export interface LabelProps {

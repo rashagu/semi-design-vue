@@ -2,8 +2,7 @@ import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 // eslint-disable-next-line max-len
 import CalendarFoundation, { ParsedEvents, CalendarAdapter, RangeData, ParsedRangeEvent, ParsedEventsType } from '@douyinfe/semi-foundation/calendar/foundation';
-import LocaleConsumer_ from '../locale/localeConsumer';
-import localeContext from '../locale/context';
+import LocaleConsumer from '../locale/localeConsumer';
 import { cssClasses } from '@douyinfe/semi-foundation/calendar/constants';
 import DayCol from './dayCol';
 import TimeCol from './timeCol';
@@ -16,7 +15,6 @@ import {defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots,
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 
-const LocaleConsumer = LocaleConsumer_()
 const toPercent = (num: number) => {
     const res = num < 1 ? num * 100 : 100;
     return `${res}%`;

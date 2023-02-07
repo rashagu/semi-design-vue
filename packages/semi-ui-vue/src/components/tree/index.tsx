@@ -25,7 +25,7 @@ import AutoSizer from './autoSizer';
 import TreeContext from './treeContext';
 import TreeNode from './treeNode';
 import NodeList from './nodeList';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import '@douyinfe/semi-foundation/tree/tree.scss';
 import { IconSearch } from '@kousum/semi-icons-vue';
 import { Locale as LocaleObject } from '../locale/interface';
@@ -44,9 +44,7 @@ import {CSSProperties, defineComponent, Fragment, h, nextTick, reactive, ref, us
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
-import {RatingItemProps} from "../rating";
 
-const LocaleConsumer = LocaleConsumer_()
 export * from './interface';
 export type { AutoSizerProps } from './autoSizer';
 

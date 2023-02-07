@@ -2,7 +2,7 @@ import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
 
 import { numbers, strings } from '@douyinfe/semi-foundation/datePicker/constants';
 import DatePicker, {DatePickerProps, vuePropsTypeDatePickerProps} from './datePicker';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import type { Locale } from '../locale/interface';
 import Context from "../configProvider/context";
 
@@ -13,7 +13,6 @@ export type { MonthsGridProps } from './monthsGrid';
 export type { QuickControlProps } from './quickControl';
 export type { YearAndMonthProps } from './yearAndMonth';
 
-const LocaleConsumer = LocaleConsumer_()
 
 export const vuePropsType = vuePropsTypeDatePickerProps
 const index = defineComponent<DatePickerProps>((props, {}) => {

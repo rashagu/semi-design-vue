@@ -21,14 +21,13 @@ import Popover from '../popover';
 import getRenderText from './util';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import {Locale} from '../locale/interface';
 import {Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseType} from './interface';
 import {CopyableConfig, LinkType} from './title';
 import {BaseProps} from '../_base/baseComponent';
 import {isSemiIcon} from '../_utils/index';
 
-const LocaleConsumerDom = LocaleConsumer_()
 
 export interface BaseTypographyProps extends BaseProps {
   children: any,
@@ -669,7 +668,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
   return () => {
     return (
-      <LocaleConsumerDom componentName={"Typography"}>
+      <LocaleConsumer componentName={"Typography"}>
         {{
           default: (locale: Locale['Typography']) => {
             expandStr = locale.expand;
@@ -678,7 +677,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
             return renderTipWrapper();
           }
         }}
-      </LocaleConsumerDom>
+      </LocaleConsumer>
     );
   }
 })

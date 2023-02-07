@@ -3,7 +3,7 @@ import * as PropTypes from '../PropTypes';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/list/constants';
 import { noop } from 'lodash';
 import '@douyinfe/semi-foundation/list/list.scss';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
 import ListItem from './item';
 import { Row } from '../grid';
@@ -13,7 +13,6 @@ import {cloneVNode, CSSProperties, defineComponent, h, useSlots, VNode} from "vu
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 
-const LocaleConsumer = LocaleConsumer_()
 export type { ListItemProps } from './item';
 
 export interface ListProps<T> {

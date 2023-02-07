@@ -11,7 +11,7 @@ import {_generateDataByType, _generateSelectedItems} from '@douyinfe/semi-founda
 import {cssClasses, strings} from '@douyinfe/semi-foundation/transfer/constants';
 import '@douyinfe/semi-foundation/transfer/transfer.scss';
 import {useBaseComponent} from '../_base/baseComponent';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import {Locale} from '../locale/interface';
 import {Checkbox} from '../checkbox/index';
 import Input, {InputProps} from '../input/index';
@@ -24,10 +24,8 @@ import {CSSProperties, defineComponent, Fragment, h, reactive, ref, useSlots, VN
 import {VueJsxNode} from '../interface';
 import SortableList from "./SortableList";
 import type {SortableItemFuncArg} from "../tagInput";
-import {arrayMove} from "@dnd-kit-vue/sortable";
 import {DragEndEvent} from "@dnd-kit-vue/core";
 
-const LocaleConsumer = LocaleConsumer_();
 export interface DataItem extends BasicDataItem {
   label?: VueJsxNode;
   style?: CSSProperties;

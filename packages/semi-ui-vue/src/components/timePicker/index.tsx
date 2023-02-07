@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
 
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import BaseTimePicker, {defaultProps, propTypes} from './TimePicker';
 import type {TimePickerProps as BasePickerProps, BaseValueType } from './TimePicker';
 
@@ -10,7 +10,7 @@ import { get } from 'lodash';
 import { Locale } from '../locale/interface';
 import {vuePropsMake} from "../PropTypes";
 import Context from "../configProvider/context";
-const LocaleConsumer = LocaleConsumer_()
+
 
 export type { TimeInputProps } from './TimeInput';
 export type { TimePickerProps } from './TimePicker';

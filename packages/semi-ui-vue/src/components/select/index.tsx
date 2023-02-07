@@ -23,7 +23,7 @@ import TagGroup from '../tag/group';
 import OverflowList from '../overflowList/index';
 import Space from '../space/index';
 import Text from '../typography/text';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import {LocaleConsumerFunc} from '../locale/localeConsumer';
 import Popover from '../popover/index';
 import type { PopoverProps } from '../popover';
 import {numbers as popoverNumbers} from '@douyinfe/semi-foundation/popover/constants';
@@ -56,7 +56,7 @@ export type {OptionGroupProps} from './optionGroup';
 export type {VirtualRowProps} from './virtualRow';
 
 const prefixcls = cssClasses.PREFIX;
-const LocaleConsumer = LocaleConsumer_<Locale['Select']>()
+const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>()
 const key = 0;
 
 type ExcludeInputType = {

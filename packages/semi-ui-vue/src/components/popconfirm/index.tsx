@@ -8,8 +8,7 @@ import Popover, { PopoverProps } from '../popover';
 import { Position, Trigger } from '../tooltip';
 import Button, { ButtonProps } from '../button';
 import { Type as ButtonType } from '../button/Button';
-import ConfigContext, { ContextValue } from '../configProvider/context';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import { Locale as LocaleObject } from '../locale/interface';
 import '@douyinfe/semi-foundation/popconfirm/popconfirm.scss';
 import { Motion } from '../_base/base';
@@ -20,7 +19,6 @@ import {useConfigContext} from "../configProvider/context/Consumer";
 import {useBaseComponent} from "../_base/baseComponent";
 import {RatingProps} from "../rating";
 
-const LocaleConsumer = LocaleConsumer_()
 
 export interface PopconfirmProps extends PopoverProps {
     cancelText?: string;

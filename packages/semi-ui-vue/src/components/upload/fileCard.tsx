@@ -3,7 +3,7 @@ import * as PropTypes from '../PropTypes';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/upload/constants';
 import { getFileSize } from '@douyinfe/semi-foundation/upload/utils';
 import { IconAlertCircle, IconClose, IconClear, IconFile, IconRefresh, IconEyeOpened } from '@kousum/semi-icons-vue';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
 
 import Button from '../button/index';
@@ -16,7 +16,6 @@ import {defineComponent, h, useSlots, Fragment} from 'vue'
 import type {CSSProperties, FunctionalComponent, VNode} from 'vue'
 import {vuePropsMake} from "../PropTypes";
 
-const LocaleConsumer = LocaleConsumer_()
 const prefixCls = cssClasses.PREFIX;
 
 const ErrorSvg: FunctionalComponent<any> = (props = {}) => (

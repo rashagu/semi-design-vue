@@ -5,8 +5,7 @@ import CalendarFoundation, { CalendarAdapter, ParsedEventsType, ParsedEventsWith
 import { cssClasses } from '@douyinfe/semi-foundation/calendar/constants';
 import DayCol from './dayCol';
 import TimeCol from './timeCol';
-import LocaleConsumer_ from '../locale/localeConsumer';
-import localeContext from '../locale/context';
+import LocaleConsumer from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
 import { DayCalendarProps } from './interface';
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
@@ -14,7 +13,6 @@ import {defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots,
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 
-const LocaleConsumer = LocaleConsumer_()
 const prefixCls = `${cssClasses.PREFIX}-day`;
 
 export interface DayCalendarState {

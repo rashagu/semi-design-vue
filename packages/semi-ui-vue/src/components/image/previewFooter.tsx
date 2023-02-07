@@ -1,16 +1,15 @@
 import { IconChevronLeft, IconChevronRight, IconMinus, IconPlus,
     IconRotate, IconDownload, IconWindowAdaptionStroked, IconRealSizeStroked } from "@kousum/semi-icons-vue";
 import type { IconSize } from "@kousum/semi-icons-vue";
-import {FooterProps, ImageProps, MenuProps, RatioType} from "./interface";
+import {FooterProps} from "./interface";
 import * as PropTypes from "../PropTypes";
 import Tooltip from "../tooltip";
 import Divider from "../divider";
 import Slider from "../slider";
-import Icon from "../icons";
 import { cssClasses } from "@douyinfe/semi-foundation/image/constants";
 import cls from "classnames";
 import PreviewFooterFoundation, { PreviewFooterAdapter } from "@douyinfe/semi-foundation/image/previewFooterFoundation";
-import LocaleConsumer_ from "../locale/localeConsumer";
+import {LocaleConsumerFunc} from "../locale/localeConsumer";
 import { Locale } from "../locale/interface";
 import { throttle } from "lodash";
 import {defineComponent, h, useSlots} from "vue";
@@ -20,7 +19,7 @@ import {vuePropsMake} from "../PropTypes";
 
 const prefixCls = cssClasses.PREFIX;
 const footerPrefixCls = `${cssClasses.PREFIX}-preview-footer`;
-const LocaleConsumer = LocaleConsumer_<Locale["Image"]>()
+const LocaleConsumer = LocaleConsumerFunc<Locale["Image"]>()
 let mouseActiveTime: number = 0;
 
 

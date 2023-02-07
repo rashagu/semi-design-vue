@@ -34,8 +34,7 @@ import { strings, cssClasses, numbers } from '@douyinfe/semi-foundation/table/co
 import '@douyinfe/semi-foundation/table/table.scss';
 
 import Spin from '../spin';
-import LocaleConsumer_ from '../locale/localeConsumer';
-import ColumnShape from './ColumnShape';
+import LocaleConsumer from '../locale/localeConsumer';
 import getColumnsImport from './getColumns';
 import TableContext, { TableContextProps } from './table-context';
 import TableContextProvider from './TableContextProvider';
@@ -46,7 +45,7 @@ import ColumnSorter from './ColumnSorter';
 import ExpandedIcon from './CustomExpandIcon';
 import HeadTable, { HeadTableProps } from './HeadTable';
 import BodyTable, { BodyProps } from './Body';
-import { measureScrollbar, logger, cloneDeep, mergeComponents } from './utils';
+import { logger, cloneDeep, mergeComponents } from './utils';
 import {
     ColumnProps,
     TablePaginationProps,
@@ -116,7 +115,6 @@ export interface RenderTableProps<RecordType> extends HeadTableProps, BodyProps 
     bodyHasScrollBar: boolean
 }
 
-const LocaleConsumer = LocaleConsumer_()
 const propTypes = {
     children: PropTypes.any,
     className: PropTypes.string,

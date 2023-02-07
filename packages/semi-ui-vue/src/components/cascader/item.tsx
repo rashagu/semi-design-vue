@@ -3,16 +3,15 @@ import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/cascader/constants';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 import { includes } from 'lodash';
-import LocaleConsumer_ from '../locale/localeConsumer';
+import LocaleConsumer from '../locale/localeConsumer';
 import { IconChevronRight, IconTick } from '@kousum/semi-icons-vue';
 import { Locale } from '../locale/interface';
 import Spin from '../spin';
 import Checkbox, { CheckboxEvent } from '../checkbox';
 import { BasicCascaderData, BasicEntity, ShowNextType, BasicData } from '@douyinfe/semi-foundation/cascader/foundation';
 import { BaseProps, useBaseComponent } from '../_base/baseComponent';
-import { CascaderProps } from './index';
 import { VueJsxNode } from '../interface';
-const LocaleConsumer = LocaleConsumer_();
+
 export interface CascaderData extends BasicCascaderData {
   label: VNode | string;
 }
