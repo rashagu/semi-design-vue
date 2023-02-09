@@ -8,6 +8,7 @@ import {
   InsetInputChangeFoundationProps,
 } from '@douyinfe/semi-foundation/datePicker/inputFoundation';
 import Input, { InputProps } from '../input';
+import Footer from "./footer";
 
 
 export interface InsetDateInputProps {
@@ -102,6 +103,7 @@ const InsetTimeInput = defineComponent<InsetTimeInputProps>((props, {}) => {
 })
 
 InsetTimeInput.props = vuePropsTypeInsetTimeInput
+InsetTimeInput.name = "InsetTimeInput"
 
 
 

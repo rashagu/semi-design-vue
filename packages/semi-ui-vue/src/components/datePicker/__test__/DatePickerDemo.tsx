@@ -20,11 +20,13 @@ const DatePickerDemo = defineComponent<ExampleProps>((props, {}) => {
 
   const types = [
     "dateTime",
-    "dateRange",
-    "dateTimeRange",
     "month",
     "date",
     "dateTime",
+  ]
+  const typesRange = [
+    "dateRange",
+    "dateTimeRange",
   ]
   return () => (
     <div>
@@ -32,12 +34,15 @@ const DatePickerDemo = defineComponent<ExampleProps>((props, {}) => {
       {types.map(item=>{
         return <DatePicker type={item as any} onChange={(date, dateString) => console.log(dateString)} />
       })}
+      {typesRange.map(item=>{
+        return <DatePicker type={item as any} onChange={(date, dateString) => console.log(dateString)} />
+      })}
       {/*// @ts-ignore*/}
-      <MonthsGrid locale={Zh_CN['DatePicker']} ></MonthsGrid>
+      {/*<MonthsGrid locale={Zh_CN['DatePicker']} ></MonthsGrid>*/}
       {/*// @ts-ignore*/}
-      <Month locale={Zh_CN['DatePicker']} ></Month>
-      <YearAndMonth locale={Zh_CN['DatePicker']} ></YearAndMonth>
-      <Navigation></Navigation>
+      {/*<Month locale={Zh_CN['DatePicker']} ></Month>*/}
+      {/*<YearAndMonth locale={Zh_CN['DatePicker']} ></YearAndMonth>*/}
+      {/*<Navigation></Navigation>*/}
     </div>
   )
 })

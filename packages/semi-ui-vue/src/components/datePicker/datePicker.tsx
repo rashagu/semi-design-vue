@@ -7,7 +7,7 @@ import type { DatePickerAdapter, DatePickerFoundationProps, DatePickerFoundation
 import { cssClasses, strings, numbers } from '@douyinfe/semi-foundation/datePicker/constants';
 import { strings as popoverStrings, numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/constants';
 import {useBaseComponent} from '../_base/baseComponent';
-import Popover from '../popover/index';
+import Popover, { PopoverProps } from '../popover/index';
 import DateInput from './dateInput';
 import type { DateInputProps }from './dateInput';
 import MonthsGrid from './monthsGrid';
@@ -35,6 +35,7 @@ export interface DatePickerProps extends DatePickerFoundationProps {
   'aria-invalid'?: AriaAttributes['aria-invalid'];
   'aria-labelledby'?: AriaAttributes['aria-labelledby'];
   'aria-required'?: AriaAttributes['aria-required'];
+  clearIcon?: VueJsxNode;
   timePickerOpts?: TimePickerProps;
   bottomSlot?: VueJsxNode;
   insetLabel?: VueJsxNode;
@@ -51,6 +52,7 @@ export interface DatePickerProps extends DatePickerFoundationProps {
   locale?: Locale['DatePicker'];
   dateFnsLocale?: Locale['dateFnsLocale'];
   yearAndMonthOpts?: ScrollItemProps<any>
+  dropdownMargin?: PopoverProps['margin']
 }
 
 export type DatePickerState = DatePickerFoundationState;
@@ -133,21 +135,26 @@ const propTypes = {
   preventScroll: PropTypes.bool,
   yearAndMonthOpts: PropTypes.object,
   locale: Object,
+
+
+
+  clearIcon: PropTypes.node,
+  presetPosition: PropTypes.string,
+  dropdownMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
 };
 
 const defaultProps = {
-  open: undefined,
   onChangeWithDateFirst: true,
   autoAdjustOverflow: true,
   stopPropagation: true,
   motion: true,
   prefixCls: cssClasses.PREFIX,
+  presetPosition: 'bottom',
   // position: 'bottomLeft',
   zIndex: popoverNumbers.DEFAULT_Z_INDEX,
   type: 'date',
   size: 'default',
   density: 'default',
-  disabled: false,
   multiple: false,
   defaultOpen: false,
   disabledHours: noop,
@@ -171,7 +178,7 @@ const defaultProps = {
   autoSwitchDate: true,
   syncSwitchMonth: false,
   rangeSeparator: strings.DEFAULT_SEPARATOR_RANGE,
-  insetInput: false
+  insetInput: false,
 };
 export const vuePropsTypeDatePickerProps = vuePropsMake(propTypes, defaultProps)
 
@@ -187,7 +194,6 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     value: [], // The currently selected date, each date is a Date object
     cachedSelectedValue: null, // Save last selected date, maybe include null
     prevTimeZone: null,
-    // motionEnd: false, // Monitor if popover animation ends
     rangeInputFocus: undefined, // Optional'rangeStart ',' rangeEnd ', false
     autofocus: props.autoFocus || (isRangeType(props.type, props.triggerRender) && (props.open || props.defaultOpen)),
     insetInputValue: null,
@@ -201,10 +207,8 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   const rangeInputEndRef =ref();
   // @ts-ignore ignore readonly
   const focusRecordsRef = ref({
-    current:{
-      rangeStart: false,
-      rangeEnd: false
-    }
+    rangeStart: false,
+    rangeEnd: false
   });
 
   const {adapter: adapterInject, isControlled} = useBaseComponent<DatePickerProps>(props, state)
@@ -217,8 +221,8 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       togglePanel: panelShow => {
         state.panelShow = panelShow
         if (!panelShow) {
-          focusRecordsRef.value.current.rangeEnd = false;
-          focusRecordsRef.value.current.rangeStart = false;
+          focusRecordsRef.value.rangeEnd = false;
+          focusRecordsRef.value.rangeStart = false;
         }
       },
       registerClickOutSide: () => {
@@ -276,13 +280,14 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       typeIsYearOrMonth: () => ['month', 'year'].includes(props.type),
       // setMotionEnd: motionEnd => state.motionEnd = motionEnd,
       setRangeInputFocus: rangeInputFocus => {
+        const { preventScroll } = props;
         if (rangeInputFocus !== state.rangeInputFocus) {
           state.rangeInputFocus = rangeInputFocus;
         }
         switch (rangeInputFocus) {
           case 'rangeStart':
-            const inputStartNode = rangeInputStartRef.value.current;
-            inputStartNode && inputStartNode.focus();
+            const inputStartNode = rangeInputStartRef.value;
+            inputStartNode && inputStartNode.focus({ preventScroll });
             /**
              * 解决选择完startDate，切换到endDate后panel被立马关闭的问题。
              * 用户打开panel，选了startDate后，会执行setRangeInputFocus('rangeEnd'),focus到endDateInput，
@@ -297,13 +302,13 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
              * resulting in the panel being closed before endDate is selected
              */
             setTimeout(() => {
-              focusRecordsRef.value.current.rangeStart = true;
+              focusRecordsRef.value.rangeStart = true;
             }, 0);
             break;
           case 'rangeEnd':
             // console.log(rangeInputEndRef.value)
             const inputEndNode = rangeInputEndRef.value;
-            inputEndNode && inputEndNode.focus();
+            inputEndNode && inputEndNode.focus({ preventScroll });
             /**
              * 解决选择完startDate，切换到endDate后panel被立马关闭的问题。
              * 用户打开panel，选了startDate后，会执行setRangeInputFocus('rangeEnd'),focus到endDateInput，
@@ -318,14 +323,14 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
              * resulting in the panel being closed before endDate is selected
              */
             setTimeout(() => {
-              focusRecordsRef.value.current.rangeEnd = true;
+              focusRecordsRef.value.rangeEnd = true;
             }, 0);
             break;
           default:
             return;
         }
       },
-      couldPanelClosed: () => focusRecordsRef.value.current.rangeStart && focusRecordsRef.value.current.rangeEnd,
+      couldPanelClosed: () => focusRecordsRef.value.rangeStart && focusRecordsRef.value.rangeEnd,
       isEventTarget: e => e && e.target === e.currentTarget,
       setInsetInputFocus: () => {
         const { preventScroll } = props;
@@ -334,7 +339,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
           case 'rangeEnd':
             if (document.activeElement !== rangeInputEndRef.value) {
               const inputEndNode = rangeInputEndRef.value;
-              inputEndNode && inputEndNode.focus();
+              inputEndNode && inputEndNode.focus({ preventScroll });
             }
             break;
           case 'rangeStart':
@@ -475,11 +480,13 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   }
 
   function renderQuickControls() {
-    const { presets, type } = props;
+    const { presets, type, presetPosition, insetInput }  = props;
     return (
       <QuickControl
         type={type}
         presets={presets}
+        insetInput={insetInput}
+        presetPosition={presetPosition}
         onPresetClick={(item, e) => foundation.handlePresetClick(item, e)}
       />
     );
@@ -498,8 +505,8 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       handleInsetDateFocus: handleInsetDateFocus,
       handleInsetTimeFocus: handleInsetTimeFocus,
       onInsetInputChange: handleInsetInputChange,
-      rangeInputStartRef: rangeInputStartRef.value,
-      rangeInputEndRef: rangeInputEndRef.value,
+      rangeInputStartRef: rangeInputStartRef,
+      rangeInputEndRef: rangeInputEndRef,
       density,
       defaultPickerValue
     };
@@ -524,9 +531,9 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   const handleRangeEndTabPress: DatePickerFoundation['handleRangeEndTabPress'] = e => foundation.handleRangeEndTabPress(e);
   const isAnotherPanelHasOpened = (currentRangeInput: RangeType) => {
     if (currentRangeInput === 'rangeStart') {
-      return focusRecordsRef.value.current.rangeEnd;
+      return focusRecordsRef.value.rangeEnd;
     } else {
-      return focusRecordsRef.value.current.rangeStart;
+      return focusRecordsRef.value.rangeStart;
     }
   };
   const handleInsetDateFocus = (e: FocusEvent, rangeType: 'rangeStart' | 'rangeEnd') => {
@@ -552,6 +559,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
 
   function renderInner(extraProps?: Partial<DatePickerProps>) {
     const {
+      clearIcon,
       type,
       format,
       multiple,
@@ -583,11 +591,12 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       [`${cssClasses.PREFIX}-range-input-disabled`]: isRangeType_ && inputDisabled,
       [`${cssClasses.PREFIX}-range-input-${validateStatus}`]: isRangeType_ && validateStatus,
     });
-    const phText = placeholder || (locale && locale.placeholder && locale.placeholder[type]); // i18n
+    const phText = placeholder || locale.placeholder[type]; // i18n
     // These values should be passed to triggerRender, do not delete any key if it is not necessary
     const props_ = {
       ...extraProps,
       placeholder: phText,
+      clearIcon,
       disabled: inputDisabled,
       inputValue,
       value: value as Date[],
@@ -666,7 +675,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   };
 
   const renderPanel = (locale: Locale['DatePicker'], localeCode: string, dateFnsLocale: Locale['dateFnsLocale']) => {
-    const { dropdownClassName, dropdownStyle, density, topSlot, bottomSlot, insetInput, type, format, rangeSeparator, defaultPickerValue } = props;
+    const { dropdownClassName, dropdownStyle, density, topSlot, bottomSlot, insetInput, type, format, rangeSeparator, defaultPickerValue, presetPosition }  = props;
     const { insetInputValue, value } = state;
     const wrapCls = classnames(
       cssClasses.PREFIX,
@@ -695,20 +704,25 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
 
     return (
       <div ref={panelRef} class={wrapCls} style={dropdownStyle}>
-        {topSlot && <div class={`${cssClasses.PREFIX}-topSlot`}>{topSlot}</div>}
-        {insetInput && <DateInput {...insetInputProps} insetInput={true} />}
+        {topSlot && <div class={`${cssClasses.PREFIX}-topSlot`}x-semi-prop="topSlot">
+          {topSlot}
+        </div>}
+        {presetPosition === "top" && renderQuickControls()}
+        {/*{insetInput && <DateInput {...insetInputProps} insetInput={true} />}*/}
         {adapter().typeIsYearOrMonth() ?
           renderYearMonthPanel(locale, localeCode) :
           renderMonthGrid(locale, localeCode, dateFnsLocale)}
-        {renderQuickControls()}
-        {bottomSlot && <div class={`${cssClasses.PREFIX}-bottomSlot`}>{bottomSlot}</div>}
+        {presetPosition === "bottom" && renderQuickControls()}
+        {bottomSlot && <div class={`${cssClasses.PREFIX}-bottomSlot`} x-semi-prop="bottomSlot">
+          {bottomSlot}
+        </div>}
         {renderFooter(locale, localeCode)}
       </div>
     );
   };
 
   const renderYearMonthPanel = (locale: Locale['DatePicker'], localeCode: string) => {
-    const { density } = props;
+    const { density, presetPosition, yearAndMonthOpts } = props;
 
     const date = state.value[0];
     let year = 0;
@@ -730,6 +744,10 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
         currentYear={year}
         currentMonth={month}
         density={density}
+        presetPosition={presetPosition}
+        renderQuickControls={renderQuickControls()}
+        renderDateInput={renderDateInput()}
+        yearAndMonthOpts={yearAndMonthOpts}
       />
     );
   };
@@ -752,6 +770,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       stopPropagation,
       autoAdjustOverflow,
       spacing,
+      dropdownMargin
     } = props;
     // const mergedMotion = foundation.getMergedMotion(motion);
     return (
@@ -761,6 +780,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
         autoAdjustOverflow={autoAdjustOverflow}
         zIndex={zIndex}
         motion={motion}
+        margin={dropdownMargin}
         content={renderPanel(locale, localeCode, dateFnsLocale)}
         trigger="custom"
         position={position}
@@ -796,6 +816,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
 })
 
 DatePicker.props = vuePropsTypeDatePickerProps
+DatePicker.name = "DatePicker"
 
 export default DatePicker
 

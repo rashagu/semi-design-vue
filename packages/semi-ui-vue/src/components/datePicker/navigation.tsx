@@ -8,6 +8,7 @@ import Button from '../button';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/datePicker/constants';
 import { IconChevronLeft, IconChevronRight, IconDoubleChevronLeft, IconDoubleChevronRight } from '@kousum/semi-icons-vue';
 import { PanelType } from '@douyinfe/semi-foundation/datePicker/monthsGridFoundation';
+import monthsGrid from "./monthsGrid";
 
 const prefixCls = cssClasses.NAVIGATION;
 
@@ -57,7 +58,8 @@ export const vuePropsType = {
   // Whether to switch synchronously for two panels
   shouldBimonthSwitch: PropTypes.bool,
   // Panel type, divided into left panel and right panel
-  panelType: PropTypes.string
+  panelType: PropTypes.string,
+
 
 }
 const navigation = defineComponent<NavigationProps>((props, {slots}) => {
@@ -153,6 +155,7 @@ const navigation = defineComponent<NavigationProps>((props, {slots}) => {
 })
 
 navigation.props = vuePropsType
+navigation.name = "DatePicker_navigation"
 
 export default navigation
 

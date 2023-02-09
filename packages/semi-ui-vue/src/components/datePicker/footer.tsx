@@ -3,6 +3,8 @@ import classnames from 'classnames';
 import Button from '../button';
 import { get } from 'lodash';
 import { Locale } from '../locale/interface';
+import dateInput from "./dateInput";
+import {vuePropsMake} from "../PropTypes";
 
 interface FooterProps {
   prefixCls?: string;
@@ -11,9 +13,13 @@ interface FooterProps {
   onCancelClick?: any;
   onConfirmClick?: any;
 }
-export const vuePropsType = {
-  name: String
-}
+export const vuePropsType = vuePropsMake({
+  prefixCls: String,
+  locale: Object,
+  localeCode: String,
+  onCancelClick: Function,
+  onConfirmClick: Function
+}, {})
 const Footer = defineComponent<FooterProps>((props, {}) => {
   const slots = useSlots()
   const { prefixCls, locale, onCancelClick, onConfirmClick } = props;
@@ -33,6 +39,7 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
 })
 
 Footer.props = vuePropsType
+Footer.name = "Footer"
 
 export default Footer
 

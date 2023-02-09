@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, reactive, onMounted, watch, nextTick, CSSProperties, VNode} from 'vue'
+import {defineComponent, ref, h, Fragment, reactive, onMounted, watch, nextTick, CSSProperties, VNode, Ref} from 'vue'
 
 import classnames from 'classnames';
 import * as PropTypes from '../PropTypes';
@@ -21,6 +21,7 @@ import {WeekStartNumber} from "@douyinfe/semi-foundation/datePicker/_utils/getMo
 import {VueJsxNode} from "../interface";
 import type { ScrollItemProps } from '../scrollList';
 import {vuePropsMake} from "../PropTypes";
+import month from "./month";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -29,7 +30,7 @@ export interface MonthsGridProps extends MonthsGridFoundationProps, BaseProps {
   navNext?: VueJsxNode;
   renderDate?: (dayNumber?: number, fullDate?: string) => VueJsxNode;
   renderFullDate?: (dayNumber?: number, fullDate?: string, dayStatus?: DayStatusType) => VueJsxNode;
-  focusRecordsRef?: any;
+  focusRecordsRef?: Ref<{ rangeStart: boolean; rangeEnd: boolean }>;
   yearAndMonthOpts?: ScrollItemProps<any>
 }
 
@@ -237,8 +238,8 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
     }
   };
 
-  const rightIsYearOrTime = (state?: MonthsGridState) => {
-    const { monthRight } = state || state;
+  const rightIsYearOrTime = (state_?: MonthsGridState) => {
+    const { monthRight } = state_ || state;
 
     if (monthRight && (monthRight.isTimePickerOpen || monthRight.isYearPickerOpen)) {
       return true;
@@ -344,7 +345,6 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
     // console.log(this.navRef.current.clientHeight, this.monthRef.current.clientHeight);
     // this.wrapRef.current.style.height = this.wrapRef.current.clientHeight + 'px';
     // this.wrapRef.current.style.overflow = 'hidden';
-    // TODO
     e.stopImmediatePropagation();
     foundation.showYearPicker(panelType);
   }
@@ -517,7 +517,7 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
 
   function renderYearAndMonth(panelType: PanelType, panelDetail: MonthInfo) {
     const { pickerDate } = panelDetail;
-    const { locale, localeCode, density } = props;
+    const { locale, localeCode, density, yearAndMonthOpts } = props;
     const y = pickerDate.getFullYear();
     const m = pickerDate.getMonth() + 1;
     return (
@@ -538,6 +538,7 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
           }
         }}
         density={density}
+        yearAndMonthOpts={yearAndMonthOpts}
       />
     );
   }
@@ -620,7 +621,7 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
   return () => {
 
     const { monthLeft, monthRight } = state;
-    const { type, insetInput } = props;
+    const { type, insetInput, presetPosition, renderQuickControls, renderDateInput } = props;
     const monthGridCls = classnames({
       [`${prefixCls }-month-grid`]: true,
     });
@@ -640,21 +641,30 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
     const yearOpenType = getYAMOpenType();
 
     return (
-      <div
-        class={monthGridCls}
-        x-type={type}
-        x-panel-yearandmonth-open-type={yearOpenType}
-        // FIXME:
-        x-insetinput={insetInput ? "true" : "false"}
-        ref={current => cacheRefCurrent('monthGrid', current)}
-      >
-        {content}
+      <div style={{ display: 'flex' }}>
+        {presetPosition === "left" && renderQuickControls}
+        <div>
+          {renderDateInput}
+          <div
+            class={monthGridCls}
+            x-type={type}
+            x-panel-yearandmonth-open-type={yearOpenType}
+            // FIXME:
+            x-insetinput={insetInput ? "true" : "false"}
+            x-preset-position={renderQuickControls === null ? 'null' : presetPosition}
+            ref={current => cacheRefCurrent('monthGrid', current)}
+          >
+            {content}
+          </div>
+        </div>
+        {presetPosition === "right" && renderQuickControls}
       </div>
     );
   }
 })
 
 monthsGrid.props = vuePropsType
+monthsGrid.name = "MonthsGrid"
 
 export default monthsGrid
 

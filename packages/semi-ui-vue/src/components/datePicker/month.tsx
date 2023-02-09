@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, reactive, onMounted, nextTick, onUnmounted, watch} from 'vue'
+import {defineComponent, ref, h, Fragment, reactive, onMounted, nextTick, onUnmounted, watch, Ref} from 'vue'
 
 
 import classNames from 'classnames';
@@ -11,18 +11,19 @@ import { noop, stubFalse, isFunction } from 'lodash';
 import { parseISO } from 'date-fns';
 import { Locale } from '../locale/interface';
 import {CheckboxProps} from "../checkbox";
+import {InsetTimeInput} from "./insetInput";
+import {vuePropsMake} from "../PropTypes";
 
 const prefixCls = cssClasses.PREFIX;
 
 export interface MonthProps extends MonthFoundationProps, BaseProps {
   forwardRef: any;
   locale: Locale['DatePicker'];
-  focusRecordsRef: any;
+  focusRecordsRef: Ref<{ rangeStart: boolean; rangeEnd: boolean }>;
 }
 
 export type MonthState = MonthFoundationState;
-
-export const vuePropsType = {
+const propTypes = {
   month: {type: PropTypes.object, default: new Date()},
   selected: {type: PropTypes.object, default: new Set()},
   rangeStart: {type: PropTypes.string, default: ''},
@@ -45,6 +46,20 @@ export const vuePropsType = {
   multiple: PropTypes.bool,
   locale:Object
 }
+
+const defaultProps = {
+  month: new Date(),
+  selected: new Set(),
+  rangeStart: '',
+  rangeEnd: '',
+  onDayClick: noop,
+  onDayHover: noop,
+  onWeeksRowNumChange: noop,
+  weekStartsOn: numbers.WEEK_START_ON,
+  disabledDate: stubFalse,
+  weeksRowNum: 0,
+};
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const month = defineComponent<MonthProps>((props, {slots}) => {
 
   const monthRef = ref()
@@ -89,8 +104,9 @@ const month = defineComponent<MonthProps>((props, {slots}) => {
 
 
   function getSingleDayStatus(options: Partial<MonthProps> & { fullDate: string; todayText: string }) {
+    const { rangeInputFocus } = props;
     const { fullDate, todayText, selected, disabledDate, rangeStart, rangeEnd } = options;
-    const disabledOptions = { rangeStart, rangeEnd };
+    const disabledOptions = { rangeStart, rangeEnd, rangeInputFocus };
     const isToday = fullDate === todayText;
     const isSelected = selected.has(fullDate);
 
@@ -100,7 +116,7 @@ const month = defineComponent<MonthProps>((props, {slots}) => {
       props.rangeInputFocus === 'rangeStart' &&
       rangeEnd &&
       props.focusRecordsRef &&
-      props.focusRecordsRef.current.rangeEnd
+      props.focusRecordsRef.value.rangeEnd
     ) {
       // The reason for splitting is that the dateRangeTime format: 'yyyy-MM-dd HH:MM:SS'
       isDisabled = isAfter(fullDate, rangeEnd.trim().split(/\s+/)[0]);
@@ -110,7 +126,7 @@ const month = defineComponent<MonthProps>((props, {slots}) => {
       props.rangeInputFocus === 'rangeEnd' &&
       rangeStart &&
       props.focusRecordsRef &&
-      props.focusRecordsRef.current.rangeStart
+      props.focusRecordsRef.value.rangeStart
     ) {
       // The reason for splitting is that the dateRangeTime format: 'yyyy-MM-dd HH:MM:SS'
       isDisabled = isBefore(fullDate, rangeStart.trim().split(/\s+/)[0]);
@@ -387,6 +403,7 @@ const month = defineComponent<MonthProps>((props, {slots}) => {
 })
 
 month.props = vuePropsType
+month.name = "Month"
 
 export default month
 

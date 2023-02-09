@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, InputHTMLAttributes, VNode, CSSProperties, reactive, watch, onMounted} from 'vue'
+import {defineComponent, ref, h, InputHTMLAttributes, VNode, CSSProperties, reactive, watch, onMounted, Ref} from 'vue'
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import InputFoundation from '@douyinfe/semi-foundation/input/foundation';
@@ -72,7 +72,7 @@ export interface InputProps extends
   onEnterPress?: (e: KeyboardEvent) => void;
   inputStyle?: CSSProperties;
   getValueLength?: (value: string) => number;
-  forwardRef?: ((instance: any) => void) | any | null;
+  forwardRef?: (((instance: any) => void) | any | null) | Ref;
   minlength?: number,
   maxlength?: number,
   preventScroll?: boolean,
@@ -136,7 +136,8 @@ const propTypes = {
 
 
   minlength: Number,
-  maxlength: Number
+  maxlength: Number,
+  forwardRef: [PropTypes.object, PropTypes.func],
 };
 
 const defaultProps = {
@@ -449,8 +450,8 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
           inputRef.value = node ;
         };
       } else if (Object.prototype.toString.call(forwardRef) === '[object Object]') {
-        inputRef.value = forwardRef;
-        return forwardRef;
+        inputRef.value = forwardRef.value;
+        return forwardRef.value;
       }
     }
     return inputRef.value;

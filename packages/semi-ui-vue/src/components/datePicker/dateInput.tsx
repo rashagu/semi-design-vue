@@ -19,6 +19,7 @@ import Input from '../input/index';
 import { InsetDateInput, InsetTimeInput } from './insetInput';
 import * as PropTypes from "../PropTypes";
 import {CheckboxProps} from "../checkbox";
+import {vuePropsMake} from "../PropTypes";
 
 export interface DateInputProps extends DateInputFoundationProps, BaseProps {
   insetLabel?: VNode;
@@ -33,8 +34,7 @@ export interface DateInputProps extends DateInputFoundationProps, BaseProps {
   value?: Date[];
 }
 
-
-export const vuePropsType = {
+const propTypes = {
   onClick: {
     type: PropTypes.func,
     default: noop
@@ -88,7 +88,34 @@ export const vuePropsType = {
   insetInput: PropTypes.bool,
   insetInputValue: PropTypes.object,
   defaultPickerValue: PropTypes.any,
+
+  clearIcon: PropTypes.node,
+  inputValue: PropTypes.string,
+  block: PropTypes.bool,
+  insetLabelId: PropTypes.string,
+  multiple: PropTypes.bool,
+  size: PropTypes.string,
+  autofocus: PropTypes.bool,
+
+  onRangeBlur: PropTypes.func,
+  onRangeClear: PropTypes.func,
+  onRangeEndTabPress: PropTypes.func,
 }
+const defaultProps = {
+  showClear: true,
+  onClick: noop,
+  onChange: noop,
+  onEnterPress: noop,
+  onBlur: noop,
+  onClear: noop,
+  onFocus: noop,
+  type: 'date',
+  inputStyle: {},
+  inputReadOnly: false,
+  prefixCls: cssClasses.PREFIX,
+  rangeSeparator: strings.DEFAULT_SEPARATOR_RANGE,
+};
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const dateInput = defineComponent<DateInputProps>((props, {}) => {
   const slots = useSlots()
   const state = reactive({isFocusing: false})
@@ -176,6 +203,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
       <div
         class={`${prefixCls}-range-input-prefix`}
         onClick={e => !disabled && !rangeInputFocus && handleRangeStartFocus(e)}
+        x-semi-prop="prefix,insetLabel"
       >
         {labelNode}
       </div>
@@ -196,7 +224,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
   }
 
   function renderRangeClearBtn(rangeStart: string, rangeEnd: string) {
-    const { showClear, prefixCls, disabled } = props;
+    const { showClear, prefixCls, disabled, clearIcon } = props;
     const allowClear = (rangeStart || rangeEnd) && showClear;
     return allowClear && !disabled ? (
       <div
@@ -205,7 +233,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
         aria-label="Clear range input value"
         class={`${prefixCls}-range-input-clearbtn`}
         onMousedown={e => !disabled && handleRangeInputClear(e)}>
-        <IconClear aria-hidden />
+        {clearIcon ? clearIcon :<IconClear aria-hidden />}
       </div>
     ) : null;
   }
@@ -225,7 +253,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
 
   function renderRangeInput(rangeProps: DateInputProps) {
     const {
-      // props
+      // this.props
       placeholder,
       inputStyle,
       disabled,
@@ -275,7 +303,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
             onEnterPress={e => handleRangeInputEnterPress(e, rangeStart, rangeEnd)}
             onFocus={e => handleRangeInputFocus(e as any, 'rangeStart')}
             autofocus={autofocus} // autofocus moved to range start
-            ref={rangeInputStartRef}
+            forwardRef={rangeInputStartRef}
           />
         </div>
         {renderRangeSeparator(rangeStart, rangeEnd)}
@@ -296,7 +324,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
             onEnterPress={e => handleRangeInputEnterPress(e, rangeStart, rangeEnd)}
             onFocus={e => handleRangeInputFocus(e as any, 'rangeEnd')}
             onKeydown={handleRangeInputEndKeyPress} // only monitor tab button on range end
-            ref={rangeInputEndRef}
+            forwardRef={rangeInputEndRef}
           />
         </div>
         {renderRangeClearBtn(rangeStart, rangeEnd)}
@@ -461,6 +489,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
 })
 
 dateInput.props = vuePropsType
+dateInput.name = "dateInput"
 
 export default dateInput
 
