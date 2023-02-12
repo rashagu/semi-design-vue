@@ -29,7 +29,7 @@ import { numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/con
 import { FixedSizeList as VirtualList } from '@kousum/vue3-window';
 import '@douyinfe/semi-foundation/tree/tree.scss';
 import '@douyinfe/semi-foundation/treeSelect/treeSelect.scss';
-import {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
+import {getProps, useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import TagGroup from '../tag/group';
 import Tag, { TagProps } from '../tag/index';
 import Input, { InputProps } from '../input/index';
@@ -190,6 +190,7 @@ const propTypes = {
     'aria-invalid': PropTypes.bool,
     'aria-labelledby': PropTypes.string,
     'aria-required': PropTypes.bool,
+    'aria-label': PropTypes.string,
     loadedKeys: PropTypes.string,
     loadData: PropTypes.func,
     onLoad: PropTypes.func,
@@ -260,7 +261,6 @@ const propTypes = {
     searchRender: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     renderSelectedItem: PropTypes.func,
     checkRelation: PropTypes.string,
-    'aria-label': PropTypes.string,
 };
 
 const defaultProps: Partial<TreeSelectProps> = {
@@ -353,7 +353,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
                     // eslint-disable-next-line
                     const optionsDom = optionInstance;
                     const target = e.target as Element;
-                    console.log(optionsRef.value, (optionInstance as HTMLElement).parentNode, target)
+                    // console.log(optionsRef.value, (optionInstance as HTMLElement).parentNode, target)
                     if (
                       optionsDom &&
                       (
@@ -479,7 +479,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
     function getDerivedStateFromProps(props: TreeSelectProps) {
         const {prevProps, rePosKey} = state;
         const needUpdate = (name: string) => (
-          (!prevProps && name in props) ||
+          (!prevProps && name in getProps(props)) ||
           (prevProps && !isEqual(prevProps[name], props[name]))
         );
 
@@ -647,13 +647,84 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
         return newState;
     }
 
-    watch([() => props, () => slots.defautl], () => {
-        const newState = getDerivedStateFromProps(props)
+    watch([
+        ()=>props.loadedKeys,
+        ()=>props.loadData,
+        ()=>props.onLoad,
+        ()=>props.arrowIcon,
+        ()=>props.defaultOpen,
+        ()=>props.defaultValue,
+        ()=>props.defaultExpandAll,
+        ()=>props.defaultExpandedKeys,
+        ()=>props.expandAll,
+        ()=>props.disabled,
+        ()=>props.disableStrictly,
+        ()=>props.filterTreeNode,
+        ()=>props.multiple,
+        ()=>props.searchPlaceholder,
+        ()=>props.searchAutoFocus,
+        ()=>props.virtualize,
+        ()=>props.treeNodeFilterProp,
+        ()=>props.onChange,
+        ()=>props.onSearch,
+        ()=>props.onSelect,
+        ()=>props.onExpand,
+        ()=>props.onChangeWithObject,
+        ()=>props.onBlur,
+        ()=>props.onFocus,
+        ()=>props.value,
+        ()=>props.expandedKeys,
+        ()=>props.autoExpandParent,
+        ()=>props.showClear,
+        ()=>props.showSearchClear,
+        ()=>props.autoAdjustOverflow,
+        ()=>props.showFilteredOnly,
+        ()=>props.motionExpand,
+        ()=>props.emptyContent,
+        ()=>props.leafOnly,
+        ()=>props.treeData,
+        ()=>props.dropdownClassName,
+        ()=>props.dropdownStyle,
+        ()=>props.motion,
+        ()=>props.placeholder,
+        ()=>props.maxTagCount,
+        ()=>props.size,
+        ()=>props.className,
+        ()=>props.style,
+        ()=>props.treeNodeLabelProp,
+        ()=>props.suffix,
+        ()=>props.prefix,
+        ()=>props.insetLabel,
+        ()=>props.insetLabelId,
+        ()=>props.zIndex,
+        ()=>props.getPopupContainer,
+        ()=>props.dropdownMatchSelectWidth,
+        ()=>props.validateStatus,
+        ()=>props.mouseEnterDelay,
+        ()=>props.mouseLeaveDelay,
+        ()=>props.triggerRender,
+        ()=>props.stopPropagation,
+        ()=>props.outerBottomSlot,
+        ()=>props.outerTopSlot,
+        ()=>props.onVisibleChange,
+        ()=>props.expandAction,
+        ()=>props.searchPosition,
+        ()=>props.clickToHide,
+        ()=>props.renderLabel,
+        ()=>props.renderFullLabel,
+        ()=>props.labelEllipsis,
+        ()=>props.optionListStyle,
+        ()=>props.searchRender,
+        ()=>props.renderSelectedItem,
+        ()=>props.checkRelation,
+        () => slots.defautl
+    ], () => {
+        const newState = getDerivedStateFromProps({...props})
         Object.keys(newState).forEach((key) => {
             // @ts-ignore
             state[key] = newState[key]
         })
-    }, {deep: true, immediate: true})
+    }, {immediate: true})
 
     onMounted(()=>{
         foundation.init();
@@ -1283,7 +1354,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
         const { flattenNodes, motionKeys, motionType, filteredKeys } = state;
         const { direction } = context.value;
         const { virtualize, motionExpand } = props;
-        const isExpandControlled = 'expandedKeys' in props;
+        const isExpandControlled = 'expandedKeys' in getProps(props);
         if (!virtualize || isEmpty(virtualize)) {
             return (
               <NodeList

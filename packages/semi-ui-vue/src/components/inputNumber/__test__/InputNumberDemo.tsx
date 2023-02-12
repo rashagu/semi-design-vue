@@ -12,11 +12,15 @@ const InputNumberDemo = defineComponent<InputNumberDemoProps>((props, {}) => {
   const slots = useSlots()
 
 
+  const value = ref(1)
   return () => (
     <div>
       <div style={{ width: 280 }}>
         <label>简单数字输入框</label>
-        <InputNumber />
+        <InputNumber value={value.value} onChange={(v)=>{
+          console.log(v)
+          value.value = v as any
+        }} />
         <br/><br/>
 
         <label>设置了步长 step=2 </label>

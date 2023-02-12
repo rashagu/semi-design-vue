@@ -638,7 +638,7 @@ const Index = defineComponent<SelectProps>((props, {}) => {
 
 
 
-  watch([() => props.value, () => props.optionList], ([prevPropsValue, prevPropsOptionList],) => {
+  watch([() => props.value, () => props.optionList], (value, [prevPropsValue, prevPropsOptionList],) => {
     const instance = getCurrentInstance()
     // TODO Children VNode 更新时
     // const prevChildrenKeys = React.Children.toArray(prevProps.children).map((child: any) => child.key);

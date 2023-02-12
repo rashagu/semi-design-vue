@@ -268,7 +268,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
     _resizeListener && window.removeEventListener('resize', _resizeListener);
   })
 
-  watch([() => props.value, () => props.autosize,], ([prevValue, prevAutosize], []) => {
+  watch([() => props.value, () => props.autosize,], (value, [prevValue, prevAutosize]) => {
 
     if (props.value !== prevValue && props.autosize) {
       foundation.resizeTextarea();

@@ -261,7 +261,7 @@ const InputNumber = defineComponent<InputNumberProps>((props, {}) => {
           state[key] = states[key]
         })
         nextTick(() => {
-          callback()
+          callback?.()
         })
       }
     };
@@ -359,7 +359,7 @@ const InputNumber = defineComponent<InputNumberProps>((props, {}) => {
           foundation.updateStates({number: null, value: newValue});
         }
       }
-      if (isString(newValue) && newValue !== String(props.value)) {
+      if (newValue && isString(newValue) && newValue !== String(props.value)) {
         foundation.notifyChange(newValue, null);
       }
     }
@@ -373,7 +373,7 @@ const InputNumber = defineComponent<InputNumberProps>((props, {}) => {
         inputNode.focus({preventScroll});
       }
     }
-  })
+  }, {immediate: true})
 
 
   const setInputRef = (node: any) => {
@@ -402,14 +402,10 @@ const InputNumber = defineComponent<InputNumberProps>((props, {}) => {
   const handleInputMouseMove = (e: MouseEvent) => foundation.handleInputMouseMove(e);
 
   const handleUpClick = (e: KeyboardEvent) => {
-    // @ts-ignore
-    e.persist = noop
     foundation.handleUpClick(e)
   };
 
   const handleDownClick = (e: KeyboardEvent) => {
-    // @ts-ignore
-    e.persist = noop
     foundation.handleDownClick(e)
   };
 

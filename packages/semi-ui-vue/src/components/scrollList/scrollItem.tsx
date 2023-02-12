@@ -220,7 +220,7 @@ function scrollItemFunc<T extends Item>() {
     }, msPerFrame * 5);
 
 
-    watch([() => props.selectedIndex, willSelectNode, list], ([prevPropsSelectedIndex]) => {
+    watch([() => props.selectedIndex, willSelectNode, list], (value, [prevPropsSelectedIndex]) => {
 
       const {selectedIndex} = props;
 

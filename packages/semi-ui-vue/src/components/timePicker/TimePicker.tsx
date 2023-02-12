@@ -3,7 +3,7 @@ import * as PropTypes from '../PropTypes';
 import classNames from 'classnames';
 import {noop, get, values} from 'lodash';
 
-import {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
+import {getProps, useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import {strings, cssClasses} from '@douyinfe/semi-foundation/timePicker/constants';
 import Popover, { PopoverProps } from '../popover';
 import {numbers as popoverNumbers} from '@douyinfe/semi-foundation/popover/constants';
@@ -290,21 +290,21 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
 
   // ok
   function getDerivedStateFromProps(nextProps: TimePickerProps, prevState: TimePickerState) {
-    if ('open' in nextProps && nextProps.open !== prevState.open) {
+    if ('open' in getProps(nextProps) && nextProps.open !== prevState.open) {
       return {
         open: nextProps.open,
       };
     }
     return null;
   }
-  // watch(()=>props.open, (val)=>{
-  //   const newState = getDerivedStateFromProps(props, state)
-  //   if (newState){
-  //     Object.keys(newState).forEach(key=>{
-  //       state[key] = newState[key]
-  //     })
-  //   }
-  // })
+  watch([()=>props.open, ()=>state.open], (val)=>{
+    const newState = getDerivedStateFromProps(props, state)
+    if (newState){
+      Object.keys(newState).forEach(key=>{
+        state[key] = newState[key]
+      })
+    }
+  }, {immediate: true})
 
 
   watch([() => props.value, () => props.timeZone, ()=>state.value], (value, oldValue) => {
@@ -320,7 +320,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
         value: state.value,
       });
     }
-  })
+  }, {immediate:true})
 
 
   const onCurrentSelectPanelChange = (currentSelectPanel: string) => {

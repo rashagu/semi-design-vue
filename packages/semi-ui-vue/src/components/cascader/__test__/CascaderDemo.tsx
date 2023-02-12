@@ -1,5 +1,5 @@
 import {defineComponent, ref, h, Fragment, useSlots, computed} from 'vue';
-import Cascader, {TriggerRenderProps} from '../index';
+import Cascader, {TriggerRenderProps, Value} from '../index';
 import Item from '../item';
 import {noop} from "lodash";
 import {IconChevronDown, IconClose, IconHome} from "@kousum/semi-icons-vue";
@@ -52,9 +52,13 @@ const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
       ],
     },
   ];
+  const value = ref<Value>(['zhejiang', 'hangzhou', 'xiaoshan'])
   return () => (
     <div>
-      <Cascader defaultOpen={true} treeData={treeData} placeholder="请选择所在地区" />
+      <Cascader defaultOpen={true} onChange={(v)=>{
+        console.log(v)
+        value.value = v
+      }} value={value.value} treeData={treeData} placeholder="请选择所在地区" />
       <Cascader treeData={treeData} multiple={true} placeholder="请选择所在地区" />
 
       <ItemDdemo />

@@ -25,7 +25,7 @@ import {cssClasses, strings} from '@douyinfe/semi-foundation/tagInput/constants'
 import '@douyinfe/semi-foundation/tagInput/tagInput.scss';
 import TagInputFoundation, {TagInputAdapter, OnSortEndProps} from '@douyinfe/semi-foundation/tagInput/foundation';
 import {ArrayElement} from '../_base/base';
-import {useBaseComponent} from '../_base/baseComponent';
+import {getProps, useBaseComponent} from '../_base/baseComponent';
 import Tag from '../tag';
 import Input from '../input';
 import Popover, {PopoverProps} from '../popover';
@@ -276,7 +276,7 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
     let tagsArray: string[];
     if (isArray(value)) {
       tagsArray = value;
-    } else if ('value' in nextProps && !value) {
+    } else if ('value' in getProps(nextProps) && !value) {
       tagsArray = [];
     } else {
       tagsArray = prevTagsArray;
@@ -286,14 +286,18 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
       inputValue: isString(inputValue) ? inputValue : prevState.inputValue
     };
   }
-  watch(()=>props, (val)=>{
+  watch([
+    ()=>props.value,
+    ()=>props.inputValue,
+    ()=>state.inputValue,
+  ], (val)=>{
     const newState = getDerivedStateFromProps(props, state)
     if (newState){
       Object.keys(newState).forEach(key=>{
         state[key] = newState[key]
       })
     }
-  }, {deep: true})
+  }, {deep: true, immediate: true})
 
   onMounted(()=>{
     const { disabled, autoFocus, preventScroll } = props;

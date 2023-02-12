@@ -509,7 +509,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     foundation.destroy();
   })
 
-  watch([()=>props.treeData, ()=>props.value],([prevPropsTreeData, prevPropsValue])=>{
+  watch([()=>props.treeData, ()=>props.value],(value, [prevPropsTreeData, prevPropsValue])=>{
     let isOptionsChanged = false;
     if (!isEqual(prevPropsTreeData, props.treeData)) {
       isOptionsChanged = true;

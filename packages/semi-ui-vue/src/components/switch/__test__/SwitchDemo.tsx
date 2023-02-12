@@ -13,9 +13,12 @@ const SwitchDemo = defineComponent<SwitchDemoProps>((props, {}) => {
 
   const slots = useSlots()
 
+  const value = ref(true)
   return () => (
     <div>
-      <Switch checkedText="开" uncheckedText="关" />
+      <Switch checked={value.value } onChange={(v)=>{
+        value.value = v
+      }} checkedText="开" uncheckedText="关" />
       <Switch checkedText="｜" uncheckedText="〇" style={{ marginLeft: 5 }} />
       <br />
       <br />

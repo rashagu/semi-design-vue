@@ -18,9 +18,14 @@ export const vuePropsType = {
 const TimePickerDemo = defineComponent<ExampleProps>((props, {}) => {
   const slots = useSlots()
 
+  const value = ref('04:05:03')
   return () => (
     <div>
-      <TimePicker defaultOpen={true} placeholder={'请选择时间'} />
+      <TimePicker value={value.value} onChange={(v)=>{
+        console.log(v)
+        value.value = v
+      }} placeholder={'请选择时间'} />
+      <TimePicker defaultOpen={true}  placeholder={'请选择时间'} />
     </div>
   )
 })

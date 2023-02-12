@@ -130,7 +130,7 @@ const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
     if (props.value !== prevPropsValue) {
       foundation.restoreCursor();
     }
-  })
+  }, {immediate: true})
 
   const setRef = (node: HTMLElement) => adapter.setCache('inputNode', node);
 
@@ -170,6 +170,7 @@ const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
       timeZone,
       defaultOpen,
       dateFnsLocale,
+      onBlur,
       ...rest
     } = props;
     // const { focusing } = state;
