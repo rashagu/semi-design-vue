@@ -5,10 +5,9 @@ const local: Locale = {
     code: 'tr-TR',
     dateFnsLocale: tr,
     Pagination: {
-        item: 'Makale',
         page: 'Sayfa',
-        pageSize: 'Makale / sayfa',
-        total: 'Toplam',
+        pageSize: '${pageSize} Makale / sayfa',
+        total: 'Toplam ${total} Sayfa',
         jumpTo: 'Atlamak'
     },
     Modal: {
@@ -83,8 +82,8 @@ const local: Locale = {
             Wed: 'Çar',
             Thu: 'Perş',
             Fri: 'Cum',
-            Sat: 'Oturdu',
-            Sun: 'Güneş'
+            Sat: 'Cmt',
+            Sun: 'Paz'
         },
         localeFormatToken: {
             FORMAT_SWITCH_DATE: 'yyyy-MM-dd',

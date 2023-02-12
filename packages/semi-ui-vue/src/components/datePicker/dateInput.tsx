@@ -1,5 +1,6 @@
 import {defineComponent, ref, h, Fragment, useSlots, VNode, reactive, onMounted, onUnmounted, CSSProperties} from 'vue'
 import cls from 'classnames';
+import { get } from 'lodash';
 
 import DateInputFoundation, {
   DateInputAdapter,
@@ -7,6 +8,7 @@ import DateInputFoundation, {
   RangeType,
   InsetInputChangeProps,
   InsetInputChangeFoundationProps,
+  InsetInputProps
 } from '@douyinfe/semi-foundation/datePicker/inputFoundation';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/datePicker/constants';
 import { noop } from '@douyinfe/semi-foundation/utils/function';
@@ -85,7 +87,7 @@ const propTypes = {
   rangeInputStartRef: PropTypes.object,
   rangeInputEndRef: PropTypes.object,
   rangeSeparator: {type: PropTypes.string, default: strings.DEFAULT_SEPARATOR_RANGE},
-  insetInput: PropTypes.bool,
+  insetInput: [PropTypes.bool, PropTypes.object],
   insetInputValue: PropTypes.object,
   defaultPickerValue: PropTypes.any,
 
@@ -123,7 +125,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
 
   function adapter(): DateInputAdapter {
     return {
-      ...adapterInject<CheckboxProps>(),
+      ...adapterInject(),
       updateIsFocusing: isFocusing => state.isFocusing = isFocusing,
       notifyClick: (...args) => props.onClick(...args),
       notifyChange: (...args) => props.onChange(...args),
@@ -233,7 +235,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
         aria-label="Clear range input value"
         class={`${prefixCls}-range-input-clearbtn`}
         onMousedown={e => !disabled && handleRangeInputClear(e)}>
-        {clearIcon ? clearIcon :<IconClear aria-hidden />}
+        {clearIcon ? clearIcon : <IconClear aria-hidden />}
       </div>
     ) : null;
   }
@@ -344,10 +346,12 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
       rangeInputStartRef,
       rangeInputEndRef,
       density,
+      insetInput,
     } = props;
 
     const _isRangeType = type.includes('Range');
     const newInsetInputValue = foundation.getInsetInputValue({ value, insetInputValue });
+    const { dateStart, dateEnd, timeStart, timeEnd } = get(insetInput, 'placeholder', {}) as InsetInputProps['placeholder'];
     const { datePlaceholder, timePlaceholder } = foundation.getInsetInputPlaceholder();
 
     const insetInputWrapperCls = `${prefixCls}-inset-input-wrapper`;
@@ -358,7 +362,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
         <InsetDateInput
           forwardRef={rangeInputStartRef}
           insetInputValue={newInsetInputValue}
-          placeholder={datePlaceholder}
+          placeholder={dateStart ?? datePlaceholder}
           valuePath={'monthLeft.dateInput'}
           onChange={handleInsetInputChange}
           onFocus={e => handleInsetDateFocus(e, 'rangeStart')}
@@ -366,7 +370,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
         <InsetTimeInput
           disabled={!newInsetInputValue.monthLeft.dateInput}
           insetInputValue={newInsetInputValue}
-          placeholder={timePlaceholder}
+          placeholder={timeStart ?? timePlaceholder}
           type={type}
           valuePath={'monthLeft.timeInput'}
           onChange={handleInsetInputChange}
@@ -378,7 +382,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
             <InsetDateInput
               forwardRef={rangeInputEndRef}
               insetInputValue={newInsetInputValue}
-              placeholder={datePlaceholder}
+              placeholder={dateEnd ?? datePlaceholder}
               valuePath={'monthRight.dateInput'}
               onChange={handleInsetInputChange}
               onFocus={e => handleInsetDateFocus(e, 'rangeEnd')}
@@ -386,7 +390,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
             <InsetTimeInput
               disabled={!newInsetInputValue.monthRight.dateInput}
               insetInputValue={newInsetInputValue}
-              placeholder={timePlaceholder}
+              placeholder={timeEnd ?? timePlaceholder}
               type={type}
               valuePath={'monthRight.timeInput'}
               onChange={handleInsetInputChange}

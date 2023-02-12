@@ -28,15 +28,20 @@ const DatePickerDemo = defineComponent<ExampleProps>((props, {}) => {
     "dateRange",
     "dateTimeRange",
   ]
+  const dateValue = ref("2023-01-01")
+
   return () => (
     <div>
-      <DatePicker onChange={(date, dateString) => console.log(dateString)} />
-      {types.map(item=>{
-        return <DatePicker type={item as any} onChange={(date, dateString) => console.log(dateString)} />
-      })}
-      {typesRange.map(item=>{
-        return <DatePicker type={item as any} onChange={(date, dateString) => console.log(dateString)} />
-      })}
+      <DatePicker value={dateValue.value} onChange={(date, dateString) => {
+        dateValue.value = dateString as any
+        console.log(dateString)
+      }} />
+      {/*{types.map(item=>{*/}
+      {/*  return <DatePicker type={item as any} onChange={(date, dateString) => console.log(dateString)} />*/}
+      {/*})}*/}
+      {/*{typesRange.map(item=>{*/}
+      {/*  return <DatePicker type={item as any} onChange={(date, dateString) => console.log(dateString)} />*/}
+      {/*})}*/}
       {/*// @ts-ignore*/}
       {/*<MonthsGrid locale={Zh_CN['DatePicker']} ></MonthsGrid>*/}
       {/*// @ts-ignore*/}

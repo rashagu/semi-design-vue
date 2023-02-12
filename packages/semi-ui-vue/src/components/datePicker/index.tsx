@@ -1,4 +1,4 @@
-import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
+import {defineComponent, ref, h, Fragment, useSlots, watch} from 'vue';
 
 import { numbers, strings } from '@douyinfe/semi-foundation/datePicker/constants';
 import DatePicker, { DatePickerProps, vuePropsTypeDatePickerProps } from './datePicker';
@@ -25,6 +25,7 @@ export type { MonthProps } from './month';
 export type { MonthsGridProps } from './monthsGrid';
 export type { QuickControlProps } from './quickControl';
 export type { YearAndMonthProps } from './yearAndMonth';
+export type { InsetInputProps } from '@douyinfe/semi-foundation/datePicker/inputFoundation';
 
 export const vuePropsType = {
   ...vuePropsTypeDatePickerProps,

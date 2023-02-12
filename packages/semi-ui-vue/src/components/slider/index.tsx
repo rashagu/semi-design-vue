@@ -2,17 +2,17 @@
 /* eslint-disable react/no-find-dom-node */
 import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
-import {cssClasses} from '@douyinfe/semi-foundation/slider/constants';
-import {useBaseComponent} from '../_base/baseComponent';
+import { cssClasses } from '@douyinfe/semi-foundation/slider/constants';
+import { useBaseComponent } from '../_base/baseComponent';
 import SliderFoundation, {
   SliderAdapter,
   SliderProps as BasicSliceProps,
   SliderState,
-  tipFormatterBasicType
+  tipFormatterBasicType,
 } from '@douyinfe/semi-foundation/slider/foundation';
 import Tooltip from '../tooltip/index';
 import '@douyinfe/semi-foundation/slider/slider.scss';
-import {isEqual, noop} from 'lodash';
+import { isEqual, noop } from 'lodash';
 import {
   CSSProperties,
   defineComponent,
@@ -24,9 +24,9 @@ import {
   useSlots,
   watch,
   Fragment,
-  nextTick
-} from "vue";
-import {vuePropsMake} from "../PropTypes";
+  nextTick,
+} from 'vue';
+import { vuePropsMake } from '../PropTypes';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -35,9 +35,7 @@ export interface SliderProps extends BasicSliceProps {
   railStyle?: CSSProperties;
 }
 
-export type {
-  SliderState
-};
+export type { SliderState };
 
 function domIsInRenderTree(e: HTMLElement) {
   if (!e) {
@@ -46,48 +44,47 @@ function domIsInRenderTree(e: HTMLElement) {
   return Boolean(e.offsetWidth || e.offsetHeight || e.getClientRects().length);
 }
 
-
 const propTypes = {
   // allowClear: PropTypes.bool,
   defaultValue: [PropTypes.number, PropTypes.array],
   disabled: {
     type: PropTypes.bool,
-    default: undefined
+    default: undefined,
   },
   included: {
     type: PropTypes.bool,
-    default: undefined
+    default: undefined,
   }, // Whether to juxtapose. Allow dragging
   marks: PropTypes.object, // Scale
   max: PropTypes.number,
   min: PropTypes.number,
   range: {
     type: PropTypes.bool,
-    default: undefined
+    default: undefined,
   }, // Whether both sides
   step: PropTypes.number,
   tipFormatter: PropTypes.func,
   value: [PropTypes.number, PropTypes.array],
   vertical: {
     type: PropTypes.bool,
-    default: undefined
+    default: undefined,
   },
   onAfterChange: PropTypes.func, // OnmouseUp and triggered when clicked
   onChange: PropTypes.func,
   tooltipVisible: {
     type: PropTypes.bool,
-    default: undefined
+    default: undefined,
   },
   style: PropTypes.object,
   className: PropTypes.string,
   showBoundary: {
     type: PropTypes.bool,
-    default: undefined
+    default: undefined,
   },
   railStyle: PropTypes.object,
   verticalReverse: {
     type: PropTypes.bool,
-    default: undefined
+    default: undefined,
   },
   getAriaValueText: PropTypes.func,
 };
@@ -109,18 +106,16 @@ const defaultProps: Partial<SliderProps> = {
   onChange: (value: number | number[]) => {
     // console.log(value);
   },
-  verticalReverse: false
+  verticalReverse: false,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Slider = defineComponent<SliderProps>((props, {}) => {
-  const slots = useSlots()
+  const slots = useSlots();
 
-
-  let {value} = props;
+  let { value } = props;
   if (!value) {
     value = props.defaultValue;
   }
-
 
   const state = reactive<SliderState>({
     // eslint-disable-next-line no-nested-ternary
@@ -137,7 +132,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
     isInRenderTree: true,
     firstDotFocusVisible: false,
     secondDotFocusVisible: false,
-  })
+  });
   const sliderEl = ref();
   const minHanleEl = ref();
 
@@ -145,10 +140,9 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   let dragging = [false, false];
   const eventListenerSet = new Set();
 
-  const {adapter: adapterInject} = useBaseComponent<SliderProps>(props, state)
+  const { adapter: adapterInject } = useBaseComponent<SliderProps>(props, state);
 
-
-  const adapter = adapter_()
+  const adapter = adapter_();
 
   function adapter_(): SliderAdapter {
     return {
@@ -191,7 +185,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
       isEventFromHandle: (e: MouseEvent) => {
         const handles = [minHanleEl, maxHanleEl];
         let flag = false;
-        handles.forEach(handle => {
+        handles.forEach((handle) => {
           if (!handle.value) {
             return;
           }
@@ -205,22 +199,22 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         dragging: dragging,
       }),
       updateDisabled: (disabled: boolean) => {
-        state.disabled = disabled
+        state.disabled = disabled;
       },
       transNewPropsToState<K extends keyof SliderState>(stateObj: Pick<SliderState, K>, callback = noop) {
-        Object.keys(stateObj).forEach(key => {
-          state[key] = stateObj[key]
-        })
+        Object.keys(stateObj).forEach((key) => {
+          state[key] = stateObj[key];
+        });
         nextTick(() => {
-          callback?.()
-        })
+          callback?.();
+        });
       },
       notifyChange: (cbValue: number | number[]) => props.onChange(cbValue),
       setDragging: (value: boolean[]) => {
         dragging = value;
       },
       updateCurrentValue: (value: number | number[]) => {
-        const {currentValue} = state;
+        const { currentValue } = state;
         if (value !== currentValue) {
           // state.currentValue = value
         }
@@ -228,7 +222,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
       setOverallVars: (key: string, value: any) => {
         // TODO
         // this[key] = value;
-        console.error('smw: 用途 未知')
+        console.error('smw: 用途 未知');
       },
       getMinHandleEl: () => minHanleEl.value,
       getMaxHandleEl: () => maxHanleEl.value,
@@ -237,15 +231,19 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         _addEventListener(document.body, 'mouseup', foundation.onHandleUp, false);
         _addEventListener(document.body, 'touchmove', foundation.onHandleTouchMove, false);
       },
-      onHandleMove: (mousePos: number, isMin: boolean, stateChangeCallback = noop, clickTrack = false, outPutValue): boolean | void => {
-
+      onHandleMove: (
+        mousePos: number,
+        isMin: boolean,
+        stateChangeCallback = noop,
+        clickTrack = false,
+        outPutValue
+      ): boolean | void => {
         const sliderDOMIsInRenderTree = foundation.checkAndUpdateIsInRenderTreeState();
         if (!sliderDOMIsInRenderTree) {
           return;
         }
 
-        const {value} = props;
-
+        const { value } = props;
 
         let finalOutPutValue = outPutValue;
         if (finalOutPutValue === undefined) {
@@ -256,16 +254,16 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
           finalOutPutValue = foundation.outPutValue(moveValue);
         }
 
-        const {currentValue} = state;
+        const { currentValue } = state;
         if (!isEqual(foundation.outPutValue(currentValue), finalOutPutValue)) {
           if (!clickTrack && foundation.valueFormatIsCorrect(value)) {
             // still require afterChangeCallback when click on the track directly, need skip here
             return false;
           }
-          state.currentValue = finalOutPutValue
+          state.currentValue = finalOutPutValue;
           nextTick(() => {
-            stateChangeCallback?.()
-          })
+            stateChangeCallback?.();
+          });
         }
       },
       setEventDefault: (e: MouseEvent) => {
@@ -273,20 +271,20 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         e.preventDefault();
       },
       setStateVal: <K extends keyof SliderState>(name: K, val: SliderState[K]) => {
-        state[name] = val
+        state[name] = val;
       },
       checkAndUpdateIsInRenderTreeState: () => {
         const sliderDOMIsInRenderTree = domIsInRenderTree(sliderEl.value);
         if (sliderDOMIsInRenderTree !== state.isInRenderTree) {
-          state.isInRenderTree = sliderDOMIsInRenderTree
+          state.isInRenderTree = sliderDOMIsInRenderTree;
         }
         return sliderDOMIsInRenderTree;
       },
       onHandleEnter: (pos: SliderState['focusPos']) => {
-        state.focusPos = pos
+        state.focusPos = pos;
       },
       onHandleLeave: () => {
-        state.focusPos = ''
+        state.focusPos = '';
       },
       onHandleUpBefore: (e: MouseEvent) => {
         e.stopPropagation();
@@ -295,7 +293,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         document.body.removeEventListener('mouseup', foundation.onHandleUp, false);
       },
       onHandleUpAfter: () => {
-        const {currentValue} = state;
+        const { currentValue } = state;
         const value = foundation.outPutValue(currentValue);
         props.onAfterChange(value);
       },
@@ -307,36 +305,31 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
 
   const foundation = new SliderFoundation(adapter);
 
+  watch(
+    [() => props.value, () => props.disabled, () => state.currentValue],
+    (val, [prevPropsValue, prevPropsDisabled]) => {
+      const hasPropValueChange = !isEqual(props.value, prevPropsValue);
+      const hasPropDisabledChange = props.disabled !== prevPropsDisabled;
 
-  watch([
-    () => props.value,
-    () => props.disabled,
-    ()=>state.currentValue
-  ], (val, [prevPropsValue, prevPropsDisabled]) => {
+      if (hasPropDisabledChange) {
+        foundation.handleDisabledChange(props.disabled);
+      }
 
-    const hasPropValueChange = !isEqual(props.value, prevPropsValue);
-    const hasPropDisabledChange = props.disabled !== prevPropsDisabled;
-
-    if (hasPropDisabledChange) {
-      foundation.handleDisabledChange(props.disabled);
+      if (hasPropValueChange) {
+        const nextValue = props.value;
+        const prevValue = state.currentValue;
+        foundation.handleValueChange(prevValue, nextValue);
+      }
     }
-
-    if (hasPropValueChange) {
-      const nextValue = props.value;
-      const prevValue = state.currentValue;
-      foundation.handleValueChange(prevValue, nextValue);
-    }
-  })
-
+  );
 
   onMounted(() => {
     foundation.init();
-  })
-
+  });
 
   onUnmounted(() => {
     foundation.init();
-  })
+  });
 
   const renderHandle = () => {
     const {
@@ -348,14 +341,14 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
       'aria-labelledby': ariaLabelledby,
       'aria-valuetext': ariaValueText,
       getAriaValueText,
-      disabled
+      disabled,
     } = props;
-    const {chooseMovePos, isDrag, isInRenderTree, firstDotFocusVisible, secondDotFocusVisible} = state;
+    const { chooseMovePos, isDrag, isInRenderTree, firstDotFocusVisible, secondDotFocusVisible } = state;
     const stylePos = vertical ? 'top' : 'left';
     const percentInfo = foundation.getMinAndMaxPercent(state.currentValue);
     const minPercent = percentInfo.min;
     const maxPercent = percentInfo.max;
-    const {tipVisible, tipChildren} = foundation.computeHandleVisibleVal(
+    const { tipVisible, tipChildren } = foundation.computeHandleVisibleVal(
       tooltipVisible && isInRenderTree,
       tipFormatter,
       range
@@ -366,14 +359,14 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
     const maxClass = cls(cssClasses.HANDLE, {
       [`${cssClasses.HANDLE}-clicked`]: chooseMovePos === 'max' && isDrag,
     });
-    const {min, max, currentValue} = state;
+    const { min, max, currentValue } = state;
 
     const commonAria = {
       'aria-label': ariaLabel ?? (disabled ? 'Disabled Slider' : undefined),
       'aria-labelledby': ariaLabelledby,
-      'aria-disabled': disabled
+      'aria-disabled': disabled,
     };
-    vertical && Object.assign(commonAria, {'aria-orientation': 'vertical'});
+    vertical && Object.assign(commonAria, { 'aria-orientation': 'vertical' });
 
     const handleContents = !range ? (
       <Tooltip
@@ -384,52 +377,52 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         visible={isInRenderTree && (tipVisible.min || firstDotFocusVisible)}
         className={`${cssClasses.HANDLE}-tooltip`}
       >
-                <span
-                  onMouseover={foundation.checkAndUpdateIsInRenderTreeState}
-                  ref={minHanleEl}
-                  class={minClass}
-                  style={{
-                    [stylePos]: `${minPercent * 100}%`,
-                    zIndex: chooseMovePos === 'min' && isDrag ? 2 : 1
-                  }}
-                  onMousedown={e => {
-                    foundation.onHandleDown(e, 'min');
-                  }}
-                  onMouseenter={() => {
-                    foundation.onHandleEnter('min');
-                  }}
-                  onTouchstart={e => {
-                    foundation.onHandleTouchStart(e, 'min');
-                  }}
-                  onMouseleave={() => {
-                    foundation.onHandleLeave();
-                  }}
-                  onMouseup={e => {
-                    foundation.onHandleUp(e);
-                  }}
-                  onKeyup={e => {
-                    foundation.onHandleUp(e);
-                  }}
-                  onTouchend={e => {
-                    foundation.onHandleUp(e);
-                  }}
-                  onKeydown={(e) => {
-                    foundation.handleKeyDown(e, 'min');
-                  }}
-                  onFocus={e => {
-                    foundation.onFocus(e, 'min');
-                  }}
-                  onBlur={(e) => {
-                    foundation.onBlur(e, 'min');
-                  }}
-                  role="slider"
-                  aria-valuetext={getAriaValueText ? getAriaValueText(currentValue as number, 0) : ariaValueText}
-                  tabindex={disabled ? -1 : 0}
-                  {...commonAria}
-                  aria-valuenow={currentValue as number}
-                  aria-valuemax={max}
-                  aria-valuemin={min}
-                />
+        <span
+          onMouseover={foundation.checkAndUpdateIsInRenderTreeState}
+          ref={minHanleEl}
+          class={minClass}
+          style={{
+            [stylePos]: `${minPercent * 100}%`,
+            zIndex: chooseMovePos === 'min' && isDrag ? 2 : 1,
+          }}
+          onMousedown={(e) => {
+            foundation.onHandleDown(e, 'min');
+          }}
+          onMouseenter={() => {
+            foundation.onHandleEnter('min');
+          }}
+          onTouchstart={(e) => {
+            foundation.onHandleTouchStart(e, 'min');
+          }}
+          onMouseleave={() => {
+            foundation.onHandleLeave();
+          }}
+          onMouseup={(e) => {
+            foundation.onHandleUp(e);
+          }}
+          onKeyup={(e) => {
+            foundation.onHandleUp(e);
+          }}
+          onTouchend={(e) => {
+            foundation.onHandleUp(e);
+          }}
+          onKeydown={(e) => {
+            foundation.handleKeyDown(e, 'min');
+          }}
+          onFocus={(e) => {
+            foundation.onFocus(e, 'min');
+          }}
+          onBlur={(e) => {
+            foundation.onBlur(e, 'min');
+          }}
+          role="slider"
+          aria-valuetext={getAriaValueText ? getAriaValueText(currentValue as number, 0) : ariaValueText}
+          tabindex={disabled ? -1 : 0}
+          {...commonAria}
+          aria-valuenow={currentValue as number}
+          aria-valuemax={max}
+          aria-valuemin={min}
+        />
       </Tooltip>
     ) : (
       <Fragment>
@@ -441,51 +434,51 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
           visible={isInRenderTree && (tipVisible.min || firstDotFocusVisible)}
           className={`${cssClasses.HANDLE}-tooltip`}
         >
-                    <span
-                      ref={minHanleEl}
-                      class={minClass}
-                      style={{
-                        [stylePos]: `${minPercent * 100}%`,
-                        zIndex: chooseMovePos === 'min' ? 2 : 1
-                      }}
-                      onMousedown={e => {
-                        foundation.onHandleDown(e, 'min');
-                      }}
-                      onMouseenter={() => {
-                        foundation.onHandleEnter('min');
-                      }}
-                      onTouchstart={e => {
-                        foundation.onHandleTouchStart(e, 'min');
-                      }}
-                      onMouseleave={() => {
-                        foundation.onHandleLeave();
-                      }}
-                      onMouseup={e => {
-                        foundation.onHandleUp(e);
-                      }}
-                      onKeyup={e => {
-                        foundation.onHandleUp(e);
-                      }}
-                      onTouchend={e => {
-                        foundation.onHandleUp(e);
-                      }}
-                      onKeydown={(e) => {
-                        foundation.handleKeyDown(e, 'min');
-                      }}
-                      onFocus={e => {
-                        foundation.onFocus(e, 'min');
-                      }}
-                      onBlur={(e) => {
-                        foundation.onBlur(e, 'min');
-                      }}
-                      role="slider"
-                      tabindex={disabled ? -1 : 0}
-                      {...commonAria}
-                      aria-valuetext={getAriaValueText ? getAriaValueText(currentValue[0], 0) : ariaValueText}
-                      aria-valuenow={currentValue[0]}
-                      aria-valuemax={currentValue[1]}
-                      aria-valuemin={min}
-                    />
+          <span
+            ref={minHanleEl}
+            class={minClass}
+            style={{
+              [stylePos]: `${minPercent * 100}%`,
+              zIndex: chooseMovePos === 'min' ? 2 : 1,
+            }}
+            onMousedown={(e) => {
+              foundation.onHandleDown(e, 'min');
+            }}
+            onMouseenter={() => {
+              foundation.onHandleEnter('min');
+            }}
+            onTouchstart={(e) => {
+              foundation.onHandleTouchStart(e, 'min');
+            }}
+            onMouseleave={() => {
+              foundation.onHandleLeave();
+            }}
+            onMouseup={(e) => {
+              foundation.onHandleUp(e);
+            }}
+            onKeyup={(e) => {
+              foundation.onHandleUp(e);
+            }}
+            onTouchend={(e) => {
+              foundation.onHandleUp(e);
+            }}
+            onKeydown={(e) => {
+              foundation.handleKeyDown(e, 'min');
+            }}
+            onFocus={(e) => {
+              foundation.onFocus(e, 'min');
+            }}
+            onBlur={(e) => {
+              foundation.onBlur(e, 'min');
+            }}
+            role="slider"
+            tabindex={disabled ? -1 : 0}
+            {...commonAria}
+            aria-valuetext={getAriaValueText ? getAriaValueText(currentValue[0], 0) : ariaValueText}
+            aria-valuenow={currentValue[0]}
+            aria-valuemax={currentValue[1]}
+            aria-valuemin={min}
+          />
         </Tooltip>
         <Tooltip
           content={tipChildren.max}
@@ -495,51 +488,51 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
           visible={isInRenderTree && (tipVisible.max || secondDotFocusVisible)}
           className={`${cssClasses.HANDLE}-tooltip`}
         >
-                    <span
-                      ref={maxHanleEl}
-                      class={maxClass}
-                      style={{
-                        [stylePos]: `${maxPercent * 100}%`,
-                        zIndex: chooseMovePos === 'max' ? 2 : 1
-                      }}
-                      onMousedown={e => {
-                        foundation.onHandleDown(e, 'max');
-                      }}
-                      onMouseenter={() => {
-                        foundation.onHandleEnter('max');
-                      }}
-                      onMouseleave={() => {
-                        foundation.onHandleLeave();
-                      }}
-                      onMouseup={e => {
-                        foundation.onHandleUp(e);
-                      }}
-                      onKeyup={e => {
-                        foundation.onHandleUp(e);
-                      }}
-                      onTouchstart={e => {
-                        foundation.onHandleTouchStart(e, 'max');
-                      }}
-                      onTouchend={e => {
-                        foundation.onHandleUp(e);
-                      }}
-                      onKeydown={e => {
-                        foundation.handleKeyDown(e, 'max');
-                      }}
-                      onFocus={e => {
-                        foundation.onFocus(e, 'max');
-                      }}
-                      onBlur={(e) => {
-                        foundation.onBlur(e, 'max');
-                      }}
-                      role="slider"
-                      tabindex={disabled ? -1 : 0}
-                      {...commonAria}
-                      aria-valuetext={getAriaValueText ? getAriaValueText(currentValue[1], 1) : ariaValueText}
-                      aria-valuenow={currentValue[1]}
-                      aria-valuemax={max}
-                      aria-valuemin={currentValue[0]}
-                    />
+          <span
+            ref={maxHanleEl}
+            class={maxClass}
+            style={{
+              [stylePos]: `${maxPercent * 100}%`,
+              zIndex: chooseMovePos === 'max' ? 2 : 1,
+            }}
+            onMousedown={(e) => {
+              foundation.onHandleDown(e, 'max');
+            }}
+            onMouseenter={() => {
+              foundation.onHandleEnter('max');
+            }}
+            onMouseleave={() => {
+              foundation.onHandleLeave();
+            }}
+            onMouseup={(e) => {
+              foundation.onHandleUp(e);
+            }}
+            onKeyup={(e) => {
+              foundation.onHandleUp(e);
+            }}
+            onTouchstart={(e) => {
+              foundation.onHandleTouchStart(e, 'max');
+            }}
+            onTouchend={(e) => {
+              foundation.onHandleUp(e);
+            }}
+            onKeydown={(e) => {
+              foundation.handleKeyDown(e, 'max');
+            }}
+            onFocus={(e) => {
+              foundation.onFocus(e, 'max');
+            }}
+            onBlur={(e) => {
+              foundation.onBlur(e, 'max');
+            }}
+            role="slider"
+            tabindex={disabled ? -1 : 0}
+            {...commonAria}
+            aria-valuetext={getAriaValueText ? getAriaValueText(currentValue[1], 1) : ariaValueText}
+            aria-valuenow={currentValue[1]}
+            aria-valuemax={max}
+            aria-valuemin={currentValue[0]}
+          />
         </Tooltip>
       </Fragment>
     );
@@ -547,21 +540,22 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   };
 
   const renderTrack = () => {
-    const {range, included, vertical} = props;
+    const { range, included, vertical } = props;
     const percentInfo = foundation.getMinAndMaxPercent(state.currentValue);
     const minPercent = percentInfo.min;
     const maxPercent = percentInfo.max;
-    let trackStyle: CSSProperties = !vertical ?
-      {
-        width: range ? `${(maxPercent - minPercent) * 100}%` : `${minPercent * 100}%`,
-        left: range ? `${minPercent * 100}%` : 0,
-      } :
-      {
-        height: range ? `${(maxPercent - minPercent) * 100}%` : `${minPercent * 100}%`,
-        top: range ? `${minPercent * 100}%` : 0,
-      };
+    let trackStyle: CSSProperties = !vertical
+      ? {
+          width: range ? `${(maxPercent - minPercent) * 100}%` : `${minPercent * 100}%`,
+          left: range ? `${minPercent * 100}%` : 0,
+        }
+      : {
+          height: range ? `${(maxPercent - minPercent) * 100}%` : `${minPercent * 100}%`,
+          top: range ? `${minPercent * 100}%` : 0,
+        };
     trackStyle = included ? trackStyle : {};
-    return (// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    return (
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
       <div class={cssClasses.TRACK} style={trackStyle} onClick={foundation.handleWrapClick}>
         {/* {renderTrack} */}
       </div>
@@ -569,12 +563,12 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   };
 
   const renderStepDot = () => {
-    const {min, max, vertical, marks} = props;
+    const { min, max, vertical, marks } = props;
     const stylePos = vertical ? 'top' : 'left';
     const labelContent =
       marks && Object.keys(marks).length > 0 ? (
         <div class={cssClasses.DOTS}>
-          {Object.keys(marks).map(mark => {
+          {Object.keys(marks).map((mark) => {
             const activeResult = foundation.isMarkActive(Number(mark));
             const markClass = cls(`${prefixCls}-dot`, {
               [`${prefixCls}-dot-active`]: foundation.isMarkActive(Number(mark)) === 'active',
@@ -586,7 +580,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
                 key={mark}
                 onClick={foundation.handleWrapClick}
                 class={markClass}
-                style={{[stylePos]: `calc(${markPercent * 100}% - 2px)`}}
+                style={{ [stylePos]: `calc(${markPercent * 100}% - 2px)` }}
               />
             ) : null;
           })}
@@ -596,24 +590,24 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   };
 
   const renderLabel = () => {
-    const {min, max, vertical, marks, verticalReverse} = props;
+    const { min, max, vertical, marks, verticalReverse } = props;
     const stylePos = vertical ? 'top' : 'left';
     const labelContent =
       marks && Object.keys(marks).length > 0 ? (
-        <div class={cssClasses.MARKS + ((vertical && verticalReverse) ? '-reverse' : '')}>
-          {Object.keys(marks).map(mark => {
+        <div class={cssClasses.MARKS + (vertical && verticalReverse ? '-reverse' : '')}>
+          {Object.keys(marks).map((mark) => {
             const activeResult = foundation.isMarkActive(Number(mark));
             const markPercent = (Number(mark) - min) / (max - min);
             return activeResult ? (
               // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
               <span
                 key={mark}
-                class={cls(`${prefixCls}-mark${(vertical && verticalReverse) ? '-reverse' : ''}`)}
-                style={{[stylePos]: `${markPercent * 100}%`}}
+                class={cls(`${prefixCls}-mark${vertical && verticalReverse ? '-reverse' : ''}`)}
+                style={{ [stylePos]: `${markPercent * 100}%` }}
                 onClick={foundation.handleWrapClick}
               >
-                                {marks[mark]}
-                            </span>
+                {marks[mark]}
+              </span>
             ) : null;
           })}
         </div>
@@ -622,11 +616,16 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   };
 
   const _getAriaValueText = (value: number, index?: number) => {
-    const {getAriaValueText} = props;
+    const { getAriaValueText } = props;
     return getAriaValueText ? getAriaValueText(value, index) : value;
-  }
+  };
 
-  function _addEventListener<T extends keyof HTMLElementEventMap>(target: HTMLElement, eventName: T, callback: (e: HTMLElementEventMap[T]) => void, ...rests: any) {
+  function _addEventListener<T extends keyof HTMLElementEventMap>(
+    target: HTMLElement,
+    eventName: T,
+    callback: (e: HTMLElementEventMap[T]) => void,
+    ...rests: any
+  ) {
     if (target.addEventListener) {
       target.addEventListener(eventName, callback, ...rests);
       const clearSelf = () => {
@@ -643,14 +642,14 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   }
 
   return () => {
-    const {disabled, currentValue, min, max} = state;
-    const {vertical, verticalReverse, style, railStyle, range, className} = props;
+    const { disabled, currentValue, min, max } = state;
+    const { vertical, verticalReverse, style, railStyle, range, className } = props;
     const wrapperClass = cls(
       `${prefixCls}-wrapper`,
       {
         [`${prefixCls}-disabled`]: disabled,
         [`${cssClasses.VERTICAL}-wrapper`]: vertical,
-        [`${prefixCls}-reverse`]: vertical && verticalReverse
+        [`${prefixCls}-reverse`]: vertical && verticalReverse,
       },
       className
     );
@@ -661,7 +660,9 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
       [`${prefixCls}`]: !vertical,
       [cssClasses.VERTICAL]: vertical,
     });
-    const ariaLabel = range ? `Range: ${_getAriaValueText(currentValue[0], 0)} to ${_getAriaValueText(currentValue[1], 1)}` : undefined;
+    const ariaLabel = range
+      ? `Range: ${_getAriaValueText(currentValue[0], 0)} to ${_getAriaValueText(currentValue[1], 1)}`
+      : undefined;
     const slider = (
       <div
         class={wrapperClass}
@@ -671,12 +672,9 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         onMouseenter={() => foundation.handleWrapperEnter()}
         onMouseleave={() => foundation.handleWrapperLeave()}
       >
-        {// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-          <div
-            class={`${prefixCls}-rail`}
-            onClick={foundation.handleWrapClick}
-            style={railStyle}
-          />
+        {
+          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+          <div class={`${prefixCls}-rail`} onClick={foundation.handleWrapClick} style={railStyle} />
         }
         {renderTrack()}
         {renderStepDot()}
@@ -692,13 +690,10 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
       return <div class={sliderCls}>{slider}</div>;
     }
     return slider;
-  }
-})
+  };
+});
 
-Slider.props = vuePropsType
-Slider.name = 'Slider'
+Slider.props = vuePropsType;
+Slider.name = 'Slider';
 
-export default Slider
-
-
-
+export default Slider;

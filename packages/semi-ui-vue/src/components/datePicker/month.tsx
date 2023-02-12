@@ -89,8 +89,8 @@ const month = defineComponent<MonthProps>((props, {slots}) => {
       notifyWeeksRowNumChange: weeksRowNum => props.onWeeksRowNumChange(weeksRowNum),
     };
   }
+  foundation = new MonthFoundation(adapter());
   onMounted(()=>{
-    foundation = new MonthFoundation(adapter());
     foundation.init();
   })
 
@@ -100,7 +100,7 @@ const month = defineComponent<MonthProps>((props, {slots}) => {
 
   watch(()=>props.month, ()=>{
     foundation.getMonthTable();
-  })
+  }, {immediate: true})
 
 
   function getSingleDayStatus(options: Partial<MonthProps> & { fullDate: string; todayText: string }) {

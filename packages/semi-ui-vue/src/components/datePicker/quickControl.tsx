@@ -5,6 +5,7 @@ import Button from '../button/index';
 import {TypographyText} from '../typography/index';
 import { noop } from '@douyinfe/semi-foundation/utils/function';
 import { PresetsType, PresetType } from '@douyinfe/semi-foundation/datePicker/foundation';
+import { DateInputFoundationProps } from '@douyinfe/semi-foundation/datePicker/inputFoundation';
 import * as PropTypes from '../PropTypes'
 import {vuePropsMake} from "../PropTypes";
 import navigation from "./navigation";
@@ -14,14 +15,14 @@ export interface QuickControlProps {
   presetPosition: typeof strings.PRESET_POSITION_SET[number];
   onPresetClick: (preset: PresetType, e: MouseEvent) => void;
   type: string;
-  insetInput: boolean
+  insetInput: DateInputFoundationProps['insetInput']
 }
 const propTypes = {
   presets: PropTypes.array,
   presetPosition: PropTypes.string,
   onPresetClick: PropTypes.func,
   type: PropTypes.string,
-  insetInput: PropTypes.bool
+  insetInput: [PropTypes.bool, PropTypes.object]
 };
 
 const defaultProps = {

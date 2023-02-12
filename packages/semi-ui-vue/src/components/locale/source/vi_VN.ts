@@ -5,11 +5,10 @@ const local: Locale = {
     code: 'vi-VN',
     dateFnsLocale: vi,
     Pagination: {
-        item: 'Con số',
-        pageSize: ' Số / trang',
+        pageSize: '${pageSize} Số / trang',
+        total: 'Tổng cộng ${total} Số trang',
+        jumpTo: 'Chuyển đến',
         page: ' Số trang',
-        total: 'Tổng cộng',
-        jumpTo: 'Chuyển đến'
     },
     Modal: {
         confirm: 'Xác nhận',
@@ -99,7 +98,7 @@ const local: Locale = {
     },
     Table: {
         emptyText: 'Không kết quả',
-        pageText: 'Hiển thị $ {currentStart} đến $ {currentEnd} trong tổng số $ {total}}',
+        pageText: 'Hiển thị ${currentStart} đến ${currentEnd} trong tổng số ${total}}',
     },
     Select: {
         emptyText: 'Không kết quả',

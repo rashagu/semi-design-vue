@@ -531,7 +531,11 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
     );
   })
   watch(() => props.visible, () => {
-    props.visible ? foundation.delayShow() : foundation.delayHide();
+    if (["hover", "focus"].includes(props.trigger)) {
+      props.visible ? foundation.delayShow() : foundation.delayHide();
+    } else {
+      props.visible ? foundation.show() : foundation.hide();
+    }
   })
   watch(() => props.rePosKey, () => {
     rePosition();

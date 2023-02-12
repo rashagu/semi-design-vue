@@ -177,11 +177,11 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
 
   watch(()=>props.defaultValue, (value)=>{
     foundation.updateSelectedFromProps(value);
-  })
+  }, {immediate: true})
 
   watch(()=>props.defaultPickerValue, (value)=>{
     foundation.initDefaultPickerValue();
-  })
+  }, {immediate: true})
 
   // watch(()=>props.motionEnd, (value)=>{
   //   if (value === true){
@@ -218,7 +218,7 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, {slots}) => {
         reselect();
       }
     }
-  })
+  }, {immediate: true})
 
 
 

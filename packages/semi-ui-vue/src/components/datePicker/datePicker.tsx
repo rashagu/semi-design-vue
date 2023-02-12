@@ -363,10 +363,17 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     return /range/i.test(type) && !isFunction(triggerRender);
   }
 
-  watch([()=>props.value, ()=>props.timeZone], ([prevPropsValue, prevPropsTimeZone])=>{
+  watch(()=>props.value, (value, oldValue, onCleanup)=>{
+    propsChange([oldValue, props.timeZone])
+  }, {immediate: true})
+  watch(()=>props.timeZone, (value, oldValue, onCleanup)=>{
+    propsChange([props.value, oldValue])
+  }, {immediate: true})
+
+  function propsChange([prevPropsValue, prevPropsTimeZone]) {
     if (prevPropsValue !== props.value) {
       foundation.initFromProps({
-        ...props,
+        ...(props as any),
       });
     }else if (props.timeZone !== prevPropsTimeZone) {
       foundation.initFromProps({
@@ -375,14 +382,15 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
         prevTimeZone: prevPropsTimeZone,
       });
     }
-  })
+  }
+
 
   watch(()=>props.open, ()=>{
     foundation.initPanelOpenStatus();
     if (!props.open) {
       foundation.clearRangeInputFocus();
     }
-  })
+  }, {immediate: true})
 
   onMounted(()=>{
     _mounted = true;
@@ -495,7 +503,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     const { insetInput, dateFnsLocale, density, type, format, rangeSeparator, defaultPickerValue } = props;
     const { insetInputValue, value } = state;
 
-    const insetInputProps = {
+    const props_ = {
       dateFnsLocale,
       format,
       insetInputValue,
@@ -511,7 +519,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       defaultPickerValue
     };
 
-    return insetInput ? <DateInput {...insetInputProps} insetInput={true} /> : null;
+    return insetInput ? <DateInput {...props_} insetInput={insetInput} /> : null;
   }
 
 
@@ -546,8 +554,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   }
 
   const handleInsetTimeFocus = () => {
-    // TODO
-    const monthGridFoundation = monthGrid.value.current.foundation;
+    const monthGridFoundation = monthGrid.value.foundation;
     if (monthGridFoundation) {
       monthGridFoundation.showTimePicker(strings.PANEL_TYPE_LEFT);
       monthGridFoundation.showTimePicker(strings.PANEL_TYPE_RIGHT);
@@ -613,7 +620,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       format,
       multiple,
       validateStatus,
-      inputReadOnly: inputReadOnly || insetInput,
+      inputReadOnly: inputReadOnly || Boolean(insetInput),
       // onClick: handleOpenPanel,
       onBlur: handleInputBlur,
       onFocus: handleInputFocus,
@@ -645,7 +652,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
             {...props_}
             triggerRender={triggerRender}
             componentName="DatePicker"
-            componentProps={{ ...props_ }}
+            componentProps={{ ...props }}
           />
         ) : (
           <DateInput {...props_} />
@@ -675,8 +682,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   };
 
   const renderPanel = (locale: Locale['DatePicker'], localeCode: string, dateFnsLocale: Locale['dateFnsLocale']) => {
-    const { dropdownClassName, dropdownStyle, density, topSlot, bottomSlot, insetInput, type, format, rangeSeparator, defaultPickerValue, presetPosition }  = props;
-    const { insetInputValue, value } = state;
+    const { dropdownClassName, dropdownStyle, density, topSlot, bottomSlot, presetPosition } = props;
     const wrapCls = classnames(
       cssClasses.PREFIX,
       {
@@ -686,29 +692,12 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       dropdownClassName
     );
 
-    const insetInputProps = {
-      dateFnsLocale,
-      format,
-      insetInputValue,
-      rangeSeparator,
-      type,
-      value: value as Date[],
-      handleInsetDateFocus: handleInsetDateFocus,
-      handleInsetTimeFocus: handleInsetTimeFocus,
-      onInsetInputChange: handleInsetInputChange,
-      rangeInputStartRef: rangeInputStartRef,
-      rangeInputEndRef: rangeInputEndRef,
-      density,
-      defaultPickerValue
-    };
-
     return (
       <div ref={panelRef} class={wrapCls} style={dropdownStyle}>
-        {topSlot && <div class={`${cssClasses.PREFIX}-topSlot`}x-semi-prop="topSlot">
+        {topSlot && <div class={`${cssClasses.PREFIX}-topSlot`} x-semi-prop="topSlot">
           {topSlot}
         </div>}
         {presetPosition === "top" && renderQuickControls()}
-        {/*{insetInput && <DateInput {...insetInputProps} insetInput={true} />}*/}
         {adapter().typeIsYearOrMonth() ?
           renderYearMonthPanel(locale, localeCode) :
           renderMonthGrid(locale, localeCode, dateFnsLocale)}
@@ -752,10 +741,10 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     );
   };
 
+  // rtl changes the default position
+  const { context } = useConfigContext();
   const wrapPopover = (children: VueJsxNode) => {
     const { panelShow } = state;
-    // rtl changes the default position
-    const { context } = useConfigContext();
     // TODO
     let direction = context.value.direction
     const defaultPosition = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';

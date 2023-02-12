@@ -39,23 +39,24 @@ export interface ButtonProps {
 
 const Button = defineComponent<ButtonProps>((props, {slots}) => {
 
-  const {
-    block,
-    loading,
-    circle,
-    className,
-    style,
-    disabled,
-    size,
-    theme,
-    type,
-    prefixCls,
-    iconPosition,
-    htmlType,
-    ...attr
-  } = props;
 
   return () => {
+    const {
+      block,
+      loading,
+      circle,
+      className,
+      style,
+      disabled,
+      size,
+      theme,
+      type,
+      prefixCls,
+      iconPosition,
+      htmlType,
+      ...attr
+    } = props;
+    
     const baseProps = {
       type: htmlType,
       ...attr,

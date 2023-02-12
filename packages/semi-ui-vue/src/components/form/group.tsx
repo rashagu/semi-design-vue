@@ -15,6 +15,7 @@ import { Col, Row } from '../grid/index';
 import {defineComponent, h, useSlots, Fragment, cloneVNode} from "vue";
 import {useFormUpdaterContext} from "./context/FormUpdaterContext/Consumer";
 import {noop} from "@douyinfe/semi-foundation/utils/function";
+import {VueJsxNode} from "../interface";
 interface GroupErrorProps {
     showValidateIcon?: boolean;
     isInInputGroup?: boolean;
@@ -24,6 +25,8 @@ interface GroupErrorProps {
 export interface InputGroupProps extends BacisInputGroupProps {
     label?: LabelProps;
     labelPosition?: 'left' | 'top';
+    extraText?: VueJsxNode;
+    extraTextPosition?: 'bottom' | 'middle'
 }
 
 const prefix = cssClasses.PREFIX;
@@ -65,7 +68,7 @@ export const vuePropsType = {
 }
 const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
     const slots = useSlots()
-    
+
     const {context} = useFormUpdaterContext()
     function renderLabel(label: LabelProps, formProps: BaseFormProps) {
         if (label) {
@@ -80,9 +83,8 @@ const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
 
     return () => {
         const children= slots.default?.()
-        const { label, ...rest } = props;
-        const updater = context;
-        const formProps = updater.value.getFormProps(['labelPosition', 'labelWidth', 'labelAlign', 'showValidateIcon', 'wrapperCol', 'labelCol']);
+        const { label, extraText, extraTextPosition, ...rest } = props;
+        const formProps = context.value.getFormProps(['labelPosition', 'labelWidth', 'labelAlign', 'showValidateIcon', 'wrapperCol', 'labelCol']);
         const labelPosition = props.labelPosition || formProps.labelPosition;
         const groupFieldSet: Array<string> = [];
         const inner = children.map((child: any) => {
@@ -115,6 +117,13 @@ const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
           </InputGroup>
         );
         const groupErrorContent = (<GroupError fieldSet={groupFieldSet} showValidateIcon={formProps.showValidateIcon} isInInputGroup />);
+        const extraCls = classNames(`${prefix}-field-extra`, {
+            [`${prefix}-field-extra-string`]: typeof extraText === 'string',
+            [`${prefix}-field-extra-middle`]: extraTextPosition === 'middle',
+            [`${prefix}-field-extra-bottom`]: extraTextPosition === 'bottom',
+        });
+
+        const extraContent = extraText ? <div class={extraCls} x-semi-prop="extraText">{extraText}</div> : null;
 
         let content: any;
 
@@ -124,7 +133,9 @@ const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
                   <>
                       {labelContent}
                       <div>
+                          {extraTextPosition === 'middle' ? extraContent : null}
                           {inputGroupContent}
+                          {extraTextPosition === 'bottom' ? extraContent : null}
                           {groupErrorContent}
                       </div>
                   </>
@@ -140,7 +151,9 @@ const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
                           </Col>
                       </div>
                       <Col {...wrapperCol}>
+                          {extraTextPosition === 'middle' ? extraContent : null}
                           {inputGroupContent}
+                          {extraTextPosition === 'bottom' ? extraContent : null}
                           {groupErrorContent}
                       </Col>
                   </>
@@ -153,7 +166,9 @@ const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
                           {labelContent}
                       </Col>
                       <Col {...wrapperCol}>
+                          {extraTextPosition === 'middle' ? extraContent : null}
                           {inputGroupContent}
+                          {extraTextPosition === 'bottom' ? extraContent : null}
                           {groupErrorContent}
                       </Col>
                   </>
@@ -162,8 +177,6 @@ const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
             default:
                 break;
         }
-
-
 
         return (
           <div x-label-pos={labelPosition} class={groupCls}>

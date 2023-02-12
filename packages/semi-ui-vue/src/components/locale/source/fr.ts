@@ -5,11 +5,10 @@ const local: Locale = {
     code: 'fr',
     dateFnsLocale: fr,
     Pagination: {
-        item: 'article',
-        pageSize: ' articles/page',
+        pageSize: '${pageSize} articles/page',
+        total: '${total} pages',
+        jumpTo: 'Sauter à',
         page: ' pages',
-        total: '',
-        jumpTo: 'Sauter à'
     },
     Modal: {
         confirm: 'Confirmer',
@@ -122,7 +121,7 @@ const local: Locale = {
     Upload: {
         mainText: 'Cliquez pour télécharger le fichier ou faites glisser le fichier vers ici',
         illegalTips: 'Ce type de fichier n\'est pas pris en charge',
-        legalTips: 'Libérer et commencer le téléchargement',
+        legalTips: 'Libérer et commencer le chargement',
         retry: 'Réessayer',
         replace: 'Remplacer le fichier',
         clear: 'Supprimer',
@@ -157,14 +156,14 @@ const local: Locale = {
         preview: 'Aperçu',
         loading: 'Chargement',
         loadError: 'Échec du chargement',
-        prevTip : 'Précédent',
-        nextTip : 'Suivant',
-        zoomInTip : 'Zoom avant',
-        zoomOutTip : 'Zoom arrière',
-        rotateTip : 'Rotation',
-        downloadTip : 'Télécharger',
-        adaptiveTip : 'Adapter à la page',
-        originTip : 'Taille d\'origine',
+        prevTip: 'Précédent',
+        nextTip: 'Suivant',
+        zoomInTip: 'Zoom avant',
+        zoomOutTip: 'Zoom arrière',
+        rotateTip: 'Rotation',
+        downloadTip: 'Télécharger',
+        adaptiveTip: 'Adapter à la page',
+        originTip: 'Taille d\'origine',
     },
 };
 
