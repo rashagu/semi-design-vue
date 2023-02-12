@@ -5,8 +5,8 @@ import Comp from "./TimePickerDemo";
 
 test('TimePickerDemo test', async () => {
   render(Comp)
-  const input = await screen.findByPlaceholderText("请选择时间")
-  await fireEvent.click(input)
+  const input = await screen.findAllByPlaceholderText("请选择时间")
+  await fireEvent.click(input[0])
   // const value = await screen.findByText("00时间")
 
 
