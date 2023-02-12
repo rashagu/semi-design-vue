@@ -1,5 +1,11 @@
 # @kousum/semi-animation-vue
 
+## 0.2.2
+
+### Patch Changes
+
+- a6cf104: fix bugs
+
 ## 0.2.1
 
 ### Patch Changes

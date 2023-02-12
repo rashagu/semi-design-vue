@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.2.2
+
+### Patch Changes
+
+- a6cf104: fix bugs
+- Updated dependencies [a6cf104]
+  - @kousum/semi-animation-vue@0.2.2
+  - @kousum/semi-icons-vue@0.2.2
+  - @kousum/semi-illustrations-vue@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes
