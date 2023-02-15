@@ -164,12 +164,12 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
         {/*<ModalDemo/>*/}
-        <UploadDemo/>
+        {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}
         {/*<DatePickerDemo />*/}
-        {/*<TimePickerDemo />*/}
+        <TimePickerDemo />
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
         {/*<CheckboxDemo />*/}

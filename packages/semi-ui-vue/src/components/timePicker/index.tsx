@@ -51,6 +51,7 @@ const index = defineComponent<LocalePickerProps>((props, {}) => {
 })
 
 index.props = vuePropsType
+index.name = "TimePickerIndex"
 
 export default index
 

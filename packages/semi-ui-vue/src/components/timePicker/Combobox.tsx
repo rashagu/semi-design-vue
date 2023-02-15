@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, Fragment, useSlots, reactive, onMounted, watch} from 'vue'
 
 import { format as dateFnsFormat } from 'date-fns';
-import { noop } from 'lodash';
+import {noop, omit} from 'lodash';
 
 import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import { strings } from '@douyinfe/semi-foundation/timePicker/constants';
@@ -9,11 +9,11 @@ import ScrollList from '../scrollList/index';
 import {scrollItemFunc} from '../scrollList/scrollItem';
 import ComboboxFoundation, { formatOption } from '@douyinfe/semi-foundation/timePicker/ComboxFoundation';
 import LocaleConsumer from '../locale/localeConsumer';
-import { TimePickerProps } from './TimePicker';
+import type {TimePickerProps} from './TimePicker';
 import { Locale } from '../locale/interface';
 import {vuePropsMake} from "../PropTypes";
 import * as PropTypes from "../PropTypes";
-import {InputProps} from "../input";
+import {timePickerPropTypes} from "./propTypes";
 const ScrollItemFormatOptionReturn = scrollItemFunc<FormatOptionReturn>()
 const ScrollItemAMPMOptionItem = scrollItemFunc<AMPMOptionItem>()
 
@@ -54,6 +54,8 @@ export interface AMPMOptionItem {
 
 
 const staticPropTypes = {
+  class: [PropTypes.string, PropTypes.object],
+  style: [PropTypes.string, PropTypes.object],
   format: PropTypes.string,
   defaultOpenValue: PropTypes.object,
   prefixCls: PropTypes.string,
@@ -70,6 +72,20 @@ const staticPropTypes = {
   isAM: PropTypes.bool,
   timeStampValue: PropTypes.any,
   scrollItemProps: PropTypes.object,
+
+  panelHeader: PropTypes.string,
+
+
+  ...omit(timePickerPropTypes, [
+    "prefixCls", "format", "style",
+    "disabledHours",
+    "disabledMinutes",
+    "disabledSeconds",
+    "hideDisabledOptions",
+    "onChange",
+    "use12Hours",
+    "scrollItemProps"
+  ]),
 };
 
 const staticDefaultProps = {
@@ -321,28 +337,27 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
 
     const value = getDisplayDateFromTimeStamp(timeStampValue);
     return (
-      <div>
-        <LocaleConsumer componentName="TimePicker">
-          {(locale: Locale['TimePicker'], localeCode: Locale['code']) => (
-            <ScrollList
-              header={panelHeader}
-              footer={panelFooter}
-              x-semi-header-alias="panelHeader"
-              x-semi-footer-alias="panelFooter"
-            >
-              {renderAMPMSelect(locale, localeCode)}
-              {renderHourSelect(value.getHours(), locale)}
-              {renderMinuteSelect(value.getMinutes(), locale)}
-              {renderSecondSelect(value.getSeconds(), locale)}
-            </ScrollList>
-          )}
-        </LocaleConsumer>
-      </div>
+      <LocaleConsumer componentName="TimePicker">
+        {(locale: Locale['TimePicker'], localeCode: Locale['code']) => (
+          <ScrollList
+            header={panelHeader}
+            footer={panelFooter}
+            x-semi-header-alias="panelHeader"
+            x-semi-footer-alias="panelFooter"
+          >
+            {renderAMPMSelect(locale, localeCode)}
+            {renderHourSelect(value.getHours(), locale)}
+            {renderMinuteSelect(value.getMinutes(), locale)}
+            {renderSecondSelect(value.getSeconds(), locale)}
+          </ScrollList>
+        )}
+      </LocaleConsumer>
     );
   }
 })
 
 Combobox.props = vuePropsType
+Combobox.name = 'Combobox'
 
 export default Combobox
 

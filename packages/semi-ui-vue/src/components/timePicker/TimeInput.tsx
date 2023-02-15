@@ -208,6 +208,7 @@ const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
 })
 
 TimeInput.props = vuePropsType
+TimeInput.name = "TimeInput"
 
 export default TimeInput
 
