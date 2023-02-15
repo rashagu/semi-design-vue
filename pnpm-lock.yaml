@@ -12,8 +12,8 @@ importers:
       '@changesets/cli': ^2.26.0
       '@douyinfe/semi-foundation': 2.29.0
       '@douyinfe/semi-theme-default': 2.29.0
-      '@kousum/semi-icons-vue': ^0.2.0
-      '@kousum/semi-ui-vue': ^0.2.0
+      '@kousum/semi-icons-vue': ^0.2.2
+      '@kousum/semi-ui-vue': ^0.2.2
       '@storybook/addon-essentials': ^7.0.0-beta.38
       '@storybook/addon-interactions': ^7.0.0-beta.38
       '@storybook/addon-links': ^7.0.0-beta.38
@@ -317,9 +317,9 @@ importers:
       '@douyinfe/semi-foundation': 2.29.0
       '@douyinfe/semi-theme-default': 2.29.0
       '@kousum/resize-observer-polyfill': ^1.5.2
-      '@kousum/semi-animation-vue': ^0.2.1
-      '@kousum/semi-icons-vue': ^0.2.1
-      '@kousum/semi-illustrations-vue': ^0.2.1
+      '@kousum/semi-animation-vue': ^0.2.2
+      '@kousum/semi-icons-vue': ^0.2.2
+      '@kousum/semi-illustrations-vue': ^0.2.2
       '@kousum/vue-draggable': 1.0.2
       '@kousum/vue-resizable': 1.0.2
       '@kousum/vue3-window': 0.0.6
@@ -4967,12 +4967,12 @@ packages:
       telejson: 7.0.4
     dev: true
 
-  /@storybook/channel-postmessage/7.0.0-beta.46:
-    resolution: {integrity: sha512-bJ7/9J1vHrm4czBzB1gNV6N6eYVP2JQJjteMjyul1ujS6PhC243GB2PTlQDwrE9MuPGIP1Qv6dSgs9bMQeXNVg==}
+  /@storybook/channel-postmessage/7.0.0-beta.48:
+    resolution: {integrity: sha512-T1VajcfxaRjXQpLUN6N//A4ggZEZC5FHnJZonhxSMQYDKVoVhtKZdvZ0Dg1mcJIZEuN8dw4SN2Lf75rfXcj18Q==}
     dependencies:
-      '@storybook/channels': 7.0.0-beta.46
-      '@storybook/client-logger': 7.0.0-beta.46
-      '@storybook/core-events': 7.0.0-beta.46
+      '@storybook/channels': 7.0.0-beta.48
+      '@storybook/client-logger': 7.0.0-beta.48
+      '@storybook/core-events': 7.0.0-beta.48
       '@storybook/global': 5.0.0
       qs: 6.11.0
       telejson: 7.0.4
@@ -4991,8 +4991,8 @@ packages:
     resolution: {integrity: sha512-3Wr0jXpwIKppOHaputPLpZBwYYN7gQzqM0MYTQmw1e+lzblhdZkFAI0KaHrMWIEi70NLbsR48ZEVwyZVwrLMRw==}
     dev: true
 
-  /@storybook/channels/7.0.0-beta.46:
-    resolution: {integrity: sha512-fNsUiWe+K+jnHyeG1WrUrJDGHmO/QLOek0Ly+5j2LhV7PG4S/33IUVShux4yfZIMJwtrVtaawM306q1uJofFaw==}
+  /@storybook/channels/7.0.0-beta.48:
+    resolution: {integrity: sha512-sP+dMU4vsHQTwlmTvt7QOTl7JjOkGIb2P1zkEwOYXx2ilMyHEpeyPG/iTlKX5T1pGEq274NeUwEE+6Zecqj30w==}
     dev: true
 
   /@storybook/cli/7.0.0-beta.38:
@@ -5047,8 +5047,8 @@ packages:
       '@storybook/global': 5.0.0
     dev: true
 
-  /@storybook/client-logger/7.0.0-beta.46:
-    resolution: {integrity: sha512-dehsFk2DDrxY1l+HtsILCw4MQTw4/7XBpAWK01dR4xOagCZvmGJqVRouDVqZJBB3NAEw1uSKR5Jy+2teu9sCOA==}
+  /@storybook/client-logger/7.0.0-beta.48:
+    resolution: {integrity: sha512-wkZ4WTclsM4QSN0GJIjrmCuw8ZR3yHRv+gI1C4feqBZiBomEXB+U117009T9BVZ4S9I5RLyYQpNIXhiOzGqyqw==}
     dependencies:
       '@storybook/global': 5.0.0
     dev: true
@@ -5136,8 +5136,8 @@ packages:
     resolution: {integrity: sha512-VzC+ssutXDheDeoDnnImVdyzzKxO4THANlM2hV8aekcRMzQe5MFSOy4kNu4bu7aA4okkz10f3Pj/TwEbgwkH0A==}
     dev: true
 
-  /@storybook/core-events/7.0.0-beta.46:
-    resolution: {integrity: sha512-ogC+bHeMsmpZuEiKWCUdgncATgDsnPTDqumgV99fXDWrYpt2KUePsZSBSTaI97lTZqko3WN1GTBbqqZ0OrerHw==}
+  /@storybook/core-events/7.0.0-beta.48:
+    resolution: {integrity: sha512-hmpEOkrWCot1gYf0kq1UvwTalr3WKXUoQSh4mtD398NZdzFX2blxmLg1bfAfuDE0YAEZuqGgYjd22ncQe2xh1Q==}
     dev: true
 
   /@storybook/core-server/7.0.0-beta.38:
@@ -5256,14 +5256,14 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/instrumenter/7.0.0-beta.46:
-    resolution: {integrity: sha512-WloEmCy/fX6aTs8hAavLO2UM3MJ3lB2gzM62mBdo/cjP6DvSjT2l5xPZuhI2IyqkIx+zgOk5lU3oGW4rPEu//w==}
+  /@storybook/instrumenter/7.0.0-beta.48:
+    resolution: {integrity: sha512-AN1tBlBkY23CbfJaWAuoKWghXw8njO1JbYQ6SFeK8KuwxXbQkakAUebdD/Fz3vCBo8Wzn8wqV4Ba32xJG0Q81Q==}
     dependencies:
-      '@storybook/channels': 7.0.0-beta.46
-      '@storybook/client-logger': 7.0.0-beta.46
-      '@storybook/core-events': 7.0.0-beta.46
+      '@storybook/channels': 7.0.0-beta.48
+      '@storybook/client-logger': 7.0.0-beta.48
+      '@storybook/core-events': 7.0.0-beta.48
       '@storybook/global': 5.0.0
-      '@storybook/preview-api': 7.0.0-beta.46
+      '@storybook/preview-api': 7.0.0-beta.48
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5339,16 +5339,16 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/preview-api/7.0.0-beta.46:
-    resolution: {integrity: sha512-sEfdUk9rMcIrCKYA9q6/735VUGRaQvGaUpATjy468WOhXwUgASFjBvRk6w0xu/lpfcnIcPwoDVpbYR17kKvzTg==}
+  /@storybook/preview-api/7.0.0-beta.48:
+    resolution: {integrity: sha512-b3+LbAgtw2NERVsIkr6Bq/EvbTyvLN+IfdmohUggaNQjRl0+qJiwmcqCNcfoMA0/OFblziGDMXBLCWS3KKVQiA==}
     dependencies:
-      '@storybook/channel-postmessage': 7.0.0-beta.46
-      '@storybook/channels': 7.0.0-beta.46
-      '@storybook/client-logger': 7.0.0-beta.46
-      '@storybook/core-events': 7.0.0-beta.46
+      '@storybook/channel-postmessage': 7.0.0-beta.48
+      '@storybook/channels': 7.0.0-beta.48
+      '@storybook/client-logger': 7.0.0-beta.48
+      '@storybook/core-events': 7.0.0-beta.48
       '@storybook/csf': 0.0.2-next.8
       '@storybook/global': 5.0.0
-      '@storybook/types': 7.0.0-beta.46
+      '@storybook/types': 7.0.0-beta.48
       '@types/qs': 6.9.7
       dequal: 2.0.3
       lodash: 4.17.21
@@ -5399,8 +5399,8 @@ packages:
   /@storybook/testing-library/0.0.14-next.1:
     resolution: {integrity: sha512-1CAl40IKIhcPaCC4pYCG0b9IiYNymktfV/jTrX7ctquRY3akaN7f4A1SippVHosksft0M+rQTFE0ccfWW581fw==}
     dependencies:
-      '@storybook/client-logger': 7.0.0-beta.46
-      '@storybook/instrumenter': 7.0.0-beta.46
+      '@storybook/client-logger': 7.0.0-beta.48
+      '@storybook/instrumenter': 7.0.0-beta.48
       '@testing-library/dom': 8.20.0
       '@testing-library/user-event': 13.5.0_yxlyej73nftwmh2fiao7paxmlm
       ts-dedent: 2.2.0
@@ -5435,11 +5435,11 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/types/7.0.0-beta.46:
-    resolution: {integrity: sha512-I5nf8aDYmkM3FqlBAqr2SxnIp16iydvjSegShHEeraXDs9wSqbyAlYuw8m2WcN+bGA2qqhGUGEWbJv5bY3WaTQ==}
+  /@storybook/types/7.0.0-beta.48:
+    resolution: {integrity: sha512-rH/SAgRwnNRg6u9ZuzkOPLKFDNkJiGfWEQxG+4ru1dDQlp4kNZKssTVXx5L2jyfGGYSNSx/K7t0yCjeGeDcDdw==}
     dependencies:
       '@babel/core': 7.20.12
-      '@storybook/channels': 7.0.0-beta.46
+      '@storybook/channels': 7.0.0-beta.48
       '@types/babel__core': 7.20.0
       '@types/express': 4.17.16
       express: 4.18.2
