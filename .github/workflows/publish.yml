@@ -57,7 +57,7 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
           git add .
           git commit -m "[github action]: ${{ env.RELEASE_VERSION }}"
-          git push --tags
+          git push origin master --tags
           else
           echo "no changes";
           fi
