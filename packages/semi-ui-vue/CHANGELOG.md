@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.2.3
+
+### Patch Changes
+
+- fdfaf0c: fix: 日期组件修复
+- Updated dependencies [fdfaf0c]
+  - @kousum/semi-animation-vue@0.2.3
+  - @kousum/semi-icons-vue@0.2.3
+  - @kousum/semi-illustrations-vue@0.2.3
+
 ## 0.2.2
 
 ### Patch Changes
