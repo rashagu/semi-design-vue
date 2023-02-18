@@ -108,7 +108,6 @@ const ArrayFieldComponent = defineComponent<ArrayFieldProps>((props, {}) => {
   })
 
   watch([
-    context,
     () => props.field,
     () => state.keys,
   ], () => {

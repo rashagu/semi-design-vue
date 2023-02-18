@@ -18,6 +18,7 @@ const Consumer = defineComponent(() => {
 })
 
 Consumer.props = vuePropsType
+Consumer.name = 'BaseFormApiContextConsumer'
 
 export default Consumer
 

@@ -7,11 +7,11 @@ export const vuePropsType = {
   value: Object
 }
 const Provider = defineComponent<{value:ArrayFieldType}>((props, {slots}) => {
-  const ConfigContext = ref<ArrayFieldType>(props.value);
+  const ConfigContext = ref<ArrayFieldType>();
 
   watch(()=>props.value, ()=>{
     ConfigContext.value = props.value
-  }, { deep: true})
+  }, { immediate: true})
   provide('ArrayFieldContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
 })

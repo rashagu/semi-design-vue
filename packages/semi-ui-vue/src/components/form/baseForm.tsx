@@ -117,7 +117,10 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
             forceUpdate: (callback?: () => void) => {
                 // TODO 重新渲染
                 // adapter.forceUpdate(callback);
-                currentInstance.update()
+                // currentInstance.update()
+                // vue3 强制刷新
+                currentInstance.proxy.$forceUpdate();
+                callback?.()
             },
             notifyChange: (formState: FormState) => {
                 props.onChange(formState);

@@ -6,11 +6,11 @@ export const vuePropsType = {
   value: Object
 }
 const Provider = defineComponent<{value:FormUpdaterContextType}>((props, {slots}) => {
-  const ConfigContext = ref<FormUpdaterContextType>(props.value);
+  const ConfigContext = ref<FormUpdaterContextType>();
 
   watch(()=>props.value, ()=>{
     ConfigContext.value = props.value
-  }, { deep: true})
+  }, { immediate: true})
   provide('FormUpdaterContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
 })

@@ -7,12 +7,11 @@ export const vuePropsType = {
   value: Object
 }
 const Provider = defineComponent<{value:TableContextProps}>((props, {slots}) => {
-  const ConfigContext = ref<TableContextProps>(props.value);
+  const ConfigContext = ref<TableContextProps>();
 
   watch(()=>props.value, ()=>{
-    // @ts-ignore
     ConfigContext.value = props.value
-  }, { deep: true})
+  }, { deep: true, immediate: true})
   provide('TableContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
 })

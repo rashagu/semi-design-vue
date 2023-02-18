@@ -374,7 +374,7 @@ function withField<
             // eslint-disable-next-line react-hooks/exhaustive-deps
         });
 
-        watch(()=>mergeProps(props).field, (value, oldValue, onCleanup)=>{
+        watch(()=>props.field, (value, oldValue, onCleanup)=>{
 
             let {
                 // condition,
