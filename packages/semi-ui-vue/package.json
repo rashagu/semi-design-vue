@@ -48,8 +48,7 @@
     "vue": "^3.2.47"
   },
   "peerDependencies": {
-    "vue": ">=3.2.47",
-    "lodash": ">=4.17.21"
+    "vue": ">=3.2.47"
   },
   "sideEffects": [
     "*.scss",
