@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-illustrations-vue",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "files": [

@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.2.4
+
+### Patch Changes
+
+- 3a0ae16: lodash 打包进代码
+- Updated dependencies [3a0ae16]
+  - @kousum/semi-animation-vue@0.2.4
+  - @kousum/semi-icons-vue@0.2.4
+  - @kousum/semi-illustrations-vue@0.2.4
+
 ## 0.2.3
 
 ### Patch Changes

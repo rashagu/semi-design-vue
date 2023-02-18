@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.2.4
+
+### Patch Changes
+
+- 3a0ae16: lodash 打包进代码
+
 ## 0.2.3
 
 ### Patch Changes
