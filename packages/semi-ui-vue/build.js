@@ -40,9 +40,6 @@ gulp.task('buildSS', async function moveScss() {
         rollupOptions: {
           // 确保外部化处理那些你不想打包进库的依赖
           external: (source, importer, isResolved)=>{
-            if (source.indexOf('lodash') > -1){
-              return false
-            }
             return importer !== undefined
           },
           output: {
