@@ -566,7 +566,7 @@ function withField<
                 onBlur: handleBlur,
                 [options.onKeyChangeFnName]: handleChange,
                 // value 为Ref 对象
-                [options.valueKey]: value,
+                [options.valueKey]: value.value,
                 validateStatus: blockStatus,
                 'aria-required': required,
                 'aria-labelledby': labelId,
