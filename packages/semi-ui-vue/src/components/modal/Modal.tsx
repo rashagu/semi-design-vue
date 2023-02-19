@@ -393,7 +393,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
                         onClose={handleCancel}
                       >
                         {{default: slots.default}}
-                      </ModalContent>:<></>;
+                      </ModalContent>:null;
                     }
                   }
                 >
