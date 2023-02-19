@@ -1,14 +1,24 @@
-import {defineComponent, ref, h, InputHTMLAttributes, VNode, CSSProperties, reactive, watch, onMounted, Ref} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  InputHTMLAttributes,
+  VNode,
+  CSSProperties,
+  reactive,
+  watch,
+  onMounted,
+  Ref,
+} from 'vue';
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import InputFoundation from '@douyinfe/semi-foundation/input/foundation';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/input/constants';
 import { isSemiIcon } from '../_utils';
-import {useBaseComponent} from '../_base/baseComponent';
+import { useBaseComponent } from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/input/input.scss';
 import { isString, noop, isFunction, isUndefined } from 'lodash';
 import { IconClear, IconEyeOpened, IconEyeClosedSolid } from '@kousum/semi-icons-vue';
-
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -18,22 +28,22 @@ const modeSet = strings.MODE;
 
 import type { InputGroupProps } from './inputGroup';
 import type { TextAreaProps } from './textArea';
-import {AriaAttributes} from "../AriaAttributes";
-import {vuePropsMake} from "../PropTypes";
-import {VueJsxNode} from "../interface";
-export type { TextAreaProps , InputGroupProps}
+import { AriaAttributes } from '../AriaAttributes';
+import { vuePropsMake } from '../PropTypes';
+import { VueJsxNode } from '../interface';
+export type { TextAreaProps, InputGroupProps };
 
 export type InputSize = 'small' | 'large' | 'default';
 export type InputMode = 'password';
 // still keep success as ValidateStatus optional value because form will pass success as props.validateStatus in sometime
 // Although we do not consume success in the input to configure special styles, we should allow it as a legal props value, otherwise a warning will be thrown
-export type ValidateStatus = "default" | "error" | "warning" | "success";
+export type ValidateStatus = 'default' | 'error' | 'warning' | 'success';
 
-
-
-
-export interface InputProps extends
-  Omit<InputHTMLAttributes, 'onChange' | 'prefix' | 'size' | 'autoFocus' | 'placeholder' | 'onFocus' | 'onBlur'> {
+export interface InputProps
+  extends Omit<
+    InputHTMLAttributes,
+    'onChange' | 'prefix' | 'size' | 'autoFocus' | 'placeholder' | 'onFocus' | 'onBlur'
+  > {
   'aria-label'?: AriaAttributes['aria-label'];
   'aria-describedby'?: AriaAttributes['aria-describedby'];
   'aria-errormessage'?: AriaAttributes['aria-errormessage'];
@@ -64,7 +74,7 @@ export interface InputProps extends
   onClear?: (e: MouseEvent) => void;
   onChange?: (value: string, e: HashChangeEvent) => void;
   onBlur?: (e: FocusEvent) => void;
-  onFocus?: (e:FocusEvent) => void;
+  onFocus?: (e: FocusEvent) => void;
   onInput?: (e: Event) => void;
   onKeyDown?: (e: KeyboardEvent) => void;
   onKeyUp?: (e: KeyboardEvent) => void;
@@ -73,9 +83,9 @@ export interface InputProps extends
   inputStyle?: CSSProperties;
   getValueLength?: (value: string) => number;
   forwardRef?: (((instance: any) => void) | any | null) | Ref;
-  minlength?: number,
-  maxlength?: number,
-  preventScroll?: boolean,
+  minlength?: number;
+  maxlength?: number;
+  preventScroll?: boolean;
 }
 
 export interface InputState {
@@ -90,8 +100,6 @@ export interface InputState {
   minlength: number;
   maxlength: number;
 }
-
-
 
 const propTypes = {
   'aria-label': PropTypes.string,
@@ -134,7 +142,6 @@ const propTypes = {
   getValueLength: PropTypes.func,
   preventScroll: PropTypes.bool,
 
-
   minlength: Number,
   maxlength: Number,
   forwardRef: [PropTypes.object, PropTypes.func],
@@ -163,15 +170,12 @@ const defaultProps = {
   onEnterPress: noop,
   validateStatus: 'default',
 };
-export const VuePropsType = vuePropsMake(propTypes, defaultProps)
-
+export const VuePropsType = vuePropsMake(propTypes, defaultProps);
 
 // Vue在这里的话 state 更新会导致整体重新渲染 导致value 无法更新到最新的
-const Input = defineComponent<InputProps>((props, {slots}) => {
-
-  const onUpdateValueFunc = props["onUpdate:value"]
+const Input = defineComponent<InputProps>((props, { slots }) => {
   const state = reactive<InputState>({
-    value: props.value || props.defaultValue ,
+    value: '',
     cachedValue: null, // Cache current props.value value
     disabled: false,
     props: {},
@@ -181,10 +185,10 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
     eyeClosed: props.mode === 'password',
     minlength: props.minlength,
     maxlength: props.maxlength,
-  })
-  const {adapter: adapterInject} = useBaseComponent<InputProps>(props, state)
+  });
+  const { adapter: adapterInject } = useBaseComponent<InputProps>(props, state);
 
-  const theAdapter = adapter()
+  const theAdapter = adapter();
   // watch(()=>state.value,()=>{
   //   console.log(state.value)
   // })
@@ -193,21 +197,22 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
     return {
       ...adapterInject<InputProps, InputState>(),
       setValue: (value: string) => {
-        // console.log('setValue',value)
-        if (onUpdateValueFunc){
-          onUpdateValueFunc(value)
-        }
-        state.value = value
+        // const onUpdateValueFunc = props["onUpdate:value"]
+        // // console.log('setValue',value)
+        // if (onUpdateValueFunc){
+        //   onUpdateValueFunc(value)
+        // }
+        state.value = value;
       },
-      setEyeClosed: (value: boolean) => state.eyeClosed = value,
+      setEyeClosed: (value: boolean) => (state.eyeClosed = value),
       toggleFocusing: (isFocus: boolean) => {
-        const { preventScroll } = props;
-        const input = inputRef.value
-        if (isFocus) {
-          input && input.focus({ preventScroll });
-        } else {
-          input && input.blur();
-        }
+        // const { preventScroll } = props;
+        // const input = inputRef.value
+        // if (isFocus) {
+        //   input && input.focus({ preventScroll });
+        // } else {
+        //   input && input.blur();
+        // }
         state.isFocus = isFocus;
       },
       focusInput: () => {
@@ -215,11 +220,11 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
         const input = inputRef && inputRef.value;
         input && input.focus({ preventScroll });
       },
-      toggleHovering: (isHovering: boolean) => state.isHovering = isHovering,
+      toggleHovering: (isHovering: boolean) => (state.isHovering = isHovering),
       getIfFocusing: () => state.isFocus,
       notifyChange: (cbValue: string, e: any) => {
         // console.log('notifyChange')
-        props.onChange(cbValue, e)
+        props.onChange(cbValue, e);
       },
       notifyBlur: (val: string, e: any) => props.onBlur(e),
       notifyFocus: (val: string, e: any) => props.onFocus(e),
@@ -230,14 +235,13 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       notifyEnterPress: (e: any) => props.onEnterPress(e),
       notifyClear: (e: any) => props.onClear(e),
       setMinLength: (minlength: number) => state.minlength,
-      isEventTarget: (e: any) => e && e.target === e.currentTarget
+      isEventTarget: (e: any) => e && e.target === e.currentTarget,
     };
   }
   let inputRef = ref(null);
   let prefixRef = ref(null);
   let suffixRef = ref(null);
-  let foundation =  new InputFoundation(theAdapter);
-
+  let foundation = new InputFoundation(theAdapter);
 
   // ok
   function getDerivedStateFromProps(props: InputProps, state: InputState) {
@@ -250,22 +254,27 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
 
     return willUpdateStates;
   }
-  watch(()=>props.value, (val)=>{
-    const newState = getDerivedStateFromProps(props, state)
-    if (newState){
-      Object.keys(newState).forEach(key=>{
-        state[key] = newState[key]
-      })
+  watch(
+    () => props.value,
+    (val) => {
+      const newState = getDerivedStateFromProps(props, state);
+      if (newState) {
+        Object.keys(newState).forEach((key) => {
+          state[key] = newState[key];
+        });
+      }
+    },
+    { immediate: true }
+  );
+
+  watch(
+    () => props.mode,
+    (prevPropsMode, nextPropsMode) => {
+      if (prevPropsMode !== nextPropsMode) {
+        handleModeChange(nextPropsMode);
+      }
     }
-  }, {immediate:true})
-
-  watch(() => props.mode, (prevPropsMode, nextPropsMode) => {
-    if (prevPropsMode !== nextPropsMode) {
-      handleModeChange(nextPropsMode);
-    }
-  })
-
-
+  );
 
   const handleClear = (e: any) => {
     foundation.handleClear(e);
@@ -301,7 +310,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
 
   const handleModeEnterPress = (e: any) => {
     foundation.handleModeEnterPress(e);
-  }
+  };
 
   const handleClickPrefixOrSuffix = (e: any) => {
     foundation.handleClickPrefixOrSuffix(e);
@@ -348,16 +357,13 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
   function renderClearBtn() {
     const clearCls = cls(`${prefixCls}-clearbtn`);
     const { clearIcon } = props;
-    const allowClear = foundation.isAllowClear()
+    const allowClear = foundation.isAllowClear();
     // use onMousedown to fix issue 1203
     // console.debug(allowClear)
     if (allowClear) {
       return (
-        <div
-          class={clearCls}
-          onMousedown={handleClear}
-        >
-          { clearIcon ? clearIcon : <IconClear />}
+        <div class={clearCls} onMousedown={handleClear}>
+          {clearIcon ? clearIcon : <IconClear />}
         </div>
       );
     }
@@ -430,16 +436,23 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       return null;
     }
     const suffixWrapperCls = cls({
-      [`${prefixCls }-suffix`]: true,
-      [`${prefixCls }-suffix-text`]: suffix && isString(suffix),
-      [`${prefixCls }-suffix-icon`]: isSemiIcon(suffix),
+      [`${prefixCls}-suffix`]: true,
+      [`${prefixCls}-suffix-text`]: suffix && isString(suffix),
+      [`${prefixCls}-suffix-icon`]: isSemiIcon(suffix),
       [`${prefixCls}-suffix-hidden`]: suffixAllowClear && Boolean(hideSuffix),
     });
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-    return (<div class={suffixWrapperCls} onMousedown={handlePreventMouseDown}
-                 onClick={handleClickPrefixOrSuffix} x-semi-prop="suffix">{suffix}</div>);
+    return (
+      <div
+        class={suffixWrapperCls}
+        onMousedown={handlePreventMouseDown}
+        onClick={handleClickPrefixOrSuffix}
+        x-semi-prop="suffix"
+      >
+        {suffix}
+      </div>
+    );
   }
-
 
   function getInputRef() {
     const { forwardRef } = props;
@@ -447,7 +460,7 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       if (typeof forwardRef === 'function') {
         return (node: HTMLInputElement) => {
           forwardRef(node);
-          inputRef.value = node ;
+          inputRef.value = node;
         };
       } else if (Object.prototype.toString.call(forwardRef) === '[object Object]') {
         inputRef.value = forwardRef.value;
@@ -457,12 +470,10 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
     return inputRef.value;
   }
 
-
   // onMounted(()=>{
   //   console.log(props, props["onUpdate:value"])
   // })
   return () => {
-
     const {
       addonAfter,
       addonBefore,
@@ -534,21 +545,21 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       readonly: readonly,
       type: foundation.handleInputType(type),
       placeholder: placeholder as string,
-      onInput: (e:any) => {
+      onInput: (e: any) => {
         // console.log(e.target.value)
-        foundation.setValue(e.target.value)
-        foundation.handleInput(e);
+        // foundation.setValue(e.target.value);
+        // foundation.handleInput(e);
         foundation.handleChange(e.target.value, e);
       },
-      onChange: (e:any) => {
+      onChange: (e: any) => {
         // console.debug(e.target.value, e, props)
-        //foundation.handleChange(e.target.value, e)
+        foundation.handleChange(e.target.value, e)
       },
-      onFocus: (e:any) => foundation.handleFocus(e),
-      onBlur: (e:any) => foundation.handleBlur(e),
-      onKeyup: (e:any) => foundation.handleKeyUp(e),
-      onKeydown: (e:any) => foundation.handleKeyDown(e),
-      onKeypress: (e:any) => foundation.handleKeyPress(e),
+      onFocus: (e: any) => foundation.handleFocus(e),
+      onBlur: (e: any) => foundation.handleBlur(e),
+      onKeyup: (e: any) => foundation.handleKeyUp(e),
+      onKeydown: (e: any) => foundation.handleKeyDown(e),
+      onKeypress: (e: any) => foundation.handleKeyPress(e),
       value: inputValue,
     };
     if (!isFunction(getValueLength)) {
@@ -558,33 +569,31 @@ const Input = defineComponent<InputProps>((props, {slots}) => {
       inputProps.minlength = stateMinLength;
     }
     if (validateStatus === 'error') {
-      inputProps['aria-invalid'] = "true";
+      inputProps['aria-invalid'] = 'true';
     }
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
       <div
         class={wrapperCls}
         style={style}
-        onMouseenter={(e:any) => handleMouseOver(e)}
-        onMouseleave={(e:any) => handleMouseLeave(e)}
+        onMouseenter={(e: any) => handleMouseOver(e)}
+        onMouseleave={(e: any) => handleMouseLeave(e)}
         onClick={(e) => handleClick(e)}
       >
         {renderPrepend()}
         {renderPrefix()}
-        <input {...inputProps} ref={ref_}/>
+        <input {...inputProps} ref={ref_} />
         {renderClearBtn()}
         {renderSuffix(suffixAllowClear)}
         {renderModeBtn()}
         {renderAppend()}
       </div>
     );
-  }
-})
+  };
+});
 
-
-Input.props = VuePropsType
-Input.name = 'Input'
-
+Input.props = VuePropsType;
+Input.name = 'Input';
 
 // const ForwardInput = defineComponent<InputProps>((props, {slots}) => {
 //   console.log(props.ref)
@@ -594,5 +603,5 @@ Input.name = 'Input'
 
 // export default ForwardInput;
 
-export default Input
-export { Input, };
+export default Input;
+export { Input };

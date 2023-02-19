@@ -87,6 +87,7 @@ import TableDemo10 from "./components/table/__test__/TableDemo10";
 import TableDemo11 from "./components/table/__test__/TableDemo11";
 import VirtualizeTreeDemo from "./components/tree/__test__/VirtualizeTreeDemo";
 import FormAllDemo from "./components/form/__test__/FormAllDemo";
+import ModalForm from "./components/form/__test__/ModalForm";
 export interface ExampleProps {
   name?: string
 }
@@ -147,7 +148,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ToastDemo/>*/}
         {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
-        <FormAllDemo />
+        {/*<FormAllDemo />*/}
         {/*<FormDemo />*/}
         {/*<WithFormApiDemo />*/}
         {/*<WithFormStateDemo/>*/}
@@ -161,6 +162,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DividerDemo/>*/}
         {/*<SliderDemo />*/}
         {/*<InputNumberDemo />*/}
+        <ModalForm />
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
         {/*<ModalDemo/>*/}

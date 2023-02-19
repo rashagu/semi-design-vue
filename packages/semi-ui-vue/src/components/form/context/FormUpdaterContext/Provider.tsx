@@ -10,7 +10,7 @@ const Provider = defineComponent<{value:FormUpdaterContextType}>((props, {slots}
 
   watch(()=>props.value, ()=>{
     ConfigContext.value = props.value
-  }, { immediate: true})
+  }, { immediate: true, deep: true})
   provide('FormUpdaterContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
 })

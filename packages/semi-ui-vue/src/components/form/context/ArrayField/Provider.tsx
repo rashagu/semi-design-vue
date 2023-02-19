@@ -11,7 +11,7 @@ const Provider = defineComponent<{value:ArrayFieldType}>((props, {slots}) => {
 
   watch(()=>props.value, ()=>{
     ConfigContext.value = props.value
-  }, { immediate: true})
+  }, { immediate: true, deep: true})
   provide('ArrayFieldContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
 })

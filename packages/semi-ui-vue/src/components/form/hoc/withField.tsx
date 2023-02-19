@@ -26,7 +26,7 @@ import {
     VNode,
     FunctionalComponent,
 
-    defineComponent, useSlots, withMemo, watchEffect, watch, shallowRef
+    defineComponent, useSlots, withMemo, watchEffect, watch, shallowRef, unref
 } from "vue";
 import {VueHTMLAttributes, VueJsxNode} from "../../interface";
 import {DefineComponent} from "vue";
@@ -60,6 +60,12 @@ function withField<
 
         // FIXME typeof initVal
         const [value, setValue, getVal] = useStateWithGetter(typeof initVal !== undefined ? initVal : null);
+
+        // watch([()=>props.field, ()=>props.initValue], ()=>{
+        //     let initValueInFormOpts = typeof mergeProps(props).field !== 'undefined' ? updater.value.getValue(mergeProps(props).field) : undefined; // Get the init value of form from formP rops.init Values Get the initial value set in the initValues of Form
+        //     let initVal = typeof mergeProps(props).initValue !== 'undefined' ? mergeProps(props).initValue : initValueInFormOpts;
+        //     setValue(typeof initVal !== undefined ? initVal : null)
+        // })
 
 
         const rulesRef:Ref = ref(mergeProps(props).rules);
@@ -98,11 +104,15 @@ function withField<
             }
         };
 
+        function getAllowEmpty(allowEmpty) {
+            return allowEmpty || updater.value.getFormProps().allowEmpty;
+        }
         const updateValue = (val: any, callOpts?: CallOpts) => {
             let {
                 field,
                 allowEmpty,
             } = mergeProps(props);
+            allowEmpty = getAllowEmpty(allowEmpty)
             setValue(val);
             let newOpts = {
                 ...callOpts,
@@ -110,6 +120,8 @@ function withField<
             };
             updater.value.updateStateValue(field, val, newOpts);
         };
+        // use arrayFieldState to fix issue 615
+        let {context: arrayFieldState} = useArrayFieldState();
 
         const reset = () => {
             const {
@@ -117,13 +129,25 @@ function withField<
                 initValue
             } = mergeProps(props)
             // To prevent user forgetting to pass the field, use undefined as the key, and updater.value.getValue will get the wrong value.
+
+            // To prevent user forgetting to pass the field, use undefined as the key, and updater.value.getValue will get the wrong value.
             let initValueInFormOpts = typeof field !== 'undefined' ? updater.value.getValue(field) : undefined; // Get the init value of form from formP rops.init Values Get the initial value set in the initValues of Form
             let initVal = typeof initValue !== 'undefined' ? initValue : initValueInFormOpts;
+
+            try {
+                if (arrayFieldState.value) {
+                    initVal =
+                      arrayFieldState.value.shouldUseInitValue && typeof initValue !== 'undefined'
+                        ? initValue
+                        : initValueInFormOpts;
+                }
+            } catch (err) {}
 
             let callOpts = {
                 notNotify: true,
                 notUpdate: true,
             };
+            console.log(initVal)
             // reset is called by the FormFoundaion uniformly. The field level does not need to trigger notify and update.
             updateValue(initVal !== null ? initVal : undefined, callOpts);
             updateError(undefined, callOpts);
@@ -271,6 +295,7 @@ function withField<
                 allowEmptyString,
                 allowEmpty,
             } = mergeProps(props);
+            allowEmpty = getAllowEmpty(allowEmpty)
             let { options, shouldInject } = mergeOptions(opts, props);
             let fnKey = options.onKeyChangeFnName;
             if (fnKey in props && typeof props[options.onKeyChangeFnName] === 'function') {
@@ -360,10 +385,10 @@ function withField<
 
 
         // avoid hooks capture value, fixed issue 346
-        watchEffect(() => {
+        watch([()=>mergeProps(props).rules, ()=>mergeProps(props).validate], () => {
             rulesRef.value = mergeProps(props).rules;
             validateRef.value = mergeProps(props).validate;
-        });
+        }, {immediate: true});
 
         // exec validate once when trigger inlcude 'mount'
         useIsomorphicEffect(() => {
@@ -374,7 +399,7 @@ function withField<
             // eslint-disable-next-line react-hooks/exhaustive-deps
         });
 
-        watch(()=>props.field, (value, oldValue, onCleanup)=>{
+        watch(()=>mergeProps(props).field, (value, oldValue, onCleanup)=>{
 
             let {
                 // condition,
@@ -383,6 +408,7 @@ function withField<
                 allowEmpty,
                 keepState,
             } = mergeProps(props);
+            allowEmpty = getAllowEmpty(allowEmpty)
             /** Field level maintains a separate layer of data, which is convenient for Form to control Field to update the UI */
               // The field level maintains a separate layer of data, which is convenient for the Form to control the Field for UI updates.
             const fieldApi = {
@@ -488,24 +514,8 @@ function withField<
                 return null;
             }
 
-            // To prevent user forgetting to pass the field, use undefined as the key, and updater.value.getValue will get the wrong value.
-            let initValueInFormOpts = typeof field !== 'undefined' ? updater.value.getValue(field) : undefined; // Get the init value of form from formP rops.init Values Get the initial value set in the initValues of Form
-            let initVal = typeof initValue !== 'undefined' ? initValue : initValueInFormOpts;
-
-            // use arrayFieldState to fix issue 615
-            let arrayFieldState;
-            try {
-                arrayFieldState = useArrayFieldState();
-                if (arrayFieldState) {
-                    initVal =
-                      arrayFieldState.shouldUseInitValue && typeof initValue !== 'undefined'
-                        ? initValue
-                        : initValueInFormOpts;
-                }
-            } catch (err) {}
 
 
-            allowEmpty = allowEmpty || updater.value.getFormProps().allowEmpty;
 
 
 
