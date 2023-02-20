@@ -1,0 +1,36 @@
+# This is a basic workflow to help you get started with Actions
+
+name: publish
+
+on:
+  push:
+    branches: [ dev ]
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Run install pnpm
+        run: npm i -g pnpm
+
+      - name: Run install
+        run: pnpm install
+
+      - name: Run build
+        run: pnpm build:lib
+
+      - name: Run test
+        run: pnpm test
+      - name: Run codecov
+        run: npx codecov --token=${{ secrets.CODECOV_TOKEN }}
+
