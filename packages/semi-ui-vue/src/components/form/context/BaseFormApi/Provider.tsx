@@ -11,7 +11,7 @@ const Provider = defineComponent<{value:BaseFormApi}>((props, {slots}) => {
   provide('BaseFormApiContext', ConfigContext)
   watch(()=>props.value, ()=>{
     ConfigContext.value = props.value
-  }, { immediate: true})
+  }, { immediate: true, deep: true})
   return ()=>slots.default?slots.default(ConfigContext.value):null
 })
 

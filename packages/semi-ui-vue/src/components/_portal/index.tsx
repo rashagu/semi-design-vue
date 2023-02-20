@@ -9,7 +9,7 @@ import {
   onMounted,
   watch,
   onUnmounted,
-  Teleport
+  Teleport, reactive
 } from 'vue'
 import { BASE_CLASS_PREFIX } from '@douyinfe/semi-foundation/base/constants';
 
@@ -47,7 +47,9 @@ export const vuePropsType = {
 const Index = defineComponent<PortalProps>((props, {slots}) => {
   const {context} = useConfigContext()
   let el: HTMLElement;
-  const containerRef = ref(undefined);
+  const state = reactive({
+    container: undefined
+  })
   onBeforeMount(()=>{
     try {
       el = document.createElement('div');
@@ -64,7 +66,7 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
     const getContainer = props.getPopupContainer || context.value.getPopupContainer || defaultGetContainer;
     const container = getContainer();
     // console.log(container)
-    if (container !== containerRef.value) {
+    if (container !== state.container) {
       // const computedStyle = window.getComputedStyle(container);
       // if (computedStyle.position !== 'relative') {
       //    container.style.position = 'relative';
@@ -72,7 +74,7 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
       container.appendChild(el);
       addStyle(props.style);
       addClass(props.prefixCls, props.className);
-      containerRef.value = container;
+      state.container = container;
     }
   })
   watch(()=>props, (newProps,prevProps)=>{
@@ -82,8 +84,8 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
     }
   })
   onUnmounted(()=>{
-    if (containerRef.value) {
-      containerRef.value.removeChild(el);
+    if (state.container) {
+      state.container.removeChild(el);
     }
   })
 
@@ -106,7 +108,7 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
   };
 
   return () => {
-    if (containerRef.value) {
+    if (state.container) {
       return  (
         <Teleport to={el}>
           {{

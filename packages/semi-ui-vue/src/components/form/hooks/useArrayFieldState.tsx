@@ -2,8 +2,7 @@ import { ArrayFieldContext } from '../context';
 import {useArrayFieldContext} from "../context/ArrayField/Consumer";
 
 function useArrayFieldState() {
-    const {context} = useArrayFieldContext();
-    return context;
+    return useArrayFieldContext();
 }
 
 export default useArrayFieldState;
