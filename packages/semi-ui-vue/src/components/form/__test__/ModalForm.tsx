@@ -5,8 +5,8 @@ import {
   FormInput,
   Space,
   Toast,
-} from "@kousum/semi-ui-vue/src/components/index";
-import type { FormApi } from "@kousum/semi-ui-vue";
+} from "../../index";
+import type { FormApi } from "../index";
 import { defineComponent, ref, h, Fragment, useSlots, reactive } from "vue";
 
 interface ModalFormProps {
