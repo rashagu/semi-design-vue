@@ -144,6 +144,6 @@ export {
   withFormState,
   withFormApi,
 } from './form/index';
-
+export type {FormApi} from './form/index';
 export { default as Image } from './image';
 export { Preview as ImagePreview } from './image';

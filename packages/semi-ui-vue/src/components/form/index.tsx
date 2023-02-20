@@ -40,6 +40,7 @@ import {
     FormSelectSelectOptionGroup
 } from "./field";
 import FormInputGroup from "./group";
+export type { FormApi } from './interface';
 
 
 
