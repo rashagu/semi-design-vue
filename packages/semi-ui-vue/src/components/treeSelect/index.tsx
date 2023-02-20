@@ -261,6 +261,7 @@ const propTypes = {
     searchRender: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     renderSelectedItem: PropTypes.func,
     checkRelation: PropTypes.string,
+    id: PropTypes.string
 };
 
 const defaultProps: Partial<TreeSelectProps> = {

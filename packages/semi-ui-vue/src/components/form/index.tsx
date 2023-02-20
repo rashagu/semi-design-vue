@@ -37,10 +37,10 @@ import {
     FormTreeSelect,
     FormUpload,
     FormSelectOption,
-    FormSelectSelectOptionGroup
+    FormSelectOptionGroup
 } from "./field";
 import FormInputGroup from "./group";
-export type { FormApi } from './interface';
+export type { FormApi, FormFCChild } from './interface';
 
 
 
@@ -50,7 +50,7 @@ export {
     FormSelect,
     FormInput,
     FormSelectOption,
-    FormSelectSelectOptionGroup,
+    FormSelectOptionGroup,
 
     FormAutoComplete,
     FormCascader,

@@ -440,6 +440,7 @@ function withField<
 
     return (_ctx, _cache) => {
       const label = truthProps.label;
+      const id = truthProps.id
       let {
         // condition,
         field,
@@ -471,9 +472,10 @@ function withField<
         extraText,
         extraTextPosition,
         pure,
-        id,
-        rest,
+        rest: rest_,
       } = mergeProps(props);
+
+      const rest = truthProps.prefix?{...rest_,prefix: truthProps.prefix}:rest_
       let { options, shouldInject } = mergeOptions(opts, props);
 
       warning(
@@ -662,6 +664,7 @@ function withField<
       const shouldUpdate = [
         ...Object.values(fieldState),
         ...Object.values(props),
+        ...Object.values(truthProps),
         field,
         mergeLabelPos,
         mergeLabelAlign,
@@ -699,8 +702,10 @@ function withField<
   SemiField.props = {
     label: [...PropTypes.node, PropTypes.func],
     validate: [PropTypes.func],
+    prefix: [...PropTypes.node, PropTypes.func],
+    id: [String]
   };
-  SemiField.name = Component.name;
+  SemiField.name = 'Form' + Component.name;
 
   return SemiField;
 }

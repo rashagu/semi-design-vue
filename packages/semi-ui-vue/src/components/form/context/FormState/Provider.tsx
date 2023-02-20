@@ -16,6 +16,7 @@ const Provider = defineComponent<{value:FormState}>((props, {slots}) => {
 })
 
 Provider.props = vuePropsType
+Provider.name = "FormStateContextProvider"
 
 export default Provider
 

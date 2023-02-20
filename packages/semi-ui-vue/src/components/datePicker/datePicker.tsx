@@ -141,6 +141,7 @@ const propTypes = {
   clearIcon: PropTypes.node,
   presetPosition: PropTypes.string,
   dropdownMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  id: PropTypes.string
 };
 
 const defaultProps = {

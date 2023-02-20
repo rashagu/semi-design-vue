@@ -84,7 +84,7 @@ export const vuePropsType = {
   addonId: String,
   extraId: String,
   name: String,
-  preventScroll: Boolean
+  preventScroll: Boolean,
 }
 const Radio = defineComponent<RadioProps>((props, {slots}) => {
   let radioEntity: any;
@@ -255,7 +255,6 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
         {extra && !isButtonRadio ? <div class={`${prefix}-extra`} id={extraId}>{extra}</div> : null}
       </>
     );
-    // console.log('radio', props, props_)
     return (
       <label
         style={style}

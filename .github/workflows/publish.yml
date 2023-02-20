@@ -35,28 +35,6 @@ jobs:
         run: npx codecov --token=${{ secrets.CODECOV_TOKEN }}
 
       - name: Run publish
-        run: pnpm changeset version
-
-      - name: Run publish
         run: pnpm changeset publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: get version
-        run: echo "RELEASE_VERSION="v$(node ./script/version.js)"" >> $GITHUB_ENV
-
-      - name: echo version
-        run: echo "${{ env.RELEASE_VERSION }}"
-
-      - name: Commit files
-        run: |
-          git config --local user.email "80970516+rashagu@users.noreply.github.com"
-          git config --local user.name "rashagu"
-          if [ -n "$(git status --porcelain)" ]; then
-          git add .
-          git commit -m "[github action]: ${{ env.RELEASE_VERSION }}"
-          git push origin master --tags
-          else
-          echo "no changes";
-          fi
-          

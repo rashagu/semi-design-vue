@@ -14,7 +14,7 @@ import type { RadioProps } from '../radio/index';
 import type { ErrorMessageProps, ReactFieldError as FieldError } from './errorMessage';
 import type { LabelProps } from './label';
 import type {VueJsxNode} from "../interface";
-import type {CSSProperties, VNode} from "vue";
+import type {CSSProperties, DefineComponent, VNode} from "vue";
 import type {AriaAttributes} from "../AriaAttributes";
 
 export type { FormState, FormApi, WithFieldOption, RuleItem };
@@ -88,9 +88,9 @@ export interface SelectStatic {
 }
 
 export type Field<P> = Subtract<P & CommonFieldProps, CommonexcludeType>
-export let FormSelectType: Subtract<SelectProps & CommonFieldProps, CommonexcludeType>& SelectStatic;
-export let FormCheckboxType: Subtract<CommonFieldProps, RadioCheckboxExcludeProps> & CheckboxProps & RCIncludeType;
-export let FormRadioType: Subtract<CommonFieldProps, RadioCheckboxExcludeProps> & RadioProps & RCIncludeType;
+export let FormSelectType: DefineComponent<Subtract<SelectProps & CommonFieldProps, CommonexcludeType>& SelectStatic>;
+export let FormCheckboxType: DefineComponent<Subtract<CommonFieldProps, RadioCheckboxExcludeProps> & CheckboxProps & RCIncludeType>;
+export let FormRadioType: DefineComponent<Subtract<CommonFieldProps, RadioCheckboxExcludeProps> & RadioProps & RCIncludeType>;
 
 export interface ErrorMsg {
     [optionalKey: string]: FieldError;

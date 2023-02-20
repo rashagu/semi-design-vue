@@ -118,7 +118,7 @@ export {
   FormSelect,
   FormInput,
   FormSelectOption,
-  FormSelectSelectOptionGroup,
+  FormSelectOptionGroup,
 
   FormAutoComplete,
   FormCascader,
@@ -144,6 +144,6 @@ export {
   withFormState,
   withFormApi,
 } from './form/index';
-export type {FormApi} from './form/index';
+export type {FormApi, FormFCChild} from './form/index';
 export { default as Image } from './image';
 export { Preview as ImagePreview } from './image';

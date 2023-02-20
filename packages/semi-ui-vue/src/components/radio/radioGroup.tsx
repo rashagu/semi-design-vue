@@ -93,7 +93,7 @@ export const vuePropsType = {
   'aria-invalid': String,
   'aria-labelledby': String,
   'aria-required': [String, Boolean],
-  id: String,
+  id: String
 }
 
 
@@ -260,6 +260,7 @@ const RadioGroup = defineComponent<RadioGroupProps>((props, {slots}) => {
 })
 
 RadioGroup.props = vuePropsType
+RadioGroup.name = "RadioGroup"
 
 export default RadioGroup
 

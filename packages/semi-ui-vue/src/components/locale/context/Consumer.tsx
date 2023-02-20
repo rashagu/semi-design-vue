@@ -11,6 +11,7 @@ const Consumer = defineComponent(() => {
 })
 
 Consumer.props = vuePropsType
+Consumer.name = "LocaleContext"
 
 export default Consumer
 

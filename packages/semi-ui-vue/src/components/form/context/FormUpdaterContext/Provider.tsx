@@ -16,6 +16,7 @@ const Provider = defineComponent<{value:FormUpdaterContextType}>((props, {slots}
 })
 
 Provider.props = vuePropsType
+Provider.name = "FormUpdaterContextProvider"
 
 export default Provider
 
