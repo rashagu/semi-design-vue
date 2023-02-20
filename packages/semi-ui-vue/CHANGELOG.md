@@ -1,5 +1,17 @@
 # @kousum/semi-ui-vue
 
+## 0.2.6
+
+### Patch Changes
+
+- 0732942: 修复一些表单组件的警告
+- 4812b0f: fix: form 组件强制更新 bug
+- Updated dependencies [0732942]
+- Updated dependencies [4812b0f]
+  - @kousum/semi-animation-vue@0.2.6
+  - @kousum/semi-icons-vue@0.2.6
+  - @kousum/semi-illustrations-vue@0.2.6
+
 ## 0.2.5
 
 ### Patch Changes
