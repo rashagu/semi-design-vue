@@ -7,7 +7,7 @@ export default function useStateWithGetter(initial?: any):[Ref,(value?: any)=>vo
         state.value = val
     }
     ref.value = state.value;
-    const set = (value: any = null) => {
+    const set = (value: any) => {
         ref.value = value;
         setState(value);
     };

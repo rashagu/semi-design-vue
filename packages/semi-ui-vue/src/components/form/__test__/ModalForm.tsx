@@ -28,6 +28,7 @@ const ModalForm = defineComponent<ModalFormProps>((props) => {
     if (!val) {
       return "can't be empty";
     } else if (val.length <= 5) {
+      console.log(val.length)
       return <span>我是传入的reactNode</span>;
     }
     return;
@@ -51,7 +52,8 @@ const ModalForm = defineComponent<ModalFormProps>((props) => {
 
   function resetPartial() {
     const scope = state.formApi.getValue("resetScope");
-    state.formApi.reset(scope);
+    // @ts-ignore
+    state.formApi.reset(scope); // 官方缺少 ts 类型
   }
   return () => {
     const options = ["a", "b", "c", "d", "b.name"].map((item) => ({

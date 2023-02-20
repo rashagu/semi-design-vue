@@ -33,7 +33,7 @@ export type CommonFieldProps = {
     fieldClassName?: string;
     fieldStyle?: CSSProperties;
     initValue?: any;
-    validate?: (fieldValue: any, values: Record<string, any>) => string | Promise<string>;
+    validate?: (fieldValue: any, values: Record<string, any>) => string | Promise<string> | VNode;
     /** Check rules, check library based on async-validator */
     rules?: Array<RuleItem>;
     /** Check trigger timing */
