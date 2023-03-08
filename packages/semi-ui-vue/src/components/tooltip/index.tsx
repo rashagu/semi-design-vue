@@ -6,7 +6,19 @@ import {
   Fragment,
   CSSProperties,
   reactive,
-  nextTick, onMounted, onUnmounted, isVNode, watch, cloneVNode, provide, inject, watchEffect, isRef, useSlots, getCurrentInstance
+  nextTick,
+  onMounted,
+  onUnmounted,
+  isVNode,
+  watch,
+  cloneVNode,
+  provide,
+  inject,
+  watchEffect,
+  isRef,
+  useSlots,
+  getCurrentInstance,
+  Ref, VNode
 } from 'vue'
 import classNames from 'classnames';
 import * as PropTypes from '../PropTypes'
@@ -45,10 +57,14 @@ export interface ArrowBounding {
   width?: number;
   height?: number;
 }
-export interface RenderContentProps {
-  initialFocusRef?: any;
+
+export interface RenderContentProps<T = HTMLElement> {
+  initialFocusRef?: Ref<T>
 }
-export type RenderContent = (props: RenderContentProps) => VueJsxNode;
+
+export type RenderContent<T = HTMLElement> = (props: RenderContentProps<T>) => VNode;
+
+
 
 export interface TooltipProps extends BaseProps {
   motion?: Motion;
@@ -475,6 +491,10 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
     foundation.destroy();
   })
 
+  function focusTrigger() {
+    foundation.focusTrigger();
+  }
+
   const isSpecial = (elem: JSX.Element | HTMLElement | any) => {
     if (isHTMLElement(elem)) {
       return Boolean(elem.disabled);
@@ -649,6 +669,8 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
     return (
       <Portal getPopupContainer={props.getPopupContainer} style={{zIndex}}>
         <div
+          // listen keyboard event, don't move tabIndex -1
+          tabindex={-1}
           class={`${BASE_CLASS_PREFIX}-portal-inner`}
           style={portalInnerStyle}
           ref={containerEl}
@@ -700,7 +722,8 @@ const Tooltip = defineComponent<TooltipProps>((props, {expose}) => {
   }
 
   expose({
-    getPopupId
+    getPopupId,
+    focusTrigger
   })
   return () => {
 

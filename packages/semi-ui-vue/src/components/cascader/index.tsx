@@ -9,14 +9,16 @@ import {
   reactive,
   onMounted,
   onUnmounted,
-  watch, nextTick
-} from 'vue'
-import  * as PropTypes from '../PropTypes'
+  watch,
+  nextTick,
+} from 'vue';
+import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
 import CascaderFoundation, {
-  BasicCascaderData, BasicEntity,
+  BasicCascaderData,
+  BasicEntity,
   BasicValue,
-  ShowNextType
+  ShowNextType,
 } from '@douyinfe/semi-foundation/cascader/foundation';
 import type {
   /* Corresponding to the state of react */
@@ -26,7 +28,7 @@ import type {
   BasicTriggerRenderProps,
   BasicScrollPanelProps,
   CascaderAdapter,
-  CascaderType
+  CascaderType,
 } from '@douyinfe/semi-foundation/cascader/foundation';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/cascader/constants';
 import { numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/constants';
@@ -35,19 +37,19 @@ import '@douyinfe/semi-foundation/cascader/cascader.scss';
 import { IconClear, IconChevronDown } from '@kousum/semi-icons-vue';
 import { findKeysForValues, convertDataToEntities, calcMergeType } from '@douyinfe/semi-foundation/cascader/util';
 import { calcCheckedKeys, normalizeKeyList, calcDisabledKeys } from '@douyinfe/semi-foundation/tree/treeUtil';
-import {getProps, useBaseComponent, ValidateStatus} from '../_base/baseComponent';
+import { getProps, useBaseComponent, ValidateStatus } from '../_base/baseComponent';
 import Input from '../input';
 import Popover, { PopoverProps } from '../popover';
 import Item, { CascaderData, Entities, Entity, Data, FilterRenderProps } from './item';
 import Trigger from '../trigger';
 import Tag from '../tag';
-import TagInput, {TagInputProps} from '../tagInput';
+import TagInput, { TagInputProps } from '../tagInput';
 import { Motion } from '../_base/base';
 import { isSemiIcon } from '../_utils/index';
 import { Position } from '../tooltip/index';
-import {AriaAttributes} from "../AriaAttributes";
-import {vuePropsMake} from "../PropTypes";
-import {VueJsxNode} from "../interface";
+import { AriaAttributes } from '../AriaAttributes';
+import { vuePropsMake } from '../PropTypes';
+import { VueJsxNode } from '../interface';
 
 export type { CascaderType, ShowNextType } from '@douyinfe/semi-foundation/cascader/foundation';
 export type { CascaderData, Entity, Data, CascaderItemProps, FilterRenderProps } from './item';
@@ -104,7 +106,7 @@ export interface CascaderProps extends BasicCascaderProps {
   onBlur?: (e: MouseEvent) => void;
   onFocus?: (e: MouseEvent) => void;
   validateStatus?: ValidateStatus;
-  position?: Position
+  position?: Position;
 }
 
 export interface CascaderState extends BasicCascaderInnerData {
@@ -189,12 +191,12 @@ const propTypes = {
 
   autoClearSearchValue: {
     type: Boolean,
-    default: true
+    default: true,
   },
 
   mouseEnterDelay: Number,
   mouseLeaveDelay: Number,
-}
+};
 const defaultProps = {
   leafOnly: false,
   arrowIcon: <IconChevronDown />,
@@ -226,9 +228,9 @@ const defaultProps = {
   'aria-label': 'Cascader',
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Index = defineComponent<CascaderProps>((props, {}) => {
-  const slots = useSlots()
+export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+const Index = defineComponent<CascaderProps>((props, { expose }) => {
+  const slots = useSlots();
 
   const state = reactive<CascaderState>({
     disabledKeys: new Set(),
@@ -276,16 +278,16 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
   const optionsRef = ref(null);
   let clickOutsideHandler: any = null;
   // TODO context
-  const {adapter: adapterInject, context} = useBaseComponent<CascaderProps>(props, state)
+  const { adapter: adapterInject, context } = useBaseComponent<CascaderProps>(props, state);
 
   const foundation = new CascaderFoundation(adapter());
   function adapter(): CascaderAdapter {
     const filterAdapter: Pick<CascaderAdapter, 'updateInputValue' | 'updateInputPlaceHolder' | 'focusInput'> = {
-      updateInputValue: value => {
-        state.inputValue = value
+      updateInputValue: (value) => {
+        state.inputValue = value;
       },
-      updateInputPlaceHolder: value => {
-        state.inputPlaceHolder = value
+      updateInputPlaceHolder: (value) => {
+        state.inputPlaceHolder = value;
       },
       focusInput: () => {
         if (inputRef.value) {
@@ -294,12 +296,11 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
         }
       },
     };
-    const cascaderAdapter: Pick<CascaderAdapter,
-      'registerClickOutsideHandler'
-      | 'unregisterClickOutsideHandler'
-      | 'rePositionDropdown'
-      > = {
-      registerClickOutsideHandler: cb => {
+    const cascaderAdapter: Pick<
+      CascaderAdapter,
+      'registerClickOutsideHandler' | 'unregisterClickOutsideHandler' | 'rePositionDropdown'
+    > = {
+      registerClickOutsideHandler: (cb) => {
         const clickOutsideHandler_ = (e: Event) => {
           const optionInstance = optionsRef.value;
           const triggerDom = triggerRef.value;
@@ -323,35 +324,35 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       rePositionDropdown: () => {
         let { rePosKey } = state;
         rePosKey = rePosKey + 1;
-        state.rePosKey = rePosKey
+        state.rePosKey = rePosKey;
       },
     };
     return {
       ...adapterInject<CascaderProps, CascaderState>(),
       ...filterAdapter,
       ...cascaderAdapter,
-      updateStates: states => {
-        for (let key in states){
-          state[key] = states[key]
+      updateStates: (states) => {
+        for (let key in states) {
+          state[key] = states[key];
         }
       },
       openMenu: () => {
-        state.isOpen = true
+        state.isOpen = true;
       },
-      closeMenu: cb => {
-        state.isOpen = false
-        cb && cb()
+      closeMenu: (cb) => {
+        state.isOpen = false;
+        cb && cb();
       },
-      updateSelection: selectedKeys => {
-        state.selectedKeys = selectedKeys
+      updateSelection: (selectedKeys) => {
+        state.selectedKeys = selectedKeys;
       },
-      notifyChange: value => {
+      notifyChange: (value) => {
         props.onChange && props.onChange(value);
       },
-      notifySelect: selected => {
+      notifySelect: (selected) => {
         props.onSelect && props.onSelect(selected);
       },
-      notifyOnSearch: input => {
+      notifyOnSearch: (input) => {
         props.onSearch && props.onSearch(input);
       },
       notifyFocus: (...v) => {
@@ -360,19 +361,19 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       notifyBlur: (...v) => {
         props.onBlur && props.onBlur(...v);
       },
-      notifyDropdownVisibleChange: visible => {
+      notifyDropdownVisibleChange: (visible) => {
         props.onDropdownVisibleChange(visible);
       },
-      toggleHovering: bool => {
-        state.isHovering = bool
+      toggleHovering: (bool) => {
+        state.isHovering = bool;
       },
       notifyLoadData: (selectedOpt, callback) => {
         const { loadData } = props;
         if (loadData) {
-          new Promise<void>(resolve => {
+          new Promise<void>((resolve) => {
             loadData(selectedOpt).then(() => {
               callback();
-              state.loading = true
+              state.loading = true;
               resolve();
             });
           });
@@ -385,33 +386,26 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       notifyListScroll: (e, { panelIndex, activeNode }) => {
         props.onListScroll(e, { panelIndex, activeNode });
       },
-      notifyOnExceed: data => props.onExceed(data),
+      notifyOnExceed: (data) => props.onExceed(data),
       notifyClear: () => props.onClear(),
       toggleInputShow: (showInput: boolean, cb: (...args: any) => void) => {
-        state.showInput = showInput
-        nextTick(()=>{
+        state.showInput = showInput;
+        nextTick(() => {
           cb();
-        })
+        });
       },
       updateFocusState: (isFocus: boolean) => {
-        state.isFocus = isFocus
+        state.isFocus = isFocus;
       },
     };
   }
 
   // watch props OK
   function getDerivedStateFromProps(props: CascaderProps) {
-    const {
-      multiple,
-      value,
-      defaultValue,
-      onChangeWithObject,
-      leafOnly,
-      autoMergeValue,
-    } = props;
+    const { multiple, value, defaultValue, onChangeWithObject, leafOnly, autoMergeValue } = props;
     const { prevProps } = state;
     let keyEntities = state.keyEntities || {};
-    const newState: Partial<CascaderState> = { };
+    const newState: Partial<CascaderState> = {};
     const needUpdate = (name: string) => {
       const firstInProps = isEmpty(prevProps) && name in props;
       const nameHasChange = prevProps && !isEqual(prevProps[name], props[name]);
@@ -437,14 +431,14 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       // formatValuePath is used to save value of valuePath
       const formatValuePath: (string | number)[][] = [];
       normallizedValue.forEach((valueItem: SimpleValueType[]) => {
-        const formatItem: (string | number)[] = onChangeWithObject ?
-          (valueItem as CascaderData[]).map(i => i?.value) :
-          valueItem as (string | number)[];
+        const formatItem: (string | number)[] = onChangeWithObject
+          ? (valueItem as CascaderData[]).map((i) => i?.value)
+          : (valueItem as (string | number)[]);
         formatValuePath.push(formatItem);
       });
       // formatKeys is used to save key of value
       const formatKeys: any[] = [];
-      formatValuePath.forEach(v => {
+      formatValuePath.forEach((v) => {
         const formatKeyItem = findKeysForValues(v, keyEntities);
         !isEmpty(formatKeyItem) && formatKeys.push(formatKeyItem);
       });
@@ -493,23 +487,27 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     }
     return newState;
   }
-  watch(()=>props, (val)=>{
-    const newState = getDerivedStateFromProps(props)
-    newState && Object.keys(newState).forEach(key=>{
-      state[key] = newState[key]
-    })
-  }, {deep: true})
+  watch(
+    () => props,
+    (val) => {
+      const newState = getDerivedStateFromProps(props);
+      newState &&
+        Object.keys(newState).forEach((key) => {
+          state[key] = newState[key];
+        });
+    },
+    { deep: true }
+  );
 
-  onMounted(()=>{
+  onMounted(() => {
     foundation.init();
-  })
+  });
 
-
-  onUnmounted(()=>{
+  onUnmounted(() => {
     foundation.destroy();
-  })
+  });
 
-  watch([()=>props.treeData, ()=>props.value],(value, [prevPropsTreeData, prevPropsValue])=>{
+  watch([() => props.treeData, () => props.value], (value, [prevPropsTreeData, prevPropsValue]) => {
     let isOptionsChanged = false;
     if (!isEqual(prevPropsTreeData, props.treeData)) {
       isOptionsChanged = true;
@@ -518,8 +516,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     if (prevPropsValue !== props.value && !isOptionsChanged) {
       foundation.handleValueChange(props.value);
     }
-  })
-
+  });
 
   const handleInputChange = (value: string) => {
     foundation.handleInputChange(value);
@@ -532,12 +529,8 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
   const renderTagItem = (value: string | Array<string>, idx: number, type: string) => {
     const { keyEntities, disabledKeys } = state;
     const { size, disabled, displayProp, displayRender, disableStrictly } = props;
-    const nodeKey = type === strings.IS_VALUE ?
-      findKeysForValues(value, keyEntities)[0] :
-      value;
-    const isDsiabled = disabled ||
-      keyEntities[nodeKey].data.disabled ||
-      (disableStrictly && disabledKeys.has(nodeKey));
+    const nodeKey = type === strings.IS_VALUE ? findKeysForValues(value, keyEntities)[0] : value;
+    const isDsiabled = disabled || keyEntities[nodeKey].data.disabled || (disableStrictly && disabledKeys.has(nodeKey));
     if (!isEmpty(keyEntities) && !isEmpty(keyEntities[nodeKey])) {
       const tagCls = cls(`${prefixcls}-selection-tag`, {
         [`${prefixcls}-selection-tag-disabled`]: isDsiabled,
@@ -569,26 +562,12 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
   };
 
   function renderTagInput() {
-    const {
-      size,
-      disabled,
-      placeholder,
-      maxTagCount,
-      showRestTagsPopover,
-      restTagsPopoverProps,
-    } = props;
-    const {
-      inputValue,
-      checkedKeys,
-      keyEntities,
-      resolvedCheckedKeys
-    } = state;
+    const { size, disabled, placeholder, maxTagCount, showRestTagsPopover, restTagsPopoverProps } = props;
+    const { inputValue, checkedKeys, keyEntities, resolvedCheckedKeys } = state;
     const tagInputcls = cls(`${prefixcls}-tagInput-wrapper`);
     const tagValue: Array<Array<string>> = [];
-    const realKeys = mergeType === strings.NONE_MERGE_TYPE
-      ? checkedKeys
-      : resolvedCheckedKeys;
-    [...realKeys].forEach(checkedKey => {
+    const realKeys = mergeType === strings.NONE_MERGE_TYPE ? checkedKeys : resolvedCheckedKeys;
+    [...realKeys].forEach((checkedKey) => {
       if (!isEmpty(keyEntities[checkedKey])) {
         tagValue.push(keyEntities[checkedKey].valuePath);
       }
@@ -608,7 +587,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
         inputValue={inputValue}
         onInputChange={handleInputChange}
         // TODO Modify logic, not modify type
-        onRemove={v => handleTagRemove(null, v as unknown as (string | number)[])}
+        onRemove={(v) => handleTagRemove(null, v as unknown as (string | number)[])}
         placeholder={placeholder}
         expandRestTagsOnClick={false}
       />
@@ -660,17 +639,22 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     foundation.handleListScroll(e, ind);
   };
 
+  function close(e?: any) {
+    foundation.close(e);
+  }
+
+  function open() {
+    foundation.open();
+  }
+
+  expose({
+    close,
+    open,
+  });
+
   const renderContent = () => {
-    const {
-      inputValue,
-      isSearching,
-      activeKeys,
-      selectedKeys,
-      checkedKeys,
-      halfCheckedKeys,
-      loadedKeys,
-      loadingKeys
-    } = state;
+    const { inputValue, isSearching, activeKeys, selectedKeys, checkedKeys, halfCheckedKeys, loadedKeys, loadingKeys } =
+      state;
     const {
       filterTreeNode,
       dropdownClassName,
@@ -682,7 +666,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       bottomSlot,
       showNext,
       multiple,
-      filterRender
+      filterRender,
     } = props;
     const searchable = Boolean(filterTreeNode) && isSearching;
     const popoverCls = cls(dropdownClassName, `${prefixcls}-popover`);
@@ -720,39 +704,31 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
   const renderPlusN = (hiddenTag: (VNode | string)[]) => {
     const { disabled, showRestTagsPopover, restTagsPopoverProps } = props;
     const plusNCls = cls(`${prefixcls}-selection-n`, {
-      [`${prefixcls}-selection-n-disabled`]: disabled
+      [`${prefixcls}-selection-n-disabled`]: disabled,
     });
-    const renderPlusNChildren = (
-      <span class={plusNCls}>
-                +{hiddenTag.length}
-            </span>
-    );
-    return (
-      showRestTagsPopover && !disabled ?
-        (
-          <Popover
-            content={hiddenTag}
-            showArrow
-            trigger="hover"
-            position="top"
-            autoAdjustOverflow
-            {...restTagsPopoverProps}
-          >
-            {renderPlusNChildren}
-          </Popover>
-        ) :
-        renderPlusNChildren
+    const renderPlusNChildren = <span class={plusNCls}>+{hiddenTag.length}</span>;
+    return showRestTagsPopover && !disabled ? (
+      <Popover
+        content={hiddenTag}
+        showArrow
+        trigger="hover"
+        position="top"
+        autoAdjustOverflow
+        {...restTagsPopoverProps}
+      >
+        {renderPlusNChildren}
+      </Popover>
+    ) : (
+      renderPlusNChildren
     );
   };
 
   const renderMultipleTags = () => {
     const { autoMergeValue, maxTagCount } = props;
     const { checkedKeys, resolvedCheckedKeys } = state;
-    const realKeys = mergeType === strings.NONE_MERGE_TYPE
-      ? checkedKeys
-      : resolvedCheckedKeys;
-    const displayTag: Array<VNode |string> = [];
-    const hiddenTag: Array<VNode |string> = [];
+    const realKeys = mergeType === strings.NONE_MERGE_TYPE ? checkedKeys : resolvedCheckedKeys;
+    const displayTag: Array<VNode | string> = [];
+    const hiddenTag: Array<VNode | string> = [];
     [...realKeys].forEach((checkedKey, idx) => {
       const notExceedMaxTagCount = !isNumber(maxTagCount) || maxTagCount >= idx + 1;
       const item = renderTagItem(checkedKey, idx, strings.IS_KEY);
@@ -770,7 +746,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     );
   };
 
-  const renderDisplayText = (): JSX.Element[] | VNode |string | VNode[] => {
+  const renderDisplayText = (): JSX.Element[] | VNode | string | VNode[] => {
     const { displayProp, separator, displayRender } = props;
     const { selectedKeys } = state;
     let displayText: JSX.Element[] | string | VNode = '';
@@ -779,7 +755,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       if (displayRender && typeof displayRender === 'function') {
         displayText = displayRender(displayPath);
       } else {
-        displayText = displayPath.map((path: VNode |string, index: number)=>(
+        displayText = displayPath.map((path: VNode | string, index: number) => (
           <Fragment key={`${path}-${index}`}>
             {index < displayPath.length - 1 ? (
               <>
@@ -794,7 +770,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       }
     }
     return displayText;
-  }
+  };
 
   const renderSelectContent = () => {
     const { placeholder, filterTreeNode, multiple } = props;
@@ -825,9 +801,11 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       [`${prefixcls}-suffix-text`]: suffix && isString(suffix),
       [`${prefixcls}-suffix-icon`]: isSemiIcon(suffix),
     });
-    return <div class={suffixWrapperCls} x-semi-prop="suffix">
-      {suffix}
-    </div>;
+    return (
+      <div class={suffixWrapperCls} x-semi-prop="suffix">
+        {suffix}
+      </div>
+    );
   };
 
   const renderPrefix = () => {
@@ -842,7 +820,11 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       [`${prefixcls}-prefix-icon`]: isSemiIcon(labelNode),
     });
 
-    return <div class={prefixWrapperCls} id={insetLabelId} x-semi-prop="prefix,insetLabel">{labelNode}</div>;
+    return (
+      <div class={prefixWrapperCls} id={insetLabelId} x-semi-prop="prefix,insetLabel">
+        {labelNode}
+      </div>
+    );
   };
 
   const renderCustomTrigger = () => {
@@ -886,11 +868,10 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     foundation.handleClear();
   };
 
-
   /**
    * A11y: simulate clear button click
    */
-  const  handleClearEnterPress = (e: KeyboardEvent) => {
+  const handleClearEnterPress = (e: KeyboardEvent) => {
     e && e.stopPropagation();
     foundation.handleClearEnterPress(e);
   };
@@ -908,13 +889,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     const allowClear = showClearBtn();
     if (allowClear) {
       return (
-        <div
-          class={clearCls}
-          onClick={handleClear}
-          onKeypress={handleClearEnterPress}
-          role='button'
-          tabindex={0}
-        >
+        <div class={clearCls} onClick={handleClear} onKeypress={handleClearEnterPress} role="button" tabindex={0}>
           <IconClear />
         </div>
       );
@@ -928,7 +903,11 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     if (showClearBtn_) {
       return null;
     }
-    return arrowIcon ? <div class={cls(`${prefixcls}-arrow`)} x-semi-prop="arrowIcon">{arrowIcon}</div> : null;
+    return arrowIcon ? (
+      <div class={cls(`${prefixcls}-arrow`)} x-semi-prop="arrowIcon">
+        {arrowIcon}
+      </div>
+    ) : null;
   };
 
   const renderSelection = () => {
@@ -950,40 +929,40 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
     const { isOpen, isFocus, isInput, checkedKeys } = state;
     const filterable = Boolean(filterTreeNode);
     const useCustomTrigger = typeof triggerRender === 'function';
-    const classNames = useCustomTrigger ?
-      cls(className) :
-      cls(prefixcls, className, {
-        [`${prefixcls}-focus`]: isFocus || (isOpen && !isInput),
-        [`${prefixcls}-disabled`]: disabled,
-        [`${prefixcls}-single`]: true,
-        [`${prefixcls}-filterable`]: filterable,
-        [`${prefixcls}-error`]: validateStatus === 'error',
-        [`${prefixcls}-warning`]: validateStatus === 'warning',
-        [`${prefixcls}-small`]: size === 'small',
-        [`${prefixcls}-large`]: size === 'large',
-        [`${prefixcls}-with-prefix`]: prefix || insetLabel,
-        [`${prefixcls}-with-suffix`]: suffix,
-      });
-    const mouseEvent = showClear ?
-      {
-        onMouseEnter: () => handleMouseOver(),
-        onMouseLeave: () => handleMouseLeave(),
-      } :
-      {};
+    const classNames = useCustomTrigger
+      ? cls(className)
+      : cls(prefixcls, className, {
+          [`${prefixcls}-focus`]: isFocus || (isOpen && !isInput),
+          [`${prefixcls}-disabled`]: disabled,
+          [`${prefixcls}-single`]: true,
+          [`${prefixcls}-filterable`]: filterable,
+          [`${prefixcls}-error`]: validateStatus === 'error',
+          [`${prefixcls}-warning`]: validateStatus === 'warning',
+          [`${prefixcls}-small`]: size === 'small',
+          [`${prefixcls}-large`]: size === 'large',
+          [`${prefixcls}-with-prefix`]: prefix || insetLabel,
+          [`${prefixcls}-with-suffix`]: suffix,
+        });
+    const mouseEvent = showClear
+      ? {
+          onMouseEnter: () => handleMouseOver(),
+          onMouseLeave: () => handleMouseLeave(),
+        }
+      : {};
     const sectionCls = cls(`${prefixcls}-selection`, {
       [`${prefixcls}-selection-multiple`]: multiple && !isEmpty(checkedKeys),
     });
-    const inner = useCustomTrigger ?
-      renderCustomTrigger() :
-      [
-        <Fragment key={'prefix'}>{prefix || insetLabel ? renderPrefix() : null}</Fragment>,
-        <Fragment key={'selection'}>
-          <div class={sectionCls}>{renderSelectContent()}</div>
-        </Fragment>,
-        <Fragment key={'clearbtn'}>{renderClearBtn()}</Fragment>,
-        <Fragment key={'suffix'}>{suffix ? renderSuffix() : null}</Fragment>,
-        <Fragment key={'arrow'}>{renderArrow()}</Fragment>,
-      ];
+    const inner = useCustomTrigger
+      ? renderCustomTrigger()
+      : [
+          <Fragment key={'prefix'}>{prefix || insetLabel ? renderPrefix() : null}</Fragment>,
+          <Fragment key={'selection'}>
+            <div class={sectionCls}>{renderSelectContent()}</div>
+          </Fragment>,
+          <Fragment key={'clearbtn'}>{renderClearBtn()}</Fragment>,
+          <Fragment key={'suffix'}>{suffix ? renderSuffix() : null}</Fragment>,
+          <Fragment key={'arrow'}>{renderArrow()}</Fragment>,
+        ];
     /**
      * Reasons for disabling the a11y eslint rule:
      * The following attributes(aria-controls,aria-expanded) will be automatically added by Tooltip, no need to declare here
@@ -993,18 +972,18 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
         class={classNames}
         style={style}
         ref={triggerRef}
-        onClick={e => foundation.handleClick(e)}
-        onKeypress={e => foundation.handleSelectionEnterPress(e)}
+        onClick={(e) => foundation.handleClick(e)}
+        onKeypress={(e) => foundation.handleSelectionEnterPress(e)}
         aria-invalid={props['aria-invalid']}
         aria-errormessage={props['aria-errormessage']}
         aria-label={props['aria-label']}
         aria-labelledby={props['aria-labelledby']}
-        aria-describedby={props["aria-describedby"]}
+        aria-describedby={props['aria-describedby']}
         aria-required={props['aria-required']}
         id={id}
         {...mouseEvent}
         // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
-        role='combobox'
+        role="combobox"
         tabindex={0}
       >
         {inner}
@@ -1021,7 +1000,7 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
       mouseLeaveDelay,
       mouseEnterDelay,
       position,
-      motion
+      motion,
     } = props;
     const { isOpen, rePosKey } = state;
     const { direction } = context.value;
@@ -1043,15 +1022,14 @@ const Index = defineComponent<CascaderProps>((props, {}) => {
         stopPropagation={stopPropagation}
         mouseLeaveDelay={mouseLeaveDelay}
         mouseEnterDelay={mouseEnterDelay}
-        afterClose={()=>foundation.updateSearching(false)}
+        afterClose={() => foundation.updateSearching(false)}
       >
         {selection}
       </Popover>
     );
-  }
-})
+  };
+});
 
-Index.props = vuePropsType
+Index.props = vuePropsType;
 
-export default Index
-
+export default Index;

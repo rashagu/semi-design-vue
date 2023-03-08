@@ -33,7 +33,6 @@ import {getProps, useBaseComponent, ValidateStatus} from '../_base/baseComponent
 import TagGroup from '../tag/group';
 import Tag, { TagProps } from '../tag/index';
 import Input, { InputProps } from '../input/index';
-import Popover from '../popover/index';
 import AutoSizer from '../tree/autoSizer';
 import TreeContext from '../tree/treeContext';
 import TreeNode from '../tree/treeNode';
@@ -64,6 +63,7 @@ import {
 import {AriaAttributes} from '../AriaAttributes'
 import {VueHTMLAttributes, VueJsxNode, VueJsxNodeSingle} from "../interface";
 import {vuePropsMake} from "../PropTypes";
+import Popover, { PopoverProps } from '../popover/index';
 
 export type ListItemKeySelector<T = any> = (index: number, data: T) => string | number;
 export type ExpandAction = false | 'click' | 'doubleClick';
@@ -130,6 +130,7 @@ export interface TreeSelectProps extends Omit<BasicTreeSelectProps, OverrideComm
     dropdownClassName?: string;
     dropdownMatchSelectWidth?: boolean;
     dropdownStyle?: CSSProperties;
+    dropdownMargin?: PopoverProps['margin'];
     insetLabel?: VueJsxNode;
     insetLabelId?: string;
     maxTagCount?: number;
@@ -139,6 +140,7 @@ export interface TreeSelectProps extends Omit<BasicTreeSelectProps, OverrideComm
     outerTopSlot?: VueJsxNode;
     placeholder?: string;
     prefix?: VueJsxNode;
+    position?: PopoverProps['position'];
     searchAutoFocus?: boolean;
     searchPlaceholder?: string;
     showSearchClear?: boolean;
@@ -170,11 +172,12 @@ export type OverrideCommonState =
 export interface TreeSelectState extends Omit<BasicTreeSelectInnerData, OverrideCommonState | 'prevProps'>, Pick<TreeState, OverrideCommonState> {
     inputTriggerFocus: boolean;
     isOpen: boolean;
-    isInput: boolean;
+    // isInput: boolean;
     rePosKey: number;
     dropdownMinWidth: null | number;
     isHovering: boolean;
     prevProps: TreeSelectProps;
+    isFocus: boolean
 }
 
 const prefixcls = cssClasses.PREFIX;
@@ -261,7 +264,13 @@ const propTypes = {
     searchRender: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     renderSelectedItem: PropTypes.func,
     checkRelation: PropTypes.string,
-    id: PropTypes.string
+    id: PropTypes.string,
+    showRestTagsPopover: PropTypes.bool,
+    restTagsPopoverProps: PropTypes.object,
+    preventScroll: PropTypes.bool,
+
+    dropdownMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+    position: PropTypes.string,
 };
 
 const defaultProps: Partial<TreeSelectProps> = {
@@ -300,7 +309,8 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
     const state = reactive<TreeSelectState>({
         inputTriggerFocus: false,
         isOpen: false,
-        isInput: false,
+        isFocus: false,
+        // isInput: false,
         rePosKey: key,
         dropdownMinWidth: null,
         inputValue: '',
@@ -467,7 +477,27 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             toggleHovering: bool => {
                 state.isHovering = bool
             },
-            updateInputFocus: bool => { } // eslint-disable-line
+            updateInputFocus: bool => {
+                if (bool) {
+                    if (inputRef.value) {
+                        const { preventScroll } = props;
+                        (inputRef.value as any).focus({ preventScroll });
+                    }
+                    if (tagInputRef.value) {
+                        tagInputRef.value.focus();
+                    }
+                } else {
+                    if (inputRef.value) {
+                        (inputRef.value as any).blur();
+                    }
+                    if (tagInputRef.value) {
+                        tagInputRef.value.blur();
+                    }
+                }
+            },
+            updateIsFocus: bool => {
+                state.isFocus = bool
+            }
         };
     }
     const adapter = adapter_()
@@ -1024,7 +1054,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             searchPosition,
             triggerRender,
         } = props;
-        const { isOpen, isInput, inputValue, selectedKeys, checkedKeys, keyEntities } = state;
+        const { inputValue, selectedKeys, checkedKeys, keyEntities, isFocus } = state;
         const filterable = Boolean(filterTreeNode);
         const useCustomTrigger = typeof triggerRender === 'function';
         const mouseEvent:VueHTMLAttributes = showClear ?
@@ -1041,7 +1071,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
           cls(
             prefixcls,
             {
-                [`${prefixcls}-focus`]: isOpen && !isInput,
+                [`${prefixcls}-focus`]: isFocus,
                 [`${prefixcls}-disabled`]: disabled,
                 [`${prefixcls}-single`]: !multiple,
                 [`${prefixcls}-multiple`]: multiple,
@@ -1183,6 +1213,11 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             placeholder,
             maxTagCount,
             checkRelation,
+            showRestTagsPopover,
+            restTagsPopoverProps,
+            searchPosition,
+            filterTreeNode,
+            preventScroll
         } = props;
         const {
             keyEntities,
@@ -1206,9 +1241,13 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             value={keyList}
             inputValue={inputValue}
             size={size}
+            showRestTagsPopover={showRestTagsPopover}
+            restTagsPopoverProps={restTagsPopoverProps}
             autoFocus={searchAutoFocus}
             renderTagItem={(itemKey, index) => renderTagItem(itemKey, index)}
             onRemove={itemKey => removeTag(itemKey)}
+            expandRestTagsOnClick={false}
+            preventScroll={preventScroll}
           />
         );
     };
@@ -1240,6 +1279,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             prefix: <IconSearch />,
         };
         const inputTriggerProps = {
+            autofocus: searchAutoFocus,
             onFocus: (e: FocusEvent) => foundation.handleInputTriggerFocus(),
             onBlur: (e: FocusEvent) => foundation.handleInputTriggerBlur(),
             disabled,
@@ -1267,7 +1307,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
                         <Input
                           aria-label='Filter TreeSelect item'
                           ref={inputRef as any}
-                          autofocus={searchAutoFocus}
+                          // autofocus={searchAutoFocus}
                           placeholder={placeholder}
                           {...baseInputProps}
                           {...realInputProps}
@@ -1486,6 +1526,8 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             autoAdjustOverflow,
             stopPropagation,
             getPopupContainer,
+            dropdownMargin,
+            position,
         } = props;
         const { isOpen, rePosKey } = state;
         const selection = renderSelection();
@@ -1496,6 +1538,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             getPopupContainer={getPopupContainer}
             zIndex={zIndex}
             motion={motion}
+            margin={dropdownMargin}
             ref={optionsRef}
             content={content}
             visible={isOpen}

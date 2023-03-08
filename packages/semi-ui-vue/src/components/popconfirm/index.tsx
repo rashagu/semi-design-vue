@@ -1,18 +1,18 @@
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
-import { noop, get } from 'lodash';
+import { noop, get, isFunction, omit } from 'lodash';
 import { cssClasses, numbers } from '@douyinfe/semi-foundation/popconfirm/constants';
 import PopconfirmFoundation, { PopconfirmAdapter } from '@douyinfe/semi-foundation/popconfirm/popconfirmFoundation';
 import { IconClose, IconAlertTriangle } from '@kousum/semi-icons-vue';
 import Popover, { PopoverProps } from '../popover';
-import { Position, Trigger } from '../tooltip';
+import { Position, Trigger, RenderContentProps } from '../tooltip';
 import Button, { ButtonProps } from '../button';
 import { Type as ButtonType } from '../button/Button';
 import LocaleConsumer from '../locale/localeConsumer';
 import { Locale as LocaleObject } from '../locale/interface';
 import '@douyinfe/semi-foundation/popconfirm/popconfirm.scss';
 import { Motion } from '../_base/base';
-import {defineComponent, h, reactive, useSlots, Fragment, isVNode, watch} from "vue";
+import {defineComponent, h, reactive, useSlots, Fragment, isVNode, watch, ref} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
@@ -24,7 +24,7 @@ export interface PopconfirmProps extends PopoverProps {
     cancelText?: string;
     cancelButtonProps?: ButtonProps;
     cancelType?: ButtonType;
-    content?: VueJsxNode;
+    // content?: VueJsxNode;
     defaultVisible?: boolean;
     disabled?: boolean;
     icon?: VueJsxNode;
@@ -59,7 +59,7 @@ interface PopProps {
 const propTypes = {
     motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
     disabled: PropTypes.bool,
-    content: PropTypes.any,
+    content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     title: PropTypes.any,
     prefixCls: PropTypes.string,
     className: PropTypes.string,
@@ -109,6 +109,8 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
         visible: props.defaultVisible || false,
     })
 
+    const footerRef = ref();
+    const popoverRef = ref();
     const {adapter: adapterInject, isControlled} = useBaseComponent<RatingProps>(props, state)
     function adapter_(): PopconfirmAdapter<PopconfirmProps, PopconfirmState> {
         return {
@@ -126,6 +128,17 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
             notifyCancel: (e: MouseEvent): Promise<any> | void => props.onCancel(e),
             notifyVisibleChange: (visible: boolean): void => props.onVisibleChange(visible),
             notifyClickOutSide: (e: MouseEvent) => props.onClickOutSide(e),
+            focusCancelButton: () => {
+                const buttonNode = footerRef.value?.querySelector('[data-type=cancel]') as HTMLElement;
+                buttonNode?.focus({ preventScroll: true });
+            },
+            focusOkButton: () => {
+                const buttonNode = footerRef.value?.querySelector('[data-type=ok]') as HTMLElement;
+                buttonNode?.focus({ preventScroll: true });
+            },
+            focusPrevFocusElement: () => {
+                popoverRef.value?.focusTrigger();
+            }
         };
     }
     const adapter = adapter_()
@@ -171,10 +184,23 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
           <LocaleConsumer componentName="Popconfirm">
               {(locale: LocaleObject['Popconfirm'], localeCode: string) => (
                 <>
-                    <Button type={cancelType} onClick={handleCancel} loading={cancelLoading} {...cancelButtonProps}>
+                    <Button
+                      data-type="cancel"
+                      type={cancelType}
+                      onClick={handleCancel}
+                      loading={cancelLoading}
+                      {...omit(cancelButtonProps, 'autoFocus')}
+                    >
                         {cancelText || get(locale, 'cancel')}
                     </Button>
-                    <Button type={okType} theme="solid" onClick={handleConfirm} loading={confirmLoading} {...okButtonProps}>
+                    <Button
+                      data-type="ok"
+                      type={okType}
+                      theme="solid"
+                      onClick={handleConfirm}
+                      loading={confirmLoading}
+                      {...omit(okButtonProps, 'autoFocus')}
+                    >
                         {okText || get(locale, 'confirm')}
                     </Button>
                 </>
@@ -183,7 +209,7 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
         );
     }
 
-    function renderConfirmPopCard() {
+    function renderConfirmPopCard({ initialFocusRef }: { initialFocusRef?: RenderContentProps['initialFocusRef'] }) {
         const { content, title, className, style, cancelType, icon, prefixCls } = props;
         const { direction } = context.value;
         const popCardCls = cls(
@@ -222,10 +248,10 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
                   </div>
                   {showContent ? (
                     <div class={`${prefixCls}-body`} x-semi-prop="content">
-                        {content}
+                        {isFunction(content) ? content({ initialFocusRef }) : content}
                     </div>
                   ) : null}
-                  <div class={`${prefixCls}-footer`}>{renderControls()}</div>
+                  <div class={`${prefixCls}-footer`} ref={footerRef}>{renderControls()}</div>
               </div>
           </div>
         );
@@ -253,7 +279,6 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
         }
 
         const { visible } = state;
-        const popContent = renderConfirmPopCard();
         const popProps: PopProps = {
             onVisibleChange: handleVisibleChange,
             className: cssClasses.POPOVER,
@@ -264,19 +289,13 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
             popProps.trigger = 'custom';
         }
 
-        console.log({
-            ...attrs,
-            content: popContent,
-            visible: visible,
-            position: position,
-            ...popProps
-        })
 
         return (
           <Popover
+            ref={popoverRef}
             {...{
                 ...attrs,
-                content: popContent,
+                content: renderConfirmPopCard,
                 visible: visible,
                 position: position,
                 ...popProps

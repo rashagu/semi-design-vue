@@ -354,7 +354,7 @@ const defaultProps: Partial<SelectProps> = {
   ellipsisTrigger: false,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Index = defineComponent<SelectProps>((props, {}) => {
+const Index = defineComponent<SelectProps>((props, {expose}) => {
   const slots = useSlots()
 
   const state = reactive({
@@ -742,6 +742,15 @@ const Index = defineComponent<SelectProps>((props, {}) => {
   function focus() {
     foundation.focus();
   }
+  expose({
+    close,
+    open,
+    clearInput,
+    selectAll,
+    deselectAll,
+    focus
+  })
+
 
   function onSelect(option: OptionProps, optionIndex: number, e: any) {
     foundation.onSelect(option, optionIndex, e);

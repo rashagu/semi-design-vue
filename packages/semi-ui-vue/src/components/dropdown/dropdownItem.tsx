@@ -66,11 +66,12 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
   return ()=>{
     const { disabled, className, forwardRef, style, type, active, icon, showTick, hover } = props;
     const { showTick: contextShowTick } = context.value;
+    const realShowTick = contextShowTick ?? showTick;
     const itemclass = cls(className, {
       [`${prefixCls}-item`]: true,
       [`${prefixCls}-item-disabled`]: disabled,
       [`${prefixCls}-item-hover`]: hover,
-      [`${prefixCls}-item-withTick`]: contextShowTick ?? showTick,
+      [`${prefixCls}-item-withTick`]: realShowTick,
       [`${prefixCls}-item-${type}`]: type,
       [`${prefixCls}-item-active`]: active,
     });
@@ -83,10 +84,10 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
     }
     let tick = null;
     switch (true) {
-      case showTick && active:
+      case realShowTick && active:
         tick = <IconTick />;
         break;
-      case showTick && !active:
+      case realShowTick && !active:
         tick = <IconTick style={{ color: 'transparent' }} />;
         break;
       default:

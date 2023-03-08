@@ -123,8 +123,15 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 
-const Popover = defineComponent<PopoverProps>((props, {slots}) => {
+const Popover = defineComponent<PopoverProps>((props, {slots, expose}) => {
   const {context} = useConfigContext()
+  const tooltipRef = ref()
+  function focusTrigger () {
+    tooltipRef.value?.focusTrigger();
+  }
+  expose({
+    focusTrigger
+  })
   function renderPopCard ({ initialFocusRef }: { initialFocusRef: any }) {
     const { content, contentClassName, prefixCls } = props;
     const { direction } = context.value;
@@ -182,6 +189,7 @@ const Popover = defineComponent<PopoverProps>((props, {slots}) => {
     return (
       <Tooltip
         guardFocus
+        ref={tooltipRef}
         {...(attr as any)}
         trigger={trigger}
         position={position}
