@@ -2,7 +2,7 @@ import {destroyFns, ModalReactProps,} from './Modal';
 import ConfirmModal from './ConfirmModal';
 
 import '@douyinfe/semi-foundation/modal/modal.scss';
-import {get} from 'lodash';
+
 import {
   IconAlertCircle,
   IconAlertTriangle,
@@ -10,7 +10,9 @@ import {
   IconInfoCircle,
   IconTickCircle
 } from '@kousum/semi-icons-vue';
-import {Motion} from '../_base/base';
+import { omit } from "lodash";
+import { type ButtonProps } from "../button";
+
 import {
   h,
   createApp,
@@ -121,7 +123,8 @@ export function withError(props: ModalReactProps) {
   return {
     type: 'error' as const,
     icon: <IconAlertCircle/>,
-    ...props
+    okButtonProps: { type: 'danger' as ButtonProps['type'], ...props.okButtonProps },
+    ...(omit(props, ['okButtonProps']))
   };
 }
 

@@ -95,7 +95,6 @@ const BasicStep = defineComponent<BasicStepProps>((props, {}) => {
           inner = icon;
         }
       } else if ('status' in getProps(props)) {
-        console.log(status, size)
         switch (status) {
           case 'error':
             inner = <IconAlertCircle size={stepSizeMapIconSize[size]} />;

@@ -164,7 +164,6 @@ const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
     // TODO
     //组件是否需要更新，需要返回一个布尔值，返回true则更新，返回flase不更新，这是一个关键点
     function shouldComponentUpdate(nextProps: BaseRowProps) {
-        console.log('shouldComponentUpdate')
         /**
          * Shallow comparison of incoming props to simulate PureComponent
          * Deep comparison cellWidths

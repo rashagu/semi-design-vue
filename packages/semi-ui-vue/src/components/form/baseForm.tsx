@@ -150,8 +150,10 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
             },
             getAllErrorDOM: () => {
                 const { formId } = state;
+                const { id } = props;
+                const xId = id ? id : formId;
                 return document.querySelectorAll(
-                  `form[x-form-id="${formId}"] .${cssClasses.PREFIX}-field-error-message`
+                  `form[x-form-id="${xId}"] .${cssClasses.PREFIX}-field-error-message`
                 );
             },
             getFieldDOM: (field: string) =>
@@ -230,6 +232,7 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
             autoScrollToError,
             showValidateIcon,
             extraTextPosition,
+            id,
             ...rest
         } = props;
 
@@ -247,7 +250,7 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
             onReset={reset}
             onSubmit={submit}
             class={formCls}
-            x-form-id={formId}
+            x-form-id={id ? id : formId}
           >
               {{
                   default: content

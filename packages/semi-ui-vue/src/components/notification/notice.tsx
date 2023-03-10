@@ -130,7 +130,6 @@ const Notice = defineComponent<NoticeReactProps>((props, {}) => {
     };
 
     const close = (e: MouseEvent) => {
-        console.log(props.id)
         props.onCloseClick(props.id);
         foundation.close(e);
     };

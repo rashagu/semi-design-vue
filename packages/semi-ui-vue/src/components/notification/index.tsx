@@ -90,14 +90,10 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
 
   const {adapter: adapterInject} = useBaseComponent<BannerProps>(props, state)
 
-  onUnmounted(()=>{
-    console.log('卸载')
-  })
   function adapter_(): NotificationListAdapter {
     return {
       ...adapterInject(),
       updateNotices: (notices: NoticeInstance[], removedItems: NoticeInstance[] = []) => {
-        console.log(notices, removedItems)
         noticeStorage = [...notices];
         removeItemStorage = [...removedItems];
         // setState is async sometimes and react often merges state, so use "this" , make sure other code always get right data.
@@ -116,7 +112,6 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
   const add = (noticeOpts: NoticeProps) => foundation.addNotice(noticeOpts);
 
   const remove = (id: string | number) => {
-    console.log(id)
     foundation.removeNotice(String(id));
   };
 
@@ -141,8 +136,6 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
           style={style}
         >
           {notices.map((notice, index) => {
-
-            console.log(notice.motion, removedItems)
              return (notice.motion ? (
                 <NoticeTransition
                   key={notice.id || index}
@@ -251,7 +244,6 @@ export class NotificationListClass {
         NotificationList,
         {
           ref: (instance: any) => {
-            console.log(instance)
             if (!this.NotificationListRef) {
               instance.add({...notice, id});
             }

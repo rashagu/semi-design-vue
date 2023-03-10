@@ -7,7 +7,6 @@ import { IconClose } from '@kousum/semi-icons-vue';
 import {TagProps, TagSize, TagColor, TagType, AvatarShape, TagShape} from './interface';
 import { handlePrevent } from '@douyinfe/semi-foundation/utils/a11y';
 import '@douyinfe/semi-foundation/tag/tag.scss';
-import {AriaAttributes} from "../AriaAttributes";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import {isString} from "lodash";
@@ -134,10 +133,11 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
     const { visible: isVisible } = state;
     const clickable = onClick !== defaultProps.onClick || closable;
     // only when the Tag is clickable or closable, the value of tabIndex is allowed to be passed in.
-    const a11yProps = { role: 'button', tabIndex: tabIndex | 0, onKeydown: handleKeyDown };
+    const a11yProps = { role: 'button', tabIndex: tabIndex || 0, onKeyDown: handleKeyDown };
     const baseProps = {
       ...attr,
       onClick,
+      tabindex: tabIndex,
       className: classNames(
         prefixCls,
         {
