@@ -606,6 +606,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
     };
     const wrappercls = cls({
       [`${prefixcls}-search-wrapper`]: true,
+      [`${prefixcls}-search-wrapper-${size}`]: size !== 'default',
     });
 
     const displayText = renderDisplayText();
