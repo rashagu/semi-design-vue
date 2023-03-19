@@ -475,21 +475,20 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
                 key={elementKey}
                 visible
                 aria-label={`${!disabled ? 'Closable ' : ''}Tag: ${value}`}
-              >                        {/* Wrap a layer of div outside IconHandler and Value to ensure that the two are aligned */}
-                <div class={`${prefixCls}-tag-content-wrapper`}>
-                  {showIconHandler && (
-                    <IconHandle
-                      className={`${prefixCls}-drag-handler`}
-                      {...arg.listeners}>
-                    </IconHandle>
-                  )}
-                  <Paragraph
-                    className={typoCls}
-                    ellipsis={{ showTooltip: showContentTooltip, rows: 1 }}
-                  >
-                    {value}
-                  </Paragraph>
-                </div>
+              >
+                {/* Wrap a layer of div outside IconHandler and Value to ensure that the two are aligned */}
+                {showIconHandler && (
+                  <IconHandle
+                    className={`${prefixCls}-drag-handler`}
+                    {...arg.listeners}>
+                  </IconHandle>
+                )}
+                <Paragraph
+                  className={typoCls}
+                  ellipsis={{ showTooltip: showContentTooltip, rows: 1 }}
+                >
+                  {value}
+                </Paragraph>
               </Tag>
             </div>
           )

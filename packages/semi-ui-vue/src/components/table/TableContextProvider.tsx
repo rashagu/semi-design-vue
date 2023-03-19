@@ -33,6 +33,7 @@ const TableContextProvider = defineComponent<TableContextProps>((props, {}) => {
     handleRowExpanded: props.handleRowExpanded,
     getVirtualizedListRef: props.getVirtualizedListRef,
     setBodyHasScrollbar: props.setBodyHasScrollbar,
+    direction: props.direction,
   }));
 
   return () => {

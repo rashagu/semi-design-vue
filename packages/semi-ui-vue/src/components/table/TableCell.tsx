@@ -6,12 +6,12 @@ import { get, noop, set, omit, isEqual, merge } from 'lodash';
 
 import { cssClasses, numbers } from '@douyinfe/semi-foundation/table/constants';
 import TableCellFoundation, { TableCellAdapter } from '@douyinfe/semi-foundation/table/cellFoundation';
-import { isSelectionColumn, isExpandedColumn } from '@douyinfe/semi-foundation/table/utils';
+import { isSelectionColumn, isExpandedColumn, getRTLAlign } from '@douyinfe/semi-foundation/table/utils';
 
 import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import Context, { TableContextProps } from './table-context';
 import { amendTableWidth } from './utils';
-import { Align, ColumnProps, ExpandIcon } from './interface';
+import { ColumnProps, ExpandIcon } from './interface';
 import {CSSProperties, defineComponent, Fragment, h, isVNode, reactive, ref, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useTableContext} from "./tableContext/Consumer";
@@ -182,14 +182,16 @@ const TableCell = defineComponent<TableCellProps>((props, {}) => {
 
         let tdProps: { style?: Partial<CSSProperties> } = {};
         let customCellProps = {};
+        const { direction } = context.value;
+        const isRTL = direction === 'rtl';
 
         const fixedLeftFlag = fixedLeft || typeof fixedLeft === 'number';
         const fixedRightFlag = fixedRight || typeof fixedRight === 'number';
 
         if (fixedLeftFlag) {
-            set(tdProps, 'style.left', typeof fixedLeft === 'number' ? fixedLeft + 'px' : 0);
+            set(tdProps, isRTL ? 'style.right' : 'style.left', typeof fixedLeft === 'number' ? fixedLeft : 0);
         } else if (fixedRightFlag) {
-            set(tdProps, 'style.right', typeof fixedRight === 'number' ? fixedRight + 'px' : 0);
+            set(tdProps, isRTL ? 'style.left' : 'style.right', typeof fixedRight === 'number' ? fixedRight : 0);
         }
 
         if (width != null) {
@@ -200,6 +202,15 @@ const TableCell = defineComponent<TableCellProps>((props, {}) => {
             set(tdProps, 'style.height', height + 'px');
         }
 
+        // Vue3 补充
+        if (tdProps.style?.left && typeof tdProps.style?.left === 'number'){
+            tdProps.style.left = tdProps.style.left + 'px'
+        }
+        if (tdProps.style?.right && typeof tdProps.style?.right === 'number'){
+            tdProps.style.right = tdProps.style.right + 'px'
+        }
+
+
         if (column.onCell) {
             customCellProps = (column as any).onCell(record, index);
             adapter.setCache('customCellProps', { ...customCellProps });
@@ -209,7 +220,8 @@ const TableCell = defineComponent<TableCellProps>((props, {}) => {
         }
 
         if (column.align) {
-            tdProps.style = { ...tdProps.style, textAlign: column.align as Align };
+            const textAlign = getRTLAlign(column.align, direction);
+            tdProps.style = { ...tdProps.style, textAlign };
         }
 
         return { tdProps, customCellProps };
@@ -331,6 +343,8 @@ const TableCell = defineComponent<TableCellProps>((props, {}) => {
             firstFixedRight,
             colIndex
         } = props;
+        const { direction } = context.value;
+        const isRTL = direction === 'rtl';
         const { className } = column;
         const fixedLeftFlag = fixedLeft || typeof fixedLeft === 'number';
         const fixedRightFlag = fixedRight || typeof fixedRight === 'number';
@@ -349,16 +363,29 @@ const TableCell = defineComponent<TableCellProps>((props, {}) => {
         }
 
         const inner = renderInner(text, indentText, realExpandIcon);
+        let isFixedLeft, isFixedLeftLast, isFixedRight, isFixedRightFirst;
+
+        if (isRTL) {
+            isFixedLeft = fixedRightFlag;
+            isFixedLeftLast = firstFixedRight;
+            isFixedRight = fixedLeftFlag;
+            isFixedRightFirst = lastFixedLeft;
+        } else {
+            isFixedLeft = fixedLeftFlag;
+            isFixedLeftLast = lastFixedLeft;
+            isFixedRight = fixedRightFlag;
+            isFixedRightFirst = firstFixedRight;
+        }
 
         const columnCls = classnames(
           className,
           `${prefixCls}-row-cell`,
           get(customCellProps, 'className'),
           {
-              [`${prefixCls}-cell-fixed-left`]: fixedLeftFlag,
-              [`${prefixCls}-cell-fixed-left-last`]: lastFixedLeft,
-              [`${prefixCls}-cell-fixed-right`]: fixedRightFlag,
-              [`${prefixCls}-cell-fixed-right-first`]: firstFixedRight,
+              [`${prefixCls}-cell-fixed-left`]: isFixedLeft,
+              [`${prefixCls}-cell-fixed-left-last`]: isFixedLeftLast,
+              [`${prefixCls}-cell-fixed-right`]: isFixedRight,
+              [`${prefixCls}-cell-fixed-right-first`]: isFixedRightFirst,
           }
         );
 

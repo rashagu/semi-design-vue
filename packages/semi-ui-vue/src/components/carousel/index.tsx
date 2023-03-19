@@ -8,7 +8,7 @@ import CarouselFoundation, {CarouselAdapter} from '@douyinfe/semi-foundation/car
 import CarouselIndicator from './CarouselIndicator';
 import CarouselArrow from './CarouselArrow';
 import '@douyinfe/semi-foundation/carousel/carousel.scss';
-import {debounce} from 'lodash';
+import {debounce, isEqual, pick} from 'lodash';
 import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
 import {
   cloneVNode,
@@ -151,10 +151,12 @@ const Carousel = defineComponent<CarouselProps>((props, {expose}) => {
 
 
   const play = (): void => {
+    foundation.setForcePlay(true);
     return foundation.handleAutoPlay();
   }
 
   const stop = (): void => {
+    foundation.setForcePlay(false);
     return foundation.stop();
   };
 
@@ -187,7 +189,7 @@ const Carousel = defineComponent<CarouselProps>((props, {expose}) => {
 
   const handleMouseEnter = (): void => {
     const {autoPlay} = props;
-    if (typeof autoPlay !== 'object' || autoPlay.hoverToPause) {
+    if ((autoPlay === true) || (typeof autoPlay === 'object' && autoPlay.hoverToPause)){
       foundation.stop();
     }
   }

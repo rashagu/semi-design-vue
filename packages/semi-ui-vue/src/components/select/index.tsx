@@ -134,7 +134,7 @@ export type SelectProps = {
   onDropdownVisibleChange?: (visible: boolean) => void;
   zIndex?: number;
   position?: Position;
-  onSearch?: (value: string) => void;
+  onSearch?: (value: string, event: KeyboardEvent | MouseEvent) => void;
   dropdownClassName?: string;
   dropdownStyle?: CSSProperties;
   dropdownMargin?: PopoverProps['margin'];
@@ -540,8 +540,8 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       notifyDropdownVisibleChange: (visible: boolean) => {
         props.onDropdownVisibleChange(visible);
       },
-      notifySearch: (input: string) => {
-        props.onSearch(input);
+      notifySearch: (input: string, event: MouseEvent | KeyboardEvent) => {
+        props.onSearch(input, event);
       },
       notifyCreate: (input: OptionProps) => {
         props.onCreate(input);

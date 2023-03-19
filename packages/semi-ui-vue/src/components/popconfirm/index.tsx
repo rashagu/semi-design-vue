@@ -294,8 +294,9 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
           <Popover
             ref={popoverRef}
             {...{
-                ...attrs,
-                content: renderConfirmPopCard,
+                ...attrs,                // A arrow function needs to be passed here, otherwise the content will not be updated after the Popconfirm state is updated
+                // Popover is a PureComponent, same props will not trigger update
+                content: ({ initialFocusRef }) => renderConfirmPopCard({ initialFocusRef }),
                 visible: visible,
                 position: position,
                 ...popProps

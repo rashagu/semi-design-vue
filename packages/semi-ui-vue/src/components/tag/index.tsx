@@ -10,6 +10,7 @@ import '@douyinfe/semi-foundation/tag/tag.scss';
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import {isString} from "lodash";
+import cls from 'classnames';
 
 export * from './interface';
 
@@ -161,12 +162,15 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
         <IconClose size="small" />
       </div>
     ) : null;
+
+    const stringChild = isString(children);
+    const contentCls = cls(`${prefixCls}-content`, `${prefixCls}-content-${stringChild ? 'ellipsis' : 'center' }`);
+
     return (
 
-      <div
-        aria-label={props['aria-label'] || isString(children) ? `${closable ? 'Closable ' : ''}Tag: ${children}` : ''} {...wrapProps}>
+      <div aria-label={props['aria-label'] || stringChild ? `${closable ? 'Closable ' : ''}Tag: ${children}` : '' } {...wrapProps}>
         {avatarSrc ? renderAvatar() : null}
-        <div class={`${prefixCls}-content`}>
+        <div class={contentCls}>
           {children}
         </div>
         {closeIcon}

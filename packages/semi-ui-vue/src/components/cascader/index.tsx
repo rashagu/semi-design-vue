@@ -290,9 +290,10 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
         state.inputPlaceHolder = value;
       },
       focusInput: () => {
+        const { preventScroll } = props;
         if (inputRef.value) {
           // TODO: check the reason
-          (inputRef.value as any).focus();
+          (inputRef.value as any).focus({ preventScroll });
         }
       },
     };

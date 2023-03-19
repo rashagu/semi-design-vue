@@ -115,7 +115,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SideSheetDemo />*/}
         {/*<ListDemo />*/}
         {/*<DescriptionsDemo />*/}
-        {/*<CollapseDemo />*/}
+        <CollapseDemo />
         {/*<CollapsibleDemo />*/}
         {/*<CarouselDemo/>*/}
         {/*<StepsDemo />*/}
@@ -162,7 +162,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DividerDemo/>*/}
         {/*<SliderDemo />*/}
         {/*<InputNumberDemo />*/}
-        <ModalForm />
+        {/*<ModalForm />*/}
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
         {/*<ModalDemo/>*/}

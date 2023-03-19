@@ -13,6 +13,7 @@ import {Motion} from '../_base/base';
 import { isFunction, noop } from 'lodash';
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
+import boolean from "async-validator/dist-types/validator/boolean";
 
 export declare interface ArrowStyle {
   borderColor?: string;
@@ -50,7 +51,8 @@ export interface PopoverProps extends BaseProps {
   clickToHide?:TooltipProps['clickToHide'];
   disableFocusListener?: boolean
   afterClose?:()=>void,
-  disableArrowKeyDown?: boolean
+  disableArrowKeyDown?: boolean,
+  keepDOM?:boolean
 }
 
 export interface PopoverState {
@@ -100,7 +102,9 @@ const propTypes = {
     default: 'Yes',
   },
   role:String,
-  afterClose: Function
+  afterClose: Function,
+  disableFocusListener: Boolean,
+  keepDOM: Boolean,
 };
 
 const defaultProps = {
@@ -119,7 +123,7 @@ const defaultProps = {
   closeOnEsc: true,
   returnFocusOnClose: true,
   guardFocus: true,
-  disableFocusListener: true
+  disableFocusListener: true,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 

@@ -17,7 +17,7 @@ export interface TableSelectionCellProps {
     columnTitle?: string; // TODO: future api
     getCheckboxProps?: () => CheckboxProps;
     type?: string; // TODO: future api
-    onChange?: (value: any, e: TableSelectionCellEvent) => void;
+    onChange?: (checked: boolean, e: TableSelectionCellEvent) => void;
     selected?: boolean;
     disabled?: boolean;
     indeterminate?: boolean; // Intermediate state, shown as a solid horizontal line

@@ -210,6 +210,9 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     }
     if ("currentIndex" in getProps(props) && props.currentIndex !== state.currentIndex) {
       willUpdateStates.currentIndex = props.currentIndex;
+      // ratio will set to adaptation when change picture,
+      // attention: If the ratio is controlled, the ratio should not change as the index changes
+      willUpdateStates.ratio = 'adaptation';
     }
     return willUpdateStates;
   }
@@ -317,10 +320,6 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     foundation.handleMouseDown(e);
   }
 
-  function handleRatio(type: RatioType): void {
-    foundation.handleRatio(type);
-  }
-
 
   return () => {
     const {
@@ -389,7 +388,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
               src={imgSrc[currentIndex]}
               onZoom={handleZoomImage}
               disableDownload={disableDownload}
-              setRatio={handleRatio}
+              setRatio={handleAdjustRatio}
               zoom={zoom}
               ratio={ratio}
               zoomStep={zoomStep}

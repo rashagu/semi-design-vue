@@ -64,6 +64,7 @@ import {AriaAttributes} from '../AriaAttributes'
 import {VueHTMLAttributes, VueJsxNode, VueJsxNodeSingle} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import Popover, { PopoverProps } from '../popover/index';
+import VirtualRow from '../select/virtualRow';
 
 export type ListItemKeySelector<T = any> = (index: number, data: T) => string | number;
 export type ExpandAction = false | 'click' | 'doubleClick';
@@ -1384,9 +1385,10 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
         return <TreeNode {...treeNodeProps} {...data} key={key} data={data} style={style} />;
     };
 
-    const itemKey = (index: number, data: TreeNodeData) => {
+    const itemKey = (index: number, data: Record<string, any>) => {
+        const { visibleOptions } = data;
         // Find the item at the specified index.
-        const item = data[index];
+        const item = visibleOptions[index];
         // Return a value that uniquely identifies this item.
         return item.key;
     };
@@ -1416,7 +1418,10 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             );
         }
 
-        const option = ({ index, style, data }: OptionProps) => renderTreeNode(data[index], index, style);
+        const data = {
+            visibleOptions: flattenNodes,
+            renderOption: renderTreeNode
+        };
 
         return (
           <AutoSizer defaultHeight={parseInt(''+virtualize.height)} defaultWidth={parseInt(''+virtualize.width)}>
@@ -1427,12 +1432,12 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
                   height={height}
                   width={width}
                   // @ts-ignore avoid strict check of itemKey
-                  itemKey={itemKey as ListItemKeySelector<TreeNodeData>}
-                  itemData={flattenNodes as any}
+                  itemKey={itemKey}
+                  itemData={data}
                   className={`${prefixTree}-virtual-list`}
                   style={{ direction }}
                 >
-                    {option}
+                    {VirtualRow}
                 </VirtualList>
               )}
           </AutoSizer>

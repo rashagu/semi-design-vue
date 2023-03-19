@@ -918,11 +918,8 @@ const Body = defineComponent<BodyProps>((props, {}) => {
 
     return () => {
         const { virtualized } = props;
-        return (
-          <ConfigContext.Consumer>
-              {({ direction }: { direction?: Direction }) => (virtualized ? renderVirtualizedBody(direction) : renderBody(direction))}
-          </ConfigContext.Consumer>
-        );
+        const { direction } = context.value;
+        return virtualized ? renderVirtualizedBody(direction) : renderBody(direction);
     };
 });
 

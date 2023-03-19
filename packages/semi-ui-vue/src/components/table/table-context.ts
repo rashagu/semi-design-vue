@@ -7,6 +7,7 @@ import {
 import Provider from "./tableContext/Provider";
 import Consumer from "./tableContext/Consumer";
 import {VueJsxNode} from "../interface";
+import type { ContextValue } from '../configProvider/context';
 
 export interface TableContextProps {
     children?: VueJsxNode;
@@ -21,7 +22,8 @@ export interface TableContextProps {
     renderExpandIcon?: (record: Record<string, any>, isNested?: boolean, groupKey?: string | number) => VueJsxNode;
     renderSelection?: (record?: Record<string, any>, isHeader?: boolean) => VueJsxNode;
     getVirtualizedListRef?: GetVirtualizedListRef;
-    setBodyHasScrollbar?: (bodyHasScrollBar: boolean) => void
+    setBodyHasScrollbar?: (bodyHasScrollBar: boolean) => void;
+    direction?: ContextValue['direction']
 }
 
 const TableContext = {

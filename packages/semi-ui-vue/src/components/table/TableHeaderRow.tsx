@@ -10,7 +10,8 @@ import {
     isLastLeftFixed,
     isFixedLeft,
     isFixedRight,
-    sliceColumnsByLevel
+    sliceColumnsByLevel,
+    getRTLAlign
 } from '@douyinfe/semi-foundation/table/utils';
 import { TableComponents, OnHeaderRow, Fixed } from './interface';
 import {CSSProperties, defineComponent, h, reactive, useSlots, watch} from "vue";
@@ -99,7 +100,8 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
     return () => {
 
         const { components, row, prefixCls, onHeaderRow, index, style, columns } = props;
-        const { getCellWidths } = context.value;
+        const { getCellWidths, direction } = context.value;
+        const isRTL = direction === 'rtl';
         const slicedColumns = sliceColumnsByLevel(columns, index);
         const headWidths = getCellWidths?.(slicedColumns) || [];
 
@@ -115,10 +117,24 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
               typeof column.onHeaderCell === 'function' ? column.onHeaderCell(column, cellIndex, index) : {};
             let cellStyle = { ...customProps.style };
             if (column.align) {
-                cellStyle = { ...cellStyle, textAlign: column.align };
+                const textAlign = getRTLAlign(column.align, direction);
+                cellStyle = { ...cellStyle, textAlign };
                 customProps.className = classnames(customProps.className, column.className, {
-                    [`${prefixCls}-align-${column.align}`]: Boolean(column.align),
+                    [`${prefixCls}-align-${textAlign}`]: Boolean(textAlign),
                 });
+            }
+
+            let fixedLeft, fixedRight, fixedLeftLast, fixedRightFirst;
+            if (isRTL) {
+                fixedLeft = isFixedRight(column);
+                fixedRight = isFixedLeft(column);
+                fixedLeftLast = isFirstFixedRight(slicedColumns, column);
+                fixedRightFirst = isLastLeftFixed(slicedColumns, column);
+            } else {
+                fixedLeft = isFixedLeft(column);
+                fixedRight = isFixedRight(column);
+                fixedLeftLast = isLastLeftFixed(slicedColumns, column);
+                fixedRightFirst = isFirstFixedRight(slicedColumns, column);
             }
 
             customProps.className = classnames(
@@ -127,10 +143,10 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
               customProps.className,
               // `${prefixCls}-fixed-columns`,
               {
-                  [`${prefixCls}-cell-fixed-left`]: isFixedLeft(column),
-                  [`${prefixCls}-cell-fixed-left-last`]: isLastLeftFixed(slicedColumns, column),
-                  [`${prefixCls}-cell-fixed-right`]: isFixedRight(column),
-                  [`${prefixCls}-cell-fixed-right-first`]: isFirstFixedRight(slicedColumns, column),
+                  [`${prefixCls}-cell-fixed-left`]: fixedLeft,
+                  [`${prefixCls}-cell-fixed-left-last`]: fixedLeftLast,
+                  [`${prefixCls}-cell-fixed-right`]: fixedRight,
+                  [`${prefixCls}-cell-fixed-right-first`]: fixedRightFirst,
               }
             );
 
@@ -141,16 +157,18 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
                 );
                 if (indexOfSlicedColumns > -1) {
                     if (isFixedLeft(column)) {
+                        const xPositionKey = isRTL ? 'right' : 'left';
                         cellStyle = {
                             ...cellStyle,
                             position: 'sticky',
-                            left: arrayAdd(headWidths, 0, indexOfSlicedColumns) + 'px',
+                            [xPositionKey]: arrayAdd(headWidths, 0, indexOfSlicedColumns),
                         };
                     } else if (isFixedRight(column)) {
+                        const xPositionKey = isRTL ? 'left' : 'right';
                         cellStyle = {
                             ...cellStyle,
                             position: 'sticky',
-                            right: arrayAdd(headWidths, indexOfSlicedColumns + 1) + 'px',
+                            [xPositionKey]: arrayAdd(headWidths, indexOfSlicedColumns + 1),
                         };
                     }
                 }
@@ -169,6 +187,13 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
                 return null;
             }
 
+            if (cellStyle.left && typeof cellStyle.left === 'number'){
+                cellStyle.left = cellStyle.left + 'px'
+            }
+
+            if (cellStyle.right && typeof cellStyle.right === 'number'){
+                cellStyle.right = cellStyle.right + 'px'
+            }
             return (
               <HeaderCell
                 role="columnheader"

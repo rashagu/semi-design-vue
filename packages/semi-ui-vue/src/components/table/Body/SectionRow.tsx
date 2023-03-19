@@ -182,7 +182,6 @@ const SectionRow = defineComponent<SectionRowProps>((props, {}) => {
 
 
         return (
-          // @ts-ignore
           <BaseRow
             components={components}
             virtualized={virtualized}
