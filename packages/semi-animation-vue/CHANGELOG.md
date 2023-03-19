@@ -1,5 +1,11 @@
 # @kousum/semi-animation-vue
 
+## 0.2.8
+
+### Patch Changes
+
+- 6977d9d: semi 2.31.0
+
 ## 0.2.7
 
 ### Patch Changes
