@@ -213,7 +213,7 @@ export function getFragmentChildren(slots: SetupContext['slots']):VNode[] {
     const children = slots.default?.()
     if (children){
         // for Vitest
-        if (typeof children[0].type === 'symbol' && children[0].type.toString() === 'Symbol(Fragment)'){
+        if (typeof children[0].type === 'symbol' && isVNode(children[0])){
             return slots.default?.()?.[0]?.children as any || []
         }else{
             return slots.default?.() as any || []
