@@ -87,7 +87,7 @@ const Switch = defineComponent<SwitchProps>((props, {}) => {
     const slots = useSlots()
 
     const state = reactive<SwitchState>({
-        nativeControlChecked: false,
+        nativeControlChecked: props.defaultChecked || props.checked,
         nativeControlDisabled: false,
         focusVisible: false
     })
