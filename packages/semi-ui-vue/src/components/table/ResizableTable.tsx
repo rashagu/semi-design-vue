@@ -2,10 +2,10 @@ import { merge, get, find, noop } from 'lodash';
 import * as PropTypes from '../PropTypes';
 import { addClass, removeClass } from '@douyinfe/semi-foundation/utils/classnames';
 import { strings, numbers } from '@douyinfe/semi-foundation/table/constants';
-import { mergeColumns, assignColumnKeys, findColumn, withResizeWidth } from '@douyinfe/semi-foundation/table/utils';
+import { assignColumnKeys, findColumn, withResizeWidth } from '@douyinfe/semi-foundation/table/utils';
 
 import Table_ from './Table';
-import { cloneDeep } from './utils';
+import { cloneDeep, mergeColumns } from './utils';
 import getColumns from './getColumns';
 import ResizableHeaderCell from './ResizableHeaderCell';
 import {

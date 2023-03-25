@@ -164,14 +164,16 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
 
     const wrapTooltip = (node: VNode) => {
         const { text, tooltipHideDelay, tooltipShowDelay } = props;
+        const hideDelay = tooltipHideDelay ?? context.value.tooltipHideDelay;
+        const showDelay = tooltipShowDelay ?? context.value.tooltipShowDelay;
 
         return (
           <Tooltip
             content={text}
             position="right"
             trigger={'hover'}
-            mouseEnterDelay={tooltipShowDelay}
-            mouseLeaveDelay={tooltipHideDelay}
+            mouseEnterDelay={showDelay}
+            mouseLeaveDelay={hideDelay}
           >
               <>{node}</>
           </Tooltip>

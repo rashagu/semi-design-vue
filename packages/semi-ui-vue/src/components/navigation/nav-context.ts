@@ -1,7 +1,10 @@
-
-
 import { NavProps } from './index';
 import { Locale } from '../locale/interface';
+
+import type { DropdownProps } from '../dropdown';
+
+
+
 import Consumer from "./nav-context/Consumer";
 import Provider from "./nav-context/Provider";
 export interface NavContextType {
@@ -21,6 +24,9 @@ export interface NavContextType {
     subNavCloseDelay?: NavProps['subNavCloseDelay'];
     subNavOpenDelay?: NavProps['subNavOpenDelay'];
     canUpdateOpenKeys?: boolean;
+    getPopupContainer?: DropdownProps['getPopupContainer'];
+    tooltipShowDelay?: number;
+    tooltipHideDelay?: number
 }
 
 const NavContext = {
