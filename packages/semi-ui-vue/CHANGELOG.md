@@ -1,5 +1,22 @@
 # @kousum/semi-ui-vue
 
+## 0.3.0
+
+### Minor Changes
+
+- 961b387: semi 2.23.0 & fix clickOutsideHandler
+
+### Patch Changes
+
+- 86f16a5: semi 2.31.2
+- 4873974: 判断 children 组件是否是 Fragment
+- Updated dependencies [86f16a5]
+- Updated dependencies [961b387]
+- Updated dependencies [4873974]
+  - @kousum/semi-animation-vue@0.3.0
+  - @kousum/semi-icons-vue@0.3.0
+  - @kousum/semi-illustrations-vue@0.3.0
+
 ## 0.2.8
 
 ### Patch Changes
