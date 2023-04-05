@@ -1,11 +1,11 @@
 import * as PropTypes from '../PropTypes';
+import {vuePropsMake} from '../PropTypes';
 import cls from 'classnames';
-import { cssClasses } from '@douyinfe/semi-foundation/tabs/constants';
+import {cssClasses} from '@douyinfe/semi-foundation/tabs/constants';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
-import { PlainTab, TabContextValue, TabPaneProps } from './interface';
+import {PlainTab, TabPaneProps} from './interface';
 import CSSAnimation from "../_cssAnimation";
 import {defineComponent, h, useSlots} from "vue";
-import {vuePropsMake} from "../PropTypes";
 import {useTabsContext} from "./tabs-context/Consumer";
 
 
@@ -105,7 +105,7 @@ const TabPane = defineComponent<TabPaneProps>((props, {}) => {
                 children={
                     ({ animationClassName, animationEventsNeedBind }) => {
                         return <div
-                          class={`${cssClasses.TABS_PANE_MOTION_OVERLAY} ${animationClassName}`}
+                          class={cls(cssClasses.TABS_PANE_MOTION_OVERLAY, animationClassName)}
                           x-semi-prop="children"
                           {...animationEventsNeedBind}
                         >

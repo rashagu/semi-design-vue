@@ -4,6 +4,7 @@ import {strings, cssClasses} from '@douyinfe/semi-foundation/space/constants';
 import '@douyinfe/semi-foundation/space/space.scss';
 import {isString, isArray, isNumber} from 'lodash';
 import {flatten} from './utils';
+import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -88,7 +89,8 @@ const Index = defineComponent<SpaceProps>((props, {slots}) => {
       [`${prefixCls}-loose-vertical`]: spacingVerticalType === strings.SPACING_LOOSE,
     });
     const childrenNodes = slots.default?flatten(slots.default()):null;
-    return <div class={classNames} style={realStyle} x-semi-prop="children">
+    const dataAttributes = getDataAttr(props);
+    return <div {...dataAttributes} class={classNames} style={realStyle} x-semi-prop="children">
       {childrenNodes}
     </div>
   };

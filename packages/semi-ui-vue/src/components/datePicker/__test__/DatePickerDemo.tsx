@@ -46,6 +46,7 @@ const DatePickerDemo = defineComponent<ExampleProps>((props, {}) => {
       <MonthsGrid locale={Zh_CN['DatePicker']} ></MonthsGrid>
       {/*// @ts-ignore*/}
       <Month locale={Zh_CN['DatePicker']} ></Month>
+      {/*// @ts-ignore*/}
       <YearAndMonth locale={Zh_CN['DatePicker']} ></YearAndMonth>
       <Navigation></Navigation>
     </div>

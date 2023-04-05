@@ -1,4 +1,4 @@
-import {cssClasses, strings} from '@douyinfe/semi-foundation/modal/constants';
+import {cssClasses} from '@douyinfe/semi-foundation/modal/constants';
 import Button from '../button';
 import ModalFoundation, {ModalAdapter, ModalProps, ModalState} from '@douyinfe/semi-foundation/modal/modalFoundation';
 import ModalContent from './ModalContent';
@@ -6,6 +6,7 @@ import Portal from '../_portal';
 import LocaleConsumer from '../locale/localeConsumer';
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
+import {vuePropsMake} from '../PropTypes';
 import {noop} from 'lodash';
 import '@douyinfe/semi-foundation/modal/modal.scss';
 import {useBaseComponent} from '../_base/baseComponent';
@@ -26,11 +27,8 @@ import {
   ref,
   useSlots,
   VNode,
-  watch,
-  Fragment
+  watch
 } from "vue";
-import {vuePropsMake} from "../PropTypes";
-import {CascaderProps} from "../cascader";
 
 export const destroyFns: any[] = [];
 export type ConfirmType = 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
@@ -357,26 +355,26 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
       _haveRendered = true;
     }
     return (
-      <Portal style={wrapperStyle} getPopupContainer={getPopupContainer}>
-        <CSSAnimation
-          motion={props.motion}
-          animationState={visible?'enter':'leave'}
-          startClassName={visible?`${cssClasses.DIALOG}-content-animate-show`:`${cssClasses.DIALOG}-content-animate-hide`}
-          onAnimationEnd={()=>{
-            updateState();
-          }}
-          children={
-            ({ animationClassName, animationEventsNeedBind })=>{
-              return (
-                <CSSAnimation
-                  motion={props.motion} animationState={visible ? 'enter' : 'leave'}
-                  startClassName={visible ? `${cssClasses.DIALOG}-mask-animate-show` : `${cssClasses.DIALOG}-mask-animate-hide`}
-                  onAnimationEnd={() => {
-                    updateState();
-                  }}
-                  children={
-                    ({ animationClassName: maskAnimationClassName, animationEventsNeedBind: maskAnimationEventsNeedBind })=>{
-                      return shouldRender ? <ModalContent
+      <CSSAnimation
+        motion={props.motion}
+        animationState={visible?'enter':'leave'}
+        startClassName={visible?`${cssClasses.DIALOG}-content-animate-show`:`${cssClasses.DIALOG}-content-animate-hide`}
+        onAnimationEnd={()=>{
+          updateState();
+        }}
+        children={
+          ({ animationClassName, animationEventsNeedBind })=>{
+            return (
+              <CSSAnimation
+                motion={props.motion} animationState={visible ? 'enter' : 'leave'}
+                startClassName={visible ? `${cssClasses.DIALOG}-mask-animate-show` : `${cssClasses.DIALOG}-mask-animate-hide`}
+                onAnimationEnd={() => {
+                  updateState();
+                }}
+                children={
+                  ({ animationClassName: maskAnimationClassName, animationEventsNeedBind: maskAnimationEventsNeedBind })=>{
+                    return shouldRender ? <Portal style={wrapperStyle} getPopupContainer={getPopupContainer}>
+                      <ModalContent
                         {...restProps}
                         getContainerContext={getContainerContext}
                         contentExtraProps={animationEventsNeedBind}
@@ -393,19 +391,18 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
                         onClose={handleCancel}
                       >
                         {{default: slots.default}}
-                      </ModalContent>:null;
-                    }
+                      </ModalContent>
+                    </Portal>:null;
                   }
-                >
+                }
+              >
 
-                </CSSAnimation>
-              );
-            }
+              </CSSAnimation>
+            );
           }
-        >
-
-        </CSSAnimation>
-      </Portal>
+        }
+      >
+      </CSSAnimation>
     );
   };
 

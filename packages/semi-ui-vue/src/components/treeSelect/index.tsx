@@ -1,55 +1,55 @@
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
-import { isEqual, isString, isEmpty, noop, get, isFunction } from 'lodash';
+import {vuePropsMake} from '../PropTypes';
+import {get, isEmpty, isEqual, isFunction, isString, noop} from 'lodash';
 import TreeSelectFoundation, {
-    Size,
-    BasicTriggerRenderProps,
-    /* Corresponding props */
-    BasicTreeSelectProps,
-    /* Corresponding state */
     BasicTreeSelectInnerData,
+    BasicTreeSelectProps,
+    BasicTriggerRenderProps,
+    Size,
     TreeSelectAdapter
 } from '@douyinfe/semi-foundation/treeSelect/foundation';
 import {
-    convertDataToEntities,
-    flattenTreeData,
+    calcCheckedKeys,
+    calcDisabledKeys,
+    calcExpandedKeys,
     calcExpandedKeysForValues,
     calcMotionKeys,
+    convertDataToEntities,
     findKeysForValues,
-    calcCheckedKeys,
-    calcExpandedKeys,
+    flattenTreeData,
     getValueOrKey,
     normalizeKeyList,
-    calcDisabledKeys,
     normalizeValue,
     updateKeys,
 } from '@douyinfe/semi-foundation/tree/treeUtil';
-import { cssClasses, strings } from '@douyinfe/semi-foundation/treeSelect/constants';
-import { numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/constants';
-import { FixedSizeList as VirtualList } from '@kousum/vue3-window';
+import {cssClasses, strings} from '@douyinfe/semi-foundation/treeSelect/constants';
+import {numbers as popoverNumbers} from '@douyinfe/semi-foundation/popover/constants';
+import {FixedSizeList as VirtualList} from '@kousum/vue3-window';
 import '@douyinfe/semi-foundation/tree/tree.scss';
 import '@douyinfe/semi-foundation/treeSelect/treeSelect.scss';
 import {getProps, useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import TagGroup from '../tag/group';
-import Tag, { TagProps } from '../tag/index';
-import Input, { InputProps } from '../input/index';
+import Tag, {TagProps} from '../tag/index';
+import Input, {InputProps} from '../input/index';
 import AutoSizer from '../tree/autoSizer';
 import TreeContext from '../tree/treeContext';
 import TreeNode from '../tree/treeNode';
 import NodeList from '../tree/nodeList';
-import { cloneDeep } from '../tree/treeUtil';
+import {cloneDeep} from '../tree/treeUtil';
 import LocaleConsumer from '../locale/localeConsumer';
-import { Locale } from '../locale/interface';
+import {Locale} from '../locale/interface';
 import Trigger from '../trigger';
 import TagInput from '../tagInput';
-import { isSemiIcon } from '../_utils';
-import type { OptionProps, TreeProps, TreeState, FlattenNode, TreeNodeData, TreeNodeProps } from '../tree/interface';
-import { Motion } from '../_base/base';
-import { IconChevronDown, IconClear, IconSearch } from '@kousum/semi-icons-vue';
-import CheckboxGroup, {CheckboxGroupProps} from '../checkbox/checkboxGroup';
+import {isSemiIcon} from '../_utils';
+import type {FlattenNode, TreeNodeData, TreeNodeProps, TreeProps, TreeState} from '../tree/interface';
+import {Motion} from '../_base/base';
+import {IconChevronDown, IconClear, IconSearch} from '@kousum/semi-icons-vue';
+import CheckboxGroup from '../checkbox/checkboxGroup';
 import {
     CSSProperties,
     defineComponent,
+    Fragment,
     h,
     nextTick,
     onMounted,
@@ -57,13 +57,12 @@ import {
     reactive,
     ref,
     useSlots,
-    watch,
-    Fragment, VNode
+    VNode,
+    watch
 } from "vue";
 import {AriaAttributes} from '../AriaAttributes'
 import {VueHTMLAttributes, VueJsxNode, VueJsxNodeSingle} from "../interface";
-import {vuePropsMake} from "../PropTypes";
-import Popover, { PopoverProps } from '../popover/index';
+import Popover, {PopoverProps} from '../popover/index';
 import VirtualRow from '../select/virtualRow';
 
 export type ListItemKeySelector<T = any> = (index: number, data: T) => string | number;
@@ -360,7 +359,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
           > = {
             registerClickOutsideHandler: cb => {
                 const clickOutsideHandler_ = (e: Event) => {
-                    const optionInstance = optionsRef && optionsRef.value?.$el;
+                    const optionInstance = optionsRef && optionsRef.value.getRef?.().vnode.el;
                     const triggerDom = triggerRef && triggerRef.value;
                     // eslint-disable-next-line
                     const optionsDom = optionInstance;
@@ -1101,6 +1100,8 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             componentName={'TreeSelect'}
             triggerRender={triggerRender}
             componentProps={{ ...props }}
+            onSearch={search}
+            onRemove={removeTag}
           />
         ) : (
           [

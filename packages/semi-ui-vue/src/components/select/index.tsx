@@ -1,23 +1,26 @@
 import {
-  defineComponent,
-  ref,
-  h,
-  Fragment,
-  VNode,
   CSSProperties,
-  reactive,
+  defineComponent,
+  Fragment,
+  getCurrentInstance,
+  h,
+  nextTick,
   onMounted,
   onUnmounted,
+  reactive,
+  ref,
+  useSlots,
+  VNode,
   watch,
-  getCurrentInstance, Component, ComponentPublicInstance, nextTick, useSlots
 } from 'vue'
 import * as PropTypes from '../PropTypes'
+import {vuePropsMake} from '../PropTypes'
 import {FixedSizeList as List} from '@kousum/vue3-window'
 import cls from 'classnames';
 import SelectFoundation, {SelectAdapter} from '@douyinfe/semi-foundation/select/foundation';
-import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/select/constants';
+import {cssClasses, numbers} from '@douyinfe/semi-foundation/select/constants';
 import {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
-import {isEqual, isString, noop, get, isNumber, isFunction} from 'lodash';
+import {get, isEqual, isFunction, isNumber, isString, noop} from 'lodash';
 import Tag from '../tag';
 import TagGroup from '../tag/group';
 import OverflowList from '../overflowList/index';
@@ -25,31 +28,30 @@ import Space from '../space/index';
 import Text from '../typography/text';
 import {LocaleConsumerFunc} from '../locale/localeConsumer';
 import Popover from '../popover/index';
-import type { PopoverProps } from '../popover';
+import type {PopoverProps} from '../popover';
 import {numbers as popoverNumbers} from '@douyinfe/semi-foundation/popover/constants';
 import Event from '@douyinfe/semi-foundation/utils/Event';
 import {getOptionsFromGroup} from './utils';
 import VirtualRow from './virtualRow';
 
-import Input, {InputProps, InputState} from '../input';
-import Option from './option';
+import Input, {InputProps} from '../input';
 import type {OptionProps} from './option';
+import Option from './option';
 import OptionGroup from './optionGroup';
 import Spin from '../spin';
 import Trigger from '../trigger';
 import {IconChevronDown, IconClear} from '@kousum/semi-icons-vue';
-import {isSemiIcon, getFocusableElements, getActiveElement, getChildrenVNode} from '../_utils';
+import {getActiveElement, getChildrenVNode, getFocusableElements, isSemiIcon} from '../_utils';
 import {Subtract} from 'utility-types';
 
 import warning from '@douyinfe/semi-foundation/utils/warning';
-import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
+import {getUuidShort} from '@douyinfe/semi-foundation/utils/uuid';
 
 import '@douyinfe/semi-foundation/select/select.scss';
 import {Locale} from '../locale/interface';
 import type {Position} from '@douyinfe/semi-foundation/tooltip/foundation';
 import type {TooltipProps} from '../tooltip';
 import {AriaAttributes} from "../AriaAttributes";
-import {vuePropsMake} from "../PropTypes";
 import {VueJsxNode} from "../interface";
 
 export type {OptionGroupProps} from './optionGroup';
@@ -82,6 +84,26 @@ export interface optionRenderProps {
 
   [x: string]: any;
 }
+
+export interface SelectedItemProps {
+  value: OptionProps['value'];
+  label: OptionProps['label'];
+  _show?: boolean;
+  _selected: boolean;
+  _scrollIndex?: number
+}
+
+export interface TriggerRenderProps {
+  value: SelectedItemProps[];
+  inputValue: string;
+  onSearch: (inputValue: string) => void;
+  onClear: () => void;
+  onRemove: (option: OptionProps) => void;
+  disabled: boolean;
+  placeholder: string;
+  componentProps: Record<string, any>
+}
+
 
 export interface selectMethod {
   clearInput?: () => void;
@@ -169,7 +191,7 @@ export type SelectProps = {
   onDeselect?: (value: SelectProps['value'], option: Record<string, any>) => void;
   onSelect?: (value: SelectProps['value'], option: Record<string, any>) => void;
   allowCreate?: boolean;
-  triggerRender?: (props?: any) => VNode;
+  triggerRender?: (props?: TriggerRenderProps) => VNode;
   onClear?: () => void;
   virtualize?: virtualListProps;
   onFocus?: (e: FocusEvent) => void;
@@ -442,8 +464,8 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       getMaxLimit: () => props.max,
       registerClickOutsideHandler: (cb: (e: MouseEvent) => void) => {
         const clickOutsideHandler_: (e: MouseEvent) => void = e => {
-          // @ts-ignore TODO 比较重要的不同点 关于获取组建dom的
-          const optionInstance = optionsRef.value && optionsRef.value?.content?.el;
+          // @ts-ignore TODO 比较重要的不同点 关于获取组建dom的 使用expose 得到的结果就不一样了
+          const optionInstance = optionsRef.value && optionsRef.value.content?.el;
           const triggerDom = (triggerRef.value) as Element;
           // eslint-disable-next-line react/no-find-dom-node
           const optionsDom = optionInstance;
@@ -1367,6 +1389,8 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
         value={Array.from(selections.values())}
         inputValue={inputValue}
         onChange={handleInputChange}
+        onSearch={handleInputChange}
+        onRemove={(item) => foundation.removeTag(item)}
         onClear={onClear}
         disabled={disabled}
         triggerRender={triggerRender}

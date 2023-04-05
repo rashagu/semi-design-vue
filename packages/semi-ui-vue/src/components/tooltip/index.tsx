@@ -740,9 +740,13 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
     return state.id;
   };
 
+  const currentInstance = getCurrentInstance()
   expose({
     getPopupId,
     focusTrigger,
+    getRef(){
+      return currentInstance
+    }
   });
   return () => {
     // 这里取的话，值可能会被缓存或者可能不是最新的

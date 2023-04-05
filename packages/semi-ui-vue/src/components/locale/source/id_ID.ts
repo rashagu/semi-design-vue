@@ -5,8 +5,8 @@ const local: Locale = {
     code: 'id-ID',
     dateFnsLocale: id,
     Pagination: {
-        pageSize: '${pageSize} item / halaman',
-        total: '${total} halaman',
+        pageSize: 'Item per halaman: ${pageSize}',
+        total: 'Total halaman: ${total}',
         jumpTo: 'Langsung ke',
         page: ' halaman',
     },
@@ -33,6 +33,7 @@ const local: Locale = {
             dateTime: 'Pilih tanggal dan waktu',
             dateRange: ['Tanggal mulai', 'Tanggal akhir'],
             dateTimeRange: ['Tanggal mulai', 'Tanggal akhir'],
+            monthRange: ['Bulan pertama', 'Bulan terakhir'],
         },
         footer: {
             confirm: 'Konfirmasi',
@@ -146,8 +147,8 @@ const local: Locale = {
         clear: 'Bersihkan',
         selectAll: 'Pilih Semua',
         clearSelectAll: 'Nyahpilih Semua',
-        total: 'Total ${total} proyek',
-        selected: '${total} item dipilih',
+        total: 'Total item: ${total}',
+        selected: 'Item dipilih: ${total}',
     },
     Form: {
         optional: '(opsional)',

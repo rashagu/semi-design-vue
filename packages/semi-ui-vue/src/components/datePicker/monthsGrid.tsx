@@ -1,20 +1,9 @@
-import {
-  defineComponent,
-  ref,
-  h,
-  Fragment,
-  reactive,
-  onMounted,
-  watch,
-  nextTick,
-  CSSProperties,
-  VNode,
-  Ref,
-} from 'vue';
+import {CSSProperties, defineComponent, h, nextTick, onMounted, reactive, Ref, watch,} from 'vue';
 
 import classnames from 'classnames';
 import * as PropTypes from '../PropTypes';
-import { format as formatFn, addMonths, isSameDay } from 'date-fns';
+import {vuePropsMake} from '../PropTypes';
+import {format as formatFn, isSameDay} from 'date-fns';
 
 import MonthsGridFoundation, {
   MonthInfo,
@@ -25,23 +14,20 @@ import MonthsGridFoundation, {
   MonthsGridRangeAdapter,
   PanelType,
 } from '@douyinfe/semi-foundation/datePicker/monthsGridFoundation';
-import { strings, numbers, cssClasses } from '@douyinfe/semi-foundation/datePicker/constants';
-import { compatibleParse } from '@douyinfe/semi-foundation/datePicker/_utils/parser';
-import { noop, stubFalse } from 'lodash';
-import { BaseProps, useBaseComponent } from '../_base/baseComponent';
+import {cssClasses, numbers, strings} from '@douyinfe/semi-foundation/datePicker/constants';
+import {compatibleParse} from '@douyinfe/semi-foundation/datePicker/_utils/parser';
+import {noop, stubFalse} from 'lodash';
+import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import Navigation from './navigation';
 import Month from './month';
 import Combobox from '../timePicker/Combobox';
 import YearAndMonth from './yearAndMonth';
-import { IconClock, IconCalendar } from '@kousum/semi-icons-vue';
-import { getDefaultFormatTokenByType } from '@douyinfe/semi-foundation/datePicker/_utils/getDefaultFormatToken';
+import {IconCalendar, IconClock} from '@kousum/semi-icons-vue';
+import {getDefaultFormatTokenByType} from '@douyinfe/semi-foundation/datePicker/_utils/getDefaultFormatToken';
 import getDefaultPickerDate from '@douyinfe/semi-foundation/datePicker/_utils/getDefaultPickerDate';
-import { DayStatusType, ValueType } from '@douyinfe/semi-foundation/datePicker/foundation';
-import { WeekStartNumber } from '@douyinfe/semi-foundation/datePicker/_utils/getMonthTable';
-import { VueJsxNode } from '../interface';
-import type { ScrollItemProps } from '../scrollList';
-import { vuePropsMake } from '../PropTypes';
-import month from './month';
+import {DayStatusType} from '@douyinfe/semi-foundation/datePicker/foundation';
+import {VueJsxNode} from '../interface';
+import type {ScrollItemProps} from '../scrollList';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -179,7 +165,9 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, { slots }) => {
       ...rangeAdapter(),
       updateMonthOnLeft: (v) => (state.monthLeft = v),
       updateMonthOnRight: (v) => (state.monthRight = v),
-      notifySelectedChange: (value, options) => props.onChange(value, options),
+      notifySelectedChange: (value, options) => {
+        props.onChange(value, options)
+      },
       notifyMaxLimit: (v) => props.onMaxSelect(v),
       notifyPanelChange: (date, dateString) => props.onPanelChange(date, dateString),
       setRangeInputFocus: (rangeInputFocus) => props.setRangeInputFocus(rangeInputFocus),
@@ -556,9 +544,9 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, { slots }) => {
         ref={(current) => cacheRefCurrent(`yam-${panelType}`, current)}
         locale={locale}
         localeCode={localeCode}
-        currentYear={y}
-        currentMonth={m}
-        onSelect={(item) => foundation.toYearMonth(panelType, new Date(item.currentYear, item.currentMonth - 1))}
+        currentYear={{ left: y, right: 0 }}
+        currentMonth={{ left: m, right: 0 }}
+        onSelect={(item) => foundation.toYearMonth(panelType, new Date(item.currentYear.left, item.currentMonth.left - 1))}
         onBackToMain={() => {
           foundation.showDatePanel(panelType);
           const wrapCurrent = adapter().getCache(`wrap-${panelType}`);

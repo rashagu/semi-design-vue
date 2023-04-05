@@ -5,8 +5,8 @@ const local: Locale = {
     code: 'zh-TW',
     dateFnsLocale: zhTW, // locale code to dateFns locale
     Pagination: {
-        pageSize: '${pageSize} 條/頁',
-        total: '共 ${total} 頁',
+        pageSize: '每頁項目數：${pageSize}',
+        total: '總頁數：${total}',
         jumpTo: '跳至',
         page: '頁',
     },
@@ -33,6 +33,7 @@ const local: Locale = {
             dateTime: '請選擇日期及時間',
             dateRange: ['開始日期', '結束日期'],
             dateTimeRange: ['開始日期', '結束日期'],
+            monthRange: ['開始月份', '結束月份'],
         },
         footer: {
             confirm: '確定',
@@ -147,8 +148,8 @@ const local: Locale = {
         clear: '清空',
         selectAll: '全選',
         clearSelectAll: '取消全選',
-        total: '共 ${total} 項',
-        selected: '已選 ${total} 項',
+        total: '總項目數：${total}',
+        selected: '選取的項目數：${total}',
     },
     Form: {
         optional: '（可選）',

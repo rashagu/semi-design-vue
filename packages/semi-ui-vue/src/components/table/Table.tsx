@@ -20,7 +20,6 @@ import {
 import {
   mergeQueries,
   equalWith,
-  mergeColumns,
   isAnyFixedRight,
   assignColumnKeys,
   flattenColumns,
@@ -49,7 +48,7 @@ import ColumnSorter from './ColumnSorter';
 import ExpandedIcon from './CustomExpandIcon';
 import HeadTable, { HeadTableProps } from './HeadTable';
 import BodyTable, { BodyProps } from './Body';
-import { measureScrollbar, logger, cloneDeep, mergeComponents } from './utils';
+import { measureScrollbar, logger, cloneDeep, mergeComponents, mergeColumns } from './utils';
 import {
   ColumnProps,
   TablePaginationProps,
@@ -66,7 +65,6 @@ import {
   Data,
 } from './interface';
 import { ArrayElement } from '../_base/base';
-import ConfigContext from '../configProvider/context';
 
 import { VueJsxNode } from '../interface';
 import {

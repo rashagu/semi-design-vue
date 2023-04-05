@@ -32,6 +32,7 @@ export { default as Cascader } from './cascader';
 export type { Value as CascaderValueType } from './cascader';
 export { default as Checkbox, CheckboxGroup } from './checkbox';
 export { default as DatePicker } from './datePicker';
+export type { BaseDatePicker } from './datePicker';
 export { default as Empty } from './empty';
 export { default as iconButton  } from './iconButton';
 export { default as Icons  } from './icons';

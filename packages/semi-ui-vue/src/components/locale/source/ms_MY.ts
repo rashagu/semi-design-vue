@@ -5,8 +5,8 @@ const local: Locale = {
     code: 'ms-MY',
     dateFnsLocale: ms,
     Pagination: {
-        pageSize: ' ${pageSize} items / halaman',
-        total: '${total} halaman',
+        pageSize: 'Item setiap halaman: ${pageSize}',
+        total: 'Jumlah halaman: ${total}',
         jumpTo: 'Lompat ke',
         page: ' halaman',
     },
@@ -33,6 +33,7 @@ const local: Locale = {
             dateTime: 'Pilih tarikh dan masa',
             dateRange: ['Tarikh mula', 'Tarikh akhir'],
             dateTimeRange: ['Tarikh mula', 'Tarikh akhir'],
+            monthRange: ['Bulan mula', 'Bulan akhir'],
         },
         footer: {
             confirm: 'Sahkan',
@@ -146,8 +147,8 @@ const local: Locale = {
         clear: 'Kosongkan',
         selectAll: 'Pilih Semua',
         clearSelectAll: 'Nyahpilih semua',
-        total: 'Jumlah ${total} item',
-        selected: '${total} projek dipilih',
+        total: 'Jumlah item: ${total}',
+        selected: 'Item dipilih: ${total}',
     },
     Form: {
         optional: '(pilihan)',

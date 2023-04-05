@@ -1,10 +1,11 @@
-import {defineComponent, ref, h, Fragment, useSlots, watch} from 'vue';
+import {defineComponent, h, useSlots} from 'vue';
 
-import { numbers, strings } from '@douyinfe/semi-foundation/datePicker/constants';
-import DatePicker, { DatePickerProps, vuePropsTypeDatePickerProps } from './datePicker';
+import {numbers, strings} from '@douyinfe/semi-foundation/datePicker/constants';
+import DatePicker, {DatePickerProps, vuePropsTypeDatePickerProps} from './datePicker';
 import LocaleConsumer from '../locale/localeConsumer';
-import type { Locale } from '../locale/interface';
+import type {Locale} from '../locale/interface';
 import Context from '../configProvider/context';
+
 export type {
   BaseValueType,
   DayStatusType,
@@ -26,6 +27,7 @@ export type { MonthsGridProps } from './monthsGrid';
 export type { QuickControlProps } from './quickControl';
 export type { YearAndMonthProps } from './yearAndMonth';
 export type { InsetInputProps } from '@douyinfe/semi-foundation/datePicker/inputFoundation';
+export type { DatePicker as BaseDatePicker };
 
 export const vuePropsType = {
   ...vuePropsTypeDatePickerProps,

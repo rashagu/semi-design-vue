@@ -5,8 +5,8 @@ const local: Locale = {
     code: 'ko-KR',
     dateFnsLocale: ko,
     Pagination: {
-        pageSize: '${pageSize} 기사 / 페이지',
-        total: '${total} 페이지',
+        pageSize: '페이지당 항목: ${pageSize}',
+        total: '총 페이지: ${total}',
         jumpTo: '이동',
         page: '페이지',
     },
@@ -34,6 +34,7 @@ const local: Locale = {
             dateTime: '날짜 및 시간 선택',
             dateRange: ['시작 날짜', '종료일'],
             dateTimeRange: ['시작 날짜', '종료일'],
+            monthRange: ['시작 월', '종료 월'],
         },
         footer: {
             confirm: '확인',
@@ -147,8 +148,8 @@ const local: Locale = {
         clear: '비우기',
         selectAll: '모두 선택',
         clearSelectAll: '모두 선택 취소',
-        total: '총 {total} 개 항목',
-        selected: '선택된 {Total} 개 항목',
+        total: '총 항목: ${total}',
+        selected: '선택한 항목: ${total}',
     },
     Form: {
         optional: '(선택 과목)',

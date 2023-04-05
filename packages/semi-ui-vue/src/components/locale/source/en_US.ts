@@ -5,8 +5,8 @@ const local: Locale = {
     code: 'en-US',
     dateFnsLocale: enUS,
     Pagination: {
-        pageSize: '${pageSize} items / page',
-        total: '${total} pages',
+        pageSize: 'Items per page: ${pageSize}',
+        total: 'Total pages: ${total}',
         jumpTo: 'Jump to',
         page: ' page',
     },
@@ -33,6 +33,7 @@ const local: Locale = {
             dateTime: 'Select date and time',
             dateRange: ['Start date', 'End date'],
             dateTimeRange: ['Start date', 'End date'],
+            monthRange: ['Start month', 'End month'],
         },
         footer: {
             confirm: 'Confirm',
@@ -146,8 +147,8 @@ const local: Locale = {
         clear: 'Clear',
         selectAll: 'Select all',
         clearSelectAll: 'Unselect all',
-        total: 'Total ${total} items',
-        selected: '${total} items selected',
+        total: 'Total items: ${total}',
+        selected: 'Items selected: ${total}',
     },
     Form: {
         optional: '(optional)',

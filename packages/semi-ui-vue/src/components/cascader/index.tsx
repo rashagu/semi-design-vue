@@ -305,7 +305,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
         const clickOutsideHandler_ = (e: Event) => {
           const optionInstance = optionsRef.value;
           const triggerDom = triggerRef.value;
-          const optionsDom = optionInstance.content.el;
+          const optionsDom = optionInstance?.getRef?.().vnode.el;
           const target = e.target as Element;
           if (
             optionsDom &&
@@ -526,6 +526,12 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
   const handleTagRemove = (e: any, tagValuePath: Array<string | number>) => {
     foundation.handleTagRemove(e, tagValuePath as string[]);
   };
+
+  const handleRemoveByKey = (key) => {
+    const { keyEntities } = state;
+    handleTagRemove(null, keyEntities[key].valuePath);
+  }
+
 
   const renderTagItem = (value: string | Array<string>, idx: number, type: string) => {
     const { keyEntities, disabledKeys } = state;
@@ -853,6 +859,8 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
         triggerRender={triggerRender}
         componentName={'Cascader'}
         componentProps={{ ...props }}
+        onSearch={handleInputChange}
+        onRemove={handleRemoveByKey}
       />
     );
   };

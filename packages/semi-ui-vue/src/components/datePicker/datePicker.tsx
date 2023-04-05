@@ -1,30 +1,38 @@
-import {defineComponent, ref, h, Fragment, useSlots, VNode, reactive, watch, onMounted, onUnmounted} from 'vue'
+import {defineComponent, h, nextTick, onMounted, onUnmounted, reactive, ref, useSlots, watch} from 'vue'
 import classnames from 'classnames';
-import {noop, stubFalse, isDate, get, isFunction, isEqual} from 'lodash';
+import {get, isDate, isEqual, isFunction, noop, stubFalse} from 'lodash';
+import type {
+  DatePickerAdapter,
+  DatePickerFoundationProps,
+  DatePickerFoundationState,
+  DayStatusType,
+  PresetType,
+  RangeType,
+  Type
+} from '@douyinfe/semi-foundation/datePicker/foundation';
 import DatePickerFoundation from '@douyinfe/semi-foundation/datePicker/foundation';
-import type { DatePickerAdapter, DatePickerFoundationProps, DatePickerFoundationState, DayStatusType, PresetType, Type, RangeType } from '@douyinfe/semi-foundation/datePicker/foundation';
 
-import { cssClasses, strings, numbers } from '@douyinfe/semi-foundation/datePicker/constants';
-import { strings as popoverStrings, numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/constants';
+import {cssClasses, numbers, strings} from '@douyinfe/semi-foundation/datePicker/constants';
+import {numbers as popoverNumbers} from '@douyinfe/semi-foundation/popover/constants';
 import {useBaseComponent} from '../_base/baseComponent';
-import Popover, { PopoverProps } from '../popover/index';
+import Popover, {PopoverProps} from '../popover/index';
+import type {DateInputProps} from './dateInput';
 import DateInput from './dateInput';
-import type { DateInputProps }from './dateInput';
+import type {MonthsGridProps} from './monthsGrid';
 import MonthsGrid from './monthsGrid';
-import type { MonthsGridProps } from './monthsGrid';
 import QuickControl from './quickControl';
 import Footer from './footer';
 import Trigger from '../trigger';
+import type {YearAndMonthProps} from './yearAndMonth';
 import YearAndMonth from './yearAndMonth';
-import type { YearAndMonthProps } from './yearAndMonth';
 import '@douyinfe/semi-foundation/datePicker/datePicker.scss';
-import { Locale } from '../locale/interface';
-import type { TimePickerProps } from '../timePicker';
-import type { ScrollItemProps } from '../scrollList';
-import type { InsetInputValue, InsetInputChangeProps } from '@douyinfe/semi-foundation/datePicker/inputFoundation';
+import {Locale} from '../locale/interface';
+import type {TimePickerProps} from '../timePicker';
+import type {ScrollItemProps} from '../scrollList';
+import type {InsetInputChangeProps, InsetInputValue} from '@douyinfe/semi-foundation/datePicker/inputFoundation';
 import type {AriaAttributes} from "../AriaAttributes";
 import * as PropTypes from '../PropTypes'
-import {vuePropsMake} from "../PropTypes";
+import {vuePropsMake} from '../PropTypes'
 import {VueJsxNode} from "../interface";
 import {useConfigContext} from "../configProvider/context/Consumer";
 
@@ -45,10 +53,21 @@ export interface DatePickerProps extends DatePickerFoundationProps {
   renderDate?: (dayNumber?: number, fullDate?: string) => VueJsxNode;
   renderFullDate?: (dayNumber?: number, fullDate?: string, dayStatus?: DayStatusType) => VueJsxNode;
   triggerRender?: (props: DatePickerProps) => VueJsxNode;
+  /**
+   * There are multiple input boxes when selecting a range, and the input boxes will be out of focus multiple times.
+   *
+   * Use `onOpenChange` or `onClickOutSide` instead
+   */
   onBlur?: any;
   onClear?: any;
+  /**
+   * There are multiple input boxes when selecting a range, and the input boxes will be focused multiple times.
+   *
+   * Use `onOpenChange` or `triggerRender` instead
+   */
   onFocus?: (e: MouseEvent, rangeType: RangeType) => void;
   onPresetClick?: (item: PresetType, e: MouseEvent) => void;
+  onClickOutSide?: () => void;
   locale?: Locale['DatePicker'];
   dateFnsLocale?: Locale['dateFnsLocale'];
   yearAndMonthOpts?: ScrollItemProps<any>
@@ -141,7 +160,8 @@ const propTypes = {
   clearIcon: PropTypes.node,
   presetPosition: PropTypes.string,
   dropdownMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
-  id: PropTypes.string
+  id: PropTypes.string,
+  onClickOutSide: PropTypes.func,
 };
 
 const defaultProps = {
@@ -180,6 +200,7 @@ const defaultProps = {
   syncSwitchMonth: false,
   rangeSeparator: strings.DEFAULT_SEPARATOR_RANGE,
   insetInput: false,
+  onClickOutSide: noop,
 };
 export const vuePropsTypeDatePickerProps = vuePropsMake(propTypes, defaultProps)
 
@@ -204,6 +225,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   const triggerElRef = ref();
   const panelRef = ref();
   const monthGrid = ref();
+  const inputRef = ref();
   const rangeInputStartRef = ref();
   const rangeInputEndRef =ref();
   // @ts-ignore ignore readonly
@@ -214,33 +236,36 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
 
   const {adapter: adapterInject, isControlled} = useBaseComponent<DatePickerProps>(props, state)
 
-  const foundation = new DatePickerFoundation(adapter());
-
-  function adapter(): DatePickerAdapter {
+  function adapter_(): DatePickerAdapter {
     return {
       ...adapterInject<DatePickerProps, DatePickerState>(),
-      togglePanel: panelShow => {
+      togglePanel: (panelShow, cb) => {
         state.panelShow = panelShow
         if (!panelShow) {
           focusRecordsRef.value.rangeEnd = false;
           focusRecordsRef.value.rangeStart = false;
         }
+        nextTick(cb)
       },
       registerClickOutSide: () => {
         if (clickOutSideHandler) {
-          adapter().unregisterClickOutSide();
+          adapter.unregisterClickOutSide();
           clickOutSideHandler = null;
         }
         clickOutSideHandler = e => {
-          if (adapter().needConfirm()) {
-            return;
-          }
           const triggerEl = triggerElRef.value;
           const panelEl = panelRef.value;
           const isInTrigger = triggerEl && triggerEl.contains(e.target as Node);
           const isInPanel = panelEl && panelEl.contains(e.target as Node);
-          if (!isInTrigger && !isInPanel && _mounted) {
-            foundation.closePanel(e);
+          const clickOutSide = !isInTrigger && !isInPanel && _mounted;
+          if (adapter.needConfirm()) {
+            clickOutSide && props.onClickOutSide();
+            return;
+          } else {
+            if (clickOutSide) {
+              props.onClickOutSide();
+              foundation.closePanel(e);
+            }
           }
         };
         document.addEventListener('mousedown', clickOutSideHandler);
@@ -278,7 +303,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       },
       needConfirm: () =>
         ['dateTime', 'dateTimeRange'].includes(props.type) && props.needConfirm === true,
-      typeIsYearOrMonth: () => ['month', 'year'].includes(props.type),
+      typeIsYearOrMonth: () => ['month', 'year', 'monthRange'].includes(props.type),
       // setMotionEnd: motionEnd => state.motionEnd = motionEnd,
       setRangeInputFocus: rangeInputFocus => {
         const { preventScroll } = props;
@@ -352,13 +377,37 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
             break;
         }
       },
+
+      setInputFocus: () => {
+        const { preventScroll } = props;
+        const inputNode = inputRef.value;
+        inputNode && inputNode.focus({ preventScroll });
+      },
+      setInputBlur: () => {
+        const inputNode = inputRef.value;
+        inputNode && inputNode.blur();
+      },
+      setRangeInputBlur: () => {
+        const { rangeInputFocus } = state;
+        if (rangeInputFocus === 'rangeStart') {
+          const inputStartNode = rangeInputStartRef.value;
+          inputStartNode && inputStartNode.blur();
+        } else if (rangeInputFocus === 'rangeEnd') {
+          const inputEndNode = rangeInputEndRef.value;
+          inputEndNode && inputEndNode.blur();
+        }
+        adapter.setRangeInputFocus(false);
+      },
       setTriggerDisabled: (disabled: boolean) => {
         state.triggerDisabled = disabled
       }
     };
   }
+  const adapter = adapter_()
+  const foundation = new DatePickerFoundation(adapter);
 
-  adapter().setCache('cachedSelectedValue', null);
+
+  adapter.setCache('cachedSelectedValue', null);
 
   function isRangeType(type: Type, triggerRender: DatePickerProps['triggerRender']) {
     return /range/i.test(type) && !isFunction(triggerRender);
@@ -463,7 +512,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
         defaultValue={defaultValue}
         defaultPickerValue={defaultPickerValue}
         timePickerOpts={timePickerOpts}
-        isControlledComponent={!adapter().needConfirm() && isControlled('value')}
+        isControlledComponent={!adapter.needConfirm() && isControlled('value')}
         onChange={handleSelectedChange}
         renderDate={renderDate}
         renderFullDate={renderFullDate}
@@ -667,7 +716,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   const handleCancel = (e: MouseEvent) => foundation.handleCancel();
 
   const renderFooter = (locale: Locale['DatePicker'], localeCode: string) => {
-    if (adapter().needConfirm()) {
+    if (adapter.needConfirm()) {
       return (
         <Footer
           {...props}
@@ -683,26 +732,27 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   };
 
   const renderPanel = (locale: Locale['DatePicker'], localeCode: string, dateFnsLocale: Locale['dateFnsLocale']) => {
-    const { dropdownClassName, dropdownStyle, density, topSlot, bottomSlot, presetPosition } = props;
+    const { dropdownClassName, dropdownStyle, density, topSlot, bottomSlot, presetPosition, type } = props;
     const wrapCls = classnames(
       cssClasses.PREFIX,
       {
-        [cssClasses.PANEL_YAM]: adapter().typeIsYearOrMonth(),
+        [cssClasses.PANEL_YAM]: adapter.typeIsYearOrMonth(),
         [`${cssClasses.PREFIX}-compact`]: density === 'compact',
       },
       dropdownClassName
     );
 
     return (
-      <div ref={panelRef} class={wrapCls} style={dropdownStyle}>
+      <div ref={panelRef} class={wrapCls} style={dropdownStyle} x-type={type}>
         {topSlot && <div class={`${cssClasses.PREFIX}-topSlot`} x-semi-prop="topSlot">
           {topSlot}
         </div>}
-        {presetPosition === "top" && renderQuickControls()}
-        {adapter().typeIsYearOrMonth() ?
+        {/* todo: monthRange does not support presetPosition temporarily */}
+        {presetPosition === "top" && type !== 'monthRange' && renderQuickControls()}
+        {adapter.typeIsYearOrMonth() ?
           renderYearMonthPanel(locale, localeCode) :
           renderMonthGrid(locale, localeCode, dateFnsLocale)}
-        {presetPosition === "bottom" && renderQuickControls()}
+        {presetPosition === "bottom" && type !== 'monthRange' && renderQuickControls()}
         {bottomSlot && <div class={`${cssClasses.PREFIX}-bottomSlot`} x-semi-prop="bottomSlot">
           {bottomSlot}
         </div>}
@@ -712,15 +762,23 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   };
 
   const renderYearMonthPanel = (locale: Locale['DatePicker'], localeCode: string) => {
-    const { density, presetPosition, yearAndMonthOpts } = props;
+    const { density, presetPosition, yearAndMonthOpts, type } = props;
 
     const date = state.value[0];
-    let year = 0;
-    let month = 0;
+    const year = { left: 0, right: 0 };
+    const month = { left: 0, right: 0 };
 
     if (isDate(date)) {
-      year = date.getFullYear();
-      month = date.getMonth() + 1;
+      year.left = date.getFullYear();
+      month.left = date.getMonth() + 1;
+    }
+
+    if (type === 'monthRange') {
+      const dateRight = state.value[1];
+      if (isDate(dateRight)) {
+        year.right = dateRight.getFullYear();
+        month.right = dateRight.getMonth() + 1;
+      }
     }
 
     return (
@@ -737,6 +795,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
         presetPosition={presetPosition}
         renderQuickControls={renderQuickControls()}
         renderDateInput={renderDateInput()}
+        type={type}
         yearAndMonthOpts={yearAndMonthOpts}
       />
     );

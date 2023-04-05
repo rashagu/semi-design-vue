@@ -1,16 +1,16 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties, inject, Ref, watch} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, CSSProperties, inject, Ref, watch, getCurrentInstance} from 'vue'
 import * as PropTypes from '../PropTypes'
 import classNames from 'classnames';
 
 import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/popover/constants';
 import Tooltip from '../tooltip';
-import type { ArrowBounding, Position, TooltipProps, Trigger } from '../tooltip'
+import type {ArrowBounding, Position, TooltipProps, Trigger} from '../tooltip'
 
 import Arrow from './Arrow';
 import '@douyinfe/semi-foundation/popover/popover.scss';
 import {BaseProps} from '../_base/baseComponent';
 import {Motion} from '../_base/base';
-import { isFunction, noop } from 'lodash';
+import {isFunction, noop} from 'lodash';
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
 import boolean from "async-validator/dist-types/validator/boolean";
@@ -48,11 +48,11 @@ export interface PopoverProps extends BaseProps {
   guardFocus?: TooltipProps['guardFocus'];
   returnFocusOnClose?: TooltipProps['returnFocusOnClose'];
   onEscKeyDown?: TooltipProps['onEscKeyDown'];
-  clickToHide?:TooltipProps['clickToHide'];
+  clickToHide?: TooltipProps['clickToHide'];
   disableFocusListener?: boolean
-  afterClose?:()=>void,
+  afterClose?: () => void,
   disableArrowKeyDown?: boolean,
-  keepDOM?:boolean
+  keepDOM?: boolean
 }
 
 export interface PopoverState {
@@ -101,7 +101,7 @@ const propTypes = {
     type: String,
     default: 'Yes',
   },
-  role:String,
+  role: String,
   afterClose: Function,
   disableFocusListener: Boolean,
   keepDOM: Boolean,
@@ -130,15 +130,23 @@ export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Popover = defineComponent<PopoverProps>((props, {slots, expose}) => {
   const {context} = useConfigContext()
   const tooltipRef = ref()
-  function focusTrigger () {
+
+  function focusTrigger() {
     tooltipRef.value?.focusTrigger();
   }
+
+  const currentInstance = getCurrentInstance()
+
   expose({
-    focusTrigger
+    focusTrigger,
+    getRef() {
+      return currentInstance
+    }
   })
-  function renderPopCard ({ initialFocusRef }: { initialFocusRef: any }) {
-    const { content, contentClassName, prefixCls } = props;
-    const { direction } = context.value;
+
+  function renderPopCard({initialFocusRef}: { initialFocusRef: any }) {
+    const {content, contentClassName, prefixCls} = props;
+    const {direction} = context.value;
     const popCardCls = classNames(
       prefixCls,
       contentClassName,
@@ -147,7 +155,7 @@ const Popover = defineComponent<PopoverProps>((props, {slots, expose}) => {
         [`${prefixCls}-rtl`]: direction === 'rtl',
       }
     );
-    const contentNode = renderContentNode({ initialFocusRef, content });
+    const contentNode = renderContentNode({initialFocusRef, content});
     return (
       <div class={popCardCls}>
         <div class={`${prefixCls}-content`}>{contentNode}</div>
@@ -156,8 +164,8 @@ const Popover = defineComponent<PopoverProps>((props, {slots, expose}) => {
   }
 
   const renderContentNode = (props: { content: TooltipProps['content'], initialFocusRef: any }) => {
-    const { initialFocusRef, content } = props;
-    const contentProps = { initialFocusRef };
+    const {initialFocusRef, content} = props;
+    const contentProps = {initialFocusRef};
     return !isFunction(content) ? content : content(contentProps);
   };
 
@@ -173,7 +181,7 @@ const Popover = defineComponent<PopoverProps>((props, {slots, expose}) => {
       trigger,
       ...attr
     } = props;
-    let { spacing } = props;
+    let {spacing} = props;
 
     const arrowProps = {
       position,
