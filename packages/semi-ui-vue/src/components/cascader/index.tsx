@@ -305,6 +305,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
         const clickOutsideHandler_ = (e: Event) => {
           const optionInstance = optionsRef.value;
           const triggerDom = triggerRef.value;
+          // 当组件内部使用了expose时，使用ref得到的内容只有expose的那部分
           const optionsDom = optionInstance?.getRef?.().vnode.el;
           const target = e.target as Element;
           if (

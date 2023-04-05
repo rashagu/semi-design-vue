@@ -744,6 +744,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
   expose({
     getPopupId,
     focusTrigger,
+    // 当组件内部使用了expose时，使用ref得到的内容只有expose的那部分
     getRef(){
       return currentInstance
     }

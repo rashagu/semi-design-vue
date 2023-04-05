@@ -139,6 +139,7 @@ const Popover = defineComponent<PopoverProps>((props, {slots, expose}) => {
 
   expose({
     focusTrigger,
+    // 当组件内部使用了expose时，使用ref得到的内容只有expose的那部分
     getRef() {
       return currentInstance
     }
