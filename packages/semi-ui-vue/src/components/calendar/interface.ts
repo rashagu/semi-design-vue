@@ -1,7 +1,8 @@
 import { strings } from '@douyinfe/semi-foundation/calendar/constants';
 import type { ArrayElement } from '../_base/base';
 import type { BaseProps } from '../_base/baseComponent';
-import type { EventObject, weeekStartsOnEnum } from '@douyinfe/semi-foundation/calendar/foundation';
+import type { EventObject, weekStartsOnEnum } from '@douyinfe/semi-foundation/calendar/foundation';
+
 import {VueJsxNode} from "../interface";
 
 export interface CalendarProps extends BaseProps {
@@ -11,7 +12,7 @@ export interface CalendarProps extends BaseProps {
     events?: EventObject[];
     mode?: ArrayElement<typeof strings.MODE>;
     showCurrTime?: boolean;
-    weekStartsOn?: weeekStartsOnEnum;
+    weekStartsOn?: weekStartsOnEnum;
     scrollTop?: number;
     onClick?: (e: MouseEvent, value: Date) => void;
     onClose?: (e: MouseEvent) => void;

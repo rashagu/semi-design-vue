@@ -137,6 +137,7 @@ export type SelectProps = {
   autoFocus?: boolean;
   autoClearSearchValue?: boolean;
   arrowIcon?: VueJsxNode;
+  borderless?: boolean;
   clearIcon?: VueJsxNode;
   defaultValue?: string | number | any[] | Record<string, any>;
   value?: string | number | any[] | Record<string, any>;
@@ -240,6 +241,7 @@ const propTypes = {
   'aria-required': PropTypes.bool,
   autoFocus: PropTypes.bool,
   autoClearSearchValue: PropTypes.bool,
+  borderless: PropTypes.bool,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.object]),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.object]),
   placeholder: PropTypes.node,
@@ -332,6 +334,7 @@ const defaultProps: Partial<SelectProps> = {
 
   stopPropagation: true,
   motion: true,
+  borderless: false,
   zIndex: popoverNumbers.DEFAULT_Z_INDEX,
   // position: 'bottomLeft',
   filter: false,
@@ -1349,7 +1352,8 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       placeholder,
       triggerRender,
       arrowIcon,
-      clearIcon
+      clearIcon,
+      borderless
     } = props;
 
     const { selections, isOpen, keyboardEventSet, inputValue, isHovering, isFocus, showInput, focusIndex } = state;
@@ -1358,6 +1362,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
     const selectionCls = useCustomTrigger ?
       cls(className) :
       cls(prefixcls, className, {
+        [`${prefixcls}-borderless`]: borderless,
         [`${prefixcls}-open`]: isOpen,
         [`${prefixcls}-focus`]: isFocus,
         [`${prefixcls}-disabled`]: disabled,

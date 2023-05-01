@@ -10,7 +10,7 @@ import {Locale} from "../locale/interface";
 import {isBoolean, isObject, isUndefined} from "lodash";
 import Skeleton from "../skeleton";
 import "@douyinfe/semi-foundation/image/image.scss";
-import {defineComponent, h, reactive, useSlots, watch} from "vue";
+import {defineComponent, h, onMounted, reactive, ref, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {usePreviewContext} from "./previewContext/Consumer";
 import {useBaseComponent} from "../_base/baseComponent";
@@ -70,6 +70,7 @@ const Image = defineComponent<ImageProps>((props, {}) => {
   const adapter = adapter_()
   const foundation = new ImageFoundation(adapter);
 
+  const imgRef = ref()
 
   function getDerivedStateFromProps(props: ImageProps, state: ImageStates) {
     const willUpdateStates: Partial<ImageStates> = {};
@@ -96,6 +97,26 @@ const Image = defineComponent<ImageProps>((props, {}) => {
       })
     }
   }, {immediate: true, deep: true})
+
+  onMounted(()=>{
+    observeImage();
+  })
+
+
+
+  watch(()=>props.src, (value, oldValue, onCleanup)=>{
+    oldValue !== props.src && observeImage();
+  })
+
+  function observeImage() {
+    if (!isLazyLoad()) {
+      return;
+    }
+    const { previewObserver } = context.value;
+    previewObserver.observe(imgRef.value);
+  }
+
+
 
   function isInGroup() {
     return Boolean(context && context.value.isGroup);
@@ -208,6 +229,7 @@ const Image = defineComponent<ImageProps>((props, {}) => {
         onClick={handleClick}
       >
         <img
+          ref={imgRef}
           {...restProps}
           src={isInGroup() && isLazyLoad() ? undefined : src}
           data-src={src}

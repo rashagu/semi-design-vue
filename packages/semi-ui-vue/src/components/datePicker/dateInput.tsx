@@ -36,10 +36,13 @@ export interface DateInputProps extends DateInputFoundationProps, BaseProps {
   inputRef?: Ref;
   rangeInputStartRef?: Ref;
   rangeInputEndRef?: Ref
-
 }
 
 const propTypes = {
+  borderless: {
+    type: PropTypes.bool,
+    default: false
+  },
   onClick: {
     type: PropTypes.func,
     default: noop
@@ -276,6 +279,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
       rangeInputFocus,
       prefixCls,
       rangeSeparator,
+      borderless
     } = rangeProps;
 
     const [rangeStart, rangeEnd = ''] = text.split(rangeSeparator) || [];
@@ -285,9 +289,11 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
     const inputLeftWrapperCls = cls(`${prefixCls}-range-input-wrapper-start`, `${prefixCls}-range-input-wrapper`, {
       [`${prefixCls}-range-input-wrapper-active`]: rangeInputFocus === 'rangeStart' && !disabled,
       [`${prefixCls}-range-input-wrapper-start-with-prefix`]: props.prefix || props.insetLabel,
+      [`${prefixCls}-borderless`]: borderless
     });
     const inputRightWrapperCls = cls(`${prefixCls}-range-input-wrapper-end`, `${prefixCls}-range-input-wrapper`, {
       [`${prefixCls}-range-input-wrapper-active`]: rangeInputFocus === 'rangeEnd' && !disabled,
+      [`${prefixCls}-borderless`]: borderless
     });
     return (
       <Fragment>
@@ -297,6 +303,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
           class={`${inputCls} ${inputLeftWrapperCls}`}
         >
           <Input
+            borderless={borderless}
             size={rangeSize}
             style={inputStyle as CSSProperties}
             disabled={disabled}
@@ -318,6 +325,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
           onClick={e => !disabled && handleRangeInputFocus(e, 'rangeEnd')}
         >
           <Input
+            borderless={borderless}
             size={rangeSize}
             style={inputStyle as CSSProperties}
             disabled={disabled}

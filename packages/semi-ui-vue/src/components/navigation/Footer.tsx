@@ -75,5 +75,5 @@ const NavFooter = defineComponent<NavFooterProps>((props, {slots}) => {
 })
 
 NavFooter.props = vuePropsType
-
+NavFooter.name = "NavFooter"
 export default NavFooter

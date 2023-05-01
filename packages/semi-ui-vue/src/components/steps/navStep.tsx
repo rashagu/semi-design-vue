@@ -58,17 +58,13 @@ const NavStep = defineComponent<NavStepProps>((props, {}) => {
       className
     );
     const handleClick = (e: MouseEvent) => {
-      if (isFunction(onClick)) {
-        onClick(e);
-      }
-      onChange();
+      onClick?.(e);
+      onChange?.();
     };
     const handleKeyDown = (e) => {
       if (e.key === 'Enter') {
-        if (isFunction(onKeyDown)) {
-          onKeyDown(e);
-        }
-        onChange();
+        onKeyDown?.(e);
+        onChange?.();
       }
     };
     return (

@@ -61,6 +61,7 @@ import {useTableContext} from "../tableContext/Consumer";
 import {FooterProps} from "../../image/interface";
 
 export interface BodyProps extends BaseProps {
+    tableLayout?: 'fixed' | 'auto';
     anyColumnFixed?: boolean;
     columns?: ColumnProps[];
     dataSource?: Record<string, any>[];
@@ -490,7 +491,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
     };
 
     const renderVirtualizedBody = (direction?: Direction) => {
-        const { scroll, prefixCls, virtualized, anyColumnFixed, columns } = props;
+        const { scroll, prefixCls, virtualized, columns } = props;
         const { virtualizedData } = state;
         const { getCellWidths } = context.value;
         const cellWidths = getCellWidths(columns);
@@ -838,6 +839,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
             onScroll,
             groups,
             expandedRowRender,
+            tableLayout,
         } = props;
 
         const x = get(scroll, 'x');
@@ -889,7 +891,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
                 aria-colcount={columns && columns.length}
                 style={tableStyle}
                 className={classnames(prefixCls, {
-                    [`${prefixCls}-fixed`]: anyColumnFixed,
+                    [`${prefixCls}-fixed`]: tableLayout === 'fixed',
                 })}
               >
                   {colgroup}

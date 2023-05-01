@@ -12,6 +12,7 @@ export const timePickerPropTypes = {
   'aria-describedby': PropTypes.string,
   'aria-required': PropTypes.bool,
   prefixCls: PropTypes.string,
+  borderless: PropTypes.bool,
   clearText: {type: PropTypes.string, default: 'clear'},
   value: TimeShape,
   inputReadOnly: PropTypes.bool,

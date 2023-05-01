@@ -10,6 +10,7 @@ export interface CopyableConfig {
   content?: string;
   copyTip?: VNode;
   successTip?: VNode;
+  icon?: VNode;
   onCopy?(e: any, content: string, res: boolean): void;
 }
 

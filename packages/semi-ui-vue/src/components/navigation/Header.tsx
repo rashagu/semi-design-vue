@@ -80,6 +80,6 @@ const NavHeader = defineComponent<NavHeaderProps>((props, {slots}) => {
 })
 
 NavHeader.props = vuePropsType
-
+NavHeader.name = "NavHeader"
 export default NavHeader
 

@@ -8,6 +8,7 @@ export interface CollapseContextType{
     activeSet: Set<string>;
     expandIcon: VNode;
     collapseIcon: VNode;
+    clickHeaderToExpand: boolean;
     keepDOM: boolean;
     expandIconPosition: 'left' | 'right';
     onClick: (activeKey: string, e: MouseEvent) => void;

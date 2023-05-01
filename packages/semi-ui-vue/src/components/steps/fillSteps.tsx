@@ -75,11 +75,11 @@ const FillSteps = defineComponent<FillStepsProps>((props, {}) => {
             childProps.status = 'wait';
           }
         }
-        childProps.onChange = () => {
+        childProps.onChange = onChange ? () => {
           if (index !== current) {
             onChange(index + initial);
           }
-        };
+        } : undefined;
         return <Col style={colStyle}>{cloneVNode(child, { ...childProps })}</Col>;
       });
       return content;

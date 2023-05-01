@@ -15,7 +15,7 @@ import {cssClasses, strings} from '@douyinfe/semi-foundation/typography/constant
 import Typography from './typography';
 import Copyable from './copyable';
 import {IconSize as Size} from '../icons';
-import {isUndefined, omit, merge, isString} from 'lodash';
+import {isUndefined, omit, merge, isString, isNull} from 'lodash';
 import Tooltip from '../tooltip';
 import Popover from '../popover';
 import getRenderText from './util';
@@ -313,6 +313,18 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     const canUseCSSEllipsis_ = canUseCSSEllipsis();
     const needUpdate = updateOverflow !== isOverflowed;
 
+    warning(
+      'children' in props && typeof children !== 'string',
+      "[Semi Typography] 'Only children with pure text could be used with ellipsis at this moment."
+    );
+    // If children is null, css/js truncated flag isTruncate is false
+    if (isNull(children)) {
+      state.isTruncated = false
+      state.isOverflowed = false
+      return undefined;
+    }
+
+
     if (!rows || rows < 0 || expanded) {
       return undefined;
     }
@@ -325,12 +337,8 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     }
 
     const extraNode = [expandRef.current, copyRef && copyRef.current];
-    warning(
-      'children' in props && typeof children !== 'string',
-      "[Semi Typography] 'Only children with pure text could be used with ellipsis at this moment."
-    );
     const content: any = getRenderText(
-      wrapperRef.current,
+      wrapperRef.value,
       rows,
       children as any,
       extraNode,
@@ -543,7 +551,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
     warning(
       hasObject,
-      'Children in Typography is a object, it will case a [object Object] mistake when copy to clipboard.'
+      'Content to be copied in Typography is a object, it will case a [object Object] mistake when copy to clipboard.'
     );
     const copyConfig = {
       content: copyContent,

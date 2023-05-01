@@ -1,4 +1,4 @@
-import {isFunction, noop} from 'lodash';
+import { isFunction, noop } from 'lodash';
 import * as PropTypes from '../PropTypes';
 import classnames from 'classnames';
 import { stepsClasses as css } from '@douyinfe/semi-foundation/steps/constants';
@@ -7,8 +7,8 @@ import { VueJsxNode } from '../interface';
 import { CSSProperties, defineComponent, useSlots, h, isVNode } from 'vue';
 import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
-import {getProps} from "../_base/baseComponent";
-import {Direction} from "./fillSteps";
+import { getProps } from '../_base/baseComponent';
+import { Direction } from './fillSteps';
 
 export type Status = 'wait' | 'process' | 'finish' | 'error' | 'warning';
 export type Size = 'default' | 'small';
@@ -64,7 +64,7 @@ const defaultProps = {
   status: 'wait',
   className: '',
   size: 'default',
-  onChange: noop
+  onChange: noop,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const BasicStep = defineComponent<BasicStepProps>((props, {}) => {
@@ -125,27 +125,26 @@ const BasicStep = defineComponent<BasicStepProps>((props, {}) => {
 
       return inner ? <span class={cls}>{inner}</span> : null;
     };
+
     const classString = classnames(
       prefixCls,
       `${prefixCls}-${status}`,
       {
         [`${prefixCls}-active`]: active,
         [`${prefixCls}-done`]: done,
+        [`${prefixCls}-hover`]: onChange || props.onClick,
+        [`${prefixCls}-${status}-hover`]: onChange || props.onClick,
       },
       className
     );
     const handleClick = (e: MouseEvent) => {
-      if (isFunction(onClick)) {
-        onClick(e);
-      }
-      onChange();
+      onClick?.(e);
+      onChange?.();
     };
     const handleKeyDown = (e) => {
       if (e.key === 'Enter') {
-        if (isFunction(onKeyDown)) {
-          onKeyDown(e);
-        }
-        onChange();
+        onKeyDown?.(e);
+        onChange?.();
       }
     };
     return (

@@ -5,12 +5,12 @@ import classnames from 'classnames';
 
 import ColGroup from './ColGroup';
 import TableHeader from './TableHeader';
-import { Fixed, TableComponents, Scroll, BodyScrollEvent, ColumnProps, OnHeaderRow } from './interface';
+import { Fixed, TableComponents, Scroll, BodyScrollEvent, ColumnProps, OnHeaderRow, Sticky } from './interface';
 import {CSSProperties, defineComponent, h, useSlots} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 export interface HeadTableProps {
-    [x: string]: any;
+    tableLayout?: 'fixed' | 'auto';
     anyColumnFixed?: boolean;
     bodyHasScrollBar?: boolean;
     columns?: ColumnProps[];
@@ -24,7 +24,8 @@ export interface HeadTableProps {
     selectedRowKeysSet: Set<any>;
     showHeader?: boolean;
     onDidUpdate?: (ref: any) => void;
-    onHeaderRow?: OnHeaderRow<any>
+    onHeaderRow?: OnHeaderRow<any>;
+    sticky?: Sticky
 }
 
 /**
@@ -32,7 +33,7 @@ export interface HeadTableProps {
  */
 
 const propTypes = {
-    anyColumnFixed: PropTypes.bool,
+    tableLayout: PropTypes.string,
     bodyHasScrollBar: PropTypes.bool,
     columns: PropTypes.array,
     components: PropTypes.object,
@@ -66,6 +67,7 @@ const HeadTable = defineComponent<HeadTableProps>((props, {}) => {
             components,
             onDidUpdate,
             showHeader,
+            tableLayout,
             anyColumnFixed,
             bodyHasScrollBar,
             sticky
@@ -115,7 +117,7 @@ const HeadTable = defineComponent<HeadTableProps>((props, {}) => {
               <Table
                 style={tableStyle}
                 className={classnames(prefixCls, {
-                    [`${prefixCls}-fixed`]: anyColumnFixed,
+                    [`${prefixCls}-fixed`]: tableLayout === 'fixed',
                 })}
               >
                   {colgroup}

@@ -80,7 +80,7 @@ const SortableList = defineComponent<SortableListProps>((props, {}) => {
           <div class={`${prefixCls}-right-list`} role="list" aria-label="Selected list">
             {props.items.map((item, index: number) => (
               // @ts-ignore skip SortableItem type check
-              <SortableItem key={item.label} index={index} id={item.id} item={item.node}/>
+              <SortableItem key={item.key} index={index} id={item.id} item={item.node}/>
             ))}
           </div>
         </SortableContext>

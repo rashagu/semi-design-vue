@@ -147,5 +147,5 @@ export const VuePropsType = {
 }
 
 Index.props = VuePropsType
-
+Index.name = "IconButton"
 export default Index

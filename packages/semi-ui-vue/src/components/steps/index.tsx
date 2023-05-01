@@ -54,7 +54,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-    onChange: noop,
     type: 'fill',
     size: 'default'
 };

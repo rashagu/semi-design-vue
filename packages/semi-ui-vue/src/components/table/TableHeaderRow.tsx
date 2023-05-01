@@ -147,6 +147,7 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
                   [`${prefixCls}-cell-fixed-left-last`]: fixedLeftLast,
                   [`${prefixCls}-cell-fixed-right`]: fixedRight,
                   [`${prefixCls}-cell-fixed-right-first`]: fixedRightFirst,
+                  [`${prefixCls}-row-head-ellipsis`]: column.ellipsis,
               }
             );
 

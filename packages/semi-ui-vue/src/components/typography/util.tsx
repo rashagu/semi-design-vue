@@ -56,6 +56,8 @@ const getRenderText = (
   );
 
   // Set shadow
+  const maxWidth = parseInt(originStyle.width);
+  // Set shadow
   ellipsisContainer.setAttribute('style', originCSS);
   ellipsisContainer.style.position = 'fixed';
   ellipsisContainer.style.left = '0';
@@ -65,7 +67,6 @@ const getRenderText = (
 
   // clean up css overflow
   ellipsisContainer.style.textOverflow = 'clip';
-  ellipsisContainer.style.whiteSpace = 'normal';
   ellipsisContainer.style.webkitLineClamp = 'none';
 
   // Render fake container

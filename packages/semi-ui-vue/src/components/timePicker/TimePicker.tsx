@@ -45,6 +45,7 @@ export type TimePickerProps = {
   'aria-required'?: AriaAttributes['aria-required'];
   autoAdjustOverflow?: boolean;
   autoFocus?: boolean; // TODO: autoFocus did not take effect
+  borderless?: boolean;
   className?: string;
   clearText?: string;
   dateFnsLocale?: Locale['dateFnsLocale'];
@@ -124,6 +125,7 @@ export const defaultProps = {
   onOpenChange: noop,
   clearText: 'clear',
   prefixCls: cssClasses.PREFIX,
+  borderless: false,
   inputReadOnly: false,
   style: {},
   className: '',

@@ -14,7 +14,7 @@ export default function getColumns(children: VueJsxNode) {
     if (children && isArray(children)) {
         const columns: ColumnProps[] = [];
         children.forEach(child => {
-            if (isVNode(child) && (child.type === Column || get(child, 'type.name') === Column.name)) {
+            if (isVNode(child) && (child.type === Column || get(child, 'type.name') === 'Column')) {
                 const col = omit(child.props, ['children']);
 
                 if (Array.isArray(child.props.children) && child.props.children.length) {

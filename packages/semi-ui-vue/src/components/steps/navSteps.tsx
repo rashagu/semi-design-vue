@@ -64,11 +64,11 @@ const NavSteps = defineComponent<NavStepsProps>((props, {}) => {
                     ...child.props,
                 };
                 childProps.active = index === current;
-                childProps.onChange = () => {
+                childProps.onChange = onChange ? () => {
                     if (index !== current) {
                         onChange(index + initial);
                     }
-                };
+                } : undefined;
                 return cloneVNode(child, { ...childProps });
             });
             return content;

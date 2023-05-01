@@ -4,7 +4,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/collapse/constants';
 import Collapsible from '../collapsible';
 import { IconChevronDown, IconChevronUp } from '@kousum/semi-icons-vue';
 import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
-import { CSSProperties, defineComponent, Fragment, h, useSlots, VNode } from 'vue';
+import { CSSProperties, defineComponent, Fragment, h, ref, useSlots, VNode } from 'vue';
 import { useCollapseContext } from './context/Consumer';
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
@@ -40,6 +40,7 @@ export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const CollapsePanel = defineComponent<CollapsePanelProps>((props, {}) => {
   const slots = useSlots();
 
+  const headerExpandIconTriggerRef = ref();
   const ariaID = getUuidShort({});
   const { context } = useCollapseContext();
   function renderHeader(active: boolean, expandIconEnable = true) {
@@ -54,6 +55,7 @@ const CollapsePanel = defineComponent<CollapsePanelProps>((props, {}) => {
     }
     const icon = (
       <span
+        ref={headerExpandIconTriggerRef}
         aria-hidden="true"
         class={cls([
           `${cssClasses.PREFIX}-header-icon`,
@@ -86,10 +88,18 @@ const CollapsePanel = defineComponent<CollapsePanelProps>((props, {}) => {
     );
   }
 
+  const handleClick = (itemKey: string, e: MouseEvent) => {
+    // Judge user click Icon or Header
+    // Don't mount this func into icon span wrapper, or get triggered twice because of event propagation
+    if (context.value.clickHeaderToExpand || headerExpandIconTriggerRef.value?.contains(e.target as HTMLElement)) {
+      context.value.onClick(itemKey, e);
+    }
+  };
+
   return () => {
     const children = slots.default?.();
     const { className, itemKey, reCalcKey, header, extra, showArrow, disabled, ...restProps } = props;
-    const { keepDOM, expandIconPosition, activeSet, onClick, motion } = context.value;
+    const { keepDOM, expandIconPosition, activeSet, motion } = context.value;
     const active = activeSet.has(itemKey);
     const itemCls = cls(className, {
       [`${cssClasses.PREFIX}-item`]: true,
@@ -111,7 +121,7 @@ const CollapsePanel = defineComponent<CollapsePanelProps>((props, {}) => {
           aria-disabled={disabled}
           aria-expanded={active ? 'true' : 'false'}
           aria-owns={ariaID}
-          onClick={(e) => !disabled && onClick(itemKey, e)}
+          onClick={(e) => !disabled && handleClick(itemKey, e)}
         >
           {renderHeader(active, children !== undefined && !disabled)}
         </div>

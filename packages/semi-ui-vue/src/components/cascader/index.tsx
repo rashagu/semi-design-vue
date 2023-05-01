@@ -126,6 +126,7 @@ const propTypes = {
   'aria-required': PropTypes.bool,
   'aria-label': PropTypes.string,
   arrowIcon: PropTypes.node,
+  borderless: PropTypes.bool,
   changeOnSelect: PropTypes.bool,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   disabled: PropTypes.bool,
@@ -198,6 +199,7 @@ const propTypes = {
   mouseLeaveDelay: Number,
 };
 const defaultProps = {
+  borderless: false,
   leafOnly: false,
   arrowIcon: <IconChevronDown />,
   stopPropagation: true,
@@ -282,7 +284,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
 
   const foundation = new CascaderFoundation(adapter());
   function adapter(): CascaderAdapter {
-    const filterAdapter: Pick<CascaderAdapter, 'updateInputValue' | 'updateInputPlaceHolder' | 'focusInput'> = {
+    const filterAdapter: Pick<CascaderAdapter, 'updateInputValue' | 'updateInputPlaceHolder' | 'focusInput' | 'blurInput'> = {
       updateInputValue: (value) => {
         state.inputValue = value;
       },
@@ -294,6 +296,11 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
         if (inputRef.value) {
           // TODO: check the reason
           (inputRef.value as any).focus({ preventScroll });
+        }
+      },
+      blurInput: () => {
+        if (inputRef.value) {
+          (inputRef.value as any).blur();
         }
       },
     };
@@ -531,8 +538,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
   const handleRemoveByKey = (key) => {
     const { keyEntities } = state;
     handleTagRemove(null, keyEntities[key].valuePath);
-  }
-
+  };
 
   const renderTagItem = (value: string | Array<string>, idx: number, type: string) => {
     const { keyEntities, disabledKeys } = state;
@@ -655,8 +661,18 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
   function open() {
     foundation.open();
   }
+  function focus() {
+    foundation.focus();
+  }
+
+  function blur() {
+    foundation.blur();
+  }
+
 
   expose({
+    focus,
+    blur,
     close,
     open,
   });
@@ -936,6 +952,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
       triggerRender,
       showClear,
       id,
+      borderless,
     } = props;
     const { isOpen, isFocus, isInput, checkedKeys } = state;
     const filterable = Boolean(filterTreeNode);
@@ -943,6 +960,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
     const classNames = useCustomTrigger
       ? cls(className)
       : cls(prefixcls, className, {
+          [`${prefixcls}-borderless`]: borderless,
           [`${prefixcls}-focus`]: isFocus || (isOpen && !isInput),
           [`${prefixcls}-disabled`]: disabled,
           [`${prefixcls}-single`]: true,

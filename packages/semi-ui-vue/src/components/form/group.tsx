@@ -84,7 +84,9 @@ const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
     return () => {
         const children= slots.default?.()
         const { label, extraText, extraTextPosition, ...rest } = props;
-        const formProps = context.value.getFormProps(['labelPosition', 'labelWidth', 'labelAlign', 'showValidateIcon', 'wrapperCol', 'labelCol']);
+
+        const updater = context.value;
+        const formProps = updater.getFormProps(['labelPosition', 'labelWidth', 'labelAlign', 'showValidateIcon', 'wrapperCol', 'labelCol', 'disabled']);
         const labelPosition = props.labelPosition || formProps.labelPosition;
         const groupFieldSet: Array<string> = [];
         const inner = children.map((child: any) => {
@@ -112,7 +114,7 @@ const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
 
         const labelContent = renderLabel(label, formProps);
         const inputGroupContent = (
-          <InputGroup {...rest}>
+          <InputGroup disabled={formProps.disabled} {...rest}>
               {inner}
           </InputGroup>
         );

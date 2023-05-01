@@ -248,7 +248,7 @@ const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
                 if (level != null && columnIndex === firstIndex) {
                     expandableProps.indent = level;
 
-                    if (!expandableRow) {
+                    if (!expandableRow && hideExpandedColumn) {
                         expandableProps.indent = level + 1;
                     }
                 }

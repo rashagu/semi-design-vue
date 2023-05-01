@@ -168,7 +168,7 @@ const BreadcrumbItem = defineComponent<BreadcrumbItemProps>((props, {}) => {
                             pos: ellipsisPos,
                           }}
                           // icon={renderIcon(icon)}
-                          style={{width}}
+                          style={{ maxWidth: width }}
                           size={compact ? 'small' : 'normal'}
                         >
                             {children}
@@ -217,7 +217,7 @@ const BreadcrumbItem = defineComponent<BreadcrumbItemProps>((props, {}) => {
       shouldRenderSeparator
       // children,
     } = props;
-    const pageLabel = active ? {'aria-current': 'page' as const} : {};
+    const pageLabel = active ? { 'aria-current': 'page' as const } : {};
     const item = renderItem();
     const separator = !active ?
       props.separator || <span class={`${clsPrefix}-separator`}>{context.value.separator}</span> :

@@ -98,11 +98,11 @@ const Steps = defineComponent<BasicStepsProps>((props, {}) => {
                 }
                 childProps.active = stepNumber === current;
                 childProps.done = stepNumber < current;
-                childProps.onChange = () => {
+                childProps.onChange = onChange ? () => {
                     if (index !== current) {
                         onChange(index + initial);
                     }
-                };
+                } : undefined;
                 return cloneVNode(child, { ...childProps });
             });
             return content;

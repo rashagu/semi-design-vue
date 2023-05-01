@@ -1,6 +1,6 @@
 import {defineComponent, h, nextTick, onMounted, onUnmounted, reactive, ref, useSlots, watch} from 'vue'
 import classnames from 'classnames';
-import {get, isDate, isEqual, isFunction, noop, stubFalse} from 'lodash';
+import {get, isDate, isEqual, isFunction, noop, stubFalse, pick} from 'lodash';
 import type {
   DatePickerAdapter,
   DatePickerFoundationProps,
@@ -82,6 +82,7 @@ const propTypes = {
   'aria-invalid': PropTypes.bool,
   'aria-labelledby': PropTypes.string,
   'aria-required': PropTypes.bool,
+  borderless: PropTypes.bool,
   type: String,
   size: String,
   density: String,
@@ -166,6 +167,7 @@ const propTypes = {
 
 const defaultProps = {
   onChangeWithDateFirst: true,
+  borderless: false,
   autoAdjustOverflow: true,
   stopPropagation: true,
   motion: true,
@@ -635,7 +637,8 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       inputReadOnly,
       rangeSeparator,
       insetInput,
-      defaultPickerValue
+      defaultPickerValue,
+      borderless
     } = props;
     const { value, inputValue, rangeInputFocus, triggerDisabled } = state;
     // This class is not needed when triggerRender is function
@@ -647,6 +650,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       [`${cssClasses.PREFIX}-range-input-active`]: isRangeType_ && rangeInputFocus && !inputDisabled,
       [`${cssClasses.PREFIX}-range-input-disabled`]: isRangeType_ && inputDisabled,
       [`${cssClasses.PREFIX}-range-input-${validateStatus}`]: isRangeType_ && validateStatus,
+      [`${cssClasses.PREFIX}-borderless`]: borderless
     });
     const phText = placeholder || locale.placeholder[type]; // i18n
     // These values should be passed to triggerRender, do not delete any key if it is not necessary
@@ -844,7 +848,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   };
 
   return () => {
-    const { style, className, prefixCls } = props;
+    const { style, className, prefixCls, type } = props;
     const outerProps = {
       style,
       class: classnames(className, { [prefixCls]: true }),
@@ -856,7 +860,12 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       'aria-required': props['aria-required'],
     };
 
-    const inner = renderInner();
+
+    const innerPropKeys: string[] = [];
+    if (!type.toLowerCase().includes("range")) {
+      innerPropKeys.push("borderless");
+    }
+    const inner = renderInner(pick(props, innerPropKeys));
     const wrappedInner = wrapPopover(inner);
 
     // @ts-ignore

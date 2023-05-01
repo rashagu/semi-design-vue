@@ -82,6 +82,21 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
     const foundation = new PreviewFoundation(adapter);
     const previewGroupId = getUuidShort({ prefix: "semi-image-preview-group", length: 4 });
     const previewRef = ref();
+    const previewObserver = new IntersectionObserver(entries => {
+          entries.forEach(item => {
+              const src = (item.target as any).dataset?.src;
+              if (item.isIntersecting && src) {
+                  (item.target as any).src = src;
+                  (item.target as any).removeAttribute("data-src");
+                  previewObserver.unobserve(item.target);
+              }
+          });
+      },
+      {
+          root: document.querySelector(`#${previewGroupId}`),
+          rootMargin: props.lazyLoadMargin,
+      }
+    );
 
     onMounted(()=>{
 
@@ -187,6 +202,7 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
                 currentIndex,
                 visible,
                 lazyLoad,
+                previewObserver: previewObserver,
                 setCurrentIndex: handleCurrentIndexChange,
                 handleVisibleChange: handleVisibleChange,
             }}

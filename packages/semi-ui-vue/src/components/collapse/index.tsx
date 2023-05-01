@@ -34,6 +34,7 @@ const propTypes = {
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   accordion: PropTypes.bool,
+  clickHeaderToExpand: PropTypes.bool,
   onChange: PropTypes.func,
   expandIcon: PropTypes.node,
   collapseIcon: PropTypes.node,
@@ -46,6 +47,7 @@ const propTypes = {
 
 const defaultProps = {
   defaultActiveKey: '',
+  clickHeaderToExpand: true,
   onChange: noop,
   expandIconPosition: 'right'
 };
@@ -122,6 +124,7 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
       expandIconPosition,
       expandIcon,
       collapseIcon,
+      clickHeaderToExpand,
       ...rest
     } = props;
     const clsPrefix = cls(cssClasses.PREFIX, className);
@@ -133,6 +136,7 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
             activeSet,
             expandIcon,
             collapseIcon,
+            clickHeaderToExpand,
             keepDOM,
             expandIconPosition,
             onClick: onChange,

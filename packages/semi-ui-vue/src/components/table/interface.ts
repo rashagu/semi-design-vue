@@ -17,7 +17,8 @@ import {
     BaseSorter,
     BaseFilter,
     BaseChangeInfoFilter,
-    BaseIncludeGroupRecord
+    BaseIncludeGroupRecord,
+    BaseEllipsis
 } from '@douyinfe/semi-foundation/table/foundation';
 import type { ScrollDirection, CSSDirection } from '@kousum/vue3-window';
 import {VueJsxNode} from "../interface";
@@ -105,7 +106,8 @@ export interface ColumnProps<RecordType extends Record<string, any> = any> {
     onCell?: OnCell<RecordType>;
     onFilter?: OnFilter<RecordType>;
     onFilterDropdownVisibleChange?: OnFilterDropdownVisibleChange;
-    onHeaderCell?: OnHeaderCell<RecordType>
+    onHeaderCell?: OnHeaderCell<RecordType>;
+    ellipsis?: BaseEllipsis
 }
 
 export type Align = BaseAlign;

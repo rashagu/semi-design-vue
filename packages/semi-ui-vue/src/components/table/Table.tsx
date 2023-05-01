@@ -15,6 +15,7 @@ import {
   difference,
   isFunction,
   isObject,
+  isPlainObject
 } from 'lodash';
 
 import {
@@ -24,6 +25,7 @@ import {
   assignColumnKeys,
   flattenColumns,
   getAllDisabledRowKeys,
+  shouldShowEllipsisTitle
 } from '@douyinfe/semi-foundation/table/utils';
 import Store from '@douyinfe/semi-foundation/utils/Store';
 import TableFoundation, {
@@ -233,6 +235,7 @@ function Table<RecordType extends Record<string, any>>() {
 
     const bodyWrapRef = ref();
     const headerWrapRef = ref();
+
     const state = reactive<NormalTableState<RecordType>>({
       /**
        * Cached props
@@ -363,6 +366,16 @@ function Table<RecordType extends Record<string, any>>() {
 
           return false;
         },
+        getTableLayout: () => {
+          let isFixed = false;
+          const { flattenColumns } = state;
+
+          if (Array.isArray(flattenColumns)) {
+            isFixed = flattenColumns.some(column => (Boolean(column.ellipsis) || Boolean(column.fixed)));
+          }
+
+          return isFixed ? 'fixed' : 'auto';
+        },
         setHeadWidths: (headWidths: Array<BaseHeadWidth>, index = 0) => {
           if (!equalWith(state.headWidths[index], headWidths)) {
             // The map call depends on the last state
@@ -446,6 +459,15 @@ function Table<RecordType extends Record<string, any>>() {
     }
     const adapter = adapter_();
     const foundation = new TableFoundation<RecordType>(adapter);
+
+
+
+    const filteredSortedDataSource = foundation.getFilteredSortedDataSource(props.dataSource, queries);
+    const newPagination = isPlainObject(props.pagination) ? props.pagination : {} as any;
+    const pageData: BasePageData<RecordType> = foundation.getCurrentPageData(filteredSortedDataSource, newPagination, queries);
+    state.dataSource = pageData.dataSource as any
+    state.pagination = pageData.pagination
+
 
     const store = new Store({
       hoveredRowKey: null,
@@ -1035,7 +1057,9 @@ function Table<RecordType extends Record<string, any>>() {
      * @param {*} column
      */
     const addFnsInColumn = (column: ColumnProps = {}) => {
+      const { prefixCls } = props;
       if (column && (column.sorter || column.filters || column.useFullRender)) {
+        let hasSorterOrFilter = false;
         const { dataIndex, title: rawTitle, useFullRender } = column;
         const curQuery = foundation.getQuery(dataIndex);
         const titleMap: ColumnTitleProps = {};
@@ -1049,8 +1073,15 @@ function Table<RecordType extends Record<string, any>>() {
         const stateSortOrder = get(curQuery, 'sortOrder');
         const defaultSortOrder = get(curQuery, 'defaultSortOrder', false);
         const sortOrder = foundation.isSortOrderValid(stateSortOrder) ? stateSortOrder : defaultSortOrder;
+        const showEllipsisTitle = shouldShowEllipsisTitle(column.ellipsis);
         const TitleNode = typeof rawTitle !== 'function' && (
-          <Fragment key={strings.DEFAULT_KEY_COLUMN_TITLE}>{rawTitle as VueJsxNode}</Fragment>
+          <span
+            class={`${prefixCls}-row-head-title`}
+            key={strings.DEFAULT_KEY_COLUMN_TITLE}
+            title={showEllipsisTitle && typeof rawTitle === 'string' ? rawTitle : undefined}
+          >
+                    {rawTitle}
+                </span>
         );
         if (typeof column.sorter === 'function' || column.sorter === true) {
           // In order to increase the click hot area of ​​sorting, when sorting is required & useFullRender is false,
@@ -1064,6 +1095,7 @@ function Table<RecordType extends Record<string, any>>() {
             />
           );
           useFullRender && (titleMap.sorter = sorter);
+          hasSorterOrFilter = true;
           titleArr.push(sorter);
         } else {
           titleArr.push(TitleNode);
@@ -1078,20 +1110,27 @@ function Table<RecordType extends Record<string, any>>() {
               key={strings.DEFAULT_KEY_COLUMN_FILTER}
               {...curQuery}
               filteredValue={filteredValue}
-              onFilterDropdownVisibleChange={(visible: boolean) => {
-                foundation.toggleShowFilter(dataIndex, visible);
-              }}
+              onFilterDropdownVisibleChange={(visible: boolean) =>
+                foundation.toggleShowFilter(dataIndex, visible)
+              }
               onSelect={(data: OnSelectData) => {
                 foundation.handleFilterSelect(dataIndex, data);
               }}
             />
           );
           useFullRender && (titleMap.filter = filter);
+          hasSorterOrFilter = true;
           titleArr.push(filter);
         }
 
-        const newTitle = typeof rawTitle === 'function' ? () => rawTitle(titleMap) : titleArr;
-
+        const newTitle =
+          typeof rawTitle === 'function' ? (
+            () => rawTitle(titleMap)
+          ) : hasSorterOrFilter ? (
+            <div class={`${prefixCls}-operate-wrapper`}>{titleArr}</div>
+          ) : (
+            titleArr
+          );
         column = { ...column, title: newTitle };
       }
 
@@ -1237,12 +1276,13 @@ function Table<RecordType extends Record<string, any>>() {
         sticky,
       } = props_;
       const selectedRowKeysSet = get(rowSelection, 'selectedRowKeysSet', new Set());
+      const tableLayout = adapter.getTableLayout();
 
       const headTable =
         fixed || useFixedHeader ? (
           <HeadTable
             key="head"
-            anyColumnFixed={anyColumnFixed}
+            tableLayout={tableLayout}
             ref={headerRef}
             columns={filteredColumns}
             prefixCls={prefixCls}
@@ -1269,6 +1309,7 @@ function Table<RecordType extends Record<string, any>>() {
           handleWheel={handleWheel}
           handleBodyScroll={handleBodyScroll}
           anyColumnFixed={anyColumnFixed}
+          tableLayout={tableLayout}
           includeHeader={includeHeader}
           showHeader={showHeader}
           scroll={scroll}
@@ -1443,11 +1484,11 @@ function Table<RecordType extends Record<string, any>>() {
        * TODO: After merging issue 1007, you can place it in the constructor to complete
        * The reason is that #1007 exposes the parameters required by getCurrentPageData in the constructor
        */
-      if (isNull(state.dataSource)) {
-        const pageData: BasePageData<RecordType> = foundation.getCurrentPageData(props.dataSource);
-        state.dataSource = pageData.dataSource as any;
-        state.pagination = pageData.pagination;
-      }
+      // if (isNull(state.dataSource)) {
+      //   const pageData: BasePageData<RecordType> = foundation.getCurrentPageData(props.dataSource);
+      //   state.dataSource = pageData.dataSource as any;
+      //   state.pagination = pageData.pagination;
+      // }
       // TODO 拿到state的原始数据
       const stateObj = { ...toRaw(state) };
 

@@ -601,6 +601,19 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
     }
   };
 
+  const handlePortalFocus = (e: FocusEvent) => {
+    if (props.stopPropagation) {
+      stopPropagation(e);
+    }
+  }
+
+  const handlePortalBlur = (e: FocusEvent) => {
+    if (props.stopPropagation) {
+      stopPropagation(e);
+    }
+  }
+
+
   const handlePortalInnerKeyDown = (e: KeyboardEvent) => {
     foundation.handleContainerKeydown(e);
   };
@@ -690,6 +703,8 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
           style={portalInnerStyle}
           ref={containerEl}
           onClick={handlePortalInnerClick}
+          onFocus={handlePortalFocus}
+          onBlur={handlePortalBlur}
           onMousedown={handlePortalMouseDown}
           onKeydown={handlePortalInnerKeyDown}
         >

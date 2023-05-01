@@ -86,6 +86,7 @@ export interface InputProps
   minlength?: number;
   maxlength?: number;
   preventScroll?: boolean;
+  borderless?: boolean;
 }
 
 export interface InputState {
@@ -141,6 +142,7 @@ const propTypes = {
   inputStyle: PropTypes.object,
   getValueLength: PropTypes.func,
   preventScroll: PropTypes.bool,
+  borderless: PropTypes.bool,
 
   minlength: Number,
   maxlength: Number,
@@ -169,6 +171,7 @@ const defaultProps = {
   onKeyPress: noop,
   onEnterPress: noop,
   validateStatus: 'default',
+  borderless: false,
 };
 export const VuePropsType = vuePropsMake(propTypes, defaultProps);
 
@@ -501,6 +504,7 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
       getValueLength,
       defaultValue,
       preventScroll,
+      borderless,
       ...rest
     } = props;
     const { value, isFocus, minlength: stateMinLength } = state;
@@ -526,6 +530,7 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
       [`${wrapperPrefix}-modebtn`]: mode === 'password',
       [`${wrapperPrefix}-hidden`]: type === 'hidden',
       [`${wrapperPrefix}-${size}`]: size,
+      [`${prefixCls}-borderless`]: borderless
     });
     const inputCls = cls(prefixCls, {
       [`${prefixCls}-${size}`]: size,

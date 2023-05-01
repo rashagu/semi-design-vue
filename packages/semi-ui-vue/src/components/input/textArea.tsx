@@ -36,6 +36,7 @@ type OmitTextareaAttr =
 export interface TextAreaProps extends Omit<TextareaHTMLAttributes, OmitTextareaAttr> {
   style?: CSSProperties;
   autosize?: boolean;
+  borderless?: boolean;
   placeholder?: string;
   value?: string;
   rows?: number;
@@ -79,6 +80,7 @@ export interface TextAreaState {
 
 const propTypes = {
   autosize: PropTypes.bool,
+  borderless: PropTypes.bool,
   placeholder: PropTypes.string,
   value: PropTypes.string,
   rows: PropTypes.number,
@@ -149,6 +151,7 @@ const propTypes = {
 
 const defaultProps = {
   autosize: false,
+  borderless: false,
   rows: 4,
   cols: 20,
   showCounter: false,
@@ -365,6 +368,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
       maxlength,
       minlength,
       showClear,
+      borderless,
       ...rest
     } = props;
     const {isFocus, value, minlength: stateMinLength} = state;
@@ -372,6 +376,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
       className,
       `${prefixCls}-textarea-wrapper`,
       {
+        [`${prefixCls}-textarea-borderless`]: borderless,
         [`${prefixCls}-textarea-wrapper-disabled`]: disabled,
         [`${prefixCls}-textarea-wrapper-readonly`]: readonly,
         [`${prefixCls}-textarea-wrapper-${validateStatus}`]: Boolean(validateStatus),

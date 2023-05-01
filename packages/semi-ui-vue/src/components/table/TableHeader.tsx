@@ -2,7 +2,9 @@
 import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import * as PropTypes from '../PropTypes';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/table/constants';
-import { noop, isFunction } from 'lodash';
+import { noop, isFunction, get } from 'lodash';
+import { shouldShowEllipsisTitle } from '@douyinfe/semi-foundation/table/utils';
+
 import TableHeaderRow from './TableHeaderRow';
 import { Fixed, TableComponents, OnHeaderRow } from './interface';
 import {defineComponent, h, reactive, useSlots} from "vue";
@@ -64,6 +66,11 @@ function parseHeaderRows(columns: any[]) {
             rows[rowIndex].push(cell);
 
             currentColIndex += colSpan;
+            const ellipsis = column?.ellipsis;
+            const shouldShowTitle = shouldShowEllipsisTitle(ellipsis);
+            if (shouldShowTitle && typeof cell.children === 'string') {
+                cell.title = cell.children;
+            }
 
             return colSpan;
         });
@@ -187,5 +194,6 @@ export interface TableHeaderCell {
     hasSubColumns?: boolean;
     rowSpan?: number;
     colSpan?: number;
-    colEnd?: number
+    colEnd?: number;
+    title?: string
 }

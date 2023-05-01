@@ -194,6 +194,7 @@ const propTypes = {
     'aria-labelledby': PropTypes.string,
     'aria-required': PropTypes.bool,
     'aria-label': PropTypes.string,
+    borderless: PropTypes.bool,
     loadedKeys: PropTypes.string,
     loadData: PropTypes.func,
     onLoad: PropTypes.func,
@@ -268,12 +269,14 @@ const propTypes = {
     showRestTagsPopover: PropTypes.bool,
     restTagsPopoverProps: PropTypes.object,
     preventScroll: PropTypes.bool,
+    clickTriggerToHide: PropTypes.bool,
 
     dropdownMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
     position: PropTypes.string,
 };
 
 const defaultProps: Partial<TreeSelectProps> = {
+    borderless: false,
     searchPosition: strings.SEARCH_POSITION_DROPDOWN,
     arrowIcon: <IconChevronDown />,
     autoExpandParent: false,
@@ -299,7 +302,8 @@ const defaultProps: Partial<TreeSelectProps> = {
     clickToHide: true,
     searchAutoFocus: false,
     checkRelation: 'related',
-    'aria-label': 'TreeSelect'
+    'aria-label': 'TreeSelect',
+    clickTriggerToHide: true,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
@@ -1054,6 +1058,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             leafOnly,
             searchPosition,
             triggerRender,
+            borderless
         } = props;
         const { inputValue, selectedKeys, checkedKeys, keyEntities, isFocus } = state;
         const filterable = Boolean(filterTreeNode);
@@ -1072,6 +1077,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
           cls(
             prefixcls,
             {
+                [`${prefixcls}-borderless`]: borderless,
                 [`${prefixcls}-focus`]: isFocus,
                 [`${prefixcls}-disabled`]: disabled,
                 [`${prefixcls}-single`]: !multiple,

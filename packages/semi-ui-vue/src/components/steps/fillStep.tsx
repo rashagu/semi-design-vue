@@ -100,22 +100,20 @@ const FillStep = defineComponent<FillStepProps>((props, {}) => {
         [`${prefixCls}-icon`]: 'icon' in getProps(props),
         [`${prefixCls}-plain`]: !('icon' in getProps(props)),
         [`${prefixCls}-icon-process`]: progress,
+        [`${prefixCls}-hover`]: onChange || onClick,
       });
 
       return inner ? <div class={cls}>{inner}</div> : null;
     };
+
     const handleClick = (e: MouseEvent) => {
-      if (isFunction(onClick)) {
-        onClick(e);
-      }
-      onChange();
+      onClick?.(e);
+      onChange?.();
     };
     const handleKeyDown = (e) => {
       if (e.key === 'Enter') {
-        if (isFunction(onKeyDown)) {
-          onKeyDown(e);
-        }
-        onChange();
+        onKeyDown?.(e);
+        onChange?.();
       }
     };
     return (
@@ -127,6 +125,7 @@ const FillStep = defineComponent<FillStepProps>((props, {}) => {
         class={classnames({
           [prefixCls]: true,
           [`${prefixCls}-${status}`]: Boolean(status),
+          [`${prefixCls}-${status}-hover`]: Boolean(status) && (onChange || onClick),
           [`${prefixCls}-clickable`]: onClick,
         }, className)}
         style={style}
