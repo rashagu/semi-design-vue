@@ -179,6 +179,7 @@ const propTypes = {
   expandRowByClick: PropTypes.bool, // TODO: future api
   getVirtualizedListRef: PropTypes.func, // TODO: future api
   bodyWrapperRef: [PropTypes.func, PropTypes.object],
+  direction: PropTypes.string,
 };
 export { propTypes as TablePropTypes };
 const defaultProps = {
@@ -1513,6 +1514,9 @@ function Table<RecordType extends Record<string, any>>() {
         getVirtualizedListRef,
         setBodyHasScrollbar: setBodyHasScrollbar,
       };
+      if (props.direction){
+        tableContextValue.direction = props.direction
+      }
       return (
         <div
           ref={rootWrapRef}
@@ -1521,7 +1525,7 @@ function Table<RecordType extends Record<string, any>>() {
           style={wrapStyle}
           id={id}
         >
-          <TableContextProvider {...tableContextValue} direction={props.direction}>
+          <TableContextProvider {...tableContextValue}>
             <Spin spinning={loading} size="large">
               <div ref={wrapRef} class={wrapCls}>
                 <Fragment key={'pagination-top'}>

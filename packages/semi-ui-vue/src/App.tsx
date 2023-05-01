@@ -117,7 +117,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DescriptionsDemo />*/}
         {/*<CollapseDemo />*/}
         {/*<CollapsibleDemo />*/}
-        <CarouselDemo/>
+        {/*<CarouselDemo/>*/}
         {/*<StepsDemo />*/}
         {/*<BacktopDemo />*/}
         {/*<AnchorDemo />*/}
@@ -200,7 +200,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<GridTest />*/}
         {/*<LayoutTest/>*/}
         {/*<SpaceTest/>*/}
-        {/*<PopoverTest />*/}
+        <PopoverTest />
         {/*<NavigationDemo />*/}
         <div class={'aa'}>123</div>
       </ConfigProvider>

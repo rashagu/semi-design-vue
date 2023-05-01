@@ -15,7 +15,8 @@ export const vuePropsType = {
   getHeadWidths: PropTypes.func,
   getCellWidths: PropTypes.func,
   getVirtualizedListRef: [PropTypes.func, PropTypes.object],
-  setBodyHasScrollbar: PropTypes.func
+  setBodyHasScrollbar: PropTypes.func,
+  direction: PropTypes.string,
 };
 const TableContextProvider = defineComponent<TableContextProps>((props, {}) => {
   const slots = useSlots();
@@ -37,10 +38,6 @@ const TableContextProvider = defineComponent<TableContextProps>((props, {}) => {
   }));
 
   return () => {
-
-
-
-
     return <Context.Provider value={tableContextValue.value}>{{default: slots.default}}</Context.Provider>;
   };
 });

@@ -163,7 +163,7 @@ const propTypes = {
   guardFocus: PropTypes.bool,
   returnFocusOnClose: PropTypes.bool,
   preventScroll: PropTypes.bool,
-
+  disableFocusListener:  PropTypes.bool,
   name: String,
 
   cancelText: String,

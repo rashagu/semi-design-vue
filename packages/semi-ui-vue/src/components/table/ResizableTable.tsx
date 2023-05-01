@@ -64,6 +64,7 @@ export const vuePropsType = {
     onHeaderRow: PropTypes.func,
     onRow: PropTypes.func,
     sticky: PropTypes.element,
+    direction: PropTypes.string,
 };
 const ResizableTable = defineComponent<TableProps>((props, {}) => {
     const slots = useSlots();

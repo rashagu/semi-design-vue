@@ -27,7 +27,7 @@ gulp.task('buildSS', async function moveScss() {
       build:{
         outDir: outDir.join('/').replaceAll('src/components','dist'),
         emptyOutDir: false,
-        sourcemap: 'hidden',
+        sourcemap: true,
         lib: {
           entry: pathSS,
           formats: ['es'],
