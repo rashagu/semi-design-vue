@@ -1,5 +1,18 @@
 # @kousum/semi-ui-vue
 
+## 0.4.0
+
+### Minor Changes
+
+- ac65def: semi 2.34.0
+
+### Patch Changes
+
+- Updated dependencies [ac65def]
+  - @kousum/semi-animation-vue@0.4.0
+  - @kousum/semi-icons-vue@0.4.0
+  - @kousum/semi-illustrations-vue@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes

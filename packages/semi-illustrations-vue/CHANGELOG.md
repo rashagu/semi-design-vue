@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.4.0
+
+### Minor Changes
+
+- ac65def: semi 2.34.0
+
 ## 0.3.0
 
 ### Minor Changes
