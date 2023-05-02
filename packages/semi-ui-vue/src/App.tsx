@@ -36,7 +36,7 @@ import InputNumberDemo from "./components/inputNumber/__test__/InputNumberDemo";
 import SliderDemo from "./components/slider/__test__/SliderDemo";
 import DividerDemo from "./components/divider/__test__/DividerDemo";
 import RatingDemo from "./components/rating/__test__/RatingDemo";
-import TreeDemo from "./components/tree/__test__/TreeDemo";
+import TreeDemo from "./components/tree/__test__/TreeAllDemo";
 import TreeCheckDemo from "./components/tree/__test__/TreeCheckDemo";
 import TreeSelectDemo from "./components/treeSelect/__test__/TreeSelectDemo";
 import FormDemo from "./components/form/__test__/FormDemo";
