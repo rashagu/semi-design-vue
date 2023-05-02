@@ -53,6 +53,7 @@ const TreeDemo = defineComponent<ExampleProps>((props, {}) => {
         defaultExpandAll
         style={style}
         virtualize={{
+          height: 300,
           itemSize: 28,
         }}
       />
