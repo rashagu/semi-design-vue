@@ -32,8 +32,8 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@kousum/semi-icons-vue": "^0.2.2",
-    "@kousum/semi-ui-vue": "^0.2.2",
+    "@kousum/semi-icons-vue": "^0.4.0",
+    "@kousum/semi-ui-vue": "^0.4.0",
     "@storybook/addon-essentials": "^7.0.0-beta.38",
     "@storybook/addon-interactions": "^7.0.0-beta.38",
     "@storybook/addon-links": "^7.0.0-beta.38",
