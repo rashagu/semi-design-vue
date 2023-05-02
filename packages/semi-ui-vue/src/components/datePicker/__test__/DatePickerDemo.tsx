@@ -47,7 +47,7 @@ const DatePickerDemo = defineComponent<ExampleProps>((props, {}) => {
       {/*// @ts-ignore*/}
       <Month locale={Zh_CN['DatePicker']} ></Month>
       {/*// @ts-ignore*/}
-      <YearAndMonth locale={Zh_CN['DatePicker']} ></YearAndMonth>
+      <YearAndMonth locale={Zh_CN['DatePicker']} currentYear={{ left: 0,  right: 0 }} currentMonth={{ left: 0,  right: 0 }}></YearAndMonth>
       <Navigation></Navigation>
     </div>
   )

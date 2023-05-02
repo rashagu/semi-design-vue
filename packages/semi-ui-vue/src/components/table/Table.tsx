@@ -225,6 +225,11 @@ function Table<RecordType extends Record<string, any>>() {
     let position!: BodyScrollPosition;
     let { context } = useTableContext();
 
+
+    let cachedFilteredSortedDataSource: RecordType[] = [];
+    let cachedFilteredSortedRowKeys: BaseRowKeyType[] = [];
+    let cachedFilteredSortedRowKeysSet: Set<string | number> = new Set();
+
     // columns cannot be deepClone, otherwise the comparison will be false
     const columns = getColumns(props.columns, props.children);
     const cachedflattenColumns = flattenColumns(columns);
@@ -475,9 +480,6 @@ function Table<RecordType extends Record<string, any>>() {
 
     let debouncedWindowResize = debounce(handleWindowResize, 150);
 
-    let cachedFilteredSortedDataSource: RecordType[] = [];
-    let cachedFilteredSortedRowKeys: BaseRowKeyType[] = [];
-    let cachedFilteredSortedRowKeysSet: Set<string | number> = new Set();
 
     function getDerivedStateFromProps(props: NormalTableProps) {
       const willUpdateStates: Partial<NormalTableState> = {};

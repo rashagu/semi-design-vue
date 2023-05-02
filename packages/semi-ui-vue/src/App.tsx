@@ -156,7 +156,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<WithFieldDemo2/>*/}
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
-        {/*<TreeDemo />*/}
+        <TreeDemo />
+        <div style={{backgroundColor: 'red', width: 300, height: 300}}>
+
+        </div>
         {/*<VirtualizeTreeDemo />*/}
         {/*<RatingDemo />*/}
         {/*<DividerDemo/>*/}
@@ -200,7 +203,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<GridTest />*/}
         {/*<LayoutTest/>*/}
         {/*<SpaceTest/>*/}
-        <PopoverTest />
+        {/*<PopoverTest />*/}
         {/*<NavigationDemo />*/}
         <div class={'aa'}>123</div>
       </ConfigProvider>
