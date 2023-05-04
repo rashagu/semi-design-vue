@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/popconfirm/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-popconfirm`,\n  POPOVER: `${BASE_CLASS_PREFIX}-popconfirm-popover`\n};\nconst strings = {\n  POSITION_SET: ['top', 'topLeft', 'topRight', 'left', 'leftTop', 'leftBottom', 'right', 'rightTop', 'rightBottom', 'bottom', 'bottomLeft', 'bottomRight', 'leftTopOver', 'rightTopOver'],\n  TRIGGER_SET: ['hover', 'focus', 'click', 'custom']\n};\nconst numbers = {\n  SPACING: 4,\n  DEFAULT_Z_INDEX: 1030\n};\nexport { cssClasses, strings, numbers };"],
+  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AAAA,EACX,SAAS,GAAG;AACd;AACA,IAAM,UAAU;AAAA,EACd,cAAc,CAAC,OAAO,WAAW,YAAY,QAAQ,WAAW,cAAc,SAAS,YAAY,eAAe,UAAU,cAAc,eAAe,eAAe,cAAc;AAAA,EACtL,aAAa,CAAC,SAAS,SAAS,SAAS,QAAQ;AACnD;AACA,IAAM,UAAU;AAAA,EACd,SAAS;AAAA,EACT,iBAAiB;AACnB;",
+  "names": []
+}

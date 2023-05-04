@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/descriptions/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-descriptions`\n};\nconst strings = {\n  ALIGN_SET: ['left', 'justify', 'plain', 'center'],\n  SIZE_SET: ['small', 'medium', 'large']\n};\nconst numbers = {};\nexport { cssClasses, strings, numbers };"],
+  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,WAAW,CAAC,QAAQ,WAAW,SAAS,QAAQ;AAAA,EAChD,UAAU,CAAC,SAAS,UAAU,OAAO;AACvC;AACA,IAAM,UAAU,CAAC;",
+  "names": []
+}

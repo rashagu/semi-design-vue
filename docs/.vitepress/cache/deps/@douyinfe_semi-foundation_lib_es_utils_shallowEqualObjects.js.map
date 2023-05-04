@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/shallowEqualObjects.js"],
+  "sourcesContent": ["export default function shallowEqualObjects(objA, objB) {\n  if (objA === objB) {\n    return true;\n  }\n\n  if (!objA || !objB) {\n    return false;\n  }\n\n  const aKeys = Object.keys(objA);\n  const bKeys = Object.keys(objB);\n  const len = aKeys.length;\n\n  if (bKeys.length !== len) {\n    return false;\n  }\n\n  for (let i = 0; i < len; i++) {\n    const key = aKeys[i];\n\n    if (objA[key] !== objB[key] || !Object.prototype.hasOwnProperty.call(objB, key)) {\n      return false;\n    }\n  }\n\n  return true;\n}"],
+  "mappings": ";;;AAAe,SAAR,oBAAqC,MAAM,MAAM;AACtD,MAAI,SAAS,MAAM;AACjB,WAAO;AAAA,EACT;AAEA,MAAI,CAAC,QAAQ,CAAC,MAAM;AAClB,WAAO;AAAA,EACT;AAEA,QAAM,QAAQ,OAAO,KAAK,IAAI;AAC9B,QAAM,QAAQ,OAAO,KAAK,IAAI;AAC9B,QAAM,MAAM,MAAM;AAElB,MAAI,MAAM,WAAW,KAAK;AACxB,WAAO;AAAA,EACT;AAEA,WAAS,IAAI,GAAG,IAAI,KAAK,KAAK;AAC5B,UAAM,MAAM,MAAM,CAAC;AAEnB,QAAI,KAAK,GAAG,MAAM,KAAK,GAAG,KAAK,CAAC,OAAO,UAAU,eAAe,KAAK,MAAM,GAAG,GAAG;AAC/E,aAAO;AAAA,IACT;AAAA,EACF;AAEA,SAAO;AACT;",
+  "names": []
+}

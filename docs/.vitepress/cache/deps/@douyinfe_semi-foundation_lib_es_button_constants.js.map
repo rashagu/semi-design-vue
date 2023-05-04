@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/button/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-button`\n};\nconst strings = {\n  sizes: ['default', 'small', 'large'],\n  iconPositions: ['left', 'right'],\n  htmlTypes: ['button', 'reset', 'submit'],\n  btnTypes: ['primary', 'secondary', 'tertiary', 'warning', 'danger'],\n  themes: ['solid', 'borderless', 'light'],\n  DEFAULT_ICON_SIZE: 'default',\n  DEFAULT_ICON_POSITION: 'left'\n};\nconst numbers = {};\nexport { cssClasses, strings, numbers };"],
+  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,OAAO,CAAC,WAAW,SAAS,OAAO;AAAA,EACnC,eAAe,CAAC,QAAQ,OAAO;AAAA,EAC/B,WAAW,CAAC,UAAU,SAAS,QAAQ;AAAA,EACvC,UAAU,CAAC,WAAW,aAAa,YAAY,WAAW,QAAQ;AAAA,EAClE,QAAQ,CAAC,SAAS,cAAc,OAAO;AAAA,EACvC,mBAAmB;AAAA,EACnB,uBAAuB;AACzB;AACA,IAAM,UAAU,CAAC;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/datePicker/_utils/isValidTimeZone.js"],
+  "sourcesContent": ["export default function isValidTimeZone(timeZone) {\n  return ['string', 'number'].includes(typeof timeZone) && timeZone !== '';\n}"],
+  "mappings": ";AAAe,SAAR,gBAAiC,UAAU;AAChD,SAAO,CAAC,UAAU,QAAQ,EAAE,SAAS,OAAO,QAAQ,KAAK,aAAa;AACxE;",
+  "names": []
+}

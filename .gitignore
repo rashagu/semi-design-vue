@@ -10,5 +10,4 @@ coverage/
 .idea
 *.log
 /.npmrc
-/docs/
 /storybook-static/

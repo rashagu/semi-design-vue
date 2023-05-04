@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/pagination/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-page`\n};\nconst strings = {};\nconst numbers = {\n  PAGE_SHOW_MAX: 7,\n  REST_PAGE_SHOW_MAX: 5,\n  DEFAULT_PAGE_SIZE: 10,\n  PAGE_SIZE_OPTION: [10, 20, 40, 100],\n  REST_PAGE_MAX_SIZE: 1000000\n};\nexport { cssClasses, strings, numbers };"],
+  "mappings": ";;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU,CAAC;AACjB,IAAM,UAAU;AAAA,EACd,eAAe;AAAA,EACf,oBAAoB;AAAA,EACpB,mBAAmB;AAAA,EACnB,kBAAkB,CAAC,IAAI,IAAI,IAAI,GAAG;AAAA,EAClC,oBAAoB;AACtB;",
+  "names": []
+}

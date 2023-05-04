@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/switch/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-switch`,\n  FOCUS: `${BASE_CLASS_PREFIX}-switch-focus`,\n  LARGE: `${BASE_CLASS_PREFIX}-switch-large`,\n  SMALL: `${BASE_CLASS_PREFIX}-switch-small`,\n  CHECKED: `${BASE_CLASS_PREFIX}-switch-checked`,\n  DISABLED: `${BASE_CLASS_PREFIX}-switch-disabled`,\n  ACTIVE: `${BASE_CLASS_PREFIX}-switch-active`,\n  KNOB: `${BASE_CLASS_PREFIX}-switch-knob`,\n  NATIVE_CONTROL: `${BASE_CLASS_PREFIX}-switch-native-control`,\n  CHECKED_TEXT: `${BASE_CLASS_PREFIX}-switch-checked-text`,\n  UNCHECKED_TEXT: `${BASE_CLASS_PREFIX}-switch-unchecked-text`,\n  LOADING_SPIN: `${BASE_CLASS_PREFIX}-switch-loading-spin`,\n  LOADING: `${BASE_CLASS_PREFIX}-switch-loading`\n};\nconst strings = {\n  SIZE_MAP: ['default', 'small', 'large']\n};\nexport { cssClasses, strings };"],
+  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AAAA,EACX,OAAO,GAAG;AAAA,EACV,OAAO,GAAG;AAAA,EACV,OAAO,GAAG;AAAA,EACV,SAAS,GAAG;AAAA,EACZ,UAAU,GAAG;AAAA,EACb,QAAQ,GAAG;AAAA,EACX,MAAM,GAAG;AAAA,EACT,gBAAgB,GAAG;AAAA,EACnB,cAAc,GAAG;AAAA,EACjB,gBAAgB,GAAG;AAAA,EACnB,cAAc,GAAG;AAAA,EACjB,SAAS,GAAG;AACd;AACA,IAAM,UAAU;AAAA,EACd,UAAU,CAAC,WAAW,SAAS,OAAO;AACxC;",
+  "names": []
+}

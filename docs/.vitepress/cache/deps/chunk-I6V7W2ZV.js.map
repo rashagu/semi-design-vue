@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/datePicker/_utils/isValidDate.js", "../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/isNumber.js", "../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/datePicker/_utils/isTimestamp.js"],
+  "sourcesContent": ["export default function isValidDate(date) {\n  return date && Object.prototype.toString.call(date) === '[object Date]' && !isNaN(date);\n}", "export default function isNumber(value) {\n  return typeof value === 'number' || Object.prototype.toString.call(value) === '[object Number]';\n}", "import isValidDate from './isValidDate';\nimport isNumber from '../../utils/isNumber';\nexport default function isTimestamp(ts) {\n  return isNumber(ts) && isValidDate(new Date(ts));\n}"],
+  "mappings": ";AAAe,SAAR,YAA6B,MAAM;AACxC,SAAO,QAAQ,OAAO,UAAU,SAAS,KAAK,IAAI,MAAM,mBAAmB,CAAC,MAAM,IAAI;AACxF;;;ACFe,SAAR,SAA0B,OAAO;AACtC,SAAO,OAAO,UAAU,YAAY,OAAO,UAAU,SAAS,KAAK,KAAK,MAAM;AAChF;;;ACAe,SAAR,YAA6B,IAAI;AACtC,SAAO,SAAS,EAAE,KAAK,YAAY,IAAI,KAAK,EAAE,CAAC;AACjD;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/avatar/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-avatar`\n};\nconst strings = {\n  SHAPE: ['circle', 'square'],\n  SIZE: ['extra-extra-small', 'extra-small', 'small', 'default', 'medium', 'large', 'extra-large'],\n  // eslint-disable-next-line max-len\n  COLOR: ['grey', 'red', 'pink', 'purple', 'violet', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'white'],\n  OVERLAP_FROM: ['start', 'end']\n};\nexport { cssClasses, strings };"],
+  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,OAAO,CAAC,UAAU,QAAQ;AAAA,EAC1B,MAAM,CAAC,qBAAqB,eAAe,SAAS,WAAW,UAAU,SAAS,aAAa;AAAA;AAAA,EAE/F,OAAO,CAAC,QAAQ,OAAO,QAAQ,UAAU,UAAU,UAAU,QAAQ,cAAc,QAAQ,QAAQ,SAAS,eAAe,QAAQ,UAAU,SAAS,UAAU,OAAO;AAAA,EACvK,cAAc,CAAC,SAAS,KAAK;AAC/B;",
+  "names": []
+}

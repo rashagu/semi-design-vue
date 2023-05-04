@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/datePicker/_utils/getDefaultFormatToken.js"],
+  "sourcesContent": ["import { strings } from '../constants';\nconst defaultFormatTokens = {\n  date: strings.FORMAT_FULL_DATE,\n  dateTime: strings.FORMAT_DATE_TIME,\n  dateRange: strings.FORMAT_FULL_DATE,\n  dateTimeRange: strings.FORMAT_DATE_TIME,\n  month: strings.FORMAT_YEAR_MONTH,\n  monthRange: strings.FORMAT_YEAR_MONTH\n};\n\nconst getDefaultFormatToken = type => defaultFormatTokens;\n\nexport function getDefaultFormatTokenByType(type) {\n  return type && defaultFormatTokens[type];\n}\nexport default getDefaultFormatToken;"],
+  "mappings": ";;;;;AACA,IAAM,sBAAsB;AAAA,EAC1B,MAAM,QAAQ;AAAA,EACd,UAAU,QAAQ;AAAA,EAClB,WAAW,QAAQ;AAAA,EACnB,eAAe,QAAQ;AAAA,EACvB,OAAO,QAAQ;AAAA,EACf,YAAY,QAAQ;AACtB;AAEA,IAAM,wBAAwB,UAAQ;AAE/B,SAAS,4BAA4B,MAAM;AAChD,SAAO,QAAQ,oBAAoB,IAAI;AACzC;AACA,IAAO,gCAAQ;",
+  "names": []
+}

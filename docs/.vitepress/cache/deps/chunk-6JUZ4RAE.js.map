@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/anchor/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-anchor`\n};\nconst strings = {\n  SIZE: ['small', 'default'],\n  SLIDE_COLOR: ['primary', 'tertiary', 'muted'],\n  MAX_WIDTH: '200px',\n  MAX_HEIGHT: '750px',\n  POSITION_SET: ['top', 'topLeft', 'topRight', 'left', 'leftTop', 'leftBottom', 'right', 'rightTop', 'rightBottom', 'bottom', 'bottomLeft', 'bottomRight', 'leftTopOver', 'rightTopOver']\n};\nexport { cssClasses, strings };"],
+  "mappings": ";;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,MAAM,CAAC,SAAS,SAAS;AAAA,EACzB,aAAa,CAAC,WAAW,YAAY,OAAO;AAAA,EAC5C,WAAW;AAAA,EACX,YAAY;AAAA,EACZ,cAAc,CAAC,OAAO,WAAW,YAAY,QAAQ,WAAW,cAAc,SAAS,YAAY,eAAe,UAAU,cAAc,eAAe,eAAe,cAAc;AACxL;",
+  "names": []
+}

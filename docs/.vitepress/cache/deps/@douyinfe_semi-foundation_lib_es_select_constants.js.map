@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/select/constants.js"],
+  "sourcesContent": ["import { VALIDATE_STATUS, BASE_CLASS_PREFIX } from '../base/constants';\nimport { strings as tooltipStrings } from '../tooltip/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-select`,\n  PREFIX_OPTION: `${BASE_CLASS_PREFIX}-select-option`,\n  PREFIX_GROUP: `${BASE_CLASS_PREFIX}-select-group`\n};\nconst strings = {\n  SIZE_SET: ['small', 'large', 'default'],\n  POSITION_SET: tooltipStrings.POSITION_SET,\n  MODE_SELECT: 'select',\n  MODE_AUTOCOMPLETE: 'autoComplete',\n  // MODE_TAGS: 'tags',\n  STATUS: VALIDATE_STATUS\n};\nconst numbers = {\n  LIST_HEIGHT: 270\n};\nexport { cssClasses, strings, numbers };"],
+  "mappings": ";;;;;;;;;;AAEA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AAAA,EACX,eAAe,GAAG;AAAA,EAClB,cAAc,GAAG;AACnB;AACA,IAAMA,WAAU;AAAA,EACd,UAAU,CAAC,SAAS,SAAS,SAAS;AAAA,EACtC,cAAc,QAAe;AAAA,EAC7B,aAAa;AAAA,EACb,mBAAmB;AAAA;AAAA,EAEnB,QAAQ;AACV;AACA,IAAM,UAAU;AAAA,EACd,aAAa;AACf;",
+  "names": ["strings"]
+}

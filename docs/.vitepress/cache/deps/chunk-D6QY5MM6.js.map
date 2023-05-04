@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_copyArray.js"],
+  "sourcesContent": ["/**\n * Copies the values of `source` to `array`.\n *\n * @private\n * @param {Array} source The array to copy values from.\n * @param {Array} [array=[]] The array to copy values to.\n * @returns {Array} Returns `array`.\n */\nfunction copyArray(source, array) {\n  var index = -1,\n      length = source.length;\n\n  array || (array = Array(length));\n  while (++index < length) {\n    array[index] = source[index];\n  }\n  return array;\n}\n\nmodule.exports = copyArray;\n"],
+  "mappings": ";;;;;AAAA;AAAA;AAQA,aAAS,UAAU,QAAQ,OAAO;AAChC,UAAI,QAAQ,IACR,SAAS,OAAO;AAEpB,gBAAU,QAAQ,MAAM,MAAM;AAC9B,aAAO,EAAE,QAAQ,QAAQ;AACvB,cAAM,KAAK,IAAI,OAAO,KAAK;AAAA,MAC7B;AACA,aAAO;AAAA,IACT;AAEA,WAAO,UAAU;AAAA;AAAA;",
+  "names": []
+}

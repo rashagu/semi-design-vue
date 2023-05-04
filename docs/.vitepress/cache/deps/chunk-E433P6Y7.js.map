@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/arrayMove.js"],
+  "sourcesContent": ["export default function arrayMove(array, from, to) {\n  const newArray = array.slice();\n  newArray.splice(to < 0 ? newArray.length + to : to, 0, newArray.splice(from, 1)[0]);\n  return newArray;\n}"],
+  "mappings": ";AAAe,SAAR,UAA2B,OAAO,MAAM,IAAI;AACjD,QAAM,WAAW,MAAM,MAAM;AAC7B,WAAS,OAAO,KAAK,IAAI,SAAS,SAAS,KAAK,IAAI,GAAG,SAAS,OAAO,MAAM,CAAC,EAAE,CAAC,CAAC;AAClF,SAAO;AACT;",
+  "names": []
+}

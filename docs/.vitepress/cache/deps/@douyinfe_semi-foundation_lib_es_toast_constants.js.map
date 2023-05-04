@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/toast/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst PREFIX = `${BASE_CLASS_PREFIX}-toast`;\nconst cssClasses = {\n  PREFIX,\n  WRAPPER: `${PREFIX}-wrapper`,\n  LIST: `${PREFIX}-list`\n};\nconst strings = {\n  types: ['warning', 'success', 'info', 'error', 'default'],\n  themes: ['normal', 'light'],\n  directions: ['ltr', 'rtl']\n};\nconst numbers = {\n  duration: 3 // default close time, unit: s\n\n};\nexport { cssClasses, strings, numbers };"],
+  "mappings": ";;;;;;AACA,IAAM,SAAS,GAAG;AAClB,IAAM,aAAa;AAAA,EACjB;AAAA,EACA,SAAS,GAAG;AAAA,EACZ,MAAM,GAAG;AACX;AACA,IAAM,UAAU;AAAA,EACd,OAAO,CAAC,WAAW,WAAW,QAAQ,SAAS,SAAS;AAAA,EACxD,QAAQ,CAAC,UAAU,OAAO;AAAA,EAC1B,YAAY,CAAC,OAAO,KAAK;AAC3B;AACA,IAAM,UAAU;AAAA,EACd,UAAU;AAAA;AAEZ;",
+  "names": []
+}

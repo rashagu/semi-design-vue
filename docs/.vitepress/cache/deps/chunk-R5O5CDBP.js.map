@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isNull.js"],
+  "sourcesContent": ["/**\n * Checks if `value` is `null`.\n *\n * @static\n * @memberOf _\n * @since 0.1.0\n * @category Lang\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is `null`, else `false`.\n * @example\n *\n * _.isNull(null);\n * // => true\n *\n * _.isNull(void 0);\n * // => false\n */\nfunction isNull(value) {\n  return value === null;\n}\n\nmodule.exports = isNull;\n"],
+  "mappings": ";;;;;AAAA;AAAA;AAiBA,aAAS,OAAO,OAAO;AACrB,aAAO,UAAU;AAAA,IACnB;AAEA,WAAO,UAAU;AAAA;AAAA;",
+  "names": []
+}

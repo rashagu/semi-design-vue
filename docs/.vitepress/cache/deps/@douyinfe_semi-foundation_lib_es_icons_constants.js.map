@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/icons/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-icon`\n};\nconst strings = {\n  SIZE: ['extra-small', 'small', 'default', 'large', 'extra-large', 'custom'],\n  // use in svg xhref. No need to respond to the change of prefixCls, always constant\n  ICON_PREFIX: 'semi-icon-'\n};\nconst numbers = {};\nexport { cssClasses, strings, numbers };"],
+  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,MAAM,CAAC,eAAe,SAAS,WAAW,SAAS,eAAe,QAAQ;AAAA;AAAA,EAE1E,aAAa;AACf;AACA,IAAM,UAAU,CAAC;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/Store.js"],
+  "sourcesContent": ["/* istanbul ignore next */\nclass Store {\n  constructor(initialState) {\n    this._state = Object.assign({}, initialState);\n    this._listeners = [];\n  }\n\n  subscribe(listener) {\n    this._listeners.push(listener);\n\n    const unsubscribe = () => {\n      const index = this._listeners.indexOf(listener);\n\n      if (index > -1) {\n        this._listeners.splice(index, 1);\n      }\n    };\n\n    return unsubscribe;\n  }\n\n  setState(state) {\n    Object.assign(this._state, Object.assign({}, state));\n\n    for (const listener of this._listeners) {\n      if (typeof listener === 'function') {\n        listener(this._state);\n      }\n    }\n  }\n\n  getState() {\n    return this._state;\n  }\n\n}\n\nexport default Store;"],
+  "mappings": ";;;AACA,IAAM,QAAN,MAAY;AAAA,EACV,YAAY,cAAc;AACxB,SAAK,SAAS,OAAO,OAAO,CAAC,GAAG,YAAY;AAC5C,SAAK,aAAa,CAAC;AAAA,EACrB;AAAA,EAEA,UAAU,UAAU;AAClB,SAAK,WAAW,KAAK,QAAQ;AAE7B,UAAM,cAAc,MAAM;AACxB,YAAM,QAAQ,KAAK,WAAW,QAAQ,QAAQ;AAE9C,UAAI,QAAQ,IAAI;AACd,aAAK,WAAW,OAAO,OAAO,CAAC;AAAA,MACjC;AAAA,IACF;AAEA,WAAO;AAAA,EACT;AAAA,EAEA,SAAS,OAAO;AACd,WAAO,OAAO,KAAK,QAAQ,OAAO,OAAO,CAAC,GAAG,KAAK,CAAC;AAEnD,eAAW,YAAY,KAAK,YAAY;AACtC,UAAI,OAAO,aAAa,YAAY;AAClC,iBAAS,KAAK,MAAM;AAAA,MACtB;AAAA,IACF;AAAA,EACF;AAAA,EAEA,WAAW;AACT,WAAO,KAAK;AAAA,EACd;AAEF;AAEA,IAAO,gBAAQ;",
+  "names": []
+}

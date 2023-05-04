@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/cascader/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-cascader`,\n  PREFIX_OPTION: `${BASE_CLASS_PREFIX}-cascader-option`\n};\nconst strings = {\n  SIZE_SET: ['small', 'large', 'default'],\n  VALIDATE_STATUS: ['success', 'default', 'error', 'warning'],\n  IS_KEY: 'isKey',\n  IS_VALUE: 'isValue',\n  SHOW_NEXT_BY_CLICK: 'click',\n  SHOW_NEXT_BY_HOVER: 'hover',\n\n  /* Merge Type */\n  LEAF_ONLY_MERGE_TYPE: 'leafOnly',\n  AUTO_MERGE_VALUE_MERGE_TYPE: 'autoMergeValue',\n  NONE_MERGE_TYPE: 'none'\n};\nconst numbers = {};\nexport { cssClasses, strings, numbers };"],
+  "mappings": ";;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AAAA,EACX,eAAe,GAAG;AACpB;AACA,IAAM,UAAU;AAAA,EACd,UAAU,CAAC,SAAS,SAAS,SAAS;AAAA,EACtC,iBAAiB,CAAC,WAAW,WAAW,SAAS,SAAS;AAAA,EAC1D,QAAQ;AAAA,EACR,UAAU;AAAA,EACV,oBAAoB;AAAA,EACpB,oBAAoB;AAAA;AAAA,EAGpB,sBAAsB;AAAA,EACtB,6BAA6B;AAAA,EAC7B,iBAAiB;AACnB;AACA,IAAM,UAAU,CAAC;",
+  "names": []
+}

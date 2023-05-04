@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/sideSheet/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-sidesheet`,\n  DIALOG: `${BASE_CLASS_PREFIX}-modal`\n};\nconst strings = {\n  PLACEMENT: ['top', 'right', 'bottom', 'left'],\n  SIZE: ['small', 'medium', 'large'],\n  WIDTH: {\n    small: 448,\n    medium: 684,\n    large: 920\n  },\n  HEIGHT: 448\n};\nexport { cssClasses, strings };"],
+  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AAAA,EACX,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,WAAW,CAAC,OAAO,SAAS,UAAU,MAAM;AAAA,EAC5C,MAAM,CAAC,SAAS,UAAU,OAAO;AAAA,EACjC,OAAO;AAAA,IACL,OAAO;AAAA,IACP,QAAQ;AAAA,IACR,OAAO;AAAA,EACT;AAAA,EACA,QAAQ;AACV;",
+  "names": []
+}

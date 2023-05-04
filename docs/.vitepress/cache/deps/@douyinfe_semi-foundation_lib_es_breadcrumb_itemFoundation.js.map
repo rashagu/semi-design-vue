@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/breadcrumb/itemFoundation.js"],
+  "sourcesContent": ["import BaseFoundation from '../base/foundation';\nexport default class BreadcrumbItemFoundation extends BaseFoundation {\n  constructor(adapter) {\n    super(Object.assign({}, adapter));\n  }\n\n  handleClick(item, e) {\n    // Trigger its own onClick first, then trigger the parent\n    this._adapter.notifyClick(item, e);\n\n    this._adapter.notifyParent(item, e);\n  }\n\n}"],
+  "mappings": ";;;;;;;;;;;;;;;;AACA,IAAqB,2BAArB,cAAsD,mBAAe;AAAA,EACnE,YAAY,SAAS;AACnB,UAAM,OAAO,OAAO,CAAC,GAAG,OAAO,CAAC;AAAA,EAClC;AAAA,EAEA,YAAY,MAAM,GAAG;AAEnB,SAAK,SAAS,YAAY,MAAM,CAAC;AAEjC,SAAK,SAAS,aAAa,MAAM,CAAC;AAAA,EACpC;AAEF;",
+  "names": []
+}

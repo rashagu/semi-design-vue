@@ -23,6 +23,6 @@
     "types": ["vite/client", "node"],
     "noImplicitAny": false
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "docs/**/*.vue"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/semi-foundation/**/*.ts", "**/__test__/*"]
 }

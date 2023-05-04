@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/isBothNaN.js"],
+  "sourcesContent": ["/**\n * Determine whether both values are NaN\n * @param {*} a\n * @param {*} b\n * @returns {Boolean}\n */\nconst isBothNaN = (a, b) => {\n  const {\n    isNaN\n  } = Number;\n  return isNaN(a) && isNaN(b);\n};\n\nexport default isBothNaN;"],
+  "mappings": ";;;AAMA,IAAM,YAAY,CAAC,GAAG,MAAM;AAC1B,QAAM;AAAA,IACJ;AAAA,EACF,IAAI;AACJ,SAAO,MAAM,CAAC,KAAK,MAAM,CAAC;AAC5B;AAEA,IAAO,oBAAQ;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/autoComplete/constants.js"],
+  "sourcesContent": ["import { strings as tooltipStrings } from '../tooltip/constants';\nimport { BASE_CLASS_PREFIX, VALIDATE_STATUS } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-autocomplete`,\n  PREFIX_OPTION: `${BASE_CLASS_PREFIX}-autoComplete-option`,\n  PREFIX_GROUP: `${BASE_CLASS_PREFIX}-autoComplete-group`\n};\nconst strings = {\n  SIZE: ['small', 'large', 'default'],\n  POSITION: tooltipStrings.POSITION_SET,\n  OPTIONS: ['children', 'value'],\n  STATUS: VALIDATE_STATUS\n};\nexport { cssClasses, strings };"],
+  "mappings": ";;;;;;;;;;AAEA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AAAA,EACX,eAAe,GAAG;AAAA,EAClB,cAAc,GAAG;AACnB;AACA,IAAMA,WAAU;AAAA,EACd,MAAM,CAAC,SAAS,SAAS,SAAS;AAAA,EAClC,UAAU,QAAe;AAAA,EACzB,SAAS,CAAC,YAAY,OAAO;AAAA,EAC7B,QAAQ;AACV;",
+  "names": ["strings"]
+}

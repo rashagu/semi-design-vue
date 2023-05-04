@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/notification/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  WRAPPER: `${BASE_CLASS_PREFIX}-notification-wrapper`,\n  LIST: `${BASE_CLASS_PREFIX}-notification-list`,\n  NOTICE: `${BASE_CLASS_PREFIX}-notification-notice`\n};\nconst strings = {\n  types: ['warning', 'success', 'info', 'error', 'default'],\n  themes: ['normal', 'light'],\n  directions: ['ltr', 'rtl']\n};\nconst numbers = {\n  duration: 3 // default close time, unit: s\n\n};\nexport { cssClasses, strings, numbers };"],
+  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,SAAS,GAAG;AAAA,EACZ,MAAM,GAAG;AAAA,EACT,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,OAAO,CAAC,WAAW,WAAW,QAAQ,SAAS,SAAS;AAAA,EACxD,QAAQ,CAAC,UAAU,OAAO;AAAA,EAC1B,YAAY,CAAC,OAAO,KAAK;AAC3B;AACA,IAAM,UAAU;AAAA,EACd,UAAU;AAAA;AAEZ;",
+  "names": []
+}

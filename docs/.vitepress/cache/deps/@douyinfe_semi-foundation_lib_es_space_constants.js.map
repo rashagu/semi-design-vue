@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/space/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-space`\n};\nconst strings = {\n  ALIGN_SET: ['start', 'end', 'center', 'baseline'],\n  SPACING_LOOSE: 'loose',\n  SPACING_MEDIUM: 'medium',\n  SPACING_TIGHT: 'tight'\n};\nexport { cssClasses, strings };"],
+  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,WAAW,CAAC,SAAS,OAAO,UAAU,UAAU;AAAA,EAChD,eAAe;AAAA,EACf,gBAAgB;AAAA,EAChB,eAAe;AACjB;",
+  "names": []
+}

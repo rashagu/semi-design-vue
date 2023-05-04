@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/collapsible/foundation.js"],
+  "sourcesContent": ["import BaseFoundation from \"../base/foundation\";\n\nclass CollapsibleFoundation extends BaseFoundation {\n  constructor(adapter) {\n    super(Object.assign({}, adapter));\n\n    this.updateDOMInRenderTree = isInRenderTree => {\n      this._adapter.setDOMInRenderTree(isInRenderTree);\n    };\n\n    this.updateDOMHeight = domHeight => {\n      this._adapter.setDOMHeight(domHeight);\n    };\n\n    this.updateVisible = visible => {\n      this._adapter.setVisible(visible);\n    };\n\n    this.updateIsTransitioning = isTransitioning => {\n      this._adapter.setIsTransitioning(isTransitioning);\n    };\n  }\n\n}\n\nexport default CollapsibleFoundation;"],
+  "mappings": ";;;;;;;;;;;;;;;;AAEA,IAAM,wBAAN,cAAoC,mBAAe;AAAA,EACjD,YAAY,SAAS;AACnB,UAAM,OAAO,OAAO,CAAC,GAAG,OAAO,CAAC;AAEhC,SAAK,wBAAwB,oBAAkB;AAC7C,WAAK,SAAS,mBAAmB,cAAc;AAAA,IACjD;AAEA,SAAK,kBAAkB,eAAa;AAClC,WAAK,SAAS,aAAa,SAAS;AAAA,IACtC;AAEA,SAAK,gBAAgB,aAAW;AAC9B,WAAK,SAAS,WAAW,OAAO;AAAA,IAClC;AAEA,SAAK,wBAAwB,qBAAmB;AAC9C,WAAK,SAAS,mBAAmB,eAAe;AAAA,IAClD;AAAA,EACF;AAEF;AAEA,IAAOA,sBAAQ;",
+  "names": ["foundation_default"]
+}

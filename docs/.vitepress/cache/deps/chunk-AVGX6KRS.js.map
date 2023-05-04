@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/isElement.js"],
+  "sourcesContent": ["/* istanbul ignore next */\nexport default function isElement(obj) {\n  try {\n    // Using W3 DOM2 (works for FF, Opera and Chrome)\n    return obj instanceof HTMLElement;\n  } catch (e) {\n    // Browsers not supporting W3 DOM2 don't have HTMLElement and\n    // an exception is thrown and we end up here. Testing some\n    // properties that all elements have (works on IE7)\n    return typeof obj === 'object' && obj.nodeType === 1 && typeof obj.style === 'object' && typeof obj.ownerDocument === 'object';\n  }\n}"],
+  "mappings": ";AACe,SAAR,UAA2B,KAAK;AACrC,MAAI;AAEF,WAAO,eAAe;AAAA,EACxB,SAAS,GAAP;AAIA,WAAO,OAAO,QAAQ,YAAY,IAAI,aAAa,KAAK,OAAO,IAAI,UAAU,YAAY,OAAO,IAAI,kBAAkB;AAAA,EACxH;AACF;",
+  "names": []
+}

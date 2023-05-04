@@ -37,7 +37,7 @@ export const vuePropsType = {
 const Icon = defineComponent<IconProps>((props, {slots}) => {
 
   return ()=> {
-    const { spin = false, rotate, style, className, prefixCls = BASE_CLASS_PREFIX, type, size = 'default', ...restProps } = props;
+    const { svg, spin = false, rotate, style, className, prefixCls = BASE_CLASS_PREFIX, type, size = 'default', ...restProps } = props;
     const classes = cls(`${prefixCls}-icon`, {
       [`${prefixCls}-icon-extra-small`]: size === 'extra-small', // 8x8
       [`${prefixCls}-icon-small`]: size === 'small', // 12x12
@@ -60,7 +60,7 @@ const Icon = defineComponent<IconProps>((props, {slots}) => {
       style={outerStyle}
       {...restProps}
     >
-    {slots.default ? slots.default() : null}
+    {slots.default ? slots.default() : svg}
   </span>
   };
 

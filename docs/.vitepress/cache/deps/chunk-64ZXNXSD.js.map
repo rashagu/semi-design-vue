@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/progress/constants.js"],
+  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-progress`\n};\nconst strings = {\n  types: ['line', 'circle'],\n  DEFAULT_TYPE: 'line',\n  STROKE_DEFAULT: 'var(--semi-color-success)',\n  strokeLineCap: ['square', 'round'],\n  DEFAULT_LINECAP: 'round',\n  sizes: ['default', 'small', 'large'],\n  DEFAULT_SIZE: 'default',\n  directions: ['vertical', 'horizontal'],\n  DEFAULT_DIRECTION: 'horizontal'\n};\nconst numbers = {};\nexport { cssClasses, strings };"],
+  "mappings": ";;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,OAAO,CAAC,QAAQ,QAAQ;AAAA,EACxB,cAAc;AAAA,EACd,gBAAgB;AAAA,EAChB,eAAe,CAAC,UAAU,OAAO;AAAA,EACjC,iBAAiB;AAAA,EACjB,OAAO,CAAC,WAAW,SAAS,OAAO;AAAA,EACnC,cAAc;AAAA,EACd,YAAY,CAAC,YAAY,YAAY;AAAA,EACrC,mBAAmB;AACrB;",
+  "names": []
+}

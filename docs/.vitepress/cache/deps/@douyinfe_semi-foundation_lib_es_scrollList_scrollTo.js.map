@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/scrollList/scrollTo.js"],
+  "sourcesContent": ["import { Animation } from '@douyinfe/semi-animation';\n\nconst scrollTo = (element, to, duration) => {\n  const animation = new Animation({\n    from: {\n      scrollTop: element.scrollTop\n    },\n    to: {\n      scrollTop: to\n    }\n  }, {\n    duration\n  });\n  animation.on('frame', _ref => {\n    let {\n      scrollTop\n    } = _ref;\n    element.scrollTop = scrollTop;\n  }); // animation.start();\n\n  return animation;\n};\n\nexport default scrollTo;"],
+  "mappings": ";;;;;;;AAEA,IAAM,WAAW,CAAC,SAAS,IAAI,aAAa;AAC1C,QAAM,YAAY,IAAI,UAAU;AAAA,IAC9B,MAAM;AAAA,MACJ,WAAW,QAAQ;AAAA,IACrB;AAAA,IACA,IAAI;AAAA,MACF,WAAW;AAAA,IACb;AAAA,EACF,GAAG;AAAA,IACD;AAAA,EACF,CAAC;AACD,YAAU,GAAG,SAAS,UAAQ;AAC5B,QAAI;AAAA,MACF;AAAA,IACF,IAAI;AACJ,YAAQ,YAAY;AAAA,EACtB,CAAC;AAED,SAAO;AACT;AAEA,IAAO,mBAAQ;",
+  "names": []
+}

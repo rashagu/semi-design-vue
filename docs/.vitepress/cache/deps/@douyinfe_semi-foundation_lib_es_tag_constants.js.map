@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/tag/constants.js"],
+  "sourcesContent": ["/* eslint-disable max-len */\nimport { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-tag`\n};\nconst strings = {\n  TAG_SIZE: ['default', 'small', 'large'],\n  TAG_COLOR: ['grey', 'red', 'pink', 'purple', 'violet', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'white'],\n  TAG_TYPE: ['light', 'solid', 'ghost'],\n  AVATAR_SHAPE: ['square', 'circle']\n};\nexport { cssClasses, strings };"],
+  "mappings": ";;;;;;AAEA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,UAAU,CAAC,WAAW,SAAS,OAAO;AAAA,EACtC,WAAW,CAAC,QAAQ,OAAO,QAAQ,UAAU,UAAU,UAAU,QAAQ,cAAc,QAAQ,QAAQ,SAAS,eAAe,QAAQ,UAAU,SAAS,UAAU,OAAO;AAAA,EAC3K,UAAU,CAAC,SAAS,SAAS,OAAO;AAAA,EACpC,cAAc,CAAC,UAAU,QAAQ;AACnC;",
+  "names": []
+}
