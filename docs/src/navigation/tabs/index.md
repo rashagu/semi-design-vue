@@ -12,7 +12,7 @@ brief: 当内容需要分组并在不同模块页面中展示，可使用 Tabs �
 ### 如何引入
 
 ```jsx import
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -25,7 +25,7 @@ import { Tabs, TabPane } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -70,7 +70,7 @@ import { Tabs, TabPane } from '@douyinfe/semi-ui';
                     }}
                 >
                     <code>
-                        yarn add @douyinfe/semi-ui
+                        yarn add @kousum/semi-ui-vue
                     </code>
                 </pre>
             </TabPane>
@@ -98,7 +98,7 @@ import { Tabs, TabPane } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 () => (
     <Tabs type="button">
@@ -117,7 +117,7 @@ import { Tabs, TabPane } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tabs } from '@douyinfe/semi-ui';
+import { Tabs } from '@kousum/semi-ui-vue';
 
 class TabDemo extends React.Component {
     constructor() {
@@ -159,8 +159,8 @@ class TabDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
-import { IconFile, IconGlobe, IconHelpCircle } from '@douyinfe/semi-icons';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
+import { IconFile, IconGlobe, IconHelpCircle } from '@kousum/semi-icons-vue';
 
 () => (
     <Tabs>
@@ -207,8 +207,8 @@ import { IconFile, IconGlobe, IconHelpCircle } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane, RadioGroup, Radio } from '@douyinfe/semi-ui';
-import { IconFile, IconGlobe, IconHelpCircle } from '@douyinfe/semi-icons';
+import { Tabs, TabPane, RadioGroup, Radio } from '@kousum/semi-ui-vue';
+import { IconFile, IconGlobe, IconHelpCircle } from '@kousum/semi-icons-vue';
 
 class App extends React.Component {
     constructor() {
@@ -287,7 +287,7 @@ class App extends React.Component {
                                 }}
                             >
                                 <code>
-                                    yarn add @douyinfe/semi-ui
+                                    yarn add @kousum/semi-ui-vue
                                 </code>
                             </pre>
                         </div>
@@ -332,7 +332,7 @@ class App extends React.Component {
 
 ```jsx live=true dir=column
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -355,7 +355,7 @@ class App extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -382,7 +382,7 @@ class App extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane, Button } from '@douyinfe/semi-ui';
+import { Tabs, TabPane, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Tabs
@@ -416,7 +416,7 @@ import { Tabs, TabPane, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 () => (
     <Tabs
@@ -449,7 +449,7 @@ import { Tabs, TabPane } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Tabs, TabPane, ButtonGroup, Button } from '@douyinfe/semi-ui';
+import { Tabs, TabPane, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor(props) {
@@ -516,7 +516,7 @@ class App extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor(props){

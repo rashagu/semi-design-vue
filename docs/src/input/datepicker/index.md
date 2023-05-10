@@ -13,14 +13,14 @@ brief: 日期选择器用于帮助用户选择一个符合要求的、格式化�
 
 
 ```jsx import
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本使用
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker onChange={(date, dateString) => console.log(dateString)} />;
 ```
@@ -31,7 +31,7 @@ import { DatePicker } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -49,7 +49,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <DatePicker insetLabel="结束日期" style={{ width: 240 }} />;
@@ -62,7 +62,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker multiple={true} style={{ width: 240 }} />;
 ```
@@ -74,7 +74,7 @@ import { DatePicker } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -99,7 +99,7 @@ import { DatePicker } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker type="dateRange" style={{ width: 260 }} onChange={console.log} />;
 ```
@@ -115,7 +115,7 @@ import { DatePicker } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -152,7 +152,7 @@ insetInput 开启后包括以下功能：
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -194,7 +194,7 @@ version: >= 1.28.0
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => (
     <DatePicker
@@ -214,7 +214,7 @@ import { DatePicker } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => (
     <DatePicker
@@ -232,7 +232,7 @@ dateRange 搭配 startDateOffset 和 endDateOffset 可以进行单击范围选�
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const handleChange = date => {
@@ -286,7 +286,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker defaultValue={new Date()} type="month" style={{ width: 140 }} />;
 ```
@@ -299,7 +299,7 @@ import { DatePicker } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker type="monthRange" style={{ width: 200 }} />;
 ```
@@ -318,7 +318,7 @@ import { DatePicker } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => (
     <DatePicker
@@ -343,7 +343,7 @@ import { DatePicker } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => {
     const presets = [
@@ -368,8 +368,8 @@ import { DatePicker } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState, useMemo } from 'react';
-import { DatePicker, Typography, Tabs, TabPane, Space } from '@douyinfe/semi-ui';
-import { IconBulb } from '@douyinfe/semi-icons';
+import { DatePicker, Typography, Tabs, TabPane, Space } from '@kousum/semi-ui-vue';
+import { IconBulb } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -481,7 +481,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker disabled type="dateTime" defaultValue={new Date()} />;
 ```
@@ -498,7 +498,7 @@ import { DatePicker } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 import { range } from 'lodash-es';
 
@@ -575,7 +575,7 @@ class App extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 () => (
@@ -598,7 +598,7 @@ import * as dateFns from 'date-fns';
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 function App() {
@@ -634,7 +634,7 @@ function App() {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker format="yyyy年MM月dd日 HH:mm" type="dateTime" defaultValue={new Date()} />;
 ```
@@ -650,8 +650,8 @@ import { DatePicker } from '@douyinfe/semi-ui';
 ```jsx live=true hideInDSM
 import React, { useState, useCallback, useMemo } from 'react';
 import * as dateFns from 'date-fns';
-import { IconClose, IconChevronDown } from '@douyinfe/semi-icons';
-import { DatePicker, Button } from '@douyinfe/semi-ui';
+import { IconClose, IconChevronDown } from '@kousum/semi-icons-vue';
+import { DatePicker, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [date, setDate] = useState(new Date());
@@ -690,8 +690,8 @@ function Demo() {
 
 ```jsx live=true hideInDSM
 import React, { useState, useCallback, useMemo } from 'react';
-import { DatePicker, Button, Icon } from '@douyinfe/semi-ui';
-import { IconClose, IconChevronDown } from '@douyinfe/semi-icons';
+import { DatePicker, Button, Icon } from '@kousum/semi-ui-vue';
+import { IconClose, IconChevronDown } from '@kousum/semi-icons-vue';
 
 
 function Demo() {
@@ -744,7 +744,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker, Tooltip } from '@douyinfe/semi-ui';
+import { DatePicker, Tooltip } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const dateStyle = {
@@ -794,7 +794,7 @@ type DayStatusType = {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 import classNames from 'classnames';
 
 function Demo() {
@@ -924,8 +924,8 @@ function Demo() {
 
 ```jsx live=true
 import React, { useRef } from 'react';
-import { DatePicker, Space, Button } from '@douyinfe/semi-ui';
-import { BaseDatePicker } from '@douyinfe/semi-ui/lib/es/datePicker';
+import { DatePicker, Space, Button } from '@kousum/semi-ui-vue';
+import { BaseDatePicker } from '@kousum/semi-ui-vue/lib/es/datePicker';
 
 function Demo() {
     const ref = useRef();

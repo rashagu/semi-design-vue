@@ -14,7 +14,7 @@ brief: 输入框是最基本的接收用户文本输入的组件
 ### 如何引入
 
 ```jsx import
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 ```
 ### 基本
 
@@ -22,7 +22,7 @@ import { Input } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 () => (
     <Input defaultValue='hi'></Input>
@@ -35,7 +35,7 @@ import { Input } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -54,7 +54,7 @@ import { Input } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -75,8 +75,8 @@ import { Input } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Input, Typography } from '@douyinfe/semi-ui';
-import { IconSearch } from '@douyinfe/semi-icons';
+import { Input, Typography } from '@kousum/semi-ui-vue';
+import { IconSearch } from '@kousum/semi-icons-vue';
 
 () => (
     <>
@@ -99,7 +99,7 @@ import { IconSearch } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 () => (
     <Input addonBefore="http://" addonAfter=".com" />
@@ -112,7 +112,7 @@ import { Input } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 () => (
     <Input showClear defaultValue='click to clear'></Input>
@@ -125,7 +125,7 @@ import { Input } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 () => (
     <Input mode="password" defaultValue="123456"></Input>
@@ -139,7 +139,7 @@ import { Input } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -158,7 +158,7 @@ import { Input } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 class InputDemo extends React.Component {
     constructor() {
@@ -196,7 +196,7 @@ class InputDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { InputGroup, Input, InputNumber, AutoComplete, DatePicker, Select } from '@douyinfe/semi-ui';
+import { InputGroup, Input, InputNumber, AutoComplete, DatePicker, Select } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -236,7 +236,7 @@ import { InputGroup, Input, InputNumber, AutoComplete, DatePicker, Select } from
 
 ```jsx live=true
 import React from 'react';
-import { InputGroup, Select, Cascader, TreeSelect } from '@douyinfe/semi-ui';
+import { InputGroup, Select, Cascader, TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const Option = Select.Option;
@@ -296,7 +296,7 @@ import { InputGroup, Select, Cascader, TreeSelect } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TextArea } from '@douyinfe/semi-ui';
+import { TextArea } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -313,7 +313,7 @@ import { TextArea } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TextArea } from '@douyinfe/semi-ui';
+import { TextArea } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -338,7 +338,7 @@ import { TextArea } from '@douyinfe/semi-ui';
 ```jsx live=true
 import React from 'react';
 import GraphemeSplitter from 'grapheme-splitter';
-import { Input, Typography, Form, TextArea, Button } from '@douyinfe/semi-ui';
+import { Input, Typography, Form, TextArea, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [value, setValue] = useState();

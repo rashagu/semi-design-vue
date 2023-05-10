@@ -13,7 +13,7 @@ brief: Tag component is used to display a collection of concise information for 
 ### How to import
 
 ```jsx import
-import { Tag } from '@douyinfe/semi-ui';
+import { Tag } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic usage
@@ -24,7 +24,7 @@ At this time, clicking x to close will trigger the onClose event, and blocking t
 
 ```jsx live=true
 import React from 'react';
-import { Tag, Space } from '@douyinfe/semi-ui';
+import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -45,7 +45,7 @@ Supports two sizes: `large` and `small` (default).
 
 ```jsx live=true
 import React from 'react';
-import { Tag } from '@douyinfe/semi-ui';
+import { Tag } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -63,7 +63,7 @@ Supports two Shape: `square`（default）、`circle`。
 
 ```jsx live=true
 import React from 'react';
-import { Tag, Space } from '@douyinfe/semi-ui';
+import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
     <Space>
@@ -79,7 +79,7 @@ Tag supports 16 colors including whites from Semi's palette: `amber`, `blue`, `c
 
 ```jsx live=true
 import React from 'react';
-import { Tag, Space } from '@douyinfe/semi-ui';
+import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => {
     return (
@@ -101,7 +101,7 @@ Tag supports three different types, including: `light`(default), `ghost`, `solid
 
 ```jsx live=true
 import React from 'react';
-import { Tag, Space } from '@douyinfe/semi-ui';
+import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
     <Space>
@@ -124,7 +124,7 @@ You can get a avatar tag with `avatarSrc` property. `avatarShape` can change the
 
 ```jsx live=true
 import React from 'react';
-import { Tag, Space } from '@douyinfe/semi-ui';
+import { Tag, Space } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const src =
@@ -158,7 +158,7 @@ You can use `visible` property to control whether the tag is visible.
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Tag, Button } from '@douyinfe/semi-ui';
+import { Tag, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -183,7 +183,7 @@ Set the `showPopover` property to control whether the remaining content is displ
 
 ```jsx live=true
 import React from 'react';
-import { TagGroup } from '@douyinfe/semi-ui';
+import { TagGroup } from '@kousum/semi-ui-vue';
 
 () => {
     const tagList = [
@@ -245,7 +245,7 @@ If the tags in the TagGroup can be deleted, the user needs to process the `tagLi
 
 ```jsx live=true
 import React from 'react';
-import { TagGroup } from '@douyinfe/semi-ui';
+import { TagGroup } from '@kousum/semi-ui-vue';
 
 class TagGroupCloseableDemo extends React.Component {
     constructor(props){

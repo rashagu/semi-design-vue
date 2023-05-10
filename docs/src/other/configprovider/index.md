@@ -14,7 +14,7 @@ brief: 为组件提供统一的全局化配置。
 ### 如何引入
 
 ```jsx import
-import { ConfigProvider } from '@douyinfe/semi-ui';
+import { ConfigProvider } from '@kousum/semi-ui-vue';
 ```
 ### 基本用法
 
@@ -22,7 +22,7 @@ import { ConfigProvider } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column" hideInDSM
 import React, { useMemo, useState } from 'react';
-import { ConfigProvider, Select, DatePicker, TimePicker } from '@douyinfe/semi-ui';
+import { ConfigProvider, Select, DatePicker, TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo(props = {}) {
     const [timeZone, setTimeZone] = useState('GMT+08:00');
@@ -79,8 +79,8 @@ function Demo(props = {}) {
 
 ```jsx live=true dir="column" hideInDSM
 import React, { useState } from 'react';
-import { ConfigProvider, ButtonGroup, Button, Row, Col, Notification, DatePicker, TimePicker, Timeline, Popover, Tag, Tooltip, Badge, Avatar, Steps, Pagination, Modal, Breadcrumb, Rating, Nav, Spin, Cascader, Radio, Select, Input, Typography, TextArea, Checkbox, Switch } from '@douyinfe/semi-ui';
-import { IconVigoLogo, IconEdit, IconCamera, IconList, IconSidebar, IconChevronDown } from '@douyinfe/semi-icons';
+import { ConfigProvider, ButtonGroup, Button, Row, Col, Notification, DatePicker, TimePicker, Timeline, Popover, Tag, Tooltip, Badge, Avatar, Steps, Pagination, Modal, Breadcrumb, Rating, Nav, Spin, Cascader, Radio, Select, Input, Typography, TextArea, Checkbox, Switch } from '@kousum/semi-ui-vue';
+import { IconVigoLogo, IconEdit, IconCamera, IconList, IconSidebar, IconChevronDown } from '@kousum/semi-icons-vue';
 
 function Demo(props = {}) {
     const { Option } = Select;

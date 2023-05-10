@@ -98,7 +98,7 @@ We provide a way to provide a text-based alternative to all images, icons, and S
 
 ```jsx live=true
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
+import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>

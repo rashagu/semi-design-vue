@@ -14,7 +14,7 @@ brief: The user can select one or more options from a set of options through the
 ### How to import
 
 ```jsx import
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 const Option = Select.Option;
 ```
 
@@ -24,7 +24,7 @@ Each Option tag must declare the `value` attribute, and the Option `children` co
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -54,7 +54,7 @@ You can pass an array of objects directly through `optionList`. Each object must
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     const list = [
@@ -84,7 +84,7 @@ Configuration `max` Properties can limit the maximum number of options and canno
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -151,7 +151,7 @@ Grouping Option with `OptGroup`(Only supports the declaration of children throug
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <Select placeholder="" style={{ width: 180 }} filter>
@@ -172,7 +172,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [
@@ -217,7 +217,7 @@ Size: small / default / large
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -244,7 +244,7 @@ validateStatus: default / warning / error
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -274,8 +274,8 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
-import { IconVigoLogo, IconGift } from '@douyinfe/semi-icons';
+import { Select } from '@kousum/semi-ui-vue';
+import { IconVigoLogo, IconGift } from '@kousum/semi-icons-vue';
 
 () => (
     <>
@@ -310,7 +310,7 @@ When the incoming type is ReactNode, you need to handle the padding between the 
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     const list = [
@@ -348,8 +348,8 @@ Use`innerTopSlot` or `outerTopSlot` to pass the custom node, which will be rende
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
-import { IconClock } from '@douyinfe/semi-icons';
+import { Select } from '@kousum/semi-ui-vue';
+import { IconClock } from '@kousum/semi-icons-vue';
 
 () => {
     let selectStyle = { width: 180, margin: 20 };
@@ -411,7 +411,7 @@ Using outerTopSlot to insert content
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     const list = {
@@ -495,7 +495,7 @@ When `value` is passed, Select is a controlled component, and the value selected
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     let [value, setValue] = useState('xigua');
@@ -517,7 +517,7 @@ If it is a complex linkage with a hierarchical relationship, it is recommended t
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 class Link extends React.Component {
     get continents() {
@@ -587,7 +587,7 @@ By default, the search keywords will be cleared automatically after multiple sel
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -629,7 +629,7 @@ A multi-select example with remote search, request debounce, loading status.
 ```jsx live=true
 import React from 'react';
 import { debounce } from 'lodash-es';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     const [loading, setLoading] = useState(false);
@@ -688,7 +688,7 @@ You can set `filter` as a custom function to customize your filter strategy.
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     function search(sugInput, option) {
@@ -720,7 +720,7 @@ But you can customize the rendering of the selection box through the `renderSele
 
 ```jsx live=true
 import React from 'react';
-import { Select, Avatar, Tag } from '@douyinfe/semi-ui';
+import { Select, Avatar, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     const list = [
@@ -865,7 +865,7 @@ For example, when you customize the width of the pop-up layer, you can pass the 
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <Select style={{ width: 180 }} dropdownStyle={{ width: 250 }} dropdownClassName="test">
@@ -883,7 +883,7 @@ If you need to update Options dynamically, you should use controlled value
 
 ```jsx live=true
 import React from 'react';
-import { Select, Button } from '@douyinfe/semi-ui';
+import { Select, Button } from '@kousum/semi-ui-vue';
 
 () => {
     let [options, setOptions] = useState([1, 2, 3, 4]);
@@ -918,7 +918,7 @@ Note that when onChange With Object is set to true,`defaultValue`/`Value`it shou
 
 ```jsx live=true
 import React from 'react';
-import { Select, TextArea } from '@douyinfe/semi-ui';
+import { Select, TextArea } from '@kousum/semi-ui-vue';
 
 () => {
     const list = [
@@ -979,7 +979,7 @@ You can create and select entries that do not exist in the options by setting `a
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     const optionList = [
@@ -1025,7 +1025,7 @@ Turn on list virtualization when passing in `virtualize` to optimize performance
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 class VirtualizeDemo extends React.Component {
     constructor(props) {
@@ -1080,8 +1080,8 @@ interface TriggerRenderProps {
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
-import { IconAppCenter, IconChevronDown } from '@douyinfe/semi-icons';
+import { Select } from '@kousum/semi-ui-vue';
+import { IconAppCenter, IconChevronDown } from '@kousum/semi-icons-vue';
 
 () => {
     const [valList, setValList] = useState(['abc', 'hotsoon']);
@@ -1199,7 +1199,7 @@ import { IconAppCenter, IconChevronDown } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Select, Checkbox } from '@douyinfe/semi-ui';
+import { Select, Checkbox } from '@kousum/semi-ui-vue';
 
 () => {
     const renderOptionItem = renderProps => {

@@ -13,7 +13,7 @@ brief: 工具提示用于对一个元素进行标识或者附上少量辅助信�
 ### 如何引入
 
 ```jsx import
-import { Tooltip } from '@douyinfe/semi-ui';
+import { Tooltip } from '@kousum/semi-ui-vue';
 ```
 
 ### 注意事项
@@ -28,7 +28,7 @@ Tooltip 需要将 DOM 事件监听器应用到 children 中，如果子元素是
 
 ```jsx live=true noInline=true dir="column"
 import React, { forwardRef } from 'react';
-import { Tooltip, Space } from '@douyinfe/semi-ui';
+import { Tooltip, Space } from '@kousum/semi-ui-vue';
 
 const style={ border: '2px solid var(--semi-color-border)', paddingLeft: 4, paddingRight: 4, borderRadius: 4 };
 
@@ -73,7 +73,7 @@ render(Demo);
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Tooltip, Tag } from '@douyinfe/semi-ui';
+import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const tops = [
@@ -178,7 +178,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Tooltip, Button } from '@douyinfe/semi-ui';
+import { Tooltip, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -212,7 +212,7 @@ function Demo() {
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Tooltip, Button, ButtonGroup, Input } from '@douyinfe/semi-ui';
+import { Tooltip, Button, ButtonGroup, Input } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [visible, setVisible] = useState(false);
@@ -258,7 +258,7 @@ function Demo() {
 你可以通过 className、style 为弹出层配置特定样式，例如覆盖默认的 maxWidth （280px）
 ```jsx live=true
 import React from 'react';
-import { Tooltip, Tag } from '@douyinfe/semi-ui';
+import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     return (
@@ -284,7 +284,7 @@ import { Tooltip, Tag } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Tooltip, Tag } from '@douyinfe/semi-ui';
+import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -309,7 +309,7 @@ Tooltip、Popconfirm、Popover 都需要劫持 children 的相关事件（onMous
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Tooltip, Popconfirm, Button } from '@douyinfe/semi-ui';
+import { Tooltip, Popconfirm, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Popconfirm content="是否确认删除" title='确认' style={{ width: 320 }}>
@@ -328,7 +328,7 @@ Semi 为这种场景提供了 Typography 组件，可以更简单快捷地满足
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Paragraph, Title, Text } = Typography;

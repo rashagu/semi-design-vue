@@ -13,7 +13,7 @@ brief: Display content areas can be expanded or folded.
 ### How to import
 
 ```jsx import
-import { Collapse } from '@douyinfe/semi-ui';
+import { Collapse } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
@@ -22,7 +22,7 @@ You can expand multiple panels at the same time, and use `defaultActiveKey` to s
 
 ```jsx live=true
 import React from 'react';
-import { Collapse } from '@douyinfe/semi-ui';
+import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
     <Collapse>
@@ -45,7 +45,7 @@ Use `accordion` to restrict one panel only to be expanded at one time.
 
 ```jsx live=true
 import React from 'react';
-import { Collapse } from '@douyinfe/semi-ui';
+import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
     <Collapse accordion>
@@ -68,7 +68,7 @@ Use `disabled` to disabled panel.
 
 ```jsx live=true
 import React from 'react';
-import { Collapse } from '@douyinfe/semi-ui';
+import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
     <Collapse accordion>
@@ -91,7 +91,7 @@ Use `showArrow` to hide the panel icon.
 
 ```jsx live=true
 import React from 'react';
-import { Collapse } from '@douyinfe/semi-ui';
+import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
     <Collapse accordion>
@@ -114,8 +114,8 @@ You can use `expandIcon` to set the expanding icon and `collapseIcon` for folded
 
 ```jsx live=true
 import React from 'react';
-import { Collapse } from '@douyinfe/semi-ui';
-import { IconPlus, IconMinus } from '@douyinfe/semi-icons';
+import { Collapse } from '@kousum/semi-ui-vue';
+import { IconPlus, IconMinus } from '@kousum/semi-icons-vue';
 
 () => (
     <Collapse expandIcon={<IconPlus />} collapseIcon={<IconMinus />}>
@@ -140,8 +140,8 @@ You can use `extra` to set extra content on the right-upper corner.
 
 ```jsx live=true
 import React from 'react';
-import { Collapse, Tag } from '@douyinfe/semi-ui';
-import { IconCopy } from '@douyinfe/semi-icons';
+import { Collapse, Tag } from '@kousum/semi-ui-vue';
+import { IconCopy } from '@kousum/semi-icons-vue';
 
 () => (
     <Collapse>
@@ -227,7 +227,7 @@ The essence of the folding panel is that the card container adds the function of
 
 ```jsx
 import React from 'react';
-import { Collapse, Input } from '@douyinfe/semi-ui';
+import { Collapse, Input } from '@kousum/semi-ui-vue';
 
 () => (
     <Collapse>

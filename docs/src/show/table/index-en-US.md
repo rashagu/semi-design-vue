@@ -17,7 +17,7 @@ Into the header. `columns` And data. `DataSource` To render.
 
 ```jsx noInline=true import
 import React from 'react';
-import { Table } from '@douyinfe/semi-ui';
+import { Table } from '@kousum/semi-ui-vue';
 
 function App() {
     const columns = [
@@ -80,8 +80,8 @@ For tables, the two most basic parameters are `dataSource` and `columns`, the fo
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 function App() {
     const columns = [
@@ -180,8 +180,8 @@ You can also use JSX syntax definitions `columns`, note that Table only supports
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 const { Column } = Table;
 
@@ -261,8 +261,8 @@ This feature can be turned on by passing in `rowSelection`.
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 function App() {
     const columns = [
@@ -405,8 +405,8 @@ Users can use Column.render to customize the rendering of a column of cells, whi
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar, Button, Empty, Typography } from '@douyinfe/semi-ui';
-import { IconDelete } from '@douyinfe/semi-icons';
+import { Table, Avatar, Button, Empty, Typography } from '@kousum/semi-ui-vue';
+import { IconDelete } from '@kousum/semi-icons-vue';
 import { IllustrationNoResult, IllustrationNoResultDark } from '@douyinfe/semi-illustrations';
 const { Text } = Typography;
 
@@ -562,7 +562,7 @@ Table paging currently supports two modes: controlled and uncontrolled.
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const figmaIconUrl = 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/figma-icon.png';
@@ -679,7 +679,7 @@ Under normal circumstances, the data is often not obtained at one time. We will 
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -816,8 +816,8 @@ You can fix the column by setting the Fixed attribute of the column and scroll.x
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -944,8 +944,8 @@ The header can be fixed to the top of the page with the `sticky` property. v2.21
 
 ```jsx live=false noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -1082,7 +1082,7 @@ Filters and sorting controls are integrated inside the table, and users can pass
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -1205,7 +1205,7 @@ This method accepts an `Object` input parameter, and the meaning of each attribu
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar, Dropdown } from '@douyinfe/semi-ui';
+import { Table, Avatar, Dropdown } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -1336,8 +1336,8 @@ If you need to render a table that can be expanded, in addition to the need to p
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar, Descriptions, Tag } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar, Descriptions, Tag } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 const columns = [
     {
@@ -1482,8 +1482,8 @@ By default, the expansion button will be rendered in the same cell as the first 
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar, Descriptions, Tag } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar, Descriptions, Tag } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 const columns = [
     {
@@ -1629,8 +1629,8 @@ You can pass the row Expandable method, enter the reference as record, and deter
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar, Descriptions, Tag } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar, Descriptions, Tag } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 const columns = [
     {
@@ -1781,7 +1781,7 @@ The table supports the display of tree data and is automatically displayed as a 
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table } from '@douyinfe/semi-ui';
+import { Table } from '@kousum/semi-ui-vue';
 
 function App() {
     const columns = [
@@ -1893,8 +1893,8 @@ You can do row switching by changing the order of the dataSource elements.
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState } from 'react';
-import { Table, Button } from '@douyinfe/semi-ui';
-import { IconArrowUp, IconArrowDown } from '@douyinfe/semi-icons';
+import { Table, Button } from '@kousum/semi-ui-vue';
+import { IconArrowUp, IconArrowDown } from '@kousum/semi-icons-vue';
 
 const raw = [
     {
@@ -2121,7 +2121,7 @@ By default, the row selection of the table is independent. You can simulate a tr
 ```jsx live=true noInline=true dir="column"
 import React, { useMemo, useState, useCallback } from 'react';
 import { get, union, pullAll } from 'lodash-es';
-import { Table } from '@douyinfe/semi-ui';
+import { Table } from '@kousum/semi-ui-vue';
 
 const childrenRecordName = 'children';
 const rowKey = 'key';
@@ -2330,7 +2330,7 @@ In principle, the properties or events supported on tr / td / th can be defined.
 
 ```jsx live=true noInline=true dir="column"
 import React, { useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui/';
+import { Table, Avatar } from '@kousum/semi-ui-vue/';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -2453,8 +2453,8 @@ Use `OnRow` to set a background color for each row to create a zebra stripped ta
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 function App() {
     const columns = [
@@ -2587,8 +2587,8 @@ Use `ellipsis` to make cells automatically clipped. v2.34.0 support.
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 function App() {
     const columns = [
@@ -2701,8 +2701,8 @@ Set `ellipsis.showTitle` to false to hide the default native HTML title. With `c
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Typography } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Typography } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 function App() {
     const columns = [
@@ -2830,7 +2830,7 @@ But you need to pay attention to some parameters:
 
 ```jsx live=true noInline=true dir="column"
 import React, { useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -2929,7 +2929,7 @@ These three callback will be triggered on `changing column width`, `start changi
 
 ```jsx live=true noInline=true dir="column"
 import React, { useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -3056,7 +3056,7 @@ With custom elements, we can integrate `react-dnd` To implement drag and drop so
 
 ```jsx live=true dir="column" noInline=true hideInDSM
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import { DndProvider, DragSource, DropTarget } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import * as dateFns from 'date-fns';
@@ -3265,7 +3265,7 @@ For some tables whose data needs to be displayed in groups, you can pass in `gro
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -3394,7 +3394,7 @@ The following is an example of rendering 1000 pieces of data.
 
 ```jsx live=true noInline=true dir="column"
 import React, { useRef } from 'react';
-import { Table, Avatar, Button } from '@douyinfe/semi-ui';
+import { Table, Avatar, Button } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -3502,7 +3502,7 @@ Based on the virtualization feature, we can achieve infinite scroll loading data
 
 ```jsx live=true noInline=true dir="column" hideInDSM
 import React, { useRef } from 'react';
-import { Table, Avatar, Button } from '@douyinfe/semi-ui';
+import { Table, Avatar, Button } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -3623,7 +3623,7 @@ render(InfiniteScrollDemo);
 
 ```jsx live=true noInline=true dir="column" hideInDSM
 import React from 'react';
-import { Table, Switch, ButtonGroup, Button, Avatar, Space } from '@douyinfe/semi-ui';
+import { Table, Switch, ButtonGroup, Button, Avatar, Space } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -4249,7 +4249,7 @@ The input parameters accepted by `Column.title` are:
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useEffect, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -4395,8 +4395,8 @@ Users can use the header merge function to group the header. The header merge ca
 
 ```jsx live=true noInline=true dir="column"
 import React, { useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -4523,8 +4523,8 @@ render(Demo);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -4663,7 +4663,7 @@ interface RenderOptions {
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const figmaIconUrl = 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/figma-icon.png';
@@ -4944,7 +4944,7 @@ function App() {
 
 ```jsx noInline=true
 import React from 'react';
-import { Table } from '@douyinfe/semi-ui';
+import { Table } from '@kousum/semi-ui-vue';
 
 () => (
     <Table
@@ -5076,7 +5076,7 @@ Some internal methods provided by Table can be accessed through ref:
 
 ```jsx noInline=true
 import React, { useRef, useEffect } from 'react';
-import { Table } from '@douyinfe/semi-ui';
+import { Table } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const ref = useRef();

@@ -12,7 +12,7 @@ brief: 滚动列表。
 ### 如何引入
 
 ```jsx import
-import { ScrollList, ScrollItem } from '@douyinfe/semi-ui';
+import { ScrollList, ScrollItem } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本使用
@@ -21,7 +21,7 @@ import { ScrollList, ScrollItem } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { ScrollList, ScrollItem, Button } from '@douyinfe/semi-ui';
+import { ScrollList, ScrollItem, Button } from '@kousum/semi-ui-vue';
 
 class ScrollListDemo extends React.Component {
     constructor(props) {

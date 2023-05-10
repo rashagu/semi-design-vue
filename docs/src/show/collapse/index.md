@@ -12,7 +12,7 @@ brief: 可以展开或折叠展示内容区域。
 ### 如何引入
 
 ```jsx import
-import { Collapse } from '@douyinfe/semi-ui';
+import { Collapse } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -21,7 +21,7 @@ import { Collapse } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Collapse } from '@douyinfe/semi-ui';
+import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
     <Collapse>
@@ -44,7 +44,7 @@ import { Collapse } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Collapse } from '@douyinfe/semi-ui';
+import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
     <Collapse accordion>
@@ -67,7 +67,7 @@ import { Collapse } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Collapse } from '@douyinfe/semi-ui';
+import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
     <Collapse accordion>
@@ -90,7 +90,7 @@ import { Collapse } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Collapse } from '@douyinfe/semi-ui';
+import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
     <Collapse accordion>
@@ -113,8 +113,8 @@ import { Collapse } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Collapse } from '@douyinfe/semi-ui';
-import { IconPlus, IconMinus } from '@douyinfe/semi-icons';
+import { Collapse } from '@kousum/semi-ui-vue';
+import { IconPlus, IconMinus } from '@kousum/semi-icons-vue';
 
 () => (
     <Collapse expandIcon={<IconPlus />} collapseIcon={<IconMinus />}>
@@ -139,8 +139,8 @@ import { IconPlus, IconMinus } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Collapse, Tag } from '@douyinfe/semi-ui';
-import { IconCopy } from '@douyinfe/semi-icons';
+import { Collapse, Tag } from '@kousum/semi-ui-vue';
+import { IconCopy } from '@kousum/semi-icons-vue';
 
 () => (
     <Collapse>
@@ -229,7 +229,7 @@ import { IconCopy } from '@douyinfe/semi-icons';
 
 ```jsx
 import React from 'react';
-import { Collapse, Input } from '@douyinfe/semi-ui';
+import { Collapse, Input } from '@kousum/semi-ui-vue';
 
 () => (
     <Collapse>

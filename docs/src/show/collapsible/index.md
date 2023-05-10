@@ -17,7 +17,7 @@ brief: 行为组件，是一个用于展开或折叠内容的容器。
 ### 如何引入
 
 ```jsx import
-import { Collapsible } from '@douyinfe/semi-ui';
+import { Collapsible } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -26,7 +26,7 @@ import { Collapsible } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Collapsible, Button } from '@douyinfe/semi-ui';
+import { Collapsible, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [isOpen, setOpen] = useState();
@@ -64,7 +64,7 @@ import { Collapsible, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Collapsible, InputNumber, Button } from '@douyinfe/semi-ui';
+import { Collapsible, InputNumber, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [isOpen, setOpen] = useState(false);
@@ -106,7 +106,7 @@ import { Collapsible, InputNumber, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Collapsible, Button } from '@douyinfe/semi-ui';
+import { Collapsible, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [isOpen, setOpen] = useState(false);
@@ -150,7 +150,7 @@ import { Collapsible, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Collapsible, Button } from '@douyinfe/semi-ui';
+import { Collapsible, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [isOpen, setOpen] = useState(false);

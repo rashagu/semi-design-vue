@@ -19,7 +19,7 @@ When the options to select is in tree structure, you could use TreeSelect, e.g. 
 ### How to import
 
 ```jsx import
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
@@ -28,7 +28,7 @@ By default, TreeSelect is in single select mode and each item is selectable.
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -80,7 +80,7 @@ Use `leafOnly` (>= v0.32.0) if you prefer to render leaf nodes only and the corr
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -174,7 +174,7 @@ Use `showRestTagsPopover` (>= v2.22.0) to set whether hover +N displays Popover 
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
         {
@@ -276,7 +276,7 @@ You could also use `showFilteredOnly` if you prefer to display filtered results 
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect, Switch } from '@douyinfe/semi-ui';
+import { TreeSelect, Switch } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -409,7 +409,7 @@ When the input box is at trigger:
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -500,7 +500,7 @@ You can set the size by `size`, one of: 'small'、'default'、'large'
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -597,7 +597,7 @@ import { TreeSelect } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -675,7 +675,7 @@ Take the following demo as an example, the node "China" is strictly disabled. Th
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -740,7 +740,7 @@ In the demo below, after `TreeData` is updated, `defaultExpandAll` becomes inval
 
 ```jsx live=true
 import React, { useState, useEffect } from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -806,7 +806,7 @@ You can use `value` along with `onChange` property if you want to use TreeSelect
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -871,7 +871,7 @@ In multiple, `checkRelation` can be used to set the type of node selection relat
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
         {
@@ -922,7 +922,7 @@ When `expandedKeys` is passed in, it is a controlled expansion component, which 
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const [expandedKeys, setExpandedKeys] = useState([]);
@@ -985,7 +985,7 @@ If tree is searchable, you could also set `showFilteredOnly={true}` to reduce ti
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect, Button } from '@douyinfe/semi-ui';
+import { TreeSelect, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1077,7 +1077,7 @@ class Demo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect, Button } from '@douyinfe/semi-ui';
+import { TreeSelect, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1134,7 +1134,7 @@ You could use `loadData` to load treeData asynchronously on node expansion. Noti
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const initialData = [
@@ -1234,7 +1234,7 @@ interface triggerRenderProps {
 
 ```jsx live=true
 import React, { useState, useCallback, useMemo } from 'react';
-import { TreeSelect, Button, Tag, TagInput } from '@douyinfe/semi-ui';
+import { TreeSelect, Button, Tag, TagInput } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [value, setValue] = useState([]);
@@ -1320,7 +1320,7 @@ You can use renderSelectedItem to customize the rendering structure of the selec
 
 ```jsx live=true
 import React, { useState, useCallback, useMemo } from 'react';
-import { TreeSelect, Tag } from '@douyinfe/semi-ui';
+import { TreeSelect, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [value, setValue] = useState([]);

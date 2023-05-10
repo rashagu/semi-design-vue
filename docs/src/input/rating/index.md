@@ -13,7 +13,7 @@ brief: 展示评分的组件
 ### 如何引入
 
 ```jsx import
-import { Rating } from '@douyinfe/semi-ui';
+import { Rating } from '@kousum/semi-ui-vue';
 ```
 ### 基本用法
 
@@ -23,7 +23,7 @@ import { Rating } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Rating } from '@douyinfe/semi-ui';
+import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -41,7 +41,7 @@ import { Rating } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Rating } from '@douyinfe/semi-ui';
+import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -56,7 +56,7 @@ import { Rating } from '@douyinfe/semi-ui';
 通过设置 `disabled` 属性将无法进行交互。
 ```jsx live=true
 import React from 'react';
-import { Rating } from '@douyinfe/semi-ui';
+import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
     <Rating disabled defaultValue={3} />
@@ -67,7 +67,7 @@ import { Rating } from '@douyinfe/semi-ui';
 通过设置 `allowClear` 属性允许再次点击时清除数值，默认为 `true`。
 ```jsx live=true
 import React from 'react';
-import { Rating } from '@douyinfe/semi-ui';
+import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -89,7 +89,7 @@ import { Rating } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Rating } from '@douyinfe/semi-ui';
+import { Rating } from '@kousum/semi-ui-vue';
 
 () => {
     const [value, setValue] = useState(0);
@@ -114,8 +114,8 @@ import { Rating } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Rating } from '@douyinfe/semi-ui';
-import { IconLikeHeart } from '@douyinfe/semi-icons';
+import { Rating } from '@kousum/semi-ui-vue';
+import { IconLikeHeart } from '@kousum/semi-icons-vue';
 
 () => (
     <div>

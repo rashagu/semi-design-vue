@@ -14,7 +14,7 @@ brief: Selector to quickly select a number or range of values using drag interac
 ### How to import
 
 ```jsx import
-import { Slider } from '@douyinfe/semi-ui';
+import { Slider } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
@@ -22,7 +22,7 @@ You can set `range={true}` to allow slider slide from both sides.
 
 ```jsx live=true
 import React from 'react';
-import { Slider } from '@douyinfe/semi-ui';
+import { Slider } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -52,7 +52,7 @@ Synchronize slider with input value.
 
 ```jsx live=true
 import React from 'react';
-import { Slider, InputNumber } from '@douyinfe/semi-ui';
+import { Slider, InputNumber } from '@kousum/semi-ui-vue';
 
 class InputSlider extends React.Component {
     constructor(props) {
@@ -88,7 +88,7 @@ You can use `tipFormatter` to format Tooltip content or set `tipFormatter={null}
 
 ```jsx live=true
 import React from 'react';
-import { Slider } from '@douyinfe/semi-ui';
+import { Slider } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -106,7 +106,7 @@ Use `marks` to label measures on sliders.
 
 ```jsx live=true
 import React from 'react';
-import { Slider } from '@douyinfe/semi-ui';
+import { Slider } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -133,7 +133,7 @@ import { Slider } from '@douyinfe/semi-ui';
 To create a slider with segmented background, you could use CSS property `linear-gradient` for `railStyle` along with `onChange` to change background dynamically。
 ```jsx live=true
 import React from 'react';
-import { Slider } from '@douyinfe/semi-ui';
+import { Slider } from '@kousum/semi-ui-vue';
 
 class SegSlider extends React.Component {
     constructor(props) {
@@ -182,7 +182,7 @@ You can use `value` along with `onChange` property if you want to use Slider as 
 
 ```jsx live=true
 import React from 'react';
-import { Slider, Button } from '@douyinfe/semi-ui';
+import { Slider, Button } from '@kousum/semi-ui-vue';
 
 class ControllSlider extends React.Component {
     constructor(props) {
@@ -212,7 +212,7 @@ class ControllSlider extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Slider } from '@douyinfe/semi-ui';
+import { Slider } from '@kousum/semi-ui-vue';
 
 () => (
     <div>

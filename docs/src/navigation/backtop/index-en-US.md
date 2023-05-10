@@ -12,7 +12,7 @@ icon: doc-backtop
 ### How to import
 
 ```jsx
-import { BackTop } from '@douyinfe/semi-ui';
+import { BackTop } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
@@ -20,7 +20,7 @@ BackTop can be used directly with the default styles.
 
 ```jsx live=true
 import React from 'react';
-import { BackTop } from '@douyinfe/semi-ui';
+import { BackTop } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     render() {
@@ -40,8 +40,8 @@ The default styles for BackTop component could be overwritten.
 
 ```jsx live=true
 import React from 'react';
-import { BackTop } from '@douyinfe/semi-ui';
-import { IconArrowUp } from '@douyinfe/semi-icons';
+import { BackTop } from '@kousum/semi-ui-vue';
+import { IconArrowUp } from '@kousum/semi-icons-vue';
 
 class Custom extends React.Component {
     target() {

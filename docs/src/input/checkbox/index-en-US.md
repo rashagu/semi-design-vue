@@ -20,7 +20,7 @@ brief: Checkboxes allow the user to select one or more items from a set.
 ### How to import
 
 ```jsx import 
-import { Checkbox, CheckboxGroup } from '@douyinfe/semi-ui';
+import { Checkbox, CheckboxGroup } from '@kousum/semi-ui-vue';
 ```
 
 
@@ -31,7 +31,7 @@ When `checked` is passed in, it is controlled component.
 
 ```jsx live=true
 import React from 'react';
-import { Checkbox } from '@douyinfe/semi-ui';
+import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <Checkbox aria-label="Checkbox demo" onChange={checked => console.log(checked)}>
@@ -42,7 +42,7 @@ import { Checkbox } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Checkbox } from '@douyinfe/semi-ui';
+import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <Checkbox
@@ -59,7 +59,7 @@ You can use `extra` to add extra information. The extra information usually is l
 
 ```jsx live=true
 import React from 'react';
-import { Checkbox } from '@douyinfe/semi-ui';
+import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -85,7 +85,7 @@ import { Checkbox } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Checkbox } from '@douyinfe/semi-ui';
+import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -104,7 +104,7 @@ At this time, Checkbox does not need to declare `defaultChecked` and `checked` a
 
 ```jsx live=true
 import React from 'react';
-import { Checkbox, CheckboxGroup } from '@douyinfe/semi-ui';
+import { Checkbox, CheckboxGroup } from '@kousum/semi-ui-vue';
 
 () => (
     <CheckboxGroup style={{ width: '100%' }} defaultValue={['A', 'B']} aria-label="CheckboxGroup demo">
@@ -124,7 +124,7 @@ You can pass an array using `options` to `CheckboxGroup` directly to generate a 
 
 ```jsx live=true
 import React from 'react';
-import { CheckboxGroup } from '@douyinfe/semi-ui';
+import { CheckboxGroup } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
 
@@ -170,7 +170,7 @@ By setting `direction` to `horizontal` or `vertical`, You can adjust the layout 
 
 ```jsx live=true
 import React from 'react';
-import { CheckboxGroup } from '@douyinfe/semi-ui';
+import { CheckboxGroup } from '@kousum/semi-ui-vue';
 
 () => {
     const options = [
@@ -191,7 +191,7 @@ Used as a controlled component.
 
 ```jsx live=true
 import React from 'react';
-import { Checkbox, Button } from '@douyinfe/semi-ui';
+import { Checkbox, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
 
@@ -263,7 +263,7 @@ You may use the `indeterminate` property to set the state to indeterminate.
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Checkbox, CheckboxGroup } from '@douyinfe/semi-ui';
+import { Checkbox, CheckboxGroup } from '@kousum/semi-ui-vue';
 
 () => {
     const plainOptions = ['Photography', 'Movies', 'Running'];
@@ -315,7 +315,7 @@ You can set `type='card'` to CheckboxGroup to realize card style with background
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { CheckboxGroup, Checkbox } from '@douyinfe/semi-ui';
+import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <CheckboxGroup type='card' defaultValue={['1', '3']} direction='vertical' aria-label="Checkbox demo">
@@ -342,7 +342,7 @@ You can set `type='pureCard'` to CheckboxGroup to realize a pure card style with
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { CheckboxGroup, Checkbox } from '@douyinfe/semi-ui';
+import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <CheckboxGroup type='pureCard' defaultValue={['1', '3']} direction='vertical' aria-label="Checkbox demo">
@@ -368,7 +368,7 @@ Use `Checkbox.Group` with `Grid` to achieve flexible layouts.
 
 ```jsx live=true
 import React from 'react';
-import { CheckboxGroup, Checkbox, Row, Col } from '@douyinfe/semi-ui';
+import { CheckboxGroup, Checkbox, Row, Col } from '@kousum/semi-ui-vue';
 
 () => (
     <CheckboxGroup style={{ width: '100%' }} aria-label="Checkbox demo">

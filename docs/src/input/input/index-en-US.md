@@ -15,14 +15,14 @@ brief: Input is a basic component for users to enter and edit text.
 ### How to import
 
 ```jsx import 
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 () => (
     <Input defaultValue='hi'></Input>
@@ -35,7 +35,7 @@ Support three sizes: `large`, `default`, and `small`.
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -52,7 +52,7 @@ import { Input } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -70,8 +70,8 @@ When the content of `prefix` and `suffix` is text or Semi Icon, the left and rig
 
 ```jsx live=true
 import React from 'react';
-import { Input, Typography } from '@douyinfe/semi-ui';
-import { IconSearch } from '@douyinfe/semi-icons';
+import { Input, Typography } from '@kousum/semi-ui-vue';
+import { IconSearch } from '@kousum/semi-icons-vue';
 
 () => (
     <>
@@ -92,7 +92,7 @@ When the content of `addonBefore` and `addonAfter` is text or Semi Icon, the lef
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 () => (
     <Input addonBefore="http://" addonAfter=".com" />
 );
@@ -104,7 +104,7 @@ Use `showClear` to allow clear current value when clicking on clear icon.
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 () => (
     <Input showClear defaultValue='click to clear'></Input>
@@ -117,7 +117,7 @@ Hide the content of input
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 () => (
     <Input mode="password" defaultValue="123456"></Input>
@@ -130,7 +130,7 @@ You can set different `validateStatus` to provide style feedback to the user.
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 () => (
     <>
         <Input defaultValue='ies' validateStatus='warning'></Input>
@@ -148,7 +148,7 @@ You can use `value` along with `onChange` property if you want to use Input as a
 
 ```jsx live=true
 import React from 'react';
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 
 class InputDemo extends React.Component {
     constructor() {
@@ -186,7 +186,7 @@ You could put multiple text field input into `<InputGroup>` and set `size`, `dis
 
 ```jsx live=true
 import React from 'react';
-import { Input, InputGroup, InputNumber, Select, AutoComplete, DatePicker } from '@douyinfe/semi-ui';
+import { Input, InputGroup, InputNumber, Select, AutoComplete, DatePicker } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -226,7 +226,7 @@ import { Input, InputGroup, InputNumber, Select, AutoComplete, DatePicker } from
 
 ```jsx live=true
 import React from 'react';
-import { Input, InputGroup, Select, Cascader, TreeSelect } from '@douyinfe/semi-ui';
+import { Input, InputGroup, Select, Cascader, TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
         {
@@ -285,7 +285,7 @@ Used for multi-line text. You can set `maxCount` to restrict text entering and d
 
 ```jsx live=true
 import React from 'react';
-import { TextArea } from '@douyinfe/semi-ui';
+import { TextArea } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -302,7 +302,7 @@ You can set `autosize` to allow TextArea resizing height with content.
 
 ```jsx live=true
 import React from 'react';
-import { TextArea } from '@douyinfe/semi-ui';
+import { TextArea } from '@kousum/semi-ui-vue';
 () => (
     <div>
         <TextArea autosize rows={1} />
@@ -325,7 +325,7 @@ What is done inside Semi when getValueLength is passed in:
 
 ```jsx live=true
 import React from 'react';
-import { Input, Typography, Form, Button, TextArea } from '@douyinfe/semi-ui';
+import { Input, Typography, Form, Button, TextArea } from '@kousum/semi-ui-vue';
 import GraphemeSplitter from 'grapheme-splitter';
 
 () => {

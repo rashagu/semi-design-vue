@@ -13,14 +13,14 @@ brief: 描述列表用于键值对的呈现。
 ### 如何引入
 
 ```jsx import
-import { Descriptions } from '@douyinfe/semi-ui';
+import { Descriptions } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Descriptions, Tag } from '@douyinfe/semi-ui';
+import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [
@@ -41,7 +41,7 @@ import { Descriptions, Tag } from '@douyinfe/semi-ui';
 ```jsx live=true dir="column"
 
 import React from 'react';
-import { Descriptions, Tag } from '@douyinfe/semi-ui';
+import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [
@@ -79,8 +79,8 @@ import { Descriptions, Tag } from '@douyinfe/semi-ui';
 ```jsx live=true dir="column"
 
 import React from 'react';
-import { Descriptions } from '@douyinfe/semi-ui';
-import { IconArrowUp } from '@douyinfe/semi-icons';
+import { Descriptions } from '@kousum/semi-ui-vue';
+import { IconArrowUp } from '@kousum/semi-icons-vue';
 
 () => {
     const data = [
@@ -123,7 +123,7 @@ import { IconArrowUp } from '@douyinfe/semi-icons';
 ```jsx live=true dir="column"
 
 import React from 'react';
-import { Descriptions } from '@douyinfe/semi-ui';
+import { Descriptions } from '@kousum/semi-ui-vue';
 
 () => {
     return (

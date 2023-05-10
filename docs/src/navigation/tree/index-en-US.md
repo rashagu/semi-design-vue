@@ -15,7 +15,7 @@ brief: A tree view component presents a hierarchical list.
 ### How to import
 
 ```jsx
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
@@ -23,7 +23,7 @@ By default, tree is in single select mode and each item is selectable.
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -98,7 +98,7 @@ You could use `multiple` to set mode to multi-choice. When all child items are s
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -175,7 +175,7 @@ You could also use `showFilteredOnly` if you prefer to display filtered results 
 
 ```jsx live=true
 import React from 'react';
-import { Tree, Switch } from '@douyinfe/semi-ui';
+import { Tree, Switch } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -275,7 +275,7 @@ class Demo extends React.Component {
 After setting the `filterTreeNode` property to enable search, you can customize the rendering method of the search box by setting `searchRender`. When set to `false`, the search box can be hidden.
 ```jsx live=true
 import React from 'react';
-import { Tree, Input } from '@douyinfe/semi-ui';
+import { Tree, Input } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -354,7 +354,7 @@ import { Tree, Input } from '@douyinfe/semi-ui';
 Use ref to get tree instance，you can call `search` method of tree to trigger search manually. Note that you need to set `filterTreeNode` to enable search at the same time.If the search box is outside the tree, you can hide the search box inside the tree by setting `searchRender=false`.
 ```jsx live=true
 import React from 'react';
-import { Tree, Input } from '@douyinfe/semi-ui';
+import { Tree, Input } from '@kousum/semi-ui-vue';
 
 () => {
     const ref = useRef();
@@ -435,7 +435,7 @@ You could use `treeDataSimpleJson` to pass in `treeNodes` data in JSON format. I
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const json = {
@@ -469,7 +469,7 @@ You could use `blockNode` to set node to display as a row. In this case, styles 
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -552,7 +552,7 @@ You could pass in ReactNode for `label` in `TreeNodeData` to customize label. Pa
 
 ```jsx live=true
 import React from 'react';
-import { Tree, ButtonGroup, Button } from '@douyinfe/semi-ui';
+import { Tree, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 () => {
     let opts = {
@@ -635,8 +635,8 @@ You could use `icon` to add customized icon.
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
-import { IconMapPin } from '@douyinfe/semi-icons';
+import { Tree } from '@kousum/semi-ui-vue';
+import { IconMapPin } from '@kousum/semi-icons-vue';
 
 () => {
     const treeData = [
@@ -681,7 +681,7 @@ You could use `directory` to display tree as a directory with default icons. Als
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -760,7 +760,7 @@ You can use `disableStrictly` to set whether to enable strict disabling. After e
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -844,7 +844,7 @@ When multiple selections are made, `checkRelation` can be used to set the type o
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -934,7 +934,7 @@ In the demo below, after clicking the button to update `TreeData`, `defaultExpan
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Tree, Button } from '@douyinfe/semi-ui';
+import { Tree, Button } from '@kousum/semi-ui-vue';
 () => {
     const json = {
         "Node1": { 
@@ -997,7 +997,7 @@ You can use `value` along with `onChange` property if you want to use Tree as a 
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1089,7 +1089,7 @@ In the case of controlled expansion, when `autoExpandParent` is turned on, if yo
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1163,7 +1163,7 @@ If tree is searchable, you could also set `showFilteredOnly={true}` to reduce ti
 
 ```jsx live=true
 import React from 'react';
-import { Tree, Button } from '@douyinfe/semi-ui';
+import { Tree, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1255,7 +1255,7 @@ class Demo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Tree, Button } from '@douyinfe/semi-ui';
+import { Tree, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1317,7 +1317,7 @@ class Demo extends React.Component {
 You could use `loadData` to load treeData asynchronously on node expansion. Notice `isLeaf` is required to mark node as leaf in treeData.
 ```jsx live=true
 import React, { useState } from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const initialData = [
@@ -1419,7 +1419,7 @@ DragTreeNode {
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
 
@@ -1585,7 +1585,7 @@ renderFullLabel only takes care of the UI rendering and won't affect inside data
 
 ```jsx live=true
 import React from 'react';
-import { Tree, Checkbox } from '@douyinfe/semi-ui';
+import { Tree, Checkbox } from '@kousum/semi-ui-vue';
 
 () => {
     const renderLabel = ({
@@ -1701,7 +1701,7 @@ The second is for the scenario of "I hope that only leaf nodes can be single-sel
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const renderLabel = ({
@@ -1801,8 +1801,8 @@ Third is for the scenario when selecting Parent node also highlighting child nod
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Tree } from '@douyinfe/semi-ui';
-import { IconFixedStroked, IconSectionStroked, IconAbsoluteStroked, IconInnerSectionStroked, IconComponentStroked } from '@douyinfe/semi-icons';
+import { Tree } from '@kousum/semi-ui-vue';
+import { IconFixedStroked, IconSectionStroked, IconAbsoluteStroked, IconInnerSectionStroked, IconComponentStroked } from '@kousum/semi-icons-vue';
 
 () => {
     const [selected, setSelected] = useState(new Set());
@@ -1932,8 +1932,8 @@ Starting from version 1.27.0, we support the simultaneous use of draggable (`dra
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Tree } from '@douyinfe/semi-ui';
-import { IconFixedStroked, IconSectionStroked, IconAbsoluteStroked, IconInnerSectionStroked, IconComponentStroked } from '@douyinfe/semi-icons';
+import { Tree } from '@kousum/semi-ui-vue';
+import { IconFixedStroked, IconSectionStroked, IconAbsoluteStroked, IconInnerSectionStroked, IconComponentStroked } from '@kousum/semi-icons-vue';
 
 () => {
     const [selected, setSelected] = useState(new Set());

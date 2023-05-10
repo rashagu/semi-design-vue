@@ -13,7 +13,7 @@ brief: 用于选择多级分类下的某个选项。
 ### 如何引入
 
 ```jsx import
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -22,7 +22,7 @@ import { Cascader } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -83,7 +83,7 @@ version: >= 1.28.0
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -145,7 +145,7 @@ import { Cascader } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Cascader, Typography } from '@douyinfe/semi-ui';
+import { Cascader, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -226,7 +226,7 @@ import { Cascader, Typography } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const [value, setValue] = useState(['zhejiang', 'ningbo', 'haishu']);
@@ -289,7 +289,7 @@ import { Cascader } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -369,7 +369,7 @@ interface FilterRenderProps {
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Cascader, Typography, Checkbox } from '@douyinfe/semi-ui';
+import { Cascader, Typography, Checkbox } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -489,7 +489,7 @@ version: >= 1.28.0
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -558,7 +558,7 @@ version: >= 1.28.0
 
 ```jsx live=true
 import React from 'react';
-import { Cascader, Toast } from '@douyinfe/semi-ui';
+import { Cascader, Toast } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -624,7 +624,7 @@ import { Cascader, Toast } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -695,7 +695,7 @@ import { Cascader } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Cascader, Typography } from '@douyinfe/semi-ui';
+import { Cascader, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -786,7 +786,7 @@ interface Entity {
 
 ```jsx live=true
 import React from 'react';
-import { Cascader, Tag, Typography } from '@douyinfe/semi-ui';
+import { Cascader, Tag, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -871,7 +871,7 @@ import { Cascader, Tag, Typography } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -930,7 +930,7 @@ import { Cascader } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -992,7 +992,7 @@ version: >= 1.32.0
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -1056,7 +1056,7 @@ version: >= 1.29.0
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -1102,7 +1102,7 @@ import { Cascader } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Cascader, Typography } from '@douyinfe/semi-ui';
+import { Cascader, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const { Text } = Typography;
@@ -1176,7 +1176,7 @@ import { Cascader, Typography } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1249,7 +1249,7 @@ class Demo extends React.Component {
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const [value, setValue] = useState([]);
@@ -1318,7 +1318,7 @@ import { Cascader } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const [value, setValue] = useState([]);
@@ -1385,7 +1385,7 @@ import { Cascader } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Cascader, Button } from '@douyinfe/semi-ui';
+import { Cascader, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1443,7 +1443,7 @@ class Demo extends React.Component {
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const initialData = [
@@ -1522,7 +1522,7 @@ import { Cascader } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -1617,8 +1617,8 @@ interface TriggerRenderProps {
 
 ```jsx live=true
 import React, { useState, useCallback, useMemo } from 'react';
-import { Cascader, Button, Tag, TagInput } from '@douyinfe/semi-ui';
-import { IconClose, IconChevronDown } from '@douyinfe/semi-icons';
+import { Cascader, Button, Tag, TagInput } from '@kousum/semi-ui-vue';
+import { IconClose, IconChevronDown } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const treeData = useMemo(() => [

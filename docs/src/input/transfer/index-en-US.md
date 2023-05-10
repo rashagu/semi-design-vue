@@ -14,7 +14,7 @@ brief: A more intuitive and efficient multiple-selection selector, which can rev
 ### How to import
 
 ```jsx import
-import { Transfer } from '@douyinfe/semi-ui';
+import { Transfer } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
@@ -23,7 +23,7 @@ dataSource should have value、label、key.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer } from '@douyinfe/semi-ui';
+import { Transfer } from '@kousum/semi-ui-vue';
 () => {
     const data = Array.from({ length: 100 }, (v, i) => {
         return {
@@ -53,7 +53,7 @@ Does not support multi-level nesting
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer } from '@douyinfe/semi-ui';
+import { Transfer } from '@kousum/semi-ui-vue';
 () => {
     const dataWithGroup = [
         {
@@ -105,8 +105,8 @@ Using `renderSelectedItem` you can customize the rendering structure of each sel
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer, Avatar, Checkbox } from '@douyinfe/semi-ui';
-import { IconClose } from '@douyinfe/semi-icons';
+import { Transfer, Avatar, Checkbox } from '@kousum/semi-ui-vue';
+import { IconClose } from '@kousum/semi-icons-vue';
 
 () => {
     const renderSourceItem = item => {
@@ -219,7 +219,7 @@ import { IconClose } from '@douyinfe/semi-icons';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer } from '@douyinfe/semi-ui';
+import { Transfer } from '@kousum/semi-ui-vue';
 () => {
     const data = Array.from({ length: 20 }, (v, i) => {
         return {
@@ -247,7 +247,7 @@ Set `draggable` to true to enable the drag sort function. Support after v1.11.0
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer } from '@douyinfe/semi-ui';
+import { Transfer } from '@kousum/semi-ui-vue';
 () => {
     const data = Array.from({ length: 30 }, (v, i) => {
         return {
@@ -276,8 +276,8 @@ You can define the trigger as any ReactNode you want and add styles. Drag the tr
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer, Checkbox, Avatar } from '@douyinfe/semi-ui';
-import { IconHandle, IconClose } from '@douyinfe/semi-icons';
+import { Transfer, Checkbox, Avatar } from '@kousum/semi-ui-vue';
+import { IconHandle, IconClose } from '@kousum/semi-icons-vue';
 
 () => {
     const renderSourceItem = item => {
@@ -376,7 +376,7 @@ The example is as follows:
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer, Button } from '@douyinfe/semi-ui';
+import { Transfer, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const data = Array.from({ length: 30 }, (v, i) => {
@@ -462,8 +462,8 @@ interface SelectedPanelProps {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer, Input, Spin, Button } from '@douyinfe/semi-ui';
-import { IconSearch } from '@douyinfe/semi-icons';
+import { Transfer, Input, Spin, Button } from '@kousum/semi-ui-vue';
+import { IconSearch } from '@kousum/semi-icons-vue';
 
 class CustomRenderDemo extends React.Component {
     constructor(props) {
@@ -716,8 +716,8 @@ To support drag sorting, you need to call onSortEnd with oldIndex and newIndex a
 ```jsx live=true dir="column"
 import React from 'react';
 import { SortableContainer, SortableElement, sortableHandle } from 'react-sortable-hoc';
-import { Transfer, Button, Spin, Input } from '@douyinfe/semi-ui';
-import { IconHandle, IconSearch } from '@douyinfe/semi-icons';
+import { Transfer, Button, Spin, Input } from '@kousum/semi-ui-vue';
+import { IconHandle, IconSearch } from '@kousum/semi-icons-vue';
 
 class CustomRenderDragDemo extends React.Component {
     constructor(props) {
@@ -893,7 +893,7 @@ interface Default TreeProps {
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Transfer } from '@douyinfe/semi-ui';
+import { Transfer } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [

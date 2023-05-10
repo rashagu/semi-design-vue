@@ -98,7 +98,7 @@ npm i @semi-bot/semi-theme-a11y
 
 ```jsx live=true
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
+import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>

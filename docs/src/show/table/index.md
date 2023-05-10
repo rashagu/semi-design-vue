@@ -15,7 +15,7 @@ brief: 表格用于呈现结构化的数据内容，通常会伴随提供对数�
 
 ```jsx import
 import React from 'react';
-import { Table } from '@douyinfe/semi-ui';
+import { Table } from '@kousum/semi-ui-vue';
 
 function App() {
     const columns = [
@@ -78,8 +78,8 @@ function App() {
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 function App() {
     const columns = [
@@ -177,8 +177,8 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 const { Column } = Table;
 
@@ -258,8 +258,8 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 function App() {
     const columns = [
@@ -402,8 +402,8 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar, Button, Empty, Typography } from '@douyinfe/semi-ui';
-import { IconDelete } from '@douyinfe/semi-icons';
+import { Table, Avatar, Button, Empty, Typography } from '@kousum/semi-ui-vue';
+import { IconDelete } from '@kousum/semi-icons-vue';
 import { IllustrationNoResult, IllustrationNoResultDark } from '@douyinfe/semi-illustrations';
 const { Text } = Typography;
 
@@ -559,7 +559,7 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const figmaIconUrl = 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/figma-icon.png';
@@ -676,7 +676,7 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -813,8 +813,8 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -941,8 +941,8 @@ render(App);
 
 ```jsx live=false noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -1079,7 +1079,7 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -1199,7 +1199,7 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar, Dropdown } from '@douyinfe/semi-ui';
+import { Table, Avatar, Dropdown } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -1330,8 +1330,8 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar, Descriptions, Tag } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar, Descriptions, Tag } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 const columns = [
     {
@@ -1476,8 +1476,8 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar, Descriptions, Tag } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar, Descriptions, Tag } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 const columns = [
     {
@@ -1623,8 +1623,8 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar, Descriptions, Tag } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar, Descriptions, Tag } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 const columns = [
     {
@@ -1775,7 +1775,7 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table } from '@douyinfe/semi-ui';
+import { Table } from '@kousum/semi-ui-vue';
 
 function App() {
     const columns = [
@@ -1887,8 +1887,8 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState } from 'react';
-import { Table, Button } from '@douyinfe/semi-ui';
-import { IconArrowUp, IconArrowDown } from '@douyinfe/semi-icons';
+import { Table, Button } from '@kousum/semi-ui-vue';
+import { IconArrowUp, IconArrowDown } from '@kousum/semi-icons-vue';
 
 const raw = [
     {
@@ -2115,7 +2115,7 @@ render(App);
 ```jsx live=true noInline=true dir="column"
 import React, { useMemo, useState, useCallback } from 'react';
 import { get, union, pullAll } from 'lodash-es';
-import { Table } from '@douyinfe/semi-ui';
+import { Table } from '@kousum/semi-ui-vue';
 
 const childrenRecordName = 'children';
 const rowKey = 'key';
@@ -2327,7 +2327,7 @@ render(ChildrenDataSelectedDemo);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui/';
+import { Table, Avatar } from '@kousum/semi-ui-vue/';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -2450,8 +2450,8 @@ render(EventTable);
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 function App() {
     const columns = [
@@ -2585,8 +2585,8 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 function App() {
     const columns = [
@@ -2699,8 +2699,8 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Typography } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Typography } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 function App() {
     const columns = [
@@ -2828,7 +2828,7 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -2927,7 +2927,7 @@ render(ResizableDemo);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -3054,7 +3054,7 @@ render(ResizableDemo);
 
 ```jsx live=true dir="column" noInline=true hideInDSM
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import { DndProvider, DragSource, DropTarget } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import * as dateFns from 'date-fns';
@@ -3265,7 +3265,7 @@ render(DragSortingTableDemo);
 
 ```jsx live=true noInline=true dir="column"
 import React from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -3396,7 +3396,7 @@ render(Demo);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useRef } from 'react';
-import { Table, Avatar, Button } from '@douyinfe/semi-ui';
+import { Table, Avatar, Button } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -3504,7 +3504,7 @@ render(VirtualizedFixedDemo);
 
 ```jsx live=true noInline=true dir="column" hideInDSM
 import React, { useRef } from 'react';
-import { Table, Avatar, Button } from '@douyinfe/semi-ui';
+import { Table, Avatar, Button } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -3625,7 +3625,7 @@ render(InfiniteScrollDemo);
 
 ```jsx live=true noInline=true dir="column" hideInDSM
 import React from 'react';
-import { Table, Switch, ButtonGroup, Button, Avatar } from '@douyinfe/semi-ui';
+import { Table, Switch, ButtonGroup, Button, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -4251,7 +4251,7 @@ render(App);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useEffect, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -4398,8 +4398,8 @@ render(Demo);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -4526,8 +4526,8 @@ render(Demo);
 
 ```jsx live=true noInline=true dir="column"
 import React, { useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 import * as dateFns from 'date-fns';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -4661,7 +4661,7 @@ interface RenderOptions {
 
 ```jsx live=true noInline=true dir="column"
 import React, { useState, useMemo } from 'react';
-import { Table, Avatar } from '@douyinfe/semi-ui';
+import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 const figmaIconUrl = 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/figma-icon.png';
@@ -4951,7 +4951,7 @@ function App() {
 
 ```jsx
 import React from 'react';
-import { Table } from '@douyinfe/semi-ui';
+import { Table } from '@kousum/semi-ui-vue';
 
 () => (
     <Table
@@ -5085,7 +5085,7 @@ type Filter = {
 
 ```jsx
 import React, { useRef, useEffect } from 'react';
-import { Table } from '@douyinfe/semi-ui';
+import { Table } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const ref = useRef();

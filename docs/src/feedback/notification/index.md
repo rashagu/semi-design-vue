@@ -13,7 +13,7 @@ brief: 通知用于主动向用户发出消息通知
 ### 如何引入
 
 ```jsx import
-import { Notification } from '@douyinfe/semi-ui';
+import { Notification } from '@kousum/semi-ui-vue';
 ```
 
 ### 普通通知
@@ -22,7 +22,7 @@ import { Notification } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button } from '@douyinfe/semi-ui';
+import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Button
@@ -45,7 +45,7 @@ import { Notification, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button, ButtonGroup } from '@douyinfe/semi-ui';
+import { Notification, Button, ButtonGroup } from '@kousum/semi-ui-vue';
 
 () => {
     let opts = {
@@ -80,8 +80,8 @@ import { Notification, Button, ButtonGroup } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button } from '@douyinfe/semi-ui';
-import { IconToutiaoLogo, IconVigoLogo } from '@douyinfe/semi-icons';
+import { Notification, Button } from '@kousum/semi-ui-vue';
+import { IconToutiaoLogo, IconVigoLogo } from '@kousum/semi-icons-vue';
 
 () => {
     let opts = {
@@ -136,7 +136,7 @@ import { IconToutiaoLogo, IconVigoLogo } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button } from '@douyinfe/semi-ui';
+import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => {
     let opts = {
@@ -173,7 +173,7 @@ import { Notification, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button, Typography } from '@douyinfe/semi-ui';
+import { Notification, Button, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const { Text } = Typography;
@@ -204,7 +204,7 @@ import { Notification, Button, Typography } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button } from '@douyinfe/semi-ui';
+import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => {
     let opts = {
@@ -222,7 +222,7 @@ import { Notification, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button } from '@douyinfe/semi-ui';
+import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => {
     let opts = {

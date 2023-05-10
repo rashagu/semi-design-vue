@@ -12,7 +12,7 @@ brief: 标签是图形化标记界面上的元素的组件，达到快速识别�
 ### 如何引入
 
 ```jsx import
-import { Tag, TagGroup } from '@douyinfe/semi-ui';
+import { Tag, TagGroup } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -22,7 +22,7 @@ import { Tag, TagGroup } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tag, Space } from '@douyinfe/semi-ui';
+import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -43,7 +43,7 @@ import { Tag, Space } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tag, Space } from '@douyinfe/semi-ui';
+import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
     <Space>
@@ -59,7 +59,7 @@ import { Tag, Space } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tag, Space } from '@douyinfe/semi-ui';
+import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
     <Space>
@@ -75,7 +75,7 @@ import { Tag, Space } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tag, Space } from '@douyinfe/semi-ui';
+import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
     <Space wrap>
@@ -95,7 +95,7 @@ import { Tag, Space } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tag, Space } from '@douyinfe/semi-ui';
+import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
     <Space>
@@ -121,7 +121,7 @@ import { Tag, Space } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tag, Space } from '@douyinfe/semi-ui';
+import { Tag, Space } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const src = 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/dy.png';
@@ -154,7 +154,7 @@ function Demo() {
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Tag, Button } from '@douyinfe/semi-ui';
+import { Tag, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -179,7 +179,7 @@ import { Tag, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagGroup } from '@douyinfe/semi-ui';
+import { TagGroup } from '@kousum/semi-ui-vue';
 
 () => {
     const tagList = [
@@ -233,7 +233,7 @@ import { TagGroup } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagGroup } from '@douyinfe/semi-ui';
+import { TagGroup } from '@kousum/semi-ui-vue';
 
 class TagGroupCloseableDemo extends React.Component {
     constructor(props){

@@ -14,14 +14,14 @@ brief: Toast component is used to give timely feedback to user's operations. It 
 ### How to import
 
 ```jsx
-import { Toast } from '@douyinfe/semi-ui';
+import { Toast } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
 
 ```jsx live=true noInline=true
 import React from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 import { throttle } from 'lodash-es';
 
 function Demo() {
@@ -58,7 +58,7 @@ Use different methods to show different Toast including success, warning, error 
 
 ```jsx live=true noInline=true
 import React from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     let opts = {
@@ -91,7 +91,7 @@ You could use `theme` for a colored background style. Default is `normal`.
 
 ```jsx live=true noInline=true
 import React from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     let opts = {
@@ -128,7 +128,7 @@ Informational feedback
 
 ```jsx live=true noInline=true
 import React from 'react';
-import { Toast, Typography, Button } from '@douyinfe/semi-ui';
+import { Toast, Typography, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -178,7 +178,7 @@ Use `duration` to set up time delay. By default it closes after 3 seconds.
 
 ```jsx live=true noInline=true hideInDSM
 import React from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     let opts = {
@@ -197,7 +197,7 @@ Set `duration` to 0 if you do not want the Notification to close by itself. In t
 
 ```jsx live=true noInline=true hideInDSM
 import React, { useState } from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [toastId, setToastId] = useState();
@@ -243,7 +243,7 @@ Use unique Toast `id` to update toast content.
 
 ```jsx live=true noInline=true hideInDSM
 import React, { useState } from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     function show() {
@@ -270,7 +270,7 @@ You could use `Toast.useToast` to create a `contextHolder` that could access con
 
 ```jsx live=true noInline=true hideInDSM
 import React from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 const ReachableContext = React.createContext();
 
@@ -305,7 +305,7 @@ You could also use `ReactDOM.createPortal` to insert toast in a Portal.
 
 ```jsx live=true noInline=true
 import React, { useRef } from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 const ReachableContext = React.createContext();
 
@@ -397,7 +397,7 @@ The static methods provided are as follows: Display: You can pass in `options` o
 
 ```jsx live=true noInline=true
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const ToastInCustomContainer = ToastFactory.create({

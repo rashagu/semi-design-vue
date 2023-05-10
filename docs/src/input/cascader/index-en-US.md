@@ -14,7 +14,7 @@ brief: Used to select an option under a multi-level classification.
 ### How to import
 
 ```jsx import 
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
@@ -23,7 +23,7 @@ Basic usage, only leaf nodes can be selected by default.
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -82,7 +82,7 @@ Set `multiple` to make multiple selections.
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -142,7 +142,7 @@ Use `filterTreeNode` to support search input. By default it searches the `value`
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -213,7 +213,7 @@ When multiple selection and search are supported at the same time (version: >= 1
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -284,7 +284,7 @@ Filtered data can be sorted using `filterSorter`, `filterSorter` is available si
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -364,7 +364,7 @@ The example is as follows
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Cascader, Typography, Checkbox } from '@douyinfe/semi-ui';
+import { Cascader, Typography, Checkbox } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -484,7 +484,7 @@ You can use `showRestTagsPopover` to set whether hover +N displays Popover after
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -553,7 +553,7 @@ In a multi-selection scene, use max to limit the number of multi-selection selec
 
 ```jsx live=true
 import React from 'react';
-import { Cascader, Toast } from '@douyinfe/semi-ui';
+import { Cascader, Toast } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -620,7 +620,7 @@ In the case of single selection, you can also set `changeOnSelect` to allow the 
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -690,7 +690,7 @@ Set `displayProp` to select which property in the data you would like to display
 
 ```jsx live=true
 import React from 'react';
-import { Cascader, Typography } from '@douyinfe/semi-ui';
+import { Cascader, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -781,7 +781,7 @@ interface Entity {
 
 ```jsx live=true
 import React from 'react';
-import { Cascader, Tag, Typography } from '@douyinfe/semi-ui';
+import { Cascader, Tag, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -865,7 +865,7 @@ You can use `separator` to set the separator, including: the separator of the co
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -924,7 +924,7 @@ import { Cascader } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -999,7 +999,7 @@ Take the following demo as an example, the node "Music" is strictly disabled. Th
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -1062,7 +1062,7 @@ You can use `showNext` to set the time to expand the Dropdown submenu, optional:
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -1121,7 +1121,7 @@ We have reserved slots at the top and bottom of the cascade selector. You can se
 
 ```jsx live=true
 import React from 'react';
-import { Cascader, Typography } from '@douyinfe/semi-ui';
+import { Cascader, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const { Text } = Typography;
@@ -1195,7 +1195,7 @@ You can use `value` along with `onChange` property if you want to use Cascader a
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1267,7 +1267,7 @@ In the multi-selection (multiple=true) scenario, when we select the ancestor nod
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const [value, setValue] = useState(['impressionism', 'visualArts']);
@@ -1335,7 +1335,7 @@ In multiple selection, you can set the value to include only leaf nodes by turni
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const [value, setValue] = useState(['impressionism', 'visualArts']);
@@ -1400,7 +1400,7 @@ import { Cascader } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Cascader, Button } from '@douyinfe/semi-ui';
+import { Cascader, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1457,7 +1457,7 @@ When your data structure level is particularly deep, the Cascader drop-down menu
 
 ```jsx live=true
 import React from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -1522,7 +1522,7 @@ You could use `loadData` to load data asynchronously.
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Cascader } from '@douyinfe/semi-ui';
+import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
     const initialData = [
@@ -1637,8 +1637,8 @@ interface TriggerRenderProps {
 
 ```jsx live=true
 import React, { useState, useCallback, useMemo } from 'react';
-import { Cascader, Button, Tag, TagInput } from '@douyinfe/semi-ui';
-import { IconClose, IconChevronDown } from '@douyinfe/semi-icons';
+import { Cascader, Button, Tag, TagInput } from '@kousum/semi-ui-vue';
+import { IconClose, IconChevronDown } from '@kousum/semi-icons-vue';
 
 
 function Demo() {

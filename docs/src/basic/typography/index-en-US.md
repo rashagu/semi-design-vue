@@ -19,7 +19,7 @@ brief: The basic format of text, images, paragraphs, and numeric.
 ### How to import
 
 ```jsx import
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 ```
 ### Title
 
@@ -27,7 +27,7 @@ Use `heading` to set different levels of headint title.
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Title } = Typography;
@@ -50,7 +50,7 @@ Text component has different built-in styles. You could also pass `icon` to use 
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -102,8 +102,8 @@ You could pass object to `link`, which will be mounted on `<a>`.
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
-import { IconLink } from '@douyinfe/semi-icons';
+import { Typography } from '@kousum/semi-ui-vue';
+import { IconLink } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -127,7 +127,7 @@ Paragraph component has two spacings. You could set`spacing='extended'` for a lo
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Paragraph, Title } = Typography;
@@ -167,7 +167,7 @@ Based on Text component, added properties: `rule`, `precision`, `truncate`, `par
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Numeral } = Typography;
@@ -211,7 +211,7 @@ Parsing rules can be customised via `parser`.
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Numeral } = Typography;
@@ -260,7 +260,7 @@ Paragraph and Text component support two sizes, `small`(12px) and `normal`(14px)
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Paragraph, Text } = Typography;
@@ -289,8 +289,8 @@ At this time, children will no longer limit the type, but `copyable.content` sti
 
 ```jsx live=true
 import React from 'react';
-import { Typography, TextArea } from '@douyinfe/semi-ui';
-import { IconSetting } from '@douyinfe/semi-icons';
+import { Typography, TextArea } from '@kousum/semi-ui-vue';
+import { IconSetting } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const { Paragraph, Text, Numeral } = Typography;
@@ -323,7 +323,7 @@ Show ellipsis if text is overflowed. Refer to [Ellipsis Config](#Ellipsis-Config
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Paragraph, Text, Title } = Typography;
@@ -375,7 +375,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;

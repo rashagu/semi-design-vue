@@ -22,14 +22,14 @@ brief: 在需要等待加载内容的位置提供的占位组件。
 ### 如何引入
 
 ```jsx import
-import { Skeleton } from '@douyinfe/semi-ui';
+import { Skeleton } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本使用
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Skeleton, Switch, Avatar, Button } from '@douyinfe/semi-ui';
+import { Skeleton, Switch, Avatar, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [loading, setLoading] = useState(true);
@@ -82,7 +82,7 @@ import { Skeleton, Switch, Avatar, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Skeleton } from '@douyinfe/semi-ui';
+import { Skeleton } from '@kousum/semi-ui-vue';
 
 () => {
     const placeholder = (
@@ -109,7 +109,7 @@ import { Skeleton } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Skeleton, Descriptions } from '@douyinfe/semi-ui';
+import { Skeleton, Descriptions } from '@kousum/semi-ui-vue';
 
 () => {
     const placeholder = (
@@ -133,7 +133,7 @@ import { Skeleton, Descriptions } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Skeleton, Avatar } from '@douyinfe/semi-ui';
+import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const placeholder = (
@@ -158,7 +158,7 @@ import { Skeleton, Avatar } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Skeleton, Button } from '@douyinfe/semi-ui';
+import { Skeleton, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const style = {
@@ -192,7 +192,7 @@ import { Skeleton, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Skeleton, Avatar } from '@douyinfe/semi-ui';
+import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const style = {
@@ -232,7 +232,7 @@ import { Skeleton, Avatar } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Skeleton, Table } from '@douyinfe/semi-ui';
+import { Skeleton, Table } from '@kousum/semi-ui-vue';
 
 () => {
     const data = {
@@ -324,7 +324,7 @@ import { Skeleton, Table } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Skeleton, Avatar } from '@douyinfe/semi-ui';
+import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const style = {

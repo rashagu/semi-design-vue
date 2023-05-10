@@ -13,13 +13,13 @@ brief: 滑动选择器，使用拖动交互快速选择数值或数值范围，�
 ### 如何引入
 
 ```jsx import
-import { Slider } from '@douyinfe/semi-ui';
+import { Slider } from '@kousum/semi-ui-vue';
 ```
 ### 基本用法
 基本滑动条。当 `range` 为 `true` 时，支持两侧滑动。当 `disabled` 为 `true` 时，滑块处于不可用状态。
 ```jsx live=true
 import React from 'react';
-import { Slider } from '@douyinfe/semi-ui';
+import { Slider } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -47,7 +47,7 @@ import { Slider } from '@douyinfe/semi-ui';
 滑动条的滑块和输入框组件保持同步。
 ```jsx live=true
 import React from 'react';
-import { Slider, InputNumber } from '@douyinfe/semi-ui';
+import { Slider, InputNumber } from '@kousum/semi-ui-vue';
 
 class InputSlider extends React.Component {
     constructor(props) {
@@ -81,7 +81,7 @@ class InputSlider extends React.Component {
 使用 `tipFormatter` 可以设置 Tooltip 的显示的格式。设置 `tipFormatter={null}`，则隐藏 Tooltip。`getAriaValueText`用于给滑块的当前值提供一个用户友好的名称，对屏幕阅读器用户很重要。
 ```jsx live=true
 import React from 'react';
-import { Slider } from '@douyinfe/semi-ui';
+import { Slider } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -97,7 +97,7 @@ import { Slider } from '@douyinfe/semi-ui';
 使用 `marks` 属性标注滑块的刻度，使用 `value` / `defaultValue` 指定滑块位置。
 ```jsx live=true
 import React from 'react';
-import { Slider } from '@douyinfe/semi-ui';
+import { Slider } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -123,7 +123,7 @@ import { Slider } from '@douyinfe/semi-ui';
 通过使用 `linear-gradient` 及 `railStyle` ，配合 onChange 可以实现动态的分段背景效果。
 ```jsx live=true
 import React from 'react';
-import { Slider } from '@douyinfe/semi-ui';
+import { Slider } from '@kousum/semi-ui-vue';
 
 class SegSlider extends React.Component {
     constructor(props) {
@@ -170,7 +170,7 @@ class SegSlider extends React.Component {
 滑块位置即 `Slider` 的值由 value 控制，配合 onChange 使用。
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Slider, Button } from '@douyinfe/semi-ui';
+import { Slider, Button } from '@kousum/semi-ui-vue';
 
 class ControllSlider extends React.Component {
     constructor(props) {
@@ -199,7 +199,7 @@ class ControllSlider extends React.Component {
 ### 垂直
 ```jsx live=true
 import React from 'react';
-import { Slider } from '@douyinfe/semi-ui';
+import { Slider } from '@kousum/semi-ui-vue';
 
 () => (
     <div>

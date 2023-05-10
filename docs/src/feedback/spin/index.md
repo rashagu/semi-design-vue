@@ -12,14 +12,14 @@ brief: 加载器组件用于告知用户内容正在加载且需要一段不确�
 ### 如何引入
 
 ```jsx import
-import { Spin } from '@douyinfe/semi-ui';
+import { Spin } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
 
 ```jsx live=true
 import React from 'react';
-import { Spin } from '@douyinfe/semi-ui';
+import { Spin } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ marginLeft: 30 }}>
@@ -35,7 +35,7 @@ import { Spin } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Spin } from '@douyinfe/semi-ui';
+import { Spin } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ marginLeft: 30 }}>
@@ -59,7 +59,7 @@ import { Spin } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Spin } from '@douyinfe/semi-ui';
+import { Spin } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -85,8 +85,8 @@ import { Spin } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Spin } from '@douyinfe/semi-ui';
-import { IconLoading } from '@douyinfe/semi-icons';
+import { Spin } from '@kousum/semi-ui-vue';
+import { IconLoading } from '@kousum/semi-icons-vue';
 
 () => (
     <div style={{ marginLeft: 30 }}>
@@ -103,7 +103,7 @@ import { IconLoading } from '@douyinfe/semi-icons';
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Spin, Button } from '@douyinfe/semi-ui';
+import { Spin, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [loading, toggleLoading] = useState(false);

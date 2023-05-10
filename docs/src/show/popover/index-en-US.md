@@ -19,7 +19,7 @@ The difference with Tooltip is that users can operate on elements on the floatin
 ### How to import
 
 ```jsx import
-import { Popover } from '@douyinfe/semi-ui';
+import { Popover } from '@kousum/semi-ui-vue';
 ```
 
 ### Cautions
@@ -34,7 +34,7 @@ At the same time, in order to calculate the positioning of the popup layer, it i
 
 ```jsx live=true noInline=true dir="column"
 import React, { forwardRef } from 'react';
-import { Popover, Space } from '@douyinfe/semi-ui';
+import { Popover, Space } from '@kousum/semi-ui-vue';
 
 const style={ border: '2px solid var(--semi-color-border)', paddingLeft: 4, paddingRight: 4, borderRadius: 4 };
 
@@ -75,7 +75,7 @@ render(Demo);
 
 ```jsx live=true
 import React from 'react';
-import { Popover, Tag } from '@douyinfe/semi-ui';
+import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -99,7 +99,7 @@ Support twelve directions.
 
 ```jsx live=true
 import React from 'react';
-import { Popover, Tag } from '@douyinfe/semi-ui';
+import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const tops = [
@@ -200,7 +200,7 @@ In this scenario, Popover's display is completely at the control of parameter `v
 
 ```jsx live=true
 import React from 'react';
-import { Popover, Button } from '@douyinfe/semi-ui';
+import { Popover, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor(props = {}) {
@@ -254,7 +254,7 @@ Popover also supports the display of a small triangle.
 
 ```jsx live=true
 import React from 'react';
-import { Popover, Tag } from '@douyinfe/semi-ui';
+import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const tops = [
@@ -361,7 +361,7 @@ Under the condition of **showArrow=true**, you can pass in `arrowPointAtCenter=t
 
 ```jsx live=true
 import React from 'react';
-import { Popover, Tag } from '@douyinfe/semi-ui';
+import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const tops = [
@@ -470,7 +470,7 @@ If you need to customize the background color or border color of the floating la
 
 ```jsx live=true
 import React from 'react';
-import { Popover, Tag } from '@douyinfe/semi-ui';
+import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -505,7 +505,7 @@ Popover `content` also supports functions. Its input parameter is an object, whi
 
 ```jsx live=true
 import React from 'react';
-import { Button, Input, Popover, Space } from '@douyinfe/semi-ui';
+import { Button, Input, Popover, Space } from '@kousum/semi-ui-vue';
 () => {
     const renderContent = ({ initialFocusRef }) => {
         return (

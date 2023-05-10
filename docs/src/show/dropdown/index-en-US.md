@@ -13,14 +13,14 @@ brief: A menu that pops down.
 ### How to import
 
 ```jsx import
-import { Dropdown } from '@douyinfe/semi-ui';
+import { Dropdown } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Tag } from '@douyinfe/semi-ui';
+import { Dropdown, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -45,7 +45,7 @@ Users can nested `Dropdown`, which is suitable for situations with multiple subl
 
 ```jsx live=true
 import React, { useMemo } from 'react';
-import { Dropdown, Tag } from '@douyinfe/semi-ui';
+import { Dropdown, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const subDropdown = useMemo(
@@ -89,8 +89,8 @@ By configuring `icon` on `Dropdown.Item` (`icon` needs to be ReactNode), you can
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Button } from '@douyinfe/semi-ui';
-import { IconBox, IconSimilarity, IconSetting, IconForward, IconColorPalette, IconRefresh, IconSearch, IconBranch } from '@douyinfe/semi-icons';
+import { Dropdown, Button } from '@kousum/semi-ui-vue';
+import { IconBox, IconSimilarity, IconSetting, IconForward, IconColorPalette, IconRefresh, IconSearch, IconBranch } from '@kousum/semi-icons-vue';
 
 function Demo() {
     return (
@@ -177,7 +177,7 @@ The position of support is the same. [Tooltip](https://semi.design/en-US/show/to
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Tag } from '@douyinfe/semi-ui';
+import { Dropdown, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -233,7 +233,7 @@ The default is the move-in Trigger, which can be expanded by getting focus, clic
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Tag, Input, Button } from '@douyinfe/semi-ui';
+import { Dropdown, Tag, Input, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -299,7 +299,7 @@ Click on the menu item to trigger different mouse events, support `onClick`, `on
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Button, Toast } from '@douyinfe/semi-ui';
+import { Dropdown, Button, Toast } from '@kousum/semi-ui-vue';
 
 class DropdownEvents extends React.Component {
     constructor() {
@@ -355,7 +355,7 @@ Configure type `Dropdown.Item` to show different colors of text.
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Button, Toast } from '@douyinfe/semi-ui';
+import { Dropdown, Button, Toast } from '@kousum/semi-ui-vue';
 
 class DropdownEvents extends React.Component {
     constructor() {
@@ -401,7 +401,7 @@ Can use the menu attribute to configure the Dropdown content menu
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Button } from '@douyinfe/semi-ui';
+import { Dropdown, Button } from '@kousum/semi-ui-vue';
 
 function DropdownEvents() {
     const menu = [

@@ -10,6 +10,9 @@ brief: 分割线是一个呈线状的轻量化组件，用于有逻辑的组织�
 <script setup>
 import { useData } from 'vitepress';
 import DesignToken from '../../../DesignToken.vue';
+import { Divider, Typography } from '@kousum/semi-ui-vue';
+import { IconSemiLogo } from '@kousum/semi-icons-vue';
+import { DividerDemo1 } from './demo/DividerDemo1.vue';
 
 const { site, theme, page, frontmatter } = useData()
 </script>
@@ -25,14 +28,14 @@ const { site, theme, page, frontmatter } = useData()
 ### 如何引入
 
 ```jsx import
-import { Divider } from '@douyinfe/semi-ui';
+import { Divider } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
 
 ```jsx live=true
 import React from 'react';
-import { Divider } from '@douyinfe/semi-ui';
+import { Divider } from '@kousum/semi-ui-vue';
 
 () => {
 
@@ -72,39 +75,18 @@ import { Divider } from '@douyinfe/semi-ui';
 };
 
 ```
-
 ### 包含内容
 
-```jsx live=true
-import React from 'react';
-import { Divider, Typography } from '@douyinfe/semi-ui';
-import { IconSemiLogo } from '@douyinfe/semi-icons';
+<DividerDemo1 />
 
-() => {
+::: details code-group Click me to view the code
 
-    return (
-        <div>
-            <Divider margin='12px' align='left'>
-                这是居左文字
-            </Divider>
+<<< @/basic/divider/demo/DividerDemo1.vue
 
-            <Divider margin='12px' align='center'>
-                这是居中文字
-            </Divider>
-
-            <Divider margin='12px' align='right'>
-                这是居右文字
-            </Divider>
-
-            <Divider margin='12px'>
-                <IconSemiLogo />
-            </Divider>
-        </div>
-    );
-};
+:::
 
 
-```
+
 
 ## API参考
 

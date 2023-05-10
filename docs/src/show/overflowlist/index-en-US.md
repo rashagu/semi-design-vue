@@ -12,7 +12,7 @@ brief: OverflowList is a behavior component used to take list of items and displ
 ### How to import
 
 ```jsx import
-import { OverflowList } from '@douyinfe/semi-ui';
+import { OverflowList } from '@kousum/semi-ui-vue';
 ```
 
 ### Collapse Mode - Simple
@@ -21,8 +21,8 @@ You could use `renderMode="collapse"` (default) to render items.
 
 ```jsx live=true
 import React from 'react';
-import { OverflowList, Tag, Slider } from '@douyinfe/semi-ui';
-import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@douyinfe/semi-icons';
+import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
+import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
 () => {
     const [width, setWidth] = useState(100);
@@ -66,8 +66,8 @@ import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder
 
 ```jsx live=true
 import React from 'react';
-import { OverflowList, Tag, Slider } from '@douyinfe/semi-ui';
-import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@douyinfe/semi-icons';
+import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
+import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
 () => {
     const [width, setWidth] = useState(100);
@@ -116,8 +116,8 @@ import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder
 
 ```jsx live=true
 import React from 'react';
-import { OverflowList, Tag, Slider } from '@douyinfe/semi-ui';
-import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@douyinfe/semi-icons';
+import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
+import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
 () => {
     const [width, setWidth] = useState(100);
@@ -167,8 +167,8 @@ If you need certain element in the list to scrollIntoView, use `` document.query
 
 ```jsx live=true
 import React from 'react';
-import { OverflowList, Tag, Slider } from '@douyinfe/semi-ui';
-import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@douyinfe/semi-icons';
+import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
+import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
 () => {
     const [width, setWidth] = useState(100);

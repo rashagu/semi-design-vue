@@ -14,7 +14,7 @@ brief: Lists display a set of related contents
 ### How to import
 
 ```jsx import
-import { List } from '@douyinfe/semi-ui';
+import { List } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
@@ -23,7 +23,7 @@ You can use `size` to size list. Supported values include `large`, `default`, `S
 
 ```jsx live=true dir="column" noInline=true 
 import React from 'react';
-import { List } from '@douyinfe/semi-ui';
+import { List } from '@kousum/semi-ui-vue';
 
 class SimpleList extends React.Component {
     render() {
@@ -83,7 +83,7 @@ List.Item has a built-in template consisting of: `header`, `main`, and `extra`. 
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { List, ButtonGroup, Button, Avatar } from '@douyinfe/semi-ui';
+import { List, ButtonGroup, Button, Avatar } from '@kousum/semi-ui-vue';
 
 class ContentList extends React.Component {
     render() {
@@ -149,7 +149,7 @@ Use `layout` property to set list layout, one of `vertical`(default) or `horizon
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { List, Avatar } from '@douyinfe/semi-ui';
+import { List, Avatar } from '@kousum/semi-ui-vue';
 
 class LayoutList extends React.Component {
     render() {
@@ -203,7 +203,7 @@ Use `grid` property to set grid layout. Use `span` to set the number of occupyin
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { List, Descriptions, Rating, ButtonGroup, Button } from '@douyinfe/semi-ui';
+import { List, Descriptions, Rating, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 class LayoutList extends React.Component {
     render() {
@@ -281,7 +281,7 @@ Refer to [Grid](/en-US/basic/grid) for responsive dimensions.
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { List, Descriptions, Rating, ButtonGroup, Button } from '@douyinfe/semi-ui';
+import { List, Descriptions, Rating, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 class Responsive extends React.Component {
     render() {
@@ -375,7 +375,7 @@ You can use `loadMore` to achieve loading state for more incoming contents.
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { List, Skeleton, Button, Avatar } from '@douyinfe/semi-ui';
+import { List, Skeleton, Button, Avatar } from '@kousum/semi-ui-vue';
 
 class LoadMoreList extends React.Component {
     constructor() {
@@ -499,7 +499,7 @@ You can integrate [react-infinite-scroller](https://github.com/CassetteRocks/rea
 
 ```jsx live=true dir="column" noInline=true hideInDSM
 import React from 'react';
-import { List, Avatar, Spin, Button } from '@douyinfe/semi-ui';
+import { List, Avatar, Spin, Button } from '@kousum/semi-ui-vue';
 import InfiniteScroll from 'react-infinite-scroller';
 
 class ScrollLoad extends React.Component {
@@ -621,7 +621,7 @@ You can integrate [react-virtualized](https://github.com/bvaughn/react-virtualiz
 
 ```jsx live=true dir="column" noInline=true hideInDSM
 import React from 'react';
-import { List, Avatar } from '@douyinfe/semi-ui';
+import { List, Avatar } from '@kousum/semi-ui-vue';
 import { InfiniteLoader, AutoSizer } from 'react-virtualized';
 import VList from 'react-virtualized/dist/commonjs/List';
 
@@ -760,7 +760,7 @@ You can integrate [react-dnd](https://github.com/react-dnd/react-dnd) to impleme
 
 ```jsx live=true dir="column" noInline=true hideInDSM
 import React from 'react';
-import { List, Avatar } from '@douyinfe/semi-ui';
+import { List, Avatar } from '@kousum/semi-ui-vue';
 import { DndProvider, DragSource, DropTarget } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ReactDOM from 'react-dom';
@@ -921,8 +921,8 @@ If you use [react-sortable-hoc](https://github.com/clauderic/react-sortable-hoc)
 
 ```jsx live=true dir="column" hideInDSM
 import React, { useState } from 'react';
-import { List } from '@douyinfe/semi-ui';
-import { IconHandle } from '@douyinfe/semi-icons';
+import { List } from '@kousum/semi-ui-vue';
+import { IconHandle } from '@kousum/semi-icons-vue';
 import { SortableContainer, SortableElement, sortableHandle } from 'react-sortable-hoc';
 
 () => {
@@ -1000,7 +1000,7 @@ You can use Pagination in combination to achieve a paged List
 
 ```jsx live=true dir="column" hideInDSM
 import React, { useState } from 'react';
-import { List, Pagination } from '@douyinfe/semi-ui';
+import { List, Pagination } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [
@@ -1053,8 +1053,8 @@ You can use it by assembling Input to filter the List
 
 ```jsx live=true dir="column"  hideInDSM
 import React, { useState } from 'react';
-import { List, Input } from '@douyinfe/semi-ui';
-import { IconSearch } from '@douyinfe/semi-icons';
+import { List, Input } from '@kousum/semi-ui-vue';
+import { IconSearch } from '@kousum/semi-icons-vue';
 
 () => {
     const data = [
@@ -1106,8 +1106,8 @@ import { IconSearch } from '@douyinfe/semi-icons';
 
 ```jsx live=true dir="column" hideInDSM
 import React, { useState } from 'react';
-import { List, Input, Button } from '@douyinfe/semi-ui';
-import { IconMinusCircle, IconPlusCircle } from '@douyinfe/semi-icons';
+import { List, Input, Button } from '@kousum/semi-ui-vue';
+import { IconMinusCircle, IconPlusCircle } from '@kousum/semi-icons-vue';
 
 () => {
     const data = [
@@ -1172,7 +1172,7 @@ You can enhance the List into a list selector by combining Radio or Checkbox
 ```jsx live=true dir="column" hideInDSM
 
 import React, { useState } from 'react';
-import { List, Input, Button, Checkbox, Radio, RadioGroup, CheckboxGroup } from '@douyinfe/semi-ui';
+import { List, Input, Button, Checkbox, Radio, RadioGroup, CheckboxGroup } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [
@@ -1240,7 +1240,7 @@ You can monitor the keyboard events of the corresponding keys by yourself to rea
 
 ```jsx live=true dir="column" hideInDSM
 import React, { useState, useRef } from 'react';
-import { List, Input, Button } from '@douyinfe/semi-ui';
+import { List, Input, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [

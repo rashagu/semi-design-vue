@@ -12,13 +12,13 @@ brief: 通过鼠标或键盘，输入范围内的数值，与 Input 不同的是
 ### 如何引入
 
 ```jsx import
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 ```
 ### 基本输入框
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ width: 280 }}>
@@ -43,7 +43,7 @@ import { InputNumber } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ width: 280 }}>
@@ -73,7 +73,7 @@ import { InputNumber } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
     <InputNumber innerButtons style={{ width: 190 }} />
@@ -84,7 +84,7 @@ hideButtons设为true，彻底隐藏步进器
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
     <InputNumber hideButtons style={{ width: 190 }} />
@@ -95,7 +95,7 @@ import { InputNumber } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ width: 180 }}>
@@ -120,7 +120,7 @@ import { InputNumber } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => {
     const log = (v) => {
@@ -157,7 +157,7 @@ import { InputNumber } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 function Demo () {
     return (

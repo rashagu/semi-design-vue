@@ -14,7 +14,7 @@ brief: Placeholder component when the page is empty.
 ### How to import
 
 ```jsx import
-import { Empty } from '@douyinfe/semi-ui';
+import { Empty } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic usage
@@ -25,7 +25,7 @@ After **v>=1.13.0**, a series of dark mode illustrations are added, and the illu
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Empty } from '@douyinfe/semi-ui';
+import { Empty } from '@kousum/semi-ui-vue';
 import { IllustrationConstruction, IllustrationConstructionDark } from '@douyinfe/semi-illustrations';
 
 () => (
@@ -44,7 +44,7 @@ Custom description content can be achieved through `children`.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Empty, Button } from '@douyinfe/semi-ui';
+import { Empty, Button } from '@kousum/semi-ui-vue';
 import { IllustrationNoContent, IllustrationNoContentDark } from '@douyinfe/semi-illustrations';
 
 () => (
@@ -70,7 +70,7 @@ It is not necessary to use pictures.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Empty, Typography } from '@douyinfe/semi-ui';
+import { Empty, Typography } from '@kousum/semi-ui-vue';
 
 () => (
     <Empty
@@ -91,7 +91,7 @@ Two types of layouts are supported: `vertical`, `horizontal`. The default is `ve
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Empty, Button } from '@douyinfe/semi-ui';
+import { Empty, Button } from '@kousum/semi-ui-vue';
 import { IllustrationSuccess, IllustrationSuccessDark } from '@douyinfe/semi-illustrations';
 
 () => (
@@ -118,7 +118,7 @@ Currently the following illustrations are supported in `@douyinfe/semi-illustrat
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Empty } from '@douyinfe/semi-ui';
+import { Empty } from '@kousum/semi-ui-vue';
 import { IllustrationConstruction, IllustrationSuccess, IllustrationFailure, IllustrationNoAccess, IllustrationNoContent, IllustrationNotFound, IllustrationNoResult } from '@douyinfe/semi-illustrations';
 
 /* The following is available after version 1.13.0 */

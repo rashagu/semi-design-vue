@@ -27,14 +27,14 @@ brief: 用于快捷划分页面整体布局
 ### 如何引入
 
 ```jsx import
-import { Layout } from '@douyinfe/semi-ui';
+import { Layout } from '@kousum/semi-ui-vue';
 ```
 
 ### 三行布局
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Layout } from '@douyinfe/semi-ui';
+import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
     const { Header, Footer, Content } = Layout;
@@ -53,7 +53,7 @@ import { Layout } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Layout } from '@douyinfe/semi-ui';
+import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
     const { Header, Footer, Sider, Content } = Layout;
@@ -74,7 +74,7 @@ import { Layout } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Layout } from '@douyinfe/semi-ui';
+import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
     const { Header, Footer, Sider, Content } = Layout;
@@ -95,7 +95,7 @@ import { Layout } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Layout } from '@douyinfe/semi-ui';
+import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
     const { Header, Footer, Sider, Content } = Layout;
@@ -118,7 +118,7 @@ import { Layout } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Layout } from '@douyinfe/semi-ui';
+import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
     const onbreakpoint = (screen, bool) => {
@@ -146,8 +146,8 @@ import { Layout } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar } from '@douyinfe/semi-ui';
-import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconLive, IconSetting } from '@douyinfe/semi-icons';
+import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar } from '@kousum/semi-ui-vue';
+import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconLive, IconSetting } from '@kousum/semi-icons-vue';
 
 () => {
     const { Header, Footer, Content } = Layout;
@@ -244,8 +244,8 @@ import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, Ic
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar } from '@douyinfe/semi-ui';
-import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting } from '@douyinfe/semi-icons';
+import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar } from '@kousum/semi-ui-vue';
+import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting } from '@kousum/semi-icons-vue';
 
 () => {
     const { Header, Footer, Sider, Content } = Layout;
@@ -373,8 +373,8 @@ import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, Ic
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar } from '@douyinfe/semi-ui';
-import { IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting } from '@douyinfe/semi-icons';
+import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar } from '@kousum/semi-ui-vue';
+import { IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting } from '@kousum/semi-icons-vue';
 
 () => {
     const { Header, Footer, Sider, Content } = Layout;

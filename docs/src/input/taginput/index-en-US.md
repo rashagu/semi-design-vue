@@ -13,7 +13,7 @@ brief: Taginput is a input component that can add content as a tag.
 ### How to import
 
 ```jsx import
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
@@ -21,7 +21,7 @@ After pressing the Enter key, the input will add value as a tag. If the tag cont
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput
@@ -38,7 +38,7 @@ You can use `separator` to set the separator to achieve batch input, and its def
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -63,7 +63,7 @@ You can also use `showClear` to set whether to support one-click deletion of all
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput 
@@ -79,7 +79,7 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput 
@@ -97,7 +97,7 @@ Use `size` to set the size of the TagInput, optional: `small`, `default`, `large
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -117,7 +117,7 @@ validateStatus: `default`, `warning`, `error`.
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -137,8 +137,8 @@ The left and right padding is automatically brought when the content passed in b
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
-import { IconVigoLogo, IconGift } from '@douyinfe/semi-icons';
+import { TagInput } from '@kousum/semi-ui-vue';
+import { IconVigoLogo, IconGift } from '@kousum/semi-icons-vue';
 
 () => (
     <>
@@ -159,7 +159,7 @@ You can use `allowDuplicates` to set whether to allow the creation of the same t
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput
@@ -177,7 +177,7 @@ You can use `addOnBlur` to set whether the current input value is automatically 
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput
@@ -197,7 +197,7 @@ You can use `maxLength` to limit the maximum length of a single tag, and the `on
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -230,7 +230,7 @@ You can use `maxTagCount` to limit the number of tags displayed, and the excess 
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput 
@@ -248,7 +248,7 @@ You can use `value` to set tags, and use `onChange` to achieve control of the ta
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 class TagInputDemo extends React.Component {
     constructor(props) {
@@ -277,7 +277,7 @@ You can use `inputValue` to set input box, and use `onInputChange` to control th
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 class TagInputDemo extends React.Component {
     constructor(props) {
@@ -304,7 +304,7 @@ class TagInputDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput 
@@ -326,7 +326,7 @@ You can use the `blur()` and `focus()` methods to manage the focus.
 
 ```jsx live=true
 import React from 'react';
-import { TagInput, Button } from '@douyinfe/semi-ui';
+import { TagInput, Button } from '@kousum/semi-ui-vue';
 
 class TagInputDemo extends React.Component {
     constructor(props) {
@@ -358,8 +358,8 @@ You can use `renderTagItem` to customize tag rendering. `renderTagItem(value: st
 
 ```jsx live=true
 import React from 'react';
-import { TagInput, Avatar } from '@douyinfe/semi-ui';
-import { IconClose } from '@douyinfe/semi-ui-icons';
+import { TagInput, Avatar } from '@kousum/semi-ui-vue';
+import { IconClose } from '@kousum/semi-ui-vue-icons';
 
 class CustomRender extends React.Component {
     constructor(props) {
@@ -417,7 +417,7 @@ outside the TagInput, the Tag cannot be dragged.
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput

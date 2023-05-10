@@ -473,7 +473,7 @@ Semi 版本号遵循 **Semver** 规范（主版本号-次版本号-修订版本�
   
 #### 🎉 2.20.2 (2022-09-27)
 - 【Fix】
-  - 修复 @douyinfe/semi-icons 关于 corejs 报错的问题
+  - 修复 @kousum/semi-icons-vue 关于 corejs 报错的问题
 
 #### 🎉 2.20.1 (2022-09-27)
 - 【Style】
@@ -503,7 +503,7 @@ Semi 版本号遵循 **Semver** 规范（主版本号-次版本号-修订版本�
     - Toast 支持新增通过 ID 动态修改内容 [#1035](https://github.com/DouyinFE/semi-design/issues/1035) [@gwsbhqt](https://github.com/gwsbhqt)
     - Skeleton.Avatar 支持 shape属性 [#1117](https://github.com/DouyinFE/semi-design/issues/1117) [@MuxinFeng](https://github.com/MuxinFeng)
 - 【Chore】
-    -  移除 @douyinfe/semi-ui 发包产物中的ts源码，仅保留 lib、dist目录
+    -  移除 @kousum/semi-ui-vue 发包产物中的ts源码，仅保留 lib、dist目录
     -  修改部分组件 scss 的写法，将除法转换为乘法及math.div语法，避免 sass 高版本编译时重复抛出 warning 的问题 
 
 #### 🎉 2.19.0 (2022-09-09)
@@ -789,7 +789,7 @@ Semi 版本号遵循 **Semver** 规范（主版本号-次版本号-修订版本�
     - Switch 新增 A11y 键盘和焦点适配  [#205](https://github.com/DouyinFE/semi-design/issues/205)
     - Banner 新增 A11y 键盘和焦点适配  [#205](https://github.com/DouyinFE/semi-design/issues/205)
 - 【Chore】
-  - @douyinfe/semi-icons、@douyinfe/semi-illustrations 更新 peerDependency中的react版本声明：16/17 -> 16/17/18
+  - @kousum/semi-icons-vue、@douyinfe/semi-illustrations 更新 peerDependency中的react版本声明：16/17 -> 16/17/18
 
 #### 🎉 2.9.1 (2022-04-26)
 - 【Fix】
@@ -824,7 +824,7 @@ Semi 版本号遵循 **Semver** 规范（主版本号-次版本号-修订版本�
 
 #### 🎉 2.8.0 (2022-04-08)
 - 【Fix】
-    - 升级 @douyinfe/semi-ui 依赖的react-sortable-hoc版本（v1.11.0 -> v2.0.0），解决 pnpm场景下使用react 17时，由于unmeet peerDependency 中 react版本未满足的报错问题,  [#747](https://github.com/DouyinFE/semi-design/issues/747)
+    - 升级 @kousum/semi-ui-vue 依赖的react-sortable-hoc版本（v1.11.0 -> v2.0.0），解决 pnpm场景下使用react 17时，由于unmeet peerDependency 中 react版本未满足的报错问题,  [#747](https://github.com/DouyinFE/semi-design/issues/747)
 
 #### 🎉 2.8.0-beta.1 (2022-04-03)
 - 【Fix】
@@ -923,7 +923,7 @@ Semi 版本号遵循 **Semver** 规范（主版本号-次版本号-修订版本�
 
 #### 🎉 2.4.1 (2022-02-16)
 - 【Fix】
-    - @douyinfe/semi-ui 添加 dependency声明：@douyinfe/semi-animation，避免在 pnpm 场景下可能存在的依赖声明缺失问题 [#626](https://github.com/DouyinFE/semi-design/issues/626)
+    - @kousum/semi-ui-vue 添加 dependency声明：@douyinfe/semi-animation，避免在 pnpm 场景下可能存在的依赖声明缺失问题 [#626](https://github.com/DouyinFE/semi-design/issues/626)
     - 修复使用 Form.Input/TextArea 且labelPosition设置为inset时，insetLabelId 被意外透传至 input/textarea dom上导致 warning 的问题，修复TimePicker onChangeWithDateFirst 被意外透传至 input dom上导致 warning 的问题 [#624](https://github.com/DouyinFE/semi-design/issues/624)
 - 【Style】
     - 优化 TagInput 组件样式变量引用关系 [@Carlosfengv](https://github.com/Carlosfengv)

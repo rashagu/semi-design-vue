@@ -17,15 +17,15 @@ brief: Semantic vector graphics.
 ### How to import
 
 ```jsx import
-import Icon, { IconHome } from '@douyinfe/semi-icons';
+import Icon, { IconHome } from '@kousum/semi-icons-vue';
 ```
 
 ### Basic usage
-Import icons from the `@douyinfe/semi-icons` package
+Import icons from the `@kousum/semi-icons-vue` package
 
 ```jsx live=true
 import React from 'react';
-import { IconHome } from '@douyinfe/semi-icons';
+import { IconHome } from '@kousum/semi-icons-vue';
 
 () => <IconHome />;
 
@@ -33,11 +33,11 @@ import { IconHome } from '@douyinfe/semi-icons';
 
 
 ### Rotate & Spin
-Introduce icons from the `@douyinfe/semi-icons` package, with its own size, rotation, and spin functions
+Introduce icons from the `@kousum/semi-icons-vue` package, with its own size, rotation, and spin functions
 
 ```jsx live=true
 import React from 'react';
-import { IconHome, IconEmoji, IconSpin } from '@douyinfe/semi-icons';
+import { IconHome, IconEmoji, IconSpin } from '@kousum/semi-icons-vue';
 
 () => (
     <div>
@@ -59,7 +59,7 @@ The Icon component encapsulates the size attribute, which makes it easier to def
 
 ```jsx live=true
 import React from 'react';
-import { IconSearch, IconHelpCircle, IconAlertCircle, IconMinusCircle, IconPlusCircle, IconPlus, IconRefresh } from '@douyinfe/semi-icons';
+import { IconSearch, IconHelpCircle, IconAlertCircle, IconMinusCircle, IconPlusCircle, IconPlus, IconRefresh } from '@kousum/semi-icons-vue';
 
 () => {
     // eslint-disable-next-line react/jsx-key
@@ -78,7 +78,7 @@ You can also modify the color of the icon by setting style props to the Icon.
 
 ```jsx live=true
 import React from 'react';
-import { IconLikeHeart, IconFlag, IconLock, IconUnlock } from '@douyinfe/semi-icons';
+import { IconLikeHeart, IconFlag, IconLock, IconUnlock } from '@kousum/semi-icons-vue';
 
 () => (
     <div>
@@ -101,7 +101,7 @@ Icon component supports size, rotate, spin and other attributes
 
 ```jsx live=true
 import React from 'react';
-import { Icon } from '@douyinfe/semi-ui';
+import { Icon } from '@kousum/semi-ui-vue';
 
 () => {
     function CustomIcon(){
@@ -134,7 +134,7 @@ If the icons provided by Semi are not enough to meet business needs, you can als
   use: ['@svgr/webpack'],
 }
 
-import { Icon } from '@douyinfe/semi-ui';
+import { Icon } from '@kousum/semi-ui-vue';
 import StarIcon from './star.svg';
 
 <Icon svg={<StarIcon />} />
@@ -169,7 +169,7 @@ import StarIcon from './star.svg';
 
 ```jsx live=true
 import React from 'react';
-import { IconHome } from '@douyinfe/semi-icons';
+import { IconHome } from '@kousum/semi-icons-vue';
 
 () => <IconHome aria-label="back to homepage" />;
 ```

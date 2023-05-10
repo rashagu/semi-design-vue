@@ -14,14 +14,14 @@ brief: 横幅通常用于标识全页的状态或通知等。它通常是常驻�
 ### 如何引入
 
 ```jsx import
-import { Banner } from '@douyinfe/semi-ui';
+import { Banner } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Banner, Layout, Button } from '@douyinfe/semi-ui';
+import { Banner, Layout, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -64,7 +64,7 @@ import { Banner, Layout, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Banner } from '@douyinfe/semi-ui';
+import { Banner } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -98,7 +98,7 @@ import { Banner } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Banner, Typography } from '@douyinfe/semi-ui';
+import { Banner, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -147,7 +147,7 @@ function Demo() {
 可以通过 children 自定义其他渲染内容。
 ```jsx live=true dir="column"
 import React from 'react';
-import { Banner } from '@douyinfe/semi-ui';
+import { Banner } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ width: 500, padding: 20, border: '1px solid var(--semi-color-border)' }}>

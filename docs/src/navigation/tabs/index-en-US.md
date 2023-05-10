@@ -13,7 +13,7 @@ brief: When the content needs to be grouped and displayed in different modules o
 ### How to import
 
 ```jsx
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
@@ -24,7 +24,7 @@ Tbs supports three types of styles: `line`, `button`, and `card`. By default, th
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -73,7 +73,7 @@ class App extends React.Component {
                             }}
                         >
                             <code>
-                                yarn add @douyinfe/semi-ui
+                                yarn add @kousum/semi-ui-vue
                             </code>
                         </pre>
                     </TabPane>
@@ -103,7 +103,7 @@ class App extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -126,7 +126,7 @@ class App extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Tabs } from '@douyinfe/semi-ui';
+import { Tabs } from '@kousum/semi-ui-vue';
 
 class TabDemo extends React.Component {
     constructor() {
@@ -166,8 +166,8 @@ class TabDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
-import { IconFile, IconGlobe, IconHelpCircle } from '@douyinfe/semi-icons';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
+import { IconFile, IconGlobe, IconHelpCircle } from '@kousum/semi-icons-vue';
 
 class App extends React.Component {
     render() {
@@ -218,8 +218,8 @@ Support two positions: `tabPosition='left|top'`
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane, Radio, RadioGroup } from '@douyinfe/semi-ui';
-import { IconFile, IconGlobe, IconHelpCircle } from '@douyinfe/semi-icons';
+import { Tabs, TabPane, Radio, RadioGroup } from '@kousum/semi-ui-vue';
+import { IconFile, IconGlobe, IconHelpCircle } from '@kousum/semi-icons-vue';
 
 class App extends React.Component {
     constructor() {
@@ -300,7 +300,7 @@ You could use `collapsible` for a scrollable tabs with dropdown menu. Horizontal
 
 ```jsx live=true dir=column
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -323,7 +323,7 @@ Disable one tab.
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -350,7 +350,7 @@ Use `tabBarExtraContent` to add extra content on the right side of tabBar.
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane, Button } from '@douyinfe/semi-ui';
+import { Tabs, TabPane, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -388,7 +388,7 @@ Use `renderTabBar` to customize tabBar render behavior.
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -425,7 +425,7 @@ You can add events to update tabBar dynamically.
 
 ```jsx live=true
 import React from 'react';
-import { Tabs, TabPane, ButtonGroup, Button } from '@douyinfe/semi-ui';
+import { Tabs, TabPane, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor(props) {
@@ -492,7 +492,7 @@ Only card style tabs support the close option. Use `closable={true}` to turn it 
 
 ```jsx live=true 
 import React from 'react';
-import { Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor(props){

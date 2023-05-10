@@ -13,7 +13,7 @@ brief: 创建超链接导航栏。
 ### 如何引入
 
 ```jsx import
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本示例
@@ -21,7 +21,7 @@ import { Anchor } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => (
     <Anchor>
@@ -48,7 +48,7 @@ import { Anchor } from '@douyinfe/semi-ui';
 
 ```jsx
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -85,7 +85,7 @@ Anchor 设置 `size` 可以控制锚点的尺寸。
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => (
     <Anchor size={'default'}>
@@ -99,7 +99,7 @@ import { Anchor } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => (
     <Anchor size={'small'}>
@@ -117,7 +117,7 @@ Anchor 设置 `railTheme` 可以控制滑轨的主题色。默认值为 `primary
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -144,7 +144,7 @@ import { Anchor } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -171,7 +171,7 @@ import { Anchor } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -202,7 +202,7 @@ Anchor 设置 `autoCollapse` 可以动态展示下一级锚点。默认值为 `f
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -233,7 +233,7 @@ import { Anchor } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -268,7 +268,7 @@ Anchor 设置 `showTooltip` 可以在 Link 超出最大宽度时显示 Link 的�
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -299,7 +299,7 @@ Anchor 设置 `position` 可以设置Tooltip的显示位置。它仅在 `showToo
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -375,7 +375,7 @@ import { Anchor } from '@douyinfe/semi-ui';
     
     ```text
     import React from 'react';
-    import { Anchor } from '@douyinfe/semi-ui';
+    import { Anchor } from '@kousum/semi-ui-vue';
 
     function() {
         // 此容器不是 Anchor 组件的容器，是文档内容的容器，因为要根据文档容器去计算当前是哪个 id 在容器上方

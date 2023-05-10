@@ -16,7 +16,7 @@ brief: 高亮特定内容
 Highlight 从 v2.24.0 版本开始支持
 
 ```jsx import
-import { Highlight } from '@douyinfe/semi-ui';
+import { Highlight } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -26,7 +26,7 @@ import { Highlight } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Highlight } from '@douyinfe/semi-ui';
+import { Highlight } from '@kousum/semi-ui-vue';
 
 () => {
     const sourceString = '从 Semi Design 到 Any Design  快速定义你的设计系统，并应用在设计稿和代码中';
@@ -46,7 +46,7 @@ import { Highlight } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Highlight } from '@douyinfe/semi-ui';
+import { Highlight } from '@kousum/semi-ui-vue';
 
 () => {
     const sourceString = '从 Semi Design 到 Any Design 快速定义你的设计系统，并应用在设计稿和代码中';
@@ -96,7 +96,7 @@ Semi 默认会将 sourceString 中与 searchWords 匹配的文本用 mark 标签
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Highlight } from '@douyinfe/semi-ui';
+import { Highlight } from '@kousum/semi-ui-vue';
 
 () => {
     const sourceString = '从 Semi Design 到 Any Design  快速定义你的设计系统，并应用在设计稿和代码中';

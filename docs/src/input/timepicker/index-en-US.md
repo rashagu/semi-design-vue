@@ -13,7 +13,7 @@ brief: Users can easily select a compliant, formatted point of time using the ti
 ### How to import
 
 ```jsx import
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
@@ -22,7 +22,7 @@ Click TimePicker, and then you can select or enter a time in the floating layer.
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <TimePicker />;
@@ -35,7 +35,7 @@ Starting from version V2.22.0, we changed the default mode of ScrollItem in Time
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <TimePicker scrollItemProps={{ mode: "wheel", cycled: true }}/>;
@@ -47,7 +47,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <TimePicker insetLabel="Time" />;
@@ -60,7 +60,7 @@ When using `value` And not. `defaultValue` When used as a controlled component.`
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -90,7 +90,7 @@ NOTE: `format` Follow the date-fns `format` Format. https://date-fns.org/v2.0.0/
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <TimePicker format={'HH:mm'} defaultValue={'10:24'} />;
@@ -101,7 +101,7 @@ function Demo() {
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { TimePicker, Button } from '@douyinfe/semi-ui';
+import { TimePicker, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [open, setOpen] = useState(false);
@@ -137,7 +137,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <TimePicker defaultValue={'12:08:23'} disabled />;
@@ -150,7 +150,7 @@ Available `Hour Step`, `Minute Step`, `Second Step` Show the optional minutes an
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <TimePicker minuteStep={15} secondStep={10} />;
@@ -165,7 +165,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -187,7 +187,7 @@ Pass type = "timeRange" to enable time range selection.
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -210,8 +210,8 @@ By default we use the `Input` component as the trigger for the `DatePicker` comp
 ```jsx live=true hideInDSM
 import React, { useState, useMemo } from 'react';
 import * as dateFns from 'date-fns';
-import { TimePicker, Button } from '@douyinfe/semi-ui';
-import { IconChevronDown, IconClose } from '@douyinfe/semi-icons';
+import { TimePicker, Button } from '@kousum/semi-ui-vue';
+import { IconChevronDown, IconClose } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const formatToken = 'HH:mm:ss';
@@ -250,7 +250,7 @@ Semi All configuration about time zone is converged in [ConfigProvider](/en-US/o
 
 ```jsx live=true hideInDSM
 import React, { useMemo, useState } from 'react';
-import { ConfigProvider, Select, TimePicker } from '@douyinfe/semi-ui';
+import { ConfigProvider, Select, TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo(props = {}) {
     const [timeZone, setTimeZone] = useState('GMT+08:00');

@@ -13,7 +13,7 @@ brief: 树型结构列表。
 ### 如何引入
 
 ```jsx import
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -22,7 +22,7 @@ import { Tree } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -77,7 +77,7 @@ import { Tree } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -162,7 +162,7 @@ import { Tree } from '@douyinfe/semi-ui';
 如果只希望展示过滤后的结果，可以设置 `showFilteredOnly` 。
 ```jsx live=true
 import React from 'react';
-import { Tree, Switch } from '@douyinfe/semi-ui';
+import { Tree, Switch } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -262,7 +262,7 @@ class Demo extends React.Component {
 设置 `filterTreeNode` 属性开启搜索后，可以通过设置 `searchRender` 自定义搜索框的渲染方法，设置为`false`时可以隐藏搜索框。
 ```jsx live=true
 import React from 'react';
-import { Tree, Input } from '@douyinfe/semi-ui';
+import { Tree, Input } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -341,7 +341,7 @@ import { Tree, Input } from '@douyinfe/semi-ui';
 可以通过ref的方式获取tree的实例，调用tree的`search`方法进行搜索。注意需要同时设置`filterTreeNode`开启搜索，如果搜索框在tree外部，可以通过设置`searchRender=false`隐藏tree内部的搜索框。
 ```jsx live=true
 import React from 'react';
-import { Tree, Input } from '@douyinfe/semi-ui';
+import { Tree, Input } from '@kousum/semi-ui-vue';
 
 () => {
     const ref = useRef();
@@ -421,7 +421,7 @@ import { Tree, Input } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const json = {
@@ -455,7 +455,7 @@ import { Tree } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -538,7 +538,7 @@ import { Tree } from '@douyinfe/semi-ui';
 在**v>=1.6.0**的版本中，你也可以使用 `renderLabel` 来传入自定义的渲染方法，此时搜索值仍为treeData中的相应的label属性。
 ```jsx live=true
 import React from 'react';
-import { Tree, ButtonGroup, Button } from '@douyinfe/semi-ui';
+import { Tree, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const opts = {
@@ -618,8 +618,8 @@ import { Tree, ButtonGroup, Button } from '@douyinfe/semi-ui';
 过长省略。在**v>=1.6.0**的版本中，可以使用 `renderLabel` 来实现文本过长省略的效果。
 ```jsx live=true
 import React from 'react';
-import { Tree, Button, Typography } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Tree, Button, Typography } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 () => {
     const renderBtn = (content) => (
@@ -683,8 +683,8 @@ import { IconMore } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
-import { IconMapPin } from '@douyinfe/semi-icons';
+import { Tree } from '@kousum/semi-ui-vue';
+import { IconMapPin } from '@kousum/semi-icons-vue';
 
 () => {
     const treeData = [
@@ -729,7 +729,7 @@ import { IconMapPin } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -808,7 +808,7 @@ import { Tree } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -892,7 +892,7 @@ import { Tree } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -982,7 +982,7 @@ import { Tree } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Tree, Button } from '@douyinfe/semi-ui';
+import { Tree, Button } from '@kousum/semi-ui-vue';
 () => {
     const json = {
         "Node1": { 
@@ -1044,7 +1044,7 @@ import { Tree, Button } from '@douyinfe/semi-ui';
 传入 `value` 时即为受控组件，可以配合 `onChange` 使用。
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1111,7 +1111,7 @@ class Demo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1191,7 +1191,7 @@ class Demo extends React.Component {
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Tree, Button } from '@douyinfe/semi-ui';
+import { Tree, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1280,7 +1280,7 @@ class Demo extends React.Component {
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Tree, Button } from '@douyinfe/semi-ui';
+import { Tree, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -1343,7 +1343,7 @@ class Demo extends React.Component {
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const initialData = [
@@ -1447,7 +1447,7 @@ DragTreeNode {
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const initialData = [
@@ -1588,7 +1588,7 @@ Tree 组件的 api 支持了大部分的渲染需求，但是如果有非常特�
 ⚠️：renderFullLabel 只接管了渲染效果，并不影响内部的数据逻辑。但是你可以选取需要的逻辑进行渲染，或者配合受控来实现更复杂的需求。
 ```jsx live=true
 import React from 'react';
-import { Tree, Checkbox } from '@douyinfe/semi-ui';
+import { Tree, Checkbox } from '@kousum/semi-ui-vue';
 
 () => {
     const renderLabel = ({
@@ -1698,7 +1698,7 @@ import { Tree, Checkbox } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Tree } from '@douyinfe/semi-ui';
+import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
     const renderLabel = ({
@@ -1797,8 +1797,8 @@ import { Tree } from '@douyinfe/semi-ui';
 第三个是针对 “单选选中父节点同时也高亮子节点” 的场景。
 ```jsx live=true
 import React, { useState } from 'react';
-import { Tree } from '@douyinfe/semi-ui';
-import { IconFixedStroked, IconSectionStroked, IconAbsoluteStroked, IconInnerSectionStroked, IconComponentStroked } from '@douyinfe/semi-icons';
+import { Tree } from '@kousum/semi-ui-vue';
+import { IconFixedStroked, IconSectionStroked, IconAbsoluteStroked, IconInnerSectionStroked, IconComponentStroked } from '@kousum/semi-icons-vue';
 
 () => {
     const [selected, setSelected] = useState(new Set());
@@ -1924,8 +1924,8 @@ import { IconFixedStroked, IconSectionStroked, IconAbsoluteStroked, IconInnerSec
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Tree } from '@douyinfe/semi-ui';
-import { IconFixedStroked, IconSectionStroked, IconAbsoluteStroked, IconInnerSectionStroked, IconComponentStroked } from '@douyinfe/semi-icons';
+import { Tree } from '@kousum/semi-ui-vue';
+import { IconFixedStroked, IconSectionStroked, IconAbsoluteStroked, IconInnerSectionStroked, IconComponentStroked } from '@kousum/semi-icons-vue';
 
 () => {
     const [selected, setSelected] = useState(new Set());

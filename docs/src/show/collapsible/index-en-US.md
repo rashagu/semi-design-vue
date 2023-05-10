@@ -18,7 +18,7 @@ brief: The collapsible component is a container component used to put long secti
 ### How to import
 
 ```jsx import 
-import { Collapsible } from '@douyinfe/semi-ui';
+import { Collapsible } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
@@ -27,7 +27,7 @@ Use `isOpen` to control the expansion or folding of the content.
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Collapsible, Button } from '@douyinfe/semi-ui';
+import { Collapsible, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [isOpen, setOpen] = useState();
@@ -57,7 +57,7 @@ You can use `duration` to set animation duration or turn off animation by settin
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Collapsible, InputNumber, Button } from '@douyinfe/semi-ui';
+import { Collapsible, InputNumber, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [isOpen, setOpen] = useState(false);
@@ -91,7 +91,7 @@ import { Collapsible, InputNumber, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Collapsible, Button } from '@douyinfe/semi-ui';
+import { Collapsible, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [isOpen, setOpen] = useState(false);
@@ -127,7 +127,7 @@ You could use `collapseHeight` to customize collapsed height. **v>=1.0.0**
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Collapsible, Button } from '@douyinfe/semi-ui';
+import { Collapsible, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [isOpen, setOpen] = useState(false);

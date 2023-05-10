@@ -15,7 +15,7 @@ brief: Notifications are used to actively send message notifications to users.
 ### How to import
 
 ```jsx import
-import { Notification } from '@douyinfe/semi-ui';
+import { Notification } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
@@ -23,7 +23,7 @@ Close after 3 seconds.
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button } from '@douyinfe/semi-ui';
+import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Button
@@ -45,7 +45,7 @@ Use `position` to set pop up position, supporting one of: `top`、`bottom`、`to
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button, ButtonGroup } from '@douyinfe/semi-ui';
+import { Notification, Button, ButtonGroup } from '@kousum/semi-ui-vue';
 
 () => {
     let opts = {
@@ -79,8 +79,8 @@ Use different methods to show Notification with icons or you can pass in `icon` 
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button } from '@douyinfe/semi-ui';
-import { IconToutiaoLogo, IconVigoLogo } from '@douyinfe/semi-icons';
+import { Notification, Button } from '@kousum/semi-ui-vue';
+import { IconToutiaoLogo, IconVigoLogo } from '@kousum/semi-icons-vue';
 
 () => {
     let opts = {
@@ -134,7 +134,7 @@ You could use `theme` for a colored background style. Default is `normal`.
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button } from '@douyinfe/semi-ui';
+import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => {
     let opts = {
@@ -175,7 +175,7 @@ Use with Typography to create operation links for more complicated situations.
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button, Typography } from '@douyinfe/semi-ui';
+import { Notification, Button, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const { Text } = Typography;
@@ -209,7 +209,7 @@ Use `duration` to set up time delay. By default it closes after 3 seconds.
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button } from '@douyinfe/semi-ui';
+import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => {
     let opts = {
@@ -231,7 +231,7 @@ Set `duration` to 0 if you do not want the Notification to close by itself. In t
 
 ```jsx live=true
 import React from 'react';
-import { Notification, Button } from '@douyinfe/semi-ui';
+import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => {
     let opts = {

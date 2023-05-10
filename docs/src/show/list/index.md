@@ -14,7 +14,7 @@ brief: 基础列表组件
 ### 如何引入
 
 ```jsx import
-import { List } from '@douyinfe/semi-ui';
+import { List } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -23,7 +23,7 @@ import { List } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { List } from '@douyinfe/semi-ui';
+import { List } from '@kousum/semi-ui-vue';
 
 class SimpleList extends React.Component {
     render() {
@@ -82,7 +82,7 @@ render(SimpleList);
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { List, Avatar, ButtonGroup, Button } from '@douyinfe/semi-ui';
+import { List, Avatar, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 class ContentList extends React.Component {
     render() {
@@ -150,7 +150,7 @@ render(ContentList);
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { List, Avatar } from '@douyinfe/semi-ui';
+import { List, Avatar } from '@kousum/semi-ui-vue';
 
 class LayoutList extends React.Component {
     render() {
@@ -204,7 +204,7 @@ render(LayoutList);
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { List, Descriptions, ButtonGroup, Rating, Button } from '@douyinfe/semi-ui';
+import { List, Descriptions, ButtonGroup, Rating, Button } from '@kousum/semi-ui-vue';
 
 class LayoutList extends React.Component {
     render() {
@@ -282,7 +282,7 @@ render(LayoutList);
 
 ```jsx live=true dir="column" noInline=true hideInDSM
 import React from 'react';
-import { List, Descriptions, Rating, Button, ButtonGroup } from '@douyinfe/semi-ui';
+import { List, Descriptions, Rating, Button, ButtonGroup } from '@kousum/semi-ui-vue';
 
 class Responsive extends React.Component {
     render() {
@@ -376,7 +376,7 @@ render(Responsive);
 
 ```jsx live=true dir="column" noInline=true hideInDSM
 import React from 'react';
-import { List, Skeleton, Button, Avatar } from '@douyinfe/semi-ui';
+import { List, Skeleton, Button, Avatar } from '@kousum/semi-ui-vue';
 
 class LoadMoreList extends React.Component {
     constructor() {
@@ -501,7 +501,7 @@ render(LoadMoreList);
 
 ```jsx live=true dir="column" noInline=true hideInDSM
 import React from 'react';
-import { List, Button, Avatar, Spin } from '@douyinfe/semi-ui';
+import { List, Button, Avatar, Spin } from '@kousum/semi-ui-vue';
 import InfiniteScroll from 'react-infinite-scroller';
 
 class ScrollLoad extends React.Component {
@@ -622,7 +622,7 @@ render(ScrollLoad);
 
 ```jsx live=true dir="column" noInline=true hideInDSM
 import React from 'react';
-import { List, Avatar } from '@douyinfe/semi-ui';
+import { List, Avatar } from '@kousum/semi-ui-vue';
 import { InfiniteLoader, AutoSizer } from 'react-virtualized';
 import VList from 'react-virtualized/dist/commonjs/List';
 
@@ -762,7 +762,7 @@ render(VirtualizedScroll);
 
 ```jsx live=true dir="column" noInline=true hideInDSM
 import React from 'react';
-import { List, Avatar } from '@douyinfe/semi-ui';
+import { List, Avatar } from '@kousum/semi-ui-vue';
 import { DndProvider, DragSource, DropTarget } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ReactDOM from 'react-dom';
@@ -923,8 +923,8 @@ render(DraggableList);
 
 ```jsx live=true dir="column" hideInDSM
 import React, { useState } from 'react';
-import { List } from '@douyinfe/semi-ui';
-import { IconHandle } from '@douyinfe/semi-icons';
+import { List } from '@kousum/semi-ui-vue';
+import { IconHandle } from '@kousum/semi-icons-vue';
 import { SortableContainer, SortableElement, sortableHandle } from 'react-sortable-hoc';
 
 
@@ -1004,7 +1004,7 @@ import { SortableContainer, SortableElement, sortableHandle } from 'react-sortab
 ```jsx live=true dir="column" hideInDSM
 
 import React, { useState } from 'react';
-import { List, Pagination } from '@douyinfe/semi-ui';
+import { List, Pagination } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [
@@ -1057,8 +1057,8 @@ import { List, Pagination } from '@douyinfe/semi-ui';
 ```jsx live=true dir="column"  hideInDSM
 
 import React, { useState } from 'react';
-import { List, Input } from '@douyinfe/semi-ui';
-import { IconSearch } from '@douyinfe/semi-icons';
+import { List, Input } from '@kousum/semi-ui-vue';
+import { IconSearch } from '@kousum/semi-icons-vue';
 
 () => {
     const data = [
@@ -1111,8 +1111,8 @@ import { IconSearch } from '@douyinfe/semi-icons';
 ```jsx live=true dir="column" hideInDSM
 
 import React, { useState } from 'react';
-import { List, Input, Button } from '@douyinfe/semi-ui';
-import { IconMinusCircle, IconPlusCircle } from '@douyinfe/semi-icons';
+import { List, Input, Button } from '@kousum/semi-ui-vue';
+import { IconMinusCircle, IconPlusCircle } from '@kousum/semi-icons-vue';
 
 () => {
     const data = [
@@ -1177,7 +1177,7 @@ import { IconMinusCircle, IconPlusCircle } from '@douyinfe/semi-icons';
 ```jsx live=true dir="column" hideInDSM
 
 import React, { useState } from 'react';
-import { List, Input, Button, Checkbox, Radio, RadioGroup, CheckboxGroup } from '@douyinfe/semi-ui';
+import { List, Input, Button, Checkbox, Radio, RadioGroup, CheckboxGroup } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [
@@ -1246,7 +1246,7 @@ import { List, Input, Button, Checkbox, Radio, RadioGroup, CheckboxGroup } from 
 ```jsx live=true dir="column" hideInDSM
 
 import React, { useState, useRef } from 'react';
-import { List, Input, Button } from '@douyinfe/semi-ui';
+import { List, Input, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [

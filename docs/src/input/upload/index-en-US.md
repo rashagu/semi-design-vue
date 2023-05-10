@@ -13,7 +13,7 @@ brief: File selection upload
 ### How to import
 
 ```jsx import
-import { Upload } from '@douyinfe/semi-ui';
+import { Upload } from '@kousum/semi-ui-vue';
 ```
 ### Basic usage
 
@@ -21,8 +21,8 @@ The most basic usage is to place a Button in children, click on the children con
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => (
     <Upload action="//semi.design/api/upload">
@@ -40,8 +40,8 @@ Set the slot position by `promptPosition`, optional `left`, `right`, `bottom`, t
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     const action = '//semi.design/api/upload';
@@ -84,8 +84,8 @@ When listType is picture, the reference object at promptPosition is the whole pi
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconPlus } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconPlus } from '@kousum/semi-icons-vue';
 
 () => {
     const action = '//semi.design/api/upload';
@@ -145,8 +145,8 @@ import { IconPlus } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Avatar, Toast } from '@douyinfe/semi-ui';
-import { IconCamera } from '@douyinfe/semi-icons';
+import { Upload, Avatar, Toast } from '@kousum/semi-ui-vue';
+import { IconCamera } from '@kousum/semi-icons-vue';
 
 () => {
     const [url, setUrl] = useState('https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/dy.png');
@@ -200,8 +200,8 @@ Custom upload attributes can be added by setting `data`, `headers`
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = '//semi.design/api/upload';
@@ -241,8 +241,8 @@ For example, only allowing users to upload PNG and PDF files, `accept` can be wr
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = '//semi.design/api/upload';
@@ -277,8 +277,8 @@ By passing in `directory` as `true`, all files in the folder can be uploaded
 
 ```jsx live=true
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = '//semi.design/api/upload';
@@ -300,8 +300,8 @@ You can select multiple files to upload at the same time by setting the `multipl
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = '//semi.design/api/upload';
@@ -322,8 +322,8 @@ When `limit` is 1, always replace the current one with the latest upload, and wi
 
 ```jsx dir="column" live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://semi.design/api/upload';
@@ -347,8 +347,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx dir="column" live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://semi.design/api/upload';
@@ -381,8 +381,8 @@ In the photo wall mode, when the number of uploaded files is equal to the limit,
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconPlus } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconPlus } from '@kousum/semi-icons-vue';
 
 () => {
     let action = '//semi.design/api/upload';
@@ -426,8 +426,8 @@ The upload file size limit can be customized through the `maxSize` and `minSize`
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = '//semi.design/api/upload';
@@ -456,8 +456,8 @@ For example, when you do not need to preview the image type by thumbnail, you ca
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload, IconFile } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload, IconFile } from '@kousum/semi-icons-vue';
 
 () => {
     let action = '//semi.design/api/upload';
@@ -490,8 +490,8 @@ When `listType` is `list`, you can customize the list operation area by passing 
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload, IconDownload, IconEyeOpened, IconDelete } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload, IconDownload, IconEyeOpened, IconDelete } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -527,8 +527,8 @@ The uploaded files can be displayed through `defaultFileList`. When you need to 
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = '//semi.design/api/upload';
@@ -571,8 +571,8 @@ When `fileList` is passed in, it is used as a controlled component. Need to list
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     const initList = [
@@ -628,8 +628,8 @@ Set `listType ='picture'`, users can upload pictures and display thumbnails in t
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconPlus } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconPlus } from '@kousum/semi-icons-vue';
 
 () => {
     let action = '//semi.design/api/upload';
@@ -657,8 +657,8 @@ Set `showPicInfo`, you can view the basic information of the picture
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconPlus } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconPlus } from '@kousum/semi-icons-vue';
 
 () => {
     let action = '//semi.design/api/upload';
@@ -696,8 +696,8 @@ When you need to customize the preview/replacement function, you need to turn of
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconPlus, IconEyeOpened } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconPlus, IconEyeOpened } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -739,8 +739,8 @@ Set `hotSpotLocation` to customize the order of click hotspots, the default is a
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Select } from '@douyinfe/semi-ui';
-import { IconPlus, IconEyeOpened } from '@douyinfe/semi-icons';
+import { Upload, Select } from '@kousum/semi-ui-vue';
+import { IconPlus, IconEyeOpened } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -788,8 +788,8 @@ import { IconPlus, IconEyeOpened } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     const defaultFileList = [
@@ -829,8 +829,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload, IconPlus } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload, IconPlus } from '@kousum/semi-icons-vue';
 
 class ManulUploadDemo extends React.Component {
     constructor() {
@@ -878,7 +878,7 @@ class ManulUploadDemo extends React.Component {
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
+import { Upload } from '@kousum/semi-ui-vue';
 
 () => (
     <Upload
@@ -894,8 +894,8 @@ You can quickly set the content of the drag area through `dragIcon`, `dragMainTe
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconBolt } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconBolt } from '@kousum/semi-icons-vue';
 
 () => <Upload
     action="//semi.design/api/upload"
@@ -912,8 +912,8 @@ You can also pass in ReactNode through `children` to completely customize the di
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconBolt } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconBolt } from '@kousum/semi-icons-vue';
 
 () => (<Upload
     action="//semi.design/api/upload"
@@ -982,8 +982,8 @@ The file status can be updated through the `beforeUpload` hook, which is to veri
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 class ValidateDemo extends React.Component {
     constructor(props) {
@@ -1044,8 +1044,8 @@ Object can be passed in when resolve/reject (the structure is the same as before
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 class AsyncBeforeUploadDemo extends React.Component {
     constructor(props) {
@@ -1109,8 +1109,8 @@ afterUpload is triggered when the upload is completed (xhr.onload) and no error 
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 class ValidateDemo extends React.Component {
     constructor(props) {
@@ -1176,8 +1176,8 @@ customRequest contains the following input parameters
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     const mockRequest = ({ file, onProgress, onError, onSuccess }) => {

@@ -12,7 +12,7 @@ brief: Carousel is a media component that can display the effect of playing mult
 
 ### How to import
 ```jsx import
-import { Carousel } from '@douyinfe/semi-ui';
+import { Carousel } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Carousel
@@ -21,7 +21,7 @@ Basic carousel
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, Typography, Space } from '@douyinfe/semi-ui';
+import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 
 () => {
     const { Title, Paragraph } = Typography;
@@ -89,7 +89,7 @@ Three themes are defined by default: `primary`、`light`、`dark`
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, RadioGroup, Radio, Space, Typography } from '@douyinfe/semi-ui';
+import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const { Title, Paragraph } = Typography;
@@ -171,7 +171,7 @@ size:  `small`、`medium`
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, RadioGroup, Radio, Space, Typography } from '@douyinfe/semi-ui';
+import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const { Title, Paragraph } = Typography;
@@ -270,7 +270,7 @@ If the arrow is visible, use the arrowType property to control the timing of the
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, RadioGroup, Radio, Space, Typography } from '@douyinfe/semi-ui';
+import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const { Title, Paragraph } = Typography;
@@ -357,8 +357,8 @@ Customize arrow styles and click events through the arrowProps property
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, Typography, Space } from '@douyinfe/semi-ui';
-import { IconArrowLeft, IconArrowRight } from "@douyinfe/semi-icons";
+import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
+import { IconArrowLeft, IconArrowRight } from "@kousum/semi-icons-vue";
 
 class CarouselDemo extends React.Component {
     constructor(props) {
@@ -437,7 +437,7 @@ Pass the parameter interval to autoPlay to control the time interval between two
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, Typography, Space } from '@douyinfe/semi-ui';
+import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 
 () => {
     const { Title, Paragraph } = Typography;
@@ -506,7 +506,7 @@ Control the switching time between two pictures by giving the speed attribute, t
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, Typography, Space } from '@douyinfe/semi-ui';
+import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 
 () => {
     const { Title, Paragraph } = Typography;
@@ -574,7 +574,7 @@ import { Carousel, Typography, Space } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, Space, Typography } from '@douyinfe/semi-ui';
+import { Carousel, Space, Typography } from '@kousum/semi-ui-vue';
 
 class CarouselDemo extends React.Component {
     constructor(props) {

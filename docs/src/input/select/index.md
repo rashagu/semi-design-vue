@@ -13,7 +13,7 @@ brief: 用户可以通过 Select 选择器从一个选项集合中去选中一�
 ### 如何引入
 
 ```jsx import
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 const Option = Select.Option;
 ```
 
@@ -27,7 +27,7 @@ Select的直接子元素必须为 Option 或者 OptGroup，不允许为其他Ele
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -65,7 +65,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     const list = [
@@ -95,7 +95,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -168,7 +168,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <Select placeholder="" style={{ width: 180 }} filter>
@@ -189,7 +189,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [
@@ -234,7 +234,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -262,7 +262,7 @@ validateStatus: default / warning / error
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -292,8 +292,8 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
-import { IconVigoLogo, IconGift } from '@douyinfe/semi-icons';
+import { Select } from '@kousum/semi-ui-vue';
+import { IconVigoLogo, IconGift } from '@kousum/semi-icons-vue';
 
 () => (
     <>
@@ -328,7 +328,7 @@ import { IconVigoLogo, IconGift } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     const list = [
@@ -397,7 +397,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     let innerSlotStyle = {
@@ -471,7 +471,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     const list = {
@@ -555,7 +555,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     let [value, setValue] = useState('xigua');
@@ -578,7 +578,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Select, Button } from '@douyinfe/semi-ui';
+import { Select, Button } from '@kousum/semi-ui-vue';
 
 () => {
     let [options, setOptions] = useState([1, 2, 3, 4]);
@@ -610,7 +610,7 @@ import { Select, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 class Link extends React.Component {
     get provinces() {
@@ -676,7 +676,7 @@ class Link extends React.Component {
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -710,7 +710,7 @@ import { Select } from '@douyinfe/semi-ui';
 ```jsx live=true
 import React from 'react';
 import { debounce } from 'lodash-es';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     const [loading, setLoading] = useState(false);
@@ -770,7 +770,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     function searchLabel(sugInput, option) {
@@ -801,7 +801,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Select, Avatar, Tag } from '@douyinfe/semi-ui';
+import { Select, Avatar, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     const list = [
@@ -931,7 +931,7 @@ import { Select, Avatar, Tag } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => (
     <Select
@@ -959,7 +959,7 @@ import { Select } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Select, TextArea } from '@douyinfe/semi-ui';
+import { Select, TextArea } from '@kousum/semi-ui-vue';
 
 () => {
     const list = [
@@ -1024,7 +1024,7 @@ import { Select, TextArea } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 () => {
     const optionList = [
@@ -1085,7 +1085,7 @@ virtualize 是一个包含下列值的对象：
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Select } from '@douyinfe/semi-ui';
+import { Select } from '@kousum/semi-ui-vue';
 
 class VirtualizeDemo extends React.Component {
     constructor(props) {
@@ -1140,8 +1140,8 @@ interface TriggerRenderProps {
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Select } from '@douyinfe/semi-ui';
-import { IconAppCenter, IconChevronDown } from '@douyinfe/semi-icons';
+import { Select } from '@kousum/semi-ui-vue';
+import { IconAppCenter, IconChevronDown } from '@kousum/semi-icons-vue';
 
 () => {
     const [valList, setValList] = useState(['abc', 'ulikecam']);
@@ -1259,7 +1259,7 @@ import { IconAppCenter, IconChevronDown } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Select, Checkbox } from '@douyinfe/semi-ui';
+import { Select, Checkbox } from '@kousum/semi-ui-vue';
 
 () => {
     const renderOptionItem = renderProps => {

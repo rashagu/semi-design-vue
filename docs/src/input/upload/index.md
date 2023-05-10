@@ -13,7 +13,7 @@ brief: 文件选择上传
 ### 如何引入
 
 ```jsx import
-import { Upload } from '@douyinfe/semi-ui';
+import { Upload } from '@kousum/semi-ui-vue';
 ```
 ### 基本
 
@@ -21,8 +21,8 @@ import { Upload } from '@douyinfe/semi-ui';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     return (
@@ -42,8 +42,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     const action = 'https://api.semi.design/upload';
@@ -86,8 +86,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconPlus } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconPlus } from '@kousum/semi-icons-vue';
 
 () => {
     const action = 'https://api.semi.design/upload';
@@ -149,8 +149,8 @@ import { IconPlus } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Avatar, Toast } from '@douyinfe/semi-ui';
-import { IconCamera } from '@douyinfe/semi-icons';
+import { Upload, Avatar, Toast } from '@kousum/semi-ui-vue';
+import { IconCamera } from '@kousum/semi-icons-vue';
 
 () => {
     const [url, setUrl] = useState('https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/dy.png');
@@ -203,8 +203,8 @@ import { IconCamera } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -244,8 +244,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -280,8 +280,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -303,8 +303,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -325,8 +325,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx dir="column" live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -350,8 +350,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx dir="column" live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -384,8 +384,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconPlus } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconPlus } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -429,8 +429,8 @@ import { IconPlus } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -459,8 +459,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload, IconFile } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload, IconFile } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -493,8 +493,8 @@ import { IconUpload, IconFile } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload, IconDownload, IconEyeOpened } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload, IconDownload, IconEyeOpened } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -533,8 +533,8 @@ import { IconUpload, IconDownload, IconEyeOpened } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -577,8 +577,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     const initList = [
@@ -634,8 +634,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconPlus } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconPlus } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -664,8 +664,8 @@ import { IconPlus } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconPlus } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconPlus } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -706,8 +706,8 @@ import { IconPlus } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconPlus, IconEyeOpened } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconPlus, IconEyeOpened } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -749,8 +749,8 @@ import { IconPlus, IconEyeOpened } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Select } from '@douyinfe/semi-ui';
-import { IconPlus, IconEyeOpened } from '@douyinfe/semi-icons';
+import { Upload, Select } from '@kousum/semi-ui-vue';
+import { IconPlus, IconEyeOpened } from '@kousum/semi-icons-vue';
 
 () => {
     let action = 'https://api.semi.design/upload';
@@ -798,8 +798,8 @@ import { IconPlus, IconEyeOpened } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     const defaultFileList = [
@@ -839,8 +839,8 @@ import { IconUpload } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload, IconPlus } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload, IconPlus } from '@kousum/semi-icons-vue';
 
 class ManulUploadDemo extends React.Component {
     constructor() {
@@ -887,7 +887,7 @@ class ManulUploadDemo extends React.Component {
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
+import { Upload } from '@kousum/semi-ui-vue';
 
 () => (
     <Upload
@@ -903,8 +903,8 @@ import { Upload } from '@douyinfe/semi-ui';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconBolt } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconBolt } from '@kousum/semi-icons-vue';
 
 () => <Upload
     action="https://api.semi.design/upload"
@@ -921,8 +921,8 @@ import { IconBolt } from '@douyinfe/semi-icons';
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload } from '@douyinfe/semi-ui';
-import { IconBolt } from '@douyinfe/semi-icons';
+import { Upload } from '@kousum/semi-ui-vue';
+import { IconBolt } from '@kousum/semi-icons-vue';
 
 () => (<Upload
     action="https://api.semi.design/upload"
@@ -991,8 +991,8 @@ Scss 样式如下
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 class ValidateDemo extends React.Component {
     constructor(props) {
@@ -1053,8 +1053,8 @@ resolve/reject 时可以传入 object（结构同上 beforeUploadResult）
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 class AsyncBeforeUploadDemo extends React.Component {
     constructor(props) {
@@ -1118,8 +1118,8 @@ afterUpload 在上传完成后(xhr.onload)且没有发生错误的情况下触�
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 class ValidateDemo extends React.Component {
     constructor(props) {
@@ -1185,8 +1185,8 @@ customRequest 包含以下入参
 
 ```jsx live=true width=48%
 import React from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Upload, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 () => {
     const mockRequest = ({ file, onProgress, onError, onSuccess }) => {

@@ -14,7 +14,7 @@ brief: 一个更直观高效的多选选择器，可以露出更多选项的信�
 ### 如何引入
 
 ```jsx import
-import { Transfer } from '@douyinfe/semi-ui';
+import { Transfer } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本使用
@@ -23,7 +23,7 @@ import { Transfer } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer } from '@douyinfe/semi-ui';
+import { Transfer } from '@kousum/semi-ui-vue';
 
 () => {
     const data = Array.from({ length: 100 }, (v, i) => {
@@ -54,7 +54,7 @@ import { Transfer } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer } from '@douyinfe/semi-ui';
+import { Transfer } from '@kousum/semi-ui-vue';
 
 () => {
     const dataWithGroup = [
@@ -107,8 +107,8 @@ import { Transfer } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer, Checkbox, Avatar } from '@douyinfe/semi-ui';
-import { IconClose } from '@douyinfe/semi-icons';
+import { Transfer, Checkbox, Avatar } from '@kousum/semi-ui-vue';
+import { IconClose } from '@kousum/semi-icons-vue';
 
 () => {
     const renderSourceItem = item => {
@@ -221,7 +221,7 @@ import { IconClose } from '@douyinfe/semi-icons';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer } from '@douyinfe/semi-ui';
+import { Transfer } from '@kousum/semi-ui-vue';
 () => {
     const data = Array.from({ length: 20 }, (v, i) => {
         return {
@@ -249,7 +249,7 @@ import { Transfer } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer } from '@douyinfe/semi-ui';
+import { Transfer } from '@kousum/semi-ui-vue';
 () => {
     const data = Array.from({ length: 30 }, (v, i) => {
         return {
@@ -278,8 +278,8 @@ import { Transfer } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer, Checkbox, Avatar } from '@douyinfe/semi-ui';
-import { IconHandle, IconClose } from '@douyinfe/semi-icons';
+import { Transfer, Checkbox, Avatar } from '@kousum/semi-ui-vue';
+import { IconHandle, IconClose } from '@kousum/semi-icons-vue';
 
 () => {
     const renderSourceItem = item => {
@@ -378,7 +378,7 @@ type SelectedHeaderProps = {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer, Button } from '@douyinfe/semi-ui';
+import { Transfer, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const data = Array.from({ length: 30 }, (v, i) => {
@@ -464,8 +464,8 @@ interface SelectedPanelProps {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Transfer, Input, Spin, Button } from '@douyinfe/semi-ui';
-import { IconSearch } from '@douyinfe/semi-icons';
+import { Transfer, Input, Spin, Button } from '@kousum/semi-ui-vue';
+import { IconSearch } from '@kousum/semi-icons-vue';
 
 class CustomRenderDemo extends React.Component {
     constructor(props) {
@@ -718,8 +718,8 @@ class CustomRenderDemo extends React.Component {
 ```jsx live=true dir="column"
 import React from 'react';
 import { SortableContainer, SortableElement, sortableHandle } from 'react-sortable-hoc';
-import { Transfer, Button, Spin, Input } from '@douyinfe/semi-ui';
-import { IconHandle, IconSearch } from '@douyinfe/semi-icons';
+import { Transfer, Button, Spin, Input } from '@kousum/semi-ui-vue';
+import { IconHandle, IconSearch } from '@kousum/semi-icons-vue';
 
 class CustomRenderDragDemo extends React.Component {
     constructor(props) {
@@ -895,7 +895,7 @@ class CustomRenderDragDemo extends React.Component {
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Transfer } from '@douyinfe/semi-ui';
+import { Transfer } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [

@@ -12,14 +12,14 @@ brief: Divider is a linear, lightweight component used to logically organize ele
 ### How to import
 
 ```jsx import
-import { Divider } from '@douyinfe/semi-ui';
+import { Divider } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
 
 ```jsx live=true
 import React from 'react';
-import { Divider } from '@douyinfe/semi-ui';
+import { Divider } from '@kousum/semi-ui-vue';
 
 () => {
 
@@ -64,8 +64,8 @@ import { Divider } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Divider, Typography } from '@douyinfe/semi-ui';
-import { IconSemiLogo } from '@douyinfe/semi-icons';
+import { Divider, Typography } from '@kousum/semi-ui-vue';
+import { IconSemiLogo } from '@kousum/semi-icons-vue';
 
 () => {
 

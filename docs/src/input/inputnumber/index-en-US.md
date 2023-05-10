@@ -18,7 +18,7 @@ When you need to get a standard value.
 ### How to import
 
 ```jsx import 
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 ```
 
 
@@ -26,7 +26,7 @@ import { InputNumber } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -55,7 +55,7 @@ class App extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -90,7 +90,7 @@ With `innerButtons`, you can hide the buttons on the right into the interior, wh
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
     <InputNumber innerButtons style={{ width: 190 }} />
@@ -101,7 +101,7 @@ Set `hidebuttons` to `true` to hide the buttons completely
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
     <InputNumber hideButtons style={{ width: 190 }} />
@@ -113,7 +113,7 @@ import { InputNumber } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -143,7 +143,7 @@ class App extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     log(v) {
@@ -183,7 +183,7 @@ With formatter and onNumberChange(**>=v1.9.0**), a pure digital input box can be
 
 ```jsx live=true
 import React from 'react';
-import { InputNumber } from '@douyinfe/semi-ui';
+import { InputNumber } from '@kousum/semi-ui-vue';
 
 function Demo () {
     return (

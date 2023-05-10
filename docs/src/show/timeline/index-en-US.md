@@ -14,14 +14,14 @@ brief: Timeline component is used to display a series of information vertically.
 ### How to import
 
 ```jsx import
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
     <Timeline>
@@ -38,7 +38,7 @@ You can use `type` to set the type of a time node, using one of: `default`,`ongo
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
     <Timeline>
@@ -55,8 +55,8 @@ You can use `dot` to customize icon, `color` to customize color or pass in `chil
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
-import { IconAlertTriangle } from '@douyinfe/semi-icons';
+import { Timeline } from '@kousum/semi-ui-vue';
+import { IconAlertTriangle } from '@kousum/semi-icons-vue';
 
 () => (
     <Timeline>
@@ -76,7 +76,7 @@ Use `mode` to set the position of the timeline, using one of: `left`, `center`, 
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
     <Timeline mode='left'>
@@ -92,7 +92,7 @@ import { Timeline } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
     <Timeline mode='center'>
@@ -108,7 +108,7 @@ import { Timeline } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
     <Timeline mode='alternate'>
@@ -124,7 +124,7 @@ import { Timeline } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
     <Timeline mode='right'>
@@ -140,8 +140,8 @@ import { Timeline } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
-import { IconAlertTriangle } from '@douyinfe/semi-icons';
+import { Timeline } from '@kousum/semi-ui-vue';
+import { IconAlertTriangle } from '@kousum/semi-icons-vue';
 
 () => (
     <Timeline 

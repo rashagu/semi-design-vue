@@ -14,7 +14,7 @@ brief: 用户使用按钮来触发一个操作或者进行跳转。
 ### 如何引入
 
 ```jsx import
-import { Button, SplitButtonGroup } from '@douyinfe/semi-ui';
+import { Button, SplitButtonGroup } from '@kousum/semi-ui-vue';
 ```
 
 ### 按钮类型
@@ -29,7 +29,7 @@ import { Button, SplitButtonGroup } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -87,7 +87,7 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -107,7 +107,7 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -127,7 +127,7 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -153,7 +153,7 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -172,7 +172,7 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -189,8 +189,8 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
-import { IconCamera, IconSidebar, IconChevronDown } from '@douyinfe/semi-icons';
+import { Button } from '@kousum/semi-ui-vue';
+import { IconCamera, IconSidebar, IconChevronDown } from '@kousum/semi-icons-vue';
 
 function ButtonDemo() {
     return (
@@ -228,8 +228,8 @@ function ButtonDemo() {
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
-import { IconLink } from '@douyinfe/semi-icons';
+import { Typography } from '@kousum/semi-ui-vue';
+import { IconLink } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -251,7 +251,7 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -272,8 +272,8 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Button } from '@douyinfe/semi-ui';
-import { IconDelete } from '@douyinfe/semi-icons';
+import { Button } from '@kousum/semi-ui-vue';
+import { IconDelete } from '@kousum/semi-icons-vue';
 
 function ButtonDemo() {
     const [saveLoading, setSaveLoading] = useState(false);
@@ -314,7 +314,7 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { ButtonGroup, Button } from '@douyinfe/semi-ui';
+import { ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     const sizes = ['large', 'default', 'small'];
@@ -339,7 +339,7 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { ButtonGroup, Button } from '@douyinfe/semi-ui';
+import { ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -360,7 +360,7 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { ButtonGroup, Button } from '@douyinfe/semi-ui';
+import { ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     const types = ['primary', 'secondary', 'tertiary', 'warning', 'danger'];
@@ -391,8 +391,8 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { SplitButtonGroup, Dropdown, Button } from '@douyinfe/semi-ui';
-import { IconTreeTriangleDown } from '@douyinfe/semi-icons';
+import { SplitButtonGroup, Dropdown, Button } from '@kousum/semi-ui-vue';
+import { IconTreeTriangleDown } from '@kousum/semi-icons-vue';
 
 function SplitButtonDemo(){
 
@@ -528,7 +528,7 @@ function SplitButtonDemo(){
 
 ## FAQ
 - #### 为什么Button中的icon属性不起作用？  
-  请检查你的Button import路径，正确的import路径应该为```import { Button } from '@douyinfe/semi-ui;'```，如果你错误地从 @douyinfe/semi-ui/button/button中import的话，获取到的是不带icon功能的基础Button组件
+  请检查你的Button import路径，正确的import路径应该为```import { Button } from '@kousum/semi-ui-vue;'```，如果你错误地从 @kousum/semi-ui-vue/button/button中import的话，获取到的是不带icon功能的基础Button组件
 
 <!-- ## 相关物料
 ```material

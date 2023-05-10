@@ -15,14 +15,14 @@ brief: The Banner component is usually used to identify the status or notificati
 ### How to import
 
 ```jsx import
-import { Banner } from '@douyinfe/semi-ui';
+import { Banner } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Banner, Layout, Button } from '@douyinfe/semi-ui';
+import { Banner, Layout, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -65,7 +65,7 @@ The `type` prop supports one of: `default`(default),`danger`,`warning`, `success
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Banner } from '@douyinfe/semi-ui';
+import { Banner } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -99,7 +99,7 @@ Also, use `bordered` for bordered style.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Banner, Typography } from '@douyinfe/semi-ui';
+import { Banner, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -148,7 +148,7 @@ function Demo() {
 Use `children` to create customized content.
 ```jsx live=true dir="column"
 import React from 'react';
-import { Banner } from '@douyinfe/semi-ui';
+import { Banner } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ width: 500, padding: 20, border: '1px solid var(--semi-color-border)' }}>

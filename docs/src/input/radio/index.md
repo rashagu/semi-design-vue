@@ -16,13 +16,13 @@ brief: 用户使用单选框来从少量的选项集合中选择单个选项
 ### 如何引入
 
 ```jsx import
-import { Radio, RadioGroup } from '@douyinfe/semi-ui';
+import { Radio, RadioGroup } from '@kousum/semi-ui-vue';
 ```
 ### 基本用法
 
 ```jsx live=true
 import React from 'react';
-import { Radio } from '@douyinfe/semi-ui';
+import { Radio } from '@kousum/semi-ui-vue';
 
 () => (
     <Radio aria-label="单选示例" name="demo-radio">Radio</Radio>
@@ -37,7 +37,7 @@ import { Radio } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Radio } from '@douyinfe/semi-ui';
+import { Radio } from '@kousum/semi-ui-vue';
 
 () => (
     <Radio extra="Semi Design 是由互娱社区前端团队与 UED 团队共同设计开发并维护的设计系统" aria-label="单选示例" name="demo-radio-extra">
@@ -52,7 +52,7 @@ Radio 不可用
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Radio, Button } from '@douyinfe/semi-ui';
+import { Radio, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [disabled, setDisabled] = useState(true);
@@ -84,7 +84,7 @@ import { Radio, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Radio } from '@douyinfe/semi-ui';
+import { Radio } from '@kousum/semi-ui-vue';
 
 () => {
     const [checked, setChecked] = useState(true);
@@ -112,7 +112,7 @@ import { Radio } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { RadioGroup, Radio } from '@douyinfe/semi-ui';
+import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => {
     const [value, setValue] = useState(1);
@@ -137,7 +137,7 @@ import { RadioGroup, Radio } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { RadioGroup, Radio } from '@douyinfe/semi-ui';
+import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => (
     <RadioGroup direction="vertical" aria-label="单选组合示例" name="demo-radio-group-vertical">
@@ -159,7 +159,7 @@ version: >=1.26.0
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { RadioGroup, Radio, Space } from '@douyinfe/semi-ui';
+import { RadioGroup, Radio, Space } from '@kousum/semi-ui-vue';
 
 () => {
     return (
@@ -192,7 +192,7 @@ version: >=1.30.0
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { RadioGroup, Radio } from '@douyinfe/semi-ui';
+import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => (
     <RadioGroup type='card' defaultValue={2} direction='vertical' aria-label="单选组合示例" name="demo-radio-group-card">
@@ -216,7 +216,7 @@ version: >=1.30.0
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { RadioGroup, Radio } from '@douyinfe/semi-ui';
+import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => (
     <RadioGroup type='pureCard' defaultValue={2} direction='vertical' aria-label="单选组合示例" name="demo-radio-group-pureCard">
@@ -239,7 +239,7 @@ import { RadioGroup, Radio } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { RadioGroup, Space } from '@douyinfe/semi-ui';
+import { RadioGroup, Space } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor() {

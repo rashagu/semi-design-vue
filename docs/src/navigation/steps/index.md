@@ -13,7 +13,7 @@ brief: 将复杂任务或存在先后关系的任务分解，使用步骤组件�
 ### 如何引入
 
 ```jsx import
-import { Steps } from '@douyinfe/semi-ui';
+import { Steps } from '@kousum/semi-ui-vue';
 const Step = Steps.Step;
 ```
 
@@ -23,7 +23,7 @@ const Step = Steps.Step;
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Steps } from '@douyinfe/semi-ui';
+import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
     <Steps current={1} onChange={(i)=>console.log(i)}>
@@ -40,7 +40,7 @@ import { Steps } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Steps } from '@douyinfe/semi-ui';
+import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
     <Steps type="basic" current={1} onChange={(i)=>console.log(i)}>
@@ -64,7 +64,7 @@ import { Steps } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Steps } from '@douyinfe/semi-ui';
+import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -85,7 +85,7 @@ import { Steps } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Steps } from '@douyinfe/semi-ui';
+import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
     <Steps type="basic" size="small" current={1} onChange={(i)=>console.log(i)}>
@@ -98,7 +98,7 @@ import { Steps } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Steps } from '@douyinfe/semi-ui';
+import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -119,7 +119,7 @@ import { Steps } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Steps, Button } from '@douyinfe/semi-ui';
+import { Steps, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor(props) {
@@ -195,7 +195,7 @@ class App extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Steps } from '@douyinfe/semi-ui';
+import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
     <Steps direction="vertical" current={1} style={{ width: 300 }} onChange={(i)=>console.log(i)}>
@@ -208,7 +208,7 @@ import { Steps } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Steps } from '@douyinfe/semi-ui';
+import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
     <Steps direction="vertical" type="basic" current={1} onChange={(i)=>console.log(i)}>
@@ -225,7 +225,7 @@ import { Steps } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Steps } from '@douyinfe/semi-ui';
+import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
     <Steps type="basic" current={1} status="error" onChange={(i)=>console.log(i)}>
@@ -243,8 +243,8 @@ import { Steps } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Steps } from '@douyinfe/semi-ui';
-import { IconHome, IconLock } from '@douyinfe/semi-icons';
+import { Steps } from '@kousum/semi-ui-vue';
+import { IconHome, IconLock } from '@kousum/semi-icons-vue';
 
 () => (
     <Steps type="basic" onChange={(i)=>console.log(i)}>
@@ -263,7 +263,7 @@ import { IconHome, IconLock } from '@douyinfe/semi-icons';
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Steps } from '@douyinfe/semi-ui';
+import { Steps } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor(props) {

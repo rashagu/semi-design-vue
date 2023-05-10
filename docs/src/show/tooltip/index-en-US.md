@@ -14,7 +14,7 @@ brief: Tooltip is used to identify an element or attach a small amount of auxili
 ### How to import
 
 ```jsx import
-import { Tooltip } from '@douyinfe/semi-ui';
+import { Tooltip } from '@kousum/semi-ui-vue';
 ```
 
 ### Cautions
@@ -29,7 +29,7 @@ At the same time, in order to calculate the positioning of the popup layer, it i
 
 ```jsx live=true noInline=true dir="column"
 import React, { forwardRef } from 'react';
-import { Tooltip, Space } from '@douyinfe/semi-ui';
+import { Tooltip, Space } from '@kousum/semi-ui-vue';
 
 const style={ border: '2px solid var(--semi-color-border)', paddingLeft: 4, paddingRight: 4, borderRadius: 4 };
 
@@ -74,7 +74,7 @@ Same for other directions
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Tooltip, Tag } from '@douyinfe/semi-ui';
+import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const tops = [
@@ -181,7 +181,7 @@ You can set it to false and the little triangle will no longer keep pointing to 
 
 ```jsx live=true
 import React from 'react';
-import { Tooltip, Button } from '@douyinfe/semi-ui';
+import { Tooltip, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -216,7 +216,7 @@ function Demo() {
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Tooltip, Button, ButtonGroup, Input } from '@douyinfe/semi-ui';
+import { Tooltip, Button, ButtonGroup, Input } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [visible, setVisible] = useState(false);
@@ -263,7 +263,7 @@ Configure specific styles for the pop-up layer through the `className` and `styl
 
 ```jsx live=true
 import React from 'react';
-import { Tooltip, Tag } from '@douyinfe/semi-ui';
+import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     return (
@@ -288,7 +288,7 @@ With `getPopupContainer` the bullet layer will be rendered to the DOM returned b
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Tooltip, Tag } from '@douyinfe/semi-ui';
+import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -313,7 +313,7 @@ Need to add a layer of elements (div or span) in the middle to prevent trigger e
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Popconfirm, Tooltip, Button } from '@douyinfe/semi-ui';
+import { Popconfirm, Tooltip, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Popconfirm content="Are you sure to delete this comment" title='Confirm Delete'>

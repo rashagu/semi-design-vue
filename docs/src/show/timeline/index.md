@@ -12,14 +12,14 @@ brief: 时间轴是用于对一系列信息进行时间排序时，垂直展示�
 ### 如何引入
 
 ```jsx import
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
     <Timeline>
@@ -36,7 +36,7 @@ import { Timeline } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
     <Timeline>
@@ -59,8 +59,8 @@ import { Timeline } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
-import { IconAlertTriangle } from '@douyinfe/semi-icons';
+import { Timeline } from '@kousum/semi-ui-vue';
+import { IconAlertTriangle } from '@kousum/semi-icons-vue';
 
 () => (
     <Timeline>
@@ -86,7 +86,7 @@ import { IconAlertTriangle } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
     <Timeline mode="left">
@@ -110,7 +110,7 @@ import { Timeline } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
     <Timeline mode="center">
@@ -134,7 +134,7 @@ import { Timeline } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
     <Timeline mode="alternate">
@@ -158,7 +158,7 @@ import { Timeline } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
+import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
     <Timeline mode="right">
@@ -182,8 +182,8 @@ import { Timeline } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Timeline } from '@douyinfe/semi-ui';
-import { IconAlertTriangle } from '@douyinfe/semi-icons';
+import { Timeline } from '@kousum/semi-ui-vue';
+import { IconAlertTriangle } from '@kousum/semi-icons-vue';
 
 () => (
     <Timeline

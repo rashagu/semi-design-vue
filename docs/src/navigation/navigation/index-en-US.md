@@ -15,7 +15,7 @@ brief: A menu list that provides navigation for pages and features.
 ### How to import
 
 ```jsx
-import { Nav } from '@douyinfe/semi-ui';
+import { Nav } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
@@ -31,8 +31,8 @@ For the meaning of the parameters, see [Nav.Item](#Nav.Item) Or [Nav.Sub](#Nav.S
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconSetting } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconSetting } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -69,7 +69,7 @@ If the navigation project doesn't come in, `icon` field, then the copy will be a
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
+import { Nav } from '@kousum/semi-ui-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -109,8 +109,8 @@ For the parameters, see [Nav.Header](#Nav.Header) and [Nav.Footer](#Nav.Footer).
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconSetting } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconSetting } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -150,8 +150,8 @@ For example, you need a navigation list to scroll, navigate the head and bottom 
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconSetting, IconFolder } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconSetting, IconFolder } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -196,8 +196,8 @@ Users can use JSX to define navigation headers, navigation items, and navigation
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconStar, IconUser, IconUserGroup } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconStar, IconUser, IconUserGroup } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -287,8 +287,8 @@ In particular, there are some functions (parameters) only in `mode = "vertical"`
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconStar, IconUser, IconUserGroup, IconSetting } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconStar, IconUser, IconUserGroup, IconSetting } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -331,8 +331,8 @@ class NavApp extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav, Avatar, Dropdown } from '@douyinfe/semi-ui';
-import { IconStar, IconUser, IconUserGroup, IconSetting, IconEdit } from '@douyinfe/semi-icons';
+import { Nav, Avatar, Dropdown } from '@kousum/semi-ui-vue';
+import { IconStar, IconUser, IconUserGroup, IconSetting, IconEdit } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -398,8 +398,8 @@ The general platform design will adopt the mode of horizontal and vertical navig
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav, Avatar, Dropdown, Select, Button } from '@douyinfe/semi-ui';
-import { IconStar, IconUser, IconUserGroup, IconSetting, IconEdit, IconLanguage } from '@douyinfe/semi-icons';
+import { Nav, Avatar, Dropdown, Select, Button } from '@kousum/semi-ui-vue';
+import { IconStar, IconUser, IconUserGroup, IconSetting, IconEdit, IconLanguage } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     constructor() {
@@ -506,8 +506,8 @@ class NavApp extends React.Component {
 
 ```jsx live=true dir=column
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconSetting } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconSetting } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -551,8 +551,8 @@ limitIndent only takes effect in the vertical direction.
 
 ```jsx live=true dir=column
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconSetting } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconSetting } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -605,8 +605,8 @@ Including:
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconUserGroup, IconSetting } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconUserGroup, IconSetting } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -664,8 +664,8 @@ The corresponding callback is:
 
 ```jsx live=true dir="column"
 import React, { useMemo } from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconUserGroup, IconSetting } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconUserGroup, IconSetting } from '@kousum/semi-icons-vue';
 
 function NavApp (props = {}) {
     const [openKeys, setOpenKeys] = useState(['union-management', 'job']);

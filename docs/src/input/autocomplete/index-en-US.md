@@ -21,7 +21,7 @@ The difference with the searchable Select component:
 ### How to import
 
 ```jsx import
-import { AutoComplete } from '@douyinfe/semi-ui';
+import { AutoComplete } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic usage
@@ -30,8 +30,8 @@ Monitor user input through onSearch, pass input suggestions through data, and ma
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete } from '@douyinfe/semi-ui';
-import { IconSearch } from '@douyinfe/semi-icons';
+import { AutoComplete } from '@kousum/semi-ui-vue';
+import { IconSearch } from '@kousum/semi-icons-vue';
 
 () => {
     const [stringData, setStringData] = useState([]);
@@ -72,8 +72,8 @@ The rendering of candidates can be customized through renderItem
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete, Avatar } from '@douyinfe/semi-ui';
-import { IconSearch } from '@douyinfe/semi-icons';
+import { AutoComplete, Avatar } from '@kousum/semi-ui-vue';
+import { IconSearch } from '@kousum/semi-icons-vue';
 
 class CustomOptionDemo extends React.Component {
     constructor() {
@@ -141,8 +141,8 @@ Get user input value from onSearch, update data value dynamically, update loadin
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete } from '@douyinfe/semi-ui';
-import { IconSearch } from '@douyinfe/semi-icons';
+import { AutoComplete } from '@kousum/semi-ui-vue';
+import { IconSearch } from '@kousum/semi-icons-vue';
 
 class ObjectDemo extends React.Component {
     constructor() {
@@ -225,7 +225,7 @@ The size of the input box can be set by setting size, optional `small`, `default
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete } from '@douyinfe/semi-ui';
+import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -261,7 +261,7 @@ The position of the drop-down menu can be set by setting position, and the optio
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete } from '@douyinfe/semi-ui';
+import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -285,7 +285,7 @@ import { AutoComplete } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete } from '@douyinfe/semi-ui';
+import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
     <AutoComplete data={[1, 2, 3, 4]} placeholder={'Disable drop-down menu'} disabled style={{ width: 200 }}></AutoComplete>
@@ -298,7 +298,7 @@ Different verification states can be set to show different styles
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete } from '@douyinfe/semi-ui';
+import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -319,7 +319,7 @@ Can set up custom display empty content
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete, Empty } from '@douyinfe/semi-ui';
+import { AutoComplete, Empty } from '@kousum/semi-ui-vue';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
 
 () => {

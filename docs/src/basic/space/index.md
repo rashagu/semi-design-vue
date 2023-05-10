@@ -12,13 +12,13 @@ brief: 设置组件之间的间距。
 ### 如何引入
 
 ```jsx import
-import { Space } from '@douyinfe/semi-ui';
+import { Space } from '@kousum/semi-ui-vue';
 ```
 ### 基本用法
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Space, Button, Switch } from '@douyinfe/semi-ui';
+import { Space, Button, Switch } from '@kousum/semi-ui-vue';
 
 () => (
     <Space>
@@ -35,7 +35,7 @@ import { Space, Button, Switch } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Space, Button, Tag } from '@douyinfe/semi-ui';
+import { Space, Button, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     const divStyle = {
@@ -81,7 +81,7 @@ import { Space, Button, Tag } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Space, Tabs, TabPane, Button } from '@douyinfe/semi-ui';
+import { Space, Tabs, TabPane, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Tabs type="line">
@@ -133,7 +133,7 @@ import { Space, Tabs, TabPane, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Space, Button } from '@douyinfe/semi-ui';
+import { Space, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Space vertical>
@@ -151,7 +151,7 @@ import { Space, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Space, Button } from '@douyinfe/semi-ui';
+import { Space, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Space wrap>

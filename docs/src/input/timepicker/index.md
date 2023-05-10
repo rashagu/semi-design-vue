@@ -13,7 +13,7 @@ brief: 用户使用时间选择器可以方便地选择某一符合要求的、�
 ### 如何引入
 
 ```jsx import
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 ```
 ### 基础使用
 
@@ -21,7 +21,7 @@ import { TimePicker } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <TimePicker />;
@@ -34,7 +34,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <TimePicker scrollItemProps={{ mode: "wheel", cycled: true }}/>;
@@ -45,7 +45,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <TimePicker insetLabel='时刻'/>;
@@ -58,7 +58,7 @@ function Demo() {
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -88,7 +88,7 @@ NOTE: `format` 遵循 date-fns 的 `format` 格式。 https://date-fns.org/v2.0.
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <TimePicker format={'HH:mm'} defaultValue={'10:24'}/>;
@@ -99,7 +99,7 @@ function Demo() {
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { TimePicker, Button } from '@douyinfe/semi-ui';
+import { TimePicker, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [open, setOpen] = useState(false);
@@ -135,7 +135,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <TimePicker defaultValue={'12:08:23'} disabled />;
@@ -148,7 +148,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <TimePicker minuteStep={15} secondStep={10} />;
@@ -163,7 +163,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -183,7 +183,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { TimePicker } from '@douyinfe/semi-ui';
+import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -204,8 +204,8 @@ function Demo() {
 ```jsx live=true hideInDSM
 import React, { useState, useMemo } from 'react';
 import * as dateFns from 'date-fns';
-import { TimePicker, Button } from '@douyinfe/semi-ui';
-import { IconChevronDown, IconClose } from '@douyinfe/semi-icons';
+import { TimePicker, Button } from '@kousum/semi-ui-vue';
+import { IconChevronDown, IconClose } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const formatToken = 'HH:mm:ss';
@@ -244,7 +244,7 @@ Semi 所有关于时区的配置都收敛在 ConfigProvider 中，详细使用�
 
 ```jsx live=true hideInDSM
 import React, { useMemo, useState } from 'react';
-import { ConfigProvider, Select, TimePicker } from '@douyinfe/semi-ui';
+import { ConfigProvider, Select, TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo(props = {}) {
     const [timeZone, setTimeZone] = useState('GMT+08:00');

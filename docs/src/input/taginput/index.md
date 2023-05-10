@@ -12,7 +12,7 @@ brief: 标签输入框能够将输入的内容生成标签。
 ### 如何引入
 
 ```jsx import
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 ```
 ### 基本演示
 
@@ -20,7 +20,7 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput
@@ -37,7 +37,7 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -62,7 +62,7 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput 
@@ -78,7 +78,7 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput 
@@ -96,7 +96,7 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -115,7 +115,7 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -135,8 +135,8 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
-import { IconVigoLogo, IconGift } from '@douyinfe/semi-icons';
+import { TagInput } from '@kousum/semi-ui-vue';
+import { IconVigoLogo, IconGift } from '@kousum/semi-icons-vue';
 
 () => (
     <>
@@ -157,7 +157,7 @@ import { IconVigoLogo, IconGift } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput
@@ -175,7 +175,7 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput
@@ -195,7 +195,7 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -228,7 +228,7 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput 
@@ -247,7 +247,7 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 class TagInputDemo extends React.Component {
     constructor(props) {
@@ -277,7 +277,7 @@ class TagInputDemo extends React.Component {
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 class TagInputDemo extends React.Component {
     constructor() {
@@ -304,7 +304,7 @@ class TagInputDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput 
@@ -327,7 +327,7 @@ import { TagInput } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { TagInput, Button } from '@douyinfe/semi-ui';
+import { TagInput, Button } from '@kousum/semi-ui-vue';
 
 class TagInputDemo extends React.Component {
     constructor(props) {
@@ -359,8 +359,8 @@ class TagInputDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { TagInput, Avatar } from '@douyinfe/semi-ui';
-import { IconClose } from '@douyinfe/semi-ui-icons';
+import { TagInput, Avatar } from '@kousum/semi-ui-vue';
+import { IconClose } from '@kousum/semi-ui-vue-icons';
 
 class CustomRender extends React.Component {
     constructor(props) {
@@ -417,7 +417,7 @@ class CustomRender extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { TagInput } from '@douyinfe/semi-ui';
+import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
     <TagInput

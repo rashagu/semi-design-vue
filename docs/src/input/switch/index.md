@@ -13,7 +13,7 @@ brief: 开关是用于切换两种互斥状态的交互形式
 ### 如何引入
 
 ```jsx import
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本
@@ -23,7 +23,7 @@ import { Switch } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -40,7 +40,7 @@ import { Switch } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -70,7 +70,7 @@ import { Switch } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -88,7 +88,7 @@ import { Switch } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -114,7 +114,7 @@ import { Switch } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Switch, Typography } from '@douyinfe/semi-ui';
+import { Switch, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const [open, setOpen] = useState();
@@ -136,7 +136,7 @@ import { Switch, Typography } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 
 () => {
     const [checked, setChecked] = useState(true);
@@ -157,7 +157,7 @@ version: >= 1.29.0
 
 ```jsx live=true
 import React from 'react';
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
     <div>

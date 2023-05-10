@@ -11,7 +11,7 @@ brief: 轮播图是一种媒体组件，可以在可视化应用中展示多张�
 
 ### 如何引入
 ```jsx import
-import { Carousel } from '@douyinfe/semi-ui';
+import { Carousel } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -20,7 +20,7 @@ import { Carousel } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, Typography, Space } from '@douyinfe/semi-ui';
+import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 
 () => {
     const { Title, Paragraph } = Typography;
@@ -88,7 +88,7 @@ import { Carousel, Typography, Space } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, RadioGroup, Radio, Space, Typography } from '@douyinfe/semi-ui';
+import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const { Title, Paragraph } = Typography;
@@ -170,7 +170,7 @@ import { Carousel, RadioGroup, Radio, Space, Typography } from '@douyinfe/semi-u
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, RadioGroup, Radio, Space, Typography } from '@douyinfe/semi-ui';
+import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const { Title, Paragraph } = Typography;
@@ -269,7 +269,7 @@ import { Carousel, RadioGroup, Radio, Space, Typography } from '@douyinfe/semi-u
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, RadioGroup, Radio, Space, Typography } from '@douyinfe/semi-ui';
+import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const { Title, Paragraph } = Typography;
@@ -356,8 +356,8 @@ import { Carousel, RadioGroup, Radio, Space, Typography } from '@douyinfe/semi-u
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, Typography, Space } from '@douyinfe/semi-ui';
-import { IconArrowLeft, IconArrowRight } from "@douyinfe/semi-icons";
+import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
+import { IconArrowLeft, IconArrowRight } from "@kousum/semi-icons-vue";
 
 class CarouselDemo extends React.Component {
     constructor(props) {
@@ -436,7 +436,7 @@ class CarouselDemo extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, Typography, Space } from '@douyinfe/semi-ui';
+import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 
 () => {
     const { Title, Paragraph } = Typography;
@@ -505,7 +505,7 @@ import { Carousel, Typography, Space } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, Typography, Space } from '@douyinfe/semi-ui';
+import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 
 () => {
     const { Title, Paragraph } = Typography;
@@ -573,7 +573,7 @@ import { Carousel, Typography, Space } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Carousel, Space, Typography } from '@douyinfe/semi-ui';
+import { Carousel, Space, Typography } from '@kousum/semi-ui-vue';
 
 class CarouselDemo extends React.Component {
     constructor(props) {

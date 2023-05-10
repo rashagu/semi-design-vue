@@ -14,7 +14,7 @@ brief: Switch is an interactive form used to switch two mutually exclusive state
 ### How to import
 
 ```jsx import
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
@@ -24,7 +24,7 @@ Use `aria-label` to describe the specific function of the Switch
 
 ```jsx live=true
 import React from 'react';
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -39,7 +39,7 @@ import { Switch } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -67,7 +67,7 @@ import { Switch } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -86,7 +86,7 @@ Note: This does not work with the smallest switch (size = 'small')
 
 ```jsx live=true
 import React from 'react';
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -112,7 +112,7 @@ Compared to setting the embedded text through checkedText and uncheckedText, we 
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Switch, Typography } from '@douyinfe/semi-ui';
+import { Switch, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const [open, setOpen] = useState();
@@ -134,7 +134,7 @@ Whether the component is selected depends entirely on the incoming checked value
 
 ```jsx live=true
 import React from 'react';
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 
 () => {
     const [checked, setChecked] = useState(true);
@@ -162,7 +162,7 @@ You can turn on the loading state by setting loading="true".
 
 ```jsx live=true
 import React from 'react';
-import { Switch } from '@douyinfe/semi-ui';
+import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
     <div>

@@ -14,13 +14,13 @@ brief: Modals are used to wait for the user to interact, inform the user of impo
 ### How to import
 
 ```jsx import 
-import { Modal } from '@douyinfe/semi-ui';
+import { Modal } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -79,7 +79,7 @@ You can set `maskClosable={false}` to prevent modal from closing when clicking o
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -132,7 +132,7 @@ You can set button text using `okText` and `cancelText`.
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -184,7 +184,7 @@ You can set button properties using `okButtonProps` and `cancelButtonProps`.
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -236,7 +236,7 @@ For more customized modal, you could use `header` and `footer`. Set `header={nul
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -291,7 +291,7 @@ You can use `style` to customize styling or position e.g. `style.top = '30vh'`, 
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -350,8 +350,8 @@ By using `header`, `footer`, etc, you could create any modal to your needs.
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button, List } from '@douyinfe/semi-ui';
-import { IconVigoLogo, IconSemiLogo } from '@douyinfe/semi-icons';
+import { Modal, Button, List } from '@kousum/semi-ui-vue';
+import { IconVigoLogo, IconSemiLogo } from '@kousum/semi-icons-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -447,7 +447,7 @@ set `fullScreen={true}` can use full screen Modal
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -478,8 +478,8 @@ You could use static methods to create a confirm Modal. Use `icon` to customize 
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
-import { IconSend } from '@douyinfe/semi-icons';
+import { Modal, Button } from '@kousum/semi-ui-vue';
+import { IconSend } from '@kousum/semi-icons-vue';
 
 ModalComponent = function(props) {
     function success() {
@@ -533,8 +533,8 @@ ModalComponent = function(props) {
 You could use `Modal.useModal` to create a `contextHolder` that could access context.
 ```jsx live=true hideInDSM
 import React from 'react';
-import { ConfigProvider, Modal, Button } from '@douyinfe/semi-ui';
-import en_GB from '@douyinfe/semi-ui/lib/es/locale/source/en_GB';
+import { ConfigProvider, Modal, Button } from '@kousum/semi-ui-vue';
+import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
 
 function Demo(props = {}) {
     const [modal, contextHolder] = Modal.useModal();

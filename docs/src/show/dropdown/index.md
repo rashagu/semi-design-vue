@@ -12,14 +12,14 @@ brief: 向下弹出的菜单。
 ### 如何引入
 
 ```jsx import
-import { Dropdown } from '@douyinfe/semi-ui';
+import { Dropdown } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Tag } from '@douyinfe/semi-ui';
+import { Dropdown, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -44,7 +44,7 @@ function Demo() {
 
 ```jsx live=true
 import React, { useMemo } from 'react';
-import { Dropdown, Tag } from '@douyinfe/semi-ui';
+import { Dropdown, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const subDropdown = useMemo(
@@ -88,8 +88,8 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Button } from '@douyinfe/semi-ui';
-import { IconBox, IconSimilarity, IconSetting, IconForward, IconColorPalette, IconRefresh, IconSearch, IconBranch } from '@douyinfe/semi-icons';
+import { Dropdown, Button } from '@kousum/semi-ui-vue';
+import { IconBox, IconSimilarity, IconSetting, IconForward, IconColorPalette, IconRefresh, IconSearch, IconBranch } from '@kousum/semi-icons-vue';
 
 function Demo() {
     return (
@@ -176,7 +176,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Tag } from '@douyinfe/semi-ui';
+import { Dropdown, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -232,7 +232,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Tag, Input, Button } from '@douyinfe/semi-ui';
+import { Dropdown, Tag, Input, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -298,7 +298,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Button, Toast } from '@douyinfe/semi-ui';
+import { Dropdown, Button, Toast } from '@kousum/semi-ui-vue';
 
 class DropdownEvents extends React.Component {
     constructor() {
@@ -352,7 +352,7 @@ class DropdownEvents extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Button, Toast } from '@douyinfe/semi-ui';
+import { Dropdown, Button, Toast } from '@kousum/semi-ui-vue';
 
 class DropdownEvents extends React.Component {
     constructor() {
@@ -398,7 +398,7 @@ class DropdownEvents extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Dropdown, Button } from '@douyinfe/semi-ui';
+import { Dropdown, Button } from '@kousum/semi-ui-vue';
 
 function DropdownEvents() {
     const menu = [

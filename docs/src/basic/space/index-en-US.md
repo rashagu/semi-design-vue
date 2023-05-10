@@ -12,13 +12,13 @@ brief: Set the spacing between components.
 ### How to import
 
 ```jsx import
-import { Space } from '@douyinfe/semi-ui';
+import { Space } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Space, Button, Switch } from '@douyinfe/semi-ui';
+import { Space, Button, Switch } from '@kousum/semi-ui-vue';
 
 () => (
     <Space>
@@ -37,7 +37,7 @@ You can use `align` to set the alignment, optional: `start`, `center`（default�
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Space, Button, Tag } from '@douyinfe/semi-ui';
+import { Space, Button, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     const divStyle = {
@@ -83,7 +83,7 @@ You can use `spacing` to set the spacing size, optional: `tight` (8px, default),
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Space, Tabs, TabPane, Button } from '@douyinfe/semi-ui';
+import { Space, Tabs, TabPane, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Tabs type="line">
@@ -135,7 +135,7 @@ You can use `vertical` to set whether the spacing is vertical, the default is fa
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Space, Button } from '@douyinfe/semi-ui';
+import { Space, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Space vertical>
@@ -153,7 +153,7 @@ When the spacing is horizontal，you can use `wrap` to set whether to wrap autom
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Space, Button } from '@douyinfe/semi-ui';
+import { Space, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Space wrap>

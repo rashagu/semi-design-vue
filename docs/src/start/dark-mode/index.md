@@ -38,7 +38,7 @@ if (body.hasAttribute('theme-mode')) {
 这里也有一个🌰：
 ```jsx live=true
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const switchMode = () => {
@@ -99,8 +99,8 @@ Semi 2.0 原生支持局部暗色/亮色模式。使用时，在顶级元素上�
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Layout, Nav, Button, Breadcrumb, Avatar, Steps, Pagination, Row, Badge, Tag, Rating, Tooltip, Timeline, Popover } from '@douyinfe/semi-ui';
-import { IconSemiLogo, IconCamera, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting, IconEdit, IconList } from '@douyinfe/semi-icons';
+import { Layout, Nav, Button, Breadcrumb, Avatar, Steps, Pagination, Row, Badge, Tag, Rating, Tooltip, Timeline, Popover } from '@kousum/semi-ui-vue';
+import { IconSemiLogo, IconCamera, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting, IconEdit, IconList } from '@kousum/semi-icons-vue';
 
 () => {
     const { Header, Footer, Sider, Content } = Layout;

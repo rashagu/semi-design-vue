@@ -14,7 +14,7 @@ Please submit all your currently modified code and checkout a separate git branc
 ### Install Semi 2.0
 
 ```bash
-npm i @douyinfe/semi-ui@2.0.0
+npm i @kousum/semi-ui-vue@2.0.0
 ```
 
 ### Modify code
@@ -133,7 +133,7 @@ v2.0 Semi is officially released to the public network npm, the package name nee
 import { Select, Input, Form } from '@ies/semi-ui-react';
 
 // now
-import { Select, Input, Form } from '@douyinfe/semi-ui';
+import { Select, Input, Form } from '@kousum/semi-ui-vue';
 ```
 
 #### Import interface（TypeScript project）
@@ -145,7 +145,7 @@ All interface related changes can be found in [Semi 1.x -> 2.0 TS interface chan
 import { SelectProps } from '@ies/semi-ui-react/select' 
 
 // now
-import { SelectProps } from '@douyinfe/semi-ui/lib/es/select'
+import { SelectProps } from '@kousum/semi-ui-vue/lib/es/select'
 ```
 
 #### Import locale language packages
@@ -155,7 +155,7 @@ import { SelectProps } from '@douyinfe/semi-ui/lib/es/select'
 import en_GB from '@ies/semi-ui-react/locale/source/en_GB'
 
 // now
-import en_GB from '@douyinfe/semi-ui/lib/es/locale/source/en_GB'
+import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB'
 ```
 
 ### 🛠 API related adjustments
@@ -211,7 +211,7 @@ import homeSvg from '@ies/semi-icons/semi-icons-home.svg';
 <Icon type={homeSvg.id} />;
 
 // 2.x use the following methods uniformly
-import { IconHome } from '@douyinfe/semi-icons';
+import { IconHome } from '@kousum/semi-icons-vue';
 <IconHome />;
 ```
 
@@ -224,7 +224,7 @@ import Construction from '@ies/semi-illustrations/construction.svg';
 <Empty image={Construction} />
 
 // 2.x
-import { Empty } from '@douyinfe/semi-ui';
+import { Empty } from '@kousum/semi-ui-vue';
 import { IllustrationConstruction } from '@douyinfe/semi-illustrations';
 <Empty image={<IllustrationConstruction />} />
 ```

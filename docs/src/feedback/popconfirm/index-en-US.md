@@ -14,7 +14,7 @@ brief: Used when the operation of the target element requires further confirmati
 ### How to import
 
 ```jsx import
-import { Popconfirm } from '@douyinfe/semi-ui';
+import { Popconfirm } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
@@ -22,7 +22,7 @@ import { Popconfirm } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Popconfirm, Button, Toast } from '@douyinfe/semi-ui';
+import { Popconfirm, Button, Toast } from '@kousum/semi-ui-vue';
 
 () => {
     const onConfirm = () => {
@@ -51,8 +51,8 @@ Developers can use scenario-based `OK Type`/`Cancel Type`/`icon` Equal parameter
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Popconfirm, Radio, RadioGroup, Button } from '@douyinfe/semi-ui/';
-import { IconAlertTriangle } from '@douyinfe/semi-icons';
+import { Popconfirm, Radio, RadioGroup, Button } from '@kousum/semi-ui-vue/';
+import { IconAlertTriangle } from '@kousum/semi-icons-vue';
 
 function TypesConfirmDemo(props = {}) {
     const typeMap = {
@@ -119,7 +119,7 @@ promise solve will close the bubble confirmation box, the bubble will remain whe
 
 ```jsx live=true
 import React from 'react';
-import { Popconfirm, Button, Toast } from '@douyinfe/semi-ui';
+import { Popconfirm, Button, Toast } from '@kousum/semi-ui-vue';
 
 () => {
     const onConfirm = () => {
@@ -161,7 +161,7 @@ import { Popconfirm, Button, Toast } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Button, Popconfirm, Space } from '@douyinfe/semi-ui';
+import { Button, Popconfirm, Space } from '@kousum/semi-ui-vue';
 
 () => {
     return (

@@ -14,7 +14,7 @@ brief: Avatar, used for image or text display.
 ### How to import
 
 ```jsx import
-import { Avatar, AvatarGroup } from '@douyinfe/semi-ui';
+import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 ```
 ### Size
 
@@ -22,7 +22,7 @@ You can change the size of the avatars with `size` property. The following sizes
 
 ```jsx live=true
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
+import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -55,7 +55,7 @@ Avatars support 16 colors including `white`, `amber`, `blue`, `cyan`, `green`, `
 
 ```jsx live=true
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
+import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -78,7 +78,7 @@ Image avatars can be created by using the `src` or `srcSet` prop.
 
 ```jsx live=true
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
+import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -103,7 +103,7 @@ Avatars support two shapes: `circle` and `square`. The shape is default to `circ
 
 ```jsx live=true
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
+import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -122,8 +122,8 @@ The overlay has no default style.
 
 ```jsx live=true
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
-import { IconCamera } from '@douyinfe/semi-icons';
+import { Avatar } from '@kousum/semi-ui-vue';
+import { IconCamera } from '@kousum/semi-icons-vue';
 
 () => {
     const style = {
@@ -154,10 +154,10 @@ You can use `AvatarGroup` component to display avatars as a group.
 
 ```jsx live=true
 import React from 'react';
-import { Avatar, AvatarGroup } from '@douyinfe/semi-ui';
+import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 
 import React from 'react';
-import { AvatarGroup, Avatar } from '@douyinfe/semi-ui';
+import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -175,7 +175,7 @@ import { AvatarGroup, Avatar } from '@douyinfe/semi-ui';
 You can set the number of avatars to display with `maxCount` property.
 ```jsx live=true
 import React from 'react';
-import { Avatar, AvatarGroup } from '@douyinfe/semi-ui';
+import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -193,7 +193,7 @@ import { Avatar, AvatarGroup } from '@douyinfe/semi-ui';
 You can customize the more tag with `renderMore`.
 ```jsx live=true
 import React from 'react';
-import { Avatar, AvatarGroup, Popover } from '@douyinfe/semi-ui';
+import { Avatar, AvatarGroup, Popover } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const renderMore = (restNumber, restAvatars) => {
@@ -231,7 +231,7 @@ function Demo() {
 You can set the coverage direction of the avatars with `overlapFrom`. It has two optional values A and B. The default value is `start`.
 ```jsx live=true
 import React from 'react';
-import { Avatar, AvatarGroup } from '@douyinfe/semi-ui';
+import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -297,7 +297,7 @@ import { Avatar, AvatarGroup } from '@douyinfe/semi-ui';
 - Avatar's `alt` attribute can be read by screen readers, when using the avatar component, please use the `alt` attribute to explain the content of the image.
 ```jsx
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
+import { Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     return (

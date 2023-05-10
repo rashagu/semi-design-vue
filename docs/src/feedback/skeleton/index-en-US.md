@@ -23,14 +23,14 @@ brief: A placeholder preview of content before the data loaded.
 ### How to import
 
 ```jsx
-import { Skeleton } from '@douyinfe/semi-ui';
+import { Skeleton } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
 
 ```jsx live=true
 import React from 'react';
-import { Skeleton, Switch, Button, Avatar } from '@douyinfe/semi-ui';
+import { Skeleton, Switch, Button, Avatar } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -94,7 +94,7 @@ Image and caption.
 
 ```jsx live=true
 import React from 'react';
-import { Skeleton } from '@douyinfe/semi-ui';
+import { Skeleton } from '@kousum/semi-ui-vue';
 
 () => {
     const placeholder = (
@@ -121,7 +121,7 @@ Statistics.
 
 ```jsx live=true
 import React from 'react';
-import { Skeleton, Descriptions } from '@douyinfe/semi-ui';
+import { Skeleton, Descriptions } from '@kousum/semi-ui-vue';
 
 () => {
     const placeholder = (
@@ -145,7 +145,7 @@ Avatar and title.
 
 ```jsx live=true
 import React from 'react';
-import { Skeleton, Avatar } from '@douyinfe/semi-ui';
+import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const placeholder = (
@@ -170,7 +170,7 @@ Centered paragraphs and button.
 
 ```jsx live=true
 import React from 'react';
-import { Skeleton, Button } from '@douyinfe/semi-ui';
+import { Skeleton, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const style = {
@@ -204,7 +204,7 @@ Avatar, headline and paragraph.
 
 ```jsx live=true
 import React from 'react';
-import { Skeleton, Avatar } from '@douyinfe/semi-ui';
+import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const style = {
@@ -244,7 +244,7 @@ Table.
 
 ```jsx live=true
 import React from 'react';
-import { Skeleton, Table } from '@douyinfe/semi-ui';
+import { Skeleton, Table } from '@kousum/semi-ui-vue';
 
 () => {
     const data = {
@@ -336,7 +336,7 @@ Use `active` property to display animated loading effects.
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Skeleton, Avatar } from '@douyinfe/semi-ui';
+import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const style = {

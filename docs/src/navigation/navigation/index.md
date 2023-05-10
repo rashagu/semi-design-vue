@@ -15,7 +15,7 @@ brief: 为页面和功能提供导航的菜单列表。
 ### 如何引入
 
 ```jsx import
-import { Nav } from '@douyinfe/semi-ui';
+import { Nav } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本使用
@@ -32,8 +32,8 @@ import { Nav } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconSetting } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconSetting } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -72,7 +72,7 @@ class NavApp extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
+import { Nav } from '@kousum/semi-ui-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -112,8 +112,8 @@ class NavApp extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconSetting, IconSemiLogo } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconSetting, IconSemiLogo } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -153,8 +153,8 @@ Navigation 目前提供了个两个参数用于定义导航样式：`style` 和 
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconSetting, IconFolder, IconSemiLogo } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconSetting, IconFolder, IconSemiLogo } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -199,8 +199,8 @@ class NavApp extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconStar, IconUser, IconUserGroup, IconSemiLogo } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconStar, IconUser, IconUserGroup, IconSemiLogo } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -239,7 +239,7 @@ class NavApp extends React.Component {
 ```jsx
 import { Link } from "react-router-dom";
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
+import { Nav } from '@kousum/semi-ui-vue';
 
 () => {
     return (
@@ -294,8 +294,8 @@ Navigation 目前提供两种方向的导航：
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconStar, IconUser, IconUserGroup, IconSetting, IconSemiLogo } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconStar, IconUser, IconUserGroup, IconSetting, IconSemiLogo } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -338,8 +338,8 @@ class NavApp extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav, Avatar, Dropdown } from '@douyinfe/semi-ui';
-import { IconStar, IconUser, IconUserGroup, IconSetting, IconEdit, IconSemiLogo } from '@douyinfe/semi-icons';
+import { Nav, Avatar, Dropdown } from '@kousum/semi-ui-vue';
+import { IconStar, IconUser, IconUserGroup, IconSetting, IconEdit, IconSemiLogo } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -405,8 +405,8 @@ class NavApp extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav, Avatar, Dropdown, Select, Button } from '@douyinfe/semi-ui';
-import { IconStar, IconUser, IconUserGroup, IconSetting, IconEdit, IconLanguage, IconSemiLogo } from '@douyinfe/semi-icons';
+import { Nav, Avatar, Dropdown, Select, Button } from '@kousum/semi-ui-vue';
+import { IconStar, IconUser, IconUserGroup, IconSetting, IconEdit, IconLanguage, IconSemiLogo } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     constructor() {
@@ -513,8 +513,8 @@ class NavApp extends React.Component {
 
 ```jsx live=true dir=column
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconSetting, IconSemiLogo } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconSetting, IconSemiLogo } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -558,8 +558,8 @@ limitIndent 只在 竖直方向生效
 
 ```jsx live=true dir=column
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconSetting, IconSemiLogo } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconSetting, IconSemiLogo } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -614,8 +614,8 @@ class NavApp extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconUserGroup, IconSetting, IconSemiLogo } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconUserGroup, IconSetting, IconSemiLogo } from '@kousum/semi-icons-vue';
 
 class NavApp extends React.Component {
     render() {
@@ -673,8 +673,8 @@ Navigation 组件提供了几个受控属性，配合各种回调，可以很轻
 
 ```jsx live=true dir="column"
 import React, { useMemo, useState } from 'react';
-import { Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconStar, IconUserGroup, IconSetting, IconSemiLogo } from '@douyinfe/semi-icons';
+import { Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconStar, IconUserGroup, IconSetting, IconSemiLogo } from '@kousum/semi-icons-vue';
 
 function NavApp (props = {}) {
     const [openKeys, setOpenKeys] = useState(['union-management', 'job']);

@@ -11,13 +11,13 @@ order: 2
 
 ```bash
 # with npm
-npm i @douyinfe/semi-ui
+npm i @kousum/semi-ui-vue
 
 # with yarn
-yarn add @douyinfe/semi-ui
+yarn add @kousum/semi-ui-vue
 
 # with pnpm
-pnpm add @douyinfe/semi-ui
+pnpm add @kousum/semi-ui-vue
 ```
 ## 2. Use components in a modular way 💫
 
@@ -27,7 +27,7 @@ All related resources are packaged on-demand at build process. Tree shaking will
 
 ```jsx
 import React, { Component } from 'react';
-import { Button, Toast } from '@douyinfe/semi-ui';
+import { Button, Toast } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor(props) {
@@ -47,7 +47,7 @@ class Demo extends React.Component {
 ```diff
 // next.config.js
 const nextConfig = {
-+ transpilePackages: ['@douyinfe/semi-ui', '@douyinfe/semi-icons', '@douyinfe/semi-illustrations'],
++ transpilePackages: ['@kousum/semi-ui-vue', '@kousum/semi-icons-vue', '@douyinfe/semi-illustrations'],
 };
 
 module.exports = nextConfig;
@@ -69,7 +69,7 @@ module.exports = semi({
 
 ```css
 /* styles/globals.css */
-@import '~@douyinfe/semi-ui/dist/css/semi.min.css';
+@import '~@kousum/semi-ui-vue/dist/css/semi.min.css';
 ```
 
 **How to use theme packages with Next.js**  
@@ -135,10 +135,10 @@ For example, when you want to apply the theme package `@semi-bot/semi-theme-douc
 
 [![BUILD-JS][build-js-badge]][build-js-url] [![BUILD-CSS][build-css-badge]][build-css-url]
 
-[build-js-badge]: https://img.badgesize.io/https:/unpkg.com/@douyinfe/semi-ui/dist/umd/semi-ui.min.js?label=semi.min.js&compression=gzip
-[build-js-url]: https://unpkg.com/browse/@douyinfe/semi-ui/dist/umd/semi-ui.min.js
-[build-css-badge]: https://img.badgesize.io/https:/unpkg.com/@douyinfe/semi-ui/dist/css/semi.min.css?label=semi.min.css&compression=gzip
-[build-css-url]: https://unpkg.com/browse/@douyinfe/semi-ui/dist/css/semi.min.css
+[build-js-badge]: https://img.badgesize.io/https:/unpkg.com/@kousum/semi-ui-vue/dist/umd/semi-ui.min.js?label=semi.min.js&compression=gzip
+[build-js-url]: https://unpkg.com/browse/@kousum/semi-ui-vue/dist/umd/semi-ui.min.js
+[build-css-badge]: https://img.badgesize.io/https:/unpkg.com/@kousum/semi-ui-vue/dist/css/semi.min.css?label=semi.min.css&compression=gzip
+[build-css-url]: https://unpkg.com/browse/@kousum/semi-ui-vue/dist/css/semi.min.css
 
 > We do not recommend using the built file directly, as this will introduce all components in full and cannot be loaded on demand. But if there is indeed a need for non-construction scenarios, you can quote in the following ways
 
@@ -149,19 +149,19 @@ Use script and link tags to import files directly in the browser, and use the gl
 
 | Resource | URL |
 | --- | --- |
-| semi-ui (min) | https://unpkg.com/@douyinfe/semi-ui@2.27.0/dist/umd/semi-ui.min.js |
-| semi-icons (min) | https://unpkg.com/@douyinfe/semi-icons@latest/dist/umd/semi-icons.min.js |
+| semi-ui (min) | https://unpkg.com/@kousum/semi-ui-vue@2.27.0/dist/umd/semi-ui.min.js |
+| semi-icons (min) | https://unpkg.com/@kousum/semi-icons-vue@latest/dist/umd/semi-icons.min.js |
 | semi-illustrations (min) | https://unpkg.com/@douyinfe/semi-illustrations@latest/dist/umd/semi-illustrations.min.js |
-| semi-ui (normal) | https://unpkg.com/@douyinfe/semi-ui@2.27.0/dist/umd/semi-ui.js |
-| semi-icons (normal) | https://unpkg.com/@douyinfe/semi-icons@latest/dist/umd/semi-icons.js |
+| semi-ui (normal) | https://unpkg.com/@kousum/semi-ui-vue@2.27.0/dist/umd/semi-ui.js |
+| semi-icons (normal) | https://unpkg.com/@kousum/semi-icons-vue@latest/dist/umd/semi-icons.js |
 | semi-illustrations (normal) | https://unpkg.com/@douyinfe/semi-illustrations@latest/dist/umd/semi-illustrations.js |
 
 3. Import the CSS style file of the Semi default theme
 
 | Resource | URL |
 | --- | --- |
-| semi.css | https://unpkg.com/@douyinfe/semi-ui@2.27.0/dist/css/semi.css |
-| semi-icons.css | https://unpkg.com/@douyinfe/semi-icons@latest/dist/css/semi-icons.css |
+| semi.css | https://unpkg.com/@kousum/semi-ui-vue@2.27.0/dist/css/semi.css |
+| semi-icons.css | https://unpkg.com/@kousum/semi-icons-vue@latest/dist/css/semi-icons.css |
 
 ```diff
 <!DOCTYPE html>
@@ -171,11 +171,11 @@ Use script and link tags to import files directly in the browser, and use the gl
 +       <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
 +       <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 
-+       <script src="https://unpkg.com/@douyinfe/semi-ui@2.27.0/dist/umd/semi-ui-react.min.js"></script>
-+       <link rel="stylesheet" href="https://unpkg.com/@douyinfe/semi-ui@2.27.0/dist/css/semi.css">
++       <script src="https://unpkg.com/@kousum/semi-ui-vue@2.27.0/dist/umd/semi-ui-react.min.js"></script>
++       <link rel="stylesheet" href="https://unpkg.com/@kousum/semi-ui-vue@2.27.0/dist/css/semi.css">
 
-+       <script src="https://unpkg.com/@douyinfe/semi-icons@latest/dist/umd/semi-icons.min.js"></script>
-+       <link rel="stylesheet" href="https://unpkg.com/@douyinfe/semi-icons@latest/dist/css/semi-icons.css">
++       <script src="https://unpkg.com/@kousum/semi-icons-vue@latest/dist/umd/semi-icons.min.js"></script>
++       <link rel="stylesheet" href="https://unpkg.com/@kousum/semi-icons-vue@latest/dist/css/semi-icons.css">
 +       <script src="https://unpkg.com/@douyinfe/semi-illustrations@latest/dist/umd/semi-illustrations.min.js"></script>
 
     </head>

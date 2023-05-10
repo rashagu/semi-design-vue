@@ -18,14 +18,14 @@ brief: Radio component allows the user to select one option from a relative smal
 ### How to import
 
 ```jsx import
-import { Radio, RadioGroup } from '@douyinfe/semi-ui';
+import { Radio, RadioGroup } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
 
 ```jsx live=true
 import React from 'react';
-import { Radio } from '@douyinfe/semi-ui';
+import { Radio } from '@kousum/semi-ui-vue';
 
 () => (
     <Radio aria-label="Radio demo" name="demo-radio">Radio</Radio>
@@ -41,7 +41,7 @@ You can use `extra` to add extra information, which can be any type of ReactNode
 
 ```jsx live=true
 import React from 'react';
-import { Radio } from '@douyinfe/semi-ui';
+import { Radio } from '@kousum/semi-ui-vue';
 
 
 () => (
@@ -55,7 +55,7 @@ import { Radio } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Radio, Button } from '@douyinfe/semi-ui';
+import { Radio, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor() {
@@ -99,7 +99,7 @@ You can set `mode='advanced'` to allow options be able to unchecked when clicked
 
 ```jsx live=true
 import React from 'react';
-import { Radio } from '@douyinfe/semi-ui';
+import { Radio } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor() {
@@ -135,7 +135,7 @@ You can use `RadioGroup` to create a set of mutually exclusive options.
 
 ```jsx live=true
 import React from 'react';
-import { Radio, RadioGroup } from '@douyinfe/semi-ui';
+import { Radio, RadioGroup } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor() {
@@ -171,7 +171,7 @@ The radio elements in the group can be arranged horizontally or vertically by se
 
 ```jsx live=true
 import React from 'react';
-import { RadioGroup, Radio } from '@douyinfe/semi-ui';
+import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => (
     <RadioGroup direction="vertical" aria-label="RadioGroup demo" name="demo-radio-group-vertical">
@@ -193,7 +193,7 @@ It should be noted that the button type radio selector does not support auxiliar
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Radio, RadioGroup, Space } from '@douyinfe/semi-ui';
+import { Radio, RadioGroup, Space } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor() {
@@ -258,7 +258,7 @@ You can set `type='card'` to `RadioGroup` to achieve card style with background.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { RadioGroup, Radio } from '@douyinfe/semi-ui';
+import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => (
     <RadioGroup type='card' defaultValue={1} direction='vertical' aria-label="RadioGroup demo" name="demo-radio-group-card">
@@ -284,7 +284,7 @@ You can set `type='pureCard'` to `RadioGroup` to achieve a pure card style with 
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { RadioGroup, Radio } from '@douyinfe/semi-ui';
+import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => (
     <RadioGroup type='pureCard' defaultValue={1} direction='vertical' aria-label="RadioGroup demo" name="demo-radio-group-pureCard">
@@ -307,7 +307,7 @@ You can pass an array of options to `RadioGroup` using `options` property to cre
 
 ```jsx live=true
 import React from 'react';
-import { RadioGroup } from '@douyinfe/semi-ui';
+import { RadioGroup } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor() {

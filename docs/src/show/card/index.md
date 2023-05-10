@@ -13,7 +13,7 @@ brief: 常规的卡片容器，可以承载标题、段落、图片、列表等�
 ### 如何引入
 
 ```jsx import
-import { Card } from '@douyinfe/semi-ui';
+import { Card } from '@kousum/semi-ui-vue';
 ```
 ### 基础卡片
 
@@ -21,7 +21,7 @@ import { Card } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Typography } from '@douyinfe/semi-ui';
+import { Card, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -49,8 +49,8 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Popover, Avatar } from '@douyinfe/semi-ui';
-import { IconInfoCircle } from '@douyinfe/semi-icons';
+import { Card, Popover, Avatar } from '@kousum/semi-ui-vue';
+import { IconInfoCircle } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const { Meta } = Card;
@@ -103,7 +103,7 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card } from '@douyinfe/semi-ui';
+import { Card } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Meta } = Card;
@@ -131,7 +131,7 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card } from '@douyinfe/semi-ui';
+import { Card } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -163,8 +163,8 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Avatar, Popover } from '@douyinfe/semi-ui';
-import { IconInfoCircle } from '@douyinfe/semi-icons';
+import { Card, Avatar, Popover } from '@kousum/semi-ui-vue';
+import { IconInfoCircle } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const { Meta } = Card;
@@ -246,7 +246,7 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Avatar, Space, Button, Typography } from '@douyinfe/semi-ui';
+import { Card, Avatar, Space, Button, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Meta } = Card;
@@ -302,7 +302,7 @@ function Demo() {
 ```jsx live=true dir="column"
 
 import React from 'react';
-import { Card, Typography } from '@douyinfe/semi-ui';
+import { Card, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -342,7 +342,7 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Row, Col } from '@douyinfe/semi-ui';
+import { Card, Row, Col } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -393,7 +393,7 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Card, Switch } from '@douyinfe/semi-ui';
+import { Card, Switch } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [loading, setLoading] = useState(true);
@@ -425,7 +425,7 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Card, Switch, Skeleton, Avatar, Typography } from '@douyinfe/semi-ui';
+import { Card, Switch, Skeleton, Avatar, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [loading, setLoading] = useState(true);
@@ -503,7 +503,7 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Card, Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 function demo() {
     return (
@@ -538,7 +538,7 @@ function demo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Rating } from '@douyinfe/semi-ui';
+import { Card, Rating } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Meta } = Card;
@@ -574,7 +574,7 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Card, CardGroup, Typography, Slider } from '@douyinfe/semi-ui';
+import { Card, CardGroup, Typography, Slider } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -623,7 +623,7 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, CardGroup, Typography } from '@douyinfe/semi-ui';
+import { Card, CardGroup, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;

@@ -18,7 +18,7 @@ Popover 气泡卡片是由用户自主打开的临时性浮层卡片，能够承
 ### 如何引入
 
 ```jsx import
-import { Popover } from '@douyinfe/semi-ui';
+import { Popover } from '@kousum/semi-ui-vue';
 ```
 
 ### 注意事项
@@ -33,7 +33,7 @@ Popover 需要将 DOM 事件监听器应用到 children 中，如果子元素是
 
 ```jsx live=true noInline=true dir="column"
 import React, { forwardRef } from 'react';
-import { Popover, Space } from '@douyinfe/semi-ui';
+import { Popover, Space } from '@kousum/semi-ui-vue';
 
 const style={ border: '2px solid var(--semi-color-border)', paddingLeft: 4, paddingRight: 4, borderRadius: 4 };
 
@@ -77,7 +77,7 @@ render(Demo);
 
 ```jsx live=true
 import React from 'react';
-import { Popover, Tag } from '@douyinfe/semi-ui';
+import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -101,7 +101,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Popover, Tag } from '@douyinfe/semi-ui';
+import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const tops = [
@@ -189,7 +189,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Popover, Button } from '@douyinfe/semi-ui';
+import { Popover, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor(props = {}) {
@@ -243,7 +243,7 @@ class App extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Popover, Tag } from '@douyinfe/semi-ui';
+import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const tops = [
@@ -350,7 +350,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Popover, Tag } from '@douyinfe/semi-ui';
+import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const tops = [
@@ -459,7 +459,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Popover, Tag } from '@douyinfe/semi-ui';
+import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -499,7 +499,7 @@ Popover content 支持传入函数，它的入参是一个对象，将 `initialF
 
 ```jsx live=true
 import React from 'react';
-import { Button, Input, Popover, Space } from '@douyinfe/semi-ui';
+import { Button, Input, Popover, Space } from '@kousum/semi-ui-vue';
 
 () => {
     const renderContent = ({ initialFocusRef }) => {

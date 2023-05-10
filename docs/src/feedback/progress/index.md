@@ -13,7 +13,7 @@ brief: 用于展示用户操作的当前进度和状态，一般在操作耗时�
 ### 如何引入
 
 ```jsx import
-import { Progress } from '@douyinfe/semi-ui';
+import { Progress } from '@kousum/semi-ui-vue';
 ```
 
 ### 标准的进度条
@@ -26,7 +26,7 @@ import { Progress } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Progress } from '@douyinfe/semi-ui';
+import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ width: 200 }}>
@@ -51,7 +51,7 @@ import { Progress } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Progress } from '@douyinfe/semi-ui';
+import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ width: 200 }}>
@@ -72,7 +72,7 @@ import { Progress } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Progress } from '@douyinfe/semi-ui';
+import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ height: 100, display: 'flex' }}>
@@ -91,7 +91,7 @@ import { Progress } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Progress } from '@douyinfe/semi-ui';
+import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -107,7 +107,7 @@ import { Progress } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Progress } from '@douyinfe/semi-ui';
+import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
     <React.Fragment>
@@ -134,7 +134,7 @@ import { Progress } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Progress } from '@douyinfe/semi-ui';
+import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
     <React.Fragment>
@@ -150,8 +150,8 @@ import { Progress } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Progress, Button } from '@douyinfe/semi-ui';
-import { IconChevronLeft, IconChevronRight } from '@douyinfe/semi-icons';
+import { Progress, Button } from '@kousum/semi-ui-vue';
+import { IconChevronLeft, IconChevronRight } from '@kousum/semi-icons-vue';
 
 () => {
     const [percent, setPercent] = useState(40);
@@ -183,8 +183,8 @@ import { IconChevronLeft, IconChevronRight } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Progress, Button } from '@douyinfe/semi-ui';
-import { IconChevronLeft, IconChevronRight } from '@douyinfe/semi-icons';
+import { Progress, Button } from '@kousum/semi-ui-vue';
+import { IconChevronLeft, IconChevronRight } from '@kousum/semi-icons-vue';
 
 () => {
     const [cirPerc, setCirPerc] = useState(40);
@@ -221,7 +221,7 @@ import { IconChevronLeft, IconChevronRight } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Progress } from '@douyinfe/semi-ui';
+import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
     <React.Fragment>
@@ -252,7 +252,7 @@ import { Progress } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Progress } from '@douyinfe/semi-ui';
+import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
     <React.Fragment>
@@ -268,8 +268,8 @@ import { Progress } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Progress, Button } from '@douyinfe/semi-ui';
-import { IconChevronLeft, IconChevronRight } from '@douyinfe/semi-icons';
+import { Progress, Button } from '@kousum/semi-ui-vue';
+import { IconChevronLeft, IconChevronRight } from '@kousum/semi-icons-vue';
 
 () => {
     const [percent, setPercent] = useState(10);
@@ -325,8 +325,8 @@ import { IconChevronLeft, IconChevronRight } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React, { useEffect, useState } from 'react';
-import { Space, Progress, Button } from '@douyinfe/semi-ui';
-import { IconChevronLeft, IconChevronRight } from '@douyinfe/semi-icons';
+import { Space, Progress, Button } from '@kousum/semi-ui-vue';
+import { IconChevronLeft, IconChevronRight } from '@kousum/semi-icons-vue';
 
 () => {
     const [percent, setPercent] = useState(65);

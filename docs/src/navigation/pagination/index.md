@@ -13,7 +13,7 @@ brief: 分页器帮助用户在多个页之间进行导航
 ### 如何引入
 
 ```jsx import
-import { Pagination } from '@douyinfe/semi-ui';
+import { Pagination } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本
@@ -22,7 +22,7 @@ import { Pagination } from '@douyinfe/semi-ui';
 
 ```jsx live=true width=60%
 import React from 'react';
-import { Pagination } from '@douyinfe/semi-ui';
+import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -40,7 +40,7 @@ import { Pagination } from '@douyinfe/semi-ui';
 
 ```jsx live=true width=55%
 import React from 'react';
-import { Pagination } from '@douyinfe/semi-ui';
+import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -56,7 +56,7 @@ import { Pagination } from '@douyinfe/semi-ui';
 
 ```jsx live=true width=55%
 import React from 'react';
-import { Pagination } from '@douyinfe/semi-ui';
+import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -71,7 +71,7 @@ import { Pagination } from '@douyinfe/semi-ui';
 
 ```jsx live=true width=55%
 import React from 'react';
-import { Pagination } from '@douyinfe/semi-ui';
+import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -89,7 +89,7 @@ showQuickJumper于 v1.31后提供
 
 ```jsx live=true width=50%
 import React from 'react';
-import { Pagination } from '@douyinfe/semi-ui';
+import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -104,7 +104,7 @@ import { Pagination } from '@douyinfe/semi-ui';
 
 ```jsx live=true width=60%
 import React, { useState } from 'react';
-import { Pagination } from '@douyinfe/semi-ui';
+import { Pagination } from '@kousum/semi-ui-vue';
 
 () => {
     const [page, setPage] = useState(3);
@@ -127,7 +127,7 @@ import { Pagination } from '@douyinfe/semi-ui';
 
 ```jsx live=true width=55%
 import React from 'react';
-import { Pagination } from '@douyinfe/semi-ui';
+import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -152,7 +152,7 @@ import { Pagination } from '@douyinfe/semi-ui';
 
 ```jsx live=true width=50%
 import React from 'react';
-import { Pagination } from '@douyinfe/semi-ui';
+import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
     <Pagination total={90} size="small"></Pagination>
@@ -163,7 +163,7 @@ import { Pagination } from '@douyinfe/semi-ui';
 
 ```jsx live=true width=50%
 import React from 'react';
-import { Pagination } from '@douyinfe/semi-ui';
+import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
     <Pagination total={90} size="small" hoverShowPageSelect></Pagination>

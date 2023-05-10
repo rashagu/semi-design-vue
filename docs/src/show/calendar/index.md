@@ -13,7 +13,7 @@ brief: 日历组件，允许以日/周/月视图展示对应事件
 ### 如何引入
 
 ```jsx import
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 ```
 
 ### 日视图
@@ -22,7 +22,7 @@ import { Calendar } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 
 () => <Calendar mode="day"></Calendar>;
 ```
@@ -33,7 +33,7 @@ import { Calendar } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 
 () => <Calendar mode="week"></Calendar>;
 ```
@@ -44,7 +44,7 @@ import { Calendar } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 
 () => <Calendar mode="month"></Calendar>;
 ```
@@ -53,7 +53,7 @@ import { Calendar } from '@douyinfe/semi-ui';
 可以通过 weekStartsOn 设置周几作为每周第一天，0 代表周日，1 代表周一，以此类推。默认为周日。weekStartsOn 自 v2.18 起提供，对月视图、周视图生效。
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { RadioGroup, Calendar, Radio } from '@douyinfe/semi-ui';
+import { RadioGroup, Calendar, Radio } from '@kousum/semi-ui-vue';
 
 () => {
     const [v, setV] = useState(0);
@@ -85,7 +85,7 @@ import { RadioGroup, Calendar, Radio } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 
 () => <Calendar mode="range" range={[new Date(2020, 8, 26), new Date(2020, 8, 31)]} />;
 ```
@@ -97,7 +97,7 @@ import { Calendar } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar, RadioGroup, Radio } from '@douyinfe/semi-ui';
+import { Calendar, RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -227,7 +227,7 @@ class Demo extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 
 () => {
     const dailyEventStyle = {
@@ -265,7 +265,7 @@ import { Calendar } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 
 () => {
     const importantDate = {

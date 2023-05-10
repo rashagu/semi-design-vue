@@ -12,7 +12,7 @@ brief: 目标元素的操作需要用户进一步的确认时使用。与 Popove
 ### 如何引入
 
 ```jsx import
-import { Popconfirm } from '@douyinfe/semi-ui';
+import { Popconfirm } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本使用
@@ -21,7 +21,7 @@ Popconfirm 底层基于 Tooltip 封装，Children 支持类型同 Tooltip，注�
 
 ```jsx live=true
 import React from 'react';
-import { Popconfirm, Button, Toast } from '@douyinfe/semi-ui';
+import { Popconfirm, Button, Toast } from '@kousum/semi-ui-vue';
 
 () => {
     const onConfirm = () => {
@@ -50,8 +50,8 @@ import { Popconfirm, Button, Toast } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Popconfirm, Radio, RadioGroup, Button } from '@douyinfe/semi-ui';
-import { IconAlertTriangle } from '@douyinfe/semi-icons';
+import { Popconfirm, Radio, RadioGroup, Button } from '@kousum/semi-ui-vue';
+import { IconAlertTriangle } from '@kousum/semi-icons-vue';
 
 function TypesConfirmDemo(props = {}) {
     const typeMap = {
@@ -117,7 +117,7 @@ promise solve 会关闭气泡确认框， promise reject时气泡依然保留，
 
 ```jsx live=true
 import React from 'react';
-import { Popconfirm, Button, Toast } from '@douyinfe/semi-ui';
+import { Popconfirm, Button, Toast } from '@kousum/semi-ui-vue';
 
 () => {
     const onConfirm = () => {
@@ -159,7 +159,7 @@ content 支持传入函数，它的入参是一个对象，将 `initialFocusRef`
 
 ```jsx live=true
 import React from 'react';
-import { Button, Popconfirm, Space } from '@douyinfe/semi-ui';
+import { Button, Popconfirm, Space } from '@kousum/semi-ui-vue';
 
 () => {
     return (

@@ -14,14 +14,14 @@ breif: The description list is used to render key-value pairs.
 ### How to import
 
 ```jsx import
-import { Descriptions } from '@douyinfe/semi-ui';
+import { Descriptions } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Descriptions, Tag } from '@douyinfe/semi-ui';
+import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [
@@ -41,7 +41,7 @@ You can use `align` to set alignment of key-value. Supporting values including: 
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Descriptions, Tag } from '@douyinfe/semi-ui';
+import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [
@@ -78,8 +78,8 @@ Set `row` to display the data to two-row, supporting three sizes: `small`, `medi
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Descriptions } from '@douyinfe/semi-ui';
-import { IconArrowUp } from '@douyinfe/semi-icons';
+import { Descriptions } from '@kousum/semi-ui-vue';
+import { IconArrowUp } from '@kousum/semi-icons-vue';
 
 () => {
     const data = [
@@ -121,7 +121,7 @@ Version: >= 1.17.0
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Descriptions } from '@douyinfe/semi-ui';
+import { Descriptions } from '@kousum/semi-ui-vue';
 
 () => {
     return (

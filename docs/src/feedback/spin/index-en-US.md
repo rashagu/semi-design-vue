@@ -13,14 +13,14 @@ brief: Spin is used to inform the user that the content is loading and may take 
 ### How to import
 
 ```jsx
-import { Spin } from '@douyinfe/semi-ui';
+import { Spin } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic usage
 
 ```jsx live=true
 import React from 'react';
-import { Spin } from '@douyinfe/semi-ui';
+import { Spin } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ marginLeft: 30 }}>
@@ -36,7 +36,7 @@ Supports three sizes: `large`, `medium` (default), and `small`.
 
 ```jsx live=true
 import React from 'react';
-import { Spin } from '@douyinfe/semi-ui';
+import { Spin } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ marginLeft: 30 }}>
@@ -60,7 +60,7 @@ Use `tip` to set the description texts when Spin is used as a wrapping element
 
 ```jsx live=true
 import React from 'react';
-import { Spin } from '@douyinfe/semi-ui';
+import { Spin } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -86,8 +86,8 @@ Use `indicator` property to customize Spin's indicator style.
 
 ```jsx live=true
 import React from 'react';
-import { Spin } from '@douyinfe/semi-ui';
-import { IconLoading } from '@douyinfe/semi-icons';
+import { Spin } from '@kousum/semi-ui-vue';
+import { IconLoading } from '@kousum/semi-icons-vue';
 
 () => (
     <div style={{ marginLeft: 30 }}>
@@ -103,7 +103,7 @@ Delayed to display Spin.
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Spin, Button } from '@douyinfe/semi-ui';
+import { Spin, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [loading, toggleLoading] = useState(false);
@@ -128,7 +128,7 @@ Use `spinning` to determine if the component is in loading status
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { Spin, Button } from '@douyinfe/semi-ui';
+import { Spin, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [loading, toggleLoading] = useState(false);

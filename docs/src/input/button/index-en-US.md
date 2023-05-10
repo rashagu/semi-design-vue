@@ -15,7 +15,7 @@ brief: Users use buttons to trigger an operation or jump.
 ### How to import
 
 ```jsx import 
-import { Button, SplitButtonGroup } from '@douyinfe/semi-ui';
+import { Button, SplitButtonGroup } from '@kousum/semi-ui-vue';
 ```
 
 ### Button Type
@@ -30,7 +30,7 @@ Buttons support the following types:
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -88,7 +88,7 @@ The default theme is `light`
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     const themes = [['light', 'light']];
@@ -121,7 +121,7 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     const themes = [['solid', 'solid']];
@@ -154,7 +154,7 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     const themes = [['borderless', 'borderless']];
@@ -193,7 +193,7 @@ Three sizes are defined by default:
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -212,7 +212,7 @@ The block button has a predefined width, and its width is independent of the wid
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -229,8 +229,8 @@ An icon that defines a button.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
-import { IconCamera, IconSidebar, IconChevronDown } from '@douyinfe/semi-icons';
+import { Button } from '@kousum/semi-ui-vue';
+import { IconCamera, IconSidebar, IconChevronDown } from '@kousum/semi-icons-vue';
 
 function ButtonDemo() {
     return (
@@ -268,8 +268,8 @@ We recommend using Typography to achieve link text button. Refer to [Typography]
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
-import { IconLink } from '@douyinfe/semi-icons';
+import { Typography } from '@kousum/semi-ui-vue';
+import { IconLink } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -291,7 +291,7 @@ function Demo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -312,8 +312,8 @@ The button supports the Loading state, by setting the loading parameter value to
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Button } from '@douyinfe/semi-ui';
-import { IconDelete } from '@douyinfe/semi-icons';
+import { Button } from '@kousum/semi-ui-vue';
+import { IconDelete } from '@kousum/semi-icons-vue';
 
 function ButtonDemo() {
     const [saveLoading, setSaveLoading] = useState(false);
@@ -354,7 +354,7 @@ You can put multiple buttons in `ButtonGroup` In the container, by setting `size
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button, ButtonGroup } from '@douyinfe/semi-ui';
+import { Button, ButtonGroup } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     const sizes = ['large', 'default', 'small'];
@@ -379,7 +379,7 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button, ButtonGroup } from '@douyinfe/semi-ui';
+import { Button, ButtonGroup } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     return (
@@ -400,7 +400,7 @@ function ButtonDemo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Button, ButtonGroup } from '@douyinfe/semi-ui';
+import { Button, ButtonGroup } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
     const types = ['primary', 'secondary', 'tertiary', 'warning', 'danger'];
@@ -431,8 +431,8 @@ In the scene where `Button` and `Dropdown` are combined, split buttons can be us
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { SplitButtonGroup, Dropdown, Button } from '@douyinfe/semi-ui';
-import { IconTreeTriangleDown } from '@douyinfe/semi-icons';
+import { SplitButtonGroup, Dropdown, Button } from '@kousum/semi-ui-vue';
+import { IconTreeTriangleDown } from '@kousum/semi-icons-vue';
 
 function SplitButtonDemo(){
 

@@ -39,7 +39,7 @@ if (body.hasAttribute('theme-mode')) {
 For instance:
 ```jsx live=true
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const switchMode = () => {
@@ -100,8 +100,8 @@ Semi 2.0 natively supports block dark/bright color mode, and you can add `.semi-
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Layout, Nav, Button, Breadcrumb, Avatar, Steps, Pagination, Row, Badge, Tag, Rating, Tooltip, Timeline, Popover } from '@douyinfe/semi-ui';
-import { IconSemiLogo, IconCamera, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting, IconEdit, IconList } from '@douyinfe/semi-icons';
+import { Layout, Nav, Button, Breadcrumb, Avatar, Steps, Pagination, Row, Badge, Tag, Rating, Tooltip, Timeline, Popover } from '@kousum/semi-ui-vue';
+import { IconSemiLogo, IconCamera, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting, IconEdit, IconList } from '@kousum/semi-icons-vue';
 () => {
     const { Header, Footer, Sider, Content } = Layout;
     const [mode, setMode] = useState('semi-always-dark');

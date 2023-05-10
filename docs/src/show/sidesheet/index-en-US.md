@@ -12,7 +12,7 @@ brief: An overlay panel that slides out from the edge of the screen, typically u
 
 ### How to import
 ```jsx import
-import { SideSheet } from '@douyinfe/semi-ui';
+import { SideSheet } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
@@ -21,7 +21,7 @@ By default, SideSheet slides from the right side of the screen and could be clos
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { SideSheet, Button } from '@douyinfe/semi-ui';
+import { SideSheet, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -46,7 +46,7 @@ You could use `placement` to set the position from which SideSheet comes in, sup
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { SideSheet, RadioGroup, Radio, Button } from '@douyinfe/semi-ui';
+import { SideSheet, RadioGroup, Radio, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -83,7 +83,7 @@ You could use `size` to set the size of SideSheet, supporting one of `small`(448
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { SideSheet, RadioGroup, Radio, Button } from '@douyinfe/semi-ui';
+import { SideSheet, RadioGroup, Radio, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -123,7 +123,7 @@ After `v0.29.0`, you could set `mask={false}` to continue working on the area ou
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { SideSheet, Button, TextArea } from '@douyinfe/semi-ui';
+import { SideSheet, Button, TextArea } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -151,7 +151,7 @@ After `v0.29.0`, you could use `getPopupContainer` to render SideSheet in target
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { SideSheet, Button } from '@douyinfe/semi-ui';
+import { SideSheet, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -198,7 +198,7 @@ Use `title`, `footer`(v>=1.3.0) and other Semi Components, you could create cust
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { SideSheet, Button, Typography, Banner, Form } from '@douyinfe/semi-ui';
+import { SideSheet, Button, Typography, Banner, Form } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {

@@ -60,7 +60,7 @@ Adapter is an interface that has all the methods required by Foundation to imple
  2. Responsible for all DOM operation/update related logic, usually using framework APIs for setState, getState, addEventListener , RemoveListener and other operations.  
 Adapters can have many implementations, allowing interoperability with different frameworks.
 
-At present, we have implemented the React version of Adapter. You can use our React components directly by `npm install @douyinfe/semi-ui`.   
+At present, we have implemented the React version of Adapter. You can use our React components directly by `npm install @kousum/semi-ui-vue`.   
 
 If you are interested in Semi's architecture design, you can read this article for more detail [How to hierarchically design the UI component library so that it has the ability to adapt to multiple mvvm frameworks](https://bytedance.feishu.cn/docs/doccnTgc0iGOVPubHZkwPpxXSNh#)。
 

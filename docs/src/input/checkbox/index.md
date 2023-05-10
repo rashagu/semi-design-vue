@@ -18,7 +18,7 @@ brief: 复选框允许用户选中多个选项
 ### 如何引入
 
 ```jsx import
-import { Checkbox, CheckboxGroup } from '@douyinfe/semi-ui';
+import { Checkbox, CheckboxGroup } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -28,7 +28,7 @@ Checkbox单个使用，可以通过`defaultChecked`、`checked`属性控制是�
 
 ```jsx live=true
 import React from 'react';
-import { Checkbox } from '@douyinfe/semi-ui';
+import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <Checkbox onChange={checked => console.log(checked)} aria-label="Checkbox 示例">Semi Design</Checkbox>
@@ -37,7 +37,7 @@ import { Checkbox } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Checkbox } from '@douyinfe/semi-ui';
+import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <Checkbox defaultChecked onChange={checked => console.log(checked)} aria-label="Checkbox 示例">Semi Design</Checkbox>
@@ -48,7 +48,7 @@ import { Checkbox } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Checkbox } from '@douyinfe/semi-ui';
+import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -69,7 +69,7 @@ import { Checkbox } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Checkbox } from '@douyinfe/semi-ui';
+import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -88,7 +88,7 @@ import { Checkbox } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { CheckboxGroup, Checkbox } from '@douyinfe/semi-ui';
+import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <CheckboxGroup style={{ width: '100%' }} defaultValue={['A', 'B']} aria-label="CheckboxGroup 示例">
@@ -108,7 +108,7 @@ import { CheckboxGroup, Checkbox } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { CheckboxGroup } from '@douyinfe/semi-ui';
+import { CheckboxGroup } from '@kousum/semi-ui-vue';
 
 () => {
     function onChange(checkedValues) {
@@ -152,7 +152,7 @@ import { CheckboxGroup } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { CheckboxGroup } from '@douyinfe/semi-ui';
+import { CheckboxGroup } from '@kousum/semi-ui-vue';
 
 () => {
     const options = [
@@ -174,7 +174,7 @@ import { CheckboxGroup } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Checkbox, Button } from '@douyinfe/semi-ui';
+import { Checkbox, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
 
@@ -246,7 +246,7 @@ class App extends React.Component {
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { Checkbox, CheckboxGroup } from '@douyinfe/semi-ui';
+import { Checkbox, CheckboxGroup } from '@kousum/semi-ui-vue';
 
 () => {
     const plainOptions = ['Photography', 'Movies', 'Running'];
@@ -297,7 +297,7 @@ version: >=1.30.0
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { CheckboxGroup, Checkbox } from '@douyinfe/semi-ui';
+import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <CheckboxGroup type='card' defaultValue={['1', '3']} direction='vertical' aria-label="CheckboxGroup 示例">
@@ -324,7 +324,7 @@ version: >=1.30.0
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { CheckboxGroup, Checkbox } from '@douyinfe/semi-ui';
+import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
     <CheckboxGroup type='pureCard' defaultValue={['1', '3']} direction='vertical' aria-label="CheckboxGroup 示例">
@@ -350,7 +350,7 @@ Checkbox.Group 内嵌 Checkbox 并与 Grid 组件一起使用，可以实现灵�
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Checkbox, CheckboxGroup, Row, Col } from '@douyinfe/semi-ui';
+import { Checkbox, CheckboxGroup, Row, Col } from '@kousum/semi-ui-vue';
 
 () => (
     <CheckboxGroup style={{ width: '100%' }} aria-label="CheckboxGroup 示例">

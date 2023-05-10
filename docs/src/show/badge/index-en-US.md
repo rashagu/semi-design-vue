@@ -14,7 +14,7 @@ brief: Badge generates a small badge to give users tips.
 ### How to import
 
 ```jsx import
-import { Badge } from '@douyinfe/semi-ui';
+import { Badge } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
@@ -22,8 +22,8 @@ The basic type of Badge is `count`. The `dot` property changes a badge into a sm
 
 ```jsx live=true
 import React from 'react';
-import { Badge, Avatar } from '@douyinfe/semi-ui';
-import { IconLock } from '@douyinfe/semi-icons';
+import { Badge, Avatar } from '@kousum/semi-ui-vue';
+import { IconLock } from '@kousum/semi-icons-vue';
 
 () => {
     const style = {
@@ -62,7 +62,7 @@ You can use the `overflowCount` property to cap the number value of the badge co
 
 ```jsx live=true
 import React from 'react';
-import { Badge, Avatar } from '@douyinfe/semi-ui';
+import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const style = {
@@ -101,7 +101,7 @@ You can use the `position` property to set the position of the badge to its chil
 
 ```jsx live=true
 import React from 'react';
-import { Badge, Avatar } from '@douyinfe/semi-ui';
+import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const style = {
@@ -140,7 +140,7 @@ You can use the `theme` and `type` prop to customize the styling. `theme` suppor
 
 ```jsx live=true
 import React from 'react';
-import { Badge, Avatar } from '@douyinfe/semi-ui';
+import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const bgStyle = {
@@ -193,7 +193,7 @@ import { Badge, Avatar } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Badge, Avatar } from '@douyinfe/semi-ui';
+import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const bgStyle = {
@@ -248,7 +248,7 @@ Badge can be used alone when it is a stand-alone element.
 
 ```jsx live=true
 import React from 'react';
-import { Badge } from '@douyinfe/semi-ui';
+import { Badge } from '@kousum/semi-ui-vue';
 
 () => (
     <div>

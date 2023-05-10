@@ -77,10 +77,9 @@ export default defineConfig({
       {
         link: 'basic',
         text: '基础',
-
         items: [
           {
-            link: '/basic/divider/',
+            link: '/basic/divider',
             text: 'Divider 分割线',
           },
           {

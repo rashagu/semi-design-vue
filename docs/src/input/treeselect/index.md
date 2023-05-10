@@ -12,7 +12,7 @@ brief: 树选择器用于多层级树形数据的结构化展示 & 选取，例�
 ### 如何引入
 
 ```jsx import
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 ```
 ### 基本用法
 
@@ -20,7 +20,7 @@ import { TreeSelect } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
         {
@@ -71,7 +71,7 @@ import { TreeSelect } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
         {
@@ -166,7 +166,7 @@ import { TreeSelect } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
         {
@@ -267,7 +267,7 @@ import { TreeSelect } from '@douyinfe/semi-ui';
 如果只希望展示过滤后的结果，可以设置 `showFilteredOnly` 。
 ```jsx live=true
 import React from 'react';
-import { TreeSelect, Switch } from '@douyinfe/semi-ui';
+import { TreeSelect, Switch } from '@kousum/semi-ui-vue';
 class Demo extends React.Component {
     constructor() {
         super();
@@ -397,7 +397,7 @@ class Demo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -488,7 +488,7 @@ import { TreeSelect } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -567,7 +567,7 @@ import { TreeSelect } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useEffect, useState } from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
         {
@@ -631,7 +631,7 @@ import { TreeSelect } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
         {
@@ -707,7 +707,7 @@ version: >= 1.30.0
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const treeData = [
@@ -767,7 +767,7 @@ import { TreeSelect } from '@douyinfe/semi-ui';
 传入 `value` 时即为受控组件，可以配合 `onChange` 使用。
 ```jsx live=true hideInDSM
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 class Demo extends React.Component {
     constructor() {
         super();
@@ -831,7 +831,7 @@ class Demo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
         {
@@ -882,7 +882,7 @@ import { TreeSelect } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const [expandedKeys, setExpandedKeys] = useState([]);
@@ -952,7 +952,7 @@ import { TreeSelect } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { TreeSelect, Button } from '@douyinfe/semi-ui';
+import { TreeSelect, Button } from '@kousum/semi-ui-vue';
 class Demo extends React.Component {
     constructor() {
         super();
@@ -1046,7 +1046,7 @@ class Demo extends React.Component {
 ### 动态更新数据
 ```jsx live=true hideInDSM
 import React from 'react';
-import { TreeSelect, Button } from '@douyinfe/semi-ui';
+import { TreeSelect, Button } from '@kousum/semi-ui-vue';
 class Demo extends React.Component {
     constructor() {
         super();
@@ -1102,7 +1102,7 @@ class Demo extends React.Component {
 
 ```jsx live=true hideInDSM
 import React, { useState } from 'react';
-import { TreeSelect } from '@douyinfe/semi-ui';
+import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
     const initialData = [
@@ -1202,7 +1202,7 @@ interface TriggerRenderProps {
 
 ```jsx live=true
 import React, { useState, useCallback, useMemo } from 'react';
-import { TreeSelect, Button, Tag, TagInput } from '@douyinfe/semi-ui';
+import { TreeSelect, Button, Tag, TagInput } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const treeData = useMemo(() => [
@@ -1287,7 +1287,7 @@ function Demo() {
 
 ```jsx live=true
 import React, { useState, useCallback, useMemo } from 'react';
-import { TreeSelect, Tag } from '@douyinfe/semi-ui';
+import { TreeSelect, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [value, setValue] = useState([]);

@@ -13,7 +13,7 @@ brief: Toast 提示是对用户的操作做出及时反馈，由用户的操作�
 ### 如何引入
 
 ```jsx import
-import { Toast } from '@douyinfe/semi-ui';
+import { Toast } from '@kousum/semi-ui-vue';
 ```
 
 ### 普通提示
@@ -23,7 +23,7 @@ import { Toast } from '@douyinfe/semi-ui';
 ```jsx live=true noInline=true
 import React from 'react';
 import { throttle } from 'lodash-es';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const opts = {
@@ -59,7 +59,7 @@ render(Demo);
 
 ```jsx live=true noInline=true
 import React from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     let opts = {
@@ -92,7 +92,7 @@ render(Demo);
 
 ```jsx live=true noInline=true
 import React from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     let opts = {
@@ -129,7 +129,7 @@ render(Demo);
 
 ```jsx live=true noInline=true
 import React from 'react';
-import { Toast, Typography, Button } from '@douyinfe/semi-ui';
+import { Toast, Typography, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -179,7 +179,7 @@ render(Demo);
 
 ```jsx live=true noInline=true
 import React from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     let opts = {
@@ -198,7 +198,7 @@ render(Demo);
 
 ```jsx live=true noInline=true hideInDSM
 import React, { useState } from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [toastId, setToastId] = useState();
@@ -244,7 +244,7 @@ render(Demo);
 
 ```jsx live=true noInline=true hideInDSM
 import React, { useState } from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     function show() {
@@ -271,7 +271,7 @@ render(Demo);
 
 ```jsx live=true noInline=true hideInDSM
 import React from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 const ReachableContext = React.createContext();
 
@@ -306,7 +306,7 @@ render(Demo);
 
 ```jsx live=true noInline=true
 import React, { useRef } from 'react';
-import { Toast, Button } from '@douyinfe/semi-ui';
+import { Toast, Button } from '@kousum/semi-ui-vue';
 
 const ReachableContext = React.createContext();
 
@@ -399,7 +399,7 @@ render(Demo);
 
 ```jsx live=true noInline=true
 import React from 'react';
-import { Button } from '@douyinfe/semi-ui';
+import { Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const ToastInCustomContainer = ToastFactory.create({

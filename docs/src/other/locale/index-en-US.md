@@ -37,30 +37,30 @@ When you need to switch the language, you can directly switch the locale passed 
 
 ```jsx
 import React from 'react';
-import zh_CN from '@douyinfe/semi-ui/lib/es/locale/source/zh_CN';
-import en_GB from '@douyinfe/semi-ui/lib/es/locale/source/en_GB';
-import en_US from '@douyinfe/semi-ui/lib/es/locale/source/en_US';
-import ko_KR from '@douyinfe/semi-ui/lib/es/locale/source/ko_KR';
-import ja_JP from '@douyinfe/semi-ui/lib/es/locale/source/ja_JP';
-import vi_VN from '@douyinfe/semi-ui/lib/es/locale/source/vi_VN';
-import ru_RU from '@douyinfe/semi-ui/lib/es/locale/source/ru_RU';
-import id_ID from '@douyinfe/semi-ui/lib/es/locale/source/id_ID';
-import ms_MY from '@douyinfe/semi-ui/lib/es/locale/source/ms_MY';
-import th_TH from '@douyinfe/semi-ui/lib/es/locale/source/th_TH';
-import tr_TR from '@douyinfe/semi-ui/lib/es/locale/source/tr_TR';
-import pt_BR from '@douyinfe/semi-ui/lib/es/locale/source/pt_BR';
-import zh_TW from '@douyinfe/semi-ui/lib/es/locale/source/zh_TW';
-import sv_SE from '@douyinfe/semi-ui/lib/es/locale/source/sv_SE';
-import pl_PL from '@douyinfe/semi-ui/lib/es/locale/source/pl_PL';
-import nl_NL from '@douyinfe/semi-ui/lib/es/locale/source/nl_NL';
-import ar from '@douyinfe/semi-ui/lib/es/locale/source/ar';
-import es from '@douyinfe/semi-ui/lib/es/locale/source/es';
-import it from '@douyinfe/semi-ui/lib/es/locale/source/it';
-import de from '@douyinfe/semi-ui/lib/es/locale/source/de';
-import fr from '@douyinfe/semi-ui/lib/es/locale/source/fr';
-import ro from '@douyinfe/semi-ui/lib/es/locale/source/fr';
+import zh_CN from '@kousum/semi-ui-vue/lib/es/locale/source/zh_CN';
+import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
+import en_US from '@kousum/semi-ui-vue/lib/es/locale/source/en_US';
+import ko_KR from '@kousum/semi-ui-vue/lib/es/locale/source/ko_KR';
+import ja_JP from '@kousum/semi-ui-vue/lib/es/locale/source/ja_JP';
+import vi_VN from '@kousum/semi-ui-vue/lib/es/locale/source/vi_VN';
+import ru_RU from '@kousum/semi-ui-vue/lib/es/locale/source/ru_RU';
+import id_ID from '@kousum/semi-ui-vue/lib/es/locale/source/id_ID';
+import ms_MY from '@kousum/semi-ui-vue/lib/es/locale/source/ms_MY';
+import th_TH from '@kousum/semi-ui-vue/lib/es/locale/source/th_TH';
+import tr_TR from '@kousum/semi-ui-vue/lib/es/locale/source/tr_TR';
+import pt_BR from '@kousum/semi-ui-vue/lib/es/locale/source/pt_BR';
+import zh_TW from '@kousum/semi-ui-vue/lib/es/locale/source/zh_TW';
+import sv_SE from '@kousum/semi-ui-vue/lib/es/locale/source/sv_SE';
+import pl_PL from '@kousum/semi-ui-vue/lib/es/locale/source/pl_PL';
+import nl_NL from '@kousum/semi-ui-vue/lib/es/locale/source/nl_NL';
+import ar from '@kousum/semi-ui-vue/lib/es/locale/source/ar';
+import es from '@kousum/semi-ui-vue/lib/es/locale/source/es';
+import it from '@kousum/semi-ui-vue/lib/es/locale/source/it';
+import de from '@kousum/semi-ui-vue/lib/es/locale/source/de';
+import fr from '@kousum/semi-ui-vue/lib/es/locale/source/fr';
+import ro from '@kousum/semi-ui-vue/lib/es/locale/source/fr';
 
-import { LocaleProvider } from '@douyinfe/semi-ui';
+import { LocaleProvider } from '@kousum/semi-ui-vue';
 
 () => {
     return (
@@ -78,9 +78,9 @@ import { LocaleProvider } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import en_GB from '@douyinfe/semi-ui/locale/source/en_GB';
-import ja_JP from '@douyinfe/semi-ui/locale/source/ja_JP';
-import { LocaleProvider, Pagination } from '@douyinfe/semi-ui';
+import en_GB from '@kousum/semi-ui-vue/locale/source/en_GB';
+import ja_JP from '@kousum/semi-ui-vue/locale/source/ja_JP';
+import { LocaleProvider, Pagination } from '@kousum/semi-ui-vue';
 
 class I18nDemo extends React.Component {
     constructor(props) {
@@ -107,10 +107,10 @@ When your custom component also wants to consume the localeCode in the Semi Loca
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import zh_CN from '@douyinfe/semi-ui/lib/es/locale/source/zh_CN';
-import en_GB from '@douyinfe/semi-ui/lib/es/locale/source/en_GB';
-import ko_KR from '@douyinfe/semi-ui/lib/es/locale/source/ko_KR';
-import { LocaleProvider, LocaleConsumer } from '@douyinfe/semi-ui';
+import zh_CN from '@kousum/semi-ui-vue/lib/es/locale/source/zh_CN';
+import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
+import ko_KR from '@kousum/semi-ui-vue/lib/es/locale/source/ko_KR';
+import { LocaleProvider, LocaleConsumer } from '@kousum/semi-ui-vue';
 
 
 class GetLocaleFromSemi extends React.Component {
@@ -178,30 +178,30 @@ The example gives all the current multilingual components
 
 ```jsx live=true dir="column"
 import React from 'react';
-import zh_CN from '@douyinfe/semi-ui/lib/es/locale/source/zh_CN';
-import en_GB from '@douyinfe/semi-ui/lib/es/locale/source/en_GB';
-import en_US from '@douyinfe/semi-ui/lib/es/locale/source/en_US';
-import ko_KR from '@douyinfe/semi-ui/lib/es/locale/source/ko_KR';
-import ja_JP from '@douyinfe/semi-ui/lib/es/locale/source/ja_JP';
-import vi_VN from '@douyinfe/semi-ui/lib/es/locale/source/vi_VN';
-import ru_RU from '@douyinfe/semi-ui/lib/es/locale/source/ru_RU';
-import id_ID from '@douyinfe/semi-ui/lib/es/locale/source/id_ID';
-import ms_MY from '@douyinfe/semi-ui/lib/es/locale/source/ms_MY';
-import th_TH from '@douyinfe/semi-ui/lib/es/locale/source/th_TH';
-import tr_TR from '@douyinfe/semi-ui/lib/es/locale/source/tr_TR';
-import pt_BR from '@douyinfe/semi-ui/lib/es/locale/source/pt_BR';
-import zh_TW from '@douyinfe/semi-ui/lib/es/locale/source/zh_TW';
-import sv_SE from '@douyinfe/semi-ui/lib/es/locale/source/sv_SE';
-import pl_PL from '@douyinfe/semi-ui/lib/es/locale/source/pl_PL';
-import nl_NL from '@douyinfe/semi-ui/lib/es/locale/source/nl_NL';
-import ar from '@douyinfe/semi-ui/lib/es/locale/source/ar';
-import es from '@douyinfe/semi-ui/lib/es/locale/source/es';
-import it from '@douyinfe/semi-ui/lib/es/locale/source/it';
-import de from '@douyinfe/semi-ui/lib/es/locale/source/de';
-import fr from '@douyinfe/semi-ui/lib/es/locale/source/fr';
-import ro from '@douyinfe/semi-ui/lib/es/locale/source/ro';
-import { LocaleProvider, ConfigProvider, Pagination, Modal, Button, Select, Cascader, DatePicker, TreeSelect, Table, TimePicker, List, Calendar, Typography, Transfer, ImagePreview, Image, Form, Nav } from '@douyinfe/semi-ui';
-import { IconUser, IconSemiLogo, IconStar } from '@douyinfe/semi-icons';
+import zh_CN from '@kousum/semi-ui-vue/lib/es/locale/source/zh_CN';
+import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
+import en_US from '@kousum/semi-ui-vue/lib/es/locale/source/en_US';
+import ko_KR from '@kousum/semi-ui-vue/lib/es/locale/source/ko_KR';
+import ja_JP from '@kousum/semi-ui-vue/lib/es/locale/source/ja_JP';
+import vi_VN from '@kousum/semi-ui-vue/lib/es/locale/source/vi_VN';
+import ru_RU from '@kousum/semi-ui-vue/lib/es/locale/source/ru_RU';
+import id_ID from '@kousum/semi-ui-vue/lib/es/locale/source/id_ID';
+import ms_MY from '@kousum/semi-ui-vue/lib/es/locale/source/ms_MY';
+import th_TH from '@kousum/semi-ui-vue/lib/es/locale/source/th_TH';
+import tr_TR from '@kousum/semi-ui-vue/lib/es/locale/source/tr_TR';
+import pt_BR from '@kousum/semi-ui-vue/lib/es/locale/source/pt_BR';
+import zh_TW from '@kousum/semi-ui-vue/lib/es/locale/source/zh_TW';
+import sv_SE from '@kousum/semi-ui-vue/lib/es/locale/source/sv_SE';
+import pl_PL from '@kousum/semi-ui-vue/lib/es/locale/source/pl_PL';
+import nl_NL from '@kousum/semi-ui-vue/lib/es/locale/source/nl_NL';
+import ar from '@kousum/semi-ui-vue/lib/es/locale/source/ar';
+import es from '@kousum/semi-ui-vue/lib/es/locale/source/es';
+import it from '@kousum/semi-ui-vue/lib/es/locale/source/it';
+import de from '@kousum/semi-ui-vue/lib/es/locale/source/de';
+import fr from '@kousum/semi-ui-vue/lib/es/locale/source/fr';
+import ro from '@kousum/semi-ui-vue/lib/es/locale/source/ro';
+import { LocaleProvider, ConfigProvider, Pagination, Modal, Button, Select, Cascader, DatePicker, TreeSelect, Table, TimePicker, List, Calendar, Typography, Transfer, ImagePreview, Image, Form, Nav } from '@kousum/semi-ui-vue';
+import { IconUser, IconSemiLogo, IconStar } from '@kousum/semi-icons-vue';
 
 class I18nDemo extends React.Component {
     constructor(props) {

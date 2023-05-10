@@ -30,14 +30,14 @@ Semi 将所有自带的输入控件（文本输入框、下拉选择、复选框
     都挂载在 Form 下，使用时直接以<Form.Input\> 、<Form.Select\>声明即可
 
 ```javascript import
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 // 具有数据同步功能的表单控件，在<Form></Form>内使用时，数据流会被Form自动接管
 // 从Form中导出表单控件时，你还可以进行重命名（这里命名为FormInput仅仅是为了在以下示例中跟普通Input做区分）
 const FormInput = Form.Input;
 const FormSelect = Form.Select;
 const Option = FormSelect.Option;
 // 普通Input，在<Form></Form>内部使用时，Form不会对其做任何处理
-import { Input } from '@douyinfe/semi-ui';
+import { Input } from '@kousum/semi-ui-vue';
 ```
 
 Form 提供的 Field 级别组件，它的 value（或者 valueKey 指定的其他属性）、onChange（或 onKeyChangeFnName 指定的其他回调函数）
@@ -67,8 +67,8 @@ Semi Form 同时支持多种写法
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Tooltip } from '@douyinfe/semi-ui';
-import { IconHelpCircle } from '@douyinfe/semi-icons';
+import { Form, Tooltip } from '@kousum/semi-ui-vue';
+import { IconHelpCircle } from '@kousum/semi-icons-vue';
 
 () => {
     const { Option } = Form.Select;
@@ -108,7 +108,7 @@ import { IconHelpCircle } from '@douyinfe/semi-icons';
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => {
     return (
@@ -136,7 +136,7 @@ Form 的 children 是一个 function，return 出所有表单控件
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => {
     return (
@@ -166,7 +166,7 @@ import { Form } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => {
     const fields = ({ formState, formApi, values }) => (
@@ -185,8 +185,8 @@ import { Form } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Col, Row, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Form, Col, Row, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 class BasicDemoWithInit extends React.Component {
     constructor() {
@@ -454,7 +454,7 @@ class BasicDemoWithInit extends React.Component {
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Form, Toast, Row, Col, TextArea } from '@douyinfe/semi-ui';
+import { Form, Toast, Row, Col, TextArea } from '@kousum/semi-ui-vue';
 
 () => (
     <Form
@@ -489,7 +489,7 @@ import { Form, Toast, Row, Col, TextArea } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column" 
 import React from 'react';
-import { Form, Toast, Button } from '@douyinfe/semi-ui';
+import { Form, Toast, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const handleSubmit = (values) => {
@@ -521,7 +521,7 @@ import { Form, Toast, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => (
     <Form layout='horizontal'>
@@ -536,7 +536,7 @@ import { Form } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Select } from '@douyinfe/semi-ui';
+import { Form, Select } from '@kousum/semi-ui-vue';
 
 class BasicDemo extends React.Component {
     constructor() {
@@ -621,7 +621,7 @@ class BasicDemo extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Col, Row } from '@douyinfe/semi-ui';
+import { Form, Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <Form
@@ -696,7 +696,7 @@ import { Form, Col, Row } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button, Space } from '@douyinfe/semi-ui';
+import { Form, Button, Space } from '@kousum/semi-ui-vue';
     
 () => {
     const { Section, Input, DatePicker, TimePicker, Select, Switch, InputNumber, Checkbox, CheckboxGroup, RadioGroup, Radio } = Form;
@@ -777,7 +777,7 @@ import { Form, Button, Space } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => (
     <Form
@@ -804,7 +804,7 @@ Form 会自动为 Field 控件插入 Label。如果你不需要自动插入 Labe
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => (
     <Form onSubmit={(values) => console.log(values)} style={{ width: 400 }}>
@@ -820,7 +820,7 @@ import { Form } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => (
     <Form labelPosition='inset' layout='horizontal'>
@@ -847,7 +847,7 @@ import { Form } from '@douyinfe/semi-ui';
 例如：当自带的 Label、ErrorMessage 布局不满足业务需求，需要自行组合位置，但又希望能直接使用 Label、ErrorMessage 的默认样式时
 
 ```
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { Label, ErrorMessage } = Form;
 ```
 
@@ -859,7 +859,7 @@ Slot 属性配置详见[Form.Slot](#Form.Slot)
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 class AssistComponent extends React.Component {
     render() {
@@ -896,7 +896,7 @@ class AssistComponent extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => {
     const [helpText, setHelpText] = useState('');
@@ -963,7 +963,7 @@ import { Form } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => {
     const options = [
@@ -1000,7 +1000,7 @@ import { Form } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Form onSubmit={(values) => console.log(values)} labelPosition='top' style={{ width: 400 }}>
@@ -1026,7 +1026,7 @@ import { Form, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Modal, Button, Row, Col } from '@douyinfe/semi-ui';
+import { Form, Modal, Button, Row, Col } from '@kousum/semi-ui-vue';
 
 class ModalFormDemo extends React.Component {
     constructor(props) {
@@ -1150,7 +1150,7 @@ class ModalFormDemo extends React.Component {
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 class BasicDemoWithInit extends React.Component {
     constructor() {
@@ -1210,7 +1210,7 @@ class BasicDemoWithInit extends React.Component {
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 class FormLevelValidateSync extends React.Component {
     constructor() {
@@ -1258,7 +1258,7 @@ class FormLevelValidateSync extends React.Component {
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 class FormLevelValidateAsync extends React.Component {
     constructor() {
@@ -1305,7 +1305,7 @@ class FormLevelValidateAsync extends React.Component {
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 class FieldLevelValidateDemo extends React.Component {
     constructor() {
@@ -1355,7 +1355,7 @@ class FieldLevelValidateDemo extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button, Space } from '@douyinfe/semi-ui';
+import { Form, Button, Space } from '@kousum/semi-ui-vue';
 class PartValidAndResetDemo extends React.Component {
     constructor() {
         super();
@@ -1437,7 +1437,7 @@ class PartValidAndResetDemo extends React.Component {
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { Form, Button, Row } from '@douyinfe/semi-ui';
+import { Form, Button, Row } from '@kousum/semi-ui-vue';
 
 () => {
     const formRef = useRef();
@@ -1472,7 +1472,7 @@ import { Form, Button, Row } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Form style={{ width: 450 }}>
@@ -1502,8 +1502,8 @@ ArrayField 详细的 API请查阅下方 [ArrayField Props](#arrayfield-props)
 
 ```jsx live=true dir="column" hideInDSM
 import React from 'react';
-import { ArrayField, TextArea, Form, Button, useFormState } from '@douyinfe/semi-ui';
-import { IconPlusCircle, IconMinusCircle } from '@douyinfe/semi-icons';
+import { ArrayField, TextArea, Form, Button, useFormState } from '@kousum/semi-ui-vue';
+import { IconPlusCircle, IconMinusCircle } from '@kousum/semi-icons-vue';
 
 class ArrayFieldDemo extends React.Component {
     constructor() {
@@ -1575,7 +1575,7 @@ class ArrayFieldDemo extends React.Component {
 我们提供了四个 Hooks，使你在不需要通过 props 传递的情况下，也能在放置于 Form 结构内部的 Functional Component 中也能轻易访问到 Form 内部状态数据，以及调用 Form、Field 的相关 api
 
 ```jsx
-import { useFormApi, useFormState, useFieldApi, useFieldState } from '@douyinfe/semi-ui';
+import { useFormApi, useFormState, useFieldApi, useFieldState } from '@kousum/semi-ui-vue';
 ```
 
 #### useFormApi
@@ -1584,7 +1584,7 @@ useFormApi 允许你通过 hook，在 Functional Component 内直接访问父级
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { useFormApi, Form, Button } from '@douyinfe/semi-ui';
+import { useFormApi, Form, Button } from '@kousum/semi-ui-vue';
 
 const ComponentUsingFormApi = () => {
     const formApi = useFormApi();
@@ -1616,7 +1616,7 @@ useFormState 允许你通过 hook，在 Functional Component 内直接访问父�
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { useFormState, Form } from '@douyinfe/semi-ui';
+import { useFormState, Form } from '@kousum/semi-ui-vue';
 
 const ComponentUsingFormState = () => {
     const formState = useFormState();
@@ -1648,7 +1648,7 @@ useFieldApi 允许你通过 hook，在 Functional Component 内直接调用指�
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { useFieldApi, Form, Button } from '@douyinfe/semi-ui';
+import { useFieldApi, Form, Button } from '@kousum/semi-ui-vue';
 
 const ComponentUsingFieldApi = () => {
     const nameFieldApi = useFieldApi('name');
@@ -1680,7 +1680,7 @@ useFieldState 允许你通过 hook，在 Functional Component 内直接访问指
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { useFieldState, Form } from '@douyinfe/semi-ui';
+import { useFieldState, Form } from '@kousum/semi-ui-vue';
 
 const ComponentUsingFieldState = props => {
     const fieldState = useFieldState(props.field);
@@ -1718,7 +1718,7 @@ render(UseFieldStateDemo);
 提供了 HOC： `withField`，用于将自定义组件封装成符合 Semi Form 数据流的表单控件
 
 ```
-import { withFormApi, withFormState, withField } from '@douyinfe/semi-ui';
+import { withFormApi, withFormState, withField } from '@kousum/semi-ui-vue';
 ```
 
 #### HOC-withFormApi
@@ -1728,7 +1728,7 @@ import { withFormApi, withFormState, withField } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { withFormApi, Form, Button } from '@douyinfe/semi-ui';
+import { withFormApi, Form, Button } from '@kousum/semi-ui-vue';
 
 const SomeComponetInsideForm = props => (
     <Button onClick={() => {
@@ -1760,7 +1760,7 @@ render(WithFormApiDemo);
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { withFormState, Form } from '@douyinfe/semi-ui';
+import { withFormState, Form } from '@kousum/semi-ui-vue';
 
 const SomeComponentInsideForm = props => (
     <code>{JSON.stringify(props.formState)}</code>
@@ -1810,7 +1810,7 @@ withField(YourComponent, withFieldOption);
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { withField, Form } from '@douyinfe/semi-ui';
+import { withField, Form } from '@kousum/semi-ui-vue';
 
 // 这里将html原生的input封装
 const htmlInput = (props) => {
@@ -1846,7 +1846,7 @@ render(WithFieldDemo1);
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { withField, Input, Select, Form } from '@douyinfe/semi-ui';
+import { withField, Input, Select, Form } from '@kousum/semi-ui-vue';
 
 const MyComponent = (props) => {
     const { onChange, value } = props;
@@ -1979,7 +1979,7 @@ FormState 存储了所有 Form 内部的状态值，包括各表单控件的值�
 
 ```jsx
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 class FormApiDemo extends React.Component {
     constructor() {
@@ -2016,7 +2016,7 @@ class FormApiDemo extends React.Component {
 
 ```jsx
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 () => {
     // 函数式组件通过useRef存储formApi
@@ -2096,7 +2096,7 @@ interface ArrayFieldItem {
 ## Form.Section
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { Section } = Form;
 ```
 
@@ -2112,7 +2112,7 @@ const { Section } = Form;
 默认情况下，Label 会由 Form 自行插入到每个 Field 中。如果你需要在其他地方自行插入 Label，我们提供了 Label 组件可以导出
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { Label } = Form;
 ```
 
@@ -2143,7 +2143,7 @@ const { Label } = Form;
 ## Form.Slot
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { Slot } = Form;
 ```
 
@@ -2159,7 +2159,7 @@ const { Slot } = Form;
 ## Form.ErrorMessage
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { ErrorMessage } = Form;
 ```
 

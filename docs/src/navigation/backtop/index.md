@@ -11,7 +11,7 @@ icon: doc-backtop
 ### 如何引入
 
 ```jsx import
-import { BackTop } from '@douyinfe/semi-ui';
+import { BackTop } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -20,7 +20,7 @@ BackTop 预设了基本的返回按钮，可以直接调用。
 
 ```jsx live=true
 import React from 'react';
-import { BackTop } from '@douyinfe/semi-ui';
+import { BackTop } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     render() {
@@ -40,8 +40,8 @@ BackTop 预设了默认样式，包括：距离底部 50px，距离右侧 100px�
 
 ```jsx live=true
 import React from 'react';
-import { BackTop } from '@douyinfe/semi-ui';
-import { IconArrowUp } from '@douyinfe/semi-icons';
+import { BackTop } from '@kousum/semi-ui-vue';
+import { IconArrowUp } from '@kousum/semi-icons-vue';
 
 class Custom extends React.Component {
     render() {

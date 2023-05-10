@@ -14,7 +14,7 @@ brief: Scroll through the list.
 ### How to import
 
 ```jsx import 
-import { ScrollList, ScrollItem } from '@douyinfe/semi-ui';
+import { ScrollList, ScrollItem } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
@@ -22,7 +22,7 @@ The scrolling list provides a scrolling selection mode similar to the IOS operat
 
 ```jsx live=true
 import React from 'react';
-import { ScrollList, ScrollItem, Button } from '@douyinfe/semi-ui';
+import { ScrollList, ScrollItem, Button } from '@kousum/semi-ui-vue';
 
 class ScrollListDemo extends React.Component {
     constructor(props) {

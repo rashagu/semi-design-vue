@@ -22,7 +22,7 @@ brief: 输入框自动填充。
 ### 如何引入
 
 ```jsx import
-import { AutoComplete } from '@douyinfe/semi-ui';
+import { AutoComplete } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -31,8 +31,8 @@ import { AutoComplete } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete } from '@douyinfe/semi-ui';
-import { IconSearch } from '@douyinfe/semi-icons';
+import { AutoComplete } from '@kousum/semi-ui-vue';
+import { IconSearch } from '@kousum/semi-icons-vue';
 
 () => {
     const [stringData, setStringData] = useState([]);
@@ -73,8 +73,8 @@ import { IconSearch } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete, Avatar } from '@douyinfe/semi-ui';
-import { IconSearch } from '@douyinfe/semi-icons';
+import { AutoComplete, Avatar } from '@kousum/semi-ui-vue';
+import { IconSearch } from '@kousum/semi-icons-vue';
 
 class CustomOptionDemo extends React.Component {
     constructor() {
@@ -142,8 +142,8 @@ class CustomOptionDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete } from '@douyinfe/semi-ui';
-import { IconSearch } from '@douyinfe/semi-icons';
+import { AutoComplete } from '@kousum/semi-ui-vue';
+import { IconSearch } from '@kousum/semi-icons-vue';
 
 class ObjectDemo extends React.Component {
     constructor() {
@@ -226,7 +226,7 @@ class ObjectDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete } from '@douyinfe/semi-ui';
+import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -262,7 +262,7 @@ import { AutoComplete } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete } from '@douyinfe/semi-ui';
+import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => {
     const [data, setData] = useState([]);
@@ -300,7 +300,7 @@ import { AutoComplete } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete } from '@douyinfe/semi-ui';
+import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
     <AutoComplete data={[1, 2, 3, 4]} placeholder={'禁用下拉菜单'} disabled style={{ width: 200 }}></AutoComplete>
@@ -313,7 +313,7 @@ import { AutoComplete } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete } from '@douyinfe/semi-ui';
+import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
     <>
@@ -334,7 +334,7 @@ import { AutoComplete } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { AutoComplete, Empty } from '@douyinfe/semi-ui';
+import { AutoComplete, Empty } from '@kousum/semi-ui-vue';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
 
 () => {

@@ -13,7 +13,7 @@ brief: 空状态时的展示占位图。
 ### 如何引入
 
 ```jsx import
-import { Empty } from '@douyinfe/semi-ui';
+import { Empty } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -24,7 +24,7 @@ import { Empty } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Empty } from '@douyinfe/semi-ui';
+import { Empty } from '@kousum/semi-ui-vue';
 import { IllustrationConstruction, IllustrationConstructionDark } from '@douyinfe/semi-illustrations';
 
 () => (
@@ -43,7 +43,7 @@ import { IllustrationConstruction, IllustrationConstructionDark } from '@douyinf
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Empty, Button } from '@douyinfe/semi-ui';
+import { Empty, Button } from '@kousum/semi-ui-vue';
 import { IllustrationNoContent, IllustrationNoContentDark } from '@douyinfe/semi-illustrations';
 
 () => (
@@ -69,7 +69,7 @@ import { IllustrationNoContent, IllustrationNoContentDark } from '@douyinfe/semi
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Empty, Typography } from '@douyinfe/semi-ui';
+import { Empty, Typography } from '@kousum/semi-ui-vue';
 
 () => (
     <Empty
@@ -90,7 +90,7 @@ import { Empty, Typography } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Empty, Button } from '@douyinfe/semi-ui';
+import { Empty, Button } from '@kousum/semi-ui-vue';
 import { IllustrationSuccess, IllustrationSuccessDark } from '@douyinfe/semi-illustrations';
 
 () => (
@@ -117,7 +117,7 @@ import { IllustrationSuccess, IllustrationSuccessDark } from '@douyinfe/semi-ill
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Empty } from '@douyinfe/semi-ui';
+import { Empty } from '@kousum/semi-ui-vue';
 import { IllustrationConstruction, IllustrationSuccess, IllustrationFailure, IllustrationNoAccess, IllustrationNoContent, IllustrationNotFound, IllustrationNoResult } from '@douyinfe/semi-illustrations';
 
 /* 以下为 1.13.0 版本后提供 */

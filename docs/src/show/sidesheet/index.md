@@ -12,7 +12,7 @@ brief: 可从屏幕边沿滑出的浮层面板，通常用于承载二级操作�
 ### 如何引入
 
 ```jsx import
-import { SideSheet } from '@douyinfe/semi-ui';
+import { SideSheet } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本
@@ -21,7 +21,7 @@ import { SideSheet } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { SideSheet, Button } from '@douyinfe/semi-ui';
+import { SideSheet, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -46,7 +46,7 @@ import { SideSheet, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { SideSheet, RadioGroup, Radio, Button } from '@douyinfe/semi-ui';
+import { SideSheet, RadioGroup, Radio, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -83,7 +83,7 @@ import { SideSheet, RadioGroup, Radio, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { SideSheet, RadioGroup, Radio, Button } from '@douyinfe/semi-ui';
+import { SideSheet, RadioGroup, Radio, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -123,7 +123,7 @@ import { SideSheet, RadioGroup, Radio, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { SideSheet, TextArea, Button } from '@douyinfe/semi-ui';
+import { SideSheet, TextArea, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -157,7 +157,7 @@ import { SideSheet, TextArea, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useState } from 'react';
-import { SideSheet, Button } from '@douyinfe/semi-ui';
+import { SideSheet, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -204,7 +204,7 @@ import { SideSheet, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { SideSheet, Form, Button, Typography, Banner } from '@douyinfe/semi-ui';
+import { SideSheet, Form, Button, Typography, Banner } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {

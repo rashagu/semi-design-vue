@@ -14,7 +14,7 @@ brief: Used to display and preview images.
 Image, ImagePreview supported since v2.20.0
 
 ```jsx import
-import { Image, ImagePreview } from '@douyinfe/semi-ui';
+import { Image, ImagePreview } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic usage
@@ -23,7 +23,7 @@ You can get an image with preview function by specifying the image path through 
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Image } from '@douyinfe/semi-ui';
+import { Image } from '@kousum/semi-ui-vue';
 
 () => (  
     <Image 
@@ -40,7 +40,7 @@ You can customize the placeholder for failed loading through `fallback`, which s
 
 ```jsx live=true
 import React from 'react';
-import { Image } from '@douyinfe/semi-ui';
+import { Image } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ display: 'flex', alignItem: 'center', flexDirection: 'column' }}>
@@ -68,7 +68,7 @@ Large images can be progressively loaded through `placeholder`
 
 ```jsx live=true
 import React from 'react';
-import { Image, Button } from '@douyinfe/semi-ui';
+import { Image, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [timestamp, setTimestamp] = React.useState('');
@@ -104,7 +104,7 @@ You can customize the preview image by setting the `src` of the Image component 
 
  ```jsx live=true
 import React from 'react';
-import { Image } from '@douyinfe/semi-ui';
+import { Image } from '@kousum/semi-ui-vue';
 
 () => {
      return ( 
@@ -126,7 +126,7 @@ Use ImagePreview to wrap Image to achieve multi-image preview
 
 ```jsx live=true dir="column"
 import React, { useMemo } from 'react';
-import { Image, ImagePreview } from '@douyinfe/semi-ui';
+import { Image, ImagePreview } from '@kousum/semi-ui-vue';
 
 () => {
     const srcList = useMemo(() => ([
@@ -160,7 +160,7 @@ The preview component ImagePreview can be used alone, through `visible` and `onV
 
 ```jsx live=true
 import React, { useMemo, useCallback } from 'react';
-import { ImagePreview, Button } from '@douyinfe/semi-ui';
+import { ImagePreview, Button } from '@kousum/semi-ui-vue';
 
 
 () => {
@@ -216,7 +216,7 @@ You can specify the parent DOM of the preview component through `getPopupContain
 
 ```jsx live=true dir="column"
 import React, { useMemo } from 'react';
-import { Image, ImagePreview } from '@douyinfe/semi-ui';
+import { Image, ImagePreview } from '@kousum/semi-ui-vue';
 
 () => {
     const srcList = useMemo(() => ([
@@ -271,8 +271,8 @@ The bottom action area of the preview can be customized using `renderPreviewMenu
 
 ```jsx live=true dir="column"
 import React, { useMemo, useCallback } from 'react';
-import { Image, ImagePreview, Button } from '@douyinfe/semi-ui';
-import { IconChevronLeft, IconChevronRight, IconMinus, IconPlus, IconRotate, IconDownload, IconRealSizeStroked, IconWindowAdaptionStroked } from "@douyinfe/semi-icons";
+import { Image, ImagePreview, Button } from '@kousum/semi-ui-vue';
+import { IconChevronLeft, IconChevronRight, IconMinus, IconPlus, IconRotate, IconDownload, IconRealSizeStroked, IconWindowAdaptionStroked } from "@kousum/semi-icons-vue";
 
 () => {
     const srcList = useMemo(() => ([
@@ -377,7 +377,7 @@ You can customize the preview top display area through `renderHeader`
 
 ```jsx live=true dir="column"
 import React, { useMemo } from 'react';
-import { Image, ImagePreview } from '@douyinfe/semi-ui';
+import { Image, ImagePreview } from '@kousum/semi-ui-vue';
 
 () => {
     const srcList = useMemo(() => ([

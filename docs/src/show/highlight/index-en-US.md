@@ -16,7 +16,7 @@ brief: highlight specific content
 Semi support `Highlight` component since v2.24.0
 
 ```jsx import
-import { Highlight } from '@douyinfe/semi-ui';
+import { Highlight } from '@kousum/semi-ui-vue';
 ```
 
 
@@ -27,7 +27,7 @@ You can specify keywords to be highlighted with `searchWords` and source text wi
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Highlight } from '@douyinfe/semi-ui';
+import { Highlight } from '@kousum/semi-ui-vue';
 
 () => {
     const sourceString = 'From Semi Design，To Any Design. Quickly define your design system and apply it to design drafts and code';
@@ -47,7 +47,7 @@ When you need to customize different highlight styles, you can specify them thro
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Highlight } from '@douyinfe/semi-ui';
+import { Highlight } from '@kousum/semi-ui-vue';
 
 () => {
     const sourceString = 'From Semi Design，To Any Design. Quickly define your design system and apply it to design drafts and code';
@@ -78,7 +78,7 @@ Semi will wrap the text matching searchWords in sourceString with mark tag by de
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Highlight } from '@douyinfe/semi-ui';
+import { Highlight } from '@kousum/semi-ui-vue';
 
 () => {
     const sourceString = 'From Semi Design，To Any Design. Quickly define your design system and apply it to design drafts and code';

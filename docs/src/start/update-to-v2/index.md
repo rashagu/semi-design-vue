@@ -15,7 +15,7 @@ order: 9
 ### 安装 Semi 2.0
 
 ```bash
-npm i @douyinfe/semi-ui@latest
+npm i @kousum/semi-ui-vue@latest
 ```
 
 ### 修改代码
@@ -139,7 +139,7 @@ v2.0 Semi 正式开源发布至公网 npm，包名需要调整，去除原有的
 import { Select, Input, Form } from '@ies/semi-ui-react';
 
 // after
-import { Select, Input, Form } from '@douyinfe/semi-ui';
+import { Select, Input, Form } from '@kousum/semi-ui-vue';
 ```
 
 #### 引入 interface（TypeScript 项目）
@@ -150,7 +150,7 @@ import { Select, Input, Form } from '@douyinfe/semi-ui';
 import { SelectProps } from '@ies/semi-ui-react/select';
 
 // now
-import { SelectProps } from '@douyinfe/semi-ui/lib/es/select';
+import { SelectProps } from '@kousum/semi-ui-vue/lib/es/select';
 ```
 
 #### 引入 locale 资源文件
@@ -160,7 +160,7 @@ import { SelectProps } from '@douyinfe/semi-ui/lib/es/select';
 import en_GB from '@ies/semi-ui-react/locale/source/en_GB';
 
 // now
-import en_GB from '@douyinfe/semi-ui/lib/es/locale/source/en_GB';
+import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
 ```
 
 ### 🛠 API 相关的调整
@@ -226,7 +226,7 @@ import homeSvg from '@ies/semi-icons/semi-icons-home.svg';
 <Icon type={homeSvg.id} />;
 
 // 2.x 统一使用如下方式使用
-import { IconHome } from '@douyinfe/semi-icons';
+import { IconHome } from '@kousum/semi-icons-vue';
 <IconHome />;
 ```
 
@@ -239,7 +239,7 @@ import Construction from '@ies/semi-illustrations/construction.svg';
 <Empty image={Construction} />;
 
 // 2.x
-import { Empty } from '@douyinfe/semi-ui';
+import { Empty } from '@kousum/semi-ui-vue';
 import { IllustrationConstruction } from '@douyinfe/semi-illustrations';
 <Empty image={<IllustrationConstruction />} />;
 ```

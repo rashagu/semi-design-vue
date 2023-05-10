@@ -16,13 +16,13 @@ brief: 文字，图片，段落，数值的基本格式。
 ### 如何引入
 
 ```jsx import
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 ```
 ### 标题组件
 通过设置 heading 可以展示不同级别的标题。
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Title } = Typography;
@@ -43,7 +43,7 @@ function Demo() {
 内置不同样式的文本。可以通过 `icon` 属性传入图标，这种方式传入的图标默认与文本有间距，同时在链接文本的情况不会出现下划线符合设计规范。
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -94,8 +94,8 @@ function Demo() {
 **v>=1.0** 后默认不再有下划线，可以配合 underline 属性在 hover，active 态增加下划线的样式。
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
-import { IconLink } from '@douyinfe/semi-icons';
+import { Typography } from '@kousum/semi-ui-vue';
+import { IconLink } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -117,7 +117,7 @@ function Demo() {
 段落组件拥有两种行距，可以通过设置 `spacing='extended'` 使用更宽松的行距。
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Paragraph, Title } = Typography;
@@ -158,7 +158,7 @@ Numeral 组件在Text组件的基础上，添加了属性: `rule`, `precision`, 
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Numeral } = Typography;
@@ -202,7 +202,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Numeral } = Typography;
@@ -249,7 +249,7 @@ function Demo() {
 段落组件和文本组件支持两种尺寸，`small`（12px） 和 `normal`（14px），默认为`normal`。
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Paragraph, Text } = Typography;
@@ -276,8 +276,8 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Typography, TextArea } from '@douyinfe/semi-ui';
-import { IconSetting } from '@douyinfe/semi-icons';
+import { Typography, TextArea } from '@kousum/semi-ui-vue';
+import { IconSetting } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const { Paragraph, Text, Numeral } = Typography;
@@ -309,7 +309,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Paragraph, Title, Text } = Typography;
@@ -374,7 +374,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;

@@ -38,22 +38,25 @@ Semi 提供完整的主题配置流程，既保持颜色、字体、圆角、阴
 
 创建完成主题下载后，使用 Semi 插件可以快速地接入选择的主题。
 
-### 使用 Webpack 作为构建工具时
+### 使用 Vite 作为构建工具时
 
-对于使用 Webpack 的用户，在 SemiWebpackPlugin 加入 `theme` 参数即可。
-
-SemiWebpackPlugin  `yarn add -D @douyinfe/semi-webpack-plugin` or `npm i -D @douyinfe/semi-webpack-plugin`
-
+1. 首先安装 Semi Vite Pluign: `vite-plugin-semi-theme` （感谢社区开发者 @boenfu 贡献）
+2. 在 `vite.config.ts` 中 配置 主题
 ```jsx
-new SemiWebpackPlugin({
-    theme: {
-        name: '你的主题npm包名称'
-    }
-    /* ...options */
+...
+import { defineConfig } from "vite";
+import SemiPlugin from "vite-plugin-semi-theme";
+
+export default defineConfig({
+  plugins: [
+    ...
+    SemiPlugin({
+      theme: "@semi-bot/semi-theme-nyx-c"
+    }),
+  ],
 });
 ```
 
-更多工程化方案（如Vite、NextJs）的主题接入，可参考 [DSM 文档](https://semi.design/dsm_manual/zh-CN/web/use#dsm_%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E4%B8%BB%E9%A2%98)
 
 ### 使组件级变量的改动生效
 

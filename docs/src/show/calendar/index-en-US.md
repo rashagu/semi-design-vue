@@ -14,7 +14,7 @@ brief: Calendar component that allows to display corresponding events in day/wee
 ### How to import
 
 ```jsx import
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 ```
 ### Day Mode
 
@@ -22,7 +22,7 @@ Day mode. You could toggle the red line of current time using `showCurrTime`.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 
 () => (
     <Calendar mode="day"></Calendar>
@@ -35,7 +35,7 @@ Week mode. You could toggle the red line of current time using `showCurrTime`.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 
 () => (
     <Calendar mode="week"></Calendar>
@@ -48,7 +48,7 @@ Month Mode.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 
 () => (
     <Calendar mode="month"></Calendar>
@@ -61,7 +61,7 @@ The day of the week can be set as the first day of the week through weekStartsOn
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { RadioGroup, Calendar, Radio } from '@douyinfe/semi-ui';
+import { RadioGroup, Calendar, Radio } from '@kousum/semi-ui-vue';
 
 () => {
     const [v, setV] = useState(0);
@@ -92,7 +92,7 @@ Range Mode. `range` is required which is a left-closed and right-open interval.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 
 () => (
     <Calendar mode="range" range={[new Date(2020, 8, 26), new Date(2020, 8, 31)]} />
@@ -105,7 +105,7 @@ You could pass in an array of event objects to `events` to render items. For det
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar, RadioGroup, Radio } from '@douyinfe/semi-ui';
+import { Calendar, RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() {
@@ -233,7 +233,7 @@ You could use `dateGridRender` to render customized date cell or column. Use abs
 #### Custom Render Events
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 
 () => {
     const dailyEventStyle = {
@@ -276,7 +276,7 @@ import { Calendar } from '@douyinfe/semi-ui';
 You could alos use `dateGridRender` to customize date cell style, e.g. backgroundColor. Please notice that in Month View, the date text on the right corner has a z-index of 3. Use a larger z-index if you would like to cover the text as well.
 ```jsx live=true dir="column"
 import React from 'react';
-import { Calendar } from '@douyinfe/semi-ui';
+import { Calendar } from '@kousum/semi-ui-vue';
 
 () => {
     const importantDate = {

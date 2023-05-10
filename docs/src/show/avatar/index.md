@@ -12,7 +12,7 @@ brief: 头像，支持图片或字符展示。
 ### 如何引入
 
 ```jsx import
-import { Avatar, AvatarGroup } from '@douyinfe/semi-ui';
+import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 ```
 
 ### 尺寸
@@ -21,7 +21,7 @@ import { Avatar, AvatarGroup } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
+import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -54,7 +54,7 @@ Avatar 支持默认色板的 15 种颜色和白色，包括：`amber`、 `blue`�
 
 ```jsx live=true
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
+import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -77,7 +77,7 @@ import { Avatar } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
+import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -102,7 +102,7 @@ Avatar 支持 `circle`、`square` 两种形状，默认为 `circle`。
 
 ```jsx live=true
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
+import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -120,8 +120,8 @@ Avatar 支持 `onClick`、`onMouseEnter`、`onMouseLeave`。其中 `hover` 状�
 
 ```jsx live=true
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
-import { IconCamera } from '@douyinfe/semi-icons';
+import { Avatar } from '@kousum/semi-ui-vue';
+import { IconCamera } from '@kousum/semi-icons-vue';
 
 () => {
     const style = {
@@ -152,7 +152,7 @@ import { IconCamera } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { AvatarGroup, Avatar } from '@douyinfe/semi-ui';
+import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -171,7 +171,7 @@ import { AvatarGroup, Avatar } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { AvatarGroup, Avatar } from '@douyinfe/semi-ui';
+import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -190,7 +190,7 @@ import { AvatarGroup, Avatar } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { AvatarGroup, Avatar, Popover } from '@douyinfe/semi-ui';
+import { AvatarGroup, Avatar, Popover } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const renderMore = (restNumber, restAvatars) => {
@@ -230,7 +230,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { AvatarGroup, Avatar } from '@douyinfe/semi-ui';
+import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -296,7 +296,7 @@ import { AvatarGroup, Avatar } from '@douyinfe/semi-ui';
 - Avatar的`alt`属性可以被屏幕阅读器读取，使用头像组件时，请使用`alt` 属性解释头像的内容。
 ```jsx
 import React from 'react';
-import { Avatar } from '@douyinfe/semi-ui';
+import { Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     return (

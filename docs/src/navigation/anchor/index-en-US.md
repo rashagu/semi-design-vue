@@ -14,7 +14,7 @@ brief: The Anchor component is used to create a hyper Link navigation bar.
 ### How to import
 
 ```jsx
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
@@ -23,7 +23,7 @@ Use `Link` to create an anchor, click it to jump to the hash tag location.
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => (
     <Anchor>
@@ -50,7 +50,7 @@ You can use `getContainer`, `targetOffset`, `offsetTop`, and `style` to create a
 
 ```jsx
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -87,7 +87,7 @@ You can change Anchor size with `size` property.
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => (
     <Anchor size={'default'}>
@@ -101,7 +101,7 @@ import { Anchor } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => (
     <Anchor size={'small'}>
@@ -119,7 +119,7 @@ You can change rail color with `railTheme` property. Three themes are supported 
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -145,7 +145,7 @@ import { Anchor } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -171,7 +171,7 @@ import { Anchor } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -201,7 +201,7 @@ Anchor can dynamically display child links with `autoCollapse` property. The def
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -232,7 +232,7 @@ import { Anchor } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -267,7 +267,7 @@ import { Anchor } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -298,7 +298,7 @@ You can change the Tooltip position with `position` property. It only works when
 
 ```jsx live=true
 import React from 'react';
-import { Anchor } from '@douyinfe/semi-ui';
+import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
     const getContainer = () => {
@@ -372,7 +372,7 @@ import { Anchor } from '@douyinfe/semi-ui';
     
     ```text
     import React from 'react';
-    import { Anchor } from '@douyinfe/semi-ui';
+    import { Anchor } from '@kousum/semi-ui-vue';
 
     function App() {
         const getContainer = () => {

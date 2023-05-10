@@ -13,7 +13,7 @@ brief: Provide a unified global configuration for components.
 
 ### How to import
 ```jsx import
-import { ConfigProvider } from '@douyinfe/semi-ui';
+import { ConfigProvider } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
@@ -21,7 +21,7 @@ By passing in the timeZone parameter, users can configure the time zone for the 
 
 ```jsx live=true dir="column" hideInDSM
 import React, { useMemo, useState } from 'react';
-import { ConfigProvider, Select, DatePicker, TimePicker } from '@douyinfe/semi-ui';
+import { ConfigProvider, Select, DatePicker, TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo(props = {}) {
     const [timeZone, setTimeZone] = useState('GMT+08:00');
@@ -75,9 +75,9 @@ Special components:
 
 ```jsx live=true dir="column" hideInDSM
 import React, { useState } from 'react';
-import { ConfigProvider, ButtonGroup, Button, Row, Col, Notification, DatePicker, TimePicker, Timeline, Popover, Tag, Tooltip, Badge, Avatar, Steps, Pagination, Modal, Breadcrumb, Rating, Nav, Spin, Cascader, Radio, Select, Input, Typography, TextArea, Checkbox, Switch } from '@douyinfe/semi-ui';
-import { IconVigoLogo, IconEdit, IconCamera, IconList, IconSidebar, IconChevronDown } from '@douyinfe/semi-icons';
-import en_GB from '@douyinfe/semi-ui/locale/source/en_GB';
+import { ConfigProvider, ButtonGroup, Button, Row, Col, Notification, DatePicker, TimePicker, Timeline, Popover, Tag, Tooltip, Badge, Avatar, Steps, Pagination, Modal, Breadcrumb, Rating, Nav, Spin, Cascader, Radio, Select, Input, Typography, TextArea, Checkbox, Switch } from '@kousum/semi-ui-vue';
+import { IconVigoLogo, IconEdit, IconCamera, IconList, IconSidebar, IconChevronDown } from '@kousum/semi-icons-vue';
+import en_GB from '@kousum/semi-ui-vue/locale/source/en_GB';
 
 function Demo(props = {}) {
     const { Option } = Select;

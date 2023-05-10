@@ -12,14 +12,14 @@ brief: 模态对话框用于等待用户响应、告知用户重要信息或在�
 ### 如何引入
 
 ```jsx import
-import { Modal } from '@douyinfe/semi-ui';
+import { Modal } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -64,7 +64,7 @@ import { Modal, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -117,7 +117,7 @@ class modalDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -169,7 +169,7 @@ class modalDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -221,7 +221,7 @@ class modalDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -276,7 +276,7 @@ class modalDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -348,8 +348,8 @@ class modalDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button, List } from '@douyinfe/semi-ui';
-import { IconVigoLogo, IconSemiLogo } from '@douyinfe/semi-icons';
+import { Modal, Button, List } from '@kousum/semi-ui-vue';
+import { IconVigoLogo, IconSemiLogo } from '@kousum/semi-icons-vue';
 
 class modalDemo extends React.Component {
     constructor() {
@@ -447,7 +447,7 @@ class modalDemo extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
+import { Modal, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [visible, setVisible] = useState(false);
@@ -472,8 +472,8 @@ import { Modal, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Modal, Button } from '@douyinfe/semi-ui';
-import { IconSend } from '@douyinfe/semi-icons';
+import { Modal, Button } from '@kousum/semi-ui-vue';
+import { IconSend } from '@kousum/semi-icons-vue';
 
 ModalComponent = function(props) {
     function success() {
@@ -541,8 +541,8 @@ ModalComponent = function(props) {
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { ConfigProvider, Button, Modal } from '@douyinfe/semi-ui';
-import en_GB from '@douyinfe/semi-ui/lib/es/locale/source/en_GB';
+import { ConfigProvider, Button, Modal } from '@kousum/semi-ui-vue';
+import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
 
 function Demo(props = {}) {
     const [modal, contextHolder] = Modal.useModal();

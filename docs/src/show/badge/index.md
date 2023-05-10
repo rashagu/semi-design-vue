@@ -12,7 +12,7 @@ brief: 用徽章来给用户提示。
 ### 如何引入
 
 ```jsx import
-import { Badge } from '@douyinfe/semi-ui';
+import { Badge } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -20,8 +20,8 @@ Badge 的基本类型为 `count`。如果传入 `dot` 则显示为小圆点，�
 
 ```jsx live=true
 import React from 'react';
-import { Badge, Avatar } from '@douyinfe/semi-ui';
-import { IconLock } from '@douyinfe/semi-icons';
+import { Badge, Avatar } from '@kousum/semi-ui-vue';
+import { IconLock } from '@kousum/semi-icons-vue';
 
 () => {
     const style = {
@@ -60,7 +60,7 @@ import { IconLock } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Badge, Avatar } from '@douyinfe/semi-ui';
+import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const style = {
@@ -99,7 +99,7 @@ import { Badge, Avatar } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Badge, Avatar } from '@douyinfe/semi-ui';
+import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const style = {
@@ -138,7 +138,7 @@ import { Badge, Avatar } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Badge, Avatar } from '@douyinfe/semi-ui';
+import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const bgStyle = {
@@ -191,7 +191,7 @@ import { Badge, Avatar } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Badge, Avatar } from '@douyinfe/semi-ui';
+import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
     const bgStyle = {
@@ -246,7 +246,7 @@ import { Badge, Avatar } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Badge } from '@douyinfe/semi-ui';
+import { Badge } from '@kousum/semi-ui-vue';
 
 () => (
     <div>

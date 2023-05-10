@@ -14,7 +14,7 @@ brief: 用于展示和预览图片。
 Image, ImagePreview 从 v2.20.0 版本开始支持
 
 ```jsx import
-import { Image, ImagePreview } from '@douyinfe/semi-ui';
+import { Image, ImagePreview } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
@@ -23,7 +23,7 @@ import { Image, ImagePreview } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Image } from '@douyinfe/semi-ui';
+import { Image } from '@kousum/semi-ui-vue';
 
 () => (  
     <Image 
@@ -40,7 +40,7 @@ import { Image } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Image } from '@douyinfe/semi-ui';
+import { Image } from '@kousum/semi-ui-vue';
 
 () => (
     <div style={{ display: 'flex', alignItem: 'center', flexDirection: 'column' }}>
@@ -68,7 +68,7 @@ import { Image } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Image, Button } from '@douyinfe/semi-ui';
+import { Image, Button } from '@kousum/semi-ui-vue';
 
 () => {
     const [timestamp, setTimestamp] = React.useState('');
@@ -104,7 +104,7 @@ import { Image, Button } from '@douyinfe/semi-ui';
 
  ```jsx live=true
 import React from 'react';
-import { Image } from '@douyinfe/semi-ui';
+import { Image } from '@kousum/semi-ui-vue';
 
 () => {
      return ( 
@@ -126,7 +126,7 @@ import { Image } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React, { useMemo } from 'react';
-import { Image, ImagePreview } from '@douyinfe/semi-ui';
+import { Image, ImagePreview } from '@kousum/semi-ui-vue';
 
 () => {
     const srcList = useMemo(() => ([
@@ -160,7 +160,7 @@ import { Image, ImagePreview } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React, { useMemo, useCallback } from 'react';
-import { ImagePreview, Button } from '@douyinfe/semi-ui';
+import { ImagePreview, Button } from '@kousum/semi-ui-vue';
 
 
 () => {
@@ -216,7 +216,7 @@ import { ImagePreview, Button } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React, { useMemo } from 'react';
-import { Image, ImagePreview } from '@douyinfe/semi-ui';
+import { Image, ImagePreview } from '@kousum/semi-ui-vue';
 
 () => {
     const srcList = useMemo(() => ([
@@ -271,8 +271,8 @@ import { Image, ImagePreview } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React, { useMemo, useCallback } from 'react';
-import { Image, ImagePreview, Button } from '@douyinfe/semi-ui';
-import { IconChevronLeft, IconChevronRight, IconMinus, IconPlus, IconRotate, IconDownload, IconRealSizeStroked, IconWindowAdaptionStroked } from "@douyinfe/semi-icons";
+import { Image, ImagePreview, Button } from '@kousum/semi-ui-vue';
+import { IconChevronLeft, IconChevronRight, IconMinus, IconPlus, IconRotate, IconDownload, IconRealSizeStroked, IconWindowAdaptionStroked } from "@kousum/semi-icons-vue";
 
 () => {
     const srcList = useMemo(() => ([
@@ -377,7 +377,7 @@ import { IconChevronLeft, IconChevronRight, IconMinus, IconPlus, IconRotate, Ico
 
 ```jsx live=true dir="column"
 import React, { useMemo } from 'react';
-import { Image, ImagePreview } from '@douyinfe/semi-ui';
+import { Image, ImagePreview } from '@kousum/semi-ui-vue';
 
 () => {
     const srcList = useMemo(() => ([

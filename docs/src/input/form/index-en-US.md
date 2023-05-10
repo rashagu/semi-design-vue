@@ -31,7 +31,7 @@ When in use, you need to import from the Form (note: only the control imported f
     All mounted under Form and declared directly in `<Form.Input />`  and `<Form.Select />` when used.
 
 ```javascript
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 const FormInput = Form.Input;
 const FormSelect = Form.Select;
@@ -67,8 +67,8 @@ You can also set `label` properties for each field, by default is the same as fi
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Tooltip } from '@douyinfe/semi-ui';
-import { IconHelpCircle } from '@douyinfe/semi-icons';
+import { Form, Tooltip } from '@kousum/semi-ui-vue';
+import { IconHelpCircle } from '@kousum/semi-icons-vue';
 
 () => (
     <Form layout='horizontal'>
@@ -104,7 +104,7 @@ When you need to get `formState`, `formApi`, `values`, etc. directly inside the 
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => (
     <Form render={({ formState, formApi, values }) => (
@@ -129,7 +129,7 @@ declare children as a function that returns all field components
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => (
     <Form layout='horizontal'>
@@ -157,7 +157,7 @@ Pass the entire internal structure directly in the form through `component` attr
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor() { super(); }
@@ -179,8 +179,8 @@ class Demo extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Col, Row, Button } from '@douyinfe/semi-ui';
-import { IconUpload } from '@douyinfe/semi-icons';
+import { Form, Col, Row, Button } from '@kousum/semi-ui-vue';
+import { IconUpload } from '@kousum/semi-icons-vue';
 
 class BasicDemoWithInit extends React.Component {
     constructor() {
@@ -443,7 +443,7 @@ Below is an example of the field name and their mapping path in FormState
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Row, Col, Toast, TextArea } from '@douyinfe/semi-ui';
+import { Form, Row, Col, Toast, TextArea } from '@kousum/semi-ui-vue';
 
 () => (
     <Form
@@ -478,7 +478,7 @@ import { Form, Row, Col, Toast, TextArea } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button, Toast } from '@douyinfe/semi-ui';
+import { Form, Button, Toast } from '@kousum/semi-ui-vue';
 
 () => {
     const handleSubmit = (values) => {
@@ -510,7 +510,7 @@ import { Form, Button, Toast } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => (
     <Form layout='horizontal'>
@@ -525,7 +525,7 @@ import { Form } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Select, Checkbox, Radio } from '@douyinfe/semi-ui';
+import { Form, Select, Checkbox, Radio } from '@kousum/semi-ui-vue';
 
 
 class BasicDemo extends React.Component {
@@ -615,7 +615,7 @@ class BasicDemo extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Row, Col } from '@douyinfe/semi-ui';
+import { Form, Row, Col } from '@kousum/semi-ui-vue';
 
 () => (
     <Form
@@ -691,7 +691,7 @@ When you need to set a uniform layout for all Fields in a Form, you can set `wra
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => (
     <Form
@@ -718,7 +718,7 @@ If you want to keep the DOM structure consistent with the original component, yo
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => (
     <Form onSubmit={(values) => console.log(values)} style={{ width: 400 }}>
@@ -742,7 +742,7 @@ A Label can be inlined in a field control by setting labelPosition to `inset`. C
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => (
     <Form labelPosition='inset' layout='horizontal'>
@@ -766,7 +766,7 @@ you can import them from the `Form` module, and combine `Form.Label` / `Form.Err
 For details of their API, refer to [Label](#Form.Label) / [ErrorMessage](#Form.ErrorMessage)
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { Label, ErrorMessage } = Form;
 ```
 
@@ -778,7 +778,7 @@ For the Slot property configuration, refer to [Form.Slot](#Form.Slot)
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 class AssistComponent extends React.Component {
     render() {
@@ -816,7 +816,7 @@ When `validateStatus` is passed in, the UI style corresponding to the value of v
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => {
     const [helpText, setHelpText] = useState('');
@@ -883,7 +883,7 @@ This attribute can be configured uniformly on the Form or individually on each F
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 () => {
     const options = [
@@ -920,7 +920,7 @@ You can set the label property in the `InputGroup` to insert a Label belonging t
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Form onSubmit={(values) => console.log(values)} labelPosition='top' style={{ width: 400 }}>
@@ -945,7 +945,7 @@ When submitting, use `formApi.validate()` to centrally verify the Field
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Modal, Select, Button, Row, Col } from '@douyinfe/semi-ui';
+import { Form, Modal, Select, Button, Row, Col } from '@kousum/semi-ui-vue';
 
 
 class ModalFormDemo extends React.Component {
@@ -1069,7 +1069,7 @@ class ModalFormDemo extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 
 class BasicDemoWithInit extends React.Component {
     constructor() {
@@ -1124,7 +1124,7 @@ When validate fails, you should return the error message (Object, key is fieldNa
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 class FormLevelValidateSync extends React.Component {
     constructor() {
@@ -1172,7 +1172,7 @@ For asynchronous validation, you should return a promise. In promise.then() you 
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 class FormLevelValidateAsync extends React.Component {
     constructor() {
@@ -1219,7 +1219,7 @@ You can specify a custom validation function for field. Supports synchronous and
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 class FieldLevelValidateDemo extends React.Component {
     constructor() {
@@ -1269,7 +1269,7 @@ When you want to manually trigger the validation of some specific Field, you can
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button, Space } from '@douyinfe/semi-ui';
+import { Form, Button, Space } from '@kousum/semi-ui-vue';
 class PartValidAndResetDemo extends React.Component {
     constructor() {
         super();
@@ -1352,7 +1352,7 @@ You can achieve the linkage between Fields by listening to the `onChange` of Fie
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button, Row } from '@douyinfe/semi-ui';
+import { Form, Button, Row } from '@kousum/semi-ui-vue';
 
 class LinkFieldForm extends React.Component {
     constructor() {
@@ -1394,7 +1394,7 @@ class LinkFieldForm extends React.Component {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 () => (
     <Form style={{ width: 450 }}>
@@ -1425,8 +1425,8 @@ Note: The initValue type of ArrayField must be an array
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { ArrayField, TextArea, Form, Button, useFormState } from '@douyinfe/semi-ui';
-import { IconPlusCircle, IconMinusCircle } from '@douyinfe/semi-icons';
+import { ArrayField, TextArea, Form, Button, useFormState } from '@kousum/semi-ui-vue';
+import { IconPlusCircle, IconMinusCircle } from '@kousum/semi-icons-vue';
 
 class ArrayFieldDemo extends React.Component {
     constructor() {
@@ -1501,7 +1501,7 @@ If you don't use ArrayField, you can use the provided formApi to manually add or
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Form, Button, TextArea } from '@douyinfe/semi-ui';
+import { Form, Button, TextArea } from '@kousum/semi-ui-vue';
 
 class ArrayDemo extends React.Component {
     constructor() {
@@ -1579,7 +1579,7 @@ class ArrayDemo extends React.Component {
 We provide four Hooks so that you can easily access Form internal state and call Form and Field related api in Functional Component which placed inside the Form structure without passing through props.
 
 ```jsx
-import { useFormApi, useFormState, useFieldApi, useFieldState } from '@douyinfe/semi-ui';
+import { useFormApi, useFormState, useFieldApi, useFieldState } from '@kousum/semi-ui-vue';
 ```
 
 #### useFormApi
@@ -1588,7 +1588,7 @@ import { useFormApi, useFormState, useFieldApi, useFieldState } from '@douyinfe/
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { useFormApi, Form, Button } from '@douyinfe/semi-ui';
+import { useFormApi, Form, Button } from '@kousum/semi-ui-vue';
 
 const ComponentUsingFormApi = () => {
     const formApi = useFormApi();
@@ -1620,7 +1620,7 @@ render(UseFromApiDemo);
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { useFormState, Form } from '@douyinfe/semi-ui';
+import { useFormState, Form } from '@kousum/semi-ui-vue';
 
 const ComponentUsingFormState = () => {
     const formState = useFormState();
@@ -1652,7 +1652,7 @@ render(UseFromStateDemo);
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { useFieldApi, Form, Button } from '@douyinfe/semi-ui';
+import { useFieldApi, Form, Button } from '@kousum/semi-ui-vue';
 
 const ComponentUsingFieldApi = () => {
     const nameFieldApi = useFieldApi('name');
@@ -1683,7 +1683,7 @@ render(UseFieldApiDemo);
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { useFieldState, Form } from '@douyinfe/semi-ui';
+import { useFieldState, Form } from '@kousum/semi-ui-vue';
 
 const ComponentUsingFieldState = props => {
     const fieldState = useFieldState(props.field);
@@ -1720,7 +1720,7 @@ We provided two HOC: `withFormApi`、`withFormState`, you can access the API of 
 Provided HOC: `withField`, to encapsulating custom components as Field that conform the Semi Form data flow.
 
 ```jsx
-import { withFormApi, withFormState, withField } from '@douyinfe/semi-ui';
+import { withFormApi, withFormState, withField } from '@kousum/semi-ui-vue';
 ```
 
 #### HOC - withFormApi
@@ -1730,7 +1730,7 @@ Note that the encapsulated components must be placed inside the Form structure.
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { withFormApi, Form, Button } from '@douyinfe/semi-ui';
+import { withFormApi, Form, Button } from '@kousum/semi-ui-vue';
 
 const SomeComponetInsideForm = props => (
     <Button onClick={() => {
@@ -1762,7 +1762,7 @@ Note that the encapsulated components must be placed inside the Form structure.
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { withFormState, Form } from '@douyinfe/semi-ui';
+import { withFormState, Form } from '@kousum/semi-ui-vue';
 
 const SomeComponentInsideForm = props => (
     <code>{JSON.stringify(props.formState)}</code>
@@ -1812,7 +1812,7 @@ withField(YourComponent, withFieldOption);
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { withField, Form } from '@douyinfe/semi-ui';
+import { withField, Form } from '@kousum/semi-ui-vue';
 
 // encapsulated html native input
 const htmlInput = (props) => {
@@ -1849,7 +1849,7 @@ render(WithFieldDemo1);
 
 ```jsx live=true dir="column" noInline=true
 import React from 'react';
-import { withField, Input, Select, Form } from '@douyinfe/semi-ui';
+import { withField, Input, Select, Form } from '@kousum/semi-ui-vue';
 
 const MyComponent = (props) => {
     const { onChange, value } = props;
@@ -1984,7 +1984,7 @@ The table below describes the features available in the formApi.
 
 ```jsx
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 class FormApiDemo extends React.Component {
     constructor() {
@@ -2018,7 +2018,7 @@ class FormApiDemo extends React.Component {
 
 ```jsx
 import React from 'react';
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
 
 () => {
     // functional compoentn usage
@@ -2107,7 +2107,7 @@ interface ArrayFieldItem {
 ## Form.Section
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { Section } = Form;
 ```
 
@@ -2124,7 +2124,7 @@ By default, `Label` is self-inserted into each `Field` by `Form`.
 If you need to self-insert Label elsewhere, we have provided the `Label` component for you.
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { Label } = Form;
 ```
 
@@ -2155,7 +2155,7 @@ When extraTextPositon is middle and labelPosition is left. Since extraText is al
 ## Form.Slot
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { Slot } = Form;
 ```
 
@@ -2170,7 +2170,7 @@ const { Slot } = Form;
 ## Form.ErrorMessage
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { ErrorMessage } = Form;
 ```
 

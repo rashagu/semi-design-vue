@@ -13,14 +13,14 @@ brief: 面包屑是用户界面中的一种辅助导航，可以显示当前页�
 ### 如何引入
 
 ```jsx import
-import { Breadcrumb } from '@douyinfe/semi-ui';
+import { Breadcrumb } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法
 
 ```jsx live=true
 import React from 'react';
-import { Breadcrumb } from '@douyinfe/semi-ui';
+import { Breadcrumb } from '@kousum/semi-ui-vue';
 
 () => (
     <Breadcrumb>
@@ -37,8 +37,8 @@ import { Breadcrumb } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Breadcrumb } from '@douyinfe/semi-ui';
-import { IconHome, IconArticle } from '@douyinfe/semi-icons';
+import { Breadcrumb } from '@kousum/semi-ui-vue';
+import { IconHome, IconArticle } from '@kousum/semi-icons-vue';
 
 () => (
     <Breadcrumb>
@@ -55,8 +55,8 @@ import { IconHome, IconArticle } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Breadcrumb } from '@douyinfe/semi-ui';
-import { IconHome } from '@douyinfe/semi-icons';
+import { Breadcrumb } from '@kousum/semi-ui-vue';
+import { IconHome } from '@kousum/semi-icons-vue';
 
 () => (
     <div>
@@ -81,8 +81,8 @@ import { IconHome } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Breadcrumb, Tag } from '@douyinfe/semi-ui';
-import { IconArrowRight } from '@douyinfe/semi-icons';
+import { Breadcrumb, Tag } from '@kousum/semi-ui-vue';
+import { IconArrowRight } from '@kousum/semi-icons-vue';
 
 () => (
     <div>
@@ -115,7 +115,7 @@ import { IconArrowRight } from '@douyinfe/semi-icons';
 
 ```jsx live=true
 import React from 'react';
-import { Breadcrumb, Typography } from '@douyinfe/semi-ui';
+import { Breadcrumb, Typography } from '@kousum/semi-ui-vue';
 
 () => {
     const routes = ['首页', '当这个页面标题很长很长很长时需要省略', '详情页'];
@@ -160,7 +160,7 @@ import { Breadcrumb, Typography } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Breadcrumb } from '@douyinfe/semi-ui';
+import { Breadcrumb } from '@kousum/semi-ui-vue';
 
 () => (
     <Breadcrumb>
@@ -181,7 +181,7 @@ import { Breadcrumb } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Breadcrumb } from '@douyinfe/semi-ui';
+import { Breadcrumb } from '@kousum/semi-ui-vue';
 
 () => (
     <Breadcrumb moreType='popover'>
@@ -200,8 +200,8 @@ import { Breadcrumb } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Breadcrumb, Popover } from '@douyinfe/semi-ui';
-import { IconMore } from '@douyinfe/semi-icons';
+import { Breadcrumb, Popover } from '@kousum/semi-ui-vue';
+import { IconMore } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const separator = '-'; // 用于拼接 restItem 数组项的分隔符
@@ -261,8 +261,8 @@ Breadcrumb 支持通过 routes 传入路由对象 `route: { name, path, href, ic
 
 ```jsx live=true hideInDSM
 import React from 'react';
-import { Breadcrumb } from '@douyinfe/semi-ui';
-import { IconHome, IconArticle } from '@douyinfe/semi-icons';
+import { Breadcrumb } from '@kousum/semi-ui-vue';
+import { IconHome, IconArticle } from '@kousum/semi-icons-vue';
 
 () => (
     <div>

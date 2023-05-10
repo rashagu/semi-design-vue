@@ -13,7 +13,7 @@ brief: Ratings provide insight regarding others’ opinions and experiences with
 ### How to import
 
 ```jsx import
-import { Rating } from '@douyinfe/semi-ui';
+import { Rating } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
@@ -23,7 +23,7 @@ Support two sizes: `default`, `small`.
 
 ```jsx live=true
 import React from 'react';
-import { Rating } from '@douyinfe/semi-ui';
+import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -41,7 +41,7 @@ Use `allowHalf` to support selection of half stars. After `v0.28.0`, it also sup
 
 ```jsx live=true
 import React from 'react';
-import { Rating } from '@douyinfe/semi-ui';
+import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -58,7 +58,7 @@ Use `disabled` to disabled interaction.
 
 ```jsx live=true
 import React from 'react';
-import { Rating } from '@douyinfe/semi-ui';
+import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
     <Rating disabled defaultValue={3} />
@@ -71,7 +71,7 @@ import { Rating } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { Rating } from '@douyinfe/semi-ui';
+import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
     <div>
@@ -93,7 +93,7 @@ Use `tooltips` to add description to Rating.
 
 ```jsx live=true
 import React from 'react';
-import { Rating } from '@douyinfe/semi-ui';
+import { Rating } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
     constructor(props) {
@@ -131,8 +131,8 @@ You can customize characters, numbers of rating and size.
 
 ```jsx live=true
 import React from 'react';
-import { Rating } from '@douyinfe/semi-ui';
-import { IconLikeHeart } from '@douyinfe/semi-icons';
+import { Rating } from '@kousum/semi-ui-vue';
+import { IconLikeHeart } from '@kousum/semi-icons-vue';
 
 () => (
     <div>

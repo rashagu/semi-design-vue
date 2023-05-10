@@ -12,7 +12,7 @@ brief: OverflowList 是一个行为组件，用于展示列表，并支持自适
 ### 如何引入
 
 ```jsx import
-import { OverflowList } from '@douyinfe/semi-ui';
+import { OverflowList } from '@kousum/semi-ui-vue';
 ```
 
 ### 折叠模式 - 默认
@@ -21,8 +21,8 @@ import { OverflowList } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { OverflowList, Tag, Slider } from '@douyinfe/semi-ui';
-import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@douyinfe/semi-icons';
+import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
+import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
 () => {
     const [width, setWidth] = useState(100);
@@ -66,8 +66,8 @@ import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder
 
 ```jsx live=true
 import React from 'react';
-import { OverflowList, Tag, Slider } from '@douyinfe/semi-ui';
-import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@douyinfe/semi-icons';
+import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
+import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
 () => {
     const [width, setWidth] = useState(100);
@@ -116,8 +116,8 @@ import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder
 
 ```jsx live=true
 import React from 'react';
-import { OverflowList, Tag, Slider } from '@douyinfe/semi-ui';
-import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@douyinfe/semi-icons';
+import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
+import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
 () => {
     const [width, setWidth] = useState(100);
@@ -166,8 +166,8 @@ import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder
 
 ```jsx live=true
 import React from 'react';
-import { OverflowList, Tag, Slider } from '@douyinfe/semi-ui';
-import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@douyinfe/semi-icons';
+import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
+import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
 () => {
     const [width, setWidth] = useState(100);

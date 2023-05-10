@@ -13,7 +13,7 @@ brief: Card container can consist of titles, paragraphs, pictures, lists, and ot
 ### How to import
 
 ```jsx import
-import { Card } from '@douyinfe/semi-ui';
+import { Card } from '@kousum/semi-ui-vue';
 ```
 ### Basic card
 
@@ -21,7 +21,7 @@ The basic card contains the title, content and other parts.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Typography } from '@douyinfe/semi-ui';
+import { Card, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -49,8 +49,8 @@ The card can only set the content area.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Popover, Avatar } from '@douyinfe/semi-ui';
-import { IconInfoCircle } from '@douyinfe/semi-icons';
+import { Card, Popover, Avatar } from '@kousum/semi-ui-vue';
+import { IconInfoCircle } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const { Meta } = Card;
@@ -103,7 +103,7 @@ You can use the `cover` property to set the cover.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card } from '@douyinfe/semi-ui';
+import { Card } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Meta } = Card;
@@ -131,7 +131,7 @@ You can use `bordered` to set whether the card has an outer border, the default 
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card } from '@douyinfe/semi-ui';
+import { Card } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -163,8 +163,8 @@ You can use `shadows` to set the timing of the shadow display. Optional: `hover`
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Avatar, Popover } from '@douyinfe/semi-ui';
-import { IconInfoCircle } from '@douyinfe/semi-icons';
+import { Card, Avatar, Popover } from '@kousum/semi-ui-vue';
+import { IconInfoCircle } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const { Meta } = Card;
@@ -246,7 +246,7 @@ You can use `Card.Meta` to support more flexible content, allowing you to set `t
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Avatar, Space, Button, Typography } from '@douyinfe/semi-ui';
+import { Card, Avatar, Space, Button, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Meta } = Card;
@@ -302,7 +302,7 @@ Other cards can be nested inside the card.
 ```jsx live=true dir="column"
 
 import React from 'react';
-import { Card, Typography } from '@douyinfe/semi-ui';
+import { Card, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -342,7 +342,7 @@ The system overview page is often combined with the grid.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Row, Col } from '@douyinfe/semi-ui';
+import { Card, Row, Col } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -393,7 +393,7 @@ You can use the `loading` property of `Card` to set whether to display placehold
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Card, Switch } from '@douyinfe/semi-ui';
+import { Card, Switch } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [loading, setLoading] = useState(true);
@@ -425,7 +425,7 @@ The `loading` property of `Card` can only set the preloading effect of the conte
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Card, Switch, Skeleton, Typography, Avatar } from '@douyinfe/semi-ui';
+import { Card, Switch, Skeleton, Typography, Avatar } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const [loading, setLoading] = useState(true);
@@ -503,7 +503,7 @@ You can use the `Tabs` component in the card component.
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Tabs, TabPane } from '@douyinfe/semi-ui';
+import { Card, Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 function demo() {
     return (
@@ -538,7 +538,7 @@ function demo() {
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, Rating } from '@douyinfe/semi-ui';
+import { Card, Rating } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Meta } = Card;
@@ -574,7 +574,7 @@ Use `CardGroup` to present the cards in an evenly spaced arrangement.
 
 ```jsx live=true dir="column"
 import React, { useState } from 'react';
-import { Card, CardGroup, Typography, Slider } from '@douyinfe/semi-ui';
+import { Card, CardGroup, Typography, Slider } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -623,7 +623,7 @@ You can use the `type` property of `CardGroup` to set the card group to a grid t
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Card, CardGroup, Typography } from '@douyinfe/semi-ui';
+import { Card, CardGroup, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const { Text } = Typography;

@@ -21,7 +21,7 @@ brief: 24 栅格系统。
 ### 如何引入
 
 ```jsx import
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 ```
 
 ### 基础使用
@@ -32,7 +32,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid">
@@ -75,7 +75,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid grid-gutter">
@@ -143,7 +143,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid">
@@ -178,7 +178,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid">
@@ -229,7 +229,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid grid-flex">
@@ -266,7 +266,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid">
@@ -286,7 +286,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 import React from 'react';
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid">

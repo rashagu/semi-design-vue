@@ -471,7 +471,7 @@ Change ：`$spacing-select_option_list-paddingTop` 、`$spacing-select_option_li
 
 #### 🎉 2.20.2 (2022-09-27)
 - 【Fix】
-  - Fix warning about corejs in @douyinfe/semi-icons 
+  - Fix warning about corejs in @kousum/semi-icons-vue 
 
 #### 🎉 2.20.1 (2022-09-27)
 - 【Style】
@@ -502,7 +502,7 @@ Change ：`$spacing-select_option_list-paddingTop` 、`$spacing-select_option_li
     - Toast supports dynamic modification of content by ID [#1035](https://github.com/DouyinFE/semi-design/issues/1035) [@gwsbhqt](https://github.com/gwsbhqt)
     - Skeleton.Avatar supports shape property [#1117](https://github.com/DouyinFE/semi-design/issues/1117) [@MuxinFeng](https://github.com/MuxinFeng)
 - 【Chore】
-    - Remove the ts source code in the package product of @douyinfe/semi-ui, leaving only the lib and dist directories
+    - Remove the ts source code in the package product of @kousum/semi-ui-vue, leaving only the lib and dist directories
     - Modify the writing of some components scss, convert division into multiplication and math.div syntax, to avoid the problem of repeatedly throwing warnings when compiling higher versions of sass
   
 #### 🎉 2.19.0 (2022-09-09)
@@ -785,7 +785,7 @@ Change ：`$spacing-select_option_list-paddingTop` 、`$spacing-select_option_li
     - Switch adds A11y keyboard and focus adaptation  [#205](https://github.com/DouyinFE/semi-design/issues/205)
     - Banner adds A11y keyboard and focus adaptation  [#205](https://github.com/DouyinFE/semi-design/issues/205)
 - 【Chore】
-  - @douyinfe/semi-icons, @douyinfe/semi-illustrations update react version statement in peerDependency: 16/17 -> 16/17/18
+  - @kousum/semi-icons-vue, @douyinfe/semi-illustrations update react version statement in peerDependency: 16/17 -> 16/17/18
 
 #### 🎉 2.9.1 (2022-04-26)
 - 【Fix】
@@ -822,7 +822,7 @@ Change ：`$spacing-select_option_list-paddingTop` 、`$spacing-select_option_li
 
 #### 🎉 2.8.0 (2022-04-08)
 - 【Fix】
-    - Upgrade the react-sortable-hoc version (v1.11.0 -> v2.0.0) that @douyinfe/semi-ui depends on, to solve the problem of unmeet peerDependency when using react 17 in the pnpm scenario, the react version is not satisfie,  [#747](https://github.com/DouyinFE/semi-design/issues/747)
+    - Upgrade the react-sortable-hoc version (v1.11.0 -> v2.0.0) that @kousum/semi-ui-vue depends on, to solve the problem of unmeet peerDependency when using react 17 in the pnpm scenario, the react version is not satisfie,  [#747](https://github.com/DouyinFE/semi-design/issues/747)
 
 #### 🎉 2.8.0-beta.1 (2022-04-03)
 - 【Fix】
@@ -916,7 +916,7 @@ Change ：`$spacing-select_option_list-paddingTop` 、`$spacing-select_option_li
 
 #### 🎉 2.4.1 (2022-02-16)
 - 【Fix】
-    - `@douyinfe/semi-ui` Add dependency declaration: `@douyinfe/semi-animation` to avoid the problem of missing dependency declarations that may exist in pnpm scenarios [#626](https://github.com/DouyinFE/semi-design/issues/626)
+    - `@kousum/semi-ui-vue` Add dependency declaration: `@douyinfe/semi-animation` to avoid the problem of missing dependency declarations that may exist in pnpm scenarios [#626](https://github.com/DouyinFE/semi-design/issues/626)
     - Avoid waring about passing insetLabelId/onChangeWithDateFirst to origin input/text dom in component Form.Input/TextArea/TimePicker [#624](https://github.com/DouyinFE/semi-design/issues/624)
 - 【Style】
     - Optimize TagInput component Sass variable reference relationship [@Carlosfengv](https://github.com/Carlosfengv)

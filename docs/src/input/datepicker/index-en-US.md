@@ -13,7 +13,7 @@ brief: The date selector is used to help the user select a compliant, formatted 
 ### How to import
 
 ```jsx import 
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 ```
 
 
@@ -21,7 +21,7 @@ import { DatePicker } from '@douyinfe/semi-ui';
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -36,7 +36,7 @@ The density can be used to control the size of the picker panel. The `compact` i
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -52,7 +52,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return <DatePicker insetLabel="End date" style={{ width: 240 }} />;
@@ -65,7 +65,7 @@ Set `Multiple` to `true`, can choose multiple dates.
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -81,7 +81,7 @@ If you want to remove the infinite loop scrolling interaction of TimePicker, you
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -105,7 +105,7 @@ Set `type` to `dateRange`, can choose the date range.
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -124,7 +124,7 @@ Set `type` to `dateTimeRange`, can choose the date range and choose time;
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -155,7 +155,7 @@ After `insetInput` is turned on, it includes the following functions:
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     return (
@@ -194,7 +194,7 @@ In the scenario of range selection, turning on `syncSwitchMonth` means to switch
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -217,7 +217,7 @@ version：>=1.28.0
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -239,7 +239,7 @@ class App extends React.Component {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const handleChange = date => {
@@ -293,7 +293,7 @@ Set `type` to `month`, can make year-to-month selection.
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -310,7 +310,7 @@ Set `type` to `monthRange` to select the year and month range, small size and qu
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker type="monthRange" style={{ width: 200 }} />;
 ```
@@ -329,7 +329,7 @@ The following example binds three callbacks: `onChange`, `onConfirm` and `onCanc
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -358,7 +358,7 @@ Pass parameter `Presets` to set shortcuts for date selection.
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     constructor() {
@@ -388,8 +388,8 @@ With `topSlot` and `bottomSlot`, you can customize the rendering of the top and 
 
 ```jsx live=true
 import React, { useState, useMemo } from 'react';
-import { DatePicker, Typography, Tabs, TabPane, Space } from '@douyinfe/semi-ui';
-import { IconBulb } from '@douyinfe/semi-icons';
+import { DatePicker, Typography, Tabs, TabPane, Space } from '@kousum/semi-ui-vue';
+import { IconBulb } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const { Text } = Typography;
@@ -503,7 +503,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -524,7 +524,7 @@ Pass in `disabledDate` to disable the specified date, pass in `disabledTime` to 
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 import { range } from 'lodash-es';
 
@@ -601,7 +601,7 @@ When `type` contains `range`, the date can be disabled dynamically according to 
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 class App extends React.Component {
@@ -628,7 +628,7 @@ When `type` contains `range`, dates can be disabled based on the focus state. Th
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
 function App() {
@@ -664,7 +664,7 @@ Pass parameter `format` to custom display format.
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
     render() {
@@ -684,8 +684,8 @@ The custom trigger is a complete customization of the trigger, the default clear
 ```jsx live=true
 import React, { useState, useCallback, useMemo } from 'react';
 import * as dateFns from 'date-fns';
-import { DatePicker, Button } from '@douyinfe/semi-ui';
-import { IconClose, IconChevronDown } from '@douyinfe/semi-icons';
+import { DatePicker, Button } from '@kousum/semi-ui-vue';
+import { IconClose, IconChevronDown } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const [date, setDate] = useState(new Date());
@@ -724,8 +724,8 @@ function Demo() {
 
 ```jsx live=true hideInDSM
 import React, { useState, useCallback, useMemo } from 'react';
-import { DatePicker, Button, Icon } from '@douyinfe/semi-ui';
-import { IconClose, IconChevronDown } from '@douyinfe/semi-icons';
+import { DatePicker, Button, Icon } from '@kousum/semi-ui-vue';
+import { IconClose, IconChevronDown } from '@kousum/semi-icons-vue';
 
 function Demo() {
     const [date, setDate] = useState();
@@ -777,7 +777,7 @@ function Demo() {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker, Tooltip } from '@douyinfe/semi-ui';
+import { DatePicker, Tooltip } from '@kousum/semi-ui-vue';
 
 function Demo() {
     const dateStyle = {
@@ -829,7 +829,7 @@ type DayStatusType = {
 
 ```jsx live=true
 import React from 'react';
-import { DatePicker } from '@douyinfe/semi-ui';
+import { DatePicker } from '@kousum/semi-ui-vue';
 import classNames from 'classnames';
 
 function Demo() {
@@ -954,8 +954,8 @@ function Demo() {
 
 ```jsx live=true
 import React, { useRef } from 'react';
-import { DatePicker, Space, Button } from '@douyinfe/semi-ui';
-import { BaseDatePicker } from '@douyinfe/semi-ui/lib/es/datePicker';
+import { DatePicker, Space, Button } from '@kousum/semi-ui-vue';
+import { BaseDatePicker } from '@kousum/semi-ui-vue/lib/es/datePicker';
 
 function Demo() {
     const ref = useRef();
