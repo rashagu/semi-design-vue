@@ -6,6 +6,18 @@ localeCode: en-US
 order: 3
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Build your own design system
 
 Semi provides a complete theme configuration process, which not only maintains the uniformity and coherence of colors, fonts, rounded corners, shadows, layouts, etc. in the visual language, but also meets the diversified visual needs of the business and the brand.  

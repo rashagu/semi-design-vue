@@ -7,6 +7,18 @@ subTitle: BackTop
 icon: doc-backtop
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -19,7 +31,7 @@ import { BackTop } from '@kousum/semi-ui-vue';
 BackTop can be used directly with the default styles.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { BackTop } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -39,7 +51,7 @@ class Demo extends React.Component {
 The default styles for BackTop component could be overwritten.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { BackTop } from '@kousum/semi-ui-vue';
 import { IconArrowUp } from '@kousum/semi-icons-vue';
 

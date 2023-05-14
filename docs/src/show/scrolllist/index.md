@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 61
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-scrolllist
 brief: 滚动列表。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -20,7 +33,7 @@ import { ScrollList, ScrollItem } from '@kousum/semi-ui-vue';
 滚动列表提供了一个类似于 iOS 操作系统的滚动选择模式，同时支持滚动至指定窗口位置选择与点击选择。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { ScrollList, ScrollItem, Button } from '@kousum/semi-ui-vue';
 
 class ScrollListDemo extends React.Component {

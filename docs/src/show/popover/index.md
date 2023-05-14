@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 60
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-popover
 brief: 点击/鼠标移入元素，弹出气泡式的卡片浮层。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 使用场景
 
 Popover 气泡卡片是由用户自主打开的临时性浮层卡片，能够承载一些额外内容和交互行为而不影响原页面。
@@ -76,7 +89,7 @@ render(Demo);
 注意事项同 [Tooltip](/zh-CN/show/tooltip#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9) 
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -100,7 +113,7 @@ function Demo() {
 支持通过`position`设置浮层弹出方向，共支持十二个方向。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -188,7 +201,7 @@ function Demo() {
 设置`trigger='custom'`，此场景下，Popover 的显示与否完全受到参数 `visible` 的控制。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popover, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -242,7 +255,7 @@ class App extends React.Component {
 > 这种模式下浮层会拥有一个默认的样式，你可以通过传递 style 参数来覆盖掉。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -349,7 +362,7 @@ function Demo() {
 在**显示小三角**的条件（`showArrow=true`）下，可以传入 `arrowPointAtCenter=true` 使得小三角始终指向元素中心位置。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -458,7 +471,7 @@ function Demo() {
 如果你需要定制浮层的背景色或边框颜色，请**务必单独声明 `style` 中的 `backgroundColor` 和 `borderColor` 属性**，这样能够使得“小三角”也能应用相同的背景色和边框颜色。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -498,7 +511,7 @@ function Demo() {
 Popover content 支持传入函数，它的入参是一个对象，将 `initialFocusRef` 绑定在可聚焦 DOM 或组件上，打开面板时会自动聚焦在该位置。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Button, Input, Popover, Space } from '@kousum/semi-ui-vue';
 
 () => {

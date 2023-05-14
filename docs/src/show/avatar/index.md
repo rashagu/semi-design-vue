@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 45
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-avatar
 brief: 头像，支持图片或字符展示。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -20,7 +33,7 @@ import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 可以通过 `size` 属性设置图标大小，支持``extra-extra-small`(20x20)，`extra-small`(24x24)，`small`(32x32)，`default`(40x40)，`medium`(48x48)，`large`(72x72)，`extra-large`(128x128)`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
@@ -53,7 +66,7 @@ import { Avatar } from '@kousum/semi-ui-vue';
 Avatar 支持默认色板的 15 种颜色和白色，包括：`amber`、 `blue`、 `cyan`、 `green`、 `grey`、 `indigo`、 `light-blue`、 `light-green`、 `lime`、 `orange`、 `pink`、 `purple`、 `red`、 `teal`、 `violet`、 `yellow`。也可以通过 `style` 来自定义颜色样式。默认为`grey`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
@@ -76,7 +89,7 @@ import { Avatar } from '@kousum/semi-ui-vue';
 可以通过 `src` 设置图片格式的头像。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
@@ -101,7 +114,7 @@ import { Avatar } from '@kousum/semi-ui-vue';
 Avatar 支持 `circle`、`square` 两种形状，默认为 `circle`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
@@ -119,7 +132,7 @@ import { Avatar } from '@kousum/semi-ui-vue';
 Avatar 支持 `onClick`、`onMouseEnter`、`onMouseLeave`。其中 `hover` 状态下可以通过 `hoverMask` 属性传入覆盖层的内容。覆盖层无默认样式。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 import { IconCamera } from '@kousum/semi-icons-vue';
 
@@ -151,7 +164,7 @@ import { IconCamera } from '@kousum/semi-icons-vue';
 可以通过 AvatarGroup 将 `avatar` 显示为组。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 
 () => (
@@ -170,7 +183,7 @@ import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 可以通过 `maxCount` 设置展示的头像数量。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 
 () => (
@@ -189,7 +202,7 @@ import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 可以通过 `renderMore` 自定义 more 标签。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AvatarGroup, Avatar, Popover } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -229,7 +242,7 @@ function Demo() {
 可以通过 `overlapFrom` 控制头像组的覆盖方式。可选值有 `start` 和 `end`，分别表示左边覆盖右边和右边覆盖左边。默认值为 `start`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 
 () => (
@@ -260,6 +273,18 @@ import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ### Avatar
 
 | 属性 | 说明 | 类型 | 默认值 |
@@ -295,7 +320,7 @@ import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 - 当 Avatar 与其他组件结合使用时，需要同时检查该组件的可访问性指南。
 - Avatar的`alt`属性可以被屏幕阅读器读取，使用头像组件时，请使用`alt` 属性解释头像的内容。
 ```jsx
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 
 () => {

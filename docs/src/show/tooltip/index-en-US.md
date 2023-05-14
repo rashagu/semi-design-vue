@@ -9,6 +9,18 @@ width: 65%
 brief: Tooltip is used to identify an element or attach a small amount of auxiliary information. The most typical scenario is to explain the meaning of the icon to the user, display the truncated text, display the description of the picture, and so on.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -73,7 +85,7 @@ When configured as `topRight`, it pops up, and the popup layer is right-aligned 
 Same for other directions
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -180,7 +192,7 @@ By default `arrowPointAtCenter=true`, the small triangle always points to the ce
 You can set it to false and the little triangle will no longer keep pointing to the center of the element. The popover is aligned to the edges of the children 
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tooltip, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -262,7 +274,7 @@ function Demo() {
 Configure specific styles for the pop-up layer through the `className` and `style` API, such as overriding the default maxWidth (280px)
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 
 () => {
@@ -287,7 +299,7 @@ With `getPopupContainer` the bullet layer will be rendered to the DOM returned b
 **It should be noted that:** The returned container, if not `document.body`,**`position` Will be set by default `"relative"`**(Version > = 0.18.0).
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -312,7 +324,7 @@ Tooltip, Popconfirm, and Popover all need to hijack related events of children (
 Need to add a layer of elements (div or span) in the middle to prevent trigger event hijack failure.
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Popconfirm, Tooltip, Button } from '@kousum/semi-ui-vue';
 
 () => (
@@ -330,7 +342,18 @@ import { Popconfirm, Tooltip, Button } from '@kousum/semi-ui-vue';
 
 ---
 
-| Properties | Instructions | Type | Default | Version |
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}| Properties | Instructions | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | autoAdjustOverflow | Whether the floating layer automatically adjusts its direction when it is blocked | boolean | true |  |
 | arrowPointAtCenter | Whether the "small triangle" points to the center of the element, you need to pass in "showArrow = true" at the same time | boolean | true | **0.34.0** |

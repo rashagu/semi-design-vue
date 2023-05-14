@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 38
 category: 导航类
@@ -6,6 +7,18 @@ title: BackTop 回到顶部
 icon: doc-backtop
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -19,7 +32,7 @@ import { BackTop } from '@kousum/semi-ui-vue';
 BackTop 预设了基本的返回按钮，可以直接调用。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { BackTop } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -39,7 +52,7 @@ class Demo extends React.Component {
 BackTop 预设了默认样式，包括：距离底部 50px，距离右侧 100px，`box-sizing` 为 `border-box`，内容水平居中。样式可以覆盖。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { BackTop } from '@kousum/semi-ui-vue';
 import { IconArrowUp } from '@kousum/semi-icons-vue';
 

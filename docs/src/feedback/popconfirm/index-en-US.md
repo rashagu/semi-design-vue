@@ -8,7 +8,18 @@ icon: doc-popconfirm
 brief: Used when the operation of the target element requires further confirmation from the user. Compared with Popover, it has a built-in series of configurable action buttons. Compared with Modal, it does not force full-screen centering, and the interaction is lighter.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -21,7 +32,7 @@ import { Popconfirm } from '@kousum/semi-ui-vue';
 `Popconfirm` is based on the `Tooltip` component. Children support the same type as `Tooltip`. For details, please refer to [Tooltip Cautions](/en-US/show/tooltip#Cautions)
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popconfirm, Button, Toast } from '@kousum/semi-ui-vue';
 
 () => {
@@ -118,7 +129,7 @@ function TypesConfirmDemo(props = {}) {
 promise solve will close the bubble confirmation box, the bubble will remain when promise reject, and button loading will automatically switch to false  
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popconfirm, Button, Toast } from '@kousum/semi-ui-vue';
 
 () => {
@@ -160,7 +171,7 @@ import { Popconfirm, Button, Toast } from '@kousum/semi-ui-vue';
 `content` supports function, and its parameter is an object, which binds `initialFocusRef` to the focusable DOM or component, and it will automatically focus at this position when the panel is opened. Version 2.30.0 supported.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Button, Popconfirm, Space } from '@kousum/semi-ui-vue';
 
 () => {

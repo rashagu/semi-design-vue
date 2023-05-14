@@ -8,6 +8,18 @@ icon: doc-spin
 brief: Spin is used to inform the user that the content is loading and may take an uncertain period of time.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -19,7 +31,7 @@ import { Spin } from '@kousum/semi-ui-vue';
 ### Basic usage
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Spin } from '@kousum/semi-ui-vue';
 
 () => (
@@ -35,7 +47,7 @@ import { Spin } from '@kousum/semi-ui-vue';
 Supports three sizes: `large`, `medium` (default), and `small`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Spin } from '@kousum/semi-ui-vue';
 
 () => (
@@ -59,7 +71,7 @@ import { Spin } from '@kousum/semi-ui-vue';
 Use `tip` to set the description texts when Spin is used as a wrapping element
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Spin } from '@kousum/semi-ui-vue';
 
 () => (
@@ -85,7 +97,7 @@ import { Spin } from '@kousum/semi-ui-vue';
 Use `indicator` property to customize Spin's indicator style.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Spin } from '@kousum/semi-ui-vue';
 import { IconLoading } from '@kousum/semi-icons-vue';
 

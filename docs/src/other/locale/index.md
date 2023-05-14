@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 75
 category: 其他
@@ -8,7 +9,18 @@ dir: column
 brief: 国际化组件，为 Semi 组件提供多语言支持
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 目前支持语言
 
 | 最低支持版本  | 语言 |
@@ -33,7 +45,7 @@ LocaleProvider 使用了 React 的 context 上下文特性，你只需要在应�
 当需要切换语言时，直接切换 props 传入的 locale 即可
 
 ```jsx hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import zh_CN from '@kousum/semi-ui-vue/lib/es/locale/source/zh_CN';
 import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
 import en_US from '@kousum/semi-ui-vue/lib/es/locale/source/en_US';
@@ -75,7 +87,7 @@ import { LocaleProvider } from '@kousum/semi-ui-vue';
 ### 国际化
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
 import ja_JP from '@kousum/semi-ui-vue/lib/es/locale/source/ja_JP';
 import { LocaleProvider, Pagination } from '@kousum/semi-ui-vue';
@@ -104,7 +116,7 @@ class I18nDemo extends React.Component {
 当你的自定义组件，也希望消费 Semi LocaleProvider Context 中的 localeCode 或者读取具体某个组件的 i18n 文本 localeData时，你可以使用 LocaleConsumer 进行获取；
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import zh_CN from '@kousum/semi-ui-vue/lib/es/locale/source/zh_CN';
 import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
 import ko_KR from '@kousum/semi-ui-vue/lib/es/locale/source/ko_KR';
@@ -178,7 +190,7 @@ render(I18nCustomDemo);
 若无RTL适配需求，直接使用LocaleProvider即可
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import zh_CN from '@kousum/semi-ui-vue/lib/es/locale/source/zh_CN';
 import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
 import en_US from '@kousum/semi-ui-vue/lib/es/locale/source/en_US';

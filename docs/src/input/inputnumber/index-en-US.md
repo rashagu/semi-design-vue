@@ -8,7 +8,18 @@ icon: doc-inputnumber
 brief: Through the mouse or keyboard, input the value in the range. Unlike Input, it has a stepper operation area for digital scenes, and it can display more complex content formats when used with Parser.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## When to Use
 
 When you need to get a standard value.
@@ -25,7 +36,7 @@ import { InputNumber } from '@kousum/semi-ui-vue';
 ### Basic Input Box
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -54,7 +65,7 @@ class App extends React.Component {
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -89,7 +100,7 @@ class App extends React.Component {
 With `innerButtons`, you can hide the buttons on the right into the interior, which will only be displayed when hover occurs
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
@@ -100,7 +111,7 @@ import { InputNumber } from '@kousum/semi-ui-vue';
 Set `hidebuttons` to `true` to hide the buttons completely
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
@@ -112,7 +123,7 @@ import { InputNumber } from '@kousum/semi-ui-vue';
 ### Size
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -142,7 +153,7 @@ class App extends React.Component {
 > A pair of methods for `formatter` and `parser`, which generally need to be set at the same time, otherwise the value cannot be resolved correctly.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -182,7 +193,7 @@ class App extends React.Component {
 With formatter and onNumberChange(**>=v1.9.0**), a pure digital input box can be implemented.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 function Demo () {

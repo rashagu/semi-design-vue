@@ -8,6 +8,18 @@ icon: doc-timepicker
 brief: Users can easily select a compliant, formatted point of time using the time selector.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -21,7 +33,7 @@ import { TimePicker } from '@kousum/semi-ui-vue';
 Click TimePicker, and then you can select or enter a time in the floating layer.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -34,7 +46,7 @@ function Demo() {
 Starting from version V2.22.0, we changed the default mode of ScrollItem in TimePicker from `wheel` to `normal`. If you want to apply the effect of infinite scrolling back, please refer to the following example.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -46,7 +58,7 @@ function Demo() {
 ### With an Embedded Label
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -59,7 +71,7 @@ function Demo() {
 When using `value` And not. `defaultValue` When used as a controlled component.`value` and `onChange` It needs to be used in conjunction.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -89,7 +101,7 @@ The columns in the TimePicker float will follow `format` Change, when omitted `f
 NOTE: `format` Follow the date-fns `format` Format. https://date-fns.org/v2.0.0/docs/format
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -136,7 +148,7 @@ function Demo() {
 ### Disable Time Selection
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -149,7 +161,7 @@ function Demo() {
 Available `Hour Step`, `Minute Step`, `Second Step` Show the optional minutes and seconds by step.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -164,7 +176,7 @@ function Demo() {
 > For example, the default 12-hour format string is:`a h:mm:ss`, if passed in `A h:mm:ss` This will result in an inability to format correctly.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -186,7 +198,7 @@ function Demo() {
 Pass type = "timeRange" to enable time range selection.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {

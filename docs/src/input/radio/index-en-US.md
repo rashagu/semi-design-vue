@@ -8,6 +8,18 @@ icon: doc-radio
 brief: Radio component allows the user to select one option from a relative small set.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## When to use
 
 -   Used to select a single state among multiple options.
@@ -24,7 +36,7 @@ import { Radio, RadioGroup } from '@kousum/semi-ui-vue';
 ### Basic Usage
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Radio } from '@kousum/semi-ui-vue';
 
 () => (
@@ -40,7 +52,7 @@ You can use `extra` to add extra information, which can be any type of ReactNode
 > `extra` >= v0.25.0
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Radio } from '@kousum/semi-ui-vue';
 
 
@@ -54,7 +66,7 @@ import { Radio } from '@kousum/semi-ui-vue';
 ### Disabled
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Radio, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -98,7 +110,7 @@ class App extends React.Component {
 You can set `mode='advanced'` to allow options be able to unchecked when clicked again.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Radio } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -134,7 +146,7 @@ class App extends React.Component {
 You can use `RadioGroup` to create a set of mutually exclusive options.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Radio, RadioGroup } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -170,7 +182,7 @@ class App extends React.Component {
 The radio elements in the group can be arranged horizontally or vertically by setting the `direction` property to the RadioGroup
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => (
@@ -192,7 +204,7 @@ You can use `type='button'` to set the button style type radio, and the button t
 It should be noted that the button type radio selector does not support auxiliary text (`extra`) and vertical arrangement (`direction='vertical'`).
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Radio, RadioGroup, Space } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -257,7 +269,7 @@ version: >=1.30.0
 You can set `type='card'` to `RadioGroup` to achieve card style with background.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => (
@@ -283,7 +295,7 @@ version: >=1.30.0
 You can set `type='pureCard'` to `RadioGroup` to achieve a pure card style with background and no radio.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => (
@@ -306,7 +318,7 @@ import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 You can pass an array of options to `RadioGroup` using `options` property to create a set.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { RadioGroup } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {

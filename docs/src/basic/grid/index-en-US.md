@@ -8,7 +8,18 @@ dir: column
 brief: 24 grid system.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Overview
 
 The grid system of layout, we define the external framework of information blocks based on row and column (col) to ensure that each area of the page can be robustly arranged.
@@ -31,7 +42,7 @@ From stacking to horizontal arrangement.
 Using a single set of Row and Col grid components, you can create a basic grid system. All Col must be placed in the Row.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -74,7 +85,7 @@ If you want to support responsiveness, you can write {xs: 8, sm: 16, md: 24, lg:
 Dark for content area, light for spacing
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -142,7 +153,7 @@ import { Col, Row } from '@kousum/semi-ui-vue';
 ### Offset
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -177,7 +188,7 @@ import { Col, Row } from '@kousum/semi-ui-vue';
 Use `row-flex` to define a Flex layout whose child elements are based on different values `start`,`center`,`end`,`space-between`,`space-around`, define their typesetting methods in the parent node respectively.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -228,7 +239,7 @@ import { Col, Row } from '@kousum/semi-ui-vue';
 ### Flex subelements vertically aligned
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -265,7 +276,7 @@ import { Col, Row } from '@kousum/semi-ui-vue';
 Change the sorting of elements through `order` of the Col.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -285,7 +296,7 @@ import { Col, Row } from '@kousum/semi-ui-vue';
 Referring to Bootstrap's responsive design, preset six response sizes:`xs`, `sm`, `md`, `lg`, `Xl`, `xxl`.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (

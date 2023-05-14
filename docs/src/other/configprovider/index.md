@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 74
 category: 其他
@@ -8,7 +9,18 @@ dir: column
 brief: 为组件提供统一的全局化配置。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入

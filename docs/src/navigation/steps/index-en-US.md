@@ -9,6 +9,18 @@ dir: column
 brief: Decompose complex tasks or tasks with prior relationships, use step components to guide users to operate according to the prescribed process, and let them know their current progress
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -23,7 +35,7 @@ const Step = Steps.Step;
 It is recommended to use the simple version of steps, which will be gradually deprecated later
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -40,7 +52,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 Set type=`"basic"` to display a simple style step bar
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -65,7 +77,7 @@ You can use type="nav" to set the navigation style step bar. The navigation styl
 4. Steps.Step only supports title, className, and style attributes.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -85,7 +97,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 Display the mini size step bar by setting size=`"small"`
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -98,7 +110,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -118,7 +130,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 Use with content and buttons to represent the processing progress of a process
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -195,7 +207,7 @@ class App extends React.Component {
 Show steps in vertical direction by setting direction
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -208,7 +220,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -225,7 +237,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 Using Steps `status` Property to specify the state of the current step.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -242,7 +254,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 By setting Steps.Step's `icon` Properties, you can use custom icons.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 import { IconHome, IconLock, IconClear, IconTickCircle } from '@kousum/semi-icons-vue';
 
@@ -261,7 +273,7 @@ import { IconHome, IconLock, IconClear, IconTickCircle } from '@kousum/semi-icon
 Since version 1.29.0, onChange is supported, which can be used to realize the processing progress. onChange receives a parameter of type number, which is equal to initial + current.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {

@@ -7,6 +7,18 @@ icon: doc-autocomplete
 brief: The input box is automatically filled.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## When to use
 
 Used to provide input suggestions to the input box and perform automatic completion operations
@@ -29,7 +41,7 @@ import { AutoComplete } from '@kousum/semi-ui-vue';
 Monitor user input through onSearch, pass input suggestions through data, and maintain control through onChange. OnChange is triggered when the input box changes/selects an input item
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete } from '@kousum/semi-ui-vue';
 import { IconSearch } from '@kousum/semi-icons-vue';
 
@@ -71,7 +83,7 @@ When you need to customize the rendering of candidates, data can be passed in an
 The rendering of candidates can be customized through renderItem
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete, Avatar } from '@kousum/semi-ui-vue';
 import { IconSearch } from '@kousum/semi-icons-vue';
 
@@ -140,7 +152,7 @@ class CustomOptionDemo extends React.Component {
 Get user input value from onSearch, update data value dynamically, update loading
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete } from '@kousum/semi-ui-vue';
 import { IconSearch } from '@kousum/semi-icons-vue';
 
@@ -224,7 +236,7 @@ class ObjectDemo extends React.Component {
 The size of the input box can be set by setting size, optional `small`, `default` (default), `large`
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
@@ -260,7 +272,7 @@ import { AutoComplete } from '@kousum/semi-ui-vue';
 The position of the drop-down menu can be set by setting position, and the optional values refer to Tooltip position
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
@@ -284,7 +296,7 @@ import { AutoComplete } from '@kousum/semi-ui-vue';
 ### Disabled
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
@@ -297,7 +309,7 @@ import { AutoComplete } from '@kousum/semi-ui-vue';
 Different verification states can be set to show different styles
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
@@ -318,7 +330,7 @@ import { AutoComplete } from '@kousum/semi-ui-vue';
 Can set up custom display empty content
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete, Empty } from '@kousum/semi-ui-vue';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
 

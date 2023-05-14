@@ -8,6 +8,18 @@ width: 50%
 brief: File selection upload
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -20,7 +32,7 @@ import { Upload } from '@kousum/semi-ui-vue';
 The most basic usage is to place a Button in children, click on the children content (the placed Button) to activate the file selection box, and the upload will start automatically after the selection is completed
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -39,7 +51,7 @@ Set a custom prompt text through the `prompt` slot
 Set the slot position by `promptPosition`, optional `left`, `right`, `bottom`, the default is `right`
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -83,7 +95,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 When listType is picture, the reference object at promptPosition is the whole picture wall list
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconPlus } from '@kousum/semi-icons-vue';
 
@@ -144,7 +156,7 @@ import { IconPlus } from '@kousum/semi-icons-vue';
 ### Click on the avatar to trigger upload
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Avatar, Toast } from '@kousum/semi-ui-vue';
 import { IconCamera } from '@kousum/semi-icons-vue';
 
@@ -199,7 +211,7 @@ import { IconCamera } from '@kousum/semi-icons-vue';
 Custom upload attributes can be added by setting `data`, `headers`
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -240,7 +252,7 @@ For example, only allowing users to upload PNG and PDF files, `accept` can be wr
 
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -276,7 +288,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 By passing in `directory` as `true`, all files in the folder can be uploaded
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -299,7 +311,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 You can select multiple files to upload at the same time by setting the `multiple` attribute.
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -321,7 +333,7 @@ You can limit the maximum number of files that can be uploaded by setting the `l
 When `limit` is 1, always replace the current one with the latest upload, and will not trigger the onExceed callback **v1.5.0 takes effect**
 
 ```jsx dir="column" live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -346,7 +358,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 ```
 
 ```jsx dir="column" live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -380,7 +392,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 In the photo wall mode, when the number of uploaded files is equal to the limit, the upload entry will be automatically hidden
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconPlus } from '@kousum/semi-icons-vue';
 
@@ -425,7 +437,7 @@ import { IconPlus } from '@kousum/semi-icons-vue';
 The upload file size limit can be customized through the `maxSize` and `minSize` properties, and the callback when the limit is exceeded can be set by setting `onSizeError`.
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -455,7 +467,7 @@ When `listType` is `list`, you can pass in `previewFile` to view the logic.
 For example, when you do not need to preview the image type by thumbnail, you can always return a `<IconFile />` in `previewFile`
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload, IconFile } from '@kousum/semi-icons-vue';
 
@@ -489,7 +501,7 @@ import { IconUpload, IconFile } from '@kousum/semi-icons-vue';
 When `listType` is `list`, you can customize the list operation area by passing in `renderFileOperation`
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload, IconDownload, IconEyeOpened, IconDelete } from '@kousum/semi-icons-vue';
 
@@ -526,7 +538,7 @@ import { IconUpload, IconDownload, IconEyeOpened, IconDelete } from '@kousum/sem
 The uploaded files can be displayed through `defaultFileList`. When you need to preview the thumbnail of the default file, you can set the `preview` attribute of the corresponding `item` in `defaultFileList` to `true`
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -570,7 +582,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 When `fileList` is passed in, it is used as a controlled component. Need to listen to the onChange callback, and pass the fileList back to Upload (note that a new array object needs to be passed in)
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -627,7 +639,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 Set `listType ='picture'`, users can upload pictures and display thumbnails in the list
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconPlus } from '@kousum/semi-icons-vue';
 
@@ -656,7 +668,7 @@ import { IconPlus } from '@kousum/semi-icons-vue';
 Set `showPicInfo`, you can view the basic information of the picture
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconPlus } from '@kousum/semi-icons-vue';
 
@@ -695,7 +707,7 @@ When you need to customize the preview/replacement function, you need to turn of
 `onPreviewClick` listens for the click event of the single image container
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconPlus, IconEyeOpened } from '@kousum/semi-icons-vue';
 
@@ -738,7 +750,7 @@ import { IconPlus, IconEyeOpened } from '@kousum/semi-icons-vue';
 Set `hotSpotLocation` to customize the order of click hotspots, the default is at the end of the photo wall list
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Select } from '@kousum/semi-ui-vue';
 import { IconPlus, IconEyeOpened } from '@kousum/semi-icons-vue';
 
@@ -787,7 +799,7 @@ import { IconPlus, IconEyeOpened } from '@kousum/semi-icons-vue';
 ### Disabled
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -828,7 +840,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 `uploadTrigger='custom'`, the upload will not be triggered automatically after the file is selected. Need to manually call the upload method on the ref to trigger
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload, IconPlus } from '@kousum/semi-icons-vue';
 
@@ -877,7 +889,7 @@ class ManulUploadDemo extends React.Component {
 </Notice>
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 
 () => (
@@ -893,7 +905,7 @@ import { Upload } from '@kousum/semi-ui-vue';
 You can quickly set the content of the drag area through `dragIcon`, `dragMainText`, `dragSubText`
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconBolt } from '@kousum/semi-icons-vue';
 
@@ -911,7 +923,7 @@ import { IconBolt } from '@kousum/semi-icons-vue';
 You can also pass in ReactNode through `children` to completely customize the display of the drag area
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconBolt } from '@kousum/semi-icons-vue';
 
@@ -981,7 +993,7 @@ The file status can be updated through the `beforeUpload` hook, which is to veri
 ```
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -1043,7 +1055,7 @@ In the case of asynchronous verification, a Promise must be returned. Promise re
 Object can be passed in when resolve/reject (the structure is the same as beforeUploadResult)
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -1108,7 +1120,7 @@ afterUpload is triggered when the upload is completed (xhr.onload) and no error 
 ```
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -1175,7 +1187,7 @@ customRequest contains the following input parameters
 ```
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -1207,7 +1219,18 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 
 ---
 
-|Property | Description | Type | Default Value | Version |
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}|Property | Description | Type | Default Value | Version |
 |--- | --- | --- | --- | --- |
 |accept | `html` Native attribute, accept uploaded [file type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept). <br/>The value of `accept` is the [MIME types string](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types) or file that you allow to select the file Suffix (.jpg, etc.) | string | | |
 |action | File upload address, required | string | | |

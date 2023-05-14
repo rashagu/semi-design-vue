@@ -8,6 +8,18 @@ icon: doc-collapsible
 brief: The collapsible component is a container component used to put long sections of information under a block that can be expanded or collapsed.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## When to use
 
 -   `Collapsible`is a behavior component with animation effect by default. It is used in various components in Semi Components, including: `Navigation`, `Collapse`, `Tree`, `TreeSelect`, and `Typography`.
@@ -90,7 +102,7 @@ import { Collapsible, InputNumber, Button } from '@kousum/semi-ui-vue';
 ### Nested use
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Collapsible, Button } from '@kousum/semi-ui-vue';
 
 () => {

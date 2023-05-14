@@ -2,11 +2,24 @@
 category: 开始
 title: Introduction 介绍
 icon: doc-intro
+outline: deep
 localeCode: zh-CN
 order: 1
 brief: Semi Design 是一个设计系统，它定义了一套中后台设计与前端基础组件，帮助我们更容易地创造更加一致的用户体验。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 什么是 Semi
 
 Semi Design 是由抖音前端团队，MED 产品设计团队设计、开发并维护的设计系统。它作为全面、易用、优质的现代应用 UI 解决方案，从字节跳动各业务线的复杂场景提炼而来，支撑近千计平台产品，服务内外部 10 万+ 用户。

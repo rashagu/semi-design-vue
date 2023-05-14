@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 36
 category: 输入类
@@ -8,6 +9,18 @@ width: 48%
 brief: 文件选择上传
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -20,7 +33,7 @@ import { Upload } from '@kousum/semi-ui-vue';
 最基本的用法，在 children 内放置一个 Button，点击 children 内容（即放置的 Button）激活文件选择框，选择完成后自动开始上传
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -41,7 +54,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 通过 `promptPosition` 设置插槽位置，可选 `left`、`right`、`bottom`，默认为 `right`
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -85,7 +98,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 当 listType 为 picture 时，promptPosition 位置的参照对象为图片墙列表整体
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconPlus } from '@kousum/semi-icons-vue';
 
@@ -148,7 +161,7 @@ import { IconPlus } from '@kousum/semi-icons-vue';
 ### 点击头像触发上传
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Avatar, Toast } from '@kousum/semi-ui-vue';
 import { IconCamera } from '@kousum/semi-icons-vue';
 
@@ -202,7 +215,7 @@ import { IconCamera } from '@kousum/semi-icons-vue';
 通过设置 `data`、`headers` 可添加自定义上传属性
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -243,7 +256,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -279,7 +292,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 通过传入 `directory` 为 `true`，可以支持上传文件夹下的所有文件
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -302,7 +315,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 通过设置 `multiple` 属性可以支持同时选中多个文件上传。
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -324,7 +337,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 当 `limit` 为1时，始终用最新上传的代替当前，并不会触发onExceed回调**v1.5.0生效**
 
 ```jsx dir="column" live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -349,7 +362,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 ```
 
 ```jsx dir="column" live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -383,7 +396,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 照片墙模式下，当已上传文件数量等于 limit 时，会自动隐藏上传入口
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconPlus } from '@kousum/semi-icons-vue';
 
@@ -428,7 +441,7 @@ import { IconPlus } from '@kousum/semi-icons-vue';
 通过 `maxSize` 和 `minSize` 属性可以自定义上传文件大小的限制，通过设置 `onSizeError` 可以设置超出限制时的回调。
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -458,7 +471,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 例如你不需要对图片类型进行缩略图预览时，可以在 `previewFile` 中恒定返回一个`<IconFile />`
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload, IconFile } from '@kousum/semi-icons-vue';
 
@@ -492,7 +505,7 @@ import { IconUpload, IconFile } from '@kousum/semi-icons-vue';
 `listType` 为 `list` 时，可以通过传入 `renderFileOperation` 来自定义列表操作区
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload, IconDownload, IconEyeOpened } from '@kousum/semi-icons-vue';
 
@@ -532,7 +545,7 @@ import { IconUpload, IconDownload, IconEyeOpened } from '@kousum/semi-icons-vue'
 
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -576,7 +589,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 当传入`fileList`时，作为受控组件使用。需要监听 onChange 回调，并且将 fileList 回传给 Upload（注意需传入一个新的数组对象）
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -633,7 +646,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 设置 `listType = 'picture'`，用户可以上传图片并在列表中显示缩略图
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconPlus } from '@kousum/semi-icons-vue';
 
@@ -663,7 +676,7 @@ import { IconPlus } from '@kousum/semi-icons-vue';
 设置 `showPicInfo`，可以查看图片基础信息
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconPlus } from '@kousum/semi-icons-vue';
 
@@ -705,7 +718,7 @@ import { IconPlus } from '@kousum/semi-icons-vue';
 
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconPlus, IconEyeOpened } from '@kousum/semi-icons-vue';
 
@@ -748,7 +761,7 @@ import { IconPlus, IconEyeOpened } from '@kousum/semi-icons-vue';
 设置 `hotSpotLocation` 自定义点击热区的顺序，默认在照片墙列表结尾
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Select } from '@kousum/semi-ui-vue';
 import { IconPlus, IconEyeOpened } from '@kousum/semi-icons-vue';
 
@@ -797,7 +810,7 @@ import { IconPlus, IconEyeOpened } from '@kousum/semi-icons-vue';
 ### 禁用
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -838,7 +851,7 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 `uploadTrigger='custom'`，选中文件后将不会自动触发上传。需要手动调用 `ref` 上的 `upload` 方法触发
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload, IconPlus } from '@kousum/semi-icons-vue';
 
@@ -886,7 +899,7 @@ class ManulUploadDemo extends React.Component {
 </Notice>
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 
 () => (
@@ -902,7 +915,7 @@ import { Upload } from '@kousum/semi-ui-vue';
 可以通过 `dragIcon`、`dragMainText`、`dragSubText` 快捷设置拖拽区内容
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconBolt } from '@kousum/semi-icons-vue';
 
@@ -920,7 +933,7 @@ import { IconBolt } from '@kousum/semi-icons-vue';
 还可以通过 `children` 传入 ReactNode，完全自定义拖拽区的显示
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload } from '@kousum/semi-ui-vue';
 import { IconBolt } from '@kousum/semi-icons-vue';
 
@@ -990,7 +1003,7 @@ Scss 样式如下
 ```
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -1052,7 +1065,7 @@ class ValidateDemo extends React.Component {
 resolve/reject 时可以传入 object（结构同上 beforeUploadResult）
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -1117,7 +1130,7 @@ afterUpload 在上传完成后(xhr.onload)且没有发生错误的情况下触�
 ```
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -1184,7 +1197,7 @@ customRequest 包含以下入参
 ```
 
 ```jsx live=true width=48%
-import React from 'react';
+import { h } from 'vue';
 import { Upload, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -1216,7 +1229,18 @@ import { IconUpload } from '@kousum/semi-icons-vue';
 
 ---
 
-|属性 | 说明 | 类型 | 默认值 | 版本 |
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}|属性 | 说明 | 类型 | 默认值 | 版本 |
 |--- | --- | --- | --- | --- |
 |accept | `html` 原生属性，接受上传的[文件类型](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept)。<br/>`accept` 的值为你允许选择文件的[MIME types 字符串](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types)或文件后缀（.jpg等） | string | |  |
 |action | 文件上传地址，必填 | string |  |  |

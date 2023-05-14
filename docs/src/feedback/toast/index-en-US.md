@@ -9,6 +9,18 @@ width: 65%
 brief: Toast component is used to give timely feedback to user's operations. It could be the result feedback of the operation, such as success, failure, error, warning, etc.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -20,7 +32,7 @@ import { Toast } from '@kousum/semi-ui-vue';
 ### Basic Usage
 
 ```jsx live=true noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { Toast, Button } from '@kousum/semi-ui-vue';
 import { throttle } from 'lodash-es';
 
@@ -57,7 +69,7 @@ render(Demo);
 Use different methods to show different Toast including success, warning, error and info.
 
 ```jsx live=true noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -90,7 +102,7 @@ render(Demo);
 You could use `theme` for a colored background style. Default is `normal`.
 
 ```jsx live=true noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -127,7 +139,7 @@ render(Demo);
 Informational feedback
 
 ```jsx live=true noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { Toast, Typography, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -177,7 +189,7 @@ render(Demo);
 Use `duration` to set up time delay. By default it closes after 3 seconds.
 
 ```jsx live=true noInline=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -269,7 +281,7 @@ render(Demo);
 You could use `Toast.useToast` to create a `contextHolder` that could access context. Created toast will be inserted to where contextHolder is placed.
 
 ```jsx live=true noInline=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Toast, Button } from '@kousum/semi-ui-vue';
 
 const ReachableContext = React.createContext();
@@ -396,7 +408,7 @@ The static methods provided are as follows: Display: You can pass in `options` o
     If you need Toast with different configs in your application, you can use ToastFactory.create(config)to create a new Toast (>= 1.23):
 
 ```jsx live=true noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function Demo() {

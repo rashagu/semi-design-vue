@@ -8,6 +8,18 @@ icon: doc-tagInput
 brief: Taginput is a input component that can add content as a tag.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -20,7 +32,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 After pressing the Enter key, the input will add value as a tag. If the tag content is an empty string or pure space, it will be filtered.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -37,7 +49,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 You can use `separator` to set the separator to achieve batch input, and its default value is a comma. After version 1.29.0, multiple separators are supported in string[] format.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -62,7 +74,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 You can also use `showClear` to set whether to support one-click deletion of all tags and input.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -78,7 +90,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 ### Disabled
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -96,7 +108,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 Use `size` to set the size of the TagInput, optional: `small`, `default`, `large`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -116,7 +128,7 @@ validateStatus: `default`, `warning`, `error`.
 
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -136,7 +148,7 @@ You can pass the input box prefix through `prefix`, the input box suffix through
 The left and right padding is automatically brought when the content passed in by prefix and reactix is text or Icon. If it is a custom ReactNode, the left and right padding is 0.If necessary, you can set it in the ReactNode you passed in.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 import { IconVigoLogo, IconGift } from '@kousum/semi-icons-vue';
 
@@ -158,7 +170,7 @@ import { IconVigoLogo, IconGift } from '@kousum/semi-icons-vue';
 You can use `allowDuplicates` to set whether to allow the creation of the same tag.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -176,7 +188,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 You can use `addOnBlur` to set whether the current input value is automatically created as a tag when the blur event is triggered.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -196,7 +208,7 @@ You can use `max` to limit the number of tags. The `onExceed()` callback will be
 You can use `maxLength` to limit the maximum length of a single tag, and the `onInputExceed()` callback will be invoked when this value is exceeded.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -229,7 +241,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 You can use `maxTagCount` to limit the number of tags displayed, and the excess will be displayed as +N. You can use `showRestTagsPopover` to set whether hover +N displays Popover after `maxTagCount` is exceeded, and you can configure Popover in the `restTagsPopoverProps` property.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -247,7 +259,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 You can use `value` to set tags, and use `onChange` to achieve control of the tags.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 class TagInputDemo extends React.Component {
@@ -276,7 +288,7 @@ class TagInputDemo extends React.Component {
 You can use `inputValue` to set input box, and use `onInputChange` to control the input content.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 class TagInputDemo extends React.Component {
@@ -303,7 +315,7 @@ class TagInputDemo extends React.Component {
 ### Callback
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -325,7 +337,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 You can use the `blur()` and `focus()` methods to manage the focus.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput, Button } from '@kousum/semi-ui-vue';
 
 class TagInputDemo extends React.Component {
@@ -357,7 +369,7 @@ class TagInputDemo extends React.Component {
 You can use `renderTagItem` to customize tag rendering. `renderTagItem(value: string, index: number, onClose: function ) => React.ReactNode` The third parameter `onClose` is available since version 2.23.0.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput, Avatar } from '@kousum/semi-ui-vue';
 import { IconClose } from '@kousum/semi-ui-vue-icons';
 
@@ -416,7 +428,7 @@ so you need to set `allowDuplicates` to false. After the drag function is enable
 outside the TagInput, the Tag cannot be dragged.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (

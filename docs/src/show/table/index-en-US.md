@@ -9,6 +9,18 @@ dir: column
 brief: Tables are used to present structured data content, usually accompanied by the ability to manipulate the data (sort, search, paginate...).
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## How to Use
 
 Into the header. `columns` And data. `DataSource` To render.
@@ -16,7 +28,7 @@ Into the header. `columns` And data. `DataSource` To render.
 > Please provide a "key" for each data item in the dataSource that is different from the value of the other data items, or use the row Key parameter to specify an attribute name as the primary key, alternative row operation functions such as row selection and expansion of the table.
 
 ```jsx noInline=true import
-import React from 'react';
+import { h } from 'vue';
 import { Table } from '@kousum/semi-ui-vue';
 
 function App() {
@@ -79,7 +91,7 @@ function App() {
 For tables, the two most basic parameters are `dataSource` and `columns`, the former is the data item, the latter is the configuration of each column, both are array types.
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -179,7 +191,7 @@ You can also use JSX syntax definitions `columns`, note that Table only supports
 </Notice>
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -260,7 +272,7 @@ This feature can be turned on by passing in `rowSelection`.
 > Note: Be sure to provide a "key" for each row of data that is different from other row values, or use the rowKey parameter to specify a property name as the primary key.
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -404,7 +416,7 @@ render(App);
 Users can use Column.render to customize the rendering of a column of cells, which is suitable for rendering more complex cell content.
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar, Button, Empty, Typography } from '@kousum/semi-ui-vue';
 import { IconDelete } from '@kousum/semi-icons-vue';
 import { IllustrationNoResult, IllustrationNoResultDark } from '@douyinfe/semi-illustrations';
@@ -1335,7 +1347,7 @@ If you need to render a table that can be expanded, in addition to the need to p
 -   If `rowKey` is a string type, you take `record[rowKey]` as the row unique ID
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar, Descriptions, Tag } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -1481,7 +1493,7 @@ render(App);
 By default, the expansion button will be rendered in the same cell as the first copy, and you can enter `hideExpandedColumn={false}` to render as a separate column:
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar, Descriptions, Tag } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -1628,7 +1640,7 @@ render(App);
 You can pass the row Expandable method, enter the reference as record, and determine whether the return value is false to close the rendering of the expandable button on a row.
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar, Descriptions, Tag } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -1780,7 +1792,7 @@ The table supports the display of tree data and is automatically displayed as a 
 #### Simple example of tree data
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table } from '@kousum/semi-ui-vue';
 
 function App() {
@@ -2452,7 +2464,7 @@ render(EventTable);
 Use `OnRow` to set a background color for each row to create a zebra stripped table.
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -2586,7 +2598,7 @@ render(App);
 Use `ellipsis` to make cells automatically clipped. v2.34.0 support.
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -2700,7 +2712,7 @@ render(App);
 Set `ellipsis.showTitle` to false to hide the default native HTML title. With `column.render` you can customize the content prompt.
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Typography } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -3264,7 +3276,7 @@ For some tables whose data needs to be displayed in groups, you can pass in `gro
 > Note: Be sure to provide a "key" for each row of data that is different from other row values, or use the rowKey parameter to specify a property name as the primary key.
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
@@ -3622,7 +3634,7 @@ render(InfiniteScrollDemo);
 ### Controlled Dynamic Tables
 
 ```jsx live=true noInline=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Table, Switch, ButtonGroup, Button, Avatar, Space } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
@@ -4943,7 +4955,7 @@ function App() {
 > Also in `column.onCell` `column.onHeaderCell` Properties or events supported by td / th can also be returned.
 
 ```jsx noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { Table } from '@kousum/semi-ui-vue';
 
 () => (

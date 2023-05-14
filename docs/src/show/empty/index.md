@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 54
 category: 展示类
@@ -8,6 +9,18 @@ dir: column
 brief: 空状态时的展示占位图。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -23,7 +36,7 @@ import { Empty } from '@kousum/semi-ui-vue';
 **v>=1.13.0** 之后增加一系列暗色模式的插画，并支持通过 `darkModeImage` 传入暗色模式下需要使用的插画，以更好地适配暗色模式。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Empty } from '@kousum/semi-ui-vue';
 import { IllustrationConstruction, IllustrationConstructionDark } from '@douyinfe/semi-illustrations';
 
@@ -42,7 +55,7 @@ import { IllustrationConstruction, IllustrationConstructionDark } from '@douyinf
 通过 `children` 可以实现自定义的描述内容。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Empty, Button } from '@kousum/semi-ui-vue';
 import { IllustrationNoContent, IllustrationNoContentDark } from '@douyinfe/semi-illustrations';
 
@@ -68,7 +81,7 @@ import { IllustrationNoContent, IllustrationNoContentDark } from '@douyinfe/semi
 也可以不使用图片。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Empty, Typography } from '@kousum/semi-ui-vue';
 
 () => (
@@ -89,7 +102,7 @@ import { Empty, Typography } from '@kousum/semi-ui-vue';
 支持 2 种类型的布局：`vertical`、`horizontal`。默认为 `vertical`。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Empty, Button } from '@kousum/semi-ui-vue';
 import { IllustrationSuccess, IllustrationSuccessDark } from '@douyinfe/semi-illustrations';
 
@@ -116,7 +129,7 @@ import { IllustrationSuccess, IllustrationSuccessDark } from '@douyinfe/semi-ill
 > 由于插画库还在建设中，请随时留意后续可能发生的改变。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Empty } from '@kousum/semi-ui-vue';
 import { IllustrationConstruction, IllustrationSuccess, IllustrationFailure, IllustrationNoAccess, IllustrationNoContent, IllustrationNotFound, IllustrationNoResult } from '@douyinfe/semi-illustrations';
 

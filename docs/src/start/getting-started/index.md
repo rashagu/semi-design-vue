@@ -2,11 +2,24 @@
 category: 开始
 title: Getting Started 快速开始
 subTitle: 快速开始
+outline: deep
 localeCode: zh-CN
 icon: doc-gettingstarted
 order: 2
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 1、安装 Semi
 
 ```bash

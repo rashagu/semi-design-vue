@@ -8,7 +8,18 @@ icon: doc-scrolllist
 brief: Scroll through the list.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -21,7 +32,7 @@ import { ScrollList, ScrollItem } from '@kousum/semi-ui-vue';
 The scrolling list provides a scrolling selection mode similar to the IOS operating system, while supporting scrolling to the specified window location selection and click selection.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { ScrollList, ScrollItem, Button } from '@kousum/semi-ui-vue';
 
 class ScrollListDemo extends React.Component {

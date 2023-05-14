@@ -2,11 +2,24 @@
 category: 开始
 title: Accessibility  无障碍
 icon: doc-a11y
+outline: deep
 localeCode: zh-CN
 order: 6
 brief: 无障碍设计是让所有人都可以轻松地与产品互动，包括那些残障人群，为每个人提供更好的体验。Semi 设计系统旨在消除障碍并创造适合所有人的包容性产品体验。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 无障碍专用主题
 Semi 针对无障碍场景，专门定制了一套专用的 A11y 主题 [@semi-bot/semi-theme-a11y](https://semi.design/dsm_store/theme?dsmID=2243)  
 与默认主题相比，A11y 主题增加了基础色盘各个颜色的对比度，并且加大了字体 token 的字号，如果对对比度有更高要求时，建议选用该主题。  
@@ -97,7 +110,7 @@ npm i @semi-bot/semi-theme-a11y
 头像组件如果包含图片，可以用 “alt” 来标识，让屏幕阅读器捕捉到。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (

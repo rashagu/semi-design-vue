@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 31
 category: 输入类
@@ -8,6 +9,18 @@ width: 60%
 brief: 开关是用于切换两种互斥状态的交互形式
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -22,7 +35,7 @@ import { Switch } from '@kousum/semi-ui-vue';
 通过 `aria-label` 描述该 Switch 开关的具体作用
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
@@ -39,7 +52,7 @@ import { Switch } from '@kousum/semi-ui-vue';
 你可以通过 size 指定尺寸
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
@@ -69,7 +82,7 @@ import { Switch } from '@kousum/semi-ui-vue';
 ### 不可用
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
@@ -87,7 +100,7 @@ import { Switch } from '@kousum/semi-ui-vue';
 注意：此项功能在最小的开关(即 size='small'时)无效
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
@@ -135,7 +148,7 @@ import { Switch, Typography } from '@kousum/semi-ui-vue';
 组件是否选中完全取决于传入的 checked 值，配合 onChange 回调函数使用
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Switch } from '@kousum/semi-ui-vue';
 
 () => {
@@ -156,7 +169,7 @@ version: >= 1.29.0
 可以通过设置 loading="true" 开启加载中状态。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Switch } from '@kousum/semi-ui-vue';
 
 () => (

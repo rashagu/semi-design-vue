@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 51
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-collapsible
 brief: 行为组件，是一个用于展开或折叠内容的容器。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 使用场景
 
 -   `Collapsible` 是一个行为组件，默认开启动画效果。它被用于 Semi 的各种组件中，如：`Navigation`， `Collapse`, `Tree`， `TreeSelect`，以及 `Typography` 中。
@@ -105,7 +118,7 @@ import { Collapsible, InputNumber, Button } from '@kousum/semi-ui-vue';
 ### 嵌套使用
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Collapsible, Button } from '@kousum/semi-ui-vue';
 
 () => {

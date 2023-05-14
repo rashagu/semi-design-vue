@@ -2,10 +2,23 @@
 category: 开始
 title: Update 从 1.x 到 2.0
 icon: doc-updateV2
+outline: deep
 localeCode: zh-CN
 order: 9
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ### 升级准备
 
 请将你当前所有已修改的代码提交，checkout 出单独的 git 分支，保证 git 工作区干净

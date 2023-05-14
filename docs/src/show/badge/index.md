@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 46
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-badge
 brief: 用徽章来给用户提示。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -19,7 +32,7 @@ import { Badge } from '@kousum/semi-ui-vue';
 Badge 的基本类型为 `count`。如果传入 `dot` 则显示为小圆点，两者互斥，优先渲染小圆点。当传入是节点类型时，将直接渲染该节点。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Badge, Avatar } from '@kousum/semi-ui-vue';
 import { IconLock } from '@kousum/semi-icons-vue';
 
@@ -59,7 +72,7 @@ import { IconLock } from '@kousum/semi-icons-vue';
 可以通过设置 `overflowCount` 值设置显示数字的最大值，当实际数值超过该值时将以 `${overflowCount}+` 的格式显示。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -98,7 +111,7 @@ import { Badge, Avatar } from '@kousum/semi-ui-vue';
 可以通过设置 `position` 设置位置，支持：`leftTop`， `leftBottom`， `rightTop`（默认）， `rightBottom`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -137,7 +150,7 @@ import { Badge, Avatar } from '@kousum/semi-ui-vue';
 可以通过设置 `theme` 和 `type` 设置徽标的样式。其中 `theme` 支持三种形式：`solid`, `light`, `inverted`。默认形式为 `solid`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -190,7 +203,7 @@ import { Badge, Avatar } from '@kousum/semi-ui-vue';
 `type` 支持如下类型：`primary`，`secondary`，`tertiary`，`warning` 和 `danger`。默认类型为 `primary`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -245,7 +258,7 @@ import { Badge, Avatar } from '@kousum/semi-ui-vue';
 当 Badge 作为独立元素时可以单独使用。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Badge } from '@kousum/semi-ui-vue';
 
 () => (

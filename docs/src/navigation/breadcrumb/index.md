@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 39
 category: 导航类
@@ -7,7 +8,18 @@ icon: doc-breadcrumb
 brief: 面包屑是用户界面中的一种辅助导航，可以显示当前页面在层级架构中的位置，并能返回之前的页面。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -19,7 +31,7 @@ import { Breadcrumb } from '@kousum/semi-ui-vue';
 ### 基本用法
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb } from '@kousum/semi-ui-vue';
 
 () => (
@@ -36,7 +48,7 @@ import { Breadcrumb } from '@kousum/semi-ui-vue';
 支持标题只显示图标或者同时显示图标和文本。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb } from '@kousum/semi-ui-vue';
 import { IconHome, IconArticle } from '@kousum/semi-icons-vue';
 
@@ -54,7 +66,7 @@ import { IconHome, IconArticle } from '@kousum/semi-icons-vue';
 默认为 `compact`，设置属性为 `false` 可使图标和文字尺寸增加。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb } from '@kousum/semi-ui-vue';
 import { IconHome } from '@kousum/semi-icons-vue';
 
@@ -80,7 +92,7 @@ import { IconHome } from '@kousum/semi-icons-vue';
 默认为 `/`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb, Tag } from '@kousum/semi-ui-vue';
 import { IconArrowRight } from '@kousum/semi-icons-vue';
 
@@ -114,7 +126,7 @@ import { IconArrowRight } from '@kousum/semi-icons-vue';
 在 **0.34.0** 版本之后，当级别名字溢出设定宽度后省略截断。可以通过 `showTooltip` 属性设置相关参数。默认宽度150px，鼠标悬停时显示 Tooltip 完整显示级别名称。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -159,7 +171,7 @@ import { Breadcrumb, Typography } from '@kousum/semi-ui-vue';
 在 **v>=1.9.0** 之后，可以通过 `maxItemCount` 来控制超过多少个级别进行折叠。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb } from '@kousum/semi-ui-vue';
 
 () => (
@@ -180,7 +192,7 @@ import { Breadcrumb } from '@kousum/semi-ui-vue';
 组件内部提供了两种省略号区域渲染的类型，可通过 `moreType` 来设置，`moreType` 的可选值为 `default` 和 `popover`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb } from '@kousum/semi-ui-vue';
 
 () => (
@@ -199,7 +211,7 @@ import { Breadcrumb } from '@kousum/semi-ui-vue';
 如果想要为省略号区域自定义其他形式的渲染，则可以使用 `renderMore()` 方法。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb, Popover } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -260,7 +272,7 @@ Breadcrumb 支持通过 routes 传入路由对象 `route: { name, path, href, ic
 -   icon 为标签的显示图标
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb } from '@kousum/semi-ui-vue';
 import { IconHome, IconArticle } from '@kousum/semi-icons-vue';
 

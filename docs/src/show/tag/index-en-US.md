@@ -8,6 +8,18 @@ icon: doc-tag
 brief: Tag component is used to display a collection of concise information for rapid identification and grouping.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -23,7 +35,7 @@ It can be turned into a closable label by adding the `closable` property.
 At this time, clicking x to close will trigger the onClose event, and blocking the default event in onClose can make it still show and not hide after clicking
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
@@ -44,7 +56,7 @@ import { Tag, Space } from '@kousum/semi-ui-vue';
 Supports two sizes: `large` and `small` (default).
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tag } from '@kousum/semi-ui-vue';
 
 () => (
@@ -62,7 +74,7 @@ import { Tag } from '@kousum/semi-ui-vue';
 Supports two Shape: `square`（default）、`circle`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
@@ -78,7 +90,7 @@ import { Tag, Space } from '@kousum/semi-ui-vue';
 Tag supports 16 colors including whites from Semi's palette: `amber`, `blue`, `cyan`, `green`, `grey`, `indigo`, `light-blue`, `light-green`, `lime`, `orange`, `pink`, `purple`, `red`, `teal`, `violet`, `yellow`, `white`. You can also customize color through `style`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => {
@@ -100,7 +112,7 @@ import { Tag, Space } from '@kousum/semi-ui-vue';
 Tag supports three different types, including: `light`(default), `ghost`, `solid`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
@@ -123,7 +135,7 @@ import { Tag, Space } from '@kousum/semi-ui-vue';
 You can get a avatar tag with `avatarSrc` property. `avatarShape` can change the shape of avatar tag including `square`(default) and `circle`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tag, Space } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -182,7 +194,7 @@ You can pass in configs for tags through `tagList` to create a TagGroup. The `ma
 Set the `showPopover` property to control whether the remaining content is displayed by Popover when hover to + N Tag
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagGroup } from '@kousum/semi-ui-vue';
 
 () => {
@@ -244,7 +256,7 @@ import { TagGroup } from '@kousum/semi-ui-vue';
 If the tags in the TagGroup can be deleted, the user needs to process the `tagList` passed to the TagGroup in `onTagClose`
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagGroup } from '@kousum/semi-ui-vue';
 
 class TagGroupCloseableDemo extends React.Component {

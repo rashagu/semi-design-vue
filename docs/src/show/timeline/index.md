@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 65
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-timeline
 brief: 时间轴是用于对一系列信息进行时间排序时，垂直展示的组件。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -18,7 +31,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 ### 基本用法
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
@@ -35,7 +48,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 通过 type 可以设置节点类型，对应原点会变成相应的颜色，可选：`default`，`ongoing`， `success`， `warning`， `error`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
@@ -58,7 +71,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 可以通过 `dot` 自定义图标，`color` 自定义圆点色值。通过设置 `children` 的样式可以自定义节点样式。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 import { IconAlertTriangle } from '@kousum/semi-icons-vue';
 
@@ -85,7 +98,7 @@ import { IconAlertTriangle } from '@kousum/semi-icons-vue';
 #### 时间轴在左侧（默认）
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
@@ -109,7 +122,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 #### 时间节点在左侧
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
@@ -133,7 +146,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 #### 交替展现
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
@@ -157,7 +170,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 #### 时间轴在右侧
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
@@ -181,7 +194,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 ### 使用 dataSource
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 import { IconAlertTriangle } from '@kousum/semi-icons-vue';
 

@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 34
 category: 输入类
@@ -9,6 +10,18 @@ dir: column
 brief: 一个更直观高效的多选选择器，可以露出更多选项的信息，支持搜索功能，缺点是占据更多空间
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -22,7 +35,7 @@ import { Transfer } from '@kousum/semi-ui-vue';
 数据项需传入 value、label、key
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Transfer } from '@kousum/semi-ui-vue';
 
 () => {
@@ -53,7 +66,7 @@ import { Transfer } from '@kousum/semi-ui-vue';
 暂不支持多层嵌套
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Transfer } from '@kousum/semi-ui-vue';
 
 () => {
@@ -106,7 +119,7 @@ import { Transfer } from '@kousum/semi-ui-vue';
 使用`renderSelectedItem` 你可以自定义右侧每一条已选项的渲染结构
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Transfer, Checkbox, Avatar } from '@kousum/semi-ui-vue';
 import { IconClose } from '@kousum/semi-icons-vue';
 
@@ -220,7 +233,7 @@ import { IconClose } from '@kousum/semi-icons-vue';
 ### 禁用
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Transfer } from '@kousum/semi-ui-vue';
 () => {
     const data = Array.from({ length: 20 }, (v, i) => {
@@ -248,7 +261,7 @@ import { Transfer } from '@kousum/semi-ui-vue';
 将 `draggable`设为 true，开启拖拽排序功能。v1.11.0 后支持
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Transfer } from '@kousum/semi-ui-vue';
 () => {
     const data = Array.from({ length: 30 }, (v, i) => {
@@ -277,7 +290,7 @@ import { Transfer } from '@kousum/semi-ui-vue';
 你可以将触发器定义为任意你想要的ReactNode，并且添加样式。将拖拽触发器，使用 `sortableHandle` 进行包裹即可（sortableHandle于 v 1.22.0 后提供）, 
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Transfer, Checkbox, Avatar } from '@kousum/semi-ui-vue';
 import { IconHandle, IconClose } from '@kousum/semi-icons-vue';
 
@@ -377,7 +390,7 @@ type SelectedHeaderProps = {
 使用示例如下
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Transfer, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -463,7 +476,7 @@ interface SelectedPanelProps {
 ```
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Transfer, Input, Spin, Button } from '@kousum/semi-ui-vue';
 import { IconSearch } from '@kousum/semi-icons-vue';
 
@@ -716,7 +729,7 @@ class CustomRenderDemo extends React.Component {
 要支持拖拽排序，你需要在拖拽排序结束后，将 oldIndex、newIndex 作为入参，调用 onSortEnd
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { SortableContainer, SortableElement, sortableHandle } from 'react-sortable-hoc';
 import { Transfer, Button, Spin, Input } from '@kousum/semi-ui-vue';
 import { IconHandle, IconSearch } from '@kousum/semi-icons-vue';

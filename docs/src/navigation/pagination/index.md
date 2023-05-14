@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 41
 category: 导航类
@@ -8,6 +9,18 @@ width: 60%
 brief: 分页器帮助用户在多个页之间进行导航
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -21,7 +34,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 基础分页，通过 `total` 设置总条数，`pageSize` 设置每页容量
 
 ```jsx live=true width=60%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -39,7 +52,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 通过 `showTotal` 属性控制是否展示总页数
 
 ```jsx live=true width=55%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -55,7 +68,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 可以通过 `defaultCurrentPage` 指定当前激活的页码
 
 ```jsx live=true width=55%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -70,7 +83,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 通过设置 `showSizeChanger` 为 `true`，允许通过 Select 组件快速切换每页容量
 
 ```jsx live=true width=55%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -88,7 +101,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 showQuickJumper于 v1.31后提供
 
 ```jsx live=true width=50%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -126,7 +139,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 传入 `pageSizeOpts` 数组，指定切换每页容量的可选值
 
 ```jsx live=true width=55%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -151,7 +164,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 `size` 设置为 `small`
 
 ```jsx live=true width=50%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -162,7 +175,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 开启 hoverShowPageSelect，可以 hover 页码快速切换（v1.27.0后提供）
 
 ```jsx live=true width=50%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (

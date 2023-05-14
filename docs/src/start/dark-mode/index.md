@@ -2,11 +2,23 @@
 category: 开始
 title:  Dark Mode 暗色模式
 icon: doc-darkmode
+outline: deep
 localeCode: zh-CN
 order: 5
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 能力介绍
 
 🤩 Semi 的默认主题或任意通过 [Semi DSM](/dsm) 配置的定制主题都自带了亮色模式与暗色模式，可以方便地进行切换。  
@@ -37,7 +49,7 @@ if (body.hasAttribute('theme-mode')) {
 
 这里也有一个🌰：
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -98,7 +110,7 @@ Semi 2.0 原生支持局部暗色/亮色模式。使用时，在顶级元素上�
 </Notice>
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout, Nav, Button, Breadcrumb, Avatar, Steps, Pagination, Row, Badge, Tag, Rating, Tooltip, Timeline, Popover } from '@kousum/semi-ui-vue';
 import { IconSemiLogo, IconCamera, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting, IconEdit, IconList } from '@kousum/semi-icons-vue';
 

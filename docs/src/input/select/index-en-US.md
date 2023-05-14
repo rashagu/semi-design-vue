@@ -9,6 +9,18 @@ width: 60%
 brief: The user can select one or more options from a set of options through the Select selector and present the final selection result
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -23,7 +35,7 @@ const Option = Select.Option;
 Each Option tag must declare the `value` attribute, and the Option `children` content will be rendered to the drop-down list
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -53,7 +65,7 @@ import { Select } from '@kousum/semi-ui-vue';
 You can pass an array of objects directly through `optionList`. Each object must contain the value / label attribute.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -83,7 +95,7 @@ Use `showRestTagsPopover` (>= v2.22.0) to set whether hover +N displays Popover 
 Configuration `max` Properties can limit the maximum number of options and cannot be selected beyond the maximum limit, while triggering`On Exceed`callback
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -150,7 +162,7 @@ import { Select } from '@kousum/semi-ui-vue';
 Grouping Option with `OptGroup`(Only supports the declaration of children through jsx, and does not support pass in through optionList)
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -171,7 +183,7 @@ import { Select } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -216,7 +228,7 @@ import { Select } from '@kousum/semi-ui-vue';
 Size: small / default / large
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -243,7 +255,7 @@ import { Select } from '@kousum/semi-ui-vue';
 validateStatus: default / warning / error
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -273,7 +285,7 @@ import { Select } from '@kousum/semi-ui-vue';
 -   Whether to show the right drop-down arrow is displayed by `showArrow`
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 import { IconVigoLogo, IconGift } from '@kousum/semi-icons-vue';
 
@@ -309,7 +321,7 @@ By setting`insetLabel`, you can set a label for Select, you can pass in string o
 When the incoming type is ReactNode, you need to handle the padding between the label and the text.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -347,7 +359,7 @@ Use`innerTopSlot` or `outerTopSlot` to pass the custom node, which will be rende
 -   `outerTopSlot` and `outerBottomSlot` will be rendered to level with the option List
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 import { IconClock } from '@kousum/semi-icons-vue';
 
@@ -410,7 +422,7 @@ import { IconClock } from '@kousum/semi-icons-vue';
 Using outerTopSlot to insert content
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -494,7 +506,7 @@ import { Select } from '@kousum/semi-ui-vue';
 When `value` is passed, Select is a controlled component, and the value selected is entirely determined by `value`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -516,7 +528,7 @@ import { Select } from '@kousum/semi-ui-vue';
 If it is a complex linkage with a hierarchical relationship, it is recommended to use Cascader components directly
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 class Link extends React.Component {
@@ -586,7 +598,7 @@ The default search strategy will include comparison of the input value with the 
 By default, the search keywords will be cleared automatically after multiple selection is selected. If you want to keep it, you can turn off the default behavior by setting `autoClearSearchValue` to false (provided after v2.3)
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -627,7 +639,7 @@ A multi-select example with remote search, request debounce, loading status.
 -   Use controlled value attribute
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { debounce } from 'lodash-es';
 import { Select } from '@kousum/semi-ui-vue';
 
@@ -687,7 +699,7 @@ By default, the user's search input will be compared with the option's label val
 You can set `filter` as a custom function to customize your filter strategy.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -719,7 +731,7 @@ But you can customize the rendering of the selection box through the `renderSele
     -   When `isRenderInTag` is false, it renders the returned content directly
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select, Avatar, Tag } from '@kousum/semi-ui-vue';
 
 () => {
@@ -864,7 +876,7 @@ You can control the style of the pop-up layer through `dropdownClassName`, `drop
 For example, when you customize the width of the pop-up layer, you can pass the width through `drowndownStyle`
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -882,7 +894,7 @@ import { Select } from '@kousum/semi-ui-vue';
 If you need to update Options dynamically, you should use controlled value
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -917,7 +929,7 @@ At this time, the argument of `onChange` will be object, containing various attr
 Note that when onChange With Object is set to true,`defaultValue`/`Value`it should also be object and must have `value` key
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select, TextArea } from '@kousum/semi-ui-vue';
 
 () => {
@@ -978,7 +990,7 @@ You can create and select entries that do not exist in the options by setting `a
 </Notice>
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1024,7 +1036,7 @@ Turn on list virtualization when passing in `virtualize` to optimize performance
 -   itemSize: The height of each line of Option, must be passed
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 class VirtualizeDemo extends React.Component {
@@ -1079,7 +1091,7 @@ interface TriggerRenderProps {
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 import { IconAppCenter, IconChevronDown } from '@kousum/semi-icons-vue';
 
@@ -1198,7 +1210,7 @@ import { IconAppCenter, IconChevronDown } from '@kousum/semi-icons-vue';
     4. If your custom item is Select.Option, you need to pass renderProps.onClick transparently to the onSelect prop of Option
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select, Checkbox } from '@kousum/semi-ui-vue';
 
 () => {

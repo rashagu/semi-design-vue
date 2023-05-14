@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 13
 category: 基础
@@ -7,6 +8,19 @@ icon: doc-grid
 dir: column
 brief: 24 栅格系统。
 ---
+
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 
 ## 概述
 
@@ -31,7 +45,7 @@ import { Col, Row } from '@kousum/semi-ui-vue';
 使用单一的一组 Row 和 Col 栅格组件，就可以创建一个基本的栅格系统，所有 Col 必须放在 Row 内。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -74,7 +88,7 @@ import { Col, Row } from '@kousum/semi-ui-vue';
 深色为内容物区域，浅色为间隔
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -142,7 +156,7 @@ import { Col, Row } from '@kousum/semi-ui-vue';
 ### Offset 偏移
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -177,7 +191,7 @@ import { Col, Row } from '@kousum/semi-ui-vue';
 使用 `row-flex` 定义 Flex 布局，其子元素根据不同的值 `start`,`center`,`end`,`space-between`,`space-around`，分别定义其在父节点里面的排版方式。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -228,7 +242,7 @@ import { Col, Row } from '@kousum/semi-ui-vue';
 ### Flex 子元素垂直对齐
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -265,7 +279,7 @@ import { Col, Row } from '@kousum/semi-ui-vue';
 通过 Flex 布局的 Order 来改变元素的排序。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -285,7 +299,7 @@ import { Col, Row } from '@kousum/semi-ui-vue';
 参照 Bootstrap 的 响应式设计，预设六个响应尺寸：`xs`, `sm`, `md`, `lg`, `xl`, `xxl`。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (

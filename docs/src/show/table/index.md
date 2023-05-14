@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 63
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-table
 brief: 表格用于呈现结构化的数据内容，通常会伴随提供对数据进行操作（排序、搜索、分页……）的能力。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 如何使用
 
 往 Table 传入表头 `columns` 和数据 `dataSource` 进行渲染。
@@ -14,7 +27,7 @@ brief: 表格用于呈现结构化的数据内容，通常会伴随提供对数�
 > 请为 `dataSource` 中的每个数据项提供一个与其他数据项值不同的 `key`，或者使用 `rowKey` 参数指定一个作为主键的属性名，表格的行选择、展开等绝大多数行操作功能都会使用到。
 
 ```jsx import
-import React from 'react';
+import { h } from 'vue';
 import { Table } from '@kousum/semi-ui-vue';
 
 function App() {
@@ -77,7 +90,7 @@ function App() {
 对于表格，最基本的两个参数为 `dataSource` 和 `columns`，前者为数据项，后者为每列的配置，二者皆为数组类型。
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -176,7 +189,7 @@ render(App);
 </Notice>
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -257,7 +270,7 @@ render(App);
 > **注意：**请务必为每行数据提供一个与其他行值不同的 `key`，或者使用 `rowKey` 参数指定一个作为主键的属性名。
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -401,7 +414,7 @@ render(App);
 用户可以使用 `Column.render` 来自定义某一列单元格的渲染，该功能适用于需要渲染较为复杂的单元格内容时。
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar, Button, Empty, Typography } from '@kousum/semi-ui-vue';
 import { IconDelete } from '@kousum/semi-icons-vue';
 import { IllustrationNoResult, IllustrationNoResultDark } from '@douyinfe/semi-illustrations';
@@ -1329,7 +1342,7 @@ render(App);
 -   如果 `rowKey` 为 `string` 类型，则会把 `record[rowKey]` 作为行唯一 ID
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar, Descriptions, Tag } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -1475,7 +1488,7 @@ render(App);
 默认情况，展开按钮会与第列文案渲染在同一个单元格内，你可以通过传入 `hideExpandedColumn={false}` 来渲染为单独一列：
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar, Descriptions, Tag } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -1622,7 +1635,7 @@ render(App);
 可传入 `rowExpandable` 方法，入参为 `record`，判断返回值是否为 `false` 来关闭某一行的可展开按钮的渲染。
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar, Descriptions, Tag } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -1774,7 +1787,7 @@ render(App);
 #### 树形数据简单示例
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table } from '@kousum/semi-ui-vue';
 
 function App() {
@@ -2449,7 +2462,7 @@ render(EventTable);
 使用 `onRow` 给每行设置一个背景色，实现有斑马纹效果的表格。如果设置了固定列，可以通过 `onCell` 给每列设置一个背景色实现相同效果。
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -2584,7 +2597,7 @@ render(App);
 使用 `ellipsis` 可以让单元格自动实现缩略效果。v2.34.0 支持。
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -2698,7 +2711,7 @@ render(App);
 设置 `ellipsis.showTitle` 为 false 可以隐藏默认原生的 HTML title。 配合 `column.render` 可以自定义内容提示。
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Typography } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -3264,7 +3277,7 @@ render(DragSortingTableDemo);
 > **注意：**请务必为每行数据提供一个与其他行值不同的 `key`，或者使用 `rowKey` 参数指定一个作为主键的属性名。
 
 ```jsx live=true noInline=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Table, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
@@ -3624,7 +3637,7 @@ render(InfiniteScrollDemo);
 ### 受控的动态表格
 
 ```jsx live=true noInline=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Table, Switch, ButtonGroup, Button, Avatar } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
@@ -4950,7 +4963,7 @@ function App() {
 `onHeaderRow` 中可以返回 th 支持的属性或者事件 `onRow` 中可以返回 tr 支持的属性或者事件
 
 ```jsx
-import React from 'react';
+import { h } from 'vue';
 import { Table } from '@kousum/semi-ui-vue';
 
 () => (

@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 28
 category: 输入类
@@ -7,7 +8,18 @@ icon: doc-rating
 brief: 展示评分的组件
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -22,7 +34,7 @@ import { Rating } from '@kousum/semi-ui-vue';
 **v >= 0.35.0** 后支持传入 number 类型自定义尺寸。具体可以参考[自定义](#自定义)
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
@@ -40,7 +52,7 @@ import { Rating } from '@kousum/semi-ui-vue';
 通过设置 `allowHalf` 属性可以支持选择半星。`0.28.0` 版本之后，设置 `allowHalf` 属性支持**展示**除0.5以外的小数。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
@@ -55,7 +67,7 @@ import { Rating } from '@kousum/semi-ui-vue';
 ### 只读
 通过设置 `disabled` 属性将无法进行交互。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
@@ -66,7 +78,7 @@ import { Rating } from '@kousum/semi-ui-vue';
 ### 点击清除
 通过设置 `allowClear` 属性允许再次点击时清除数值，默认为 `true`。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
@@ -113,7 +125,7 @@ import { Rating } from '@kousum/semi-ui-vue';
 > **v >= 0.35.0** 自定义尺寸需要配合自定义的字符才能生效。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Rating } from '@kousum/semi-ui-vue';
 import { IconLikeHeart } from '@kousum/semi-icons-vue';
 

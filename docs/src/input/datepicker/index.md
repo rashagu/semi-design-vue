@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 23
 category: 输入类
@@ -7,6 +8,18 @@ icon: doc-datepicker
 brief: 日期选择器用于帮助用户选择一个符合要求的、格式化的日期（时间）或日期（时间）范围
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -19,7 +32,7 @@ import { DatePicker } from '@kousum/semi-ui-vue';
 ### 基本使用
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker onChange={(date, dateString) => console.log(dateString)} />;
@@ -30,7 +43,7 @@ import { DatePicker } from '@kousum/semi-ui-vue';
 使用 density 可以控制日期面板的尺寸，`compact` 为小尺寸，`default` 为默认尺寸。v1.17.0 后支持。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -48,7 +61,7 @@ function Demo() {
 ### 带内嵌标签
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -61,7 +74,7 @@ function Demo() {
 将 `multiple` 设为 `true`，可以多选日期
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker multiple={true} style={{ width: 240 }} />;
@@ -73,7 +86,7 @@ import { DatePicker } from '@kousum/semi-ui-vue';
 同时，如果希望去掉 TimePicker 的无限循环滚动交互，可以通过 timePickerOpts 传入特定配置关闭。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => (
@@ -98,7 +111,7 @@ import { DatePicker } from '@kousum/semi-ui-vue';
 将 `type` 设定为 `dateRange`，可以选择日期范围
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker type="dateRange" style={{ width: 260 }} onChange={console.log} />;
@@ -114,7 +127,7 @@ import { DatePicker } from '@kousum/semi-ui-vue';
 当未传入 defaultValue 或 value时，底部面板默认时间为当前时间。如果你有特殊需求（如指定默认时分秒），可以通过 defaultPickerValue 指定
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => (
@@ -151,7 +164,7 @@ insetInput 开启后包括以下功能：
 </Notice>
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -193,7 +206,7 @@ version: >= 1.28.0
 > Note：点击年份按钮也会同步切换两个面板，从滚轮里面切换年月不会同步切换面板，这保证了用户选择非固定间隔月份的能力。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => (
@@ -213,7 +226,7 @@ import { DatePicker } from '@kousum/semi-ui-vue';
 `onPanelChange` 回调函数会在面板的月份或年份切换改变时被调用。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => (
@@ -231,7 +244,7 @@ import { DatePicker } from '@kousum/semi-ui-vue';
 dateRange 搭配 startDateOffset 和 endDateOffset 可以进行单击范围选择，如周选择、双周选择。v1.10.0 后支持。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -285,7 +298,7 @@ function Demo() {
 将 `type` 设定为 `month`，可以进行年月选择。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker defaultValue={new Date()} type="month" style={{ width: 140 }} />;
@@ -298,7 +311,7 @@ import { DatePicker } from '@kousum/semi-ui-vue';
 将 `type` 设定为 `monthRange`，可以进行年月范围选择。暂不支持小尺寸与快捷面板。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker type="monthRange" style={{ width: 200 }} />;
@@ -317,7 +330,7 @@ import { DatePicker } from '@kousum/semi-ui-vue';
 > 注意：开启确认选择时，需要点击取消按钮关闭面板，点击空白区域不再关闭面板（v2.2.0）
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => (
@@ -342,7 +355,7 @@ import { DatePicker } from '@kousum/semi-ui-vue';
 通过 `presets` 设定快捷日期选择
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => {
@@ -480,7 +493,7 @@ function Demo() {
 ### 禁用日期选择
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker disabled type="dateTime" defaultValue={new Date()} />;
@@ -497,7 +510,7 @@ import { DatePicker } from '@kousum/semi-ui-vue';
 </Notice>
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 import { range } from 'lodash-es';
@@ -574,7 +587,7 @@ class App extends React.Component {
 在 type 包含 range 时，可以根据当前选择动态禁止日期。options 参数 1.9.0 后支持。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
@@ -597,7 +610,7 @@ import * as dateFns from 'date-fns';
 范围选择时，可以根据 focus 状态禁用日期。focus 状态通过 options 中的 rangeInputFocus 参数传递。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
@@ -633,7 +646,7 @@ function App() {
 可以通过 `format` 自定义显示格式
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker format="yyyy年MM月dd日 HH:mm" type="dateTime" defaultValue={new Date()} />;
@@ -743,7 +756,7 @@ function Demo() {
 -   `fullDate`：当前日的完整日期。如 `2020-08-13`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker, Tooltip } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -793,7 +806,7 @@ type DayStatusType = {
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 import classNames from 'classnames';
 
@@ -857,29 +870,29 @@ function Demo() {
 | defaultValue       | 默认值                                                                    | ValueType |         |            |
 | density            | 面板的尺寸，可选值：`default`, `compact`                                    | string    | default | **1.17.0** |
 | disabled           | 是否禁用                                                                  | boolean   | false   |            |
-| disabledDate | 日期禁止判断方法，返回为 true 时禁止该日期，options 参数 1.9.0 后支持，其中 rangeEnd 1.29 后支持，rangeInputFocus 2.22 后支持 | <ApiType detail='(date: Date, options: { rangeStart: string, rangeEnd: string, rangeInputFocus: "rangeStart" \| "rangeEnd" \| false }) => boolean'>(date, options) => boolean</ApiType> | () => false   |
-| disabledTime | 时间禁止配置，返回值将会作为参数透传给 [`TimePicker`](/zh-CN/input/timepicker#API_参考) | <ApiType detail='(date: Date \| Date[], panelType?: string) => ({ disabledHours:() => number[], disabledMinutes: (hour: number) => number[], disabledSeconds: (hour: number, minute: number) => number[] })'>(date, panelType) => object</ApiType> | () => false | **0.36.0** |
+| disabledDate | 日期禁止判断方法，返回为 true 时禁止该日期，options 参数 1.9.0 后支持，其中 rangeEnd 1.29 后支持，rangeInputFocus 2.22 后支持 | `<ApiType detail='(date: Date, options: { rangeStart: string, rangeEnd: string, rangeInputFocus: "rangeStart" \| "rangeEnd" \| false }) => boolean'>(date, options) => boolean</ApiType>` | () => false   |
+| disabledTime | 时间禁止配置，返回值将会作为参数透传给 [`TimePicker`](/zh-CN/input/timepicker#API_参考) | `<ApiType detail='(date: Date \| Date[], panelType?: string) => ({ disabledHours:() => number[], disabledMinutes: (hour: number) => number[], disabledSeconds: (hour: number, minute: number) => number[] })'>(date, panelType) => object</ApiType>` | () => false | **0.36.0** |
 | disabledTimePicker | 是否禁止时间选择 | boolean |  | **0.32.0** |
 | dropdownClassName | 下拉列表的 CSS 类名 | string |  | **1.13.0** |
 | dropdownStyle | 下拉列表的内联样式 | object |  | **1.13.0** |
-| dropdownMargin | 下拉列表算溢出时的增加的冗余值，详见[issue#549](https://github.com/DouyinFE/semi-design/issues/549)，作用同 Tooltip margin      | object\|number  |  | **2.25.0**
+| dropdownMargin | 下拉列表算溢出时的增加的冗余值，详见[issue#549](https://github.com/DouyinFE/semi-design/issues/549)，作用同 Tooltip margin      | `object\|number`  |  | **2.25.0**
 | endDateOffset | type 为 dateRange 时，设置单击选择范围的结束日期 | (selectedDate?: Date) => Date; | - | **1.10.0** |
 | format | 在输入框内展现的日期串格式 | string | 与 type 对应：详见[日期时间格式](#日期时间格式) |  |
 | getPopupContainer | 指定父级 DOM，弹层将会渲染至该 DOM 中，自定义需要设置 `position: relative` | function():HTMLElement | () => document.body |  |
 | hideDisabledOptions | 隐藏禁止选择的时间 | boolean | false |  |
-| insetInput | 面板中是否嵌入输入框，InsetInputProps 类型 v2.29 支持  | boolean \| <ApiType detail='{ placeholder?: { dateStart?: string; dateEnd?: string; timeStart?: string; timeEnd?: string } }'>InsetInputProps</ApiType>  | false | **2.7.0** |
+| insetInput | 面板中是否嵌入输入框，InsetInputProps 类型 v2.29 支持  | boolean \| `<ApiType detail='{ placeholder?: { dateStart?: string; dateEnd?: string; timeStart?: string; timeEnd?: string } }'>InsetInputProps</ApiType>`  | false | **2.7.0** |
 | inputReadOnly | 文本框是否 readonly | boolean | false |  |
 | inputStyle | 输入框样式 | object |  |  |
-| insetLabel | 前缀标签，优先级低于 `prefix` | string\|ReactNode |  |  |
-| max | multiple 为 true 时，多选的数目,不传或者值为 null\|undefined 的话无限制 | number | - |  |
+| insetLabel | 前缀标签，优先级低于 `prefix` | `string\|ReactNode` |  |  |
+| max | multiple 为 true 时，多选的数目,不传或者值为 `null\|undefined` 的话无限制 | number | - |  |
 | motion | 是否开启面板展开的动画 | boolean | true |  |
 | multiple | 是否可以选择多个，仅支持 type="date" | boolean | false |  |
-| needConfirm | 是否需要“确认选择”，仅 type="dateTime"\|"dateTimeRange" 时有效 | boolean |  | **0.18.0** |
+| needConfirm | 是否需要“确认选择”，仅 `type="dateTime"\|"dateTimeRange"` 时有效 | boolean |  | **0.18.0** |
 | open | 面板显示或隐藏的受控属性 | boolean |  |  |
 | placeholder | 输入框提示文字 | string\|string[] | 'Select date' |  |
 | position | 浮层位置，可选值同[Popover#API 参考·position 参数](/zh-CN/show/popover#API参考) | string | 'bottomLeft' |  |
 | prefix | 前缀内容 | string\|ReactNode |  |  |
-| presets | 日期时间快捷方式 |  <ApiType detail='Array< { start: BaseValueType, end :BaseValueType, text: string } \| () => { start:B aseValueType, end: BaseValueType, text: string }>'>Array</ApiType> | [] |  |
+| presets | 日期时间快捷方式 |  `<ApiType detail='Array< { start: BaseValueType, end :BaseValueType, text: string } \| () => { start:B aseValueType, end: BaseValueType, text: string }>'>Array</ApiType>` | [] |  |
 | preventScroll | 指示浏览器是否应滚动文档以显示新聚焦的元素，作用于组件内的 focus 方法 | boolean |  |  |
 | presetPosition | 日期时间快捷方式面板位置, 可选值'left', 'right', 'top', 'bottom' | string |  'bottom' | **2.18.0** |
 | rangeSeparator | 自定义范围类型输入框的日期分隔符 | string | '~' | **1.31.0** |
@@ -888,7 +901,7 @@ function Demo() {
 | showClear | 是否显示清除按钮 | boolean | true | **0.35.0** |
 | size | 尺寸，可选值："small", "default", "large" | string | 'default' |  |
 | spacing | 浮层与 trigger 的距离 | number | 4 | **1.9.0** |
-| startDateOffset | type 为 dateRange 时，设置单击选择范围的开始日期 | <ApiType detail='(selectedDate?: Date) => Date '>(selectedDate) => Date </ApiType>| - | **1.10.0** |
+| startDateOffset | type 为 dateRange 时，设置单击选择范围的开始日期 | `<ApiType detail='(selectedDate?: Date) => Date '>(selectedDate) => Date </ApiType>`| - | **1.10.0** |
 | stopPropagation | 是否阻止弹出层上的点击事件冒泡 | boolean | false |  |
 | style | 自定义样式 | CSSProperties |  |  |
 | syncSwitchMonth | 在范围选择的场景中，支持同步切换双面板的月份 | boolean | false | **1.28.0** |
@@ -901,16 +914,16 @@ function Demo() {
 | weekStartsOn | 以周几作为每周第一天，0 代表周日，1 代表周一，以此类推 | number | 0 |  |
 | zIndex | 弹出面板的 zIndex | number | 1030 |  |
 | onBlur | 失去焦点时的回调，范围选择时不推荐使用 | (e: event) => void | () => {} | **1.0.0** |
-| onCancel | 取消选择时的回调，入参为上次确认选择的值，仅 type="dateTime"\|"dateTimeRange" 且 needConfirm=true 时有效。<br/>0.x版本入参顺序与新版有所不同 | <ApiType detail='(date: DateType, dateStr: StringType) => void'>(date, dateString) => void</ApiType> |  | **0.18.0** |
-| onChange | 值变化时的回调。<br/>0.x版本入参顺序与新版有所不同 | <ApiType detail='(date: DateType, dateString: StringType) => void'>(date, dateString) => void</ApiType> |  |  |
+| onCancel | 取消选择时的回调，入参为上次确认选择的值，仅 type="dateTime"\|"dateTimeRange" 且 needConfirm=true 时有效。<br/>0.x版本入参顺序与新版有所不同 | `<ApiType detail='(date: DateType, dateStr: StringType) => void'>(date, dateString) => void</ApiType>` |  | **0.18.0** |
+| onChange | 值变化时的回调。<br/>0.x版本入参顺序与新版有所不同 | `<ApiType detail='(date: DateType, dateString: StringType) => void'>(date, dateString) => void</ApiType>` |  |  |
 | onChangeWithDateFirst | 0.x 中 onChange(string, Date), 1.0 后(Date, string)。此开关设为 false 时，入参顺序将与 0.x 版本保持一致 | boolean | true | **1.0.0** |
 | onClear | 点击 clear 按钮时触发 | (e: event) => void | () => {} | **1.16.0** |
 | onClickOutSide | 当弹出层处于展示状态，点击非弹出层、触发器的回调 | () => void | () => {} | **2.31.0** |
-| onConfirm | 确认选择时的回调，入参为当前选择的值，仅 type="dateTime"\|"dateTimeRange" 且 needConfirm=true 时有效。<br/>0.x版本入参顺序与新版有所不同 | <ApiType detail='(date: DateType, dateStr: StringType) => void'>(date, dateString) => void</ApiType>|  | **0.18.0** |
+| onConfirm | 确认选择时的回调，入参为当前选择的值，仅 `type="dateTime"\|"dateTimeRange"` 且 needConfirm=true 时有效。<br/>0.x版本入参顺序与新版有所不同 | `<ApiType detail='(date: DateType, dateStr: StringType) => void'>(date, dateString) => void</ApiType>`|  | **0.18.0** |
 | onFocus | 获得焦点时的回调，范围选择时不推荐使用 | (e: event) => void | () => {} | **1.0.0** |
-| onOpenChange | 面板显示或隐藏状态切换的回调 | <ApiType detail='(isOpen: boolean) => void'>(isOpen) => void</ApiType> |  |  |
-| onPanelChange | 切换面板的年份或者日期时的回调 | <ApiType detail='(date: DateType \| DateType[], dateStr: StringType \| StringType[])=>void'>(date, dateStr) => void</ApiType> | function | **1.28.0** |
-| onPresetClick | 点击快捷选择按钮的回调 | <ApiType detail='(item: Object, e: Event) => void'>(item, e) => void</ApiType> | () => {}  | **1.24.0** |
+| onOpenChange | 面板显示或隐藏状态切换的回调 | `<ApiType detail='(isOpen: boolean) => void'>(isOpen) => void</ApiType>` |  |  |
+| onPanelChange | 切换面板的年份或者日期时的回调 | `<ApiType detail='(date: DateType \| DateType[], dateStr: StringType \| StringType[])=>void'>(date, dateStr) => void</ApiType>` | function | **1.28.0** |
+| onPresetClick | 点击快捷选择按钮的回调 | `<ApiType detail='(item: Object, e: Event) => void'>(item, e) => void</ApiType>` | () => {}  | **1.24.0** |
 | yearAndMonthOpts | 其他可以透传给年月选择器的参数，详见 [ScrollList#API](/zh-CN/show/scrolllist#ScrollItem)|  | object | **2.20.0** |
 
 ## Methods
@@ -1037,4 +1050,4 @@ semi-ui 组件库中采用 [date-fns(v2.9.0)](https://date-fns.org/v2.9.0/docs/G
 
     由于设计上它有隐含两层含义，可能会导致歧义，建议使用内嵌样式，通过 `insetInput` 打开。使用前推荐阅读相关 <a href="#内嵌输入框">文档</a>。
 
-    <Image src="https://lf6-static.semi.design/obj/semi-tos/images/9c9e8500-bccf-11ed-a8cf-bfecde588f0d.png" width={600} />
+    <Image src="https://lf6-static.semi.design/obj/semi-tos/images/9c9e8500-bccf-11ed-a8cf-bfecde588f0d.png" width="600px" />

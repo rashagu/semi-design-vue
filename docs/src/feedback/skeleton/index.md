@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 71
 category: 反馈类
@@ -7,6 +8,18 @@ icon: doc-skeleton
 brief: 在需要等待加载内容的位置提供的占位组件。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 概述
 
 -   `Avatar`：占位头像，默认为圆形，默认尺寸：Avatar medium: `width: 48px`，`height: 48px`。支持 Avatar 的 size（v1.0后支持)、shape 属性 (v2.20后支持)
@@ -81,7 +94,7 @@ import { Skeleton, Switch, Avatar, Button } from '@kousum/semi-ui-vue';
 图片和标题。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton } from '@kousum/semi-ui-vue';
 
 () => {
@@ -108,7 +121,7 @@ import { Skeleton } from '@kousum/semi-ui-vue';
 统计数字。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Descriptions } from '@kousum/semi-ui-vue';
 
 () => {
@@ -132,7 +145,7 @@ import { Skeleton, Descriptions } from '@kousum/semi-ui-vue';
 头像和标题。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -157,7 +170,7 @@ import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 居中段落和按钮。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -191,7 +204,7 @@ import { Skeleton, Button } from '@kousum/semi-ui-vue';
 头像、标题和段落。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -231,7 +244,7 @@ import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 表格。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Table } from '@kousum/semi-ui-vue';
 
 () => {
@@ -323,7 +336,7 @@ import { Skeleton, Table } from '@kousum/semi-ui-vue';
 通过设置 `active` 属性可以展示动画效果。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 
 () => {

@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 49
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-carousel
 brief: 轮播图是一种媒体组件，可以在可视化应用中展示多张图片轮流播放的效果。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -19,7 +32,7 @@ import { Carousel } from '@kousum/semi-ui-vue';
 基本用法
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 
 () => {
@@ -87,7 +100,7 @@ import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 默认定义了三种主题：  `primary`、`light`、`dark`
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -169,7 +182,7 @@ import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-
 尺寸：  `small`、`medium`
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -268,7 +281,7 @@ import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-
 如果箭头可见，通过 arrowType 属性控制箭头展示的时机
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -355,7 +368,7 @@ import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-
 通过 arrowProps 属性定制箭头样式和点击事件
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 import { IconArrowLeft, IconArrowRight } from "@kousum/semi-icons-vue";
 
@@ -435,7 +448,7 @@ class CarouselDemo extends React.Component {
 通过给 autoPlay 传入参数 interval 控制两张图片之间的时间间隔，传入 hoverToPause 控制鼠标放置在图片上时是否停止播放
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 
 () => {
@@ -504,7 +517,7 @@ import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 通过给 speed 属性控制两张图片之间的切换时间，单位为ms
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 
 () => {
@@ -572,7 +585,7 @@ import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 ### 受控的轮播图
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, Space, Typography } from '@kousum/semi-ui-vue';
 
 class CarouselDemo extends React.Component {

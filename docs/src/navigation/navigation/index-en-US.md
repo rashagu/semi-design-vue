@@ -10,6 +10,18 @@ dir: column
 brief: A menu list that provides navigation for pages and features.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -30,7 +42,7 @@ Each navigation item includes:
 For the meaning of the parameters, see [Nav.Item](#Nav.Item) Or [Nav.Sub](#Nav.Sub)
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconUser, IconStar, IconSetting } from '@kousum/semi-icons-vue';
 
@@ -68,7 +80,7 @@ class NavApp extends React.Component {
 If the navigation project doesn't come in, `icon` field, then the copy will be automatically filled to the left.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 
 class NavApp extends React.Component {
@@ -108,7 +120,7 @@ For `footer`, semi-ui extra encapsulates a pull-up feature button that developer
 For the parameters, see [Nav.Header](#Nav.Header) and [Nav.Footer](#Nav.Footer).
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconUser, IconStar, IconSetting } from '@kousum/semi-icons-vue';
 
@@ -149,7 +161,7 @@ Navigation currently provides two parameters to define navigation styles:`style`
 For example, you need a navigation list to scroll, navigate the head and bottom fixed navigation components, which can be used this way:
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconUser, IconStar, IconSetting, IconFolder } from '@kousum/semi-icons-vue';
 
@@ -195,7 +207,7 @@ class NavApp extends React.Component {
 Users can use JSX to define navigation headers, navigation items, and navigation bottoms.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconStar, IconUser, IconUserGroup } from '@kousum/semi-icons-vue';
 
@@ -286,7 +298,7 @@ In particular, there are some functions (parameters) only in `mode = "vertical"`
 #### Vertical Direction
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconStar, IconUser, IconUserGroup, IconSetting } from '@kousum/semi-icons-vue';
 
@@ -330,7 +342,7 @@ class NavApp extends React.Component {
 #### Horizontal Direction
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav, Avatar, Dropdown } from '@kousum/semi-ui-vue';
 import { IconStar, IconUser, IconUserGroup, IconSetting, IconEdit } from '@kousum/semi-icons-vue';
 
@@ -397,7 +409,7 @@ class NavApp extends React.Component {
 The general platform design will adopt the mode of horizontal and vertical navigation. Here is a common example.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav, Avatar, Dropdown, Select, Button } from '@kousum/semi-ui-vue';
 import { IconStar, IconUser, IconUserGroup, IconSetting, IconEdit, IconLanguage } from '@kousum/semi-icons-vue';
 
@@ -505,7 +517,7 @@ class NavApp extends React.Component {
 `toggleIconPosition` set 'left' or 'right', default right
 
 ```jsx live=true dir=column
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconUser, IconStar, IconSetting } from '@kousum/semi-icons-vue';
 
@@ -550,7 +562,7 @@ Object method No need to care about level when passing in navigation items.
 limitIndent only takes effect in the vertical direction.
 
 ```jsx live=true dir=column
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconUser, IconStar, IconSetting } from '@kousum/semi-icons-vue';
 
@@ -604,7 +616,7 @@ Including:
 -   `defaultIsCollapsed` (whether the sidebar is closed by default, valid only when `mode = "vertical"`)
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconUser, IconStar, IconUserGroup, IconSetting } from '@kousum/semi-icons-vue';
 

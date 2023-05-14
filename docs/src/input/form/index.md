@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 24
 category: 输入类
@@ -7,7 +8,18 @@ icon: doc-form
 dir: column
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 表单(Form)
 
 -   **按需重绘**，避免了不必要的全量渲染, 性能更高
@@ -66,7 +78,7 @@ Semi Form 同时支持多种写法
 </Notice>
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form, Tooltip } from '@kousum/semi-ui-vue';
 import { IconHelpCircle } from '@kousum/semi-icons-vue';
 
@@ -107,7 +119,7 @@ import { IconHelpCircle } from '@kousum/semi-icons-vue';
 即 render props
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Form } from '@kousum/semi-ui-vue';
 
 () => {
@@ -135,7 +147,7 @@ import { Form } from '@kousum/semi-ui-vue';
 Form 的 children 是一个 function，return 出所有表单控件
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Form } from '@kousum/semi-ui-vue';
 
 () => {
@@ -165,7 +177,7 @@ import { Form } from '@kousum/semi-ui-vue';
 通过 component 属性直接将整个内部结构以 ReactNode 形式传入
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Form } from '@kousum/semi-ui-vue';
 
 () => {
@@ -184,7 +196,7 @@ import { Form } from '@kousum/semi-ui-vue';
 ### 已支持的表单控件
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form, Col, Row, Button } from '@kousum/semi-ui-vue';
 import { IconUpload } from '@kousum/semi-icons-vue';
 
@@ -453,7 +465,7 @@ class BasicDemoWithInit extends React.Component {
 | parents\[1\]\['name'\] | formState.values.parents\[1\].name |
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Form, Toast, Row, Col, TextArea } from '@kousum/semi-ui-vue';
 
 () => (
@@ -488,7 +500,7 @@ import { Form, Toast, Row, Col, TextArea } from '@kousum/semi-ui-vue';
      Semi Design 更推荐表单采用垂直布局
 
 ```jsx live=true dir="column" 
-import React from 'react';
+import { h } from 'vue';
 import { Form, Toast, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -520,7 +532,7 @@ import { Form, Toast, Button } from '@kousum/semi-ui-vue';
     你可以通过设置 `layout='horizontal'`来使用水平布局
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form } from '@kousum/semi-ui-vue';
 
 () => (
@@ -535,7 +547,7 @@ import { Form } from '@kousum/semi-ui-vue';
     你可以通过设置 labelPosition、labelAlign 控制 label 在 Field 中出现的位置，文本对齐的方向
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form, Select } from '@kousum/semi-ui-vue';
 
 class BasicDemo extends React.Component {
@@ -620,7 +632,7 @@ class BasicDemo extends React.Component {
     你还可以结合 Grid 提供的 Row、Col，来对表单进行你想要的排列
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form, Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
@@ -695,7 +707,7 @@ import { Form, Col, Row } from '@kousum/semi-ui-vue';
 字段数量较多的表单应考虑对字段进行分组，可以使用`Form.Section`对 Fields 进行分组（仅影响布局，不会影响数据结构）
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form, Button, Space } from '@kousum/semi-ui-vue';
     
 () => {
@@ -776,7 +788,7 @@ import { Form, Button, Space } from '@kousum/semi-ui-vue';
 `wrapperCol`、`labelCol`属性配置参考[Col 组件](/zh-CN/basic/grid#Col)
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form } from '@kousum/semi-ui-vue';
 
 () => (
@@ -803,7 +815,7 @@ Form 会自动为 Field 控件插入 Label。如果你不需要自动插入 Labe
 如果你希望与原始控件保持 DOM 结构一致，可以使用 pure=true，此时除了数据流被接管外，DOM结构不会有任何变化（你需要自行负责 ErrorMessage的渲染，同时它也无法被 formProps.wrapperCol 属性影响）
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form } from '@kousum/semi-ui-vue';
 
 () => (
@@ -819,7 +831,7 @@ import { Form } from '@kousum/semi-ui-vue';
 通过将 labelPosition 设为`inset`，可以将 Label 内嵌在表单控件中。目前支持这项功能的组件有`Input`、`InputNumber`、`DatePicker`、`TimePicker`、`Select`、`TreeSelect`、`Cascader`、`TagInput`
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form } from '@kousum/semi-ui-vue';
 
 () => (
@@ -858,7 +870,7 @@ const { Label, ErrorMessage } = Form;
 Slot 属性配置详见[Form.Slot](#Form.Slot)
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form } from '@kousum/semi-ui-vue';
 
 class AssistComponent extends React.Component {
@@ -895,7 +907,7 @@ class AssistComponent extends React.Component {
 当传入 validateStatus 时，优先展示 validateStatus 值对应的 UI 样式。不传入时，以 field 内部校验状态为准。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form } from '@kousum/semi-ui-vue';
 
 () => {
@@ -962,7 +974,7 @@ import { Form } from '@kousum/semi-ui-vue';
 该属性可在 Form 上统一配置，亦可在每个 Field 上单独配置，同时传入时，以 Field 的配置为准。  
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form } from '@kousum/semi-ui-vue';
 
 () => {
@@ -999,7 +1011,7 @@ import { Form } from '@kousum/semi-ui-vue';
 `label`可配置属性详见[Label](#Form.Label)  
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form, Button } from '@kousum/semi-ui-vue';
 
 () => (
@@ -1025,7 +1037,7 @@ import { Form, Button } from '@kousum/semi-ui-vue';
 在提交时，通过 formApi.validate()对 Field 进行集中校验
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form, Modal, Button, Row, Col } from '@kousum/semi-ui-vue';
 
 class ModalFormDemo extends React.Component {
@@ -1149,7 +1161,7 @@ class ModalFormDemo extends React.Component {
 -   你可以通过 form 的`initValues`为整个表单统一设置初始值，也可以在每个 field 中通过`initValue`设置初始值（后者优先级更高）
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Form, Button } from '@kousum/semi-ui-vue';
 
 class BasicDemoWithInit extends React.Component {
@@ -1209,7 +1221,7 @@ class BasicDemoWithInit extends React.Component {
 校验失败时，你应该返回错误信息(Object，key 为 fieldName，value 为对应的错误信息）
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Form, Button } from '@kousum/semi-ui-vue';
 
 class FormLevelValidateSync extends React.Component {
@@ -1257,7 +1269,7 @@ class FormLevelValidateSync extends React.Component {
 异步校验时，你应当返回一个 promise，在 promise.then()中 你需要 return 对应的错误信息
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Form, Button } from '@kousum/semi-ui-vue';
 
 class FormLevelValidateAsync extends React.Component {
@@ -1304,7 +1316,7 @@ class FormLevelValidateAsync extends React.Component {
 你可以指定单个表单控件的自定义校验函数，支持同步、异步校验（通过返回 promise）
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Form, Button } from '@kousum/semi-ui-vue';
 
 class FieldLevelValidateDemo extends React.Component {
@@ -1354,7 +1366,7 @@ class FieldLevelValidateDemo extends React.Component {
 
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form, Button, Space } from '@kousum/semi-ui-vue';
 class PartValidAndResetDemo extends React.Component {
     constructor() {
@@ -1436,7 +1448,7 @@ class PartValidAndResetDemo extends React.Component {
 你可以通过监听 Field 的 onChange 事件，然后使用 formApi 进行相关修改，来使 Field 之间达到联动
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Form, Button, Row } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1471,7 +1483,7 @@ import { Form, Button, Row } from '@kousum/semi-ui-vue';
 #### 动态删减表单项
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Form, Button } from '@kousum/semi-ui-vue';
 
 () => (
@@ -1501,7 +1513,7 @@ ArrayField 详细的 API请查阅下方 [ArrayField Props](#arrayfield-props)
 注意：ArrayField 的 initValue 类型必须是数组
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { ArrayField, TextArea, Form, Button, useFormState } from '@kousum/semi-ui-vue';
 import { IconPlusCircle, IconMinusCircle } from '@kousum/semi-icons-vue';
 
@@ -1583,7 +1595,7 @@ import { useFormApi, useFormState, useFieldApi, useFieldState } from '@kousum/se
 useFormApi 允许你通过 hook，在 Functional Component 内直接访问父级 Form 组件的 formApi
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { useFormApi, Form, Button } from '@kousum/semi-ui-vue';
 
 const ComponentUsingFormApi = () => {
@@ -1615,7 +1627,7 @@ render(UseFromApiDemo);
 useFormState 允许你通过 hook，在 Functional Component 内直接访问父级 Form 组件的 formState
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { useFormState, Form } from '@kousum/semi-ui-vue';
 
 const ComponentUsingFormState = () => {
@@ -1647,7 +1659,7 @@ render(UseFromStateDemo);
 useFieldApi 允许你通过 hook，在 Functional Component 内直接调用指定 Field 的 api
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { useFieldApi, Form, Button } from '@kousum/semi-ui-vue';
 
 const ComponentUsingFieldApi = () => {
@@ -1679,7 +1691,7 @@ render(UseFieldApiDemo);
 useFieldState 允许你通过 hook，在 Functional Component 内直接访问指定 Field 的 State
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { useFieldState, Form } from '@kousum/semi-ui-vue';
 
 const ComponentUsingFieldState = props => {
@@ -1727,7 +1739,7 @@ import { withFormApi, withFormState, withField } from '@kousum/semi-ui-vue';
 注意封装后的组件必须放置于 Form 结构内部
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { withFormApi, Form, Button } from '@kousum/semi-ui-vue';
 
 const SomeComponetInsideForm = props => (
@@ -1759,7 +1771,7 @@ render(WithFormApiDemo);
 注意封装后的组件必须放置于 Form 结构内部 (因其强依赖 Context 机制进行消费)
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { withFormState, Form } from '@kousum/semi-ui-vue';
 
 const SomeComponentInsideForm = props => (
@@ -1809,7 +1821,7 @@ withField(YourComponent, withFieldOption);
 ```
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { withField, Form } from '@kousum/semi-ui-vue';
 
 // 这里将html原生的input封装
@@ -1845,7 +1857,7 @@ render(WithFieldDemo1);
 ```
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { withField, Input, Select, Form } from '@kousum/semi-ui-vue';
 
 const MyComponent = (props) => {
@@ -1978,7 +1990,7 @@ FormState 存储了所有 Form 内部的状态值，包括各表单控件的值�
 -   通过 [withFormApi](#HOC-withFormApi) HOC
 
 ```jsx
-import React from 'react';
+import { h } from 'vue';
 import { Form, Button } from '@kousum/semi-ui-vue';
 
 class FormApiDemo extends React.Component {
@@ -2015,7 +2027,7 @@ class FormApiDemo extends React.Component {
 ```
 
 ```jsx
-import React from 'react';
+import { h } from 'vue';
 import { Form, Button } from '@kousum/semi-ui-vue';
 
 () => {

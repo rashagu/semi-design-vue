@@ -8,7 +8,18 @@ icon: doc-modal
 brief: Modals are used to wait for the user to interact, inform the user of important information, or display more information without losing context.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -19,7 +30,7 @@ import { Modal } from '@kousum/semi-ui-vue';
 ### Basic Usage
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
@@ -78,7 +89,7 @@ class modalDemo extends React.Component {
 You can set `maskClosable={false}` to prevent modal from closing when clicking on the mask.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
@@ -131,7 +142,7 @@ You can set button text using `okText` and `cancelText`.
 > In the case of creating a modal with static methods, you will have to use these two properties to set i18 texts at this moment. Because we cannot modify the React component tree, imperatively inserted components cannot consume Locale-related Context
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
@@ -183,7 +194,7 @@ class modalDemo extends React.Component {
 You can set button properties using `okButtonProps` and `cancelButtonProps`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
@@ -235,7 +246,7 @@ class modalDemo extends React.Component {
 For more customized modal, you could use `header` and `footer`. Set `header={null}` if you do not want header area, or `footer={null}` to remove footer area including buttons.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
@@ -290,7 +301,7 @@ class modalDemo extends React.Component {
 You can use `style` to customize styling or position e.g. `style.top = '30vh'`, or use `centered` to center modal. Also, you could use `maskStyle` to customize mask style or `bodyStyle` for content style.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
@@ -349,7 +360,7 @@ class modalDemo extends React.Component {
 By using `header`, `footer`, etc, you could create any modal to your needs.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button, List } from '@kousum/semi-ui-vue';
 import { IconVigoLogo, IconSemiLogo } from '@kousum/semi-icons-vue';
 
@@ -446,7 +457,7 @@ class modalDemo extends React.Component {
 set `fullScreen={true}` can use full screen Modal
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -477,7 +488,7 @@ import { Modal, Button } from '@kousum/semi-ui-vue';
 You could use static methods to create a confirm Modal. Use `icon` to customize icon.
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 import { IconSend } from '@kousum/semi-icons-vue';
 
@@ -532,7 +543,7 @@ ModalComponent = function(props) {
 ### useModal Hooks
 You could use `Modal.useModal` to create a `contextHolder` that could access context.
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { ConfigProvider, Modal, Button } from '@kousum/semi-ui-vue';
 import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
 

@@ -8,7 +8,18 @@ icon: doc-tree
 brief: A tree view component presents a hierarchical list.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 
@@ -22,7 +33,7 @@ import { Tree } from '@kousum/semi-ui-vue';
 By default, tree is in single select mode and each item is selectable.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -97,7 +108,7 @@ import { Tree } from '@kousum/semi-ui-vue';
 You could use `multiple` to set mode to multi-choice. When all child items are selected, the parent item will be selected.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -174,7 +185,7 @@ Use `filterTreeNode` to support search input. By default it searches the `label`
 You could also use `showFilteredOnly` if you prefer to display filtered results only.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Switch } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -274,7 +285,7 @@ class Demo extends React.Component {
 
 After setting the `filterTreeNode` property to enable search, you can customize the rendering method of the search box by setting `searchRender`. When set to `false`, the search box can be hidden.
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Input } from '@kousum/semi-ui-vue';
 
 () => {
@@ -353,7 +364,7 @@ import { Tree, Input } from '@kousum/semi-ui-vue';
 ### Trigger search manually
 Use ref to get tree instance，you can call `search` method of tree to trigger search manually. Note that you need to set `filterTreeNode` to enable search at the same time.If the search box is outside the tree, you can hide the search box inside the tree by setting `searchRender=false`.
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Input } from '@kousum/semi-ui-vue';
 
 () => {
@@ -434,7 +445,7 @@ import { Tree, Input } from '@kousum/semi-ui-vue';
 You could use `treeDataSimpleJson` to pass in `treeNodes` data in JSON format. In this case, key will be used as `key` and `label`, and value will be used as `value` correspondingly. Return value includes JSON data in selected nodes.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -468,7 +479,7 @@ import { Tree } from '@kousum/semi-ui-vue';
 You could use `blockNode` to set node to display as a row. In this case, styles for hovering and selected state take effects on the entire row. By default, it is set to `true`. When it is set to `false`, only label will be highlighted.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -551,7 +562,7 @@ import { Tree } from '@kousum/semi-ui-vue';
 You could pass in ReactNode for `label` in `TreeNodeData` to customize label. Pay attention that by default `filterTreeNode` searches data by label. When label is a ReactNode, it is advised to pass in customized search function for a searchable tree.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -634,7 +645,7 @@ import { Tree, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 You could use `icon` to add customized icon.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 import { IconMapPin } from '@kousum/semi-icons-vue';
 
@@ -680,7 +691,7 @@ import { IconMapPin } from '@kousum/semi-icons-vue';
 You could use `directory` to display tree as a directory with default icons. Also, the icon could be overwritten by custom Icon.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -759,7 +770,7 @@ import { Tree } from '@kousum/semi-ui-vue';
 You can use `disableStrictly` to set whether to enable strict disabling. After enabling strict disabling, when the node is disabled, the selected state cannot be changed through the relationship between the child or the parent.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -843,7 +854,7 @@ Version: >= 2.5.0
 When multiple selections are made, `checkRelation` can be used to set the type of node selection relationship, optional: 'related' (default), 'unRelated'. When the selection relationship is 'unRelated', it means that selections between nodes do not affect each other.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -996,7 +1007,7 @@ import { Tree, Button } from '@kousum/semi-ui-vue';
 You can use `value` along with `onChange` property if you want to use Tree as a controlled component.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1088,7 +1099,7 @@ class Demo extends React.Component {
 In the case of controlled expansion, when `autoExpandParent` is turned on, if you want to collapse the parent element, you need to collapse all its child elements. By default, `autoExpandParent` is false, that is, the collapse of the parent element is not affected by the child element.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1162,7 +1173,7 @@ The property `virtualize` is an object consisting of the following values:
 If tree is searchable, you could also set `showFilteredOnly={true}` to reduce time of rendering for results.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1254,7 +1265,7 @@ class Demo extends React.Component {
 ### Dynamic Update of Data
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1584,7 +1595,7 @@ First is to render Parent node as separator and only allow leaf nodes to be sele
 renderFullLabel only takes care of the UI rendering and won't affect inside data logic. But you could choose info to your needs and use it with controlled mode for advanced usage.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Checkbox } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1700,7 +1711,7 @@ The second is for the scenario of "I hope that only leaf nodes can be single-sel
 - You only need to click on the parent node without triggering the selection, click on the leaf node to trigger.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {

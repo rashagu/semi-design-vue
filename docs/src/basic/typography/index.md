@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 18
 category: 基础
@@ -7,6 +8,18 @@ icon: doc-typography
 brief: 文字，图片，段落，数值的基本格式。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 使用场景
 - 对文章、博客、日志等的文本内容进行展示时。
 - 对文本进行复制和省略等基础操作时。
@@ -21,7 +34,7 @@ import { Typography } from '@kousum/semi-ui-vue';
 ### 标题组件
 通过设置 heading 可以展示不同级别的标题。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -42,7 +55,7 @@ function Demo() {
 ### 文本组件
 内置不同样式的文本。可以通过 `icon` 属性传入图标，这种方式传入的图标默认与文本有间距，同时在链接文本的情况不会出现下划线符合设计规范。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -93,7 +106,7 @@ function Demo() {
 链接文本支持传入 `object`，将对应的属性挂在 `<a>` 标签上。  
 **v>=1.0** 后默认不再有下划线，可以配合 underline 属性在 hover，active 态增加下划线的样式。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 import { IconLink } from '@kousum/semi-icons-vue';
 
@@ -116,7 +129,7 @@ function Demo() {
 ### 段落组件
 段落组件拥有两种行距，可以通过设置 `spacing='extended'` 使用更宽松的行距。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -157,7 +170,7 @@ Numeral 组件在Text组件的基础上，添加了属性: `rule`, `precision`, 
 - 设为 `exponential` 时,会将数字自动转换为科学计数法形式展示
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -201,7 +214,7 @@ function Demo() {
 可以通过 `parser` 自定义解析规则
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -248,7 +261,7 @@ function Demo() {
 ### 文本大小
 段落组件和文本组件支持两种尺寸，`small`（12px） 和 `normal`（14px），默认为`normal`。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -275,7 +288,7 @@ function Demo() {
 当 copyable 配置为 object 时，可通过 `copyable.content` 指定复制至粘贴板的内容，与 children 不再强关联， 此时 children 将不再限定类型，但 `copyable.content` 仍需要为 string    
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography, TextArea } from '@kousum/semi-ui-vue';
 import { IconSetting } from '@kousum/semi-icons-vue';
 
@@ -308,7 +321,7 @@ function Demo() {
 
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -373,7 +386,7 @@ function Demo() {
 </Notice>
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -506,17 +519,17 @@ function Demo() {
 ### Ellipsis Config
 **v >= 0.34.0**
 
-| 属性         | 说明                                                                                                              | 类型                                                | 默认值 |
-| ------------ | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ------ |
-| collapseText | 折叠的展示文本                                                                                                    | string                                              | `收起` |
-| collapsible  | 是否支持折叠                                                                                                      | boolean                                             | false  |
-| expandText   | 展开的展示文本                                                                                                    | string                                              | `展开` |
-| expandable   | 是否支持展开                                                                                                      | boolean                                             | false  |
-| pos          | 省略截断的位置，支持末尾和中间截断：`end`, `middle`                                                               | string                                              | `end`  |
-| rows         | 省略溢出行数                                                                                                      | number                                              | 1      |
-| showTooltip  | 是否展示 tooltip 及相关配置: type，浮层内容承载的组件，支持 Tooltip\| Popover；opts，其他需要透传给浮层组件的属性 | boolean\|{type: 'tooltip'\|'popover', opts: object} | false  |
-| suffix       | 始终展示的后缀                                                                                                    | string                                              | -      |
-| onExpand     | 展开/收起的回调                                                                                                   | function(expanded: bool, Event: e)                  | -      |
+| 属性         | 说明                                                                                                              | 类型                                                    | 默认值 |
+| ------------ | ----------------------------------------------------------------------------------------------------------------- |-------------------------------------------------------| ------ |
+| collapseText | 折叠的展示文本                                                                                                    | string                                                | `收起` |
+| collapsible  | 是否支持折叠                                                                                                      | boolean                                               | false  |
+| expandText   | 展开的展示文本                                                                                                    | string                                                | `展开` |
+| expandable   | 是否支持展开                                                                                                      | boolean                                               | false  |
+| pos          | 省略截断的位置，支持末尾和中间截断：`end`, `middle`                                                               | string                                                | `end`  |
+| rows         | 省略溢出行数                                                                                                      | number                                                | 1      |
+| showTooltip  | 是否展示 tooltip 及相关配置: type，浮层内容承载的组件，支持 Tooltip\| Popover；opts，其他需要透传给浮层组件的属性 | boolean\|`{type: 'tooltip'\|'popover', opts: object}` | false  |
+| suffix       | 始终展示的后缀                                                                                                    | string                                                | -      |
+| onExpand     | 展开/收起的回调                                                                                                   | function(expanded: bool, Event: e)                    | -      |
 
 ### Copyable Config
 | 属性       | 说明                        | 类型                                           | 默认值 | 版本   |
@@ -537,32 +550,32 @@ function Demo() {
 
 | ✅ 推荐用法 | ❌ 不推荐用法 |   
 | --- | --- | 
-| No spaces yet? <PureA> Create space </PureA>| No spaces yet? <PureA>Click here</PureA> |
+| No spaces yet? <pre> Create space </pre>| No spaces yet? <pre>Click here</pre> |
 
 - 避免将整个句子作为可点击的文字链接，而是将描述具体去向的文字作为链接内容
 
 | ✅ 推荐用法 | ❌ 不推荐用法 |   
 | --- | --- | 
-| Views <PureA>user documentation</PureA> for details|<PureA>View user documentation for details</PureA> |
+| Views <pre>user documentation</pre> for details|<pre>View user documentation for details</pre> |
 
 - 使用短术语或词作为链接文本会更有利于国际化，以避免由于不同的语言的语法和语序不同，而出现链接文字被拆分的问题
 
 | ✅ 推荐用法 | ❌ 不推荐用法 |   
 | --- | --- | 
-| Manage <PureA>notifications </PureA>to| <PureA>Manage notifications</PureA> to |
+| Manage <pre>notifications </pre>to| <pre>Manage notifications</pre> to |
 
 - 以文字链接结尾时，不需要跟随标点符号，除了问号“？”
 
 | ✅ 推荐用法 | ❌ 不推荐用法 |   
 | --- | --- | 
-| No spaces yet? <PureA> Create space </PureA> | No spaces yet? <PureA>Click here</PureA> |
-| <PureA> Forgot password ？</PureA> |<PureA>Forgot password</PureA> |
+| No spaces yet? <pre> Create space </pre> | No spaces yet? <pre>Click here</pre> |
+| <pre> Forgot password ？</pre> |<pre>Forgot password</pre> |
 
 - 链接文字不要包含冠词“the, a, an”
 
 | ✅ 推荐用法 | ❌ 不推荐用法 |   
 | --- | --- | 
-| View <PureA> user documentation </PureA> for details| View the<PureA> user documentation</PureA> for details |
+| View <pre> user documentation </pre> for details| View the<pre> user documentation</pre> for details |
 
 ## 设计变量
 <DesignToken/>

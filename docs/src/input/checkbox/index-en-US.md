@@ -8,7 +8,18 @@ icon: doc-checkbox
 brief: Checkboxes allow the user to select one or more items from a set.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## When to use
 
 -   When making multiple choices in a set of options;
@@ -30,7 +41,7 @@ When the Checkbox is used individually, you can control whether to check it thro
 When `checked` is passed in, it is controlled component.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -41,7 +52,7 @@ import { Checkbox } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -58,7 +69,7 @@ import { Checkbox } from '@kousum/semi-ui-vue';
 You can use `extra` to add extra information. The extra information usually is longer and even has line changes.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -84,7 +95,7 @@ import { Checkbox } from '@kousum/semi-ui-vue';
 ### Disabled
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -103,7 +114,7 @@ Using the Checkbox group, you can more conveniently control the selection of a g
 At this time, Checkbox does not need to declare `defaultChecked` and `checked` attributes
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Checkbox, CheckboxGroup } from '@kousum/semi-ui-vue';
 
 () => (
@@ -123,7 +134,7 @@ import { Checkbox, CheckboxGroup } from '@kousum/semi-ui-vue';
 You can pass an array using `options` to `CheckboxGroup` directly to generate a set of checkboxs.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { CheckboxGroup } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -169,7 +180,7 @@ class App extends React.Component {
 By setting `direction` to `horizontal` or `vertical`, You can adjust the layout within the Checkbox Group.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { CheckboxGroup } from '@kousum/semi-ui-vue';
 
 () => {
@@ -190,7 +201,7 @@ import { CheckboxGroup } from '@kousum/semi-ui-vue';
 Used as a controlled component.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Checkbox, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -314,7 +325,7 @@ version: >=1.30.0
 You can set `type='card'` to CheckboxGroup to realize card style with background.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -341,7 +352,7 @@ version: >=1.30.0
 You can set `type='pureCard'` to CheckboxGroup to realize a pure card style with background and no checkbox.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -367,7 +378,7 @@ import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 Use `Checkbox.Group` with `Grid` to achieve flexible layouts.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { CheckboxGroup, Checkbox, Row, Col } from '@kousum/semi-ui-vue';
 
 () => (

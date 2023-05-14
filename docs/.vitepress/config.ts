@@ -1,11 +1,16 @@
 import { defineConfig } from 'vitepress';
 import { h } from 'vue';
+import Vue from "@vitejs/plugin-vue";
+import Jsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'semi-design-vue',
-  description: 'semi-ui-vue',
+  description: 'Vue3 UI components based on semi-design and Vue',
   srcDir: 'src',
+  vite:{
+    plugins: [Jsx()],
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -79,7 +84,7 @@ export default defineConfig({
         text: '基础',
         items: [
           {
-            link: '/basic/divider',
+            link: '/basic/divider/',
             text: 'Divider 分割线',
           },
           {
@@ -191,7 +196,6 @@ export default defineConfig({
       {
         link: 'navigation',
         text: '导航类',
-
         items: [
           {
             link: '/navigation/anchor/',

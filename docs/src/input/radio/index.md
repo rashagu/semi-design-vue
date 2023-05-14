@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 27
 category: 输入类
@@ -7,6 +8,18 @@ icon: doc-radio
 brief: 用户使用单选框来从少量的选项集合中选择单个选项
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 使用场景
 
 单选框(Radio)也叫单选按钮，它允许用户在一组选项中选择其中一个。  
@@ -21,7 +34,7 @@ import { Radio, RadioGroup } from '@kousum/semi-ui-vue';
 ### 基本用法
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Radio } from '@kousum/semi-ui-vue';
 
 () => (
@@ -36,7 +49,7 @@ import { Radio } from '@kousum/semi-ui-vue';
 > `extra`在 v0.25.0 后开始提供
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Radio } from '@kousum/semi-ui-vue';
 
 () => (
@@ -111,7 +124,7 @@ import { Radio } from '@kousum/semi-ui-vue';
 一组互斥的 Radio 配合使用
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => {
@@ -136,7 +149,7 @@ import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 可通过给 RadioGroup 设置 `direction`属性来决定 组内的 radio 元素水平排列或者垂直排列
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => (
@@ -158,7 +171,7 @@ version: >=1.26.0
 需要注意的是: button 类型的单选器暂不支持辅助文本（`extra`）和垂直排列（`direction='vertical'`）。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { RadioGroup, Radio, Space } from '@kousum/semi-ui-vue';
 
 () => {
@@ -191,7 +204,7 @@ version: >=1.30.0
 可以给 `RadioGroup` 设置 `type='card'` 实现带有背景的卡片样式。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => (
@@ -215,7 +228,7 @@ version: >=1.30.0
 可以给 `RadioGroup` 设置 `type='pureCard'` 实现带有背景且无 radio 的纯卡片样式。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 () => (
@@ -238,7 +251,7 @@ import { RadioGroup, Radio } from '@kousum/semi-ui-vue';
 通过配置 options 参数来渲染单选框
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { RadioGroup, Space } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {

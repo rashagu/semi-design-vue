@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 25
 category: 输入类
@@ -8,7 +9,18 @@ width: 60%
 brief: 输入框是最基本的接收用户文本输入的组件
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -21,7 +33,7 @@ import { Input } from '@kousum/semi-ui-vue';
 基本使用
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 () => (
@@ -34,7 +46,7 @@ import { Input } from '@kousum/semi-ui-vue';
 默认定义了三种尺寸：大、默认、小
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 () => (
@@ -53,7 +65,7 @@ import { Input } from '@kousum/semi-ui-vue';
 设定 `disabled` 属性为 `true`
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 () => (
@@ -74,7 +86,7 @@ import { Input } from '@kousum/semi-ui-vue';
 
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input, Typography } from '@kousum/semi-ui-vue';
 import { IconSearch } from '@kousum/semi-icons-vue';
 
@@ -98,7 +110,7 @@ import { IconSearch } from '@kousum/semi-icons-vue';
 当 addonBefore、addonAfter 传入的内容为文本或者 Semi Icon 时，会自动带上左右间隔，若为自定义 ReactNode，则左右间隔为 0
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 () => (
@@ -111,7 +123,7 @@ import { Input } from '@kousum/semi-ui-vue';
 点击图标删除所有内容
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 () => (
@@ -124,7 +136,7 @@ import { Input } from '@kousum/semi-ui-vue';
 隐藏输入的具体内容
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 () => (
@@ -138,7 +150,7 @@ import { Input } from '@kousum/semi-ui-vue';
 可设置不同校验状态，展示不同样式
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 () => (
@@ -157,7 +169,7 @@ import { Input } from '@kousum/semi-ui-vue';
 `Input` 值完全取决于传入的 `value` 值，配合 `onChange` 回调函数使用
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 class InputDemo extends React.Component {
@@ -195,7 +207,7 @@ class InputDemo extends React.Component {
 </Notice>
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputGroup, Input, InputNumber, AutoComplete, DatePicker, Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -235,7 +247,7 @@ import { InputGroup, Input, InputNumber, AutoComplete, DatePicker, Select } from
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputGroup, Select, Cascader, TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
@@ -295,7 +307,7 @@ import { InputGroup, Select, Cascader, TreeSelect } from '@kousum/semi-ui-vue';
 用于多行输入。通过设置 `maxCount` 属性可以进行字数限制并显示字数统计。1.30.0 开始支持 `showClear`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TextArea } from '@kousum/semi-ui-vue';
 
 () => (
@@ -312,7 +324,7 @@ import { TextArea } from '@kousum/semi-ui-vue';
 通过设置 `autosize` 属性可设置只有高度自动随内容增加而变化。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TextArea } from '@kousum/semi-ui-vue';
 
 () => (
@@ -336,7 +348,7 @@ import { TextArea } from '@kousum/semi-ui-vue';
 - maxCount：使用 getValueLength 获取的值与 maxCount 进行比较
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import GraphemeSplitter from 'grapheme-splitter';
 import { Input, Typography, Form, TextArea, Button } from '@kousum/semi-ui-vue';
 

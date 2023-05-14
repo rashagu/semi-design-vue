@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 73
 category: 反馈类
@@ -8,6 +9,18 @@ width: 65%
 brief: Toast 提示是对用户的操作做出及时反馈，由用户的操作触发，反馈信息可以是操作的结果状态，如成功、失败、出错、警告等。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -21,7 +34,7 @@ import { Toast } from '@kousum/semi-ui-vue';
 信息提醒反馈
 
 ```jsx live=true noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { throttle } from 'lodash-es';
 import { Toast, Button } from '@kousum/semi-ui-vue';
 
@@ -58,7 +71,7 @@ render(Demo);
 包括成功、失败、警告
 
 ```jsx live=true noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -91,7 +104,7 @@ render(Demo);
 可以使用 `theme` 设置浅色填充样式提高与界面的对比，默认为 'normal' 的白色模式。
 
 ```jsx live=true noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -128,7 +141,7 @@ render(Demo);
 配合 Typography 可以自定义链接文本，用来配合更复杂的场景的使用。
 
 ```jsx live=true noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { Toast, Typography, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -178,7 +191,7 @@ render(Demo);
 自定义时长 10s，默认时长为 3s
 
 ```jsx live=true noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { Toast, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -270,7 +283,7 @@ render(Demo);
 通过 Toast.useToast 创建支持读取 context 的 contextHolder。此时的 toast 会渲染在 contextHolder 所在的节点处。
 
 ```jsx live=true noInline=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Toast, Button } from '@kousum/semi-ui-vue';
 
 const ReachableContext = React.createContext();
@@ -398,7 +411,7 @@ render(Demo);
     如果您的应用中需要使用不同 config 的 Toast，可以使用 ToastFactory.create(config)创建新的 Toast (>= 1.23):
 
 ```jsx live=true noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function Demo() {

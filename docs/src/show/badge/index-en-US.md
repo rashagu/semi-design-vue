@@ -8,7 +8,18 @@ icon: doc-badge
 brief: Badge generates a small badge to give users tips.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -21,7 +32,7 @@ import { Badge } from '@kousum/semi-ui-vue';
 The basic type of Badge is `count`. The `dot` property changes a badge into a small dot. The two are mutually exclusive, giving priority to rendering `dot`. When passed in a node type, the node will be rendered directly.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Badge, Avatar } from '@kousum/semi-ui-vue';
 import { IconLock } from '@kousum/semi-icons-vue';
 
@@ -61,7 +72,7 @@ import { IconLock } from '@kousum/semi-icons-vue';
 You can use the `overflowCount` property to cap the number value of the badge content. When the actual value exceeds that value, it will be formatted into `${overflowCount}+`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -100,7 +111,7 @@ import { Badge, Avatar } from '@kousum/semi-ui-vue';
 You can use the `position` property to set the position of the badge to its children. The prop uses one of: `leftTop`, `leftBottom`, `rightTop`(default), `rightBottom`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -139,7 +150,7 @@ import { Badge, Avatar } from '@kousum/semi-ui-vue';
 You can use the `theme` and `type` prop to customize the styling. `theme` supports the following values: `solid`(default), `light`, `inverted`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -192,7 +203,7 @@ import { Badge, Avatar } from '@kousum/semi-ui-vue';
 `type` support the following values: `primary`(default),`secondary`,`tertiary`,`warning` and `danger`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Badge, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -247,7 +258,7 @@ import { Badge, Avatar } from '@kousum/semi-ui-vue';
 Badge can be used alone when it is a stand-alone element.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Badge } from '@kousum/semi-ui-vue';
 
 () => (

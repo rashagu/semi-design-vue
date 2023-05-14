@@ -9,7 +9,18 @@ brief: TreeSelector is used for structured display & selection of multi-level tr
 ---
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## When to Use
 
 When the options to select is in tree structure, you could use TreeSelect, e.g. department hierarchy, subject system, category directory and etc.
@@ -27,7 +38,7 @@ import { TreeSelect } from '@kousum/semi-ui-vue';
 By default, TreeSelect is in single select mode and each item is selectable.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
@@ -79,7 +90,7 @@ You could use `multiple` to set mode to multi-choice. When all child items are s
 Use `leafOnly` (>= v0.32.0) if you prefer to render leaf nodes only and the corresponding params for onChange will also be leaf nodes values.  
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
@@ -173,7 +184,7 @@ In the multi-selection scenario, `maxTagCount` can be used to limit the number o
 Use `showRestTagsPopover` (>= v2.22.0) to set whether hover +N displays Popover after exceeding `maxTagCount`, the default is `false`. Also, popovers can be configured in the `restTagsPopoverProps` property.  
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
@@ -275,7 +286,7 @@ Use `filterTreeNode` to support search input. By default it searches the `label`
 You could also use `showFilteredOnly` if you prefer to display filtered results only.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect, Switch } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -408,7 +419,7 @@ When the input box is at trigger:
 2. When `showClear=true`, click the clear button of the input box, the inputValue and value will be cleared at the same time.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
@@ -499,7 +510,7 @@ import { TreeSelect } from '@kousum/semi-ui-vue';
 You can set the size by `size`, one of: 'small'、'default'、'large'
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
@@ -596,7 +607,7 @@ import { TreeSelect } from '@kousum/semi-ui-vue';
 ### Disabled
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
@@ -674,7 +685,7 @@ You can use `disableStrictly` to enable strict disabling. After enabling strict 
 Take the following demo as an example, the node "China" is strictly disabled. Therefore, when we change the selected state of its parent node "Asia", it will not affect the selected state of the node "China".
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
@@ -805,7 +816,7 @@ import { TreeSelect } from '@kousum/semi-ui-vue';
 You can use `value` along with `onChange` property if you want to use TreeSelect as a controlled component.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -870,7 +881,7 @@ Version: >= 2.5.0
 In multiple, `checkRelation` can be used to set the type of node selection relationship, optional: 'related' (default), 'unRelated'. When the selection relationship is 'unRelated', it means that selections between nodes do not affect each other.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
@@ -984,7 +995,7 @@ The property `virtualize` is an object consisting of the following values:
 If tree is searchable, you could also set `showFilteredOnly={true}` to reduce time of rendering for results.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1076,7 +1087,7 @@ class Demo extends React.Component {
 ### Dynamic Update of Data
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {

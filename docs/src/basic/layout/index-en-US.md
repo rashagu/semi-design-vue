@@ -9,7 +9,18 @@ dir: column
 brief: Used to quickly divide the overall layout of the page
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Overview
 
 -   `Layout`: Layout containers. You can nest `Header` `Sider` `Content` `Footer` or `Layout` itself inside.
@@ -33,7 +44,7 @@ import { Layout } from '@kousum/semi-ui-vue';
 ### Three-section Layout
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
@@ -51,7 +62,7 @@ import { Layout } from '@kousum/semi-ui-vue';
 ### Left-sidebar Layout
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
@@ -72,7 +83,7 @@ import { Layout } from '@kousum/semi-ui-vue';
 ### Right-sidebar Layout
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
@@ -93,7 +104,7 @@ import { Layout } from '@kousum/semi-ui-vue';
 ### Sidebar Layout
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
@@ -116,7 +127,7 @@ import { Layout } from '@kousum/semi-ui-vue';
 Six response sizes are preset in the sidebar: `xs`,`sm`,`md`,`lg`,`xl`,`xxl`. You can use `breakpoint` to set breakpoints, and use `onBreakpoint` to call callback functions.
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
@@ -142,7 +153,7 @@ import { Layout } from '@kousum/semi-ui-vue';
 ### Top-nav Layout
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar } from '@kousum/semi-ui-vue';
 import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconLive, IconSetting } from '@kousum/semi-icons-vue';
 
@@ -237,7 +248,7 @@ import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, Ic
 ### Top-Nav SideBar Layout
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar } from '@kousum/semi-ui-vue';
 import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting } from '@kousum/semi-icons-vue';
 
@@ -360,7 +371,7 @@ import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, Ic
 ### SideBar Navigation
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar } from '@kousum/semi-ui-vue';
 import { IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting } from '@kousum/semi-icons-vue';
 

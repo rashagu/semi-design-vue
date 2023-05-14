@@ -8,6 +8,18 @@ icon: doc-icons
 brief: Semantic vector graphics.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Icon List
 ```icon
 ```
@@ -24,7 +36,7 @@ import Icon, { IconHome } from '@kousum/semi-icons-vue';
 Import icons from the `@kousum/semi-icons-vue` package
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { IconHome } from '@kousum/semi-icons-vue';
 
 () => <IconHome />;
@@ -36,7 +48,7 @@ import { IconHome } from '@kousum/semi-icons-vue';
 Introduce icons from the `@kousum/semi-icons-vue` package, with its own size, rotation, and spin functions
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { IconHome, IconEmoji, IconSpin } from '@kousum/semi-icons-vue';
 
 () => (
@@ -58,7 +70,7 @@ The Icon component encapsulates the size attribute, which makes it easier to def
 
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { IconSearch, IconHelpCircle, IconAlertCircle, IconMinusCircle, IconPlusCircle, IconPlus, IconRefresh } from '@kousum/semi-icons-vue';
 
 () => {
@@ -77,7 +89,7 @@ The icon will automatically inherit the `color` property of the external contain
 You can also modify the color of the icon by setting style props to the Icon.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { IconLikeHeart, IconFlag, IconLock, IconUnlock } from '@kousum/semi-icons-vue';
 
 () => (
@@ -100,7 +112,7 @@ You can use custom icons to pass in Icon components
 Icon component supports size, rotate, spin and other attributes
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Icon } from '@kousum/semi-ui-vue';
 
 () => {
@@ -168,7 +180,7 @@ import StarIcon from './star.svg';
 - The Icon component role is img, and its aria-label defaults to the component's file name
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { IconHome } from '@kousum/semi-icons-vue';
 
 () => <IconHome aria-label="back to homepage" />;

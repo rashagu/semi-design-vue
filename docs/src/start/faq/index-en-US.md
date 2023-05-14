@@ -7,7 +7,18 @@ localeCode: en-US
 order: 10
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 #### Semi now offers Figma UI Kit, will Sketch or other design tool based versions be available in the future?
 - There is no plan in this regard, please refer to [Issue 74](https://github.com/DouyinFE/semi-design/issues/74)
 

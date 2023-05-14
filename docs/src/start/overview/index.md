@@ -2,11 +2,24 @@
 category: 开始
 title: Overview 组件总览
 icon: doc-overview
+outline: deep
 localeCode: zh-CN
 order: 11
 brief: 基于Semi 设计语言开发，能够在线调试的React UI 桌面端组件库，帮助开发者高效构建应用
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 基础
 
 ```overview

@@ -8,6 +8,18 @@ icon: doc-card
 brief: Card container can consist of titles, paragraphs, pictures, lists, and other content.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -20,7 +32,7 @@ import { Card } from '@kousum/semi-ui-vue';
 The basic card contains the title, content and other parts.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -48,7 +60,7 @@ function Demo() {
 The card can only set the content area.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Popover, Avatar } from '@kousum/semi-ui-vue';
 import { IconInfoCircle } from '@kousum/semi-icons-vue';
 
@@ -102,7 +114,7 @@ function Demo() {
 You can use the `cover` property to set the cover.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -130,7 +142,7 @@ function Demo() {
 You can use `bordered` to set whether the card has an outer border, the default is true. At the same time, you can also use `headerLine` to set whether the content area and title area have borders, and `footerLine` to set whether the content area and footer area have borders.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -162,7 +174,7 @@ function Demo() {
 You can use `shadows` to set the timing of the shadow display. Optional: `hover` (show shadow when hover), `always` (show shadow always), if this property is not set, there will be no shadow.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Avatar, Popover } from '@kousum/semi-ui-vue';
 import { IconInfoCircle } from '@kousum/semi-icons-vue';
 
@@ -245,7 +257,7 @@ function Demo() {
 You can use `Card.Meta` to support more flexible content, allowing you to set `title`, `avatar`, and `description`.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Avatar, Space, Button, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -301,7 +313,7 @@ Other cards can be nested inside the card.
 
 ```jsx live=true dir="column"
 
-import React from 'react';
+import { h } from 'vue';
 import { Card, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -341,7 +353,7 @@ function Demo() {
 The system overview page is often combined with the grid.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Row, Col } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -502,7 +514,7 @@ function Demo() {
 You can use the `Tabs` component in the card component.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 function demo() {
@@ -537,7 +549,7 @@ function demo() {
 `actions` receives the ReactNode array, and the elements will be displayed at the bottom of the content area with a horizontal spacing of 12px.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Rating } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -622,7 +634,7 @@ function Demo() {
 You can use the `type` property of `CardGroup` to set the card group to a grid type.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, CardGroup, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {

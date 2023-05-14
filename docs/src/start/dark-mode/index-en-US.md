@@ -7,6 +7,18 @@ localeCode: en-US
 order: 5
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Dark mode
 
 🤩  Semi's default theme or custom themes configured through [Semi DSM](/dsm) come with both light and dark modes, which can be easily switched.   
@@ -38,7 +50,7 @@ if (body.hasAttribute('theme-mode')) {
 
 For instance:
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -99,7 +111,7 @@ Semi 2.0 natively supports block dark/bright color mode, and you can add `.semi-
 > Note: this is not work for pop-up layers or components
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout, Nav, Button, Breadcrumb, Avatar, Steps, Pagination, Row, Badge, Tag, Rating, Tooltip, Timeline, Popover } from '@kousum/semi-ui-vue';
 import { IconSemiLogo, IconCamera, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting, IconEdit, IconList } from '@kousum/semi-icons-vue';
 () => {

@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 33
 category: 输入类
@@ -7,7 +8,18 @@ icon: doc-timepicker
 brief: 用户使用时间选择器可以方便地选择某一符合要求的、格式化的时间点
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -20,7 +32,7 @@ import { TimePicker } from '@kousum/semi-ui-vue';
 点击 TimePicker，然后可以在浮层中选择或者输入某一时间。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -33,7 +45,7 @@ function Demo() {
 版本V2.22.0开始，我们将 TimePicker 内的 ScrollItem 的默认模式从 `wheel` 变更为了 `normal`, 若想应用回无限滚动的效果，可参考以下示例。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -44,7 +56,7 @@ function Demo() {
 ### 带内嵌标签
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -57,7 +69,7 @@ function Demo() {
 当使用 `value` 而不是 `defaultValue` 时，作为受控组件使用。`value` 和 `onChange` 需要配合使用。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -87,7 +99,7 @@ TimePicker 浮层中的列会随着 `format` 变化，当略去 `format` 中的�
 NOTE: `format` 遵循 date-fns 的 `format` 格式。 https://date-fns.org/v2.0.0/docs/format
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -134,7 +146,7 @@ function Demo() {
 ### 禁用时间选择
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -147,7 +159,7 @@ function Demo() {
 可以使用 `hourStep`, `minuteStep`, `secondStep` 按步长展示可选的时分秒。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -162,7 +174,7 @@ function Demo() {
 > 例如默认的 12 小时制格式串为：`a h:mm:ss`，如果传入 `A h:mm:ss` 则会导致无法正确格式化。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -182,7 +194,7 @@ function Demo() {
 传入 type="timeRange" 开启时间范围选择。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TimePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {

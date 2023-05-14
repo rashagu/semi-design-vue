@@ -8,7 +8,18 @@ icon: doc-typography
 brief: The basic format of text, images, paragraphs, and numeric.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## When to Use
 
 -   To display the text content of articles, blogs, logs, etc.
@@ -26,7 +37,7 @@ import { Typography } from '@kousum/semi-ui-vue';
 Use `heading` to set different levels of headint title.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -49,7 +60,7 @@ function Demo() {
 Text component has different built-in styles. You could also pass `icon` to use the build-in styles for icon. Different from passing icon to children, using `icon` for link will have no underline in compliance with Semi Design principles.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -101,7 +112,7 @@ function Demo() {
 You could pass object to `link`, which will be mounted on `<a>`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 import { IconLink } from '@kousum/semi-icons-vue';
 
@@ -126,7 +137,7 @@ function Demo() {
 Paragraph component has two spacings. You could set`spacing='extended'` for a looser spacing.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -166,7 +177,7 @@ Based on Text component, added properties: `rule`, `precision`, `truncate`, `par
 - When set to `exponential`, numbers are automatically converted to scientific notation
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -210,7 +221,7 @@ function Demo() {
 Parsing rules can be customised via `parser`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -259,7 +270,7 @@ function Demo() {
 Paragraph and Text component support two sizes, `small`(12px) and `normal`(14px). By default it is set to `normal`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -288,7 +299,7 @@ When copyable is configured as object, you can specify the content copied to the
 At this time, children will no longer limit the type, but `copyable.content` still needs to be a string.  
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography, TextArea } from '@kousum/semi-ui-vue';
 import { IconSetting } from '@kousum/semi-icons-vue';
 
@@ -322,7 +333,7 @@ Show ellipsis if text is overflowed. Refer to [Ellipsis Config](#Ellipsis-Config
 </Notice>
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -374,7 +385,7 @@ function Demo() {
 </Notice>
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {

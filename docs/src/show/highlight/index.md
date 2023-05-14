@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 55
 category: 展示类
@@ -9,6 +10,18 @@ noInline: true
 brief: 高亮特定内容
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -25,7 +38,7 @@ import { Highlight } from '@kousum/semi-ui-vue';
 
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Highlight } from '@kousum/semi-ui-vue';
 
 () => {
@@ -45,7 +58,7 @@ import { Highlight } from '@kousum/semi-ui-vue';
 当你需要自定义不同的高亮样式时，你可以通过 `highlightClassName`, `highlightStyle`来指定 
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Highlight } from '@kousum/semi-ui-vue';
 
 () => {
@@ -95,7 +108,7 @@ import { Highlight } from '@kousum/semi-ui-vue';
 Semi 默认会将 sourceString 中与 searchWords 匹配的文本用 mark 标签包裹，你也可以通过 `component` 重新指定标签
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Highlight } from '@kousum/semi-ui-vue';
 
 () => {

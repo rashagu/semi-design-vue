@@ -9,6 +9,18 @@ width: 60%
 brief: Switch is an interactive form used to switch two mutually exclusive states.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -23,7 +35,7 @@ You can monitor state changes through `onChange`, and set the selected state thr
 Use `aria-label` to describe the specific function of the Switch
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
@@ -38,7 +50,7 @@ import { Switch } from '@kousum/semi-ui-vue';
 ### Size
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
@@ -66,7 +78,7 @@ import { Switch } from '@kousum/semi-ui-vue';
 ### Disabled
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
@@ -85,7 +97,7 @@ The long text is recommended to be placed directly on the outside.
 Note: This does not work with the smallest switch (size = 'small')
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Switch } from '@kousum/semi-ui-vue';
 
 () => (
@@ -133,7 +145,7 @@ import { Switch, Typography } from '@kousum/semi-ui-vue';
 Whether the component is selected depends entirely on the incoming checked value, used with `onChange`
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Switch } from '@kousum/semi-ui-vue';
 
 () => {
@@ -161,7 +173,7 @@ version: >= 1.29.0
 You can turn on the loading state by setting loading="true".
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Switch } from '@kousum/semi-ui-vue';
 
 () => (

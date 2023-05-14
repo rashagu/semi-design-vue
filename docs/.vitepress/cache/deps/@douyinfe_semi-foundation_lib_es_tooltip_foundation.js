@@ -1,4 +1,7 @@
 import {
+  handlePrevent
+} from "./chunk-M6FOBOF7.js";
+import {
   require_isEmpty
 } from "./chunk-RSVADYER.js";
 import "./chunk-KPUGFIAL.js";
@@ -7,9 +10,6 @@ import "./chunk-TSZXP53R.js";
 import "./chunk-BVRSW63P.js";
 import "./chunk-54BFKMM2.js";
 import "./chunk-XGO3WBYR.js";
-import {
-  handlePrevent
-} from "./chunk-M6FOBOF7.js";
 import {
   foundation_default
 } from "./chunk-VMJJZ6RG.js";

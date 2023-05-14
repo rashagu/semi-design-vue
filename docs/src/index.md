@@ -4,15 +4,15 @@ layout: home
 
 hero:
   name: "semi-design-vue"
-  text: "semi-ui-vue"
-  tagline: My great project tagline
+  text: "Vue3 UI components"
+  tagline: based on semi-design
   actions:
     - theme: brand
       text: 快速开始
       link: /start/getting-started/
     - theme: alt
-      text: Introduction 介绍
-      link: /start/introduction/
+      text: Semi Design 官方文档
+      link: https://semi.design/zh-CN/
 
 features:
   - title: Feature A

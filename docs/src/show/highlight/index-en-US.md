@@ -9,6 +9,18 @@ noInline: true
 brief: highlight specific content
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## code demo
 
 ### How to import
@@ -26,7 +38,7 @@ You can specify keywords to be highlighted with `searchWords` and source text wi
 
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Highlight } from '@kousum/semi-ui-vue';
 
 () => {
@@ -46,7 +58,7 @@ In dark mode, the text color is white, and the background color is `--semi-yello
 When you need to customize different highlight styles, you can specify them through `highlightClassName`, `highlightStyle`
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Highlight } from '@kousum/semi-ui-vue';
 
 () => {
@@ -77,7 +89,7 @@ import { Highlight } from '@kousum/semi-ui-vue';
 Semi will wrap the text matching searchWords in sourceString with mark tag by default, you can also re-specify the tag through `component`
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Highlight } from '@kousum/semi-ui-vue';
 
 () => {

@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 15
 category: 基础
@@ -7,6 +8,19 @@ icon: doc-layout
 dir: column
 brief: 用于快捷划分页面整体布局
 ---
+
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 
 ## 概述
 
@@ -33,7 +47,7 @@ import { Layout } from '@kousum/semi-ui-vue';
 ### 三行布局
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
@@ -52,7 +66,7 @@ import { Layout } from '@kousum/semi-ui-vue';
 ### 左侧边栏布局
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
@@ -73,7 +87,7 @@ import { Layout } from '@kousum/semi-ui-vue';
 ### 右侧边栏布局
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
@@ -94,7 +108,7 @@ import { Layout } from '@kousum/semi-ui-vue';
 ### 侧边栏布局
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
@@ -117,7 +131,7 @@ import { Layout } from '@kousum/semi-ui-vue';
 侧边栏预设了六个响应尺寸：`xs`、`sm`、`md`、`lg`、`xl`、`xxl`。可以通过设置 `breakpoint` 属性设置断点，通过 `onBreakpoint` 调用回调函数。
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout } from '@kousum/semi-ui-vue';
 
 () => {
@@ -145,7 +159,7 @@ import { Layout } from '@kousum/semi-ui-vue';
 ### 顶部导航布局
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar } from '@kousum/semi-ui-vue';
 import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconLive, IconSetting } from '@kousum/semi-icons-vue';
 
@@ -243,7 +257,7 @@ import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, Ic
 ### 顶部导航-侧边布局
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar } from '@kousum/semi-ui-vue';
 import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting } from '@kousum/semi-icons-vue';
 
@@ -372,7 +386,7 @@ import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, Ic
 ### 侧边导航
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar } from '@kousum/semi-ui-vue';
 import { IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting } from '@kousum/semi-icons-vue';
 

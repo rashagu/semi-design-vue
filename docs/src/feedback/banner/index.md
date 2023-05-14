@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 67
 category: 反馈类
@@ -8,7 +9,18 @@ dir: column
 brief: 横幅通常用于标识全页的状态或通知等。它通常是常驻的，需要用户主动将其关闭。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -63,7 +75,7 @@ import { Banner, Layout, Button } from '@kousum/semi-ui-vue';
 支持4种类型：`info`、`warning`、`danger`、`success`。默认为 `info`。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Banner } from '@kousum/semi-ui-vue';
 
 () => (
@@ -97,7 +109,7 @@ import { Banner } from '@kousum/semi-ui-vue';
 通过 `bordered` 属性可以设置边框。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Banner, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -146,7 +158,7 @@ function Demo() {
 ### 自定义内容
 可以通过 children 自定义其他渲染内容。
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Banner } from '@kousum/semi-ui-vue';
 
 () => (

@@ -9,7 +9,18 @@ width: 60%
 brief: Input is a basic component for users to enter and edit text.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -21,7 +32,7 @@ import { Input } from '@kousum/semi-ui-vue';
 ### Basic Usage
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 () => (
@@ -34,7 +45,7 @@ import { Input } from '@kousum/semi-ui-vue';
 Support three sizes: `large`, `default`, and `small`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 () => (
@@ -51,7 +62,7 @@ import { Input } from '@kousum/semi-ui-vue';
 ### Disabled
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 () => (
@@ -69,7 +80,7 @@ import { Input } from '@kousum/semi-ui-vue';
 When the content of `prefix` and `suffix` is text or Semi Icon, the left and right margin will be automatically added. If it is a custom ReactNode, the left and right margin will be 0
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input, Typography } from '@kousum/semi-ui-vue';
 import { IconSearch } from '@kousum/semi-icons-vue';
 
@@ -91,7 +102,7 @@ import { IconSearch } from '@kousum/semi-icons-vue';
 When the content of `addonBefore` and `addonAfter` is text or Semi Icon, the left and right margin will be automatically added. If it is a custom ReactNode, the left and right margin will be 0.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 () => (
     <Input addonBefore="http://" addonAfter=".com" />
@@ -103,7 +114,7 @@ import { Input } from '@kousum/semi-ui-vue';
 Use `showClear` to allow clear current value when clicking on clear icon.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 () => (
@@ -116,7 +127,7 @@ import { Input } from '@kousum/semi-ui-vue';
 Hide the content of input
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 () => (
@@ -129,7 +140,7 @@ import { Input } from '@kousum/semi-ui-vue';
 You can set different `validateStatus` to provide style feedback to the user.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 () => (
     <>
@@ -147,7 +158,7 @@ import { Input } from '@kousum/semi-ui-vue';
 You can use `value` along with `onChange` property if you want to use Input as a controlled component.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input } from '@kousum/semi-ui-vue';
 
 class InputDemo extends React.Component {
@@ -185,7 +196,7 @@ You could put multiple text field input into `<InputGroup>` and set `size`, `dis
 </Notice>
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input, InputGroup, InputNumber, Select, AutoComplete, DatePicker } from '@kousum/semi-ui-vue';
 
 () => (
@@ -225,7 +236,7 @@ import { Input, InputGroup, InputNumber, Select, AutoComplete, DatePicker } from
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input, InputGroup, Select, Cascader, TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
@@ -284,7 +295,7 @@ import { Input, InputGroup, Select, Cascader, TreeSelect } from '@kousum/semi-ui
 Used for multi-line text. You can set `maxCount` to restrict text entering and display text count. Since 1.30.0, `showClear` is supported.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TextArea } from '@kousum/semi-ui-vue';
 
 () => (
@@ -301,7 +312,7 @@ import { TextArea } from '@kousum/semi-ui-vue';
 You can set `autosize` to allow TextArea resizing height with content.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TextArea } from '@kousum/semi-ui-vue';
 () => (
     <div>
@@ -324,7 +335,7 @@ What is done inside Semi when getValueLength is passed in:
 - maxCount: compare the values obtained using getValueLength with maxCount
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Input, Typography, Form, Button, TextArea } from '@kousum/semi-ui-vue';
 import GraphemeSplitter from 'grapheme-splitter';
 

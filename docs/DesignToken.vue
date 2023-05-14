@@ -19,7 +19,7 @@ const data = useData()
 
 
 const count = ref(0)
-const designTokenData = designToken[props.title.split(' ')[0].toLowerCase()]
+const designTokenData = designToken[props.title?.split(' ')[0].toLowerCase()] || []
 
 const category = {}
 

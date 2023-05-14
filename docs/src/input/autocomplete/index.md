@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 19
 category: 输入类
@@ -7,6 +8,18 @@ icon: doc-autocomplete
 brief: 输入框自动填充。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 使用场景
 
 用于对输入框提供输入建议，进行自动补全的操作
@@ -30,7 +43,7 @@ import { AutoComplete } from '@kousum/semi-ui-vue';
 通过 onSearch 监听用户输入，将输入建议通过 data 传入，通过 onChange 保持受控，当输入框变化/选中输入项时会触发 onChange
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete } from '@kousum/semi-ui-vue';
 import { IconSearch } from '@kousum/semi-icons-vue';
 
@@ -72,7 +85,7 @@ import { IconSearch } from '@kousum/semi-icons-vue';
 通过 renderItem 可以自定义候选项的渲染
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete, Avatar } from '@kousum/semi-ui-vue';
 import { IconSearch } from '@kousum/semi-icons-vue';
 
@@ -141,7 +154,7 @@ class CustomOptionDemo extends React.Component {
 从 onSearch 中获取用户输入值，动态更新 data 值，更新 loading
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete } from '@kousum/semi-ui-vue';
 import { IconSearch } from '@kousum/semi-icons-vue';
 
@@ -225,7 +238,7 @@ class ObjectDemo extends React.Component {
 通过设置 size 可设置输入框尺寸，可选`small`，`default`(默认)，`large`
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
@@ -261,7 +274,7 @@ import { AutoComplete } from '@kousum/semi-ui-vue';
 通过设置 position 可设置下拉菜单位置，可选值参考 Tooltip position
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => {
@@ -299,7 +312,7 @@ import { AutoComplete } from '@kousum/semi-ui-vue';
 ### 禁用
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
@@ -312,7 +325,7 @@ import { AutoComplete } from '@kousum/semi-ui-vue';
 可设置不同校验状态，展示不同样式
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete } from '@kousum/semi-ui-vue';
 
 () => (
@@ -333,7 +346,7 @@ import { AutoComplete } from '@kousum/semi-ui-vue';
 可设置自定义展示空内容
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { AutoComplete, Empty } from '@kousum/semi-ui-vue';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
 
@@ -384,16 +397,16 @@ import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
 | dropdownClassName | 下拉列表的 CSS 类名 | string |  |
 | dropdownStyle | 下拉列表的内联样式 | object |  |
 | emptyContent | data 为空时自定义下拉内容  | ReactNode | null | 1.16.0 |
-| getPopupContainer | 指定父级 DOM，下拉列表浮层将会渲染至该 DOM 中，自定义需要设置 `position: relative` | () => HTMLElement | () => document.body |
+| getPopupContainer | 指定父级 DOM，下拉列表浮层将会渲染至该 DOM 中，自定义需要设置 `position: relative` | `() => HTMLElement | () => document.body` |
 | loading | 下拉列表是否展示加载动画 | boolean | false |
 | maxHeight | 下拉列表的最大高度 | number\|string | 300 |
 | motion | 下拉列表出现/隐藏时，是否有动画 | boolean | true |
-| onSelectWithObject | 点击候选项时，是否将选中项 option 的其他属性也作为回调入参。设为 true 时，onSelect 的入参类型会从 `string` 变为 object: { value, label, ...rest }| boolean | false |1.23.0 |
+| onSelectWithObject | 点击候选项时，是否将选中项 option 的其他属性也作为回调入参。设为 true 时，onSelect 的入参类型会从 `string` 变为 object: `{ value, label, ...rest }`| boolean | false |1.23.0 |
 | placeholder | 输入框提示 | string | |
 | position | 下拉菜单的显示位置，可选值同 tooltip 组件 | string | 'bottomLeft' |
 | prefix | 选择框的前缀标签 | ReactNode |  | 0.23.0|
 | renderItem | 控制下拉列表候选项的渲染 | (option: string\|Item)=> React.Node |  |
-| renderSelectedItem | 通过 renderSelectedItem 自定义下拉列表候选项被点击选中后，在选择框中的渲染内容<br/>**仅支持 String 类型的返回值**<br/> | (option: string\|Item) => string |  |0.23.0 |
+| renderSelectedItem | 通过 renderSelectedItem 自定义下拉列表候选项被点击选中后，在选择框中的渲染内容<br/>**仅支持 String 类型的返回值**<br/> | `(option: string\|Item) => string` |  |0.23.0 |
 | showClear | 是否展示清除按钮 | boolean | false |
 | size | 尺寸，可选`small`, `default`, `large`  | string | `default` |
 | style | 样式 | object |  |
@@ -402,11 +415,11 @@ import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
 | value | 当前值 | string\|number | 无 |
 | zIndex | 下拉菜单的 zIndex | number |  |
 | onBlur | 失去焦点时的回调 | Function(event) | |
-| onChange | 输入框变化/候选项选中时变化 | Function(value:string\|number) | |1.23.0 |
+| onChange | 输入框变化/候选项选中时变化 | `Function(value:string\|number)` | |1.23.0 |
 | onFocus | 获得焦点时的回调 | Function(event) | |
-| onKeyDown | keydown 回调 | (e: React.KeyboardEvent) => void | | 2.21.0 |
-| onSearch | 输入变化时的回调 | Function(value: string) | |
-| onSelect | 下拉菜单候选项被选中时的回调 | Function(item: string\|number\|Item) | |
+| onKeyDown | keydown 回调 | `(e: React.KeyboardEvent) => void` | | 2.21.0 |
+| onSearch | 输入变化时的回调 | `Function(value: string)` | |
+| onSelect | 下拉菜单候选项被选中时的回调 | `Function(item: string\|number\|Item)` | |
 
 ## Accessibility
 ### 键盘和焦点

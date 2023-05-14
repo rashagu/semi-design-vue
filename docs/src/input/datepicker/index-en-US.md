@@ -8,6 +8,18 @@ icon: doc-datepicker
 brief: The date selector is used to help the user select a compliant, formatted date (time) or date (time) range.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -20,7 +32,7 @@ import { DatePicker } from '@kousum/semi-ui-vue';
 ### Basic Use
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -35,7 +47,7 @@ class App extends React.Component {
 The density can be used to control the size of the picker panel. The `compact` is the small size and the `default` is the default size. Support after v1.17.0.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -51,7 +63,7 @@ function Demo() {
 ### With an Embedded Label
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -64,7 +76,7 @@ function Demo() {
 Set `Multiple` to `true`, can choose multiple dates.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -80,7 +92,7 @@ Set `type` to `dateTime`, can choose date and time.
 If you want to remove the infinite loop scrolling interaction of TimePicker, you can pass timePickerOpts into a specific configuration to close it.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -104,7 +116,7 @@ class App extends React.Component {
 Set `type` to `dateRange`, can choose the date range.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -123,7 +135,7 @@ class App extends React.Component {
 Set `type` to `dateTimeRange`, can choose the date range and choose time;
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -154,7 +166,7 @@ After `insetInput` is turned on, it includes the following functions:
 </Notice>
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -193,7 +205,7 @@ In the scenario of range selection, turning on `syncSwitchMonth` means to switch
 > Note: Clicking the year button will also switch the two panels synchronously. Switching the year and month from the scroll wheel will not switch the panels synchronously. This ensures the user's ability to select months at non-fixed intervals.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -216,7 +228,7 @@ version：>=1.28.0
 `onPanelChange` will be called when the month or year of the panel is changed.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -238,7 +250,7 @@ class App extends React.Component {
 `daterange` is used with `startDateOffset` and `endDateOffset` to select range with single click, such as weekly selection and biweekly selection. Support after v1.10.0.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -292,7 +304,7 @@ function Demo() {
 Set `type` to `month`, can make year-to-month selection.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -309,7 +321,7 @@ class App extends React.Component {
 Set `type` to `monthRange` to select the year and month range, small size and quick panel are not supported yet.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 () => <DatePicker type="monthRange" style={{ width: 200 }} />;
@@ -328,7 +340,7 @@ The following example binds three callbacks: `onChange`, `onConfirm` and `onCanc
 > Note: When opening `needConfirm`, you need to click the cancel button to close the panel, and clicking the blank area will no longer close the panel (v2.2.0)
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -357,7 +369,7 @@ class App extends React.Component {
 Pass parameter `Presets` to set shortcuts for date selection.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -502,7 +514,7 @@ function Demo() {
 ### Disable Date Selection
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -523,7 +535,7 @@ Pass in `disabledDate` to disable the specified date, pass in `disabledTime` to 
 </Notice>
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 import { range } from 'lodash-es';
@@ -600,7 +612,7 @@ class App extends React.Component {
 When `type` contains `range`, the date can be disabled dynamically according to the rangeStart. The `options` parameter is supported after 1.9.0
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
@@ -627,7 +639,7 @@ class App extends React.Component {
 When `type` contains `range`, dates can be disabled based on the focus state. The focus state is passed through the `rangeInputFocus` parameter in `options`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 import * as dateFns from 'date-fns';
 
@@ -663,7 +675,7 @@ function App() {
 Pass parameter `format` to custom display format.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -776,7 +788,7 @@ function Demo() {
 -   `fullDate`: such as `2020-08-13`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker, Tooltip } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -828,7 +840,7 @@ type DayStatusType = {
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { DatePicker } from '@kousum/semi-ui-vue';
 import classNames from 'classnames';
 

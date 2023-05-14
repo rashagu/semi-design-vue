@@ -9,7 +9,18 @@ dir: column
 brief: Users use buttons to trigger an operation or jump.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -29,7 +40,7 @@ Buttons support the following types:
 -   Danger button ("danger")
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -59,7 +70,7 @@ function ButtonDemo() {
 You can define your elements directly using these theme colors.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 
 function ButtonDemo() {
     const types = [['primary', 'primary'], ['secondary', 'secondary'], ['tertiary', 'tertiary'], ['warning', 'warning'], ['danger', 'danger']];
@@ -87,7 +98,7 @@ The default theme is `light`
 #### Light Background
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -120,7 +131,7 @@ function ButtonDemo() {
 #### Dark Background
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -153,7 +164,7 @@ function ButtonDemo() {
 #### No Background
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -192,7 +203,7 @@ Three sizes are defined by default:
 -   Small: "Small"
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -211,7 +222,7 @@ function ButtonDemo() {
 The block button has a predefined width, and its width is independent of the width of the contents of the button.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -228,7 +239,7 @@ function ButtonDemo() {
 An icon that defines a button.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 import { IconCamera, IconSidebar, IconChevronDown } from '@kousum/semi-icons-vue';
 
@@ -267,7 +278,7 @@ function ButtonDemo() {
 We recommend using Typography to achieve link text button. Refer to [Typography](/en-US/basic/typography) for more information.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 import { IconLink } from '@kousum/semi-icons-vue';
 
@@ -290,7 +301,7 @@ function Demo() {
 ### Prohibited Status
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -353,7 +364,7 @@ You can put multiple buttons in `ButtonGroup` In the container, by setting `size
 #### Combined Dimensions
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button, ButtonGroup } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -378,7 +389,7 @@ function ButtonDemo() {
 #### Combined Disabled
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button, ButtonGroup } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -399,7 +410,7 @@ function ButtonDemo() {
 #### Combined Type
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button, ButtonGroup } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {

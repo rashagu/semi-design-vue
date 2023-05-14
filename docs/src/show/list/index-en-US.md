@@ -9,6 +9,18 @@ dir: column
 brief: Lists display a set of related contents
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -22,7 +34,7 @@ import { List } from '@kousum/semi-ui-vue';
 You can use `size` to size list. Supported values include `large`, `default`, `Small`. Header and Footer customized.
 
 ```jsx live=true dir="column" noInline=true 
-import React from 'react';
+import { h } from 'vue';
 import { List } from '@kousum/semi-ui-vue';
 
 class SimpleList extends React.Component {
@@ -82,7 +94,7 @@ render(SimpleList);
 List.Item has a built-in template consisting of: `header`, `main`, and `extra`. The alignment of `header` and `main` set by `align` properties using one of `flex-start`(default), `flex-end`, `center`, `baseline`, and `stretch` .
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { List, ButtonGroup, Button, Avatar } from '@kousum/semi-ui-vue';
 
 class ContentList extends React.Component {
@@ -148,7 +160,7 @@ render(ContentList);
 Use `layout` property to set list layout, one of `vertical`(default) or `horizontal`.
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { List, Avatar } from '@kousum/semi-ui-vue';
 
 class LayoutList extends React.Component {
@@ -202,7 +214,7 @@ render(LayoutList);
 Use `grid` property to set grid layout. Use `span` to set the number of occupying spaces for each item and `gutter` for spacing between items.
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { List, Descriptions, Rating, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 class LayoutList extends React.Component {
@@ -280,7 +292,7 @@ render(LayoutList);
 Refer to [Grid](/en-US/basic/grid) for responsive dimensions.
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { List, Descriptions, Rating, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 class Responsive extends React.Component {
@@ -374,7 +386,7 @@ render(Responsive);
 You can use `loadMore` to achieve loading state for more incoming contents.
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { List, Skeleton, Button, Avatar } from '@kousum/semi-ui-vue';
 
 class LoadMoreList extends React.Component {
@@ -498,7 +510,7 @@ render(LoadMoreList);
 You can integrate [react-infinite-scroller](https://github.com/CassetteRocks/react-infinite-scroller) to implement scrolling load list. Recommended interaction could be reveal a loadmore button after three scrolling loads.
 
 ```jsx live=true dir="column" noInline=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { List, Avatar, Spin, Button } from '@kousum/semi-ui-vue';
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -620,7 +632,7 @@ render(ScrollLoad);
 You can integrate [react-virtualized](https://github.com/bvaughn/react-virtualized) to implement infinite scrolling lists with virtualization to improve the performance for large amounts of data.
 
 ```jsx live=true dir="column" noInline=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { List, Avatar } from '@kousum/semi-ui-vue';
 import { InfiniteLoader, AutoSizer } from 'react-virtualized';
 import VList from 'react-virtualized/dist/commonjs/List';
@@ -759,7 +771,7 @@ render(VirtualizedScroll);
 You can integrate [react-dnd](https://github.com/react-dnd/react-dnd) to implement drag and drop sort.
 
 ```jsx live=true dir="column" noInline=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { List, Avatar } from '@kousum/semi-ui-vue';
 import { DndProvider, DragSource, DropTarget } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';

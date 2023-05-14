@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 35
 category: 输入类
@@ -7,6 +8,18 @@ icon: doc-treeselect
 brief: 树选择器用于多层级树形数据的结构化展示 & 选取，例如显示文件夹与文件的列表、显示组织架构成员列表等等。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -19,7 +32,7 @@ import { TreeSelect } from '@kousum/semi-ui-vue';
 最简单的用法，默认为单选模式，每一级菜单项均可选择。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
@@ -70,7 +83,7 @@ import { TreeSelect } from '@kousum/semi-ui-vue';
 通过 `leafOnly` (>= v0.32.0) 属性，可以设置只展示叶子节点，同时 onChange 的回调入参也会只有叶子节点的值。  
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
@@ -165,7 +178,7 @@ import { TreeSelect } from '@kousum/semi-ui-vue';
 使用 `showRestTagsPopover` (>= v2.22.0) 可以设置在超出 `maxTagCount` 后，hover +N 是否显示 Popover，默认为 `false`。并且，还可以在 `restTagsPopoverProps` 属性中配置 Popover。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
@@ -266,7 +279,7 @@ import { TreeSelect } from '@kousum/semi-ui-vue';
 
 如果只希望展示过滤后的结果，可以设置 `showFilteredOnly` 。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect, Switch } from '@kousum/semi-ui-vue';
 class Demo extends React.Component {
     constructor() {
@@ -396,7 +409,7 @@ class Demo extends React.Component {
 2. `showClear=true` 时，点击输入框的清空按钮，将同时清空 inputValue 和 value。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
@@ -487,7 +500,7 @@ import { TreeSelect } from '@kousum/semi-ui-vue';
 可以通过 `size` 设置尺寸大小，可选: 'small'、'default'、'large'
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
@@ -630,7 +643,7 @@ import { TreeSelect } from '@kousum/semi-ui-vue';
 ### 禁用
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
@@ -706,7 +719,7 @@ version: >= 1.30.0
 以下面的 demo 为例，节点"中国"开启了严格禁用，因此，当我们改变其父节点"亚洲"的选中状态时，也不会影响到节点"中国"的选中状态。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 
 () => {
@@ -766,7 +779,7 @@ import { TreeSelect } from '@kousum/semi-ui-vue';
 ### 受控
 传入 `value` 时即为受控组件，可以配合 `onChange` 使用。
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 class Demo extends React.Component {
     constructor() {
@@ -830,7 +843,7 @@ class Demo extends React.Component {
 多选时，可以使用 `checkRelation` 来设置节点之间选中关系的类型，可选：'related'（默认）、'unRelated'。当选中关系为 'unRelated' 时，意味着节点之间的选中互不影响。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect } from '@kousum/semi-ui-vue';
 () => {
     const treeData = [
@@ -951,7 +964,7 @@ import { TreeSelect } from '@kousum/semi-ui-vue';
 如果带搜索框，建议开启 `showFilteredOnly` 减少多余节点的渲染。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect, Button } from '@kousum/semi-ui-vue';
 class Demo extends React.Component {
     constructor() {
@@ -1045,7 +1058,7 @@ class Demo extends React.Component {
 
 ### 动态更新数据
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { TreeSelect, Button } from '@kousum/semi-ui-vue';
 class Demo extends React.Component {
     constructor() {

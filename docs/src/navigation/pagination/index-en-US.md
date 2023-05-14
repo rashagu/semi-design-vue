@@ -9,6 +9,18 @@ width: 45%
 brief: The Pager helps users navigate between multiple pages
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -21,7 +33,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 Set the total number via `Total`, Set capacity per page via `pageSize`.
 
 ```jsx live=true width=55%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -39,7 +51,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 Use the showTotal property to control whether the total number of pages is shown.
 
 ```jsx live=true width=55%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -55,7 +67,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 You can specify the currently active page number via `defaultCurrentPage`.
 
 ```jsx live=true width=55%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -70,7 +82,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 By setting `showSizeChanger` for `true`, allowing quick switching of capacity per page via the Select component
 
 ```jsx live=true width=50%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -91,7 +103,7 @@ If you enter a page number greater than the total page number of the pager, we w
 showQuickJumper is available after v1.31  
 
 ```jsx live=true width=50%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -131,7 +143,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 Specify an optional value for switching the capacity per page by using the `pageSizeOpts` array
 
 ```jsx live=true width=50%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -157,7 +169,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 Show mini pagination via size properties.
 
 ```jsx live=true width=55%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (
@@ -168,7 +180,7 @@ import { Pagination } from '@kousum/semi-ui-vue';
 Turn on hoverShowPageSelect to quickly switch hover page numbers (provided after v1.27.0)
 
 ```jsx live=true width=50%
-import React from 'react';
+import { h } from 'vue';
 import { Pagination } from '@kousum/semi-ui-vue';
 
 () => (

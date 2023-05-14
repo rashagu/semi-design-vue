@@ -7,6 +7,18 @@ icon: doc-space
 brief: Set the spacing between components.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -17,7 +29,7 @@ import { Space } from '@kousum/semi-ui-vue';
 ### Basic Usage
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Space, Button, Switch } from '@kousum/semi-ui-vue';
 
 () => (
@@ -36,7 +48,7 @@ You can use `align` to set the alignment, optional: `start`, `center`（default�
 
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Space, Button, Tag } from '@kousum/semi-ui-vue';
 
 () => {
@@ -82,7 +94,7 @@ import { Space, Button, Tag } from '@kousum/semi-ui-vue';
 You can use `spacing` to set the spacing size, optional: `tight` (8px, default), `medium` (16px), `loose` (24px), and allow to pass in number to customize the spacing size, and also support to pass in array to set the horizontal and vertical spacing at the same time.
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Space, Tabs, TabPane, Button } from '@kousum/semi-ui-vue';
 
 () => (
@@ -134,7 +146,7 @@ import { Space, Tabs, TabPane, Button } from '@kousum/semi-ui-vue';
 You can use `vertical` to set whether the spacing is vertical, the default is false.
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Space, Button } from '@kousum/semi-ui-vue';
 
 () => (
@@ -152,7 +164,7 @@ import { Space, Button } from '@kousum/semi-ui-vue';
 When the spacing is horizontal，you can use `wrap` to set whether to wrap automatically, the default is false.
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Space, Button } from '@kousum/semi-ui-vue';
 
 () => (

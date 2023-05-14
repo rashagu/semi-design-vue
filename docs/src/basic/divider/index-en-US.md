@@ -7,6 +7,18 @@ icon: doc-divider
 brief: Divider is a linear, lightweight component used to logically organize element content and page structure or areas.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -18,7 +30,7 @@ import { Divider } from '@kousum/semi-ui-vue';
 ### Basic Usage
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Divider } from '@kousum/semi-ui-vue';
 
 () => {
@@ -63,7 +75,7 @@ import { Divider } from '@kousum/semi-ui-vue';
 ### With Children
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Divider, Typography } from '@kousum/semi-ui-vue';
 import { IconSemiLogo } from '@kousum/semi-icons-vue';
 

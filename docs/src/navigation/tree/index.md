@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 44
 category: 导航类
@@ -7,7 +8,18 @@ icon: doc-tree
 brief: 树型结构列表。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -21,7 +33,7 @@ import { Tree } from '@kousum/semi-ui-vue';
 最简单的用法，默认为单选模式，每一级菜单项均可选择。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -76,7 +88,7 @@ import { Tree } from '@kousum/semi-ui-vue';
 设置 `multiple`，可以进行多选。多选情况下所有子项都被选择时，自动勾选显示其父项。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -161,7 +173,7 @@ import { Tree } from '@kousum/semi-ui-vue';
 通过设置 `filterTreeNode` 属性可支持搜索功能。默认对 `label` 值进行搜索，可通过 `treeNodeFilterProp` 更改。
 如果只希望展示过滤后的结果，可以设置 `showFilteredOnly` 。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Switch } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -261,7 +273,7 @@ class Demo extends React.Component {
 
 设置 `filterTreeNode` 属性开启搜索后，可以通过设置 `searchRender` 自定义搜索框的渲染方法，设置为`false`时可以隐藏搜索框。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Input } from '@kousum/semi-ui-vue';
 
 () => {
@@ -340,7 +352,7 @@ import { Tree, Input } from '@kousum/semi-ui-vue';
 ### 手动触发搜索
 可以通过ref的方式获取tree的实例，调用tree的`search`方法进行搜索。注意需要同时设置`filterTreeNode`开启搜索，如果搜索框在tree外部，可以通过设置`searchRender=false`隐藏tree内部的搜索框。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Input } from '@kousum/semi-ui-vue';
 
 () => {
@@ -420,7 +432,7 @@ import { Tree, Input } from '@kousum/semi-ui-vue';
 可以通过 `treeDataSimpleJson` 传入 JSON 形式的 `treeNodes` 数据。此时 key-value 键值对中的 key 值将作为 `TreeNodeData` 的 `key` 和 `label`，`value` 值将作为 `TreeNodeData` 的 `value`。返回值为包含选中节点的 JSON 数据。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -454,7 +466,7 @@ import { Tree } from '@kousum/semi-ui-vue';
 关闭时只高亮节点 label。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -537,7 +549,7 @@ import { Tree } from '@kousum/semi-ui-vue';
 
 在**v>=1.6.0**的版本中，你也可以使用 `renderLabel` 来传入自定义的渲染方法，此时搜索值仍为treeData中的相应的label属性。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -617,7 +629,7 @@ import { Tree, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 过长省略。在**v>=1.6.0**的版本中，可以使用 `renderLabel` 来实现文本过长省略的效果。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Button, Typography } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -682,7 +694,7 @@ import { IconMore } from '@kousum/semi-icons-vue';
 通过设置 `icon` 属性可添加自定义图标。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 import { IconMapPin } from '@kousum/semi-icons-vue';
 
@@ -728,7 +740,7 @@ import { IconMapPin } from '@kousum/semi-icons-vue';
 通过设置 `directory` 属性可显示为目录树模式。目录树模式下自带目录图标，可以通过自定义图标覆盖。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -807,7 +819,7 @@ import { Tree } from '@kousum/semi-ui-vue';
 可以使用 `disableStrictly` 来开启严格禁用。开启严格禁用后，当节点是 disabled 的时候，则不能通过子级或者父级的关系改变选中状态。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -891,7 +903,7 @@ import { Tree } from '@kousum/semi-ui-vue';
 多选时，可以使用 `checkRelation` 来设置节点选中关系的类型，可选：'related'（默认）、'unRelated'。当选中关系为 'unRelated'，意味着节点之间的选中互不影响。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1043,7 +1055,7 @@ import { Tree, Button } from '@kousum/semi-ui-vue';
 
 传入 `value` 时即为受控组件，可以配合 `onChange` 使用。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1110,7 +1122,7 @@ class Demo extends React.Component {
 在展开受控的情况下，当开启了 `autoExpandParent` ，如果想要收起父元素，则需要把它的所有子元素均收起后才可以。默认情况下，`autoExpandParent` 为 false，即：父元素收起不受到子元素的影响。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1190,7 +1202,7 @@ class Demo extends React.Component {
 如果带搜索框，建议开启 `showFilteredOnly` 减少多余节点的渲染。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1279,7 +1291,7 @@ class Demo extends React.Component {
 ### 动态更新数据
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1587,7 +1599,7 @@ Tree 组件的 api 支持了大部分的渲染需求，但是如果有非常特�
 - 同时开启 leafOnly 可以使 onChange 的回调入参都是叶子节点。  
 ⚠️：renderFullLabel 只接管了渲染效果，并不影响内部的数据逻辑。但是你可以选取需要的逻辑进行渲染，或者配合受控来实现更复杂的需求。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree, Checkbox } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1697,7 +1709,7 @@ import { Tree, Checkbox } from '@kousum/semi-ui-vue';
 - 你只需要点击父节点时不触发选中，点击叶子节点触发。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tree } from '@kousum/semi-ui-vue';
 
 () => {

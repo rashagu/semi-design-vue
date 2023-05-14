@@ -8,7 +8,18 @@ icon: doc-anchor
 brief: The Anchor component is used to create a hyper Link navigation bar.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -22,7 +33,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 Use `Link` to create an anchor, click it to jump to the hash tag location.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => (
@@ -49,7 +60,7 @@ You can use `getContainer`, `targetOffset`, `offsetTop`, and `style` to create a
 -   offsetTop：`offsetTop` can trigger the current Link switch when the scrolling content reaches a specified offset from the top of the container.
 
 ```jsx
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -86,7 +97,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 You can change Anchor size with `size` property.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => (
@@ -100,7 +111,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => (
@@ -118,7 +129,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 You can change rail color with `railTheme` property. Three themes are supported and the default value is `primary`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -144,7 +155,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -170,7 +181,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -200,7 +211,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 Anchor can dynamically display child links with `autoCollapse` property. The default is `false`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -231,7 +242,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -266,7 +277,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 `showTooltip` can display the title of link when it exceeds the max-width. The default value is `false`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -297,7 +308,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 You can change the Tooltip position with `position` property. It only works when `showTooltip` is `true`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -371,7 +382,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
     - Yes, it may be that the scrolling container is not set correctly to ensure that the content of the document is wrapped in the scrolling container. The default scrolling container is window. If your container is a div of .my-container, you should set the scrolling container to this div.
     
     ```text
-    import React from 'react';
+    import { h } from 'vue';
     import { Anchor } from '@kousum/semi-ui-vue';
 
     function App() {

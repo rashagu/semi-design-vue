@@ -8,7 +8,18 @@ icon: doc-cascader
 brief: Used to select an option under a multi-level classification.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -22,7 +33,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 Basic usage, only leaf nodes can be selected by default.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -81,7 +92,7 @@ version: >= 1.28.0
 Set `multiple` to make multiple selections.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -141,7 +152,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 Use `filterTreeNode` to support search input. By default it searches the `value` property of the data. You can use `treeNodeFilterProp` to set another property to search or pass in a function to `filterTreeNode` to customize search behavior.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -212,7 +223,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 When multiple selection and search are supported at the same time (version: >= 1.28.0), in this scenario, you can delete the corresponding selected item by pressing the BackSpace key.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -483,7 +494,7 @@ When multiple selections, you can use `maxTagCount` to limit the number of tags 
 You can use `showRestTagsPopover` to set whether hover +N displays Popover after maxTagCount is exceeded, the default is false. And, you can also configure Popover in the `restTagsPopoverProps` property.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -552,7 +563,7 @@ version: >= 1.28.0
 In a multi-selection scene, use max to limit the number of multi-selection selections. After max is exceeded, the onExceed callback will be triggered.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader, Toast } from '@kousum/semi-ui-vue';
 
 () => {
@@ -619,7 +630,7 @@ import { Cascader, Toast } from '@kousum/semi-ui-vue';
 In the case of single selection, you can also set `changeOnSelect` to allow the parent option to be selected.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -689,7 +700,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 Set `displayProp` to select which property in the data you would like to display. By default, `label` is displayed.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -780,7 +791,7 @@ interface Entity {
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader, Tag, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -864,7 +875,7 @@ Version: >=2.2.0
 You can use `separator` to set the separator, including: the separator of the content displayed in the dropdown during search and displayed in the Trigger during single selection.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -923,7 +934,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 ### Disabled
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -998,7 +1009,7 @@ You can use disableStrictly to enable strict disabling. After enabling strict di
 Take the following demo as an example, the node "Music" is strictly disabled. Therefore, when we change the selected state of its parent node "Impressionism", it will not affect the selected state of the node "Music".
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1061,7 +1072,7 @@ version: >= 1.29.0
 You can use `showNext` to set the time to expand the Dropdown submenu, optional: `click` (default), `hover`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1120,7 +1131,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 We have reserved slots at the top and bottom of the cascade selector. You can set them through bottomSlot or topSlot.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1194,7 +1205,7 @@ import { Cascader, Typography } from '@kousum/semi-ui-vue';
 You can use `value` along with `onChange` property if you want to use Cascader as a controlled component.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1399,7 +1410,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 ### Dynamic Update of Data
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1456,7 +1467,7 @@ class Demo extends React.Component {
 When your data structure level is particularly deep, the Cascader drop-down menu may be at the top of the screen. At this time, we recommend setting overflow -x: auto and a suitable width for the drop-down menu (it is recommended to use a width of N+0.5 columns, the most Expand to display half a column to give users a visual cue that they can scroll in the horizontal direction)
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {

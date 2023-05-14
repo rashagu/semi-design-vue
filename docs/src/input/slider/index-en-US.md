@@ -8,7 +8,18 @@ icon: doc-slider
 brief: Selector to quickly select a number or range of values using drag interaction, more intuitive than InputNumber
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -21,7 +32,7 @@ import { Slider } from '@kousum/semi-ui-vue';
 You can set `range={true}` to allow slider slide from both sides.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Slider } from '@kousum/semi-ui-vue';
 
 () => (
@@ -51,7 +62,7 @@ import { Slider } from '@kousum/semi-ui-vue';
 Synchronize slider with input value.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Slider, InputNumber } from '@kousum/semi-ui-vue';
 
 class InputSlider extends React.Component {
@@ -87,7 +98,7 @@ class InputSlider extends React.Component {
 You can use `tipFormatter` to format Tooltip content or set `tipFormatter={null}`to hide Tooltip.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Slider } from '@kousum/semi-ui-vue';
 
 () => (
@@ -105,7 +116,7 @@ import { Slider } from '@kousum/semi-ui-vue';
 Use `marks` to label measures on sliders.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Slider } from '@kousum/semi-ui-vue';
 
 () => (
@@ -132,7 +143,7 @@ import { Slider } from '@kousum/semi-ui-vue';
 ### Segmented Background
 To create a slider with segmented background, you could use CSS property `linear-gradient` for `railStyle` along with `onChange` to change background dynamically。
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Slider } from '@kousum/semi-ui-vue';
 
 class SegSlider extends React.Component {
@@ -181,7 +192,7 @@ class SegSlider extends React.Component {
 You can use `value` along with `onChange` property if you want to use Slider as a controlled component.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Slider, Button } from '@kousum/semi-ui-vue';
 
 class ControllSlider extends React.Component {
@@ -211,7 +222,7 @@ class ControllSlider extends React.Component {
 ### Vertical
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Slider } from '@kousum/semi-ui-vue';
 
 () => (

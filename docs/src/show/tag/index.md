@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 64
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-tag
 brief: 标签是图形化标记界面上的元素的组件，达到快速识别、分组的目的。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -21,7 +34,7 @@ import { Tag, TagGroup } from '@kousum/semi-ui-vue';
 可以通过添加 `closable` 属性将其变为可关闭标签，此时点击 x 关闭会触发 onClose 事件，在 onClose 中阻止默认事件可以使其点击后依然显示不隐藏
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
@@ -42,7 +55,7 @@ import { Tag, Space } from '@kousum/semi-ui-vue';
 默认定义了两种尺寸：大、小（默认）。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
@@ -58,7 +71,7 @@ import { Tag, Space } from '@kousum/semi-ui-vue';
 默认定义了两种形状：`square`（默认）、`circle`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
@@ -74,7 +87,7 @@ import { Tag, Space } from '@kousum/semi-ui-vue';
 标签支持默认色板的 16 种颜色和白色，包括：`amber`、 `blue`、 `cyan`、 `green`、 `grey`、 `indigo`、 `light-blue`、 `light-green`、 `lime`、 `orange`、 `pink`、 `purple`、 `red`、 `teal`、 `violet`、 `yellow`、 `white`，也可以通过 style 来自定义颜色样式。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
@@ -94,7 +107,7 @@ import { Tag, Space } from '@kousum/semi-ui-vue';
 标签支持三种样式类型，包括浅色底色 `light`，白色底色 `ghost`，深色底色 `solid`；默认值为 `light`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tag, Space } from '@kousum/semi-ui-vue';
 
 () => (
@@ -120,7 +133,7 @@ import { Tag, Space } from '@kousum/semi-ui-vue';
 设置 `avatarSrc` 可以生成头像标签。结合 `avatarShape` 可以调整头像标签的形状，支持 `square` 和 `circle`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tag, Space } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -178,7 +191,7 @@ import { Tag, Button } from '@kousum/semi-ui-vue';
 通过设置 `showPopover` 属性，来控制 hover 到 +N Tag 时，是否通过 Popover 显示剩余内容
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagGroup } from '@kousum/semi-ui-vue';
 
 () => {
@@ -232,7 +245,7 @@ import { TagGroup } from '@kousum/semi-ui-vue';
 如果 TagGroup 中的标签可删除，用户需要在 `onTagClose` 中处理传递给 TagGroup 的 `tagList`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagGroup } from '@kousum/semi-ui-vue';
 
 class TagGroupCloseableDemo extends React.Component {

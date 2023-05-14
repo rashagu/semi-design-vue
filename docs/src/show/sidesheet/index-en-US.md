@@ -8,6 +8,18 @@ icon: doc-sidesheet
 brief: An overlay panel that slides out from the edge of the screen, typically used to host secondary action pages.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -197,7 +209,7 @@ import { SideSheet, Button } from '@kousum/semi-ui-vue';
 Use `title`, `footer`(v>=1.3.0) and other Semi Components, you could create customized information display layers.
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { SideSheet, Button, Typography, Banner, Form } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {

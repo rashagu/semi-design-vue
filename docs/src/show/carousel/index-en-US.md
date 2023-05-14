@@ -8,6 +8,18 @@ icon: doc-carousel
 brief: Carousel is a media component that can display the effect of playing multiple pictures in turn in a visualization application.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -20,7 +32,7 @@ import { Carousel } from '@kousum/semi-ui-vue';
 Basic carousel
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 
 () => {
@@ -88,7 +100,7 @@ import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 Three themes are defined by default: `primary`、`light`、`dark`
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -170,7 +182,7 @@ position:  `left`、`center`、`right`
 size:  `small`、`medium`
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -269,7 +281,7 @@ Control whether the arrow is visible through the showArrow property
 If the arrow is visible, use the arrowType property to control the timing of the arrow display
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -356,7 +368,7 @@ import { Carousel, RadioGroup, Radio, Space, Typography } from '@kousum/semi-ui-
 Customize arrow styles and click events through the arrowProps property
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 import { IconArrowLeft, IconArrowRight } from "@kousum/semi-icons-vue";
 
@@ -436,7 +448,7 @@ class CarouselDemo extends React.Component {
 Pass the parameter interval to autoPlay to control the time interval between two pictures, and pass hoverToPause to control whether to stop playing when the mouse is placed on the picture
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 
 () => {
@@ -505,7 +517,7 @@ Control the animation by giving the animation property, optional values are `fad
 Control the switching time between two pictures by giving the speed attribute, the unit is ms
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 
 () => {
@@ -573,7 +585,7 @@ import { Carousel, Typography, Space } from '@kousum/semi-ui-vue';
 ### Controlled Carousel
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Carousel, Space, Typography } from '@kousum/semi-ui-vue';
 
 class CarouselDemo extends React.Component {

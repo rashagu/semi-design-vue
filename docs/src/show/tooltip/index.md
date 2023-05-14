@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 66
 category: 展示类
@@ -8,6 +9,18 @@ width: 65%
 brief: 工具提示用于对一个元素进行标识或者附上少量辅助信息，最典型的场景是向用户解释图标的含义、展示被截断的文本、显示图片的描述等。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -72,7 +85,7 @@ render(Demo);
 其他方向同理  
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -177,7 +190,7 @@ function Demo() {
 你可以将其设置为 false，此时小三角将不再保持指向元素中心。弹出层与 children 边缘对齐
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tooltip, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -257,7 +270,7 @@ function Demo() {
 
 你可以通过 className、style 为弹出层配置特定样式，例如覆盖默认的 maxWidth （280px）
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 
 () => {
@@ -283,7 +296,7 @@ import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 **需要注意的是：** 返回的容器如果不是 `document.body`，**`position` 需要设为 `"relative"`**（版本 >= 0.18.0）。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Tooltip, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -308,7 +321,7 @@ Tooltip、Popconfirm、Popover 都需要劫持 children 的相关事件（onMous
 需要在中间加一层元素（div 或 span）以防止 trigger 的事件劫持失效。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Tooltip, Popconfirm, Button } from '@kousum/semi-ui-vue';
 
 () => (
@@ -327,7 +340,7 @@ import { Tooltip, Popconfirm, Button } from '@kousum/semi-ui-vue';
 Semi 为这种场景提供了 Typography 组件，可以更简单快捷地满足需求。不需要自己再对 Tooltip 的出现做条件判断，详细的使用请参考[Typography 组件文档](/zh-CN/basic/typography#%E7%9C%81%E7%95%A5%E6%96%87%E6%9C%AC)
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -361,7 +374,18 @@ function Demo() {
 
 ---
 
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}| 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | autoAdjustOverflow | 弹出层被遮挡时是否自动调整方向 | boolean | true |  |
 | arrowPointAtCenter | “小三角”是否指向元素中心，需要同时传入"showArrow=true" | boolean | true | **0.34.0** |

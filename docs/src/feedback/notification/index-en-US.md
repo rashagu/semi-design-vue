@@ -9,7 +9,18 @@ width: 65%
 brief: Notifications are used to actively send message notifications to users.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -22,7 +33,7 @@ import { Notification } from '@kousum/semi-ui-vue';
 Close after 3 seconds.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => (
@@ -44,7 +55,7 @@ import { Notification, Button } from '@kousum/semi-ui-vue';
 Use `position` to set pop up position, supporting one of: `top`、`bottom`、`topLeft`、`topRight`(default)、`bottomLeft`、`bottomRight`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button, ButtonGroup } from '@kousum/semi-ui-vue';
 
 () => {
@@ -78,7 +89,7 @@ import { Notification, Button, ButtonGroup } from '@kousum/semi-ui-vue';
 Use different methods to show Notification with icons or you can pass in `icon` for customized icon.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button } from '@kousum/semi-ui-vue';
 import { IconToutiaoLogo, IconVigoLogo } from '@kousum/semi-icons-vue';
 
@@ -133,7 +144,7 @@ import { IconToutiaoLogo, IconVigoLogo } from '@kousum/semi-icons-vue';
 You could use `theme` for a colored background style. Default is `normal`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -174,7 +185,7 @@ import { Notification, Button } from '@kousum/semi-ui-vue';
 Use with Typography to create operation links for more complicated situations.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -208,7 +219,7 @@ import { Notification, Button, Typography } from '@kousum/semi-ui-vue';
 Use `duration` to set up time delay. By default it closes after 3 seconds.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -230,7 +241,7 @@ import { Notification, Button } from '@kousum/semi-ui-vue';
 Set `duration` to 0 if you do not want the Notification to close by itself. In this case, it could only be closed manually.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => {

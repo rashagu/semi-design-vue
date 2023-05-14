@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 20
 category: 输入类
@@ -8,7 +9,18 @@ dir: column
 brief: 用户使用按钮来触发一个操作或者进行跳转。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -28,7 +40,7 @@ import { Button, SplitButtonGroup } from '@kousum/semi-ui-vue';
 -   危险按钮（"danger"）
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -58,7 +70,7 @@ function ButtonDemo() {
 你可以直接使用这些主题色定义你的元素。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 
 function ButtonDemo() {
     const types = [['primary', '主要'], ['secondary', '次要'], ['tertiary', '第三'], ['warning', '警告'], ['danger', '危险']];
@@ -86,7 +98,7 @@ function ButtonDemo() {
 #### 浅色背景
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -106,7 +118,7 @@ function ButtonDemo() {
 #### 深色背景
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -126,7 +138,7 @@ function ButtonDemo() {
 #### 无背景
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -152,7 +164,7 @@ function ButtonDemo() {
 -   小："small"
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -171,7 +183,7 @@ function ButtonDemo() {
 块级按钮具有预先定义好的宽度，它的宽度与按钮里面内容的宽度无关。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -188,7 +200,7 @@ function ButtonDemo() {
 可定义按钮的图标。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 import { IconCamera, IconSidebar, IconChevronDown } from '@kousum/semi-icons-vue';
 
@@ -227,7 +239,7 @@ function ButtonDemo() {
 我们推荐使用 Typography 的 link 属性来实现链接型的文字按钮，具体用法详见[Typography](/zh-CN/basic/typography)
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Typography } from '@kousum/semi-ui-vue';
 import { IconLink } from '@kousum/semi-icons-vue';
 
@@ -250,7 +262,7 @@ function Demo() {
 ### 禁用状态
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -313,7 +325,7 @@ function ButtonDemo() {
 #### 组合尺寸
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -338,7 +350,7 @@ function ButtonDemo() {
 #### 组合禁用
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -359,7 +371,7 @@ function ButtonDemo() {
 #### 组合类型
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 function ButtonDemo() {
@@ -506,15 +518,15 @@ function SplitButtonDemo(){
 - 按钮应该总是以鼓励行动的强动词开头
 - 为了给用户提供足够的上下文，在按钮上使用 {动词}+{名词} 内容公式；除了常见的动作，如“Done”、“Close”、“Cancel”或“OK”
 
-| ✅ 推荐用法 | ❌ 不推荐用法 |   
-| --- | --- | 
-| <div style={{ textAlign: 'center' }}><Empty image={<IllustrationNoAccess style={{ width: 150, height: 150 }} />} darkModeImage={<IllustrationNoAccessDark style={{ width: 150, height: 150 }} />} description={'No permission to view this page'}/><Button theme='solid' type='primary' style={{ marginTop: 12 }}>Apply permission</Button></div>|  <div style={{ textAlign: 'center' }}><Empty image={<IllustrationNoAccess style={{ width: 150, height: 150 }} />} darkModeImage={<IllustrationNoAccessDark style={{ width: 150, height: 150 }} />} description={'No permission to view this page'}/><Button theme='solid' type='primary' style={{ marginTop: 12 }}>Apply</Button></div>  |
+| ✅ 推荐用法                                                                                                                                                                                                                                                                                                                                              | ❌ 不推荐用法                                                                                                                                                                                                                                                                                                                                 |   
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
+| <div :style="{ textAlign: 'center' }"><Empty image={<IllustrationNoAccess :style="{ width: 150, height: 150 }" />} darkModeImage={<IllustrationNoAccessDark :style="{ width: 150, height: 150 }" />} description='No permission to view this page'/><Button theme='solid' type='primary' :style="{ marginTop: 12 }">Apply permission</Button></div> | <div style="{ textAlign: 'center' }"><Empty image={<IllustrationNoAccess :style="{ width: 150, height: 150 }" />} darkModeImage={<IllustrationNoAccessDark :style="{ width: 150, height: 150 }" />} description='No permission to view this page'/><Button theme='solid' type='primary' :style="{ marginTop: 12 }">Apply</Button></div> |
 
 - 当按钮和其他组件一起时候，如果其他组件（比如 Modal 和Sidesheet）已经提供了足够信息的上下文的话，按钮可以只展示 {动词}，如“Add”、“Create”；
   
-| ✅ 推荐用法 | ❌ 不推荐用法 |   
-| --- | --- | 
-| <img src='https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/content_guide/button-good-2.png' style={{ width: 350 }} />| <img src='https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/content_guide/button-bad-2.png' style={{ width: 350 }} /> |
+| ✅ 推荐用法                                                                                                                                        | ❌ 不推荐用法                                                                                                                                      |   
+|-----------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------| 
+| <img src='https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/content_guide/button-good-2.png' style="width: 350px" /> | <img src='https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/content_guide/button-bad-2.png' style="width: 350px" /> |
 
 - 始终按句子大小写（Sentence case）原则书写
 

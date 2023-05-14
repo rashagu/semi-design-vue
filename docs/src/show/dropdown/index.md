@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 53
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-dropdown
 brief: 向下弹出的菜单。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -18,7 +31,7 @@ import { Dropdown } from '@kousum/semi-ui-vue';
 ### 基本用法
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Dropdown, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -87,7 +100,7 @@ function Demo() {
 通过在 `Dropdown.Item` 上设置 `icon` 可以快速配置图标
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Dropdown, Button } from '@kousum/semi-ui-vue';
 import { IconBox, IconSimilarity, IconSetting, IconForward, IconColorPalette, IconRefresh, IconSearch, IconBranch } from '@kousum/semi-icons-vue';
 
@@ -175,7 +188,7 @@ function Demo() {
 支持的位置同 [Tooltip](https://semi.design/zh-CN/show/tooltip#%E4%BD%8D%E7%BD%AE)，常用的是："bottom", "bottomLeft", "bottomRight" 这三种。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Dropdown, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -231,7 +244,7 @@ function Demo() {
 默认是移入触发，可通过获取焦点(focus)，点击(click)或自定义事件触发菜单展开。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Dropdown, Tag, Input, Button } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -297,7 +310,7 @@ function Demo() {
 点击菜单项后可触发不同鼠标事件，支持 `onClick`，`onMouseEnter`， `onMouseLeave` 和 `onContextMenu`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Dropdown, Button, Toast } from '@kousum/semi-ui-vue';
 
 class DropdownEvents extends React.Component {
@@ -351,7 +364,7 @@ class DropdownEvents extends React.Component {
 使用 `Dropdown.Divider` 可以插入分割线使用 `Dropdown.Title` 可以插入分组名组合使用 `Dropdown.Title`、`Dropdown.Divider`、`Dropdown.Item`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Dropdown, Button, Toast } from '@kousum/semi-ui-vue';
 
 class DropdownEvents extends React.Component {
@@ -397,7 +410,7 @@ class DropdownEvents extends React.Component {
 可以通过 menu 属性，传入 JSON Array 快速配置出下拉框菜单
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Dropdown, Button } from '@kousum/semi-ui-vue';
 
 function DropdownEvents() {

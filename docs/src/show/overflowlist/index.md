@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 59
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-overflowList
 brief: OverflowList 是一个行为组件，用于展示列表，并支持自适应来展示尽可能多的项目。因过长而溢出项目将折叠为一个元素。当检测到调整大小时，可见项将被重新计算。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -20,7 +33,7 @@ import { OverflowList } from '@kousum/semi-ui-vue';
 通过 `renderMode="collapse"` (默认) 来实现内容的折叠。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
 import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
@@ -65,7 +78,7 @@ import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder
 `collapse` 模式下支持 collapseFrom 设置折叠方向。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
 import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
@@ -115,7 +128,7 @@ import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder
 `collapse` 模式下支持 minVisibleItems 设置最小展示的数目。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
 import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
@@ -165,7 +178,7 @@ import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder
 通过 `renderMode="scroll"` 来使用滚动模式的折叠列表。如果需要 scrollIntoView，可以通过选择器： `` document.querySelector(`.item-cls[data-scrollkey="${key}"] `` 来选取。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
 import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 

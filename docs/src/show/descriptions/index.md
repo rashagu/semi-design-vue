@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 52
 category: 展示类
@@ -8,6 +9,18 @@ dir: column
 brief: 描述列表用于键值对的呈现。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -19,7 +32,7 @@ import { Descriptions } from '@kousum/semi-ui-vue';
 ### 基本用法
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 
 () => {
@@ -40,7 +53,7 @@ import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 
 ```jsx live=true dir="column"
 
-import React from 'react';
+import { h } from 'vue';
 import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 
 () => {
@@ -78,7 +91,7 @@ import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 
 ```jsx live=true dir="column"
 
-import React from 'react';
+import { h } from 'vue';
 import { Descriptions } from '@kousum/semi-ui-vue';
 import { IconArrowUp } from '@kousum/semi-icons-vue';
 
@@ -122,7 +135,7 @@ import { IconArrowUp } from '@kousum/semi-icons-vue';
 
 ```jsx live=true dir="column"
 
-import React from 'react';
+import { h } from 'vue';
 import { Descriptions } from '@kousum/semi-ui-vue';
 
 () => {

@@ -7,7 +7,18 @@ icon: doc-token
 brief: Semi Design Tokens
 ---
 
-<JumpToToken/>
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}<JumpToToken/>
 
 ## Why use variables
 

@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 70
 category: 反馈类
@@ -8,6 +9,18 @@ width: 60%
 brief: 用于展示用户操作的当前进度和状态，一般在操作耗时较长时使用。也可用来表示任务/对象的完成度
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -25,7 +38,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 如果`size`预设的尺寸不满足，可以通过`style`传入 height 自定义进度条高度
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -50,7 +63,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 通过`showInfo`控制是否展示百分比数字，可以通过`format`格式化展示文本
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -71,7 +84,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 设置`direction='vertical'`，展示垂直进度条，可以通过`style`传入 width 控制进度条宽度
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -90,7 +103,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 将 type 设为`circle`，进度条将会展示成环状。进度条默认尺寸为 72 x 72
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -106,7 +119,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 你可以通过修改`width`来控制环形进度条的大小
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -133,7 +146,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 小号进度条默认尺寸为 24 x 24
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -220,7 +233,7 @@ import { IconChevronLeft, IconChevronRight } from '@kousum/semi-icons-vue';
 如果不需要中心文本内容，你可以将 `showInfo` 设为 false，或者在 `format` 中直接返回空字符串
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -251,7 +264,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 通过 strokeLinecap 属性，你可以控制环形进度条边缘形状
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (

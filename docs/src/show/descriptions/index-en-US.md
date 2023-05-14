@@ -9,6 +9,18 @@ dir: column
 breif: The description list is used to render key-value pairs.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -20,7 +32,7 @@ import { Descriptions } from '@kousum/semi-ui-vue';
 ### Basic Usage
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 
 () => {
@@ -40,7 +52,7 @@ import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 You can use `align` to set alignment of key-value. Supporting values including: `center`(default), `justify`, `left`, and `plain`.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 
 () => {
@@ -77,7 +89,7 @@ import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 Set `row` to display the data to two-row, supporting three sizes: `small`, `medium`(default), and `large`.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Descriptions } from '@kousum/semi-ui-vue';
 import { IconArrowUp } from '@kousum/semi-icons-vue';
 
@@ -120,7 +132,7 @@ import { IconArrowUp } from '@kousum/semi-icons-vue';
 Version: >= 1.17.0
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Descriptions } from '@kousum/semi-ui-vue';
 
 () => {

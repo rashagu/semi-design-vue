@@ -8,6 +8,18 @@ icon: doc-accordion
 brief: Display content areas can be expanded or folded.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -21,7 +33,7 @@ import { Collapse } from '@kousum/semi-ui-vue';
 You can expand multiple panels at the same time, and use `defaultActiveKey` to set the panel to expand by default.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
@@ -44,7 +56,7 @@ import { Collapse } from '@kousum/semi-ui-vue';
 Use `accordion` to restrict one panel only to be expanded at one time.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
@@ -67,7 +79,7 @@ import { Collapse } from '@kousum/semi-ui-vue';
 Use `disabled` to disabled panel.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
@@ -90,7 +102,7 @@ import { Collapse } from '@kousum/semi-ui-vue';
 Use `showArrow` to hide the panel icon.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
@@ -113,7 +125,7 @@ import { Collapse } from '@kousum/semi-ui-vue';
 You can use `expandIcon` to set the expanding icon and `collapseIcon` for folded icon.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Collapse } from '@kousum/semi-ui-vue';
 import { IconPlus, IconMinus } from '@kousum/semi-icons-vue';
 
@@ -139,7 +151,7 @@ You can use `extra` to set extra content on the right-upper corner.
 **Only works when `header` is string. If `header` is a ReactNode, it will take the entire header part including extra so that you could render whatever you need.**
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Collapse, Tag } from '@kousum/semi-ui-vue';
 import { IconCopy } from '@kousum/semi-icons-vue';
 
@@ -226,7 +238,7 @@ The essence of the folding panel is that the card container adds the function of
     You can prevent the event from bubbling to Collapse.Header in the onClick event callback of the custom element. If the custom element does not provide an event object, wrap a layer of div to prevent bubbling in the div onClick.
 
 ```jsx
-import React from 'react';
+import { h } from 'vue';
 import { Collapse, Input } from '@kousum/semi-ui-vue';
 
 () => (

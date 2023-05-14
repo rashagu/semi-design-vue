@@ -6,6 +6,18 @@ localeCode: en-US
 order: 9
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Start upgrade
 
 ### Upgrade preparation

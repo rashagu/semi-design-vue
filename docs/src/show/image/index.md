@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 56
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-image
 brief: 用于展示和预览图片。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -22,7 +35,7 @@ import { Image, ImagePreview } from '@kousum/semi-ui-vue';
 通过 `src` 指定图片路径即可获取一个具有预览功能的图片，通过 `width`，`height` 指定图片的宽高
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Image } from '@kousum/semi-ui-vue';
 
 () => (  
@@ -39,7 +52,7 @@ import { Image } from '@kousum/semi-ui-vue';
 可通过 `fallback` 自定义加载失败的占位图，该参数类型支持 string 和 ReactNode
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Image } from '@kousum/semi-ui-vue';
 
 () => (
@@ -67,7 +80,7 @@ import { Image } from '@kousum/semi-ui-vue';
 大图可通过`placeholder`实现渐进加载
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Image, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -103,7 +116,7 @@ import { Image, Button } from '@kousum/semi-ui-vue';
 可以通过设置 Image 组件的 `src` 和 `preview` 参数中的 `src` 不同来自定义预览图片
 
  ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Image } from '@kousum/semi-ui-vue';
 
 () => {

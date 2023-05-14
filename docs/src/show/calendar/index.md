@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 47
 category: 展示类
@@ -8,6 +9,18 @@ dir: column
 brief: 日历组件，允许以日/周/月视图展示对应事件
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -21,7 +34,7 @@ import { Calendar } from '@kousum/semi-ui-vue';
 日视图的日历模板，可通过 `showCurrTime` 控制是否显示当前时间的位置红线。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Calendar } from '@kousum/semi-ui-vue';
 
 () => <Calendar mode="day"></Calendar>;
@@ -32,7 +45,7 @@ import { Calendar } from '@kousum/semi-ui-vue';
 周视图的日历模板，可通过 `showCurrTime` 控制是否显示当前时间的位置红线。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Calendar } from '@kousum/semi-ui-vue';
 
 () => <Calendar mode="week"></Calendar>;
@@ -43,7 +56,7 @@ import { Calendar } from '@kousum/semi-ui-vue';
 月视图的日历模板。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Calendar } from '@kousum/semi-ui-vue';
 
 () => <Calendar mode="month"></Calendar>;
@@ -84,7 +97,7 @@ import { RadioGroup, Calendar, Radio } from '@kousum/semi-ui-vue';
 多日视图模式。 `range` 必传，左闭右开。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Calendar } from '@kousum/semi-ui-vue';
 
 () => <Calendar mode="range" range={[new Date(2020, 8, 26), new Date(2020, 8, 31)]} />;
@@ -96,7 +109,7 @@ import { Calendar } from '@kousum/semi-ui-vue';
 通过 `events` 传入需要渲染的事件，`events` 是一个由 event objects 组成的数组，具体形式请参考 events API。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Calendar, RadioGroup, Radio } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -226,7 +239,7 @@ class Demo extends React.Component {
 #### 自定义渲染事件
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Calendar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -264,7 +277,7 @@ import { Calendar } from '@kousum/semi-ui-vue';
 可以通过 dateGridRender 自定义单元格的背景，月视图的文字 zIndex 默认为 3，如需完全覆盖单元格可以设置更大的 zIndex 来实现。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Calendar } from '@kousum/semi-ui-vue';
 
 () => {

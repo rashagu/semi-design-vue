@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 21
 category: 输入类
@@ -7,6 +8,18 @@ icon: doc-cascader
 brief: 用于选择多级分类下的某个选项。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 
@@ -21,7 +34,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 最简单的用法，默认只可以选叶子节点。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -82,7 +95,7 @@ version: >= 1.28.0
 设置 `multiple`，可以进行多选。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -225,7 +238,7 @@ import { Cascader, Typography } from '@kousum/semi-ui-vue';
 支持多选和搜索同时使用（version >= v1.28.0)，在这种场景下，可以通过按下 BackSpace 键来删除对应的已选项目。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -488,7 +501,7 @@ version: >= 1.28.0
 使用 showRestTagsPopover 可以设置在超出 maxTagCount 后，hover +N 是否显示 Popover，默认为 false。并且，还可以在 restTagsPopoverProps 属性中配置 Popover。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -557,7 +570,7 @@ version: >= 1.28.0
 在多选的场景中，利用 max 可以限制多选选中的数量。超出 max 后将触发 onExceed 回调。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader, Toast } from '@kousum/semi-ui-vue';
 
 () => {
@@ -623,7 +636,7 @@ import { Cascader, Toast } from '@kousum/semi-ui-vue';
 在单选的情况下，还可以通过设置 `changeOnSelect`，允许选中父级选项。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -694,7 +707,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 可以通过 `displayProp` 设置回填选项显示的属性值，默认为 `label`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -785,7 +798,7 @@ interface Entity {
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader, Tag, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -870,7 +883,7 @@ import { Cascader, Tag, Typography } from '@kousum/semi-ui-vue';
 可以使用 `separator` 设置分隔符, 包括：搜索时显示在下拉框的内容以及单选时回显到 Trigger 的内容的分隔符。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -929,7 +942,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 ### 禁用
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -991,7 +1004,7 @@ version: >= 1.32.0
 以下面的 demo 为例，节点"宁波"开启了严格禁用，因此，当我们改变其父节点"浙江省"的选中状态时，也不会影响到节点"宁波"的选中状态。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1055,7 +1068,7 @@ version: >= 1.29.0
 可以使用 `showNext` 设置展开 Dropdown 子菜单的触发时机，可选: `click`（默认）、`hover`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1101,7 +1114,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 我们在级联选择器的顶部、底部分别预留了插槽，你可以通过 `topSlot` 或 `bottomSlot` 来设置。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1175,7 +1188,7 @@ import { Cascader, Typography } from '@kousum/semi-ui-vue';
 传入 `value` 时即为受控组件，可以配合 `onChange` 使用。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1384,7 +1397,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 ### 动态更新数据
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Cascader, Button } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -1442,7 +1455,7 @@ class Demo extends React.Component {
 **不能与搜索同时使用**
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1521,7 +1534,7 @@ import { Cascader } from '@kousum/semi-ui-vue';
 当你的数据结构层级特别深时，Cascader下拉菜单可能会超出屏幕，此时我们建议为下拉菜单设置 overflow-x: auto 以及一个合适的 width 宽度（ 建议以N+0.5列的宽度为准，最右侧显示半列，以给用户一种右侧尚有待展开项，可以水平方向滚动的视觉暗示）
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Cascader } from '@kousum/semi-ui-vue';
 
 () => {

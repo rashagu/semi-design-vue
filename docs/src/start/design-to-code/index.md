@@ -2,10 +2,23 @@
 category: 开始
 title:  Design to Code 设计稿转代码
 icon: doc-code
+outline: deep
 localeCode: zh-CN
 order: 4
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 简介
 
 Design to code（简称D2C） 是 Semi Design 提供的设计稿转代码功能，支持一键识别 Figma 页面中图层布局 + Semi 组件，像素级还原设计稿，转译为 JSX 和 CSS 代码，快捷预览，

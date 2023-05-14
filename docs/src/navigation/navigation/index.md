@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 40
 category: 导航类
@@ -9,7 +10,18 @@ dir: column
 brief: 为页面和功能提供导航的菜单列表。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -31,7 +43,7 @@ import { Nav } from '@kousum/semi-ui-vue';
 参数含义详见 [Nav.Item](#Nav.Item) 或 [Nav.Sub](#Nav.Sub)
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconUser, IconStar, IconSetting } from '@kousum/semi-icons-vue';
 
@@ -71,7 +83,7 @@ class NavApp extends React.Component {
 如果导航项目没有传入 `icon` 字段，那么文案会自动向左填充。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 
 class NavApp extends React.Component {
@@ -111,7 +123,7 @@ class NavApp extends React.Component {
 参数详见[Nav.Header](#Nav.Header)和[Nav.Footer](#Nav.Footer)。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconUser, IconStar, IconSetting, IconSemiLogo } from '@kousum/semi-icons-vue';
 
@@ -152,7 +164,7 @@ Navigation 目前提供了个两个参数用于定义导航样式：`style` 和 
 例如你需要一个导航列表可以滚动，导航头部和底部固定的导航组件，可以这么使用：
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconUser, IconStar, IconSetting, IconFolder, IconSemiLogo } from '@kousum/semi-icons-vue';
 
@@ -198,7 +210,7 @@ class NavApp extends React.Component {
 用户可以使用 JSX 写法定义导航头部、导航项以及导航底部。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconStar, IconUser, IconUserGroup, IconSemiLogo } from '@kousum/semi-icons-vue';
 
@@ -238,7 +250,7 @@ class NavApp extends React.Component {
 
 ```jsx
 import { Link } from "react-router-dom";
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 
 () => {
@@ -293,7 +305,7 @@ Navigation 目前提供两种方向的导航：
 #### 竖直方向
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconStar, IconUser, IconUserGroup, IconSetting, IconSemiLogo } from '@kousum/semi-icons-vue';
 
@@ -337,7 +349,7 @@ class NavApp extends React.Component {
 #### 水平方向
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav, Avatar, Dropdown } from '@kousum/semi-ui-vue';
 import { IconStar, IconUser, IconUserGroup, IconSetting, IconEdit, IconSemiLogo } from '@kousum/semi-icons-vue';
 
@@ -404,7 +416,7 @@ class NavApp extends React.Component {
 一般的平台设计会采取水平加垂直导航的模式，这里有一个比较常见的例子。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav, Avatar, Dropdown, Select, Button } from '@kousum/semi-ui-vue';
 import { IconStar, IconUser, IconUserGroup, IconSetting, IconEdit, IconLanguage, IconSemiLogo } from '@kousum/semi-icons-vue';
 
@@ -512,7 +524,7 @@ class NavApp extends React.Component {
 `toggleIconPosition` 设置 'left' 或 'right', 默认 right
 
 ```jsx live=true dir=column
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconUser, IconStar, IconSetting, IconSemiLogo } from '@kousum/semi-icons-vue';
 
@@ -557,7 +569,7 @@ Object 方式 传入导航项时 无需关心 level
 limitIndent 只在 竖直方向生效
 
 ```jsx live=true dir=column
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconUser, IconStar, IconSetting, IconSemiLogo } from '@kousum/semi-icons-vue';
 
@@ -613,7 +625,7 @@ class NavApp extends React.Component {
 -   `defaultIsCollapsed`（侧边栏默认是否收起，仅 `mode = "vertical"` 时有效）
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Nav } from '@kousum/semi-ui-vue';
 import { IconUser, IconStar, IconUserGroup, IconSetting, IconSemiLogo } from '@kousum/semi-icons-vue';
 

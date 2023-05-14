@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 48
 category: 展示类
@@ -8,6 +9,18 @@ icon: doc-card
 brief: 常规的卡片容器，可以承载标题、段落、图片、列表等内容。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -20,7 +33,7 @@ import { Card } from '@kousum/semi-ui-vue';
 基础卡片包含标题、内容等部分。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -48,7 +61,7 @@ function Demo() {
 卡片可以只设置内容区域。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Popover, Avatar } from '@kousum/semi-ui-vue';
 import { IconInfoCircle } from '@kousum/semi-icons-vue';
 
@@ -102,7 +115,7 @@ function Demo() {
 可以使用 `cover` 属性设置封面。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -130,7 +143,7 @@ function Demo() {
 可以使用 `bordered` 设置卡片是否有外边框，默认为 true 。同时，也可以使用 `headerLine` 设置内容区和标题区是否有边线， `footerLine` 设置内容区和页尾区是否有边线。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -162,7 +175,7 @@ function Demo() {
 可以使用 `shadows` 设置显示阴影的时机，可选值为: `hover`（hover 时显示阴影）、`always`（始终显示阴影），如果不设置该属性则没有阴影。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Avatar, Popover } from '@kousum/semi-ui-vue';
 import { IconInfoCircle } from '@kousum/semi-icons-vue';
 
@@ -245,7 +258,7 @@ function Demo() {
 可以利用 `Card.Meta` 支持更灵活的内容，允许设置 `title`、`avatar`、`description`。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Avatar, Space, Button, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -301,7 +314,7 @@ function Demo() {
 
 ```jsx live=true dir="column"
 
-import React from 'react';
+import { h } from 'vue';
 import { Card, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -341,7 +354,7 @@ function Demo() {
 在系统概览页面常常和栅格进行配合。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Row, Col } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -502,7 +515,7 @@ function Demo() {
 可以结合 Tabs 组件，实现带页签的卡片。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 function demo() {
@@ -537,7 +550,7 @@ function demo() {
 `actions` 接收 ReactNode 数组，元素间将以 12px 的水平间距展示于内容区底部。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, Rating } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -622,7 +635,7 @@ function Demo() {
 使用 `CardGroup` 的 `type` 属性，可以将卡片组设置为网格型。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Card, CardGroup, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {

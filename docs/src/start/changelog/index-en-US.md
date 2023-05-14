@@ -8,7 +8,18 @@ order: 8
 brief: About Semi Design For React Optimization and Updat. We provide Changelog Diff between versions, you can call out the Diff control by hovering the version number. If you want to view the change history of a single component, you can view it through the Version Diff button of the corresponding component documentation
 ---
 
-Version：Major.Minor.Patch (follow the **Semver** specification)
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}Version：Major.Minor.Patch (follow the **Semver** specification)
 
 -   **Major version**: Significant performance / usage changes
 -   **Minor version**: Semi releases a minor version every two weeks, including changes of the following types: new components/features added, or style changes: New component added / new feature
@@ -16,6 +27,18 @@ Version：Major.Minor.Patch (follow the **Semver** specification)
 
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 #### 🎉 2.34.0 (2023-04-28)
 - 【Fix】
   - Fixed the issue where Table SSR was not rendering correctly [#1466](https://github.com/DouyinFE/semi-design/issues/1466)

@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 68
 category: 反馈类
@@ -8,6 +9,18 @@ width: 65%
 brief: 通知用于主动向用户发出消息通知
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -21,7 +34,7 @@ import { Notification } from '@kousum/semi-ui-vue';
 最基本的用法，3s 后自动关闭
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => (
@@ -44,7 +57,7 @@ import { Notification, Button } from '@kousum/semi-ui-vue';
 可以从多个不同位置弹出：默认右上角 `topRight`。可选值：`top`、`bottom`、`topLeft`、`topRight`、`bottomLeft`、`bottomRight`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button, ButtonGroup } from '@kousum/semi-ui-vue';
 
 () => {
@@ -79,7 +92,7 @@ import { Notification, Button, ButtonGroup } from '@kousum/semi-ui-vue';
 包括成功、失败、警告、提示
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button } from '@kousum/semi-ui-vue';
 import { IconToutiaoLogo, IconVigoLogo } from '@kousum/semi-icons-vue';
 
@@ -135,7 +148,7 @@ import { IconToutiaoLogo, IconVigoLogo } from '@kousum/semi-icons-vue';
 可以使用 `theme` 设置浅色填充样式提高与界面的对比，默认为 'normal' 的白色模式。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -172,7 +185,7 @@ import { Notification, Button } from '@kousum/semi-ui-vue';
 配合 Typography 可以自定义操作区链接文本，用来配合更复杂的场景的使用。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -203,7 +216,7 @@ import { Notification, Button, Typography } from '@kousum/semi-ui-vue';
 自定义时长 10s，默认时长为 3s
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -221,7 +234,7 @@ import { Notification, Button } from '@kousum/semi-ui-vue';
 设置 duration 为 0 时，通知将不会自动关闭，此时只能手动关闭。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Notification, Button } from '@kousum/semi-ui-vue';
 
 () => {

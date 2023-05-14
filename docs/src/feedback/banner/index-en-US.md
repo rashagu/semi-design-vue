@@ -9,7 +9,18 @@ dir: column
 brief: The Banner component is usually used to identify the status or notification of the full page. It is usually resident and requires the user to close it initiatively.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -64,7 +75,7 @@ import { Banner, Layout, Button } from '@kousum/semi-ui-vue';
 The `type` prop supports one of: `default`(default),`danger`,`warning`, `success`.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Banner } from '@kousum/semi-ui-vue';
 
 () => (
@@ -98,7 +109,7 @@ You could set  `fullMode={false}` to use style for non-fullscreen mode。
 Also, use `bordered` for bordered style.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Banner, Typography } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -147,7 +158,7 @@ function Demo() {
 ### Customized Content
 Use `children` to create customized content.
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Banner } from '@kousum/semi-ui-vue';
 
 () => (

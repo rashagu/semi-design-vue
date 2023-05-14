@@ -9,7 +9,18 @@ dir: column
 brief: Internationalized components to provide multilingual support for Semi components
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Languages supported
 
 | Minimum supported version  | Language |
@@ -36,7 +47,7 @@ brief: Internationalized components to provide multilingual support for Semi com
 When you need to switch the language, you can directly switch the locale passed in by the props.
 
 ```jsx
-import React from 'react';
+import { h } from 'vue';
 import zh_CN from '@kousum/semi-ui-vue/lib/es/locale/source/zh_CN';
 import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
 import en_US from '@kousum/semi-ui-vue/lib/es/locale/source/en_US';
@@ -77,7 +88,7 @@ import { LocaleProvider } from '@kousum/semi-ui-vue';
 ### Internationalization
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import en_GB from '@kousum/semi-ui-vue/locale/source/en_GB';
 import ja_JP from '@kousum/semi-ui-vue/locale/source/ja_JP';
 import { LocaleProvider, Pagination } from '@kousum/semi-ui-vue';
@@ -106,7 +117,7 @@ class I18nDemo extends React.Component {
 When your custom component also wants to consume the localeCode in the Semi LocaleProvider Context or read the i18n text localeData of a specific component, you can use LocaleConsumer to get it
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import zh_CN from '@kousum/semi-ui-vue/lib/es/locale/source/zh_CN';
 import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
 import ko_KR from '@kousum/semi-ui-vue/lib/es/locale/source/ko_KR';
@@ -177,7 +188,7 @@ render(I18nCustomDemo);
 The example gives all the current multilingual components
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import zh_CN from '@kousum/semi-ui-vue/lib/es/locale/source/zh_CN';
 import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
 import en_US from '@kousum/semi-ui-vue/lib/es/locale/source/en_US';

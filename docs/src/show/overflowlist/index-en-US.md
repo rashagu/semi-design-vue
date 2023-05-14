@@ -20,7 +20,7 @@ import { OverflowList } from '@kousum/semi-ui-vue';
 You could use `renderMode="collapse"` (default) to render items.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
 import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
@@ -65,7 +65,7 @@ import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder
 `collapse` mode supports two `collapseFrom` directions: `start` and `end` (default).
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
 import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
@@ -115,7 +115,7 @@ import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder
 `collapse` mode supports to set up minimum visible items that will not be collected.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
 import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 
@@ -166,7 +166,7 @@ You could use `renderMode="scroll"` for a scrollable list.
 If you need certain element in the list to scrollIntoView, use `` document.querySelector(`.item-cls[data-scrollkey="${key}"] `` to select to corresponding DOM.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { OverflowList, Tag, Slider } from '@kousum/semi-ui-vue';
 import { IconAlarm, IconBookmark, IconCamera, IconDuration, IconEdit, IconFolder } from '@kousum/semi-icons-vue';
 

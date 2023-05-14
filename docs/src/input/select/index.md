@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 29
 category: 输入类
@@ -8,6 +9,18 @@ width: 60%
 brief: 用户可以通过 Select 选择器从一个选项集合中去选中一个或多个选项，并呈现最终选择结果
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -26,7 +39,7 @@ Select的直接子元素必须为 Option 或者 OptGroup，不允许为其他Ele
 每个 Option 标签都必须声明 value 属性，Option 的 children 或 label 将会被渲染至下拉列表中
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -64,7 +77,7 @@ import { Select } from '@kousum/semi-ui-vue';
 可以直接通过`optionList`传入一个对象数组，每个对象必须包含 value/label 属性（当然其他属性也可以通过此方式传入）
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -94,7 +107,7 @@ import { Select } from '@kousum/semi-ui-vue';
 配置 `max` 属性可限制最大可选的数量，超出最大限制数量后无法选中，同时会触发`onExceed`回调
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -167,7 +180,7 @@ import { Select } from '@kousum/semi-ui-vue';
 </Notice>
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -188,7 +201,7 @@ import { Select } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -233,7 +246,7 @@ import { Select } from '@kousum/semi-ui-vue';
 通过 Size 控制选择器的大小尺寸: `small` / `default` / `large`
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -261,7 +274,7 @@ validateStatus: default / warning / error
 仅影响背景颜色等样式表现
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -291,7 +304,7 @@ import { Select } from '@kousum/semi-ui-vue';
 -   通过`showArrow`控制右侧下拉箭头是否展示
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 import { IconVigoLogo, IconGift } from '@kousum/semi-icons-vue';
 
@@ -396,7 +409,7 @@ import { Select } from '@kousum/semi-ui-vue';
 -   `outerTopSlot` 和 `outerBottomSlot`将会被渲染为与 optionList 平级，无论 optionList 是否滚动，都会始终展现
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -470,7 +483,7 @@ import { Select } from '@kousum/semi-ui-vue';
 通过 outerTopSlot 将内容插入顶部插槽
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -609,7 +622,7 @@ import { Select, Button } from '@kousum/semi-ui-vue';
 使用受控 value，实现不同 Select 之间的联动。如果是带有层级关系的复杂联动建议直接使用`Cascader`组件
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 class Link extends React.Component {
@@ -675,7 +688,7 @@ class Link extends React.Component {
 默认情况下，多选选中后会自动清空搜索关键字。若你希望保留，可以通过 autoClearSearchValue 设为 false 关闭默认行为（v2.3 后提供）
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -708,7 +721,7 @@ import { Select } from '@kousum/semi-ui-vue';
 使用受控的 value 属性
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { debounce } from 'lodash-es';
 import { Select } from '@kousum/semi-ui-vue';
 
@@ -769,7 +782,7 @@ import { Select } from '@kousum/semi-ui-vue';
 通过传入自定义 `filter` 函数，检索时输入小写字母也能搜到相应内容。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -800,7 +813,7 @@ import { Select } from '@kousum/semi-ui-vue';
     -   isRenderInTag 为 false 时，将直接渲染返回的 content
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select, Avatar, Tag } from '@kousum/semi-ui-vue';
 
 () => {
@@ -930,7 +943,7 @@ import { Select, Avatar, Tag } from '@kousum/semi-ui-vue';
 例如当自定义弹出层的宽度时，可以通过 dropdownStyle 传入 width
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => (
@@ -958,7 +971,7 @@ import { Select } from '@kousum/semi-ui-vue';
 </Notice>
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Select, TextArea } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1023,7 +1036,7 @@ import { Select, TextArea } from '@kousum/semi-ui-vue';
 </Notice>
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1084,7 +1097,7 @@ virtualize 是一个包含下列值的对象：
 ```
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Select } from '@kousum/semi-ui-vue';
 
 class VirtualizeDemo extends React.Component {
@@ -1258,7 +1271,7 @@ import { IconAppCenter, IconChevronDown } from '@kousum/semi-icons-vue';
     4. 如果你的自定义 item 为 Select.Option，需要将 renderProps.onClick 透传给 Option 的 onSelect prop
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Select, Checkbox } from '@kousum/semi-ui-vue';
 
 () => {
@@ -1452,7 +1465,18 @@ import { Select, Checkbox } from '@kousum/semi-ui-vue';
 
 ---
 
-> **不同 Option 的 label 必须唯一，不允许重复**
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}> **不同 Option 的 label 必须唯一，不允许重复**
 
 | 属性      | 说明                                                               | 类型              | 默认值 |
 | --------- | ------------------------------------------------------------------ | ----------------- | ------ |
@@ -1467,7 +1491,18 @@ import { Select, Checkbox } from '@kousum/semi-ui-vue';
 
 ---
 
-| 属性      | 说明       | 类型      | 版本    |
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}| 属性      | 说明       | 类型      | 版本    |
 | --------- | ---------- | --------- | ------- |
 | className | 样式类名   | string    | v0.31.0 |
 | label     | 展示的文本 | ReactNode | v0.31.0 |

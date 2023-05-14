@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 16
 category: 基础
@@ -6,6 +7,19 @@ title:  Tokens 设计变量
 icon: doc-token
 brief: Semi Design Tokens
 ---
+
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 
 <JumpToToken/>
 

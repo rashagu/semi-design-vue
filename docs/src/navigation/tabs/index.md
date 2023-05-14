@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 43
 category: 导航类
@@ -7,6 +8,18 @@ icon: doc-tabs
 brief: 当内容需要分组并在不同模块页面中展示，可使用 Tabs 标签栏目对不同的组/页之间进行切换
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -24,7 +37,7 @@ import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 > 当使用 `tabList` 时每次只渲染当前传入的节点使用 `<TabPane>` 时默认会渲染所有面板。可以通过设置 `keepDOM={false}` 只渲染当前面板，此时不会有动画效果。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 () => (
@@ -97,7 +110,7 @@ import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 () => (
@@ -116,7 +129,7 @@ import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs } from '@kousum/semi-ui-vue';
 
 class TabDemo extends React.Component {
@@ -158,7 +171,7 @@ class TabDemo extends React.Component {
 有图标的标签栏。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 import { IconFile, IconGlobe, IconHelpCircle } from '@kousum/semi-icons-vue';
 
@@ -206,7 +219,7 @@ import { IconFile, IconGlobe, IconHelpCircle } from '@kousum/semi-icons-vue';
 支持水平和垂直两种模式， `tabPosition='left|top'`
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane, RadioGroup, Radio } from '@kousum/semi-ui-vue';
 import { IconFile, IconGlobe, IconHelpCircle } from '@kousum/semi-icons-vue';
 
@@ -331,7 +344,7 @@ class App extends React.Component {
 通过设置 `collapsible` 可以支持滚动折叠，目前只支持 horizontal 模式。
 
 ```jsx live=true dir=column
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -354,7 +367,7 @@ class App extends React.Component {
 禁用标签栏中的某一个标签页。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -381,7 +394,7 @@ class App extends React.Component {
 传入 `tabBarExtraContent` 属性可以在标签栏右侧添加附加操作。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane, Button } from '@kousum/semi-ui-vue';
 
 () => (
@@ -415,7 +428,7 @@ import { Tabs, TabPane, Button } from '@kousum/semi-ui-vue';
 传入 `renderTabBar` 函数可对标签栏进行二次封装。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 () => (
@@ -448,7 +461,7 @@ import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 通过绑定事件，可以使标签栏动态更新。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -515,7 +528,7 @@ class App extends React.Component {
 只有卡片样式的页签支持关闭选项。使用 `closable={true}` 来开启。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {

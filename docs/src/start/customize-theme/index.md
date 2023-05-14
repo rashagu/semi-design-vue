@@ -2,10 +2,23 @@
 category: 开始
 title:  Customized Themes 定制主题
 icon: doc-theme
+outline: deep
 localeCode: zh-CN
 order: 3
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 定制方式
 
 Semi 提供完整的主题配置流程，既保持颜色、字体、圆角、阴影、布局等在视觉语言上的统一连贯，又能满足业务和品牌多样化的视觉需求。  

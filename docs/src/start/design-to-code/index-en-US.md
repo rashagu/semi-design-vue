@@ -7,6 +7,18 @@ localeCode: en-US
 order: 4
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Introduction
 
 Design to code (D2C) is a design draft conversion code tool provided by `Semi Design`, which supports one-click recognition of layer layout + Semi components in Figma pages, restores design drafts at the pixel level, translates them into JSX and CSS codes, and quickly previews them.

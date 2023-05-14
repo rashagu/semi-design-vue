@@ -8,7 +8,18 @@ icon: doc-breadcrumb
 brief: Breadcrumbs allow users to make selections from a range of values and provide an auxiliary navigation that can return to previous page.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -19,7 +30,7 @@ import { Breadcrumb } from '@kousum/semi-ui-vue';
 ### Basic Usage
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb } from '@kousum/semi-ui-vue';
 
 () => (
@@ -34,7 +45,7 @@ import { Breadcrumb } from '@kousum/semi-ui-vue';
 ### With Icons
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb } from '@kousum/semi-ui-vue';
 import { IconHome, IconArticle } from '@kousum/semi-icons-vue';
 
@@ -52,7 +63,7 @@ import { IconHome, IconArticle } from '@kousum/semi-icons-vue';
 You can set the `compact` property to `false` to increase the size of icons and texts.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb } from '@kousum/semi-ui-vue';
 import { IconHome } from '@kousum/semi-icons-vue';
 
@@ -78,7 +89,7 @@ import { IconHome } from '@kousum/semi-icons-vue';
 Default separator is `/`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb, Tag } from '@kousum/semi-ui-vue';
 import { IconArrowRight } from '@kousum/semi-icons-vue';
 
@@ -110,7 +121,7 @@ import { IconArrowRight } from '@kousum/semi-icons-vue';
 After **v0.34.0**, the truncation happens if the text is overflowed. Default max-width is set to 150px. You could use `showTooltip` to customize ellipsis behavior.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb, Typography } from '@kousum/semi-ui-vue';
 
 () => {
@@ -155,7 +166,7 @@ When the path exceeds 4 levels, the second level to the penultimate one will be 
 For **v>=1.9.0** , you could use `maxItemCount` to set the number exceeded to trigger auto collapse.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb } from '@kousum/semi-ui-vue';
 
 () => (
@@ -176,7 +187,7 @@ import { Breadcrumb } from '@kousum/semi-ui-vue';
 There are two ellipsis area rendering types provided inside the component. You can set and select the desired rendering type through `moreType`. The optional values of `moreType` are `default` and `popover`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb } from '@kousum/semi-ui-vue';
 
 () => (
@@ -195,7 +206,7 @@ import { Breadcrumb } from '@kousum/semi-ui-vue';
 If you want to customize other forms of rendering for the ellipsis area, you can use the `renderMore()` method.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb, Popover } from '@kousum/semi-ui-vue';
 import { IconMore } from '@kousum/semi-icons-vue';
 
@@ -257,7 +268,7 @@ Breadcrumb supports passing in an array of strings or route objects consisting o
 -   `icon`: Icon displayed.
  
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Breadcrumb } from '@kousum/semi-ui-vue';
 import { IconHome, IconArticle } from '@kousum/semi-icons-vue';
 

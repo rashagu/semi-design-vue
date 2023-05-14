@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 22
 category: 输入类
@@ -7,7 +8,18 @@ icon: doc-checkbox
 brief: 复选框允许用户选中多个选项
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 使用场景
 
 - 勾选框可以让用户在两种相反的状态、行为或取值之间选择;
@@ -27,7 +39,7 @@ Checkbox单个使用，可以通过`defaultChecked`、`checked`属性控制是�
 当传入`checked`时，为受控使用。  
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -36,7 +48,7 @@ import { Checkbox } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -47,7 +59,7 @@ import { Checkbox } from '@kousum/semi-ui-vue';
 带辅助文本的checkbox。通过`extra`传入辅助文本。辅助文本会更长一些，甚至还可能换行。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -68,7 +80,7 @@ import { Checkbox } from '@kousum/semi-ui-vue';
 通过设置 `disabled` 属性，禁用 Checkbox
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -87,7 +99,7 @@ import { Checkbox } from '@kousum/semi-ui-vue';
 此时Checkbox不需要再声明`defaultChecked`、`checked`属性
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -107,7 +119,7 @@ import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 也可以将数组通过 `options` 属性直接传入 CheckboxGroup，直接生成 Checkbox 组
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { CheckboxGroup } from '@kousum/semi-ui-vue';
 
 () => {
@@ -151,7 +163,7 @@ import { CheckboxGroup } from '@kousum/semi-ui-vue';
 通过设置 `direction` 为 `horizontal` 或者 `vertical` 可以调整 CheckboxGroup 内的布局
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { CheckboxGroup } from '@kousum/semi-ui-vue';
 
 () => {
@@ -173,7 +185,7 @@ import { CheckboxGroup } from '@kousum/semi-ui-vue';
 联动 checkbox。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Checkbox, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -296,7 +308,7 @@ version: >=1.30.0
 可以给 CheckboxGroup 设置 `type='card'`，实现带有背景的卡片样式。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -323,7 +335,7 @@ version: >=1.30.0
 可以给 CheckboxGroup 设置 `type='pureCard'`，实现带有背景且无 checkbox 的纯卡片样式。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 
 () => (
@@ -349,7 +361,7 @@ import { CheckboxGroup, Checkbox } from '@kousum/semi-ui-vue';
 Checkbox.Group 内嵌 Checkbox 并与 Grid 组件一起使用，可以实现灵活的布局。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Checkbox, CheckboxGroup, Row, Col } from '@kousum/semi-ui-vue';
 
 () => (
@@ -435,15 +447,15 @@ import { Checkbox, CheckboxGroup, Row, Col } from '@kousum/semi-ui-vue';
 ## 文案规范
 
 
-<div style={{ border: '1px solid var(--semi-color-border)', padding: 10, marginBottom: 24 }}>
-    <p style={{ fontWeight: 600, fontSize: 16  }}>Checkbox Content Demo</p>
-    <CheckboxGroup options={[
+<div :style="{ border: '1px solid var(--semi-color-border)', padding: 10, marginBottom: 24 }">
+    <p :style="{ fontWeight: 600, fontSize: 16  }">Checkbox Content Demo</p>
+    <CheckboxGroup :options="[
         { label: 'Call', value: 'abc' },
         { label: 'IM', value: 'c' },
         { label: 'Ticket', value: 'd' },
         { label: 'Offline', value: 'e' },
         { label: 'Buzz', value: 'f' }
-    ]} direction='horizontal' aria-label="CheckboxGroup 示例" style={{ marginTop: 10 }}/>
+    ]" direction='horizontal' aria-label="CheckboxGroup 示例" :style="{ marginTop: 10 }"/>
 </div>
 
 - 首字母大写

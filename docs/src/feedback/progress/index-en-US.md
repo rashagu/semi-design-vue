@@ -25,7 +25,7 @@ Use `aria-label` Property to explain the specific role
 If the preset size is not satisfied, You can pass height to customize the height of the progress bar through `style` property.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -50,7 +50,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 You can control whether to show percentage number through the `showInfo` property In addition, you can format the percentage text show through `format`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -71,7 +71,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 You can use vertical progress bar by setting `direction='vertical'` If preset width is not satisfied, you can pass width to customize the width of the vertical progress bar through `style` property.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -90,7 +90,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 Set type to`circle`, the progress bar will be displayed in a ring shape. The default size of the progress bar is 72 x 72
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -106,7 +106,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 You can modify it's `width` to control the size of the circular progress bar.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -126,7 +126,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 Small progress bar default size is 24 x 24.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -142,7 +142,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 ### Dynamic change percent
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress, Button } from '@kousum/semi-ui-vue';
 import { IconChevronLeft, IconChevronRight } from '@kousum/semi-icons-vue';
 
@@ -175,7 +175,7 @@ import { IconChevronLeft, IconChevronRight } from '@kousum/semi-icons-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress, Button } from '@kousum/semi-ui-vue';
 import { IconChevronLeft, IconChevronRight } from '@kousum/semi-icons-vue';
 
@@ -213,7 +213,7 @@ You can customize the central text by passing `format` function, and the argumen
 If you don't need central text content, you can set `showInfo` to false or return an empty string directly in `format`
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (
@@ -230,7 +230,7 @@ import { Progress } from '@kousum/semi-ui-vue';
 With the `strokeLinecap` property, you can control the edge shape of the ring progress bar.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Progress } from '@kousum/semi-ui-vue';
 
 () => (

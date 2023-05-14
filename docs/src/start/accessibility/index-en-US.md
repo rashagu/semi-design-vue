@@ -7,6 +7,18 @@ order: 6
 brief: Accessible design is about making it easy for everyone to interact with products, including those with disabilities, to provide a better experience for everyone. The Semi design system is designed to remove barriers and create inclusive product experiences that work for all.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Accessibility-specific themes
 Semi has customized a set of accessibility friendly themes [@semi-bot/semi-theme-a11y](https://semi.design/dsm_store/theme?dsmID=2243)  
 Compared with the default theme, the A11y theme increases the contrast of each color of the basic color wheel, and increases the font size of the font token. If there is a higher requirement for contrast, this theme is recommended.   
@@ -97,7 +109,7 @@ We provide a way to provide a text-based alternative to all images, icons, and S
 
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (

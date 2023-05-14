@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 72
 category: 反馈类
@@ -7,6 +8,18 @@ icon: doc-spin
 brief: 加载器组件用于告知用户内容正在加载且需要一段不确定的时长。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -18,7 +31,7 @@ import { Spin } from '@kousum/semi-ui-vue';
 ### 基本用法
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Spin } from '@kousum/semi-ui-vue';
 
 () => (
@@ -34,7 +47,7 @@ import { Spin } from '@kousum/semi-ui-vue';
 组件定义了三种尺寸：大、中（默认）、小。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Spin } from '@kousum/semi-ui-vue';
 
 () => (
@@ -58,7 +71,7 @@ import { Spin } from '@kousum/semi-ui-vue';
 通过 `tip` 属性可设置当 Spin 用作包裹元素时的文字。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Spin } from '@kousum/semi-ui-vue';
 
 () => (
@@ -84,7 +97,7 @@ import { Spin } from '@kousum/semi-ui-vue';
 可以通过设置 `indicator` 属性自定义 Spin 的指示符样式。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Spin } from '@kousum/semi-ui-vue';
 import { IconLoading } from '@kousum/semi-icons-vue';
 

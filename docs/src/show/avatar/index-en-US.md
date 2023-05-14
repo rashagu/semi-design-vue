@@ -8,7 +8,18 @@ icon: doc-avatar
 brief: Avatar, used for image or text display.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -21,7 +32,7 @@ import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 You can change the size of the avatars with `size` property. The following sizes are supported:  `extra-extra-small`(20x20), `extra-small`(24x24),`small`(32x32), `default`(40x40), `medium`(48x48), `large`(72x72), `extra-large`(128 x 128).
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
@@ -54,7 +65,7 @@ import { Avatar } from '@kousum/semi-ui-vue';
 Avatars support 16 colors including `white`, `amber`, `blue`, `cyan`, `green`, `grey`, `indigo`, `light-blue`, `light-green`, `lime`, `orange`, `pink`, `purple`, `red`, `teal`, `violet`, and `yellow`. You can also use the `style` prop to customize styles. The default color is`grey`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
@@ -77,7 +88,7 @@ import { Avatar } from '@kousum/semi-ui-vue';
 Image avatars can be created by using the `src` or `srcSet` prop.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
@@ -102,7 +113,7 @@ import { Avatar } from '@kousum/semi-ui-vue';
 Avatars support two shapes: `circle` and `square`. The shape is default to `circle`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 
 () => (
@@ -121,7 +132,7 @@ Avatars support `onClick`,`onMouseEnter`,`onMouseLeave`. You can use the `hoverM
 The overlay has no default style.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 import { IconCamera } from '@kousum/semi-icons-vue';
 
@@ -153,10 +164,10 @@ import { IconCamera } from '@kousum/semi-icons-vue';
 You can use `AvatarGroup` component to display avatars as a group.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 
-import React from 'react';
+import { h } from 'vue';
 import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 
 () => (
@@ -174,7 +185,7 @@ import { AvatarGroup, Avatar } from '@kousum/semi-ui-vue';
 
 You can set the number of avatars to display with `maxCount` property.
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 
 () => (
@@ -192,7 +203,7 @@ import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 
 You can customize the more tag with `renderMore`.
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar, AvatarGroup, Popover } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -230,7 +241,7 @@ function Demo() {
 
 You can set the coverage direction of the avatars with `overlapFrom`. It has two optional values A and B. The default value is `start`.
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 
 () => (
@@ -261,6 +272,18 @@ import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ### Avatar
 
 | Properties   | Instructions                                                                                                                                                                              | type           | Default  |
@@ -296,7 +319,7 @@ import { Avatar, AvatarGroup } from '@kousum/semi-ui-vue';
 - When Avatar is used in combination with other components, also check the accessibility guidelines for that component.
 - Avatar's `alt` attribute can be read by screen readers, when using the avatar component, please use the `alt` attribute to explain the content of the image.
 ```jsx
-import React from 'react';
+import { h } from 'vue';
 import { Avatar } from '@kousum/semi-ui-vue';
 
 () => {

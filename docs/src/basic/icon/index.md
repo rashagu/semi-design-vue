@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 14
 category: 基础
@@ -6,6 +7,19 @@ title:  Icon 图标
 icon: doc-icons
 brief: 语义化的矢量图形。
 ---
+
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 
 ## 图标列表
 ```icon
@@ -23,7 +37,7 @@ import Icon, { IconHome } from '@kousum/semi-icons-vue';
 从`@kousum/semi-icons-vue`包中引入图标
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { IconHome } from '@kousum/semi-icons-vue';
 
 () => <IconHome />;
@@ -35,7 +49,7 @@ import { IconHome } from '@kousum/semi-icons-vue';
 从`@kousum/semi-icons-vue`包中引入图标，自带尺寸、旋转、spin功能
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { IconHome, IconEmoji, IconSpin } from '@kousum/semi-icons-vue';
 
 () => (
@@ -57,7 +71,7 @@ Icon组件封装了size属性，可以更方便地定义图标尺寸，支持 `e
 
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { IconSearch, IconHelpCircle, IconAlertCircle, IconMinusCircle, IconPlusCircle, IconPlus, IconRefresh } from '@kousum/semi-icons-vue';
 
 () => {
@@ -76,7 +90,7 @@ import { IconSearch, IconHelpCircle, IconAlertCircle, IconMinusCircle, IconPlusC
 你还可以通过给 Icon 设置 style props 来修改图标的颜色。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { IconLikeHeart, IconFlag, IconLock, IconUnlock } from '@kousum/semi-icons-vue';
 
 () => (
@@ -99,7 +113,7 @@ import { IconLikeHeart, IconFlag, IconLock, IconUnlock } from '@kousum/semi-icon
 Icon组件支持size、rotate、spin等属性
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Icon } from '@kousum/semi-ui-vue';
 
 () => {
@@ -168,7 +182,7 @@ import StarIcon from './star.svg';
 - Icon 组件 role 为 img，它的 aria-label 默认为组件的文件名。例如 IconHome 的 aria-label 为 `home`，如果你有更好的语义化名字，可以通过 aria-label 传入。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { IconHome } from '@kousum/semi-icons-vue';
 
 () => <IconHome aria-label="back to homepage" />;

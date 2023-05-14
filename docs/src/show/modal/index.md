@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 58
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-modal
 brief: 模态对话框用于等待用户响应、告知用户重要信息或在不丢失上下文的情况下展示更多信息
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -18,7 +31,7 @@ import { Modal } from '@kousum/semi-ui-vue';
 ### 基本
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -63,7 +76,7 @@ import { Modal, Button } from '@kousum/semi-ui-vue';
 修改 `maskClosable` 为 `false` 则不可通过点击遮罩层来关闭对话框。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
@@ -116,7 +129,7 @@ class modalDemo extends React.Component {
 注意：命令式调用的 Modal 需要通过这两个属性来设置 i18 的文本，因为我们无法修改 React 组件树，命令式调用插入的 Component 无法消费到 Locale 相关的 Context
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
@@ -168,7 +181,7 @@ class modalDemo extends React.Component {
 通过设置 `okButtonProps` 与 `cancelButtonProps` 属性可自定义按钮的属性。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
@@ -220,7 +233,7 @@ class modalDemo extends React.Component {
 如果需要实现更丰富的个性化需求，可以通过 `header` 自定义头部，`footer` 自定义页脚的按钮。把 `header` 设为 `null`时则不展示头部区域；不需要显示任何按钮时，同样可以把 `footer` 设为 `null`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
@@ -275,7 +288,7 @@ class modalDemo extends React.Component {
 通过设置 `style` 可以自定义样式及位置如 `style.top`，也可以通过 `centered` 使对话框居中显示。也可以通过设置 `maskStyle` 自定义遮罩样式，及 `bodyStyle` 自定义对话框内容样式。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 class modalDemo extends React.Component {
@@ -347,7 +360,7 @@ class modalDemo extends React.Component {
 通过灵活使用使用 `header`，`footer`等属性可以实现一个完全自定义的对话框。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button, List } from '@kousum/semi-ui-vue';
 import { IconVigoLogo, IconSemiLogo } from '@kousum/semi-icons-vue';
 
@@ -446,7 +459,7 @@ class modalDemo extends React.Component {
 使用 `fullScreen={true}` 可以开启全屏对话框
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -471,7 +484,7 @@ import { Modal, Button } from '@kousum/semi-ui-vue';
 使用 `confirm()` 可以设置一个确认框。支持各种类型的信息提示。命令式调用也可以自定义 icon , 支持 string 和 ReactNode 类型。其他 Modal 支持的 props 都可以传入。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Modal, Button } from '@kousum/semi-ui-vue';
 import { IconSend } from '@kousum/semi-icons-vue';
 
@@ -540,7 +553,7 @@ ModalComponent = function(props) {
 通过 Modal.useModal 创建支持读取 context 的 contextHolder。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { ConfigProvider, Button, Modal } from '@kousum/semi-ui-vue';
 import en_GB from '@kousum/semi-ui-vue/lib/es/locale/source/en_GB';
 

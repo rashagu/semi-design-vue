@@ -8,6 +8,18 @@ icon: doc-rating
 brief: Ratings provide insight regarding others’ opinions and experiences with a product.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -22,7 +34,7 @@ Support two sizes: `default`, `small`.
 **v >= 0.35.0** supports customized size if pass in a number. Refer to [Customize](#Customize)
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
@@ -40,7 +52,7 @@ import { Rating } from '@kousum/semi-ui-vue';
 Use `allowHalf` to support selection of half stars. After `v0.28.0`, it also supports to **display** decimals ratings other than 0.5.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
@@ -57,7 +69,7 @@ import { Rating } from '@kousum/semi-ui-vue';
 Use `disabled` to disabled interaction.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
@@ -70,7 +82,7 @@ import { Rating } from '@kousum/semi-ui-vue';
 `allowClear` Property allows you to clear the value when you click on the component again. By default it is set to `true`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Rating } from '@kousum/semi-ui-vue';
 
 () => (
@@ -92,7 +104,7 @@ import { Rating } from '@kousum/semi-ui-vue';
 Use `tooltips` to add description to Rating.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Rating } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -130,7 +142,7 @@ You can customize characters, numbers of rating and size.
 > **v >= 0.35.0** Note that customized size could only work with customized characters.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Rating } from '@kousum/semi-ui-vue';
 import { IconLikeHeart } from '@kousum/semi-icons-vue';
 

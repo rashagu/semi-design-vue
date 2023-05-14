@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 37
 category: 导航类
@@ -7,7 +8,18 @@ icon: doc-anchor
 brief: 创建超链接导航栏。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -20,7 +32,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 使用 Link 可以创建锚点，点击它会跳转到指定位置。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => (
@@ -47,7 +59,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 -   偏移距离：`offsetTop` 可以在滚动内容距离容器顶部达到指定偏移量时触发当前 Link 切换。
 
 ```jsx
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -84,7 +96,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 Anchor 设置 `size` 可以控制锚点的尺寸。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => (
@@ -98,7 +110,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => (
@@ -116,7 +128,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 Anchor 设置 `railTheme` 可以控制滑轨的主题色。默认值为 `primary`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -143,7 +155,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -170,7 +182,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -201,7 +213,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 Anchor 设置 `autoCollapse` 可以动态展示下一级锚点。默认值为 `false`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -232,7 +244,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -267,7 +279,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 Anchor 设置 `showTooltip` 可以在 Link 超出最大宽度时显示 Link 的文字内容。默认值为 `false`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -298,7 +310,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
 Anchor 设置 `position` 可以设置Tooltip的显示位置。它仅在 `showTooltip` 为 `true` 时起作用。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Anchor } from '@kousum/semi-ui-vue';
 
 () => {
@@ -374,7 +386,7 @@ import { Anchor } from '@kousum/semi-ui-vue';
     - 可以，可能是滚动容器设置不正确，确保文档内容被包裹在滚动容器内。滚动容器默认为 window，如果你的容器是 .my-container 的 div，则应该将滚动容器设置为该 div。
     
     ```text
-    import React from 'react';
+    import { h } from 'vue';
     import { Anchor } from '@kousum/semi-ui-vue';
 
     function() {

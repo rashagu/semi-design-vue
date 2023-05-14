@@ -8,6 +8,18 @@ order: 11
 brief: Based on Semi design language, React UI desktop component library that can be debugged online, helps developers build applications efficiently.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Basic
 
 ```overview

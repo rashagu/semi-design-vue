@@ -9,6 +9,18 @@ dir: column
 brief: Placeholder component when the page is empty.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -24,7 +36,7 @@ By setting a placeholder image with `image`, you can manually import the corresp
 After **v>=1.13.0**, a series of dark mode illustrations are added, and the illustrations that need to be used in dark mode can be passed in through `darkModeImage` to better adapt to the dark mode.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Empty } from '@kousum/semi-ui-vue';
 import { IllustrationConstruction, IllustrationConstructionDark } from '@douyinfe/semi-illustrations';
 
@@ -43,7 +55,7 @@ import { IllustrationConstruction, IllustrationConstructionDark } from '@douyinf
 Custom description content can be achieved through `children`.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Empty, Button } from '@kousum/semi-ui-vue';
 import { IllustrationNoContent, IllustrationNoContentDark } from '@douyinfe/semi-illustrations';
 
@@ -69,7 +81,7 @@ import { IllustrationNoContent, IllustrationNoContentDark } from '@douyinfe/semi
 It is not necessary to use pictures.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Empty, Typography } from '@kousum/semi-ui-vue';
 
 () => (
@@ -90,7 +102,7 @@ import { Empty, Typography } from '@kousum/semi-ui-vue';
 Two types of layouts are supported: `vertical`, `horizontal`. The default is `vertical`.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Empty, Button } from '@kousum/semi-ui-vue';
 import { IllustrationSuccess, IllustrationSuccessDark } from '@douyinfe/semi-illustrations';
 
@@ -117,7 +129,7 @@ Currently the following illustrations are supported in `@douyinfe/semi-illustrat
 > As the illustration library is still under construction, please keep an eye on possible changes in the future.
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Empty } from '@kousum/semi-ui-vue';
 import { IllustrationConstruction, IllustrationSuccess, IllustrationFailure, IllustrationNoAccess, IllustrationNoContent, IllustrationNotFound, IllustrationNoResult } from '@douyinfe/semi-illustrations';
 

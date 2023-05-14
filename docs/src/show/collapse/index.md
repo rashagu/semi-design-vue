@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 50
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-accordion
 brief: 可以展开或折叠展示内容区域。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -20,7 +33,7 @@ import { Collapse } from '@kousum/semi-ui-vue';
 可以同时展开多个面板，可以通过 `defaultActiveKey` 设置默认展开的面板。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
@@ -43,7 +56,7 @@ import { Collapse } from '@kousum/semi-ui-vue';
 可以通过设置 `accordion` 使每次只允许展开一个面板。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
@@ -66,7 +79,7 @@ import { Collapse } from '@kousum/semi-ui-vue';
 可以通过设置 `disabled` 禁用面板。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
@@ -89,7 +102,7 @@ import { Collapse } from '@kousum/semi-ui-vue';
 可以通过设置 `showArrow` 隐藏面板展开/收起图标。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Collapse } from '@kousum/semi-ui-vue';
 
 () => (
@@ -112,7 +125,7 @@ import { Collapse } from '@kousum/semi-ui-vue';
 可以通过 `expandIcon` 设置展开图标，`collapseIcon` 设置折叠图标。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Collapse } from '@kousum/semi-ui-vue';
 import { IconPlus, IconMinus } from '@kousum/semi-icons-vue';
 
@@ -138,7 +151,7 @@ import { IconPlus, IconMinus } from '@kousum/semi-icons-vue';
 **仅在 header 为 string 时生效， 如果 header 为 ReactNode 会包含 extra 所在的区域，可以自行渲染**
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Collapse, Tag } from '@kousum/semi-ui-vue';
 import { IconCopy } from '@kousum/semi-icons-vue';
 
@@ -228,7 +241,7 @@ import { IconCopy } from '@kousum/semi-icons-vue';
     可以在自定义元素的 onClick 事件回调中，阻止事件冒泡至 Collapse.Header 即可。若自定义元素未提供 event 对象，再包裹一层 div，于 div onClick 中阻止冒泡亦可。
 
 ```jsx
-import React from 'react';
+import { h } from 'vue';
 import { Collapse, Input } from '@kousum/semi-ui-vue';
 
 () => (

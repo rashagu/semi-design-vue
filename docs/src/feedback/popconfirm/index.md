@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 69
 category: 反馈类
@@ -7,6 +8,18 @@ icon: doc-popconfirm
 brief: 目标元素的操作需要用户进一步的确认时使用。与 Popover 相比它内置了一系列可配置的操作按钮，与 Modal 相比它不强制全屏居中显示，交互也更轻量
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -20,7 +33,7 @@ import { Popconfirm } from '@kousum/semi-ui-vue';
 Popconfirm 底层基于 Tooltip 封装，Children 支持类型同 Tooltip，注意事项详情可查阅 [Tooltip注意事项](/zh-CN/show/tooltip#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popconfirm, Button, Toast } from '@kousum/semi-ui-vue';
 
 () => {
@@ -116,7 +129,7 @@ onOk、onCancel 可以通过 return Promise 实现点击后延时关闭 （v2.19
 promise solve 会关闭气泡确认框， promise reject时气泡依然保留，同时 button loading 自动切换为 false
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popconfirm, Button, Toast } from '@kousum/semi-ui-vue';
 
 () => {
@@ -158,7 +171,7 @@ okButtonProps 和 cancelButtonProps 支持传入 `autoFocus` 参数，传入后�
 content 支持传入函数，它的入参是一个对象，将 `initialFocusRef` 绑定在可聚焦 DOM 或组件上，打开面板时会自动聚焦在该位置。2.30.0 版本支持。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Button, Popconfirm, Space } from '@kousum/semi-ui-vue';
 
 () => {

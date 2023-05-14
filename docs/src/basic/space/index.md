@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 17
 category: 基础
@@ -7,6 +8,18 @@ icon: doc-space
 brief: 设置组件之间的间距。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -17,7 +30,7 @@ import { Space } from '@kousum/semi-ui-vue';
 ### 基本用法
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Space, Button, Switch } from '@kousum/semi-ui-vue';
 
 () => (
@@ -34,7 +47,7 @@ import { Space, Button, Switch } from '@kousum/semi-ui-vue';
 可使用 `align` 设置对齐方式，可选值：`start`、`center`（默认）、`end`、`baseline`。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Space, Button, Tag } from '@kousum/semi-ui-vue';
 
 () => {
@@ -80,7 +93,7 @@ import { Space, Button, Tag } from '@kousum/semi-ui-vue';
 可使用 `spacing` 设置间距大小，内置可选值：`tight`（8px，默认）、`medium`（16px）、`loose`（24px），并且支持传入 number 来自定义间距大小，也支持传入 array 来同时设置水平和垂直方向的间距。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Space, Tabs, TabPane, Button } from '@kousum/semi-ui-vue';
 
 () => (
@@ -132,7 +145,7 @@ import { Space, Tabs, TabPane, Button } from '@kousum/semi-ui-vue';
 可使用 `vertical` 设置间距是否为垂直方向，默认情况下为 false。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Space, Button } from '@kousum/semi-ui-vue';
 
 () => (
@@ -150,7 +163,7 @@ import { Space, Button } from '@kousum/semi-ui-vue';
 当间距为水平方向时，可使用 `wrap` 设置是否自动换行，默认情况下为 false。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Space, Button } from '@kousum/semi-ui-vue';
 
 () => (

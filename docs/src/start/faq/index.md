@@ -2,10 +2,23 @@
 category: 开始
 title: FAQ 常见问题
 icon: doc-faq
+outline: deep
 localeCode: zh-CN
 order: 10
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 #### Semi 提供了 Figma UI Kit，考虑提供 Sketch 或基于其他设计工具的版本吗？
 - 目前没有这方面的计划，具体原因请参考 [Issue 74](https://github.com/DouyinFE/semi-design/issues/74)
 

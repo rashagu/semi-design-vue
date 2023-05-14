@@ -8,6 +8,18 @@ icon: doc-tabs
 brief: When the content needs to be grouped and displayed in different modules or pages, you could use Tabs to switch between different groups or pages
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -23,7 +35,7 @@ Tbs supports three types of styles: `line`, `button`, and `card`. By default, th
 > When you use `tabList`, only the current active tab will be rendered. For `<TabPane>`, all tabs will be rendered in DOM tree by default. You could set `keepDOM={false}` to only render current panel. No animation will be displayed in this case.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -102,7 +114,7 @@ class App extends React.Component {
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -125,7 +137,7 @@ class App extends React.Component {
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs } from '@kousum/semi-ui-vue';
 
 class TabDemo extends React.Component {
@@ -165,7 +177,7 @@ class TabDemo extends React.Component {
 ### With Icon
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 import { IconFile, IconGlobe, IconHelpCircle } from '@kousum/semi-icons-vue';
 
@@ -217,7 +229,7 @@ class App extends React.Component {
 Support two positions: `tabPosition='left|top'`
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane, Radio, RadioGroup } from '@kousum/semi-ui-vue';
 import { IconFile, IconGlobe, IconHelpCircle } from '@kousum/semi-icons-vue';
 
@@ -299,7 +311,7 @@ class App extends React.Component {
 You could use `collapsible` for a scrollable tabs with dropdown menu. Horizontal mode only.
 
 ```jsx live=true dir=column
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -322,7 +334,7 @@ class App extends React.Component {
 Disable one tab.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -349,7 +361,7 @@ class App extends React.Component {
 Use `tabBarExtraContent` to add extra content on the right side of tabBar.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -387,7 +399,7 @@ class App extends React.Component {
 Use `renderTabBar` to customize tabBar render behavior.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -424,7 +436,7 @@ class App extends React.Component {
 You can add events to update tabBar dynamically.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -491,7 +503,7 @@ Close a tab in the tab bar.
 Only card style tabs support the close option. Use `closable={true}` to turn it on.
 
 ```jsx live=true 
-import React from 'react';
+import { h } from 'vue';
 import { Tabs, TabPane } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {

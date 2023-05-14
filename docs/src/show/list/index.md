@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 57
 category: 展示类
@@ -9,6 +10,18 @@ noInline: true
 brief: 基础列表组件
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -22,7 +35,7 @@ import { List } from '@kousum/semi-ui-vue';
 列表的基本用法。可以通过 size 设置尺寸，支持`large`, `default`, `small`。可设置 header 和 footer，来自定义列表头部和尾部。
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { List } from '@kousum/semi-ui-vue';
 
 class SimpleList extends React.Component {
@@ -81,7 +94,7 @@ render(SimpleList);
 列表的 List.Item 内置了简单的结构包含：header，main 和 extra 。其中 header 和 main 的对齐方式可以通过 align 属性设置，支持 `flex-start`（默认）, `flex-end`, `center`, `baseline`, 和 `stretch` 。
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { List, Avatar, ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
 class ContentList extends React.Component {
@@ -149,7 +162,7 @@ render(ContentList);
 通过 layout 属性可以设置列表的布局，支持`vertical`（默认）和`horizontal`。
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { List, Avatar } from '@kousum/semi-ui-vue';
 
 class LayoutList extends React.Component {
@@ -203,7 +216,7 @@ render(LayoutList);
 通过 grid 属性可以实现栅格列表，`span` 可设置每项的占格数，`gutter`可设置栅格间隔。
 
 ```jsx live=true dir="column" noInline=true
-import React from 'react';
+import { h } from 'vue';
 import { List, Descriptions, ButtonGroup, Rating, Button } from '@kousum/semi-ui-vue';
 
 class LayoutList extends React.Component {
@@ -281,7 +294,7 @@ render(LayoutList);
 响应式的栅格列表。响应尺寸与 [Grid](/zh-CN/basic/grid) 保持一致。
 
 ```jsx live=true dir="column" noInline=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { List, Descriptions, Rating, Button, ButtonGroup } from '@kousum/semi-ui-vue';
 
 class Responsive extends React.Component {
@@ -375,7 +388,7 @@ render(Responsive);
 可通过 loadMore 属性实现加载更多的功能。
 
 ```jsx live=true dir="column" noInline=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { List, Skeleton, Button, Avatar } from '@kousum/semi-ui-vue';
 
 class LoadMoreList extends React.Component {
@@ -500,7 +513,7 @@ render(LoadMoreList);
 可以通过集成 [react-infinite-scroller](https://github.com/CassetteRocks/react-infinite-scroller) 来实现滚动加载的列表。交互建议符合 semi 交互设计规范，这里采用三次滚加载后出现 load more 按钮的形式。
 
 ```jsx live=true dir="column" noInline=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { List, Button, Avatar, Spin } from '@kousum/semi-ui-vue';
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -621,7 +634,7 @@ render(ScrollLoad);
 可以通过集成 [react-virtualized](https://github.com/bvaughn/react-virtualized) 实现滚动加载无限长列表，带有虚拟化（virtualization）功能，能够提高数据量大时候长列表的性能。
 
 ```jsx live=true dir="column" noInline=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { List, Avatar } from '@kousum/semi-ui-vue';
 import { InfiniteLoader, AutoSizer } from 'react-virtualized';
 import VList from 'react-virtualized/dist/commonjs/List';
@@ -761,7 +774,7 @@ render(VirtualizedScroll);
 可以通过集成 [react-dnd](https://github.com/react-dnd/react-dnd) 来实现拖拽排序。
 
 ```jsx live=true dir="column" noInline=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { List, Avatar } from '@kousum/semi-ui-vue';
 import { DndProvider, DragSource, DropTarget } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';

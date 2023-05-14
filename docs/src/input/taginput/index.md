@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 32
 category: 输入类
@@ -7,6 +8,18 @@ icon: doc-tagInput
 brief: 标签输入框能够将输入的内容生成标签。
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -19,7 +32,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 敲击回车键后，输入内容将成为标签。标签内容如果为空串或者纯空格时，则会被过滤。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -36,7 +49,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 可以使用 `separator` 设置分隔符，来实现批量输入，它的默认值为英文逗号。1.29.0 版本后支持多个分隔符以 string[] 格式传入。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -61,7 +74,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 可使用 `showClear` 设置是否支持一键删除所有标签和输入框内容。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -77,7 +90,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 ### 禁用
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -95,7 +108,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 通过 `size` 控制标签输入框的大小尺寸，可选: `small` 、 `default` 、 `large`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -114,7 +127,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 可以使用 `validateStatus` 设置不同校验状态的样式，它仅影响背景颜色等样式表现，可选值: `default` 、 `warning` 、 `error`。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -134,7 +147,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 当 `prefix`、`suffix` 传入的内容为 string 或者 Icon 时，会自动带上左右间隔；若为自定义 ReactNode，则左右间隔为 0，如需可以在你传入的 ReactNode中自行设置。  
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 import { IconVigoLogo, IconGift } from '@kousum/semi-icons-vue';
 
@@ -156,7 +169,7 @@ import { IconVigoLogo, IconGift } from '@kousum/semi-icons-vue';
 可使用 `addOnBlur`，设置是否在 blur 事件触发时，将当前 input 的值自动创建成 tag。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -174,7 +187,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 可使用 `allowDuplicates`，设置是否允许创建相同 tag，默认为 true。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -194,7 +207,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 可使用 `maxLength` 限制单个标签的最大长度，超出后将不允许再输入，并且触发 `onInputExceed()` 回调。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -227,7 +240,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 利用 `maxTagCount` 可以限制展示的标签数量，超出部分将以 +N 的方式展示。使用 `showRestTagsPopover` 可以设置在超出 `maxTagCount` 后，hover +N 是否显示 `Popover`，并且可以在 `restTagsPopoverProps` 属性中配置 `Popover`。 
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -246,7 +259,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 可使用 `value` 设置标签内容，并配合 `onChange` 实现标签内容受控。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 class TagInputDemo extends React.Component {
@@ -276,7 +289,7 @@ class TagInputDemo extends React.Component {
 可使用 `inputValue` 设置输入框内容，并配合 `onInputChange` 实现输入内容受控。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 class TagInputDemo extends React.Component {
@@ -303,7 +316,7 @@ class TagInputDemo extends React.Component {
 ### 回调
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (
@@ -326,7 +339,7 @@ import { TagInput } from '@kousum/semi-ui-vue';
 可以使用 `blur()` 和 `focus()` 方法对焦点进行管理。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { TagInput, Button } from '@kousum/semi-ui-vue';
 
 class TagInputDemo extends React.Component {
@@ -358,7 +371,7 @@ class TagInputDemo extends React.Component {
 可以使用 `renderTagItem` 自定义标签渲染。 `renderTagItem(value: string, index: number, onClose: function ) => React.ReactNode` 第三个参数 `onClose` 于 2.23.0 版本开始提供。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput, Avatar } from '@kousum/semi-ui-vue';
 import { IconClose } from '@kousum/semi-ui-vue-icons';
 
@@ -416,7 +429,7 @@ class CustomRender extends React.Component {
 拖拽功能开启后，点击 TagInput，Tag 可拖拽。点击 TagInput 外任意区域，Tag 不可拖拽。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { TagInput } from '@kousum/semi-ui-vue';
 
 () => (

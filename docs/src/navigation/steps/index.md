@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 42
 category: 导航类
@@ -8,6 +9,18 @@ dir: column
 brief: 将复杂任务或存在先后关系的任务分解，使用步骤组件引导用户按规定流程操作，并让其知道其当前的进度
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -22,7 +35,7 @@ const Step = Steps.Step;
 建议使用简易版 steps（新版），旧版后续会逐渐 deprecate
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -39,7 +52,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 通过设置 type="basic" 显示为简洁风格步骤条
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -63,7 +76,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 4. Steps.Step 仅支持title、className、style 属性。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -84,7 +97,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 通过设置 size="small" 显示迷你尺寸步骤条
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -97,7 +110,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -118,7 +131,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 配合内容及按钮使用，表示一个流程的处理进度
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -194,7 +207,7 @@ class App extends React.Component {
 通过设置 `direction`，使用竖直方向的步骤条
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -207,7 +220,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -224,7 +237,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 步骤运行错误，使用 Steps 的 `status` 属性来指定当前步骤的状态。
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 () => (
@@ -242,7 +255,7 @@ import { Steps } from '@kousum/semi-ui-vue';
 通过设置 Steps.Step 的 `status` 属性，可以自定义每个 step 的状态
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 import { IconHome, IconLock } from '@kousum/semi-icons-vue';
 
@@ -262,7 +275,7 @@ import { IconHome, IconLock } from '@kousum/semi-icons-vue';
 从 1.29.0 版本开始支持 onChange，可以使用它来实现处理进度。onChange 接收一个 number 类型的参数，该参数等于 initial + current。
 
 ```jsx live=true dir="column" hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Steps } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {

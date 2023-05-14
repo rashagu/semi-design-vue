@@ -8,6 +8,18 @@ icon: doc-popover
 brief: Click / mouse to move into the element and pop up the bubble card floating layer.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## When to Use
 
 When the target element has further description and related operations, it can be included in the card and displayed according to the user's operational behavior.
@@ -74,7 +86,7 @@ render(Demo);
 ### Basic Usage
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -98,7 +110,7 @@ function Demo() {
 Support twelve directions.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -199,7 +211,7 @@ function Demo() {
 In this scenario, Popover's display is completely at the control of parameter `visible`.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popover, Button } from '@kousum/semi-ui-vue';
 
 class App extends React.Component {
@@ -253,7 +265,7 @@ Popover also supports the display of a small triangle.
 > The floating layer in this mode has a default style that you can overwrite by passing the style parameters.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -360,7 +372,7 @@ function Demo() {
 Under the condition of **showArrow=true**, you can pass in `arrowPointAtCenter=true` so that the small triangle always points to the center of the element.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -469,7 +481,7 @@ function Demo() {
 If you need to customize the background color or border color of the floating layer, please **Be sure to set `backgroundColor` and `borderColor` properties in `style` separately.** This enables the "small triangle" to apply the same background color and border color.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Popover, Tag } from '@kousum/semi-ui-vue';
 
 function Demo() {
@@ -504,7 +516,7 @@ function Demo() {
 Popover `content` also supports functions. Its input parameter is an object, which binds `initialFocusRef` to the focusable DOM or component. When the panel is opened, it will automatically focus at that position.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Button, Input, Popover, Space } from '@kousum/semi-ui-vue';
 () => {
     const renderContent = ({ initialFocusRef }) => {

@@ -8,6 +8,18 @@ icon: doc-skeleton
 brief: A placeholder preview of content before the data loaded.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Overview
 
 -   `Avatar`: Avatar placeholder, by default uses Avatar medium sizing: `width: 48px`, `height: 48px`. Supports Avatar's size (after v1.0) and shape attributes (after v2.20)
@@ -29,7 +41,7 @@ import { Skeleton } from '@kousum/semi-ui-vue';
 ### Basic Usage
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Switch, Button, Avatar } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {
@@ -93,7 +105,7 @@ class Demo extends React.Component {
 Image and caption.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton } from '@kousum/semi-ui-vue';
 
 () => {
@@ -120,7 +132,7 @@ import { Skeleton } from '@kousum/semi-ui-vue';
 Statistics.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Descriptions } from '@kousum/semi-ui-vue';
 
 () => {
@@ -144,7 +156,7 @@ import { Skeleton, Descriptions } from '@kousum/semi-ui-vue';
 Avatar and title.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -169,7 +181,7 @@ import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 Centered paragraphs and button.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -203,7 +215,7 @@ import { Skeleton, Button } from '@kousum/semi-ui-vue';
 Avatar, headline and paragraph.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 
 () => {
@@ -243,7 +255,7 @@ import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 Table.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Table } from '@kousum/semi-ui-vue';
 
 () => {
@@ -335,7 +347,7 @@ import { Skeleton, Table } from '@kousum/semi-ui-vue';
 Use `active` property to display animated loading effects.
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { Skeleton, Avatar } from '@kousum/semi-ui-vue';
 
 () => {

@@ -7,6 +7,18 @@ icon: doc-image
 brief: Used to display and preview images.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -22,7 +34,7 @@ import { Image, ImagePreview } from '@kousum/semi-ui-vue';
 You can get an image with preview function by specifying the image path through `src`, and specify the width and height of the image through `width`, `height`
 
 ```jsx live=true dir="column"
-import React from 'react';
+import { h } from 'vue';
 import { Image } from '@kousum/semi-ui-vue';
 
 () => (  
@@ -39,7 +51,7 @@ import { Image } from '@kousum/semi-ui-vue';
 You can customize the placeholder for failed loading through `fallback`, which supports string and ReactNode
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Image } from '@kousum/semi-ui-vue';
 
 () => (
@@ -67,7 +79,7 @@ import { Image } from '@kousum/semi-ui-vue';
 Large images can be progressively loaded through `placeholder`
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Image, Button } from '@kousum/semi-ui-vue';
 
 () => {
@@ -103,7 +115,7 @@ import { Image, Button } from '@kousum/semi-ui-vue';
 You can customize the preview image by setting the `src` of the Image component to be different from the `src` in the `preview` parameter
 
  ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Image } from '@kousum/semi-ui-vue';
 
 () => {

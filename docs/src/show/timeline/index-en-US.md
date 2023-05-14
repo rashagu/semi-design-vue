@@ -8,7 +8,18 @@ icon: doc-timeline
 brief: Timeline component is used to display a series of information vertically.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
 
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Demos
 
 ### How to import
@@ -20,7 +31,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 ### Basic Usage
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
@@ -37,7 +48,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 You can use `type` to set the type of a time node, using one of: `default`,`ongoing`, `success`, `warning`, `Error`. The corresponding dot will have a corresponding color.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
@@ -54,7 +65,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 You can use `dot` to customize icon, `color` to customize color or pass in `children` with style.
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 import { IconAlertTriangle } from '@kousum/semi-icons-vue';
 
@@ -75,7 +86,7 @@ Use `mode` to set the position of the timeline, using one of: `left`, `center`, 
 #### Left (default)
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
@@ -91,7 +102,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 #### Center
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
@@ -107,7 +118,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 #### Alternate
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
@@ -123,7 +134,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 #### Right
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 
 () => (
@@ -139,7 +150,7 @@ import { Timeline } from '@kousum/semi-ui-vue';
 ### DataSource
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { Timeline } from '@kousum/semi-ui-vue';
 import { IconAlertTriangle } from '@kousum/semi-icons-vue';
 

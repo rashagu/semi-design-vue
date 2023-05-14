@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 26
 category: 输入类
@@ -7,6 +8,18 @@ icon: doc-inputnumber
 brief: 通过鼠标或键盘，输入范围内的数值，与 Input 不同的是它带有针对数字场景的步进器操作区，配合 Parser 使用可以展示更复杂的内容格式
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -17,7 +30,7 @@ import { InputNumber } from '@kousum/semi-ui-vue';
 ### 基本输入框
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
@@ -42,7 +55,7 @@ import { InputNumber } from '@kousum/semi-ui-vue';
 ```
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
@@ -72,7 +85,7 @@ import { InputNumber } from '@kousum/semi-ui-vue';
 通过innerButtons，你可以将右侧的步进器隐藏进内部，仅hover时才会显示
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
@@ -83,7 +96,7 @@ import { InputNumber } from '@kousum/semi-ui-vue';
 hideButtons设为true，彻底隐藏步进器
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
@@ -94,7 +107,7 @@ import { InputNumber } from '@kousum/semi-ui-vue';
 ### 尺寸
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => (
@@ -119,7 +132,7 @@ import { InputNumber } from '@kousum/semi-ui-vue';
 > formatter 和 parser 一对方法，一般需要同时设置，否则无法正确解析值
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 () => {
@@ -156,7 +169,7 @@ import { InputNumber } from '@kousum/semi-ui-vue';
 搭配 formatter 和 onNumberChange（**>=v1.9.0**） 可以实现纯数字输入框。
 
 ```jsx live=true
-import React from 'react';
+import { h } from 'vue';
 import { InputNumber } from '@kousum/semi-ui-vue';
 
 function Demo () {

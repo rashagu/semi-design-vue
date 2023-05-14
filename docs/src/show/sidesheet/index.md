@@ -1,4 +1,5 @@
 ---
+outline: deep
 localeCode: zh-CN
 order: 62
 category: 展示类
@@ -7,6 +8,18 @@ icon: doc-sidesheet
 brief: 可从屏幕边沿滑出的浮层面板，通常用于承载二级操作页面
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## 代码演示
 
 ### 如何引入
@@ -203,7 +216,7 @@ import { SideSheet, Button } from '@kousum/semi-ui-vue';
 可以通过自定义 `title`，`footer`(v>=1.3.0) 等创建出丰富的内容样式。
 
 ```jsx live=true hideInDSM
-import React from 'react';
+import { h } from 'vue';
 import { SideSheet, Form, Button, Typography, Banner } from '@kousum/semi-ui-vue';
 
 class Demo extends React.Component {

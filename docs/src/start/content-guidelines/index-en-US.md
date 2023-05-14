@@ -7,6 +7,18 @@ order: 7
 brief: We are all keen to use Semi to create products that users like, and copywriting is the most direct communication method between products and users, and outputting correct and consistent copywriting is an indispensable part of product design.
 ---
 
+<script setup>
+import { useData } from 'vitepress';
+import DesignToken from '../../../DesignToken.vue';
+
+
+
+const { site, theme, page, frontmatter } = useData()
+</script>
+
+# {{page.title}}
+
+{{page.frontmatter.brief}}
 ## Voice and Tone
 
 ### Who will use our Guidelines and Principles?
