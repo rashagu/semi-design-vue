@@ -40,6 +40,7 @@ const StepsDemo = defineComponent<StepsDemoProps>((props, {}) => {
   )
 })
 
+// @ts-ignore
 StepsDemo.props = vuePropsType
 StepsDemo.name = 'StepsDemo'
 

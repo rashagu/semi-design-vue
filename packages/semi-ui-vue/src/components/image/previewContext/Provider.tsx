@@ -16,6 +16,7 @@ const Provider = defineComponent<{value:PreviewContextProps}>((props, {slots}) =
   return ()=>slots.default?slots.default(ConfigContext.value):null
 })
 
+// @ts-ignore
 Provider.props = vuePropsType
 
 export default Provider

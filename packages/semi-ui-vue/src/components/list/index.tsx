@@ -187,7 +187,9 @@ function ListMaker<T>() {
         }
     })
 
+// @ts-ignore
     List.props = vuePropsType
+// @ts-ignore
     List.name = 'List'
 
     return List

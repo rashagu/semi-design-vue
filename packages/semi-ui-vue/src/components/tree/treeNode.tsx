@@ -465,6 +465,7 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
   };
 });
 
+// @ts-ignore
 TreeNode.props = vuePropsType;
 TreeNode.name = 'TreeNode';
 

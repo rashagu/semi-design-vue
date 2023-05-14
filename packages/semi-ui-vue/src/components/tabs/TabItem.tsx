@@ -129,6 +129,7 @@ const TabItem = defineComponent<TabItemProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 TabItem.props = vuePropsType
 TabItem.name = 'Tabs.TabItem'
 

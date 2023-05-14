@@ -205,6 +205,7 @@ const ConfirmModal = defineComponent<ConfirmProps>((props, {}) => {
   }
 })
 
+// @ts-ignore
 ConfirmModal.props = vuePropsType
 ConfirmModal.name = 'ConfirmModal'
 

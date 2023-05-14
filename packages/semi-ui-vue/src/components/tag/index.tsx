@@ -179,6 +179,7 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
   }
 })
 
+// @ts-ignore
 Index.props = vuePropsType
 Index.name = 'Tag'
 

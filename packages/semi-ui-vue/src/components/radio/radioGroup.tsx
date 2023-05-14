@@ -259,6 +259,7 @@ const RadioGroup = defineComponent<RadioGroupProps>((props, {slots}) => {
   }
 })
 
+// @ts-ignore
 RadioGroup.props = vuePropsType
 RadioGroup.name = "RadioGroup"
 

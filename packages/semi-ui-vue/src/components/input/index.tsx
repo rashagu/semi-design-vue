@@ -597,7 +597,9 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
   };
 });
 
+// @ts-ignore
 Input.props = VuePropsType;
+// @ts-ignore
 Input.name = 'Input';
 
 // const ForwardInput = defineComponent<InputProps>((props, {slots}) => {

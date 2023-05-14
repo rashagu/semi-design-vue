@@ -47,6 +47,7 @@ const FormDemo = defineComponent<ExampleProps>((props, { attrs }) => {
   );
 });
 
+// @ts-ignore
 FormDemo.props = vuePropsType;
 FormDemo.name = 'FormDemo';
 

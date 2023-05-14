@@ -85,6 +85,7 @@ const ColumnSorter = defineComponent<ColumnSorterProps>((props, {}) => {
     };
 });
 
+// @ts-ignore
 ColumnSorter.props = vuePropsType;
 ColumnSorter.name = "ColumnSorter";
 

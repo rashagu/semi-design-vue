@@ -148,6 +148,7 @@ const Group = defineComponent<TagGroupProps>((props, {slots}) => {
   }
 })
 
+// @ts-ignore
 Group.props = vuePropsType
 
 export default Group

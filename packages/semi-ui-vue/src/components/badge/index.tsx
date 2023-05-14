@@ -93,7 +93,9 @@ const Badge = defineComponent<BadgeProps>((props, {}) => {
   };
 });
 
+// @ts-ignore
 Badge.props = vuePropsType;
+// @ts-ignore
 Badge.name = 'Badge';
 
 export default Badge;

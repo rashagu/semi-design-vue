@@ -121,6 +121,7 @@ const TabPane = defineComponent<TabPaneProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 TabPane.props = vuePropsType
 TabPane.name = 'TabPane'
 TabPane.isTabPane = true

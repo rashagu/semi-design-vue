@@ -15,6 +15,7 @@ const Provider = defineComponent<{value:FormState}>((props, {slots}) => {
   return ()=>slots.default?slots.default(ConfigContext.value):null
 })
 
+// @ts-ignore
 Provider.props = vuePropsType
 Provider.name = "FormStateContextProvider"
 

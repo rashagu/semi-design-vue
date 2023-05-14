@@ -121,7 +121,9 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
   }
 })
 
+// @ts-ignore
 Index.props = vuePropsType
+// @ts-ignore
 Index.name = 'Portal'
 export default Index
 

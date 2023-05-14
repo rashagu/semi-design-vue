@@ -106,6 +106,7 @@ const NodeList = defineComponent<NodeListProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 NodeList.props = vuePropsType
 NodeList.name = 'NodeList'
 

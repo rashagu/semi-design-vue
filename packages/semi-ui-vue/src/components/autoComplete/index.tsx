@@ -516,9 +516,12 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
             );
         }
     })
+// @ts-ignore
     AutoComplete.props = vuePropsType_
+// @ts-ignore
     AutoComplete.name = 'AutoComplete'
 
+// @ts-ignore
     return AutoComplete
 }
 

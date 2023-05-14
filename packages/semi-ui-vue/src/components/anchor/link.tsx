@@ -175,7 +175,9 @@ const Link = defineComponent<LinkProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 Link.props = vuePropsType
+// @ts-ignore
 Link.name = 'Link'
 
 export default Link

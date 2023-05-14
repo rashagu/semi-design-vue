@@ -66,6 +66,7 @@ const Icon = defineComponent<IconProps>((props, {slots}) => {
 
 })
 
+// @ts-ignore
 Icon.props = vuePropsType
 
 
@@ -102,6 +103,7 @@ const ConvertIcon = defineComponent<convertIconType>((props, {slots}) => {
     )
   }
 })
+// @ts-ignore
 ConvertIcon.props = {
   ...vuePropsType,
   svg:Object,

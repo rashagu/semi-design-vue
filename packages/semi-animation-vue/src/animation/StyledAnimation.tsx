@@ -65,7 +65,8 @@ export const vuePropsType = {
   duration: [Number, String],
   fillMode: String,
 }
-const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) => {
+const StyledAnimation = defineComponent<StyledAnimationProps>(
+  (props, {slots}) => {
   // 在keep-alive = true时  相当于 onShow
   onActivated(() => {
 
@@ -153,12 +154,13 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
   //     return slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
   //   }
   // };
-})
+},
+)
 
+// @ts-ignore
 StyledAnimation.props = vuePropsType
 
 export default StyledAnimation
-
 
 
 

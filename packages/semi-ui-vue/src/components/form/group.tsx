@@ -188,6 +188,7 @@ const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 FormInputGroup.props = vuePropsType
 FormInputGroup.name = 'FormInputGroup'
 

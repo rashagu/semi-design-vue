@@ -56,7 +56,7 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
       htmlType,
       ...attr
     } = props;
-    
+
     const baseProps = {
       type: htmlType,
       ...attr,
@@ -150,6 +150,7 @@ export const vuePropsType = {
   }
 }
 
+// @ts-ignore
 Button.props = vuePropsType
 
 export default Button

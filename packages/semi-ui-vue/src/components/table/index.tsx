@@ -39,7 +39,9 @@ function Table<RecordType extends Record<string, any> = Data>() {
     };
   });
 
+// @ts-ignore
   Table.props = vuePropsType;
+// @ts-ignore
   Table.name = "TableIndex";
   return Table
 }

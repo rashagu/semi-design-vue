@@ -211,6 +211,7 @@ const ListDemo = defineComponent<ListDemoProps>((props, {}) => {
   )
 })
 
+// @ts-ignore
 ListDemo.props = vuePropsType
 ListDemo.name = 'ListDemo'
 

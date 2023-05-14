@@ -13,6 +13,7 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "suppressImplicitAnyIndexErrors": true,
+    "ignoreDeprecations":"5.0",
     "strictNullChecks": false,
     "sourceMap": true,
     "declaration": true,

@@ -53,6 +53,7 @@ export const vuePropsType = {
   },
 }
 
+// @ts-ignore
 ButtonGroup.props = vuePropsType
 
 export default ButtonGroup

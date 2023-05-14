@@ -75,6 +75,7 @@ const Meta = defineComponent<MetaProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 Meta.props = vuePropsType
 Meta.name = 'Meta'
 

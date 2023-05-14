@@ -96,6 +96,9 @@ export const VuePropsType = {
   name: String
 }
 
+
+
+
 const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   // const a= ref(0)
@@ -211,8 +214,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   )
 })
 
-
+// @ts-ignore
 App.props = VuePropsType
+// @ts-ignore
 App.name = 'App'
 
 export default App

@@ -133,6 +133,7 @@ const Empty = defineComponent<EmptyProps>((props, ) => {
   }
 })
 
+// @ts-ignore
 Empty.props = vuePropsType
 
 export default Empty

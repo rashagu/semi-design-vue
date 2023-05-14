@@ -93,6 +93,7 @@ const NavStep = defineComponent<NavStepProps>((props, {}) => {
   };
 });
 
+// @ts-ignore
 NavStep.props = vuePropsType;
 NavStep.name = 'NavStep';
 

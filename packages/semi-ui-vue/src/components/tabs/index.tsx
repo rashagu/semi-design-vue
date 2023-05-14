@@ -345,6 +345,7 @@ const Tabs = defineComponent<TabsProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 Tabs.props = vuePropsType
 Tabs.name = 'Tabs'
 

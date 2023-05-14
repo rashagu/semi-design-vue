@@ -146,6 +146,7 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
 })
 
 
+// @ts-ignore
 Index.props = VuePropsType
 Index.name = 'Spin'
 

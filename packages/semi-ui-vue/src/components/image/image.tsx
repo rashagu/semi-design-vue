@@ -259,8 +259,11 @@ const Image = defineComponent<ImageProps>((props, {}) => {
   }
 })
 
+// @ts-ignore
 Image.props = vuePropsType
+// @ts-ignore
 Image.name = 'Image'
+// @ts-ignore
 Image.isSemiImage = true
 
 export default Image

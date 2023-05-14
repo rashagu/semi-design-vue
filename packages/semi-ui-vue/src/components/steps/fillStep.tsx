@@ -151,6 +151,7 @@ const FillStep = defineComponent<FillStepProps>((props, {}) => {
   }
 })
 
+// @ts-ignore
 FillStep.props = vuePropsType
 FillStep.name = 'FillStep'
 

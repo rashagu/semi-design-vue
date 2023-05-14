@@ -47,6 +47,7 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
   }
 })
 
+// @ts-ignore
 TabsDemo.props = vuePropsType
 TabsDemo.name = 'TabsDemo'
 

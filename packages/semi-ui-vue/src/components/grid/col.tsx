@@ -122,6 +122,7 @@ const Col = defineComponent<ColProps>((props, {slots}) => {
   }
 })
 
+// @ts-ignore
 Col.props = vuePropsType
 
 export default Col

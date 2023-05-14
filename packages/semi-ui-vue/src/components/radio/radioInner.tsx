@@ -185,6 +185,7 @@ const RadioInner = defineComponent<RadioInnerProps>((props, { slots }) => {
     };
 });
 
+// @ts-ignore
 RadioInner.props = vuePropsType;
 
 export default RadioInner;

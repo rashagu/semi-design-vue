@@ -416,6 +416,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
   }
 })
 
+// @ts-ignore
 Modal.props = vuePropsType
 Modal.name = 'Modal'
 

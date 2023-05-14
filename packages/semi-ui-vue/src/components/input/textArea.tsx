@@ -438,6 +438,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
 })
 
 
+// @ts-ignore
 TextArea.props = VuePropsType
 
 export default TextArea

@@ -76,6 +76,7 @@ const HookModal = defineComponent<HookModalProps>((props_, {expose}) => {
     }
 })
 
+// @ts-ignore
 HookModal.props = vuePropsType
 HookModal.name = 'HookModal'
 

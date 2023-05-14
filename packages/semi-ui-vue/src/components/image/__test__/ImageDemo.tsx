@@ -56,6 +56,7 @@ const ImageDemo = defineComponent<ImageDemoProps>((props, {}) => {
   )
 })
 
+// @ts-ignore
 ImageDemo.props = vuePropsType
 ImageDemo.name = 'ImageDemo'
 

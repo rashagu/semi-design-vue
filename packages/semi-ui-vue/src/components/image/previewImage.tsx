@@ -242,6 +242,7 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 PreviewImage.props = vuePropsType
 PreviewImage.name = 'PreviewImage'
 

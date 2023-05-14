@@ -220,6 +220,7 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
   }
 })
 
+// @ts-ignore
 Transition.props = vuePropsType
 
 export default Transition

@@ -244,6 +244,7 @@ const TabBar = defineComponent<TabBarProps>((props, {}) => {
   };
 });
 
+// @ts-ignore
 TabBar.props = vuePropsType;
 TabBar.name = 'TabBar';
 

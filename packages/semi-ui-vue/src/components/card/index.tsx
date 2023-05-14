@@ -224,6 +224,7 @@ const Card = defineComponent<CardProps>((props, {}) => {
   };
 });
 
+// @ts-ignore
 Card.props = vuePropsType;
 Card.name = 'Card';
 

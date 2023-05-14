@@ -44,7 +44,9 @@ const BacktopDemo = defineComponent<BacktopDeemoProps>((props, {}) => {
   )
 })
 
+// @ts-ignore
 BacktopDemo.props = vuePropsType
+// @ts-ignore
 BacktopDemo.name = 'BacktopDemo'
 
 export default BacktopDemo

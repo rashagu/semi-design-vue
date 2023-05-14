@@ -122,6 +122,7 @@ const InputGroup = defineComponent<InputGroupProps>((props, { slots }) => {
   };
 });
 
+// @ts-ignore
 InputGroup.props = VuePropsType;
 
 export default InputGroup;

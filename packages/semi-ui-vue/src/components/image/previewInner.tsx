@@ -449,6 +449,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
   }
 })
 
+// @ts-ignore
 PreviewInner.props = vuePropsType
 PreviewInner.name = 'PreviewInner'
 

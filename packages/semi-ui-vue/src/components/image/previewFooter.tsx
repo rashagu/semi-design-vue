@@ -286,6 +286,7 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 Footer.props = vuePropsType
 Footer.name = 'Footer'
 

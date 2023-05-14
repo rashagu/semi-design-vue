@@ -51,6 +51,7 @@ export const vuePropsType = {
     },
     fillMode: String,
 }
+// @ts-ignore
 const CSSAnimation = defineComponent<AnimationProps>((props, {}) => {
 
     const slots = useSlots()
@@ -133,7 +134,9 @@ const CSSAnimation = defineComponent<AnimationProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 CSSAnimation.props = vuePropsType
+// @ts-ignore
 CSSAnimation.name = 'CSSAnimation'
 
 export default CSSAnimation

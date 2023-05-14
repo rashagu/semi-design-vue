@@ -162,6 +162,7 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
     };
 })
 
+// @ts-ignore
 Collapse.props = vuePropsType
 Collapse.name = 'Collapse'
 

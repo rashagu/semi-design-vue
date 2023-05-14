@@ -57,6 +57,7 @@ const ModalDemo = defineComponent<ModalDemoProps>((props, {}) => {
   )
 })
 
+// @ts-ignore
 ModalDemo.props = vuePropsType
 ModalDemo.name = 'ModalDemo'
 

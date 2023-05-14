@@ -223,7 +223,9 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 Preview.props = vuePropsType
+// @ts-ignore
 Preview.name = 'Preview'
 
 export default Preview

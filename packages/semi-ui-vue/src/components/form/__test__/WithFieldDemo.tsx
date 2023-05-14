@@ -44,6 +44,7 @@ const WithFieldDemo = defineComponent<WithFieldDemoProps>((props, {}) => {
   )
 })
 
+// @ts-ignore
 WithFieldDemo.props = vuePropsType
 WithFieldDemo.name = 'WithFieldDemo'
 

@@ -64,6 +64,7 @@ const CardGroup = defineComponent<CardGroupProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 CardGroup.props = vuePropsType
 CardGroup.name = 'CardGroup'
 

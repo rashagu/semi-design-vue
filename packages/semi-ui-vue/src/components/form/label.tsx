@@ -105,6 +105,7 @@ const Label = defineComponent<LabelProps>((props, {slots}) => {
 })
 
 
+// @ts-ignore
 Label.props = VuePropsType
 Label.name = 'Label'
 

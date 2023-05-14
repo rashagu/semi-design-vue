@@ -154,6 +154,7 @@ const Row = defineComponent<RowProps>((props, {slots}) => {
   }
 })
 
+// @ts-ignore
 Row.props = vuePropsType
 Row.name = 'Row'
 

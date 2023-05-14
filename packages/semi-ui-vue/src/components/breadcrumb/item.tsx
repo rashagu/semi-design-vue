@@ -235,7 +235,9 @@ const BreadcrumbItem = defineComponent<BreadcrumbItemProps>((props, {}) => {
   }
 })
 
+// @ts-ignore
 BreadcrumbItem.props = vuePropsType
+// @ts-ignore
 BreadcrumbItem.name = 'BreadcrumbItem'
 
 export default BreadcrumbItem

@@ -287,6 +287,7 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
   }
 })
 
+// @ts-ignore
 Radio.props = vuePropsType
 
 export default Radio

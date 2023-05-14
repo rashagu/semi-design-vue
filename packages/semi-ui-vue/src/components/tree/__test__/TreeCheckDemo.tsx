@@ -87,6 +87,7 @@ const TreeCheckDemo = defineComponent<ExampleProps>((props, {}) => {
   )
 })
 
+// @ts-ignore
 TreeCheckDemo.props = vuePropsType
 TreeCheckDemo.name = 'TreeCheckDemo'
 

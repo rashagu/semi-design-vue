@@ -270,6 +270,7 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 Form.props = vuePropsType
 Form.name = 'Form'
 

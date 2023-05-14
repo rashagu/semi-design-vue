@@ -200,6 +200,7 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
   };
 })
 
+// @ts-ignore
 StyledTransition.props = vuePropsType
 
 export default StyledTransition

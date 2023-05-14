@@ -182,7 +182,9 @@ const Banner = defineComponent<BannerProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 Banner.props = vuePropsType
+// @ts-ignore
 Banner.name = 'Banner'
 
 export default Banner

@@ -408,6 +408,7 @@ const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 ModalContent.props = vuePropsType
 ModalContent.name = 'ModalContent'
 

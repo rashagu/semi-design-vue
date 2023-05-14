@@ -28,6 +28,7 @@ const WithFormStateDemo = defineComponent<WithFormStateDemoProps>((props, {}) =>
   )
 })
 
+// @ts-ignore
 WithFormStateDemo.props = vuePropsType
 WithFormStateDemo.name = 'WithFormStateDemo'
 

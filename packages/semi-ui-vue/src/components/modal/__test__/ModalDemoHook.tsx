@@ -39,6 +39,7 @@ const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
   )
 })
 
+// @ts-ignore
 ModalDemoConfirm.props = vuePropsType
 ModalDemoConfirm.name = 'ModalDemoConfirm'
 

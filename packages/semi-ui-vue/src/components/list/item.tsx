@@ -113,6 +113,7 @@ const ListItem = defineComponent<ListItemProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 ListItem.props = vuePropsType
 ListItem.name = 'ListItem'
 

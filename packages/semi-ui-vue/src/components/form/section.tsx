@@ -37,6 +37,7 @@ const Section = defineComponent<SectionProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 Section.props = vuePropsType
 Section.name = 'Section'
 

@@ -303,6 +303,7 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 Breadcrumb.props = vuePropsType
 
 export default Breadcrumb

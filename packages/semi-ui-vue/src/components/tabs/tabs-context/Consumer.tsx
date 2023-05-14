@@ -18,6 +18,7 @@ const Consumer = defineComponent(() => {
   return () => slots.default ? slots.default(context) : null
 })
 
+// @ts-ignore
 Consumer.props = vuePropsType
 
 export default Consumer

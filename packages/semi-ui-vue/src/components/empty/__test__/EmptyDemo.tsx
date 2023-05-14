@@ -29,6 +29,7 @@ const EmptyDemo = defineComponent<EmptyDemoProps>((props, {slots}) => {
   )
 })
 
+// @ts-ignore
 EmptyDemo.props = vuePropsType
 
 export default EmptyDemo

@@ -35,6 +35,7 @@ const RadioContext = defineComponent<{value:any}>((props, {slots}) => {
   return ()=>slots.default?slots.default():null
 })
 
+// @ts-ignore
 RadioContext.props = vuePropsType
 
 export default RadioContext

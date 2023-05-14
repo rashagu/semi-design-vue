@@ -97,6 +97,7 @@ const ErrorMessage = defineComponent<ErrorMessageProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 ErrorMessage.props = vuePropsType
 ErrorMessage.name = 'ErrorMessage'
 

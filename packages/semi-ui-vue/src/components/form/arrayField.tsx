@@ -193,6 +193,7 @@ const ArrayFieldComponent = defineComponent<ArrayFieldProps>((props, {}) => {
   }
 })
 
+// @ts-ignore
 ArrayFieldComponent.props = vuePropsType
 ArrayFieldComponent.name = 'ArrayFieldComponent'
 
