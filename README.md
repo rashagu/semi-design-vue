@@ -58,6 +58,8 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 # 开发
 1. 使用`typescript`,`changeSets`
 2. `node: >= 16`
+3. `vue: < 3.3`
+4. `typescript: < 5.0`
 
 
 ### 安装依赖
