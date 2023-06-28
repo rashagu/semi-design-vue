@@ -198,10 +198,11 @@ const StyledTransition = defineComponent<StyledTransitionProps>((props, {slots})
       </StyledAnimation>
     )
   };
+}, {
+  props: vuePropsType,
+  name: 'StyledTransition'
 })
 
-// @ts-ignore
-StyledTransition.props = vuePropsType
 
 export default StyledTransition
 

@@ -275,10 +275,11 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
       return null;
     }
   }
+}, {
+  props: vuePropsType,
+  name: 'Animation'
 })
 
-// @ts-ignore
-Index.props = vuePropsType
 
 export default Index
 

@@ -154,11 +154,12 @@ const StyledAnimation = defineComponent<StyledAnimationProps>(
   //     return slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
   //   }
   // };
-},
+},{
+    props: vuePropsType,
+    name: 'StyledAnimation'
+  }
 )
 
-// @ts-ignore
-StyledAnimation.props = vuePropsType
 
 export default StyledAnimation
 

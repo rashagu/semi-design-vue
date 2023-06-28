@@ -28,7 +28,7 @@
   "dependencies": {
     "@douyinfe/semi-foundation": "2.34.0",
     "@douyinfe/semi-theme-default": "2.34.0",
-    "vue": "^3.3.2",
+    "vue": "^3.3.4",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
@@ -80,7 +80,6 @@
     "sass": "^1.52.1",
     "sass-loader": "^13.0.0",
     "style-loader": "^3.3.1",
-    "typescript": "^5.0.4",
     "vue-loader": "^16.8.3",
     "camelcase": "^6.3.0",
     "jsdom": "^21.1.0",
@@ -88,8 +87,9 @@
     "svgo": "2.7.0",
     "ts-node": "^10.5.0",
     "tslib": "^2.4.1",
-    "vite": "^4.3.5",
     "vitest": "^0.28.4",
-    "vue-tsc": "^1.7.3"
+    "typescript": "^5.1.5",
+    "vite": "4.3.9",
+    "vue-tsc": "^1.8.2"
   }
 }

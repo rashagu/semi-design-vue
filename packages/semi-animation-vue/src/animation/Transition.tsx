@@ -218,10 +218,11 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
       </Animation>
     )
   }
+}, {
+  props: vuePropsType,
+  name: 'Transition'
 })
 
-// @ts-ignore
-Transition.props = vuePropsType
 
 export default Transition
 

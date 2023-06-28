@@ -64,16 +64,12 @@ const Icon = defineComponent<IconProps>((props, {slots}) => {
   </span>
   };
 
+}, {
+  props: vuePropsType,
+  name: 'Icon',
+  elementType: 'Icon'
 })
 
-// @ts-ignore
-Icon.props = vuePropsType
-
-
-
-// @ts-ignore used to judge whether it is a semi-icon in semi-ui
-// custom icon case
-Icon.elementType = 'Icon';
 
 export interface convertIconType extends IconProps{
   svg:any,
@@ -102,13 +98,15 @@ const ConvertIcon = defineComponent<convertIconType>((props, {slots}) => {
       </Icon>
     )
   }
+},{
+  props: {
+    ...vuePropsType,
+    svg:Object,
+    iconType: String,
+  },
+  name: 'ConvertIcon'
 })
-// @ts-ignore
-ConvertIcon.props = {
-  ...vuePropsType,
-  svg:Object,
-  iconType: String,
-}
+
 
 export { ConvertIcon };
 export default Icon

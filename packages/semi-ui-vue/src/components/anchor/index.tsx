@@ -370,12 +370,11 @@ const Anchor = defineComponent<AnchorProps>((props, {}) => {
           </AnchorContext.Provider>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Anchor'
 })
 
-// @ts-ignore
-Anchor.props = vuePropsType
-// @ts-ignore
-Anchor.name = 'Anchor'
 
 export {
     Link,

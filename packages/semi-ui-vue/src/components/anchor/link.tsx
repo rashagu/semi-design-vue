@@ -173,11 +173,11 @@ const Link = defineComponent<LinkProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Link'
 })
 
-// @ts-ignore
-Link.props = vuePropsType
-// @ts-ignore
-Link.name = 'Link'
+
 
 export default Link
