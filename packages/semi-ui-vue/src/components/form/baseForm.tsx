@@ -18,13 +18,14 @@ import type {
     ErrorMsg, FormFCChild
 } from './interface';
 import {
+    ComponentObjectPropsOptions,
     createVNode,
     CSSProperties,
     defineComponent,
     getCurrentInstance,
     h,
     onMounted,
-    onUnmounted,
+    onUnmounted, PropType,
     reactive,
     useSlots,
 } from "vue";
@@ -37,33 +38,33 @@ interface BaseFormState {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<BaseFormProps> = {
     'aria-label': PropTypes.string,
-    onSubmit: PropTypes.func,
-    onSubmitFail: PropTypes.func,
+    onSubmit: PropTypes.func as PropType<BaseFormProps['onSubmit']>,
+    onSubmitFail: PropTypes.func as PropType<BaseFormProps['onSubmitFail']>,
     /* Triggered from update, including field mount/unmount/value change/blur/verification status change/error prompt change, input parameter is formState, currentField */
-    onChange: PropTypes.func,
-    onReset: PropTypes.func,
+    onChange: PropTypes.func as PropType<BaseFormProps['onChange']>,
+    onReset: PropTypes.func as PropType<BaseFormProps['onReset']>,
     // Triggered when the value of the form is updated, only when the value of the subfield changes. The entry parameter is formState.values
-    onValueChange: PropTypes.func,
+    onValueChange: PropTypes.func as PropType<BaseFormProps['onValueChange']>,
     initValues: PropTypes.object,
-    getFormApi: PropTypes.func,
+    getFormApi: PropTypes.func as PropType<BaseFormProps['getFormApi']>,
     component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    render: PropTypes.func,
-    validateFields: PropTypes.func,
+    render: PropTypes.func as PropType<BaseFormProps['render']>,
+    validateFields: PropTypes.func as PropType<BaseFormProps['validateFields']>,
     style: PropTypes.object,
     className: PropTypes.string,
-    layout: String,
-    labelPosition: String,
+    layout: String as PropType<BaseFormProps['layout']>,
+    labelPosition: String as PropType<BaseFormProps['labelPosition']>,
     labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    labelAlign: String,
+    labelAlign: String as PropType<BaseFormProps['labelAlign']>,
     labelCol: PropTypes.object, // Control labelCol {span: number, offset: number} for all field child nodes
     wrapperCol: PropTypes.object, // Control wrapperCol {span: number, offset: number} for all field child nodes
     allowEmpty: PropTypes.bool,
     autoScrollToError: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     disabled: PropTypes.bool,
     showValidateIcon: PropTypes.bool,
-    extraTextPosition: String,
+    extraTextPosition: String as PropType<BaseFormProps['extraTextPosition']>,
     id: PropTypes.string,
 };
 
@@ -79,7 +80,7 @@ const defaultProps = {
     autoScrollToError: false,
     showValidateIcon: true,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<BaseFormProps>(propTypes, defaultProps)
 const Form = defineComponent<BaseFormProps>((props, {}) => {
     const slots = useSlots()
     let currentInstance = getCurrentInstance()
@@ -268,11 +269,11 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
           </FormUpdaterContext.Provider>
         );
     }
+}, {
+    props: vuePropsType,
+    name:'Form'
 })
 
-// @ts-ignore
-Form.props = vuePropsType
-Form.name = 'Form'
 
 export default Form
 

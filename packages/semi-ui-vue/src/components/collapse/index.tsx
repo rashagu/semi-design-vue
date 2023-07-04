@@ -12,10 +12,11 @@ import '@douyinfe/semi-foundation/collapse/collapse.scss';
 import {noop} from '@douyinfe/semi-foundation/utils/function';
 import {isEqual} from 'lodash';
 import CollapseContext from './collapse-context';
-import {CSSProperties, defineComponent, h, onBeforeUnmount, reactive, useSlots, VNode, watch} from "vue";
+import {CSSProperties, defineComponent, h, onBeforeUnmount, PropType, reactive, useSlots, VNode, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 import {AnchorProps} from "../anchor";
+import {ComponentObjectPropsOptions} from "vue/dist/vue";
 
 export type {CollapsePanelProps} from './item';
 
@@ -30,19 +31,19 @@ export interface CollapseReactProps extends CollapseProps {
 
 export type {CollapseState};
 
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<CollapseProps> = {
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   accordion: PropTypes.bool,
   clickHeaderToExpand: PropTypes.bool,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func as PropType<CollapseProps['onChange']>,
   expandIcon: PropTypes.node,
   collapseIcon: PropTypes.node,
   style: PropTypes.object,
   className: PropTypes.string,
   keepDOM: PropTypes.bool,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
-  expandIconPosition: PropTypes.string
+  expandIconPosition: PropTypes.string as PropType<CollapseProps['expandIconPosition']>,
 };
 
 const defaultProps = {
@@ -51,7 +52,7 @@ const defaultProps = {
   onChange: noop,
   expandIconPosition: 'right'
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<CollapseProps>(propTypes, defaultProps)
 const Collapse = defineComponent<CollapseProps>((props, {}) => {
   const slots = useSlots()
 
@@ -148,10 +149,12 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Collapse'
 })
 
-Collapse.props = vuePropsType
-Collapse.name = 'Collapse'
+
 
 export default Collapse
 export {

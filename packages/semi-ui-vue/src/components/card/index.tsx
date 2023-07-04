@@ -4,10 +4,10 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/card/constants';
 import '@douyinfe/semi-foundation/card/card.scss';
 import Meta from './meta';
 import cls from 'classnames';
-import Skeleton from '../skeleton';
+import Skeleton, {SkeletonParagraph, SkeletonTitle} from '../skeleton';
 import { Title } from '../typography';
 import Space from '../space';
-import { CSSProperties, defineComponent, h, useSlots } from 'vue';
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
 
@@ -57,7 +57,7 @@ export interface CardProps {
   'aria-label'?: string;
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<CardProps> = {
   actions: PropTypes.array,
   bodyStyle: PropTypes.object,
   bordered: PropTypes.bool,
@@ -72,7 +72,7 @@ const propTypes = {
   headerLine: PropTypes.bool,
   headerStyle: PropTypes.object,
   loading: PropTypes.bool,
-  shadows: PropTypes.string,
+  shadows: PropTypes.string as PropType<CardProps['shadows']>,
   style: PropTypes.object,
   title: PropTypes.node,
   'aria-label': PropTypes.string,
@@ -84,7 +84,7 @@ const defaultProps = {
   headerLine: true,
   loading: false,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<CardProps>(propTypes, defaultProps);
 const Card = defineComponent<CardProps>((props, {}) => {
   const slots = useSlots();
 
@@ -148,9 +148,9 @@ const Card = defineComponent<CardProps>((props, {}) => {
     const actionsItemCls = cls(`${prefixcls}-body-actions-item`);
     const placeholder = (
       <div>
-        <Skeleton.Title />
+        <SkeletonTitle />
         <br />
-        <Skeleton.Paragraph rows={3} />
+        <SkeletonParagraph rows={3} />
       </div>
     );
     return (
@@ -222,10 +222,10 @@ const Card = defineComponent<CardProps>((props, {}) => {
       </div>
     );
   };
+}, {
+  props: vuePropsType,
+  name:'Card'
 });
 
-// @ts-ignore
-Card.props = vuePropsType;
-Card.name = 'Card';
 
 export default Card;

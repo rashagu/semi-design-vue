@@ -60,6 +60,7 @@ function withField<
   C,
   T extends Subtract<VueHTMLAttributes, CommonexcludeType> & CommonFieldProps & VueHTMLAttributes & C
 >(Component: DefineComponent<C> | FunctionalComponent<C>, opts?: WithFieldOption): DefineComponent<T> {
+  // @ts-ignore
   const SemiField = defineComponent<T>((truthProps, { attrs: props }) => {
     const slots = useSlots();
 
@@ -613,6 +614,7 @@ function withField<
       if (!noLabel && mergeLabelPos !== 'inset') {
         let needSpread = typeof label === 'object' && !isElement(label) ? label : {};
         labelContent = (
+          // @ts-ignore
           <Label
             text={label || field}
             id={labelId}
@@ -709,7 +711,7 @@ function withField<
 // @ts-ignore
   SemiField.name = 'Form' + Component.name;
 
-  return SemiField;
+  return SemiField as any;
 }
 
 // eslint-disable-next-line

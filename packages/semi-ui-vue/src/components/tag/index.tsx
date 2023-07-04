@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties, reactive, watch} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, CSSProperties, reactive, watch, PropType} from 'vue'
 import * as PropTypes from '../PropTypes'
 import classNames from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/tag/constants';
@@ -11,6 +11,7 @@ import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import {isString} from "lodash";
 import cls from 'classnames';
+import {ComponentObjectPropsOptions} from "vue/dist/vue";
 
 export * from './interface';
 
@@ -26,8 +27,8 @@ export interface TagState {
   visible: boolean;
 }
 
-const propTypes = {
-  children: PropTypes.node,
+const propTypes:ComponentObjectPropsOptions<TagProps> = {
+  children: PropTypes.node as PropType<any>,
   tagKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   size: String,
   color: String,
@@ -61,7 +62,7 @@ const defaultProps: TagProps = {
   shape: 'square',
   avatarShape: 'square',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<TagProps>(propTypes, defaultProps)
 const Index = defineComponent<TagProps>((props, {slots}) => {
 
   const state = reactive<TagState>({

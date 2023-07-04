@@ -1,4 +1,14 @@
-import {defineComponent, ref, h, onActivated, Fragment, onMounted, watch} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  onActivated,
+  Fragment,
+  onMounted,
+  watch,
+  ComponentObjectPropsOptions,
+  PropType
+} from 'vue'
 
 import StyledAnimation, {StyledAnimationProps} from './StyledAnimation';
 import noop from './utils/noop';
@@ -16,7 +26,7 @@ export interface StyledTransitionProps extends StyledAnimationProps {
   onRest?: (value: any) => void;
 }
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<StyledTransitionProps> = {
   duration: String,
   className: String,
   name: String,
@@ -33,27 +43,27 @@ export const vuePropsType = {
   leave: String,
 
   willEnter: {
-    type: Function,
+    type: Function as PropType<StyledTransitionProps['willEnter']>,
     default: noop,
   },
   didEnter: {
-    type: Function,
+    type: Function as PropType<StyledTransitionProps['didEnter']>,
     default: noop,
   },
   willLeave: {
-    type: Function,
+    type: Function as PropType<StyledTransitionProps['willLeave']>,
     default: noop,
   },
   didLeave: {
-    type: Function,
+    type: Function as PropType<StyledTransitionProps['didLeave']>,
     default: noop,
   },
   onRest: {
-    type: Function,
+    type: Function as PropType<StyledTransitionProps['onRest']>,
     default: noop,
   },
   onStart: {
-    type: Function,
+    type: Function as PropType<StyledTransitionProps['onStart']>,
     default: noop,
   },
 }

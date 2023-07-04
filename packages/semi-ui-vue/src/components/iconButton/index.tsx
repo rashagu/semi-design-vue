@@ -8,6 +8,7 @@ import SpinIcon from '../spin/icon';
 import {noop} from 'lodash';
 import '@douyinfe/semi-foundation/button/iconButton.scss';
 import {getFragmentChildren} from "../_utils";
+import {vuePropsType} from "../tag";
 
 
 const iconSizes = iconStrings.SIZE;
@@ -101,6 +102,9 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
       </Button>
     )
   };
+},{
+  props: vuePropsType,
+  name:'IconButton'
 })
 
 export const VuePropsType = {
@@ -146,6 +150,4 @@ export const VuePropsType = {
   autoFocus:Function,
 }
 
-Index.props = VuePropsType
-Index.name = "IconButton"
 export default Index

@@ -1,4 +1,4 @@
-import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
+import {defineComponent, ref, h, Fragment, useSlots, PropType} from 'vue';
 import classnames from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { noop } from 'lodash';
@@ -8,6 +8,7 @@ import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
 import { VueHTMLAttributes } from '../interface';
 import {propTypesCheckbox} from "./propType";
+import {ComponentObjectPropsOptions} from "vue/dist/vue";
 
 export interface CheckboxInnerProps {
   'aria-describedby'?: AriaAttributes['aria-describedby'];
@@ -28,9 +29,13 @@ export interface CheckboxInnerProps {
   onInputFocus?: (e: any) => void;
   onInputBlur?: (e: any) => void;
   preventScroll?: boolean;
+  onChange?: any
+  children?: any
+  grouped?: boolean
+  value?: any
 }
 
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<CheckboxInnerProps> = {
   ...propTypesCheckbox,
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
@@ -39,16 +44,16 @@ const propTypes = {
   'aria-required': PropTypes.bool,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func as PropType<CheckboxInnerProps['onChange']>,
   children: PropTypes.node,
-  grouped: PropTypes.bool,
+  grouped: PropTypes.bool as PropType<CheckboxInnerProps['grouped']>,
   value: PropTypes.any,
   isPureCardType: PropTypes.bool,
   addonId: PropTypes.string,
   extraId: PropTypes.string,
   focusInner: PropTypes.bool,
-  onInputFocus: PropTypes.func,
-  onInputBlur: PropTypes.func,
+  onInputFocus: PropTypes.func as PropType<CheckboxInnerProps['onInputFocus']>,
+  onInputBlur: PropTypes.func as PropType<CheckboxInnerProps['onInputBlur']>,
   preventScroll: PropTypes.bool,
 
   indeterminate: Boolean,
@@ -60,7 +65,7 @@ const propTypes = {
 const defaultProps = {
   onChange: noop,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<CheckboxInnerProps>(propTypes, defaultProps);
 const CheckboxInner = defineComponent<CheckboxInnerProps>((props, { expose }) => {
   const slots = useSlots();
   const inputEntity = ref();
@@ -138,8 +143,11 @@ const CheckboxInner = defineComponent<CheckboxInnerProps>((props, { expose }) =>
       </span>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'vuePropsType'
 });
 
-CheckboxInner.props = vuePropsType;
+
 
 export default CheckboxInner;

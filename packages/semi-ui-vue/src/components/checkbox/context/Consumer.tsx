@@ -15,9 +15,11 @@ const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useCheckboxContext()
   return () => slots.default ? slots.default(context) : null
+}, {
+  props: vuePropsType,
+  name: 'CheckboxContextConsumer'
 })
 
-Consumer.props = vuePropsType
 
 export default Consumer
 

@@ -123,10 +123,11 @@ const EventDemo = defineComponent<EventDemoProps>((props, {}) => {
       </>
     );
   }
+}, {
+  props: vuePropsType,
+  name :'EventDemo'
 })
 
-EventDemo.props = vuePropsType
-EventDemo.name = 'EventDemo'
 
 export default EventDemo
 

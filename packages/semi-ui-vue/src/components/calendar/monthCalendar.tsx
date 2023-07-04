@@ -14,7 +14,17 @@ import { Locale } from '../locale/interface';
 import { MonthCalendarProps } from './interface';
 
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
-import {defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    defineComponent,
+    h,
+    onBeforeUnmount,
+    onMounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 const toPercent = (num: number) => {
@@ -33,27 +43,27 @@ export interface MonthCalendarState {
     cachedKeys: Array<string>
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<MonthCalendarProps> = {
     displayValue: PropTypes.object,
     header: PropTypes.node,
     events: PropTypes.array,
-    mode: PropTypes.string,
+    mode: PropTypes.string as PropType<MonthCalendarProps['mode']>,
     markWeekend: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     style: PropTypes.object,
     className: PropTypes.string,
-    dateGridRender: PropTypes.func,
-    onClick: PropTypes.func,
-    onClose: PropTypes.func,
+    dateGridRender: PropTypes.func as PropType<MonthCalendarProps['dateGridRender']>,
+    onClick: PropTypes.func as PropType<MonthCalendarProps['onClick']>,
+    onClose: PropTypes.func as PropType<MonthCalendarProps['onClose']>,
 
 
 
-    weekStartsOn: PropTypes.number,
-    range: PropTypes.array,
-    showCurrTime: PropTypes.bool,
-    scrollTop: PropTypes.number,
-    renderTimeDisplay: PropTypes.func,
+    weekStartsOn: PropTypes.number as PropType<MonthCalendarProps['weekStartsOn']>,
+    // range: PropTypes.array as PropType<MonthCalendarProps['range']>,
+    // showCurrTime: PropTypes.bool as PropType<MonthCalendarProps['showCurrTime']>,
+    // scrollTop: PropTypes.number as PropType<MonthCalendarProps['scrollTop']>,
+    // renderTimeDisplay: PropTypes.func as PropType<MonthCalendarProps['renderTimeDisplay']>,
 };
 
 const defaultProps = {
@@ -62,7 +72,7 @@ const defaultProps = {
     mode: 'month',
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<MonthCalendarProps>(propTypes, defaultProps)
 const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
     const slots = useSlots()
 
@@ -411,10 +421,10 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
           </LocaleConsumer>
         );
     }
-})
+},
+  {props: vuePropsType, name:'MonthCalendar' })
 
-MonthCalendar.props = vuePropsType
-MonthCalendar.name = 'monthCalendar'
+
 
 export default MonthCalendar
 

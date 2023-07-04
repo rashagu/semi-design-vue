@@ -9,7 +9,17 @@ import LocaleConsumer from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
 import { DayCalendarProps } from './interface';
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
-import {defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    defineComponent,
+    h,
+    onBeforeUnmount,
+    onMounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 
@@ -21,33 +31,33 @@ export interface DayCalendarState {
     cachedKeys: Array<string>
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<DayCalendarProps> = {
     displayValue: PropTypes.object,
     events: PropTypes.array,
     header: PropTypes.node,
     showCurrTime: PropTypes.bool,
-    onClick: PropTypes.func,
-    mode: PropTypes.string,
-    renderTimeDisplay: PropTypes.func,
+    onClick: PropTypes.func as PropType<DayCalendarProps['onClick']>,
+    // mode: PropTypes.string as PropType<DayCalendarProps['mode']>,
+    renderTimeDisplay: PropTypes.func as PropType<DayCalendarProps['renderTimeDisplay']>,
     markWeekend: PropTypes.bool,
     scrollTop: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     style: PropTypes.object,
     className: PropTypes.string,
-    dateGridRender: PropTypes.func,
+    dateGridRender: PropTypes.func as PropType<DayCalendarProps['dateGridRender']>,
 
 
     range: PropTypes.array,
-    weekStartsOn: PropTypes.number,
+    weekStartsOn: PropTypes.number as PropType<DayCalendarProps['weekStartsOn']>,
 };
 
 const defaultProps = {
     events: [] as DayCalendarProps['events'],
     displayValue: new Date(),
-    mode: 'day',
+    // mode: 'day',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<DayCalendarProps>(propTypes, defaultProps)
 const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
     const slots = useSlots()
     let dom = ref()
@@ -188,9 +198,10 @@ const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'DayCalendar'
 })
 
-DayCalendar.props = vuePropsType
-DayCalendar.name = 'DayCalendar'
 
 export default DayCalendar

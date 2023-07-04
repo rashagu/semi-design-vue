@@ -10,7 +10,7 @@ import {
   onMounted,
   onUnmounted,
   watch,
-  nextTick,
+  nextTick, ComponentObjectPropsOptions, PropType,
 } from 'vue';
 import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
@@ -107,6 +107,9 @@ export interface CascaderProps extends BasicCascaderProps {
   onFocus?: (e: MouseEvent) => void;
   validateStatus?: ValidateStatus;
   position?: Position;
+
+  loadedKeys?: any
+  autoClearSearchValue?: boolean
 }
 
 export interface CascaderState extends BasicCascaderInnerData {
@@ -118,60 +121,60 @@ export interface CascaderState extends BasicCascaderInnerData {
 const prefixcls = cssClasses.PREFIX;
 const resetkey = 0;
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<CascaderProps> = {
   'aria-labelledby': PropTypes.string,
   'aria-invalid': PropTypes.bool,
   'aria-errormessage': PropTypes.string,
   'aria-describedby': PropTypes.string,
   'aria-required': PropTypes.bool,
   'aria-label': PropTypes.string,
-  arrowIcon: PropTypes.node,
+  arrowIcon: PropTypes.node as PropType<CascaderProps['arrowIcon']>,
   borderless: PropTypes.bool,
   changeOnSelect: PropTypes.bool,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   disabled: PropTypes.bool,
   dropdownClassName: PropTypes.string,
   dropdownStyle: PropTypes.object,
-  emptyContent: PropTypes.node,
+  emptyContent: PropTypes.node as PropType<CascaderProps['emptyContent']>,
   motion: PropTypes.bool,
   /* show search input, if passed in a function, used as custom filter */
   filterTreeNode: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   filterLeafOnly: PropTypes.bool,
   placeholder: PropTypes.string,
   searchPlaceholder: PropTypes.string,
-  size: String,
+  size: String as PropType<CascaderProps['size']>,
   style: PropTypes.object,
   className: PropTypes.string,
-  treeData: [String, Number, Object, Array],
+  treeData: [String, Number, Object, Array] as PropType<CascaderProps['treeData']>,
   treeNodeFilterProp: PropTypes.string,
-  suffix: PropTypes.node,
-  prefix: PropTypes.node,
-  insetLabel: PropTypes.node,
+  suffix: PropTypes.node as PropType<CascaderProps['suffix']>,
+  prefix: PropTypes.node as PropType<CascaderProps['prefix']>,
+  insetLabel: PropTypes.node as PropType<CascaderProps['insetLabel']>,
   insetLabelId: PropTypes.string,
   id: PropTypes.string,
   displayProp: PropTypes.string,
-  displayRender: PropTypes.func,
-  onChange: PropTypes.func,
-  onSearch: PropTypes.func,
-  onSelect: PropTypes.func,
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  children: PropTypes.node,
-  getPopupContainer: PropTypes.func,
+  displayRender: PropTypes.func as PropType<CascaderProps['displayRender']>,
+  onChange: PropTypes.func as PropType<CascaderProps['onChange']>,
+  onSearch: PropTypes.func as PropType<CascaderProps['onSearch']>,
+  onSelect: PropTypes.func as PropType<CascaderProps['onSelect']>,
+  onBlur: PropTypes.func as PropType<CascaderProps['onBlur']>,
+  onFocus: PropTypes.func as PropType<CascaderProps['onFocus']>,
+  children: PropTypes.node as PropType<CascaderProps['children']>,
+  getPopupContainer: PropTypes.func as PropType<CascaderProps['getPopupContainer']>,
   zIndex: PropTypes.number,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]),
-  validateStatus: PropTypes.string,
-  showNext: PropTypes.string,
+  validateStatus: PropTypes.string as PropType<CascaderProps['validateStatus']>,
+  showNext: PropTypes.string as PropType<CascaderProps['showNext']>,
   stopPropagation: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   showClear: PropTypes.bool,
   defaultOpen: PropTypes.bool,
   autoAdjustOverflow: PropTypes.bool,
-  onDropdownVisibleChange: PropTypes.func,
-  triggerRender: PropTypes.func,
-  onListScroll: PropTypes.func,
+  onDropdownVisibleChange: PropTypes.func as PropType<CascaderProps['onDropdownVisibleChange']>,
+  triggerRender: PropTypes.func as PropType<CascaderProps['triggerRender']>,
+  onListScroll: PropTypes.func as PropType<CascaderProps['onListScroll']>,
   onChangeWithObject: PropTypes.bool,
-  bottomSlot: PropTypes.node,
-  topSlot: PropTypes.node,
+  bottomSlot: PropTypes.node as PropType<CascaderProps['bottomSlot']>,
+  topSlot: PropTypes.node as PropType<CascaderProps['topSlot']>,
   multiple: PropTypes.bool,
   autoMergeValue: PropTypes.bool,
   maxTagCount: PropTypes.number,
@@ -179,16 +182,16 @@ const propTypes = {
   restTagsPopoverProps: PropTypes.object,
   max: PropTypes.number,
   separator: PropTypes.string,
-  onExceed: PropTypes.func,
-  onClear: PropTypes.func,
-  loadData: PropTypes.func,
-  onLoad: PropTypes.func,
-  loadedKeys: PropTypes.array,
+  onExceed: PropTypes.func as PropType<CascaderProps['onExceed']>,
+  onClear: PropTypes.func as PropType<CascaderProps['onClear']>,
+  loadData: PropTypes.func as PropType<CascaderProps['loadData']>,
+  onLoad: PropTypes.func as PropType<CascaderProps['onLoad']>,
+  loadedKeys: PropTypes.array as PropType<any>,
   disableStrictly: PropTypes.bool,
   leafOnly: PropTypes.bool,
   enableLeafClick: PropTypes.bool,
   preventScroll: PropTypes.bool,
-  position: PropTypes.string,
+  position: PropTypes.string as PropType<CascaderProps['position']>,
 
   autoClearSearchValue: {
     type: Boolean,
@@ -230,7 +233,7 @@ const defaultProps = {
   'aria-label': 'Cascader',
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<CascaderProps>(propTypes, defaultProps);
 const Index = defineComponent<CascaderProps>((props, { expose }) => {
   const slots = useSlots();
 
@@ -1057,8 +1060,9 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
       </Popover>
     );
   };
+}, {
+  props: vuePropsType
 });
 
-Index.props = vuePropsType;
 
 export default Index;

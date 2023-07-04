@@ -12,7 +12,17 @@ import { WeekCalendarProps } from './interface';
 
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
 import { Locale } from '../locale/interface';
-import {defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    defineComponent,
+    h,
+    onBeforeUnmount,
+    onMounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 
@@ -30,16 +40,16 @@ export interface WeekCalendarState {
     cachedKeys: Array<string>
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<WeekCalendarProps> = {
     displayValue: PropTypes.object,
     header: PropTypes.node,
     events: PropTypes.array,
-    mode: PropTypes.string,
+    mode: PropTypes.string as PropType<WeekCalendarProps['mode']>,
     showCurrTime: PropTypes.bool,
     markWeekend: PropTypes.bool,
     scrollTop: PropTypes.number,
-    renderTimeDisplay: PropTypes.func,
-    dateGridRender: PropTypes.func,
+    renderTimeDisplay: PropTypes.func as PropType<WeekCalendarProps['renderTimeDisplay']>,
+    dateGridRender: PropTypes.func as PropType<WeekCalendarProps['dateGridRender']>,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     style: PropTypes.object,
@@ -47,8 +57,8 @@ const propTypes = {
 
 
     range: PropTypes.array,
-    weekStartsOn: PropTypes.number,
-    onClick: PropTypes.func,
+    weekStartsOn: PropTypes.number as PropType<WeekCalendarProps['weekStartsOn']>,
+    onClick: PropTypes.func as PropType<WeekCalendarProps['onClick']>,
 };
 
 const defaultProps = {
@@ -56,7 +66,7 @@ const defaultProps = {
     events: [] as Array<EventObject>,
     mode: 'week',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<WeekCalendarProps>(propTypes, defaultProps)
 const WeekCalendar = defineComponent<WeekCalendarProps>((props, {}) => {
     const slots = useSlots()
 
@@ -276,9 +286,8 @@ const WeekCalendar = defineComponent<WeekCalendarProps>((props, {}) => {
           </LocaleConsumer>
         );
     }
-})
+}, {props:vuePropsType, name:'WeekCalendar'})
 
-WeekCalendar.props = vuePropsType
-WeekCalendar.name = 'WeekCalendar'
+
 
 export default WeekCalendar

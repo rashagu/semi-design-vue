@@ -8,7 +8,7 @@ import ImageFoundation, {ImageAdapter} from "@douyinfe/semi-foundation/image/ima
 import {LocaleConsumerFunc} from "../locale/localeConsumer";
 import {Locale} from "../locale/interface";
 import {isBoolean, isObject, isUndefined} from "lodash";
-import Skeleton from "../skeleton";
+import Skeleton, {SkeletonImage} from "../skeleton";
 import "@douyinfe/semi-foundation/image/image.scss";
 import {defineComponent, h, onMounted, reactive, ref, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
@@ -148,7 +148,7 @@ const Image = defineComponent<ImageProps>((props, {}) => {
   const renderDefaultLoading = () => {
     const {width, height} = props;
     return (
-      <Skeleton.Image style={{width, height}}/>
+      <SkeletonImage style={{width, height}}/>
     );
   };
 

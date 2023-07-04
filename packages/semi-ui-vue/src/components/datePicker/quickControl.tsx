@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
+import {defineComponent, ref, h, Fragment, useSlots, PropType} from 'vue'
 import classNames from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/datePicker/constants';
 import Button from '../button/index';
@@ -9,6 +9,7 @@ import { DateInputFoundationProps } from '@douyinfe/semi-foundation/datePicker/i
 import * as PropTypes from '../PropTypes'
 import {vuePropsMake} from "../PropTypes";
 import navigation from "./navigation";
+import {ComponentObjectPropsOptions} from "vue/dist/vue";
 const prefixCls = cssClasses.PREFIX;
 export interface QuickControlProps {
   presets: PresetsType;
@@ -17,10 +18,10 @@ export interface QuickControlProps {
   type: string;
   insetInput: DateInputFoundationProps['insetInput']
 }
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<QuickControlProps> = {
   presets: PropTypes.array,
-  presetPosition: PropTypes.string,
-  onPresetClick: PropTypes.func,
+  presetPosition: PropTypes.string as PropType<QuickControlProps['presetPosition']>,
+  onPresetClick: PropTypes.func as PropType<QuickControlProps['onPresetClick']>,
   type: PropTypes.string,
   insetInput: [PropTypes.bool, PropTypes.object]
 };
@@ -30,7 +31,7 @@ const defaultProps = {
   presetPosition: 'bottom',
   onPresetClick: noop,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<QuickControlProps>(propTypes, defaultProps)
 const quickControl = defineComponent<QuickControlProps>((props, {}) => {
   const slots = useSlots()
 
@@ -97,10 +98,10 @@ const quickControl = defineComponent<QuickControlProps>((props, {}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'DatePicker_quickControl'
 })
-
-quickControl.props = vuePropsType
-quickControl.name = "DatePicker_quickControl"
 
 export default quickControl
 

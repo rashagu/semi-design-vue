@@ -18,9 +18,12 @@ const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useDropdownContext()
   return () => slots.default ? slots.default(context) : null
+}, {
+  props: vuePropsType,
+  name: 'DropdownConsumer'
 })
 
-Consumer.props = vuePropsType
+
 
 export default Consumer
 

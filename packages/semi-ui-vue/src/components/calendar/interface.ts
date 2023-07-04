@@ -21,6 +21,7 @@ export interface CalendarProps extends BaseProps {
     width?: number | string;
     height?: number | string;
     dateGridRender?: (dateString?: string, date?: Date) => VueJsxNode
+
 }
 
 export type DayCalendarProps = Omit<CalendarProps, 'mode'>;

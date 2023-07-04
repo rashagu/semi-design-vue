@@ -4,7 +4,18 @@ import { cssClasses } from '@douyinfe/semi-foundation/anchor/constants';
 import LinkFoundation, { LinkAdapter } from '@douyinfe/semi-foundation/anchor/linkFoundation';
 import AnchorContext, { AnchorContextType } from './anchor-context';
 import {Text as TypographyText} from '../typography/index';
-import {CSSProperties, defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    onBeforeUnmount,
+    onMounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useAnchorContext} from "./anchor-content/Consumer";
 import {useBaseComponent} from "../_base/baseComponent";
@@ -24,14 +35,14 @@ export interface LinkProps {
     direction?: 'ltr' | 'rtl'
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<LinkProps> = {
     href: PropTypes.string,
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     className: PropTypes.string,
     style: PropTypes.object,
     disabled: PropTypes.bool,
     level: PropTypes.number,
-    direction: PropTypes.string,
+    direction: PropTypes.string as PropType<LinkProps['direction']>,
     children: PropTypes.node,
 };
 
@@ -40,7 +51,7 @@ const defaultProps = {
     title: '',
     className: '',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<LinkProps>(propTypes, defaultProps)
 const Link = defineComponent<LinkProps>((props, {}) => {
     const slots = useSlots()
     const {context} = useAnchorContext()

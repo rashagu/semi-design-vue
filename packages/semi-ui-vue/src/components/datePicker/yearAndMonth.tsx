@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, useSlots, reactive, watch} from 'vue'
+import {defineComponent, ref, h, Fragment, useSlots, reactive, watch, PropType} from 'vue'
 
 import YearAndMonthFoundation, { MonthScrollItem, YearAndMonthAdapter, YearAndMonthFoundationProps, YearAndMonthFoundationState, YearScrollItem } from '@douyinfe/semi-foundation/datePicker/yearAndMonthFoundation';
 import {BaseProps, useBaseComponent} from '../_base/baseComponent';
@@ -17,6 +17,7 @@ import * as PropTypes from "../PropTypes";
 import {vuePropsMake} from "../PropTypes";
 import { strings } from '@douyinfe/semi-foundation/datePicker/constants';
 import { PanelType } from '@douyinfe/semi-foundation/datePicker/monthsGridFoundation';
+import {ComponentObjectPropsOptions} from "vue/dist/vue";
 
 const prefixCls = `${BASE_CLASS_PREFIX}-datepicker`;
 
@@ -27,23 +28,23 @@ export interface YearAndMonthProps extends YearAndMonthFoundationProps, BaseProp
 export type YearAndMonthState = YearAndMonthFoundationState;
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<YearAndMonthProps> = {
   currentYear: PropTypes.object,
   currentMonth: PropTypes.object,
-  onSelect: PropTypes.func,
+  onSelect: PropTypes.func as PropType<YearAndMonthProps['onSelect']>,
   locale: PropTypes.object,
   localeCode: PropTypes.string,
   monthCycled: PropTypes.bool,
   yearCycled: PropTypes.bool,
   noBackBtn: PropTypes.bool,
-  disabledDate: PropTypes.func,
+  disabledDate: PropTypes.func as PropType<YearAndMonthProps['disabledDate']>,
   density: PropTypes.string,
 
-  presetPosition: PropTypes.string,
+  presetPosition: PropTypes.string as PropType<YearAndMonthProps['presetPosition']>,
   renderQuickControls: PropTypes.node,
   renderDateInput: PropTypes.node,
   yearAndMonthOpts: PropTypes.any,
-  type: PropTypes.string,
+  type: PropTypes.string as PropType<YearAndMonthProps['type']>,
 };
 
 const defaultProps = {
@@ -54,7 +55,7 @@ const defaultProps = {
   onSelect: noop,
   type: 'month',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<YearAndMonthProps>(propTypes, defaultProps)
 const yearAndMonth = defineComponent<YearAndMonthProps>((props, {expose}) => {
   const slots = useSlots()
 
@@ -333,10 +334,11 @@ const yearAndMonth = defineComponent<YearAndMonthProps>((props, {expose}) => {
       </Fragment>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'DatePicker_yearAndMonth'
 })
 
-yearAndMonth.props = vuePropsType
-yearAndMonth.name = "DatePicker_yearAndMonth"
 
 export default yearAndMonth
 

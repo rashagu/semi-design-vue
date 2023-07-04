@@ -43,6 +43,8 @@ export interface CheckboxProps extends BaseCheckboxProps {
   addonId?: string;
   extraId?: string;
   type?: CheckboxType;
+  index?: number
+  class?: string
 }
 
 interface CheckboxState {
@@ -61,7 +63,7 @@ const defaultProps = {
   onMouseLeave: noop,
   type: 'default',
 };
-export const vuePropsType = vuePropsMake(propTypesCheckbox, defaultProps)
+export const vuePropsType = vuePropsMake<CheckboxProps>(propTypesCheckbox, defaultProps)
 const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
   const slots = useSlots()
 
@@ -288,10 +290,11 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
       </span>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Checkbox'
 })
 
-Checkbox.props = vuePropsType
-Checkbox.name = 'Checkbox'
 
 export default Checkbox
 

@@ -91,7 +91,6 @@ const DescriptionsDemo = defineComponent<DescriptionsDemoProps>((props, {}) => {
   };
 });
 
-DescriptionsDemo.props = vuePropsType;
-DescriptionsDemo.name = 'DescriptionsDemo';
+
 
 export default DescriptionsDemo;

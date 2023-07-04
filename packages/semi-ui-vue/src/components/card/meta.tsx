@@ -73,10 +73,10 @@ const Meta = defineComponent<MetaProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Meta'
 })
 
-// @ts-ignore
-Meta.props = vuePropsType
-Meta.name = 'Meta'
 
 export default Meta

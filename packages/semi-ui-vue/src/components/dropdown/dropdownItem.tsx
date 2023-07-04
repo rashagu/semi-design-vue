@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, onActivated, Fragment, provide, inject} from 'vue'
+import {defineComponent, ref, h, onActivated, Fragment, provide, inject, PropType} from 'vue'
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { cssClasses as css, strings } from '@douyinfe/semi-foundation/dropdown/constants';
@@ -8,6 +8,7 @@ import { IconTick } from '@kousum/semi-icons-vue';
 import { noop } from 'lodash';
 import {vuePropsMake} from "../PropTypes";
 import {useDropdownContext} from "./context/Consumer";
+import {ComponentObjectPropsOptions} from "vue/dist/vue";
 
 export type Type = 'primary' | 'secondary' | 'tertiary' | 'warning' | 'danger';
 
@@ -26,24 +27,25 @@ export interface DropdownItemProps extends BaseProps {
   showTick?: boolean;
   /** internal prop, please do not use  */
   hover?: boolean
+  name?: string
 }
 
 const prefixCls = css.PREFIX;
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<DropdownItemProps> = {
   name: PropTypes.string,
   disabled: PropTypes.bool,
   selected: PropTypes.bool,
-  onClick: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func,
-  onContextMenu: PropTypes.func,
+  onClick: PropTypes.func as PropType<DropdownItemProps['onClick']>,
+  onMouseEnter: PropTypes.func as PropType<DropdownItemProps['onMouseEnter']>,
+  onMouseLeave: PropTypes.func as PropType<DropdownItemProps['onMouseLeave']>,
+  onContextMenu: PropTypes.func as PropType<DropdownItemProps['onContextMenu']>,
   className: PropTypes.string,
   style: PropTypes.object,
   forwardRef: [PropTypes.object, PropTypes.func],
-  type: String,
+  type: String as PropType<DropdownItemProps['type']>,
   active: PropTypes.bool,
-  icon: PropTypes.node,
-  onKeyDown: PropTypes.func,
+  icon: PropTypes.node as PropType<DropdownItemProps['icon']>,
+  onKeyDown: PropTypes.func as PropType<DropdownItemProps['onKeyDown']>,
   showTick: PropTypes.bool,
   /** internal prop, please do not use  */
   hover: PropTypes.bool,
@@ -57,7 +59,7 @@ const defaultProps = {
   forwardRef: noop,
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<DropdownItemProps>(propTypes, defaultProps)
 const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
 
   const {context} = useDropdownContext();
@@ -110,10 +112,11 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
       </li>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'DropdownItem'
 })
 
-DropdownItem.props = vuePropsType
-DropdownItem.name = 'Dropdown.Item'
 
 export default DropdownItem
 

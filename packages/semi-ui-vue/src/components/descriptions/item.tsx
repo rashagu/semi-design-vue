@@ -57,9 +57,10 @@ const DescriptionsItem = defineComponent<DescriptionsItemProps>((props, {}) => {
       );
     return item;
   };
+}, {
+  props: vuePropsType,
+  name: 'DescriptionsItem'
 });
 
-DescriptionsItem.props = vuePropsType;
-DescriptionsItem.name = 'DescriptionsItem';
 
 export default DescriptionsItem;

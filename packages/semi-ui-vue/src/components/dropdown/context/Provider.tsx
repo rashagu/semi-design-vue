@@ -13,9 +13,12 @@ const Provider = defineComponent<{value:DropdownContextType}>((props, {slots}) =
   })
   provide('DropdownContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
+}, {
+  props: vuePropsType,
+  name: 'DropdownProvider'
 })
 
-Provider.props = vuePropsType
+
 
 export default Provider
 

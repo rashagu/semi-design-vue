@@ -54,7 +54,5 @@ const ContrlDemo = defineComponent<ContrlDemoProps>((props, {}) => {
   };
 });
 
-ContrlDemo.props = vuePropsType;
-ContrlDemo.name = 'ContrlDemo';
 
 export default ContrlDemo;

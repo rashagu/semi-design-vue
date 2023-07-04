@@ -4,6 +4,7 @@ import Group  from './checkboxGroup';
 import type { CheckboxGroupProps, CheckboxType, CheckboxDirection } from './checkboxGroup';
 
 export type { CheckboxInnerProps } from './checkboxInner';
+// @ts-ignore
 Checkbox.Group = Group
 const CheckboxWithGroup  = Checkbox
 export const CheckboxGroup = Group

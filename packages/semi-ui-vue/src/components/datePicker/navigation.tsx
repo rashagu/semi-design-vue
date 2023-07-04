@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, CSSProperties, ComponentObjectPropsOptions, PropType} from 'vue'
 
 import * as PropTypes from '../PropTypes'
 import { noop } from 'lodash';
@@ -30,35 +30,35 @@ interface NavigationProps {
 }
 
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<NavigationProps> = {
   monthText: {type: PropTypes.string, default: ''},
   density: PropTypes.string,
   onMonthClick: {
-    type: PropTypes.func,
+    type: PropTypes.func as PropType<NavigationProps['onMonthClick']>,
     default: noop
   },
   onNextMonth: {
-    type: PropTypes.func,
+    type: PropTypes.func as PropType<NavigationProps['onNextMonth']>,
     default: noop
   },
   onPrevMonth: {
-    type: PropTypes.func,
+    type: PropTypes.func as PropType<NavigationProps['onPrevMonth']>,
     default: noop
   },
   onNextYear: {
-    type: PropTypes.func,
+    type: PropTypes.func as PropType<NavigationProps['onNextYear']>,
     default: noop
   },
   onPrevYear: {
-    type: PropTypes.func,
+    type: PropTypes.func as PropType<NavigationProps['onPrevYear']>,
     default: noop
   },
-  navPrev: PropTypes.node,
-  navNext: PropTypes.node,
+  navPrev: PropTypes.node as PropType<NavigationProps['navPrev']>,
+  navNext: PropTypes.node as PropType<NavigationProps['navNext']>,
   // Whether to switch synchronously for two panels
   shouldBimonthSwitch: PropTypes.bool,
   // Panel type, divided into left panel and right panel
-  panelType: PropTypes.string,
+  panelType: PropTypes.string as PropType<NavigationProps['panelType']>,
 
 
 }
@@ -152,10 +152,12 @@ const navigation = defineComponent<NavigationProps>((props, {slots}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: "DatePicker_navigation"
 })
 
-navigation.props = vuePropsType
-navigation.name = "DatePicker_navigation"
+
 
 export default navigation
 

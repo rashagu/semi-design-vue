@@ -11,7 +11,17 @@ import { calcRowHeight } from '@douyinfe/semi-foundation/calendar/eventUtil';
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
 import { RangeCalendarProps } from './interface';
 import { Locale } from '../locale/interface';
-import {defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    defineComponent,
+    h,
+    onBeforeUnmount,
+    onMounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 
@@ -30,17 +40,17 @@ export interface RangeCalendarState {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<RangeCalendarProps> = {
     // displayValue: PropTypes.instanceOf(Date),
     range: PropTypes.array,
     header: PropTypes.node,
     events: PropTypes.array,
-    mode: PropTypes.string,
+    mode: PropTypes.string as PropType<RangeCalendarProps['mode']>,
     showCurrTime: PropTypes.bool,
     markWeekend: PropTypes.bool,
     scrollTop: PropTypes.number,
-    renderTimeDisplay: PropTypes.func,
-    dateGridRender: PropTypes.func,
+    renderTimeDisplay: PropTypes.func as PropType<RangeCalendarProps['renderTimeDisplay']>,
+    dateGridRender: PropTypes.func as PropType<RangeCalendarProps['dateGridRender']>,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     style: PropTypes.object,
@@ -48,15 +58,15 @@ const propTypes = {
 
 
     displayValue: PropTypes.object,
-    weekStartsOn: PropTypes.number,
-    onClick: PropTypes.func,
+    weekStartsOn: PropTypes.number as PropType<RangeCalendarProps['weekStartsOn']>,
+    onClick: PropTypes.func as PropType<RangeCalendarProps['onClick']>,
 };
 
 const defaultProps = {
     events: [] as ParsedEvents[],
     mode: 'range',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<RangeCalendarProps>(propTypes, defaultProps)
 const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
     const slots = useSlots()
 
@@ -270,9 +280,7 @@ const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
           </LocaleConsumer>
         );
     }
-})
+}, {props: vuePropsType, name:'RangeCalendar'})
 
-RangeCalendar.props = vuePropsType
-RangeCalendar.name = 'RangeCalendar'
 
 export default RangeCalendar

@@ -71,7 +71,6 @@ const DropdownDemo1 = defineComponent<ExampleProps>((props, {slots}) => {
   );
 })
 
-DropdownDemo1.props = vuePropsType
 
 export default DropdownDemo1
 

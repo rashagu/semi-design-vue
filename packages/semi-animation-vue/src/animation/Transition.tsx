@@ -10,7 +10,7 @@ import {
   reactive,
   VNode,
   useSlots,
-  onBeforeUnmount, watchEffect, computed, getCurrentInstance
+  onBeforeUnmount, watchEffect, computed, getCurrentInstance, ComponentObjectPropsOptions, PropType
 } from 'vue'
 import Animation, {AnimationProps} from './Animation';
 
@@ -36,8 +36,8 @@ export interface TransitionProps extends AnimationProps {
   onStart?: (value: any) => void;
 }
 
-export const vuePropsType = {
-  children: [Object, Function],
+export const vuePropsType:ComponentObjectPropsOptions<TransitionProps> = {
+  children: [Object, Function] as PropType<TransitionProps['children']>,
   from: Object,
   enter: Object,
   leave: Object,
@@ -48,27 +48,27 @@ export const vuePropsType = {
   },
 
   willEnter: {
-    type: Function,
+    type: Function as PropType<TransitionProps['willEnter']>,
     default: noop,
   },
   didEnter: {
-    type: Function,
+    type: Function as PropType<TransitionProps['didEnter']>,
     default: noop,
   },
   willLeave: {
-    type: Function,
+    type: Function as PropType<TransitionProps['willLeave']>,
     default: noop,
   },
   didLeave: {
-    type: Function,
+    type: Function as PropType<TransitionProps['didLeave']>,
     default: noop,
   },
   onRest: {
-    type: Function,
+    type: Function as PropType<TransitionProps['onRest']>,
     default: noop,
   },
   onStart: {
-    type: Function,
+    type: Function as PropType<TransitionProps['onStart']>,
     default: noop,
   },
 }

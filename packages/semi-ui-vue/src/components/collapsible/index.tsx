@@ -14,7 +14,7 @@ import {
   defineComponent,
   h,
   onBeforeUnmount,
-  onMounted,
+  onMounted, PropType,
   reactive,
   ref,
   useSlots,
@@ -24,6 +24,7 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
 import { PreviewImageProps } from '../image';
+import {ComponentObjectPropsOptions} from "vue/dist/vue";
 
 interface CollapsibleProps extends CollapsibleFoundationProps {
   motion?: boolean;
@@ -45,9 +46,9 @@ interface CollapsibleState extends CollapsibleFoundationState {
   visible: boolean;
   isTransitioning: boolean;
 }
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<CollapsibleProps> = {
   motion: PropTypes.bool,
-  children: PropTypes.node,
+  children: PropTypes.node as PropType<any>,
   isOpen: PropTypes.bool,
   duration: PropTypes.number,
   keepDOM: PropTypes.bool,
@@ -64,7 +65,7 @@ const defaultProps = {
   collapseHeight: 0,
   fade: false,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<CollapsibleProps>(propTypes, defaultProps);
 const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
   const slots = useSlots();
 
@@ -224,9 +225,10 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
       </div>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'Collapsible'
 });
 
-Collapsible.props = vuePropsType;
-Collapsible.name = 'Collapsible';
 
 export default Collapsible;

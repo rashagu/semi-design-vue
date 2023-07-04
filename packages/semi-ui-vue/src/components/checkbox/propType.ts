@@ -1,6 +1,10 @@
 import * as PropTypes from "../PropTypes";
+import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {CheckboxProps} from "./checkbox";
+import {PropType} from "vue";
 
-export const propTypesCheckbox = {
+
+export const propTypesCheckbox:ComponentObjectPropsOptions<CheckboxProps> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,
@@ -15,21 +19,21 @@ export const propTypesCheckbox = {
   // Set indeterminate state, only responsible for style control
   indeterminate: PropTypes.bool,
   // Callback function when changing
-  onChange: PropTypes.func,
+  onChange: PropTypes.func as PropType<CheckboxProps['onChange']>,
   value: PropTypes.any,
   style: PropTypes.object,
   className: PropTypes.string,
   prefixCls: PropTypes.string,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
-  extra: PropTypes.node,
-  index: PropTypes.number,
+  extra: PropTypes.node as PropType<CheckboxProps['extra']>,
+  index: PropTypes.number as PropType<CheckboxProps['index']>,
   'aria-label': PropTypes.string,
   tabIndex: PropTypes.number,
   preventScroll: PropTypes.bool,
-  type: PropTypes.string,
+  type: PropTypes.string as PropType<CheckboxProps['type']>,
 
-  class: PropTypes.string,
+  class: PropTypes.string as PropType<CheckboxProps['class']>,
   role: String,
   addonId: String,
   extraId: String,

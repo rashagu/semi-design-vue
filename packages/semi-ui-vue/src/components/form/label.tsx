@@ -1,10 +1,11 @@
-import {defineComponent, ref, h, CSSProperties, VNode, Fragment} from 'vue'
+import {defineComponent, ref, h, CSSProperties, VNode, Fragment, PropType} from 'vue'
 import classNames from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/form/constants';
 import { LocaleConsumerFunc } from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
 import {vuePropsMake} from "../PropTypes";
+import {ComponentObjectPropsOptions} from "vue/dist/vue";
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Form']>()
 const prefixCls = cssClasses.PREFIX;
@@ -30,9 +31,8 @@ export interface LabelProps {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<LabelProps> = {
   id: PropTypes.string,
-  children: PropTypes.node,
   required: PropTypes.bool,
   text: PropTypes.node,
   disabled: PropTypes.bool,
@@ -41,7 +41,7 @@ const propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   style: PropTypes.object,
   className: PropTypes.string,
-  extra: PropTypes.node,
+  extra: PropTypes.node as PropType<any>,
   optional: PropTypes.bool,
 };
 const defaultProps = {
@@ -51,7 +51,7 @@ const defaultProps = {
   className: '',
   optional: false,
 };
-export const VuePropsType = vuePropsMake(propTypes, defaultProps)
+export const VuePropsType = vuePropsMake<LabelProps>(propTypes, defaultProps)
 const Label = defineComponent<LabelProps>((props, {slots}) => {
 
   return () => {
@@ -102,11 +102,11 @@ const Label = defineComponent<LabelProps>((props, {slots}) => {
       </label>
     );
   }
+}, {
+  props: VuePropsType,
+  name: 'Label'
 })
 
 
-// @ts-ignore
-Label.props = VuePropsType
-Label.name = 'Label'
 
 export default Label

@@ -22,9 +22,11 @@ const DropdownDivider = defineComponent<DropdownDividerProps>((props, {slots}) =
 
   const { style, className } = props;
   return ()=> <div class={classnames(`${prefixCls}-divider`, className)} style={style}/>;
+}, {
+  props:vuePropsType,
+  name:'DropdownDivider'
 })
 
-DropdownDivider.props = vuePropsType
 
 export default DropdownDivider
 

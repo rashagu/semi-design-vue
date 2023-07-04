@@ -1,4 +1,16 @@
-import {CSSProperties, defineComponent, h, onMounted, onUnmounted, reactive, useSlots, VNode, Fragment, Ref} from 'vue'
+import {
+  CSSProperties,
+  defineComponent,
+  h,
+  onMounted,
+  onUnmounted,
+  reactive,
+  useSlots,
+  VNode,
+  Fragment,
+  Ref,
+  PropType
+} from 'vue'
 import cls from 'classnames';
 import {get} from 'lodash';
 
@@ -21,6 +33,7 @@ import Input from '../input/index';
 import {InsetDateInput, InsetTimeInput} from './insetInput';
 import * as PropTypes from "../PropTypes";
 import {vuePropsMake} from "../PropTypes";
+import {ComponentObjectPropsOptions} from "vue/dist/vue";
 
 export interface DateInputProps extends DateInputFoundationProps, BaseProps {
   insetLabel?: VNode;
@@ -38,38 +51,38 @@ export interface DateInputProps extends DateInputFoundationProps, BaseProps {
   rangeInputEndRef?: Ref
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<DateInputProps> = {
   borderless: {
     type: PropTypes.bool,
     default: false
   },
   onClick: {
-    type: PropTypes.func,
+    type: PropTypes.func as PropType<DateInputProps['onClick']>,
     default: noop
   },
   onChange: {
-    type: PropTypes.func,
+    type: PropTypes.func as PropType<DateInputProps['onChange']>,
     default: noop
   },
   onEnterPress: {
-    type: PropTypes.func,
+    type: PropTypes.func as PropType<DateInputProps['onEnterPress']>,
     default: noop
   },
   onBlur: {
-    type: PropTypes.func,
+    type: PropTypes.func as PropType<DateInputProps['onBlur']>,
     default: noop
   },
   onClear: {
-    type: PropTypes.func,
+    type: PropTypes.func as PropType<DateInputProps['onClear']>,
     default: noop
   },
   onFocus: {
-    type: PropTypes.func,
+    type: PropTypes.func as PropType<DateInputProps['onFocus']>,
     default: noop
   },
   value: PropTypes.array,
   disabled: PropTypes.bool,
-  type: {type: PropTypes.string, default: 'date'},
+  type: {type: PropTypes.string as PropType<DateInputProps['type']>, default: 'date'},
   showClear: {
     type: PropTypes.bool,
     default: true
@@ -83,9 +96,9 @@ const propTypes = {
     type: PropTypes.bool,
     default: false
   }, // Text box can be entered
-  insetLabel: PropTypes.node,
-  validateStatus: PropTypes.string,
-  prefix: PropTypes.node,
+  insetLabel: PropTypes.node as PropType<DateInputProps['insetLabel']>,
+  validateStatus: PropTypes.string as PropType<DateInputProps['validateStatus']>,
+  prefix: PropTypes.node as PropType<DateInputProps['prefix']>,
   prefixCls: {type: PropTypes.string, default: cssClasses.PREFIX},
   dateFnsLocale: PropTypes.any, // Foundation useful to
   placeholder: PropTypes.any,
@@ -95,7 +108,7 @@ const propTypes = {
   rangeSeparator: {type: PropTypes.string, default: strings.DEFAULT_SEPARATOR_RANGE},
   insetInput: [PropTypes.bool, PropTypes.object],
   insetInputValue: PropTypes.object,
-  defaultPickerValue: PropTypes.any,
+  defaultPickerValue: PropTypes.any as PropType<DateInputProps['defaultPickerValue']>,
 
   clearIcon: PropTypes.node,
   inputValue: PropTypes.string,
@@ -107,7 +120,7 @@ const propTypes = {
 
   onRangeBlur: PropTypes.func,
   onRangeClear: PropTypes.func,
-  onRangeEndTabPress: PropTypes.func,
+  onRangeEndTabPress: PropTypes.func as PropType<DateInputProps['onRangeEndTabPress']>,
 
   inputRef: PropTypes.object,
 }
@@ -125,7 +138,7 @@ const defaultProps = {
   prefixCls: cssClasses.PREFIX,
   rangeSeparator: strings.DEFAULT_SEPARATOR_RANGE,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<DateInputProps>(propTypes, defaultProps)
 const dateInput = defineComponent<DateInputProps>((props, {}) => {
   const slots = useSlots()
   const state = reactive({isFocusing: false})
@@ -514,10 +527,12 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
     const {insetInput} = props;
     return insetInput ? renderInputInset() : renderTriggerInput();
   }
+}, {
+  props: vuePropsType,
+  name: "dateInput"
 })
 
-dateInput.props = vuePropsType
-dateInput.name = "dateInput"
+
 
 export default dateInput
 

@@ -20,9 +20,11 @@ const DropdownMenu = defineComponent<DropdownMenuProps>((props, {slots}) => {
       {slots.default?slots.default():null}
     </ul>
   );
+},{
+  props: vuePropsType,
+  name: 'DropdownMenu'
 })
 
-DropdownMenu.props = vuePropsType
 
 export default DropdownMenu
 

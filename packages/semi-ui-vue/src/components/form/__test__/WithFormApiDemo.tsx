@@ -34,9 +34,5 @@ const WithFormApiDemo = defineComponent<WithFormApiDemoProps>((props, {}) => {
   )
 })
 
-// @ts-ignore
-WithFormApiDemo.props = vuePropsType
-WithFormApiDemo.name = 'WithFormApiDemo'
-
 export default WithFormApiDemo
 

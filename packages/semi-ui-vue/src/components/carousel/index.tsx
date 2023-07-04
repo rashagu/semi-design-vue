@@ -11,13 +11,13 @@ import '@douyinfe/semi-foundation/carousel/carousel.scss';
 import {debounce, isEqual, pick} from 'lodash';
 import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
 import {
-  cloneVNode,
+  cloneVNode, ComponentObjectPropsOptions,
   defineComponent,
   Fragment,
   h,
   isVNode,
   onBeforeUnmount,
-  onMounted,
+  onMounted, PropType,
   reactive, shallowRef,
   useSlots,
   VNode,
@@ -35,25 +35,25 @@ export interface CarouselState {
   isInit: boolean
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<CarouselProps> = {
   activeIndex: PropTypes.number,
-  animation: PropTypes.string,
+  animation: PropTypes.string as PropType<CarouselProps['animation']>,
   arrowProps: PropTypes.object,
   autoPlay: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   className: PropTypes.string,
   defaultActiveIndex: PropTypes.number,
-  indicatorPosition: PropTypes.string,
-  indicatorSize: PropTypes.string,
-  indicatorType: PropTypes.string,
-  theme: PropTypes.string,
-  onChange: PropTypes.func,
-  arrowType: PropTypes.string,
+  indicatorPosition: PropTypes.string as PropType<CarouselProps['indicatorPosition']>,
+  indicatorSize: PropTypes.string as PropType<CarouselProps['indicatorSize']>,
+  indicatorType: PropTypes.string as PropType<CarouselProps['indicatorType']>,
+  theme: PropTypes.string as PropType<CarouselProps['theme']>,
+  onChange: PropTypes.func as PropType<CarouselProps['onChange']>,
+  arrowType: PropTypes.string as PropType<CarouselProps['arrowType']>,
   showArrow: PropTypes.bool,
   showIndicator: PropTypes.bool,
-  slideDirection: PropTypes.string,
+  slideDirection: PropTypes.string as PropType<CarouselProps['slideDirection']>,
   speed: PropTypes.number,
   style: PropTypes.object,
-  trigger: PropTypes.string
+  trigger: PropTypes.string as PropType<CarouselProps['trigger']>,
 };
 
 const defaultProps: CarouselProps = {
@@ -73,7 +73,7 @@ const defaultProps: CarouselProps = {
   speed: numbers.DEFAULT_SPEED,
   trigger: 'click'
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<CarouselProps>(propTypes, defaultProps)
 const Carousel = defineComponent<CarouselProps>((props, {expose}) => {
   const slots = useSlots()
   const childrenRef = shallowRef<{children:VNode[]}>({
@@ -336,9 +336,10 @@ const Carousel = defineComponent<CarouselProps>((props, {expose}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Carousel'
 })
 
-Carousel.props = vuePropsType
-Carousel.name = 'Carousel'
 
 export default Carousel

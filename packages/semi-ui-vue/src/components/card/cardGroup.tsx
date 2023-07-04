@@ -3,7 +3,7 @@ import * as PropTypes from '../PropTypes';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/card/constants';
 import cls from 'classnames';
 import Space from '../space';
-import {CSSProperties, defineComponent, h, useSlots} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {VueJsxNode} from "../interface";
 
@@ -21,17 +21,17 @@ export interface CardGroupProps {
     /** Card set type */
     type?: CardGroupType
 }
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<CardGroupProps> = {
     className: PropTypes.string,
     spacing: [PropTypes.number, PropTypes.array],
     style: PropTypes.object,
-    type: PropTypes.string
+    type: PropTypes.string as PropType<CardGroupProps['type']>
 };
 
 const defaultProps = {
     spacing: 16
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<CardGroupProps>(propTypes, defaultProps)
 const CardGroup = defineComponent<CardGroupProps>((props, {}) => {
     const slots = useSlots()
 
@@ -62,10 +62,10 @@ const CardGroup = defineComponent<CardGroupProps>((props, {}) => {
           </Space>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'CardGroup'
 })
 
-// @ts-ignore
-CardGroup.props = vuePropsType
-CardGroup.name = 'CardGroup'
 
 export default CardGroup

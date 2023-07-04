@@ -1,5 +1,15 @@
 import { isEqual, noop } from "lodash";
-import {CSSProperties, defineComponent, h, nextTick, onMounted, reactive, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    nextTick,
+    onMounted, PropType,
+    reactive,
+    useSlots, VNode,
+    watch
+} from "vue";
 import {VueJsxNode} from "../interface";
 
 
@@ -34,13 +44,13 @@ interface AnimationState {
 }
 
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<AnimationProps> = {
     startClassName: String,
     endClassName: String,
-    children: [Function, Object],
-    animationState: String,
-    onAnimationEnd: Function,
-    onAnimationStart: Function,
+    children: [Function, Object] as PropType<AnimationProps['children']>,
+    animationState: String as PropType<AnimationProps['animationState']>,
+    onAnimationEnd: Function as PropType<AnimationProps['onAnimationEnd']>,
+    onAnimationStart: Function as PropType<AnimationProps['onAnimationStart']>,
     motion: {
         type: Boolean,
         default: true
@@ -49,7 +59,7 @@ export const vuePropsType = {
         type: String,
         default: ""
     },
-    fillMode: String,
+    fillMode: String as PropType<AnimationProps['fillMode']>,
 }
 
 
@@ -123,20 +133,21 @@ const CSSAnimation = defineComponent<AnimationProps>((props, {}) => {
                     onAnimationend: handleAnimationEnd
                 },
                 isAnimating: state.isAnimating
-            });
+            }) as VNode;
         } else {
             return props.children({
                 animationClassName: "",
                 animationStyle: {},
                 animationEventsNeedBind: {},
                 isAnimating: state.isAnimating
-            });
+            }) as VNode;
         }
     }
+}, {
+    props: vuePropsType,
+    name: 'CSSAnimation'
 })
 
-CSSAnimation.props = vuePropsType
-CSSAnimation.name = 'CSSAnimation'
 
 export default CSSAnimation
 

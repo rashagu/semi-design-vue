@@ -9,17 +9,17 @@ export function useBaseFormApiContext (): { context: Ref<UnwrapRef<BaseFormApi>>
   }
 }
 export const vuePropsType = {
-  name: String
+
 }
 const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useBaseFormApiContext()
   return () => slots.default ? slots.default(context) : null
+},{
+  props: vuePropsType,
+  name: 'BaseFormApiContextConsumer'
 })
 
-// @ts-ignore
-Consumer.props = vuePropsType
-Consumer.name = 'BaseFormApiContextConsumer'
 
 export default Consumer
 

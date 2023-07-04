@@ -54,15 +54,13 @@ const Skeleton = defineComponent<SkeletonProps>((props, {}) => {
         }
         return content;
     }
+}, {
+    props: vuePropsType,
+    name: 'Skeleton'
 })
 
-Skeleton.props = vuePropsType
-Skeleton.name = 'Skeleton'
-Skeleton.Avatar = Avatar
-Skeleton.Image = Image
-Skeleton.Title = Title
-Skeleton.Button = Button
-Skeleton.Paragraph = Paragraph
+
+
 
 export {
     Avatar as SkeletonAvatar,

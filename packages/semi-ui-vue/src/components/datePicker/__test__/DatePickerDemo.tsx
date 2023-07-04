@@ -53,7 +53,7 @@ const DatePickerDemo = defineComponent<ExampleProps>((props, {}) => {
   )
 })
 
-DatePickerDemo.props = vuePropsType
+
 
 export default DatePickerDemo
 
