@@ -62,7 +62,8 @@ const PopoverTest = defineComponent<ExampleProps>((props, {slots}) => {
   )
 })
 
-PopoverTest.props = vuePropsType
+
+
 
 export default PopoverTest
 

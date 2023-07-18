@@ -8,7 +8,19 @@ import Tooltip from '../tooltip';
 import RatingFoundation, { RatingAdapter } from '@douyinfe/semi-foundation/rating/foundation';
 
 import '@douyinfe/semi-foundation/rating/rating.scss';
-import {CSSProperties, defineComponent, h, onMounted, onUnmounted, reactive, ref, useSlots, VNode, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    onMounted,
+    onUnmounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    VNode,
+    watch
+} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 
@@ -53,7 +65,7 @@ export interface RatingState {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<RatingProps> = {
     'aria-describedby': PropTypes.string,
     'aria-errormessage': PropTypes.string,
     'aria-invalid': PropTypes.bool,
@@ -68,14 +80,14 @@ const propTypes = {
     allowClear: PropTypes.bool,
     style: PropTypes.object,
     prefixCls: PropTypes.string,
-    onChange: PropTypes.func,
-    onHoverChange: PropTypes.func,
+    onChange: PropTypes.func as PropType<RatingProps['onChange']>,
+    onHoverChange: PropTypes.func as PropType<RatingProps['onHoverChange']>,
     className: PropTypes.string,
     character: PropTypes.node,
     tabIndex: PropTypes.number,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onKeyDown: PropTypes.func,
+    onFocus: PropTypes.func as PropType<RatingProps['onFocus']>,
+    onBlur: PropTypes.func as PropType<RatingProps['onBlur']>,
+    onKeyDown: PropTypes.func as PropType<RatingProps['onKeyDown']>,
     autoFocus: PropTypes.bool,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     tooltips: Array,
@@ -95,7 +107,7 @@ const defaultProps = {
     tabIndex: -1,
     size: 'default' as const,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<RatingProps>(propTypes, defaultProps)
 const Rating = defineComponent<RatingProps>((props, {}) => {
     const slots = useSlots()
 
@@ -334,10 +346,12 @@ const Rating = defineComponent<RatingProps>((props, {}) => {
           </ul>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Rating'
 })
 
-Rating.props = vuePropsType
-Rating.name = 'Rating'
+
 
 export default Rating
 

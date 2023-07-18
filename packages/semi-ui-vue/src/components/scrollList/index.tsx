@@ -57,9 +57,11 @@ const index = defineComponent<ScrollListProps>((props, {}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'ScrollList'
 })
 
-index.props = vuePropsType
 
 export default index
 

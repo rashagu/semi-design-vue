@@ -1,10 +1,21 @@
-import {defineComponent, ref, h, Fragment, CSSProperties, onMounted, inject} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  CSSProperties,
+  onMounted,
+  inject,
+  ComponentObjectPropsOptions,
+  PropType
+} from 'vue'
 import cls from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/layout/constants';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import {registerMediaQuery} from '../_utils/index';
 import LayoutContext from "./layoutContext";
 import {useLayoutContext} from "./context/Consumer";
+import {PreviewProps as PreviewInnerProps} from "../image";
 
 export interface ResponsiveMap {
   xs: string;
@@ -46,16 +57,15 @@ export interface SiderProps {
 }
 
 
-export const vuePropsType = {
-  name: String,
+export const vuePropsType:ComponentObjectPropsOptions<SiderProps> = {
   prefixCls: {
-    type: String,
+    type: String as PropType<SiderProps['prefixCls']>,
     default: cssClasses.PREFIX
   },
-  style: [String, Object],
+  style: [String, Object] as PropType<SiderProps['style']>,
   className: String,
   breakpoint: Array,
-  onBreakpoin: Function,
+  // onBreakpoin: Function as PropType<SiderProps['onBreakpoin']>,
   'aria-label': String,
   'role': String,
 }
@@ -103,9 +113,11 @@ const Sider = defineComponent<SiderProps>((props, {slots}) => {
       </aside>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'LayoutSider'
 })
 
-Sider.props = vuePropsType
-Sider.name = 'Layout.Sider'
+
 export default Sider
 

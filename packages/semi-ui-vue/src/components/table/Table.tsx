@@ -70,7 +70,7 @@ import { ArrayElement } from '../_base/base';
 
 import { VueJsxNode } from '../interface';
 import {
-  ComponentInternalInstance,
+  ComponentInternalInstance, ComponentObjectPropsOptions,
   CSSProperties,
   defineComponent,
   Fragment,
@@ -78,7 +78,7 @@ import {
   h,
   isVNode,
   onBeforeUnmount,
-  onMounted,
+  onMounted, PropType,
   reactive,
   ref,
   toRaw,
@@ -88,6 +88,7 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
 import { useTableContext } from './tableContext/Consumer';
+import {a} from "vitest/dist/types-aac763a5";
 
 export type NormalTableProps<RecordType extends Record<string, any> = Data> = Omit<TableProps<RecordType>, 'resizable'>;
 
@@ -132,31 +133,32 @@ export interface RenderTableProps<RecordType> extends HeadTableProps, BodyProps 
   bodyHasScrollBar: boolean;
 }
 
-const propTypes = {
-  children: PropTypes.any,
+const propTypes:ComponentObjectPropsOptions<NormalTableProps<any>> = {
+  children: PropTypes.any as PropType<NormalTableProps['children']>,
   className: PropTypes.string,
   style: PropTypes.object,
   prefixCls: PropTypes.string,
-  components: PropTypes.any,
+  components: PropTypes.any as PropType<NormalTableProps['components']>,
   bordered: PropTypes.bool,
   loading: PropTypes.bool,
-  size: PropTypes.string,
-  tableLayout: PropTypes.string,
+  size: PropTypes.string as PropType<NormalTableProps['size']>,
+// @ts-ignore
+  tableLayout: PropTypes.string as PropType<any>,
   columns: PropTypes.array,
   hideExpandedColumn: PropTypes.bool,
   id: PropTypes.string,
   expandIcon: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.node]),
   expandCellFixed: PropTypes.bool,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.func]),
-  onHeaderRow: PropTypes.func,
+  onHeaderRow: PropTypes.func as PropType<NormalTableProps['onHeaderRow']>,
   showHeader: PropTypes.bool,
   indentSize: PropTypes.number,
   rowKey: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.number]),
-  onRow: PropTypes.func,
-  onExpandedRowsChange: PropTypes.func,
-  onExpand: PropTypes.func,
-  rowExpandable: PropTypes.func,
-  expandedRowRender: PropTypes.func,
+  onRow: PropTypes.func as PropType<NormalTableProps['onRow']>,
+  onExpandedRowsChange: PropTypes.func as PropType<NormalTableProps['onExpandedRowsChange']>,
+  onExpand: PropTypes.func as PropType<NormalTableProps['onExpand']>,
+  rowExpandable: PropTypes.func as PropType<NormalTableProps['rowExpandable']>,
+  expandedRowRender: PropTypes.func as PropType<NormalTableProps['expandedRowRender']>,
   expandedRowKeys: PropTypes.array,
   defaultExpandAllRows: PropTypes.bool,
   expandAllRows: PropTypes.bool,
@@ -164,24 +166,24 @@ const propTypes = {
   expandAllGroupRows: PropTypes.bool,
   defaultExpandedRowKeys: PropTypes.array,
   pagination: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  renderPagination: PropTypes.func,
+  renderPagination: PropTypes.func as PropType<NormalTableProps['renderPagination']>,
   footer: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.node]),
   empty: PropTypes.node,
   dataSource: PropTypes.array,
   childrenRecordName: PropTypes.string, // children data property name
   rowSelection: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  onChange: PropTypes.func,
+  onChange: PropTypes.func as PropType<NormalTableProps['onChange']>,
   scroll: PropTypes.object,
   groupBy: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.func]),
   renderGroupSection: PropTypes.oneOfType([PropTypes.func]),
-  onGroupedRow: PropTypes.func,
+  onGroupedRow: PropTypes.func as PropType<NormalTableProps['onGroupedRow']>,
   clickGroupedRowToExpand: PropTypes.bool,
   virtualized: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   dropdownPrefixCls: PropTypes.string, // TODO: future api
   expandRowByClick: PropTypes.bool, // TODO: future api
-  getVirtualizedListRef: PropTypes.func, // TODO: future api
+  getVirtualizedListRef: PropTypes.func as PropType<NormalTableProps['getVirtualizedListRef']>, // TODO: future api
   bodyWrapperRef: [PropTypes.func, PropTypes.object],
-  direction: PropTypes.string,
+  direction: PropTypes.string as PropType<NormalTableProps['direction']>,
 };
 export { propTypes as TablePropTypes };
 const defaultProps = {
@@ -212,10 +214,10 @@ const defaultProps = {
   onExpandedRowsChange: noop,
   expandRowByClick: false,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 // NormalTableProps<RecordType>, NormalTableState<RecordType>
 // 需要返回范型组件
 function Table<RecordType extends Record<string, any>>() {
+  const vuePropsType = vuePropsMake<NormalTableProps<RecordType>>(propTypes, defaultProps);
   const TableComp = defineComponent<NormalTableProps<RecordType>>((props, {}) => {
     const slots = useSlots();
 
@@ -1589,10 +1591,11 @@ function Table<RecordType extends Record<string, any>>() {
         </div>
       );
     };
+  }, {
+    props: vuePropsType,
+    name: 'Table'
   });
 
-  TableComp.props = vuePropsType;
-  TableComp.name = 'Table';
   return TableComp;
 }
 

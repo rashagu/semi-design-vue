@@ -209,11 +209,11 @@ const ListDemo = defineComponent<ListDemoProps>((props, {}) => {
       </div>
     </div>
   )
+},{
+  name:'ListDemo'
 })
 
-// @ts-ignore
-ListDemo.props = vuePropsType
-ListDemo.name = 'ListDemo'
+
 
 export default ListDemo
 

@@ -46,11 +46,12 @@ import {
 } from '../interface';
 import {VueJsxNode} from "../../interface";
 import {
+    ComponentObjectPropsOptions,
     CSSProperties,
     defineComponent, Fragment,
     FunctionalComponent,
     h,
-    nextTick,
+    nextTick, PropType,
     reactive,
     ref,
     useSlots,
@@ -90,6 +91,44 @@ export interface BodyProps extends BaseProps {
     headerRef?: any;
     onScroll?: VirtualizedOnScroll,
     bodyWrapperRef?: any
+
+    expandRowByClick?: boolean
+    tableWidth?: number
+    expandIcon?: any
+    expandCellFixed?: any
+    title?: string
+    indentSize?: any
+    defaultExpandAllRows?: any
+    expandAllRows?: any
+    defaultExpandAllGroupRows?: any
+    expandAllGroupRows?: any
+    defaultExpandedRowKeys?: any
+    footer?: any
+    empty?: any
+    groupBy?: any
+    renderGroupSection?: any
+    clickGroupedRowToExpand?: any
+    dropdownPrefixCls?: any
+    cachedColumns?: any
+    cachedChildren?: any
+    flattenColumns?: any
+    queries?: any
+    flattenData?: any
+    pagination?: any
+    allRowKeys?: any
+    disabledRowKeys?: any
+    bodyHasScrollBar?: any
+    prePropRowSelection?: any
+    prePagination?: any
+    hideExpandedColumn?: any
+    filteredColumns?: any
+    useFixedHeader?: any
+    bodyRef?: any
+    onExpandedRowsChange?: any
+    onExpand?: any
+    onChange?: any
+    onRow?: any
+    onGroupedRow?: any
 }
 
 export interface BodyState {
@@ -108,7 +147,7 @@ export interface BodyContext {
     getCellWidths: (flattenedColumns: ColumnProps[]) => number[]
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<BodyProps> = {
     anyColumnFixed: PropTypes.bool,
     childrenRecordName: PropTypes.string,
     columns: PropTypes.array,
@@ -116,72 +155,72 @@ const propTypes = {
     dataSource: PropTypes.array,
     disabledRowKeysSet: PropTypes.object,
     emptySlot: PropTypes.node,
-    expandRowByClick: PropTypes.bool,
+    expandRowByClick: PropTypes.bool as PropType<BodyProps['expandRowByClick']>,
     expandedRowKeys: PropTypes.array,
-    expandedRowRender: PropTypes.func,
+    expandedRowRender: PropTypes.func as PropType<BodyProps['expandedRowRender']>,
     fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     forwardedRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     groups: PropTypes.object,
-    handleBodyScroll: PropTypes.func,
-    handleWheel: PropTypes.func,
+    handleBodyScroll: PropTypes.func as PropType<BodyProps['handleBodyScroll']>,
+    handleWheel: PropTypes.func as PropType<BodyProps['handleWheel']>,
     headerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     includeHeader: PropTypes.bool,
-    onScroll: PropTypes.func,
+    onScroll: PropTypes.func as PropType<BodyProps['onScroll']>,
     prefixCls: PropTypes.string,
-    renderExpandIcon: PropTypes.func,
-    rowExpandable: PropTypes.func,
+    renderExpandIcon: PropTypes.func as PropType<BodyProps['renderExpandIcon']>,
+    rowExpandable: PropTypes.func as PropType<BodyProps['rowExpandable']>,
     rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.func]),
     scroll: PropTypes.object,
     selectedRowKeysSet: PropTypes.object,
     showHeader: PropTypes.bool,
-    size: PropTypes.string,
+    size: PropTypes.string as PropType<BodyProps['size']>,
     store: PropTypes.object,
     virtualized: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
 
-    tableWidth: PropTypes.number,
-    tableLayout: PropTypes.any,
-    expandIcon: PropTypes.any,
-    expandCellFixed: PropTypes.any,
-    title: PropTypes.any,
-    indentSize: PropTypes.any,
-    defaultExpandAllRows: PropTypes.any,
-    expandAllRows: PropTypes.any,
-    defaultExpandAllGroupRows: PropTypes.any,
-    expandAllGroupRows: PropTypes.any,
-    defaultExpandedRowKeys: PropTypes.any,
-    footer: PropTypes.any,
-    empty: PropTypes.any,
-    groupBy: PropTypes.any,
-    renderGroupSection: PropTypes.any,
-    clickGroupedRowToExpand: PropTypes.any,
-    dropdownPrefixCls: PropTypes.any,
-    cachedColumns: PropTypes.any,
-    cachedChildren: PropTypes.any,
-    flattenColumns: PropTypes.any,
-    queries: PropTypes.any,
-    flattenData: PropTypes.any,
-    pagination: PropTypes.any,
-    allRowKeys: PropTypes.any,
-    disabledRowKeys: PropTypes.any,
-    bodyHasScrollBar: PropTypes.any,
-    prePropRowSelection: PropTypes.any,
-    prePagination: PropTypes.any,
-    hideExpandedColumn: PropTypes.any,
-    filteredColumns: PropTypes.any,
-    useFixedHeader: PropTypes.any,
-    bodyRef: PropTypes.any,
-    onExpandedRowsChange: PropTypes.func,
-    onExpand: PropTypes.func,
-    onChange: PropTypes.func,
+    tableWidth: PropTypes.number as PropType<BodyProps['tableWidth']>,
+    tableLayout: PropTypes.any as PropType<BodyProps['tableLayout']>,
+    expandIcon: PropTypes.any as PropType<BodyProps['expandIcon']>,
+    expandCellFixed: PropTypes.any as PropType<BodyProps['expandCellFixed']>,
+    title: PropTypes.any as PropType<BodyProps['title']>,
+    indentSize: PropTypes.any as PropType<BodyProps['indentSize']>,
+    defaultExpandAllRows: PropTypes.any as PropType<BodyProps['defaultExpandAllRows']>,
+    expandAllRows: PropTypes.any as PropType<BodyProps['expandAllRows']>,
+    defaultExpandAllGroupRows: PropTypes.any as PropType<BodyProps['defaultExpandAllGroupRows']>,
+    expandAllGroupRows: PropTypes.any as PropType<BodyProps['expandAllGroupRows']>,
+    defaultExpandedRowKeys: PropTypes.any as PropType<BodyProps['defaultExpandedRowKeys']>,
+    footer: PropTypes.any as PropType<BodyProps['footer']>,
+    empty: PropTypes.any as PropType<BodyProps['empty']>,
+    groupBy: PropTypes.any as PropType<BodyProps['groupBy']>,
+    renderGroupSection: PropTypes.any as PropType<BodyProps['renderGroupSection']>,
+    clickGroupedRowToExpand: PropTypes.any as PropType<BodyProps['clickGroupedRowToExpand']>,
+    dropdownPrefixCls: PropTypes.any as PropType<BodyProps['dropdownPrefixCls']>,
+    cachedColumns: PropTypes.any as PropType<BodyProps['cachedColumns']>,
+    cachedChildren: PropTypes.any as PropType<BodyProps['cachedChildren']>,
+    flattenColumns: PropTypes.any as PropType<BodyProps['flattenColumns']>,
+    queries: PropTypes.any as PropType<BodyProps['queries']>,
+    flattenData: PropTypes.any as PropType<BodyProps['flattenData']>,
+    pagination: PropTypes.any as PropType<BodyProps['pagination']>,
+    allRowKeys: PropTypes.any as PropType<BodyProps['allRowKeys']>,
+    disabledRowKeys: PropTypes.any as PropType<BodyProps['disabledRowKeys']>,
+    bodyHasScrollBar: PropTypes.any as PropType<BodyProps['bodyHasScrollBar']>,
+    prePropRowSelection: PropTypes.any as PropType<BodyProps['prePropRowSelection']>,
+    prePagination: PropTypes.any as PropType<BodyProps['prePagination']>,
+    hideExpandedColumn: PropTypes.any as PropType<BodyProps['hideExpandedColumn']>,
+    filteredColumns: PropTypes.any as PropType<BodyProps['filteredColumns']>,
+    useFixedHeader: PropTypes.any as PropType<BodyProps['useFixedHeader']>,
+    bodyRef: PropTypes.any as PropType<BodyProps['bodyRef']>,
+    onExpandedRowsChange: PropTypes.func as PropType<BodyProps['onExpandedRowsChange']>,
+    onExpand: PropTypes.func as PropType<BodyProps['onExpand']>,
+    onChange: PropTypes.func as PropType<BodyProps['onChange']>,
 
-    onRow: PropTypes.func,
+    onRow: PropTypes.func as PropType<BodyProps['onRow']>,
     bodyWrapperRef: [PropTypes.func, PropTypes.object],
-    onGroupedRow: PropTypes.func,
+    onGroupedRow: PropTypes.func as PropType<BodyProps['onGroupedRow']>,
 };
 export {
     propTypes as BodyPropTypes
 }
-export const vuePropsType = vuePropsMake(propTypes, {});
+export const vuePropsType = vuePropsMake<BodyProps>(propTypes, {});
 const Body = defineComponent<BodyProps>((props, {}) => {
     const slots = useSlots();
 
@@ -923,10 +962,12 @@ const Body = defineComponent<BodyProps>((props, {}) => {
         const { direction } = context.value;
         return virtualized ? renderVirtualizedBody(direction) : renderBody(direction);
     };
+}, {
+    props: vuePropsType,
+    name: 'Body'
 });
 
-Body.props = vuePropsType;
-Body.name = "Body";
+
 
 export default Body;
 

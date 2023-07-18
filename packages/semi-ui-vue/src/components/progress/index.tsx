@@ -5,7 +5,17 @@ import '@douyinfe/semi-foundation/progress/progress.scss';
 import { Animation } from '@douyinfe/semi-animation';
 import { Motion } from '../_base/base';
 import { generateColor, StrokeArr } from '@douyinfe/semi-foundation/progress/generates';
-import {CSSProperties, defineComponent, h, onUnmounted, reactive, useSlots, VNode, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    onUnmounted, PropType,
+    reactive,
+    useSlots,
+    VNode,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 const prefixCls = cssClasses.PREFIX;
@@ -37,26 +47,26 @@ export interface ProgressState {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<ProgressProps> = {
     'aria-label': PropTypes.string,
     'aria-labelledby': PropTypes.string,
     'aria-valuetext': PropTypes.string,
     className: PropTypes.string,
-    direction: String,
-    format: [Function, ...PropTypes.node],
+    direction: String as PropType<ProgressProps['direction']>,
+    format: [Function, ...PropTypes.node] as PropType<ProgressProps['format']>,
     id: PropTypes.string,
     motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
     orbitStroke: PropTypes.string,
     percent: PropTypes.number,
-    scale: PropTypes.number,
+    // scale: PropTypes.number as PropType<ProgressProps['scale']>,
     showInfo: PropTypes.bool,
-    size: String,
+    size: String as PropType<ProgressProps['size']>,
     stroke: [PropTypes.string, PropTypes.array],
     strokeGradient: PropTypes.bool,
-    strokeLinecap: String,
+    strokeLinecap: String as PropType<ProgressProps['strokeLinecap']>,
     strokeWidth: PropTypes.number,
     style: PropTypes.object,
-    type: String,
+    type: String as PropType<ProgressProps['type']>,
     width: PropTypes.number,
 };
 
@@ -76,7 +86,7 @@ const defaultProps = {
     style: {},
     type: strings.DEFAULT_TYPE,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<ProgressProps>(propTypes, defaultProps)
 const Progress = defineComponent<ProgressProps>((props, {}) => {
 
     const slots = useSlots()
@@ -333,9 +343,10 @@ const Progress = defineComponent<ProgressProps>((props, {}) => {
             return renderCircleProgress();
         }
     }
+}, {
+    props: vuePropsType,
+    name: 'Progress'
 })
 
-Progress.props = vuePropsType
-Progress.name = 'Progress'
 
 export default Progress

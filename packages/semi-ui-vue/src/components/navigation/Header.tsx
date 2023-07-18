@@ -6,7 +6,7 @@ import {cssClasses} from '@douyinfe/semi-foundation/navigation/constants';
 import '@douyinfe/semi-foundation/navigation/navigation.scss';
 
 import {BaseProps} from '../_base/baseComponent';
-import {defineComponent, h, isVNode, VNode, Fragment} from "vue";
+import {defineComponent, h, isVNode, VNode, Fragment, ComponentObjectPropsOptions, PropType} from "vue";
 import {useNavContext} from "./nav-context/Consumer";
 
 export type Logo = VNode;
@@ -17,17 +17,18 @@ export interface NavHeaderProps extends BaseProps {
   logo?: Logo;
   prefixCls?: string;
   text?: VNode;
+  class?: string
 }
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<NavHeaderProps> = {
   prefixCls: {
     type: PropTypes.string,
     default: cssClasses.PREFIX,
   },
-  logo: PropTypes.node,
-  text: PropTypes.node,
+  logo: PropTypes.node as PropType<NavHeaderProps['logo']>,
+  text: PropTypes.node as PropType<NavHeaderProps['text']>,
   style: PropTypes.object,
-  class: PropTypes.string,
+  class: PropTypes.string as PropType<NavHeaderProps['class']>,
   link: PropTypes.string,
   linkOptions: PropTypes.object,
 }
@@ -77,9 +78,11 @@ const NavHeader = defineComponent<NavHeaderProps>((props, {slots}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'NavHeader'
 })
 
-NavHeader.props = vuePropsType
-NavHeader.name = "NavHeader"
+
 export default NavHeader
 

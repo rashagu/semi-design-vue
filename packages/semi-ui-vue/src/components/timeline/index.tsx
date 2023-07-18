@@ -5,7 +5,16 @@ import '@douyinfe/semi-foundation/timeline/timeline.scss';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/timeline/constants';
 import ConfigContext from '../configProvider/context';
 import Item, { TimelineItemProps } from './item';
-import {cloneVNode, CSSProperties, defineComponent, h, isVNode, useSlots, VNode} from "vue";
+import {
+    cloneVNode,
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    isVNode, PropType,
+    useSlots,
+    VNode
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {AriaAttributes} from "../AriaAttributes";
 import {VueJsxNode} from "../interface";
@@ -25,8 +34,8 @@ export interface TimelineProps extends Pick<AriaAttributes, 'aria-label'> {
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes = {
-    mode: PropTypes.string,
+const propTypes:ComponentObjectPropsOptions<TimelineProps> = {
+    mode: PropTypes.string as PropType<TimelineProps['mode']>,
     className: PropTypes.string,
     style: PropTypes.object,
     dataSource: PropTypes.array,
@@ -99,10 +108,12 @@ const Timeline = defineComponent<TimelineProps>((props, {}) => {
           </ul>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Timeline'
 })
 
-Timeline.props = vuePropsType
-Timeline.name = 'Timeline'
+
 
 export default Timeline
 export {

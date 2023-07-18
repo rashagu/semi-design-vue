@@ -9,9 +9,19 @@ import ListItem from './item';
 import { Row } from '../grid';
 import Spin from '../spin';
 import ListContext, { Grid } from './list-context';
-import {cloneVNode, CSSProperties, defineComponent, h, useSlots, VNode} from "vue";
+import {
+    cloneVNode,
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    PropType,
+    useSlots,
+    VNode
+} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
+import {PreviewProps as PreviewInnerProps} from "../image";
 
 export type { ListItemProps } from './item';
 
@@ -37,23 +47,23 @@ export interface ListProps<T> {
 const prefixCls = cssClasses.PREFIX;
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<ListProps<any>> = {
     style: PropTypes.object,
     className: PropTypes.string,
     bordered: PropTypes.bool,
     footer: PropTypes.node,
     header: PropTypes.node,
-    layout: PropTypes.string,
-    size: PropTypes.string,
+    layout: PropTypes.string as PropType<ListProps<any>['layout']>,
+    size: PropTypes.string as PropType<ListProps<any>['size']>,
     split: PropTypes.bool,
     emptyContent: PropTypes.node,
     dataSource: PropTypes.array,
-    renderItem: PropTypes.func,
+    renderItem: PropTypes.func as PropType<ListProps<any>['renderItem']>,
     grid: PropTypes.object,
     loading: PropTypes.bool,
     loadMore: PropTypes.node,
-    onRightClick: PropTypes.func,
-    onClick: PropTypes.func,
+    onRightClick: PropTypes.func as PropType<ListProps<any>['onRightClick']>,
+    onClick: PropTypes.func as PropType<ListProps<any>['onClick']>,
 };
 
 const defaultProps = {
@@ -66,138 +76,132 @@ const defaultProps = {
     onClick: noop,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-function ListMaker<T>() {
-    const List = defineComponent<ListProps<T>>((props, {}) => {
-        const slots = useSlots()
 
-        const renderEmpty = () => {
-            const { emptyContent } = props;
-            if (emptyContent) {
-                return (
-                  <div class={`${cssClasses.PREFIX}-empty`} x-semi-prop="emptyContent">
-                      {emptyContent}
-                  </div>
-                );
-            } else {
-                return (
-                  <LocaleConsumer componentName="List">
-                      {
-                          (locale: Locale['List']) => (
-                            <div class={`${cssClasses.PREFIX}-empty`}>{locale.emptyText}</div>
-                          )
-                      }
-                  </LocaleConsumer>
-                );
-            }
-        };
 
-        function wrapChildren(childrenList: VNode[], children: VNode[]) {
-            const { grid } = props;
-            if (grid) {
-                const rowProps = {};
-                ['align', 'gutter', 'justify', 'type'].forEach(key => {
-                    if (key in grid) {
-                        rowProps[key] = grid[key];
-                    }
-                });
-                return (
-                  <Row type="flex" {...rowProps}>
-                      {childrenList ? childrenList : null}
-                      {children}
-                  </Row>
-                );
-            }
+const List = defineComponent(<T extends ListProps<T>>(props, {}) => {
+    const slots = useSlots()
+
+    const renderEmpty = () => {
+        const { emptyContent } = props;
+        if (emptyContent) {
             return (
-              <ul class={`${prefixCls}-items`}>
-                  {childrenList ? childrenList : null}
-                  {children}
-              </ul>
-            );
-        }
-
-
-        return () => {
-
-            const children = slots.default?.()
-            const {
-                style,
-                className,
-                header,
-                loading,
-                onRightClick,
-                onClick,
-                footer,
-                layout,
-                grid,
-                size,
-                split,
-                loadMore,
-                bordered,
-                dataSource,
-                renderItem,
-            } = props;
-            const wrapperCls = cls(prefixCls, className, {
-                [`${prefixCls}-flex`]: layout === 'horizontal',
-                [`${prefixCls}-${size}`]: size,
-                [`${prefixCls}-grid`]: grid,
-                [`${prefixCls}-split`]: split,
-                [`${prefixCls}-bordered`]: bordered,
-            });
-            let childrenList;
-            if (dataSource && dataSource.length) {
-                childrenList = [];
-                const items = renderItem ? dataSource.map((item, index) => renderItem(item, index)) : [];
-                items.forEach((child, index) => {
-                    const itemKey = child.key || `list-item-${index}`;
-                    childrenList.push(
-                      cloneVNode(child, {
-                          key: itemKey,
-                      })
-                    );
-                });
-            } else if (!children && !loading) {
-                childrenList = renderEmpty();
-            }
-            return (
-              <div class={wrapperCls} style={style}>
-                  {header ? (
-                    <div class={`${cssClasses.PREFIX}-header`} x-semi-prop="header">
-                        {header}
-                    </div>
-                  ) : null}
-                  <ListContext.Provider
-                    value={{
-                        grid,
-                        onRightClick,
-                        onClick,
-                    }}
-                  >
-                      <Spin spinning={loading} size="large">
-                          {wrapChildren(childrenList, children)}
-                      </Spin>
-                  </ListContext.Provider>
-                  {footer ? (
-                    <div class={`${cssClasses.PREFIX}-footer`} x-semi-prop="footer">
-                        {footer}
-                    </div>
-                  ) : null}
-                  {loadMore ? loadMore : null}
+              <div class={`${cssClasses.PREFIX}-empty`} x-semi-prop="emptyContent">
+                  {emptyContent}
               </div>
             );
+        } else {
+            return (
+              <LocaleConsumer componentName="List">
+                  {
+                      (locale: Locale['List']) => (
+                        <div class={`${cssClasses.PREFIX}-empty`}>{locale.emptyText}</div>
+                      )
+                  }
+              </LocaleConsumer>
+            );
         }
-    })
+    };
 
-// @ts-ignore
-    List.props = vuePropsType
-// @ts-ignore
-    List.name = 'List'
+    function wrapChildren(childrenList: VNode[], children: VNode[]) {
+        const { grid } = props;
+        if (grid) {
+            const rowProps = {};
+            ['align', 'gutter', 'justify', 'type'].forEach(key => {
+                if (key in grid) {
+                    rowProps[key] = grid[key];
+                }
+            });
+            return (
+              <Row type="flex" {...rowProps}>
+                  {childrenList ? childrenList : null}
+                  {children}
+              </Row>
+            );
+        }
+        return (
+          <ul class={`${prefixCls}-items`}>
+              {childrenList ? childrenList : null}
+              {children}
+          </ul>
+        );
+    }
 
-    return List
-}
+    return () => {
 
-const ListDefault = ListMaker<any>()
-export default ListDefault
+        const children = slots.default?.()
+        const {
+            style,
+            className,
+            header,
+            loading,
+            onRightClick,
+            onClick,
+            footer,
+            layout,
+            grid,
+            size,
+            split,
+            loadMore,
+            bordered,
+            dataSource,
+            renderItem,
+        } = props;
+        const wrapperCls = cls(prefixCls, className, {
+            [`${prefixCls}-flex`]: layout === 'horizontal',
+            [`${prefixCls}-${size}`]: size,
+            [`${prefixCls}-grid`]: grid,
+            [`${prefixCls}-split`]: split,
+            [`${prefixCls}-bordered`]: bordered,
+        });
+        let childrenList;
+        if (dataSource && dataSource.length) {
+            childrenList = [];
+            const items = renderItem ? dataSource.map((item, index) => renderItem(item, index)) : [];
+            items.forEach((child, index) => {
+                const itemKey = child.key || `list-item-${index}`;
+                childrenList.push(
+                  cloneVNode(child, {
+                      key: itemKey,
+                  })
+                );
+            });
+        } else if (!children && !loading) {
+            childrenList = renderEmpty();
+        }
+        return (
+          <div class={wrapperCls} style={style}>
+              {header ? (
+                <div class={`${cssClasses.PREFIX}-header`} x-semi-prop="header">
+                    {header}
+                </div>
+              ) : null}
+              <ListContext.Provider
+                value={{
+                    grid,
+                    onRightClick,
+                    onClick,
+                }}
+              >
+                  <Spin spinning={loading} size="large">
+                      {wrapChildren(childrenList, children)}
+                  </Spin>
+              </ListContext.Provider>
+              {footer ? (
+                <div class={`${cssClasses.PREFIX}-footer`} x-semi-prop="footer">
+                    {footer}
+                </div>
+              ) : null}
+              {loadMore ? loadMore : null}
+          </div>
+        );
+    }
+},{
+    props: vuePropsType,
+    name: 'List'
+})
+
+
+export default List
 export {
-    ListItem,
-    ListMaker
+    ListItem
 }

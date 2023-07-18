@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, CSSProperties, ComponentObjectPropsOptions, PropType} from 'vue'
 import { strings } from '@douyinfe/semi-foundation/typography/constants';
 import Base from './base';
 import { Ellipsis, TypographyBaseType, OmitTypographyProps } from './interface';
@@ -33,7 +33,7 @@ export interface TitleProps extends Omit<any, OmitTitleProps>{
   type?: TypographyBaseType;
   underline?: boolean;
 }
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<TitleProps> = {
   className: {
     type: String,
     default: ''
@@ -68,7 +68,7 @@ export const vuePropsType = {
     default: false
   },
   heading: {
-    type: [String, Array, Boolean, Object,Number],
+    type: [String, Array, Boolean, Object,Number] as PropType<TitleProps['heading']>,
     default: 1,
   },
   link: {
@@ -84,11 +84,11 @@ export const vuePropsType = {
     default: false
   },
   style: {
-    type: [String,Object],
+    type: [String,Object] as PropType<TitleProps['style']>,
     default: {}
   },
   type: {
-    type: String,
+    type: String as PropType<TitleProps['type']>,
     default: 'primary'
   },
   underline: Boolean,
@@ -107,9 +107,11 @@ const Title = defineComponent<TitleProps>((props, {slots}) => {
       }}
     </Base>;
   }
+}, {
+  props: vuePropsType,
+  name: 'Title'
 })
 
-Title.props = vuePropsType
 
 export default Title
 

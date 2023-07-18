@@ -1,7 +1,15 @@
 import { Transition } from '@kousum/semi-animation-vue';
 import { NoticePosition } from '@douyinfe/semi-foundation/notification/notificationFoundation';
 import { Motion } from '../_base/base';
-import {CSSProperties, defineComponent, FunctionalComponent, h, useSlots, VNode} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    FunctionalComponent,
+    h, PropType,
+    useSlots,
+    VNode
+} from "vue";
 
 export type ArgsType<T> = T extends (...args: infer A) => any ? A : never;
 
@@ -14,9 +22,9 @@ export interface NoticeTransitionProps{
 type NoticeTransitionFormatFuncType = (styles: { translate: string;opacity: string | number }) => any;
 
 
-export const vuePropsType = {
-    position: String,
-    children: [Object, Function],
+export const vuePropsType:ComponentObjectPropsOptions<NoticeTransitionProps> = {
+    position: String as PropType<NoticeTransitionProps['position']>,
+    children: [Object, Function] as PropType<NoticeTransitionProps['children']>,
     motion: [Object, String, Boolean],
 }
 const NoticeTransition = defineComponent<NoticeTransitionProps>((props, {}) => {
@@ -87,10 +95,13 @@ const NoticeTransition = defineComponent<NoticeTransitionProps>((props, {}) => {
           </Transition>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'NoticeTransition'
 })
 
-NoticeTransition.props = vuePropsType
-NoticeTransition.name = 'NoticeTransition'
+
+
 
 export default NoticeTransition
 

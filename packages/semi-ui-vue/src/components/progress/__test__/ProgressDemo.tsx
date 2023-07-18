@@ -29,8 +29,8 @@ const ProgressDemo = defineComponent<ProgressDemoProps>((props, {}) => {
   )
 })
 
-ProgressDemo.props = vuePropsType
-ProgressDemo.name = 'ProgressDemo'
+
+
 
 export default ProgressDemo
 

@@ -3,14 +3,14 @@ import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/tabs/constants';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import OverflowList from '../overflowList';
-import Dropdown from '../dropdown';
+import Dropdown, {DropdownItem, DropdownMenu} from '../dropdown';
 import Button from '../button';
 import { TabBarProps, PlainTab } from './interface';
 import { isEmpty, pick } from 'lodash';
 import { IconChevronRight, IconChevronLeft, IconClose } from '@kousum/semi-icons-vue';
 import { getUuidv4 } from '@douyinfe/semi-foundation/utils/uuid';
 import TabItem from './TabItem';
-import {defineComponent, h, onMounted, reactive, useSlots, VNode} from 'vue';
+import {ComponentObjectPropsOptions, defineComponent, h, onMounted, PropType, reactive, useSlots, VNode} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
 
@@ -25,20 +25,20 @@ export interface OverflowItem extends PlainTab {
   key: string;
   active: boolean;
 }
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TabBarProps> = {
   activeKey: PropTypes.string,
   className: PropTypes.string,
   collapsible: PropTypes.bool,
   list: PropTypes.array,
-  onTabClick: PropTypes.func,
-  size: PropTypes.string,
+  onTabClick: PropTypes.func as PropType<TabBarProps['onTabClick']>,
+  size: PropTypes.string as PropType<TabBarProps['size']>,
   style: PropTypes.object,
   tabBarExtraContent: PropTypes.node,
-  tabPosition: PropTypes.string,
-  type: PropTypes.string,
+  tabPosition: PropTypes.string as PropType<TabBarProps['tabPosition']>,
+  type: PropTypes.string as PropType<TabBarProps['type']>,
   closable: PropTypes.bool,
-  deleteTabItem: PropTypes.func,
-  handleKeyDown: PropTypes.func,
+  deleteTabItem: PropTypes.func as PropType<TabBarProps['deleteTabItem']>,
+  handleKeyDown: PropTypes.func as PropType<TabBarProps['handleKeyDown']>,
 };
 
 export const vuePropsType = vuePropsMake(propTypes, {});
@@ -138,19 +138,20 @@ const TabBar = defineComponent<TabBarProps>((props, {}) => {
     const { dropdownClassName, dropdownStyle } = props;
     const { rePosKey } = state;
     const disabled = !items.length;
+
     const menu = (
-      <Dropdown.Menu>
+      <DropdownMenu>
         {items.map((panel) => {
           const { icon: i, tab, itemKey } = panel;
           const panelIcon = i ? renderIcon(panel.icon) : null;
           return (
-            <Dropdown.Item key={itemKey} onClick={(e): void => handleItemClick(itemKey, e)} active={_isActive(itemKey)}>
+            <DropdownItem key={itemKey} onClick={(e): void => handleItemClick(itemKey, e)} active={_isActive(itemKey)}>
               {panelIcon}
               {tab}
-            </Dropdown.Item>
+            </DropdownItem>
           );
         })}
-      </Dropdown.Menu>
+      </DropdownMenu>
     );
 
     const arrowCls = cls({
@@ -242,10 +243,10 @@ const TabBar = defineComponent<TabBarProps>((props, {}) => {
       </div>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'TabBar'
 });
 
-// @ts-ignore
-TabBar.props = vuePropsType;
-TabBar.name = 'TabBar';
 
 export default TabBar;

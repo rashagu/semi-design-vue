@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { stepsClasses as css } from '@douyinfe/semi-foundation/steps/constants';
 import { IconTickCircle, IconAlertCircle, IconAlertTriangle } from '@kousum/semi-icons-vue';
 import { VueJsxNode } from '../interface';
-import { CSSProperties, defineComponent, useSlots, h, isVNode } from 'vue';
+import {CSSProperties, defineComponent, useSlots, h, isVNode, ComponentObjectPropsOptions, PropType} from 'vue';
 import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
 import { getProps } from '../_base/baseComponent';
@@ -36,11 +36,11 @@ export enum stepSizeMapIconSize {
   default = 'extra-large',
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<BasicStepProps> = {
   prefixCls: PropTypes.string,
   description: PropTypes.node,
   icon: PropTypes.node,
-  status: PropTypes.string,
+  status: PropTypes.string as PropType<BasicStepProps['status']>,
   title: PropTypes.node,
   className: PropTypes.string,
   style: PropTypes.object,
@@ -48,11 +48,11 @@ const propTypes = {
   active: PropTypes.bool,
   done: PropTypes.bool,
 
-  direction: PropTypes.string,
-  children: PropTypes.node,
-  onChange: PropTypes.func,
-  stepNumber: [PropTypes.number, PropTypes.string],
-  size: PropTypes.string,
+  direction: PropTypes.string as PropType<BasicStepProps['direction']>,
+  // children: PropTypes.node as PropType<BasicStepProps['children']>,
+  onChange: PropTypes.func as PropType<BasicStepProps['onChange']>,
+  stepNumber: [PropTypes.number, PropTypes.string] as PropType<BasicStepProps['stepNumber']>,
+  size: PropTypes.string as PropType<BasicStepProps['size']>,
   onKeyDown: PropTypes.func,
   role: PropTypes.string,
   'aria-label': PropTypes.string,
@@ -66,7 +66,7 @@ const defaultProps = {
   size: 'default',
   onChange: noop,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<BasicStepProps>(propTypes, defaultProps);
 const BasicStep = defineComponent<BasicStepProps>((props, {}) => {
   const slots = useSlots();
 
@@ -170,9 +170,10 @@ const BasicStep = defineComponent<BasicStepProps>((props, {}) => {
       </div>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'BasicStep'
 });
 
-BasicStep.props = vuePropsType;
-BasicStep.name = 'BasicStep';
 
 export default BasicStep;

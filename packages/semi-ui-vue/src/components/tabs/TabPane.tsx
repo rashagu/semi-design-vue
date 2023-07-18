@@ -119,11 +119,11 @@ const TabPane = defineComponent<TabPaneProps>((props, {}) => {
           </div>
         );
     }
+},{
+    props: vuePropsType,
+    name: 'TabPane',
+    ...{isTabPane: true},
 })
 
-// @ts-ignore
-TabPane.props = vuePropsType
-TabPane.name = 'TabPane'
-TabPane.isTabPane = true
 
 export default TabPane

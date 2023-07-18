@@ -8,13 +8,13 @@ import { IconClose, IconAlertTriangle, IconInfoCircle, IconTickCircle, IconAlert
 import { noop } from 'lodash';
 import { isSemiIcon } from '../_utils';
 import {
-    cloneVNode,
+    cloneVNode, ComponentObjectPropsOptions,
     CSSProperties,
     defineComponent,
     h,
     onBeforeUnmount,
     onMounted,
-    onUnmounted,
+    onUnmounted, PropType,
     reactive,
     useSlots,
     VNode
@@ -33,22 +33,23 @@ export interface ToastReactProps extends ToastProps {
     content: VueJsxNode;
     onAnimationEnd?: (e: AnimationEvent) => void;
     onAnimationStart?: (e: AnimationEvent) => void
+    id?: string
 }
 
-const propTypes = {
-    onClose: PropTypes.func,
+const propTypes:ComponentObjectPropsOptions<ToastReactProps> = {
+    onClose: PropTypes.func as PropType<ToastReactProps['onClose']>,
     content: PropTypes.node,
-    close: PropTypes.func,
+    close: PropTypes.func as PropType<ToastReactProps['close']>,
     duration: PropTypes.number,
-    theme: String,
-    type: String,
+    theme: String as PropType<ToastReactProps['theme']>,
+    type: String as PropType<ToastReactProps['type']>,
     textMaxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     style: PropTypes.object,
     className: PropTypes.string,
     showClose: PropTypes.bool,
     icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    direction: String,
-    id: String,
+    direction: String as PropType<ToastReactProps['direction']>,
+    id: String as PropType<ToastReactProps['id']>,
 };
 const defaultProps = {
     onClose: noop,
@@ -182,10 +183,13 @@ const Toast = defineComponent<ToastReactProps>((props, {expose}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Toast'
 })
 
-Toast.props = vuePropsType
-Toast.name = 'Toast'
+// Toast.props = vuePropsType
+// Toast.name = 'Toast'
 
 export default Toast
 

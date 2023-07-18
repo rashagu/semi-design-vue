@@ -1,9 +1,20 @@
 import { cssClasses } from "@douyinfe/semi-foundation/image/constants";
-import {PreviewImageProps, PreviewImageStates, PreviewProps} from "./interface";
+import {FooterProps, PreviewImageProps, PreviewImageStates, PreviewProps} from "./interface";
 import * as PropTypes from "../PropTypes";
 import Spin from "../spin";
 import PreviewImageFoundation, { PreviewImageAdapter } from "@douyinfe/semi-foundation/image/previewImageFoundation";
-import {CSSProperties, defineComponent, h, onMounted, onUnmounted, reactive, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    onMounted,
+    onUnmounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
 
@@ -16,7 +27,7 @@ let startMouseMove = false;
 let startMouseOffset = { x: 0, y: 0 };
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<PreviewImageProps> = {
     src: PropTypes.string,
     rotation: PropTypes.number,
     style: PropTypes.object,
@@ -24,13 +35,13 @@ const propTypes = {
     minZoom: PropTypes.number,
     zoomStep: PropTypes.number,
     zoom: PropTypes.number,
-    ratio: PropTypes.string,
-    disableDownload: PropTypes.number,
+    ratio: PropTypes.string as PropType<PreviewImageProps['ratio']>,
+    disableDownload: PropTypes.bool as PropType<PreviewImageProps['disableDownload']>,
     clickZoom: PropTypes.number,
-    setRatio: PropTypes.func,
-    onZoom: PropTypes.func,
-    onLoad: PropTypes.func,
-    onError: PropTypes.func,
+    setRatio: PropTypes.func as PropType<PreviewImageProps['setRatio']>,
+    onZoom: PropTypes.func as PropType<PreviewImageProps['onZoom']>,
+    onLoad: PropTypes.func as PropType<PreviewImageProps['onLoad']>,
+    onError: PropTypes.func as PropType<PreviewImageProps['onError']>,
 }
 
 const defaultProps = {
@@ -39,7 +50,7 @@ const defaultProps = {
     zoomStep: 0.1,
     zoom: undefined,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<PreviewImageProps>(propTypes, defaultProps)
 const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
 
     const slots = useSlots()
@@ -240,10 +251,11 @@ const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'PreviewImage'
 })
 
-// @ts-ignore
-PreviewImage.props = vuePropsType
-PreviewImage.name = 'PreviewImage'
+
 
 export default PreviewImage

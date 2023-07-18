@@ -38,10 +38,11 @@ const SortableItem = defineComponent<SortableItemProps>((props, {}) => {
     };
     return props.item({setNodeRef,style,attributes: attributes?.value,listeners:listeners?.value});
   }
+}, {
+  props: vuePropsType,
+  name: 'SortableItem'
 })
 
-SortableItem.props = vuePropsType
-SortableItem.name = 'SortableItem'
 
 export default SortableItem
 

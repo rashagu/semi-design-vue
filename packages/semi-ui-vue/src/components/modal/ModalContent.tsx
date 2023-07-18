@@ -2,7 +2,6 @@
 import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/modal/constants';
-import ConfigContext, { ContextValue } from '../configProvider/context';
 import Button from '../iconButton';
 import {Title as TypographyTitle} from '../typography';
 import {useBaseComponent} from '../_base/baseComponent';
@@ -16,12 +15,13 @@ import {get, isFunction, isNumber, noop} from 'lodash';
 import { IconClose } from '@kousum/semi-icons-vue';
 import FocusTrapHandle from "@douyinfe/semi-foundation/utils/FocusHandle";
 import {
+    ComponentObjectPropsOptions,
     CSSProperties,
     defineComponent,
     h,
     onBeforeUnmount,
     onMounted,
-    onUnmounted,
+    onUnmounted, PropType,
     reactive,
     ref,
     useSlots,
@@ -37,20 +37,20 @@ export interface ModalContentReactProps extends ModalContentProps {
 }
 
 
-const propTypes = {
-    onClose: Function,
-    close: PropTypes.func,
-    getContainerContext: PropTypes.func,
+const propTypes: ComponentObjectPropsOptions<ModalContentReactProps> = {
+    onClose: Function as PropType<ModalContentReactProps['onClose']>,
+    // close: PropTypes.func as PropType<ModalContentReactProps['close']>,
+    getContainerContext: PropTypes.func as PropType<ModalContentReactProps['getContainerContext']>,
     contentClassName: PropTypes.string,
     maskClassName: PropTypes.string,
-    onAnimationEnd: PropTypes.func,
+    onAnimationEnd: PropTypes.func as PropType<ModalContentReactProps['onAnimationEnd']>,
     preventScroll: PropTypes.bool,
     isFullScreen: PropTypes.bool,
     maskExtraProps: Object,
     contentExtraProps: Object,
 
     title: PropTypes.any,
-    afterClose: Function,
+    afterClose: Function as PropType<ModalContentReactProps['afterClose']>,
     bodyStyle: Object,
     cancelButtonProps: PropTypes.any,
     cancelText: PropTypes.string,
@@ -72,26 +72,26 @@ const propTypes = {
         type: PropTypes.any,
         default: undefined
     },
-    height: [PropTypes.bool,PropTypes.string],
+    height: [PropTypes.bool,PropTypes.string] as PropType<ModalContentReactProps['height']>,
     mask: PropTypes.bool,
     maskClosable: PropTypes.bool,
     maskStyle: Object,
     maskFixed: PropTypes.bool,
-    motion: PropTypes.any,
+    motion: PropTypes.any as PropType<ModalContentReactProps['motion']>,
     okButtonProps: PropTypes.any,
     okText: String,
-    okType: String,
-    onCancel: Function,
-    onOk: Function,
+    okType: String as PropType<ModalContentReactProps['okType']>,
+    onCancel: Function as PropType<ModalContentReactProps['onCancel']>,
+    onOk: Function as PropType<ModalContentReactProps['onOk']>,
     style: Object,
     visible: PropTypes.bool,
     width: [String, Number],
     zIndex: Number,
     icon: PropTypes.any,
-    getPopupContainer: Function,
+    getPopupContainer: Function as PropType<ModalContentReactProps['getPopupContainer']>,
     closeIcon: PropTypes.any,
     closeOnEsc: PropTypes.bool,
-    size: String,
+    size: String as PropType<ModalContentReactProps['size']>,
     lazyRender: PropTypes.bool,
     keepDOM: PropTypes.bool,
     direction: PropTypes.any,
@@ -104,7 +104,7 @@ const defaultProps = {
     contentClassName: '',
     maskClassName: ''
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<ModalContentReactProps>(propTypes, defaultProps)
 const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
 
     const slots = useSlots()
@@ -406,11 +406,11 @@ const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
         return containerContext && containerContext.Provider ?
           <containerContext.Provider value={containerContext.value}>{elem}</containerContext.Provider> : elem;
     }
+}, {
+    props: vuePropsType,
+    name: 'ModalContent'
 })
 
-// @ts-ignore
-ModalContent.props = vuePropsType
-ModalContent.name = 'ModalContent'
 
 export default ModalContent
 

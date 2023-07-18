@@ -414,8 +414,12 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
       </NavItem>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'SubNav'
 });
 
-SubNav.props = vuePropsType;
+
+
 
 export default SubNav;

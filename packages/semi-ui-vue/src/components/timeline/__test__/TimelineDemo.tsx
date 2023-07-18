@@ -133,8 +133,8 @@ const TimelineDemo = defineComponent<TimelineDemoProps>((props, {}) => {
   )
 })
 
-TimelineDemo.props = vuePropsType
-TimelineDemo.name = 'TimelineDemo'
+
+
 
 export default TimelineDemo
 

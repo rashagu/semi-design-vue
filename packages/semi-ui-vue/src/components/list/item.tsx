@@ -4,10 +4,11 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/list/constants';
 import { noop } from 'lodash';
 import { Col } from '../grid';
 import ListContext, { ListContextValue } from './list-context';
-import {CSSProperties, defineComponent, h, useSlots, VNode} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots, VNode} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useListContext} from "./context/Consumer";
 import {VueJsxNode} from "../interface";
+import {PreviewProps as PreviewInnerProps} from "../image";
 
 export interface ListItemProps {
     extra?: VueJsxNode;
@@ -23,17 +24,17 @@ export interface ListItemProps {
 }
 
 const prefixCls = cssClasses.PREFIX;
-const propTypes = {
-    extra: PropTypes.node,
+const propTypes:ComponentObjectPropsOptions<ListItemProps> = {
+    extra: PropTypes.node as PropType<ListItemProps['extra']>,
     header: PropTypes.node,
     main: PropTypes.node,
-    align: PropTypes.string,
+    align: PropTypes.string as PropType<ListItemProps['align']>,
     className: PropTypes.string,
     style: PropTypes.object,
-    onClick: PropTypes.func,
-    onRightClick: PropTypes.func,
-    onMouseEnter: PropTypes.func,
-    onMouseLeave: PropTypes.func,
+    onClick: PropTypes.func as PropType<ListItemProps['onClick']>,
+    onRightClick: PropTypes.func as PropType<ListItemProps['onRightClick']>,
+    onMouseEnter: PropTypes.func as PropType<ListItemProps['onMouseEnter']>,
+    onMouseLeave: PropTypes.func as PropType<ListItemProps['onMouseLeave']>,
 };
 
 const defaultProps = {
@@ -41,7 +42,7 @@ const defaultProps = {
     onMouseEnter: noop,
     onMouseLeave: noop,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<ListItemProps>(propTypes, defaultProps)
 const ListItem = defineComponent<ListItemProps>((props, {}) => {
     const slots = useSlots()
 
@@ -111,10 +112,10 @@ const ListItem = defineComponent<ListItemProps>((props, {}) => {
 
         return content;
     }
+}, {
+    props: vuePropsType,
+    name: 'ListItem'
 })
 
-// @ts-ignore
-ListItem.props = vuePropsType
-ListItem.name = 'ListItem'
 
 export default ListItem

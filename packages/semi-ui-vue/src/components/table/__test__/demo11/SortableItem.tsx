@@ -76,10 +76,10 @@ const SortableItem = defineComponent<SortableItemProps>((props, {attrs}) => {
     }, slots.default?.())
 
   }
+}, {
+  name: 'SortableItem'
 })
 
-SortableItem.props = vuePropsType
-SortableItem.name = 'SortableItem'
 
 export default SortableItem
 

@@ -518,10 +518,11 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'TimePicker'
 })
 
-TimePicker.props = vuePropsType
-TimePicker.name = 'TimePicker'
 
 export default TimePicker
 

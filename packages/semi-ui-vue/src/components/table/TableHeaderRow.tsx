@@ -14,7 +14,7 @@ import {
     getRTLAlign
 } from '@douyinfe/semi-foundation/table/utils';
 import { TableComponents, OnHeaderRow, Fixed } from './interface';
-import {CSSProperties, defineComponent, h, reactive, useSlots, watch} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, reactive, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 import {TableSelectionCellProps} from "./ColumnSelection";
@@ -33,11 +33,11 @@ export interface TableHeaderRowProps {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TableHeaderRowProps> = {
     components: PropTypes.object,
     row: PropTypes.array,
     prefixCls: PropTypes.string,
-    onHeaderRow: PropTypes.func,
+    onHeaderRow: PropTypes.func as PropType<TableHeaderRowProps['onHeaderRow']>,
     index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     style: PropTypes.object,
     columns: PropTypes.array,
@@ -220,9 +220,10 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
           </HeaderRow>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'TableHeaderRow'
 });
 
-TableHeaderRow.props = vuePropsType;
-TableHeaderRow.name = "TableHeaderRow";
 
 export default TableHeaderRow;

@@ -35,8 +35,7 @@ const RatingDemo = defineComponent<ExampleProps>((props, {}) => {
   )
 })
 
-RatingDemo.props = vuePropsType
-RatingDemo.name = 'RatingDemo'
+
 
 export default RatingDemo
 

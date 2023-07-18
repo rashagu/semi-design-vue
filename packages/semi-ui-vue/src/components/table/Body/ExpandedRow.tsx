@@ -10,7 +10,7 @@ import TableContext, { TableContextProps } from '../table-context';
 import TableRow from './BaseRow';
 import { amendTableWidth } from '../utils';
 import { ColumnProps, ExpandIcon, TableComponents, Virtualized, Fixed } from '../interface';
-import {CSSProperties, defineComponent, h, isVNode, useSlots} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, isVNode, PropType, useSlots} from "vue";
 import {vuePropsMake} from "../../PropTypes";
 import {useTableContext} from "../tableContext/Consumer";
 import {VueJsxNode} from "../../interface";
@@ -35,10 +35,12 @@ export interface TableExpandedRowProps {
     store?: Store;
     style?: CSSProperties;
     virtualized?: Virtualized
+    onExpand?: any
+    onExpandedRowsChange?: any
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TableExpandedRowProps> = {
     cellWidths: PropTypes.array,
     className: PropTypes.string,
     columns: PropTypes.array,
@@ -49,14 +51,14 @@ const propTypes = {
     expandRowByClick: PropTypes.bool,
     expanded: PropTypes.bool,
     expandedRowKeys: PropTypes.array,
-    expandedRowRender: PropTypes.func,
+    expandedRowRender: PropTypes.func as PropType<TableExpandedRowProps['expandedRowRender']>,
     indentSize: PropTypes.number,
     index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    onExpand: PropTypes.func,
-    onExpandedRowsChange: PropTypes.func,
+    onExpand: PropTypes.func as PropType<TableExpandedRowProps['onExpand']>,
+    onExpandedRowsChange: PropTypes.func as PropType<TableExpandedRowProps['onExpandedRowsChange']>,
     prefixCls: PropTypes.string,
     record: PropTypes.object,
-    renderExpandIcon: PropTypes.func,
+    renderExpandIcon: PropTypes.func as PropType<TableExpandedRowProps['renderExpandIcon']>,
     store: PropTypes.object,
     style: PropTypes.object,
     virtualized: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
@@ -153,10 +155,11 @@ const TableExpandedRow = defineComponent<TableExpandedRowProps>((props, {}) => {
           />
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'TableExpandedRow'
 });
 
-TableExpandedRow.props = vuePropsType;
-TableExpandedRow.name = "TableExpandedRow";
 
 export default TableExpandedRow;
 

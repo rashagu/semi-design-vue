@@ -18,9 +18,12 @@ const LocaleProvider = defineComponent<ExampleProps>((props, {slots}) => {
       {slots.default?.()}
     </LocaleContext.Provider>
   )
+}, {
+  props: vuePropsType,
+  name: 'LocaleProvider'
 })
 
-LocaleProvider.props = vuePropsType
+
 
 export default LocaleProvider
 

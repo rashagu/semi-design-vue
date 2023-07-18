@@ -18,9 +18,6 @@ const Test = defineComponent<TestProps>((props, {}) => {
   )
 })
 
-// @ts-ignore
-Test.props = vuePropsType
-Test.name = 'Test'
 
 export default Test
 

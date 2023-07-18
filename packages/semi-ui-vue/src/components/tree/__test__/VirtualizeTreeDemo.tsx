@@ -89,8 +89,8 @@ const VirtualizeTreeDemo = defineComponent<VirtualizeTreeDemoProps>((props, {}) 
 })
 
 // @ts-ignore
-VirtualizeTreeDemo.props = vuePropsType
-VirtualizeTreeDemo.name = 'VirtualizeTreeDemo'
+// VirtualizeTreeDemo.props = vuePropsType
+// VirtualizeTreeDemo.name = 'VirtualizeTreeDemo'
 
 export default VirtualizeTreeDemo
 

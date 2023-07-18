@@ -10,10 +10,21 @@ import Footer from "./previewFooter";
 import PreviewImage from "./previewImage";
 import PreviewInnerFoundation, {PreviewInnerAdapter} from "@douyinfe/semi-foundation/image/previewInnerFoundation";
 import {PreviewContext, PreviewContextProps} from "./previewContext";
-import {CSSProperties, defineComponent, h, onBeforeUnmount, onMounted, reactive, useSlots, watch} from "vue";
+import {
+  ComponentObjectPropsOptions,
+  CSSProperties,
+  defineComponent,
+  h,
+  onBeforeUnmount,
+  onMounted, PropType,
+  reactive,
+  useSlots,
+  watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {usePreviewContext} from "./previewContext/Consumer";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
+import {AnchorProps} from "../anchor";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -25,7 +36,7 @@ let timer = null;
 // let bodyOverflowValue = document.body.style.overflow;
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<PreviewInnerProps> = {
   style: PropTypes.object,
   className: PropTypes.string,
   lazyLoadMargin: PropTypes.string,
@@ -53,20 +64,20 @@ const propTypes = {
   disableDownload: PropTypes.bool,
   viewerVisibleDelay: PropTypes.number,
   zIndex: PropTypes.number,
-  renderHeader: PropTypes.func,
-  renderPreviewMenu: PropTypes.func,
-  getPopupContainer: PropTypes.func,
-  onVisibleChange: PropTypes.func,
-  onChange: PropTypes.func,
-  onClose: PropTypes.func,
-  onZoomIn: PropTypes.func,
-  onZoomOut: PropTypes.func,
-  onPrev: PropTypes.func,
-  onNext: PropTypes.func,
-  onDownload: PropTypes.func,
-  onRatioChange: PropTypes.func,
-  onRotateChange: PropTypes.func,
-  onRotateLeft: PropTypes.func,
+  renderHeader: PropTypes.func as PropType<PreviewInnerProps['renderHeader']>,
+  renderPreviewMenu: PropTypes.func as PropType<PreviewInnerProps['renderPreviewMenu']>,
+  getPopupContainer: PropTypes.func as PropType<PreviewInnerProps['getPopupContainer']>,
+  onVisibleChange: PropTypes.func as PropType<PreviewInnerProps['onVisibleChange']>,
+  onChange: PropTypes.func as PropType<PreviewInnerProps['onChange']>,
+  onClose: PropTypes.func as PropType<PreviewInnerProps['onClose']>,
+  onZoomIn: PropTypes.func as PropType<PreviewInnerProps['onZoomIn']>,
+  onZoomOut: PropTypes.func as PropType<PreviewInnerProps['onZoomOut']>,
+  onPrev: PropTypes.func as PropType<PreviewInnerProps['onPrev']>,
+  onNext: PropTypes.func as PropType<PreviewInnerProps['onNext']>,
+  onDownload: PropTypes.func as PropType<PreviewInnerProps['onDownload']>,
+  onRatioChange: PropTypes.func as PropType<PreviewInnerProps['onRatioChange']>,
+  onRotateChange: PropTypes.func as PropType<PreviewInnerProps['onRotateChange']>,
+  // onRotateLeft: PropTypes.func as PropType<PreviewInnerProps['onRotateLeft']>,
 }
 
 const defaultProps = {
@@ -81,7 +92,7 @@ const defaultProps = {
   maskClosable: true,
   viewerVisibleDelay: 10000,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<PreviewInnerProps>(propTypes, defaultProps)
 const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
 
   const slots = useSlots()
@@ -150,7 +161,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
       },
       notifyRatioChange: (type: string) => {
         const {onRatioChange} = props;
-        isFunction(onRatioChange) && onRatioChange(type);
+        isFunction(onRatioChange) && onRatioChange(type as "adaptation" | "realSize");
       },
       notifyRotateChange: (angle: number) => {
         const {onRotateChange} = props;
@@ -447,10 +458,10 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
       </Portal>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'PreviewInner'
 })
 
-// @ts-ignore
-PreviewInner.props = vuePropsType
-PreviewInner.name = 'PreviewInner'
 
 export default PreviewInner

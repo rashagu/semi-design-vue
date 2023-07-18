@@ -9,7 +9,7 @@ import {
   reactive,
   onMounted,
   isVNode,
-  watch, VNodeRef
+  watch, VNodeRef, ComponentObjectPropsOptions, PropType
 } from 'vue'
 import * as PropTypes from '../PropTypes'
 import cls from 'classnames';
@@ -114,8 +114,8 @@ export interface TagInputState {
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes = {
-  children: PropTypes.node,
+const propTypes:ComponentObjectPropsOptions<TagInputProps> = {
+  // children: PropTypes.node as PropType<TagInputProps['children']>,
   clearIcon: PropTypes.node,
   style: PropTypes.object,
   className: PropTypes.string,
@@ -137,18 +137,18 @@ const propTypes = {
   draggable: PropTypes.bool,
   expandRestTagsOnClick: PropTypes.bool,
   autoFocus: PropTypes.bool,
-  renderTagItem: PropTypes.func,
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onChange: PropTypes.func,
-  onInputChange: PropTypes.func,
-  onExceed: PropTypes.func,
-  onInputExceed: PropTypes.func,
-  onAdd: PropTypes.func,
-  onRemove: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  size: PropTypes.string,
-  validateStatus: PropTypes.string,
+  renderTagItem: PropTypes.func as PropType<TagInputProps['renderTagItem']>,
+  onBlur: PropTypes.func as PropType<TagInputProps['onBlur']>,
+  onFocus: PropTypes.func as PropType<TagInputProps['onFocus']>,
+  onChange: PropTypes.func as PropType<TagInputProps['onChange']>,
+  onInputChange: PropTypes.func as PropType<TagInputProps['onInputChange']>,
+  onExceed: PropTypes.func as PropType<TagInputProps['onExceed']>,
+  onInputExceed: PropTypes.func as PropType<TagInputProps['onInputExceed']>,
+  onAdd: PropTypes.func as PropType<TagInputProps['onAdd']>,
+  onRemove: PropTypes.func as PropType<TagInputProps['onRemove']>,
+  onKeyDown: PropTypes.func as PropType<TagInputProps['onKeyDown']>,
+  size: PropTypes.string as PropType<TagInputProps['size']>,
+  validateStatus: PropTypes.string as PropType<TagInputProps['validateStatus']>,
   prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   'aria-label': PropTypes.string,
@@ -689,9 +689,11 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'TagInput'
 })
 
-Index.props = vuePropsType
 
 export default Index
 

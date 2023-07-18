@@ -31,7 +31,7 @@ const TooltipDemo = defineComponent<ExampleProps>((props, {slots}) => {
   );
 })
 
-TooltipDemo.props = vuePropsType
+// TooltipDemo.props = vuePropsType
 
 export default TooltipDemo
 

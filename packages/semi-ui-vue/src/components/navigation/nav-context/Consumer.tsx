@@ -13,15 +13,17 @@ export function useNavContext (): { context: Ref<UnwrapRef<NavContextType>> } {
   }
 }
 export const vuePropsType = {
-  name: String
 }
 const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useNavContext()
   return () => slots.default ? slots.default(context) : null
+}, {
+  props: vuePropsType,
+  name:'NavContextConsumer'
 })
 
-Consumer.props = vuePropsType
+
 
 export default Consumer
 

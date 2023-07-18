@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, reactive, onMounted} from 'vue'
+import {defineComponent, ref, h, Fragment, reactive, onMounted, ComponentObjectPropsOptions, PropType} from 'vue'
 import Tooltip from '../tooltip';
 import { cssClasses } from '@douyinfe/semi-foundation/typography/constants';
 import copyModel from 'copy-text-to-clipboard';
@@ -24,15 +24,14 @@ interface CopyableState {
   item: string;
 }
 
-export const vuePropsType = {
-  name: String,
+export const vuePropsType:ComponentObjectPropsOptions<CopyableProps> = {
   forwardRef:Object,
   content: {
     type: String,
     default: '',
   },
   onCopy: {
-    type: Function,
+    type: Function as PropType<CopyableProps['onCopy']>,
     default: noop
   },
   duration: {
@@ -40,7 +39,7 @@ export const vuePropsType = {
     default: 3,
   },
   style: {
-    type: [Object, String],
+    type: [Object, String] as PropType<CopyableProps['style']>,
     default:{}
   },
   className: {
@@ -143,9 +142,12 @@ const Copyable = defineComponent<CopyableProps>((props, {slots}) => {
       </LocaleConsumer>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Copyable'
 })
 
-Copyable.props = vuePropsType
+
 
 export default Copyable
 

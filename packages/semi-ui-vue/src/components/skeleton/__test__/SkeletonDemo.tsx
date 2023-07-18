@@ -53,7 +53,7 @@ const SkeletonDemo = defineComponent<SkeletonDemoProps>((props, {}) => {
   );
 });
 
-SkeletonDemo.props = vuePropsType;
-SkeletonDemo.name = 'SkeletonDemo';
+
+
 
 export default SkeletonDemo;

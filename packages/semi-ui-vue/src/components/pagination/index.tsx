@@ -22,7 +22,17 @@ import InputNumber from '../inputNumber/index';
 import Popover from '../popover/index';
 import { Position } from '../tooltip';
 import { VueJsxNode } from '../interface';
-import { CSSProperties, defineComponent, h, onMounted, onUnmounted, reactive, useSlots, watch } from 'vue';
+import {
+  ComponentObjectPropsOptions,
+  CSSProperties,
+  defineComponent,
+  h,
+  onMounted,
+  onUnmounted, PropType,
+  reactive,
+  useSlots,
+  watch
+} from 'vue';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { useBaseComponent } from '../_base/baseComponent';
 import { vuePropsMake } from '../PropTypes';
@@ -69,28 +79,28 @@ export type PaginationLocale = Locale['Pagination'];
 export type PopoverPosition = Position;
 export type { PageList };
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<PaginationProps> = {
   total: PropTypes.number,
   showTotal: PropTypes.bool,
   pageSize: PropTypes.number,
   pageSizeOpts: PropTypes.array,
-  size: PropTypes.string,
+  size: PropTypes.string as PropType<PaginationProps['size']>,
   currentPage: PropTypes.number,
   defaultCurrentPage: PropTypes.number,
-  onPageChange: PropTypes.func,
-  onPageSizeChange: PropTypes.func,
-  onChange: PropTypes.func,
+  onPageChange: PropTypes.func as PropType<PaginationProps['onPageChange']>,
+  onPageSizeChange: PropTypes.func as PropType<PaginationProps['onPageSizeChange']>,
+  onChange: PropTypes.func as PropType<PaginationProps['onChange']>,
   prevText: PropTypes.node,
   nextText: PropTypes.node,
   showSizeChanger: PropTypes.bool,
   popoverZIndex: PropTypes.number,
-  popoverPosition: PropTypes.string,
+  popoverPosition: PropTypes.string as PropType<PaginationProps['popoverPosition']>,
   style: PropTypes.object,
   className: PropTypes.string,
   hideOnSinglePage: PropTypes.bool,
   hoverShowPageSelect: PropTypes.bool,
   showQuickJumper: PropTypes.bool,
-  position: PropTypes.string,
+  // position: PropTypes.string as PropType<PaginationProps['position']>,
 };
 
 const defaultProps = {
@@ -109,7 +119,7 @@ const defaultProps = {
   hideOnSinglePage: false,
   showQuickJumper: false,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<PaginationProps>(propTypes, defaultProps);
 const Pagination = defineComponent<PaginationProps>((props, {}) => {
   const slots = useSlots();
   const { context } = useConfigContext();
@@ -457,9 +467,12 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
       </LocaleConsumer>
     );
   };
+},{
+  props: vuePropsType,
+  name: 'Pagination'
 });
 
-Pagination.props = vuePropsType;
-Pagination.name = 'Pagination';
+
+
 
 export default Pagination;

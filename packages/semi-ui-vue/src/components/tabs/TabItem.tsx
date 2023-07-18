@@ -4,7 +4,7 @@ import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/tabs/constants';
 import { IconClose } from '@kousum/semi-icons-vue';
 import { TabType, TabSize, TabPosition } from './interface';
-import {computed, defineComponent, h, useSlots} from "vue";
+import {ComponentObjectPropsOptions, computed, defineComponent, h, PropType, useSlots} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 
@@ -21,21 +21,21 @@ export interface TabItemProps {
     handleKeyDown?: (event: KeyboardEvent, itemKey: string, closable: boolean) => void;
     deleteTabItem?: (tabKey: string, event: MouseEvent) => void;
     onClick?: (itemKey: string, e: MouseEvent) => void,
-    forwardRef: any
+    forwardRef?: any
 }
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TabItemProps> = {
     tab: PropTypes.node,
     icon: PropTypes.node,
-    size: PropTypes.string,
-    type: PropTypes.string,
-    tabPosition: PropTypes.string,
+    size: PropTypes.string as PropType<TabItemProps['size']>,
+    type: PropTypes.string as PropType<TabItemProps['type']>,
+    tabPosition: PropTypes.string as PropType<TabItemProps['tabPosition']>,
     selected: PropTypes.bool,
     closable: PropTypes.bool,
     disabled: PropTypes.bool,
     itemKey: PropTypes.string,
-    handleKeyDown: PropTypes.func,
-    deleteTabItem: PropTypes.func,
-    onClick: PropTypes.func,
+    handleKeyDown: PropTypes.func as PropType<TabItemProps['handleKeyDown']>,
+    deleteTabItem: PropTypes.func as PropType<TabItemProps['deleteTabItem']>,
+    onClick: PropTypes.func as PropType<TabItemProps['onClick']>,
     forwardRef: [PropTypes.object, PropTypes.func],
 }
 export const vuePropsType = vuePropsMake(propTypes, {})
@@ -127,11 +127,11 @@ const TabItem = defineComponent<TabItemProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Tabs.TabItem'
 })
 
-// @ts-ignore
-TabItem.props = vuePropsType
-TabItem.name = 'Tabs.TabItem'
 
 export default TabItem
 

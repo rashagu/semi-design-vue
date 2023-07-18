@@ -21,7 +21,16 @@ import { BaseRowKeyType } from '@douyinfe/semi-foundation/table/foundation';
 
 import TableCell from '../TableCell';
 import { ColumnProps, Fixed, TableComponents, Virtualized, ExpandIcon, OnRow, RowExpandable } from '../interface';
-import {CSSProperties, defineComponent, getCurrentInstance, h, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    getCurrentInstance,
+    h, PropType,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../../PropTypes";
 import {useBaseComponent} from "../../_base/baseComponent";
 import {FooterProps} from "../../image/interface";
@@ -51,6 +60,7 @@ export interface BaseRowProps {
     onHover?: (mouseEnter: boolean, rowKey: string | number) => void;
     onRow?: OnRow<any>;
     onRowClick?: (rowKey: BaseRowKeyType, e: MouseEvent, expand: boolean) => void;
+    onRowContextMenu?: (record: Record<string, any>, e: MouseEvent) => void;
     onRowDoubleClick?: (record: Record<string, any>, e: MouseEvent) => void;
     onRowMouseEnter?: (record: Record<string, any>, e: MouseEvent) => void;
     onRowMouseLeave?: (record: Record<string, any>, e: MouseEvent) => void;
@@ -67,7 +77,7 @@ export interface BaseRowProps {
     visible?: boolean; // required
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<BaseRowProps> = {
     anyColumnFixed: PropTypes.bool,
     cellWidths: PropTypes.array,
     className: PropTypes.string,
@@ -87,26 +97,26 @@ const propTypes = {
     index: PropTypes.number,
     isSection: PropTypes.bool,
     level: PropTypes.number,
-    onDidUpdate: PropTypes.func,
-    onHover: PropTypes.func,
-    onRow: PropTypes.func,
-    onRowClick: PropTypes.func,
-    onRowContextMenu: PropTypes.func,
-    onRowDoubleClick: PropTypes.func,
-    onRowMouseEnter: PropTypes.func,
-    onRowMouseLeave: PropTypes.func,
+    onDidUpdate: PropTypes.func as PropType<BaseRowProps['onDidUpdate']>,
+    onHover: PropTypes.func as PropType<BaseRowProps['onHover']>,
+    onRow: PropTypes.func as PropType<BaseRowProps['onRow']>,
+    onRowClick: PropTypes.func as PropType<BaseRowProps['onRowClick']>,
+    onRowContextMenu: PropTypes.func as PropType<BaseRowProps['onRowContextMenu']>,
+    onRowDoubleClick: PropTypes.func as PropType<BaseRowProps['onRowDoubleClick']>,
+    onRowMouseEnter: PropTypes.func as PropType<BaseRowProps['onRowMouseEnter']>,
+    onRowMouseLeave: PropTypes.func as PropType<BaseRowProps['onRowMouseLeave']>,
     prefixCls: PropTypes.string,
     record: PropTypes.object,
-    renderExpandIcon: PropTypes.func,
+    renderExpandIcon: PropTypes.func as PropType<BaseRowProps['renderExpandIcon']>,
     replaceClassName: PropTypes.string,
-    rowExpandable: PropTypes.func,
+    rowExpandable: PropTypes.func as PropType<BaseRowProps['rowExpandable']>,
     rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // real key of the row
     selected: PropTypes.bool,
     store: PropTypes.object,
     style: PropTypes.object,
     virtualized: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     visible: PropTypes.bool,
-    data: [Array]
+    // data: [Array] as PropType<BaseRowProps['data']>,
 };
 
 export {
@@ -134,7 +144,7 @@ const defaultProps = {
     selected: false,
     disabled: false,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<BaseRowProps>(propTypes, defaultProps);
 const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
     const slots = useSlots();
     const nodeRef = ref()
@@ -401,10 +411,11 @@ const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
           </BodyRow>
         );
     };
+}, {
+    props: vuePropsType,
+    name:'TableRow'
 });
 
-TableRow.props = vuePropsType;
-TableRow.name = "TableRow";
 
 export default TableRow;
 

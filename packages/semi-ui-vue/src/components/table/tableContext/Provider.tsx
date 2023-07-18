@@ -14,10 +14,11 @@ const Provider = defineComponent<{value:TableContextProps}>((props, {slots}) => 
   }, { deep: true, immediate: true})
   provide('TableContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
+}, {
+  props: vuePropsType,
+  name: 'TableContextProvider'
 })
 
-Provider.props = vuePropsType
-Provider.name = 'TableContextProvider'
 
 export default Provider
 

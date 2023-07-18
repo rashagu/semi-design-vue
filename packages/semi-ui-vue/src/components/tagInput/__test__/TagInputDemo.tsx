@@ -31,7 +31,7 @@ const TagInputDemo = defineComponent<ExampleProps>((props, {}) => {
   )
 })
 
-TagInputDemo.props = vuePropsType
+
 
 export default TagInputDemo
 

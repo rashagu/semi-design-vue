@@ -116,7 +116,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<HighlightDemo />*/}
         {/*<TimelineDemo/>*/}
         {/*<SideSheetDemo />*/}
-        {/*<ListDemo />*/}
+        <ListDemo />
         {/*<DescriptionsDemo />*/}
         {/*<CollapseDemo />*/}
         {/*<CollapsibleDemo />*/}
@@ -159,7 +159,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<WithFieldDemo2/>*/}
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
-        <TreeDemo />
+        {/*<TreeDemo />*/}
         <div style={{backgroundColor: 'red', width: 300, height: 300}}>
 
         </div>

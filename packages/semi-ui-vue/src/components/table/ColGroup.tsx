@@ -68,10 +68,11 @@ const ColGroup = defineComponent<ColGroupProps>((props, {}) => {
           </ColGroup>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'ColGroup'
 });
 
-ColGroup.props = vuePropsType;
-ColGroup.name = "ColGroup";
 
 export default ColGroup;
 

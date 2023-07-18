@@ -9,7 +9,7 @@ import {
   VNode,
   isVNode,
   useSlots,
-  CSSProperties, WatchStopHandle, nextTick, unref
+  CSSProperties, WatchStopHandle, nextTick, unref, ComponentObjectPropsOptions, PropType
 } from 'vue'
 import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import * as PropTypes from '../PropTypes';
@@ -100,7 +100,7 @@ export interface NavState {
 
 const {hasOwnProperty} = Object.prototype;
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<NavProps> = {
   // Initial expanded SubNav navigation key array
   defaultOpenKeys: Array,
   openKeys: Array,
@@ -108,13 +108,13 @@ const propTypes = {
   defaultSelectedKeys: Array,
   selectedKeys: Array,
   // Navigation type, now supports vertical, horizontal
-  mode: String,
+  mode: String as PropType<NavProps['mode']>,
   // Triggered when selecting a navigation item
-  onSelect: PropTypes.func,
+  onSelect: PropTypes.func as PropType<NavProps['onSelect']>,
   // Triggered when clicking a navigation item
-  onClick: PropTypes.func,
+  onClick: PropTypes.func as PropType<NavProps['onClick']>,
   // SubNav expand/close callback
-  onOpenChange: PropTypes.func,
+  onOpenChange: PropTypes.func as PropType<NavProps['onOpenChange']>,
   // Array of options (nested options can continue)
   items: PropTypes.array,
   // Is it in the state of being stowed to the sidebar
@@ -126,25 +126,25 @@ const propTypes = {
     type: PropTypes.bool,
     default: undefined
   },
-  onCollapseChange: PropTypes.func,
+  onCollapseChange: PropTypes.func as PropType<NavProps['onCollapseChange']>,
   multiple: {
     type: PropTypes.bool,
     default: undefined
   },
-  onDeselect: PropTypes.func,
+  onDeselect: PropTypes.func as PropType<NavProps['onDeselect']>,
   subNavMotion: [PropTypes.bool, PropTypes.object, PropTypes.func],
   subNavCloseDelay: PropTypes.number,
   subNavOpenDelay: PropTypes.number,
   tooltipShowDelay: PropTypes.number,
   tooltipHideDelay: PropTypes.number,
-  children: PropTypes.node,
+  children: PropTypes.node as PropType<NavProps['children']>,
   style: PropTypes.object,
   bodyStyle: PropTypes.object,
   className: PropTypes.string,
   toggleIconPosition: PropTypes.string,
   prefixCls: PropTypes.string,
-  header: PropTypes.node,
-  footer: PropTypes.node,
+  header: PropTypes.node as PropType<NavProps['header']>,
+  footer: PropTypes.node as PropType<NavProps['footer']>,
   limitIndent: {
     type: PropTypes.bool,
     default: undefined
@@ -171,7 +171,7 @@ const defaultProps = {
   // items: [],
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<NavProps>(propTypes, defaultProps)
 const index = defineComponent<NavProps>((props, {slots}) => {
   const slots_ = useSlots()
   let itemsChanged: boolean = true;
@@ -475,10 +475,11 @@ const index = defineComponent<NavProps>((props, {slots}) => {
       </LocaleConsumer>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Navigation'
 })
 
-index.props = vuePropsType
-index.name = 'Navigation'
 
 export default index
 

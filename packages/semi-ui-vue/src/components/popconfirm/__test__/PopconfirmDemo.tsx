@@ -34,8 +34,7 @@ const PopconfirmDemo = defineComponent<PopconfirmDemoProps>((props, {}) => {
   )
 })
 
-PopconfirmDemo.props = vuePropsType
-PopconfirmDemo.name = 'PopconfirmDemo'
+
 
 export default PopconfirmDemo
 

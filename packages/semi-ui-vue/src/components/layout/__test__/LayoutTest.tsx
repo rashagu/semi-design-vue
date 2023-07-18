@@ -25,7 +25,8 @@ const LayoutTest = defineComponent<ExampleProps>((props, {slots}) => {
   )
 })
 
-LayoutTest.props = vuePropsType
+
+
 
 export default LayoutTest
 

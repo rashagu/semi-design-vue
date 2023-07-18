@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, VNode, inject, Ref} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, inject, Ref, ComponentObjectPropsOptions} from 'vue'
 import { Locale as dateFns } from 'date-fns';
 
 import { get } from 'lodash';
@@ -7,6 +7,7 @@ import Context, {ContextValue} from '../configProvider/context';
 
 import DefaultLocale from './source/zh_CN';
 import { Locale } from './interface';
+import {ListItemProps} from "../list";
 
 type ChildrenRender<T> = (componentLocal: T, localeCode: string, dateFnsLocale: dateFns) => VNode;
 export interface LocaleConsumerProps<T> {
@@ -14,15 +15,16 @@ export interface LocaleConsumerProps<T> {
   children?: ChildrenRender<T>;
 }
 
-export const vuePropsType = {
-  componentName: {
-    type:String,
-    default:''
-  },
-  children: [String, Boolean,Object,Array],
-}
+
 
 function LocaleConsumerFunc<T>(){
+  const vuePropsType:ComponentObjectPropsOptions<LocaleConsumerProps<T>> = {
+    componentName: {
+      type:String,
+      default:''
+    },
+    // children: [String, Boolean,Object,Array],
+  }
   const vn = defineComponent<LocaleConsumerProps<T>>((props, {slots}) => {
 
     // const config = inject('ConfigContext', ref<ContextValue>({}))
@@ -64,10 +66,11 @@ function LocaleConsumerFunc<T>(){
         </Context.Consumer>
       )
     }
+  }, {
+    props: vuePropsType,
+    name: 'LocaleConsumer'
   })
 
-  vn.props = vuePropsType
-  vn.name = 'LocaleConsumer'
   return vn
 }
 

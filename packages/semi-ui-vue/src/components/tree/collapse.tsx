@@ -4,7 +4,19 @@ import { noop } from 'lodash';
 import { cssClasses } from '@douyinfe/semi-foundation/collapsible/constants';
 import getMotionObjFromProps from '@douyinfe/semi-foundation/utils/getMotionObjFromProps';
 import {RefElement, VueJsxNode} from "../interface";
-import {defineComponent, h, useSlots, ref, watch, computed, onUnmounted, CSSProperties, nextTick, onMounted} from "vue";
+import {
+    defineComponent,
+    h,
+    useSlots,
+    ref,
+    watch,
+    computed,
+    onUnmounted,
+    CSSProperties,
+    nextTick,
+    onMounted,
+    PropType
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 export interface CollapseProps {
@@ -23,10 +35,10 @@ const ease = 'cubicBezier(.25,.1,.25,1)';
 
 
 
-export const vuePropsType = vuePropsMake({
+export const vuePropsType = vuePropsMake<CollapseProps>({
     motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
     duration: PropTypes.number,
-    onMotionEnd: PropTypes.func,
+    onMotionEnd: PropTypes.func as PropType<CollapseProps['onMotionEnd']>,
     motionType: String
 }, {
     duration: 250,
@@ -160,10 +172,13 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
           renderChildren(null)
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'Collapse'
 })
 
 // @ts-ignore
-Collapse.props = vuePropsType
-Collapse.name = 'Collapse'
+// Collapse.props = vuePropsType
+// Collapse.name = 'Collapse'
 
 export default Collapse

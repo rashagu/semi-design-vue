@@ -52,10 +52,10 @@ export function vuePropsMake<T>(typeObj:ComponentObjectPropsOptions<T>, defaultP
       }
     }else{
       obj[typeKey] = {
-        type: typeObj[typeKey].hasOwnProperty('type')?
+        type: (typeObj[typeKey] === undefined?undefined:typeObj[typeKey].hasOwnProperty('type')?
           // @ts-ignore
           typeObj[typeKey].type:
-          typeObj[typeKey],
+          typeObj[typeKey]),
         default: undefined
       }
     }

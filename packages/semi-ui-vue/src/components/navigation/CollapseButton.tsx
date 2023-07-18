@@ -1,4 +1,4 @@
-import {defineComponent, FunctionalComponent, h, VNode} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, FunctionalComponent, h, PropType, VNode} from "vue";
 import {noop} from 'lodash';
 import {IconSidebar} from '@kousum/semi-icons-vue';
 import Button from '../button';
@@ -17,15 +17,15 @@ export interface CollapseButtonProps {
   onClick?(e: boolean): void;
 }
 
-const vuePropsType = {
+const vuePropsType:ComponentObjectPropsOptions<CollapseButtonProps> = {
   prefixCls: String,
   locale: Object,
-  collapseText: Function,
+  collapseText: Function as PropType<CollapseButtonProps['collapseText']>,
   isCollapsed: {
     type: Boolean,
     default: undefined
   },
-  onClick: Function
+  onClick: Function as PropType<CollapseButtonProps['onClick']>,
 }
 const CollapseButton = defineComponent<CollapseButtonProps>((props, ctx) => {
 
@@ -72,6 +72,10 @@ const CollapseButton = defineComponent<CollapseButtonProps>((props, ctx) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'CollapseButton'
 })
-CollapseButton.props = vuePropsType
+
+
 export default CollapseButton

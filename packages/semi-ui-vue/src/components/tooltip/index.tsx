@@ -19,7 +19,7 @@ import {
   useSlots,
   getCurrentInstance,
   Ref,
-  VNode,
+  VNode, ComponentObjectPropsOptions, PropType,
 } from 'vue';
 import classNames from 'classnames';
 import * as PropTypes from '../PropTypes';
@@ -128,15 +128,15 @@ const triggerSet = strings.TRIGGER_SET;
 const blockDisplays = ['flex', 'block', 'table', 'flow-root', 'grid'];
 const defaultGetContainer = () => document.body;
 
-const propTypes = {
-  children: PropTypes.node,
+const propTypes:ComponentObjectPropsOptions<TooltipProps> = {
+  // children: PropTypes.node,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
   autoAdjustOverflow: PropTypes.bool,
-  position: String,
-  getPopupContainer: PropTypes.func,
+  position: String as PropType<TooltipProps['position']>,
+  getPopupContainer: PropTypes.func as PropType<TooltipProps['getPopupContainer']>,
   mouseEnterDelay: PropTypes.number,
   mouseLeaveDelay: PropTypes.number,
-  trigger: [Boolean, String],
+  trigger: [Boolean, String] as PropType<TooltipProps['trigger']>,
   className: PropTypes.string,
   wrapperClassName: PropTypes.string,
   clickToHide: PropTypes.bool,
@@ -146,13 +146,13 @@ const propTypes = {
   style: PropTypes.object,
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   prefixCls: PropTypes.string,
-  onVisibleChange: PropTypes.func,
-  onClickOutSide: PropTypes.func,
+  onVisibleChange: PropTypes.func as PropType<TooltipProps['onVisibleChange']>,
+  onClickOutSide: PropTypes.func as PropType<TooltipProps['onClickOutSide']>,
   spacing: PropTypes.number,
   margin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   showArrow: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   zIndex: PropTypes.number,
-  rePosKey: [String, Number, Boolean],
+  rePosKey: [String, Number, Boolean] as PropType<TooltipProps['rePosKey']>,
   arrowBounding: Object,
   transformFromCenter: PropTypes.bool, // Whether to change from the center of the trigger (for dynamic effects)
   arrowPointAtCenter: PropTypes.bool,
@@ -164,22 +164,22 @@ const propTypes = {
   returnFocusOnClose: PropTypes.bool,
   preventScroll: PropTypes.bool,
   disableFocusListener:  PropTypes.bool,
-  name: String,
+  // name: String,
 
-  cancelText: String,
-  okText: String,
-  contentClassName: String,
+  // cancelText: String,
+  // okText: String,
+  // contentClassName: String,
   closeOnEsc: {
     type: Boolean,
     default: false,
   },
   onEscKeyDown: {
-    type: Function,
+    type: Function as PropType<TooltipProps['onEscKeyDown']>,
     default: noop,
   },
   wrapperId: String,
   disableArrowKeyDown: Boolean,
-  afterClose: Function,
+  afterClose: Function as PropType<TooltipProps['afterClose']>,
   keepDOM: Boolean,
 };
 
@@ -846,9 +846,11 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
       </>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'Tooltip'
 });
 
-Tooltip.props = vuePropsType;
-Tooltip.name = 'Tooltip';
+
 
 export default Tooltip;

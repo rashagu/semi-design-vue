@@ -47,13 +47,14 @@ import {Motion} from '../_base/base';
 import {IconChevronDown, IconClear, IconSearch} from '@kousum/semi-icons-vue';
 import CheckboxGroup from '../checkbox/checkboxGroup';
 import {
+    ComponentObjectPropsOptions,
     CSSProperties,
     defineComponent,
     Fragment,
     h,
     nextTick,
     onMounted,
-    onUnmounted,
+    onUnmounted, PropType,
     reactive,
     ref,
     useSlots,
@@ -160,6 +161,8 @@ export interface TreeSelectProps extends Omit<BasicTreeSelectProps, OverrideComm
     onChange?: OnChange;
     onFocus?: (e: MouseEvent) => void;
     onVisibleChange?: (isVisible: boolean) => void;
+    id?:string
+
 }
 
 export type OverrideCommonState =
@@ -187,7 +190,7 @@ const key = 0;
 
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TreeSelectProps> = {
     'aria-describedby': PropTypes.string,
     'aria-errormessage': PropTypes.string,
     'aria-invalid': PropTypes.bool,
@@ -195,9 +198,9 @@ const propTypes = {
     'aria-required': PropTypes.bool,
     'aria-label': PropTypes.string,
     borderless: PropTypes.bool,
-    loadedKeys: PropTypes.string,
-    loadData: PropTypes.func,
-    onLoad: PropTypes.func,
+    loadedKeys: PropTypes.array as PropType<TreeSelectProps['loadedKeys']>,
+    loadData: PropTypes.func as PropType<TreeSelectProps['loadData']>,
+    onLoad: PropTypes.func as PropType<TreeSelectProps['onLoad']>,
     arrowIcon: PropTypes.node,
     defaultOpen: PropTypes.bool,
     defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
@@ -213,13 +216,13 @@ const propTypes = {
     searchAutoFocus: PropTypes.bool,
     virtualize: PropTypes.object,
     treeNodeFilterProp: PropTypes.string,
-    onChange: PropTypes.func,
-    onSearch: PropTypes.func,
-    onSelect: PropTypes.func,
-    onExpand: PropTypes.func,
+    onChange: PropTypes.func as PropType<TreeSelectProps['onChange']>,
+    onSearch: PropTypes.func as PropType<TreeSelectProps['onSearch']>,
+    onSelect: PropTypes.func as PropType<TreeSelectProps['onSelect']>,
+    onExpand: PropTypes.func as PropType<TreeSelectProps['onExpand']>,
     onChangeWithObject: PropTypes.bool,
-    onBlur: PropTypes.func,
-    onFocus: PropTypes.func,
+    onBlur: PropTypes.func as PropType<TreeSelectProps['onBlur']>,
+    onFocus: PropTypes.func as PropType<TreeSelectProps['onFocus']>,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.object]),
     expandedKeys: PropTypes.array,
     autoExpandParent: PropTypes.bool,
@@ -236,7 +239,7 @@ const propTypes = {
     motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
     placeholder: PropTypes.string,
     maxTagCount: PropTypes.number,
-    size: String,
+    size: String as PropType<TreeSelectProps['size']>,
     className: PropTypes.string,
     style: PropTypes.object,
     treeNodeLabelProp: PropTypes.string,
@@ -245,34 +248,34 @@ const propTypes = {
     insetLabel: PropTypes.node,
     insetLabelId: PropTypes.string,
     zIndex: PropTypes.number,
-    getPopupContainer: PropTypes.func,
+    getPopupContainer: PropTypes.func as PropType<TreeSelectProps['getPopupContainer']>,
     dropdownMatchSelectWidth: PropTypes.bool,
-    validateStatus: String,
+    validateStatus: String as PropType<TreeSelectProps['validateStatus']>,
     mouseEnterDelay: PropTypes.number,
     mouseLeaveDelay: PropTypes.number,
-    triggerRender: PropTypes.func,
+    triggerRender: PropTypes.func as PropType<TreeSelectProps['triggerRender']>,
     stopPropagation: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     outerBottomSlot: PropTypes.node,
     outerTopSlot: PropTypes.node,
-    onVisibleChange: PropTypes.func,
+    onVisibleChange: PropTypes.func as PropType<TreeSelectProps['onVisibleChange']>,
     expandAction: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     searchPosition: String,
     clickToHide: PropTypes.bool,
-    renderLabel: PropTypes.func,
-    renderFullLabel: PropTypes.func,
+    renderLabel: PropTypes.func as PropType<TreeSelectProps['renderLabel']>,
+    renderFullLabel: PropTypes.func as PropType<TreeSelectProps['renderFullLabel']>,
     labelEllipsis: PropTypes.bool,
     optionListStyle: PropTypes.object,
     searchRender: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-    renderSelectedItem: PropTypes.func,
-    checkRelation: PropTypes.string,
-    id: PropTypes.string,
+    renderSelectedItem: PropTypes.func as PropType<TreeSelectProps['renderSelectedItem']>,
+    checkRelation: PropTypes.string as PropType<TreeSelectProps['checkRelation']>,
+    id: PropTypes.string as PropType<TreeSelectProps['id']>,
     showRestTagsPopover: PropTypes.bool,
     restTagsPopoverProps: PropTypes.object,
     preventScroll: PropTypes.bool,
     clickTriggerToHide: PropTypes.bool,
 
     dropdownMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
-    position: PropTypes.string,
+    position: PropTypes.string as PropType<TreeSelectProps['position']>,
 };
 
 const defaultProps: Partial<TreeSelectProps> = {
@@ -1567,10 +1570,11 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
           </Popover>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'TreeSelect'
 })
 
-TreeSelect.props = vuePropsType
-TreeSelect.name = 'TreeSelect'
 
 export default TreeSelect
 

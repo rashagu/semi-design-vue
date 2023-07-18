@@ -7,7 +7,7 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/table/constants';
 
 import { SortOrder } from './interface';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
-import {CSSProperties, defineComponent, h, useSlots} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 
@@ -20,13 +20,13 @@ export interface ColumnSorterProps {
     title?: VueJsxNode
 }
 
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<ColumnSorterProps> = {
     className: PropTypes.string,
     style: PropTypes.object,
-    onClick: PropTypes.func,
+    onClick: PropTypes.func as PropType<ColumnSorterProps['onClick']>,
     prefixCls: PropTypes.string,
     sortOrder: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    title: PropTypes.any,
+    title: PropTypes.any as PropType<ColumnSorterProps['title']>,
 };
 
 const defaultProps = {
@@ -83,11 +83,10 @@ const ColumnSorter = defineComponent<ColumnSorterProps>((props, {}) => {
           </div>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'ColumnSorter'
 });
-
-// @ts-ignore
-ColumnSorter.props = vuePropsType;
-ColumnSorter.name = "ColumnSorter";
 
 export default ColumnSorter;
 

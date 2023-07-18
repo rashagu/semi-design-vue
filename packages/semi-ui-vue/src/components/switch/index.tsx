@@ -8,7 +8,19 @@ import '@douyinfe/semi-foundation/switch/switch.scss';
 
 import { noop } from 'lodash';
 import Spin from '../spin';
-import {CSSProperties, defineComponent, h, onMounted, onUnmounted, reactive, ref, useSlots, VNode, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    onMounted,
+    onUnmounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    VNode,
+    watch
+} from "vue";
 import {AriaAttributes} from "../AriaAttributes";
 import {vuePropsMake} from "../PropTypes";
 import {TimeInputProps} from "../timePicker";
@@ -39,7 +51,7 @@ export interface SwitchState {
     focusVisible: boolean;
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<SwitchProps> = {
     'aria-label': PropTypes.string,
     'aria-labelledby': PropTypes.string,
     'aria-invalid': PropTypes.bool,
@@ -50,7 +62,7 @@ const propTypes = {
         type: PropTypes.bool,
         default: undefined
     },
-    checkedText: PropTypes.node,
+    checkedText: PropTypes.node as PropType<SwitchProps['checkedText']>,
     defaultChecked: {
         type: PropTypes.bool,
         default: undefined
@@ -63,12 +75,12 @@ const propTypes = {
         type: PropTypes.bool,
         default: undefined
     },
-    onChange: PropTypes.func,
-    onMouseEnter: PropTypes.func,
-    onMouseLeave: PropTypes.func,
+    onChange: PropTypes.func as PropType<SwitchProps['onChange']>,
+    onMouseEnter: PropTypes.func as PropType<SwitchProps['onMouseEnter']>,
+    onMouseLeave: PropTypes.func as PropType<SwitchProps['onMouseLeave']>,
     style: PropTypes.object,
-    size: String,
-    uncheckedText: PropTypes.node,
+    size: String as PropType<SwitchProps['size']>,
+    uncheckedText: PropTypes.node as PropType<SwitchProps['uncheckedText']>,
     id: PropTypes.string
 };
 
@@ -81,7 +93,7 @@ const defaultProps: Partial<SwitchProps> = {
     onMouseLeave: noop,
     size: 'default',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<SwitchProps>(propTypes, defaultProps)
 const Switch = defineComponent<SwitchProps>((props, {}) => {
 
     const slots = useSlots()
@@ -199,9 +211,11 @@ const Switch = defineComponent<SwitchProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Switch'
 })
 
-Switch.props = vuePropsType
-Switch.name = 'Switch'
+
 
 export default Switch

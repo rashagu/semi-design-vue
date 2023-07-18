@@ -6,7 +6,7 @@ import {cssClasses, strings} from '@douyinfe/semi-foundation/navigation/constant
 import CollapseButton from './CollapseButton';
 import '@douyinfe/semi-foundation/navigation/navigation.scss';
 import {BaseProps} from '../_base/baseComponent';
-import {defineComponent, h, isVNode, VNode} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, h, isVNode, PropType, VNode} from "vue";
 import {useNavContext} from "./nav-context/Consumer";
 import {VueJsxNode} from "../interface";
 
@@ -15,15 +15,15 @@ export interface NavFooterProps extends BaseProps {
   collapseText?: (collapsed?: boolean) => VueJsxNode;
 }
 
-export const vuePropsType = {
-  children: PropTypes.node,
+export const vuePropsType:ComponentObjectPropsOptions<NavFooterProps> = {
+  // children: PropTypes.node,
   style: PropTypes.object,
   className: PropTypes.string,
   collapseButton: {
-    type: PropTypes.any,
+    type: PropTypes.any as PropType<NavFooterProps['collapseButton']>,
     default: false
   },
-  collapseText: PropTypes.func,
+  collapseText: PropTypes.func as PropType<NavFooterProps['collapseText']>,
 }
 const NavFooter = defineComponent<NavFooterProps>((props, {slots}) => {
 
@@ -72,8 +72,11 @@ const NavFooter = defineComponent<NavFooterProps>((props, {slots}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'NavFooter'
 })
 
-NavFooter.props = vuePropsType
-NavFooter.name = "NavFooter"
+
+
 export default NavFooter

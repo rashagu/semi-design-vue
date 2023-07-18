@@ -2,7 +2,7 @@ import ConfirmModal from '../ConfirmModal';
 import { get } from 'lodash';
 import { ConfirmProps } from '../confirm';
 import { Motion } from '../../_base/base';
-import {defineComponent, h, ref, useSlots} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, h, PropType, ref, useSlots} from "vue";
 
 interface HookModalProps {
     afterClose: (...args: any[]) => void;
@@ -17,8 +17,8 @@ export interface HookModalRef {
 // useImperativeHandle 定义子组件暴露给父组件的属性或方法
 
 
-export const vuePropsType = {
-    afterClose: Function,
+export const vuePropsType:ComponentObjectPropsOptions<HookModalProps> = {
+    afterClose: Function as PropType<HookModalProps['afterClose']>,
     config: Object,
     motion: [Object, Function]
 }
@@ -74,10 +74,11 @@ const HookModal = defineComponent<HookModalProps>((props_, {expose}) => {
           />
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'HookModal'
 })
 
-// @ts-ignore
-HookModal.props = vuePropsType
-HookModal.name = 'HookModal'
+
 
 export default HookModal

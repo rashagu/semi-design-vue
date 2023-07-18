@@ -1,13 +1,16 @@
 import Toast from '../toast';
 import { ToastInstance } from '@douyinfe/semi-foundation/toast/toastFoundation';
-import {defineComponent, h, ref, useSlots, watch} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, h, PropType, ref, useSlots, watch} from "vue";
 
 interface HookToastProps extends ToastInstance{
     afterClose: (id: string) => void;
 }
 
-export const vuePropsType = {
-    afterClose: Function
+export const vuePropsType:ComponentObjectPropsOptions<HookToastProps> = {
+    content: undefined,
+    id: String as PropType<HookToastProps['id']>,
+    motion: Boolean as PropType<HookToastProps['motion']>,
+    afterClose: Function as PropType<HookToastProps['afterClose']>
 }
 const HookToast = defineComponent<HookToastProps>((props, {attrs}) => {
     const slots = useSlots()
@@ -38,9 +41,11 @@ const HookToast = defineComponent<HookToastProps>((props, {attrs}) => {
           />
         ) : null;
     }
+}, {
+    props: vuePropsType,
+    name: 'HookToast'
 })
 
-HookToast.props = vuePropsType
-HookToast.name = 'HookToast'
+
 
 export default HookToast

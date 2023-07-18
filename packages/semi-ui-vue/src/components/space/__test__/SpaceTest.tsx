@@ -27,9 +27,11 @@ const SpaceTest = defineComponent<ExampleProps>((props, {slots}) => {
       </Space>
     </div>
   )
+},{
+  name:'SpaceTest'
 })
 
-SpaceTest.props = vuePropsType
+
 
 export default SpaceTest
 

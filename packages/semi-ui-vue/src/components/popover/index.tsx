@@ -1,4 +1,16 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties, inject, Ref, watch, getCurrentInstance} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  VNode,
+  CSSProperties,
+  inject,
+  Ref,
+  watch,
+  getCurrentInstance,
+  ComponentObjectPropsOptions, PropType
+} from 'vue'
 import * as PropTypes from '../PropTypes'
 import classNames from 'classnames';
 
@@ -53,6 +65,11 @@ export interface PopoverProps extends BaseProps {
   afterClose?: () => void,
   disableArrowKeyDown?: boolean,
   keepDOM?: boolean
+
+  class?: string
+  cancelText?: string
+  okText?: string
+  role?: string
 }
 
 export interface PopoverState {
@@ -62,21 +79,21 @@ export interface PopoverState {
 const positionSet = strings.POSITION_SET;
 const triggerSet = strings.TRIGGER_SET;
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<PopoverProps> = {
 
-  children: PropTypes.node,
+  // children: PropTypes.node,
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   visible: PropTypes.bool,
   autoAdjustOverflow: PropTypes.bool,
   motion: PropTypes.bool,
-  position: PropTypes.string,
+  position: PropTypes.string as PropType<PopoverProps['position']>,
   // getPopupContainer: PropTypes.func,
   mouseEnterDelay: PropTypes.number,
   mouseLeaveDelay: PropTypes.number,
-  trigger: [Boolean, String],
+  trigger: [Boolean, String] as PropType<PopoverProps['trigger']>,
   contentClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  onVisibleChange: PropTypes.func,
-  onClickOutSide: PropTypes.func,
+  onVisibleChange: PropTypes.func as PropType<PopoverProps['onVisibleChange']>,
+  onClickOutSide: PropTypes.func as PropType<PopoverProps['onClickOutSide']>,
   style: PropTypes.object,
   spacing: PropTypes.number,
   zIndex: PropTypes.number,
@@ -89,20 +106,20 @@ const propTypes = {
   disableArrowKeyDown: PropTypes.bool,
 
   className: String,
-  class: String,
+  class: String as PropType<PopoverProps['class']>,
   stopPropagation: [Boolean, String],
-  rePosKey: [String, Number, Boolean],
-  getPopupContainer: Function,
+  rePosKey: [String, Number, Boolean] as PropType<PopoverProps['rePosKey']>,
+  getPopupContainer: Function as PropType<PopoverProps['getPopupContainer']>,
   cancelText: {
-    type: String,
+    type: String as PropType<PopoverProps['cancelText']>,
     default: 'No',
   },
   okText: {
-    type: String,
+    type: String as PropType<PopoverProps['okText']>,
     default: 'Yes',
   },
-  role: String,
-  afterClose: Function,
+  role: String as PropType<PopoverProps['role']>,
+  afterClose: Function as PropType<PopoverProps['afterClose']>,
   disableFocusListener: Boolean,
   keepDOM: Boolean,
 };
@@ -125,7 +142,7 @@ const defaultProps = {
   guardFocus: true,
   disableFocusListener: true,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<PopoverProps>(propTypes, defaultProps)
 
 const Popover = defineComponent<PopoverProps>((props, {slots, expose}) => {
   const {context} = useConfigContext()
@@ -220,9 +237,12 @@ const Popover = defineComponent<PopoverProps>((props, {slots, expose}) => {
       </Tooltip>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Popover'
 })
 
-Popover.props = vuePropsType
-Popover.name = 'Popover'
+
+
 export default Popover
 

@@ -65,8 +65,7 @@ const NotificationDemo = defineComponent<NotificationDemoProps>((props, {}) => {
   )
 })
 
-NotificationDemo.props = vuePropsType
-NotificationDemo.name = 'NotificationDemo'
+
 
 export default NotificationDemo
 

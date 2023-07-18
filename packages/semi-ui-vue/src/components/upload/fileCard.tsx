@@ -12,7 +12,7 @@ import Tooltip from '../tooltip/index';
 import Spin from '../spin/index';
 import { isElement } from '../_base/reactUtils';
 import {RenderFileItemProps, UploadListType} from './interface';
-import {defineComponent, h, useSlots, Fragment} from 'vue'
+import {defineComponent, h, useSlots, Fragment, ComponentObjectPropsOptions, PropType} from 'vue'
 import type {CSSProperties, FunctionalComponent, VNode} from 'vue'
 import {vuePropsMake} from "../PropTypes";
 
@@ -53,31 +53,31 @@ export interface FileCardProps extends RenderFileItemProps {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<FileCardProps> = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
-    listType: PropTypes.string,
+    listType: PropTypes.string as PropType<FileCardProps['listType']>,
     name: PropTypes.string,
-    onPreviewClick: PropTypes.func,
-    onRemove: PropTypes.func,
-    onReplace: PropTypes.func,
-    onRetry: PropTypes.func,
+    onPreviewClick: PropTypes.func as PropType<FileCardProps['onPreviewClick']>,
+    onRemove: PropTypes.func as PropType<FileCardProps['onRemove']>,
+    onReplace: PropTypes.func as PropType<FileCardProps['onReplace']>,
+    onRetry: PropTypes.func as PropType<FileCardProps['onRetry']>,
     percent: PropTypes.number,
     preview: PropTypes.bool,
-    previewFile: PropTypes.func,
+    previewFile: PropTypes.func as PropType<FileCardProps['previewFile']>,
     showReplace: PropTypes.bool,
     showRetry: PropTypes.bool,
     size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    status: PropTypes.string,
+    status: PropTypes.string as PropType<FileCardProps['status']>,
     style: PropTypes.object,
     url: PropTypes.string,
-    validateMessage: PropTypes.node,
+    validateMessage: PropTypes.node as PropType<FileCardProps['validateMessage']>,
     index: PropTypes.number,
     key: String,
     showPicInfo: Boolean,
-    renderPicInfo: Function,
-    renderPicPreviewIcon: Function,
-    renderFileOperation: Function,
+    renderPicInfo: Function as PropType<FileCardProps['renderPicInfo']>,
+    renderPicPreviewIcon: Function as PropType<FileCardProps['renderPicPreviewIcon']>,
+    renderFileOperation: Function as PropType<FileCardProps['renderFileOperation']>,
     uid: String,
     fileInstance: Object,
     renderThumbnail:Function,
@@ -94,7 +94,7 @@ const defaultProps = {
     size: '',
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<FileCardProps>(propTypes, defaultProps)
 const FileCard = defineComponent<FileCardProps>((props, {}) => {
 
     const slots = useSlots()
@@ -297,9 +297,9 @@ const FileCard = defineComponent<FileCardProps>((props, {}) => {
 
         return null;
     }
+},{
+    props: vuePropsType,
+    name: 'FileCard'
 })
-
-FileCard.props = vuePropsType
-FileCard.name = 'FileCard'
 
 export default FileCard

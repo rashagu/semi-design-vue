@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, CSSProperties} from 'vue'
+import {defineComponent, ref, h, Fragment, CSSProperties, ComponentObjectPropsOptions, PropType} from 'vue'
 import classnames from 'classnames';
 import { get } from 'lodash';
 import { Position } from '@douyinfe/semi-foundation/tooltip/foundation';
@@ -14,11 +14,11 @@ export interface ArrowProps {
 
 
 
-export const vuePropsType = {
-  position: String,
+export const vuePropsType:ComponentObjectPropsOptions<ArrowProps> = {
+  position: String as PropType<ArrowProps['position']>,
   className: String,
-  arrowStyle: [String, Object],
-  popStyle: [String, Object],
+  arrowStyle: [String, Object] as PropType<ArrowProps['arrowStyle']>,
+  popStyle: [String, Object] as PropType<ArrowProps['popStyle']>,
 }
 const Arrow = defineComponent<ArrowProps>((props, {slots}) => {
 
@@ -68,9 +68,11 @@ const Arrow = defineComponent<ArrowProps>((props, {slots}) => {
       </svg>
     );
   }
+},{
+  props: vuePropsType,
+  name: 'Arrow'
 })
 
-Arrow.props = vuePropsType
 
 export default Arrow
 

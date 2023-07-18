@@ -38,11 +38,12 @@ const StepsDemo = defineComponent<StepsDemoProps>((props, {}) => {
       </div>
     </div>
   )
+}, {
+  props: vuePropsType,
+  name:'StepsDemo'
 })
 
-// @ts-ignore
-StepsDemo.props = vuePropsType
-StepsDemo.name = 'StepsDemo'
+
 
 export default StepsDemo
 

@@ -1,22 +1,22 @@
-import {computed, defineComponent, h, useSlots} from "vue"
+import {ComponentObjectPropsOptions, computed, defineComponent, h, PropType, useSlots} from "vue"
 import Context, { TableContextProps } from './table-context';
 import * as PropTypes from "../PropTypes";
 
 
-export const vuePropsType = {
+export const vuePropsType: ComponentObjectPropsOptions<TableContextProps> = {
   headWidths: PropTypes.array,
-  setHeadWidths: PropTypes.func,
-  handleRowExpanded: PropTypes.func,
+  setHeadWidths: PropTypes.func as PropType<TableContextProps['setHeadWidths']>,
+  handleRowExpanded: PropTypes.func as PropType<TableContextProps['handleRowExpanded']>,
   tableWidth: PropTypes.number,
   anyColumnFixed: PropTypes.bool,
   flattenedColumns: PropTypes.array,
-  renderExpandIcon: PropTypes.func,
-  renderSelection: PropTypes.func,
-  getHeadWidths: PropTypes.func,
-  getCellWidths: PropTypes.func,
-  getVirtualizedListRef: [PropTypes.func, PropTypes.object],
-  setBodyHasScrollbar: PropTypes.func,
-  direction: PropTypes.string,
+  renderExpandIcon: PropTypes.func as PropType<TableContextProps['renderExpandIcon']>,
+  renderSelection: PropTypes.func as PropType<TableContextProps['renderSelection']>,
+  getHeadWidths: PropTypes.func as PropType<TableContextProps['getHeadWidths']>,
+  getCellWidths: PropTypes.func as PropType<TableContextProps['getCellWidths']>,
+  getVirtualizedListRef: [PropTypes.func, PropTypes.object] as PropType<TableContextProps['getVirtualizedListRef']>,
+  setBodyHasScrollbar: PropTypes.func as PropType<TableContextProps['setBodyHasScrollbar']>,
+  direction: PropTypes.string as PropType<TableContextProps['direction']>,
 };
 const TableContextProvider = defineComponent<TableContextProps>((props, {}) => {
   const slots = useSlots();
@@ -40,10 +40,11 @@ const TableContextProvider = defineComponent<TableContextProps>((props, {}) => {
   return () => {
     return <Context.Provider value={tableContextValue.value}>{{default: slots.default}}</Context.Provider>;
   };
+}, {
+  props: vuePropsType,
+  name: 'TableContextProvider'
 });
 
-TableContextProvider.props = vuePropsType;
-TableContextProvider.name = "TableContextProvider";
 
 export default TableContextProvider;
 

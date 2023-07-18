@@ -4,7 +4,16 @@ import { cssClasses } from '@douyinfe/semi-foundation/sideSheet/constants';
 import Button from '../iconButton';
 import { noop } from 'lodash';
 import { IconClose } from '@kousum/semi-icons-vue';
-import { CSSProperties, defineComponent, h, onBeforeUnmount, onMounted, ref, useSlots } from 'vue';
+import {
+  ComponentObjectPropsOptions,
+  CSSProperties,
+  defineComponent,
+  h,
+  onBeforeUnmount,
+  onMounted, PropType,
+  ref,
+  useSlots
+} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
 
@@ -30,10 +39,13 @@ export interface SideSheetContentProps {
   'aria-label'?: string;
   maskExtraProps?: { [key: string]: any };
   wrapperExtraProps?: { [key: string]: any };
+
+  motion?: boolean;
+  visible?: boolean;
 }
 
-const propTypes = {
-  onClose: PropTypes.func,
+const propTypes:ComponentObjectPropsOptions<SideSheetContentProps> = {
+  onClose: PropTypes.func as PropType<SideSheetContentProps['onClose']>,
   mask: PropTypes.bool,
   maskStyle: PropTypes.object,
   maskClosable: PropTypes.bool,
@@ -51,16 +63,16 @@ const propTypes = {
   'aria-label': PropTypes.string,
   maskExtraProps: PropTypes.object,
   wrapperExtraProps: PropTypes.object,
-  children: PropTypes.node,
+  // children: PropTypes.node as PropType<SideSheetContentProps['children']>,
 
-  motion: PropTypes.bool,
-  visible: PropTypes.bool,
+  motion: PropTypes.bool as PropType<SideSheetContentProps['motion']>,
+  visible: PropTypes.bool as PropType<SideSheetContentProps['visible']>,
 };
 
 const defaultProps = {
   onClose: noop,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<SideSheetContentProps>(propTypes, defaultProps);
 const SideSheetContent = defineComponent<SideSheetContentProps>((props, {}) => {
   const slots = useSlots();
   let sideSheetId: string;
@@ -187,9 +199,10 @@ const SideSheetContent = defineComponent<SideSheetContentProps>((props, {}) => {
       </div>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'SideSheetContent'
 });
 
-SideSheetContent.props = vuePropsType;
-SideSheetContent.name = 'SideSheetContent';
 
 export default SideSheetContent;

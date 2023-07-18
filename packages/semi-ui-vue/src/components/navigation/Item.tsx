@@ -14,7 +14,16 @@ import {cssClasses, strings} from '@douyinfe/semi-foundation/navigation/constant
 
 import Tooltip from '../tooltip';
 import Dropdown, {DropdownItem} from '../dropdown';
-import {AnchorHTMLAttributes, cloneVNode, defineComponent, h, reactive, VNode, Fragment} from "vue";
+import {
+    AnchorHTMLAttributes,
+    cloneVNode,
+    defineComponent,
+    h,
+    reactive,
+    VNode,
+    Fragment,
+    ComponentObjectPropsOptions, PropType
+} from "vue";
 import {useNavContext} from "./nav-context/Consumer";
 import {VueJsxNode} from "../interface";
 
@@ -45,11 +54,11 @@ export interface NavItemState {
 }
 
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<NavItemProps> = {
     text: PropTypes.node,
     itemKey: [PropTypes.string, PropTypes.number],
     onClick: {
-        type: PropTypes.func,
+        type: PropTypes.func as PropType<NavItemProps['onClick']>,
         default: noop
     },
     onMouseEnter: {
@@ -60,12 +69,12 @@ export const vuePropsType = {
         type: PropTypes.func,
         default: noop
     },
-    icon: PropTypes.node,
+    icon: PropTypes.node as PropType<NavItemProps['icon']>,
     className: PropTypes.string,
     toggleIcon: PropTypes.string,
     style: PropTypes.object,
     forwardRef: {
-        type: PropTypes.func,
+        type: PropTypes.func as PropType<NavItemProps['forwardRef']>,
         default: noop
     },
     indent: {
@@ -88,7 +97,7 @@ export const vuePropsType = {
     },
 
 
-    items: Array,
+    // items: Array as PropType<NavItemProps['items']>,
     level: Number
 }
 const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
@@ -304,9 +313,12 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
 
         return itemDom;
     }
+}, {
+    props: vuePropsType,
+    name: 'NavItem'
 })
 
-NavItem.props = vuePropsType
+
 
 export default NavItem
 

@@ -8,7 +8,7 @@ import {
   reactive,
   onMounted,
   watchEffect,
-  onUnmounted, cloneVNode, watch, useSlots
+  onUnmounted, cloneVNode, watch, useSlots, ComponentObjectPropsOptions, PropType
 } from 'vue'
 import cls from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/typography/constants';
@@ -48,6 +48,10 @@ export interface BaseTypographyProps extends BaseProps {
   component_?: any;
   spacing?: string;
   heading?: string;
+
+  class?: string
+  id?: string
+  'x-semi-prop'?: string
 }
 
 interface BaseTypographyState {
@@ -65,10 +69,10 @@ const prefixCls = cssClasses.PREFIX;
 const ELLIPSIS_STR = '...';
 
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<BaseTypographyProps> = {
   children: [Object, Array, Function],
   style: {
-    type: [Object, String],
+    type: [Object, String] as PropType<BaseTypographyProps['style']>,
     default: {}
   },
   className: {
@@ -100,8 +104,8 @@ export const vuePropsType = {
     default: false,
   },
   icon: {
-    type: [Object, String],
-    default: '',
+    type: [Object, String] as PropType<BaseTypographyProps['icon']>,
+    default: ()=>null,
   },
   ellipsis: {
     type: [Object, Boolean],
@@ -124,11 +128,11 @@ export const vuePropsType = {
     default: false,
   },
   type: {
-    type: String,
+    type: String as PropType<BaseTypographyProps['type']>,
     default: 'primary',
   },
   size: {
-    type: String,
+    type: String as PropType<BaseTypographyProps['size']>,
     default: 'normal',
   },
   code: Boolean,
@@ -688,9 +692,12 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       </LocaleConsumer>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Base'
 })
 
-Base.props = vuePropsType
+
 
 export default Base
 
