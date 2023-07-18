@@ -424,7 +424,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
 
   const eventManager = new Event();
   // TODO context
-  const {adapter: adapterInject, context: context_} = useBaseComponent<SelectProps>(props, state)
+  const {adapter: adapterInject, context: context_, getDataAttr} = useBaseComponent<SelectProps>(props, state)
   const setOptionContainerEl = (node: HTMLDivElement) => (optionContainerEl.value = node);
 
   const instance = getCurrentInstance()
@@ -698,9 +698,8 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
   })
 
 
-  const handleInputChange = (e: Event) => {
-    // @ts-ignore
-    foundation.handleInputChange(e.target.value)
+  const handleInputChange = (value: string, event: Event) => {
+    foundation.handleInputChange(value, event)
   };
 
   function renderInput() {
@@ -792,6 +791,10 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
     foundation.handleClearBtnEnterPress(e as any);
   }
 
+  function search(value: string, event: Event) {
+    handleInputChange(value, event);
+  }
+
   function renderEmpty() {
     return <Option empty={true} emptyContent={props.emptyContent}/>;
   }
@@ -833,7 +836,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
           key={option.key || option.label as string + option.value as string + optionIndex}
           renderOptionItem={renderOptionItem}
           inputValue={inputValue}
-          id={`${selectID}-option-${optionIndex}`}
+          semiOptionId={`${selectID}-option-${optionIndex}`}
         >
           {option.label}
         </Option>
@@ -1355,7 +1358,8 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       triggerRender,
       arrowIcon,
       clearIcon,
-      borderless
+      borderless,
+      ...rest
     } = props;
 
     const { selections, isOpen, keyboardEventSet, inputValue, isHovering, isFocus, showInput, focusIndex } = state;
@@ -1463,6 +1467,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
         onBlur={e => foundation.handleTriggerBlur(e as any)}
         onKeypress={onKeyPress}
         {...keyboardEventSet}
+        {...getDataAttr()}
       >
         {inner}
       </div>

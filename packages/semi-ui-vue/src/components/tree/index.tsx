@@ -184,7 +184,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
   const virtualizedListRef = ref()
 
 
-  const {adapter: adapterInject} = useBaseComponent<TreeProps>(props, state);
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<TreeProps>(props, state);
 
   function adapter_(): TreeAdapter {
     const filterAdapter: Pick<TreeAdapter, 'updateInputValue' | 'focusInput'> = {
@@ -218,8 +218,8 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
       notifyChange: value => {
         props.onChange && props.onChange(value);
       },
-      notifySearch: input => {
-        props.onSearch && props.onSearch(input);
+      notifySearch: (input: string, filteredExpandedKeys: string[]) => {
+        props.onSearch && props.onSearch(input, filteredExpandedKeys);
       },
       notifyRightClick: (e, node) => {
         props.onContextMenu && props.onContextMenu(e, node);
@@ -856,7 +856,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
           labelEllipsis: typeof labelEllipsis === 'undefined' ? virtualize : labelEllipsis,
         }}
       >
-        <div aria-label={props['aria-label']} class={wrapperCls} style={style}>
+        <div aria-label={props['aria-label']} class={wrapperCls} style={style} {...getDataAttr()}>
           {filterTreeNode ? renderInput() : null}
           <div class={listCls} {...ariaAttr}>
             {noData ? renderEmpty() : (multiple ?

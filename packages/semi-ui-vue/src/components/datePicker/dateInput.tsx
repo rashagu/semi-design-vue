@@ -49,6 +49,7 @@ export interface DateInputProps extends DateInputFoundationProps, BaseProps {
   inputRef?: Ref;
   rangeInputStartRef?: Ref;
   rangeInputEndRef?: Ref
+  showClearIgnoreDisabled?: boolean
 }
 
 const propTypes:ComponentObjectPropsOptions<DateInputProps> = {
@@ -246,16 +247,17 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
   }
 
   function renderRangeClearBtn(rangeStart: string, rangeEnd: string) {
-    const {showClear, prefixCls, disabled, clearIcon} = props;
-    const allowClear = (rangeStart || rangeEnd) && showClear;
-    return allowClear && !disabled ? (
+    const { showClear, prefixCls, disabled, clearIcon, showClearIgnoreDisabled } = props;
+    const isRealDisabled = disabled && !showClearIgnoreDisabled;
+    const allowClear = (rangeStart || rangeEnd) && showClear && !isRealDisabled;
+    return allowClear ? (
       <div
         role="button"
         tabindex={0}
         aria-label="Clear range input value"
         class={`${prefixCls}-range-input-clearbtn`}
-        onMousedown={e => !disabled && handleRangeInputClear(e)}>
-        {clearIcon ? clearIcon : <IconClear aria-hidden/>}
+        onMousedown={e => handleRangeInputClear(e)}>
+      {clearIcon ? clearIcon : <IconClear aria-hidden/>}
       </div>
     ) : null;
   }
@@ -471,6 +473,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
       insetInput,
       insetInputValue,
       defaultPickerValue,
+      showClearIgnoreDisabled,
       ...rest
     } = props;
     const dateIcon = <IconCalendar aria-hidden/>;
@@ -496,6 +499,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
       inputRef,
       insetLabel: insetLabel,
       disabled: disabled,
+      showClearIgnoreDisabled: showClearIgnoreDisabled,
       readonly: inputReadOnly,
       className: inputCls,
       style: inputStyle as CSSProperties,

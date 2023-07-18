@@ -649,7 +649,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
     const icon = renderIcon();
     let portalInnerStyle: CSSProperties = omit(containerStyle, motion ? ['transformOrigin'] : undefined);
     const transformOrigin = get(containerStyle, 'transformOrigin');
-    const userOpacity = get(style, 'opacity');
+    const userOpacity: CSSProperties['opacity'] | null  = get(style, 'opacity', null);
     const opacity = userOpacity ? userOpacity : 1;
 
     portalInnerStyle = {
@@ -678,7 +678,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
                 ...(displayNone ? { display: "none" } : {}),
                 transformOrigin,
                 ...style,
-                opacity: isPositionUpdated ? opacity : '0',
+                ...(userOpacity ? { opacity: isPositionUpdated ? opacity : "0" }:{})
               }}
               {...portalEventSet}
               {...animationEventsNeedBind}
@@ -686,7 +686,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
               x-placement={placement}
               id={id}
             >
-              {contentNode}
+              <div class={`${prefix}-content`} >{contentNode}</div>
               {icon}
             </div>
           );
@@ -769,7 +769,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
     // const { isInsert, triggerEventSet, visible, id } = state;
     const { wrapWhenSpecial, role, trigger } = props;
     let children: any = slots.default ? slots.default()[0] : null;
-    const childrenStyle = { ...get(children, 'props.style') };
+    const childrenStyle:CSSProperties = { ...get(children, 'props.style') };
     const extraStyle: CSSProperties = {};
 
     if (wrapWhenSpecial) {

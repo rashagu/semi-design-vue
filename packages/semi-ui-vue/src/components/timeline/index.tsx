@@ -11,13 +11,14 @@ import {
     CSSProperties,
     defineComponent,
     h,
-    isVNode, PropType,
+    isVNode, PropType, useAttrs,
     useSlots,
     VNode
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {AriaAttributes} from "../AriaAttributes";
 import {VueJsxNode} from "../interface";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 export type { TimelineItemProps } from './item';
 
@@ -47,6 +48,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Timeline = defineComponent<TimelineProps>((props, {}) => {
     const slots = useSlots()
+    const attr = useAttrs()
 
     const getPosCls = (ele: VNode, idx: number) => {
         const { mode } = props;
@@ -87,7 +89,7 @@ const Timeline = defineComponent<TimelineProps>((props, {}) => {
 
     return () => {
         const children = slots.default?.()
-        const { className, style, mode, dataSource } = props;
+        const { className, style, mode, dataSource, ...rest } = props;
         const classString = cls(
           prefixCls,
           className,
@@ -103,7 +105,7 @@ const Timeline = defineComponent<TimelineProps>((props, {}) => {
         const items = childrenList || addClassName(children);
 
         return (
-          <ul aria-label={props['aria-label']} style={style} class={classString}>
+          <ul aria-label={props['aria-label']} style={style} class={classString} {...getDataAttr({...rest, ...attr})}>
               {items}
           </ul>
         );

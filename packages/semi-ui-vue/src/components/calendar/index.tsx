@@ -22,6 +22,7 @@ const propTypes:ComponentObjectPropsOptions<CalendarProps> = {
     scrollTop: PropTypes.number,
     onClick: PropTypes.func as PropType<CalendarProps['onClick']>,
     renderTimeDisplay: PropTypes.func as PropType<CalendarProps['renderTimeDisplay']>,
+    renderDateDisplay: PropTypes.func as PropType<CalendarProps['renderDateDisplay']>,
     markWeekend: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

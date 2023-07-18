@@ -11,12 +11,13 @@ import {
     defineComponent,
     h,
     onUnmounted, PropType,
-    reactive,
+    reactive, useAttrs,
     useSlots,
     VNode,
     watch
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -89,6 +90,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake<ProgressProps>(propTypes, defaultProps)
 const Progress = defineComponent<ProgressProps>((props, {}) => {
 
+    const attr = useAttrs()
     const slots = useSlots()
     let _mounted: boolean = true;
 
@@ -164,6 +166,7 @@ const Progress = defineComponent<ProgressProps>((props, {}) => {
             percent,
             orbitStroke,
             id,
+          ...rest
         } = props;
         const ariaLabel = props['aria-label'];
         const ariaLabelledBy = props['aria-labelledby'];
@@ -209,6 +212,7 @@ const Progress = defineComponent<ProgressProps>((props, {}) => {
             aria-labelledby={ariaLabelledBy}
             aria-label={ariaLabel}
             aria-valuetext={ariaValueText}
+            {...getDataAttr({...rest, ...attr})}
           >
               <svg key={size} class={classNames.svg} height={width} width={width} aria-hidden>
                   <circle
@@ -278,6 +282,7 @@ const Progress = defineComponent<ProgressProps>((props, {}) => {
             percent,
             orbitStroke,
             id,
+          ...rest
         } = props;
         const ariaLabel = props['aria-label'];
         const ariaLabelledBy = props['aria-labelledby'];
@@ -322,6 +327,7 @@ const Progress = defineComponent<ProgressProps>((props, {}) => {
             aria-labelledby={ariaLabelledBy}
             aria-label={ariaLabel}
             aria-valuetext={ariaValueText}
+            {...getDataAttr({...rest, ...attr})}
           >
               <div
                 class={progressTrackCls}

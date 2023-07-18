@@ -9,11 +9,12 @@ import {
     isVNode,
     VNode,
     cloneVNode,
-    ComponentObjectPropsOptions, PropType
+    ComponentObjectPropsOptions, PropType, useAttrs
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {noop} from "lodash";
 import {BasicStepProps} from "./basicStep";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 export type Direction = 'horizontal' | 'vertical';
 export type Status = 'wait' | 'process' | 'finish' | 'error' | 'warning';
@@ -62,6 +63,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake<BasicStepsProps>(propTypes, defaultProps)
 const Steps = defineComponent<BasicStepsProps>((props, {}) => {
     const slots = useSlots()
+    const attrs = useAttrs()
 
 
 
@@ -78,6 +80,7 @@ const Steps = defineComponent<BasicStepsProps>((props, {}) => {
             style,
             hasLine,
             onChange,
+          ...rest
         } = props;
 
         const inner = () => {
@@ -126,7 +129,7 @@ const Steps = defineComponent<BasicStepsProps>((props, {}) => {
         });
 
         return (
-          <div aria-label={props["aria-label"]} class={wrapperCls} style={style}>
+          <div aria-label={props["aria-label"]} class={wrapperCls} style={style}  {...getDataAttr({...rest, ...attrs})}>
               {inner()}
           </div>
         );

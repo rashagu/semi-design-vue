@@ -106,7 +106,7 @@ const RadioGroup = defineComponent<RadioGroupProps>((props, {slots}) => {
   const state = reactive({
     value: undefined,
   })
-  const {adapter: adapterInject} = useBaseComponent<RadioGroupProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<RadioGroupProps>(props, state)
 
   const theAdapter = adapter()
   function adapter(): RadioGroupAdapter {
@@ -165,6 +165,7 @@ const RadioGroup = defineComponent<RadioGroupProps>((props, {slots}) => {
       type,
       buttonSize,
       id,
+      ...rest
     } = props;
 
     const isButtonRadio = type === strings.TYPE_BUTTON;
@@ -232,6 +233,7 @@ const RadioGroup = defineComponent<RadioGroupProps>((props, {slots}) => {
         aria-labelledby={props['aria-labelledby']}
         aria-describedby={props['aria-describedby']}
         aria-required={props['aria-required']}
+        {...getDataAttr()}
       >
         <Context
           value={{

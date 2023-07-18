@@ -299,7 +299,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
     },
     {immediate: true}
   );
-  const { adapter: adapterInject } = useBaseComponent<TransferProps>(props, state);
+  const { adapter: adapterInject, getDataAttr } = useBaseComponent<TransferProps>(props, state);
   function adapter_(): TransferAdapter<TransferProps, TransferState> {
     return {
       ...adapterInject(),
@@ -752,7 +752,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
     return (
       <LocaleConsumer componentName="Transfer">
         {(locale: Locale['Transfer']) => (
-          <div class={transferCls} style={style}>
+          <div class={transferCls} style={style} {...getDataAttr()}>
             {renderLeft(locale)}
             {renderRight(locale)}
           </div>

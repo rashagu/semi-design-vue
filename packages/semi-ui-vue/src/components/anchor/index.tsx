@@ -8,7 +8,7 @@ import '@douyinfe/semi-foundation/anchor/anchor.scss';
 import {noop, debounce, throttle, isEqual} from 'lodash';
 import getUuid from '@douyinfe/semi-foundation/utils/uuid';
 import { ArrayElement } from '../_base/base';
-import ConfigContext, { ContextValue } from '../configProvider/context';
+import { ShowTooltip } from '../typography/interface';
 import {
     cloneVNode, ComponentObjectPropsOptions,
     CSSProperties,
@@ -43,7 +43,7 @@ export interface AnchorProps {
     position?: ArrayElement<typeof strings.POSITION_SET>;
     railTheme?: ArrayElement<typeof strings.SLIDE_COLOR>;
     scrollMotion?: boolean;
-    showTooltip?: boolean;
+    showTooltip?: boolean | ShowTooltip;
     size?: ArrayElement<typeof strings.SIZE>;
     style?: CSSProperties;
     targetOffset?: number;
@@ -108,7 +108,7 @@ const Anchor = defineComponent<AnchorProps>((props, {}) => {
         scrollHeight: '100%',
         slideBarTop: '0',
     })
-    const {adapter: adapterInject} = useBaseComponent<AnchorProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<AnchorProps>(props, state)
     const childrenRef = ref<VNode[]>([])
     function adapter_(): AnchorAdapter<AnchorProps, AnchorState> {
         return {
@@ -359,6 +359,7 @@ const Anchor = defineComponent<AnchorProps>((props, {}) => {
                 class={wrapperCls}
                 style={wrapperStyle}
                 id={anchorID}
+                {...getDataAttr()}
               >
                   <div aria-hidden class={slideCls} style={{ height: scrollHeight }}>
                       <span class={slideBarCls} style={{ top: slideBarTop }} />

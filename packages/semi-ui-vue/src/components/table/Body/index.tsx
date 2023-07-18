@@ -29,9 +29,10 @@ import SectionRow, {SectionRowPropTypes} from './SectionRow';
 import TableHeader from '../TableHeader';
 import ConfigContext from '../../configProvider/context';
 import TableContext, { TableContextProps } from '../table-context';
-import {
+import type {
     ExpandedRowRender,
     Virtualized,
+    VirtualizedItemSize,
     GetVirtualizedListRef,
     ColumnProps,
     Size,
@@ -373,9 +374,9 @@ const Body = defineComponent<BodyProps>((props, {}) => {
         const virtualizedItem = get(virtualizedData, index);
         const defaultConfig = getDefaultVirtualizedRowConfig(tableSize, virtualizedItem.sectionRow);
 
-        const itemSize = get(virtualized, 'itemSize', defaultConfig.height);
+        const itemSize = get(virtualized, 'itemSize', defaultConfig.height) as VirtualizedItemSize;
 
-        let realSize = itemSize;
+        let realSize = itemSize as number;
 
         if (typeof itemSize === 'function') {
             realSize = itemSize(index, {

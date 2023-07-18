@@ -1,10 +1,12 @@
 import * as PropTypes from '../PropTypes';
-import { cssClasses } from '@douyinfe/semi-foundation/descriptions/constants';
+import {cssClasses} from '@douyinfe/semi-foundation/descriptions/constants';
 import '@douyinfe/semi-foundation/descriptions/descriptions.scss';
-import { CSSProperties, defineComponent, h, useSlots, VNode } from 'vue';
-import { vuePropsMake } from '../PropTypes';
-import { useDescriptionsContext } from './context/Consumer';
-import { VueJsxNode } from '../interface';
+import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
+import {CSSProperties, defineComponent, h, useSlots, VNode} from 'vue';
+import {vuePropsMake} from '../PropTypes';
+import {useDescriptionsContext} from './context/Consumer';
+import {VueJsxNode} from '../interface';
+import {useAttrs} from "vue/dist/vue";
 
 export interface DescriptionsItemProps {
   hidden?: boolean;
@@ -27,26 +29,27 @@ const propTypes = {
 export const vuePropsType = vuePropsMake(propTypes, {});
 const DescriptionsItem = defineComponent<DescriptionsItemProps>((props, {}) => {
   const slots = useSlots();
+  const attr = useAttrs()
 
-  const { context } = useDescriptionsContext();
+  const {context} = useDescriptionsContext();
 
   return () => {
     const children = slots.default?.();
-    const { itemKey, hidden, className, style } = props;
-    const { align } = context.value;
+    const {itemKey, hidden, className, style, ...rest} = props;
+    const {align} = context.value;
     if (hidden) {
       return null;
     }
     const item =
       align === 'plain' ? (
-        <tr class={className} style={style}>
+        <tr class={className} style={style}  {...getDataAttr({...rest, ...attr})}>
           <td class={`${prefixCls}-item`}>
             <span class={keyCls}>{itemKey}:</span>
             <span class={valCls}>{children}</span>
           </td>
         </tr>
       ) : (
-        <tr class={className} style={style}>
+        <tr class={className} style={style}  {...getDataAttr({...rest, ...attr})}>
           <th class={`${prefixCls}-item ${prefixCls}-item-th`}>
             <span class={keyCls}>{itemKey}</span>
           </th>

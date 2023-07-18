@@ -31,7 +31,8 @@ type OmitTextareaAttr =
   | 'onBlur'
   | 'onKeydown'
   | 'onKeypress'
-  | 'onKeyup';
+  | 'onKeyUp'
+  | 'onResize'
 
 export interface TextAreaProps extends Omit<TextareaHTMLAttributes, OmitTextareaAttr> {
   style?: CSSProperties;

@@ -121,7 +121,7 @@ const Rating = defineComponent<RatingProps>((props, {}) => {
         emptyStarFocusVisible: false,
     });
 
-    const {adapter: adapterInject} = useBaseComponent<RatingProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<RatingProps>(props, state)
     function adapter_(): RatingAdapter<RatingProps, RatingState> {
         return {
             ...adapterInject<RatingProps, RatingState>(),
@@ -313,7 +313,7 @@ const Rating = defineComponent<RatingProps>((props, {}) => {
 
 
     return () => {
-        const { style, prefixCls, disabled, className, id, count, tabIndex } = props;
+        const { style, prefixCls, disabled, className, id, count, tabIndex, ...rest } = props;
         const { value, emptyStarFocusVisible } = state;
         const ariaLabelPrefix = getAriaLabelPrefix();
         const ariaLabel = `Rating: ${value} of ${count} ${ariaLabelPrefix}${value === 1 ? '' : 's'},`;
@@ -341,6 +341,7 @@ const Rating = defineComponent<RatingProps>((props, {}) => {
             onKeydown={disabled ? noop : onKeyDown}
             ref={rate}
             id={id}
+            {...getDataAttr()}
           >
               {itemList}
           </ul>

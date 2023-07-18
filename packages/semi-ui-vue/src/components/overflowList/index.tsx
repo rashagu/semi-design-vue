@@ -201,7 +201,14 @@ const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
     ()=>onItemResizeNum.value
   ], (value, oldValue)=>{
 
-    if (!isEqual(value[0], props.items)) {
+    const prevItemsKeys = value[0].map((item) =>
+      item.key
+    );
+    const nowItemsKeys = props.items.map((item) =>
+      item.key
+    );
+
+    if (!isEqual(prevItemsKeys, nowItemsKeys)) {
       itemRefs = {};
       state.visibleState = new Map()
     }

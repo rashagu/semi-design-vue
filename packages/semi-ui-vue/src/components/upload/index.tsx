@@ -248,7 +248,7 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
     const inputRef = ref();
     const replaceInputRef = ref();
 
-    const {adapter: adapterInject} = useBaseComponent<UploadProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<UploadProps>(props, state)
     function adapter_(): UploadAdapter<UploadProps, UploadState> {
         return {
             ...adapterInject<UploadProps, UploadState>(),
@@ -692,7 +692,7 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
         const dirProps = directory ? { directory: 'directory', webkitdirectory: 'webkitdirectory' } : {};
 
         return (
-          <div class={uploadCls} style={style} x-prompt-pos={promptPosition}>
+          <div class={uploadCls} style={style} x-prompt-pos={promptPosition} {...getDataAttr()}>
               <input
                 key={state.inputKey}
                 capture={capture}

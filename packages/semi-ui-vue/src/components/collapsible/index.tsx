@@ -78,7 +78,7 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
     visible: props.isOpen,
     isTransitioning: false,
   });
-  const { adapter: adapterInject } = useBaseComponent<CollapsibleProps>(props, state);
+  const { adapter: adapterInject, getDataAttr } = useBaseComponent<CollapsibleProps>(props, state);
   function adapter_(): CollapsibleAdapter<CollapsibleProps, CollapsibleState> {
     return {
       ...adapterInject(),
@@ -207,6 +207,7 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
       },
       props.className
     );
+
     return (
       <div
         class={wrapperCls}
@@ -218,9 +219,17 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
           foundation.updateIsTransitioning(false);
           props.onMotionEnd?.();
         }}
+        {...getDataAttr()}
       >
-        <div x-semi-prop="children" ref={domRef} style={{ overflow: 'hidden' }} id={props.id}>
-          {(props.keepDOM || props.collapseHeight !== 0 || state.visible || props.isOpen) && slots.default?.()}
+        <div
+          x-semi-prop="children"
+          ref={domRef}
+          style={{ overflow: 'hidden' }}
+          id={props.id}
+        >
+          {
+            (props.keepDOM || props.collapseHeight !== 0 || state.visible || props.isOpen) && props.children
+          }
         </div>
       </div>
     );

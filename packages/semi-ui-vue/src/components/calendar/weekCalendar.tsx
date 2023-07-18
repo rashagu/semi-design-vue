@@ -14,7 +14,7 @@ import '@douyinfe/semi-foundation/calendar/calendar.scss';
 import { Locale } from '../locale/interface';
 import {
     ComponentObjectPropsOptions,
-    defineComponent,
+    defineComponent, Fragment,
     h,
     onBeforeUnmount,
     onMounted, PropType,
@@ -49,7 +49,9 @@ const propTypes:ComponentObjectPropsOptions<WeekCalendarProps> = {
     markWeekend: PropTypes.bool,
     scrollTop: PropTypes.number,
     renderTimeDisplay: PropTypes.func as PropType<WeekCalendarProps['renderTimeDisplay']>,
+    renderDateDisplay: PropTypes.func as PropType<WeekCalendarProps['renderDateDisplay']>,
     dateGridRender: PropTypes.func as PropType<WeekCalendarProps['dateGridRender']>,
+    allDayEventsRender: PropTypes.func as PropType<WeekCalendarProps['allDayEventsRender']>,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     style: PropTypes.object,
@@ -86,7 +88,7 @@ const WeekCalendar = defineComponent<WeekCalendarProps>((props, {}) => {
         cachedKeys: [],
     })
 
-    const {adapter: adapterInject} = useBaseComponent<WeekCalendarProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<WeekCalendarProps>(props, state)
     function adapter_(): CalendarAdapter<WeekCalendarProps, WeekCalendarState> {
         return {
             ...adapterInject(),
@@ -120,10 +122,11 @@ const WeekCalendar = defineComponent<WeekCalendarProps>((props, {}) => {
     watch([
         ()=>state.cachedKeys,
         ()=>props.events,
-    ], (value, [prevStateCachedKeys], onCleanup)=>{
+        ()=>props.displayValue,
+    ], (value, [prevStateCachedKeys,_, prevPropsDisplayValue], onCleanup)=>{
         const prevEventKeys = prevStateCachedKeys;
         const nowEventKeys = props.events.map(event => event.key);
-        if (!isEqual(prevEventKeys, nowEventKeys)) {
+        if (!isEqual(prevEventKeys, nowEventKeys) || !isEqual(prevPropsDisplayValue, props.displayValue)) {
             foundation.parseWeeklyEvents();
         }
     })
@@ -167,7 +170,7 @@ const WeekCalendar = defineComponent<WeekCalendarProps>((props, {}) => {
     };
 
     const renderHeader = (dateFnsLocale: any) => {
-        const { markWeekend, displayValue } = props;
+        const { markWeekend, displayValue, renderDateDisplay } = props;
         const { month, week } = foundation.getWeeklyData(displayValue, dateFnsLocale);
         return (
           <div class={`${prefixCls}-header`}>
@@ -182,10 +185,17 @@ const WeekCalendar = defineComponent<WeekCalendarProps>((props, {}) => {
                               [`${cssClasses.PREFIX}-today`]: isToday,
                               [`${cssClasses.PREFIX}-weekend`]: markWeekend && day.isWeekend,
                           });
-                          return (
-                            <li key={`${date.toString()}-weekheader`} class={listCls}>
+                          const dateContent = renderDateDisplay ? (
+                            renderDateDisplay(date)
+                          ) : (
+                            <Fragment>
                                 <span class={`${cssClasses.PREFIX}-today-date`}>{dayString}</span>
                                 <span>{weekday}</span>
+                            </Fragment>
+                          );
+                          return (
+                            <li key={`${date.toString()}-weekheader`} class={listCls}>
+                                {dateContent}
                             </li>
                           );
                       })}
@@ -196,6 +206,9 @@ const WeekCalendar = defineComponent<WeekCalendarProps>((props, {}) => {
     };
 
     const renderAllDayEvents = (events: ParsedRangeEvent[]) => {
+        if (props.allDayEventsRender) {
+            return props.allDayEventsRender(props.events);
+        }
         const list = events.map((event, ind) => {
             const { leftPos, width, topInd, children, key } = event;
             const top = `${topInd}em`;
@@ -218,11 +231,11 @@ const WeekCalendar = defineComponent<WeekCalendarProps>((props, {}) => {
     };
 
     const renderAllDay = (locale: Locale['Calendar']) => {
+        const { allDayEventsRender } = props;
         const { allDay } = state.parsedEvents;
         const parsed = foundation.parseWeeklyAllDayEvents(allDay);
-        const maxRowHeight = calcRowHeight(parsed);
-        const style = {
-            height: `${maxRowHeight}em`
+        const style = allDayEventsRender ? null : {
+            height: `${calcRowHeight(parsed)}em`
         };
         const { markWeekend } = props;
         const { week } = weeklyData;
@@ -266,7 +279,7 @@ const WeekCalendar = defineComponent<WeekCalendarProps>((props, {}) => {
         return (
           <LocaleConsumer componentName="Calendar">
               {(locale: Locale['Calendar'], localeCode: string, dateFnsLocale: any) => (
-                <div class={weekCls} style={weekStyle} ref={dom}>
+                <div class={weekCls} style={weekStyle} ref={dom} {...getDataAttr()}>
                     <div class={`${prefixCls}-sticky-top`}>
                         {header}
                         {renderHeader(dateFnsLocale)}

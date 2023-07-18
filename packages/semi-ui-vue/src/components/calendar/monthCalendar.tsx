@@ -89,7 +89,7 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
         parsedEvents: {} as MonthlyEvent,
         cachedKeys: []
     });
-    const {adapter: adapterInject} = useBaseComponent<MonthCalendarProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<MonthCalendarProps>(props, state)
     function adapter_(): CalendarAdapter<MonthCalendarProps, MonthCalendarState> {
         return {
             ...adapterInject(),
@@ -163,11 +163,13 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
         ()=>state.itemLimit,
         ()=>props.events,
         ()=>props.height,
+        ()=>props.displayValue,
     ], (value, [
       prevStateCachedKeys,
         prevStateItemLimit,
         prevPropsEvents,
-        prevPropsHeight
+        prevPropsHeight,
+        prevPropsDisplayValue
     ], onCleanup)=>{
 
         const prevEventKeys = prevStateCachedKeys;
@@ -181,7 +183,7 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
                 itemLimitUpdate = true;
             }
         }
-        if (!isEqual(prevEventKeys, nowEventKeys) || itemLimitUpdate) {
+        if (!isEqual(prevEventKeys, nowEventKeys) || itemLimitUpdate || !isEqual(prevPropsDisplayValue, props.displayValue)) {
             foundation.parseMonthlyEvents((itemLimit || props.events) as any);
         }
     })
@@ -297,6 +299,7 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
                   class={`${cardCls}-wrapper`}
                   style={{ bottom: 0 }}
                   onClick={e => showCardFunc(e, key)}
+                  {...getDataAttr()}
                 >
                     {locale.remaining.replace('${remained}', String(remained))}
                 </div>
@@ -313,7 +316,7 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
             ref={ref => cardRef.set(key, ref)}
           >
               <li key={date as any} class={listCls} onClick={e => handleClick(e, [date])}>
-                  {formatDayString(month, dayString)}
+                  {formatDayString(date, month, dayString)}
                   {shouldRenderCard ? text : null}
                   {renderCusDateGrid(date)}
               </li>
@@ -321,7 +324,11 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
         );
     };
 
-    const formatDayString = (month: string, date: string) => {
+    const formatDayString = (dateObj: Date, month: string, date: string) => {
+        const { renderDateDisplay } = props;
+        if (renderDateDisplay) {
+            return renderDateDisplay(dateObj);
+        }
         if (date === '1') {
             return (
               <LocaleConsumer componentName="Calendar">
@@ -366,7 +373,7 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
                       const shouldRenderCollapsed = Boolean(day && day[ind] && day[ind].length > itemLimit);
                       const inner = (
                         <li role="gridcell" aria-label={date.toLocaleDateString()} aria-current={isToday ? "date" : false} key={`${date}-weeksk`} class={listCls} onClick={e => handleClick(e, [date])}>
-                            {formatDayString(month, dayString)}
+                            {formatDayString(date, month, dayString)}
                             {renderCusDateGrid(date)}
                         </li>
                       );

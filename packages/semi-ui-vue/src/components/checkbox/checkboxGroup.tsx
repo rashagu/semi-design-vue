@@ -94,7 +94,7 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
     value: props.value || props.defaultValue,
   });
 
-  const {adapter: adapterInject} = useBaseComponent<CheckboxGroupProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<CheckboxGroupProps>(props, state)
   function adapter(): CheckboxGroupAdapter {
     return {
       ...adapterInject<CheckboxGroupProps, CheckboxGroupState>(),
@@ -191,6 +191,7 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
         style={style}
         aria-labelledby={props['aria-labelledby']}
         aria-describedby={props['aria-describedby']}
+        {...getDataAttr()}
         // aria-errormessage={props['aria-errormessage']}
         // aria-invalid={props['aria-invalid']}
         // aria-required={props['aria-required']}

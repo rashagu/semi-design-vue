@@ -539,7 +539,7 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, { slots }) => {
 
   function renderYearAndMonth(panelType: PanelType, panelDetail: MonthInfo) {
     const { pickerDate } = panelDetail;
-    const { locale, localeCode, density, yearAndMonthOpts } = props;
+    const { locale, localeCode, density, yearAndMonthOpts, startYear, endYear } = props;
     const y = pickerDate.getFullYear();
     const m = pickerDate.getMonth() + 1;
     return (
@@ -559,6 +559,8 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, { slots }) => {
         }}
         density={density}
         yearAndMonthOpts={yearAndMonthOpts}
+        startYear={startYear}
+        endYear={endYear}
       />
     );
   }

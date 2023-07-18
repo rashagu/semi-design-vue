@@ -283,7 +283,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
   const optionsRef = ref(null);
   let clickOutsideHandler: any = null;
   // TODO context
-  const { adapter: adapterInject, context } = useBaseComponent<CascaderProps>(props, state);
+  const { adapter: adapterInject, context, getDataAttr } = useBaseComponent<CascaderProps>(props, state);
 
   const foundation = new CascaderFoundation(adapter());
   function adapter(): CascaderAdapter {
@@ -735,7 +735,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
       [`${prefixcls}-selection-n-disabled`]: disabled,
     });
     const renderPlusNChildren = <span class={plusNCls}>+{hiddenTag.length}</span>;
-    return showRestTagsPopover && !disabled ? (
+    return showRestTagsPopover ? (
       <Popover
         content={hiddenTag}
         showArrow
@@ -1017,6 +1017,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
         // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
         role="combobox"
         tabindex={0}
+        {...getDataAttr()}
       >
         {inner}
       </div>

@@ -7,6 +7,8 @@ import '@douyinfe/semi-foundation/timeline/timeline.scss';
 import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots, VNode} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
+import {useAttrs} from "vue/dist/vue";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 export interface TimelineItemProps {
     color?: string;
@@ -44,6 +46,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const TimelineItem = defineComponent<TimelineItemProps>((props, {}) => {
     const slots = useSlots()
+    const attr = useAttrs()
 
 
     return () => {
@@ -57,6 +60,7 @@ const TimelineItem = defineComponent<TimelineItemProps>((props, {}) => {
             time,
             extra,
             onClick,
+          ...rest
         } = props;
 
         const itemCls = cls(prefixCls,
@@ -70,7 +74,7 @@ const TimelineItem = defineComponent<TimelineItemProps>((props, {}) => {
         });
         const dotStyle = color ? { style: { backgroundColor: color } } : null;
         return (
-          <li class={itemCls} style={style} onClick={onClick}>
+          <li class={itemCls} style={style} onClick={onClick}  {...getDataAttr({...rest, ...attr})}>
               <div class={`${prefixCls}-tail`} aria-hidden />
               <div
                 class={dotCls}

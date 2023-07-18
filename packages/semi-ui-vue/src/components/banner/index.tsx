@@ -9,7 +9,16 @@ import { IconClose, IconAlertTriangle, IconInfoCircle, IconTickCircle, IconAlert
 
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import {useBaseComponent} from '../_base/baseComponent';
-import {CSSProperties, defineComponent, h, onMounted, onUnmounted, reactive, useSlots} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    onMounted,
+    onUnmounted, PropType,
+    reactive,
+    useSlots
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {VueJsxNode} from "../interface";
 
@@ -36,19 +45,18 @@ export interface BannerState {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<BannerProps> = {
     // target: PropTypes.func,
     fullMode: PropTypes.bool,
     // insertAfter: PropTypes.func,
-    type: String,
+    type: String as PropType<BannerProps['type']>,
     title: PropTypes.node,
     description: PropTypes.node,
     icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     closeIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    children: PropTypes.node,
     style: PropTypes.object,
     className: PropTypes.string,
-    onClose: PropTypes.func,
+    onClose: PropTypes.func as PropType<BannerProps['onClose']>,
     bordered: PropTypes.bool,
 };
 
@@ -75,7 +83,7 @@ const Banner = defineComponent<BannerProps>((props, {}) => {
     let foundation:BannerFoundation
 
 
-    const {adapter: adapterInject} = useBaseComponent<BannerProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<BannerProps>(props, state)
     function adapter_(): BannerAdapter<BannerProps, BannerState> {
         return {
             ...adapterInject(),
@@ -164,7 +172,7 @@ const Banner = defineComponent<BannerProps>((props, {}) => {
             [`${prefixCls}-bordered`]: !fullMode && bordered,
         });
         const banner = visible ? (
-          <div class={wrapper} style={style} role="alert">
+          <div class={wrapper} style={style} role="alert" {...getDataAttr()}>
               <div class={`${prefixCls}-content-wrapper`}>
                   <div class={`${prefixCls}-content`}>
                       {renderIcon()}
@@ -180,11 +188,11 @@ const Banner = defineComponent<BannerProps>((props, {}) => {
         ) : null;
         return banner;
     }
+}, {
+    props: vuePropsType,
+    name: 'Banner'
 })
 
-// @ts-ignore
-Banner.props = vuePropsType
-// @ts-ignore
-Banner.name = 'Banner'
+
 
 export default Banner

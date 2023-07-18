@@ -46,6 +46,7 @@ const propTypes:ComponentObjectPropsOptions<DayCalendarProps> = {
     style: PropTypes.object,
     className: PropTypes.string,
     dateGridRender: PropTypes.func as PropType<DayCalendarProps['dateGridRender']>,
+    allDayEventsRender: PropTypes.func as PropType<DayCalendarProps['allDayEventsRender']>,
 
 
     range: PropTypes.array,
@@ -74,7 +75,7 @@ const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
         cachedKeys: [],
     });
 
-    const {adapter: adapterInject} = useBaseComponent<DayCalendarProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<DayCalendarProps>(props, state)
     function adapter_(): CalendarAdapter<DayCalendarProps, DayCalendarState> {
         return {
             ...adapterInject(),
@@ -101,11 +102,12 @@ const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
 
     watch([
         ()=>state.cachedKeys,
-        ()=>props.events
-    ], (value, [prevStateCachedKeys], onCleanup)=>{
+        ()=>props.events,
+        ()=>props.displayValue
+    ], (value, [prevStateCachedKeys,_,prevPropsDisplayValue ], onCleanup)=>{
         const prevEventKeys = prevStateCachedKeys;
         const nowEventKeys = props.events.map(event => event.key);
-        if (!isEqual(prevEventKeys, nowEventKeys)) {
+        if (!isEqual(prevEventKeys, nowEventKeys) || !isEqual(prevPropsDisplayValue, props.displayValue)) {
             foundation.parseDailyEvents();
         }
     })
@@ -118,6 +120,10 @@ const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
     const checkWeekend = (val: Date) => foundation.checkWeekend(val);
 
     const renderAllDayEvents = (events: ParsedEventsWithArray['allDay']) => {
+        if (props.allDayEventsRender) {
+            return props.allDayEventsRender(props.events);
+        }
+
         const list = events.map((event, ind) => {
             const { children, key } = event;
             return (
@@ -173,7 +179,7 @@ const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
         const { parsedEvents, scrollHeight } = state;
         isWeekend = markWeekend && checkWeekend(displayValue);
         return (
-          <div class={dayCls} style={dayStyle} ref={dom}>
+          <div class={dayCls} style={dayStyle} ref={dom} {...getDataAttr()}>
               <div class={`${prefixCls}-sticky-top`}>
                   {header}
                   {renderAllDay(parsedEvents.allDay)}

@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, useSlots, computed} from 'vue'
+import {defineComponent, ref, h, Fragment, useSlots, computed, onMounted} from 'vue'
 import Image, {Preview as ImagePreview} from '../index'
 
 interface ImageDemoProps {
@@ -11,11 +11,15 @@ export const vuePropsType = {
 const ImageDemo = defineComponent<ImageDemoProps>((props, {}) => {
 
   const slots = useSlots()
-  const srcList = computed(() => ([
+  const srcList = ref([
     "https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/abstract.jpg",
     "https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/sky.jpg",
-    "https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/greenleaf.jpg",
-  ]));
+  ]);
+  onMounted(()=>{
+    setTimeout(()=>{
+      srcList.value.push("https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/greenleaf.jpg")
+    },2000)
+  })
 
   return () => (
     <>
@@ -27,6 +31,7 @@ const ImageDemo = defineComponent<ImageDemoProps>((props, {}) => {
         }}
       >
         <ImagePreview
+          lazyLoad={true}
           getPopupContainer={() => {
             const node = document.getElementById("container");
             return node;

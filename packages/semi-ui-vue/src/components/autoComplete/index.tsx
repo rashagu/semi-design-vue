@@ -1,7 +1,6 @@
 import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
 import { isEqual, noop } from 'lodash';
-
 import { strings, cssClasses } from '@douyinfe/semi-foundation/autoComplete/constants';
 import AutoCompleteFoundation, { AutoCompleteAdapter, StateOptionItem, DataItem } from '@douyinfe/semi-foundation/autoComplete/foundation';
 import { numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/constants';
@@ -216,7 +215,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
         });
         const clickOutsideHandler: () => void | null = null;
 
-        const {adapter: adapterInject} = useBaseComponent<AutoCompleteProps<T>>(props, state)
+        const {adapter: adapterInject, getDataAttr} = useBaseComponent<AutoCompleteProps<T>>(props, state)
 
         function adapter_(): AutoCompleteAdapter<AutoCompleteProps<T>, AutoCompleteState> {
             const keyboardAdapter = {
@@ -375,7 +374,8 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
                 id,
                 ...keyboardEventSet,
                 // tooltip give tabindex 0 to children by default, autoComplete just need the input get focus, so outer div's tabindex set to -1
-                tabIndex: -1
+                tabIndex: -1,
+                ...getDataAttr()
             };
 
             const innerProps:VueHTMLAttributes & InputProps = {

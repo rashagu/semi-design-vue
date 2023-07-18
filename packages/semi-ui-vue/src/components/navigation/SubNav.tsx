@@ -44,7 +44,7 @@ export interface SubNavProps extends BaseProps {
   onMouseEnter?: any;
   onMouseLeave?: any;
   text?: VueJsxNode;
-  toggleIcon?: ToggleIcon;
+  expandIcon?: VueJsxNode
 }
 
 export interface SubNavState {
@@ -60,6 +60,7 @@ const propTypes = {
    * Copywriting
    */
   text: PropTypes.node,
+  expandIcon: PropTypes.node,
   /**
    * Whether child navigation is expanded
    */
@@ -215,7 +216,7 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
   }
 
   function renderTitleDiv() {
-    const { text, icon, itemKey, indent, disabled, level } = props;
+    const { text, icon, itemKey, indent, disabled, level, expandIcon } = props;
 
     const { mode, isInSubNav, isCollapsed, prefixCls, subNavMotion, limitIndent } = context.value;
 
@@ -239,7 +240,7 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
       if (isInSubNav) {
         toggleIconType = <IconChevronRight />;
       } else {
-        toggleIconType = <IconChevronDown />;
+        toggleIconType = expandIcon ? expandIcon : <IconChevronDown aria-hidden={true} />;
         // Horizontal mode does not require animation fix#1198
         // withTransition = true;
       }
@@ -247,7 +248,7 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
       if (subNavMotion) {
         withTransition = true;
       }
-      toggleIconType = <IconChevronDown />;
+      toggleIconType = expandIcon ? expandIcon : <IconChevronDown aria-hidden={true} />;
     }
 
     let placeholderIcons = null;

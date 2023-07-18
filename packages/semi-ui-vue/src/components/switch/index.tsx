@@ -105,7 +105,7 @@ const Switch = defineComponent<SwitchProps>((props, {}) => {
     })
 
     const switchRef = ref()
-    const {adapter: adapterInject} = useBaseComponent<SwitchProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<SwitchProps>(props, state)
 
 
     function adapter_(): SwitchAdapter<SwitchProps, SwitchState> {
@@ -173,7 +173,7 @@ const Switch = defineComponent<SwitchProps>((props, {}) => {
         const showCheckedText = checkedText && nativeControlChecked && size !== 'small';
         const showUncheckedText = uncheckedText && !nativeControlChecked && size !== 'small';
         return (
-          <div class={wrapperCls} style={style} onMouseenter={onMouseEnter} onMouseleave={onMouseLeave}>
+          <div class={wrapperCls} style={style} onMouseenter={onMouseEnter} onMouseleave={onMouseLeave}  {...getDataAttr()}>
               {loading ? (
                 <Spin wrapperClassName={cssClasses.LOADING_SPIN} size={size === 'default' ? 'middle' : size} />
               ) : (

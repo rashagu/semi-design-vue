@@ -98,7 +98,7 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
   }, {deep: true, immediate: true})
 
 
-  const {adapter: adapterInject} = useBaseComponent<SpinProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<SpinProps>(props, state)
   function adapter() {
     return {
       ...adapterInject<SpinProps, SpinState>(),
@@ -136,18 +136,24 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
 
   return ()=>{
     foundation.value.updateLoadingIfNeedDelay();
-    const { style, wrapperClassName, childStyle, size } = props;
+    const { style, wrapperClassName, childStyle, size, ...rest } = props;
     const { loading } = state;
     return (
-      <div class={cls(
-        prefixCls,
-        wrapperClassName,
-        {
-          [`${prefixCls}-${size}`]: size,
-          [`${prefixCls}-block`]: slots.default,
-          [`${prefixCls}-hidden`]: !loading,
+      <div
+        class={
+          cls(
+            prefixCls,
+            wrapperClassName,
+            {
+              [`${prefixCls}-${size}`]: size,
+              [`${prefixCls}-block`]: slots.default,
+              [`${prefixCls}-hidden`]: !loading,
+            }
+          )
         }
-      )} style={style}>
+        style={style}
+        {...getDataAttr()}
+      >
         {renderSpin()}
         <div class={`${prefixCls}-children`} style={childStyle} x-semi-prop="children">{slots.default?slots.default():null}</div>
       </div>

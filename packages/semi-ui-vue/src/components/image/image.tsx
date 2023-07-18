@@ -98,24 +98,6 @@ const Image = defineComponent<ImageProps>((props, {}) => {
     }
   }, {immediate: true, deep: true})
 
-  onMounted(()=>{
-    observeImage();
-  })
-
-
-
-  watch(()=>props.src, (value, oldValue, onCleanup)=>{
-    oldValue !== props.src && observeImage();
-  })
-
-  function observeImage() {
-    if (!isLazyLoad()) {
-      return;
-    }
-    const { previewObserver } = context.value;
-    previewObserver.observe(imgRef.value);
-  }
-
 
 
   function isInGroup() {

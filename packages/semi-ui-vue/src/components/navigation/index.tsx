@@ -32,6 +32,7 @@ import type {NavFooterProps} from './Footer';
 import type {NavHeaderProps} from './Header';
 import type {NavItemProps} from './Item';
 import type {ToggleIcon, SubNavProps} from './SubNav';
+import {VueJsxNode} from "../interface";
 
 export type Mode = 'vertical' | 'horizontal';
 export {
@@ -65,6 +66,7 @@ export interface NavProps extends BaseProps {
   defaultIsCollapsed?: boolean;
   defaultOpenKeys?: string[];
   defaultSelectedKeys?: string[];
+  expandIcon?: VueJsxNode;
   footer?: VNode | NavFooterProps;
   header?: VNode | NavHeaderProps;
   isCollapsed?: boolean;
@@ -81,6 +83,7 @@ export interface NavProps extends BaseProps {
   toggleIconPosition?: string;
   tooltipHideDelay?: number;
   tooltipShowDelay?: number;
+  getPopupContainer?: () => HTMLElement;
   onClick?: (data: { itemKey: string; domEvent: MouseEvent; isOpen: boolean }) => void;
   onCollapseChange?: (isCollapse: boolean) => void;
   onDeselect?: (data?: any) => void;
@@ -149,6 +152,7 @@ const propTypes:ComponentObjectPropsOptions<NavProps> = {
     type: PropTypes.bool,
     default: undefined
   },
+  getPopupContainer: PropTypes.func as PropType<NavProps['getPopupContainer']>,
 };
 
 const defaultProps = {
@@ -186,7 +190,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
       selectedKeys: []
     });
 
-  const {adapter: adapterInject, isControlled} = useBaseComponent<NavProps>(props, state)
+  const {adapter: adapterInject, isControlled, getDataAttr} = useBaseComponent<NavProps>(props, state)
 
 
   let initState = {
@@ -313,12 +317,18 @@ const index = defineComponent<NavProps>((props, {slots}) => {
    * @returns {JSX.Element}
    */
   function renderItems(items: (SubNavPropsWithItems | NavItemPropsWithItems)[] = [], level = 0) {
+    const { expandIcon } = props;
     const finalDom = (
       <>
         {items.map((item, idx) => {
           if (Array.isArray(item.items) && item.items.length) {
             return (
-              <SubNav key={item.itemKey || String(level) + idx} {...item as SubNavPropsWithItems} level={level}>
+              <SubNav
+                key={item.itemKey || String(level) + idx}
+                {...item as SubNavPropsWithItems}
+                level={level}
+                expandIcon={expandIcon}
+              >
                 {renderItems(item.items as (SubNavPropsWithItems | NavItemPropsWithItems)[], level + 1)}
               </SubNav>
             );
@@ -355,7 +365,10 @@ const index = defineComponent<NavProps>((props, {slots}) => {
       footer,
       header,
       toggleIconPosition,
-      limitIndent
+      limitIndent,
+      renderWrapper,
+      getPopupContainer,
+      ...rest
     } = props;
 
     const { selectedKeys, openKeys, items, isCollapsed } = state;
@@ -456,7 +469,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
               limitIndent
             } as any}
           >
-            <div class={finalCls} style={finalStyle}>
+            <div class={finalCls} style={finalStyle} {...getDataAttr()}>
               <div class={`${prefixCls}-inner`}>
                 <div class={headerListOuterCls}>
                   {headers}

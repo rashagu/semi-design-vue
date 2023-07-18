@@ -29,6 +29,8 @@ import {
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
+import {useAttrs} from "vue/dist/vue";
 
 let uuid = 0;
 
@@ -108,6 +110,7 @@ export const vuePropsType = vuePropsMake<ModalContentReactProps>(propTypes, defa
 const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
 
     const slots = useSlots()
+    const attr = useAttrs()
     let timeoutId: NodeJS.Timeout;
 
     let {context} = useConfigContext();
@@ -374,6 +377,7 @@ const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
             getPopupContainer,
             maskFixed,
             getContainerContext,
+            ...rest
         } = props;
         const { direction } = context.value;
         const classList = cls(className, {
@@ -383,9 +387,10 @@ const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
         });
 
         const containerContext = getContainerContext();
+        const dataAttr = getDataAttr({...rest, ...attr});
 
         const elem = (
-          <div class={classList}>
+          <div class={classList} {...dataAttr}>
               {getMaskElement()}
               <div
                 role="none"

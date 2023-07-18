@@ -75,7 +75,7 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
     focusVisible: false
   });
   const checkboxEntity = ref(null);
-  const {adapter: adapterInject} = useBaseComponent<CheckboxProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<CheckboxProps>(props, state)
 
   const {context} = useCheckboxContext()
 
@@ -272,6 +272,7 @@ const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
         onClick={handleChange}
         onKeypress={handleEnterPress}
         aria-labelledby={props['aria-labelledby']}
+        {...getDataAttr()}
       >
         <CheckboxInner
           {...{

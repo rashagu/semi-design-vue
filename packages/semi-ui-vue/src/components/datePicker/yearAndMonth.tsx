@@ -45,6 +45,8 @@ const propTypes:ComponentObjectPropsOptions<YearAndMonthProps> = {
   renderDateInput: PropTypes.node,
   yearAndMonthOpts: PropTypes.any,
   type: PropTypes.string as PropType<YearAndMonthProps['type']>,
+  startYear: PropTypes.number,
+  endYear: PropTypes.number,
 };
 
 const defaultProps = {
@@ -70,7 +72,7 @@ const yearAndMonth = defineComponent<YearAndMonthProps>((props, {expose}) => {
   currentMonth = { left: currentLeftMonth, right: currentMonth.right || currentLeftMonth + 1 };
 
   const state = reactive<YearAndMonthState>({
-    years: getYears().map(year => ({
+    years: getYears(props.startYear, props.endYear).map(year => ({
       value: year,
       year,
     })),

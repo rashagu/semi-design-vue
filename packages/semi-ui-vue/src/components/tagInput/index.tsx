@@ -193,7 +193,7 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
     entering: false,
   });
 
-  const {adapter: adapterInject} = useBaseComponent<TagInputProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<TagInputProps>(props, state)
 
   const foundation = new TagInputFoundation(adapter());
 
@@ -656,6 +656,7 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
         onClick={e => {
           handleClick(e);
         }}
+        {...getDataAttr()}
       >
         {renderPrefix()}
         <div class={wrapperCls}>

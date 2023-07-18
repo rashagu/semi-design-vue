@@ -21,7 +21,10 @@ import {
 } from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
-import {PreviewProps as PreviewInnerProps} from "../image";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
+import {useAttrs} from "vue/dist/vue";
+
+
 
 export type { ListItemProps } from './item';
 
@@ -80,6 +83,7 @@ export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 
 const List = defineComponent(<T extends ListProps<T>>(props, {}) => {
     const slots = useSlots()
+    const attr = useAttrs()
 
     const renderEmpty = () => {
         const { emptyContent } = props;
@@ -145,6 +149,7 @@ const List = defineComponent(<T extends ListProps<T>>(props, {}) => {
             bordered,
             dataSource,
             renderItem,
+            ...rest
         } = props;
         const wrapperCls = cls(prefixCls, className, {
             [`${prefixCls}-flex`]: layout === 'horizontal',
@@ -169,7 +174,7 @@ const List = defineComponent(<T extends ListProps<T>>(props, {}) => {
             childrenList = renderEmpty();
         }
         return (
-          <div class={wrapperCls} style={style}>
+          <div class={wrapperCls} style={style}  {...getDataAttr({...rest, ...attr})}>
               {header ? (
                 <div class={`${cssClasses.PREFIX}-header`} x-semi-prop="header">
                     {header}

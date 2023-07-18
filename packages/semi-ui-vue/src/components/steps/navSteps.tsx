@@ -9,13 +9,14 @@ import {
     defineComponent,
     h,
     isVNode,
-    PropType,
+    PropType, useAttrs,
     useSlots,
     VNode
 } from "vue";
 import {noop} from "lodash";
 import {NavStepProps} from "./navStep";
 import {Direction, Status} from "./basicSteps";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 export type Size = 'default' | 'small';
 export interface NavStepsProps {
@@ -56,11 +57,12 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake<NavStepsProps>(propTypes, defaultProps)
 const NavSteps = defineComponent<NavStepsProps>((props, {}) => {
     const slots = useSlots()
+    const attr = useAttrs()
 
 
     return () => {
 
-        const { size, current, initial, children, prefixCls, className, style, onChange } = props;
+        const { size, current, initial, children, prefixCls, className, style, onChange, ...rest } = props;
         const inner = () => {
             const filteredChildren = children.filter(c => isVNode(c)) as Array<VNode>;
             const total = filteredChildren.length;
@@ -90,7 +92,7 @@ const NavSteps = defineComponent<NavStepsProps>((props, {}) => {
         });
 
         return (
-          <div aria-label={props["aria-label"]} class={wrapperCls} style={style}>
+          <div aria-label={props["aria-label"]} class={wrapperCls} style={style} {...getDataAttr({...rest, ...attr})}>
               {inner()}
           </div>
         );

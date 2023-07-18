@@ -27,6 +27,7 @@ import {Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseTy
 import {CopyableConfig, LinkType} from './title';
 import {BaseProps} from '../_base/baseComponent';
 import {isSemiIcon} from '../_utils/index';
+import ResizeObserver from '../resizeObserver';
 
 
 export interface BaseTypographyProps extends BaseProps {
@@ -48,6 +49,7 @@ export interface BaseTypographyProps extends BaseProps {
   component_?: any;
   spacing?: string;
   heading?: string;
+  weight?: string | number
 
   class?: string
   id?: string
@@ -315,6 +317,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     const {ellipsisContent, isOverflowed, isTruncated, expanded} = state;
     const updateOverflow = shouldTruncated(rows);
     const canUseCSSEllipsis_ = canUseCSSEllipsis();
+
     const needUpdate = updateOverflow !== isOverflowed;
 
     warning(
@@ -593,6 +596,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       size,
       link,
       heading,
+      weight,
       ...rest
     } = props;
     const children = props.children
@@ -624,6 +628,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       </>
     );
     const hTagReg = /^h[1-6]$/;
+    const isHeader = isString(heading) && hTagReg.test(heading);
     const wrapperCls = cls(className, ellipsisCls, {
       // [`${prefixCls}-primary`]: !type || type === 'primary',
       [`${prefixCls}-${type}`]: type && !link,
@@ -631,7 +636,9 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       [`${prefixCls}-link`]: link,
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-${spacing}`]: spacing,
-      [`${prefixCls}-${heading}`]: isString(heading) && hTagReg.test(heading),
+      [`${prefixCls}-${heading}`]: isHeader,
+      [`${prefixCls}-${heading}-weight-${weight}`]: isHeader && weight && isNaN(Number(weight)),
+
     });
     return (
       <Typography
@@ -679,8 +686,9 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
 
   return () => {
-    return (
-      <LocaleConsumer componentName={"Typography"}>
+
+    const content = (
+      <LocaleConsumer componentName="Typography">
         {{
           default: (locale: Locale['Typography']) => {
             expandStr = locale.expand;
@@ -691,6 +699,14 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
         }}
       </LocaleConsumer>
     );
+    if (props.ellipsis) {
+      return (
+        <ResizeObserver onResize={onResize} observeParent>
+          {content}
+        </ResizeObserver>
+      );
+    }
+    return content;
   }
 }, {
   props: vuePropsType,

@@ -4,11 +4,12 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/list/constants';
 import { noop } from 'lodash';
 import { Col } from '../grid';
 import ListContext, { ListContextValue } from './list-context';
-import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots, VNode} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useAttrs, useSlots, VNode} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useListContext} from "./context/Consumer";
 import {VueJsxNode} from "../interface";
 import {PreviewProps as PreviewInnerProps} from "../image";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 export interface ListItemProps {
     extra?: VueJsxNode;
@@ -45,6 +46,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake<ListItemProps>(propTypes, defaultProps)
 const ListItem = defineComponent<ListItemProps>((props, {}) => {
     const slots = useSlots()
+    const attr = useAttrs()
 
     const {context} = useListContext()
 
@@ -70,7 +72,8 @@ const ListItem = defineComponent<ListItemProps>((props, {}) => {
             onClick,
             onRightClick,
             onMouseEnter,
-            onMouseLeave
+            onMouseLeave,
+            ...rest
         } = props;
         const { onRightClick: contextOnRightClick, onClick: contextOnClick, grid: contextGrid } = context.value;
         const handleContextMenu = onRightClick ? onRightClick : contextOnRightClick;
@@ -99,6 +102,7 @@ const ListItem = defineComponent<ListItemProps>((props, {}) => {
             onContextmenu={handleContextMenu}
             onMouseenter={onMouseEnter}
             onMouseleave={onMouseLeave}
+            {...getDataAttr({...rest, ...attr})}
           >
               {body ? body : null}
               {children}

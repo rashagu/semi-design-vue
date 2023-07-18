@@ -89,7 +89,7 @@ const Carousel = defineComponent<CarouselProps>((props, {expose}) => {
     isInit: true
   })
 
-  const {adapter: adapterInject} = useBaseComponent<CarouselProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<CarouselProps>(props, state)
 
   function adapter_(): CarouselAdapter<CarouselProps, CarouselState> {
     return {
@@ -318,6 +318,7 @@ const Carousel = defineComponent<CarouselProps>((props, {expose}) => {
         style={style}
         onMouseenter={debounce(handleMouseEnter, 400)}
         onMouseleave={debounce(handleMouseLeave, 400)}
+        {...getDataAttr()}
         // onMouseEnter={handleMouseEnter}
         // onMouseLeave={handleMouseLeave}
         // onKeyDown={e => foundation.handleKeyDown(e)}

@@ -23,7 +23,7 @@ import {
   onUnmounted,
   isVNode,
   cloneVNode,
-  useSlots
+  useSlots, ComponentObjectPropsOptions, PropType
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useBreadContext} from "./context/Consumer";
@@ -55,15 +55,13 @@ interface GetTooltipOptType {
   opts?: ShowTooltipType['opts'];
 }
 
-const propTypes_ = {
-  onClick: propTypes.func,
+const propTypes_:ComponentObjectPropsOptions<BreadcrumbItemProps> = {
+  onClick: propTypes.func as PropType<BreadcrumbItemProps['onClick']>,
   route: [propTypes.object, propTypes.string],
-  name: propTypes.string,
-  children: propTypes.node,
   active: propTypes.bool,
   shouldRenderSeparator: propTypes.bool,
-  icon: propTypes.node,
-  separator: propTypes.node,
+  icon: propTypes.node as PropType<BreadcrumbItemProps['icon']>,
+  separator: propTypes.node as PropType<BreadcrumbItemProps['separator']>,
   noLink: propTypes.bool,
 };
 
@@ -79,6 +77,7 @@ const BreadcrumbItem = defineComponent<BreadcrumbItemProps>((props, {}) => {
   const {context} = useBreadContext()
   const {
     adapter: adapterInject,
+    getDataAttr
   } = useBaseComponent<BreadcrumbItemProps>(props, state)
 
   function adapter(): BreadcrumbItemAdapter<BreadcrumbItemProps, BreadcrumbItemState> {
@@ -227,17 +226,17 @@ const BreadcrumbItem = defineComponent<BreadcrumbItemProps>((props, {}) => {
       // [`${clsPrefix}-item-wrap-iconOnly`]: !!children && props.icon,
     });
     return (
-      <span class={wrapperCLs} {...pageLabel}>
+      <span class={wrapperCLs} {...pageLabel} {...getDataAttr()}>
         {item}
         {shouldRenderSeparator && separator}
       </span>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'BreadcrumbItem'
 })
 
-// @ts-ignore
-BreadcrumbItem.props = vuePropsType
-// @ts-ignore
-BreadcrumbItem.name = 'BreadcrumbItem'
+
 
 export default BreadcrumbItem

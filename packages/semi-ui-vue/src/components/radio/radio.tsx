@@ -96,7 +96,7 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
     extraId: props.extraId,
     checked: props.checked || props.defaultChecked || false,
   });
-  const {adapter: adapterInject} = useBaseComponent<RadioProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<RadioProps>(props, state)
   context = inject('RadioContextValue', ref<RadioContextValue>(null))
   // console.log(context)
   const theAdapter = adapter()
@@ -182,7 +182,8 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
       mode,
       type,
       value: propValue,
-      name
+      name,
+      ...rest
     } = props;
     const children = slots.default?slots.default():null;
 
@@ -259,6 +260,9 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
       <label
         style={style}
         class={wrapper}
+        onMouseenter={handleMouseEnter}
+        onMouseleave={handleMouseLeave}
+        {...getDataAttr()}
       >
         <RadioInner
           {...props}

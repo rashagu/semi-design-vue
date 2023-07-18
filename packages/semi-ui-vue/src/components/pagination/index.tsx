@@ -60,6 +60,7 @@ export interface PaginationProps {
   className?: string;
   hideOnSinglePage?: boolean;
   hoverShowPageSelect?: boolean;
+  disabled?: boolean
 }
 
 export interface PaginationState {
@@ -100,6 +101,7 @@ const propTypes:ComponentObjectPropsOptions<PaginationProps> = {
   hideOnSinglePage: PropTypes.bool,
   hoverShowPageSelect: PropTypes.bool,
   showQuickJumper: PropTypes.bool,
+  disabled: PropTypes.bool,
   // position: PropTypes.string as PropType<PaginationProps['position']>,
 };
 
@@ -118,6 +120,7 @@ const defaultProps = {
   className: '',
   hideOnSinglePage: false,
   showQuickJumper: false,
+  disabled: false,
 };
 export const vuePropsType = vuePropsMake<PaginationProps>(propTypes, defaultProps);
 const Pagination = defineComponent<PaginationProps>((props, {}) => {
@@ -136,7 +139,7 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
     quickJumpPage: '',
   });
 
-  const { adapter: adapterInject } = useBaseComponent<PaginationProps>(props, state);
+  const { adapter: adapterInject, getDataAttr } = useBaseComponent<PaginationProps>(props, state);
   function adapter_(): PaginationAdapter<PaginationProps, PaginationState> {
     return {
       ...adapterInject(),
@@ -218,19 +221,20 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
   );
 
   function renderPrevBtn() {
-    const { prevText } = props;
+    const { prevText, disabled  } = props;
     const { prevDisabled } = state;
+    const isDisabled = prevDisabled || disabled;
     const preClassName = classNames({
       [`${prefixCls}-item`]: true,
       [`${prefixCls}-prev`]: true,
-      [`${prefixCls}-item-disabled`]: prevDisabled,
+      [`${prefixCls}-item-disabled`]: isDisabled,
     });
     return (
       <li
         role="button"
-        aria-disabled={prevDisabled ? true : false}
+        aria-disabled={isDisabled ? true : false}
         aria-label="Previous"
-        onClick={(e) => !prevDisabled && foundation.goPrev()}
+        onClick={e => !isDisabled && foundation.goPrev(e)}
         class={preClassName}
         x-semi-prop="prevText"
       >
@@ -240,21 +244,22 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
   }
 
   function renderNextBtn() {
-    const { nextText } = props;
+    const { nextText, disabled } = props;
     const { nextDisabled } = state;
+    const isDisabled = nextDisabled || disabled;
     const nextClassName = classNames({
       [`${prefixCls}-item`]: true,
-      [`${prefixCls}-item-disabled`]: nextDisabled,
+      [`${prefixCls}-item-disabled`]: isDisabled,
       [`${prefixCls}-next`]: true,
     });
     return (
       <li
         role="button"
-        aria-disabled={nextDisabled ? true : false}
+        aria-disabled={isDisabled ? true : false}
         aria-label="Next"
-        onClick={(e) => !nextDisabled && foundation.goNext()}
+        onClick={e => !isDisabled && foundation.goNext(e)}
         class={nextClassName}
-        x-semi-prop="prevText"
+        x-semi-prop="nextText"
       >
         {nextText || <IconChevronRight size="large" />}
       </li>
@@ -265,7 +270,7 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
     // rtl modify the default position
     const { direction } = context.value;
     const defaultPopoverPosition = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
-    const { showSizeChanger, popoverPosition = defaultPopoverPosition } = props;
+    const { showSizeChanger, popoverPosition = defaultPopoverPosition, disabled } = props;
     const { pageSize } = state;
     const switchCls = classNames(`${prefixCls}-switch`);
     if (!showSizeChanger) {
@@ -283,6 +288,7 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
       <div class={switchCls}>
         <Select
           aria-label="Page size selector"
+          disabled={disabled}
           onChange={(newPageSize) => {
             foundation.changePageSize(newPageSize as any);
           }}
@@ -299,13 +305,13 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
   }
 
   function renderQuickJump(locale: PaginationLocale) {
-    const { showQuickJumper } = props;
+    const { showQuickJumper, disabled } = props;
     const { quickJumpPage, total, pageSize } = state;
     if (!showQuickJumper) {
       return null;
     }
     const totalPageNum = foundation._getTotalPageNumber(total, pageSize);
-    const isDisabled = totalPageNum === 1;
+    const isDisabled = (totalPageNum === 1) || disabled;
     const quickJumpCls = classNames({
       [`${prefixCls}-quickjump`]: true,
       [`${prefixCls}-quickjump-disabled`]: isDisabled,
@@ -330,17 +336,19 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
 
   function renderPageList() {
     const { pageList, currentPage, restLeftPageList, restRightPageList } = state;
-    const { popoverPosition, popoverZIndex } = props;
+    const { popoverPosition, popoverZIndex, disabled } = props;
 
     return pageList.map((page, i) => {
       const pageListClassName = classNames(`${prefixCls}-item`, {
         [`${prefixCls}-item-active`]: currentPage === page,
+        [`${prefixCls}-item-all-disabled`]: disabled,
+        [`${prefixCls}-item-all-disabled-active`]: currentPage === page && disabled,
         // [`${prefixCls}-item-rest-opening`]: (i < 3 && isLeftRestHover && page ==='...') || (i > 3 && isRightRestHover && page === '...')
       });
       const pageEl = (
         <li
           key={`${page}${i}`}
-          onClick={() => foundation.goPage(page)}
+          onClick={() => !disabled && foundation.goPage(page, i)}
           class={pageListClassName}
           aria-label={page === '...' ? 'More' : `Page ${page}`}
           aria-current={currentPage === page ? 'page' : false}
@@ -348,7 +356,7 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
           {page}
         </li>
       );
-      if (page === '...') {
+      if (page === '...' && !disabled) {
         let content;
         i < 3 ? (content = restLeftPageList) : (content = restRightPageList);
         return (
@@ -408,8 +416,8 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
   }
 
   function renderSmallPage(locale: PaginationLocale) {
-    const { className, style, hideOnSinglePage, hoverShowPageSelect, showSizeChanger } = props;
-    const paginationCls = classNames(`${prefixCls}-small`, prefixCls, className);
+    const { className, style, hideOnSinglePage, hoverShowPageSelect, showSizeChanger, disabled, ...rest } = props;
+    const paginationCls = classNames(`${prefixCls}-small`, prefixCls, className, { [`${prefixCls}-disabled`]: disabled });
     const { currentPage, total, pageSize } = state;
     const totalPageNum = Math.ceil(total / pageSize);
     if (totalPageNum < 2 && hideOnSinglePage && !showSizeChanger) {
@@ -419,16 +427,19 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
     const pageNumbers = Array.from({ length: Math.ceil(total / pageSize) }, (v, i) => i + 1);
     const pageList = renderRestPageList(pageNumbers);
 
-    const page = (
-      <div class={`${prefixCls}-item ${prefixCls}-item-small`}>
-        {currentPage}/{totalPageNum}{' '}
-      </div>
-    );
+    const pageCls = classNames({
+      [`${prefixCls}-item`]: true,
+      [`${prefixCls}-item-small`]: true,
+      [`${prefixCls}-item-all-disabled`]: disabled,
+    });
+
+    const page = (<div class={pageCls}>{currentPage}/{totalPageNum} </div>);
+
 
     return (
-      <div class={paginationCls} style={style}>
+      <div class={paginationCls} style={style}  {...getDataAttr()}>
         {renderPrevBtn()}
-        {hoverShowPageSelect ? <Popover content={pageList}>{page}</Popover> : page}
+        {(hoverShowPageSelect && !disabled) ? <Popover content={pageList}>{page}</Popover> : page}
         {renderNextBtn()}
         {renderQuickJump(locale)}
       </div>
@@ -437,8 +448,8 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
 
   function renderDefaultPage(locale: PaginationLocale) {
     const { total, pageSize } = state;
-    const { showTotal, className, style, hideOnSinglePage, showSizeChanger } = props;
-    const paginationCls = classNames(className, `${prefixCls}`);
+    const { showTotal, className, style, hideOnSinglePage, showSizeChanger, disabled, ...rest } = props;
+    const paginationCls = classNames(className, `${prefixCls}`, { [`${prefixCls}-disabled`]: disabled });
     const showTotalCls = `${prefixCls}-total`;
     const totalPageNum = Math.ceil(total / pageSize);
     if (totalPageNum < 2 && hideOnSinglePage && !showSizeChanger) {
@@ -448,7 +459,7 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
     const totalToken = locale.total.replace('${total}', totalNum.toString());
 
     return (
-      <ul class={paginationCls} style={style}>
+      <ul class={paginationCls} style={style}  {...getDataAttr()}>
         {showTotal ? <span class={showTotalCls}>{totalToken}</span> : null}
         {renderPrevBtn()}
         {renderPageList()}

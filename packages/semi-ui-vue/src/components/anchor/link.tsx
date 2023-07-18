@@ -2,7 +2,6 @@ import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/anchor/constants';
 import LinkFoundation, { LinkAdapter } from '@douyinfe/semi-foundation/anchor/linkFoundation';
-import AnchorContext, { AnchorContextType } from './anchor-context';
 import {Text as TypographyText} from '../typography/index';
 import {
     ComponentObjectPropsOptions,
@@ -21,6 +20,7 @@ import {useAnchorContext} from "./anchor-content/Consumer";
 import {useBaseComponent} from "../_base/baseComponent";
 import {TabsProps} from "../tabs";
 import {VueJsxNode} from "../interface";
+import { isObject } from 'lodash';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -117,12 +117,17 @@ const Link = defineComponent<LinkProps>((props, {}) => {
             [`${prefixCls}-link-tooltip-active`]: active,
             [`${prefixCls}-link-tooltip-disabled`]: disabled,
         });
-        const toolTipOpt = position ? { position } : {};
         if (showTooltip) {
+            const showTooltipObj = isObject(showTooltip) ?
+              Object.assign({ opts: {} }, showTooltip) : { opts: {} };
+            // The position can be set through showTooltip, here it is compatible with the position API
+            if (position) {
+                showTooltipObj.opts['position'] = position;
+            }
             return (
               <TypographyText
                 size={size === 'default' ? 'normal' : 'small'}
-                ellipsis={{ showTooltip: { opts: { ...toolTipOpt } } }}
+                ellipsis={{ showTooltip: showTooltipObj as any }}
                 type={'tertiary'}
                 className={linkTitleCls}
               >

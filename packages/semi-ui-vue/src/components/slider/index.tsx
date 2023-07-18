@@ -140,7 +140,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   let dragging = [false, false];
   const eventListenerSet = new Set();
 
-  const { adapter: adapterInject } = useBaseComponent<SliderProps>(props, state);
+  const { adapter: adapterInject, getDataAttr } = useBaseComponent<SliderProps>(props, state);
 
   const adapter = adapter_();
 
@@ -643,7 +643,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
 
   return () => {
     const { disabled, currentValue, min, max } = state;
-    const { vertical, verticalReverse, style, railStyle, range, className } = props;
+    const { vertical, verticalReverse, style, railStyle, range, className, ...rest } = props;
     const wrapperClass = cls(
       `${prefixCls}-wrapper`,
       {
@@ -671,6 +671,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         aria-label={ariaLabel}
         onMouseenter={() => foundation.handleWrapperEnter()}
         onMouseleave={() => foundation.handleWrapperLeave()}
+        {...getDataAttr()}
       >
         {
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions

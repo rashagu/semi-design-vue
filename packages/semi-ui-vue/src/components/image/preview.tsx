@@ -5,18 +5,32 @@ import PreviewInner from "./previewInner";
 import PreviewFoundation from "@douyinfe/semi-foundation/image/previewFoundation";
 import { getUuidShort } from "@douyinfe/semi-foundation/utils/uuid";
 import { cssClasses } from "@douyinfe/semi-foundation/image/constants";
-import { isObject } from "lodash";
+import { isObject, isEqual } from "lodash";
 import "@douyinfe/semi-foundation/image/image.scss";
-import {defineComponent, h, reactive, useSlots, ref, Fragment, onMounted, watch, cloneVNode, VNode} from "vue";
+import {
+    defineComponent,
+    h,
+    reactive,
+    useSlots,
+    ref,
+    Fragment,
+    onMounted,
+    watch,
+    cloneVNode,
+    VNode,
+    isVNode,
+    onBeforeUnmount, ComponentObjectPropsOptions, PropType, shallowRef, nextTick
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
 import {VueJsxNode} from "../interface";
 import {getFragmentChildren} from "../_utils";
+import cls from "classnames";
 
 const prefixCls = cssClasses.PREFIX;
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<PreviewProps> = {
     style: PropTypes.object,
     className: PropTypes.string,
     visible: PropTypes.bool,
@@ -43,19 +57,19 @@ const propTypes = {
     preLoadGap: PropTypes.number,
     disableDownload: PropTypes.bool,
     zIndex: PropTypes.number,
-    renderHeader: PropTypes.func,
-    renderPreviewMenu: PropTypes.func,
-    getPopupContainer: PropTypes.func,
-    onVisibleChange: PropTypes.func,
-    onChange: PropTypes.func,
-    onClose: PropTypes.func,
-    onZoomIn: PropTypes.func,
-    onZoomOut: PropTypes.func,
-    onPrev: PropTypes.func,
-    onNext: PropTypes.func,
-    onDownload: PropTypes.func,
-    onRatioChange: PropTypes.func,
-    onRotateChange: PropTypes.func,
+    renderHeader: PropTypes.func as PropType<PreviewProps['renderHeader']>,
+    renderPreviewMenu: PropTypes.func as PropType<PreviewProps['renderPreviewMenu']>,
+    getPopupContainer: PropTypes.func as PropType<PreviewProps['getPopupContainer']>,
+    onVisibleChange: PropTypes.func as PropType<PreviewProps['onVisibleChange']>,
+    onChange: PropTypes.func as PropType<PreviewProps['onChange']>,
+    onClose: PropTypes.func as PropType<PreviewProps['onClose']>,
+    onZoomIn: PropTypes.func as PropType<PreviewProps['onZoomIn']>,
+    onZoomOut: PropTypes.func as PropType<PreviewProps['onZoomOut']>,
+    onPrev: PropTypes.func as PropType<PreviewProps['onPrev']>,
+    onNext: PropTypes.func as PropType<PreviewProps['onNext']>,
+    onDownload: PropTypes.func as PropType<PreviewProps['onDownload']>,
+    onRatioChange: PropTypes.func as PropType<PreviewProps['onRatioChange']>,
+    onRotateChange: PropTypes.func as PropType<PreviewProps['onRotateChange']>,
 }
 
 const defaultProps = {
@@ -82,43 +96,77 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
     const foundation = new PreviewFoundation(adapter);
     const previewGroupId = getUuidShort({ prefix: "semi-image-preview-group", length: 4 });
     const previewRef = ref();
-    const previewObserver = new IntersectionObserver(entries => {
-          entries.forEach(item => {
-              const src = (item.target as any).dataset?.src;
-              if (item.isIntersecting && src) {
-                  (item.target as any).src = src;
-                  (item.target as any).removeAttribute("data-src");
-                  previewObserver.unobserve(item.target);
-              }
-          });
-      },
-      {
-          root: document.querySelector(`#${previewGroupId}`),
-          rootMargin: props.lazyLoadMargin,
-      }
-    );
+    let previewObserver: IntersectionObserver;
+    // const previewObserver = new IntersectionObserver(entries => {
+    //       entries.forEach(item => {
+    //           const src = (item.target as any).dataset?.src;
+    //           if (item.isIntersecting && src) {
+    //               (item.target as any).src = src;
+    //               (item.target as any).removeAttribute("data-src");
+    //               previewObserver.unobserve(item.target);
+    //           }
+    //       });
+    //   },
+    //   {
+    //       root: document.querySelector(`#${previewGroupId}`),
+    //       rootMargin: props.lazyLoadMargin,
+    //   }
+    // );
 
     onMounted(()=>{
-
-        const { lazyLoadMargin } = props;
-        const allElement = document.querySelectorAll(`.${prefixCls}-img`);
-        // use IntersectionObserver to lazy load image
-        const observer = new IntersectionObserver(entries => {
-              entries.forEach(item => {
-                  const src = (item.target as any).dataset?.src;
-                  if (item.isIntersecting && src) {
-                      (item.target as any).src = src;
-                      observer.unobserve(item.target);
-                  }
-              });
-          },
-          {
-              root: document.querySelector(`#${previewGroupId}`),
-              rootMargin: lazyLoadMargin,
-          }
-        );
-        allElement.forEach(item => observer.observe(item));
+        props.lazyLoad && observerImages();
     })
+
+
+    const children = shallowRef<VNode[]>([])
+    // 监听子元素变化
+    watch([
+        ()=>props.lazyLoad,
+        children,
+    ], ([a, newChildren], [_, prevPropsChildren], onCleanup)=>{
+
+        if (props.lazyLoad) {
+            const prevChildrenKeys = prevPropsChildren?.map((child) =>
+              isVNode(child) ? child.key : null
+            );
+            const currChildrenKeys = newChildren?.map((child) =>
+              isVNode(child) ? child.key : null
+            );
+
+            if (!isEqual(prevChildrenKeys, currChildrenKeys)) {
+                nextTick(()=>{
+                    observerImages();
+                })
+            }
+        }
+    })
+
+
+
+    function observerImages () {
+        if (previewObserver) {
+            // cancel the observation of all elements of the previous observer
+            previewObserver.disconnect();
+        } else {
+            previewObserver = new IntersectionObserver(entries => {
+                  entries.forEach(item => {
+                      const src = (item.target as any).dataset?.src;
+                      if (item.isIntersecting && src) {
+                          (item.target as any).src = src;
+                          (item.target as any).removeAttribute("data-src");
+                      }
+                      previewObserver.unobserve(item.target);
+                  });
+              },
+              {
+                  root: document.querySelector(`#${previewGroupId}`),
+                  rootMargin: props.lazyLoadMargin,
+              }
+            );
+        }
+        const allImgElement = document.querySelectorAll(`.${prefixCls}-img`);
+        allImgElement.forEach(item => previewObserver.observe(item));
+    }
 
 
     function getDerivedStateFromProps(props: PreviewProps, state: PreviewState) {
@@ -139,6 +187,12 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
         })
     }, {deep: true})
 
+    onBeforeUnmount(()=>{
+        if (previewObserver) {
+            previewObserver.disconnect();
+            previewObserver = null;
+        }
+    })
     const handleVisibleChange = (newVisible : boolean) => {
         foundation.handleVisibleChange(newVisible);
     };
@@ -188,7 +242,9 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
 
     // TODO 关闭后再次打开图片不显示
     return () => {
-        const { src, style, lazyLoad, ...restProps } = props;
+        // @ts-ignore
+        children.value = slots.default?.()?.[0]?.children || []
+        const { src, className, style, lazyLoad, ...restProps } = props;
         const { currentIndex, visible } = state;
         const { srcListInChildren, newChildren, titles } = loopImageIndex();
         const srcArr = Array.isArray(src) ? src : (typeof src === "string" ? [src] : []);
@@ -207,7 +263,7 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
                 handleVisibleChange: handleVisibleChange,
             }}
           >
-              <div id={previewGroupId} style={style} class={`${prefixCls}-preview-group`}>
+              <div id={previewGroupId} style={style} class={cls(`${prefixCls}-preview-group`, className)}>
                   {newChildren}
               </div>
               <PreviewInner
@@ -221,12 +277,11 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
           </PreviewContext.Provider>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Preview'
 })
 
-// @ts-ignore
-Preview.props = vuePropsType
-// @ts-ignore
-Preview.name = 'Preview'
 
 export default Preview
 

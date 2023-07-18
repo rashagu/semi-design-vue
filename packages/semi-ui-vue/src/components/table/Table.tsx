@@ -277,7 +277,7 @@ function Table<RecordType extends Record<string, any>>() {
       prePropRowSelection: undefined,
       prePagination: undefined,
     });
-    const { adapter: adapterInject } = useBaseComponent<NormalTableProps<RecordType>>(props, state);
+    const { adapter: adapterInject, getDataAttr } = useBaseComponent<NormalTableProps<RecordType>>(props, state);
 
     function adapter_(): TableAdapter<RecordType> {
       return {
@@ -1562,6 +1562,7 @@ function Table<RecordType extends Record<string, any>>() {
       if (props.direction){
         tableContextValue.direction = props.direction
       }
+      const dataAttr = getDataAttr();
       return (
         <div
           ref={rootWrapRef}
@@ -1569,6 +1570,7 @@ function Table<RecordType extends Record<string, any>>() {
           data-column-fixed={anyColumnFixed}
           style={wrapStyle}
           id={id}
+          {...dataAttr}
         >
           <TableContextProvider {...tableContextValue}>
             <Spin spinning={loading} size="large">

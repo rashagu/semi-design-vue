@@ -60,7 +60,7 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
   const state = reactive<CollapseState>({
     activeSet: new Set()
   });
-  const {adapter: adapterInject} = useBaseComponent<CollapseProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<CollapseProps>(props, state)
 
   function adapter_(): CollapseAdapter {
     return {
@@ -131,7 +131,7 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
     const clsPrefix = cls(cssClasses.PREFIX, className);
     const {activeSet} = state;
     return (
-      <div class={clsPrefix} style={style}>
+      <div class={clsPrefix} style={style} {...getDataAttr()}>
         <CollapseContext.Provider
           value={{
             activeSet,

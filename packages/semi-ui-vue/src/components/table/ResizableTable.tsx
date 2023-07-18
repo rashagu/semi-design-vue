@@ -8,10 +8,7 @@ import Table_ from './Table';
 import { cloneDeep, mergeColumns } from './utils';
 import getColumns from './getColumns';
 import ResizableHeaderCell from './ResizableHeaderCell';
-import {
-    TableProps,
-    ColumnProps,
-} from './interface';
+import type { ResizableProps, TableProps, ColumnProps } from './interface';
 import {
     ComponentObjectPropsOptions,
     computed,
@@ -87,8 +84,11 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
         () => props.hideExpandedColumn,
         () => props.rowSelection
     ], () => {
+        const { components: propComponents, columns: propColumns, resizable, ...restProps } = props;
 
-        const { columns: propColumns } = props;
+
+
+
         /**
          * 此处关于 columns 有三个存储
          *
@@ -148,7 +148,7 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
 
 
     const handleResize = (column: ColumnProps) => (e: MouseEvent, { size }: { size: { width: number } }) => {
-        const onResize = get(props.resizable, 'onResize', noop);
+        const onResize = get(props.resizable, 'onResize', noop) as ResizableProps<any>['onResize']
 
         const nextColumns = cloneDeep(columns.value);
         const curColumn: ColumnProps = findColumn(nextColumns, column, childrenColumnName);
@@ -169,7 +169,7 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
     };
 
     const handleResizeStart = (column: ColumnProps<any>) => (e: MouseEvent) => {
-        const onResizeStart = get(props.resizable, 'onResizeStart', noop);
+        const onResizeStart = get(props.resizable, 'onResizeStart', noop) as ResizableProps<any>['onResize']
         const handlerClassName = get(props.resizable, 'handlerClassName', 'resizing');
 
         const nextColumns = cloneDeep(columns.value);
@@ -194,7 +194,7 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
     };
 
     const handleResizeStop = (column: ColumnProps) => (e: MouseEvent) => {
-        const onResizeStop = get(props.resizable, 'onResizeStop', noop);
+        const onResizeStop = get(props.resizable, 'onResizeStop', noop) as ResizableProps<any>['onResize']
         const handlerClassName = get(props.resizable, 'handlerClassName', 'resizing');
         const nextColumns = cloneDeep(columns.value);
 

@@ -20,8 +20,9 @@ export interface CalendarProps extends BaseProps {
     markWeekend?: boolean;
     width?: number | string;
     height?: number | string;
-    dateGridRender?: (dateString?: string, date?: Date) => VueJsxNode
-
+    renderDateDisplay?: (date: Date) => VueJsxNode;
+    dateGridRender?: (dateString?: string, date?: Date) => VueJsxNode;
+    allDayEventsRender?: (events: EventObject[]) => VueJsxNode
 }
 
 export type DayCalendarProps = Omit<CalendarProps, 'mode'>;

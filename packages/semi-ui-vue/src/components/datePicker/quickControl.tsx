@@ -17,13 +17,15 @@ export interface QuickControlProps {
   onPresetClick: (preset: PresetType, e: MouseEvent) => void;
   type: string;
   insetInput: DateInputFoundationProps['insetInput']
+  locale: any
 }
 const propTypes:ComponentObjectPropsOptions<QuickControlProps> = {
   presets: PropTypes.array,
   presetPosition: PropTypes.string as PropType<QuickControlProps['presetPosition']>,
   onPresetClick: PropTypes.func as PropType<QuickControlProps['onPresetClick']>,
   type: PropTypes.string,
-  insetInput: [PropTypes.bool, PropTypes.object]
+  insetInput: [PropTypes.bool, PropTypes.object],
+  locale: PropTypes.object,
 };
 
 const defaultProps = {
@@ -36,7 +38,7 @@ const quickControl = defineComponent<QuickControlProps>((props, {}) => {
   const slots = useSlots()
 
   return () => {
-    const { presets, onPresetClick, type, presetPosition, insetInput } = props;
+    const { presets, onPresetClick, type, presetPosition, insetInput, locale } = props;
     const isTypeRange = type === 'dateRange' || type === 'dateTimeRange';
     const isPanelTopAndBottom = presetPosition === 'top' || presetPosition === 'bottom';
     const isMonth = type === 'month';
@@ -75,7 +77,7 @@ const quickControl = defineComponent<QuickControlProps>((props, {}) => {
     }
     return (
       <div class={wrapperCls} x-insetinput={insetInput ? "true" : "false"}>
-        { !isPanelTopAndBottom && <div class={headerCls}>快捷选择</div>}
+        { !isPanelTopAndBottom && <div class={headerCls}>{locale.presets}</div>}
         <div class={contentWrapperCls}>
           <div class={contentCls}>
             {presets.map((item, index) => {

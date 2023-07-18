@@ -2,10 +2,11 @@ import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/descriptions/constants';
 import '@douyinfe/semi-foundation/descriptions/descriptions.scss';
+import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import { isPlainObject } from 'lodash';
 import DescriptionsContext, { DescriptionsAlign, DescriptionsContextValue } from './descriptions-context';
 import Item from './item';
-import {CSSProperties, defineComponent, h, PropType, useSlots, VNode} from "vue";
+import {CSSProperties, defineComponent, h, PropType, useAttrs, useSlots, VNode} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {VueJsxNode} from "../interface";
 import {ComponentObjectPropsOptions} from "vue/dist/vue";
@@ -47,11 +48,13 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake<DescriptionsProps>(propTypes, defaultProps)
 const Descriptions = defineComponent<DescriptionsProps>((props, {}) => {
     const slots = useSlots()
+    const attr = useAttrs()
+
 
 
     return () => {
         const children = slots.default?.()
-        const { align, row, size, className, style, data } = props;
+        const { align, row, size, className, style, data, ...rest } = props;
         const classNames = cls(prefixCls, className, {
             [`${prefixCls}-${align}`]: !row,
             [`${prefixCls}-double`]: row,
@@ -63,7 +66,7 @@ const Descriptions = defineComponent<DescriptionsProps>((props, {}) => {
           )) :
           children;
         return (
-          <div class={classNames} style={style}>
+          <div class={classNames} style={style} {...getDataAttr({...rest, ...attr} )}>
               <table>
                   <tbody>
                   <DescriptionsContext.Provider value={{ align }}>
