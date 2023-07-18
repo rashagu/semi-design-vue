@@ -966,7 +966,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
         // searchPosition = dropdown and single seleciton
         if (!multiple || !hasValue()) {
             const renderText = foundation.getRenderTextInSingle();
-            const spanCls = cls({
+            const spanCls = cls(`${prefixcls}-selection-content`, {
                 [`${prefixcls}-selection-placeholder`]: !renderText,
             });
             return <span class={spanCls}>{renderText ? renderText : placeholder}</span>;

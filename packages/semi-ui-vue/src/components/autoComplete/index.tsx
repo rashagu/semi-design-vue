@@ -213,7 +213,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
             selection: new Map(),
             rePosKey: initRePosKey,
         });
-        const clickOutsideHandler: () => void | null = null;
+        let clickOutsideHandler: (e: Event) => void | null = null;
 
         const {adapter: adapterInject, getDataAttr} = useBaseComponent<AutoCompleteProps<T>>(props, state)
 
@@ -282,6 +282,30 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
                     let { rePosKey } = state;
                     rePosKey = rePosKey + 1;
                     state.rePosKey = rePosKey
+                },
+                registerClickOutsideHandler: cb => {
+                    const clickOutsideHandler_ = (e: Event) => {
+                        const optionInstance = optionsRef && optionsRef.value.getRef?.().vnode.el;
+                        const triggerDom = triggerRef && triggerRef.value;
+                        // eslint-disable-next-line
+                        const optionsDom = optionInstance;
+                        const target = e.target as Element;
+                        if (
+                          optionsDom &&
+                          (!optionsDom.contains(target) || !optionsDom.contains(target.parentNode)) &&
+                          triggerDom &&
+                          !triggerDom.contains(target)
+                        ) {
+                            cb(e);
+                        }
+                    };
+                    clickOutsideHandler = clickOutsideHandler_;
+                    document.addEventListener('mousedown', clickOutsideHandler, false);
+                },
+                unregisterClickOutsideHandler: () => {
+                    if (clickOutsideHandler) {
+                        document.removeEventListener('mousedown', clickOutsideHandler, false);
+                    }
                 },
             };
         }
