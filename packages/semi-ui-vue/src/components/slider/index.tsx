@@ -24,7 +24,7 @@ import {
   useSlots,
   watch,
   Fragment,
-  nextTick,
+  nextTick, ComponentObjectPropsOptions, PropType,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 
@@ -44,7 +44,7 @@ function domIsInRenderTree(e: HTMLElement) {
   return Boolean(e.offsetWidth || e.offsetHeight || e.getClientRects().length);
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<SliderProps> = {
   // allowClear: PropTypes.bool,
   defaultValue: [PropTypes.number, PropTypes.array],
   disabled: {
@@ -63,14 +63,14 @@ const propTypes = {
     default: undefined,
   }, // Whether both sides
   step: PropTypes.number,
-  tipFormatter: PropTypes.func,
+  tipFormatter: PropTypes.func as PropType<SliderProps['tipFormatter']>,
   value: [PropTypes.number, PropTypes.array],
   vertical: {
     type: PropTypes.bool,
     default: undefined,
   },
-  onAfterChange: PropTypes.func, // OnmouseUp and triggered when clicked
-  onChange: PropTypes.func,
+  onAfterChange: PropTypes.func as PropType<SliderProps['onAfterChange']>, // OnmouseUp and triggered when clicked
+  onChange: PropTypes.func as PropType<SliderProps['onChange']>,
   tooltipVisible: {
     type: PropTypes.bool,
     default: undefined,
@@ -86,7 +86,7 @@ const propTypes = {
     type: PropTypes.bool,
     default: undefined,
   },
-  getAriaValueText: PropTypes.func,
+  getAriaValueText: PropTypes.func as PropType<SliderProps['getAriaValueText']>,
 };
 
 const defaultProps: Partial<SliderProps> = {
@@ -108,7 +108,7 @@ const defaultProps: Partial<SliderProps> = {
   },
   verticalReverse: false,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<SliderProps>(propTypes, defaultProps);
 const Slider = defineComponent<SliderProps>((props, {}) => {
   const slots = useSlots();
 
@@ -140,7 +140,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   let dragging = [false, false];
   const eventListenerSet = new Set();
 
-  const { adapter: adapterInject } = useBaseComponent<SliderProps>(props, state);
+  const { adapter: adapterInject, getDataAttr } = useBaseComponent<SliderProps>(props, state);
 
   const adapter = adapter_();
 
@@ -643,7 +643,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
 
   return () => {
     const { disabled, currentValue, min, max } = state;
-    const { vertical, verticalReverse, style, railStyle, range, className } = props;
+    const { vertical, verticalReverse, style, railStyle, range, className, ...rest } = props;
     const wrapperClass = cls(
       `${prefixCls}-wrapper`,
       {
@@ -671,6 +671,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         aria-label={ariaLabel}
         onMouseenter={() => foundation.handleWrapperEnter()}
         onMouseleave={() => foundation.handleWrapperLeave()}
+        {...getDataAttr()}
       >
         {
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -691,9 +692,10 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
     }
     return slider;
   };
+}, {
+  props: vuePropsType,
+  name: 'Slider'
 });
 
-Slider.props = vuePropsType;
-Slider.name = 'Slider';
 
 export default Slider;

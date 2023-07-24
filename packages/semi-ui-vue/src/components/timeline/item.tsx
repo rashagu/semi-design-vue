@@ -4,9 +4,11 @@ import { noop } from 'lodash';
 import * as PropTypes from '../PropTypes';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/timeline/constants';
 import '@douyinfe/semi-foundation/timeline/timeline.scss';
-import {CSSProperties, defineComponent, h, useSlots, VNode} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots, VNode} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
+import {useAttrs} from "vue";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 export interface TimelineItemProps {
     color?: string;
@@ -23,16 +25,16 @@ export interface TimelineItemProps {
 
 const prefixCls = cssClasses.ITEM;
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TimelineItemProps> = {
     color: PropTypes.string,
     time: PropTypes.node,
-    type: PropTypes.string,
+    type: PropTypes.string as PropType<TimelineItemProps['type']>,
     dot: PropTypes.node,
     extra: PropTypes.node,
-    position: PropTypes.string,
+    position: PropTypes.string as PropType<TimelineItemProps['position']>,
     className: PropTypes.string,
     style: PropTypes.object,
-    onClick: PropTypes.func,
+    onClick: PropTypes.func as PropType<TimelineItemProps['onClick']>,
 };
 
 const defaultProps = {
@@ -44,6 +46,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const TimelineItem = defineComponent<TimelineItemProps>((props, {}) => {
     const slots = useSlots()
+    const attr = useAttrs()
 
 
     return () => {
@@ -57,6 +60,7 @@ const TimelineItem = defineComponent<TimelineItemProps>((props, {}) => {
             time,
             extra,
             onClick,
+          ...rest
         } = props;
 
         const itemCls = cls(prefixCls,
@@ -70,7 +74,7 @@ const TimelineItem = defineComponent<TimelineItemProps>((props, {}) => {
         });
         const dotStyle = color ? { style: { backgroundColor: color } } : null;
         return (
-          <li class={itemCls} style={style} onClick={onClick}>
+          <li class={itemCls} style={style} onClick={onClick}  {...getDataAttr({...rest, ...attr})}>
               <div class={`${prefixCls}-tail`} aria-hidden />
               <div
                 class={dotCls}
@@ -87,9 +91,10 @@ const TimelineItem = defineComponent<TimelineItemProps>((props, {}) => {
           </li>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'TimelineItem'
 })
 
-TimelineItem.props = vuePropsType
-TimelineItem.name = 'TimelineItem'
 
 export default TimelineItem

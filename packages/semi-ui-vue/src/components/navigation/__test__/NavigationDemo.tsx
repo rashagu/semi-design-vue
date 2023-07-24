@@ -68,7 +68,8 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
   );
 })
 
-Test.props = vuePropsType
+
+
 
 export default Test
 

@@ -210,10 +210,11 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
 
     return <Fragment>{noticesList}</Fragment>;
   }
+}, {
+  props: vuePropsType,
+  name: 'NotificationList'
 })
 
-NotificationList.props = vuePropsType
-NotificationList.name = 'NotificationList'
 
 export default NotificationList
 

@@ -1,18 +1,17 @@
 import { Resizable } from '@kousum/vue-resizable';
-import {defineComponent, Fragment, h, useSlots} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, Fragment, h, PropType, useSlots} from "vue";
 import {omit} from "lodash";
 
 export interface ResizableHeaderCellProps {
-    [x: string]: any;
     onResize?: ResizeFn;
     onResizeStart?: ResizeFn;
     onResizeStop?: ResizeFn;
     width?: number | string
 }
-export const vuePropsType = {
-    onResize: Function,
-    onResizeStart: Function,
-    onResizeStop: Function,
+export const vuePropsType: ComponentObjectPropsOptions<ResizableHeaderCellProps> = {
+    onResize: Function as PropType<ResizableHeaderCellProps['onResize']>,
+    onResizeStart: Function as PropType<ResizableHeaderCellProps['onResizeStart']>,
+    onResizeStop: Function as PropType<ResizableHeaderCellProps['onResizeStop']>,
     width: [Number, String]
 };
 const ResizableHeaderCell = defineComponent<ResizableHeaderCellProps>((props, {attrs}) => {
@@ -48,10 +47,12 @@ const ResizableHeaderCell = defineComponent<ResizableHeaderCellProps>((props, {a
           </Resizable>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'ResizableHeaderCell'
 });
 
-ResizableHeaderCell.props = vuePropsType;
-ResizableHeaderCell.name = "ResizableHeaderCell";
+
 
 export type ResizeFn = (e: any) => any;
 export default ResizableHeaderCell;

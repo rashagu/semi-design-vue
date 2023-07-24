@@ -1,4 +1,5 @@
 import {
+  ComponentObjectPropsOptions,
   CSSProperties,
   defineComponent,
   Fragment,
@@ -6,7 +7,7 @@ import {
   h,
   nextTick,
   onMounted,
-  onUnmounted,
+  onUnmounted, PropType,
   reactive,
   ref,
   useSlots,
@@ -131,6 +132,7 @@ export type SelectProps = {
   'aria-describedby'?: AriaAttributes['aria-describedby'];
   'aria-errormessage'?: AriaAttributes['aria-errormessage'];
   'aria-invalid'?: AriaAttributes['aria-invalid'];
+  'aria-label'?: AriaAttributes['aria-label'];
   'aria-labelledby'?: AriaAttributes['aria-labelledby'];
   'aria-required'?: AriaAttributes['aria-required'];
   id?: string;
@@ -232,7 +234,7 @@ export interface SelectState {
 // Notes: Use the label of the option as the identifier, that is, the option in Select, the value is allowed to be the same, but the label must be unique
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<SelectProps> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,
@@ -244,8 +246,8 @@ const propTypes = {
   borderless: PropTypes.bool,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.object]),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.object]),
-  placeholder: PropTypes.node,
-  onChange: PropTypes.func,
+  placeholder: PropTypes.node as PropType<SelectProps['placeholder']>,
+  onChange: PropTypes.func as PropType<SelectProps['onChange']>,
   multiple: PropTypes.bool,
   // Whether to turn on the input box filtering function, when it is a function, it represents a custom filtering function
   filter: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
@@ -256,66 +258,66 @@ const propTypes = {
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   style: PropTypes.object,
   className: PropTypes.string,
-  size: String,
+  size: String as PropType<SelectProps['size']>,
   disabled: PropTypes.bool,
-  emptyContent: PropTypes.node,
-  onDropdownVisibleChange: PropTypes.func,
+  emptyContent: PropTypes.node as PropType<SelectProps['emptyContent']>,
+  onDropdownVisibleChange: PropTypes.func as PropType<SelectProps['onDropdownVisibleChange']>,
   zIndex: PropTypes.number,
-  position: String,
-  onSearch: PropTypes.func,
-  getPopupContainer: PropTypes.func,
+  position: String as PropType<SelectProps['position']>,
+  onSearch: PropTypes.func as PropType<SelectProps['onSearch']>,
+  getPopupContainer: PropTypes.func as PropType<SelectProps['getPopupContainer']>,
   dropdownClassName: PropTypes.string,
   dropdownStyle: PropTypes.object,
-  outerTopSlot: PropTypes.node,
-  innerTopSlot: PropTypes.node,
+  outerTopSlot: PropTypes.node as PropType<SelectProps['outerTopSlot']>,
+  innerTopSlot: PropTypes.node as PropType<SelectProps['innerTopSlot']>,
   inputProps: PropTypes.object,
-  outerBottomSlot: PropTypes.node,
-  innerBottomSlot: PropTypes.node, // Options slot
+  outerBottomSlot: PropTypes.node as PropType<SelectProps['outerBottomSlot']>,
+  innerBottomSlot: PropTypes.node as PropType<SelectProps['innerBottomSlot']>, // Options slot
   optionList: PropTypes.array,
   dropdownMatchSelectWidth: PropTypes.bool,
   loading: PropTypes.bool,
   defaultOpen: PropTypes.bool,
-  validateStatus: String,
+  validateStatus: String as PropType<SelectProps['validateStatus']>,
   defaultActiveFirstOption: PropTypes.bool,
-  triggerRender: PropTypes.func,
+  triggerRender: PropTypes.func as PropType<SelectProps['triggerRender']>,
   stopPropagation: PropTypes.bool,
   // motion doesn't need to be exposed
   motion: PropTypes.oneOfType([PropTypes.func, PropTypes.bool, PropTypes.object]),
 
   onChangeWithObject: PropTypes.bool,
 
-  suffix: PropTypes.node,
-  prefix: PropTypes.node,
-  insetLabel: PropTypes.node,
+  suffix: PropTypes.node as PropType<SelectProps['suffix']>,
+  prefix: PropTypes.node as PropType<SelectProps['prefix']>,
+  insetLabel: PropTypes.node as PropType<SelectProps['insetLabel']>,
   insetLabelId: PropTypes.string,
   showClear: PropTypes.bool,
   showArrow: PropTypes.bool,
 
-  renderSelectedItem: PropTypes.func,
+  renderSelectedItem: PropTypes.func as PropType<SelectProps['renderSelectedItem']>,
 
   allowCreate: PropTypes.bool,
-  renderCreateItem: PropTypes.func,
+  renderCreateItem: PropTypes.func as PropType<SelectProps['renderCreateItem']>,
 
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func,
+  onMouseEnter: PropTypes.func as PropType<SelectProps['onMouseEnter']>,
+  onMouseLeave: PropTypes.func as PropType<SelectProps['onMouseLeave']>,
   clickToHide: PropTypes.bool,
-  onExceed: PropTypes.func,
-  onCreate: PropTypes.func,
+  onExceed: PropTypes.func as PropType<SelectProps['onExceed']>,
+  onCreate: PropTypes.func as PropType<SelectProps['onCreate']>,
   remote: PropTypes.bool,
-  onDeselect: PropTypes.func,
+  onDeselect: PropTypes.func as PropType<SelectProps['onDeselect']>,
   // The main difference between onSelect and onChange is that when multiple selections are selected, onChange contains all options, while onSelect only contains items for the current operation
-  onSelect: PropTypes.func,
+  onSelect: PropTypes.func as PropType<SelectProps['onSelect']>,
   autoAdjustOverflow: PropTypes.bool,
   mouseEnterDelay: PropTypes.number,
   mouseLeaveDelay: PropTypes.number,
   spacing: PropTypes.number,
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onClear: PropTypes.func,
+  onBlur: PropTypes.func as PropType<SelectProps['onBlur']>,
+  onFocus: PropTypes.func as PropType<SelectProps['onFocus']>,
+  onClear: PropTypes.func as PropType<SelectProps['onClear']>,
 
   virtualize: PropTypes.object,
-  renderOptionItem: PropTypes.func,
-  onListScroll: PropTypes.func,
+  renderOptionItem: PropTypes.func as PropType<SelectProps['renderOptionItem']>,
+  onListScroll: PropTypes.func as PropType<SelectProps['onListScroll']>,
   arrowIcon: PropTypes.node,
   preventScroll: PropTypes.bool,
   // open: PropTypes.bool,
@@ -378,7 +380,7 @@ const defaultProps: Partial<SelectProps> = {
   expandRestTagsOnClick: false,
   ellipsisTrigger: false,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<SelectProps>(propTypes, defaultProps)
 const Index = defineComponent<SelectProps>((props, {expose}) => {
   const slots = useSlots()
 
@@ -404,7 +406,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
   let virtualizeListRef = ref()
   let inputRef = ref()
   let triggerRef = ref()
-  let optionsRef = ref<InstanceType<typeof Popover> | null>()
+  let optionsRef = ref()
   const optionContainerEl = ref()
   let clickOutsideHandler: (e: MouseEvent) => void;
   let foundation: SelectFoundation;
@@ -422,7 +424,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
 
   const eventManager = new Event();
   // TODO context
-  const {adapter: adapterInject, context: context_} = useBaseComponent<SelectProps>(props, state)
+  const {adapter: adapterInject, context: context_, getDataAttr} = useBaseComponent<SelectProps>(props, state)
   const setOptionContainerEl = (node: HTMLDivElement) => (optionContainerEl.value = node);
 
   const instance = getCurrentInstance()
@@ -696,9 +698,8 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
   })
 
 
-  const handleInputChange = (e: Event) => {
-    // @ts-ignore
-    foundation.handleInputChange(e.target.value)
+  const handleInputChange = (value: string, event: Event) => {
+    foundation.handleInputChange(value, event)
   };
 
   function renderInput() {
@@ -790,6 +791,10 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
     foundation.handleClearBtnEnterPress(e as any);
   }
 
+  function search(value: string, event: Event) {
+    handleInputChange(value, event);
+  }
+
   function renderEmpty() {
     return <Option empty={true} emptyContent={props.emptyContent}/>;
   }
@@ -831,7 +836,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
           key={option.key || option.label as string + option.value as string + optionIndex}
           renderOptionItem={renderOptionItem}
           inputValue={inputValue}
-          id={`${selectID}-option-${optionIndex}`}
+          semiOptionId={`${selectID}-option-${optionIndex}`}
         >
           {option.label}
         </Option>
@@ -1353,7 +1358,8 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       triggerRender,
       arrowIcon,
       clearIcon,
-      borderless
+      borderless,
+      ...rest
     } = props;
 
     const { selections, isOpen, keyboardEventSet, inputValue, isHovering, isFocus, showInput, focusIndex } = state;
@@ -1461,6 +1467,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
         onBlur={e => foundation.handleTriggerBlur(e as any)}
         onKeypress={onKeyPress}
         {...keyboardEventSet}
+        {...getDataAttr()}
       >
         {inner}
       </div>
@@ -1511,9 +1518,11 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       </Popover>
     );
   }
+},{
+  props: vuePropsType,
+  name: 'Select'
 })
 
-Index.props = vuePropsType
 
 export default Index
 

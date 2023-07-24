@@ -96,6 +96,7 @@ const Index = defineComponent<SpaceProps>((props, {slots}) => {
   };
 })
 
+// @ts-ignore
 Index.props = vuePropsType
 
 export default Index

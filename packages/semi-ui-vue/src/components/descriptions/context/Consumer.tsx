@@ -15,9 +15,11 @@ const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useDescriptionsContext()
   return () => slots.default ? slots.default(context) : null
+}, {
+  props: vuePropsType,
+  name: 'DescriptionsConsumer'
 })
 
-Consumer.props = vuePropsType
 
 export default Consumer
 

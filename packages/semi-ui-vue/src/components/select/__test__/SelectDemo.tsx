@@ -347,7 +347,6 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
   }
 })
 
-SelectDemo.props = vuePropsType
 
 export default SelectDemo
 

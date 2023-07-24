@@ -7,16 +7,16 @@ import { cssClasses } from '@douyinfe/semi-foundation/calendar/constants';
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
 import { TimeColProps } from './interface';
 import { Locale } from '../locale/interface';
-import {defineComponent, h, useSlots} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, h, PropType, useSlots} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 const prefixCls = `${cssClasses.PREFIX}-time`;
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TimeColProps> = {
     className: PropTypes.string,
-    renderTimeDisplay: PropTypes.func,
+    renderTimeDisplay: PropTypes.func as PropType<TimeColProps['renderTimeDisplay']>,
 };
-export const vuePropsType = vuePropsMake(propTypes, {})
+export const vuePropsType = vuePropsMake<TimeColProps>(propTypes, {})
 const TimeCol = defineComponent<TimeColProps>((props, {}) => {
     const slots = useSlots()
 
@@ -64,9 +64,8 @@ const TimeCol = defineComponent<TimeColProps>((props, {}) => {
         const time = renderTime();
         return time;
     }
-})
+}, {props:vuePropsType, name:'TimeCol'})
 
-TimeCol.props = vuePropsType
-TimeCol.name = 'TimeCol'
+
 
 export default TimeCol

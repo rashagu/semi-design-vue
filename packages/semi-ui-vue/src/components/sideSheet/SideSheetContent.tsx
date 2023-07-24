@@ -4,9 +4,21 @@ import { cssClasses } from '@douyinfe/semi-foundation/sideSheet/constants';
 import Button from '../iconButton';
 import { noop } from 'lodash';
 import { IconClose } from '@kousum/semi-icons-vue';
-import { CSSProperties, defineComponent, h, onBeforeUnmount, onMounted, ref, useSlots } from 'vue';
+import {
+  ComponentObjectPropsOptions,
+  CSSProperties,
+  defineComponent,
+  h,
+  onBeforeUnmount,
+  onMounted, PropType,
+  ref,
+  useSlots
+} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
+import { SideSheetProps } from "@douyinfe/semi-foundation/sideSheet/sideSheetFoundation";
+import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
+
 
 let uuid = 0;
 const prefixCls = cssClasses.PREFIX;
@@ -23,6 +35,7 @@ export interface SideSheetContentProps {
   width: CSSProperties['width'];
   height: CSSProperties['height'];
   style: CSSProperties;
+  size: SideSheetProps['size'];
   bodyStyle?: CSSProperties;
   className: string;
   dialogClassName?: string;
@@ -30,10 +43,14 @@ export interface SideSheetContentProps {
   'aria-label'?: string;
   maskExtraProps?: { [key: string]: any };
   wrapperExtraProps?: { [key: string]: any };
+
+  motion?: boolean;
+  visible?: boolean;
 }
 
-const propTypes = {
-  onClose: PropTypes.func,
+const propTypes:ComponentObjectPropsOptions<SideSheetContentProps> = {
+  size: String as PropType<SideSheetContentProps['size']>,
+  onClose: PropTypes.func as PropType<SideSheetContentProps['onClose']>,
   mask: PropTypes.bool,
   maskStyle: PropTypes.object,
   maskClosable: PropTypes.bool,
@@ -51,16 +68,16 @@ const propTypes = {
   'aria-label': PropTypes.string,
   maskExtraProps: PropTypes.object,
   wrapperExtraProps: PropTypes.object,
-  children: PropTypes.node,
+  // children: PropTypes.node as PropType<SideSheetContentProps['children']>,
 
-  motion: PropTypes.bool,
-  visible: PropTypes.bool,
+  motion: PropTypes.bool as PropType<SideSheetContentProps['motion']>,
+  visible: PropTypes.bool as PropType<SideSheetContentProps['visible']>
 };
 
 const defaultProps = {
   onClose: noop,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<SideSheetContentProps>(propTypes, defaultProps);
 const SideSheetContent = defineComponent<SideSheetContentProps>((props, {}) => {
   const slots = useSlots();
   let sideSheetId: string;
@@ -172,7 +189,27 @@ const SideSheetContent = defineComponent<SideSheetContentProps>((props, {}) => {
   }
 
   return () => {
-    const { mask, className, width } = props;
+    const {
+      mask,
+      className,
+      width,
+      onClose,
+      maskStyle,
+      maskClosable,
+      maskClassName,
+      title,
+      closable,
+      headerStyle,
+      height,
+      style,
+      size,
+      bodyStyle,
+      dialogClassName,
+      footer,
+      maskExtraProps,
+      wrapperExtraProps,
+      ...rest
+    } = props;
     const wrapperCls = cls(className, {
       [`${prefixCls}-fixed`]: !mask,
     });
@@ -180,16 +217,20 @@ const SideSheetContent = defineComponent<SideSheetContentProps>((props, {}) => {
     if (!mask && width) {
       wrapperStyle.width = typeof width === 'string' ? width : width + 'px';
     }
+
+    const dataAttr = getDataAttr(rest);
+
     return (
-      <div class={wrapperCls} style={wrapperStyle}>
+      <div class={wrapperCls} style={wrapperStyle}  {...dataAttr}>
         {getMaskElement()}
         {getDialogElement()}
       </div>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'SideSheetContent'
 });
 
-SideSheetContent.props = vuePropsType;
-SideSheetContent.name = 'SideSheetContent';
 
 export default SideSheetContent;

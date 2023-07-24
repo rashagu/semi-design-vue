@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, onActivated, Fragment} from 'vue'
+import {defineComponent, h, onActivated} from 'vue'
 import DropdownMenu from "../dropdownMenu";
 import DropdownItem from "../dropdownItem";
 import DropdownDivider from "../dropdownDivider";
@@ -71,7 +71,6 @@ const DropdownDemo1 = defineComponent<ExampleProps>((props, {slots}) => {
   );
 })
 
-DropdownDemo1.props = vuePropsType
 
 export default DropdownDemo1
 

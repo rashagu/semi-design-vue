@@ -109,7 +109,7 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
         isCollapsed: true,
     });
 
-    const {adapter: adapterInject} = useBaseComponent<BreadcrumbProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<BreadcrumbProps>(props, state)
     function adapter(): BreadcrumbAdapter<BreadcrumbProps, BreadcrumbState> {
         return {
             ...adapterInject<BreadcrumbProps, BreadcrumbState>(),
@@ -164,7 +164,7 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
     const handleCollapse = (template: Array<VNode>, itemsLen: number) => {
         const { maxItemCount, renderMore, moreType } = props;
         const hasRenderMore = isFunction(renderMore);
-        const restItem = template.slice(1, itemsLen - 3);
+        const restItem = template.slice(1, itemsLen - maxItemCount + 1);
         const spread = (
           <span class={`${clsPrefix}-collapse`} key={`more-${itemsLen}`}>
                 <span class={`${clsPrefix}-item-wrap`}>
@@ -295,7 +295,7 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
                 separator,
             }}
           >
-              <nav aria-label={props['aria-label']} class={sizeCls} style={style}>
+              <nav aria-label={props['aria-label']} class={sizeCls} style={style} {...getDataAttr()}>
                   {breadcrumbs}
               </nav>
           </BreadContext.Provider>
@@ -303,6 +303,7 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 Breadcrumb.props = vuePropsType
 
 export default Breadcrumb

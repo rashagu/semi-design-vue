@@ -9,7 +9,7 @@ import {
   VNode,
   isVNode,
   useSlots,
-  CSSProperties, WatchStopHandle, nextTick, unref
+  CSSProperties, WatchStopHandle, nextTick, unref, ComponentObjectPropsOptions, PropType
 } from 'vue'
 import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import * as PropTypes from '../PropTypes';
@@ -32,6 +32,7 @@ import type {NavFooterProps} from './Footer';
 import type {NavHeaderProps} from './Header';
 import type {NavItemProps} from './Item';
 import type {ToggleIcon, SubNavProps} from './SubNav';
+import {VueJsxNode} from "../interface";
 
 export type Mode = 'vertical' | 'horizontal';
 export {
@@ -65,6 +66,7 @@ export interface NavProps extends BaseProps {
   defaultIsCollapsed?: boolean;
   defaultOpenKeys?: string[];
   defaultSelectedKeys?: string[];
+  expandIcon?: VueJsxNode;
   footer?: VNode | NavFooterProps;
   header?: VNode | NavHeaderProps;
   isCollapsed?: boolean;
@@ -81,6 +83,7 @@ export interface NavProps extends BaseProps {
   toggleIconPosition?: string;
   tooltipHideDelay?: number;
   tooltipShowDelay?: number;
+  getPopupContainer?: () => HTMLElement;
   onClick?: (data: { itemKey: string; domEvent: MouseEvent; isOpen: boolean }) => void;
   onCollapseChange?: (isCollapse: boolean) => void;
   onDeselect?: (data?: any) => void;
@@ -100,7 +103,7 @@ export interface NavState {
 
 const {hasOwnProperty} = Object.prototype;
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<NavProps> = {
   // Initial expanded SubNav navigation key array
   defaultOpenKeys: Array,
   openKeys: Array,
@@ -108,13 +111,13 @@ const propTypes = {
   defaultSelectedKeys: Array,
   selectedKeys: Array,
   // Navigation type, now supports vertical, horizontal
-  mode: String,
+  mode: String as PropType<NavProps['mode']>,
   // Triggered when selecting a navigation item
-  onSelect: PropTypes.func,
+  onSelect: PropTypes.func as PropType<NavProps['onSelect']>,
   // Triggered when clicking a navigation item
-  onClick: PropTypes.func,
+  onClick: PropTypes.func as PropType<NavProps['onClick']>,
   // SubNav expand/close callback
-  onOpenChange: PropTypes.func,
+  onOpenChange: PropTypes.func as PropType<NavProps['onOpenChange']>,
   // Array of options (nested options can continue)
   items: PropTypes.array,
   // Is it in the state of being stowed to the sidebar
@@ -126,29 +129,30 @@ const propTypes = {
     type: PropTypes.bool,
     default: undefined
   },
-  onCollapseChange: PropTypes.func,
+  onCollapseChange: PropTypes.func as PropType<NavProps['onCollapseChange']>,
   multiple: {
     type: PropTypes.bool,
     default: undefined
   },
-  onDeselect: PropTypes.func,
+  onDeselect: PropTypes.func as PropType<NavProps['onDeselect']>,
   subNavMotion: [PropTypes.bool, PropTypes.object, PropTypes.func],
   subNavCloseDelay: PropTypes.number,
   subNavOpenDelay: PropTypes.number,
   tooltipShowDelay: PropTypes.number,
   tooltipHideDelay: PropTypes.number,
-  children: PropTypes.node,
+  children: PropTypes.node as PropType<NavProps['children']>,
   style: PropTypes.object,
   bodyStyle: PropTypes.object,
   className: PropTypes.string,
   toggleIconPosition: PropTypes.string,
   prefixCls: PropTypes.string,
-  header: PropTypes.node,
-  footer: PropTypes.node,
+  header: PropTypes.node as PropType<NavProps['header']>,
+  footer: PropTypes.node as PropType<NavProps['footer']>,
   limitIndent: {
     type: PropTypes.bool,
     default: undefined
   },
+  getPopupContainer: PropTypes.func as PropType<NavProps['getPopupContainer']>,
 };
 
 const defaultProps = {
@@ -171,7 +175,7 @@ const defaultProps = {
   // items: [],
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<NavProps>(propTypes, defaultProps)
 const index = defineComponent<NavProps>((props, {slots}) => {
   const slots_ = useSlots()
   let itemsChanged: boolean = true;
@@ -186,7 +190,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
       selectedKeys: []
     });
 
-  const {adapter: adapterInject, isControlled} = useBaseComponent<NavProps>(props, state)
+  const {adapter: adapterInject, isControlled, getDataAttr} = useBaseComponent<NavProps>(props, state)
 
 
   let initState = {
@@ -313,12 +317,18 @@ const index = defineComponent<NavProps>((props, {slots}) => {
    * @returns {JSX.Element}
    */
   function renderItems(items: (SubNavPropsWithItems | NavItemPropsWithItems)[] = [], level = 0) {
+    const { expandIcon } = props;
     const finalDom = (
       <>
         {items.map((item, idx) => {
           if (Array.isArray(item.items) && item.items.length) {
             return (
-              <SubNav key={item.itemKey || String(level) + idx} {...item as SubNavPropsWithItems} level={level}>
+              <SubNav
+                key={item.itemKey || String(level) + idx}
+                {...item as SubNavPropsWithItems}
+                level={level}
+                expandIcon={expandIcon}
+              >
                 {renderItems(item.items as (SubNavPropsWithItems | NavItemPropsWithItems)[], level + 1)}
               </SubNav>
             );
@@ -355,7 +365,10 @@ const index = defineComponent<NavProps>((props, {slots}) => {
       footer,
       header,
       toggleIconPosition,
-      limitIndent
+      limitIndent,
+      renderWrapper,
+      getPopupContainer,
+      ...rest
     } = props;
 
     const { selectedKeys, openKeys, items, isCollapsed } = state;
@@ -456,7 +469,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
               limitIndent
             } as any}
           >
-            <div class={finalCls} style={finalStyle}>
+            <div class={finalCls} style={finalStyle} {...getDataAttr()}>
               <div class={`${prefixCls}-inner`}>
                 <div class={headerListOuterCls}>
                   {headers}
@@ -475,10 +488,11 @@ const index = defineComponent<NavProps>((props, {slots}) => {
       </LocaleConsumer>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Navigation'
 })
 
-index.props = vuePropsType
-index.name = 'Navigation'
 
 export default index
 

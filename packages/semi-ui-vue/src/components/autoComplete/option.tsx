@@ -166,8 +166,11 @@ const Option = defineComponent<OptionProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 Option.props = vuePropsType
+// @ts-ignore
 Option.name = 'Option'
+// @ts-ignore
 Option.isSelectOption = true
 export default Option
 

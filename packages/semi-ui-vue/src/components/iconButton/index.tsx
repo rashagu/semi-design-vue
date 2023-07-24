@@ -1,5 +1,6 @@
-import {defineComponent, ref, h, StyleValue, isVNode, Fragment} from 'vue'
+import {defineComponent, ref, h, StyleValue, isVNode, Fragment, PropType} from 'vue'
 import classNames from 'classnames';
+import * as PropTypes from '../PropTypes';
 
 import {cssClasses, strings} from '@douyinfe/semi-foundation/button/constants';
 import {strings as iconStrings} from '@douyinfe/semi-foundation/icons/constants';
@@ -8,6 +9,10 @@ import SpinIcon from '../spin/icon';
 import {noop} from 'lodash';
 import '@douyinfe/semi-foundation/button/iconButton.scss';
 import {getFragmentChildren} from "../_utils";
+import {vuePropsMake} from "../PropTypes";
+import {BaseFormProps} from "../form";
+
+
 
 
 const iconSizes = iconStrings.SIZE;
@@ -23,11 +28,34 @@ export interface IconButtonProps extends ButtonProps {
   theme?: Theme;
   style?: StyleValue;
   className?: string;
+  class?: string;
   disabled?: boolean;
   noHorizontalPadding?: boolean | HorizontalPaddingType | HorizontalPaddingType[];
   prefixCls?: string;
   autoFocus?: boolean
 }
+const vuePropsType= vuePropsMake<IconButtonProps>({
+  iconStyle: PropTypes.object,
+  style: PropTypes.object,
+  loading: PropTypes.bool,
+  prefixCls: PropTypes.string,
+  icon: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.node]),
+  iconSize: PropTypes.string,
+  noHorizontalPadding: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.array]),
+  theme: PropTypes.string as PropType<IconButtonProps['theme']>,
+  iconPosition: PropTypes.string as PropType<IconButtonProps['iconPosition']>,
+  className: PropTypes.string,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+  class: String
+}, {
+  iconPosition: strings.DEFAULT_ICON_POSITION,
+  prefixCls: cssClasses.PREFIX,
+  loading: false,
+  noHorizontalPadding: false, //  true same as ['left', 'right']
+  onMouseEnter: noop,
+  onMouseLeave: noop,
+})
 
 // TODO: add a buttonGroup component
 // TODO: icon configuration
@@ -101,6 +129,9 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
       </Button>
     )
   };
+},{
+  props: vuePropsType,
+  name:'IconButton'
 })
 
 export const VuePropsType = {
@@ -146,6 +177,4 @@ export const VuePropsType = {
   autoFocus:Function,
 }
 
-Index.props = VuePropsType
-Index.name = "IconButton"
 export default Index

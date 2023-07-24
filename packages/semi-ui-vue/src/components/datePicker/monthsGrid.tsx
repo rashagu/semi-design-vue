@@ -1,4 +1,4 @@
-import {CSSProperties, defineComponent, h, nextTick, onMounted, reactive, Ref, watch,} from 'vue';
+import {CSSProperties, defineComponent, h, nextTick, onMounted, PropType, reactive, Ref, watch,} from 'vue';
 
 import classnames from 'classnames';
 import * as PropTypes from '../PropTypes';
@@ -28,6 +28,7 @@ import getDefaultPickerDate from '@douyinfe/semi-foundation/datePicker/_utils/ge
 import {DayStatusType} from '@douyinfe/semi-foundation/datePicker/foundation';
 import {VueJsxNode} from '../interface';
 import type {ScrollItemProps} from '../scrollList';
+import {ComponentObjectPropsOptions} from "vue";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -38,24 +39,26 @@ export interface MonthsGridProps extends MonthsGridFoundationProps, BaseProps {
   renderFullDate?: (dayNumber?: number, fullDate?: string, dayStatus?: DayStatusType) => VueJsxNode;
   focusRecordsRef?: Ref<{ rangeStart: boolean; rangeEnd: boolean }>;
   yearAndMonthOpts?: ScrollItemProps<any>;
+
+  motionEnd?: boolean
 }
 
 export type MonthsGridState = MonthsGridFoundationState;
 
-const propTypes = {
-  type: PropTypes.string,
+const propTypes:ComponentObjectPropsOptions<MonthsGridProps> = {
+  type: PropTypes.string as PropType<MonthsGridProps['type']>,
   defaultValue: PropTypes.array,
   defaultPickerValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object, PropTypes.array]),
   multiple: PropTypes.bool,
   max: PropTypes.number, // only work when multiple is true
-  weekStartsOn: PropTypes.number,
-  disabledDate: PropTypes.func,
-  disabledTime: PropTypes.func,
+  weekStartsOn: PropTypes.number as PropType<MonthsGridProps['weekStartsOn']>,
+  disabledDate: PropTypes.func as PropType<MonthsGridProps['disabledDate']>,
+  disabledTime: PropTypes.func as PropType<MonthsGridProps['disabledTime']>,
   disabledTimePicker: PropTypes.bool,
   hideDisabledOptions: PropTypes.bool,
   navPrev: PropTypes.node,
   navNext: PropTypes.node,
-  onMaxSelect: PropTypes.func,
+  onMaxSelect: PropTypes.func as PropType<MonthsGridProps['onMaxSelect']>,
   timePickerOpts: PropTypes.object,
   // Whether the outer datePicker is a controlled component
   isControlledComponent: PropTypes.bool,
@@ -64,10 +67,10 @@ const propTypes = {
   locale: PropTypes.object,
   localeCode: PropTypes.string,
   format: PropTypes.string,
-  renderDate: PropTypes.func,
-  renderFullDate: PropTypes.func,
-  startDateOffset: PropTypes.func,
-  endDateOffset: PropTypes.func,
+  renderDate: PropTypes.func as PropType<MonthsGridProps['renderDate']>,
+  renderFullDate: PropTypes.func as PropType<MonthsGridProps['renderFullDate']>,
+  startDateOffset: PropTypes.func as PropType<MonthsGridProps['startDateOffset']>,
+  endDateOffset: PropTypes.func as PropType<MonthsGridProps['endDateOffset']>,
   autoSwitchDate: PropTypes.bool,
   density: PropTypes.string,
   dateFnsLocale: PropTypes.any,
@@ -75,20 +78,20 @@ const propTypes = {
   // Support synchronous switching of months
   syncSwitchMonth: PropTypes.bool,
   // Callback function for panel date switching
-  onPanelChange: PropTypes.func,
+  onPanelChange: PropTypes.func as PropType<MonthsGridProps['onPanelChange']>,
   focusRecordsRef: PropTypes.object,
-  triggerRender: PropTypes.func,
-  presetPosition: PropTypes.string,
+  triggerRender: PropTypes.func as PropType<MonthsGridProps['triggerRender']>,
+  presetPosition: PropTypes.string as PropType<MonthsGridProps['presetPosition']>,
   renderQuickControls: PropTypes.node,
   renderDateInput: PropTypes.node,
 
-  style: [Object, String],
+  style: [Object, String] as PropType<MonthsGridProps['style']>,
   className: String,
-  motionEnd: PropTypes.bool,
+  motionEnd: PropTypes.bool as PropType<MonthsGridProps['motionEnd']>,
   splitPanels: Boolean,
-  onChange: Function,
-  setRangeInputFocus: Function,
-  isAnotherPanelHasOpened: Function,
+  onChange: Function as PropType<MonthsGridProps['onChange']>,
+  setRangeInputFocus: Function as PropType<MonthsGridProps['setRangeInputFocus']>,
+  isAnotherPanelHasOpened: Function as PropType<MonthsGridProps['isAnotherPanelHasOpened']>,
   insetInput: Boolean,
 };
 
@@ -101,7 +104,7 @@ const defaultProps = {
   onMaxSelect: noop,
   locale: {},
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<MonthsGridProps>(propTypes, defaultProps);
 const monthsGrid = defineComponent<MonthsGridProps>((props, { slots }) => {
   const validFormat = props.format || getDefaultFormatTokenByType(props.type);
   const { nowDate, nextDate } = getDefaultPickerDate({
@@ -536,7 +539,7 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, { slots }) => {
 
   function renderYearAndMonth(panelType: PanelType, panelDetail: MonthInfo) {
     const { pickerDate } = panelDetail;
-    const { locale, localeCode, density, yearAndMonthOpts } = props;
+    const { locale, localeCode, density, yearAndMonthOpts, startYear, endYear } = props;
     const y = pickerDate.getFullYear();
     const m = pickerDate.getMonth() + 1;
     return (
@@ -556,6 +559,8 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, { slots }) => {
         }}
         density={density}
         yearAndMonthOpts={yearAndMonthOpts}
+        startYear={startYear}
+        endYear={endYear}
       />
     );
   }
@@ -672,9 +677,10 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, { slots }) => {
       </div>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'MonthsGrid'
 });
 
-monthsGrid.props = vuePropsType;
-monthsGrid.name = 'MonthsGrid';
 
 export default monthsGrid;

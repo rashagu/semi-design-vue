@@ -13,10 +13,12 @@ const Provider = defineComponent<{value:CheckboxContext}>((props, {slots}) => {
   }, { deep: true})
   provide('CheckboxContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
+}, {
+  props: vuePropsType,
+  name: 'CheckboxContextProvider'
 })
 
-Provider.props = vuePropsType
-Provider.name = 'CheckboxContextProvider'
+
 
 export default Provider
 

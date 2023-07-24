@@ -11,7 +11,17 @@ import { calcRowHeight } from '@douyinfe/semi-foundation/calendar/eventUtil';
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
 import { RangeCalendarProps } from './interface';
 import { Locale } from '../locale/interface';
-import {defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    defineComponent, Fragment,
+    h,
+    onBeforeUnmount,
+    onMounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 
@@ -30,17 +40,19 @@ export interface RangeCalendarState {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<RangeCalendarProps> = {
     // displayValue: PropTypes.instanceOf(Date),
     range: PropTypes.array,
     header: PropTypes.node,
     events: PropTypes.array,
-    mode: PropTypes.string,
+    mode: PropTypes.string as PropType<RangeCalendarProps['mode']>,
     showCurrTime: PropTypes.bool,
     markWeekend: PropTypes.bool,
     scrollTop: PropTypes.number,
-    renderTimeDisplay: PropTypes.func,
-    dateGridRender: PropTypes.func,
+    renderTimeDisplay: PropTypes.func as PropType<RangeCalendarProps['renderTimeDisplay']>,
+    renderDateDisplay: PropTypes.func as PropType<RangeCalendarProps['renderDateDisplay']>,
+    dateGridRender: PropTypes.func as PropType<RangeCalendarProps['dateGridRender']>,
+    allDayEventsRender: PropTypes.func as PropType<RangeCalendarProps['allDayEventsRender']>,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     style: PropTypes.object,
@@ -48,15 +60,15 @@ const propTypes = {
 
 
     displayValue: PropTypes.object,
-    weekStartsOn: PropTypes.number,
-    onClick: PropTypes.func,
+    weekStartsOn: PropTypes.number as PropType<RangeCalendarProps['weekStartsOn']>,
+    onClick: PropTypes.func as PropType<RangeCalendarProps['onClick']>,
 };
 
 const defaultProps = {
     events: [] as ParsedEvents[],
     mode: 'range',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<RangeCalendarProps>(propTypes, defaultProps)
 const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
     const slots = useSlots()
 
@@ -74,7 +86,7 @@ const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
         cachedKeys: [],
     })
 
-    const { adapter: adapterInject} = useBaseComponent<RangeCalendarProps>(props, state)
+    const { adapter: adapterInject, getDataAttr} = useBaseComponent<RangeCalendarProps>(props, state)
     function adapter_(): CalendarAdapter<RangeCalendarProps, RangeCalendarState> {
         return {
             ...adapterInject(),
@@ -106,10 +118,11 @@ const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
     watch([
         ()=>state.cachedKeys,
         ()=>props.events,
-    ], (value, [prevStateCachedKeys], onCleanup)=>{
+        ()=>props.range
+    ], (value, [prevStateCachedKeys,_, prevPropsRange], onCleanup)=>{
         const prevEventKeys = prevStateCachedKeys;
         const nowEventKeys = props.events.map(event => event.key);
-        if (!isEqual(prevEventKeys, nowEventKeys)) {
+        if (!isEqual(prevEventKeys, nowEventKeys) || !isEqual(prevPropsRange, props.range)) {
             foundation.parseRangeEvents();
         }
     })
@@ -151,7 +164,7 @@ const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
     };
 
     const renderHeader = (dateFnsLocale: Locale['dateFnsLocale']) => {
-        const { markWeekend, range } = props;
+        const { markWeekend, range, renderDateDisplay } = props;
         const { month, week } = foundation.getRangeData(range[0], dateFnsLocale);
         return (
           <div class={`${prefixCls}-header`}>
@@ -166,10 +179,19 @@ const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
                               [`${cssClasses.PREFIX}-today`]: isToday,
                               [`${cssClasses.PREFIX}-weekend`]: markWeekend && day.isWeekend,
                           });
-                          return (
-                            <li key={`${date.toString()}-weekheader`} class={listCls}>
+
+                          const dateContent = renderDateDisplay ? (
+                            renderDateDisplay(date)
+                          ) : (
+                            <Fragment>
                                 <span class={`${cssClasses.PREFIX}-today-date`}>{dayString}</span>
                                 <span>{weekday}</span>
+                            </Fragment>
+                          );
+
+                          return (
+                            <li key={`${date.toString()}-weekheader`} class={listCls}>
+                                {dateContent}
                             </li>
                           );
                       })}
@@ -180,6 +202,9 @@ const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
     };
 
     const renderAllDayEvents = (events: Array<ParsedRangeEvent>) => {
+        if (props.allDayEventsRender) {
+            return props.allDayEventsRender(props.events);
+        }
         const list = events.map((event, ind) => {
             const { leftPos, width, topInd, children } = event;
             const top = `${topInd}em`;
@@ -202,11 +227,11 @@ const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
     };
 
     const renderAllDay = (locale: Locale['Calendar']) => {
+        const { allDayEventsRender } = props;
         const { allDay } = state.parsedEvents;
         const parsed = foundation.parseRangeAllDayEvents(allDay);
-        const maxRowHeight = calcRowHeight(parsed);
-        const style = {
-            height: `${maxRowHeight}em`
+        const style = allDayEventsRender ? null : {
+            height: `${calcRowHeight(parsed) }em`
         };
         const { markWeekend } = props;
         const { week } = RangeData;
@@ -250,7 +275,7 @@ const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
         return (
           <LocaleConsumer componentName="Calendar">
               {(locale: Locale['Calendar'], localeCode: string, dateFnsLocale: Locale['dateFnsLocale']) => (
-                <div class={weekCls} style={weekStyle} ref={dom}>
+                <div class={weekCls} style={weekStyle} ref={dom} {...getDataAttr()}>
                     <div class={`${prefixCls}-sticky-top`}>
                         {header}
                         {renderHeader(dateFnsLocale)}
@@ -270,9 +295,7 @@ const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
           </LocaleConsumer>
         );
     }
-})
+}, {props: vuePropsType, name:'RangeCalendar'})
 
-RangeCalendar.props = vuePropsType
-RangeCalendar.name = 'RangeCalendar'
 
 export default RangeCalendar

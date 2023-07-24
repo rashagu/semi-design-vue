@@ -2,14 +2,25 @@ import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/anchor/constants';
 import LinkFoundation, { LinkAdapter } from '@douyinfe/semi-foundation/anchor/linkFoundation';
-import AnchorContext, { AnchorContextType } from './anchor-context';
 import {Text as TypographyText} from '../typography/index';
-import {CSSProperties, defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    onBeforeUnmount,
+    onMounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useAnchorContext} from "./anchor-content/Consumer";
 import {useBaseComponent} from "../_base/baseComponent";
 import {TabsProps} from "../tabs";
 import {VueJsxNode} from "../interface";
+import { isObject } from 'lodash';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -24,14 +35,14 @@ export interface LinkProps {
     direction?: 'ltr' | 'rtl'
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<LinkProps> = {
     href: PropTypes.string,
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     className: PropTypes.string,
     style: PropTypes.object,
     disabled: PropTypes.bool,
     level: PropTypes.number,
-    direction: PropTypes.string,
+    direction: PropTypes.string as PropType<LinkProps['direction']>,
     children: PropTypes.node,
 };
 
@@ -40,7 +51,7 @@ const defaultProps = {
     title: '',
     className: '',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<LinkProps>(propTypes, defaultProps)
 const Link = defineComponent<LinkProps>((props, {}) => {
     const slots = useSlots()
     const {context} = useAnchorContext()
@@ -106,12 +117,17 @@ const Link = defineComponent<LinkProps>((props, {}) => {
             [`${prefixCls}-link-tooltip-active`]: active,
             [`${prefixCls}-link-tooltip-disabled`]: disabled,
         });
-        const toolTipOpt = position ? { position } : {};
         if (showTooltip) {
+            const showTooltipObj = isObject(showTooltip) ?
+              Object.assign({ opts: {} }, showTooltip) : { opts: {} };
+            // The position can be set through showTooltip, here it is compatible with the position API
+            if (position) {
+                showTooltipObj.opts['position'] = position;
+            }
             return (
               <TypographyText
                 size={size === 'default' ? 'normal' : 'small'}
-                ellipsis={{ showTooltip: { opts: { ...toolTipOpt } } }}
+                ellipsis={{ showTooltip: showTooltipObj as any }}
                 type={'tertiary'}
                 className={linkTitleCls}
               >
@@ -173,9 +189,11 @@ const Link = defineComponent<LinkProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Link'
 })
 
-Link.props = vuePropsType
-Link.name = 'Link'
+
 
 export default Link

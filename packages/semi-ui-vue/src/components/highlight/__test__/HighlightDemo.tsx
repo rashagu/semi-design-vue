@@ -62,8 +62,6 @@ const HighlightDemo = defineComponent<HighlightDemoProps>((props, {}) => {
   }
 })
 
-HighlightDemo.props = vuePropsType
-HighlightDemo.name = 'HighlightDemo'
 
 export default HighlightDemo
 

@@ -19,7 +19,7 @@ import {
   useSlots,
   getCurrentInstance,
   Ref,
-  VNode,
+  VNode, ComponentObjectPropsOptions, PropType,
 } from 'vue';
 import classNames from 'classnames';
 import * as PropTypes from '../PropTypes';
@@ -128,15 +128,15 @@ const triggerSet = strings.TRIGGER_SET;
 const blockDisplays = ['flex', 'block', 'table', 'flow-root', 'grid'];
 const defaultGetContainer = () => document.body;
 
-const propTypes = {
-  children: PropTypes.node,
+const propTypes:ComponentObjectPropsOptions<TooltipProps> = {
+  // children: PropTypes.node,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
   autoAdjustOverflow: PropTypes.bool,
-  position: String,
-  getPopupContainer: PropTypes.func,
+  position: String as PropType<TooltipProps['position']>,
+  getPopupContainer: PropTypes.func as PropType<TooltipProps['getPopupContainer']>,
   mouseEnterDelay: PropTypes.number,
   mouseLeaveDelay: PropTypes.number,
-  trigger: [Boolean, String],
+  trigger: [Boolean, String] as PropType<TooltipProps['trigger']>,
   className: PropTypes.string,
   wrapperClassName: PropTypes.string,
   clickToHide: PropTypes.bool,
@@ -146,13 +146,13 @@ const propTypes = {
   style: PropTypes.object,
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   prefixCls: PropTypes.string,
-  onVisibleChange: PropTypes.func,
-  onClickOutSide: PropTypes.func,
+  onVisibleChange: PropTypes.func as PropType<TooltipProps['onVisibleChange']>,
+  onClickOutSide: PropTypes.func as PropType<TooltipProps['onClickOutSide']>,
   spacing: PropTypes.number,
   margin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   showArrow: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   zIndex: PropTypes.number,
-  rePosKey: [String, Number, Boolean],
+  rePosKey: [String, Number, Boolean] as PropType<TooltipProps['rePosKey']>,
   arrowBounding: Object,
   transformFromCenter: PropTypes.bool, // Whether to change from the center of the trigger (for dynamic effects)
   arrowPointAtCenter: PropTypes.bool,
@@ -164,22 +164,22 @@ const propTypes = {
   returnFocusOnClose: PropTypes.bool,
   preventScroll: PropTypes.bool,
   disableFocusListener:  PropTypes.bool,
-  name: String,
+  // name: String,
 
-  cancelText: String,
-  okText: String,
-  contentClassName: String,
+  // cancelText: String,
+  // okText: String,
+  // contentClassName: String,
   closeOnEsc: {
     type: Boolean,
     default: false,
   },
   onEscKeyDown: {
-    type: Function,
+    type: Function as PropType<TooltipProps['onEscKeyDown']>,
     default: noop,
   },
   wrapperId: String,
   disableArrowKeyDown: Boolean,
-  afterClose: Function,
+  afterClose: Function as PropType<TooltipProps['afterClose']>,
   keepDOM: Boolean,
 };
 
@@ -299,7 +299,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
         // There is no guarantee that triggerE l.current can get the real dom, so call findDOMNode to ensure that you can get the real dom
         const triggerDOM = theAdapter.getTriggerNode();
         triggerEl.value = triggerDOM;
-        return triggerDOM && triggerDOM.getBoundingClientRect();
+        return triggerDOM && triggerDOM.getBoundingClientRect?.();
       },
       // Gets the outer size of the specified container
       getPopupContainerRect: () => {
@@ -450,6 +450,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
       getContainer: () => containerEl.value,
       getTriggerNode: () => {
         let triggerDOM = triggerEl.value;
+        // TODO 可能是文本 节点 #text
         if (!isHTMLElement(triggerEl.value)) {
           triggerDOM = triggerEl.value;
         }
@@ -649,7 +650,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
     const icon = renderIcon();
     let portalInnerStyle: CSSProperties = omit(containerStyle, motion ? ['transformOrigin'] : undefined);
     const transformOrigin = get(containerStyle, 'transformOrigin');
-    const userOpacity = get(style, 'opacity');
+    const userOpacity: CSSProperties['opacity'] | null  = get(style, 'opacity', null);
     const opacity = userOpacity ? userOpacity : 1;
 
     portalInnerStyle = {
@@ -678,7 +679,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
                 ...(displayNone ? { display: "none" } : {}),
                 transformOrigin,
                 ...style,
-                opacity: isPositionUpdated ? opacity : '0',
+                ...(userOpacity ? { opacity: isPositionUpdated ? opacity : "0" }:{})
               }}
               {...portalEventSet}
               {...animationEventsNeedBind}
@@ -686,7 +687,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
               x-placement={placement}
               id={id}
             >
-              {contentNode}
+              <div class={`${prefix}-content`} >{contentNode}</div>
               {icon}
             </div>
           );
@@ -769,7 +770,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
     // const { isInsert, triggerEventSet, visible, id } = state;
     const { wrapWhenSpecial, role, trigger } = props;
     let children: any = slots.default ? slots.default()[0] : null;
-    const childrenStyle = { ...get(children, 'props.style') };
+    const childrenStyle:CSSProperties = { ...get(children, 'props.style') };
     const extraStyle: CSSProperties = {};
 
     if (wrapWhenSpecial) {
@@ -846,9 +847,11 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
       </>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'Tooltip'
 });
 
-Tooltip.props = vuePropsType;
-Tooltip.name = 'Tooltip';
+
 
 export default Tooltip;

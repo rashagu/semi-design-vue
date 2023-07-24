@@ -1,7 +1,6 @@
 import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
 import { isEqual, noop } from 'lodash';
-
 import { strings, cssClasses } from '@douyinfe/semi-foundation/autoComplete/constants';
 import AutoCompleteFoundation, { AutoCompleteAdapter, StateOptionItem, DataItem } from '@douyinfe/semi-foundation/autoComplete/foundation';
 import { numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/constants';
@@ -18,7 +17,18 @@ import '@douyinfe/semi-foundation/autoComplete/autoComplete.scss';
 import { Motion } from '../_base/base';
 import {AriaAttributes} from "../AriaAttributes";
 import {VueHTMLAttributes, VueJsxNode} from "../interface";
-import {CSSProperties, defineComponent, h, onMounted, onUnmounted, reactive, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    onMounted,
+    onUnmounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {DefineComponent} from "vue";
 import {PropObj, vuePropsMake} from "../PropTypes";
 import {PreviewImageProps} from "../image";
@@ -112,8 +122,8 @@ interface AutoCompleteState {
     keyboardEventSet?: KeyboardEventType;
 }
 
-function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}):DefineComponent<AutoCompleteProps<T>> {
-    const propTypes = {
+function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}) {
+    const propTypes:ComponentObjectPropsOptions<AutoCompleteProps<T>> = {
         'aria-label': PropTypes.string,
         'aria-labelledby': PropTypes.string,
         'aria-invalid': PropTypes.bool,
@@ -136,34 +146,34 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
         id: PropTypes.string,
         insetLabel: PropTypes.node,
         insetLabelId: PropTypes.string,
-        onSearch: PropTypes.func,
-        onSelect: PropTypes.func,
-        onClear: PropTypes.func,
-        onBlur: PropTypes.func,
-        onFocus: PropTypes.func,
-        onChange: PropTypes.func,
-        onKeyDown: PropTypes.func,
-        position: String,
+        onSearch: PropTypes.func as PropType<AutoCompleteProps<T>['onSearch']>,
+        onSelect: PropTypes.func as PropType<AutoCompleteProps<T>['onSelect']>,
+        onClear: PropTypes.func as PropType<AutoCompleteProps<T>['onClear']>,
+        onBlur: PropTypes.func as PropType<AutoCompleteProps<T>['onBlur']>,
+        onFocus: PropTypes.func as PropType<AutoCompleteProps<T>['onFocus']>,
+        onChange: PropTypes.func as PropType<AutoCompleteProps<T>['onChange']>,
+        onKeyDown: PropTypes.func as PropType<AutoCompleteProps<T>['onKeyDown']>,
+        position: String as PropType<AutoCompleteProps<T>['position']>,
         placeholder: PropTypes.string,
         prefix: PropTypes.node,
         onChangeWithObject: PropTypes.bool,
         onSelectWithObject: PropTypes.bool,
-        onDropdownVisibleChange: PropTypes.func,
-        renderItem: PropTypes.func,
-        renderSelectedItem: PropTypes.func,
+        onDropdownVisibleChange: PropTypes.func as PropType<AutoCompleteProps<T>['onDropdownVisibleChange']>,
+        renderItem: PropTypes.func as PropType<AutoCompleteProps<T>['renderItem']>,
+        renderSelectedItem: PropTypes.func as PropType<AutoCompleteProps<T>['renderSelectedItem']>,
         suffix: PropTypes.node,
         showClear: PropTypes.bool,
-        size: String,
+        size: String as PropType<AutoCompleteProps<T>['size']>,
         style: PropTypes.object,
         stopPropagation: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
         maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         mouseEnterDelay: PropTypes.number,
         mouseLeaveDelay: PropTypes.number,
         motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
-        getPopupContainer: PropTypes.func,
-        triggerRender: PropTypes.func,
+        getPopupContainer: PropTypes.func as PropType<AutoCompleteProps<T>['getPopupContainer']>,
+        triggerRender: PropTypes.func as PropType<AutoCompleteProps<T>['triggerRender']>,
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        validateStatus: String,
+        validateStatus: String as PropType<AutoCompleteProps<T>['validateStatus']>,
         zIndex: PropTypes.number,
     };
 
@@ -214,9 +224,9 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
             selection: new Map(),
             rePosKey: initRePosKey,
         });
-        const clickOutsideHandler: () => void | null = null;
+        let clickOutsideHandler: (e: Event) => void | null = null;
 
-        const {adapter: adapterInject} = useBaseComponent<AutoCompleteProps<T>>(props, state)
+        const {adapter: adapterInject, getDataAttr} = useBaseComponent<AutoCompleteProps<T>>(props, state)
 
         function adapter_(): AutoCompleteAdapter<AutoCompleteProps<T>, AutoCompleteState> {
             const keyboardAdapter = {
@@ -283,6 +293,30 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
                     let { rePosKey } = state;
                     rePosKey = rePosKey + 1;
                     state.rePosKey = rePosKey
+                },
+                registerClickOutsideHandler: cb => {
+                    const clickOutsideHandler_ = (e: Event) => {
+                        const optionInstance = optionsRef && optionsRef.value.getRef?.().vnode.el;
+                        const triggerDom = triggerRef && triggerRef.value;
+                        // eslint-disable-next-line
+                        const optionsDom = optionInstance;
+                        const target = e.target as Element;
+                        if (
+                          optionsDom &&
+                          (!optionsDom.contains(target) || !optionsDom.contains(target.parentNode)) &&
+                          triggerDom &&
+                          !triggerDom.contains(target)
+                        ) {
+                            cb(e);
+                        }
+                    };
+                    clickOutsideHandler = clickOutsideHandler_;
+                    document.addEventListener('mousedown', clickOutsideHandler, false);
+                },
+                unregisterClickOutsideHandler: () => {
+                    if (clickOutsideHandler) {
+                        document.removeEventListener('mousedown', clickOutsideHandler, false);
+                    }
                 },
             };
         }
@@ -375,7 +409,8 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
                 id,
                 ...keyboardEventSet,
                 // tooltip give tabindex 0 to children by default, autoComplete just need the input get focus, so outer div's tabindex set to -1
-                tabIndex: -1
+                tabIndex: -1,
+                ...getDataAttr()
             };
 
             const innerProps:VueHTMLAttributes & InputProps = {
@@ -515,9 +550,10 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
               </Popover>
             );
         }
+    }, {
+        props: vuePropsType_,
+        name: 'AutoComplete'
     })
-    AutoComplete.props = vuePropsType_
-    AutoComplete.name = 'AutoComplete'
 
     return AutoComplete
 }

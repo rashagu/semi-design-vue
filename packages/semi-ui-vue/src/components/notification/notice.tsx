@@ -12,7 +12,17 @@ import { isSemiIcon } from '../_utils';
 import { noop } from 'lodash';
 import { IconAlertCircle, IconAlertTriangle, IconClose, IconInfoCircle, IconTickCircle } from '@kousum/semi-icons-vue';
 import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
-import {cloneVNode, CSSProperties, defineComponent, h, onMounted, onUnmounted, reactive, useSlots} from "vue";
+import {
+    cloneVNode,
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    onMounted,
+    onUnmounted, PropType,
+    reactive,
+    useSlots
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
 import {VueJsxNode} from "../interface";
@@ -30,22 +40,22 @@ const { duration } = numbers;
 const { types, themes, directions } = strings;
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<NoticeReactProps> = {
     duration: PropTypes.number,
     id: [PropTypes.string, PropTypes.number],
     title: PropTypes.node,
     content: PropTypes.node, // strings、numbers、array、element
-    type: String,
-    theme: String,
+    type: String as PropType<NoticeReactProps['type']>,
+    theme: String as PropType<NoticeReactProps['theme']>,
     icon: PropTypes.node,
-    onClick: PropTypes.func,
-    onClose: PropTypes.func,
-    onCloseClick: PropTypes.func,
+    onClick: PropTypes.func as PropType<NoticeReactProps['onClick']>,
+    onClose: PropTypes.func as PropType<NoticeReactProps['onClose']>,
+    onCloseClick: PropTypes.func as PropType<NoticeReactProps['onCloseClick']>,
     showClose: PropTypes.bool,
     // private props
-    close: PropTypes.func,
-    direction: String,
-    onHookClose: PropTypes.func,
+    close: PropTypes.func as PropType<NoticeReactProps['close']>,
+    direction: String as PropType<NoticeReactProps['direction']>,
+    onHookClose: PropTypes.func as PropType<NoticeReactProps['onHookClose']>,
 };
 const defaultProps = {
     duration,
@@ -60,7 +70,7 @@ const defaultProps = {
     theme: 'normal',
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<NoticeReactProps>(propTypes, defaultProps)
 const Notice = defineComponent<NoticeReactProps>((props, {}) => {
 
     const slots = useSlots()
@@ -206,10 +216,11 @@ const Notice = defineComponent<NoticeReactProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Notice'
 })
 
-Notice.props = vuePropsType
-Notice.name = 'Notice'
 
 export default Notice
 

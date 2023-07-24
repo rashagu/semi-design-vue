@@ -47,13 +47,14 @@ import {Motion} from '../_base/base';
 import {IconChevronDown, IconClear, IconSearch} from '@kousum/semi-icons-vue';
 import CheckboxGroup from '../checkbox/checkboxGroup';
 import {
+    ComponentObjectPropsOptions,
     CSSProperties,
     defineComponent,
     Fragment,
     h,
     nextTick,
     onMounted,
-    onUnmounted,
+    onUnmounted, PropType,
     reactive,
     ref,
     useSlots,
@@ -124,6 +125,7 @@ export interface TreeSelectProps extends Omit<BasicTreeSelectProps, OverrideComm
     mouseEnterDelay?: number;
     mouseLeaveDelay?: number;
     arrowIcon?: VueJsxNode;
+    clearIcon?: VueJsxNode;
     autoAdjustOverflow?: boolean;
     clickToHide?: boolean;
     defaultOpen?: boolean;
@@ -160,6 +162,8 @@ export interface TreeSelectProps extends Omit<BasicTreeSelectProps, OverrideComm
     onChange?: OnChange;
     onFocus?: (e: MouseEvent) => void;
     onVisibleChange?: (isVisible: boolean) => void;
+    id?:string
+
 }
 
 export type OverrideCommonState =
@@ -187,7 +191,7 @@ const key = 0;
 
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TreeSelectProps> = {
     'aria-describedby': PropTypes.string,
     'aria-errormessage': PropTypes.string,
     'aria-invalid': PropTypes.bool,
@@ -195,10 +199,11 @@ const propTypes = {
     'aria-required': PropTypes.bool,
     'aria-label': PropTypes.string,
     borderless: PropTypes.bool,
-    loadedKeys: PropTypes.string,
-    loadData: PropTypes.func,
-    onLoad: PropTypes.func,
+    loadedKeys: PropTypes.array as PropType<TreeSelectProps['loadedKeys']>,
+    loadData: PropTypes.func as PropType<TreeSelectProps['loadData']>,
+    onLoad: PropTypes.func as PropType<TreeSelectProps['onLoad']>,
     arrowIcon: PropTypes.node,
+    clearIcon: PropTypes.node,
     defaultOpen: PropTypes.bool,
     defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     defaultExpandAll: PropTypes.bool,
@@ -213,13 +218,13 @@ const propTypes = {
     searchAutoFocus: PropTypes.bool,
     virtualize: PropTypes.object,
     treeNodeFilterProp: PropTypes.string,
-    onChange: PropTypes.func,
-    onSearch: PropTypes.func,
-    onSelect: PropTypes.func,
-    onExpand: PropTypes.func,
+    onChange: PropTypes.func as PropType<TreeSelectProps['onChange']>,
+    onSearch: PropTypes.func as PropType<TreeSelectProps['onSearch']>,
+    onSelect: PropTypes.func as PropType<TreeSelectProps['onSelect']>,
+    onExpand: PropTypes.func as PropType<TreeSelectProps['onExpand']>,
     onChangeWithObject: PropTypes.bool,
-    onBlur: PropTypes.func,
-    onFocus: PropTypes.func,
+    onBlur: PropTypes.func as PropType<TreeSelectProps['onBlur']>,
+    onFocus: PropTypes.func as PropType<TreeSelectProps['onFocus']>,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.object]),
     expandedKeys: PropTypes.array,
     autoExpandParent: PropTypes.bool,
@@ -236,7 +241,7 @@ const propTypes = {
     motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
     placeholder: PropTypes.string,
     maxTagCount: PropTypes.number,
-    size: String,
+    size: String as PropType<TreeSelectProps['size']>,
     className: PropTypes.string,
     style: PropTypes.object,
     treeNodeLabelProp: PropTypes.string,
@@ -245,34 +250,34 @@ const propTypes = {
     insetLabel: PropTypes.node,
     insetLabelId: PropTypes.string,
     zIndex: PropTypes.number,
-    getPopupContainer: PropTypes.func,
+    getPopupContainer: PropTypes.func as PropType<TreeSelectProps['getPopupContainer']>,
     dropdownMatchSelectWidth: PropTypes.bool,
-    validateStatus: String,
+    validateStatus: String as PropType<TreeSelectProps['validateStatus']>,
     mouseEnterDelay: PropTypes.number,
     mouseLeaveDelay: PropTypes.number,
-    triggerRender: PropTypes.func,
+    triggerRender: PropTypes.func as PropType<TreeSelectProps['triggerRender']>,
     stopPropagation: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     outerBottomSlot: PropTypes.node,
     outerTopSlot: PropTypes.node,
-    onVisibleChange: PropTypes.func,
+    onVisibleChange: PropTypes.func as PropType<TreeSelectProps['onVisibleChange']>,
     expandAction: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     searchPosition: String,
     clickToHide: PropTypes.bool,
-    renderLabel: PropTypes.func,
-    renderFullLabel: PropTypes.func,
+    renderLabel: PropTypes.func as PropType<TreeSelectProps['renderLabel']>,
+    renderFullLabel: PropTypes.func as PropType<TreeSelectProps['renderFullLabel']>,
     labelEllipsis: PropTypes.bool,
     optionListStyle: PropTypes.object,
     searchRender: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-    renderSelectedItem: PropTypes.func,
-    checkRelation: PropTypes.string,
-    id: PropTypes.string,
+    renderSelectedItem: PropTypes.func as PropType<TreeSelectProps['renderSelectedItem']>,
+    checkRelation: PropTypes.string as PropType<TreeSelectProps['checkRelation']>,
+    id: PropTypes.string as PropType<TreeSelectProps['id']>,
     showRestTagsPopover: PropTypes.bool,
     restTagsPopoverProps: PropTypes.object,
     preventScroll: PropTypes.bool,
     clickTriggerToHide: PropTypes.bool,
 
     dropdownMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
-    position: PropTypes.string,
+    position: PropTypes.string as PropType<TreeSelectProps['position']>,
 };
 
 const defaultProps: Partial<TreeSelectProps> = {
@@ -349,7 +354,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
     let onNodeDoubleClick
 
     // TODO context
-    const {adapter: adapterInject, context} = useBaseComponent<TreeSelectProps>(props, state)
+    const {adapter: adapterInject, context, getDataAttr} = useBaseComponent<TreeSelectProps>(props, state)
     function adapter_(): TreeSelectAdapter<TreeSelectProps, TreeSelectState> {
         const filterAdapter: Pick<TreeSelectAdapter, 'updateInputValue'> = {
             updateInputValue: value => {
@@ -950,6 +955,8 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             maxTagCount,
             searchPosition,
             filterTreeNode,
+            showRestTagsPopover,
+            restTagsPopoverProps
         } = props;
         const isTriggerPositionSearch = filterTreeNode && searchPosition === strings.SEARCH_POSITION_TRIGGER;
         // searchPosition = trigger
@@ -959,7 +966,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
         // searchPosition = dropdown and single seleciton
         if (!multiple || !hasValue()) {
             const renderText = foundation.getRenderTextInSingle();
-            const spanCls = cls({
+            const spanCls = cls(`${prefixcls}-selection-content`, {
                 [`${prefixcls}-selection-placeholder`]: !renderText,
             });
             return <span class={spanCls}>{renderText ? renderText : placeholder}</span>;
@@ -1023,6 +1030,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
 
     const renderClearBtn = () => {
         const showClearBtn_ = showClearBtn();
+        const {clearIcon} = props
         const clearCls = cls(`${prefixcls}-clearbtn`);
         if (showClearBtn_) {
             return (
@@ -1034,7 +1042,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
                 onClick={handleClear}
                 onKeypress={handleClearEnterPress}
               >
-                  <IconClear />
+                  {clearIcon ? clearIcon : <IconClear />}
               </div>
             );
         }
@@ -1151,6 +1159,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             aria-describedby={props['aria-describedby']}
             aria-required={props['aria-required']}
             {...mouseEvent}
+            {...getDataAttr()}
           >
               {{default:()=>inner}}
           </div>
@@ -1271,6 +1280,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
             searchAutoFocus,
             multiple,
             disabled,
+            preventScroll,
         } = props;
         const isDropdownPositionSearch = searchPosition === strings.SEARCH_POSITION_DROPDOWN;
         const inputcls = cls({
@@ -1281,6 +1291,7 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
         const baseInputProps = {
             value: inputValue,
             className: inputcls,
+            preventScroll,
             onChange: (value: string) => search(value),
         };
         const inputDropdownProps = {
@@ -1567,10 +1578,11 @@ const TreeSelect = defineComponent<TreeSelectProps>((props, {}) => {
           </Popover>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'TreeSelect'
 })
 
-TreeSelect.props = vuePropsType
-TreeSelect.name = 'TreeSelect'
 
 export default TreeSelect
 

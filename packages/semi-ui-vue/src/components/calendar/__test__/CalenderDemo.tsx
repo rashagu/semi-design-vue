@@ -40,10 +40,11 @@ const CalenderDemo = defineComponent<CalenderDemoProps>((props, {}) => {
       <DemoDiy />
     </div>
   )
+}, {
+  props:vuePropsType,
+  name:'CalenderDemo',
 })
 
-CalenderDemo.props = vuePropsType
-CalenderDemo.name = 'CalenderDemo'
 
 export default CalenderDemo
 

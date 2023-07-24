@@ -12,10 +12,11 @@ import PreviewFooterFoundation, { PreviewFooterAdapter } from "@douyinfe/semi-fo
 import {LocaleConsumerFunc} from "../locale/localeConsumer";
 import { Locale } from "../locale/interface";
 import { throttle } from "lodash";
-import {defineComponent, h, useSlots} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, h, PropType, useSlots} from "vue";
 import {useBaseComponent} from "../_base/baseComponent";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
+import {AnchorProps} from "../anchor";
 
 const prefixCls = cssClasses.PREFIX;
 const footerPrefixCls = `${cssClasses.PREFIX}-preview-footer`;
@@ -23,7 +24,7 @@ const LocaleConsumer = LocaleConsumerFunc<Locale["Image"]>()
 let mouseActiveTime: number = 0;
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<FooterProps> = {
     curPage: PropTypes.number,
     totalNum: PropTypes.number,
     disabledPrev: PropTypes.bool,
@@ -31,7 +32,7 @@ const propTypes = {
     disableDownload: PropTypes.bool,
     className: PropTypes.string,
     zoom: PropTypes.number,
-    ratio: PropTypes.string,
+    ratio: PropTypes.string as PropType<FooterProps['ratio']>,
     prevTip: PropTypes.string,
     nextTip: PropTypes.string,
     zoomInTip: PropTypes.string,
@@ -41,19 +42,19 @@ const propTypes = {
     adaptiveTip: PropTypes.string,
     originTip: PropTypes.string,
     showTooltip: PropTypes.bool,
-    onZoomIn: PropTypes.func,
-    onZoomOut: PropTypes.func,
-    onPrev: PropTypes.func,
-    onNext: PropTypes.func,
-    onAdjustRatio: PropTypes.func,
-    onRotateLeft: PropTypes.func,
-    onDownload: PropTypes.func,
+    onZoomIn: PropTypes.func as PropType<FooterProps['onZoomIn']>,
+    onZoomOut: PropTypes.func as PropType<FooterProps['onZoomOut']>,
+    onPrev: PropTypes.func as PropType<FooterProps['onPrev']>,
+    onNext: PropTypes.func as PropType<FooterProps['onNext']>,
+    onAdjustRatio: PropTypes.func as PropType<FooterProps['onAdjustRatio']>,
+    // onRotateLeft: PropTypes.func,
+    onDownload: PropTypes.func as PropType<FooterProps['onDownload']>,
 
     min: PropTypes.number,
     max: PropTypes.number,
     step: PropTypes.number,
-    onRotate: PropTypes.func,
-    renderPreviewMenu: PropTypes.func,
+    onRotate: PropTypes.func as PropType<FooterProps['onRotate']>,
+    renderPreviewMenu: PropTypes.func as PropType<FooterProps['renderPreviewMenu']>,
 }
 
 const defaultProps = {
@@ -63,7 +64,7 @@ const defaultProps = {
     showTooltip: false,
     disableDownload: false,
 }
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<FooterProps>(propTypes, defaultProps)
 const Footer = defineComponent<FooterProps>((props, {}) => {
 
     const slots = useSlots()
@@ -284,10 +285,12 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
           </section>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Footer'
 })
 
-Footer.props = vuePropsType
-Footer.name = 'Footer'
+
 
 export default Footer
 

@@ -1,3 +1,5 @@
+import {ComponentObjectPropsOptions} from "vue";
+import {DayColProps} from "./calendar";
 
 
 export const any = [Array, Object, String, Number, Boolean, Function];
@@ -31,12 +33,7 @@ export type PropObj = Record<any, {
   default?: any;
   validator?(value: unknown): boolean;
 } | Prop>
-export function vuePropsMake(typeObj:Record<any, {
-  type: Prop;
-  required?: boolean;
-  default?: any;
-  validator?(value: unknown): boolean;
-} | Prop>, defaultProps:{[key:string]: any}) {
+export function vuePropsMake<T>(typeObj:ComponentObjectPropsOptions<T>, defaultProps:{[key:string]: any}) {
   const obj = {}
   Object.keys(typeObj).forEach(typeKey=>{
     if (defaultProps.hasOwnProperty(typeKey)){
@@ -55,10 +52,10 @@ export function vuePropsMake(typeObj:Record<any, {
       }
     }else{
       obj[typeKey] = {
-        type: typeObj[typeKey].hasOwnProperty('type')?
+        type: (typeObj[typeKey] === undefined?undefined:typeObj[typeKey].hasOwnProperty('type')?
           // @ts-ignore
           typeObj[typeKey].type:
-          typeObj[typeKey],
+          typeObj[typeKey]),
         default: undefined
       }
     }
@@ -67,5 +64,5 @@ export function vuePropsMake(typeObj:Record<any, {
 
 
   })
-  return obj
+  return obj as ComponentObjectPropsOptions<T>
 }

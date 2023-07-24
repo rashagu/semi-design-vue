@@ -28,10 +28,9 @@ export type GenericProps = BasicProps & AvatarProps;
 const sizeSet = strings.SIZE;
 const shapeSet = strings.SHAPE;
 
-const generator = <T extends BasicProps>(type: string) => (BasicComponent: DefineComponent<T>): FunctionalComponent<T> => (
+const generator = <T extends BasicProps>(type: string) => (BasicComponent: typeof Generic) => (
     props
-):FunctionalComponent<T> => {
-    // @ts-ignore
+) => {
     return <BasicComponent type={type} {...props} />
 };
 
@@ -70,10 +69,11 @@ const Generic = defineComponent<GenericProps>((props, {}) => {
         );
         return h('div', { className: classString, ...others });
     }
+}, {
+    props: vuePropsTypeGeneric,
+    name: 'Generic'
 })
 
-Generic.props = vuePropsTypeGeneric
-Generic.name = 'Generic'
 
 export const Avatar = generator<AvatarProps>('avatar')(Generic);
 export const Image = generator<BasicProps>('image')(Generic);
@@ -109,8 +109,9 @@ export const Paragraph = defineComponent<ParagraphProps>((props, {}) => {
           </ul>
         );
     }
+}, {
+    props: vuePropsTypeParagraph,
+    name: 'Paragraph'
 })
 
-Paragraph.props = vuePropsTypeParagraph
-Paragraph.name = 'Paragraph'
 

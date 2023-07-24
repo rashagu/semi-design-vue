@@ -26,13 +26,13 @@ export const vuePropsType = {
 }
 const index = defineComponent<ScrollListProps>((props, {}) => {
   const slots = useSlots()
-  const {adapter: adapterInject} = useBaseComponent<CheckboxProps>(props, {})
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<CheckboxProps>(props, {})
 
   const foundation = new Foundation(adapterInject<CheckboxProps>());
 
   return () => {
 
-    const { header, footer, prefixCls, bodyHeight, className, style } = props;
+    const { header, footer, prefixCls, bodyHeight, className, style, ...rest } = props;
 
     const clsWrapper = classnames(className, {
       [prefixCls || cssClasses.PREFIX]: true,
@@ -43,7 +43,7 @@ const index = defineComponent<ScrollListProps>((props, {}) => {
     });
 
     return (
-      <div class={clsWrapper} style={style}>
+      <div class={clsWrapper} style={style}  {...getDataAttr()}>
         {header ? (
           <div class={clsHeader}>
             <div class={`${clsHeader}-title`}>{header}</div>
@@ -57,9 +57,11 @@ const index = defineComponent<ScrollListProps>((props, {}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'ScrollList'
 })
 
-index.props = vuePropsType
 
 export default index
 

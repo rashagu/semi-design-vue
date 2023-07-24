@@ -81,8 +81,7 @@ const SideSheetDemo = defineComponent<SideSheetDemoProps>((props, {}) => {
   )
 })
 
-SideSheetDemo.props = vuePropsType
-SideSheetDemo.name = 'SideSheetDemo'
+
 
 export default SideSheetDemo
 

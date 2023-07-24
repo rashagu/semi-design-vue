@@ -1,12 +1,22 @@
-
 import * as PropTypes from '../PropTypes';
+import {vuePropsMake} from '../PropTypes';
 import cls from 'classnames';
-import { stepsClasses as css } from '@douyinfe/semi-foundation/steps/constants';
-import {defineComponent, useSlots, h, cloneVNode, isVNode, VNode, CSSProperties} from "vue";
-import {vuePropsMake} from "../PropTypes";
+import {stepsClasses as css} from '@douyinfe/semi-foundation/steps/constants';
+import {
+    cloneVNode,
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    isVNode,
+    PropType, useAttrs,
+    useSlots,
+    VNode
+} from "vue";
 import {noop} from "lodash";
 import {NavStepProps} from "./navStep";
-import {Direction} from "./basicSteps";
+import {Direction, Status} from "./basicSteps";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 export type Size = 'default' | 'small';
 export interface NavStepsProps {
@@ -20,19 +30,20 @@ export interface NavStepsProps {
     children?: VNode[];
     onChange?: (current: number) => void;
     "aria-label"?: string
+    status?: Status;
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<NavStepsProps> = {
     prefixCls: PropTypes.string,
     className: PropTypes.string,
     style: PropTypes.object,
     current: PropTypes.number,
     initial: PropTypes.number,
-    size: PropTypes.string,
-    children: PropTypes.node,
-    onChange: PropTypes.func,
+    children: PropTypes.node as PropType<NavStepsProps['children']>,
+    onChange: PropTypes.func as PropType<NavStepsProps['onChange']>,
     'aria-label': PropTypes.string,
-    direction: PropTypes.string,
+    direction: PropTypes.string as PropType<NavStepsProps['direction']>,
+    size: PropTypes.string as PropType<NavStepsProps['size']>,
 };
 const defaultProps = {
     prefixCls: css.PREFIX,
@@ -43,14 +54,15 @@ const defaultProps = {
     status: 'process',
     onChange: noop
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<NavStepsProps>(propTypes, defaultProps)
 const NavSteps = defineComponent<NavStepsProps>((props, {}) => {
     const slots = useSlots()
+    const attr = useAttrs()
 
 
     return () => {
 
-        const { size, current, initial, children, prefixCls, className, style, onChange } = props;
+        const { size, current, initial, children, prefixCls, className, style, onChange, ...rest } = props;
         const inner = () => {
             const filteredChildren = children.filter(c => isVNode(c)) as Array<VNode>;
             const total = filteredChildren.length;
@@ -80,14 +92,15 @@ const NavSteps = defineComponent<NavStepsProps>((props, {}) => {
         });
 
         return (
-          <div aria-label={props["aria-label"]} class={wrapperCls} style={style}>
+          <div aria-label={props["aria-label"]} class={wrapperCls} style={style} {...getDataAttr({...rest, ...attr})}>
               {inner()}
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'NavSteps'
 })
 
-NavSteps.props = vuePropsType
-NavSteps.name = 'NavSteps'
 
 export default NavSteps

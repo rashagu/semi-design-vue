@@ -40,7 +40,18 @@ import {
   ScrollData,
 } from './interface';
 import CheckboxGroup from '../checkbox/checkboxGroup';
-import {CSSProperties, defineComponent, Fragment, h, nextTick, reactive, ref, useSlots, watch} from "vue";
+import {
+  ComponentObjectPropsOptions,
+  CSSProperties,
+  defineComponent,
+  Fragment,
+  h,
+  nextTick, PropType,
+  reactive,
+  ref,
+  useSlots,
+  watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
@@ -51,7 +62,7 @@ export type {AutoSizerProps} from './autoSizer';
 const prefixcls = cssClasses.PREFIX;
 
 
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<TreeProps> = {
   blockNode: PropTypes.bool,
   className: PropTypes.string,
   showClear: PropTypes.bool,
@@ -68,16 +79,16 @@ const propTypes = {
   onChangeWithObject: PropTypes.bool,
   motion: PropTypes.bool,
   multiple: PropTypes.bool,
-  onChange: PropTypes.func,
-  onExpand: PropTypes.func,
-  onSearch: PropTypes.func,
-  onSelect: PropTypes.func,
-  onContextMenu: PropTypes.func,
-  onDoubleClick: PropTypes.func,
+  onChange: PropTypes.func as PropType<TreeProps['onChange']>,
+  onExpand: PropTypes.func as PropType<TreeProps['onExpand']>,
+  onSearch: PropTypes.func as PropType<TreeProps['onSearch']>,
+  onSelect: PropTypes.func as PropType<TreeProps['onSelect']>,
+  onContextMenu: PropTypes.func as PropType<TreeProps['onContextMenu']>,
+  onDoubleClick: PropTypes.func as PropType<TreeProps['onDoubleClick']>,
   searchClassName: PropTypes.string,
   searchPlaceholder: PropTypes.string,
   searchStyle: PropTypes.object,
-  selectedKey: PropTypes.string,
+  selectedKey: PropTypes.string as PropType<TreeProps['selectedKey']>,
   showFilteredOnly: PropTypes.bool,
   style: PropTypes.object,
   treeData: PropTypes.array,
@@ -86,30 +97,30 @@ const propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.object]),
   virtualize: PropTypes.object,
   autoExpandParent: PropTypes.bool,
-  expandAction: [String, Boolean],
+  expandAction: [String, Boolean] as PropType<TreeProps['expandAction']>,
   searchRender: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-  renderLabel: PropTypes.func,
-  renderFullLabel: PropTypes.func,
+  renderLabel: PropTypes.func as PropType<TreeProps['renderLabel']>,
+  renderFullLabel: PropTypes.func as PropType<TreeProps['renderFullLabel']>,
   leafOnly: PropTypes.bool,
   loadedKeys: PropTypes.array,
-  loadData: PropTypes.func,
-  onLoad: PropTypes.func,
+  loadData: PropTypes.func as PropType<TreeProps['loadData']>,
+  onLoad: PropTypes.func as PropType<TreeProps['onLoad']>,
   disableStrictly: PropTypes.bool,
   draggable: PropTypes.bool,
   autoExpandWhenDragEnter: PropTypes.bool,
   hideDraggingNode: PropTypes.bool,
-  renderDraggingNode: PropTypes.func,
-  onDragEnd: PropTypes.func,
-  onDragEnter: PropTypes.func,
-  onDragLeave: PropTypes.func,
-  onDragOver: PropTypes.func,
-  onDragStart: PropTypes.func,
-  onDrop: PropTypes.func,
+  renderDraggingNode: PropTypes.func as PropType<TreeProps['renderDraggingNode']>,
+  onDragEnd: PropTypes.func as PropType<TreeProps['onDragEnd']>,
+  onDragEnter: PropTypes.func as PropType<TreeProps['onDragEnter']>,
+  onDragLeave: PropTypes.func as PropType<TreeProps['onDragLeave']>,
+  onDragOver: PropTypes.func as PropType<TreeProps['onDragOver']>,
+  onDragStart: PropTypes.func as PropType<TreeProps['onDragStart']>,
+  onDrop: PropTypes.func as PropType<TreeProps['onDrop']>,
   labelEllipsis: PropTypes.bool,
-  checkRelation: PropTypes.string,
+  checkRelation: PropTypes.string as PropType<TreeProps['checkRelation']>,
   'aria-label': PropTypes.string,
   preventScroll: PropTypes.bool,
-  role: PropTypes.string,
+  role: PropTypes.string as PropType<TreeProps['role']>,
 };
 
 const defaultProps = {
@@ -173,7 +184,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
   const virtualizedListRef = ref()
 
 
-  const {adapter: adapterInject} = useBaseComponent<TreeProps>(props, state);
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<TreeProps>(props, state);
 
   function adapter_(): TreeAdapter {
     const filterAdapter: Pick<TreeAdapter, 'updateInputValue' | 'focusInput'> = {
@@ -207,8 +218,8 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
       notifyChange: value => {
         props.onChange && props.onChange(value);
       },
-      notifySearch: input => {
-        props.onSearch && props.onSearch(input);
+      notifySearch: (input: string, filteredExpandedKeys: string[]) => {
+        props.onSearch && props.onSearch(input, filteredExpandedKeys);
       },
       notifyRightClick: (e, node) => {
         props.onContextMenu && props.onContextMenu(e, node);
@@ -845,7 +856,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
           labelEllipsis: typeof labelEllipsis === 'undefined' ? virtualize : labelEllipsis,
         }}
       >
-        <div aria-label={props['aria-label']} class={wrapperCls} style={style}>
+        <div aria-label={props['aria-label']} class={wrapperCls} style={style} {...getDataAttr()}>
           {filterTreeNode ? renderInput() : null}
           <div class={listCls} {...ariaAttr}>
             {noData ? renderEmpty() : (multiple ?
@@ -859,10 +870,14 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
       </TreeContext.Provider>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Tree'
 })
 
-Tree.props = vuePropsType
-Tree.name = 'Tree'
+// @ts-ignore
+// Tree.props = vuePropsType
+// Tree.name = 'Tree'
 
 export default Tree
 

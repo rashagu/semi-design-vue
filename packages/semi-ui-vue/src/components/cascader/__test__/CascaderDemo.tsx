@@ -71,7 +71,6 @@ const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
   );
 });
 
-CascaderDemo.props = vuePropsType;
 
 export default CascaderDemo;
 export const ItemDdemo = defineComponent(() => {

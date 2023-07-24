@@ -13,7 +13,7 @@ export const vuePropsType = {
 const ToastDemo = defineComponent<ExampleProps>((props, {}) => {
   const slots = useSlots()
   const Toast = useToastHook()
-  Toast.info({
+  const id = Toast.info({
     content:<div class={"test_class1"}>useToastHook</div>
   })
   const opts = ref({
@@ -32,6 +32,8 @@ const ToastDemo = defineComponent<ExampleProps>((props, {}) => {
   const throttled = throttle(() => Toast.info(throttleOpts), 10000, {trailing: false});
 
   Toast.info(opts.value)
+
+  Toast.close(id)
 
 
 
@@ -85,8 +87,8 @@ const ToastDemo = defineComponent<ExampleProps>((props, {}) => {
   )
 })
 
-ToastDemo.props = vuePropsType
-ToastDemo.name = 'ToastDemo'
+// ToastDemo.props = vuePropsType
+// ToastDemo.name = 'ToastDemo'
 
 export default ToastDemo
 

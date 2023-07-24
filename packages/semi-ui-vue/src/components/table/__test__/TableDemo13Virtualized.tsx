@@ -119,7 +119,7 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
   };
 });
 
-TableDemo1.props = vuePropsType;
-TableDemo1.name = 'TableDemo1';
+// TableDemo1.props = vuePropsType;
+// TableDemo1.name = 'TableDemo1';
 
 export default TableDemo1;

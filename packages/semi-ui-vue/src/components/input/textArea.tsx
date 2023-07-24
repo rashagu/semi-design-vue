@@ -31,7 +31,8 @@ type OmitTextareaAttr =
   | 'onBlur'
   | 'onKeydown'
   | 'onKeypress'
-  | 'onKeyup';
+  | 'onKeyUp'
+  | 'onResize'
 
 export interface TextAreaProps extends Omit<TextareaHTMLAttributes, OmitTextareaAttr> {
   style?: CSSProperties;
@@ -271,9 +272,8 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
     _resizeListener && window.removeEventListener('resize', _resizeListener);
   })
 
-  watch([() => props.value, () => props.autosize,], (value, [prevValue, prevAutosize]) => {
-
-    if (props.value !== prevValue && props.autosize) {
+  watch([() => props.value, () => props.autosize, ()=>props.placeholder], (value, [prevValue, prevAutosize, prevPlaceholder]) => {
+    if ((props.value !== prevValue || props.placeholder !== prevPlaceholder) && props.autosize) {
       foundation.resizeTextarea();
     }
   })
@@ -438,6 +438,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
 })
 
 
+// @ts-ignore
 TextArea.props = VuePropsType
 
 export default TextArea

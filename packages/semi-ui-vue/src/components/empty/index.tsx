@@ -1,9 +1,22 @@
-import {defineComponent, ref, h, Fragment, CSSProperties, VNode, reactive, onMounted, onUnmounted, useSlots} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  CSSProperties,
+  VNode,
+  reactive,
+  onMounted,
+  onUnmounted,
+  useSlots,
+  useAttrs
+} from 'vue'
 import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/empty/constants';
 import '@douyinfe/semi-foundation/empty/empty.scss';
 import {Title} from '../typography';
 import { ArrayElement } from '../_base/base';
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -43,6 +56,7 @@ export const vuePropsType = {
 
 const Empty = defineComponent<EmptyProps>((props, ) => {
 
+  const attr = useAttrs()
   let body: any;
   let observer: MutationObserver;
 
@@ -83,7 +97,7 @@ const Empty = defineComponent<EmptyProps>((props, ) => {
   const slots = useSlots()
   return () => {
     const children = slots.default?slots.default():null
-    const { className, image, description, style, title, imageStyle, layout, darkModeImage } = props;
+    const { className, image, description, style, title, imageStyle, layout, darkModeImage, ...rest } = props;
 
     const alt = typeof description === 'string' ? description : 'empty';
     const imgSrc = state.mode && darkModeImage ? darkModeImage : image;
@@ -115,7 +129,7 @@ const Empty = defineComponent<EmptyProps>((props, ) => {
         style: { fontWeight: 400 },
       };
     return (
-      <div class={wrapperCls} style={style}>
+      <div class={wrapperCls} style={style}  {...getDataAttr({...rest, ...attr})}>
         <div class={`${prefixCls}-image`} style={imageStyle} >
           {imageNode}
         </div>
@@ -133,6 +147,7 @@ const Empty = defineComponent<EmptyProps>((props, ) => {
   }
 })
 
+// @ts-ignore
 Empty.props = vuePropsType
 
 export default Empty

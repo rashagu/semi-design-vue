@@ -1,4 +1,13 @@
-import {defineComponent, ref, h, Fragment, CSSProperties, HTMLAttributes} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  CSSProperties,
+  HTMLAttributes,
+  ComponentObjectPropsOptions,
+  PropType
+} from 'vue'
 import cls from 'classnames';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/typography/constants';
 import Base from './base';
@@ -34,7 +43,7 @@ export interface ParagraphProps extends Omit<HTMLAttributes, OmitParagraphProps>
 const prefixCls = cssClasses.PREFIX;
 
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<ParagraphProps> = {
   copyable: {
     type: [Object, Boolean],
     default: false,
@@ -69,15 +78,15 @@ export const vuePropsType = {
     default: false,
   },
   type: {
-    type: String,
+    type: String as PropType<ParagraphProps['type']>,
     default: 'primary',
   },
   size: {
-    type: String,
+    type: String as PropType<ParagraphProps['size']>,
     default: 'normal',
   },
   spacing: {
-    type: String,
+    type: String as PropType<ParagraphProps['spacing']>,
     default: 'normal',
   },
   style: {
@@ -96,9 +105,11 @@ const paragraph = defineComponent<ParagraphProps>((props, {slots}) => {
   const paragraphCls = cls(className, `${prefixCls}-paragraph`);
   return ()=><Base children={slots.default?.()} component_={'p'} {...props} className={paragraphCls} >
   </Base>;
+}, {
+  props: vuePropsType,
+  name: 'Paragraph'
 })
 
-paragraph.props = vuePropsType
 
 export default paragraph
 

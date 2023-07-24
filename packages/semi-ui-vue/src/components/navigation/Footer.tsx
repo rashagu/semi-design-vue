@@ -5,25 +5,28 @@ import {cssClasses, strings} from '@douyinfe/semi-foundation/navigation/constant
 // @ts-ignore
 import CollapseButton from './CollapseButton';
 import '@douyinfe/semi-foundation/navigation/navigation.scss';
+import { noop } from 'lodash';
 import {BaseProps} from '../_base/baseComponent';
-import {defineComponent, h, isVNode, VNode} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, h, isVNode, PropType, VNode} from "vue";
 import {useNavContext} from "./nav-context/Consumer";
 import {VueJsxNode} from "../interface";
 
 export interface NavFooterProps extends BaseProps {
   collapseButton?: VueJsxNode;
   collapseText?: (collapsed?: boolean) => VueJsxNode;
+  onClick?: (event: MouseEvent) => void
 }
 
-export const vuePropsType = {
-  children: PropTypes.node,
+export const vuePropsType:ComponentObjectPropsOptions<NavFooterProps> = {
+  // children: PropTypes.node,
   style: PropTypes.object,
   className: PropTypes.string,
   collapseButton: {
-    type: PropTypes.any,
+    type: PropTypes.any as PropType<NavFooterProps['collapseButton']>,
     default: false
   },
-  collapseText: PropTypes.func,
+  collapseText: PropTypes.func as PropType<NavFooterProps['collapseText']>,
+  onClick: {type: PropTypes.func as PropType<NavFooterProps['onClick']>, default: noop},
 }
 const NavFooter = defineComponent<NavFooterProps>((props, {slots}) => {
 
@@ -54,7 +57,7 @@ const NavFooter = defineComponent<NavFooterProps>((props, {slots}) => {
 
 
   return () => {
-    const {style, className, collapseButton} = props;
+    const {style, className, collapseButton, onClick} = props;
     let children = slots.default?.();
     const {isCollapsed, mode} = context.value;
 
@@ -67,13 +70,16 @@ const NavFooter = defineComponent<NavFooterProps>((props, {slots}) => {
     });
 
     return (
-      <div class={wrapCls} style={style}>
+      <div class={wrapCls} style={style} onClick={onClick}>
         {children}
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'NavFooter'
 })
 
-NavFooter.props = vuePropsType
-NavFooter.name = "NavFooter"
+
+
 export default NavFooter

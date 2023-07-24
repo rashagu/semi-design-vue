@@ -54,10 +54,10 @@ const SwitchDemo = defineComponent<SwitchDemoProps>((props, {}) => {
       </div>
     </div>
   )
+}, {
+  name: 'SwitchDemo'
 })
 
-SwitchDemo.props = vuePropsType
-SwitchDemo.name = 'SwitchDemo'
 
 export default SwitchDemo
 

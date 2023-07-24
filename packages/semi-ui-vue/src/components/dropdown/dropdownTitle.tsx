@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, onActivated, Fragment, inject} from 'vue'
+import {defineComponent, ref, h, onActivated, Fragment, inject, ComponentObjectPropsOptions, PropType} from 'vue'
 
 import { cssClasses } from '@douyinfe/semi-foundation/dropdown/constants';
 import cls from 'classnames';
@@ -10,8 +10,9 @@ const prefixCls = cssClasses.PREFIX;
 export type DropdownTitleProps = BaseProps;
 
 
-export const vuePropsType = {
-  name: String
+export const vuePropsType:ComponentObjectPropsOptions<DropdownTitleProps> = {
+  style: [Object, String] as PropType<DropdownTitleProps['style']>,
+  className: String,
 }
 const DropdownTitle = defineComponent<DropdownTitleProps>((props, {slots}) => {
   const { className, style,  } = props;
@@ -25,9 +26,11 @@ const DropdownTitle = defineComponent<DropdownTitleProps>((props, {slots}) => {
       {slots.default?slots.default():null}
     </div>
   );
+}, {
+  props: vuePropsType,
+  name: 'DropdownTitle'
 })
 
-DropdownTitle.props = vuePropsType
 
 export default DropdownTitle
 

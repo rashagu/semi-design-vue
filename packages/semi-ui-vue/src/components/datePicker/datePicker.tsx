@@ -1,4 +1,16 @@
-import {defineComponent, h, nextTick, onMounted, onUnmounted, reactive, ref, useSlots, watch} from 'vue'
+import {
+  defineComponent,
+  h,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  PropType,
+  reactive,
+  ref,
+  useSlots,
+  VNode,
+  watch
+} from 'vue'
 import classnames from 'classnames';
 import {get, isDate, isEqual, isFunction, noop, stubFalse, pick} from 'lodash';
 import type {
@@ -11,6 +23,8 @@ import type {
   Type
 } from '@douyinfe/semi-foundation/datePicker/foundation';
 import DatePickerFoundation from '@douyinfe/semi-foundation/datePicker/foundation';
+
+import MonthGridFoundation from '@douyinfe/semi-foundation/datePicker/monthsGridFoundation';
 
 import {cssClasses, numbers, strings} from '@douyinfe/semi-foundation/datePicker/constants';
 import {numbers as popoverNumbers} from '@douyinfe/semi-foundation/popover/constants';
@@ -35,6 +49,7 @@ import * as PropTypes from '../PropTypes'
 import {vuePropsMake} from '../PropTypes'
 import {VueJsxNode} from "../interface";
 import {useConfigContext} from "../configProvider/context/Consumer";
+import {ComponentObjectPropsOptions} from "vue";
 
 
 export interface DatePickerProps extends DatePickerFoundationProps {
@@ -72,20 +87,21 @@ export interface DatePickerProps extends DatePickerFoundationProps {
   dateFnsLocale?: Locale['dateFnsLocale'];
   yearAndMonthOpts?: ScrollItemProps<any>
   dropdownMargin?: PopoverProps['margin']
+  id?: string
 }
 
 export type DatePickerState = DatePickerFoundationState;
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<DatePickerProps> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,
   'aria-labelledby': PropTypes.string,
   'aria-required': PropTypes.bool,
   borderless: PropTypes.bool,
-  type: String,
-  size: String,
-  density: String,
+  type: String as PropType<DatePickerProps['type']>,
+  size: String as PropType<DatePickerProps['size']>,
+  density: String as PropType<DatePickerProps['density']>,
   defaultValue: [PropTypes.string, PropTypes.number, PropTypes.object, PropTypes.array],
   value: [PropTypes.string, PropTypes.number, PropTypes.object, PropTypes.array],
   defaultPickerValue: [
@@ -94,7 +110,7 @@ const propTypes = {
     PropTypes.object,
     PropTypes.array,
   ],
-  disabledTime: PropTypes.func,
+  disabledTime: PropTypes.func as PropType<DatePickerProps['disabledTime']>,
   disabledTimePicker: PropTypes.bool,
   hideDisabledOptions: PropTypes.bool,
   format: PropTypes.string,
@@ -103,44 +119,44 @@ const propTypes = {
   max: PropTypes.number, // only work when multiple is true
   placeholder: [PropTypes.string, PropTypes.array],
   presets: PropTypes.array,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func as PropType<DatePickerProps['onChange']>,
   onChangeWithDateFirst: PropTypes.bool,
-  weekStartsOn: PropTypes.number,
-  disabledDate: PropTypes.func,
+  weekStartsOn: PropTypes.number as PropType<DatePickerProps['weekStartsOn']>,
+  disabledDate: PropTypes.func as PropType<DatePickerProps['disabledDate']>,
   timePickerOpts: PropTypes.object, // When dateTime, dateTimeRange, pass through the props to timePicker
   showClear: PropTypes.bool, // Whether to show the clear button
-  onOpenChange: PropTypes.func,
+  onOpenChange: PropTypes.func as PropType<DatePickerProps['onOpenChange']>,
   open: PropTypes.bool,
   defaultOpen: PropTypes.bool,
-  motion: [PropTypes.bool, PropTypes.func, PropTypes.object],
+  motion: [PropTypes.bool, PropTypes.func, PropTypes.object] as PropType<DatePickerProps['motion']>,
   className: PropTypes.string,
   prefixCls: PropTypes.string,
   prefix: PropTypes.node,
   insetLabel: PropTypes.node,
   insetLabelId: PropTypes.string,
   zIndex: PropTypes.number,
-  position: String,
-  getPopupContainer: PropTypes.func,
-  onCancel: PropTypes.func,
-  onConfirm: PropTypes.func,
+  position: String as PropType<DatePickerProps['position']>,
+  getPopupContainer: PropTypes.func as PropType<DatePickerProps['getPopupContainer']>,
+  onCancel: PropTypes.func as PropType<DatePickerProps['onCancel']>,
+  onConfirm: PropTypes.func as PropType<DatePickerProps['onConfirm']>,
   needConfirm: PropTypes.bool,
   inputStyle: PropTypes.object,
   timeZone: [PropTypes.string, PropTypes.number],
-  triggerRender: PropTypes.func,
+  triggerRender: PropTypes.func as PropType<DatePickerProps['triggerRender']>,
   stopPropagation: [PropTypes.bool, PropTypes.string],
   autoAdjustOverflow: PropTypes.bool,
   onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
+  onFocus: PropTypes.func as PropType<DatePickerProps['onFocus']>,
   onClear: PropTypes.func,
   style: PropTypes.object,
   autoFocus: PropTypes.bool,
   inputReadOnly: PropTypes.bool, // Text box can be entered
-  validateStatus: String,
-  renderDate: PropTypes.func,
-  renderFullDate: PropTypes.func,
+  validateStatus: String as PropType<DatePickerProps['validateStatus']>,
+  renderDate: PropTypes.func as PropType<DatePickerProps['renderDate']>,
+  renderFullDate: PropTypes.func as PropType<DatePickerProps['renderFullDate']>,
   spacing: PropTypes.number,
-  startDateOffset: PropTypes.func,
-  endDateOffset: PropTypes.func,
+  startDateOffset: PropTypes.func as PropType<DatePickerProps['startDateOffset']>,
+  endDateOffset: PropTypes.func as PropType<DatePickerProps['endDateOffset']>,
   autoSwitchDate: PropTypes.bool,
   dropdownClassName: PropTypes.string,
   dropdownStyle: PropTypes.object,
@@ -150,7 +166,7 @@ const propTypes = {
   // Support synchronous switching of months
   syncSwitchMonth: PropTypes.bool,
   // Callback function for panel date switching
-  onPanelChange: PropTypes.func,
+  onPanelChange: PropTypes.func as PropType<DatePickerProps['onPanelChange']>,
   rangeSeparator: PropTypes.string,
   preventScroll: PropTypes.bool,
   yearAndMonthOpts: PropTypes.object,
@@ -159,10 +175,10 @@ const propTypes = {
 
 
   clearIcon: PropTypes.node,
-  presetPosition: PropTypes.string,
+  presetPosition: PropTypes.string as PropType<DatePickerProps['presetPosition']>,
   dropdownMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
-  id: PropTypes.string,
-  onClickOutSide: PropTypes.func,
+  id: PropTypes.string as PropType<DatePickerProps['id']>,
+  onClickOutSide: PropTypes.func as PropType<DatePickerProps['onClickOutSide']>,
 };
 
 const defaultProps = {
@@ -204,7 +220,7 @@ const defaultProps = {
   insetInput: false,
   onClickOutSide: noop,
 };
-export const vuePropsTypeDatePickerProps = vuePropsMake(propTypes, defaultProps)
+export const vuePropsTypeDatePickerProps = vuePropsMake<DatePickerProps>(propTypes, defaultProps)
 
 const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   const slots = useSlots()
@@ -216,7 +232,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     isRange: false,
     inputValue: null, // Staging input values
     value: [], // The currently selected date, each date is a Date object
-    cachedSelectedValue: null, // Save last selected date, maybe include null
+    cachedSelectedValue: [], // Save last selected date, maybe include null
     prevTimeZone: null,
     rangeInputFocus: undefined, // Optional'rangeStart ',' rangeEnd ', false
     autofocus: props.autoFocus || (isRangeType(props.type, props.triggerRender) && (props.open || props.defaultOpen)),
@@ -236,7 +252,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     rangeEnd: false
   });
 
-  const {adapter: adapterInject, isControlled} = useBaseComponent<DatePickerProps>(props, state)
+  const {adapter: adapterInject, isControlled, getDataAttr} = useBaseComponent<DatePickerProps>(props, state)
 
   function adapter_(): DatePickerAdapter {
     return {
@@ -491,7 +507,9 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       triggerRender,
       insetInput,
       presetPosition,
-      yearAndMonthOpts
+      yearAndMonthOpts,
+      startYear,
+      endYear
     } = props;
     const { cachedSelectedValue, rangeInputFocus } = state;
 
@@ -535,12 +553,14 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
         renderQuickControls={renderQuickControls()}
         renderDateInput={renderDateInput()}
         yearAndMonthOpts={yearAndMonthOpts}
+        startYear={startYear}
+        endYear={endYear}
       />
     );
   }
 
   function renderQuickControls() {
-    const { presets, type, presetPosition, insetInput }  = props;
+    const { presets, type, presetPosition, insetInput, locale  }  = props;
     return (
       <QuickControl
         type={type}
@@ -548,6 +568,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
         insetInput={insetInput}
         presetPosition={presetPosition}
         onPresetClick={(item, e) => foundation.handlePresetClick(item, e)}
+        locale={locale}
       />
     );
   }
@@ -571,7 +592,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       defaultPickerValue
     };
 
-    return insetInput ? <DateInput {...props_} insetInput={insetInput} /> : null;
+    return insetInput ? <DateInput {...props_} insetInput={insetInput}/> : null;
   }
 
 
@@ -597,7 +618,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     }
   };
   const handleInsetDateFocus = (e: FocusEvent, rangeType: 'rangeStart' | 'rangeEnd') => {
-    const monthGridFoundation = monthGrid.value.foundation;
+    const monthGridFoundation = get(this, 'monthGrid.current.foundation') as MonthGridFoundation;
     if (monthGridFoundation) {
       monthGridFoundation.showDatePanel(strings.PANEL_TYPE_LEFT);
       monthGridFoundation.showDatePanel(strings.PANEL_TYPE_RIGHT);
@@ -606,7 +627,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   }
 
   const handleInsetTimeFocus = () => {
-    const monthGridFoundation = monthGrid.value.foundation;
+    const monthGridFoundation = get(this, 'monthGrid.current.foundation') as MonthGridFoundation;
     if (monthGridFoundation) {
       monthGridFoundation.showTimePicker(strings.PANEL_TYPE_LEFT);
       monthGridFoundation.showTimePicker(strings.PANEL_TYPE_RIGHT);
@@ -654,8 +675,9 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     });
     const phText = placeholder || locale.placeholder[type]; // i18n
     // These values should be passed to triggerRender, do not delete any key if it is not necessary
-    const props_ = {
+    const props_:DateInputProps = {
       ...extraProps,
+      showClearIgnoreDisabled: Boolean(insetInput),
       placeholder: phText,
       clearIcon,
       disabled: inputDisabled,
@@ -668,7 +690,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       block: true,
       inputStyle,
       showClear,
-      insetLabel,
+      insetLabel: insetLabel as VNode,
       insetLabelId,
       type,
       format,
@@ -679,7 +701,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       onBlur: handleInputBlur,
       onFocus: handleInputFocus,
       onClear: handleInputClear,
-      prefix,
+      prefix: prefix as VNode,
       size,
       autofocus: state.autofocus,
       dateFnsLocale,
@@ -766,7 +788,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   };
 
   const renderYearMonthPanel = (locale: Locale['DatePicker'], localeCode: string) => {
-    const { density, presetPosition, yearAndMonthOpts, type } = props;
+    const { density, presetPosition, yearAndMonthOpts, type, startYear, endYear } = props;
 
     const date = state.value[0];
     const year = { left: 0, right: 0 };
@@ -801,6 +823,8 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
         renderDateInput={renderDateInput()}
         type={type}
         yearAndMonthOpts={yearAndMonthOpts}
+        startYear={startYear}
+        endYear={endYear}
       />
     );
   };
@@ -848,7 +872,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   };
 
   return () => {
-    const { style, className, prefixCls, type } = props;
+    const { style, className, prefixCls, type, ...rest } = props;
     const outerProps = {
       style,
       class: classnames(className, { [prefixCls]: true }),
@@ -858,6 +882,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
       'aria-labelledby': props['aria-labelledby'],
       'aria-describedby': props['aria-describedby'],
       'aria-required': props['aria-required'],
+      ...getDataAttr()
     };
 
 
@@ -871,10 +896,11 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     // @ts-ignore
     return <div {...outerProps}>{wrappedInner}</div>;
   }
+}, {
+  props: vuePropsTypeDatePickerProps,
+  name: "DatePicker"
 })
 
-DatePicker.props = vuePropsTypeDatePickerProps
-DatePicker.name = "DatePicker"
 
 export default DatePicker
 

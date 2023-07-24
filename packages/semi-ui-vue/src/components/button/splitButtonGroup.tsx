@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, onActivated, Fragment, StyleValue} from 'vue'
+import {defineComponent, ref, h, onActivated, Fragment, StyleValue, ComponentObjectPropsOptions} from 'vue'
 import classNames from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/button/constants';
 import '@douyinfe/semi-foundation/button/button.scss';
@@ -10,7 +10,7 @@ const prefixCls = cssClasses.PREFIX;
 // eslint-disable-next-line
 export interface SplitButtonGroupProps extends BaseProps {}
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<SplitButtonGroupProps> = {
   style: Object,
   className: String,
 }
@@ -22,9 +22,11 @@ const SplitButtonGroup = defineComponent<SplitButtonGroupProps>((props, {slots})
       {slots.default?slots.default():null}
     </div>
   );
+}, {
+  props: vuePropsType,
+  name: 'SplitButtonGroup'
 })
 
-SplitButtonGroup.props = vuePropsType
 
 export default SplitButtonGroup
 

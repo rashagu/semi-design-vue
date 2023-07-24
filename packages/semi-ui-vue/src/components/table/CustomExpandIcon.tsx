@@ -6,7 +6,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/table/constants';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 
 import CSSAnimation from "../_cssAnimation";
-import {cloneVNode, computed, defineComponent, h, isVNode, useSlots} from "vue";
+import {cloneVNode, ComponentObjectPropsOptions, computed, defineComponent, h, isVNode, PropType, useSlots} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 
@@ -25,12 +25,12 @@ export interface CustomExpandIconProps {
  * render expand icon
  */
 
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<CustomExpandIconProps> = {
     expanded: PropTypes.bool,
-    componentType: String,
-    onClick: PropTypes.func,
-    onMouseEnter: PropTypes.func,
-    onMouseLeave: PropTypes.func,
+    componentType: String as PropType<CustomExpandIconProps['componentType']>,
+    onClick: PropTypes.func as PropType<CustomExpandIconProps['onClick']>,
+    onMouseEnter: PropTypes.func as PropType<CustomExpandIconProps['onMouseEnter']>,
+    onMouseLeave: PropTypes.func as PropType<CustomExpandIconProps['onMouseLeave']>,
     expandIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     prefixCls: PropTypes.string,
     motion: PropTypes.bool,
@@ -108,9 +108,10 @@ const CustomExpandIcon = defineComponent<CustomExpandIconProps>((props, {}) => {
         </span>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'CustomExpandIcon'
 });
 
-CustomExpandIcon.props = vuePropsType;
-CustomExpandIcon.name = "CustomExpandIcon";
 
 export default CustomExpandIcon;

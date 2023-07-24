@@ -21,7 +21,7 @@ interface SortableListProps {
   onSortEnd: any,
   useDragHandle: any,
   helperClass: any,
-  axis: any,
+  axis?: any,
 }
 
 export const vuePropsType = {
@@ -100,10 +100,12 @@ const SortableList = defineComponent<SortableListProps>((props, {}) => {
     );
 
   }
+}, {
+  props: vuePropsType,
+  name: 'SortableList'
 })
 
-SortableList.props = vuePropsType
-SortableList.name = 'SortableList'
+
 
 export default SortableList
 

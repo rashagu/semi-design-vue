@@ -22,8 +22,9 @@ const TreeAllDemo = defineComponent<TreeAllDemoProps>((props, {}) => {
   )
 })
 
-TreeAllDemo.props = vuePropsType
-TreeAllDemo.name = 'TreeAllDemo'
+// @ts-ignore
+// TreeAllDemo.props = vuePropsType
+// TreeAllDemo.name = 'TreeAllDemo'
 
 export default TreeAllDemo
 

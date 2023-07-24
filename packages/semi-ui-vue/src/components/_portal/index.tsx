@@ -9,13 +9,14 @@ import {
   onMounted,
   watch,
   onUnmounted,
-  Teleport, reactive
+  Teleport, reactive, PropType
 } from 'vue'
 import { BASE_CLASS_PREFIX } from '@douyinfe/semi-foundation/base/constants';
 
 import classnames from 'classnames';
 import '@douyinfe/semi-foundation/_portal/portal.scss';
 import {useConfigContext} from "../configProvider/context/Consumer";
+import type {ComponentObjectPropsOptions} from "vue";
 
 export interface PortalProps {
   style?: CSSProperties;
@@ -31,17 +32,15 @@ export interface PortalState {
 
 const defaultGetContainer = () => document.body;
 
-export const vuePropsType = {
-  name: String,
-  children: Object,
-  style: [Object, String],
+export const vuePropsType:ComponentObjectPropsOptions<PortalProps> = {
+  style: [Object, String] as PropType<PortalProps['style']>,
   prefixCls: {
     type:String,
     default:`${BASE_CLASS_PREFIX}-portal`
   },
   className: String,
-  getPopupContainer: Function,
-  didUpdate: Function,
+  getPopupContainer: Function as PropType<PortalProps['getPopupContainer']>,
+  didUpdate: Function as PropType<PortalProps['didUpdate']>,
 }
 
 const Index = defineComponent<PortalProps>((props, {slots}) => {
@@ -119,9 +118,11 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
     }
     return null;
   }
+}, {
+  props: vuePropsType,
+  name: 'Portal'
 })
 
-Index.props = vuePropsType
-Index.name = 'Portal'
+
 export default Index
 

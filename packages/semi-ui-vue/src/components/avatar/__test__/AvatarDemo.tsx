@@ -93,6 +93,7 @@ const AvatarDemo = defineComponent<ExampleProps>((props, {slots}) => {
   )
 })
 
+// @ts-ignore
 AvatarDemo.props = vuePropsType
 
 export default AvatarDemo

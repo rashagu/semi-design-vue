@@ -13,12 +13,13 @@ import SideSheetFoundation, {
 import '@douyinfe/semi-foundation/sideSheet/sideSheet.scss';
 import CSSAnimation from '../_cssAnimation';
 import {
+  ComponentObjectPropsOptions,
   CSSProperties,
   defineComponent,
   Fragment,
   h,
   onBeforeUnmount,
-  onMounted,
+  onMounted, PropType,
   reactive,
   useSlots,
   VNode,
@@ -49,28 +50,28 @@ export interface SideSheetReactProps extends SideSheetProps {
 
 export type { SideSheetState };
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<SideSheetProps> = {
   bodyStyle: PropTypes.object,
   headerStyle: PropTypes.object,
   children: PropTypes.node,
   className: PropTypes.string,
   closable: PropTypes.bool,
   disableScroll: PropTypes.bool,
-  getPopupContainer: PropTypes.func,
+  getPopupContainer: PropTypes.func as PropType<SideSheetProps['getPopupContainer']>,
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   mask: PropTypes.bool,
   maskClosable: PropTypes.bool,
   maskStyle: PropTypes.object,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
-  onCancel: PropTypes.func,
-  placement: PropTypes.string,
-  size: PropTypes.string,
+  onCancel: PropTypes.func as PropType<SideSheetProps['onCancel']>,
+  placement: PropTypes.string as PropType<SideSheetProps['placement']>,
+  size: PropTypes.string as PropType<SideSheetProps['size']>,
   style: PropTypes.object,
   title: PropTypes.node,
   visible: PropTypes.bool,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   zIndex: PropTypes.number,
-  afterVisibleChange: PropTypes.func,
+  afterVisibleChange: PropTypes.func as PropType<SideSheetProps['afterVisibleChange']>,
   closeOnEsc: PropTypes.bool,
   footer: PropTypes.node,
   keepDOM: PropTypes.bool,
@@ -92,7 +93,7 @@ const defaultProps: SideSheetReactProps = {
   afterVisibleChange: noop,
   keepDOM: false,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<SideSheetProps>(propTypes, defaultProps);
 const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
   const slots = useSlots();
 
@@ -242,6 +243,7 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
       ...props_,
       visible,
       motion: false,
+      size,
       className: classList,
       width: sheetWidth,
       height: sheetHeight,
@@ -308,9 +310,10 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
       </Portal>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'SideSheet'
 });
 
-SideSheet.props = vuePropsType;
-SideSheet.name = 'SideSheet';
 
 export default SideSheet;

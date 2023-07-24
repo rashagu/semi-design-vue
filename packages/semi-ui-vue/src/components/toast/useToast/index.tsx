@@ -1,7 +1,8 @@
 import getUuid from '@douyinfe/semi-foundation/utils/uuid';
 import HookToast from './HookToast';
 import { ToastInstance, ToastProps } from '@douyinfe/semi-foundation/toast/toastFoundation';
-import {h, Fragment, ref, Ref, VNode, watch} from "vue";
+import {h, Fragment, ref, Ref, VNode, watch, shallowRef} from "vue";
+import { noop } from "lodash";
 
 // const ref = null;
 // TODO: toast larger than N bars, automatic folding, allowing expansion, N configurable
@@ -41,7 +42,7 @@ type ToastFuncType = {
 
 export default function useToast():[ToastFuncType, Ref<VNode>] {
     const [elements, patchElement] = usePatchElement();
-    const toastRef = new Map<string, { close: () => void } & any>();
+  const toastRef = shallowRef(new Map<string, { close: () => void }>());
 
     const addToast = (config: ToastProps) => {
         const id = getUuid('semi_toast_');
@@ -51,15 +52,17 @@ export default function useToast():[ToastFuncType, Ref<VNode>] {
         };
         // eslint-disable-next-line prefer-const
         let closeFunc: ReturnType<typeof patchElement>;
-        const ref = (ele: { close: () => void } & any) => {
-            toastRef.set(id, ele);
-        };
-        const toast = (
+
+      const toast = (
             <HookToast
                 {...mergeConfig}
                 key={id}
                 afterClose={instanceId => closeFunc(instanceId)}
-                ref={ref}
+                // TODO
+              // @ts-ignore
+                ref={(data: { close: () => void }) => {
+                  toastRef.value.set(id, { close: data?.close ?? noop });
+                }}
             />
         );
         closeFunc = patchElement(toast, { ...mergeConfig });
@@ -67,7 +70,7 @@ export default function useToast():[ToastFuncType, Ref<VNode>] {
     };
 
     const removeElement = (id: string) => {
-        const ele = toastRef.get(id);
+        const ele = toastRef.value.get(id);
         ele && ele.close();
     };
 

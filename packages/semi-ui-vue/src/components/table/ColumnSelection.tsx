@@ -7,7 +7,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/table/constants';
 import TableSelectionCellFoundation, { TableSelectionCellAdapter, TableSelectionCellEvent } from '@douyinfe/semi-foundation/table/tableSelectionCellFoundation';
 
 import { Checkbox, CheckboxEvent, CheckboxProps } from '../checkbox';
-import {defineComponent, h, reactive, useSlots} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, h, PropType, reactive, useSlots} from "vue";
 import {AriaAttributes} from "../AriaAttributes";
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
@@ -30,11 +30,11 @@ export interface TableSelectionCellProps {
  * render selection cell
  */
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TableSelectionCellProps> = {
     columnTitle: PropTypes.string,
-    getCheckboxProps: PropTypes.func,
+    getCheckboxProps: PropTypes.func as PropType<TableSelectionCellProps['getCheckboxProps']>,
     type: PropTypes.string,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func as PropType<TableSelectionCellProps['onChange']>,
     selected: PropTypes.bool,
     disabled: PropTypes.bool,
     indeterminate: PropTypes.bool,
@@ -92,9 +92,10 @@ const TableSelectionCell = defineComponent<TableSelectionCellProps>((props, {}) 
             </span>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'TableSelectionCell'
 });
 
-TableSelectionCell.props = vuePropsType;
-TableSelectionCell.name = "TableSelectionCell";
 
 export default TableSelectionCell;

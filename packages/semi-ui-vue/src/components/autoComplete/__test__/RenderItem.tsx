@@ -71,6 +71,7 @@ const RenderItem = defineComponent<ExampleProps>((props, {slots}) => {
   )
 })
 
+// @ts-ignore
 RenderItem.props = vuePropsType
 
 export default RenderItem

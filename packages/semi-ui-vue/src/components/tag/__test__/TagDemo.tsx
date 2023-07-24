@@ -106,6 +106,7 @@ const TagDemo = defineComponent<ExampleProps>((props, {slots}) => {
   )
 })
 
+// @ts-ignore
 TagDemo.props = vuePropsType
 
 export default TagDemo

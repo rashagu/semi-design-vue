@@ -7,7 +7,7 @@ import { shouldShowEllipsisTitle } from '@douyinfe/semi-foundation/table/utils';
 
 import TableHeaderRow from './TableHeaderRow';
 import { Fixed, TableComponents, OnHeaderRow } from './interface';
-import {defineComponent, h, reactive, useSlots} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, h, PropType, reactive, useSlots} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import {TableSelectionCellProps} from "./ColumnSelection";
@@ -112,6 +112,7 @@ export interface TableHeaderProps extends BaseProps {
     onHeaderRow?: OnHeaderRow<any>;
     prefixCls?: string;
     selectedRowKeysSet: Set<any>
+    columnManager?: any
 }
 
 
@@ -119,14 +120,14 @@ export interface TableHeaderProps extends BaseProps {
  * Render the header of the table header, and control the merging of the columns of the header
  */
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TableHeaderProps> = {
     ...BodyPropTypes,
-    components: PropTypes.any,
+    components: PropTypes.any as PropType<TableHeaderProps['components']>,
     columns: PropTypes.array,
-    columnManager: PropTypes.object,
+    columnManager: PropTypes.object as PropType<TableHeaderProps['columnManager']>,
     prefixCls: PropTypes.string,
-    onHeaderRow: PropTypes.func,
-    onDidUpdate: PropTypes.func,
+    onHeaderRow: PropTypes.func as PropType<TableHeaderProps['onHeaderRow']>,
+    onDidUpdate: PropTypes.func as PropType<TableHeaderProps['onDidUpdate']>,
     fixed: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     selectedRowKeysSet: PropTypes.object,
 };
@@ -176,10 +177,11 @@ const TableHeader = defineComponent<TableHeaderProps>((props, {}) => {
           </HeaderWrapper>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'TableHeader'
 });
 
-TableHeader.props = vuePropsType;
-TableHeader.name = "TableHeader";
 
 export default TableHeader;
 

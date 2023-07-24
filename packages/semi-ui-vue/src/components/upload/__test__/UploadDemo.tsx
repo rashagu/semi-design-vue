@@ -43,12 +43,28 @@ const UploadDemo = defineComponent<UploadDemoProps>((props, {}) => {
         </Button>
       </Upload>
 
-      <FileCard />
+      <FileCard
+        key={''}
+        disabled={false}
+        listType={"picture"}
+        name={''}
+        onPreviewClick={() => {
+        }}
+        onRemove={() => {
+        }}
+        onReplace={() => {
+        }}
+        onRetry={() => {
+        }}
+        size={'small'}
+        status={'success'}
+        uid={''}
+      />
     </div>
   );
 });
 
-UploadDemo.props = vuePropsType;
-UploadDemo.name = 'UploadDemo';
+// UploadDemo.props = vuePropsType;
+// UploadDemo.name = 'UploadDemo';
 
 export default UploadDemo;

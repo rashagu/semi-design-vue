@@ -2,7 +2,17 @@ import { isEqual } from 'lodash';
 import TreeContext from './treeContext';
 import Collapse from './collapse';
 import { FlattenNode, NodeListProps, NodeListState, TransitionNodes } from './interface';
-import {CSSProperties, defineComponent, h, reactive, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    PropType,
+    reactive,
+    useSlots,
+    VNode,
+    watch
+} from "vue";
 import {VueJsxNode} from "../interface";
 
 const getTreeNodeKey = (treeNode: FlattenNode) => {
@@ -12,14 +22,14 @@ const getTreeNodeKey = (treeNode: FlattenNode) => {
 };
 
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<NodeListProps> = {
     flattenNodes: Array,
     motionKeys: Object,
     motionType: String,
     flattenList: Array,
     searchTargetIsDeep: Boolean,
-    renderTreeNode: Function,
-    onMotionEnd: Function
+    renderTreeNode: Function as PropType<NodeListProps['renderTreeNode']>,
+    onMotionEnd: Function as PropType<NodeListProps['onMotionEnd']>,
 }
 const NodeList = defineComponent<NodeListProps>((props, {}) => {
     const slots = useSlots()
@@ -102,12 +112,14 @@ const NodeList = defineComponent<NodeListProps>((props, {}) => {
             }
             return renderTreeNode(treeNode as FlattenNode);
         });
-        return options;
+        return options as VNode[];
     }
+}, {
+    props: vuePropsType,
+    name: 'NodeList'
 })
 
-NodeList.props = vuePropsType
-NodeList.name = 'NodeList'
+
 
 export default NodeList
 

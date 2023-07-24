@@ -21,9 +21,12 @@ const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useLayoutContext()
   return () => slots.default ? slots.default(context) : null
+},{
+  props:vuePropsType,
+  name: 'LayoutConsumer'
 })
 
-Consumer.props = vuePropsType
+// Consumer.props = vuePropsType
 
 export default Consumer
 

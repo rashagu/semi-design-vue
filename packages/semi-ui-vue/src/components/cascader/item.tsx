@@ -1,4 +1,4 @@
-import { defineComponent, ref, h, Fragment, useSlots, VNode, cloneVNode } from 'vue';
+import {defineComponent, ref, h, Fragment, useSlots, VNode, cloneVNode, PropType} from 'vue';
 import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/cascader/constants';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
@@ -11,6 +11,7 @@ import Checkbox, { CheckboxEvent } from '../checkbox';
 import { BasicCascaderData, BasicEntity, ShowNextType, BasicData } from '@douyinfe/semi-foundation/cascader/foundation';
 import { BaseProps, useBaseComponent } from '../_base/baseComponent';
 import { VueJsxNode } from '../interface';
+import {ComponentObjectPropsOptions} from "vue";
 
 export interface CascaderData extends BasicCascaderData {
   label: VNode | string;
@@ -73,20 +74,20 @@ export interface CascaderItemProps extends BaseProps {
 
 const prefixcls = cssClasses.PREFIX_OPTION;
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<CascaderItemProps> = {
   activeKeys: Object,
   selectedKeys: Object,
   loadedKeys: Object,
   loadingKeys: Object,
-  onItemClick: Function,
-  onItemHover: Function,
-  showNext: String,
-  onItemCheckboxClick: Function,
-  onListScroll: Function,
+  onItemClick: Function as PropType<CascaderItemProps['onItemClick']>,
+  onItemHover: Function as PropType<CascaderItemProps['onItemHover']>,
+  showNext: String as PropType<CascaderItemProps['showNext']>,
+  onItemCheckboxClick: Function as PropType<CascaderItemProps['onItemCheckboxClick']>,
+  onListScroll: Function as PropType<CascaderItemProps['onListScroll']>,
   searchable: Boolean,
   keyword: String,
   emptyContent: [Object, String],
-  loadData: Function,
+  loadData: Function as PropType<CascaderItemProps['loadData']>,
   data: Array,
   separator: String,
   multiple: Boolean,
@@ -351,8 +352,10 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
     }
     return <div class={listsCls}>{content}</div>;
   };
+}, {
+  props: vuePropsType,
+  name: 'CascaderItem'
 });
 
-Item.props = vuePropsType;
 
 export default Item;

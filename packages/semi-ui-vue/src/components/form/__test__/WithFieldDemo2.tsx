@@ -68,7 +68,6 @@ const WithFieldDemo = defineComponent<WithFieldDemoProps>((props, {}) => {
   );
 });
 
-WithFieldDemo.props = vuePropsType;
-WithFieldDemo.name = 'WithFieldDemo';
+
 
 export default WithFieldDemo;

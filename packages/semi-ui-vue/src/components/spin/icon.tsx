@@ -61,6 +61,7 @@ export const VuePropsType = {
   type: String,
 }
 
+// @ts-ignore
 Icon.props = VuePropsType
 
 export default Icon

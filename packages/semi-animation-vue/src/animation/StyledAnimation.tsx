@@ -1,4 +1,15 @@
-import {defineComponent, ref, h, onActivated, Fragment, StyleValue, isVNode, cloneVNode, CSSProperties} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  onActivated,
+  Fragment,
+  StyleValue,
+  isVNode,
+  cloneVNode,
+  CSSProperties,
+  ComponentObjectPropsOptions, PropType
+} from 'vue'
 
 import classnames from 'classnames';
 import {types as styledTypes, loops, delays, speeds} from '@douyinfe/semi-animation-styled';
@@ -6,6 +17,17 @@ import noop from './utils/noop';
 import invokeFns from './utils/invokeFns';
 
 export interface StyledAnimationProps {
+  state?:any
+  willEnter?:any
+  didEnter?:any
+  willLeave?:any
+  didLeave?:any
+  from?:any
+  motion?:any
+  name?:any
+  position?:any
+
+
   className?: string;
   type?: any;
   style?: CSSProperties;
@@ -36,36 +58,37 @@ export interface StyledAnimateStyleType {
 const types: any = Object.values(styledTypes).reduce((arr, cur) => [...arr as any, ...cur as any], []);
 
 
-export const vuePropsType = {
-  state: [Object, String, Boolean, Function],
-  willEnter: [Object, String, Boolean, Function],
-  didEnter: [Object, String, Boolean, Function],
-  willLeave: [Object, String, Boolean, Function],
-  didLeave: [Object, String, Boolean, Function],
-  from: [Object, String, Boolean, Function],
-  motion: [Object, String, Boolean, Function],
-  name: [Object, String, Boolean, Function],
-  position: [Object, String, Boolean, Function],
+export const vuePropsType: ComponentObjectPropsOptions<StyledAnimationProps> = {
+  state: [Object, String, Boolean, Function] as PropType<StyledAnimationProps['state']>,
+  willEnter: [Object, String, Boolean, Function] as PropType<StyledAnimationProps['willEnter']>,
+  didEnter: [Object, String, Boolean, Function] as PropType<StyledAnimationProps['didEnter']>,
+  willLeave: [Object, String, Boolean, Function] as PropType<StyledAnimationProps['willLeave']>,
+  didLeave: [Object, String, Boolean, Function] as PropType<StyledAnimationProps['didLeave']>,
+  from: [Object, String, Boolean, Function] as PropType<StyledAnimationProps['from']>,
+  motion: [Object, String, Boolean, Function] as PropType<StyledAnimationProps['motion']>,
+  name: [Object, String, Boolean, Function] as PropType<StyledAnimationProps['name']>,
+  position: [Object, String, Boolean, Function] as PropType<StyledAnimationProps['position']>,
   transitionState: String,
 
   className: String,
   type: [Object, String],
-  style: [Object, String],
+  style: [Object, String] as PropType<StyledAnimationProps['style']>,
   speed: {
     type: [Number, String], default: 'faster'
   },
   delay: [Number, String],
-  reverse: [Number, String],
+  reverse: [Number, String] as PropType<StyledAnimationProps['reverse']>,
   loop: [Number, String],
-  onStart: {type: Function, default: noop},
-  onFrame: {type: Function, default: noop},
-  onRest: {type: Function, default: noop},
+  onStart: {type: Function as PropType<StyledAnimationProps['onStart']>, default: noop},
+  onFrame: {type: Function as PropType<StyledAnimationProps['onFrame']>, default: noop},
+  onRest: {type: Function as PropType<StyledAnimationProps['onRest']>, default: noop},
   prefixCls: {type: String, default: 'semi'},
   timing: String,
   duration: [Number, String],
   fillMode: String,
 }
-const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) => {
+const StyledAnimation = defineComponent<StyledAnimationProps>(
+  (props, {slots}) => {
   // 在keep-alive = true时  相当于 onShow
   onActivated(() => {
 
@@ -153,12 +176,14 @@ const StyledAnimation = defineComponent<StyledAnimationProps>((props, {slots}) =
   //     return slots.default({animateCls, animateStyle, animateEvents: _generateAnimateEvents(null, props)})
   //   }
   // };
-})
+},{
+    props: vuePropsType,
+    name: 'StyledAnimation'
+  }
+)
 
-StyledAnimation.props = vuePropsType
 
 export default StyledAnimation
-
 
 
 

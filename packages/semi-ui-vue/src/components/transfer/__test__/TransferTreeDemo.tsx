@@ -95,7 +95,7 @@ const TransferTreeDemo = defineComponent<TreeDemoProps>((props, {}) => {
   );
 });
 
-TransferTreeDemo.props = vuePropsType;
-TransferTreeDemo.name = 'TransferTreeDemo';
+// TransferTreeDemo.props = vuePropsType;
+// TransferTreeDemo.name = 'TransferTreeDemo';
 
 export default TransferTreeDemo;

@@ -18,9 +18,11 @@ const TriangleArrowVertical = defineComponent<ExampleProps>((props, {slots}) => 
       <path d="M0 0L1 0C1 4, 2 5.5, 4 7.5S7,10 7,12S6 14.5, 4 16.5S1,20 1,24L0 24L0 0z" />
     </svg>
   );
+}, {
+  props: vuePropsType,
+  name: 'TriangleArrowVertical'
 })
 
-TriangleArrowVertical.props = vuePropsType
 
 export default TriangleArrowVertical
 

@@ -63,6 +63,7 @@ const AutoCompleteItemsDemo = defineComponent<ExampleProps>((props, { slots }) =
   };
 });
 
+// @ts-ignore
 AutoCompleteItemsDemo.props = vuePropsType;
 
 export default AutoCompleteItemsDemo;

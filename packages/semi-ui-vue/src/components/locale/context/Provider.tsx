@@ -13,9 +13,11 @@ const Provider = defineComponent<{value:Locale}>((props, {slots}) => {
   })
   provide('LocalContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
+}, {
+  props: vuePropsType,
+  name: 'LocalContextProvider'
 })
 
-Provider.props = vuePropsType
 
 export default Provider
 

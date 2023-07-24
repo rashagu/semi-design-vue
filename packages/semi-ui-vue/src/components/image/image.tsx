@@ -8,7 +8,7 @@ import ImageFoundation, {ImageAdapter} from "@douyinfe/semi-foundation/image/ima
 import {LocaleConsumerFunc} from "../locale/localeConsumer";
 import {Locale} from "../locale/interface";
 import {isBoolean, isObject, isUndefined} from "lodash";
-import Skeleton from "../skeleton";
+import Skeleton, {SkeletonImage} from "../skeleton";
 import "@douyinfe/semi-foundation/image/image.scss";
 import {defineComponent, h, onMounted, reactive, ref, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
@@ -98,24 +98,6 @@ const Image = defineComponent<ImageProps>((props, {}) => {
     }
   }, {immediate: true, deep: true})
 
-  onMounted(()=>{
-    observeImage();
-  })
-
-
-
-  watch(()=>props.src, (value, oldValue, onCleanup)=>{
-    oldValue !== props.src && observeImage();
-  })
-
-  function observeImage() {
-    if (!isLazyLoad()) {
-      return;
-    }
-    const { previewObserver } = context.value;
-    previewObserver.observe(imgRef.value);
-  }
-
 
 
   function isInGroup() {
@@ -148,7 +130,7 @@ const Image = defineComponent<ImageProps>((props, {}) => {
   const renderDefaultLoading = () => {
     const {width, height} = props;
     return (
-      <Skeleton.Image style={{width, height}}/>
+      <SkeletonImage style={{width, height}}/>
     );
   };
 
@@ -259,8 +241,11 @@ const Image = defineComponent<ImageProps>((props, {}) => {
   }
 })
 
+// @ts-ignore
 Image.props = vuePropsType
+// @ts-ignore
 Image.name = 'Image'
+// @ts-ignore
 Image.isSemiImage = true
 
 export default Image

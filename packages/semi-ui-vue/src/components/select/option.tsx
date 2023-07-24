@@ -92,6 +92,7 @@ const Option = defineComponent<OptionProps>({
         prefixCls,
         renderOptionItem,
         inputValue,
+        semiOptionId,
         ...rest
       } = props;
       const optionClassName = classNames(prefixCls, {
@@ -146,6 +147,7 @@ const Option = defineComponent<OptionProps>({
           }}
           onMouseenter={e => onMouseEnter && onMouseEnter(e)}
           role="option"
+          id={semiOptionId}
           aria-selected={selected ? "true" : "false"}
           aria-disabled={disabled ? "true" : "false"}
           style={style}

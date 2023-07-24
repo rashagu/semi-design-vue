@@ -1,7 +1,8 @@
 import {defineComponent, ref, h, Fragment, VNode, CSSProperties} from 'vue'
+import {VueJsxNode} from "../interface";
 
 export interface TriggerProps {
-  triggerRender?: (props?: any) => VNode;
+  triggerRender?: (props?: any) => VueJsxNode;
   componentName?: string;
   componentProps?: Record<string, any>;
   value?: any;
@@ -23,6 +24,7 @@ export const vuePropsType = {
   style: [Object, String],
 }
 
+// @ts-ignore
 const Index = defineComponent<TriggerProps>((props, {slots}) => {
 
 
@@ -33,6 +35,7 @@ const Index = defineComponent<TriggerProps>((props, {slots}) => {
   }
 })
 
+// @ts-ignore
 Index.props = vuePropsType
 
 export default Index

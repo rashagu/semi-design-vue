@@ -36,7 +36,6 @@ export type { BaseDatePicker } from './datePicker';
 export { default as Empty } from './empty';
 export { default as iconButton  } from './iconButton';
 export { default as Icons  } from './icons';
-export { default as Locale  } from './locale';
 export { default as ScrollList  } from './scrollList';
 export { default as Select  } from './select';
 export { default as Tag  } from './tag';

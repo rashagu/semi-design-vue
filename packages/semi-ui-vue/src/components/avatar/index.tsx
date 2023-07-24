@@ -179,6 +179,7 @@ const Index = defineComponent<AvatarProps>((props, {slots}) => {
   }
 })
 
+// @ts-ignore
 Index.props = vuePropsType
 
 export default Index

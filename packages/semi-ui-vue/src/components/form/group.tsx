@@ -12,10 +12,11 @@ import InputGroup, { InputGroupProps as BacisInputGroupProps } from '../input/in
 import { BaseFormProps, FormState } from './interface';
 import { FormUpdaterContextType } from '@douyinfe/semi-foundation/form/interface';
 import { Col, Row } from '../grid/index';
-import {defineComponent, h, useSlots, Fragment, cloneVNode} from "vue";
+import {defineComponent, h, useSlots, Fragment, cloneVNode, PropType} from "vue";
 import {useFormUpdaterContext} from "./context/FormUpdaterContext/Consumer";
 import {noop} from "@douyinfe/semi-foundation/utils/function";
 import {VueJsxNode} from "../interface";
+import {ComponentObjectPropsOptions} from "vue";
 interface GroupErrorProps {
     showValidateIcon?: boolean;
     isInInputGroup?: boolean;
@@ -50,20 +51,20 @@ const GroupError = (props: GroupErrorProps) => {
 
 
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<InputGroupProps> = {
     className: { type: String, default: '' },
-    size: { type: String, default: 'default' },
+    size: { type: String as PropType<InputGroupProps['size']>, default: 'default' },
     style: [String, Object],
     onBlur: {
-        type: Function,
+        type: Function as PropType<InputGroupProps['onBlur']>,
         default: noop,
     },
     onFocus: {
-        type: Function,
+        type: Function as PropType<InputGroupProps['onFocus']>,
         default: noop,
     },
     label: Object,
-    labelPosition: String,
+    labelPosition: String as PropType<InputGroupProps['labelPosition']>,
     disabled: Boolean,
 }
 const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
@@ -186,10 +187,11 @@ const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'FormInputGroup'
 })
 
-FormInputGroup.props = vuePropsType
-FormInputGroup.name = 'FormInputGroup'
 
 export default FormInputGroup
 

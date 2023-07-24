@@ -8,7 +8,7 @@ import {
   onMounted,
   onUnmounted,
   watch,
-  onBeforeMount, reactive, onBeforeUnmount, shallowRef, CSSProperties
+  onBeforeMount, reactive, onBeforeUnmount, shallowRef, CSSProperties, ComponentObjectPropsOptions, PropType
 } from 'vue'
 
 import {Animation as SemiAnimation, events} from '@douyinfe/semi-animation';
@@ -32,10 +32,16 @@ export interface AnimationProps {
   forwardInstance?: (value: any) => void;
   immediate?: boolean;
 
-
+  enter?:any
+  leave?:any
+  state?:any
+  willEnter?:any
+  didEnter?:any
+  willLeave?:any
+  didLeave?:any
 }
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<AnimationProps> = {
   onStart: {
     type: Function,
     default: noop,
@@ -74,32 +80,33 @@ export const vuePropsType = {
     type: Boolean,
     default: true
   },
-  forwardInstance: Function,
+  forwardInstance: Function as PropType<AnimationProps['forwardInstance']>,
   immediate: Boolean,
 
 
 
-  enter: Object,
-  leave: Object,
-  state: [String, Boolean],
+  enter: Object as PropType<AnimationProps['enter']>,
+  leave: Object as PropType<AnimationProps['leave']>,
+  state: [String, Boolean] as PropType<AnimationProps['state']>,
 
   willEnter: {
-    type: Function,
+    type: Function as PropType<AnimationProps['willEnter']>,
     default: noop,
   },
   didEnter: {
-    type: Function,
+    type: Function as PropType<AnimationProps['didEnter']>,
     default: noop,
   },
   willLeave: {
-    type: Function,
+    type: Function as PropType<AnimationProps['willLeave']>,
     default: noop,
   },
   didLeave: {
-    type: Function,
+    type: Function as PropType<AnimationProps['willLeave']>,
     default: noop,
   },
 }
+
 const Index = defineComponent<AnimationProps>((props, {slots}) => {
   // 在keep-alive = true时  相当于 onShow
 
@@ -275,9 +282,11 @@ const Index = defineComponent<AnimationProps>((props, {slots}) => {
       return null;
     }
   }
+}, {
+  props: vuePropsType,
+  name: 'Animation'
 })
 
-Index.props = vuePropsType
 
 export default Index
 

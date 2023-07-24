@@ -32,9 +32,10 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
             </BaseButton>
         )
     };
+}, {
+    props: vuePropsType,
+    name: 'Button'
 })
 
 
-Button.props = vuePropsType
-Button.name = 'Button'
 export default Button;

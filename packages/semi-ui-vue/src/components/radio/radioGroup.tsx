@@ -9,7 +9,7 @@ import {
   onMounted,
   watch,
   onUnmounted,
-  cloneVNode, isVNode
+  cloneVNode, isVNode, ComponentObjectPropsOptions, PropType
 } from 'vue'
 
 import classnames from 'classnames';
@@ -55,14 +55,15 @@ export type RadioGroupProps = {
   'aria-labelledby'?: any;
   'aria-required'?: any
   id?: string;
+  'onUpdate:value'?:(v:any)=>void
 };
 
 export interface RadioGroupState {
   value?: any;
 }
 
-export const vuePropsType = {
-  'onUpdate:value': Function,
+export const vuePropsType:ComponentObjectPropsOptions<RadioGroupProps> = {
+  'onUpdate:value': Function as PropType<RadioGroupProps['onUpdate:value']>,
   defaultValue: {
     type: [String, Number],
 // @ts-ignore
@@ -76,16 +77,16 @@ export const vuePropsType = {
 // @ts-ignore
     default: undefined,
   },
-  onChange: {type:Function,default:noop},
+  onChange: {type:Function as PropType<RadioGroupProps['onChange']>,default:noop},
   className: String,
-  style: [Object, String],
+  style: [Object, String] as PropType<RadioGroupProps['style']>,
   direction: {
-    type: [String, Object,Array,Boolean],
+    type: [String, Object,Array,Boolean] as PropType<RadioGroupProps['direction']>,
     default: strings.DEFAULT_DIRECTION,
   },
-  mode: {type: String, default:''},
-  type: {type:String, default:strings.TYPE_DEFAULT},
-  buttonSize: {type:String,default:'middle'},
+  mode: {type: String as PropType<RadioGroupProps['mode']>, default:''},
+  type: {type:String as PropType<RadioGroupProps['type']>, default:strings.TYPE_DEFAULT},
+  buttonSize: {type:String as PropType<RadioGroupProps['buttonSize']>, default:'middle'},
   prefixCls: String,
   'aria-label': String,
   'aria-describedby': String,
@@ -105,7 +106,7 @@ const RadioGroup = defineComponent<RadioGroupProps>((props, {slots}) => {
   const state = reactive({
     value: undefined,
   })
-  const {adapter: adapterInject} = useBaseComponent<RadioGroupProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<RadioGroupProps>(props, state)
 
   const theAdapter = adapter()
   function adapter(): RadioGroupAdapter {
@@ -164,6 +165,7 @@ const RadioGroup = defineComponent<RadioGroupProps>((props, {slots}) => {
       type,
       buttonSize,
       id,
+      ...rest
     } = props;
 
     const isButtonRadio = type === strings.TYPE_BUTTON;
@@ -231,6 +233,7 @@ const RadioGroup = defineComponent<RadioGroupProps>((props, {slots}) => {
         aria-labelledby={props['aria-labelledby']}
         aria-describedby={props['aria-describedby']}
         aria-required={props['aria-required']}
+        {...getDataAttr()}
       >
         <Context
           value={{
@@ -257,10 +260,12 @@ const RadioGroup = defineComponent<RadioGroupProps>((props, {slots}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'RadioGroup'
 })
 
-RadioGroup.props = vuePropsType
-RadioGroup.name = "RadioGroup"
+
 
 export default RadioGroup
 

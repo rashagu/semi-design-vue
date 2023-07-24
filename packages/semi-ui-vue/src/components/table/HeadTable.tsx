@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import ColGroup from './ColGroup';
 import TableHeader from './TableHeader';
 import { Fixed, TableComponents, Scroll, BodyScrollEvent, ColumnProps, OnHeaderRow, Sticky } from './interface';
-import {CSSProperties, defineComponent, h, useSlots} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 export interface HeadTableProps {
@@ -32,21 +32,21 @@ export interface HeadTableProps {
  * When there are fixed columns, the header is rendered as a separate Table
  */
 
-const propTypes = {
-    tableLayout: PropTypes.string,
+const propTypes: ComponentObjectPropsOptions<HeadTableProps> = {
+    tableLayout: PropTypes.string as PropType<HeadTableProps['tableLayout']>,
     bodyHasScrollBar: PropTypes.bool,
     columns: PropTypes.array,
     components: PropTypes.object,
     dataSource: PropTypes.array,
     fixed: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-    handleBodyScroll: PropTypes.func,
+    handleBodyScroll: PropTypes.func as PropType<HeadTableProps['handleBodyScroll']>,
     prefixCls: PropTypes.string,
     forwardedRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     scroll: PropTypes.object,
     selectedRowKeysSet: PropTypes.object, // Useful when update is selected
     showHeader: PropTypes.bool,
-    onDidUpdate: PropTypes.func,
-    onHeaderRow: PropTypes.func,
+    onDidUpdate: PropTypes.func as PropType<HeadTableProps['onDidUpdate']>,
+    onHeaderRow: PropTypes.func as PropType<HeadTableProps['onHeaderRow']>,
 };
 
 const defaultProps = {
@@ -126,9 +126,11 @@ const HeadTable = defineComponent<HeadTableProps>((props, {}) => {
           </div>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'HeadTable'
 });
 
-HeadTable.props = vuePropsType;
-HeadTable.name = "HeadTable";
+
 
 export default HeadTable;

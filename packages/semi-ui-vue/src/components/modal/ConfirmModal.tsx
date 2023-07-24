@@ -7,13 +7,25 @@ import {isSemiIcon} from '../_utils';
 
 import '@douyinfe/semi-foundation/modal/modal.scss';
 import {ConfirmProps} from './confirm';
-import {cloneVNode, computed, defineComponent, h, onMounted, onUnmounted, ref, useSlots} from 'vue';
+import {
+  cloneVNode,
+  ComponentObjectPropsOptions,
+  computed,
+  defineComponent,
+  h,
+  onMounted,
+  onUnmounted, PropType,
+  ref,
+  useSlots
+} from 'vue';
 import {vuePropsMake} from "../PropTypes";
 import * as PropTypes from "../PropTypes";
 import {noop} from "lodash";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
+import {ListItemProps} from "../list";
 
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<ConfirmProps> = {
+  type: undefined,
   mask: {
     type: PropTypes.bool,
     default: undefined
@@ -41,15 +53,15 @@ const propTypes = {
     default: undefined
   },
   okText: PropTypes.string,
-  okType: PropTypes.string,
+  okType: PropTypes.string as PropType<ConfirmProps['okType']>,
   cancelText: PropTypes.string,
   maskClosable: {
     type: PropTypes.bool,
     default: undefined
   },
-  onCancel: PropTypes.func,
-  onOk: PropTypes.func,
-  afterClose: PropTypes.func,
+  onCancel: PropTypes.func as PropType<ConfirmProps['onCancel']>,
+  onOk: PropTypes.func as PropType<ConfirmProps['onOk']>,
+  afterClose: PropTypes.func as PropType<ConfirmProps['afterClose']>,
   okButtonProps: PropTypes.object,
   cancelButtonProps: PropTypes.object,
   style: PropTypes.object,
@@ -57,27 +69,27 @@ const propTypes = {
   maskStyle: PropTypes.object,
   bodyStyle: PropTypes.object,
   zIndex: PropTypes.number,
-  title: PropTypes.node,
-  icon: PropTypes.node,
-  header: PropTypes.node,
-  footer: PropTypes.node,
+  title: PropTypes.node as PropType<ConfirmProps['title']>,
+  icon: PropTypes.node as PropType<ConfirmProps['icon']>,
+  header: PropTypes.node as PropType<ConfirmProps['header']>,
+  footer: PropTypes.node as PropType<ConfirmProps['footer']>,
   hasCancel: {
     type: PropTypes.bool,
     default: undefined
   },
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
-  getPopupContainer: PropTypes.func,
-  getContainerContext: PropTypes.func,
+  getPopupContainer: PropTypes.func as PropType<ConfirmProps['getPopupContainer']>,
+  getContainerContext: PropTypes.func as PropType<ConfirmProps['getContainerContext']>,
   maskFixed: {
     type: PropTypes.bool,
     default: undefined
   },
-  closeIcon: PropTypes.node,
+  closeIcon: PropTypes.node as PropType<ConfirmProps['closeIcon']>,
   closeOnEsc: {
     type: PropTypes.bool,
     default: undefined
   },
-  size: String,
+  size: String as PropType<ConfirmProps['size']>,
   keepDOM: {
     type: PropTypes.bool,
     default: undefined
@@ -95,9 +107,9 @@ const propTypes = {
 };
 const defaultProps = {
 };
-export const vuePropsType = {
-  ...vuePropsMake(propTypes, defaultProps),
-  type: String
+export const vuePropsType: ComponentObjectPropsOptions<ConfirmProps> = {
+  ...vuePropsMake<ConfirmProps>(propTypes, defaultProps),
+  type: String as PropType<ConfirmProps['type']>
 }
 const ConfirmModal = defineComponent<ConfirmProps>((props, {}) => {
 
@@ -203,10 +215,12 @@ const ConfirmModal = defineComponent<ConfirmProps>((props, {}) => {
       </Modal>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'ConfirmModal'
 })
 
-ConfirmModal.props = vuePropsType
-ConfirmModal.name = 'ConfirmModal'
+
 
 export default ConfirmModal
 

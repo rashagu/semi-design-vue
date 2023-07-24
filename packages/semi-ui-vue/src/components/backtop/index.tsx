@@ -125,7 +125,9 @@ const BackTop = defineComponent<BackTopProps>((props, {}) => {
     }
 })
 
+// @ts-ignore
 BackTop.props = vuePropsType
+// @ts-ignore
 BackTop.name = 'BackTop'
 
 export default BackTop

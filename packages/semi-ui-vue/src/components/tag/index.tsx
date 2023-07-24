@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties, reactive, watch} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, CSSProperties, reactive, watch, PropType} from 'vue'
 import * as PropTypes from '../PropTypes'
 import classNames from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/tag/constants';
@@ -11,6 +11,7 @@ import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import {isString} from "lodash";
 import cls from 'classnames';
+import {ComponentObjectPropsOptions} from "vue";
 
 export * from './interface';
 
@@ -26,26 +27,26 @@ export interface TagState {
   visible: boolean;
 }
 
-const propTypes = {
-  children: PropTypes.node,
+const propTypes:ComponentObjectPropsOptions<TagProps> = {
+  children: PropTypes.node as PropType<any>,
   tagKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  size: String,
-  color: String,
-  type: String,
+  size: String as PropType<TagProps['size']>,
+  color: String as PropType<TagProps['color']>,
+  type: String as PropType<TagProps['type']>,
   closable: PropTypes.bool,
   visible: PropTypes.bool,
-  onClose: PropTypes.func,
-  onClick: PropTypes.func,
+  onClose: PropTypes.func as PropType<TagProps['onClose']>,
+  onClick: PropTypes.func as PropType<TagProps['onClick']>,
   style: PropTypes.object,
   className: PropTypes.string,
   avatarSrc: PropTypes.string,
-  avatarShape: String,
+  avatarShape: String as PropType<TagProps['avatarShape']>,
   'aria-label': PropTypes.string,
 
-  shape: {type: String, default: 'square'},
-  onKeydown: Function,
+  shape: {type: String as PropType<TagProps['shape']>, default: 'square'},
+  onKeydown: Function as PropType<TagProps['onKeydown']>,
   tabIndex: Number, // use internal, when tag in taInput, we want to use left arrow and right arrow to control the tag focus, so the tabIndex need to be -1.
-  onMouseenter: Function
+  onMouseenter: Function as PropType<TagProps['onMouseenter']>,
 };
 const defaultProps: TagProps = {
   size: tagSize[0] as TagSize,
@@ -61,7 +62,7 @@ const defaultProps: TagProps = {
   shape: 'square',
   avatarShape: 'square',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<TagProps>(propTypes, defaultProps)
 const Index = defineComponent<TagProps>((props, {slots}) => {
 
   const state = reactive<TagState>({
@@ -177,10 +178,12 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Tag'
 })
 
-Index.props = vuePropsType
-Index.name = 'Tag'
+
 
 export default Index
 

@@ -10,13 +10,13 @@ import OverflowListFoundation, {OverflowListAdapter} from '@douyinfe/semi-founda
 import '@douyinfe/semi-foundation/overflowList/overflowList.scss';
 import {VueJsxNode} from "../interface";
 import {
-  cloneVNode,
+  cloneVNode, ComponentObjectPropsOptions,
   createVNode,
   CSSProperties,
   defineComponent,
   Fragment,
   h,
-  isVNode, nextTick,
+  isVNode, nextTick, PropType,
   reactive, shallowRef,
   useSlots,
   watch
@@ -77,24 +77,24 @@ const defaultProps = {
   visibleItemRenderer: (): VueJsxNode => null,
   onOverflow: () => null,
 };
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<OverflowListProps> = {
   // if render in scroll mode, key is required in items
   className: PropTypes.string,
-  collapseFrom: PropTypes.string,
-  direction: PropTypes.string,
+  collapseFrom: PropTypes.string as PropType<OverflowListProps['collapseFrom']>,
+  // direction: PropTypes.string as PropType<OverflowListProps['direction']>,
   items: PropTypes.array,
   minVisibleItems: PropTypes.number,
-  onIntersect: PropTypes.func,
-  onOverflow: PropTypes.func,
-  overflowRenderer: PropTypes.func,
-  renderMode: PropTypes.string,
+  onIntersect: PropTypes.func as PropType<OverflowListProps['onIntersect']>,
+  onOverflow: PropTypes.func as PropType<OverflowListProps['onOverflow']>,
+  overflowRenderer: PropTypes.func as PropType<OverflowListProps['overflowRenderer']>,
+  renderMode: PropTypes.string as PropType<OverflowListProps['renderMode']>,
   style: PropTypes.object,
   threshold: PropTypes.number,
-  visibleItemRenderer: PropTypes.func,
+  visibleItemRenderer: PropTypes.func as PropType<OverflowListProps['visibleItemRenderer']>,
   wrapperClassName: PropTypes.string,
   wrapperStyle: PropTypes.object,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<OverflowListProps>(propTypes, defaultProps)
 const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
   const slots = useSlots()
 
@@ -201,7 +201,14 @@ const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
     ()=>onItemResizeNum.value
   ], (value, oldValue)=>{
 
-    if (!isEqual(value[0], props.items)) {
+    const prevItemsKeys = value[0].map((item) =>
+      item.key
+    );
+    const nowItemsKeys = props.items.map((item) =>
+      item.key
+    );
+
+    if (!isEqual(prevItemsKeys, nowItemsKeys)) {
       itemRefs = {};
       state.visibleState = new Map()
     }
@@ -405,10 +412,12 @@ const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
     }
     return <ResizeObserver onResize={resize}>{list}</ResizeObserver>;
   }
+}, {
+  props: vuePropsType,
+  name: 'OverflowList'
 })
 
-OverflowList.props = vuePropsType
-OverflowList.name = 'OverflowList'
+
 
 export default OverflowList
 

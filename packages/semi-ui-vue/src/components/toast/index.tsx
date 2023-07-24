@@ -149,9 +149,12 @@ const ToastList = defineComponent<ToastListProps>((props, { expose }) => {
       </Fragment>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'ToastList'
 });
-ToastList.props = vuePropsType;
-ToastList.name = 'ToastList';
+// ToastList.props = vuePropsType;
+// ToastList.name = 'ToastList';
 export { ToastList };
 
 const createBaseToast = () => {

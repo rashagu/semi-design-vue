@@ -8,22 +8,29 @@ import Table_ from './Table';
 import { cloneDeep, mergeColumns } from './utils';
 import getColumns from './getColumns';
 import ResizableHeaderCell from './ResizableHeaderCell';
+import type { ResizableProps, TableProps, ColumnProps } from './interface';
 import {
-    TableProps,
-    ColumnProps,
-} from './interface';
-import {computed, CSSProperties, defineComponent, h, ref, useSlots, watch} from "vue";
+    ComponentObjectPropsOptions,
+    computed,
+    CSSProperties,
+    defineComponent,
+    h,
+    PropType,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {VueJsxNode} from "../interface";
 
 const Table = Table_()
-export const vuePropsType = {
+export const vuePropsType: ComponentObjectPropsOptions<TableProps> = {
     bordered: PropTypes.bool,
     children: PropTypes.element,
     childrenRecordName: PropTypes.string,
     className: PropTypes.string,
     clickGroupedRowToExpand: PropTypes.bool,
     columns: PropTypes.array,
-    components: PropTypes.element,
+    components: PropTypes.element as PropType<TableProps['components']>,
     dataSource: PropTypes.array,
     defaultExpandAllGroupRows: PropTypes.bool,
     defaultExpandAllRows: PropTypes.bool,
@@ -34,37 +41,37 @@ export const vuePropsType = {
     expandCellFixed: PropTypes.bool,
     expandIcon: PropTypes.element,
     expandedRowKeys: PropTypes.array,
-    expandedRowRender: PropTypes.func,
+    expandedRowRender: PropTypes.func as PropType<TableProps['expandedRowRender']>,
     expandRowByClick: PropTypes.bool,
     footer: PropTypes.element,
-    getVirtualizedListRef: PropTypes.element,
-    groupBy: PropTypes.element,
+    getVirtualizedListRef: PropTypes.element as PropType<TableProps['getVirtualizedListRef']>,
+    groupBy: PropTypes.element as PropType<TableProps['groupBy']>,
     hideExpandedColumn: PropTypes.bool,
     id: PropTypes.string,
     indentSize: PropTypes.number,
     loading: PropTypes.bool,
     pagination: PropTypes.object,
     prefixCls: PropTypes.string,
-    renderGroupSection: PropTypes.element,
-    renderPagination: PropTypes.element,
+    renderGroupSection: PropTypes.element as PropType<TableProps['renderGroupSection']>,
+    renderPagination: PropTypes.element as PropType<TableProps['renderPagination']>,
     resizable: [PropTypes.bool, PropTypes.object],
-    rowExpandable: PropTypes.any,
+    rowExpandable: PropTypes.any as PropType<TableProps['rowExpandable']>,
     rowKey: PropTypes.string,
-    rowSelection: PropTypes.element,
-    scroll: PropTypes.any,
+    rowSelection: PropTypes.element as PropType<TableProps['rowSelection']>,
+    scroll: PropTypes.any as PropType<TableProps['scroll']>,
     showHeader: PropTypes.bool,
     size: PropTypes.object,
     style: PropTypes.object,
     title: PropTypes.element,
     virtualized: PropTypes.bool,
-    onChange: PropTypes.func,
-    onExpand: PropTypes.func,
-    onExpandedRowsChange: PropTypes.func,
-    onGroupedRow: PropTypes.func,
-    onHeaderRow: PropTypes.func,
-    onRow: PropTypes.func,
-    sticky: PropTypes.element,
-    direction: PropTypes.string,
+    onChange: PropTypes.func as PropType<TableProps['onChange']>,
+    onExpand: PropTypes.func as PropType<TableProps['onExpand']>,
+    onExpandedRowsChange: PropTypes.func as PropType<TableProps['onExpandedRowsChange']>,
+    onGroupedRow: PropTypes.func as PropType<TableProps['onGroupedRow']>,
+    onHeaderRow: PropTypes.func as PropType<TableProps['onHeaderRow']>,
+    onRow: PropTypes.func as PropType<TableProps['onRow']>,
+    sticky: PropTypes.element as PropType<TableProps['sticky']>,
+    direction: PropTypes.string as PropType<TableProps['direction']>,
 };
 const ResizableTable = defineComponent<TableProps>((props, {}) => {
     const slots = useSlots();
@@ -77,8 +84,11 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
         () => props.hideExpandedColumn,
         () => props.rowSelection
     ], () => {
+        const { components: propComponents, columns: propColumns, resizable, ...restProps } = props;
 
-        const { columns: propColumns } = props;
+
+
+
         /**
          * 此处关于 columns 有三个存储
          *
@@ -138,7 +148,7 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
 
 
     const handleResize = (column: ColumnProps) => (e: MouseEvent, { size }: { size: { width: number } }) => {
-        const onResize = get(props.resizable, 'onResize', noop);
+        const onResize = get(props.resizable, 'onResize', noop) as ResizableProps<any>['onResize']
 
         const nextColumns = cloneDeep(columns.value);
         const curColumn: ColumnProps = findColumn(nextColumns, column, childrenColumnName);
@@ -159,7 +169,7 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
     };
 
     const handleResizeStart = (column: ColumnProps<any>) => (e: MouseEvent) => {
-        const onResizeStart = get(props.resizable, 'onResizeStart', noop);
+        const onResizeStart = get(props.resizable, 'onResizeStart', noop) as ResizableProps<any>['onResize']
         const handlerClassName = get(props.resizable, 'handlerClassName', 'resizing');
 
         const nextColumns = cloneDeep(columns.value);
@@ -184,7 +194,7 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
     };
 
     const handleResizeStop = (column: ColumnProps) => (e: MouseEvent) => {
-        const onResizeStop = get(props.resizable, 'onResizeStop', noop);
+        const onResizeStop = get(props.resizable, 'onResizeStop', noop) as ResizableProps<any>['onResize']
         const handlerClassName = get(props.resizable, 'handlerClassName', 'resizing');
         const nextColumns = cloneDeep(columns.value);
 
@@ -240,9 +250,11 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
 
         return <Table {...restProps} columns={finalColumns.value} components={components.value} />;
     };
+}, {
+    props: vuePropsType,
+    name: 'ResizableTable'
 });
 
-ResizableTable.props = vuePropsType;
-ResizableTable.name = "ResizableTable";
+
 
 export default ResizableTable;

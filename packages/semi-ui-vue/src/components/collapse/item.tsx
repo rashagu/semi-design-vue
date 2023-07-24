@@ -36,7 +36,7 @@ const defaultProps = {
   disabled: false,
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<CollapsePanelProps>(propTypes, defaultProps);
 const CollapsePanel = defineComponent<CollapsePanelProps>((props, {}) => {
   const slots = useSlots();
 
@@ -135,9 +135,11 @@ const CollapsePanel = defineComponent<CollapsePanelProps>((props, {}) => {
       </div>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'CollapsePanel'
 });
 
-CollapsePanel.props = vuePropsType;
-CollapsePanel.name = 'CollapsePanel';
+
 
 export default CollapsePanel;

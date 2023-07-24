@@ -76,6 +76,7 @@ const AvatarGroup = defineComponent<AvatarGroupProps>((props, {slots}) => {
   }
 })
 
+// @ts-ignore
 AvatarGroup.props = vuePropsType
 
 export default AvatarGroup

@@ -9,7 +9,7 @@ const meta = {
    * to learn how to generate automatic titles
    */
   title: 'B输入类/InputNumber',
-  component: InputNumber,
+  component: InputNumber as any,
   render: (args: any) => ({
     setup() {
       return ()=>(<div style={{padding: '10px'}}>

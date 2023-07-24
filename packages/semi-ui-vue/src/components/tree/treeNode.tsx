@@ -9,7 +9,7 @@ import TreeContext, { TreeContextValue } from './treeContext';
 import Spin from '../spin';
 import { TreeNodeProps, TreeNodeState } from './interface';
 import { getHighLightTextHTML } from '../_utils/index';
-import {CSSProperties, defineComponent, h, reactive, ref, useSlots} from 'vue';
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, reactive, ref, useSlots} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useTreeContext } from './TreeContext/Consumer';
 import {VueHTMLAttributes, VueJsxNode} from '../interface';
@@ -17,7 +17,7 @@ import {BasicTreeNodeData} from "@douyinfe/semi-foundation/tree/foundation";
 
 const prefixcls = cssClasses.PREFIX_OPTION;
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TreeNodeProps> = {
   expanded: {
     type: PropTypes.bool,
     default: undefined
@@ -71,11 +71,12 @@ const propTypes = {
   nodeInstance: PropTypes.node,
   emptyContent: PropTypes.node,
 
-  filtered: [String, Boolean],
+  filtered: [String, Boolean] as PropType<TreeNodeProps['filtered']>,
   level: Number,
   empty: Boolean,
-  style: [Object, String],
-  display: PropTypes.any
+  style: [Object, String] as PropType<TreeNodeProps['style']>,
+  display: PropTypes.any,
+  key:String
 };
 
 const defaultProps = {
@@ -275,7 +276,11 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
   }
 
   function renderIcon() {
-    const { directory, treeIcon } = context.value;
+    const {
+      directory,
+      // @ts-ignore
+      treeIcon
+    } = context.value;
     const { expanded, icon } = props;
     const hasChild = !isLeaf();
     const hasIcon = icon || treeIcon;
@@ -463,9 +468,10 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
       </li>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'TreeNode'
 });
 
-TreeNode.props = vuePropsType;
-TreeNode.name = 'TreeNode';
 
 export default TreeNode;

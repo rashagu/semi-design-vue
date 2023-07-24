@@ -63,6 +63,7 @@ const InputDemo = defineComponent<ExampleProps>((props, {slots}) => {
 })
 
 
+// @ts-ignore
 InputDemo.props = VuePropsType
 
 export default InputDemo

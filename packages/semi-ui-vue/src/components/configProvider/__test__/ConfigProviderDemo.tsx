@@ -20,7 +20,7 @@ const ConfigProviderDemo = defineComponent<ConfigProviderDemoProps>((props, {slo
   )
 })
 
-ConfigProviderDemo.props = vuePropsType
+// ConfigProviderDemo.props = vuePropsType
 
 export default ConfigProviderDemo
 

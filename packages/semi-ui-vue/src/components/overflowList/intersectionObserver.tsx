@@ -1,6 +1,15 @@
 import * as PropTypes from '../PropTypes';
 import {isEqual, isEmpty} from 'lodash';
-import {defineComponent, h, onBeforeUnmount, onMounted, useSlots, watch} from 'vue';
+import {
+  ComponentObjectPropsOptions,
+  defineComponent,
+  h,
+  onBeforeUnmount,
+  onMounted,
+  PropType,
+  useSlots,
+  watch
+} from 'vue';
 import {vuePropsMake} from '../PropTypes';
 import {VueJsxNode} from "../interface";
 
@@ -14,10 +23,10 @@ export interface ReactIntersectionObserverProps {
   items?: Record<string, Element>;
 }
 
-const propTypes = {
-  onIntersect: PropTypes.func,
+const propTypes:ComponentObjectPropsOptions<ReactIntersectionObserverProps> = {
+  onIntersect: PropTypes.func as PropType<ReactIntersectionObserverProps['onIntersect']>,
   option: PropTypes.object,
-  root: PropTypes.any,
+  root: PropTypes.any as PropType<ReactIntersectionObserverProps['root']>,
   threshold: PropTypes.number,
   rootMargin: PropTypes.string,
   items: PropTypes.object,
@@ -31,7 +40,7 @@ const defaultProps = {
   items: {},
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<ReactIntersectionObserverProps>(propTypes, defaultProps);
 const ReactIntersectionObserver = defineComponent<ReactIntersectionObserverProps>((props, {}) => {
   const slots = useSlots();
   let observer: IntersectionObserver;
@@ -91,9 +100,10 @@ const ReactIntersectionObserver = defineComponent<ReactIntersectionObserverProps
 
   // 不能直接 return slots.default，会失去响应
   return ()=>slots.default?.();
+}, {
+  props: vuePropsType,
+  name: 'ReactIntersectionObserver'
 });
 
-ReactIntersectionObserver.props = vuePropsType;
-ReactIntersectionObserver.name = 'ReactIntersectionObserver';
 
 export default ReactIntersectionObserver;

@@ -35,9 +35,10 @@ const Section = defineComponent<SectionProps>((props, {}) => {
           </section>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Section'
 })
 
-Section.props = vuePropsType
-Section.name = 'Section'
 
 export default Section

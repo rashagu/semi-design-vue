@@ -9,7 +9,7 @@ const meta = {
    * to learn how to generate automatic titles
    */
   title: 'B输入类/AutoComplete',
-  component: AutoComplete,
+  component: AutoComplete as any,
   render: (args: any) => ({
     setup() {
       return ()=>(<div style={{padding: '10px'}}>
@@ -31,6 +31,5 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    autoFocus: true
   },
 };

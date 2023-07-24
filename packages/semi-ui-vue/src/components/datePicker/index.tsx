@@ -93,9 +93,11 @@ const index = defineComponent<DatePickerProps>((props, {}) => {
       </Context.Consumer>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'DatePickerIndex'
 });
 
-index.props = vuePropsType;
-index.name = 'DatePickerIndex';
+
 
 export default index;

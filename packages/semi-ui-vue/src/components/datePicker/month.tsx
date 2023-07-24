@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, reactive, onMounted, nextTick, onUnmounted, watch, Ref} from 'vue'
+import {defineComponent, ref, h, Fragment, reactive, onMounted, nextTick, onUnmounted, watch, Ref, PropType} from 'vue'
 
 
 import classNames from 'classnames';
@@ -13,6 +13,7 @@ import { Locale } from '../locale/interface';
 import {CheckboxProps} from "../checkbox";
 import {InsetTimeInput} from "./insetInput";
 import {vuePropsMake} from "../PropTypes";
+import {ComponentObjectPropsOptions} from "vue";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -23,24 +24,26 @@ export interface MonthProps extends MonthFoundationProps, BaseProps {
 }
 
 export type MonthState = MonthFoundationState;
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<MonthProps> = {
+  forwardRef: undefined,
+  localeCode: undefined,
   month: {type: PropTypes.object, default: new Date()},
   selected: {type: PropTypes.object, default: new Set()},
   rangeStart: {type: PropTypes.string, default: ''},
   rangeEnd: {type: PropTypes.string, default: ''},
   offsetRangeStart: PropTypes.string,
   offsetRangeEnd: PropTypes.string,
-  onDayClick: {type:PropTypes.func,default:noop},
-  onDayHover: {type:PropTypes.func,default:noop},
-  weekStartsOn: {type: PropTypes.number, default: numbers.WEEK_START_ON},
-  disabledDate: {type: PropTypes.func, default: stubFalse},
+  onDayClick: {type:PropTypes.func as PropType<MonthProps['onDayClick']>,default:noop},
+  onDayHover: {type:PropTypes.func as PropType<MonthProps['onDayHover']>,default:noop},
+  weekStartsOn: {type: PropTypes.number as PropType<MonthProps['weekStartsOn']>, default: numbers.WEEK_START_ON},
+  disabledDate: {type: PropTypes.func as PropType<MonthProps['disabledDate']>, default: stubFalse},
   weeksRowNum: {type:PropTypes.number, default:0},
-  onWeeksRowNumChange: {type:PropTypes.func,default:noop},
-  renderDate: PropTypes.func,
-  renderFullDate: PropTypes.func,
+  onWeeksRowNumChange: {type:PropTypes.func as PropType<MonthProps['onWeeksRowNumChange']>,default:noop},
+  renderDate: PropTypes.func as PropType<MonthProps['renderDate']>,
+  renderFullDate: PropTypes.func as PropType<MonthProps['renderFullDate']>,
   hoverDay: PropTypes.string, // Real-time hover date
-  startDateOffset: PropTypes.func,
-  endDateOffset: PropTypes.func,
+  startDateOffset: PropTypes.func as PropType<MonthProps['startDateOffset']>,
+  endDateOffset: PropTypes.func as PropType<MonthProps['endDateOffset']>,
   rangeInputFocus: [PropTypes.string, PropTypes.bool],
   focusRecordsRef: PropTypes.object,
   multiple: PropTypes.bool,
@@ -59,7 +62,7 @@ const defaultProps = {
   disabledDate: stubFalse,
   weeksRowNum: 0,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<MonthProps>(propTypes, defaultProps)
 const month = defineComponent<MonthProps>((props, {slots}) => {
 
   const monthRef = ref()
@@ -375,8 +378,10 @@ const month = defineComponent<MonthProps>((props, {slots}) => {
         onMouseenter={() => foundation.handleHover(day)}
         onMouseleave={() => foundation.handleHover()}
       >
+        {/*// @ts-ignore*/}
         {customRender ? renderFullDate(...fullDateArgs) : (
           <div class={dayMainCls}>
+            {/*// @ts-ignore*/}
             {isFunction(renderDate) ? renderDate(dayNumber, fullDate) : <span>{dayNumber}</span>}
           </div>
         )}
@@ -400,10 +405,11 @@ const month = defineComponent<MonthProps>((props, {slots}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Month'
 })
 
-month.props = vuePropsType
-month.name = "Month"
 
 export default month
 

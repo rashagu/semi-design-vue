@@ -31,8 +31,7 @@ const FormAllDemo = defineComponent<FormAllDemoProps>((props, {}) => {
   )
 })
 
-FormAllDemo.props = vuePropsType
-FormAllDemo.name = 'FormAllDemo'
+
 
 export default FormAllDemo
 

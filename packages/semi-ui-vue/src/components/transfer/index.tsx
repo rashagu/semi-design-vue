@@ -20,7 +20,18 @@ import Button from '../button';
 import Tree from '../tree';
 import {IconClose, IconHandle, IconSearch} from '@kousum/semi-icons-vue';
 import {TreeProps, Value as TreeValue} from '../tree/interface';
-import {CSSProperties, defineComponent, Fragment, h, reactive, ref, useSlots, VNode, watch,} from 'vue';
+import {
+  ComponentObjectPropsOptions,
+  CSSProperties,
+  defineComponent,
+  Fragment,
+  h, PropType,
+  reactive,
+  ref,
+  useSlots,
+  VNode,
+  watch,
+} from 'vue';
 import {VueJsxNode} from '../interface';
 import SortableList from "./SortableList";
 import type {SortableItemFuncArg} from "../tagInput";
@@ -177,28 +188,28 @@ export interface TransferProps {
 export const prefixCls = cssClasses.PREFIX;
 
 
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<TransferProps> = {
   style: PropTypes.object,
   className: PropTypes.string,
   disabled: PropTypes.bool,
   dataSource: PropTypes.array,
   filter: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-  onSearch: PropTypes.func,
+  onSearch: PropTypes.func as PropType<TransferProps['onSearch']>,
   inputProps: PropTypes.object,
   value: PropTypes.array,
   defaultValue: PropTypes.array,
-  onChange: PropTypes.func,
-  onSelect: PropTypes.func,
-  onDeselect: PropTypes.func,
-  renderSourceItem: PropTypes.func,
-  renderSelectedItem: PropTypes.func,
+  onChange: PropTypes.func as PropType<TransferProps['onChange']>,
+  onSelect: PropTypes.func as PropType<TransferProps['onSelect']>,
+  onDeselect: PropTypes.func as PropType<TransferProps['onDeselect']>,
+  renderSourceItem: PropTypes.func as PropType<TransferProps['renderSourceItem']>,
+  renderSelectedItem: PropTypes.func as PropType<TransferProps['renderSelectedItem']>,
   loading: PropTypes.bool,
-  type: PropTypes.string,
+  type: PropTypes.string as PropType<TransferProps['type']>,
   treeProps: PropTypes.object,
   showPath: PropTypes.bool,
   emptyContent: PropTypes.object,
-  renderSourcePanel: PropTypes.func,
-  renderSelectedPanel: PropTypes.func,
+  renderSourcePanel: PropTypes.func as PropType<TransferProps['renderSourcePanel']>,
+  renderSelectedPanel: PropTypes.func as PropType<TransferProps['renderSelectedPanel']>,
   draggable: PropTypes.bool,
 };
 
@@ -288,7 +299,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
     },
     {immediate: true}
   );
-  const { adapter: adapterInject } = useBaseComponent<TransferProps>(props, state);
+  const { adapter: adapterInject, getDataAttr } = useBaseComponent<TransferProps>(props, state);
   function adapter_(): TransferAdapter<TransferProps, TransferState> {
     return {
       ...adapterInject(),
@@ -741,7 +752,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
     return (
       <LocaleConsumer componentName="Transfer">
         {(locale: Locale['Transfer']) => (
-          <div class={transferCls} style={style}>
+          <div class={transferCls} style={style} {...getDataAttr()}>
             {renderLeft(locale)}
             {renderRight(locale)}
           </div>
@@ -749,9 +760,10 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
       </LocaleConsumer>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'Transfer'
 });
 
-Transfer.props = vuePropsType;
-Transfer.name = 'Transfer';
 
 export default Transfer;

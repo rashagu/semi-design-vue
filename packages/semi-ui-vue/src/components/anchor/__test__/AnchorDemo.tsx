@@ -62,7 +62,9 @@ const AnchorDemo = defineComponent<AnchorDemoProps>((props, {}) => {
   )
 })
 
+// @ts-ignore
 AnchorDemo.props = vuePropsType
+// @ts-ignore
 AnchorDemo.name = 'AnchorDemo'
 
 export default AnchorDemo

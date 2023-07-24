@@ -83,6 +83,9 @@ export interface TreeProps extends BasicTreeProps {
     renderDraggingNode?: (nodeInstance: HTMLElement, node: TreeNodeData) => HTMLElement;
     renderFullLabel?: (renderFullLabelProps: RenderFullLabelProps) => VueJsxNode;
     renderLabel?: (label?: VueJsxNode, treeNode?: TreeNodeData) => VueJsxNode;
+
+    selectedKey?: string
+    role?: string
 }
 export interface OptionProps {
     index: number;
