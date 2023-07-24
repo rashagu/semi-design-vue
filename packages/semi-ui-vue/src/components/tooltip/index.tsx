@@ -299,7 +299,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
         // There is no guarantee that triggerE l.current can get the real dom, so call findDOMNode to ensure that you can get the real dom
         const triggerDOM = theAdapter.getTriggerNode();
         triggerEl.value = triggerDOM;
-        return triggerDOM && triggerDOM.getBoundingClientRect();
+        return triggerDOM && triggerDOM.getBoundingClientRect?.();
       },
       // Gets the outer size of the specified container
       getPopupContainerRect: () => {
@@ -450,6 +450,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
       getContainer: () => containerEl.value,
       getTriggerNode: () => {
         let triggerDOM = triggerEl.value;
+        // TODO 可能是文本 节点 #text
         if (!isHTMLElement(triggerEl.value)) {
           triggerDOM = triggerEl.value;
         }
