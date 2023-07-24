@@ -1,21 +1,9 @@
-import {
-  defineComponent,
-  ref,
-  h,
-  Fragment,
-  CSSProperties,
-  onMounted,
-  inject,
-  ComponentObjectPropsOptions,
-  PropType
-} from 'vue'
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, onMounted, PropType} from 'vue'
 import cls from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/layout/constants';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import {registerMediaQuery} from '../_utils/index';
-import LayoutContext from "./layoutContext";
 import {useLayoutContext} from "./context/Consumer";
-import {PreviewProps as PreviewInnerProps} from "../image";
 
 export interface ResponsiveMap {
   xs: string;

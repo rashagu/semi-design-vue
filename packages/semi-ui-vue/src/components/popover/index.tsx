@@ -197,6 +197,9 @@ const Popover = defineComponent<PopoverProps>((props, {slots, expose}) => {
       position,
       style,
       trigger,
+      contentClassName,
+      cancelText,
+      okText,
       ...attr
     } = props;
     let {spacing} = props;

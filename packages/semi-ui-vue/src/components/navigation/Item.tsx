@@ -43,6 +43,8 @@ export interface NavItemProps extends ItemProps, BaseProps {
     onClick?(clickItems: SelectedData): void;
     onMouseEnter?: any;
     onMouseLeave?: any;
+
+    items?: any
 }
 
 export interface SelectedData extends SelectedItemProps<NavItemProps> {
@@ -97,7 +99,8 @@ export const vuePropsType:ComponentObjectPropsOptions<NavItemProps> = {
     },
 
 
-    // items: Array as PropType<NavItemProps['items']>,
+
+    items: Array as PropType<NavItemProps['items']>,
     level: Number
 }
 const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
@@ -184,7 +187,7 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
             mouseEnterDelay={showDelay}
             mouseLeaveDelay={hideDelay}
           >
-              <>{node}</>
+              <Fragment>{node}</Fragment>
           </Tooltip>
         );
     };

@@ -259,6 +259,8 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots, expose}) => {
       onSelect,
       onHeaderCell,
       onGroupedRow,
+      name,
+      contentClassName,
       ...attr
     } = props;
     let { spacing } = props;

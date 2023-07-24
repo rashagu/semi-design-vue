@@ -61,6 +61,8 @@ export interface PaginationProps {
   hideOnSinglePage?: boolean;
   hoverShowPageSelect?: boolean;
   disabled?: boolean
+
+  position?: string
 }
 
 export interface PaginationState {
@@ -103,7 +105,9 @@ const propTypes:ComponentObjectPropsOptions<PaginationProps> = {
   hoverShowPageSelect: PropTypes.bool,
   showQuickJumper: PropTypes.bool,
   disabled: PropTypes.bool,
-  // position: PropTypes.string as PropType<PaginationProps['position']>,
+
+
+  position: PropTypes.string as PropType<PaginationProps['position']>,
 };
 
 const defaultProps = {

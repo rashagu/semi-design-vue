@@ -1,22 +1,9 @@
-import {
-  defineComponent,
-  ref,
-  h,
-  Fragment,
-  CSSProperties,
-  DefineComponent,
-  reactive,
-  provide,
-  isVNode,
-  ComponentObjectPropsOptions, PropType,
-} from 'vue'
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, isVNode, PropType, reactive,} from 'vue'
 import cls from 'classnames';
 import {cssClasses} from '@douyinfe/semi-foundation/layout/constants';
 import '@douyinfe/semi-foundation/layout/layout.scss';
-import LayoutContext, { ContextType } from './layoutContext';
+import LayoutContext, {ContextType} from './layoutContext';
 import Sider from './Sider';
-import {InputNumberProps} from "../inputNumber";
-import {PreviewProps as PreviewInnerProps} from "../image";
 
 
 const htmlTag = {
@@ -131,7 +118,7 @@ const Layout = defineComponent<BasicLayoutProps>((props, {slots}) => {
     return (
       <LayoutContext.Provider value={{ siderHook: getSiderHook() }}>
         <Tag className={classString} {...others}>
-          {slots.default?slots.default():null}
+          {slots.default?.()}
         </Tag>
       </LayoutContext.Provider>
     );

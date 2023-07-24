@@ -7,7 +7,6 @@ import Context, {ContextValue} from '../configProvider/context';
 
 import DefaultLocale from './source/zh_CN';
 import { Locale } from './interface';
-import {ListItemProps} from "../list";
 
 type ChildrenRender<T> = (componentLocal: T, localeCode: string, dateFnsLocale: dateFns) => VNode;
 export interface LocaleConsumerProps<T> {
