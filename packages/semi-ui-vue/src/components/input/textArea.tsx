@@ -402,9 +402,11 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
       placeholder: !placeholder ? null : placeholder,
       onInput: (e: any) => {
         // console.log(e)
-        foundation._adapter.setValue(e.target.value)
+        foundation.handleChange(e.target.value, e)
       },
-      onChange: (e: any) => foundation.handleChange(e.target.value, e),
+      onChange: (e: any) => {
+        // foundation.handleChange(e.target.value, e)
+      },
       onFocus: (e: Event) => foundation.handleFocus(e),
       onBlur: (e: any) => foundation.handleBlur(e),
       onKeydown: (e: any) => {

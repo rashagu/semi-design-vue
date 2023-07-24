@@ -715,7 +715,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       value: inputValue,
       disabled,
       className: inputcls,
-      onInput: handleInputChange,
+      onChange: handleInputChange,
       ...inputProps,
     };
 
