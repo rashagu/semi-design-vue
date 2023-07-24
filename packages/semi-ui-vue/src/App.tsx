@@ -118,7 +118,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SideSheetDemo />*/}
         {/*<ListDemo />*/}
         {/*<DescriptionsDemo />*/}
-        {/*<CollapseDemo />*/}
+        <CollapseDemo />
         {/*<CollapsibleDemo />*/}
         {/*<CarouselDemo/>*/}
         {/*<StepsDemo />*/}
@@ -180,7 +180,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
-        <CheckboxDemo />
+        {/*<CheckboxDemo />*/}
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
@@ -212,11 +212,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
       </ConfigProvider>
     </div>
   )
+}, {
+  props: VuePropsType,
+  name: 'App'
 })
 
-// @ts-ignore
-App.props = VuePropsType
-// @ts-ignore
-App.name = 'App'
 
 export default App

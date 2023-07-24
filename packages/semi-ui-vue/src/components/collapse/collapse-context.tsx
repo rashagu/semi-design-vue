@@ -1,4 +1,3 @@
-import {VueJsxNode} from "../interface";
 import Provider from "./context/Provider";
 import Consumer from "./context/Consumer";
 import {VNode} from "vue";

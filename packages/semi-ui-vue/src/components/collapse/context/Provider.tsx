@@ -12,7 +12,11 @@ const Provider = defineComponent<{value:CollapseContextType}>((props, {slots}) =
     ConfigContext.value = props.value
   }, { deep: true, immediate: true})
   provide('CollapseContext', ConfigContext)
-  return ()=>slots.default?slots.default(ConfigContext.value):null
+  return ()=>{
+
+    console.log(slots.default?.())
+    return slots.default?slots.default(ConfigContext.value):null
+  }
 }, {
   props: vuePropsType,
   name: 'CollapseProvider'

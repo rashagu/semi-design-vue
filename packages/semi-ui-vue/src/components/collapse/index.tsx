@@ -1,8 +1,8 @@
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
-import {cssClasses, strings} from '@douyinfe/semi-foundation/collapse/constants';
+import {vuePropsMake} from '../PropTypes';
+import {cssClasses} from '@douyinfe/semi-foundation/collapse/constants';
 import CollapseFoundation, {
-  ArgsType,
   CollapseAdapter,
   CollapseProps,
   CollapseState
@@ -12,11 +12,19 @@ import '@douyinfe/semi-foundation/collapse/collapse.scss';
 import {noop} from '@douyinfe/semi-foundation/utils/function';
 import {isEqual} from 'lodash';
 import CollapseContext from './collapse-context';
-import {CSSProperties, defineComponent, h, onBeforeUnmount, PropType, reactive, useSlots, VNode, watch} from "vue";
-import {vuePropsMake} from "../PropTypes";
+import {
+  ComponentObjectPropsOptions,
+  CSSProperties,
+  defineComponent,
+  h,
+  onBeforeUnmount,
+  PropType,
+  reactive,
+  useSlots,
+  VNode,
+  watch
+} from "vue";
 import {useBaseComponent} from "../_base/baseComponent";
-import {AnchorProps} from "../anchor";
-import {ComponentObjectPropsOptions} from "vue";
 
 export type {CollapsePanelProps} from './item';
 

@@ -28,7 +28,6 @@ import {ComponentObjectPropsOptions} from "vue";
 
 interface CollapsibleProps extends CollapsibleFoundationProps {
   motion?: boolean;
-  children?: VNode[];
   isOpen?: boolean;
   duration?: number;
   keepDOM?: boolean;
@@ -48,7 +47,6 @@ interface CollapsibleState extends CollapsibleFoundationState {
 }
 const propTypes:ComponentObjectPropsOptions<CollapsibleProps> = {
   motion: PropTypes.bool,
-  children: PropTypes.node as PropType<any>,
   isOpen: PropTypes.bool,
   duration: PropTypes.number,
   keepDOM: PropTypes.bool,
@@ -208,6 +206,7 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
       props.className
     );
 
+    const children = slots.default?.()
     return (
       <div
         class={wrapperCls}
@@ -228,7 +227,7 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
           id={props.id}
         >
           {
-            (props.keepDOM || props.collapseHeight !== 0 || state.visible || props.isOpen) && props.children
+            (props.keepDOM || props.collapseHeight !== 0 || state.visible || props.isOpen) && children
           }
         </div>
       </div>
