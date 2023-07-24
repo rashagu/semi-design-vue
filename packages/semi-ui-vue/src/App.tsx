@@ -148,7 +148,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<PopconfirmDemo/>*/}
         {/*<NotificationDemo/>*/}
         {/*<BannerDemo/>*/}
-        <ToastDemo/>
+        {/*<ToastDemo/>*/}
         {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
         {/*<FormAllDemo />*/}
@@ -180,7 +180,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
-        {/*<CheckboxDemo />*/}
+        <CheckboxDemo />
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}

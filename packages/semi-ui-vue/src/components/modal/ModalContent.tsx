@@ -30,7 +30,7 @@ import {
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
 import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
-import {useAttrs} from "vue/dist/vue";
+import {useAttrs} from "vue";
 
 let uuid = 0;
 

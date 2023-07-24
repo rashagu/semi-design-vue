@@ -16,7 +16,7 @@ import {CSSProperties, defineComponent, h, onBeforeUnmount, PropType, reactive, 
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 import {AnchorProps} from "../anchor";
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 export type {CollapsePanelProps} from './item';
 

@@ -24,7 +24,7 @@ import Checkbox from './checkbox';
 import type { CheckboxEvent } from './checkbox';
 import {AriaAttributes} from "../AriaAttributes";
 import {vuePropsMake} from "../PropTypes";
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 export type CheckboxDirection = 'horizontal' | 'vertical';
 export type CheckboxType = 'default' | 'card' | 'pureCard';

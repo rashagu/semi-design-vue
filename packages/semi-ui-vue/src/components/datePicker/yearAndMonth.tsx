@@ -17,7 +17,7 @@ import * as PropTypes from "../PropTypes";
 import {vuePropsMake} from "../PropTypes";
 import { strings } from '@douyinfe/semi-foundation/datePicker/constants';
 import { PanelType } from '@douyinfe/semi-foundation/datePicker/monthsGridFoundation';
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 const prefixCls = `${BASE_CLASS_PREFIX}-datepicker`;
 

@@ -243,6 +243,7 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
       ...props_,
       visible,
       motion: false,
+      size,
       className: classList,
       width: sheetWidth,
       height: sheetHeight,

@@ -30,7 +30,7 @@ import {
   onMounted,
   onUnmounted, PropType,
   reactive,
-  useSlots,
+  useSlots, VNode,
   watch
 } from 'vue';
 import { useConfigContext } from '../configProvider/context/Consumer';
@@ -74,6 +74,7 @@ export interface PaginationState {
   nextDisabled: boolean;
   restLeftPageList: number[];
   restRightPageList: number[];
+  allPageNumbers: number[]
 }
 
 export type PaginationLocale = Locale['Pagination'];
@@ -126,17 +127,24 @@ export const vuePropsType = vuePropsMake<PaginationProps>(propTypes, defaultProp
 const Pagination = defineComponent<PaginationProps>((props, {}) => {
   const slots = useSlots();
   const { context } = useConfigContext();
-  const state = reactive<PaginationState>({
-    total: props.total,
+  const total = props.total;
+
+  const pageSize = props.pageSize || props.pageSizeOpts[0] || numbers.DEFAULT_PAGE_SIZE; // Use pageSize first, use the first of pageSizeOpts when not, use the default value when none
+
+  const shouldFillAllNumber = props.size === 'small' && props.hoverShowPageSelect && !props.disabled;
+
+  const state = reactive<PaginationState>( {
+    total,
     showTotal: props.showTotal,
     currentPage: props.currentPage || props.defaultCurrentPage,
-    pageSize: props.pageSize || props.pageSizeOpts[0] || numbers.DEFAULT_PAGE_SIZE, // Use pageSize first, use the first of pageSizeOpts when not, use the default value when none
+    pageSize,
     pageList: [],
     prevDisabled: false,
     nextDisabled: false,
     restLeftPageList: [],
     restRightPageList: [],
     quickJumpPage: '',
+    allPageNumbers: shouldFillAllNumber ? Array.from({ length: Math.ceil(total / pageSize) }, (v, i) => i + 1) : [], // only need to count in smallPage mode, when props.size = small
   });
 
   const { adapter: adapterInject, getDataAttr } = useBaseComponent<PaginationProps>(props, state);
@@ -163,6 +171,7 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
       registerKeyDownHandler: (handler: KeyDownHandler) => {
         document.addEventListener('keydown', handler);
       },
+      updateAllPageNumbers: (allPageNumbers: number[]) => state.allPageNumbers = allPageNumbers,
       unregisterKeyDownHandler: (handler: KeyDownHandler) => {
         document.removeEventListener('keydown', handler);
       },
@@ -200,6 +209,8 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
       };
 
       let pagerHasChanged = false;
+      let allPageNumberNeedUpdate = false;
+
 
       if (prevPropsCurrentPage !== props.currentPage) {
         pagerHasChanged = true;
@@ -208,14 +219,20 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
 
       if (prevPropsTotal !== props.total) {
         pagerHasChanged = true;
+        allPageNumberNeedUpdate = true;
       }
 
       if (prevPropsPageSize !== props.pageSize) {
         pagerHasChanged = true;
+        allPageNumberNeedUpdate = true;
       }
 
       if (pagerHasChanged) {
         foundation.updatePage(pagerProps.currentPage, pagerProps.total, pagerProps.pageSize);
+      }
+
+      if (allPageNumberNeedUpdate) {
+        foundation.updateAllPageNumbers(pagerProps.total, pagerProps.pageSize);
       }
     }
   );
@@ -234,7 +251,7 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
         role="button"
         aria-disabled={isDisabled ? true : false}
         aria-label="Previous"
-        onClick={e => !isDisabled && foundation.goPrev(e)}
+        onClick={e => !isDisabled && foundation.goPrev()}
         class={preClassName}
         x-semi-prop="prevText"
       >
@@ -257,7 +274,7 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
         role="button"
         aria-disabled={isDisabled ? true : false}
         aria-label="Next"
-        onClick={e => !isDisabled && foundation.goNext(e)}
+        onClick={e => !isDisabled && foundation.goNext()}
         class={nextClassName}
         x-semi-prop="nextText"
       >
@@ -348,7 +365,7 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
       const pageEl = (
         <li
           key={`${page}${i}`}
-          onClick={() => !disabled && foundation.goPage(page, i)}
+          onClick={() => !disabled && foundation.goPage(page)}
           class={pageListClassName}
           aria-label={page === '...' ? 'More' : `Page ${page}`}
           aria-current={currentPage === page ? 'page' : false}
@@ -415,6 +432,19 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
     );
   }
 
+  function renderSmallPageSelect(content: VNode) {
+    const allPageNumbers = state.allPageNumbers;
+    const pageList = renderRestPageList(allPageNumbers);
+
+    return (
+      <Popover
+        content={pageList}
+      >
+        {content}
+      </Popover>
+    );
+  }
+
   function renderSmallPage(locale: PaginationLocale) {
     const { className, style, hideOnSinglePage, hoverShowPageSelect, showSizeChanger, disabled, ...rest } = props;
     const paginationCls = classNames(`${prefixCls}-small`, prefixCls, className, { [`${prefixCls}-disabled`]: disabled });
@@ -424,22 +454,21 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
       return null;
     }
 
-    const pageNumbers = Array.from({ length: Math.ceil(total / pageSize) }, (v, i) => i + 1);
-    const pageList = renderRestPageList(pageNumbers);
-
     const pageCls = classNames({
       [`${prefixCls}-item`]: true,
       [`${prefixCls}-item-small`]: true,
       [`${prefixCls}-item-all-disabled`]: disabled,
     });
 
-    const page = (<div class={pageCls}>{currentPage}/{totalPageNum} </div>);
+    const content = (<div class={pageCls}>{currentPage}/{totalPageNum} </div>);
 
 
     return (
       <div class={paginationCls} style={style}  {...getDataAttr()}>
         {renderPrevBtn()}
-        {(hoverShowPageSelect && !disabled) ? <Popover content={pageList}>{page}</Popover> : page}
+        {
+          (hoverShowPageSelect && !disabled) ? renderSmallPageSelect(content) : content
+        }
         {renderNextBtn()}
         {renderQuickJump(locale)}
       </div>

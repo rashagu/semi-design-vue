@@ -22,7 +22,7 @@ import {
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
-import {useAttrs} from "vue/dist/vue";
+import {useAttrs} from "vue";
 
 
 

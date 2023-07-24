@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3';
 
 import Cascader, {CascaderProps} from '../index';
 import Demo from "../__test__/CascaderDemo";
+import {DefineComponent} from "vue";
 
 const meta = {
   /* 👇 The title prop is optional.
@@ -9,7 +10,7 @@ const meta = {
    * to learn how to generate automatic titles
    */
   title: 'B输入类/Cascader',
-  component: Cascader,
+  component: Cascader as any,
   render: (args: any) => ({
     setup() {
       return ()=>(<div style={{padding: '10px'}}>

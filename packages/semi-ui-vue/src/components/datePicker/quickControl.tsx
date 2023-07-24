@@ -9,7 +9,7 @@ import { DateInputFoundationProps } from '@douyinfe/semi-foundation/datePicker/i
 import * as PropTypes from '../PropTypes'
 import {vuePropsMake} from "../PropTypes";
 import navigation from "./navigation";
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 const prefixCls = cssClasses.PREFIX;
 export interface QuickControlProps {
   presets: PresetsType;

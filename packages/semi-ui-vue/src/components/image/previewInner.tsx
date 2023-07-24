@@ -8,8 +8,10 @@ import {IconArrowLeft, IconArrowRight} from "@kousum/semi-icons-vue";
 import Header from "./previewHeader";
 import Footer from "./previewFooter";
 import PreviewImage from "./previewImage";
-import PreviewInnerFoundation, {PreviewInnerAdapter} from "@douyinfe/semi-foundation/image/previewInnerFoundation";
-import {PreviewContext, PreviewContextProps} from "./previewContext";
+import PreviewInnerFoundation from "@douyinfe/semi-foundation/image/previewInnerFoundation";
+import type {PreviewInnerAdapter} from "@douyinfe/semi-foundation/image/previewInnerFoundation";
+
+
 import {
   ComponentObjectPropsOptions,
   CSSProperties,
@@ -291,7 +293,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     foundation.handlePreviewClose();
   }
 
-  const handleAdjustRatio = (type: string) => {
+  const handleAdjustRatio = (type: RatioType) => {
     foundation.handleAdjustRatio(type);
   }
 

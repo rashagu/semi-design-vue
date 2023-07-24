@@ -2,7 +2,7 @@
 /* eslint-disable react/prefer-stateless-function, max-len */
 import { Subtract } from 'utility-types';
 import type { RuleItem } from 'async-validator';
-import { Options as scrollIntoViewOptions } from 'scroll-into-view-if-needed';
+import { Options as ScrollIntoViewOptions } from 'scroll-into-view-if-needed';
 
 import type { BaseFormApi as FormApi, FormState, WithFieldOption } from '@douyinfe/semi-foundation/form/interface';
 import type { SelectProps } from '../select/index';
@@ -129,7 +129,7 @@ export interface BaseFormProps {
     allowEmpty?: boolean;
     render?: (internalProps: FormFCChild) => VueJsxNode;
     component?: VNode | string;
-    autoScrollToError?: boolean | scrollIntoViewOptions;
+    autoScrollToError?: boolean | ScrollIntoViewOptions;
     disabled?: boolean;
     showValidateIcon?: boolean;
     extraTextPosition?: 'middle' | 'bottom';

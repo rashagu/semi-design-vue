@@ -8,7 +8,7 @@ import { IconTick } from '@kousum/semi-icons-vue';
 import { noop } from 'lodash';
 import {vuePropsMake} from "../PropTypes";
 import {useDropdownContext} from "./context/Consumer";
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 export type Type = 'primary' | 'secondary' | 'tertiary' | 'warning' | 'danger';
 

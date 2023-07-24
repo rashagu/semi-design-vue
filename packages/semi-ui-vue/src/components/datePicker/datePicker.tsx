@@ -49,7 +49,7 @@ import * as PropTypes from '../PropTypes'
 import {vuePropsMake} from '../PropTypes'
 import {VueJsxNode} from "../interface";
 import {useConfigContext} from "../configProvider/context/Consumer";
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 
 export interface DatePickerProps extends DatePickerFoundationProps {

@@ -3,13 +3,13 @@ import type { Meta, StoryObj } from '@storybook/vue3';
 import Checkbox, {CheckboxProps} from '../index';
 import Demo from "../__test__/CheckboxDemo";
 
-const meta = {
+const meta: Meta<typeof Checkbox> = {
   /* 👇 The title prop is optional.
    * See https://storybook.js.org/docs/7.0/vue/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
   title: 'B输入类/Checkbox',
-  component: Checkbox,
+  component: Checkbox as any,
   render: (args: any) => ({
     setup() {
       return ()=>(<div style={{padding: '10px'}}>
@@ -23,7 +23,7 @@ const meta = {
   },
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/7.0/vue/writing-docs/docs-page
   tags: ['autodocs'],
-} satisfies Meta<CheckboxProps>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

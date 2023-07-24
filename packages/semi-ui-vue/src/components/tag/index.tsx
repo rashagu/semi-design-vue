@@ -11,7 +11,7 @@ import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import {isString} from "lodash";
 import cls from 'classnames';
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 export * from './interface';
 

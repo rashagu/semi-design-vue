@@ -9,7 +9,7 @@ import Item from './item';
 import {CSSProperties, defineComponent, h, PropType, useAttrs, useSlots, VNode} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {VueJsxNode} from "../interface";
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 export type { DescriptionsItemProps } from './item';
 export type DescriptionsSize = 'small' | 'medium' | 'large';

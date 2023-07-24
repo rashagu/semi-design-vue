@@ -28,7 +28,7 @@ import getDefaultPickerDate from '@douyinfe/semi-foundation/datePicker/_utils/ge
 import {DayStatusType} from '@douyinfe/semi-foundation/datePicker/foundation';
 import {VueJsxNode} from '../interface';
 import type {ScrollItemProps} from '../scrollList';
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 const prefixCls = cssClasses.PREFIX;
 

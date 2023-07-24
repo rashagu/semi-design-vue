@@ -11,7 +11,7 @@ import Checkbox, { CheckboxEvent } from '../checkbox';
 import { BasicCascaderData, BasicEntity, ShowNextType, BasicData } from '@douyinfe/semi-foundation/cascader/foundation';
 import { BaseProps, useBaseComponent } from '../_base/baseComponent';
 import { VueJsxNode } from '../interface';
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 export interface CascaderData extends BasicCascaderData {
   label: VNode | string;

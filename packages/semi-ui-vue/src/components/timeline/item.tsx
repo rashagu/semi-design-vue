@@ -7,7 +7,7 @@ import '@douyinfe/semi-foundation/timeline/timeline.scss';
 import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots, VNode} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
-import {useAttrs} from "vue/dist/vue";
+import {useAttrs} from "vue";
 import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 export interface TimelineItemProps {

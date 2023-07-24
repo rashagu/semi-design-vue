@@ -13,7 +13,7 @@ import { Locale } from '../locale/interface';
 import {CheckboxProps} from "../checkbox";
 import {InsetTimeInput} from "./insetInput";
 import {vuePropsMake} from "../PropTypes";
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 const prefixCls = cssClasses.PREFIX;
 

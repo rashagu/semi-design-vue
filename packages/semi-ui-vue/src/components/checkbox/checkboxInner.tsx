@@ -8,7 +8,7 @@ import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
 import { VueHTMLAttributes } from '../interface';
 import {propTypesCheckbox} from "./propType";
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 export interface CheckboxInnerProps {
   'aria-describedby'?: AriaAttributes['aria-describedby'];

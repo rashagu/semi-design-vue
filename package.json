@@ -26,24 +26,24 @@
     "packages/semi-illustrations-vue"
   ],
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.39.0",
-    "@douyinfe/semi-theme-default": "2.39.0",
+    "@douyinfe/semi-foundation": "2.39.2",
+    "@douyinfe/semi-theme-default": "2.39.2",
     "vue": "^3.3.4",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@kousum/semi-icons-vue": "^0.4.0",
     "@kousum/semi-ui-vue": "^0.4.0",
-    "@storybook/addon-essentials": "^7.0.0-beta.38",
-    "@storybook/addon-interactions": "^7.0.0-beta.38",
-    "@storybook/addon-links": "^7.0.0-beta.38",
-    "@storybook/blocks": "^7.0.0-beta.38",
-    "@storybook/testing-library": "^0.0.14-next.1",
-    "@storybook/vue3": "^7.0.0-beta.38",
-    "@storybook/vue3-vite": "^7.0.0-beta.38",
+    "@storybook/addon-essentials": "^7.1.0",
+    "@storybook/addon-interactions": "^7.1.0",
+    "@storybook/addon-links": "^7.1.0",
+    "@storybook/blocks": "^7.1.0",
+    "@storybook/testing-library": "^0.2.0",
+    "@storybook/vue3": "^7.1.0",
+    "@storybook/vue3-vite": "^7.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "storybook": "^7.0.0-beta.38",
+    "storybook": "^7.1.0",
 
 
 
@@ -53,7 +53,7 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.16.7",
     "@changesets/cli": "^2.26.0",
-    "@douyinfe/semi-theme-default": "2.39.0",
+    "@douyinfe/semi-theme-default": "2.39.2",
     "@svgr/babel-plugin-add-jsx-attribute": "5.4.0",
     "@svgr/babel-plugin-remove-jsx-attribute": "5.4.0",
     "@svgr/babel-plugin-remove-jsx-empty-expression": "5.0.1",

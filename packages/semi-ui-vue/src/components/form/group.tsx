@@ -16,7 +16,7 @@ import {defineComponent, h, useSlots, Fragment, cloneVNode, PropType} from "vue"
 import {useFormUpdaterContext} from "./context/FormUpdaterContext/Consumer";
 import {noop} from "@douyinfe/semi-foundation/utils/function";
 import {VueJsxNode} from "../interface";
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 interface GroupErrorProps {
     showValidateIcon?: boolean;
     isInInputGroup?: boolean;

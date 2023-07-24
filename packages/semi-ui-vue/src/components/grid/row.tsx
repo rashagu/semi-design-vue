@@ -15,7 +15,7 @@ import classnames from 'classnames';
 import {cssClasses} from '@douyinfe/semi-foundation/grid/constants';
 import '@douyinfe/semi-foundation/grid/grid.scss';
 import {registerMediaQuery} from '../_utils/index';
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 const responsiveArray = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
 

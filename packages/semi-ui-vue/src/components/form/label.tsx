@@ -5,7 +5,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/form/constants';
 import { LocaleConsumerFunc } from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
 import {vuePropsMake} from "../PropTypes";
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Form']>()
 const prefixCls = cssClasses.PREFIX;

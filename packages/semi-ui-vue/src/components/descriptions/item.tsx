@@ -6,7 +6,7 @@ import {CSSProperties, defineComponent, h, useSlots, VNode} from 'vue';
 import {vuePropsMake} from '../PropTypes';
 import {useDescriptionsContext} from './context/Consumer';
 import {VueJsxNode} from '../interface';
-import {useAttrs} from "vue/dist/vue";
+import {useAttrs} from "vue";
 
 export interface DescriptionsItemProps {
   hidden?: boolean;

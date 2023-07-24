@@ -33,7 +33,7 @@ import Input from '../input/index';
 import {InsetDateInput, InsetTimeInput} from './insetInput';
 import * as PropTypes from "../PropTypes";
 import {vuePropsMake} from "../PropTypes";
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 
 export interface DateInputProps extends DateInputFoundationProps, BaseProps {
   insetLabel?: VNode;

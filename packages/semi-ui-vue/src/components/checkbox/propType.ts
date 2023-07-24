@@ -1,5 +1,5 @@
 import * as PropTypes from "../PropTypes";
-import {ComponentObjectPropsOptions} from "vue/dist/vue";
+import {ComponentObjectPropsOptions} from "vue";
 import {CheckboxProps} from "./checkbox";
 import {PropType} from "vue";
 
