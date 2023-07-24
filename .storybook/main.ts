@@ -21,7 +21,7 @@ const config: StorybookConfig = {
       build: {
         ...config.build,
         rollupOptions: {
-          external: [ './sb-preview/runtime.mjs' ],
+          external: [ './sb-preview/runtime.js' ],
           output: {
             // 入口文件名
             // 块文件名
