@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.5.0
+
+### Minor Changes
+
+- 6045292: vue3.3 & semi 2.39.2
+
 ## 0.4.0
 
 ### Minor Changes
