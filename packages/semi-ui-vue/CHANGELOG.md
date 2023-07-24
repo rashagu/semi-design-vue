@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.5.1
+
+### Patch Changes
+
+- f21a535: fix
+- Updated dependencies [f21a535]
+  - @kousum/semi-illustrations-vue@0.5.1
+  - @kousum/semi-animation-vue@0.5.1
+  - @kousum/semi-icons-vue@0.5.1
+
 ## 0.5.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.5.1
+
+### Patch Changes
+
+- f21a535: fix
+
 ## 0.5.0
 
 ### Minor Changes
