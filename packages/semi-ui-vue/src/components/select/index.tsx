@@ -4,7 +4,7 @@ import {
   defineComponent,
   Fragment,
   getCurrentInstance,
-  h,
+  h, isVNode,
   nextTick,
   onMounted,
   onUnmounted, PropType,
@@ -470,7 +470,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       registerClickOutsideHandler: (cb: (e: MouseEvent) => void) => {
         const clickOutsideHandler_: (e: MouseEvent) => void = e => {
           // @ts-ignore TODO 比较重要的不同点 关于获取组建dom的 使用expose 得到的结果就不一样了
-          const optionInstance = optionsRef.value && optionsRef.value.getRef?.().vnode;
+          const optionInstance = optionsRef.value && optionsRef.value.getRef?.().vnode.el;
           const triggerDom = (triggerRef.value) as Element;
           // eslint-disable-next-line react/no-find-dom-node
           const optionsDom = optionInstance;

@@ -184,7 +184,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        {/*<SelectDemo/>*/}
+        <SelectDemo/>
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}
@@ -198,7 +198,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
         {/*<IconTest />*/}
         {/*<br/>*/}
-        <TooltipDemo />
+        {/*<TooltipDemo />*/}
         {/*<br/>*/}
         {/*<br/>*/}
         {/*<DropdownDemo1/>*/}

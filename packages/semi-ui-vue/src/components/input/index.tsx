@@ -567,7 +567,8 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
       },
       onChange: (e: any) => {
         // console.debug(e.target.value, e, props)
-        foundation.handleChange(e.target.value, e)
+        // TODO 这里多调一次，会使AutoComplete这样的组件无法正常关闭下拉框
+        // foundation.handleChange(e.target.value, e)
       },
       onFocus: (e: any) => foundation.handleFocus(e),
       onBlur: (e: any) => foundation.handleBlur(e),

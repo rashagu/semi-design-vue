@@ -21,7 +21,7 @@ import {
     ComponentObjectPropsOptions,
     CSSProperties,
     defineComponent,
-    h,
+    h, isVNode,
     onMounted,
     onUnmounted, PropType,
     reactive,

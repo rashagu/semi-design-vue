@@ -51,7 +51,7 @@ import {
     CSSProperties,
     defineComponent,
     Fragment,
-    h,
+    h, isVNode,
     nextTick,
     onMounted,
     onUnmounted, PropType,

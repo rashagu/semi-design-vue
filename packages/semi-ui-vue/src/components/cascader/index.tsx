@@ -1,55 +1,49 @@
 import {
-  defineComponent,
-  ref,
-  h,
-  Fragment,
-  useSlots,
+  ComponentObjectPropsOptions,
   CSSProperties,
-  VNode,
-  reactive,
+  defineComponent,
+  Fragment,
+  h,
+  nextTick,
   onMounted,
   onUnmounted,
+  PropType,
+  reactive,
+  ref,
+  useSlots,
+  VNode,
   watch,
-  nextTick, ComponentObjectPropsOptions, PropType,
 } from 'vue';
 import * as PropTypes from '../PropTypes';
+import {vuePropsMake} from '../PropTypes';
 import cls from 'classnames';
-import CascaderFoundation, {
-  BasicCascaderData,
-  BasicEntity,
-  BasicValue,
-  ShowNextType,
-} from '@douyinfe/semi-foundation/cascader/foundation';
 import type {
-  /* Corresponding to the state of react */
   BasicCascaderInnerData,
-  /* Corresponding to the props of react */
   BasicCascaderProps,
-  BasicTriggerRenderProps,
   BasicScrollPanelProps,
+  BasicTriggerRenderProps,
   CascaderAdapter,
   CascaderType,
 } from '@douyinfe/semi-foundation/cascader/foundation';
-import { cssClasses, strings } from '@douyinfe/semi-foundation/cascader/constants';
-import { numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/constants';
-import { isSet, isEqual, isString, isEmpty, isFunction, isNumber, noop, flatten } from 'lodash';
+import CascaderFoundation, {ShowNextType,} from '@douyinfe/semi-foundation/cascader/foundation';
+import {cssClasses, strings} from '@douyinfe/semi-foundation/cascader/constants';
+import {numbers as popoverNumbers} from '@douyinfe/semi-foundation/popover/constants';
+import {flatten, isEmpty, isEqual, isFunction, isNumber, isSet, isString, noop} from 'lodash';
 import '@douyinfe/semi-foundation/cascader/cascader.scss';
-import { IconClear, IconChevronDown } from '@kousum/semi-icons-vue';
-import { findKeysForValues, convertDataToEntities, calcMergeType } from '@douyinfe/semi-foundation/cascader/util';
-import { calcCheckedKeys, normalizeKeyList, calcDisabledKeys } from '@douyinfe/semi-foundation/tree/treeUtil';
-import { getProps, useBaseComponent, ValidateStatus } from '../_base/baseComponent';
+import {IconChevronDown, IconClear} from '@kousum/semi-icons-vue';
+import {calcMergeType, convertDataToEntities, findKeysForValues} from '@douyinfe/semi-foundation/cascader/util';
+import {calcCheckedKeys, calcDisabledKeys, normalizeKeyList} from '@douyinfe/semi-foundation/tree/treeUtil';
+import {getProps, useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import Input from '../input';
-import Popover, { PopoverProps } from '../popover';
-import Item, { CascaderData, Entities, Entity, Data, FilterRenderProps } from './item';
+import Popover, {PopoverProps} from '../popover';
+import Item, {CascaderData, Data, Entities, Entity, FilterRenderProps} from './item';
 import Trigger from '../trigger';
 import Tag from '../tag';
-import TagInput, { TagInputProps } from '../tagInput';
-import { Motion } from '../_base/base';
-import { isSemiIcon } from '../_utils/index';
-import { Position } from '../tooltip/index';
-import { AriaAttributes } from '../AriaAttributes';
-import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import TagInput from '../tagInput';
+import {isSemiIcon} from '../_utils/index';
+import {Position} from '../tooltip/index';
+import {AriaAttributes} from '../AriaAttributes';
+import {VueJsxNode} from '../interface';
 
 export type { CascaderType, ShowNextType } from '@douyinfe/semi-foundation/cascader/foundation';
 export type { CascaderData, Entity, Data, CascaderItemProps, FilterRenderProps } from './item';
@@ -767,10 +761,10 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
       }
     });
     return (
-      <>
+      <Fragment>
         {displayTag}
         {!isEmpty(hiddenTag) && renderPlusN(hiddenTag)}
-      </>
+      </Fragment>
     );
   };
 
@@ -786,10 +780,10 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
         displayText = displayPath.map((path: VNode | string, index: number) => (
           <Fragment key={`${path}-${index}`}>
             {index < displayPath.length - 1 ? (
-              <>
+              <Fragment>
                 {path}
                 {separator}
-              </>
+              </Fragment>
             ) : (
               path
             )}
