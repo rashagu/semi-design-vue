@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.5.2
+
+### Patch Changes
+
+- c27de0a: fix
+
 ## 0.5.1
 
 ### Patch Changes
