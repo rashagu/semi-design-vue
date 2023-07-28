@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.5.3
+
+### Patch Changes
+
+- 73d045c: fix props type
+
 ## 0.5.2
 
 ### Patch Changes

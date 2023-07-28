@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.5.3
+
+### Patch Changes
+
+- 73d045c: fix props type
+- Updated dependencies [73d045c]
+  - @kousum/semi-animation-vue@0.5.3
+  - @kousum/semi-icons-vue@0.5.3
+  - @kousum/semi-illustrations-vue@0.5.3
+
 ## 0.5.2
 
 ### Patch Changes
