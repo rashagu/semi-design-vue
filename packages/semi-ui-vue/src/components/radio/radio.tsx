@@ -1,4 +1,15 @@
-import {defineComponent, ref, h, Fragment, CSSProperties, VNode, reactive, inject, Ref} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  CSSProperties,
+  VNode,
+  reactive,
+  inject,
+  Ref,
+  ComponentObjectPropsOptions, PropType
+} from 'vue'
 import cls from 'classnames';
 import { noop } from 'lodash';
 import RadioFoundation, { RadioAdapter } from '@douyinfe/semi-foundation/radio/radioFoundation';
@@ -52,7 +63,7 @@ export interface RadioState {
   checked?: boolean;
 }
 
-export const vuePropsType = {
+export const vuePropsType: ComponentObjectPropsOptions<RadioProps> = {
   autoFocus: {
     type: Boolean,
     default: false
@@ -69,17 +80,17 @@ export const vuePropsType = {
   value: [String, Number],
   disabled: Boolean,
   prefixCls: String,
-  displayMode: String,
-  onChange: Function,
-  onMouseEnter: {type: Function, default: noop},
-  onMouseLeave: {type: Function, default: noop},
-  mode: {type:String, default:''},
+  displayMode: String as PropType<RadioProps['displayMode']>,
+  onChange: Function as PropType<RadioProps['onChange']>,
+  onMouseEnter: {type: Function as PropType<RadioProps['onMouseEnter']>, default: noop},
+  onMouseLeave: {type: Function as PropType<RadioProps['onMouseLeave']>, default: noop},
+  mode: {type:String as PropType<RadioProps['mode']>, default:''},
   extra: [Object, String],
-  style: [Object, String],
+  style: [Object, String] as PropType<RadioProps['style']>,
   className: String,
-  addonStyle: [Object, String],
+  addonStyle: [Object, String] as PropType<RadioProps['style']>,
   addonClassName: String,
-  type: {type:String, default:'default'},
+  type: {type:String as PropType<RadioProps['type']>, default:'default'},
   'aria-label': String,
   addonId: String,
   extraId: String,
@@ -289,10 +300,11 @@ const Radio = defineComponent<RadioProps>((props, {slots}) => {
       </label>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Radio'
 })
 
-// @ts-ignore
-Radio.props = vuePropsType
 
 export default Radio
 

@@ -13,10 +13,11 @@ const Provider = defineComponent<{value:ListContextValue}>((props, {slots}) => {
   }, { deep: true, immediate: true})
   provide('ListContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
+}, {
+  props: vuePropsType,
+  name: 'ListContextProvider'
 })
 
-// @ts-ignore
-Provider.props = vuePropsType
 
 export default Provider
 

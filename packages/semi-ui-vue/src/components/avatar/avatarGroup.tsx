@@ -1,23 +1,24 @@
-import {defineComponent, ref, h, Fragment, VNode, cloneVNode} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, cloneVNode, PropType} from 'vue'
 import cls from 'classnames';
 import { get as lodashGet, isFunction, isNumber } from 'lodash';
 import Avatar, {AvatarGroupOverlapFrom, AvatarGroupShape, AvatarGroupSize} from './index';
 import { AvatarGroupProps } from './interface';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/avatar/constants';
+import {ComponentObjectPropsOptions} from "vue/dist/vue";
 
 const sizeSet = strings.SIZE;
 const shapeSet = strings.SHAPE;
 const overlapFromSet = strings.OVERLAP_FROM;
 const prefixCls = cssClasses.PREFIX;
 
-export const vuePropsType = {
-  style: [Object, String],
+export const vuePropsType:ComponentObjectPropsOptions<AvatarGroupProps> = {
+  style: [Object, String] as PropType<AvatarGroupProps['style']>,
   className: String,
-  shape: {type:String,default:'circle'},
-  size: {type:String,default:'medium'},
-  overlapFrom: {type:String,default:'start'},
+  shape: {type:String as PropType<AvatarGroupProps['shape']>,default:'circle'},
+  size: {type:String as PropType<AvatarGroupProps['size']>,default:'medium'},
+  overlapFrom: {type:String as PropType<AvatarGroupProps['overlapFrom']>,default:'start'},
   maxCount: Number,
-  renderMore: Function
+  renderMore: Function as PropType<AvatarGroupProps['renderMore']>
 }
 const AvatarGroup = defineComponent<AvatarGroupProps>((props, {slots}) => {
 
@@ -74,10 +75,11 @@ const AvatarGroup = defineComponent<AvatarGroupProps>((props, {slots}) => {
 
     return <div class={groupCls}>{inner}</div>;
   }
+},{
+  props: vuePropsType,
+  name: 'AvatarGroup'
 })
 
-// @ts-ignore
-AvatarGroup.props = vuePropsType
 
 export default AvatarGroup
 

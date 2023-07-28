@@ -90,8 +90,6 @@ const AutoSizer = defineComponent<AutoSizerProps>((props, {}) => {
   name: 'AutoSizer'
 });
 
-// @ts-ignore
-// AutoSizer.props = vuePropsType;
-// AutoSizer.name = 'AutoSizer';
+
 
 export default AutoSizer;

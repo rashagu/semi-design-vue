@@ -7,7 +7,7 @@ import {
   watch,
   CSSProperties,
   onMounted,
-  onUnmounted, VNode
+  onUnmounted, VNode, ComponentObjectPropsOptions, PropType
 } from 'vue'
 import * as PropTypes from '../PropTypes';
 
@@ -66,7 +66,8 @@ export interface TextAreaProps extends Omit<TextareaHTMLAttributes, OmitTextarea
   minlength?: number,
   maxlength?: number,
   class?: string,
-
+  className?: string,
+  'onUpdate:value'?: any
 }
 
 export interface TextAreaState {
@@ -79,7 +80,7 @@ export interface TextAreaState {
   cachedValue?: string;
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TextAreaProps> = {
   autosize: PropTypes.bool,
   borderless: PropTypes.bool,
   placeholder: PropTypes.string,
@@ -87,21 +88,21 @@ const propTypes = {
   rows: PropTypes.number,
   cols: PropTypes.number,
   maxCount: PropTypes.number,
-  onEnterPress: PropTypes.func,
-  validateStatus: PropTypes.string,
-  className: PropTypes.string,
+  onEnterPress: PropTypes.func as PropType<TextAreaProps['onEnterPress']>,
+  validateStatus: PropTypes.string as PropType<TextAreaProps['validateStatus']>,
+  className: PropTypes.string as PropType<TextAreaProps['className']>,
   style: PropTypes.object,
   showClear: PropTypes.bool,
-  onClear: PropTypes.func,
-  onResize: PropTypes.func,
-  getValueLength: PropTypes.func,
+  onClear: PropTypes.func as PropType<TextAreaProps['onClear']>,
+  onResize: PropTypes.func as PropType<TextAreaProps['onResize']>,
+  getValueLength: PropTypes.func as PropType<TextAreaProps['getValueLength']>,
   // TODO
   // resize: PropTypes.bool,
 
 
   class: {type: String, default: ''},
   defaultValue: {
-    type: [String, Boolean, Object, Array, undefined],
+    type: [String, Boolean, Object, Array, undefined] as PropType<TextAreaProps['defaultValue']>,
 // @ts-ignore
     default: undefined,
   },
@@ -111,37 +112,37 @@ const propTypes = {
   showCounter: {type: Boolean, default: false},
   minlength: Number,
   maxlength: Number,
-  'onUpdate:value': Function,
+  'onUpdate:value': Function as PropType<TextAreaProps['onUpdate:value']>,
   onChange: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onChange']>,
     default: noop,
   },
   onBlur: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onBlur']>,
     default: noop,
   },
   onFocus: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onFocus']>,
     default: noop,
   },
   onInput: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onInput']>,
     default: noop,
   },
   onKeyDown: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onKeyDown']>,
     default: noop,
   },
   onKeyUp: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onKeyUp']>,
     default: noop,
   },
   onKeyPress: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onKeyPress']>,
     default: noop,
   },
   onPressEnter: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onPressEnter']>,
     default: noop,
   },
   forwardRef: {
@@ -437,10 +438,11 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
       </div>
     );
   }
+}, {
+  props: VuePropsType,
+  name: 'TextArea'
 })
 
 
-// @ts-ignore
-TextArea.props = VuePropsType
 
 export default TextArea

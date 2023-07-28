@@ -16,10 +16,11 @@ const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useBreadContext()
   return () => slots.default ? slots.default(context) : null
+}, {
+  props: vuePropsType,
+  name: 'BreadContextConsumer'
 })
 
-// @ts-ignore
-Consumer.props = vuePropsType
 
 export default Consumer
 

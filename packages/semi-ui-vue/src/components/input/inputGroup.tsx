@@ -1,4 +1,4 @@
-import { defineComponent, ref, h, cloneVNode, VNode } from 'vue';
+import {defineComponent, ref, h, cloneVNode, VNode, ComponentObjectPropsOptions, PropType} from 'vue';
 
 import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
@@ -28,16 +28,16 @@ export interface InputGroupProps {
 // eslint-disable-next-line
 export interface InputGroupState {}
 
-export const VuePropsType = {
+export const VuePropsType:ComponentObjectPropsOptions<InputGroupProps> = {
   className: { type: String, default: '' },
-  size: { type: String, default: 'default' },
+  size: { type: String as PropType<InputGroupProps['size']>, default: 'default' },
   style: [String, Object],
   onBlur: {
-    type: Function,
+    type: Function as PropType<InputGroupProps['onBlur']>,
     default: noop,
   },
   onFocus: {
-    type: Function,
+    type: Function as PropType<InputGroupProps['onFocus']>,
     default: noop,
   },
   label: Object,
@@ -120,9 +120,10 @@ const InputGroup = defineComponent<InputGroupProps>((props, { slots }) => {
       </span>
     );
   };
+}, {
+  props: VuePropsType,
+  name: 'InputGroup'
 });
 
-// @ts-ignore
-InputGroup.props = VuePropsType;
 
 export default InputGroup;

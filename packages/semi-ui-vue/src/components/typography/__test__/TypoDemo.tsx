@@ -170,7 +170,6 @@ const TypoDemo = defineComponent<ExampleProps>((props, {slots}) => {
   )
 })
 
-// TypoDemo.props = vuePropsType
 
 export default TypoDemo
 

@@ -33,10 +33,11 @@ const Index = defineComponent<TriggerProps>((props, {slots}) => {
     const { triggerRender, componentName, ...rest } = props;
     return triggerRender({ ...rest });
   }
+}, {
+  props: vuePropsType,
+  name: 'Trigger'
 })
 
-// @ts-ignore
-Index.props = vuePropsType
 
 export default Index
 

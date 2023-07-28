@@ -37,12 +37,11 @@ function Table<RecordType extends Record<string, any> = Data>() {
         return <NormalTable {...props} children={slots.default?.()} ref={tableRef} direction={direction} ></NormalTable>;
       }
     };
+  }, {
+    props: vuePropsType,
+    name: 'TableIndex'
   });
 
-// @ts-ignore
-  Table.props = vuePropsType;
-// @ts-ignore
-  Table.name = "TableIndex";
   return Table
 }
 

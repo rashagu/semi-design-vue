@@ -72,8 +72,7 @@ const TreeSelectDemo = defineComponent<ExampleProps>((props, {}) => {
   )
 })
 
-// TreeSelectDemo.props = vuePropsType
-// TreeSelectDemo.name = 'TreeSelectDemo'
+
 
 export default TreeSelectDemo
 

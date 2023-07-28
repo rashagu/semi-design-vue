@@ -9,7 +9,7 @@ import {
   onMounted,
   onUnmounted,
   useSlots,
-  useAttrs
+  useAttrs, ComponentObjectPropsOptions, PropType
 } from 'vue'
 import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/empty/constants';
@@ -42,14 +42,14 @@ interface EmptyState {
 }
 
 
-export const vuePropsType = {
-  layout: {type:String,default:'vertical'},
-  imageStyle:[Object,String],
+export const vuePropsType:ComponentObjectPropsOptions<EmptyProps> = {
+  layout: {type:String as PropType<EmptyProps['layout']>,default:'vertical'},
+  imageStyle:[Object,String] as PropType<EmptyProps['imageStyle']>,
   title:[Object,String],
   description:[Object,String],
   image:[Object,String],
   darkModeImage:[Object,String],
-  style:[Object,String],
+  style:[Object,String] as PropType<EmptyProps['style']>,
   className:[String],
 }
 
@@ -145,10 +145,11 @@ const Empty = defineComponent<EmptyProps>((props, ) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Empty'
 })
 
-// @ts-ignore
-Empty.props = vuePropsType
 
 export default Empty
 

@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, CSSProperties, ComponentObjectPropsOptions, PropType} from 'vue'
 import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/select/constants';
 
@@ -11,33 +11,33 @@ export interface OptionGroupProps {
 const prefixCls = cssClasses.PREFIX_GROUP;
 
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<OptionGroupProps> = {
   label: [String, Number, Object, Array],
   children: [String, Number, Object, Array],
   className: String,
-  style: [String, Object],
+  style: [String, Object] as PropType<OptionGroupProps['style']>,
 }
-const OptionGroup = defineComponent<OptionGroupProps>({
-  name:'isSelectOptionGroup',
-  setup:(props, {slots}) => {
-    return () => {
-      const { label, className, style } = props;
-      const groupCls = cls(className, {
-        [prefixCls]: true,
-      });
-      if (!label && typeof label !== 'number') {
-        return null;
-      }
-      return (
-        <div class={groupCls} style={style}>
-          {label}
-        </div>
-      );
+const OptionGroup = defineComponent<OptionGroupProps>((props, {slots}) => {
+  return () => {
+    const { label, className, style } = props;
+    const groupCls = cls(className, {
+      [prefixCls]: true,
+    });
+    if (!label && typeof label !== 'number') {
+      return null;
     }
+    return (
+      <div class={groupCls} style={style}>
+        {label}
+      </div>
+    );
   }
+}, {
+  props: vuePropsType,
+  name: 'isSelectOptionGroup'
 })
 
-OptionGroup.props = vuePropsType
+
 
 export default OptionGroup
 

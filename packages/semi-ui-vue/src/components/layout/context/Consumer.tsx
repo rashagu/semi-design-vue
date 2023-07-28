@@ -26,7 +26,6 @@ const Consumer = defineComponent(() => {
   name: 'LayoutConsumer'
 })
 
-// Consumer.props = vuePropsType
 
 export default Consumer
 

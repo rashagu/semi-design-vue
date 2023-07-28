@@ -10,7 +10,17 @@ import {Locale} from "../locale/interface";
 import {isBoolean, isObject, isUndefined} from "lodash";
 import Skeleton, {SkeletonImage} from "../skeleton";
 import "@douyinfe/semi-foundation/image/image.scss";
-import {defineComponent, h, onMounted, reactive, ref, useSlots, watch} from "vue";
+import {
+  ComponentObjectPropsOptions,
+  defineComponent,
+  h,
+  onMounted,
+  PropType,
+  reactive,
+  ref,
+  useSlots,
+  watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {usePreviewContext} from "./previewContext/Consumer";
 import {useBaseComponent} from "../_base/baseComponent";
@@ -19,7 +29,7 @@ const LocaleConsumer = LocaleConsumerFunc<Locale["Image"]>()
 const prefixCls = cssClasses.PREFIX;
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<ImageProps> = {
   style: PropTypes.object,
   className: PropTypes.string,
   src: PropTypes.string,
@@ -29,9 +39,9 @@ const propTypes = {
   placeholder: PropTypes.node,
   fallback: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   preview: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  onLoad: PropTypes.func,
-  onError: PropTypes.func,
-  crossOrigin: PropTypes.string,
+  onLoad: PropTypes.func as PropType<ImageProps['onLoad']>,
+  onError: PropTypes.func as PropType<ImageProps['onError']>,
+  crossOrigin: PropTypes.string as PropType<ImageProps['crossOrigin']>,
   imageID: PropTypes.number,
 }
 
@@ -239,12 +249,11 @@ const Image = defineComponent<ImageProps>((props, {}) => {
       </div>
     );
   }
+}, {
+  props:vuePropsType,
+  name: 'Image'
 })
 
-// @ts-ignore
-Image.props = vuePropsType
-// @ts-ignore
-Image.name = 'Image'
 // @ts-ignore
 Image.isSemiImage = true
 

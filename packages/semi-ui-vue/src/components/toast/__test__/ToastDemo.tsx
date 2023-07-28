@@ -87,8 +87,8 @@ const ToastDemo = defineComponent<ExampleProps>((props, {}) => {
   )
 })
 
-// ToastDemo.props = vuePropsType
-// ToastDemo.name = 'ToastDemo'
+
+
 
 export default ToastDemo
 

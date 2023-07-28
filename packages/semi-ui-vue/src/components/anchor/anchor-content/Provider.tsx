@@ -13,10 +13,11 @@ const Provider = defineComponent<{value:AnchorContextType}>((props, {slots}) => 
   }, { deep: true, immediate: true})
   provide('AnchorContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
+}, {
+  props: vuePropsType,
+  name: 'AnchorContextProvider'
 })
 
-// @ts-ignore
-Provider.props = vuePropsType
 
 export default Provider
 

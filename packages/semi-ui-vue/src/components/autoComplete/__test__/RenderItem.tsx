@@ -69,10 +69,11 @@ const RenderItem = defineComponent<ExampleProps>((props, {slots}) => {
       ></AutoComplete>
     </div>
   )
+}, {
+  props: vuePropsType,
+  name: 'RenderItem'
 })
 
-// @ts-ignore
-RenderItem.props = vuePropsType
 
 export default RenderItem
 

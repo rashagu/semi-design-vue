@@ -875,9 +875,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
   name: 'Tree'
 })
 
-// @ts-ignore
-// Tree.props = vuePropsType
-// Tree.name = 'Tree'
+
 
 export default Tree
 

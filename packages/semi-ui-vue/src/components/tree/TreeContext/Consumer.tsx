@@ -15,10 +15,11 @@ const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useTreeContext()
   return () => slots.default ? slots.default(context) : null
+}, {
+  props: vuePropsType,
+  name: 'TreeContextConsumer'
 })
 
-// @ts-ignore
-Consumer.props = vuePropsType
 
 export default Consumer
 

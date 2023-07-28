@@ -153,8 +153,8 @@ const ToastList = defineComponent<ToastListProps>((props, { expose }) => {
   props: vuePropsType,
   name: 'ToastList'
 });
-// ToastList.props = vuePropsType;
-// ToastList.name = 'ToastList';
+
+
 export { ToastList };
 
 const createBaseToast = () => {

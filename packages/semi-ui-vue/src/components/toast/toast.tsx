@@ -188,8 +188,8 @@ const Toast = defineComponent<ToastReactProps>((props, {expose}) => {
     name: 'Toast'
 })
 
-// Toast.props = vuePropsType
-// Toast.name = 'Toast'
+
+
 
 export default Toast
 

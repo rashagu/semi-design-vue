@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, CSSProperties, VNode} from 'vue'
+import {defineComponent, ref, h, Fragment, CSSProperties, VNode, ComponentObjectPropsOptions, PropType} from 'vue'
 import classNames from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/tag/constants';
 import Tag from './index';
@@ -26,7 +26,7 @@ export interface TagGroupProps {
 }
 
 
-export const vuePropsType = {
+export const vuePropsType: ComponentObjectPropsOptions<TagGroupProps> = {
   maxTagCount:Number,
   restCount:Number,
   tagList:Array,
@@ -34,7 +34,7 @@ export const vuePropsType = {
   popoverProps:Object,
   mode:String, // TODO: This API is not in the check file
   style: {
-    type: [Object, String],
+    type: [Object, String] as PropType<TagGroupProps['style']>,
     default: {}
   },
   className: {
@@ -42,15 +42,15 @@ export const vuePropsType = {
     default: ''
   },
   size: {
-    type: String,
-    default: tagSize[0]
+    type: String as PropType<TagGroupProps['size']>,
+    default: tagSize[0] as any
   },
   avatarShape: {
-    type: String,
+    type: String as PropType<TagGroupProps['avatarShape']>,
     default: 'square'
   },
-  onTagClose: Function,
-  onPlusNMouseEnter: Function,
+  onTagClose: Function as PropType<TagGroupProps['onTagClose']>,
+  onPlusNMouseEnter: Function as PropType<TagGroupProps['onPlusNMouseEnter']>,
 }
 const Group = defineComponent<TagGroupProps>((props, {slots}) => {
 
@@ -146,10 +146,12 @@ const Group = defineComponent<TagGroupProps>((props, {slots}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'TagGroup'
 })
 
-// @ts-ignore
-Group.props = vuePropsType
+
 
 export default Group
 

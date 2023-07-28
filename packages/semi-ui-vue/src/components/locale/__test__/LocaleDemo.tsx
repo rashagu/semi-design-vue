@@ -24,7 +24,6 @@ const LocaleDemo = defineComponent<LocaleDemoProps>((props, {}) => {
   </div>;
 });
 
-// LocaleDemo.props = vuePropsType;
-// LocaleDemo.name = "LocaleDemo";
+
 
 export default LocaleDemo;

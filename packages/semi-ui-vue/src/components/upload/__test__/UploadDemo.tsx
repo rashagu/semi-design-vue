@@ -64,7 +64,7 @@ const UploadDemo = defineComponent<UploadDemoProps>((props, {}) => {
   );
 });
 
-// UploadDemo.props = vuePropsType;
-// UploadDemo.name = 'UploadDemo';
+
+
 
 export default UploadDemo;

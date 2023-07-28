@@ -141,8 +141,8 @@ const TransferDemo = defineComponent<TransferDemoProps>((props, {}) => {
   )
 })
 
-// TransferDemo.props = vuePropsType
-// TransferDemo.name = 'TransferDemo'
+
+
 
 export default TransferDemo
 

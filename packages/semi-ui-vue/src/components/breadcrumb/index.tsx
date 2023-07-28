@@ -24,11 +24,12 @@ import {
     VNode,
     Fragment,
     cloneVNode,
-    useSlots
+    useSlots, ComponentObjectPropsOptions, PropType
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 import {AriaAttributes} from "../AriaAttributes";
+import {VueJsxNode} from "../interface";
 
 const clsPrefix = cssClasses.PREFIX;
 
@@ -45,7 +46,7 @@ export type MoreType = 'default' | 'popover';
 export interface BreadcrumbProps extends BaseProps {
     routes?: Array<RouteProps>;
     onClick?: (route: RouteProps, event: MouseEvent) => void;
-    separator?: VNode;
+    separator?: VueJsxNode;
     compact?: boolean;
     style?: CSSProperties;
     renderItem?: (route: RouteProps) => VNode;
@@ -65,14 +66,13 @@ interface BreadcrumbState {
 }
 
 
-const propTypes_ = {
+const propTypes_:ComponentObjectPropsOptions<BreadcrumbProps> = {
     routes: propTypes.array,
-    onClick: propTypes.func,
-    separator: propTypes.node,
+    onClick: propTypes.func as PropType<BreadcrumbProps['onClick']>,
+    separator: propTypes.node as PropType<BreadcrumbProps['separator']>,
     compact: propTypes.bool,
-    children: propTypes.node,
     style: propTypes.object,
-    renderItem: propTypes.func,
+    renderItem: propTypes.func as PropType<BreadcrumbProps['renderItem']>,
     showTooltip: [
         propTypes.object,
         propTypes.bool,
@@ -82,10 +82,10 @@ const propTypes_ = {
     maxItemCount: propTypes.number,
 
     /* Customize the contents of the ellipsis area */
-    renderMore: propTypes.func,
+    renderMore: propTypes.func as PropType<BreadcrumbProps['renderMore']>,
 
     /* Type of ellipsis area */
-    moreType: String,
+    moreType: String as PropType<BreadcrumbProps['moreType']>,
     'aria-label': propTypes.string,
 };
 const defaultProps = {
@@ -301,10 +301,11 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
           </BreadContext.Provider>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Breadcrumb'
 })
 
-// @ts-ignore
-Breadcrumb.props = vuePropsType
 
 export default Breadcrumb
 export {

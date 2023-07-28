@@ -699,17 +699,16 @@ function withField<
         0
       );
     };
+  }, {
+    props: {
+      label: [...PropTypes.node, PropTypes.func],
+      validate: [PropTypes.func],
+      prefix: [...PropTypes.node, PropTypes.func],
+      id: [String]
+    },
+    name: 'Form' + Component.name
   });
 
-// @ts-ignore
-  SemiField.props = {
-    label: [...PropTypes.node, PropTypes.func],
-    validate: [PropTypes.func],
-    prefix: [...PropTypes.node, PropTypes.func],
-    id: [String]
-  };
-// @ts-ignore
-  SemiField.name = 'Form' + Component.name;
 
   return SemiField as any;
 }
