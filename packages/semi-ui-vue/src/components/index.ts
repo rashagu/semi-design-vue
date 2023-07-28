@@ -61,7 +61,7 @@ export { default as AvatarGroup } from './avatar/avatarGroup';
 export { default as BackTop } from './backtop';
 export { default as Badge } from './badge';
 export { default as Banner } from './banner';
-export { default as Breadcrumb } from './breadcrumb';
+export { default as Breadcrumb, BreadcrumbItem } from './breadcrumb';
 // export { default as Calendar } from './calendar';
 export { default as Card } from './card';
 export { default as CardGroup } from './card/cardGroup';

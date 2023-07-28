@@ -222,3 +222,23 @@ export function getFragmentChildren(slots: SetupContext['slots']):VNode[] {
         return children
     }
 }
+
+
+
+function getLeg(arr:VNode[], ) {
+    let nodes: VNode[] = []
+    arr.forEach(item=>{
+        if (typeof item.type === 'symbol'){
+        (Array.isArray(item.children) && item.children.length > 0) && (nodes = [...nodes, ...getLeg(item.children as VNode[])])
+        }else{
+            nodes.push(item)
+        }
+    })
+    return nodes
+}
+/**
+ * 当使用vue的v-for时的特殊处理
+ */
+export function getVNodeChildren(arr:VNode[]){
+    return getLeg(arr)
+}

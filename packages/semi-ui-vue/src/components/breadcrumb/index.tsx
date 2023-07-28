@@ -1,35 +1,38 @@
 /* eslint-disable max-len */
 import cls from 'classnames';
-import * as propTypes from '../PropTypes';
-import { cssClasses, strings } from '@douyinfe/semi-foundation/breadcrumb/constants';
-import BreadcrumbFoundation, { BreadcrumbAdapter } from '@douyinfe/semi-foundation/breadcrumb/foundation';
-import warning from '@douyinfe/semi-foundation/utils/warning';
-import { isFunction } from 'lodash';
-import '@douyinfe/semi-foundation/breadcrumb/breadcrumb.scss';
-import { noop } from '@douyinfe/semi-foundation/utils/function';
-import {BaseProps, useBaseComponent} from '../_base/baseComponent';
-import Popover from '../popover';
-import BreadcrumbItem from './item';
-import type { RouteProps, BreadcrumbItemInfo, BreadcrumbItemProps } from './item';
-import BreadContext from './bread-context';
-import { TooltipProps } from '../tooltip';
-import { IconMore } from '@kousum/semi-icons-vue';
 import {
+    cloneVNode,
+    ComponentObjectPropsOptions,
     CSSProperties,
     defineComponent,
+    Fragment,
     h,
     onMounted,
     onUnmounted,
+    PropType,
     reactive,
+    useSlots,
     VNode,
-    Fragment,
-    cloneVNode,
-    useSlots, ComponentObjectPropsOptions, PropType
-} from "vue";
-import {vuePropsMake} from "../PropTypes";
+} from 'vue'
+import * as propTypes from '../PropTypes';
+import {vuePropsMake} from '../PropTypes';
+import {cssClasses} from '@douyinfe/semi-foundation/breadcrumb/constants';
+import BreadcrumbFoundation, {BreadcrumbAdapter} from '@douyinfe/semi-foundation/breadcrumb/foundation';
+import warning from '@douyinfe/semi-foundation/utils/warning';
+import {isFunction} from 'lodash';
+import '@douyinfe/semi-foundation/breadcrumb/breadcrumb.scss';
+import {noop} from '@douyinfe/semi-foundation/utils/function';
+import {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import Popover from '../popover';
+import type {BreadcrumbItemInfo, BreadcrumbItemProps, RouteProps} from './item';
+import BreadcrumbItem from './item';
+import BreadContext from './bread-context';
+import {TooltipProps} from '../tooltip';
+import {IconMore} from '@kousum/semi-icons-vue';
 
 import {AriaAttributes} from "../AriaAttributes";
 import {VueJsxNode} from "../interface";
+import {getVNodeChildren} from "../_utils";
 
 const clsPrefix = cssClasses.PREFIX;
 
@@ -227,10 +230,12 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
         } = props;
         const { isCollapsed } = state;
         const hasRoutes = routes && routes.length > 0;
-        const items = hasRoutes ?
+        const items = getVNodeChildren(((hasRoutes ?
           foundation.genRoutes(routes) :
-          children;
+          children) as VNode[]));
+
         let template;
+
         const itemLength = items.length; // children length
 
         const restItemLength = itemLength - maxItemCount; // Omitted children items
@@ -249,7 +254,6 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
                   if (!item) {
                       return item;
                   }
-
                   warning(
                     item.type && item.type.name !== 'BreadcrumbItem',
                     '[Semi Breadcrumb]: Only accepts Breadcrumb.Item as its children'
@@ -263,6 +267,7 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
               })
             );
         }
+
 
         if (shouldCollapse) {
             return handleCollapse(template, items.length);
