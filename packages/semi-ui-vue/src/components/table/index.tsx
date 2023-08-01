@@ -3,11 +3,12 @@ import NormalTable_, {TablePropTypes} from './Table';
 import ResizableTable from './ResizableTable';
 import Column from './Column';
 import {strings} from '@douyinfe/semi-foundation/table/constants';
-import {TableProps, Data} from './interface';
+import type {TableProps, Data} from './interface';
 
 import {defineComponent, h, ref, useSlots} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
+
 
 const propTypes = {
   ...TablePropTypes,
@@ -17,6 +18,7 @@ const propTypes = {
 const defaultProps = {
   hideExpandedColumn: true,
 };
+
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 
 function Table<RecordType extends Record<string, any> = Data>() {

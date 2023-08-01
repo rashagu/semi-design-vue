@@ -42,7 +42,7 @@ import OptionGroup from './optionGroup';
 import Spin from '../spin';
 import Trigger from '../trigger';
 import {IconChevronDown, IconClear} from '@kousum/semi-icons-vue';
-import {getActiveElement, getChildrenVNode, getFocusableElements, isSemiIcon} from '../_utils';
+import {getActiveElement, getFocusableElements, getFragmentChildren, isSemiIcon} from '../_utils';
 import {Subtract} from 'utility-types';
 
 import warning from '@douyinfe/semi-foundation/utils/warning';
@@ -273,7 +273,7 @@ const propTypes:ComponentObjectPropsOptions<SelectProps> = {
   inputProps: PropTypes.object,
   outerBottomSlot: PropTypes.node as PropType<SelectProps['outerBottomSlot']>,
   innerBottomSlot: PropTypes.node as PropType<SelectProps['innerBottomSlot']>, // Options slot
-  optionList: PropTypes.array,
+  optionList: PropTypes.array as PropType<SelectProps['optionList']>, // O
   dropdownMatchSelectWidth: PropTypes.bool,
   loading: PropTypes.bool,
   defaultOpen: PropTypes.bool,
@@ -427,7 +427,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
   const {adapter: adapterInject, context: context_, getDataAttr} = useBaseComponent<SelectProps>(props, state)
   const setOptionContainerEl = (node: HTMLDivElement) => (optionContainerEl.value = node);
 
-  const instance = getCurrentInstance()
+  let preChildren:VNode[] = []
   function adapter(): SelectAdapter<SelectProps, SelectState> {
     const keyboardAdapter = {
       registerKeyDown: (cb: () => void) => {
@@ -512,7 +512,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       // Collect all subitems, each item is visible by default when collected, and is not selected
       //slots.default?slots.default():null
       getOptionsFromChildren: () => {
-        let children:VueJsxNode = getChildrenVNode(instance)
+        let children:VueJsxNode = preChildren || []
         let optionGroups = [];
         let options = [];
         const {optionList} = props;
@@ -666,7 +666,6 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
 
 
   watch([() => props.value, () => props.optionList], (value, [prevPropsValue, prevPropsOptionList],) => {
-    const instance = getCurrentInstance()
     // TODO Children VNode 更新时
     // const prevChildrenKeys = React.Children.toArray(prevProps.children).map((child: any) => child.key);
     // const nowChildrenKeys = React.Children.toArray(props.children).map((child: any) => child.key);
@@ -954,7 +953,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       listContent = renderVirtualizeList(visibleOptions);
     }
 
-    const style = {minWidth: dropdownMinWidth, ...dropdownStyle};
+    const style = {minWidth: (typeof dropdownMinWidth === "string" ? dropdownMinWidth : dropdownMinWidth + 'px'), ...dropdownStyle};
 
     const optionListCls = cls({
       [`${prefixcls}-option-list`]: true,
@@ -1476,6 +1475,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
 
 
   return () => {
+    preChildren = getFragmentChildren(slots);
     const {direction} = context_.value;
     const defaultPosition = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
     const {

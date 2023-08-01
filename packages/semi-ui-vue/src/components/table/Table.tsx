@@ -144,7 +144,7 @@ const propTypes:ComponentObjectPropsOptions<NormalTableProps<any>> = {
   size: PropTypes.string as PropType<NormalTableProps['size']>,
 // @ts-ignore
   tableLayout: PropTypes.string as PropType<any>,
-  columns: PropTypes.array,
+  columns: PropTypes.array as PropType<NormalTableProps['columns']>,
   hideExpandedColumn: PropTypes.bool,
   id: PropTypes.string,
   expandIcon: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.node]),

@@ -198,24 +198,16 @@ export function getFocusableElements(node: HTMLElement) {
 }
 
 
-export function getChildrenVNode(instance: ComponentInternalInstance) {
-    let children:VueJsxNode = []
-    // @ts-ignore
-    children = instance?.vnode?.children?.default ? instance.vnode.children.default() : null
-    if (children && Array.isArray(children[0])){
-        children = children[0]
-    }
-    return children
-}
+
 
 
 export function getFragmentChildren(slots: SetupContext['slots']):VNode[] {
     const children = slots.default?.()
     if (children){
         // for Vitest
-        if (typeof children[0].type === 'symbol' && isVNode(children[0])){
+        if (typeof children[0].type === 'symbol' && isVNode(children[0])) {
             return slots.default?.()?.[0]?.children as any || []
-        }else{
+        } else {
             return slots.default?.() as any || []
         }
     }else{

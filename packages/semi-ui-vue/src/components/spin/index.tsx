@@ -59,7 +59,7 @@ export const VuePropsType:ComponentObjectPropsOptions<SpinProps> = {
     type: Number,
     default: 0,
   },
-  tip: Object,
+  tip: [Object, String] as PropType<SpinProps['tip']>,
   wrapperClassName: String,
   style: Object,
   childStyle: Object,

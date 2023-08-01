@@ -1,11 +1,12 @@
 import './_base/base.scss';
+
 export { default as Button } from './button';
 export { default as ButtonGroup } from './button/ButtonGroup';
 export { default as ConfigProvider } from './configProvider';
-export { DropdownMenu, DropdownItem, DropdownDivider, DropdownTitle,Dropdown } from './dropdown';
+export { DropdownMenu, DropdownItem, DropdownDivider, DropdownTitle, Dropdown } from './dropdown';
 export { Row, Col } from './grid';
-export {LayoutContent, LayoutFooter, LayoutHeader, LayoutSider} from "./layout";
-export {default as Layout} from "./layout";
+export { LayoutContent, LayoutFooter, LayoutHeader, LayoutSider } from './layout';
+export { default as Layout } from './layout';
 export { default as IconButton } from './iconButton';
 export { default as Icon } from './icons';
 export { default as Popover } from './popover';
@@ -14,7 +15,6 @@ export { default as Spin } from './spin';
 export { default as SplitButtonGroup } from './button/splitButtonGroup';
 export { default as Tooltip } from './tooltip';
 export { default as LocaleProvider } from './locale/localeProvider';
-
 
 export {
   Typography,
@@ -34,26 +34,24 @@ export { default as Checkbox, CheckboxGroup } from './checkbox';
 export { default as DatePicker } from './datePicker';
 export type { BaseDatePicker } from './datePicker';
 export { default as Empty } from './empty';
-export { default as iconButton  } from './iconButton';
-export { default as Icons  } from './icons';
-export { default as ScrollList  } from './scrollList';
-export { default as Select  } from './select';
-export { default as Tag  } from './tag';
-export { default as TagInput  } from './tagInput';
-export { default as TimePicker  } from './timePicker';
-export { default as InputNumber  } from './inputNumber/index';
-export { default as Progress  } from './progress/index';
-export { default as Upload  } from './upload/index';
-export { default as Slider  } from './slider/index';
-export { default as Divider  } from './divider/index';
-export { default as Rating  } from './rating/index';
-export { default as Tree, TreeNode  } from './tree/index';
-export { default as TreeSelect  } from './treeSelect/index';
+export { default as iconButton } from './iconButton';
+export { default as Icons } from './icons';
+export { default as ScrollList } from './scrollList';
+export { default as Select } from './select';
+export { default as Tag } from './tag';
+export { default as TagInput } from './tagInput';
+export { default as TimePicker } from './timePicker';
+export { default as InputNumber } from './inputNumber/index';
+export { default as Progress } from './progress/index';
+export { default as Upload } from './upload/index';
+export { default as Slider } from './slider/index';
+export { default as Divider } from './divider/index';
+export { default as Rating } from './rating/index';
+export { default as Tree, TreeNode } from './tree/index';
+export { default as TreeSelect } from './treeSelect/index';
 
-import {default as Toast} from './toast'
-import {NotificationListClass as NotificationList} from './notification'
-
-
+import { default as Toast } from './toast';
+import { NotificationListClass as NotificationList } from './notification';
 
 export { default as Anchor } from './anchor';
 export { default as AutoComplete } from './autoComplete';
@@ -68,12 +66,12 @@ export { default as CardGroup } from './card/cardGroup';
 export { default as Carousel } from './carousel';
 export { default as Collapse } from './collapse';
 export { default as Collapsible } from './collapsible';
-export { default as Descriptions } from './descriptions';
+export { default as Descriptions, DescriptionsItem } from './descriptions';
 export { default as Modal } from './modal';
 
 export { default as List } from './list';
 export { default as InputGroup } from './input/inputGroup';
-export { default as Nav  } from './navigation/index';
+export { default as Nav } from './navigation/index';
 export { default as NavItem } from './navigation/Item';
 export { default as SubNav } from './navigation/SubNav';
 export type {
@@ -83,9 +81,8 @@ export type {
   SubNavProps,
   NavItemProps,
   NavItems,
-  OnSelectedData
+  OnSelectedData,
 } from './navigation/index';
-
 
 export { default as Notification } from './notification';
 export { default as OverflowList } from './overflowList';
@@ -99,7 +96,12 @@ export { default as Step } from './steps/step';
 export { default as Steps } from './steps';
 export { default as Switch } from './switch';
 
+/**
+ * Table
+ */
 export { default as Table } from './table';
+export type { ColumnProps } from './table/interface';
+
 export { default as Tabs } from './tabs';
 export { default as TabPane } from './tabs/TabPane';
 export { default as TagGroup } from './tag/group';
@@ -119,11 +121,11 @@ export {
   FormInput,
   FormSelectOption,
   FormSelectOptionGroup,
-
   FormAutoComplete,
   FormCascader,
   FormCheckbox,
-  FormCheckboxGroup, FormDatePicker,
+  FormCheckboxGroup,
+  FormDatePicker,
   FormRadio,
   FormRadioGroup,
   FormRating,
@@ -133,7 +135,6 @@ export {
   FormTimePicker,
   FormTreeSelect,
   FormUpload,
-
   Form,
   ArrayField,
   withField,
@@ -144,6 +145,6 @@ export {
   withFormState,
   withFormApi,
 } from './form/index';
-export type {FormApi, FormFCChild} from './form/index';
+export type { FormApi, FormFCChild } from './form/index';
 export { default as Image } from './image';
 export { Preview as ImagePreview } from './image';

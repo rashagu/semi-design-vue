@@ -1,7 +1,8 @@
 import { defineComponent, ref, h, Fragment, useSlots, watch } from 'vue';
-import { Form, FormSelectOption, FormInput, FormSelect } from '../index';
+import { Form, FormSelectOption, FormInput, FormSelect, FormApi } from '../index';
 import Tooltip from '../../tooltip';
 import { IconHelpCircle } from '@kousum/semi-icons-vue';
+import Button from "../../button";
 
 interface ExampleProps {
   name?: string;
@@ -12,10 +13,16 @@ export const vuePropsType = {
 };
 const FormDemo = defineComponent<ExampleProps>((props, { attrs }) => {
   const slots = useSlots();
+  const formApi = ref<FormApi<any>>()
 
+  function onSubmit() {
+    formApi.value.validate().then(values=>{
+      console.log(values)
+    })
+  }
   return () => (
     <div>
-      <Form layout="horizontal" onValueChange={(values) => console.log(values)}>
+      <Form getFormApi={v=>formApi.value = v} layout="horizontal" onValueChange={(values) => console.log(values)}>
         <FormInput
           field="UserName"
           label="用户名"
@@ -42,6 +49,7 @@ const FormDemo = defineComponent<ExampleProps>((props, { attrs }) => {
           <FormSelectOption value="user">普通用户</FormSelectOption>
           <FormSelectOption value="guest">访客</FormSelectOption>
         </FormSelect>
+        <Button type="primary" html-type="submit" onClick={onSubmit}>刷新</Button>
       </Form>
     </div>
   );

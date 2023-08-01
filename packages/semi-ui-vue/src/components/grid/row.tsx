@@ -55,7 +55,7 @@ export const vuePropsType:ComponentObjectPropsOptions<RowProps> = {
   justify: String as PropType<RowProps['justify']>,
   className: String,
   style: [String, Object] as PropType<RowProps['style']>,
-  gutter: [Number],
+  gutter: [Number, Array] as PropType<RowProps['gutter']>,
   prefixCls: {
     type: String,
     default: cssClasses.PREFIX
