@@ -40,10 +40,10 @@ importers:
         specifier: ^2.26.0
         version: 2.26.0
       '@kousum/semi-icons-vue':
-        specifier: ^0.5.1
+        specifier: ^0.5.4
         version: link:packages/semi-icons-vue
       '@kousum/semi-ui-vue':
-        specifier: ^0.5.1
+        specifier: ^0.5.4
         version: link:packages/semi-ui-vue
       '@storybook/addon-essentials':
         specifier: ^7.1.0
@@ -472,13 +472,13 @@ importers:
         specifier: ^1.5.2
         version: 1.5.2
       '@kousum/semi-animation-vue':
-        specifier: ^0.5.3
+        specifier: ^0.5.4
         version: link:../semi-animation-vue
       '@kousum/semi-icons-vue':
-        specifier: ^0.5.3
+        specifier: ^0.5.4
         version: link:../semi-icons-vue
       '@kousum/semi-illustrations-vue':
-        specifier: ^0.5.3
+        specifier: ^0.5.4
         version: link:../semi-illustrations-vue
       '@kousum/vue-draggable':
         specifier: 1.0.2
