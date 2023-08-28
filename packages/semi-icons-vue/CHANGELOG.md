@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.5.4
+
+### Patch Changes
+
+- 715b37f: expose type
+
 ## 0.5.3
 
 ### Patch Changes

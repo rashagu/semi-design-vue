@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.5.4
+
+### Patch Changes
+
+- 715b37f: expose type
+- Updated dependencies [715b37f]
+  - @kousum/semi-animation-vue@0.5.4
+  - @kousum/semi-icons-vue@0.5.4
+  - @kousum/semi-illustrations-vue@0.5.4
+
 ## 0.5.3
 
 ### Patch Changes
