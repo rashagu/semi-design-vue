@@ -26,6 +26,7 @@ export {
 export { default as Input } from './input';
 export { default as TextArea } from './input/textArea';
 export { Group as RadioGroup, Radio } from './radio';
+export type { RadioChangeEvent } from './radio'
 export { default as AutoCompleteItems } from './autoComplete';
 export { default as Avatar } from './avatar';
 export { default as Cascader } from './cascader';
@@ -37,7 +38,9 @@ export { default as Empty } from './empty';
 export { default as iconButton } from './iconButton';
 export { default as Icons } from './icons';
 export { default as ScrollList } from './scrollList';
-export { default as Select } from './select';
+export { default as Select, SelectOption } from './select';
+export type { OptionProps } from './select';
+
 export { default as Tag } from './tag';
 export { default as TagInput } from './tagInput';
 export { default as TimePicker } from './timePicker';
@@ -50,8 +53,6 @@ export { default as Rating } from './rating/index';
 export { default as Tree, TreeNode } from './tree/index';
 export { default as TreeSelect } from './treeSelect/index';
 
-import { default as Toast } from './toast';
-import { NotificationListClass as NotificationList } from './notification';
 
 export { default as Anchor } from './anchor';
 export { default as AutoComplete } from './autoComplete';
@@ -67,9 +68,10 @@ export { default as Carousel } from './carousel';
 export { default as Collapse } from './collapse';
 export { default as Collapsible } from './collapsible';
 export { default as Descriptions, DescriptionsItem } from './descriptions';
-export { default as Modal } from './modal';
+export { default as Modal, ModalClass } from './modal';
 
 export { default as List } from './list';
+export { ListItem } from "./list";
 export { default as InputGroup } from './input/inputGroup';
 export { default as Nav } from './navigation/index';
 export { default as NavItem } from './navigation/Item';
@@ -100,7 +102,8 @@ export { default as Switch } from './switch';
  * Table
  */
 export { default as Table } from './table';
-export type { ColumnProps } from './table/interface';
+export type { ColumnProps, TablePaginationProps,  } from './table/interface';
+export type {TableStateRowSelection} from "./table/Table";
 
 export { default as Tabs } from './tabs';
 export { default as TabPane } from './tabs/TabPane';

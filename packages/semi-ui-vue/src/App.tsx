@@ -131,7 +131,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<BadgeDemo />*/}
         {/*<OverflowListDemo1 />*/}
         {/*<OverflowListDemoScroll />*/}
-        {/*<TableDemo1 />*/}
+        <TableDemo1 />
         {/*<TableDemo2 />*/}
         {/*<TableDemo3 />*/}
         {/*<TableDemo4 />*/}
@@ -184,7 +184,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        <SelectDemo/>
+        {/*<SelectDemo/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}

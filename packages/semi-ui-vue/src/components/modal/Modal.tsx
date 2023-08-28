@@ -453,7 +453,7 @@ const destroyAll = function destroyAllFn() {
   }
 };
 
-export class ModalConfirm {
+export class ModalClass {
   static useModal = useModal
 
   static info = function (props: ModalReactProps) {

@@ -1,7 +1,6 @@
 import * as PropTypes from '../PropTypes';
 import Portal from '../_portal';
 import cls from 'classnames';
-import ConfigContext, { ContextValue } from '../configProvider/context';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/sideSheet/constants';
 import SideSheetContent from './SideSheetContent';
 import { noop } from 'lodash';
@@ -44,7 +43,6 @@ export interface SideSheetReactProps extends SideSheetProps {
   style?: CSSProperties;
   title?: VueJsxNode;
   footer?: VueJsxNode;
-  children?: VNode[];
   onCancel?: (e: MouseEvent | KeyboardEvent) => void;
 }
 
@@ -53,7 +51,6 @@ export type { SideSheetState };
 const propTypes:ComponentObjectPropsOptions<SideSheetProps> = {
   bodyStyle: PropTypes.object,
   headerStyle: PropTypes.object,
-  children: PropTypes.node,
   className: PropTypes.string,
   closable: PropTypes.bool,
   disableScroll: PropTypes.bool,
@@ -208,7 +205,6 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
   };
 
   function renderContent() {
-    const children = slots.default?.();
     const {
       placement,
       className,
@@ -282,7 +278,9 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
                     maskStyle={{ ...maskStyle }}
                     style={{ ...animationStyle, ...style }}
                   >
-                    {children}
+                    {{
+                      default: slots.default
+                    }}
                   </SideSheetContent>
                 ) : null;
               }}

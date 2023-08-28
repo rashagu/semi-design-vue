@@ -23,12 +23,16 @@ export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 
 function Table<RecordType extends Record<string, any> = Data>() {
   const NormalTable = NormalTable_<RecordType>()
-  const Table = defineComponent<TableProps<RecordType>>((props, {}) => {
+  const Table = defineComponent<TableProps<RecordType>>((props, {expose}) => {
     const slots = useSlots();
     const tableRef = ref()
     const {context} = useConfigContext()
 
     const getCurrentPageData = () => tableRef.value && tableRef.value.getCurrentPageData();
+
+    expose({
+      getCurrentPageData
+    })
 
     return () => {
       const direction = props.direction ?? context.value.direction;

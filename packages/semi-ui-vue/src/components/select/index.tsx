@@ -55,6 +55,7 @@ import type {TooltipProps} from '../tooltip';
 import {AriaAttributes} from "../AriaAttributes";
 import {VueJsxNode} from "../interface";
 
+export type {OptionProps} from './option';
 export type {OptionGroupProps} from './optionGroup';
 export type {VirtualRowProps} from './virtualRow';
 

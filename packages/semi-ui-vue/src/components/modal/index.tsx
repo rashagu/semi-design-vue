@@ -1,7 +1,7 @@
 
 import '@douyinfe/semi-foundation/modal/modal.scss';
 import { ModalState } from '@douyinfe/semi-foundation/modal/modalFoundation';
-import Modal, {ModalConfirm} from './Modal';
+import Modal, {ModalClass} from './Modal';
 import　{ ModalReactProps } from './Modal';
 import useModal from './useModal';
 
@@ -12,7 +12,7 @@ export type Directions = 'ltr' | 'rtl';
 export type { ModalReactProps, ModalState };
 
 export {
-  ModalConfirm,
+  ModalClass,
   useModal
 }
 export default Modal;
