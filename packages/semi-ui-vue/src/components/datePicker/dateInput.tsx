@@ -330,7 +330,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
             onChange={(rangeStartValue, e) => handleRangeInputChange(rangeStartValue, rangeEnd, e)}
             onEnterPress={e => handleRangeInputEnterPress(e, rangeStart, rangeEnd)}
             onFocus={e => handleRangeInputFocus(e as any, 'rangeStart')}
-            autofocus={autofocus} // autofocus moved to range start
+            autoFocus={autofocus} // autofocus moved to range start
             forwardRef={rangeInputStartRef}
           />
         </div>
@@ -513,7 +513,7 @@ const dateInput = defineComponent<DateInputProps>((props, {}) => {
       value: text,
       validateStatus: validateStatus,
       prefix: prefix,
-      autofocus: autofocus,
+      autoFocus: autofocus,
       size: size,
       onBlur: onBlur as any,
       onFocus: onFocus as any,

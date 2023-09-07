@@ -26,9 +26,10 @@ import {
 } from 'vue';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { VueJsxNode } from '../interface';
-import { vuePropsMake } from '../PropTypes';
+import {func, vuePropsMake} from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
-import { PaginationProps } from '../pagination';
+import { getScrollbarWidth } from "../_utils";
+
 
 const prefixCls = cssClasses.PREFIX;
 const defaultWidthList = strings.WIDTH;
@@ -94,6 +95,10 @@ export const vuePropsType = vuePropsMake<SideSheetProps>(propTypes, defaultProps
 const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
   const slots = useSlots();
 
+  let bodyOverflow: string = '';
+  let scrollBarWidth: number = 0;
+  let originBodyWidth: string = '100%';
+
   let _active: boolean;
   const state = reactive({ displayNone: !props.visible });
   const { context } = useConfigContext();
@@ -104,14 +109,18 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
       ...adapterInject(),
       disabledBodyScroll: () => {
         const { getPopupContainer } = props;
-        if (!getPopupContainer && document) {
+        bodyOverflow = document.body.style.overflow || '';
+        if (!getPopupContainer && bodyOverflow !== 'hidden') {
           document.body.style.overflow = 'hidden';
+          document.body.style.width = `calc(${originBodyWidth || '100%'} - ${scrollBarWidth}px)`;
+
         }
       },
       enabledBodyScroll: () => {
         const { getPopupContainer } = props;
-        if (!getPopupContainer && document) {
-          document.body.style.overflow = '';
+        if (!getPopupContainer && bodyOverflow !== 'hidden') {
+          document.body.style.overflow = bodyOverflow;
+          document.body.style.width = originBodyWidth;
         }
       },
       notifyCancel: (e: MouseEvent | KeyboardEvent) => {
@@ -163,6 +172,8 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
   });
 
   onMounted(() => {
+    scrollBarWidth = getScrollbarWidth();
+    originBodyWidth = document.body.style.width;
     if (props.visible) {
       foundation.beforeShow();
     }
@@ -236,6 +247,7 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
       [`${prefixCls}-hidden`]: keepDOM && state.displayNone,
     });
     const contentProps = {
+      ...(isVertical ? (width ? { width } : {}) : { width: "100%" }),
       ...props_,
       visible,
       motion: false,

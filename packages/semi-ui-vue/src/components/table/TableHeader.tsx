@@ -1,4 +1,3 @@
-
 import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import * as PropTypes from '../PropTypes';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/table/constants';
@@ -6,12 +5,12 @@ import { noop, isFunction, get } from 'lodash';
 import { shouldShowEllipsisTitle } from '@douyinfe/semi-foundation/table/utils';
 
 import TableHeaderRow from './TableHeaderRow';
-import { Fixed, TableComponents, OnHeaderRow } from './interface';
 import {ComponentObjectPropsOptions, defineComponent, h, PropType, reactive, useSlots} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import {TableSelectionCellProps} from "./ColumnSelection";
 import {BodyPropTypes} from "./Body";
+import type { Fixed, TableComponents, OnHeaderRow, ColumnProps } from './interface';
 
 function parseHeaderRows(columns: any[]) {
     const rows: any[] = [];
@@ -189,7 +188,7 @@ export interface TableHeaderCell {
     key: string | number;
     className: string;
     children: VueJsxNode;
-    column: any[];
+    column: ColumnProps;
     colStart: number;
     level: number;
     parents: any[];

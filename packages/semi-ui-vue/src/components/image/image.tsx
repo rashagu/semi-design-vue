@@ -205,7 +205,21 @@ const Image = defineComponent<ImageProps>((props, {}) => {
 
   return () => {
     const {src, loadStatus, previewVisible} = state;
-    const { src: picSrc, width, height, alt, style, className, crossOrigin, preview, fallback, placeholder, imageID, ...restProps } = props;
+    const {
+      src: picSrc,
+      width,
+      height,
+      alt,
+      style,
+      className,
+      crossOrigin,
+      preview,
+      fallback,
+      placeholder,
+      imageID,
+      setDownloadName,
+      ...restProps
+    } = props;
     const outerStyle = Object.assign({width, height}, style);
     const outerCls = cls(prefixCls, className);
     const canPreview = loadStatus === "success" && preview && !isInGroup();
@@ -244,6 +258,7 @@ const Image = defineComponent<ImageProps>((props, {}) => {
             visible={previewVisible}
             onVisibleChange={handlePreviewVisibleChange}
             crossOrigin={!isUndefined(crossOrigin) ? crossOrigin : previewProps?.crossOrigin}
+            setDownloadName={setDownloadName}
           />
         }
       </div>

@@ -47,25 +47,29 @@ const propTypes:ComponentObjectPropsOptions<BaseFormProps> = {
     onReset: PropTypes.func as PropType<BaseFormProps['onReset']>,
     // Triggered when the value of the form is updated, only when the value of the subfield changes. The entry parameter is formState.values
     onValueChange: PropTypes.func as PropType<BaseFormProps['onValueChange']>,
-    initValues: PropTypes.object,
-    getFormApi: PropTypes.func as PropType<BaseFormProps['getFormApi']>,
-    component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    render: PropTypes.func as PropType<BaseFormProps['render']>,
-    validateFields: PropTypes.func as PropType<BaseFormProps['validateFields']>,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    layout: String as PropType<BaseFormProps['layout']>,
-    labelPosition: String as PropType<BaseFormProps['labelPosition']>,
-    labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    labelAlign: String as PropType<BaseFormProps['labelAlign']>,
-    labelCol: PropTypes.object, // Control labelCol {span: number, offset: number} for all field child nodes
-    wrapperCol: PropTypes.object, // Control wrapperCol {span: number, offset: number} for all field child nodes
-    allowEmpty: PropTypes.bool,
     autoScrollToError: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    allowEmpty: PropTypes.bool,
+    className: PropTypes.string,
+    component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     disabled: PropTypes.bool,
+    extraTextPosition: PropTypes.string as PropType<BaseFormProps['extraTextPosition']>,
+    getFormApi: PropTypes.func as PropType<BaseFormProps['getFormApi']>,
+    initValues: PropTypes.object,
+    validateFields: PropTypes.func as PropType<BaseFormProps['validateFields']>,
+    layout: PropTypes.string as PropType<BaseFormProps['layout']>,
+    labelPosition: PropTypes.string as PropType<BaseFormProps['labelPosition']>,
+    labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    labelAlign: PropTypes.string as PropType<BaseFormProps['labelAlign']>,
+    labelCol: PropTypes.object, // Control labelCol {span: number, offset: number} for all field child nodes
+    render: PropTypes.func as PropType<BaseFormProps['render']>,
+    style: PropTypes.object,
     showValidateIcon: PropTypes.bool,
-    extraTextPosition: String as PropType<BaseFormProps['extraTextPosition']>,
+    stopValidateWithError: PropTypes.bool as PropType<BaseFormProps['stopValidateWithError']>,
     id: PropTypes.string,
+    wrapperCol: PropTypes.object, // Control wrapperCol {span: number, offset: number} for all field child nodes
+    trigger: [String, Array] as PropType<BaseFormProps['trigger']>,
+
+
 };
 
 const defaultProps = {
@@ -109,11 +113,11 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
         return {
             ...adapterInject<BaseFormProps, BaseFormState>(),
             cloneDeep,
-            notifySubmit: (values: any) => {
-                props.onSubmit(values);
+            notifySubmit: (values: any, e: any) => {
+                props.onSubmit(values, e);
             },
-            notifySubmitFail: (errors: ErrorMsg, values: any) => {
-                props.onSubmitFail(errors, values);
+            notifySubmitFail: (errors, values: any, e: any) => {
+                props.onSubmitFail(errors, values, e);
             },
             forceUpdate: (callback?: () => void) => {
                 // TODO 重新渲染
@@ -197,7 +201,7 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
 
     function submit(e: Event) {
         e.preventDefault();
-        foundation.submit();
+        foundation.submit(e);
     }
 
     function reset(e: Event) {
@@ -232,8 +236,10 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
             allowEmpty,
             autoScrollToError,
             showValidateIcon,
+            stopValidateWithError,
             extraTextPosition,
             id,
+            trigger,
             ...rest
         } = props;
 

@@ -352,6 +352,10 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
       const {active, over} = event;
       const selectedItems = adapter.getSelected();
       let selectedArr = [...selectedItems.values()].map(item=>item.key);
+
+      if (!active || !over){
+        return
+      }
       if (active.id !== over.id) {
         const oldIndex = selectedArr.indexOf(active.id);
         const newIndex = selectedArr.indexOf(over.id);

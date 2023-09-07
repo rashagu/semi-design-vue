@@ -47,7 +47,7 @@ export interface TextAreaProps extends Omit<TextareaHTMLAttributes, OmitTextarea
   defaultValue?: string;
   disabled?: boolean;
   readonly?: boolean;
-  autofocus?: boolean;
+  autoFocus?: boolean;
   showCounter?: boolean;
   showClear?: boolean;
   onClear?: (e: Event) => void;
@@ -108,7 +108,7 @@ const propTypes:ComponentObjectPropsOptions<TextAreaProps> = {
   },
   disabled: Boolean,
   readonly: Boolean,
-  autofocus: Boolean,
+  autoFocus: Boolean,
   showCounter: {type: Boolean, default: false},
   minlength: Number,
   maxlength: Number,
@@ -365,6 +365,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
       defaultValue,
       style,
       forwardRef,
+      autoFocus,
       getValueLength,
       maxlength,
       minlength,
@@ -399,6 +400,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
       ...omit(rest, 'insetLabel', 'insetLabelId', 'getValueLength', 'onClear', 'showClear'),
       className: itemCls,
       disabled,
+      autofocus: autoFocus || props.autofocus,
       readOnly: readonly,
       placeholder: !placeholder ? null : placeholder,
       onInput: (e: any) => {

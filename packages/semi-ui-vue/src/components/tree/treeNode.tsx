@@ -323,7 +323,7 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
     const { label, keyword, data, filtered, treeNodeFilterProp } = props;
     if (isFunction(renderLabel)) {
       return renderLabel(label, data);
-    } else if (isString(label) && filtered && keyword && treeNodeFilterProp === 'label') {
+    } else if (isString(label) && filtered && keyword) {
       return getHighLightTextHTML({
         sourceString: label,
         searchWords: [keyword],
@@ -370,7 +370,6 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
       [`${prefixcls}-selected`]: selected,
       [`${prefixcls}-active`]: !multiple && active,
       [`${prefixcls}-ellipsis`]: labelEllipsis,
-      [`${prefixcls}-filtered`]: filtered && treeNodeFilterProp !== 'label',
       [`${prefixcls}-drag-over`]: !disabled && dragOver,
       [`${prefixcls}-draggable`]: !disabled && draggable && !renderFullLabel,
       // When draggable + renderFullLabel is enabled, the default style

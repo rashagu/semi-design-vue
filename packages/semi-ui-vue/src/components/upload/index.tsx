@@ -43,6 +43,7 @@ import type {
 } from '@douyinfe/semi-foundation/upload/foundation';
 import type { ValidateStatus } from '../_base/baseComponent';
 import {vuePropsMake} from "../PropTypes";
+import {styleNum} from "../_utils";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -108,6 +109,8 @@ export interface UploadProps {
     previewFile?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
     prompt?: VNode | string;
     promptPosition?: PromptPositionType;
+    picHeight?: string | number;
+    picWidth?: string | number;
     renderFileItem?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
     renderPicInfo?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
     renderThumbnail?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
@@ -183,6 +186,8 @@ const propTypes:ComponentObjectPropsOptions<UploadProps> = {
     previewFile: PropTypes.func as PropType<UploadProps['previewFile']>,
     prompt: PropTypes.node as PropType<UploadProps['prompt']>,
     promptPosition: String as PropType<UploadProps['promptPosition']>,
+    picWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    picHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     renderFileItem: PropTypes.func as PropType<UploadProps['renderFileItem']>,
     renderPicPreviewIcon: PropTypes.func as PropType<UploadProps['renderPicPreviewIcon']>,
     renderFileOperation: PropTypes.func as PropType<UploadProps['renderFileOperation']>,
@@ -232,7 +237,7 @@ const defaultProps: Partial<UploadProps> = {
     withCredentials: false,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Upload = defineComponent<UploadProps>((props, {}) => {
+const Upload = defineComponent<UploadProps>((props, {expose}) => {
 
     const slots = useSlots()
 
@@ -376,9 +381,13 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
      * manual upload by user
      */
     const upload = (): void => {
-        const { fileList } = state;
-        foundation.startUpload(fileList);
+        foundation.manualUpload();
     };
+
+    expose({
+        insert,
+        upload,
+    })
 
     const renderFile = (file: FileItem, index: number, locale: Locale['Upload']): VNode | string => {
         const { name, status, validateMessage, _sizeInvalid, uid } = file;
@@ -394,6 +403,8 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
             renderThumbnail,
             disabled,
             onPreviewClick,
+            picWidth,
+            picHeight,
         } = props;
         const onRemove = (): void => remove(file);
         const onRetry = (): void => {
@@ -423,6 +434,8 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
               typeof onPreviewClick !== 'undefined'
                 ? (): void => foundation.handlePreviewClick(file)
                 : undefined,
+            picWidth,
+            picHeight
         };
 
         if (status === strings.FILE_STATUS_UPLOAD_FAIL && !validateMessage) {
@@ -455,7 +468,7 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
 
     const renderFileListPic = () => {
         const children = slots.default?.()
-        const { showUploadList, limit, disabled, draggable, hotSpotLocation } = props;
+        const { showUploadList, limit, disabled, draggable, hotSpotLocation, picHeight, picWidth } = props;
         const { fileList: stateFileList, dragAreaStatus } = state;
         const fileList = props.fileList || stateFileList;
         const showAddTriggerInList = limit ? limit > fileList.length : true;
@@ -476,6 +489,10 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
             role: 'button',
             className: uploadAddCls,
             onClick: onClick,
+            style: {
+                height: styleNum(picHeight),
+                width: styleNum(picWidth)
+            }
         };
         const containerProps = {
             class: fileListCls,

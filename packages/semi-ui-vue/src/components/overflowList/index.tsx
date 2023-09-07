@@ -336,12 +336,12 @@ const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
             const child = cloneVNode(element as any);
             return (
               <ResizeObserver
-                key={key}
+                key={key ?? idx}
                 onResize={([entry]) => onItemResize(entry, item, idx)}
               >
                 {/* 用div包起来，可以直接在resize回调中拿到宽度，不用通过获取元素的padding, margin, border-width求和计算宽度*/}
                 {/* This div wrap can get width directly rather than do the math of padding, margin, border-width*/}
-                <div key={key} class={`${prefixCls}-item`}>
+                <div key={key ?? idx} class={`${prefixCls}-item`}>
                   {child}
                 </div>
               </ResizeObserver>);

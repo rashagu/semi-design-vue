@@ -10,7 +10,7 @@ import Footer from "./previewFooter";
 import PreviewImage from "./previewImage";
 import PreviewInnerFoundation from "@douyinfe/semi-foundation/image/previewInnerFoundation";
 import type {PreviewInnerAdapter} from "@douyinfe/semi-foundation/image/previewInnerFoundation";
-
+import { getScrollbarWidth } from "../_utils";
 
 import {
   ComponentObjectPropsOptions,
@@ -45,7 +45,7 @@ const propTypes:ComponentObjectPropsOptions<PreviewInnerProps> = {
   visible: PropTypes.bool,
   src: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   currentIndex: PropTypes.number,
-  defaultIndex: PropTypes.number,
+  defaultCurrentIndex: PropTypes.number,
   defaultVisible: PropTypes.bool,
   maskClosable: PropTypes.bool,
   closable: PropTypes.bool,
@@ -197,6 +197,9 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
       setMouseActiveTime: (time: number) => {
         mouseActiveTime = time;
       },
+      getSetDownloadFunc: () => {
+        return context.value?.setDownloadName ?? props.setDownloadName;
+      },
     };
 
   }
@@ -238,12 +241,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
       })
     }
   }, {deep: true, immediate: true})
-  function getScrollbarWidth() {
-    if (globalThis && Object.prototype.toString.call(globalThis) === '[object Window]') {
-      return window.innerWidth - document.documentElement.clientWidth;
-    }
-    return 0;
-  }
+
   onMounted(()=>{
     scrollBarWidth = getScrollbarWidth();
     originBodyWidth = document.body.style.width;

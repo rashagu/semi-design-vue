@@ -15,6 +15,7 @@ import {Locale} from '../locale/interface';
 import useModal from './useModal';
 import {ButtonProps} from '../button/Button';
 import CSSAnimation from "../_cssAnimation";
+import { getScrollbarWidth } from "../_utils";
 
 import {
   ComponentObjectPropsOptions,
@@ -206,17 +207,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
     })
   })
 
-  function getScrollbarWidth() {
-    if (globalThis && Object.prototype.toString.call(globalThis) === '[object Window]') {
-      return window.innerWidth - document.documentElement.clientWidth;
-    }
-    return 0;
-  }
 
-
-  expose({
-    getScrollbarWidth,
-  })
 
   onMounted(() => {
     scrollBarWidth = getScrollbarWidth();

@@ -1,7 +1,6 @@
 import * as PropTypes from '../PropTypes';
 import classnames from 'classnames';
 import Input, {InputProps} from '../input';
-import {forwardStatics} from '@douyinfe/semi-foundation/utils/object';
 import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
 import isBothNaN from '@douyinfe/semi-foundation/utils/isBothNaN';
 import InputNumberFoundation, {
@@ -303,7 +302,7 @@ const InputNumber = defineComponent<InputNumberProps>((props, {}) => {
       } else {
         let valueStr = value;
         if (typeof value === 'number') {
-          valueStr = value.toString();
+          valueStr = foundation.doFormat(value);
         }
 
         const parsedNum = foundation.doParse(valueStr, false, true, true);

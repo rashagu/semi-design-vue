@@ -286,6 +286,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
         focus: 'onFocus',
         blur: 'onBlur',
         keydown: 'onKeydown',
+        contextMenu: 'onContextmenu',
       }),
       registerTriggerEvent: (triggerEventSet: Record<string, any>) => {
         state.triggerEventSet = triggerEventSet;

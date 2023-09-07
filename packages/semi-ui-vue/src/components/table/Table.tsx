@@ -380,7 +380,9 @@ function Table<RecordType extends Record<string, any>>() {
           if (Array.isArray(flattenColumns)) {
             isFixed = flattenColumns.some(column => (Boolean(column.ellipsis) || Boolean(column.fixed)));
           }
-
+          if (adapter.useFixedHeader()) {
+            isFixed = true;
+          }
           return isFixed ? 'fixed' : 'auto';
         },
         setHeadWidths: (headWidths: Array<BaseHeadWidth>, index = 0) => {

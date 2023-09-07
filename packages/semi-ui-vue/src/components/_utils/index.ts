@@ -234,3 +234,20 @@ function getLeg(arr:VNode[], ) {
 export function getVNodeChildren(arr:VNode[]){
     return getLeg(arr)
 }
+
+
+export function getScrollbarWidth() {
+    if (globalThis && Object.prototype.toString.call(globalThis) === '[object Window]') {
+        return window.innerWidth - document.documentElement.clientWidth;
+    }
+    return 0;
+}
+
+
+export function styleNum(v: string | number) {
+    if (isNaN(+v)) {
+        return v
+    } else {
+        return v + 'px'
+    }
+}

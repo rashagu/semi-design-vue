@@ -107,7 +107,8 @@ export interface ColumnProps<RecordType extends Record<string, any> = any> {
     onFilter?: OnFilter<RecordType>;
     onFilterDropdownVisibleChange?: OnFilterDropdownVisibleChange;
     onHeaderCell?: OnHeaderCell<RecordType>;
-    ellipsis?: BaseEllipsis
+    ellipsis?: BaseEllipsis;
+    resize?: boolean
 }
 
 export type Align = BaseAlign;
@@ -122,7 +123,7 @@ export type Fixed = BaseFixed;
 export type OnCell<RecordType> = (record?: RecordType, rowIndex?: number) => OnCellReturnObject;
 export type OnFilter<RecordType> = (filteredValue?: any, record?: RecordType) => boolean;
 export type OnFilterDropdownVisibleChange = (visible?: boolean) => void;
-export type OnHeaderCell<RecordType> = (record?: RecordType, columnIndex?: number) => OnHeaderCellReturnObject;
+export type OnHeaderCell<RecordType> = (record?: RecordType, columnIndex?: number, index?: number) => OnHeaderCellReturnObject;
 export type ColumnRender<RecordType> = (text: any, record: RecordType, index: number, options?: RenderOptions) => ColumnRenderReturnType;
 export type RenderFilterDropdownItem = (itemInfo?: FilterDropdownItem) => VueJsxNode;
 export type Sorter<RecordType> = BaseSorter<RecordType>;

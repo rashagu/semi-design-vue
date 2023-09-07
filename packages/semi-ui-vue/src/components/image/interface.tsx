@@ -22,6 +22,7 @@ export interface ImageProps extends BaseProps{
     crossOrigin?: "anonymous"| "use-credentials";
     children?: VueJsxNode,
     imageID?: number;
+    setDownloadName?: (src: string) => string
 }
 
 export interface PreviewProps extends BaseProps {
@@ -29,7 +30,7 @@ export interface PreviewProps extends BaseProps {
     src?: string | string[];
     previewTitle?: VueJsxNode;
     currentIndex?: number;
-    defaultIndex?: number;
+    defaultCurrentIndex?: number;
     defaultVisible?: boolean;
     maskClosable?: boolean;
     closable?: boolean;
@@ -67,6 +68,7 @@ export interface PreviewProps extends BaseProps {
     onRatioChange?: (type: RatioType) => void;
     onRotateChange?: (angle: number) => void;
     onDownload?: (src: string, index: number) => void;
+    setDownloadName?: (src: string) => string
 }
 
 export interface MenuProps {
@@ -88,6 +90,7 @@ export interface MenuProps {
     onRatioClick?: () => void,
     onRotateLeft?: () => void,
     onRotateRight?: () => void,
+    setDownloadName?: (src: string) => string
 }
 
 export type RatioType = "adaptation" | "realSize";

@@ -36,7 +36,7 @@ const propTypes:ComponentObjectPropsOptions<PreviewProps> = {
     visible: PropTypes.bool,
     src: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     currentIndex: PropTypes.number,
-    defaultIndex: PropTypes.number,
+    defaultCurrentIndex: PropTypes.number,
     defaultVisible: PropTypes.bool,
     maskClosable: PropTypes.bool,
     closable: PropTypes.bool,
@@ -82,7 +82,7 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
 
     const slots = useSlots()
     const state = reactive({
-        currentIndex: props.currentIndex || props.defaultIndex || 0,
+        currentIndex: props.currentIndex || props.defaultCurrentIndex || 0,
         visible: props.visible || props.defaultVisible || false,
     });
 
@@ -244,7 +244,7 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
     return () => {
         // @ts-ignore
         children.value = slots.default?.()?.[0]?.children || []
-        const { src, className, style, lazyLoad, ...restProps } = props;
+        const { src, className, style, lazyLoad, setDownloadName, ...restProps } = props;
         const { currentIndex, visible } = state;
         const { srcListInChildren, newChildren, titles } = loopImageIndex();
         const srcArr = Array.isArray(src) ? src : (typeof src === "string" ? [src] : []);
@@ -261,6 +261,7 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
                 previewObserver: previewObserver,
                 setCurrentIndex: handleCurrentIndexChange,
                 handleVisibleChange: handleVisibleChange,
+                setDownloadName: setDownloadName,
             }}
           >
               <div id={previewGroupId} style={style} class={cls(`${prefixCls}-preview-group`, className)}>

@@ -310,7 +310,7 @@ const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
 
         const customRowProps = adapter.getCache('customRowProps');
 
-        if (typeof customRowProps.onMouseEnter === 'function') {
+        if (typeof customRowProps?.onMouseEnter === 'function') {
             customRowProps.onMouseEnter(e);
         }
     };
@@ -320,7 +320,7 @@ const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
 
         const customRowProps = adapter.getCache('customRowProps');
 
-        if (typeof customRowProps.onMouseLeave === 'function') {
+        if (typeof customRowProps?.onMouseLeave === 'function') {
             customRowProps.onMouseLeave(e);
         }
     };

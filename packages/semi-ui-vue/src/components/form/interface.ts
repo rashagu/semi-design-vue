@@ -4,7 +4,7 @@ import { Subtract } from 'utility-types';
 import type { RuleItem } from 'async-validator';
 import { Options as ScrollIntoViewOptions } from 'scroll-into-view-if-needed';
 
-import type { BaseFormApi as FormApi, FormState, WithFieldOption } from '@douyinfe/semi-foundation/form/interface';
+import type { BaseFormApi as FormApi, FormState, WithFieldOption, AllErrors, FieldValidateTriggerType } from '@douyinfe/semi-foundation/form/interface';
 import type { SelectProps } from '../select/index';
 import Option from '../select/option';
 import OptGroup from '../select/optionGroup';
@@ -105,32 +105,34 @@ interface setValuesConfig {
     isOverride: boolean;
 }
 
-export interface BaseFormProps {
+export interface BaseFormProps <Values extends Record<string, any> = any> {
     'aria-label'?: AriaAttributes['aria-label'];
-    onSubmit?: (values: Record<string, any>) => void;
-    onSubmitFail?: (errors: Record<string, FieldError>, values: any) => void;
+    onSubmit?: (values: Values, e?: any) => void;
+    onSubmitFail?: (errors: Record<keyof Values, FieldError>, values: Partial<Values>, e?: any) => void;
     onReset?: () => void;
-    onValueChange?: (values: Record<string, any>, changedValue: Record<string, any>) => void;
+    onValueChange?: (values: Values, changedValue: Partial<Values>) => void;
     onChange?: (formState: FormState) => void;
-    validateFields?: (values: Record<string, any>) => string | Record<string, any>;
+    allowEmpty?: boolean;
+    validateFields?: (values: Values) => string | Partial<AllErrors<Values>>;
     /** Use this if you want to populate the form with initial values. */
-    initValues?: Record<string, any>;
+    initValues?: Values;
     id?: string;
     /** getFormApi will be call once when Form mounted, u can save formApi reference in your component  */
-    getFormApi?: (formApi: FormApi) => void;
+    getFormApi?: (formApi: FormApi<Values>) => void;
     style?: CSSProperties;
     className?: string;
+    extraTextPosition?: 'middle' | 'bottom';
     layout?: 'horizontal' | 'vertical';
     labelPosition?: 'top' | 'left' | 'inset';
     labelWidth?: number | string;
     labelAlign?: 'left' | 'right';
     labelCol?: Record<string, any>;
     wrapperCol?: Record<string, any>;
-    allowEmpty?: boolean;
     render?: (internalProps: FormFCChild) => VueJsxNode;
     component?: VNode | string;
     autoScrollToError?: boolean | ScrollIntoViewOptions;
     disabled?: boolean;
     showValidateIcon?: boolean;
-    extraTextPosition?: 'middle' | 'bottom';
+    stopValidateWithError?: boolean;
+    trigger?: FieldValidateTriggerType
 }

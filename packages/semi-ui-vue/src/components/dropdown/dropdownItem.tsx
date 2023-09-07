@@ -66,7 +66,18 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
   let elementType: string = 'Dropdown.Item'
 
   return ()=>{
-    const { disabled, className, forwardRef, style, type, active, icon, showTick, hover } = props;
+    const {
+      disabled,
+      className,
+      forwardRef,
+      style,
+      type,
+      active,
+      icon,
+      onKeyDown,
+      showTick,
+      hover
+    } = props;
     const { showTick: contextShowTick } = context.value;
     const realShowTick = contextShowTick ?? showTick;
     const itemclass = cls(className, {
@@ -81,16 +92,20 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
     const events = {};
     if (!disabled) {
       ['onClick', 'onMouseEnter', 'onMouseLeave', 'onContextMenu'].forEach(eventName => {
-        events[eventName] = props[eventName];
+        if (eventName === "onClick") {
+          events["onMouseDown"] = props[eventName];
+        } else {
+          events[eventName] = props[eventName];
+        }
       });
     }
     let tick = null;
     switch (true) {
       case realShowTick && active:
-        tick = <IconTick />;
+        tick = <IconTick/>;
         break;
       case realShowTick && !active:
-        tick = <IconTick style={{ color: 'transparent' }} />;
+        tick = <IconTick style={{ color: 'transparent' }}/>;
         break;
       default:
         tick = null;
@@ -105,7 +120,8 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
       );
     }
     return (
-      <li role="menuitem" tabindex={-1} aria-disabled={disabled} {...events} ref={forwardRef} class={itemclass} style={style}>
+      <li role="menuitem" tabindex={-1} aria-disabled={disabled} {...events} onKeydown={onKeyDown} ref={forwardRef}
+          class={itemclass} style={style}>
         {tick}
         {iconContent}
         {slots.default?.()}

@@ -18,7 +18,8 @@ const ToastDemo = defineComponent<ExampleProps>((props, {}) => {
   })
   const opts = ref({
     content: 'Hi, Bytedance dance dance',
-    duration: 3,
+    duration: 13,
+    stack: true,
   });
 
   const handleClose = () => {
@@ -58,12 +59,12 @@ const ToastDemo = defineComponent<ExampleProps>((props, {}) => {
       <div>
         <Button onClick={() => {
           Toast.info(opts.value)
-          setTimeout(() => {
-            opts.value = {
-              content: 'Hi, Bytedansssssssssssce dance dance',
-              duration: 3,
-            }
-          }, 1000)
+          // setTimeout(() => {
+          //   opts.value = {
+          //     content: 'Hi, Bytedansssssssssssce dance dance',
+          //     duration: 3,
+          //   }
+          // }, 1000)
         }}>Display Toast</Button>
         <br/>
 

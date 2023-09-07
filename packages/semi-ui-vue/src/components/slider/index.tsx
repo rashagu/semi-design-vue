@@ -71,6 +71,7 @@ const propTypes:ComponentObjectPropsOptions<SliderProps> = {
   },
   onAfterChange: PropTypes.func as PropType<SliderProps['onAfterChange']>, // OnmouseUp and triggered when clicked
   onChange: PropTypes.func as PropType<SliderProps['onChange']>,
+  onMouseUp: PropTypes.func as PropType<SliderProps['onMouseUp']>,
   tooltipVisible: {
     type: PropTypes.bool,
     default: undefined,
@@ -228,7 +229,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
       getMaxHandleEl: () => maxHanleEl.value,
       onHandleDown: (e: MouseEvent) => {
         _addEventListener(document.body, 'mousemove', foundation.onHandleMove, false);
-        _addEventListener(document.body, 'mouseup', foundation.onHandleUp, false);
+        _addEventListener(window, 'mouseup', foundation.onHandleUp, false);
         _addEventListener(document.body, 'touchmove', foundation.onHandleTouchMove, false);
       },
       onHandleMove: (
@@ -287,6 +288,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         state.focusPos = '';
       },
       onHandleUpBefore: (e: MouseEvent) => {
+        props.onMouseUp?.(e);
         e.stopPropagation();
         e.preventDefault();
         document.body.removeEventListener('mousemove', foundation.onHandleMove, false);
@@ -621,9 +623,9 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   };
 
   function _addEventListener<T extends keyof HTMLElementEventMap>(
-    target: HTMLElement,
+    target: HTMLElement | Window,
     eventName: T,
-    callback: (e: HTMLElementEventMap[T]) => void,
+    callback: EventListenerOrEventListenerObject,
     ...rests: any
   ) {
     if (target.addEventListener) {

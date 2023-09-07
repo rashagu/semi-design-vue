@@ -294,7 +294,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
         return merge(
           {
             opts: {
-              style: {width: '240px'},
+              // style: {width: '240px'},
               showArrow: true,
             },
           },
@@ -353,15 +353,11 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       suffix,
       pos
     );
-    if (
 
-      children === content) {
-      state.expanded = true
-    } else if (ellipsisContent !== content || isOverflowed !== updateOverflow) {
-      state.ellipsisContent = content
-      state.isOverflowed = updateOverflow
-      state.isTruncated = children !== content
-    }
+    state.isOverflowed = false
+    state.ellipsisContent = content
+    state.isTruncated = children !== content
+
     return undefined;
   }
 

@@ -217,9 +217,10 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
         columns.value = nextColumns
     };
 
-    const resizableRender = (col: ColumnProps, index: number, level = 0) => ({
+    const resizableRender = (col: ColumnProps, index: number, level = 0, originalHeaderCellProps) => ({
         ...col,
         onHeaderCell: (column: ColumnProps) => ({
+            ...originalHeaderCellProps,
             width: column.width,
             onResize: handleResize(column),
             onResizeStart: handleResizeStart(column),
@@ -229,7 +230,8 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
 
     const assignResizableRender = (columns: ColumnProps[] = [], level = 0) => (Array.isArray(columns) && columns.length ?
       columns.map((col, index) => {
-          Object.assign(col, resizableRender(col, index, level));
+          const originalHeaderCellProps = col.onHeaderCell?.(col, index, level) ?? {};
+          Object.assign(col, resizableRender(col, index, level, originalHeaderCellProps));
           const children = col[childrenColumnName];
 
           if (Array.isArray(children) && children.length) {

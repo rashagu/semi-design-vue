@@ -502,6 +502,9 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
     const tagsArray = state.tagsArray;
     const {active, over} = event;
 
+    if (!active || !over){
+      return
+    }
     if (active.id !== over.id) {
       const oldIndex = tagsArray.indexOf(''+active.id);
       const newIndex = tagsArray.indexOf(''+over.id);

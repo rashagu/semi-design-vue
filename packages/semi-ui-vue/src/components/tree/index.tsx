@@ -721,7 +721,9 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
     // Return a value that uniquely identifies this item.
     return item.key;
   };
-
+  const option = ({ index, style, data }: OptionProps) => (
+    renderTreeNode(data[index], index, style)
+  );
   function renderNodeList() {
     const {flattenNodes, cachedFlattenNodes, motionKeys, motionType} = state;
     const {virtualize, motion} = props;
@@ -743,9 +745,6 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
         </Fragment>
       );
     }
-    const option = ({index, style, data}: OptionProps) => (
-      renderTreeNode(data[index], index, style)
-    );
 
     return (
       <AutoSizer

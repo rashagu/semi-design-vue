@@ -59,7 +59,7 @@ export interface InputProps
   defaultValue?: string | number;
   disabled?: boolean;
   readonly?: boolean;
-  autofocus?: boolean;
+  autoFocus?: boolean;
   type?: string;
   showClear?: boolean;
   hideSuffix?: boolean;
@@ -120,7 +120,7 @@ const propTypes:ComponentObjectPropsOptions<InputProps> = {
   defaultValue: PropTypes.any as PropType<InputProps['defaultValue']>,
   disabled: PropTypes.bool,
   readonly: PropTypes.bool,
-  autofocus: PropTypes.bool,
+  autoFocus: PropTypes.bool,
   type: PropTypes.string,
   showClear: PropTypes.bool,
   hideSuffix: PropTypes.bool,
@@ -283,7 +283,7 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
   onMounted(()=>{
     foundation.init();
     const { disabled, autofocus, preventScroll } = props;
-    if (!disabled && autofocus) {
+    if (!disabled && (autofocus || props.autoFocus)) {
       inputRef.value.focus({ preventScroll });
     }
   })
@@ -488,7 +488,7 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
     const {
       addonAfter,
       addonBefore,
-      autofocus,
+      autoFocus,
       className,
       disabled,
       placeholder,
@@ -553,7 +553,7 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
     const inputProps: InputHTMLAttributes = {
       ...rest,
       style: { ...inputStyle },
-      autofocus: autofocus,
+      autofocus: autoFocus,
       class: inputCls,
       disabled,
       readonly: readonly,

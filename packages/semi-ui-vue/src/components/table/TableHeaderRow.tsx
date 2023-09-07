@@ -19,10 +19,11 @@ import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 import {TableSelectionCellProps} from "./ColumnSelection";
 import {useTableContext} from "./tableContext/Consumer";
+import type { TableHeaderCell } from './TableHeader';
 
 export interface TableHeaderRowProps {
     components?: TableComponents;
-    row?: any[];
+    row?: TableHeaderCell[];
     prefixCls?: string;
     onHeaderRow?: OnHeaderRow<any>;
     index?: number;
@@ -78,7 +79,7 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
             context.value.setHeadWidths(
               map(heads, (head, headIndex) => {
                   let configWidth = get(row, [headIndex, 'column', 'width']);
-                  const key = get(row, [headIndex, 'column', 'key']);
+                  const key = get(row, [headIndex, 'column', 'key']) as any;
                   if (typeof configWidth !== 'number') {
                       configWidth = (head && head.getBoundingClientRect().width) || 0;
                   }
@@ -175,6 +176,7 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
                 }
             }
 
+            Object.assign(cellProps, { resize: column.resize });
             const props = omit({ ...cellProps, ...customProps }, [
                 'colStart',
                 'colEnd',
