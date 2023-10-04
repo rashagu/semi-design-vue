@@ -8,16 +8,16 @@ import '@douyinfe/semi-foundation/anchor/anchor.scss';
 import {noop, debounce, throttle, isEqual} from 'lodash';
 import getUuid from '@douyinfe/semi-foundation/utils/uuid';
 import { ArrayElement } from '../_base/base';
-import ConfigContext, { ContextValue } from '../configProvider/context';
+import { ShowTooltip } from '../typography/interface';
 import {
-    cloneVNode,
+    cloneVNode, ComponentObjectPropsOptions,
     CSSProperties,
     defineComponent,
     h,
     isVNode,
     nextTick,
     onBeforeUnmount,
-    onMounted,
+    onMounted, PropType,
     reactive, ref,
     useSlots, VNode,
     watch
@@ -43,7 +43,7 @@ export interface AnchorProps {
     position?: ArrayElement<typeof strings.POSITION_SET>;
     railTheme?: ArrayElement<typeof strings.SLIDE_COLOR>;
     scrollMotion?: boolean;
-    showTooltip?: boolean;
+    showTooltip?: boolean | ShowTooltip;
     size?: ArrayElement<typeof strings.SIZE>;
     style?: CSSProperties;
     targetOffset?: number;
@@ -60,9 +60,9 @@ export interface AnchorState {
     slideBarTop: string
 }
 
-const propTypes = {
-    size: PropTypes.string,
-    railTheme: PropTypes.string,
+const propTypes:ComponentObjectPropsOptions<AnchorProps> = {
+    size: PropTypes.string as PropType<AnchorProps['size']>,
+    railTheme: PropTypes.string as PropType<AnchorProps['railTheme']>,
     className: PropTypes.string,
     style: PropTypes.object,
     scrollMotion: PropTypes.bool,
@@ -70,12 +70,12 @@ const propTypes = {
     offsetTop: PropTypes.number,
     targetOffset: PropTypes.number,
     showTooltip: PropTypes.bool,
-    position: PropTypes.string,
+    position: PropTypes.string as PropType<AnchorProps['position']>,
     maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    getContainer: PropTypes.func,
-    onChange: PropTypes.func,
-    onClick: PropTypes.func,
+    getContainer: PropTypes.func as PropType<AnchorProps['getContainer']>,
+    onChange: PropTypes.func as PropType<AnchorProps['onChange']>,
+    onClick: PropTypes.func as PropType<AnchorProps['onClick']>,
     defaultAnchor: PropTypes.string,
     'aria-label': PropTypes.string,
 };
@@ -96,7 +96,7 @@ const defaultProps = {
     onClick: noop,
     defaultAnchor: '',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<AnchorProps>(propTypes, defaultProps)
 const Anchor = defineComponent<AnchorProps>((props, {}) => {
     const slots = useSlots()
 
@@ -108,7 +108,7 @@ const Anchor = defineComponent<AnchorProps>((props, {}) => {
         scrollHeight: '100%',
         slideBarTop: '0',
     })
-    const {adapter: adapterInject} = useBaseComponent<AnchorProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<AnchorProps>(props, state)
     const childrenRef = ref<VNode[]>([])
     function adapter_(): AnchorAdapter<AnchorProps, AnchorState> {
         return {
@@ -359,6 +359,7 @@ const Anchor = defineComponent<AnchorProps>((props, {}) => {
                 class={wrapperCls}
                 style={wrapperStyle}
                 id={anchorID}
+                {...getDataAttr()}
               >
                   <div aria-hidden class={slideCls} style={{ height: scrollHeight }}>
                       <span class={slideBarCls} style={{ top: slideBarTop }} />
@@ -370,10 +371,11 @@ const Anchor = defineComponent<AnchorProps>((props, {}) => {
           </AnchorContext.Provider>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Anchor'
 })
 
-Anchor.props = vuePropsType
-Anchor.name = 'Anchor'
 
 export {
     Link,

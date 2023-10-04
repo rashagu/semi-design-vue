@@ -44,6 +44,7 @@ export interface CarouselIndicatorProps {
     onIndicatorChange?: (activeIndex: number) => void;
     style?: CSSProperties;
     trigger?: typeof strings.TRIGGER[number]
+    activeKey?: number
 }
 
 export interface CarouselArrowProps {

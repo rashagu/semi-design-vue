@@ -96,6 +96,9 @@ export const VuePropsType = {
   name: String
 }
 
+
+
+
 const App = defineComponent<ExampleProps>((props, {slots}) => {
 
   // const a= ref(0)
@@ -156,7 +159,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<WithFieldDemo2/>*/}
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
-        <TreeDemo />
+        {/*<TreeDemo />*/}
         <div style={{backgroundColor: 'red', width: 300, height: 300}}>
 
         </div>
@@ -178,7 +181,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
         {/*<CheckboxDemo />*/}
-        {/*<TagInputDemo />*/}
+        <TagInputDemo />
 
         {/*<AutoCompleteDemo/>*/}
         {/*<SelectDemo/>*/}
@@ -209,10 +212,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
       </ConfigProvider>
     </div>
   )
+}, {
+  props: VuePropsType,
+  name: 'App'
 })
 
-
-App.props = VuePropsType
-App.name = 'App'
 
 export default App

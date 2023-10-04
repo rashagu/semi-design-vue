@@ -37,10 +37,12 @@ const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
       </ConfigProvider>
     </div>
   )
+}, {
+  props: vuePropsType,
+  name: 'ModalDemoConfirm'
 })
 
-ModalDemoConfirm.props = vuePropsType
-ModalDemoConfirm.name = 'ModalDemoConfirm'
+
 
 export default ModalDemoConfirm
 

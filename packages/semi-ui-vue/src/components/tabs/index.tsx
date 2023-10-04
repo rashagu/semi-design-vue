@@ -12,7 +12,18 @@ import TabPane from './TabPane';
 import TabItem from './TabItem';
 import TabsContext from './tabs-context';
 import type {PlainTab, TabBarProps, TabContextValue, TabsProps} from './interface';
-import {computed, defineComponent, h, isVNode, reactive, ref, useSlots, VNode, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    computed,
+    defineComponent,
+    h,
+    isVNode, PropType,
+    reactive,
+    ref,
+    useSlots,
+    VNode,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 import {AutoCompleteProps} from "../autoComplete";
@@ -30,7 +41,7 @@ export interface TabsState {
     forceDisableMotion: boolean
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TabsProps> = {
     activeKey: PropTypes.string,
     className: PropTypes.string,
     collapsible: PropTypes.bool,
@@ -38,19 +49,19 @@ const propTypes = {
     defaultActiveKey: PropTypes.string,
     keepDOM: PropTypes.bool,
     lazyRender: PropTypes.bool,
-    onChange: PropTypes.func,
-    onTabClick: PropTypes.func,
-    renderTabBar: PropTypes.func,
-    size: PropTypes.string,
+    onChange: PropTypes.func as PropType<TabsProps['onChange']>,
+    onTabClick: PropTypes.func as PropType<TabsProps['onTabClick']>,
+    renderTabBar: PropTypes.func as PropType<TabsProps['renderTabBar']>,
+    size: PropTypes.string as PropType<TabsProps['size']>,
     style: PropTypes.object,
     tabBarClassName: PropTypes.string,
     tabBarExtraContent: PropTypes.node,
     tabBarStyle: PropTypes.object,
     tabList: PropTypes.array,
     tabPaneMotion: PropTypes.bool,
-    tabPosition: PropTypes.string,
-    type: PropTypes.string,
-    onTabClose: PropTypes.func,
+    tabPosition: PropTypes.string as PropType<TabsProps['tabPosition']>,
+    type: PropTypes.string as PropType<TabsProps['type']>,
+    onTabClose: PropTypes.func as PropType<TabsProps['onTabClose']>,
     preventScroll: PropTypes.bool,
 };
 
@@ -343,10 +354,12 @@ const Tabs = defineComponent<TabsProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Tabs'
 })
 
-Tabs.props = vuePropsType
-Tabs.name = 'Tabs'
+
 
 export default Tabs
 

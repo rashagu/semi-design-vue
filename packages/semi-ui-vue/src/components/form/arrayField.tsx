@@ -191,10 +191,11 @@ const ArrayFieldComponent = defineComponent<ArrayFieldProps>((props, {}) => {
       </ArrayFieldContext.Provider>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'ArrayFieldComponent'
 })
 
-ArrayFieldComponent.props = vuePropsType
-ArrayFieldComponent.name = 'ArrayFieldComponent'
 
 export default ArrayFieldComponent
 

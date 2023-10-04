@@ -8,14 +8,16 @@ export function usePreviewContext(): { context: Ref<UnwrapRef<PreviewContextProp
   };
 }
 export const vuePropsType = {
-  name: String,
+
 };
 const Consumer = defineComponent(() => {
   const slots = useSlots();
   const { context } = usePreviewContext();
   return () => (slots.default ? slots.default(context) : null);
+}, {
+  props: vuePropsType,
+  name: 'PreviewContextConsumer'
 });
 
-Consumer.props = vuePropsType;
 
 export default Consumer;

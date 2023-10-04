@@ -2,12 +2,22 @@ import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
 import { stepsClasses as css } from '@douyinfe/semi-foundation/steps/constants';
 import { Row, Col } from '../grid';
-import { defineComponent, useSlots, h, CSSProperties, isVNode, VNode, cloneVNode } from 'vue';
+import {
+  defineComponent,
+  useSlots,
+  h,
+  CSSProperties,
+  isVNode,
+  VNode,
+  cloneVNode,
+  ComponentObjectPropsOptions, PropType
+} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { FillStepProps } from './fillStep';
 
 export type Status = 'wait' | 'process' | 'finish' | 'error' | 'warning';
 export type Direction = 'horizontal' | 'vertical';
+export type Size = 'default' | 'small';
 export interface FillStepsProps {
   prefixCls?: string;
   className?: string;
@@ -19,18 +29,20 @@ export interface FillStepsProps {
   children?: VNode[];
   onChange?: (current: number) => void;
   'aria-label'?: string;
+  size?: Size
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<FillStepsProps> = {
   prefixCls: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
   current: PropTypes.number,
   initial: PropTypes.number,
-  direction: PropTypes.string,
-  status: PropTypes.string,
-  children: PropTypes.node,
-  onChange: PropTypes.func,
+  direction: PropTypes.string as PropType<FillStepsProps['direction']>,
+  status: PropTypes.string as PropType<FillStepsProps['status']>,
+  children: PropTypes.node as PropType<FillStepsProps['children']>,
+  onChange: PropTypes.func as PropType<FillStepsProps['onChange']>,
+  size: PropTypes.string as PropType<FillStepsProps['size']>,
 };
 
 const defaultProps = {
@@ -41,7 +53,7 @@ const defaultProps = {
   status: 'process',
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<FillStepsProps>(propTypes, defaultProps);
 const FillSteps = defineComponent<FillStepsProps>((props, {}) => {
   const slots = useSlots();
 
@@ -97,9 +109,10 @@ const FillSteps = defineComponent<FillStepsProps>((props, {}) => {
       </div>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'FillSteps'
 });
 
-FillSteps.props = vuePropsType;
-FillSteps.name = 'FillSteps';
 
 export default FillSteps;

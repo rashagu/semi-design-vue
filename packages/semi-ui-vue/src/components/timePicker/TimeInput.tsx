@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, reactive, onMounted, watch} from 'vue'
+import {defineComponent, ref, h, Fragment, reactive, onMounted, watch, ComponentObjectPropsOptions, PropType} from 'vue'
 import * as PropTypes from '../PropTypes';
 import classNames from 'classnames';
 import { strings } from '@douyinfe/semi-foundation/timePicker/constants';
@@ -43,10 +43,14 @@ export type TimeInputProps = Pick<TimePickerProps,
   currentSelectPanel?: string;
   timeStampValue?: any;
   invalid?: boolean;
+
+  hourOptions?:any[]
+  minuteOptions?:any[]
+  secondOptions?:any[]
 };
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TimeInputProps> = {
   value:String,
   borderless: PropTypes.bool,
   format: {type: PropTypes.string, default:strings.DEFAULT_FORMAT},
@@ -54,16 +58,16 @@ const propTypes = {
   placeholder: PropTypes.string,
   clearText: PropTypes.string,
   inputReadOnly: {type: PropTypes.bool, default: false},
-  hourOptions: PropTypes.array,
-  minuteOptions: PropTypes.array,
-  secondOptions: PropTypes.array,
-  disabledHours: {type: PropTypes.func, default: noop},
-  disabledMinutes: {type: PropTypes.func, default: noop},
-  disabledSeconds: {type: PropTypes.func, default: noop},
-  onChange: {type: PropTypes.func, default: noop},
+  hourOptions: PropTypes.array as PropType<TimeInputProps['hourOptions']>,
+  minuteOptions: PropTypes.array as PropType<TimeInputProps['minuteOptions']>,
+  secondOptions: PropTypes.array as PropType<TimeInputProps['secondOptions']>,
+  disabledHours: {type: PropTypes.func as PropType<TimeInputProps['disabledHours']>, default: noop},
+  disabledMinutes: {type: PropTypes.func as PropType<TimeInputProps['disabledMinutes']>, default: noop},
+  disabledSeconds: {type: PropTypes.func as PropType<TimeInputProps['disabledSeconds']>, default: noop},
+  onChange: {type: PropTypes.func as PropType<TimeInputProps['onChange']>, default: noop},
   onFocus: {type: PropTypes.func, default: noop},
   onBlur: {type: PropTypes.func, default: noop},
-  onEsc: PropTypes.func,
+  onEsc: PropTypes.func as PropType<TimeInputProps['onEsc']>,
   onClick: {type: PropTypes.func, default: noop},
   defaultOpenValue: PropTypes.object,
   currentSelectPanel: PropTypes.string,
@@ -71,8 +75,8 @@ const propTypes = {
   timeStampValue: PropTypes.any,
   locale: PropTypes.object,
   localeCode: PropTypes.string,
-  insetLabel: PropTypes.node,
-  validateStatus: PropTypes.string,
+  insetLabel: PropTypes.node as PropType<TimeInputProps['insetLabel']>,
+  validateStatus: PropTypes.string as PropType<TimeInputProps['validateStatus']>,
   preventScroll: PropTypes.bool,
 }
 const defaultProps = {
@@ -208,10 +212,11 @@ const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
     const { prefixCls } = props;
     return <div class={`${prefixCls}-input-wrap`}>{getInput()}</div>;
   }
+}, {
+  props: vuePropsType,
+  name: 'TimeInput'
 })
 
-TimeInput.props = vuePropsType
-TimeInput.name = "TimeInput"
 
 export default TimeInput
 

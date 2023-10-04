@@ -36,10 +36,12 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
       </Button>
     </div>
   )
+}, {
+  props: vuePropsType,
+  name: "Footer"
 })
 
-Footer.props = vuePropsType
-Footer.name = "Footer"
+
 
 export default Footer
 

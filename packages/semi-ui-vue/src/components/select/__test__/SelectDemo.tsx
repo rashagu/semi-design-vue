@@ -4,6 +4,7 @@ import Option from '../option'
 import OptGroup from '../optionGroup'
 import classNames from "classnames";
 import {IconGift, IconVigoLogo} from "@kousum/semi-icons-vue";
+import {Form, FormSelect} from "../../form";
 
 interface ExampleProps {
   name?: string
@@ -51,12 +52,7 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
       </div>
     );
   };
-  const list = [
-    { value: 'abc', label: '抖音', otherKey:0 },
-    { value: 'hotsoon', label: '火山小视频', disabled: true, otherKey: 1 },
-    { value: 'jianying', label: '剪映', otherKey: 2 },
-    { value: 'toutiao', label: '今日头条', otherKey: 3 },
-  ];
+  const list = [];
   const data = [
     {
       label: 'Asia',
@@ -278,8 +274,10 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
         </div>
 
         <div>
-          <Select style={{ width: '300px' }} optionList={list} insetLabel='业务线' defaultValue='abc'>
-          </Select>
+          {/*<Select style={{ width: '800px' }} optionList={list} insetLabel='业务线' defaultValue='abc' />*/}
+          <Form>
+            <FormSelect field={''} style={{  }} optionList={list} placeholder={'placeholder'}></FormSelect>
+          </Form>
           <br/><br/>
           <Select
             style={{ width: '300px' }}
@@ -347,7 +345,6 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
   }
 })
 
-SelectDemo.props = vuePropsType
 
 export default SelectDemo
 

@@ -1,7 +1,16 @@
 import * as PropTypes from '../PropTypes';
 import { BaseProps } from '../_base/baseComponent';
 import ResizeObserver from '@kousum/resize-observer-polyfill';
-import {cloneVNode, defineComponent, h, onBeforeUnmount, onMounted, useSlots, watch} from "vue";
+import {
+    cloneVNode,
+    ComponentObjectPropsOptions,
+    defineComponent,
+    h,
+    onBeforeUnmount,
+    onMounted, PropType,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 /** A parallel type to `ResizeObserverEntry` (from resize-observer-polyfill). */
@@ -15,8 +24,8 @@ export interface ReactResizeObserverProps extends BaseProps {
     observeParent?: boolean;
 }
 
-const propTypes = {
-    onResize: PropTypes.func,
+const propTypes:ComponentObjectPropsOptions<ReactResizeObserverProps> = {
+    onResize: PropTypes.func as PropType<ReactResizeObserverProps['onResize']>,
     observeParent: PropTypes.bool,
 };
 
@@ -24,7 +33,7 @@ const defaultProps = {
     onResize: () => {}, // eslint-disable-line
     observeParent: false,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<ReactResizeObserverProps>(propTypes, defaultProps)
 const ReactResizeObserver = defineComponent<ReactResizeObserverProps>((props, {}) => {
     const slots = useSlots()
     let observer: ResizeObserver = new ResizeObserver(props.onResize);
@@ -115,10 +124,10 @@ const ReactResizeObserver = defineComponent<ReactResizeObserverProps>((props, {}
             ref: (node: any) => mergeRef(ref, node),
         }, );
     }
+}, {
+    props: vuePropsType,
+    name: 'ReactResizeObserver'
 })
 
-
-ReactResizeObserver.props = vuePropsType
-ReactResizeObserver.name = 'ReactResizeObserver'
 
 export default ReactResizeObserver

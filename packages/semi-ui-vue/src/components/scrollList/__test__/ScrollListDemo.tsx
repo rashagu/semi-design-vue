@@ -104,9 +104,11 @@ const ScrollListDemo = defineComponent<ExampleProps>((props, {}) => {
       </div>
     )
   }
+}, {
+  props: vuePropsType,
+  name: 'ScrollListDemo'
 })
 
-ScrollListDemo.props = vuePropsType
 
 export default ScrollListDemo
 

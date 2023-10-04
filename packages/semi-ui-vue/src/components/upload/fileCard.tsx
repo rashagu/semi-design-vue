@@ -1,6 +1,8 @@
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/upload/constants';
+import FileCardFoundation, { FileCardAdapter } from '@douyinfe/semi-foundation/upload/fileCardFoundation';
+
 import { getFileSize } from '@douyinfe/semi-foundation/upload/utils';
 import { IconAlertCircle, IconClose, IconClear, IconFile, IconRefresh, IconEyeOpened } from '@kousum/semi-icons-vue';
 import LocaleConsumer from '../locale/localeConsumer';
@@ -12,9 +14,11 @@ import Tooltip from '../tooltip/index';
 import Spin from '../spin/index';
 import { isElement } from '../_base/reactUtils';
 import {RenderFileItemProps, UploadListType} from './interface';
-import {defineComponent, h, useSlots, Fragment} from 'vue'
+import {defineComponent, h, useSlots, Fragment, ComponentObjectPropsOptions, PropType, reactive} from 'vue'
 import type {CSSProperties, FunctionalComponent, VNode} from 'vue'
 import {vuePropsMake} from "../PropTypes";
+import {styleNum} from "../_utils";
+import {useBaseComponent} from "../_base/baseComponent";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -50,34 +54,38 @@ const DirectorySvg: FunctionalComponent<any>  = (props = {}) => (
 export interface FileCardProps extends RenderFileItemProps {
     className?: string;
     style?: CSSProperties;
+    picWidth?: string | number;
+    picHeight?: string | number
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<FileCardProps> = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
-    listType: PropTypes.string,
+    listType: PropTypes.string as PropType<FileCardProps['listType']>,
     name: PropTypes.string,
-    onPreviewClick: PropTypes.func,
-    onRemove: PropTypes.func,
-    onReplace: PropTypes.func,
-    onRetry: PropTypes.func,
+    onPreviewClick: PropTypes.func as PropType<FileCardProps['onPreviewClick']>,
+    onRemove: PropTypes.func as PropType<FileCardProps['onRemove']>,
+    onReplace: PropTypes.func as PropType<FileCardProps['onReplace']>,
+    onRetry: PropTypes.func as PropType<FileCardProps['onRetry']>,
     percent: PropTypes.number,
     preview: PropTypes.bool,
-    previewFile: PropTypes.func,
+    previewFile: PropTypes.func as PropType<FileCardProps['previewFile']>,
+    picWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    picHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     showReplace: PropTypes.bool,
     showRetry: PropTypes.bool,
     size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    status: PropTypes.string,
+    status: PropTypes.string as PropType<FileCardProps['status']>,
     style: PropTypes.object,
     url: PropTypes.string,
-    validateMessage: PropTypes.node,
+    validateMessage: PropTypes.node as PropType<FileCardProps['validateMessage']>,
     index: PropTypes.number,
     key: String,
     showPicInfo: Boolean,
-    renderPicInfo: Function,
-    renderPicPreviewIcon: Function,
-    renderFileOperation: Function,
+    renderPicInfo: Function as PropType<FileCardProps['renderPicInfo']>,
+    renderPicPreviewIcon: Function as PropType<FileCardProps['renderPicPreviewIcon']>,
+    renderFileOperation: Function as PropType<FileCardProps['renderFileOperation']>,
     uid: String,
     fileInstance: Object,
     renderThumbnail:Function,
@@ -94,11 +102,28 @@ const defaultProps = {
     size: '',
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<FileCardProps>(propTypes, defaultProps)
+export interface FileCardState {
+    fallbackPreview?: boolean
+}
 const FileCard = defineComponent<FileCardProps>((props, {}) => {
 
     const slots = useSlots()
+    const state = reactive({
+        fallbackPreview: false,
+    })
 
+    const {adapter: adapterInject} = useBaseComponent<FileCardProps>(props, state)
+    function adapter_(): FileCardAdapter<FileCardProps, FileCardState> {
+        return {
+            ...adapterInject(),
+            updateFallbackPreview: (fallbackPreview: boolean): void => {
+                state.fallbackPreview = fallbackPreview
+            },
+        };
+    }
+    const adapter = adapter_()
+    const foundation = new FileCardFoundation(adapter);
     function transSize(size: string | number): string {
         if (typeof size === 'number') {
             return getFileSize(size);
@@ -142,13 +167,15 @@ const FileCard = defineComponent<FileCardProps>((props, {}) => {
     }
 
     function renderPic(locale: Locale['Upload']): VNode | string {
-        const { url, percent, status, disabled, style, onPreviewClick, showPicInfo, renderPicInfo, renderPicPreviewIcon, renderThumbnail, name, index } = props;
+        const { fallbackPreview } = state;
+        const { url, percent, status, disabled, style, onPreviewClick, showPicInfo, renderPicInfo, renderPicPreviewIcon, renderThumbnail, name, index, picHeight, picWidth } = props;
         const showProgress = status === strings.FILE_STATUS_UPLOADING && percent !== 100;
         const showRetry = status === strings.FILE_STATUS_UPLOAD_FAIL && props.showRetry;
         const showReplace = status === strings.FILE_STATUS_SUCCESS && props.showReplace;
         const showPreview = status === strings.FILE_STATUS_SUCCESS && !props.showReplace;
         const filePicCardCls = cls({
             [`${prefixCls}-picture-file-card`]: true,
+            [`${prefixCls}-picture-file-card-preview-fallback`]: fallbackPreview,
             [`${prefixCls}-picture-file-card-disabled`]: disabled,
             [`${prefixCls}-picture-file-card-show-pointer`]: typeof onPreviewClick !== 'undefined',
             [`${prefixCls}-picture-file-card-error`]: status === strings.FILE_STATUS_UPLOAD_FAIL,
@@ -181,10 +208,25 @@ const FileCard = defineComponent<FileCardProps>((props, {}) => {
           <div class={`${prefixCls }-picture-file-card-pic-info`}>{index + 1}</div>
         );
 
-        const thumbnail = typeof renderThumbnail === 'function' ? renderThumbnail(props) : <img src={url} alt={name} />;
+
+        let imgStyle: { height?: number | string; width?: number | string } = {};
+        let itemStyle = style ? { ...style } : {};
+
+        if (picHeight) {
+            itemStyle.height = styleNum(picHeight);
+            imgStyle.height = styleNum(picHeight);
+        }
+
+        if (picWidth) {
+            itemStyle.width = styleNum(picWidth);
+            imgStyle.width = styleNum(picWidth);
+        }
+        const defaultThumbTail = !fallbackPreview ? <img src={url} alt={name} onError={error => foundation.handleImageError(error)} style={imgStyle}/> : <IconFile size="large" />;
+
+        const thumbnail = typeof renderThumbnail === 'function' ? renderThumbnail(props) : defaultThumbTail;
 
         return (
-          <div role="listitem" class={filePicCardCls} style={style} onClick={onPreviewClick}>
+          <div role="listitem" class={filePicCardCls} style={itemStyle} onClick={onPreviewClick}>
               {thumbnail}
               {showProgress ? <Progress percent={percent} type="circle" size="small" orbitStroke={'#FFF'} aria-label="uploading file progress" /> : null}
               {showRetry ? retry : null}
@@ -199,6 +241,7 @@ const FileCard = defineComponent<FileCardProps>((props, {}) => {
 
     function renderFile(locale: Locale["Upload"]) {
         const { name, size, percent, url, showRetry: propsShowRetry, showReplace: propsShowReplace, preview, previewFile, status, style, onPreviewClick, renderFileOperation } = props;
+        const { fallbackPreview } = state;
         const fileCardCls = cls({
             [`${prefixCls}-file-card`]: true,
             [`${prefixCls}-file-card-fail`]: status === strings.FILE_STATUS_VALID_FAIL || status === strings.FILE_STATUS_UPLOAD_FAIL,
@@ -206,7 +249,7 @@ const FileCard = defineComponent<FileCardProps>((props, {}) => {
         });
         const previewCls = cls({
             [`${prefixCls}-file-card-preview`]: true,
-            [`${prefixCls}-file-card-preview-placeholder`]: !preview || previewFile
+            [`${prefixCls}-file-card-preview-placeholder`]: !preview || previewFile || fallbackPreview
         });
         const infoCls = `${prefixCls}-file-card-info`;
         const closeCls = `${prefixCls}-file-card-close`;
@@ -216,7 +259,7 @@ const FileCard = defineComponent<FileCardProps>((props, {}) => {
         const showRetry = status === strings.FILE_STATUS_UPLOAD_FAIL && propsShowRetry;
         const showReplace = status === strings.FILE_STATUS_SUCCESS && propsShowReplace;
         const fileSize = transSize(size);
-        let previewContent: VNode | string = preview ? (<img src={url} alt={name} />) : (<IconFile size="large" />);
+        let previewContent: VNode | string = (preview && !fallbackPreview) ? (<img src={url} alt={name} onError={(error) => foundation.handleImageError(error)} />) : (<IconFile size="large" />);
         if (previewFile) {
             previewContent = previewFile(props);
         }
@@ -297,9 +340,9 @@ const FileCard = defineComponent<FileCardProps>((props, {}) => {
 
         return null;
     }
+},{
+    props: vuePropsType,
+    name: 'FileCard'
 })
-
-FileCard.props = vuePropsType
-FileCard.name = 'FileCard'
 
 export default FileCard

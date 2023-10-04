@@ -3,7 +3,7 @@ import {isFunction, noop} from 'lodash';
 import classnames from 'classnames';
 import { stepsClasses as css } from '@douyinfe/semi-foundation/steps/constants';
 import { IconChevronRight } from '@kousum/semi-icons-vue';
-import { defineComponent, useSlots, h, CSSProperties } from 'vue';
+import {defineComponent, useSlots, h, CSSProperties, ComponentObjectPropsOptions, PropType} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
 import { AriaAttributes } from '../AriaAttributes';
@@ -22,9 +22,10 @@ export interface NavStepProps {
   onKeyDown?: any;
   role?: string;
   'aria-label'?: AriaAttributes['aria-label'];
+  stepNumber?: number
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<NavStepProps> = {
   prefixCls: PropTypes.string,
   title: PropTypes.node,
   className: PropTypes.string,
@@ -32,8 +33,8 @@ const propTypes = {
   onClick: PropTypes.func,
   active: PropTypes.bool,
 
-  onChange: PropTypes.func,
-  stepNumber: [PropTypes.number, PropTypes.string],
+  onChange: PropTypes.func as PropType<NavStepProps['onChange']>,
+  stepNumber: [PropTypes.number, PropTypes.string] as PropType<NavStepProps['stepNumber']>,
   onKeyDown: PropTypes.func,
   role: PropTypes.string,
   'aria-label': PropTypes.string,
@@ -44,7 +45,7 @@ const defaultProps = {
   className: '',
   onChange: noop
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<NavStepProps>(propTypes, defaultProps);
 const NavStep = defineComponent<NavStepProps>((props, {}) => {
   const slots = useSlots();
 
@@ -91,9 +92,11 @@ const NavStep = defineComponent<NavStepProps>((props, {}) => {
       </div>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'NavStep'
 });
 
-NavStep.props = vuePropsType;
-NavStep.name = 'NavStep';
+
 
 export default NavStep;

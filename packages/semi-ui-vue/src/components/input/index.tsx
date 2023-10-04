@@ -8,7 +8,7 @@ import {
   reactive,
   watch,
   onMounted,
-  Ref,
+  Ref, ComponentObjectPropsOptions, PropType,
 } from 'vue';
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
@@ -59,7 +59,7 @@ export interface InputProps
   defaultValue?: string | number;
   disabled?: boolean;
   readonly?: boolean;
-  autofocus?: boolean;
+  autoFocus?: boolean;
   type?: string;
   showClear?: boolean;
   hideSuffix?: boolean;
@@ -85,7 +85,8 @@ export interface InputProps
   forwardRef?: (((instance: any) => void) | any | null) | Ref;
   minlength?: number;
   maxlength?: number;
-  preventScroll?: boolean;
+  preventScroll?: boolean;    /** internal prop, DatePicker use it */
+  showClearIgnoreDisabled?: boolean
   borderless?: boolean;
 }
 
@@ -102,7 +103,7 @@ export interface InputState {
   maxlength: number;
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<InputProps> = {
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
   'aria-invalid': PropTypes.bool,
@@ -114,33 +115,33 @@ const propTypes = {
   clearIcon: PropTypes.node,
   prefix: PropTypes.node,
   suffix: PropTypes.node,
-  mode: String,
-  value: PropTypes.any,
-  defaultValue: PropTypes.any,
+  mode: String as PropType<InputProps['mode']>,
+  value: PropTypes.any as PropType<InputProps['value']>,
+  defaultValue: PropTypes.any as PropType<InputProps['defaultValue']>,
   disabled: PropTypes.bool,
   readonly: PropTypes.bool,
-  autofocus: PropTypes.bool,
+  autoFocus: PropTypes.bool,
   type: PropTypes.string,
   showClear: PropTypes.bool,
   hideSuffix: PropTypes.bool,
-  placeholder: PropTypes.any,
-  size: String,
+  placeholder: PropTypes.any as PropType<InputProps['placeholder']>,
+  size: String as PropType<InputProps['size']>,
   className: PropTypes.string,
   style: PropTypes.object,
-  validateStatus: String,
-  onClear: PropTypes.func,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onInput: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onKeyUp: PropTypes.func,
-  onKeyPress: PropTypes.func,
-  onEnterPress: PropTypes.func,
+  validateStatus: String as PropType<InputProps['validateStatus']>,
+  onClear: PropTypes.func as PropType<InputProps['onClear']>,
+  onChange: PropTypes.func as PropType<InputProps['onChange']>,
+  onBlur: PropTypes.func as PropType<InputProps['onBlur']>,
+  onFocus: PropTypes.func as PropType<InputProps['onFocus']>,
+  onInput: PropTypes.func as PropType<InputProps['onInput']>,
+  onKeyDown: PropTypes.func as PropType<InputProps['onKeyDown']>,
+  onKeyUp: PropTypes.func as PropType<InputProps['onKeyUp']>,
+  onKeyPress: PropTypes.func as PropType<InputProps['onKeyPress']>,
+  onEnterPress: PropTypes.func as PropType<InputProps['onEnterPress']>,
   insetLabel: PropTypes.node,
   insetLabelId: PropTypes.string,
   inputStyle: PropTypes.object,
-  getValueLength: PropTypes.func,
+  getValueLength: PropTypes.func as PropType<InputProps['getValueLength']>,
   preventScroll: PropTypes.bool,
   borderless: PropTypes.bool,
 
@@ -279,6 +280,13 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
     }
   );
 
+  onMounted(()=>{
+    foundation.init();
+    const { disabled, autofocus, preventScroll } = props;
+    if (!disabled && (autofocus || props.autoFocus)) {
+      inputRef.value.focus({ preventScroll });
+    }
+  })
   const handleClear = (e: any) => {
     foundation.handleClear(e);
   };
@@ -427,11 +435,11 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
     );
   }
 
-  function showClearBtn() {
-    const { value, isFocus, isHovering } = state;
-    const { disabled, showClear } = props;
-    return Boolean(value) && showClear && !disabled && (isFocus || isHovering);
-  }
+  // function showClearBtn() {
+  //   const { value, isFocus, isHovering } = state;
+  //   const { disabled, showClear } = props;
+  //   return Boolean(value) && showClear && !disabled && (isFocus || isHovering);
+  // }
 
   function renderSuffix(suffixAllowClear: boolean) {
     const { suffix, hideSuffix } = props;
@@ -480,7 +488,7 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
     const {
       addonAfter,
       addonBefore,
-      autofocus,
+      autoFocus,
       className,
       disabled,
       placeholder,
@@ -505,10 +513,11 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
       defaultValue,
       preventScroll,
       borderless,
+      showClearIgnoreDisabled,
       ...rest
     } = props;
     const { value, isFocus, minlength: stateMinLength } = state;
-    const suffixAllowClear = showClearBtn();
+    const suffixAllowClear = foundation.isAllowClear();
     const suffixIsIcon = isSemiIcon(suffix);
     const ref_ = getInputRef();
     const wrapperPrefix = `${prefixCls}-wrapper`;
@@ -544,7 +553,7 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
     const inputProps: InputHTMLAttributes = {
       ...rest,
       style: { ...inputStyle },
-      autofocus: autofocus,
+      autofocus: autoFocus,
       class: inputCls,
       disabled,
       readonly: readonly,
@@ -558,7 +567,8 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
       },
       onChange: (e: any) => {
         // console.debug(e.target.value, e, props)
-        foundation.handleChange(e.target.value, e)
+        // TODO 这里多调一次，会使AutoComplete这样的组件无法正常关闭下拉框
+        // foundation.handleChange(e.target.value, e)
       },
       onFocus: (e: any) => foundation.handleFocus(e),
       onBlur: (e: any) => foundation.handleBlur(e),
@@ -595,10 +605,12 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
       </div>
     );
   };
+}, {
+  props: VuePropsType,
+  name: 'Input'
 });
 
-Input.props = VuePropsType;
-Input.name = 'Input';
+
 
 // const ForwardInput = defineComponent<InputProps>((props, {slots}) => {
 //   console.log(props.ref)

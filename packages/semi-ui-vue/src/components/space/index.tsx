@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, CSSProperties} from 'vue'
+import {defineComponent, ref, h, Fragment, CSSProperties, ComponentObjectPropsOptions, PropType} from 'vue'
 import cls from 'classnames';
 import {strings, cssClasses} from '@douyinfe/semi-foundation/space/constants';
 import '@douyinfe/semi-foundation/space/space.scss';
@@ -20,13 +20,13 @@ export type SpaceProps = {
   className?: string;
 };
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<SpaceProps> = {
   wrap: {
     type: Boolean,
     default: false
   },
   align: {
-    type: String,
+    type: String as PropType<SpaceProps['align']>,
     default: 'center',
   },
   vertical: {
@@ -34,10 +34,10 @@ export const vuePropsType = {
     default: false
   },
   spacing: {
-    type: [Number, Array, String],
+    type: [Number, Array, String] as PropType<SpaceProps['spacing']>,
     default: 'tight',
   },
-  style: [String, Object],
+  style: [String, Object] as PropType<SpaceProps['style']>,
   className: String,
 }
 const Index = defineComponent<SpaceProps>((props, {slots}) => {
@@ -94,9 +94,12 @@ const Index = defineComponent<SpaceProps>((props, {slots}) => {
       {childrenNodes}
     </div>
   };
+}, {
+  props: vuePropsType,
+  name: 'Space'
 })
 
-Index.props = vuePropsType
+
 
 export default Index
 

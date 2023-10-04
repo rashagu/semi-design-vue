@@ -12,7 +12,18 @@ import LocaleConsumer from '../locale/localeConsumer';
 import { Locale as LocaleObject } from '../locale/interface';
 import '@douyinfe/semi-foundation/popconfirm/popconfirm.scss';
 import { Motion } from '../_base/base';
-import {defineComponent, h, reactive, useSlots, Fragment, isVNode, watch, ref} from "vue";
+import {
+    defineComponent,
+    h,
+    reactive,
+    useSlots,
+    Fragment,
+    isVNode,
+    watch,
+    ref,
+    ComponentObjectPropsOptions,
+    PropType
+} from "vue";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
@@ -56,23 +67,23 @@ interface PopProps {
 
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<PopconfirmProps> = {
     motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
     disabled: PropTypes.bool,
     content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    title: PropTypes.any,
+    title: PropTypes.any as PropType<PopconfirmProps['title']>,
     prefixCls: PropTypes.string,
     className: PropTypes.string,
     style: PropTypes.object,
     icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     okText: PropTypes.string,
-    okType: PropTypes.string,
+    okType: PropTypes.string as PropType<PopconfirmProps['okType']>,
     cancelText: PropTypes.string,
-    cancelType: PropTypes.string,
-    onCancel: PropTypes.func,
-    onConfirm: PropTypes.func,
-    onClickOutSide: PropTypes.func,
-    onVisibleChange: PropTypes.func,
+    cancelType: PropTypes.string as PropType<PopconfirmProps['cancelType']>,
+    onCancel: PropTypes.func as PropType<PopconfirmProps['onCancel']>,
+    onConfirm: PropTypes.func as PropType<PopconfirmProps['onConfirm']>,
+    onClickOutSide: PropTypes.func as PropType<PopconfirmProps['onClickOutSide']>,
+    onVisibleChange: PropTypes.func as PropType<PopconfirmProps['onVisibleChange']>,
     visible: PropTypes.bool,
     defaultVisible: PropTypes.bool,
     okButtonProps: PropTypes.object,
@@ -80,8 +91,8 @@ const propTypes = {
     stopPropagation: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     zIndex: PropTypes.number,
     // private
-    trigger: PropTypes.string,
-    position: PropTypes.string,
+    trigger: PropTypes.string as PropType<PopconfirmProps['trigger']>,
+    position: PropTypes.string as PropType<PopconfirmProps['position']>,
 };
 const defaultProps = {
     stopPropagation: true,
@@ -98,7 +109,7 @@ const defaultProps = {
     onConfirm: noop,
     onClickOutSide: noop,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<PopconfirmProps>(propTypes, defaultProps)
 const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
     const slots = useSlots()
 
@@ -308,9 +319,10 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
           </Popover>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Popconfirm'
 })
 
-Popconfirm.props = vuePropsType
-Popconfirm.name = 'Popconfirm'
 
 export default Popconfirm

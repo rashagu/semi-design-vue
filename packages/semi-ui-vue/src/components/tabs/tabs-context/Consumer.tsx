@@ -16,9 +16,12 @@ const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useTabsContext()
   return () => slots.default ? slots.default(context) : null
+}, {
+  props: vuePropsType,
+  name: 'TabsContextConsumer'
 })
 
-Consumer.props = vuePropsType
+
 
 export default Consumer
 

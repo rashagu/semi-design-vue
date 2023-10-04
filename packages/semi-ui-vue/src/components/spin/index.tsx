@@ -1,4 +1,14 @@
-import {defineComponent, ref, h, StyleValue, onUnmounted, watch, reactive} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  StyleValue,
+  onUnmounted,
+  watch,
+  reactive,
+  ComponentObjectPropsOptions,
+  PropType
+} from 'vue'
 import cls from 'classnames';
 import { cssClasses as css, strings } from '@douyinfe/semi-foundation/spin/constants';
 import SpinFoundation from '@douyinfe/semi-foundation/spin/foundation';
@@ -35,9 +45,9 @@ interface SpinState {
  *         indicator: null,
  *         delay: 0,
  */
-export const VuePropsType = {
+export const VuePropsType:ComponentObjectPropsOptions<SpinProps> = {
   size: {
-    type: String,
+    type: String as PropType<SpinProps['size']>,
     default: 'middle',
   },
   spinning: {
@@ -49,7 +59,7 @@ export const VuePropsType = {
     type: Number,
     default: 0,
   },
-  tip: Object,
+  tip: [Object, String] as PropType<SpinProps['tip']>,
   wrapperClassName: String,
   style: Object,
   childStyle: Object,
@@ -88,7 +98,7 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
   }, {deep: true, immediate: true})
 
 
-  const {adapter: adapterInject} = useBaseComponent<SpinProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<SpinProps>(props, state)
   function adapter() {
     return {
       ...adapterInject<SpinProps, SpinState>(),
@@ -126,27 +136,33 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
 
   return ()=>{
     foundation.value.updateLoadingIfNeedDelay();
-    const { style, wrapperClassName, childStyle, size } = props;
+    const { style, wrapperClassName, childStyle, size, ...rest } = props;
     const { loading } = state;
     return (
-      <div class={cls(
-        prefixCls,
-        wrapperClassName,
-        {
-          [`${prefixCls}-${size}`]: size,
-          [`${prefixCls}-block`]: slots.default,
-          [`${prefixCls}-hidden`]: !loading,
+      <div
+        class={
+          cls(
+            prefixCls,
+            wrapperClassName,
+            {
+              [`${prefixCls}-${size}`]: size,
+              [`${prefixCls}-block`]: slots.default,
+              [`${prefixCls}-hidden`]: !loading,
+            }
+          )
         }
-      )} style={style}>
+        style={style}
+        {...getDataAttr()}
+      >
         {renderSpin()}
         <div class={`${prefixCls}-children`} style={childStyle} x-semi-prop="children">{slots.default?slots.default():null}</div>
       </div>
     );
   }
+},{
+  props:VuePropsType,
+  name:'Spin'
 })
 
-
-Index.props = VuePropsType
-Index.name = 'Spin'
 
 export default Index

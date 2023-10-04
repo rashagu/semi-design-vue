@@ -91,10 +91,12 @@ const SortableList = defineComponent<SortableListProps>((props, {}) => {
     );
 
   }
+}, {
+  props: vuePropsType,
+  name: 'SortableList'
 })
 
-SortableList.props = vuePropsType
-SortableList.name = 'SortableList'
+
 
 export default SortableList
 

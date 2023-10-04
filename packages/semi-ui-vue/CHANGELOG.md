@@ -1,5 +1,58 @@
 # @kousum/semi-ui-vue
 
+## 0.5.4
+
+### Patch Changes
+
+- 715b37f: expose type
+- Updated dependencies [715b37f]
+  - @kousum/semi-animation-vue@0.5.4
+  - @kousum/semi-icons-vue@0.5.4
+  - @kousum/semi-illustrations-vue@0.5.4
+
+## 0.5.3
+
+### Patch Changes
+
+- 73d045c: fix props type
+- Updated dependencies [73d045c]
+  - @kousum/semi-animation-vue@0.5.3
+  - @kousum/semi-icons-vue@0.5.3
+  - @kousum/semi-illustrations-vue@0.5.3
+
+## 0.5.2
+
+### Patch Changes
+
+- c27de0a: fix
+- Updated dependencies [c27de0a]
+  - @kousum/semi-animation-vue@0.5.2
+  - @kousum/semi-icons-vue@0.5.2
+  - @kousum/semi-illustrations-vue@0.5.2
+
+## 0.5.1
+
+### Patch Changes
+
+- f21a535: fix
+- Updated dependencies [f21a535]
+  - @kousum/semi-illustrations-vue@0.5.1
+  - @kousum/semi-animation-vue@0.5.1
+  - @kousum/semi-icons-vue@0.5.1
+
+## 0.5.0
+
+### Minor Changes
+
+- 6045292: vue3.3 & semi 2.39.2
+
+### Patch Changes
+
+- Updated dependencies [6045292]
+  - @kousum/semi-illustrations-vue@0.5.0
+  - @kousum/semi-animation-vue@0.5.0
+  - @kousum/semi-icons-vue@0.5.0
+
 ## 0.4.0
 
 ### Minor Changes

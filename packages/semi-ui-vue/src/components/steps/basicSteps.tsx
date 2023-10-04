@@ -1,10 +1,20 @@
 import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
 import { stepsClasses as css } from '@douyinfe/semi-foundation/steps/constants';
-import {defineComponent, useSlots, h, CSSProperties, isVNode, VNode, cloneVNode} from "vue";
+import {
+    defineComponent,
+    useSlots,
+    h,
+    CSSProperties,
+    isVNode,
+    VNode,
+    cloneVNode,
+    ComponentObjectPropsOptions, PropType, useAttrs
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {noop} from "lodash";
 import {BasicStepProps} from "./basicStep";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 export type Direction = 'horizontal' | 'vertical';
 export type Status = 'wait' | 'process' | 'finish' | 'error' | 'warning';
@@ -25,18 +35,19 @@ export interface BasicStepsProps {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<BasicStepsProps> = {
     prefixCls: PropTypes.string,
     className: PropTypes.string,
     style: PropTypes.object,
     current: PropTypes.number,
     initial: PropTypes.number,
-    direction: PropTypes.string,
-    status: PropTypes.string,
+    direction: PropTypes.string as PropType<BasicStepsProps['direction']>,
+    status: PropTypes.string as PropType<BasicStepsProps['status']>,
     hasLine: PropTypes.bool,
-    children: PropTypes.node,
-    onChange: PropTypes.func,
+    children: PropTypes.node as PropType<BasicStepsProps['children']>,
+    onChange: PropTypes.func as PropType<BasicStepsProps['onChange']>,
     'aria-label': PropTypes.string,
+    size: PropTypes.string as PropType<BasicStepsProps['size']>,
 };
 
 const defaultProps = {
@@ -49,9 +60,10 @@ const defaultProps = {
     status: 'process',
     onChange: noop
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<BasicStepsProps>(propTypes, defaultProps)
 const Steps = defineComponent<BasicStepsProps>((props, {}) => {
     const slots = useSlots()
+    const attrs = useAttrs()
 
 
 
@@ -68,6 +80,7 @@ const Steps = defineComponent<BasicStepsProps>((props, {}) => {
             style,
             hasLine,
             onChange,
+          ...rest
         } = props;
 
         const inner = () => {
@@ -116,14 +129,15 @@ const Steps = defineComponent<BasicStepsProps>((props, {}) => {
         });
 
         return (
-          <div aria-label={props["aria-label"]} class={wrapperCls} style={style}>
+          <div aria-label={props["aria-label"]} class={wrapperCls} style={style}  {...getDataAttr({...rest, ...attrs})}>
               {inner()}
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Steps'
 })
 
-Steps.props = vuePropsType
-Steps.name = 'Steps'
 
 export default Steps

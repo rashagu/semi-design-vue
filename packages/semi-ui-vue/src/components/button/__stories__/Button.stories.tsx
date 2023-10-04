@@ -8,7 +8,7 @@ const meta = {
    * to learn how to generate automatic titles
    */
   title: 'B输入类/Button',
-  component: Button,
+  component: Button as any,
   render: (args: any) => ({
     components: { Button: Button },
     setup() {

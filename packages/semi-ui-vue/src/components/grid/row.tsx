@@ -1,9 +1,21 @@
-import {defineComponent, ref, h, Fragment, CSSProperties, reactive, onMounted, onUnmounted, provide} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  CSSProperties,
+  reactive,
+  onMounted,
+  onUnmounted,
+  provide,
+  PropType
+} from 'vue'
 import classnames from 'classnames';
 
 import {cssClasses} from '@douyinfe/semi-foundation/grid/constants';
 import '@douyinfe/semi-foundation/grid/grid.scss';
 import {registerMediaQuery} from '../_utils/index';
+import {ComponentObjectPropsOptions} from "vue";
 
 const responsiveArray = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
 
@@ -37,13 +49,13 @@ const responsiveMap = {
 };
 
 
-export const vuePropsType = {
-  type: String,
-  align: String,
-  justify: String,
+export const vuePropsType:ComponentObjectPropsOptions<RowProps> = {
+  type: String as PropType<RowProps['type']>,
+  align: String as PropType<RowProps['align']>,
+  justify: String as PropType<RowProps['justify']>,
   className: String,
-  style: [String, Object],
-  gutter: [Number],
+  style: [String, Object] as PropType<RowProps['style']>,
+  gutter: [Number, Array] as PropType<RowProps['gutter']>,
   prefixCls: {
     type: String,
     default: cssClasses.PREFIX
@@ -152,10 +164,11 @@ const Row = defineComponent<RowProps>((props, {slots}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name:'Row'
 })
 
-Row.props = vuePropsType
-Row.name = 'Row'
 
 export default Row
 

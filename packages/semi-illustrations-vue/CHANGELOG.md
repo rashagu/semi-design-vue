@@ -1,5 +1,35 @@
 # @kousum/semi-illustrations-vue
 
+## 0.5.4
+
+### Patch Changes
+
+- 715b37f: expose type
+
+## 0.5.3
+
+### Patch Changes
+
+- 73d045c: fix props type
+
+## 0.5.2
+
+### Patch Changes
+
+- c27de0a: fix
+
+## 0.5.1
+
+### Patch Changes
+
+- f21a535: fix
+
+## 0.5.0
+
+### Minor Changes
+
+- 6045292: vue3.3 & semi 2.39.2
+
 ## 0.4.0
 
 ### Minor Changes

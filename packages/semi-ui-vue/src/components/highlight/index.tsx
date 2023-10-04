@@ -36,7 +36,7 @@ const defaultProps = {
     caseSensitive: false,
     sourceString: '',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<HighlightProps>(propTypes, defaultProps)
 const Highlight = defineComponent<HighlightProps>((props, {}) => {
     const slots = useSlots()
 
@@ -69,9 +69,10 @@ const Highlight = defineComponent<HighlightProps>((props, {}) => {
           getHighLightTextHTML({ sourceString, searchWords, option })
         );
     }
+},{
+    props:vuePropsType,
+    name:'Highlight'
 })
 
-Highlight.props = vuePropsType
-Highlight.name = 'THighlight'
 
 export default Highlight

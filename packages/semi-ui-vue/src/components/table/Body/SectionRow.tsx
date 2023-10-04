@@ -18,7 +18,7 @@ import {
     OnRowReturnObject
 } from '../interface';
 import {VueJsxNode} from "../../interface";
-import {CSSProperties, defineComponent, h, isVNode, useSlots} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, isVNode, PropType, useSlots} from "vue";
 import {vuePropsMake} from "../../PropTypes";
 import {useTableContext} from "../tableContext/Consumer";
 
@@ -47,23 +47,23 @@ export interface SectionRowProps {
 /**
  * Grouping component title row
  */
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<SectionRowProps> = {
     record: PropTypes.object,
     index: PropTypes.number,
     columns: PropTypes.array,
     group: PropTypes.object,
     groupKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     data: PropTypes.array,
-    renderGroupSection: PropTypes.func, // render group title
-    onGroupedRow: PropTypes.func,
+    renderGroupSection: PropTypes.func as PropType<SectionRowProps['renderGroupSection']>, // render group title
+    onGroupedRow: PropTypes.func as PropType<SectionRowProps['onGroupedRow']>,
     clickGroupedRowToExpand: PropTypes.bool,
     components: PropTypes.object,
     expanded: PropTypes.bool,
     prefixCls: PropTypes.string,
-    onExpand: PropTypes.func,
+    onExpand: PropTypes.func as PropType<SectionRowProps['onExpand']>,
     virtualized: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     style: PropTypes.object,
-    renderExpandIcon: PropTypes.func, // passing to baseRow
+    renderExpandIcon: PropTypes.func as PropType<SectionRowProps['renderExpandIcon']>, // passing to baseRow
     className: PropTypes.string,
     store: PropTypes.object,
     rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.func]),
@@ -202,10 +202,10 @@ const SectionRow = defineComponent<SectionRowProps>((props, {}) => {
           />
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'SectionRow',
 });
-
-SectionRow.props = vuePropsType;
-SectionRow.name = "SectionRow";
 
 export default SectionRow;
 

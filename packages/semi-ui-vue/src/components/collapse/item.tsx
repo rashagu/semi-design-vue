@@ -4,7 +4,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/collapse/constants';
 import Collapsible from '../collapsible';
 import { IconChevronDown, IconChevronUp } from '@kousum/semi-icons-vue';
 import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
-import { CSSProperties, defineComponent, Fragment, h, ref, useSlots, VNode } from 'vue';
+import {CSSProperties, defineComponent, Fragment, h, onMounted, ref, useSlots, VNode} from 'vue';
 import { useCollapseContext } from './context/Consumer';
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
@@ -36,12 +36,15 @@ const defaultProps = {
   disabled: false,
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<CollapsePanelProps>(propTypes, defaultProps);
 const CollapsePanel = defineComponent<CollapsePanelProps>((props, {}) => {
+  let ariaID: string = "";
+  onMounted(()=>{
+    ariaID = getUuidShort({});
+  })
   const slots = useSlots();
 
   const headerExpandIconTriggerRef = ref();
-  const ariaID = getUuidShort({});
   const { context } = useCollapseContext();
   function renderHeader(active: boolean, expandIconEnable = true) {
     const { showArrow, header, extra } = props;
@@ -135,9 +138,11 @@ const CollapsePanel = defineComponent<CollapsePanelProps>((props, {}) => {
       </div>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'CollapsePanel',
 });
 
-CollapsePanel.props = vuePropsType;
-CollapsePanel.name = 'CollapsePanel';
+
 
 export default CollapsePanel;

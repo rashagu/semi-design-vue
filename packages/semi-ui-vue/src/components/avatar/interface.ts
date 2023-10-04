@@ -1,6 +1,6 @@
 
 import { BaseProps } from '../_base/baseComponent';
-import {ImgHTMLAttributes, VNode} from "vue";
+import {CSSProperties, ImgHTMLAttributes, VNode} from "vue";
 
 export type AvatarShape = 'circle' | 'square';
 export type AvatarSize = 'extra-extra-small' | 'extra-small' | 'small' | 'default' | 'medium' | 'large' | 'extra-large';
@@ -47,4 +47,6 @@ export interface AvatarGroupProps {
     overlapFrom?: AvatarGroupOverlapFrom;
     maxCount?: number;
     renderMore?: (restNumber?: number, restAvatars?: VNode[]) => VNode;
+    style?: CSSProperties
+    className?: string
 }

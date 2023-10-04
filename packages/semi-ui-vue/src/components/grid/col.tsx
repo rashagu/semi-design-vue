@@ -1,7 +1,7 @@
 /**
  * Implementation reference from: https://github.com/ant-design/ant-design/blob/master/components/grid/col.tsx
  */
-import {defineComponent, ref, h, Fragment, CSSProperties, inject} from 'vue'
+import {defineComponent, ref, h, Fragment, CSSProperties, inject, ComponentObjectPropsOptions, PropType} from 'vue'
 // import { RowContext } from './row';
 import classnames from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/grid/constants';
@@ -34,8 +34,7 @@ export interface ColProps {
 }
 
 
-export const vuePropsType = {
-  name: String,
+export const vuePropsType:ComponentObjectPropsOptions<ColProps> = {
   span:Number,
   order:Number,
   offset:Number,
@@ -46,7 +45,7 @@ export const vuePropsType = {
     type: String,
     default: cssClasses.PREFIX
   },
-  style: [Object, String,],
+  style: [Object, String,] as PropType<ColProps['style']>,
   xs: [Number, Object],
   sm: [Number, Object],
   md: [Number, Object],
@@ -120,9 +119,12 @@ const Col = defineComponent<ColProps>((props, {slots}) => {
         </div>
     )
   }
+}, {
+  props: vuePropsType,
+  name: 'Col'
 })
 
-Col.props = vuePropsType
+
 
 export default Col
 

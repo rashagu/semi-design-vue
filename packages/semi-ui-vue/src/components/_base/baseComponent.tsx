@@ -1,8 +1,9 @@
-import {defineComponent, ref, h, CSSProperties, Ref, getCurrentInstance,} from 'vue'
+import {defineComponent, ref, h, CSSProperties, Ref, getCurrentInstance, useAttrs,} from 'vue'
 import baseLog from '@douyinfe/semi-foundation/utils/log';
 import {DefaultAdapter} from '@douyinfe/semi-foundation/base/foundation';
 import {VALIDATE_STATUS} from '@douyinfe/semi-foundation/base/constants';
-import {ArrayElement} from './base';
+import getDataAttr_ from '@douyinfe/semi-foundation/utils/getDataAttr';
+import { ArrayElement } from './base';
 import type {ContextValue} from "../configProvider/context";
 import {useConfigContext} from "../configProvider/context/Consumer";
 
@@ -33,8 +34,10 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
     cache: any,
     adapter: <P extends BaseProps, S={}>() => DefaultAdapter<P, S>,
     log: (text: string, ...rest: any) => any,
-    context: Ref<ContextValue>, foundation: any, state: any
-  }= (props,state)=> {
+    context: Ref<ContextValue>, foundation: any, state: any,
+    getDataAttr: () => Record<string, any>
+  } = (props,state)=> {
+  const attrs = useAttrs()
   const cache = ref<any>({});
   const foundation = ref<any>(null);
 
@@ -113,7 +116,9 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
   function log(text: string, ...rest: any): any {
     return baseLog(text, ...rest);
   }
-
+  function getDataAttr() {
+    return getDataAttr_({...props, ...attrs});
+  }
 
   return {
     cache,
@@ -123,6 +128,7 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
     context,
     adapter,
     log,
+    getDataAttr,
   }
 
 

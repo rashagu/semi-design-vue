@@ -29,7 +29,7 @@ const PaginationDemo = defineComponent<PaginationDemoProps>((props, {}) => {
   };
 });
 
-PaginationDemo.props = vuePropsType;
-PaginationDemo.name = "PaginationDemo";
+
+
 
 export default PaginationDemo;

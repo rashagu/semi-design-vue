@@ -1,8 +1,8 @@
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
-import {cssClasses, strings} from '@douyinfe/semi-foundation/collapse/constants';
+import {vuePropsMake} from '../PropTypes';
+import {cssClasses} from '@douyinfe/semi-foundation/collapse/constants';
 import CollapseFoundation, {
-  ArgsType,
   CollapseAdapter,
   CollapseProps,
   CollapseState
@@ -12,10 +12,19 @@ import '@douyinfe/semi-foundation/collapse/collapse.scss';
 import {noop} from '@douyinfe/semi-foundation/utils/function';
 import {isEqual} from 'lodash';
 import CollapseContext from './collapse-context';
-import {CSSProperties, defineComponent, h, onBeforeUnmount, reactive, useSlots, VNode, watch} from "vue";
-import {vuePropsMake} from "../PropTypes";
+import {
+  ComponentObjectPropsOptions,
+  CSSProperties,
+  defineComponent,
+  h,
+  onBeforeUnmount,
+  PropType,
+  reactive,
+  useSlots,
+  VNode,
+  watch
+} from "vue";
 import {useBaseComponent} from "../_base/baseComponent";
-import {AnchorProps} from "../anchor";
 
 export type {CollapsePanelProps} from './item';
 
@@ -30,19 +39,19 @@ export interface CollapseReactProps extends CollapseProps {
 
 export type {CollapseState};
 
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<CollapseProps> = {
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   accordion: PropTypes.bool,
   clickHeaderToExpand: PropTypes.bool,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func as PropType<CollapseProps['onChange']>,
   expandIcon: PropTypes.node,
   collapseIcon: PropTypes.node,
   style: PropTypes.object,
   className: PropTypes.string,
   keepDOM: PropTypes.bool,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
-  expandIconPosition: PropTypes.string
+  expandIconPosition: PropTypes.string as PropType<CollapseProps['expandIconPosition']>,
 };
 
 const defaultProps = {
@@ -51,7 +60,7 @@ const defaultProps = {
   onChange: noop,
   expandIconPosition: 'right'
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<CollapseProps>(propTypes, defaultProps)
 const Collapse = defineComponent<CollapseProps>((props, {}) => {
   const slots = useSlots()
 
@@ -59,7 +68,7 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
   const state = reactive<CollapseState>({
     activeSet: new Set()
   });
-  const {adapter: adapterInject} = useBaseComponent<CollapseProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<CollapseProps>(props, state)
 
   function adapter_(): CollapseAdapter {
     return {
@@ -130,7 +139,7 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
     const clsPrefix = cls(cssClasses.PREFIX, className);
     const {activeSet} = state;
     return (
-      <div class={clsPrefix} style={style}>
+      <div class={clsPrefix} style={style} {...getDataAttr()}>
         <CollapseContext.Provider
           value={{
             activeSet,
@@ -148,10 +157,12 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Collapse'
 })
 
-Collapse.props = vuePropsType
-Collapse.name = 'Collapse'
+
 
 export default Collapse
 export {

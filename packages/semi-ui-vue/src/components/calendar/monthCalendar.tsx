@@ -14,7 +14,17 @@ import { Locale } from '../locale/interface';
 import { MonthCalendarProps } from './interface';
 
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
-import {defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    defineComponent,
+    h,
+    onBeforeUnmount,
+    onMounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 const toPercent = (num: number) => {
@@ -33,27 +43,27 @@ export interface MonthCalendarState {
     cachedKeys: Array<string>
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<MonthCalendarProps> = {
     displayValue: PropTypes.object,
     header: PropTypes.node,
     events: PropTypes.array,
-    mode: PropTypes.string,
+    mode: PropTypes.string as PropType<MonthCalendarProps['mode']>,
     markWeekend: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     style: PropTypes.object,
     className: PropTypes.string,
-    dateGridRender: PropTypes.func,
-    onClick: PropTypes.func,
-    onClose: PropTypes.func,
+    dateGridRender: PropTypes.func as PropType<MonthCalendarProps['dateGridRender']>,
+    onClick: PropTypes.func as PropType<MonthCalendarProps['onClick']>,
+    onClose: PropTypes.func as PropType<MonthCalendarProps['onClose']>,
 
 
 
-    weekStartsOn: PropTypes.number,
-    range: PropTypes.array,
-    showCurrTime: PropTypes.bool,
-    scrollTop: PropTypes.number,
-    renderTimeDisplay: PropTypes.func,
+    weekStartsOn: PropTypes.number as PropType<MonthCalendarProps['weekStartsOn']>,
+    // range: PropTypes.array as PropType<MonthCalendarProps['range']>,
+    // showCurrTime: PropTypes.bool as PropType<MonthCalendarProps['showCurrTime']>,
+    // scrollTop: PropTypes.number as PropType<MonthCalendarProps['scrollTop']>,
+    // renderTimeDisplay: PropTypes.func as PropType<MonthCalendarProps['renderTimeDisplay']>,
 };
 
 const defaultProps = {
@@ -62,7 +72,7 @@ const defaultProps = {
     mode: 'month',
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<MonthCalendarProps>(propTypes, defaultProps)
 const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
     const slots = useSlots()
 
@@ -79,7 +89,7 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
         parsedEvents: {} as MonthlyEvent,
         cachedKeys: []
     });
-    const {adapter: adapterInject} = useBaseComponent<MonthCalendarProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<MonthCalendarProps>(props, state)
     function adapter_(): CalendarAdapter<MonthCalendarProps, MonthCalendarState> {
         return {
             ...adapterInject(),
@@ -153,11 +163,13 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
         ()=>state.itemLimit,
         ()=>props.events,
         ()=>props.height,
+        ()=>props.displayValue,
     ], (value, [
       prevStateCachedKeys,
         prevStateItemLimit,
         prevPropsEvents,
-        prevPropsHeight
+        prevPropsHeight,
+        prevPropsDisplayValue
     ], onCleanup)=>{
 
         const prevEventKeys = prevStateCachedKeys;
@@ -171,7 +183,7 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
                 itemLimitUpdate = true;
             }
         }
-        if (!isEqual(prevEventKeys, nowEventKeys) || itemLimitUpdate) {
+        if (!isEqual(prevEventKeys, nowEventKeys) || itemLimitUpdate || !isEqual(prevPropsDisplayValue, props.displayValue)) {
             foundation.parseMonthlyEvents((itemLimit || props.events) as any);
         }
     })
@@ -287,6 +299,7 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
                   class={`${cardCls}-wrapper`}
                   style={{ bottom: 0 }}
                   onClick={e => showCardFunc(e, key)}
+                  {...getDataAttr()}
                 >
                     {locale.remaining.replace('${remained}', String(remained))}
                 </div>
@@ -303,7 +316,7 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
             ref={ref => cardRef.set(key, ref)}
           >
               <li key={date as any} class={listCls} onClick={e => handleClick(e, [date])}>
-                  {formatDayString(month, dayString)}
+                  {formatDayString(date, month, dayString)}
                   {shouldRenderCard ? text : null}
                   {renderCusDateGrid(date)}
               </li>
@@ -311,7 +324,11 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
         );
     };
 
-    const formatDayString = (month: string, date: string) => {
+    const formatDayString = (dateObj: Date, month: string, date: string) => {
+        const { renderDateDisplay } = props;
+        if (renderDateDisplay) {
+            return renderDateDisplay(dateObj);
+        }
         if (date === '1') {
             return (
               <LocaleConsumer componentName="Calendar">
@@ -356,7 +373,7 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
                       const shouldRenderCollapsed = Boolean(day && day[ind] && day[ind].length > itemLimit);
                       const inner = (
                         <li role="gridcell" aria-label={date.toLocaleDateString()} aria-current={isToday ? "date" : false} key={`${date}-weeksk`} class={listCls} onClick={e => handleClick(e, [date])}>
-                            {formatDayString(month, dayString)}
+                            {formatDayString(date, month, dayString)}
                             {renderCusDateGrid(date)}
                         </li>
                       );
@@ -411,10 +428,10 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
           </LocaleConsumer>
         );
     }
-})
+},
+  {props: vuePropsType, name:'MonthCalendar' })
 
-MonthCalendar.props = vuePropsType
-MonthCalendar.name = 'monthCalendar'
+
 
 export default MonthCalendar
 

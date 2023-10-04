@@ -43,8 +43,7 @@ const CollapsibleDemo = defineComponent<CollapsibleDemoProps>((props, {}) => {
   }
 })
 
-CollapsibleDemo.props = vuePropsType
-CollapsibleDemo.name = 'CollapsibleDemo'
+
 
 export default CollapsibleDemo
 

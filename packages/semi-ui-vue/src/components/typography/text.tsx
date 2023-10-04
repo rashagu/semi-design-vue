@@ -1,4 +1,13 @@
-import {defineComponent, ref, h, Fragment, HTMLAttributes, CSSProperties} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  HTMLAttributes,
+  CSSProperties,
+  ComponentObjectPropsOptions,
+  PropType
+} from 'vue'
 import { strings } from '@douyinfe/semi-foundation/typography/constants';
 import Base from './base';
 import { Ellipsis, TypographyBaseSize, TypographyBaseType, OmitTypographyProps } from './interface';
@@ -26,7 +35,7 @@ export interface TextProps extends Omit<HTMLAttributes, OmitTextProps> {
 }
 
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<TextProps> = {
   copyable: {
     type: [Object, Boolean],
     default: false,
@@ -65,7 +74,7 @@ export const vuePropsType = {
     default: false,
   },
   type: {
-    type: String,
+    type: String as PropType<TextProps['type']>,
     default: 'primary',
   },
   style: {
@@ -73,7 +82,7 @@ export const vuePropsType = {
     default: {},
   },
   size: {
-    type: String,
+    type: String as PropType<TextProps['size']>,
     default: 'normal',
   },
   className: {
@@ -92,9 +101,11 @@ const Text = defineComponent<TextProps>((props, {slots}) => {
       }}
     </Base>;
   }
+}, {
+  props: vuePropsType,
+  name: 'Text'
 })
 
-Text.props = vuePropsType
 
 export default Text
 

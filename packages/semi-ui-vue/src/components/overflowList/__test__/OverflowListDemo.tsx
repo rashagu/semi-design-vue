@@ -48,8 +48,7 @@ const OverflowListDemo1 = defineComponent<OverflowListDemo1Props>((props, {}) =>
   )
 })
 
-OverflowListDemo1.props = vuePropsType
-OverflowListDemo1.name = 'OverflowList'
+
 
 export default OverflowListDemo1
 

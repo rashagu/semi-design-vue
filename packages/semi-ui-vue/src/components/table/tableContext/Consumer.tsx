@@ -22,10 +22,11 @@ const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useTableContext()
   return () => slots.default ? slots.default(context) : null
+}, {
+  props: vuePropsType,
+  name: 'TableContextConsumer'
 })
 
-Consumer.props = vuePropsType
-Consumer.name = 'TableContextConsumer'
 
 export default Consumer
 

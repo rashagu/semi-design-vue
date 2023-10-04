@@ -1,9 +1,22 @@
-import {defineComponent, ref, h, Fragment, CSSProperties, VNode, reactive, onMounted, onUnmounted, useSlots} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  CSSProperties,
+  VNode,
+  reactive,
+  onMounted,
+  onUnmounted,
+  useSlots,
+  useAttrs, ComponentObjectPropsOptions, PropType
+} from 'vue'
 import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/empty/constants';
 import '@douyinfe/semi-foundation/empty/empty.scss';
 import {Title} from '../typography';
 import { ArrayElement } from '../_base/base';
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -29,20 +42,21 @@ interface EmptyState {
 }
 
 
-export const vuePropsType = {
-  layout: {type:String,default:'vertical'},
-  imageStyle:[Object,String],
+export const vuePropsType:ComponentObjectPropsOptions<EmptyProps> = {
+  layout: {type:String as PropType<EmptyProps['layout']>,default:'vertical'},
+  imageStyle:[Object,String] as PropType<EmptyProps['imageStyle']>,
   title:[Object,String],
   description:[Object,String],
   image:[Object,String],
   darkModeImage:[Object,String],
-  style:[Object,String],
+  style:[Object,String] as PropType<EmptyProps['style']>,
   className:[String],
 }
 
 
 const Empty = defineComponent<EmptyProps>((props, ) => {
 
+  const attr = useAttrs()
   let body: any;
   let observer: MutationObserver;
 
@@ -83,7 +97,7 @@ const Empty = defineComponent<EmptyProps>((props, ) => {
   const slots = useSlots()
   return () => {
     const children = slots.default?slots.default():null
-    const { className, image, description, style, title, imageStyle, layout, darkModeImage } = props;
+    const { className, image, description, style, title, imageStyle, layout, darkModeImage, ...rest } = props;
 
     const alt = typeof description === 'string' ? description : 'empty';
     const imgSrc = state.mode && darkModeImage ? darkModeImage : image;
@@ -115,7 +129,7 @@ const Empty = defineComponent<EmptyProps>((props, ) => {
         style: { fontWeight: 400 },
       };
     return (
-      <div class={wrapperCls} style={style}>
+      <div class={wrapperCls} style={style}  {...getDataAttr({...rest, ...attr})}>
         <div class={`${prefixCls}-image`} style={imageStyle} >
           {imageNode}
         </div>
@@ -131,9 +145,11 @@ const Empty = defineComponent<EmptyProps>((props, ) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Empty'
 })
 
-Empty.props = vuePropsType
 
 export default Empty
 

@@ -48,7 +48,7 @@ const DividerDemo = defineComponent<ExampleProps>((props, {slots}) => {
   )
 })
 
-DividerDemo.props = vuePropsType
+
 
 export default DividerDemo
 

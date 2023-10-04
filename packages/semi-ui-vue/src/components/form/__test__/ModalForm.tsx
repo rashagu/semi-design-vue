@@ -110,7 +110,5 @@ const ModalForm = defineComponent<ModalFormProps>((props) => {
   };
 });
 
-ModalForm.props = vuePropsType;
-ModalForm.name = "ModalForm";
 
 export default ModalForm;

@@ -1,4 +1,14 @@
-import { defineComponent, ref, h, Fragment, reactive, onMounted, watch, onUnmounted } from 'vue';
+import {
+    defineComponent,
+    ref,
+    h,
+    Fragment,
+    reactive,
+    onMounted,
+    watch,
+    onUnmounted,
+    ComponentObjectPropsOptions, PropType
+} from 'vue';
 import RadioInnerFoundation, {
     RadioChangeEvent,
     RadioInnerAdapter,
@@ -30,13 +40,17 @@ export interface RadioInnerProps extends BaseProps {
     onInputFocus?: (e: any) => void;
     onInputBlur?: (e: any) => void;
     preventScroll?: boolean;
+
+    defaultChecked?: boolean
+    value?: any
+    type?: string
 }
 
 interface RadioInnerState {
     checked?: boolean;
 }
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<RadioInnerProps> = {
     checked: {
         type: Boolean,
         // @ts-ignore
@@ -44,8 +58,8 @@ export const vuePropsType = {
     },
     disabled: Boolean,
     isButtonRadio: { type: Boolean, default: false },
-    onChange: { type: Function, default: noop },
-    mode: String,
+    onChange: { type: Function as PropType<RadioInnerProps['onChange']>, default: noop },
+    mode: String as PropType<RadioInnerProps['mode']>,
     autoFocus: Boolean,
     name: String,
     prefixCls: String,
@@ -57,14 +71,14 @@ export const vuePropsType = {
 
     className: String, // TODO 区别
     defaultChecked: {
-        type: Boolean,
+        type: Boolean as PropType<RadioInnerProps['defaultChecked']>,
         default: false,
     },
-    value: [String, Boolean, Number],
-    type: { type: String, default: 'default' },
+    value: [String, Boolean, Number] as PropType<RadioInnerProps['value']>,
+    type: { type: String as PropType<RadioInnerProps['type']>, default: 'default' },
     focusInner: Boolean,
-    onInputFocus: Function,
-    onInputBlur: Function,
+    onInputFocus: Function as PropType<RadioInnerProps['onInputFocus']>,
+    onInputBlur: Function as PropType<RadioInnerProps['onInputBlur']>,
     preventScroll: Boolean,
 };
 const RadioInner = defineComponent<RadioInnerProps>((props, { slots }) => {
@@ -183,8 +197,11 @@ const RadioInner = defineComponent<RadioInnerProps>((props, { slots }) => {
             </span>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'RadioInner'
 });
 
-RadioInner.props = vuePropsType;
+
 
 export default RadioInner;

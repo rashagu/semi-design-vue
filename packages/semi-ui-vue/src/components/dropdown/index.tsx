@@ -8,7 +8,7 @@ import {
   CSSProperties,
   reactive,
   isVNode,
-  cloneVNode, inject, provide
+  cloneVNode, inject, provide, ComponentObjectPropsOptions, PropType
 } from 'vue'
 import classnames from 'classnames';
 import * as PropTypes from '../PropTypes'
@@ -86,12 +86,14 @@ export interface DropdownProps extends TooltipProps {
 
   closeOnEsc?: TooltipProps['closeOnEsc'];
   onEscKeyDown?: TooltipProps['onEscKeyDown']
+
+  name?: string
 }
 
 interface DropdownState {
   popVisible: boolean;
 }
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<DropdownProps> = {
   onFilter: PropTypes.func,
   onFilterDropdownVisibleChange: PropTypes.func,
   onSelect: PropTypes.func,
@@ -99,19 +101,18 @@ const propTypes = {
   onGroupedRow: PropTypes.func,
 
   render: PropTypes.node,
-  children: PropTypes.node,
   visible: PropTypes.bool,
-  position: PropTypes.string,
-  getPopupContainer: PropTypes.func,
+  position: PropTypes.string as PropType<DropdownProps['position']>,
+  getPopupContainer: PropTypes.func as PropType<DropdownProps['getPopupContainer']>,
   mouseEnterDelay: PropTypes.number,
   mouseLeaveDelay: PropTypes.number,
-  trigger: PropTypes.string,
+  trigger: PropTypes.string as PropType<DropdownProps['trigger']>,
   zIndex: PropTypes.number,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
   className: PropTypes.string,
   contentClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   style: PropTypes.object,
-  onVisibleChange: PropTypes.func,
+  onVisibleChange: PropTypes.func as PropType<DropdownProps['onVisibleChange']>,
   rePosKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   showTick: PropTypes.bool,
   prefixCls: PropTypes.string,
@@ -133,7 +134,7 @@ const defaultProps = {
   onEscKeyDown: noop,
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<DropdownProps>(propTypes, defaultProps)
 
 
 const Dropdown = defineComponent<DropdownProps>((props, {slots, expose}) => {
@@ -258,6 +259,8 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots, expose}) => {
       onSelect,
       onHeaderCell,
       onGroupedRow,
+      name,
+      contentClassName,
       ...attr
     } = props;
     let { spacing } = props;
@@ -305,11 +308,12 @@ const Dropdown = defineComponent<DropdownProps>((props, {slots, expose}) => {
       </Tooltip>
     )
   }
+}, {
+  props: vuePropsType,
+  name: 'Dropdown'
 })
 
 
-Dropdown.props = vuePropsType
-Dropdown.name = 'Dropdown'
 
 export {DropdownMenu, DropdownItem, DropdownDivider, DropdownTitle,Dropdown}
 export default Dropdown

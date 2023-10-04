@@ -14,15 +14,16 @@ import {
     getRTLAlign
 } from '@douyinfe/semi-foundation/table/utils';
 import { TableComponents, OnHeaderRow, Fixed } from './interface';
-import {CSSProperties, defineComponent, h, reactive, useSlots, watch} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, reactive, useSlots, watch} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 import {TableSelectionCellProps} from "./ColumnSelection";
 import {useTableContext} from "./tableContext/Consumer";
+import type { TableHeaderCell } from './TableHeader';
 
 export interface TableHeaderRowProps {
     components?: TableComponents;
-    row?: any[];
+    row?: TableHeaderCell[];
     prefixCls?: string;
     onHeaderRow?: OnHeaderRow<any>;
     index?: number;
@@ -33,11 +34,11 @@ export interface TableHeaderRowProps {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TableHeaderRowProps> = {
     components: PropTypes.object,
     row: PropTypes.array,
     prefixCls: PropTypes.string,
-    onHeaderRow: PropTypes.func,
+    onHeaderRow: PropTypes.func as PropType<TableHeaderRowProps['onHeaderRow']>,
     index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     style: PropTypes.object,
     columns: PropTypes.array,
@@ -78,7 +79,7 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
             context.value.setHeadWidths(
               map(heads, (head, headIndex) => {
                   let configWidth = get(row, [headIndex, 'column', 'width']);
-                  const key = get(row, [headIndex, 'column', 'key']);
+                  const key = get(row, [headIndex, 'column', 'key']) as any;
                   if (typeof configWidth !== 'number') {
                       configWidth = (head && head.getBoundingClientRect().width) || 0;
                   }
@@ -175,6 +176,7 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
                 }
             }
 
+            Object.assign(cellProps, { resize: column.resize });
             const props = omit({ ...cellProps, ...customProps }, [
                 'colStart',
                 'colEnd',
@@ -220,9 +222,10 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
           </HeaderRow>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'TableHeaderRow'
 });
 
-TableHeaderRow.props = vuePropsType;
-TableHeaderRow.name = "TableHeaderRow";
 
 export default TableHeaderRow;

@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, CSSProperties, Ref} from 'vue'
+import {defineComponent, ref, h, Fragment, CSSProperties, Ref, ComponentObjectPropsOptions, PropType} from 'vue'
 import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/typography/constants';
 import '@douyinfe/semi-foundation/typography/typography.scss';
@@ -11,12 +11,12 @@ interface TypographyProps extends BaseProps{
   className?: string
 }
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<TypographyProps> = {
   component_: {
-    component_: [String, Array, Boolean, Object,Number],
+    type: [String, Array, Boolean, Object,Number] as PropType<TypographyProps['component_']>,
     default: 'article'
   },
-  style: [String, Object],
+  style: [String, Object] as PropType<TypographyProps['style']>,
   className: String,
   forwardRef: Object,
 }
@@ -31,9 +31,11 @@ const Typography = defineComponent<TypographyProps>((props, {slots}) => {
     // console.log(children)
     return component_?h(component_, {class:classNames,ref:forwardRef,...rest}, children):<span />
   };
+}, {
+  props: vuePropsType,
+  name: 'Typography'
 })
 
-Typography.props = vuePropsType
 
 export default Typography
 

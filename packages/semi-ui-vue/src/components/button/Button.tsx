@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, StyleValue} from 'vue'
+import {defineComponent, ref, h, StyleValue, ComponentObjectPropsOptions, PropType} from 'vue'
 /* eslint-disable react/destructuring-assignment */
 import classNames from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/button/constants';
@@ -37,6 +37,63 @@ export interface ButtonProps {
 }
 
 
+export const vuePropsType: ComponentObjectPropsOptions<ButtonProps> = {
+  id: String,
+  circle: Boolean,
+  className: String,
+  icon: [Object, String],
+  iconPosition: String as PropType<ButtonProps['iconPosition']>,
+  loading: Boolean,
+  block: {
+    type: Boolean,
+    default: false
+  },
+  htmlType: {
+    type: String as PropType<ButtonProps['htmlType']>,
+    default: 'button',
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  size: {
+    type: String as PropType<ButtonProps['size']>,
+    default: 'default',
+  },
+  style: Object,
+  type: {
+    type: String as PropType<ButtonProps['type']>,
+    default: 'primary',
+  },
+  theme: {
+    type: String as PropType<ButtonProps['theme']>,
+    default: 'light',
+  },
+  onClick: {
+    type: Function,
+    default: noop,
+  },
+  onMouseDown: {
+    type: Function,
+    default: noop,
+  },
+  onMouseEnter: {
+    type: Function,
+    default: noop,
+  },
+  onMouseLeave: {
+    type: Function,
+    default: noop,
+  },
+  prefixCls: {
+    type: String,
+    default: cssClasses.PREFIX,
+  },
+  autoFocus: {
+    type: Boolean,
+    default: undefined
+  }
+}
 const Button = defineComponent<ButtonProps>((props, {slots}) => {
 
 
@@ -56,7 +113,7 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
       htmlType,
       ...attr
     } = props;
-    
+
     const baseProps = {
       type: htmlType,
       ...attr,
@@ -90,66 +147,11 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
       </button>
     )
   };
+}, {
+  props: vuePropsType,
+  name: 'Button'
 })
 
-export const vuePropsType = {
-  id: String,
-  circle: Boolean,
-  className: String,
-  icon: [Object, String],
-  iconPosition: String,
-  loading: Boolean,
-  block: {
-    type: Boolean,
-    default: false
-  },
-  htmlType: {
-    type: String,
-    default: 'button',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  size: {
-    type: String,
-    default: 'default',
-  },
-  style: Object,
-  type: {
-    type: String,
-    default: 'primary',
-  },
-  theme: {
-    type: String,
-    default: 'light',
-  },
-  onClick: {
-    type: Function,
-    default: noop,
-  },
-  onMouseDown: {
-    type: Function,
-    default: noop,
-  },
-  onMouseEnter: {
-    type: Function,
-    default: noop,
-  },
-  onMouseLeave: {
-    type: Function,
-    default: noop,
-  },
-  prefixCls: {
-    type: String,
-    default: cssClasses.PREFIX,
-  },
-  autoFocus: {
-    type: Boolean,
-    default: undefined
-  }
-}
 
-Button.props = vuePropsType
 
 export default Button

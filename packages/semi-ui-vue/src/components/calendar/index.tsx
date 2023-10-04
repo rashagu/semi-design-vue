@@ -6,22 +6,23 @@ import MonthCalendar from './monthCalendar';
 import RangeCalendar from './rangeCalendar';
 import { CalendarProps } from './interface';
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
-import {cloneVNode, defineComponent, h, useSlots} from "vue";
+import {cloneVNode, ComponentObjectPropsOptions, defineComponent, h, PropType, useSlots} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 export * from './interface';
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<CalendarProps> = {
     displayValue: PropTypes.object,
     header: PropTypes.node,
     events: PropTypes.array,
-    mode: PropTypes.string,
+    mode: PropTypes.string as PropType<CalendarProps['mode']>,
     showCurrTime: PropTypes.bool,
-    weekStartsOn: PropTypes.number,
+    weekStartsOn: PropTypes.number as PropType<CalendarProps['weekStartsOn']>,
     scrollTop: PropTypes.number,
-    onClick: PropTypes.func,
-    renderTimeDisplay: PropTypes.func,
+    onClick: PropTypes.func as PropType<CalendarProps['onClick']>,
+    renderTimeDisplay: PropTypes.func as PropType<CalendarProps['renderTimeDisplay']>,
+    renderDateDisplay: PropTypes.func as PropType<CalendarProps['renderDateDisplay']>,
     markWeekend: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -41,7 +42,7 @@ const defaultProps = {
     weekStartsOn: 0,
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<CalendarProps>(propTypes, defaultProps)
 const Calendar = defineComponent<CalendarProps>((props, {}) => {
     const slots = useSlots()
 
@@ -56,10 +57,8 @@ const Calendar = defineComponent<CalendarProps>((props, {}) => {
         };
         return cloneVNode(component[mode], { ...rest });
     }
-})
+},{props:vuePropsType, name:'Calendar'})
 
-Calendar.props = vuePropsType
-Calendar.name = 'Calendar'
 
 export default Calendar
 

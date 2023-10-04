@@ -9,7 +9,9 @@ import {fireEvent, render, screen} from "@testing-library/vue";
 
 beforeAll(()=>{
   const intersectionObserverMock = () => ({
-    observe: () => null
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
   })
   window.IntersectionObserver = vi.fn().mockImplementation(intersectionObserverMock);
 

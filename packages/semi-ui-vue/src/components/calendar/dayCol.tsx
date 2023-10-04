@@ -5,7 +5,16 @@ import { cssClasses } from '@douyinfe/semi-foundation/calendar/constants';
 import { useBaseComponent } from '../_base/baseComponent';
 import { DayColProps } from './interface';
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
-import { defineComponent, Fragment, h, onBeforeUnmount, onMounted, reactive, useSlots } from 'vue';
+import {
+  ComponentObjectPropsOptions,
+  defineComponent,
+  Fragment,
+  h,
+  onBeforeUnmount,
+  onMounted, PropType,
+  reactive,
+  useSlots
+} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 
 const prefixCls = `${cssClasses.PREFIX}-grid`;
@@ -19,16 +28,16 @@ export interface DayColState {
   showCurrTime: boolean;
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<DayColProps> = {
   events: PropTypes.array,
   displayValue: PropTypes.object,
   showCurrTime: PropTypes.bool,
   scrollHeight: PropTypes.number,
   currPos: PropTypes.number,
-  handleClick: PropTypes.func,
-  mode: PropTypes.string,
+  handleClick: PropTypes.func as PropType<DayColProps['handleClick']>,
+  mode: PropTypes.string as PropType<DayColProps['mode']>,
   isWeekend: PropTypes.bool,
-  dateGridRender: PropTypes.func,
+  dateGridRender: PropTypes.func as PropType<DayColProps['dateGridRender']>,
 };
 
 const defaultProps = {
@@ -38,7 +47,7 @@ const defaultProps = {
   currPos: 0,
   mode: 'dayCol',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<DayColProps>(propTypes, defaultProps);
 const DayCol = defineComponent<DayColProps>((props, {}) => {
   const slots = useSlots();
 
@@ -154,9 +163,10 @@ const DayCol = defineComponent<DayColProps>((props, {}) => {
     const grid = renderGrid();
     return grid;
   };
+},{
+  props: vuePropsType,
+  name: 'DayCol'
 });
 
-DayCol.props = vuePropsType;
-DayCol.name = 'DayCol';
 
 export default DayCol;

@@ -47,8 +47,7 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
   }
 })
 
-TabsDemo.props = vuePropsType
-TabsDemo.name = 'TabsDemo'
+
 
 export default TabsDemo
 

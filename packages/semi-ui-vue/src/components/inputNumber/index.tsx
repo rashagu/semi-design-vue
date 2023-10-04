@@ -1,7 +1,6 @@
 import * as PropTypes from '../PropTypes';
 import classnames from 'classnames';
 import Input, {InputProps} from '../input';
-import {forwardStatics} from '@douyinfe/semi-foundation/utils/object';
 import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
 import isBothNaN from '@douyinfe/semi-foundation/utils/isBothNaN';
 import InputNumberFoundation, {
@@ -15,9 +14,20 @@ import {IconChevronUp, IconChevronDown} from '@kousum/semi-icons-vue';
 import '@douyinfe/semi-foundation/inputNumber/inputNumber.scss';
 import {isNaN, isString, noop} from 'lodash';
 import {ArrayElement} from '../_base/base';
-import {CSSProperties, defineComponent, h, nextTick, reactive, useSlots, VNode, watch} from "vue";
+import {
+  ComponentObjectPropsOptions,
+  CSSProperties,
+  defineComponent,
+  h,
+  nextTick, PropType,
+  reactive,
+  useSlots,
+  VNode,
+  watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {YearAndMonthProps} from "../datePicker";
+import {AnchorProps} from "../anchor";
 
 export interface InputNumberProps extends InputProps {
   autofocus?: boolean;
@@ -59,7 +69,7 @@ export interface InputNumberState extends BaseInputNumberState {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<InputNumberProps> = {
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
   'aria-invalid': PropTypes.bool,
@@ -70,16 +80,16 @@ const propTypes = {
   className: PropTypes.string,
   defaultValue: [PropTypes.number, PropTypes.string],
   disabled: PropTypes.bool,
-  formatter: PropTypes.func,
+  formatter: PropTypes.func as PropType<InputNumberProps['formatter']>,
   forwardedRef: PropTypes.any,
   hideButtons: PropTypes.bool,
   innerButtons: PropTypes.bool,
-  insetLabel: PropTypes.node,
+  insetLabel: PropTypes.node as PropType<InputNumberProps['insetLabel']>,
   insetLabelId: PropTypes.string,
   keepFocus: PropTypes.bool,
   max: PropTypes.number,
   min: PropTypes.number,
-  parser: PropTypes.func,
+  parser: PropTypes.func as PropType<InputNumberProps['parser']>,
   precision: PropTypes.number,
   prefixCls: PropTypes.string,
   pressInterval: PropTypes.number,
@@ -89,17 +99,17 @@ const propTypes = {
   step: PropTypes.number,
   style: PropTypes.object,
   suffix: {
-    type: PropTypes.any,
+    type: PropTypes.any as PropType<InputNumberProps['suffix']>,
     default: undefined
   },
   value: [PropTypes.number, PropTypes.string],
-  onBlur: PropTypes.func,
-  onChange: PropTypes.func,
-  onDownClick: PropTypes.func,
-  onFocus: PropTypes.func,
+  onBlur: PropTypes.func as PropType<InputNumberProps['onBlur']>,
+  onChange: PropTypes.func as PropType<InputNumberProps['onChange']>,
+  onDownClick: PropTypes.func as PropType<InputNumberProps['onDownClick']>,
+  onFocus: PropTypes.func as PropType<InputNumberProps['onBlur']>,
   onKeyDown: PropTypes.func,
-  onNumberChange: PropTypes.func,
-  onUpClick: PropTypes.func,
+  onNumberChange: PropTypes.func as PropType<InputNumberProps['onNumberChange']>,
+  onUpClick: PropTypes.func as PropType<InputNumberProps['onUpClick']>,
 };
 
 const defaultProps: InputNumberProps = {
@@ -292,7 +302,7 @@ const InputNumber = defineComponent<InputNumberProps>((props, {}) => {
       } else {
         let valueStr = value;
         if (typeof value === 'number') {
-          valueStr = value.toString();
+          valueStr = foundation.doFormat(value);
         }
 
         const parsedNum = foundation.doParse(valueStr, false, true, true);
@@ -552,10 +562,11 @@ const InputNumber = defineComponent<InputNumberProps>((props, {}) => {
     );
     return input;
   }
+}, {
+  props: vuePropsType,
+  name: 'InputNumber'
 })
 
-InputNumber.props = vuePropsType
-InputNumber.name = 'InputNumber'
 
 
 export default InputNumber;

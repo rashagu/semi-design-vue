@@ -38,8 +38,7 @@ const SliderDemo = defineComponent<SliderDemoProps>((props, {}) => {
   )
 })
 
-SliderDemo.props = vuePropsType
-SliderDemo.name = 'SliderDemo'
+
 
 export default SliderDemo
 

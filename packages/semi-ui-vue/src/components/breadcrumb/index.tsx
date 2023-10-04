@@ -1,34 +1,38 @@
 /* eslint-disable max-len */
 import cls from 'classnames';
-import * as propTypes from '../PropTypes';
-import { cssClasses, strings } from '@douyinfe/semi-foundation/breadcrumb/constants';
-import BreadcrumbFoundation, { BreadcrumbAdapter } from '@douyinfe/semi-foundation/breadcrumb/foundation';
-import warning from '@douyinfe/semi-foundation/utils/warning';
-import { isFunction } from 'lodash';
-import '@douyinfe/semi-foundation/breadcrumb/breadcrumb.scss';
-import { noop } from '@douyinfe/semi-foundation/utils/function';
-import {BaseProps, useBaseComponent} from '../_base/baseComponent';
-import Popover from '../popover';
-import BreadcrumbItem from './item';
-import type { RouteProps, BreadcrumbItemInfo, BreadcrumbItemProps } from './item';
-import BreadContext from './bread-context';
-import { TooltipProps } from '../tooltip';
-import { IconMore } from '@kousum/semi-icons-vue';
 import {
+    cloneVNode,
+    ComponentObjectPropsOptions,
     CSSProperties,
     defineComponent,
+    Fragment,
     h,
     onMounted,
     onUnmounted,
+    PropType,
     reactive,
+    useSlots,
     VNode,
-    Fragment,
-    cloneVNode,
-    useSlots
-} from "vue";
-import {vuePropsMake} from "../PropTypes";
+} from 'vue'
+import * as propTypes from '../PropTypes';
+import {vuePropsMake} from '../PropTypes';
+import {cssClasses} from '@douyinfe/semi-foundation/breadcrumb/constants';
+import BreadcrumbFoundation, {BreadcrumbAdapter} from '@douyinfe/semi-foundation/breadcrumb/foundation';
+import warning from '@douyinfe/semi-foundation/utils/warning';
+import {isFunction} from 'lodash';
+import '@douyinfe/semi-foundation/breadcrumb/breadcrumb.scss';
+import {noop} from '@douyinfe/semi-foundation/utils/function';
+import {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import Popover from '../popover';
+import type {BreadcrumbItemInfo, BreadcrumbItemProps, RouteProps} from './item';
+import BreadcrumbItem from './item';
+import BreadContext from './bread-context';
+import {TooltipProps} from '../tooltip';
+import {IconMore} from '@kousum/semi-icons-vue';
 
 import {AriaAttributes} from "../AriaAttributes";
+import {VueJsxNode} from "../interface";
+import {getVNodeChildren} from "../_utils";
 
 const clsPrefix = cssClasses.PREFIX;
 
@@ -45,7 +49,7 @@ export type MoreType = 'default' | 'popover';
 export interface BreadcrumbProps extends BaseProps {
     routes?: Array<RouteProps>;
     onClick?: (route: RouteProps, event: MouseEvent) => void;
-    separator?: VNode;
+    separator?: VueJsxNode;
     compact?: boolean;
     style?: CSSProperties;
     renderItem?: (route: RouteProps) => VNode;
@@ -65,14 +69,13 @@ interface BreadcrumbState {
 }
 
 
-const propTypes_ = {
+const propTypes_:ComponentObjectPropsOptions<BreadcrumbProps> = {
     routes: propTypes.array,
-    onClick: propTypes.func,
-    separator: propTypes.node,
+    onClick: propTypes.func as PropType<BreadcrumbProps['onClick']>,
+    separator: propTypes.node as PropType<BreadcrumbProps['separator']>,
     compact: propTypes.bool,
-    children: propTypes.node,
     style: propTypes.object,
-    renderItem: propTypes.func,
+    renderItem: propTypes.func as PropType<BreadcrumbProps['renderItem']>,
     showTooltip: [
         propTypes.object,
         propTypes.bool,
@@ -82,10 +85,10 @@ const propTypes_ = {
     maxItemCount: propTypes.number,
 
     /* Customize the contents of the ellipsis area */
-    renderMore: propTypes.func,
+    renderMore: propTypes.func as PropType<BreadcrumbProps['renderMore']>,
 
     /* Type of ellipsis area */
-    moreType: String,
+    moreType: String as PropType<BreadcrumbProps['moreType']>,
     'aria-label': propTypes.string,
 };
 const defaultProps = {
@@ -109,7 +112,7 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
         isCollapsed: true,
     });
 
-    const {adapter: adapterInject} = useBaseComponent<BreadcrumbProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<BreadcrumbProps>(props, state)
     function adapter(): BreadcrumbAdapter<BreadcrumbProps, BreadcrumbState> {
         return {
             ...adapterInject<BreadcrumbProps, BreadcrumbState>(),
@@ -164,7 +167,7 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
     const handleCollapse = (template: Array<VNode>, itemsLen: number) => {
         const { maxItemCount, renderMore, moreType } = props;
         const hasRenderMore = isFunction(renderMore);
-        const restItem = template.slice(1, itemsLen - 3);
+        const restItem = template.slice(1, itemsLen - maxItemCount + 1);
         const spread = (
           <span class={`${clsPrefix}-collapse`} key={`more-${itemsLen}`}>
                 <span class={`${clsPrefix}-item-wrap`}>
@@ -227,10 +230,12 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
         } = props;
         const { isCollapsed } = state;
         const hasRoutes = routes && routes.length > 0;
-        const items = hasRoutes ?
+        const items = getVNodeChildren(((hasRoutes ?
           foundation.genRoutes(routes) :
-          children;
+          children) as VNode[]));
+
         let template;
+
         const itemLength = items.length; // children length
 
         const restItemLength = itemLength - maxItemCount; // Omitted children items
@@ -249,7 +254,6 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
                   if (!item) {
                       return item;
                   }
-
                   warning(
                     item.type && item.type.name !== 'BreadcrumbItem',
                     '[Semi Breadcrumb]: Only accepts Breadcrumb.Item as its children'
@@ -263,6 +267,7 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
               })
             );
         }
+
 
         if (shouldCollapse) {
             return handleCollapse(template, items.length);
@@ -295,15 +300,17 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
                 separator,
             }}
           >
-              <nav aria-label={props['aria-label']} class={sizeCls} style={style}>
+              <nav aria-label={props['aria-label']} class={sizeCls} style={style} {...getDataAttr()}>
                   {breadcrumbs}
               </nav>
           </BreadContext.Provider>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Breadcrumb'
 })
 
-Breadcrumb.props = vuePropsType
 
 export default Breadcrumb
 export {

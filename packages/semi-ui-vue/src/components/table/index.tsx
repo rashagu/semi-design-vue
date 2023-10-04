@@ -3,11 +3,12 @@ import NormalTable_, {TablePropTypes} from './Table';
 import ResizableTable from './ResizableTable';
 import Column from './Column';
 import {strings} from '@douyinfe/semi-foundation/table/constants';
-import {TableProps, Data} from './interface';
+import type {TableProps, Data} from './interface';
 
 import {defineComponent, h, ref, useSlots} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
+
 
 const propTypes = {
   ...TablePropTypes,
@@ -17,16 +18,21 @@ const propTypes = {
 const defaultProps = {
   hideExpandedColumn: true,
 };
+
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 
 function Table<RecordType extends Record<string, any> = Data>() {
   const NormalTable = NormalTable_<RecordType>()
-  const Table = defineComponent<TableProps<RecordType>>((props, {}) => {
+  const Table = defineComponent<TableProps<RecordType>>((props, {expose}) => {
     const slots = useSlots();
     const tableRef = ref()
     const {context} = useConfigContext()
 
     const getCurrentPageData = () => tableRef.value && tableRef.value.getCurrentPageData();
+
+    expose({
+      getCurrentPageData
+    })
 
     return () => {
       const direction = props.direction ?? context.value.direction;
@@ -37,10 +43,11 @@ function Table<RecordType extends Record<string, any> = Data>() {
         return <NormalTable {...props} children={slots.default?.()} ref={tableRef} direction={direction} ></NormalTable>;
       }
     };
+  }, {
+    props: vuePropsType,
+    name: 'TableIndex'
   });
 
-  Table.props = vuePropsType;
-  Table.name = "TableIndex";
   return Table
 }
 

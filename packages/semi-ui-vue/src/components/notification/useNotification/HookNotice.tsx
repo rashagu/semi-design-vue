@@ -1,15 +1,15 @@
 import Notice from '../notice';
 import { NoticeInstance } from '@douyinfe/semi-foundation/notification/notificationFoundation';
-import {defineComponent, h, ref, useSlots, watch} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, h, PropType, ref, useSlots, watch} from "vue";
 
 export interface HookNoticeProps extends NoticeInstance{
     afterClose: (id: string) => void;
 }
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<HookNoticeProps> = {
     id: String,
-    afterClose: Function,
-    motion: [Object, String, Boolean,]
+    afterClose: Function as PropType<HookNoticeProps['afterClose']>,
+    motion: [Object, String, Boolean,] as PropType<HookNoticeProps['motion']>,
 }
 const HookNotice = defineComponent<HookNoticeProps>((props, {expose, attrs}) => {
 
@@ -39,10 +39,11 @@ const HookNotice = defineComponent<HookNoticeProps>((props, {expose, attrs}) => 
           />
         ) : null;
     }
+}, {
+    props: vuePropsType,
+    name: 'HookNotice'
 })
 
-HookNotice.props = vuePropsType
-HookNotice.name = 'HookNotice'
 
 export default HookNotice
 

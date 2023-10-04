@@ -59,7 +59,9 @@ const CardDemo = defineComponent<CardDemoProps>((props, {}) => {
   }
 })
 
+// @ts-ignore
 CardDemo.props = vuePropsType
+// @ts-ignore
 CardDemo.name = 'CardDemo'
 
 export default CardDemo

@@ -28,8 +28,6 @@ const WithFormStateDemo = defineComponent<WithFormStateDemoProps>((props, {}) =>
   )
 })
 
-WithFormStateDemo.props = vuePropsType
-WithFormStateDemo.name = 'WithFormStateDemo'
 
 export default WithFormStateDemo
 

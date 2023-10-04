@@ -18,13 +18,14 @@ import type {
     ErrorMsg, FormFCChild
 } from './interface';
 import {
+    ComponentObjectPropsOptions,
     createVNode,
     CSSProperties,
     defineComponent,
     getCurrentInstance,
     h,
     onMounted,
-    onUnmounted,
+    onUnmounted, PropType,
     reactive,
     useSlots,
 } from "vue";
@@ -37,34 +38,38 @@ interface BaseFormState {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<BaseFormProps> = {
     'aria-label': PropTypes.string,
-    onSubmit: PropTypes.func,
-    onSubmitFail: PropTypes.func,
+    onSubmit: PropTypes.func as PropType<BaseFormProps['onSubmit']>,
+    onSubmitFail: PropTypes.func as PropType<BaseFormProps['onSubmitFail']>,
     /* Triggered from update, including field mount/unmount/value change/blur/verification status change/error prompt change, input parameter is formState, currentField */
-    onChange: PropTypes.func,
-    onReset: PropTypes.func,
+    onChange: PropTypes.func as PropType<BaseFormProps['onChange']>,
+    onReset: PropTypes.func as PropType<BaseFormProps['onReset']>,
     // Triggered when the value of the form is updated, only when the value of the subfield changes. The entry parameter is formState.values
-    onValueChange: PropTypes.func,
-    initValues: PropTypes.object,
-    getFormApi: PropTypes.func,
-    component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    render: PropTypes.func,
-    validateFields: PropTypes.func,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    layout: String,
-    labelPosition: String,
-    labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    labelAlign: String,
-    labelCol: PropTypes.object, // Control labelCol {span: number, offset: number} for all field child nodes
-    wrapperCol: PropTypes.object, // Control wrapperCol {span: number, offset: number} for all field child nodes
-    allowEmpty: PropTypes.bool,
+    onValueChange: PropTypes.func as PropType<BaseFormProps['onValueChange']>,
     autoScrollToError: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    allowEmpty: PropTypes.bool,
+    className: PropTypes.string,
+    component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     disabled: PropTypes.bool,
+    extraTextPosition: PropTypes.string as PropType<BaseFormProps['extraTextPosition']>,
+    getFormApi: PropTypes.func as PropType<BaseFormProps['getFormApi']>,
+    initValues: PropTypes.object,
+    validateFields: PropTypes.func as PropType<BaseFormProps['validateFields']>,
+    layout: PropTypes.string as PropType<BaseFormProps['layout']>,
+    labelPosition: PropTypes.string as PropType<BaseFormProps['labelPosition']>,
+    labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    labelAlign: PropTypes.string as PropType<BaseFormProps['labelAlign']>,
+    labelCol: PropTypes.object, // Control labelCol {span: number, offset: number} for all field child nodes
+    render: PropTypes.func as PropType<BaseFormProps['render']>,
+    style: PropTypes.object,
     showValidateIcon: PropTypes.bool,
-    extraTextPosition: String,
+    stopValidateWithError: PropTypes.bool as PropType<BaseFormProps['stopValidateWithError']>,
     id: PropTypes.string,
+    wrapperCol: PropTypes.object, // Control wrapperCol {span: number, offset: number} for all field child nodes
+    trigger: [String, Array] as PropType<BaseFormProps['trigger']>,
+
+
 };
 
 const defaultProps = {
@@ -79,7 +84,7 @@ const defaultProps = {
     autoScrollToError: false,
     showValidateIcon: true,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<BaseFormProps>(propTypes, defaultProps)
 const Form = defineComponent<BaseFormProps>((props, {}) => {
     const slots = useSlots()
     let currentInstance = getCurrentInstance()
@@ -108,11 +113,11 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
         return {
             ...adapterInject<BaseFormProps, BaseFormState>(),
             cloneDeep,
-            notifySubmit: (values: any) => {
-                props.onSubmit(values);
+            notifySubmit: (values: any, e: any) => {
+                props.onSubmit(values, e);
             },
-            notifySubmitFail: (errors: ErrorMsg, values: any) => {
-                props.onSubmitFail(errors, values);
+            notifySubmitFail: (errors, values: any, e: any) => {
+                props.onSubmitFail(errors, values, e);
             },
             forceUpdate: (callback?: () => void) => {
                 // TODO 重新渲染
@@ -196,7 +201,7 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
 
     function submit(e: Event) {
         e.preventDefault();
-        foundation.submit();
+        foundation.submit(e);
     }
 
     function reset(e: Event) {
@@ -231,8 +236,10 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
             allowEmpty,
             autoScrollToError,
             showValidateIcon,
+            stopValidateWithError,
             extraTextPosition,
             id,
+            trigger,
             ...rest
         } = props;
 
@@ -268,10 +275,11 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
           </FormUpdaterContext.Provider>
         );
     }
+}, {
+    props: vuePropsType,
+    name:'Form'
 })
 
-Form.props = vuePropsType
-Form.name = 'Form'
 
 export default Form
 

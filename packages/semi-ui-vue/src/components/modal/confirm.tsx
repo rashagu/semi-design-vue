@@ -82,7 +82,7 @@ export default function confirm<T>(props: ConfirmProps) {
     currentConfig = {
       ...currentConfig,
       ...newConfig,
-    };
+    } as ConfirmProps;
     render(currentConfig);
   }
 
@@ -100,7 +100,7 @@ export function withInfo(props: ModalReactProps) {
     type: 'info' as const,
     icon: <IconInfoCircle/>,
     ...props
-  };
+  } as ConfirmProps;
 }
 
 export function withSuccess(props: ModalReactProps) {
@@ -108,7 +108,7 @@ export function withSuccess(props: ModalReactProps) {
     type: 'success' as const,
     icon: <IconTickCircle/>,
     ...props
-  };
+  } as ConfirmProps;
 }
 
 export function withWarning(props: ModalReactProps) {
@@ -116,7 +116,7 @@ export function withWarning(props: ModalReactProps) {
     type: 'warning' as const,
     icon: <IconAlertTriangle/>,
     ...props
-  };
+  } as ConfirmProps;
 }
 
 export function withError(props: ModalReactProps) {
@@ -124,7 +124,7 @@ export function withError(props: ModalReactProps) {
     type: 'error' as const,
     icon: <IconAlertCircle/>,
     okButtonProps: { type: 'danger' as ButtonProps['type'], ...props.okButtonProps },
-    ...(omit(props, ['okButtonProps']))
+    ...(omit(props, ['okButtonProps']) as ConfirmProps)
   };
 }
 
@@ -133,5 +133,5 @@ export function withConfirm(props: ModalReactProps) {
     type: 'confirm' as const,
     icon: <IconHelpCircle/>,
     ...props
-  };
+  } as ConfirmProps;
 }

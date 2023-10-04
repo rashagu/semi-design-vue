@@ -9,7 +9,7 @@ import {
   reactive,
   onMounted,
   watch,
-  onUnmounted, cloneVNode
+  onUnmounted, cloneVNode, PropType
 } from 'vue'
 
 import * as PropTypes from '../PropTypes'
@@ -24,6 +24,7 @@ import Checkbox from './checkbox';
 import type { CheckboxEvent } from './checkbox';
 import {AriaAttributes} from "../AriaAttributes";
 import {vuePropsMake} from "../PropTypes";
+import {ComponentObjectPropsOptions} from "vue";
 
 export type CheckboxDirection = 'horizontal' | 'vertical';
 export type CheckboxType = 'default' | 'card' | 'pureCard';
@@ -53,7 +54,7 @@ export type CheckboxGroupState = {
   value?: any[];
 };
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<CheckboxGroupProps> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,
@@ -64,11 +65,11 @@ const propTypes = {
   name: PropTypes.string,
   options: PropTypes.array,
   value: PropTypes.array,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func as PropType<CheckboxGroupProps['onChange']>,
   prefixCls: PropTypes.string,
-  direction: String,
+  direction: String as PropType<CheckboxGroupProps['direction']>,
   className: PropTypes.string,
-  type: String,
+  type: String as PropType<CheckboxGroupProps['type']>,
   style: PropTypes.object,
 
   id: String,
@@ -83,7 +84,7 @@ const defaultProps: Partial<CheckboxGroupProps> = {
   defaultValue: [] as any,
   direction: strings.DEFAULT_DIRECTION,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<CheckboxGroupProps>(propTypes, defaultProps)
 
 const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
   const slots = useSlots()
@@ -93,7 +94,7 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
     value: props.value || props.defaultValue,
   });
 
-  const {adapter: adapterInject} = useBaseComponent<CheckboxGroupProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<CheckboxGroupProps>(props, state)
   function adapter(): CheckboxGroupAdapter {
     return {
       ...adapterInject<CheckboxGroupProps, CheckboxGroupState>(),
@@ -190,6 +191,7 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
         style={style}
         aria-labelledby={props['aria-labelledby']}
         aria-describedby={props['aria-describedby']}
+        {...getDataAttr()}
         // aria-errormessage={props['aria-errormessage']}
         // aria-invalid={props['aria-invalid']}
         // aria-required={props['aria-required']}
@@ -211,10 +213,11 @@ const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'CheckboxGroup'
 })
 
-CheckboxGroup.props = vuePropsType
-CheckboxGroup.name = 'CheckboxGroup'
 
 export default CheckboxGroup
 

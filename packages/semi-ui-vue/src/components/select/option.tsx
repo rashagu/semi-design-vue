@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties} from 'vue'
+import {defineComponent, ref, h, Fragment, VNode, CSSProperties, ComponentObjectPropsOptions, PropType} from 'vue'
 import classNames from 'classnames';
 
 import {isString} from 'lodash';
@@ -31,7 +31,7 @@ interface renderOptionContentArgument {
   prefixCls: string;
 }
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<OptionProps> = {
   value: [String, Number],
   label: [String, Number, Object, Array],
   children: [String, Number, Object, Array],
@@ -47,7 +47,7 @@ export const vuePropsType = {
 
   showTick: Boolean,
   className: String,
-  style: [String, Object],
+  style: [String, Object] as PropType<OptionProps['style']>,
   onSelect: Function,
   prefixCls: {
     type: String,
@@ -55,116 +55,118 @@ export const vuePropsType = {
   }
 }
 
-const Option = defineComponent<OptionProps>({
-  name: 'isSelectOption',
-  setup: (props, {slots, attrs}) => {
+const Option = defineComponent<OptionProps>((props, {slots, attrs}) => {
 
-    function onClick({value, label, children, ...rest}: Partial<OptionProps>, event: MouseEvent) {
-      const isDisabled = props.disabled;
-      if (!isDisabled) {
-        props.onSelect({...rest, value, label: label || children}, event);
-      }
-    }
-
-    function renderOptionContent({config, children, inputValue, prefixCls}: renderOptionContentArgument) {
-      if (isString(children) && inputValue) {
-        return getHighLightTextHTML(config as any);
-      }
-      return children;
-    }
-
-    return () => {
-      const children = slots.default ? slots.default() : null
-      // 还有部分属性没有写到props
-      const {
-        disabled,
-        value,
-        selected,
-        label,
-        empty,
-        emptyContent,
-        onSelect,
-        focused,
-        showTick,
-        className,
-        style,
-        onMouseEnter,
-        prefixCls,
-        renderOptionItem,
-        inputValue,
-        ...rest
-      } = props;
-      const optionClassName = classNames(prefixCls, {
-        [`${prefixCls}-disabled`]: disabled,
-        [`${prefixCls}-selected`]: selected,
-        [`${prefixCls}-focused`]: focused,
-        [`${prefixCls}-empty`]: empty,
-        [className]: className,
-      });
-      const selectedIconClassName = classNames([`${prefixCls}-icon`]);
-
-      if (empty) {
-        if (emptyContent === null) {
-          return null;
-        }
-        return (
-          <LocaleConsumer componentName="Select">
-            {(locale: Locale['Select']) => <div class={optionClassName}>{emptyContent || locale.emptyText}</div>}
-          </LocaleConsumer>
-        );
-      }
-
-      // Since there are empty, locale and other logic, the custom renderOptionItem is directly converged to the internal option instead of being placed in Select/index
-      if (typeof renderOptionItem === 'function') {
-        return renderOptionItem({
-          disabled,
-          focused,
-          selected,
-          style,
-          label,
-          value,
-          inputValue,
-          onMouseEnter: (e: MouseEvent) => onMouseEnter(e),
-          onClick: (e: MouseEvent) => onClick({value, label, children, ...rest}, e),
-          ...rest
-        });
-      }
-
-      const config = {
-        searchWords: inputValue,
-        sourceString: children,
-        option: {
-          highlightClassName: `${prefixCls}-keyword`
-        }
-      };
-      return (
-        // eslint-disable-next-line jsx-a11y/interactive-supports-focus,jsx-a11y/click-events-have-key-events
-        <div
-          class={optionClassName}
-          onClick={e => {
-            onClick({value, label, children, ...rest}, e);
-          }}
-          onMouseenter={e => onMouseEnter && onMouseEnter(e)}
-          role="option"
-          aria-selected={selected ? "true" : "false"}
-          aria-disabled={disabled ? "true" : "false"}
-          style={style}
-        >
-          {showTick ? (
-            <div class={selectedIconClassName}>
-              <IconTick/>
-            </div>
-          ) : null}
-          {isString(children) ? <div class={`${prefixCls}-text`}>
-            {renderOptionContent({children, config, inputValue, prefixCls})}
-          </div> : [children]}
-        </div>
-      );
+  function onClick({value, label, children, ...rest}: Partial<OptionProps>, event: MouseEvent) {
+    const isDisabled = props.disabled;
+    if (!isDisabled) {
+      props.onSelect({...rest, value, label: label || children}, event);
     }
   }
+
+  function renderOptionContent({config, children, inputValue, prefixCls}: renderOptionContentArgument) {
+    if (isString(children) && inputValue) {
+      return getHighLightTextHTML(config as any);
+    }
+    return children;
+  }
+
+  return () => {
+    const children = slots.default ? slots.default() : null
+    // 还有部分属性没有写到props
+    const {
+      disabled,
+      value,
+      selected,
+      label,
+      empty,
+      emptyContent,
+      onSelect,
+      focused,
+      showTick,
+      className,
+      style,
+      onMouseEnter,
+      prefixCls,
+      renderOptionItem,
+      inputValue,
+      semiOptionId,
+      ...rest
+    } = props;
+    const optionClassName = classNames(prefixCls, {
+      [`${prefixCls}-disabled`]: disabled,
+      [`${prefixCls}-selected`]: selected,
+      [`${prefixCls}-focused`]: focused,
+      [`${prefixCls}-empty`]: empty,
+      [className]: className,
+    });
+    const selectedIconClassName = classNames([`${prefixCls}-icon`]);
+
+    if (empty) {
+      if (emptyContent === null) {
+        return null;
+      }
+      return (
+        <LocaleConsumer componentName="Select">
+          {(locale: Locale['Select']) => <div class={optionClassName}>{emptyContent || locale.emptyText}</div>}
+        </LocaleConsumer>
+      );
+    }
+
+    // Since there are empty, locale and other logic, the custom renderOptionItem is directly converged to the internal option instead of being placed in Select/index
+    if (typeof renderOptionItem === 'function') {
+      return renderOptionItem({
+        disabled,
+        focused,
+        selected,
+        style,
+        label,
+        value,
+        inputValue,
+        onMouseEnter: (e: MouseEvent) => onMouseEnter(e),
+        onClick: (e: MouseEvent) => onClick({value, label, children, ...rest}, e),
+        ...rest
+      });
+    }
+
+    const config = {
+      searchWords: inputValue,
+      sourceString: children,
+      option: {
+        highlightClassName: `${prefixCls}-keyword`
+      }
+    };
+    return (
+      // eslint-disable-next-line jsx-a11y/interactive-supports-focus,jsx-a11y/click-events-have-key-events
+      <div
+        class={optionClassName}
+        onClick={e => {
+          onClick({value, label, children, ...rest}, e);
+        }}
+        onMouseenter={e => onMouseEnter && onMouseEnter(e)}
+        role="option"
+        id={semiOptionId}
+        aria-selected={selected ? "true" : "false"}
+        aria-disabled={disabled ? "true" : "false"}
+        style={style}
+      >
+        {showTick ? (
+          <div class={selectedIconClassName}>
+            <IconTick/>
+          </div>
+        ) : null}
+        {isString(children) ? <div class={`${prefixCls}-text`}>
+          {renderOptionContent({children, config, inputValue, prefixCls})}
+        </div> : [children]}
+      </div>
+    );
+  }
+}, {
+  props: vuePropsType,
+  name: 'isSelectOption'
 })
 
-Option.props = vuePropsType
+
 
 export default Option
 

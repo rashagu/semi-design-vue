@@ -31,6 +31,8 @@ yarn add @kousum/semi-icons-vue
 
 # 👍 使用
 
+> vue >= 3.3
+
 ```vue
 #Component.vue
 <script setup>
@@ -58,6 +60,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 # 开发
 1. 使用`typescript`,`changeSets`
 2. `node: >= 16`
+3. `vue: >= 3.3`
 
 
 ### 安装依赖

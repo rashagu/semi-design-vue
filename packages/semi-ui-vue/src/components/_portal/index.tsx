@@ -9,13 +9,15 @@ import {
   onMounted,
   watch,
   onUnmounted,
-  Teleport, reactive
+  Teleport, reactive, PropType
 } from 'vue'
 import { BASE_CLASS_PREFIX } from '@douyinfe/semi-foundation/base/constants';
 
 import classnames from 'classnames';
 import '@douyinfe/semi-foundation/_portal/portal.scss';
 import {useConfigContext} from "../configProvider/context/Consumer";
+import type {ComponentObjectPropsOptions} from "vue";
+import {ContextValue} from "../configProvider/context";
 
 export interface PortalProps {
   style?: CSSProperties;
@@ -31,17 +33,15 @@ export interface PortalState {
 
 const defaultGetContainer = () => document.body;
 
-export const vuePropsType = {
-  name: String,
-  children: Object,
-  style: [Object, String],
+export const vuePropsType:ComponentObjectPropsOptions<PortalProps> = {
+  style: [Object, String] as PropType<PortalProps['style']>,
   prefixCls: {
     type:String,
     default:`${BASE_CLASS_PREFIX}-portal`
   },
   className: String,
-  getPopupContainer: Function,
-  didUpdate: Function,
+  getPopupContainer: Function as PropType<PortalProps['getPopupContainer']>,
+  didUpdate: Function as PropType<PortalProps['didUpdate']>,
 }
 
 const Index = defineComponent<PortalProps>((props, {slots}) => {
@@ -52,31 +52,41 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
   })
   onBeforeMount(()=>{
     try {
-      el = document.createElement('div');
+      el = initContainer(context.value, true);
     } catch (e) {
     }
   })
 
   onMounted(()=>{
-
-    if (!el) {
-      el = document.createElement('div');
-    }
-
-    const getContainer = props.getPopupContainer || context.value.getPopupContainer || defaultGetContainer;
-    const container = getContainer();
-    // console.log(container)
-    if (container !== state.container) {
-      // const computedStyle = window.getComputedStyle(container);
-      // if (computedStyle.position !== 'relative') {
-      //    container.style.position = 'relative';
-      // }
-      container.appendChild(el);
-      addStyle(props.style);
-      addClass(props.prefixCls, props.className);
-      state.container = container;
+    const container = initContainer(context.value);
+    if (container!==state.container) {
+      state.container = container
     }
   })
+  function initContainer(context: ContextValue, catchError = false){
+    try {
+      let container: HTMLElement | undefined = undefined;
+      if (!el) {
+        el = document.createElement('div');
+      }
+      if (!state?.container) {
+        el = document.createElement('div');
+        const getContainer = props.getPopupContainer || context.getPopupContainer || defaultGetContainer;
+        const portalContainer = getContainer();
+        portalContainer.appendChild(el);
+        addStyle(props.style);
+        addClass(props.prefixCls, context, props.className);
+        container = portalContainer;
+        return container;
+      }
+    } catch (e) {
+      if (!catchError) {
+        throw e;
+      }
+    }
+    return state?.container;
+  }
+
   watch(()=>props, (newProps,prevProps)=>{
     const { didUpdate } = props;
     if (didUpdate) {
@@ -97,8 +107,8 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
       }
     }
   };
-  const addClass = (prefixCls: string, ...classNames: string[]) => {
-    const { direction } = context.value;
+  const addClass = (prefixCls: string,context_ = context.value, ...classNames: string[]) => {
+    const { direction } = context_;
     const cls = classnames(prefixCls, ...classNames, {
       [`${prefixCls}-rtl`]: direction === 'rtl'
     });
@@ -119,9 +129,11 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
     }
     return null;
   }
+}, {
+  props: vuePropsType,
+  name: 'Portal'
 })
 
-Index.props = vuePropsType
-Index.name = 'Portal'
+
 export default Index
 

@@ -13,9 +13,12 @@ const Provider = defineComponent<{value:TabContextValue}>((props, {slots}) => {
   }, { deep: true, immediate: true})
   provide('TabsContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
+}, {
+  props: vuePropsType,
+  name: 'TabsContextProvider'
 })
 
-Provider.props = vuePropsType
+
 
 export default Provider
 

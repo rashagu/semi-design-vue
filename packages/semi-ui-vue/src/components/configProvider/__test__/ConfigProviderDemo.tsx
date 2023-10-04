@@ -8,7 +8,8 @@ interface ConfigProviderDemoProps {
 }
 
 export const vuePropsType = {
-  name: String
+
+
 }
 const ConfigProviderDemo = defineComponent<ConfigProviderDemoProps>((props, {slots}) => {
 
@@ -20,7 +21,7 @@ const ConfigProviderDemo = defineComponent<ConfigProviderDemoProps>((props, {slo
   )
 })
 
-ConfigProviderDemo.props = vuePropsType
+
 
 export default ConfigProviderDemo
 

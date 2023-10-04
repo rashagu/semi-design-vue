@@ -143,24 +143,5 @@ const getRenderText = (
 
 
 
-// interface ExampleProps {
-//   name?: string
-// }
-//
-// export const vuePropsType = {
-//   name: String
-// }
-// const util = defineComponent<ExampleProps>((props, {slots}) => {
-//
-//
-//   return () => (
-//     <div>
-//       util
-//     </div>
-//   )
-// })
-//
-// util.props = vuePropsType
-
 export default getRenderText
 

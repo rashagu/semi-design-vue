@@ -198,27 +198,56 @@ export function getFocusableElements(node: HTMLElement) {
 }
 
 
-export function getChildrenVNode(instance: ComponentInternalInstance) {
-    let children:VueJsxNode = []
-    // @ts-ignore
-    children = instance?.vnode?.children?.default ? instance.vnode.children.default() : null
-    if (children && Array.isArray(children[0])){
-        children = children[0]
-    }
-    return children
-}
+
 
 
 export function getFragmentChildren(slots: SetupContext['slots']):VNode[] {
     const children = slots.default?.()
     if (children){
         // for Vitest
-        if (typeof children[0].type === 'symbol' && isVNode(children[0])){
+        if (typeof children[0].type === 'symbol' && isVNode(children[0])) {
             return slots.default?.()?.[0]?.children as any || []
-        }else{
+        } else {
             return slots.default?.() as any || []
         }
     }else{
         return children
+    }
+}
+
+
+
+function getLeg(arr:VNode[], ) {
+    let nodes: VNode[] = []
+    arr.forEach(item=>{
+        if (typeof item.type === 'symbol'){
+        (Array.isArray(item.children) && item.children.length > 0) && (nodes = [...nodes, ...getLeg(item.children as VNode[])])
+        }else{
+            nodes.push(item)
+        }
+    })
+    return nodes
+}
+/**
+ * 当使用vue的v-for时的特殊处理
+ */
+export function getVNodeChildren(arr:VNode[]){
+    return getLeg(arr)
+}
+
+
+export function getScrollbarWidth() {
+    if (globalThis && Object.prototype.toString.call(globalThis) === '[object Window]') {
+        return window.innerWidth - document.documentElement.clientWidth;
+    }
+    return 0;
+}
+
+
+export function styleNum(v: string | number) {
+    if (isNaN(+v)) {
+        return v
+    } else {
+        return v + 'px'
     }
 }

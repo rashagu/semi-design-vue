@@ -15,14 +15,16 @@ import {Locale} from '../locale/interface';
 import useModal from './useModal';
 import {ButtonProps} from '../button/Button';
 import CSSAnimation from "../_cssAnimation";
+import { getScrollbarWidth } from "../_utils";
 
 import {
+  ComponentObjectPropsOptions,
   CSSProperties,
   defineComponent,
   h,
   nextTick,
   onMounted,
-  onUnmounted,
+  onUnmounted, PropType,
   reactive,
   ref,
   useSlots,
@@ -50,11 +52,12 @@ export interface ModalReactProps extends ModalProps {
   header?: VNode | string;
   onCancel?: (e: MouseEvent) => void | Promise<any>;
   onOk?: (e: MouseEvent) => void | Promise<any>;
+  type?: string
 }
 
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<ModalReactProps> = {
   mask: PropTypes.bool,
   closable: PropTypes.bool,
   centered: PropTypes.bool,
@@ -64,12 +67,12 @@ const propTypes = {
   confirmLoading: PropTypes.bool,
   cancelLoading: PropTypes.bool,
   okText: PropTypes.string,
-  okType: PropTypes.string,
+  okType: PropTypes.string as PropType<ModalReactProps['okType']>,
   cancelText: PropTypes.string,
   maskClosable: PropTypes.bool,
-  onCancel: PropTypes.func,
-  onOk: PropTypes.func,
-  afterClose: PropTypes.func,
+  onCancel: PropTypes.func as PropType<ModalReactProps['onCancel']>,
+  onOk: PropTypes.func as PropType<ModalReactProps['onOk']>,
+  afterClose: PropTypes.func as PropType<ModalReactProps['afterClose']>,
   okButtonProps: PropTypes.object,
   cancelButtonProps: PropTypes.object,
   style: PropTypes.object,
@@ -77,24 +80,24 @@ const propTypes = {
   maskStyle: PropTypes.object,
   bodyStyle: PropTypes.object,
   zIndex: PropTypes.number,
-  title: PropTypes.node,
-  icon: PropTypes.node,
-  header: PropTypes.node,
-  footer: PropTypes.node,
+  title: PropTypes.node as PropType<ModalReactProps['title']>,
+  icon: PropTypes.node as PropType<ModalReactProps['icon']>,
+  header: PropTypes.node as PropType<ModalReactProps['header']>,
+  footer: PropTypes.node as PropType<ModalReactProps['footer']>,
   hasCancel: PropTypes.bool,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
-  getPopupContainer: PropTypes.func,
-  getContainerContext: PropTypes.func,
+  getPopupContainer: PropTypes.func as PropType<ModalReactProps['getPopupContainer']>,
+  getContainerContext: PropTypes.func as PropType<ModalReactProps['getContainerContext']>,
   maskFixed: PropTypes.bool,
-  closeIcon: PropTypes.node,
+  closeIcon: PropTypes.node as PropType<ModalReactProps['closeIcon']>,
   closeOnEsc: PropTypes.bool,
-  size: String,
+  size: String as PropType<ModalReactProps['size']>,
   keepDOM: PropTypes.bool,
   lazyRender: PropTypes.bool,
   direction: String,
   fullScreen: PropTypes.bool,
   content: [Object, String],
-  type: String,
+  type: String as PropType<ModalReactProps['type']>,
 };
 const defaultProps = {
   zIndex: 1000,
@@ -117,7 +120,7 @@ const defaultProps = {
   fullScreen: false,
   getContainerContext: noop,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<ModalReactProps>(propTypes, defaultProps)
 
 const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
 
@@ -204,17 +207,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
     })
   })
 
-  function getScrollbarWidth() {
-    if (globalThis && Object.prototype.toString.call(globalThis) === '[object Window]') {
-      return window.innerWidth - document.documentElement.clientWidth;
-    }
-    return 0;
-  }
 
-
-  expose({
-    getScrollbarWidth,
-  })
 
   onMounted(() => {
     scrollBarWidth = getScrollbarWidth();
@@ -414,10 +407,12 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
     } = props;
     return renderDialog();
   }
+},{
+  props: vuePropsType,
+  name: 'Modal'
 })
 
-Modal.props = vuePropsType
-Modal.name = 'Modal'
+
 
 
 const info = function (props: ModalReactProps) {
@@ -449,7 +444,7 @@ const destroyAll = function destroyAllFn() {
   }
 };
 
-export class ModalConfirm {
+export class ModalClass {
   static useModal = useModal
 
   static info = function (props: ModalReactProps) {

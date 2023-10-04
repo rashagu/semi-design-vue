@@ -1,7 +1,6 @@
 import * as PropTypes from '../PropTypes';
 import Portal from '../_portal';
 import cls from 'classnames';
-import ConfigContext, { ContextValue } from '../configProvider/context';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/sideSheet/constants';
 import SideSheetContent from './SideSheetContent';
 import { noop } from 'lodash';
@@ -13,12 +12,13 @@ import SideSheetFoundation, {
 import '@douyinfe/semi-foundation/sideSheet/sideSheet.scss';
 import CSSAnimation from '../_cssAnimation';
 import {
+  ComponentObjectPropsOptions,
   CSSProperties,
   defineComponent,
   Fragment,
   h,
   onBeforeUnmount,
-  onMounted,
+  onMounted, PropType,
   reactive,
   useSlots,
   VNode,
@@ -26,9 +26,10 @@ import {
 } from 'vue';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { VueJsxNode } from '../interface';
-import { vuePropsMake } from '../PropTypes';
+import {func, vuePropsMake} from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
-import { PaginationProps } from '../pagination';
+import { getScrollbarWidth } from "../_utils";
+
 
 const prefixCls = cssClasses.PREFIX;
 const defaultWidthList = strings.WIDTH;
@@ -43,34 +44,32 @@ export interface SideSheetReactProps extends SideSheetProps {
   style?: CSSProperties;
   title?: VueJsxNode;
   footer?: VueJsxNode;
-  children?: VNode[];
   onCancel?: (e: MouseEvent | KeyboardEvent) => void;
 }
 
 export type { SideSheetState };
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<SideSheetProps> = {
   bodyStyle: PropTypes.object,
   headerStyle: PropTypes.object,
-  children: PropTypes.node,
   className: PropTypes.string,
   closable: PropTypes.bool,
   disableScroll: PropTypes.bool,
-  getPopupContainer: PropTypes.func,
+  getPopupContainer: PropTypes.func as PropType<SideSheetProps['getPopupContainer']>,
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   mask: PropTypes.bool,
   maskClosable: PropTypes.bool,
   maskStyle: PropTypes.object,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
-  onCancel: PropTypes.func,
-  placement: PropTypes.string,
-  size: PropTypes.string,
+  onCancel: PropTypes.func as PropType<SideSheetProps['onCancel']>,
+  placement: PropTypes.string as PropType<SideSheetProps['placement']>,
+  size: PropTypes.string as PropType<SideSheetProps['size']>,
   style: PropTypes.object,
   title: PropTypes.node,
   visible: PropTypes.bool,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   zIndex: PropTypes.number,
-  afterVisibleChange: PropTypes.func,
+  afterVisibleChange: PropTypes.func as PropType<SideSheetProps['afterVisibleChange']>,
   closeOnEsc: PropTypes.bool,
   footer: PropTypes.node,
   keepDOM: PropTypes.bool,
@@ -92,9 +91,13 @@ const defaultProps: SideSheetReactProps = {
   afterVisibleChange: noop,
   keepDOM: false,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<SideSheetProps>(propTypes, defaultProps);
 const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
   const slots = useSlots();
+
+  let bodyOverflow: string = '';
+  let scrollBarWidth: number = 0;
+  let originBodyWidth: string = '100%';
 
   let _active: boolean;
   const state = reactive({ displayNone: !props.visible });
@@ -106,14 +109,18 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
       ...adapterInject(),
       disabledBodyScroll: () => {
         const { getPopupContainer } = props;
-        if (!getPopupContainer && document) {
+        bodyOverflow = document.body.style.overflow || '';
+        if (!getPopupContainer && bodyOverflow !== 'hidden') {
           document.body.style.overflow = 'hidden';
+          document.body.style.width = `calc(${originBodyWidth || '100%'} - ${scrollBarWidth}px)`;
+
         }
       },
       enabledBodyScroll: () => {
         const { getPopupContainer } = props;
-        if (!getPopupContainer && document) {
-          document.body.style.overflow = '';
+        if (!getPopupContainer && bodyOverflow !== 'hidden') {
+          document.body.style.overflow = bodyOverflow;
+          document.body.style.width = originBodyWidth;
         }
       },
       notifyCancel: (e: MouseEvent | KeyboardEvent) => {
@@ -165,6 +172,8 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
   });
 
   onMounted(() => {
+    scrollBarWidth = getScrollbarWidth();
+    originBodyWidth = document.body.style.width;
     if (props.visible) {
       foundation.beforeShow();
     }
@@ -207,7 +216,6 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
   };
 
   function renderContent() {
-    const children = slots.default?.();
     const {
       placement,
       className,
@@ -239,9 +247,11 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
       [`${prefixCls}-hidden`]: keepDOM && state.displayNone,
     });
     const contentProps = {
+      ...(isVertical ? (width ? { width } : {}) : { width: "100%" }),
       ...props_,
       visible,
       motion: false,
+      size,
       className: classList,
       width: sheetWidth,
       height: sheetHeight,
@@ -280,7 +290,9 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
                     maskStyle={{ ...maskStyle }}
                     style={{ ...animationStyle, ...style }}
                   >
-                    {children}
+                    {{
+                      default: slots.default
+                    }}
                   </SideSheetContent>
                 ) : null;
               }}
@@ -308,9 +320,10 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
       </Portal>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'SideSheet'
 });
 
-SideSheet.props = vuePropsType;
-SideSheet.name = 'SideSheet';
 
 export default SideSheet;

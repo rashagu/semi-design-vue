@@ -1,29 +1,30 @@
 import { Resizable } from '@kousum/vue-resizable';
-import {defineComponent, Fragment, h, useSlots} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, Fragment, h, PropType, useSlots} from "vue";
 import {omit} from "lodash";
 
 export interface ResizableHeaderCellProps {
-    [x: string]: any;
     onResize?: ResizeFn;
     onResizeStart?: ResizeFn;
     onResizeStop?: ResizeFn;
-    width?: number | string
+    width?: number | string;
+    /** For compatibility with previous versions, the default value is true. If you don't want to resize, set it to false */
+    resize?: boolean
 }
-export const vuePropsType = {
-    onResize: Function,
-    onResizeStart: Function,
-    onResizeStop: Function,
+export const vuePropsType: ComponentObjectPropsOptions<ResizableHeaderCellProps> = {
+    onResize: Function as PropType<ResizableHeaderCellProps['onResize']>,
+    onResizeStart: Function as PropType<ResizableHeaderCellProps['onResizeStart']>,
+    onResizeStop: Function as PropType<ResizableHeaderCellProps['onResizeStop']>,
     width: [Number, String]
 };
 const ResizableHeaderCell = defineComponent<ResizableHeaderCellProps>((props, {attrs}) => {
     const slots = useSlots();
 
     return () => {
+        const { onResize, onResizeStart, onResizeStop, width, resize, ...restProps } = props;
 
-        const { onResize, onResizeStart, onResizeStop, width, ...restProps } = props;
         const domProps = omit(attrs, 'onResize', 'onResizeStart', 'onResizeStop', 'width')
 
-        if (typeof width !== 'number') {
+        if (typeof width !== 'number' || resize === false) {
             return <th {...domProps} />;
         }
 
@@ -35,7 +36,7 @@ const ResizableHeaderCell = defineComponent<ResizableHeaderCellProps>((props, {a
         return (
           // @ts-ignore
           <Resizable
-            width={width}
+            width={width as number}
             height={0}
             onResize={onResize}
             onResizeStart={onResizeStart}
@@ -44,14 +45,17 @@ const ResizableHeaderCell = defineComponent<ResizableHeaderCellProps>((props, {a
             children={<th {...domProps}>
                 {children}
             </th>}
+            axis='x'
           >
           </Resizable>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'ResizableHeaderCell'
 });
 
-ResizableHeaderCell.props = vuePropsType;
-ResizableHeaderCell.name = "ResizableHeaderCell";
+
 
 export type ResizeFn = (e: any) => any;
 export default ResizableHeaderCell;

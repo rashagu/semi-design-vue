@@ -5,10 +5,20 @@ import '@douyinfe/semi-foundation/timeline/timeline.scss';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/timeline/constants';
 import ConfigContext from '../configProvider/context';
 import Item, { TimelineItemProps } from './item';
-import {cloneVNode, CSSProperties, defineComponent, h, isVNode, useSlots, VNode} from "vue";
+import {
+    cloneVNode,
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    isVNode, PropType, useAttrs,
+    useSlots,
+    VNode
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {AriaAttributes} from "../AriaAttributes";
 import {VueJsxNode} from "../interface";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 export type { TimelineItemProps } from './item';
 
@@ -25,8 +35,8 @@ export interface TimelineProps extends Pick<AriaAttributes, 'aria-label'> {
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes = {
-    mode: PropTypes.string,
+const propTypes:ComponentObjectPropsOptions<TimelineProps> = {
+    mode: PropTypes.string as PropType<TimelineProps['mode']>,
     className: PropTypes.string,
     style: PropTypes.object,
     dataSource: PropTypes.array,
@@ -38,6 +48,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Timeline = defineComponent<TimelineProps>((props, {}) => {
     const slots = useSlots()
+    const attr = useAttrs()
 
     const getPosCls = (ele: VNode, idx: number) => {
         const { mode } = props;
@@ -78,7 +89,7 @@ const Timeline = defineComponent<TimelineProps>((props, {}) => {
 
     return () => {
         const children = slots.default?.()
-        const { className, style, mode, dataSource } = props;
+        const { className, style, mode, dataSource, ...rest } = props;
         const classString = cls(
           prefixCls,
           className,
@@ -94,15 +105,17 @@ const Timeline = defineComponent<TimelineProps>((props, {}) => {
         const items = childrenList || addClassName(children);
 
         return (
-          <ul aria-label={props['aria-label']} style={style} class={classString}>
+          <ul aria-label={props['aria-label']} style={style} class={classString} {...getDataAttr({...rest, ...attr})}>
               {items}
           </ul>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Timeline'
 })
 
-Timeline.props = vuePropsType
-Timeline.name = 'Timeline'
+
 
 export default Timeline
 export {

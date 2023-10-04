@@ -6,7 +6,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/table/constants';
 import Pagination from '../pagination';
 import { RenderPagination, TablePaginationProps as PaginationProps } from './interface';
 import {VueJsxNode} from "../interface";
-import type {CSSProperties} from "vue";
+import type {ComponentObjectPropsOptions, CSSProperties, PropType} from "vue";
 import {defineComponent, h, useSlots, Fragment, isVNode} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
@@ -17,12 +17,12 @@ export interface TablePaginationProps {
     info?: VueJsxNode;
     renderPagination?: RenderPagination
 }
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TablePaginationProps> = {
     style: PropTypes.object,
     prefixCls: PropTypes.string,
     pagination: PropTypes.object,
     info: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    renderPagination: PropTypes.func,
+    renderPagination: PropTypes.func as PropType<TablePaginationProps['renderPagination']>,
 };
 
 const defaultProps = {
@@ -52,9 +52,10 @@ const TablePagination = defineComponent<TablePaginationProps>((props, {}) => {
           </div>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'TablePagination'
 });
 
-TablePagination.props = vuePropsType;
-TablePagination.name = "TablePagination";
 
 export default TablePagination;

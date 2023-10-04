@@ -3,14 +3,14 @@ import * as PropTypes from '../PropTypes';
 import { isNumber, isString, noop } from 'lodash';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/badge/constants';
 import '@douyinfe/semi-foundation/badge/badge.scss';
-import { CSSProperties, defineComponent, h, useSlots } from 'vue';
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { VueJsxNode } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 
-export type BadgeType = 'primary' | 'secondary' | 'tertiary' | 'danger' | 'warning';
+export type BadgeType = 'primary' | 'secondary' | 'tertiary' | 'danger' | 'warning' | 'success';
 export type BadgeTheme = 'solid' | 'light' | 'inverted';
 export type BadgePosition = 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
 
@@ -28,18 +28,18 @@ export interface BadgeProps {
   onClick?: (e: MouseEvent) => any;
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<BadgeProps> = {
   count: PropTypes.node,
   dot: PropTypes.bool,
-  type: PropTypes.string,
-  theme: PropTypes.string,
-  position: PropTypes.string,
+  type: PropTypes.string as PropType<BadgeProps['type']>,
+  theme: PropTypes.string as PropType<BadgeProps['theme']>,
+  position: PropTypes.string as PropType<BadgeProps['position']>,
   overflowCount: PropTypes.number,
   style: PropTypes.object,
   className: PropTypes.string,
-  onClick: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func,
+  onClick: PropTypes.func as PropType<BadgeProps['onClick']>,
+  onMouseEnter: PropTypes.func as PropType<BadgeProps['onMouseEnter']>,
+  onMouseLeave: PropTypes.func as PropType<BadgeProps['onMouseLeave']>,
 };
 
 const defaultProps = {
@@ -52,7 +52,7 @@ const defaultProps = {
   onMouseLeave: () => noop,
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<BadgeProps>(propTypes, defaultProps);
 const Badge = defineComponent<BadgeProps>((props, {}) => {
   const slots = useSlots();
 
@@ -91,9 +91,10 @@ const Badge = defineComponent<BadgeProps>((props, {}) => {
       </span>
     );
   };
+},{
+  props: vuePropsType,
+  name:'Badge'
 });
 
-Badge.props = vuePropsType;
-Badge.name = 'Badge';
 
 export default Badge;

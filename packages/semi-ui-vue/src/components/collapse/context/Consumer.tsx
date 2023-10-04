@@ -15,9 +15,11 @@ const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useCollapseContext()
   return () => slots.default ? slots.default(context) : null
+}, {
+  props: vuePropsType,
+  name: 'CollapseConsumer'
 })
 
-Consumer.props = vuePropsType
 
 export default Consumer
 

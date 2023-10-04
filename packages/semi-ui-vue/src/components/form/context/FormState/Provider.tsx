@@ -13,10 +13,11 @@ const Provider = defineComponent<{value:FormState}>((props, {slots}) => {
   }, { immediate: true, deep: true})
   provide('FormStateContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
+}, {
+  props: vuePropsType,
+  name: 'FormStateContextProvider'
 })
 
-Provider.props = vuePropsType
-Provider.name = "FormStateContextProvider"
 
 export default Provider
 

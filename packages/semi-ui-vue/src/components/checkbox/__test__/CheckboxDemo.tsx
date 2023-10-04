@@ -48,7 +48,6 @@ const CheckboxDemo = defineComponent<ExampleProps>((props, {}) => {
   )
 })
 
-CheckboxDemo.props = vuePropsType
 
 export default CheckboxDemo
 

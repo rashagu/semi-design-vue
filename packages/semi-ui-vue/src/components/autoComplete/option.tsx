@@ -8,7 +8,7 @@ import { getHighLightTextHTML } from '../_utils/index';
 import { Locale } from '../locale/interface';
 import { BasicOptionProps } from '@douyinfe/semi-foundation/autoComplete/optionFoundation';
 import {VueJsxNode} from "../interface";
-import {CSSProperties, defineComponent, h, useSlots} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, useSlots} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>()
@@ -34,7 +34,7 @@ interface renderOptionContentArgument {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<OptionProps> = {
     children: PropTypes.node,
     disabled: PropTypes.bool,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -164,10 +164,13 @@ const Option = defineComponent<OptionProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Option'
 })
 
-Option.props = vuePropsType
-Option.name = 'Option'
+
+// @ts-ignore
 Option.isSelectOption = true
 export default Option
 

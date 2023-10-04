@@ -24,12 +24,11 @@ import {
   createApp,
   App,
   ref,
-  createVNode,
+  createVNode, getCurrentInstance, shallowRef,
 } from 'vue';
 import { VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
-
 
 export interface ToastReactProps extends ToastProps {
   id?: string;
@@ -46,112 +45,170 @@ const propTypes = {
   onClose: PropTypes.func,
   icon: PropTypes.node,
   direction: String,
+  stack: PropTypes.bool,
   ref: [Function, Object],
 };
 const defaultProps = {};
 const vuePropsType = vuePropsMake(propTypes, defaultProps);
 
-const ToastList = defineComponent<ToastListProps>((props, { expose }) => {
-  const slots = useSlots();
+const ToastList = defineComponent<ToastListProps>(
+  (props, { expose }) => {
+    const slots = useSlots();
+    const stack = shallowRef<boolean>(false);
 
-  const state = reactive<ToastListState>({
-    list: [],
-    removedItems: [],
-    updatedItems: [],
-  });
+    function setStack(v: boolean) {
+      stack.value = v
+    }
+    function getStack() {
+      return stack.value
+    }
+    const currentInstance = getCurrentInstance()
 
-  const { adapter: adapterInject } = useBaseComponent<ToastListProps>(props, state);
 
-  function adapter_(): ToastListAdapter {
-    return {
-      ...adapterInject<ToastListProps, ToastListState>(),
-      updateToast: (list: ToastInstance[], removedItems: ToastInstance[], updatedItems: ToastInstance[]) => {
-        state.list = list;
-        state.removedItems = removedItems;
-        state.updatedItems = updatedItems;
-      },
-    };
-  }
+    let innerWrapperRef = ref();
 
-  const adapter = adapter_();
-  const foundation = new ToastListFoundation(adapter);
+    const state = reactive<ToastListState>({
+      list: [],
+      removedItems: [],
+      updatedItems: [],
+      mouseInSide: false,
+    });
 
-  function has(id: string) {
-    return foundation.hasToast(id);
-  }
+    const { adapter: adapterInject } = useBaseComponent<ToastListProps>(props, state);
 
-  function add(opts: ToastInstance) {
-    return foundation.addToast(opts);
-  }
+    function adapter_(): ToastListAdapter {
+      return {
+        ...adapterInject<ToastListProps, ToastListState>(),
+        updateToast: (list: ToastInstance[], removedItems: ToastInstance[], updatedItems: ToastInstance[]) => {
+          state.list = list;
+          state.removedItems = removedItems;
+          state.updatedItems = updatedItems;
+        },
+        handleMouseInSideChange: (mouseInSide: boolean) => {
+          state.mouseInSide = mouseInSide;
+        },
+        getInputWrapperRect: () => {
+          return innerWrapperRef.value?.getBoundingClientRect();
+        },
+      };
+    }
 
-  function update(id: string, opts: ToastInstance) {
-    return foundation.updateToast(id, opts);
-  }
-
-  function remove(id: string) {
-    return foundation.removeToast(id);
-  }
-
-  function destroyAll() {
-    return foundation.destroyAll();
-  }
-
-  expose({
-    has,
-    add,
-    update,
-    remove,
-    destroyAll,
-  });
-
-  return () => {
-    let { list } = state;
-    const { removedItems, updatedItems } = state;
-    list = Array.from(new Set([...list, ...removedItems]));
-    const updatedIds = updatedItems.map(({ id }) => id);
-
-    const refFn = (toast) => {
-      if (toast?.foundation?._id && updatedIds.includes(toast.foundation._id)) {
-        toast.foundation.setState({ duration: toast.props.duration });
-        toast.foundation.restartCloseTimer();
+    const handleMouseEnter = (e: MouseEvent) => {
+      if (stack.value) {
+        foundation.handleMouseInSideChange(true);
       }
     };
 
-    return (
-      <Fragment>
-        {list.map((item, index) => {
-          const isRemoved = removedItems.find((removedItem) => removedItem.id === item.id) !== undefined;
-          return (
-            <CSSAnimation
-              key={item.id}
-              motion={item.motion}
-              animationState={isRemoved ? 'leave' : 'enter'}
-              startClassName={isRemoved ? `${cssClasses.PREFIX}-animation-hide` : `${cssClasses.PREFIX}-animation-show`}
-              children={({ animationClassName, animationEventsNeedBind, isAnimating }) => {
-                return isRemoved && !isAnimating ? null : (
-                  <Toast
-                    {...item}
-                    className={cls({
-                      [item.className]: Boolean(item.className),
-                      [animationClassName]: true,
-                    })}
-                    {...animationEventsNeedBind}
-                    style={{ ...item.style }}
-                    close={(id) => remove(id)}
-                    ref={refFn}
-                  />
-                );
-              }}
-            >
-            </CSSAnimation>
-          );
-        })}
-      </Fragment>
-    );
-  };
-});
-ToastList.props = vuePropsType;
-ToastList.name = 'ToastList';
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (stack.value) {
+        const height = foundation.getInputWrapperRect()?.height;
+        if (height) {
+          foundation.handleMouseInSideChange(false);
+        }
+      }
+    };
+
+    const adapter = adapter_();
+    const foundation = new ToastListFoundation(adapter);
+
+    function has(id: string) {
+      return foundation.hasToast(id);
+    }
+
+    function add(opts: ToastInstance) {
+      return foundation.addToast(opts);
+    }
+
+    function update(id: string, opts: ToastInstance) {
+      return foundation.updateToast(id, opts);
+    }
+
+    function remove(id: string) {
+      return foundation.removeToast(id);
+    }
+
+    function destroyAll() {
+      return foundation.destroyAll();
+    }
+
+    expose({
+      has,
+      add,
+      update,
+      remove,
+      destroyAll,
+      setStack,
+      getStack,
+    });
+
+    return () => {
+      let { list } = state;
+      const { removedItems, updatedItems } = state;
+      list = Array.from(new Set([...list, ...removedItems]));
+      const updatedIds = updatedItems.map(({ id }) => id);
+
+      const refFn = (toast) => {
+        if (toast?.foundation?._id && updatedIds.includes(toast.foundation._id)) {
+          toast.foundation.setState({ duration: toast.props.duration });
+          toast.foundation.restartCloseTimer();
+        }
+      };
+
+      return (
+        <Fragment>
+          <div
+            class={cls({
+              [`${cssClasses.PREFIX}-innerWrapper`]: true,
+              [`${cssClasses.PREFIX}-innerWrapper-hover`]: state.mouseInSide,
+            })}
+            ref={innerWrapperRef}
+            onMouseenter={handleMouseEnter}
+            onMouseleave={handleMouseLeave}
+          >
+            {list.map((item, index) => {
+              const isRemoved = removedItems.find((removedItem) => removedItem.id === item.id) !== undefined;
+              return (
+                <CSSAnimation
+                  key={item.id}
+                  motion={item.motion}
+                  animationState={isRemoved ? 'leave' : 'enter'}
+                  startClassName={
+                    isRemoved ? `${cssClasses.PREFIX}-animation-hide` : `${cssClasses.PREFIX}-animation-show`
+                  }
+                  children=
+                    {({ animationClassName, animationEventsNeedBind, isAnimating }) => {
+                      return isRemoved && !isAnimating ? null : (
+                        <Toast
+                          {...item}
+                          stack={stack.value}
+                          stackExpanded={state.mouseInSide}
+                          positionInList={{ length: list.length, index }}
+                          className={cls({
+                            [item.className]: Boolean(item.className),
+                            [animationClassName]: true,
+                          })}
+                          {...animationEventsNeedBind}
+                          style={{ ...item.style }}
+                          close={(id) => remove(id)}
+                          ref={refFn}
+                        />
+                      );
+                    }}
+                >
+                </CSSAnimation>
+              );
+            })}
+          </div>
+        </Fragment>
+      );
+    };
+  },
+  {
+    props: vuePropsType,
+    name: 'ToastList',
+  }
+);
+
 export { ToastList };
 
 const createBaseToast = () => {
@@ -164,6 +221,8 @@ export type ToastListType = {
   update: (id: string, opts: ToastInstance) => void;
   remove: (id: string) => void;
   destroyAll: () => void;
+  setStack: (v: boolean) => boolean;
+  getStack: () => boolean;
 };
 export function useToastHook(configProps?: ConfigProps) {
   let createApp_: App<Element>;
@@ -206,6 +265,7 @@ export function useToastHook(configProps?: ConfigProps) {
           ref: (instance: any) => {
             if (!ToastListRef) {
               instance.add({ ...opts, id });
+              instance.setStack(Boolean(opts.stack))
             }
             ToastListRef = instance;
           },
@@ -219,6 +279,11 @@ export function useToastHook(configProps?: ConfigProps) {
           node.style[pos] = typeof opts[pos] === 'number' ? `${opts[pos]}px` : opts[pos];
         }
       });
+
+      if (Boolean(opts.stack) !== ToastListRef.getStack()) {
+        ToastListRef.setStack(Boolean(opts.stack))
+      }
+
       if (ToastListRef.has(id)) {
         ToastListRef.update(id, { ...opts, id });
       } else {

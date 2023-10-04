@@ -14,7 +14,7 @@ import {
   defineComponent,
   h,
   onBeforeUnmount,
-  onMounted,
+  onMounted, PropType,
   reactive,
   ref,
   useSlots,
@@ -24,10 +24,10 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
 import { PreviewImageProps } from '../image';
+import {ComponentObjectPropsOptions} from "vue";
 
 interface CollapsibleProps extends CollapsibleFoundationProps {
   motion?: boolean;
-  children?: VNode[];
   isOpen?: boolean;
   duration?: number;
   keepDOM?: boolean;
@@ -45,9 +45,8 @@ interface CollapsibleState extends CollapsibleFoundationState {
   visible: boolean;
   isTransitioning: boolean;
 }
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<CollapsibleProps> = {
   motion: PropTypes.bool,
-  children: PropTypes.node,
   isOpen: PropTypes.bool,
   duration: PropTypes.number,
   keepDOM: PropTypes.bool,
@@ -64,7 +63,7 @@ const defaultProps = {
   collapseHeight: 0,
   fade: false,
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake<CollapsibleProps>(propTypes, defaultProps);
 const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
   const slots = useSlots();
 
@@ -77,7 +76,7 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
     visible: props.isOpen,
     isTransitioning: false,
   });
-  const { adapter: adapterInject } = useBaseComponent<CollapsibleProps>(props, state);
+  const { adapter: adapterInject, getDataAttr } = useBaseComponent<CollapsibleProps>(props, state);
   function adapter_(): CollapsibleAdapter<CollapsibleProps, CollapsibleState> {
     return {
       ...adapterInject(),
@@ -206,6 +205,8 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
       },
       props.className
     );
+
+    const children = slots.default?.()
     return (
       <div
         class={wrapperCls}
@@ -217,16 +218,25 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
           foundation.updateIsTransitioning(false);
           props.onMotionEnd?.();
         }}
+        {...getDataAttr()}
       >
-        <div x-semi-prop="children" ref={domRef} style={{ overflow: 'hidden' }} id={props.id}>
-          {(props.keepDOM || props.collapseHeight !== 0 || state.visible || props.isOpen) && slots.default?.()}
+        <div
+          x-semi-prop="children"
+          ref={domRef}
+          style={{ overflow: 'hidden' }}
+          id={props.id}
+        >
+          {
+            (props.keepDOM || props.collapseHeight !== 0 || state.visible || props.isOpen) && children
+          }
         </div>
       </div>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'Collapsible'
 });
 
-Collapsible.props = vuePropsType;
-Collapsible.name = 'Collapsible';
 
 export default Collapsible;

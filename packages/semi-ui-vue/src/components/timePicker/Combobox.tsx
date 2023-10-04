@@ -1,4 +1,15 @@
-import {defineComponent, ref, h, Fragment, useSlots, reactive, onMounted, watch} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  useSlots,
+  reactive,
+  onMounted,
+  watch,
+  ComponentObjectPropsOptions,
+  PropType
+} from 'vue'
 
 import { format as dateFnsFormat } from 'date-fns';
 import {noop, omit} from 'lodash';
@@ -33,6 +44,7 @@ export type ComboboxProps = Pick<TimePickerProps, 'format' | 'prefixCls' | 'disa
   onCurrentSelectPanelChange?: (range: string) => void;
   isAM?: boolean;
   timeStampValue?: any;
+  class?: string
 };
 
 export interface ComboboxState {
@@ -53,27 +65,27 @@ export interface AMPMOptionItem {
 
 
 
-const staticPropTypes = {
+const staticPropTypes:ComponentObjectPropsOptions<ComboboxProps> = {
   class: [PropTypes.string, PropTypes.object],
-  style: [PropTypes.string, PropTypes.object],
+  style: [PropTypes.string, PropTypes.object] as PropType<ComboboxProps['style']>,
   format: PropTypes.string,
   defaultOpenValue: PropTypes.object,
   prefixCls: PropTypes.string,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func as PropType<ComboboxProps['onChange']>,
   showHour: PropTypes.bool,
   showMinute: PropTypes.bool,
   showSecond: PropTypes.bool,
-  disabledHours: PropTypes.func,
-  disabledMinutes: PropTypes.func,
-  disabledSeconds: PropTypes.func,
+  disabledHours: PropTypes.func as PropType<ComboboxProps['disabledHours']>,
+  disabledMinutes: PropTypes.func as PropType<ComboboxProps['disabledMinutes']>,
+  disabledSeconds: PropTypes.func as PropType<ComboboxProps['disabledSeconds']>,
   hideDisabledOptions: PropTypes.bool,
-  onCurrentSelectPanelChange: PropTypes.func,
+  onCurrentSelectPanelChange: PropTypes.func as PropType<ComboboxProps['onCurrentSelectPanelChange']>,
   use12Hours: PropTypes.bool,
   isAM: PropTypes.bool,
   timeStampValue: PropTypes.any,
   scrollItemProps: PropTypes.object,
 
-  panelHeader: PropTypes.string,
+  panelHeader: PropTypes.string as PropType<ComboboxProps['panelHeader']>,
 
 
   ...omit(timePickerPropTypes, [
@@ -354,10 +366,11 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
       </LocaleConsumer>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Combobox'
 })
 
-Combobox.props = vuePropsType
-Combobox.name = 'Combobox'
 
 export default Combobox
 

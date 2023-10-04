@@ -39,8 +39,6 @@ const InputNumberDemo = defineComponent<InputNumberDemoProps>((props, {}) => {
   )
 })
 
-InputNumberDemo.props = vuePropsType
-InputNumberDemo.name = 'InputNumberDemo'
 
 export default InputNumberDemo
 

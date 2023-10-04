@@ -6,7 +6,7 @@ import FillSteps, { FillStepsProps } from './fillSteps';
 import BasicSteps, { BasicStepsProps } from './basicSteps';
 import NavSteps, { NavStepsProps } from './navSteps';
 import Context from './context';
-import {defineComponent, useSlots, h, ref, VNode} from "vue";
+import {defineComponent, useSlots, h, ref, VNode, ComponentObjectPropsOptions, PropType} from "vue";
 import {vuePropsMake} from "../PropTypes";
 
 export type { Status, Size, BasicStepProps } from './basicStep';
@@ -28,25 +28,26 @@ export interface NavStepsAllProps extends NavStepsProps {
 }
 export type StepsProps = FillStepsAllProps | BasicStepsAllProps | NavStepsAllProps;
 
-const propTypes = {
-    onChange: PropTypes.func,
-    type: PropTypes.string,
-    size: PropTypes.string,
+const propTypes:ComponentObjectPropsOptions<StepsProps> = {
+    onChange: PropTypes.func as PropType<StepsProps['onChange']>,
+// @ts-ignore
+    type: PropTypes.string as PropType<StepsProps['type']>,
+    size: PropTypes.string as PropType<StepsProps['size']>,
     current: PropTypes.number,
     style: PropTypes.object,
-    direction: PropTypes.string,
+    direction: PropTypes.string as PropType<StepsProps['direction']>,
 
     prefixCls: PropTypes.string,
     description: PropTypes.node,
     icon: PropTypes.node,
-    status: PropTypes.string,
+    status: PropTypes.string as PropType<StepsProps['status']>,
     title: PropTypes.node,
     className: PropTypes.string,
     onClick: PropTypes.func,
     active: PropTypes.bool,
     done: PropTypes.bool,
 
-    children: PropTypes.node,
+    children: PropTypes.node as PropType<StepsProps['children']>,
     stepNumber: [PropTypes.number, PropTypes.string],
     onKeyDown: PropTypes.func,
     role: PropTypes.string,
@@ -58,8 +59,8 @@ const defaultProps = {
     size: 'default'
 };
 
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Steps = defineComponent<StepsProps>((props, {}) => {
+export const vuePropsType = vuePropsMake<StepsProps>(propTypes, defaultProps)
+const Steps = defineComponent((props, {}) => {
     const slots = useSlots()
     const childrenRef = ref<VNode[]>([])
     function renderComponent() {
@@ -96,10 +97,11 @@ const Steps = defineComponent<StepsProps>((props, {}) => {
           </Context.Provider>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Steps'
 })
 
-Steps.props = vuePropsType
-Steps.name = 'Steps'
 
 export default Steps
 export {

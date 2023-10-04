@@ -3,7 +3,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/tree/constants';
 import ResizeObserver from '../resizeObserver';
 import type { ResizeEntry } from '../resizeObserver';
 import { get } from 'lodash';
-import { defineComponent, h, onMounted, reactive, useSlots } from 'vue';
+import {ComponentObjectPropsOptions, defineComponent, h, onMounted, PropType, reactive, useSlots} from 'vue';
 import { VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 
@@ -20,10 +20,10 @@ export interface AutoSizerState {
 
 const prefixcls = cssClasses.PREFIX;
 
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<AutoSizerProps> = {
   defaultHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   defaultWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  children: PropTypes.func,
+  children: PropTypes.func as PropType<AutoSizerProps['children']>,
 };
 
 const defaultProps = {
@@ -85,9 +85,11 @@ const AutoSizer = defineComponent<AutoSizerProps>((props, {}) => {
       </ResizeObserver>
     );
   };
+}, {
+  props: vuePropsType,
+  name: 'AutoSizer'
 });
 
-AutoSizer.props = vuePropsType;
-AutoSizer.name = 'AutoSizer';
+
 
 export default AutoSizer;

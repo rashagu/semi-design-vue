@@ -46,7 +46,9 @@ const BadgeDemo = defineComponent<BadgeDemoProps>((props, {}) => {
   }
 })
 
+// @ts-ignore
 BadgeDemo.props = vuePropsType
+// @ts-ignore
 BadgeDemo.name = 'BadgeDemo'
 
 export default BadgeDemo

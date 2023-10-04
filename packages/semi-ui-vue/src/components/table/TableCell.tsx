@@ -12,7 +12,18 @@ import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import Context, { TableContextProps } from './table-context';
 import { amendTableWidth } from './utils';
 import { ColumnProps, ExpandIcon } from './interface';
-import {CSSProperties, defineComponent, Fragment, h, isVNode, reactive, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    Fragment,
+    h,
+    isVNode, PropType,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useTableContext} from "./tableContext/Consumer";
 import {FooterProps} from "../image/interface";
@@ -55,7 +66,7 @@ function isInvalidRenderCellText(text: any) {
 
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TableCellProps> = {
     record: PropTypes.object,
     prefixCls: PropTypes.string,
     index: PropTypes.number,
@@ -66,12 +77,12 @@ const propTypes = {
     indent: PropTypes.number,
     indentSize: PropTypes.number,
     column: PropTypes.object,
-    expandIcon: PropTypes.any,
-    renderExpandIcon: PropTypes.func,
+    expandIcon: PropTypes.any as PropType<TableCellProps['expandIcon']>,
+    renderExpandIcon: PropTypes.func as PropType<TableCellProps['renderExpandIcon']>,
     hideExpandedColumn: PropTypes.bool,
     component: PropTypes.any,
-    onClick: PropTypes.func,
-    onDidUpdate: PropTypes.func,
+    onClick: PropTypes.func as PropType<TableCellProps['onClick']>,
+    onDidUpdate: PropTypes.func as PropType<TableCellProps['onDidUpdate']>,
     isSection: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -412,9 +423,12 @@ const TableCell = defineComponent<TableCellProps>((props, {}) => {
           </BodyCell>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'TableCell'
 });
 
-TableCell.props = vuePropsType;
-TableCell.name = "TableCell";
+
+
 
 export default TableCell;

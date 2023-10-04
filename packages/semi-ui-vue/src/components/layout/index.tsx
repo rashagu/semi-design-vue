@@ -1,8 +1,8 @@
-import {defineComponent, ref, h, Fragment, CSSProperties, DefineComponent, reactive, provide, isVNode,} from 'vue'
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, isVNode, PropType, reactive,} from 'vue'
 import cls from 'classnames';
 import {cssClasses} from '@douyinfe/semi-foundation/layout/constants';
 import '@douyinfe/semi-foundation/layout/layout.scss';
-import LayoutContext, { ContextType } from './layoutContext';
+import LayoutContext, {ContextType} from './layoutContext';
 import Sider from './Sider';
 
 
@@ -23,14 +23,14 @@ export interface BasicProps {
   type?: string;
 }
 
-const BasicVuePropsType = {
+const basicVuePropsType:ComponentObjectPropsOptions<BasicProps> = {
   prefixCls: {
     type: String,
     default: cssClasses.PREFIX
   },
-  style: [String, Object],
+  style: [String, Object] as PropType<BasicProps['style']>,
   className: String,
-  tagName: String,
+  tagName: String as PropType<BasicProps['tagName']>,
   type: String,
 }
 
@@ -41,11 +41,13 @@ const Basic = defineComponent<BasicProps>((props, {slots}) => {
     const classString = cls(className, `${prefixCls}-${type}`);
     return h(tagName, { className: classString, ...others }, slots.default?slots.default():null);
   }
+}, {
+  props: basicVuePropsType,
+  name: 'Basic'
 })
-Basic.props = BasicVuePropsType
 
 
-function generator<P extends { type?: string; tagName?: string; role?: any; 'aria-label'?: string }>(type: string): (ComponentType:  DefineComponent<BasicProps>) => DefineComponent<P> {
+function generator<P extends { type?: string; tagName?: string; role?: any; 'aria-label'?: string }>(type: string) {
   const tagName = htmlTag[type];
   const typeName = type.toLowerCase();
   return (BasicComponent) => defineComponent<P>((props, {slots}) => {
@@ -73,17 +75,16 @@ export interface BasicLayoutProps {
 export interface BasicLayoutState {
   siders: Array<string>;
 }
-export const vuePropsType = {
-  name: String,
+export const vuePropsType:ComponentObjectPropsOptions<BasicLayoutProps> = {
   prefixCls: {
     type: String,
     default: cssClasses.PREFIX
   },
-  style: [String, Object],
+  style: [String, Object] as PropType<BasicLayoutProps['style']>,
   className: String,
   hasSider: Boolean,
   tagName: {
-    type: String,
+    type: String as PropType<BasicLayoutProps['tagName']>,
     default: 'section'
   },
 }
@@ -117,15 +118,16 @@ const Layout = defineComponent<BasicLayoutProps>((props, {slots}) => {
     return (
       <LayoutContext.Provider value={{ siderHook: getSiderHook() }}>
         <Tag className={classString} {...others}>
-          {slots.default?slots.default():null}
+          {slots.default?.()}
         </Tag>
       </LayoutContext.Provider>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Layout'
 })
 
-Layout.props = vuePropsType
-Layout.name = 'Layout'
 
 export {
   LayoutHeader,

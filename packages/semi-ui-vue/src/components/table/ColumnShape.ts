@@ -1,4 +1,6 @@
 import * as PropTypes from '../PropTypes';
+import {ComponentObjectPropsOptions} from "vue";
+import {ColumnProps} from "./interface";
 
 export default {
     align: String,
@@ -29,4 +31,4 @@ export default {
     title: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     useFullRender: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-};
+} as ComponentObjectPropsOptions<ColumnProps>;

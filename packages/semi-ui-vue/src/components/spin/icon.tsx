@@ -12,7 +12,13 @@ export interface IconProps {
   type?: string;
 }
 
-
+export const VuePropsType = {
+  id: Number,
+  component: Object,
+  size: Number,
+  className: String,
+  type: String,
+}
 const Icon = defineComponent<IconProps>(props => {
 
   const { id: propsId, className, ...rest } = props;
@@ -51,16 +57,12 @@ const Icon = defineComponent<IconProps>(props => {
       </g>
     </svg>
   );
+}, {
+  props: VuePropsType,
+  name: 'Icon'
 })
 
-export const VuePropsType = {
-  id: Number,
-  component: Object,
-  size: Number,
-  className: String,
-  type: String,
-}
 
-Icon.props = VuePropsType
+
 
 export default Icon

@@ -4,13 +4,13 @@ import {cssClasses, strings} from '@douyinfe/semi-foundation/carousel/constants'
 import {ArrowProps, CarouselArrowProps} from "./interface";
 import { IconChevronLeft, IconChevronRight } from "@kousum/semi-icons-vue";
 import { get } from 'lodash';
-import {defineComponent, h, useSlots} from "vue";
+import {ComponentObjectPropsOptions, defineComponent, h, PropType, useSlots} from "vue";
 
-export const vuePropsType = {
-    type: String,
-    theme: String,
-    prev: Function,
-    next: Function,
+export const vuePropsType:ComponentObjectPropsOptions<CarouselArrowProps> = {
+    type: String as PropType<CarouselArrowProps['type']>,
+    theme: String as PropType<CarouselArrowProps['theme']>,
+    prev: Function as PropType<CarouselArrowProps['prev']>,
+    next: Function as PropType<CarouselArrowProps['next']>,
     arrowProps: Object
 }
 const CarouselArrow = defineComponent<CarouselArrowProps>((props, {}) => {
@@ -67,9 +67,10 @@ const CarouselArrow = defineComponent<CarouselArrowProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'CarouselArrow'
 })
 
-CarouselArrow.props = vuePropsType
-CarouselArrow.name = 'CarouselArrow'
 
 export default CarouselArrow

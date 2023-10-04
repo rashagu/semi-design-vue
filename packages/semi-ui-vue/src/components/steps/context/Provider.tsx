@@ -14,9 +14,12 @@ const Provider = defineComponent<{value:ContextValue}>((props, {slots}) => {
   }, { deep: true})
   provide('StepsContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
+}, {
+  props: vuePropsType,
+  name: 'StepsContextProvider'
 })
 
-Provider.props = vuePropsType
+
 
 export default Provider
 

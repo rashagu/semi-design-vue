@@ -14,7 +14,7 @@ const BreadcrumbDemo = defineComponent<BreadcrumbDemoProps>((props, {slots}) => 
 
   return () => (
     <div>
-      <Breadcrumb>
+      <Breadcrumb separator={'<'}>
         <BreadcrumbItem><span id={'aa'}>Semi-ui</span></BreadcrumbItem>
         <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
         <BreadcrumbItem>Default</BreadcrumbItem>
@@ -49,6 +49,7 @@ const BreadcrumbDemo = defineComponent<BreadcrumbDemoProps>((props, {slots}) => 
   )
 })
 
+// @ts-ignore
 BreadcrumbDemo.props = vuePropsType
 
 export default BreadcrumbDemo

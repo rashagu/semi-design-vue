@@ -7,7 +7,16 @@ import BackTopFoundation, { BackTopAdapter } from '@douyinfe/semi-foundation/bac
 import '@douyinfe/semi-foundation/backtop/backtop.scss';
 import IconButton from '../iconButton';
 import { IconChevronUp } from '@kousum/semi-icons-vue';
-import {CSSProperties, defineComponent, h, onBeforeUnmount, onMounted, reactive, useSlots} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    onBeforeUnmount,
+    onMounted, PropType,
+    reactive,
+    useSlots
+} from "vue";
 import {VueJsxNode} from "../interface";
 import {useBaseComponent} from "../_base/baseComponent";
 import {TabsProps} from "../tabs";
@@ -37,11 +46,11 @@ const defaultProps = {
     duration: 450,
 };
 
-const propTypes = {
-    target: PropTypes.func,
+const propTypes:ComponentObjectPropsOptions<BackTopProps> = {
+    target: PropTypes.func as PropType<BackTopProps['target']>,
     visibilityHeight: PropTypes.number,
     duration: PropTypes.number,
-    onClick: PropTypes.func,
+    onClick: PropTypes.func as PropType<BackTopProps['onClick']>,
     style: PropTypes.object,
     className: PropTypes.string,
 };
@@ -123,9 +132,11 @@ const BackTop = defineComponent<BackTopProps>((props, {}) => {
         ) : null;
         return content;
     }
+},{
+    props: vuePropsType,
+    name: 'BackTop'
 })
 
-BackTop.props = vuePropsType
-BackTop.name = 'BackTop'
+
 
 export default BackTop

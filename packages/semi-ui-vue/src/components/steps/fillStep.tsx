@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import {stepsClasses as css} from '@douyinfe/semi-foundation/steps/constants';
 import {IconTickCircle, IconAlertCircle, IconAlertTriangle} from '@kousum/semi-icons-vue';
 import {VueJsxNode} from "../interface";
-import {CSSProperties, defineComponent, h, useSlots} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots} from "vue";
 import {AriaAttributes} from "../AriaAttributes";
 import {vuePropsMake} from "../PropTypes";
 import {getProps} from "../_base/baseComponent";
@@ -29,17 +29,17 @@ export interface FillStepProps {
   direction?: Direction;
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<FillStepProps> = {
   prefixCls: PropTypes.string,
   description: PropTypes.node,
   icon: PropTypes.node,
-  status: PropTypes.string,
+  status: PropTypes.string as PropType<FillStepProps['status']>,
   title: PropTypes.node,
   className: PropTypes.string,
   style: PropTypes.object,
   onClick: PropTypes.func,
-  onChange: PropTypes.func,
-  direction: PropTypes.string,
+  onChange: PropTypes.func as PropType<FillStepProps['onChange']>,
+  direction: PropTypes.string as PropType<FillStepProps['direction']>,
 };
 const defaultProps = {
   prefixCls: css.ITEM,
@@ -47,7 +47,7 @@ const defaultProps = {
   className: '',
   onChange: noop
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<FillStepProps>(propTypes, defaultProps)
 const FillStep = defineComponent<FillStepProps>((props, {}) => {
   const slots = useSlots()
 
@@ -149,10 +149,11 @@ const FillStep = defineComponent<FillStepProps>((props, {}) => {
       </div>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'FillStep'
 })
 
-FillStep.props = vuePropsType
-FillStep.name = 'FillStep'
 
 export default FillStep
 

@@ -22,6 +22,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 })
 
 
+// @ts-ignore
 App.props = VuePropsType
 
 export default App

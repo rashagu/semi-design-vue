@@ -9,7 +9,17 @@ import LocaleConsumer from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
 import { DayCalendarProps } from './interface';
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
-import {defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    defineComponent,
+    h,
+    onBeforeUnmount,
+    onMounted, PropType,
+    reactive,
+    ref,
+    useSlots,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 
@@ -21,33 +31,34 @@ export interface DayCalendarState {
     cachedKeys: Array<string>
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<DayCalendarProps> = {
     displayValue: PropTypes.object,
     events: PropTypes.array,
     header: PropTypes.node,
     showCurrTime: PropTypes.bool,
-    onClick: PropTypes.func,
-    mode: PropTypes.string,
-    renderTimeDisplay: PropTypes.func,
+    onClick: PropTypes.func as PropType<DayCalendarProps['onClick']>,
+    // mode: PropTypes.string as PropType<DayCalendarProps['mode']>,
+    renderTimeDisplay: PropTypes.func as PropType<DayCalendarProps['renderTimeDisplay']>,
     markWeekend: PropTypes.bool,
     scrollTop: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     style: PropTypes.object,
     className: PropTypes.string,
-    dateGridRender: PropTypes.func,
+    dateGridRender: PropTypes.func as PropType<DayCalendarProps['dateGridRender']>,
+    allDayEventsRender: PropTypes.func as PropType<DayCalendarProps['allDayEventsRender']>,
 
 
     range: PropTypes.array,
-    weekStartsOn: PropTypes.number,
+    weekStartsOn: PropTypes.number as PropType<DayCalendarProps['weekStartsOn']>,
 };
 
 const defaultProps = {
     events: [] as DayCalendarProps['events'],
     displayValue: new Date(),
-    mode: 'day',
+    // mode: 'day',
 };
-export const vuePropsType = vuePropsMake(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<DayCalendarProps>(propTypes, defaultProps)
 const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
     const slots = useSlots()
     let dom = ref()
@@ -64,7 +75,7 @@ const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
         cachedKeys: [],
     });
 
-    const {adapter: adapterInject} = useBaseComponent<DayCalendarProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<DayCalendarProps>(props, state)
     function adapter_(): CalendarAdapter<DayCalendarProps, DayCalendarState> {
         return {
             ...adapterInject(),
@@ -91,11 +102,12 @@ const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
 
     watch([
         ()=>state.cachedKeys,
-        ()=>props.events
-    ], (value, [prevStateCachedKeys], onCleanup)=>{
+        ()=>props.events,
+        ()=>props.displayValue
+    ], (value, [prevStateCachedKeys,_,prevPropsDisplayValue ], onCleanup)=>{
         const prevEventKeys = prevStateCachedKeys;
         const nowEventKeys = props.events.map(event => event.key);
-        if (!isEqual(prevEventKeys, nowEventKeys)) {
+        if (!isEqual(prevEventKeys, nowEventKeys) || !isEqual(prevPropsDisplayValue, props.displayValue)) {
             foundation.parseDailyEvents();
         }
     })
@@ -108,6 +120,10 @@ const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
     const checkWeekend = (val: Date) => foundation.checkWeekend(val);
 
     const renderAllDayEvents = (events: ParsedEventsWithArray['allDay']) => {
+        if (props.allDayEventsRender) {
+            return props.allDayEventsRender(props.events);
+        }
+
         const list = events.map((event, ind) => {
             const { children, key } = event;
             return (
@@ -163,7 +179,7 @@ const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
         const { parsedEvents, scrollHeight } = state;
         isWeekend = markWeekend && checkWeekend(displayValue);
         return (
-          <div class={dayCls} style={dayStyle} ref={dom}>
+          <div class={dayCls} style={dayStyle} ref={dom} {...getDataAttr()}>
               <div class={`${prefixCls}-sticky-top`}>
                   {header}
                   {renderAllDay(parsedEvents.allDay)}
@@ -188,9 +204,10 @@ const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'DayCalendar'
 })
 
-DayCalendar.props = vuePropsType
-DayCalendar.name = 'DayCalendar'
 
 export default DayCalendar

@@ -1,24 +1,20 @@
-
-import {VueJsxNode} from "../interface";
-import Provider from "./previewContext/Provider";
-import Consumer from "./previewContext/Consumer";
+import { VueJsxNode } from '../interface';
+import Provider from './previewContext/Provider';
+import Consumer from './previewContext/Consumer';
 export interface PreviewContextProps {
-    isGroup: boolean,
-    lazyLoad: boolean,
-    previewSrc: string[],
-    titles: VueJsxNode[],
-    currentIndex: number;
-    visible: boolean;
-    previewObserver: IntersectionObserver;
-    setCurrentIndex: (current: number) => void;
-    handleVisibleChange: (visible: boolean, preVisible?: boolean) => void;
+  isGroup: boolean;
+  lazyLoad: boolean;
+  previewSrc: string[];
+  titles: VueJsxNode[];
+  currentIndex: number;
+  visible: boolean;
+  previewObserver: IntersectionObserver;
+  setCurrentIndex: (current: number) => void;
+  handleVisibleChange: (visible: boolean, preVisible?: boolean) => void;
+  setDownloadName: (src: string) => string;
 }
 
 export const PreviewContext = {
-    Provider,
-    Consumer
+  Provider,
+  Consumer,
 };
-
-
-
-

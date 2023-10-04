@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, onActivated, StyleValue, VNode} from 'vue'
+import {defineComponent, ref, h, onActivated, StyleValue, VNode, ComponentObjectPropsOptions, PropType} from 'vue'
 import { BASE_CLASS_PREFIX } from '../env';
 import cls from 'classnames';
 import '../styles/icons.scss';
@@ -19,8 +19,8 @@ export interface IconProps  {
   tabIndex?: number
   onKeypress?: (e:any)=>void
 }
-export const vuePropsType = {
-  size: String,
+export const vuePropsType:ComponentObjectPropsOptions<IconProps> = {
+  size: String as PropType<IconSize>,
   spin: Boolean,
   rotate: Number,
   prefixCls: String,
@@ -28,10 +28,10 @@ export const vuePropsType = {
   className: String,
   style: Object,
   svg: Object,
-  onClick:Function,
+  onClick:Function as PropType<IconProps['onClick']>,
   role: String,
   tabIndex: Number,
-  onKeypress: Function
+  onKeypress: Function as PropType<IconProps['onKeypress']>,
 }
 
 const Icon = defineComponent<IconProps>((props, {slots}) => {
@@ -64,15 +64,11 @@ const Icon = defineComponent<IconProps>((props, {slots}) => {
   </span>
   };
 
+}, {
+  props: vuePropsType,
+  name: 'Icon',
 })
 
-Icon.props = vuePropsType
-
-
-
-// @ts-ignore used to judge whether it is a semi-icon in semi-ui
-// custom icon case
-Icon.elementType = 'Icon';
 
 export interface convertIconType extends IconProps{
   svg:any,
@@ -101,12 +97,15 @@ const ConvertIcon = defineComponent<convertIconType>((props, {slots}) => {
       </Icon>
     )
   }
+},{
+  props: {
+    ...vuePropsType,
+    svg:Object,
+    iconType: String,
+  } as any,
+  name: 'ConvertIcon'
 })
-ConvertIcon.props = {
-  ...vuePropsType,
-  svg:Object,
-  iconType: String,
-}
+
 
 export { ConvertIcon };
 export default Icon

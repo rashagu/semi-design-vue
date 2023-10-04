@@ -56,6 +56,7 @@ const GridTest = defineComponent<ExampleProps>((props, {slots}) => {
   )
 })
 
+// @ts-ignore
 GridTest.props = vuePropsType
 
 export default GridTest

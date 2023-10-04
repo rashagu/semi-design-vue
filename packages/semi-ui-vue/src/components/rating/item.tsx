@@ -5,7 +5,7 @@ import '@douyinfe/semi-foundation/rating/rating.scss';
 import { IconStar } from '@kousum/semi-icons-vue';
 import { RatingItemFoundation, RatingItemAdapter } from '@douyinfe/semi-foundation/rating/foundation';
 import { BaseProps, useBaseComponent } from '../_base/baseComponent';
-import {defineComponent, h, reactive, ref, useSlots} from 'vue';
+import {ComponentObjectPropsOptions, defineComponent, h, PropType, reactive, ref, useSlots} from 'vue';
 import {VueHTMLAttributes, VueJsxNode} from '../interface';
 import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
@@ -38,13 +38,13 @@ export interface RatingItemState {
     secondStarFocus: boolean;
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<RatingItemProps> = {
     value: PropTypes.number,
     index: PropTypes.number,
     prefixCls: PropTypes.string,
     allowHalf: PropTypes.bool,
-    onHover: PropTypes.func,
-    onClick: PropTypes.func,
+    onHover: PropTypes.func as PropType<RatingItemProps['onHover']>,
+    onClick: PropTypes.func as PropType<RatingItemProps['onClick']>,
     character: PropTypes.node,
     focused: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -52,11 +52,11 @@ const propTypes = {
     ariaLabelPrefix: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     'aria-describedby': PropTypes.string,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
+    onFocus: PropTypes.func as PropType<RatingItemProps['onFocus']>,
+    onBlur: PropTypes.func as PropType<RatingItemProps['onBlur']>,
     preventScroll: PropTypes.bool,
 };
-export const vuePropsType = vuePropsMake(propTypes, {});
+export const vuePropsType = vuePropsMake<RatingItemProps>(propTypes, {});
 const Item = defineComponent<RatingItemProps>((props, {expose}) => {
     const slots = useSlots();
 
@@ -228,9 +228,11 @@ const Item = defineComponent<RatingItemProps>((props, {expose}) => {
             </li>
         );
     };
+}, {
+    props: vuePropsType,
+    name: 'Item'
 });
 
-Item.props = vuePropsType;
-Item.name = 'Item';
+
 
 export default Item;

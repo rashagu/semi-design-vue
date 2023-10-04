@@ -19,7 +19,7 @@ const SpinDemo = defineComponent<SpinDemoProps>((props, {}) => {
   </div>;
 });
 
-SpinDemo.props = vuePropsType;
-SpinDemo.name = "SpinDemo";
+
+
 
 export default SpinDemo;

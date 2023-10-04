@@ -38,7 +38,7 @@ const propTypes = {
     helpTextId: PropTypes.string,
 };
 
-export const vuePropsType = vuePropsMake(propTypes, {})
+export const vuePropsType = vuePropsMake<ErrorMessageProps>(propTypes, {})
 const ErrorMessage = defineComponent<ErrorMessageProps>((props, {}) => {
     const slots = useSlots()
 
@@ -95,10 +95,11 @@ const ErrorMessage = defineComponent<ErrorMessageProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'ErrorMessage'
 })
 
-ErrorMessage.props = vuePropsType
-ErrorMessage.name = 'ErrorMessage'
 
 export default ErrorMessage
 

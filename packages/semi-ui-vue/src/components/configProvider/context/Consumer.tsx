@@ -9,16 +9,17 @@ export function useConfigContext (): { context: Ref<UnwrapRef<ContextValue>> } {
   }
 }
 export const vuePropsType = {
-  name: String
+
 }
 const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useConfigContext()
   return () => slots.default ? slots.default(context) : null
+},{
+  props: vuePropsType,
+  name: "ConfigContextConsumer"
 })
 
-Consumer.props = vuePropsType
-Consumer.name = "ConfigContextConsumer"
 
 export default Consumer
 

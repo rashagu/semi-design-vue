@@ -15,9 +15,11 @@ const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useFormUpdaterContext()
   return () => slots.default ? slots.default(context) : null
+}, {
+  props: vuePropsType,
+  name: 'FormUpdaterContextConsumer'
 })
 
-Consumer.props = vuePropsType
 
 export default Consumer
 

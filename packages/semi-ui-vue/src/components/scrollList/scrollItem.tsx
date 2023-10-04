@@ -9,7 +9,7 @@ import {
   onUnmounted,
   onMounted,
   watch,
-  watchEffect, nextTick
+  watchEffect, nextTick, ComponentObjectPropsOptions, PropType
 } from 'vue'
 
 import {useBaseComponent} from '../_base/baseComponent';
@@ -45,6 +45,7 @@ export interface ScrollItemProps<T extends Item> {
   style?: CSSProperties;
   type?: string | number; // used to identify the scrollItem, used internally by the semi component, and does not need to be exposed to the user
   'aria-label'?: AriaAttributes['aria-label'];
+  class?: string
 }
 
 export interface ScrollItemState {
@@ -52,40 +53,40 @@ export interface ScrollItemState {
   appendCount: number;
 }
 
-export const vuePropsType = {
-  className:String,
-  class:String,
-  selectedIndex: {
-    type: Number,
-    default: 0
-  },
-  motion: {
-    type: [Object, String, Boolean, Function],
-    default: true
-  },
-  transform: Function,
-  list: {
-    type: [Array],
-    default: []
-  },
-  onSelect: {
-    type: Function,
-    default: noop,
-  },
-  cycled: {
-    type: Boolean,
-    default: false
-  },
-  mode: {
-    type: String,
-    default: wheelMode
-  },
-  type: [String, Number], //used to identify the scrollItem, used internally by the semi component, and does not need to be exposed to the user
-  'aria-label':String
-}
 
 
 function scrollItemFunc<T extends Item>() {
+  const vuePropsType:ComponentObjectPropsOptions<ScrollItemProps<T>> = {
+    className:String,
+    class:String,
+    selectedIndex: {
+      type: Number,
+      default: 0
+    },
+    motion: {
+      type: [Object, String, Boolean, Function],
+      default: true
+    },
+    transform: Function as PropType<ScrollItemProps<any>['transform']>,
+    list: {
+      type: [Array],
+      default: []
+    },
+    onSelect: {
+      type: Function as PropType<ScrollItemProps<any>['onSelect']>,
+      default: noop,
+    },
+    cycled: {
+      type: Boolean,
+      default: false
+    },
+    mode: {
+      type: String,
+      default: wheelMode
+    },
+    type: [String, Number], //used to identify the scrollItem, used internally by the semi component, and does not need to be exposed to the user
+    'aria-label':String
+  }
   const scrollItem_ = defineComponent<ScrollItemProps<T>>((props, {}) => {
     const slots = useSlots()
 
@@ -607,9 +608,11 @@ function scrollItemFunc<T extends Item>() {
     return () => {
       return isWheelMode() ? renderInfiniteList() : renderNormalList();
     }
+  }, {
+    props: vuePropsType,
+    name: 'ScrollItem'
   })
 
-  scrollItem_.props = vuePropsType
 
   return scrollItem_
 }

@@ -6,6 +6,7 @@ import {
   mergeOptions,
   mergeProps,
   getDisplayName,
+  transformTrigger, transformDefaultBooleanAPI
 } from '@douyinfe/semi-foundation/form/utils';
 import {isValid} from './utils'
 import * as ObjectUtil from '@douyinfe/semi-foundation/utils/object';
@@ -60,6 +61,7 @@ function withField<
   C,
   T extends Subtract<VueHTMLAttributes, CommonexcludeType> & CommonFieldProps & VueHTMLAttributes & C
 >(Component: DefineComponent<C> | FunctionalComponent<C>, opts?: WithFieldOption): DefineComponent<T> {
+  // @ts-ignore
   const SemiField = defineComponent<T>((truthProps, { attrs: props }) => {
     const slots = useSlots();
 
@@ -67,6 +69,8 @@ function withField<
     const { context: updater } = useFormUpdaterContext();
     // use arrayFieldState to fix issue 615
     let { context: arrayFieldState } = useArrayFieldState();
+
+
 
     // To prevent user forgetting to pass the field, use undefined as the key, and updater.value.getValue will get the wrong value.
     let initValueInFormOpts =
@@ -156,12 +160,31 @@ function withField<
         [mergeProps(props).field]: val,
       };
 
+
+      let {
+        stopValidateWithError,
+      } = mergeProps(props);
+      let formProps = updater.value.getFormProps([
+        'labelPosition',
+        'labelWidth',
+        'labelAlign',
+        'labelCol',
+        'wrapperCol',
+        'disabled',
+        'showValidateIcon',
+        'extraTextPosition',
+        'stopValidateWithError',
+        'trigger'
+      ]);
+      let mergeStopValidateWithError = transformDefaultBooleanAPI(stopValidateWithError, formProps.stopValidateWithError, false);
+
+
       const rootPromise = new Promise((resolve, reject) => {
         validator
           .validate(
             model,
             {
-              first: mergeProps(props).stopValidateWithError,
+              first: mergeStopValidateWithError,
             },
             // eslint-disable-next-line @typescript-eslint/no-empty-function
             (errors, fields) => {}
@@ -329,13 +352,46 @@ function withField<
 
       updateTouched(true, { notNotify: true, notUpdate: true });
       updateValue(val);
+
+
+      let formProps = updater.value.getFormProps([
+        'labelPosition',
+        'labelWidth',
+        'labelAlign',
+        'labelCol',
+        'wrapperCol',
+        'disabled',
+        'showValidateIcon',
+        'extraTextPosition',
+        'stopValidateWithError',
+        'trigger'
+      ]);
+      let mergeTrigger = transformTrigger(trigger, formProps.trigger);
       // only validate when trigger includes change
-      if (trigger.includes('change')) {
+      if (mergeTrigger.includes('change')) {
         fieldValidate(val);
       }
     };
 
     const handleBlur = (e: FocusEvent) => {
+
+      let {
+        trigger,
+      } = mergeProps(props);
+      let formProps = updater.value.getFormProps([
+        'labelPosition',
+        'labelWidth',
+        'labelAlign',
+        'labelCol',
+        'wrapperCol',
+        'disabled',
+        'showValidateIcon',
+        'extraTextPosition',
+        'stopValidateWithError',
+        'trigger'
+      ]);
+      let mergeTrigger = transformTrigger(trigger, formProps.trigger);
+
       if (props.onBlur) {
         // @ts-ignore
         props.onBlur(e);
@@ -343,7 +399,7 @@ function withField<
       if (!touched) {
         updateTouched(true);
       }
-      if (mergeProps(props).trigger.includes('blur')) {
+      if (mergeTrigger.includes('blur')) {
         let val = getVal();
         fieldValidate(val);
       }
@@ -376,7 +432,24 @@ function withField<
 
     // exec validate once when trigger inlcude 'mount'
     useIsomorphicEffect(() => {
-      const validateOnMount = mergeProps(props).trigger.includes('mount');
+      let {
+        trigger,
+      } = mergeProps(props);
+      let formProps = updater.value.getFormProps([
+        'labelPosition',
+        'labelWidth',
+        'labelAlign',
+        'labelCol',
+        'wrapperCol',
+        'disabled',
+        'showValidateIcon',
+        'extraTextPosition',
+        'stopValidateWithError',
+        'trigger'
+      ]);
+      let mergeTrigger = transformTrigger(trigger, formProps.trigger);
+
+      const validateOnMount = mergeTrigger.includes('mount');
       if (validateOnMount) {
         fieldValidate(value);
       }
@@ -613,6 +686,7 @@ function withField<
       if (!noLabel && mergeLabelPos !== 'inset') {
         let needSpread = typeof label === 'object' && !isElement(label) ? label : {};
         labelContent = (
+          // @ts-ignore
           <Label
             text={label || field}
             id={labelId}
@@ -697,17 +771,18 @@ function withField<
         0
       );
     };
+  }, {
+    props: {
+      label: [...PropTypes.node, PropTypes.func],
+      validate: [PropTypes.func],
+      prefix: [...PropTypes.node, PropTypes.func],
+      id: [String]
+    },
+    name: 'Form' + Component.name
   });
 
-  SemiField.props = {
-    label: [...PropTypes.node, PropTypes.func],
-    validate: [PropTypes.func],
-    prefix: [...PropTypes.node, PropTypes.func],
-    id: [String]
-  };
-  SemiField.name = 'Form' + Component.name;
 
-  return SemiField;
+  return SemiField as any;
 }
 
 // eslint-disable-next-line

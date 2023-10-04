@@ -8,7 +8,7 @@ import {
   ImgHTMLAttributes,
   reactive,
   onUnmounted,
-  onBeforeUpdate, watch, onMounted
+  onBeforeUpdate, watch, onMounted, ComponentObjectPropsOptions, PropType
 } from 'vue'
 
 import cls from 'classnames';
@@ -35,27 +35,27 @@ export interface AvatarState {
 }
 
 
-export const vuePropsType = {
-  style: [Object, String],
+export const vuePropsType:ComponentObjectPropsOptions<AvatarProps> = {
+  style: [Object, String] as PropType<AvatarProps['style']>,
   className: String,
-  color: {type:String,default:'grey'},
-  shape: {type:String,default:'circle'},
-  size: {type:String,default:'medium'},
-  hoverMask: [Object, String,Number],
+  color: {type:String as PropType<AvatarProps['color']>,default:'grey'},
+  shape: {type:String as PropType<AvatarProps['shape']>,default:'circle'},
+  size: {type:String as PropType<AvatarProps['size']>,default:'medium'},
+  hoverMask: [Object, String,Number] as PropType<AvatarProps['hoverMask']>,
   src: String,
   srcSet: String,
   alt: String,
-  onError: Function,
+  onError: Function as PropType<AvatarProps['onError']>,
   onClick: {
-    type: Function,
+    type: Function as PropType<AvatarProps['onClick']>,
     default: noop
   },
   onMouseEnter: {
-    type: Function,
+    type: Function as PropType<AvatarProps['onMouseEnter']>,
     default: noop
   },
   onMouseLeave: {
-    type: Function,
+    type: Function as PropType<AvatarProps['onMouseLeave']>,
     default: noop
   },
   imgAttr: Object,
@@ -177,9 +177,11 @@ const Index = defineComponent<AvatarProps>((props, {slots}) => {
       </span>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'Avatar'
 })
 
-Index.props = vuePropsType
 
 export default Index
 

@@ -30,8 +30,8 @@ const TimePickerDemo = defineComponent<ExampleProps>((props, {}) => {
   )
 })
 
-TimePickerDemo.props = vuePropsType
-TimePickerDemo.name = 'TimePickerDemo'
+
+
 
 export default TimePickerDemo
 

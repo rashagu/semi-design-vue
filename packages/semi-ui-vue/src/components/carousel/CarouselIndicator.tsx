@@ -3,25 +3,25 @@ import * as PropTypes from '../PropTypes';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/carousel/constants';
 import { CarouselIndicatorProps } from "./interface";
 import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
-import {CSSProperties, defineComponent, h, useSlots, VNode} from "vue";
+import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots, VNode} from "vue";
 import {vuePropsMake} from "../PropTypes";
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<CarouselIndicatorProps> = {
     activeKey: PropTypes.number,
     className: PropTypes.string,
-    position: PropTypes.string,
-    size: PropTypes.string,
+    position: PropTypes.string as PropType<CarouselIndicatorProps['position']>,
+    size: PropTypes.string as PropType<CarouselIndicatorProps['size']>,
     style: PropTypes.object,
-    theme: PropTypes.string,
+    theme: PropTypes.string as PropType<CarouselIndicatorProps['theme']>,
     total: PropTypes.number,
-    onIndicatorChange: PropTypes.func,
-    type: PropTypes.string,
-    trigger: PropTypes.string,
+    onIndicatorChange: PropTypes.func as PropType<CarouselIndicatorProps['onIndicatorChange']>,
+    type: String as PropType<CarouselIndicatorProps['type']>,
+    trigger: PropTypes.string as PropType<CarouselIndicatorProps['trigger']>,
     activeIndex: PropTypes.number,
 
     defaultActiveIndex: PropTypes.number,
 };
 
-export const vuePropsType = vuePropsMake(propTypes, {})
+export const vuePropsType = vuePropsMake<CarouselIndicatorProps>(propTypes, {})
 const CarouselIndicator = defineComponent<CarouselIndicatorProps>((props, {}) => {
     const slots = useSlots()
 
@@ -83,10 +83,11 @@ const CarouselIndicator = defineComponent<CarouselIndicatorProps>((props, {}) =>
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'CarouselIndicator'
 })
 
-CarouselIndicator.props = vuePropsType
-CarouselIndicator.name = 'CarouselIndicator'
 
 export default CarouselIndicator
 

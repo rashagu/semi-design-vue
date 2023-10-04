@@ -7,14 +7,15 @@ import {vuePropsMake} from "../PropTypes";
 const propTypes = {
     ...ColumnShape,
 };
-export const vuePropsType = vuePropsMake(propTypes, {});
+export const vuePropsType = vuePropsMake<ColumnProps>(propTypes, {});
 const Column = defineComponent<ColumnProps>((props, {}) => {
     const slots = useSlots();
 
     return () => null;
+}, {
+    props: vuePropsType,
+    name: 'Column'
 });
 
-Column.props = vuePropsType;
-Column.name = "Column";
 
 export default Column;

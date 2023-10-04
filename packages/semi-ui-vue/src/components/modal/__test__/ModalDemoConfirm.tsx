@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment, useSlots, onMounted} from 'vue'
 import Button from "../../button";
-import {ModalConfirm} from "../index";
+import {ModalClass} from "../index";
 import {IconSend} from "@kousum/semi-icons-vue";
 
 interface ModalDemoConfirmProps {
@@ -14,24 +14,24 @@ const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
 
   const slots = useSlots()
   function success() {
-    ModalConfirm.success({ title: 'This is a success message', content: 'bla bla bla...' });
+    ModalClass.success({ title: 'This is a success message', content: 'bla bla bla...' });
   }
 
   function info() {
-    ModalConfirm.info({ title: 'Here is some info', content: 'bla bla bla...' });
+    ModalClass.info({ title: 'Here is some info', content: 'bla bla bla...' });
   }
 
   function error() {
-    ModalConfirm.error({ title: 'Unfortunately, there is an error', content: 'bla bla bla...' });
+    ModalClass.error({ title: 'Unfortunately, there is an error', content: 'bla bla bla...' });
   }
 
   function warning() {
-    ModalConfirm.warning({ title: 'Warning: be cautious ahead', content: 'bla bla bla...' });
+    ModalClass.warning({ title: 'Warning: be cautious ahead', content: 'bla bla bla...' });
   }
 
   const container = ref()
   function confirm() {
-    ModalConfirm.confirm({
+    ModalClass.confirm({
       getContainerContext: ()=>container.value,
       title: 'Are you sure ?',
       content: 'bla bla bla...',
@@ -39,7 +39,7 @@ const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
   }
 
   function custom() {
-    ModalConfirm.info({
+    ModalClass.info({
       title: 'This is a custom modal',
       content: 'bla bla bla...',
       icon: <IconSend />,
@@ -81,10 +81,11 @@ const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
       </div>
     </div>
   )
+},{
+  props: vuePropsType,
+  name: 'ModalDemoConfirm'
 })
 
-ModalDemoConfirm.props = vuePropsType
-ModalDemoConfirm.name = 'ModalDemoConfirm'
 
 export default ModalDemoConfirm
 

@@ -32,7 +32,7 @@ import {
     watch,
     onMounted,
     Fragment,
-    nextTick
+    nextTick, ComponentObjectPropsOptions, PropType
 } from 'vue'
 
 import type {
@@ -43,6 +43,7 @@ import type {
 } from '@douyinfe/semi-foundation/upload/foundation';
 import type { ValidateStatus } from '../_base/baseComponent';
 import {vuePropsMake} from "../PropTypes";
+import {styleNum} from "../_utils";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -108,6 +109,8 @@ export interface UploadProps {
     previewFile?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
     prompt?: VNode | string;
     promptPosition?: PromptPositionType;
+    picHeight?: string | number;
+    picWidth?: string | number;
     renderFileItem?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
     renderPicInfo?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
     renderThumbnail?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
@@ -137,57 +140,59 @@ export interface UploadState {
 }
 
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<UploadProps> = {
     accept: PropTypes.string, // Limit allowed file types
     action: String,
-    afterUpload: PropTypes.func,
-    beforeClear: PropTypes.func,
-    beforeRemove: PropTypes.func,
-    beforeUpload: PropTypes.func,
-    children: PropTypes.node,
+    afterUpload: PropTypes.func as PropType<UploadProps['afterUpload']>,
+    beforeClear: PropTypes.func as PropType<UploadProps['beforeClear']>,
+    beforeRemove: PropTypes.func as PropType<UploadProps['beforeRemove']>,
+    beforeUpload: PropTypes.func as PropType<UploadProps['beforeUpload']>,
+    // children: PropTypes.node as PropType<any>,
     className: PropTypes.string,
-    customRequest: PropTypes.func,
+    customRequest: PropTypes.func as PropType<UploadProps['customRequest']>,
     data: PropTypes.oneOfType([PropTypes.object, PropTypes.func]), // Extra parameters attached when uploading
     defaultFileList: PropTypes.array,
     directory: PropTypes.bool, // Support folder upload
     disabled: PropTypes.bool,
-    dragIcon: PropTypes.node,
-    dragMainText: PropTypes.node,
-    dragSubText: PropTypes.node,
+    dragIcon: PropTypes.node as PropType<UploadProps['dragIcon']>,
+    dragMainText: PropTypes.node as PropType<UploadProps['dragMainText']>,
+    dragSubText: PropTypes.node as PropType<UploadProps['dragMainText']>,
     draggable: PropTypes.bool,
     fileList: PropTypes.array, // files had been uploaded
     fileName: PropTypes.string, // same as name, to avoid props conflict in Form.Upload
     headers: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-    hotSpotLocation: String,
+    hotSpotLocation: String as PropType<UploadProps['hotSpotLocation']>,
     itemStyle: PropTypes.object,
     limit: PropTypes.number, // 最大允许上传文件个数
-    listType: String,
+    listType: String as PropType<UploadProps['listType']>,
     maxSize: PropTypes.number, // 文件大小限制，单位kb
     minSize: PropTypes.number, // 文件大小限制，单位kb
     multiple: PropTypes.bool,
     name: PropTypes.string, // file name
-    onAcceptInvalid: PropTypes.func,
-    onChange: PropTypes.func,
-    onClear: PropTypes.func,
-    onDrop: PropTypes.func,
-    onError: PropTypes.func,
-    onExceed: PropTypes.func, // Callback exceeding limit
-    onFileChange: PropTypes.func, // Callback when file is selected
-    onOpenFileDialog: PropTypes.func,
-    onPreviewClick: PropTypes.func,
-    onProgress: PropTypes.func,
-    onRemove: PropTypes.func,
-    onRetry: PropTypes.func,
-    onSizeError: PropTypes.func, // Callback with invalid file size
-    onSuccess: PropTypes.func,
-    previewFile: PropTypes.func, // Custom preview
-    prompt: PropTypes.node,
-    promptPosition: String,
-    renderFileItem: PropTypes.func,
-    renderPicPreviewIcon: PropTypes.func,
-    renderFileOperation: PropTypes.func,
-    renderPicInfo: PropTypes.func,
-    renderThumbnail: PropTypes.func,
+    onAcceptInvalid: PropTypes.func as PropType<UploadProps['onAcceptInvalid']>,
+    onChange: PropTypes.func as PropType<UploadProps['onChange']>,
+    onClear: PropTypes.func as PropType<UploadProps['onClear']>,
+    onDrop: PropTypes.func as PropType<UploadProps['onDrop']>,
+    onError: PropTypes.func as PropType<UploadProps['onError']>,
+    onExceed: PropTypes.func as PropType<UploadProps['onExceed']>,
+    onFileChange: PropTypes.func as PropType<UploadProps['onFileChange']>,
+    onOpenFileDialog: PropTypes.func as PropType<UploadProps['onOpenFileDialog']>,
+    onPreviewClick: PropTypes.func as PropType<UploadProps['onPreviewClick']>,
+    onProgress: PropTypes.func as PropType<UploadProps['onProgress']>,
+    onRemove: PropTypes.func as PropType<UploadProps['onRemove']>,
+    onRetry: PropTypes.func as PropType<UploadProps['onRetry']>,
+    onSizeError: PropTypes.func as PropType<UploadProps['onSizeError']>,
+    onSuccess: PropTypes.func as PropType<UploadProps['onSuccess']>,
+    previewFile: PropTypes.func as PropType<UploadProps['previewFile']>,
+    prompt: PropTypes.node as PropType<UploadProps['prompt']>,
+    promptPosition: String as PropType<UploadProps['promptPosition']>,
+    picWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    picHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    renderFileItem: PropTypes.func as PropType<UploadProps['renderFileItem']>,
+    renderPicPreviewIcon: PropTypes.func as PropType<UploadProps['renderPicPreviewIcon']>,
+    renderFileOperation: PropTypes.func as PropType<UploadProps['renderFileOperation']>,
+    renderPicInfo: PropTypes.func as PropType<UploadProps['renderPicInfo']>,
+    renderThumbnail: PropTypes.func as PropType<UploadProps['renderThumbnail']>,
     showClear: PropTypes.bool,
     showPicInfo: PropTypes.bool,
     showReplace: PropTypes.bool,
@@ -195,10 +200,10 @@ const propTypes = {
     showUploadList: PropTypes.bool, // whether to show fileList
     style: PropTypes.object,
     timeout: PropTypes.number,
-    transformFile: PropTypes.func,
-    uploadTrigger: String, // auto、custom
-    validateMessage: PropTypes.node,
-    validateStatus: String,
+    transformFile: PropTypes.func as PropType<UploadProps['transformFile']>,
+    uploadTrigger: String as PropType<UploadProps['uploadTrigger']>, // auto、custom
+    validateMessage: PropTypes.node as PropType<UploadProps['validateMessage']>,
+    validateStatus: String as PropType<UploadProps['validateStatus']>,
     withCredentials: PropTypes.bool,
 };
 const defaultProps: Partial<UploadProps> = {
@@ -232,7 +237,7 @@ const defaultProps: Partial<UploadProps> = {
     withCredentials: false,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Upload = defineComponent<UploadProps>((props, {}) => {
+const Upload = defineComponent<UploadProps>((props, {expose}) => {
 
     const slots = useSlots()
 
@@ -248,7 +253,7 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
     const inputRef = ref();
     const replaceInputRef = ref();
 
-    const {adapter: adapterInject} = useBaseComponent<UploadProps>(props, state)
+    const {adapter: adapterInject, getDataAttr} = useBaseComponent<UploadProps>(props, state)
     function adapter_(): UploadAdapter<UploadProps, UploadState> {
         return {
             ...adapterInject<UploadProps, UploadState>(),
@@ -376,9 +381,13 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
      * manual upload by user
      */
     const upload = (): void => {
-        const { fileList } = state;
-        foundation.startUpload(fileList);
+        foundation.manualUpload();
     };
+
+    expose({
+        insert,
+        upload,
+    })
 
     const renderFile = (file: FileItem, index: number, locale: Locale['Upload']): VNode | string => {
         const { name, status, validateMessage, _sizeInvalid, uid } = file;
@@ -394,6 +403,8 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
             renderThumbnail,
             disabled,
             onPreviewClick,
+            picWidth,
+            picHeight,
         } = props;
         const onRemove = (): void => remove(file);
         const onRetry = (): void => {
@@ -423,6 +434,8 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
               typeof onPreviewClick !== 'undefined'
                 ? (): void => foundation.handlePreviewClick(file)
                 : undefined,
+            picWidth,
+            picHeight
         };
 
         if (status === strings.FILE_STATUS_UPLOAD_FAIL && !validateMessage) {
@@ -455,7 +468,7 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
 
     const renderFileListPic = () => {
         const children = slots.default?.()
-        const { showUploadList, limit, disabled, draggable, hotSpotLocation } = props;
+        const { showUploadList, limit, disabled, draggable, hotSpotLocation, picHeight, picWidth } = props;
         const { fileList: stateFileList, dragAreaStatus } = state;
         const fileList = props.fileList || stateFileList;
         const showAddTriggerInList = limit ? limit > fileList.length : true;
@@ -476,6 +489,10 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
             role: 'button',
             className: uploadAddCls,
             onClick: onClick,
+            style: {
+                height: styleNum(picHeight),
+                width: styleNum(picWidth)
+            }
         };
         const containerProps = {
             class: fileListCls,
@@ -692,7 +709,7 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
         const dirProps = directory ? { directory: 'directory', webkitdirectory: 'webkitdirectory' } : {};
 
         return (
-          <div class={uploadCls} style={style} x-prompt-pos={promptPosition}>
+          <div class={uploadCls} style={style} x-prompt-pos={promptPosition} {...getDataAttr()}>
               <input
                 key={state.inputKey}
                 capture={capture}
@@ -733,10 +750,11 @@ const Upload = defineComponent<UploadProps>((props, {}) => {
           </div>
         );
     }
+}, {
+    props: vuePropsType,
+    name: 'Upload'
 })
 
-Upload.props = vuePropsType
-Upload.name = 'Upload'
 
 export default Upload
 

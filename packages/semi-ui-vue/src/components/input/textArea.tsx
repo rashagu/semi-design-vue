@@ -7,7 +7,7 @@ import {
   watch,
   CSSProperties,
   onMounted,
-  onUnmounted, VNode
+  onUnmounted, VNode, ComponentObjectPropsOptions, PropType
 } from 'vue'
 import * as PropTypes from '../PropTypes';
 
@@ -31,7 +31,8 @@ type OmitTextareaAttr =
   | 'onBlur'
   | 'onKeydown'
   | 'onKeypress'
-  | 'onKeyup';
+  | 'onKeyUp'
+  | 'onResize'
 
 export interface TextAreaProps extends Omit<TextareaHTMLAttributes, OmitTextareaAttr> {
   style?: CSSProperties;
@@ -46,7 +47,7 @@ export interface TextAreaProps extends Omit<TextareaHTMLAttributes, OmitTextarea
   defaultValue?: string;
   disabled?: boolean;
   readonly?: boolean;
-  autofocus?: boolean;
+  autoFocus?: boolean;
   showCounter?: boolean;
   showClear?: boolean;
   onClear?: (e: Event) => void;
@@ -65,7 +66,8 @@ export interface TextAreaProps extends Omit<TextareaHTMLAttributes, OmitTextarea
   minlength?: number,
   maxlength?: number,
   class?: string,
-
+  className?: string,
+  'onUpdate:value'?: any
 }
 
 export interface TextAreaState {
@@ -78,7 +80,7 @@ export interface TextAreaState {
   cachedValue?: string;
 }
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<TextAreaProps> = {
   autosize: PropTypes.bool,
   borderless: PropTypes.bool,
   placeholder: PropTypes.string,
@@ -86,61 +88,61 @@ const propTypes = {
   rows: PropTypes.number,
   cols: PropTypes.number,
   maxCount: PropTypes.number,
-  onEnterPress: PropTypes.func,
-  validateStatus: PropTypes.string,
-  className: PropTypes.string,
+  onEnterPress: PropTypes.func as PropType<TextAreaProps['onEnterPress']>,
+  validateStatus: PropTypes.string as PropType<TextAreaProps['validateStatus']>,
+  className: PropTypes.string as PropType<TextAreaProps['className']>,
   style: PropTypes.object,
   showClear: PropTypes.bool,
-  onClear: PropTypes.func,
-  onResize: PropTypes.func,
-  getValueLength: PropTypes.func,
+  onClear: PropTypes.func as PropType<TextAreaProps['onClear']>,
+  onResize: PropTypes.func as PropType<TextAreaProps['onResize']>,
+  getValueLength: PropTypes.func as PropType<TextAreaProps['getValueLength']>,
   // TODO
   // resize: PropTypes.bool,
 
 
   class: {type: String, default: ''},
   defaultValue: {
-    type: [String, Boolean, Object, Array, undefined],
+    type: [String, Boolean, Object, Array, undefined] as PropType<TextAreaProps['defaultValue']>,
 // @ts-ignore
     default: undefined,
   },
   disabled: Boolean,
   readonly: Boolean,
-  autofocus: Boolean,
+  autoFocus: Boolean,
   showCounter: {type: Boolean, default: false},
   minlength: Number,
   maxlength: Number,
-  'onUpdate:value': Function,
+  'onUpdate:value': Function as PropType<TextAreaProps['onUpdate:value']>,
   onChange: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onChange']>,
     default: noop,
   },
   onBlur: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onBlur']>,
     default: noop,
   },
   onFocus: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onFocus']>,
     default: noop,
   },
   onInput: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onInput']>,
     default: noop,
   },
   onKeyDown: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onKeyDown']>,
     default: noop,
   },
   onKeyUp: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onKeyUp']>,
     default: noop,
   },
   onKeyPress: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onKeyPress']>,
     default: noop,
   },
   onPressEnter: {
-    type: Function,
+    type: Function as PropType<TextAreaProps['onPressEnter']>,
     default: noop,
   },
   forwardRef: {
@@ -271,9 +273,8 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
     _resizeListener && window.removeEventListener('resize', _resizeListener);
   })
 
-  watch([() => props.value, () => props.autosize,], (value, [prevValue, prevAutosize]) => {
-
-    if (props.value !== prevValue && props.autosize) {
+  watch([() => props.value, () => props.autosize, ()=>props.placeholder], (value, [prevValue, prevAutosize, prevPlaceholder]) => {
+    if ((props.value !== prevValue || props.placeholder !== prevPlaceholder) && props.autosize) {
       foundation.resizeTextarea();
     }
   })
@@ -364,6 +365,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
       defaultValue,
       style,
       forwardRef,
+      autoFocus,
       getValueLength,
       maxlength,
       minlength,
@@ -398,13 +400,16 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
       ...omit(rest, 'insetLabel', 'insetLabelId', 'getValueLength', 'onClear', 'showClear'),
       className: itemCls,
       disabled,
+      autofocus: autoFocus || props.autofocus,
       readOnly: readonly,
       placeholder: !placeholder ? null : placeholder,
       onInput: (e: any) => {
         // console.log(e)
-        foundation._adapter.setValue(e.target.value)
+        foundation.handleChange(e.target.value, e)
       },
-      onChange: (e: any) => foundation.handleChange(e.target.value, e),
+      onChange: (e: any) => {
+        // foundation.handleChange(e.target.value, e)
+      },
       onFocus: (e: Event) => foundation.handleFocus(e),
       onBlur: (e: any) => foundation.handleBlur(e),
       onKeydown: (e: any) => {
@@ -435,9 +440,11 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
       </div>
     );
   }
+}, {
+  props: VuePropsType,
+  name: 'TextArea'
 })
 
 
-TextArea.props = VuePropsType
 
 export default TextArea

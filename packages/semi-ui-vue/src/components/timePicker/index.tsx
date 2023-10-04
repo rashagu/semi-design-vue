@@ -48,10 +48,12 @@ const index = defineComponent<LocalePickerProps>((props, {}) => {
       </Context.Consumer>
     );
   }
+}, {
+  props: vuePropsType,
+  name: 'TimePickerIndex'
 })
 
-index.props = vuePropsType
-index.name = "TimePickerIndex"
+
 
 export default index
 

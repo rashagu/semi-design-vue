@@ -13,10 +13,11 @@ const Provider = defineComponent<{value:TreeContextValue}>((props, {slots}) => {
   }, {immediate:true})
   provide('TreeContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
+}, {
+  props: vuePropsType,
+  name: 'TreeContextProvider'
 })
 
-Provider.props = vuePropsType
-Provider.name = 'TreeContextProvider'
 
 export default Provider
 
