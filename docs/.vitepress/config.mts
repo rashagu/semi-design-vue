@@ -5,6 +5,7 @@ import Jsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  // base:'/semi-design-vue/docs/.vitepress/dist/',
   title: 'semi-design-vue',
   description: 'Vue3 UI components based on semi-design and Vue',
   srcDir: 'src',
@@ -13,6 +14,9 @@ export default defineConfig({
     // optimizeDeps: {
     //   disabled: true,
     // },
+    ssr: {
+      noExternal: ['@douyinfe\\semi-foundation', 'lodash', '@vue/repl', '@vue/repl/monaco-editor'],
+    },
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

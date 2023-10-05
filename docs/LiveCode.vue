@@ -2,6 +2,7 @@
 import {onMounted, watchEffect} from 'vue'
 import { Repl, ReplStore, File } from '@vue/repl'
 import Monaco from '@vue/repl/monaco-editor'
+import '@vue/repl/style.css'
 import {withBase} from "vitepress";
 
 const props = defineProps({
@@ -44,12 +45,12 @@ const store = new ReplStore({
 // pre-set import map
 store.setImportMap({
   imports: {
-    "@kousum/semi-ui-vue": withBase('/semi/semi-ui-vue.mjs'),
+    "@kousum/semi-ui-vue": 'http://localhost:1593/semi/semi-ui-vue.mjs',
   },
 })
 
 const previewOptions = {
-  headHTML: '<link rel="stylesheet" href="/semi/style.css" data-n-g="">'
+  headHTML: '<link rel="stylesheet" href="http://localhost:1593/semi/style.css" data-n-g="">'
 }
 // use a specific version of Vue
 store.setVueVersion('3.3.4')
