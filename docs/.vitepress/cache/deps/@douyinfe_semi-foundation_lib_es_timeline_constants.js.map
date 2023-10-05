@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/timeline/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-timeline`,\n  ITEM: `${BASE_CLASS_PREFIX}-timeline-item`\n};\nconst strings = {\n  MODE: ['left', 'alternate', 'right', 'center'],\n  ITEM_POS: ['left', 'right'],\n  ITEM_TYPE: ['ongoing', 'success', 'warning', 'error', 'default']\n};\nexport { cssClasses, strings };"],
-  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AAAA,EACX,MAAM,GAAG;AACX;AACA,IAAM,UAAU;AAAA,EACd,MAAM,CAAC,QAAQ,aAAa,SAAS,QAAQ;AAAA,EAC7C,UAAU,CAAC,QAAQ,OAAO;AAAA,EAC1B,WAAW,CAAC,WAAW,WAAW,WAAW,SAAS,SAAS;AACjE;",
-  "names": []
-}

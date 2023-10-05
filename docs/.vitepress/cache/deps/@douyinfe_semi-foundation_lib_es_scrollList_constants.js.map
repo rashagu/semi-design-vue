@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/scrollList/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-scrolllist`,\n  SELECTED: `${BASE_CLASS_PREFIX}-scrolllist-item-selected`\n};\nconst strings = {\n  MODE: ['normal', 'wheel']\n};\nconst numbers = {\n  DEFAULT_ITEM_HEIGHT: 36,\n  DEFAULT_SCROLL_DURATION: 120\n};\nexport { cssClasses, strings, numbers };"],
-  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AAAA,EACX,UAAU,GAAG;AACf;AACA,IAAM,UAAU;AAAA,EACd,MAAM,CAAC,UAAU,OAAO;AAC1B;AACA,IAAM,UAAU;AAAA,EACd,qBAAqB;AAAA,EACrB,yBAAyB;AAC3B;",
-  "names": []
-}

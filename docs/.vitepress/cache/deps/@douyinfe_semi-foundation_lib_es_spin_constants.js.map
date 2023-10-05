@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/spin/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst PREFIX = `${BASE_CLASS_PREFIX}-spin`;\nconst cssClasses = {\n  PREFIX\n};\nconst strings = {\n  SIZE: ['small', 'middle', 'large']\n};\nconst numbers = {};\nexport { cssClasses, strings, numbers };"],
-  "mappings": ";;;;;;AACA,IAAM,SAAS,GAAG;AAClB,IAAM,aAAa;AAAA,EACjB;AACF;AACA,IAAM,UAAU;AAAA,EACd,MAAM,CAAC,SAAS,UAAU,OAAO;AACnC;AACA,IAAM,UAAU,CAAC;",
-  "names": []
-}

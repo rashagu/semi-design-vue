@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/transfer/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-transfer`\n};\nconst strings = {\n  TYPE_GROUP_LIST: 'groupList',\n  TYPE_LIST: 'list',\n  TYPE_TREE_TO_LIST: 'treeList'\n};\nconst numbers = {};\nexport { cssClasses, strings, numbers };"],
-  "mappings": ";;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,iBAAiB;AAAA,EACjB,WAAW;AAAA,EACX,mBAAmB;AACrB;AACA,IAAM,UAAU,CAAC;",
-  "names": []
-}

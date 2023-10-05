@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/typography/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-typography`\n};\nconst strings = {\n  TYPE: ['primary', 'secondary', 'danger', 'warning', 'success', 'tertiary', 'quaternary'],\n  SIZE: ['normal', 'small'],\n  SPACING: ['normal', 'extended'],\n  HEADING: [1, 2, 3, 4, 5, 6],\n  RULE: ['text', 'numbers', 'bytes-decimal', 'bytes-binary', 'percentages', 'exponential'],\n  TRUNCATE: ['ceil', 'floor', 'round']\n};\nexport { cssClasses, strings };"],
-  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,MAAM,CAAC,WAAW,aAAa,UAAU,WAAW,WAAW,YAAY,YAAY;AAAA,EACvF,MAAM,CAAC,UAAU,OAAO;AAAA,EACxB,SAAS,CAAC,UAAU,UAAU;AAAA,EAC9B,SAAS,CAAC,GAAG,GAAG,GAAG,GAAG,GAAG,CAAC;AAAA,EAC1B,MAAM,CAAC,QAAQ,WAAW,iBAAiB,gBAAgB,eAAe,aAAa;AAAA,EACvF,UAAU,CAAC,QAAQ,SAAS,OAAO;AACrC;",
-  "names": []
-}

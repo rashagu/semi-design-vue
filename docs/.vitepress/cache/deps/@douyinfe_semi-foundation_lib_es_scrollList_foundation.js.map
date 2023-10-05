@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/scrollList/foundation.js"],
-  "sourcesContent": ["import BaseFoundation from '../base/foundation';\nexport default class ScrollListFoundation extends BaseFoundation {}"],
-  "mappings": ";;;;;;;;;;;;;;;;AACA,IAAqB,uBAArB,cAAkD,mBAAe;AAAC;",
-  "names": []
-}

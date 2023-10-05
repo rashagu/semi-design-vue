@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/tree/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-tree`,\n  PREFIX_OPTION: `${BASE_CLASS_PREFIX}-tree-option`\n};\nconst strings = {\n  EXPAND_ACTION: [false, 'click', 'doubleClick']\n};\nconst numbers = {};\nexport { cssClasses, strings, numbers };"],
-  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AAAA,EACX,eAAe,GAAG;AACpB;AACA,IAAM,UAAU;AAAA,EACd,eAAe,CAAC,OAAO,SAAS,aAAa;AAC/C;AACA,IAAM,UAAU,CAAC;",
-  "names": []
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/image/previewFoundation.js"],
-  "sourcesContent": ["import BaseFoundation from \"../base/foundation\";\nexport default class PreviewFoundation extends BaseFoundation {\n  constructor() {\n    super(...arguments);\n\n    this.handleVisibleChange = newVisible => {\n      const {\n        visible,\n        onVisibleChange\n      } = this.getProps();\n\n      if (!(visible in this.getProps())) {\n        this.setState({\n          visible: newVisible\n        });\n      }\n\n      onVisibleChange && onVisibleChange(newVisible);\n    };\n\n    this.handleCurrentIndexChange = index => {\n      const {\n        currentIndex,\n        onChange\n      } = this.getProps();\n\n      if (!(currentIndex in this.getProps())) {\n        this.setState({\n          currentIndex: index\n        });\n      }\n\n      onChange && onChange(index);\n    };\n  }\n\n}"],
-  "mappings": ";;;;;;;;;;;;;;;;AACA,IAAqB,oBAArB,cAA+C,mBAAe;AAAA,EAC5D,cAAc;AACZ,UAAM,GAAG,SAAS;AAElB,SAAK,sBAAsB,gBAAc;AACvC,YAAM;AAAA,QACJ;AAAA,QACA;AAAA,MACF,IAAI,KAAK,SAAS;AAElB,UAAI,EAAE,WAAW,KAAK,SAAS,IAAI;AACjC,aAAK,SAAS;AAAA,UACZ,SAAS;AAAA,QACX,CAAC;AAAA,MACH;AAEA,yBAAmB,gBAAgB,UAAU;AAAA,IAC/C;AAEA,SAAK,2BAA2B,WAAS;AACvC,YAAM;AAAA,QACJ;AAAA,QACA;AAAA,MACF,IAAI,KAAK,SAAS;AAElB,UAAI,EAAE,gBAAgB,KAAK,SAAS,IAAI;AACtC,aAAK,SAAS;AAAA,UACZ,cAAc;AAAA,QAChB,CAAC;AAAA,MACH;AAEA,kBAAY,SAAS,KAAK;AAAA,IAC5B;AAAA,EACF;AAEF;",
-  "names": []
-}

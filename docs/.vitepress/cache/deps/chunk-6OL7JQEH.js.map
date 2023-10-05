@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/isNullOrUndefined.js"],
-  "sourcesContent": ["/**\n * Whether null or undefined\n * @param {*} value\n * @returns  {boolean}\n */\nexport default function isNullOrUndefined(value) {\n  return value === null || value === undefined;\n}"],
-  "mappings": ";AAKe,SAAR,kBAAmC,OAAO;AAC/C,SAAO,UAAU,QAAQ,UAAU;AACrC;",
-  "names": []
-}

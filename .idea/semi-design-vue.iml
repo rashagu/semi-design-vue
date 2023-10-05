@@ -11,6 +11,8 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/semi-illustrations-vue/src/svgs" />
       <excludeFolder url="file://$MODULE_DIR$/packages/semi-illustrations-vue/lib" />
       <excludeFolder url="file://$MODULE_DIR$/storybook-static" />
+      <excludeFolder url="file://$MODULE_DIR$/docs/.vitepress/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/docs/.vitepress/dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

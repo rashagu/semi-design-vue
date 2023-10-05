@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/overflowList/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: BASE_CLASS_PREFIX + '-overflow-list'\n};\nconst MODE_MAP = {\n  COLLAPSE: 'collapse',\n  SCROLL: 'scroll'\n};\nconst BOUNDARY_MAP = {\n  START: 'start',\n  END: 'end'\n};\nconst OVERFLOW_DIR = {\n  NONE: 0,\n  GROW: 1,\n  SHRINK: 2\n};\nconst strings = {\n  BOUNDARY_SET: Object.values(BOUNDARY_MAP),\n  POSITION_SET: ['vertical', 'horizontal'],\n  MODE_SET: Object.values(MODE_MAP),\n  MODE_MAP,\n  BOUNDARY_MAP,\n  OVERFLOW_DIR\n};\nconst numbers = {\n  MINIMUM_HTML_ELEMENT_WIDTH: 4\n};\nexport { cssClasses, strings, numbers };"],
-  "mappings": ";;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,oBAAoB;AAC9B;AACA,IAAM,WAAW;AAAA,EACf,UAAU;AAAA,EACV,QAAQ;AACV;AACA,IAAM,eAAe;AAAA,EACnB,OAAO;AAAA,EACP,KAAK;AACP;AACA,IAAM,eAAe;AAAA,EACnB,MAAM;AAAA,EACN,MAAM;AAAA,EACN,QAAQ;AACV;AACA,IAAM,UAAU;AAAA,EACd,cAAc,OAAO,OAAO,YAAY;AAAA,EACxC,cAAc,CAAC,YAAY,YAAY;AAAA,EACvC,UAAU,OAAO,OAAO,QAAQ;AAAA,EAChC;AAAA,EACA;AAAA,EACA;AACF;AACA,IAAM,UAAU;AAAA,EACd,4BAA4B;AAC9B;",
-  "names": []
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/table/tableSelectionCellFoundation.js"],
-  "sourcesContent": ["import BaseFoundation from '../base/foundation';\nexport default class TableSelectionCellFoundation extends BaseFoundation {\n  handleChange(e) {\n    const value = e.target.checked;\n\n    this._adapter.notifyChange(value, e);\n  }\n\n}"],
-  "mappings": ";;;;;;;;;;;;;;;;AACA,IAAqB,+BAArB,cAA0D,mBAAe;AAAA,EACvE,aAAa,GAAG;AACd,UAAM,QAAQ,EAAE,OAAO;AAEvB,SAAK,SAAS,aAAa,OAAO,CAAC;AAAA,EACrC;AAEF;",
-  "names": []
-}

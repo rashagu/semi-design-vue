@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/input/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-input`\n};\nconst strings = {\n  SIZE: ['small', 'large', 'default'],\n  DEFAULT_SIZE: 'default',\n  STATUS: ['default', 'error', 'warning', 'success'],\n  CLEARBTN_CLICKED_EVENT_FLAG: '__fromClearBtn',\n  MODE: ['password']\n};\nconst numbers = {};\nexport { cssClasses, strings, numbers };"],
-  "mappings": ";;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,MAAM,CAAC,SAAS,SAAS,SAAS;AAAA,EAClC,cAAc;AAAA,EACd,QAAQ,CAAC,WAAW,SAAS,WAAW,SAAS;AAAA,EACjD,6BAA6B;AAAA,EAC7B,MAAM,CAAC,UAAU;AACnB;AACA,IAAM,UAAU,CAAC;",
-  "names": []
-}

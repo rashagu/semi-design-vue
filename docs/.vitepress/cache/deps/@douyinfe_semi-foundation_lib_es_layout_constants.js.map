@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/layout/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-layout`\n};\nconst strings = {\n  BREAKPOINT: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']\n};\nexport { cssClasses, strings };"],
-  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,YAAY,CAAC,MAAM,MAAM,MAAM,MAAM,MAAM,KAAK;AAClD;",
-  "names": []
-}

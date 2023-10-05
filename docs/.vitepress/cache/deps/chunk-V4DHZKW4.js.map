@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/tooltip/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-tooltip`\n};\nconst strings = {\n  POSITION_SET: ['top', 'topLeft', 'topRight', 'left', 'leftTop', 'leftBottom', 'right', 'rightTop', 'rightBottom', 'bottom', 'bottomLeft', 'bottomRight', 'leftTopOver', 'rightTopOver', 'leftBottomOver', 'rightBottomOver'],\n  TRIGGER_SET: ['hover', 'focus', 'click', 'custom'],\n  STATUS_DISABLED: 'disabled',\n  STATUS_LOADING: 'loading'\n};\nconst numbers = {\n  ARROW_BOUNDING: {\n    offsetX: 0,\n    offsetY: 2,\n    width: 24,\n    height: 7\n  },\n  DEFAULT_Z_INDEX: 1060,\n  MOUSE_ENTER_DELAY: 50,\n  MOUSE_LEAVE_DELAY: 50,\n  SPACING: 8,\n  MARGIN: 0\n};\nexport { cssClasses, strings, numbers };"],
-  "mappings": ";;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,cAAc,CAAC,OAAO,WAAW,YAAY,QAAQ,WAAW,cAAc,SAAS,YAAY,eAAe,UAAU,cAAc,eAAe,eAAe,gBAAgB,kBAAkB,iBAAiB;AAAA,EAC3N,aAAa,CAAC,SAAS,SAAS,SAAS,QAAQ;AAAA,EACjD,iBAAiB;AAAA,EACjB,gBAAgB;AAClB;AACA,IAAM,UAAU;AAAA,EACd,gBAAgB;AAAA,IACd,SAAS;AAAA,IACT,SAAS;AAAA,IACT,OAAO;AAAA,IACP,QAAQ;AAAA,EACV;AAAA,EACA,iBAAiB;AAAA,EACjB,mBAAmB;AAAA,EACnB,mBAAmB;AAAA,EACnB,SAAS;AAAA,EACT,QAAQ;AACV;",
-  "names": []
-}

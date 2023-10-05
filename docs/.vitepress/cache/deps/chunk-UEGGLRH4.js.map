@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/isEnterPress.js"],
-  "sourcesContent": ["import _get from \"lodash/get\";\nimport { ENTER_KEY } from './keyCode';\n\nfunction isEnterPress(e) {\n  return _get(e, 'key') === ENTER_KEY ? true : false;\n}\n\nexport default isEnterPress;"],
-  "mappings": ";;;;;;;;;;;AAAA,iBAAiB;AAGjB,SAAS,aAAa,GAAG;AACvB,aAAO,WAAAA,SAAK,GAAG,KAAK,MAAM,YAAY,OAAO;AAC/C;AAEA,IAAO,uBAAQ;",
-  "names": ["_get"]
-}

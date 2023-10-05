@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/dropdown/constants.js"],
-  "sourcesContent": ["import { strings as tooltipStrings } from '../tooltip/constants';\nimport { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-dropdown`,\n  SELECTED: `${BASE_CLASS_PREFIX}-dropdown-item-selected`,\n  DISABLED: `${BASE_CLASS_PREFIX}-dropdown-item-disabled`\n};\nconst strings = {\n  POSITION_SET: tooltipStrings.POSITION_SET,\n  TRIGGER_SET: ['hover', 'focus', 'click', 'custom'],\n  DEFAULT_LEAVE_DELAY: 100,\n  ITEM_TYPE: ['primary', 'secondary', 'tertiary', 'warning', 'danger']\n};\nconst numbers = {\n  SPACING: 4,\n  NESTED_SPACING: 2\n};\nexport { cssClasses, strings, numbers };"],
-  "mappings": ";;;;;;;;;AAEA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AAAA,EACX,UAAU,GAAG;AAAA,EACb,UAAU,GAAG;AACf;AACA,IAAMA,WAAU;AAAA,EACd,cAAc,QAAe;AAAA,EAC7B,aAAa,CAAC,SAAS,SAAS,SAAS,QAAQ;AAAA,EACjD,qBAAqB;AAAA,EACrB,WAAW,CAAC,WAAW,aAAa,YAAY,WAAW,QAAQ;AACrE;AACA,IAAM,UAAU;AAAA,EACd,SAAS;AAAA,EACT,gBAAgB;AAClB;",
-  "names": ["strings"]
-}

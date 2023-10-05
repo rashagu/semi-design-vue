@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/table/cellFoundation.js"],
-  "sourcesContent": ["import BaseFoundation from '../base/foundation';\nexport default class TableCellFoundation extends BaseFoundation {\n  handleClick(e) {\n    this._adapter.notifyClick(this.getProp('record'), e);\n  }\n\n}"],
-  "mappings": ";;;;;;;;;;;;;;;;AACA,IAAqB,sBAArB,cAAiD,mBAAe;AAAA,EAC9D,YAAY,GAAG;AACb,SAAK,SAAS,YAAY,KAAK,QAAQ,QAAQ,GAAG,CAAC;AAAA,EACrD;AAEF;",
-  "names": []
-}

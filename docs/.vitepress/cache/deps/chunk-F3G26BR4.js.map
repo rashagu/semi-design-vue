@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/treeSelect/constants.js"],
-  "sourcesContent": ["import { VALIDATE_STATUS, BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-tree-select`,\n  PREFIX_TREE: `${BASE_CLASS_PREFIX}-tree`,\n  PREFIX_OPTION: `${BASE_CLASS_PREFIX}-tree-select-option`\n};\nconst strings = {\n  SIZE_SET: ['small', 'large', 'default'],\n  SEARCH_POSITION_DROPDOWN: 'dropdown',\n  SEARCH_POSITION_TRIGGER: 'trigger',\n  STATUS: VALIDATE_STATUS\n};\nconst numbers = {};\nexport { cssClasses, strings, numbers };"],
-  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AAAA,EACX,aAAa,GAAG;AAAA,EAChB,eAAe,GAAG;AACpB;AACA,IAAM,UAAU;AAAA,EACd,UAAU,CAAC,SAAS,SAAS,SAAS;AAAA,EACtC,0BAA0B;AAAA,EAC1B,yBAAyB;AAAA,EACzB,QAAQ;AACV;AACA,IAAM,UAAU,CAAC;",
-  "names": []
-}

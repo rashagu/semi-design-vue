@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/table/tableRowFoundation.js"],
-  "sourcesContent": ["import BaseFoundation from '../base/foundation'; // eslint-disable-next-line max-len\n\nexport default class TableRowFoundation extends BaseFoundation {\n  handleClick(e) {\n    const {\n      expanded,\n      rowKey\n    } = this.getProps();\n\n    this._adapter.notifyClick(rowKey, e, expanded);\n  }\n\n  handleDoubleClick(e) {\n    this._adapter.notifyDoubleClick(this.getProp('record'), e);\n  }\n\n  handleMouseEnter(e) {\n    const record = this.getProp('record');\n\n    this._adapter.notifyMouseEnter(record, e);\n  }\n\n  handleMouseLeave(e) {\n    const record = this.getProp('record');\n\n    this._adapter.notifyMouseLeave(record, e);\n  }\n\n}"],
-  "mappings": ";;;;;;;;;;;;;;;;AAEA,IAAqB,qBAArB,cAAgD,mBAAe;AAAA,EAC7D,YAAY,GAAG;AACb,UAAM;AAAA,MACJ;AAAA,MACA;AAAA,IACF,IAAI,KAAK,SAAS;AAElB,SAAK,SAAS,YAAY,QAAQ,GAAG,QAAQ;AAAA,EAC/C;AAAA,EAEA,kBAAkB,GAAG;AACnB,SAAK,SAAS,kBAAkB,KAAK,QAAQ,QAAQ,GAAG,CAAC;AAAA,EAC3D;AAAA,EAEA,iBAAiB,GAAG;AAClB,UAAM,SAAS,KAAK,QAAQ,QAAQ;AAEpC,SAAK,SAAS,iBAAiB,QAAQ,CAAC;AAAA,EAC1C;AAAA,EAEA,iBAAiB,GAAG;AAClB,UAAM,SAAS,KAAK,QAAQ,QAAQ;AAEpC,SAAK,SAAS,iBAAiB,QAAQ,CAAC;AAAA,EAC1C;AAEF;",
-  "names": []
-}

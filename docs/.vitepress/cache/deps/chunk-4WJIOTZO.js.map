@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/inputNumber/constants.js"],
-  "sourcesContent": ["import { cssClasses as inputCssClasses, numbers as inputNumbers, strings as inputStrings } from '../input/constants';\nconst cssClasses = Object.assign({}, inputCssClasses);\nconst numbers = Object.assign(Object.assign({}, inputNumbers), {\n  DEFAULT_STEP: 1,\n  DEFAULT_SHIFT_STEP: 10,\n  DEFAULT_PRESS_TIMEOUT: 250,\n  DEFAULT_PRESS_INTERVAL: 0,\n  MOUSE_BUTTON_LEFT: 0\n});\nconst strings = Object.assign({}, inputStrings);\nexport { cssClasses, numbers, strings };"],
-  "mappings": ";;;;;;;AACA,IAAMA,cAAa,OAAO,OAAO,CAAC,GAAG,UAAe;AACpD,IAAMC,WAAU,OAAO,OAAO,OAAO,OAAO,CAAC,GAAG,OAAY,GAAG;AAAA,EAC7D,cAAc;AAAA,EACd,oBAAoB;AAAA,EACpB,uBAAuB;AAAA,EACvB,wBAAwB;AAAA,EACxB,mBAAmB;AACrB,CAAC;AACD,IAAMC,WAAU,OAAO,OAAO,CAAC,GAAG,OAAY;",
-  "names": ["cssClasses", "numbers", "strings"]
-}

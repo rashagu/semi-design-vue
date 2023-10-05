@@ -11,3 +11,5 @@ coverage/
 *.log
 /.npmrc
 /storybook-static/
+/docs/.vitepress/cache/
+/docs/.vitepress/dist/

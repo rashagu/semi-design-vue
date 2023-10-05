@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/warning.js"],
-  "sourcesContent": ["export default function warning(flag, info) {\n  if (flag) {\n    console.warn(`Warning: ${info}`);\n  }\n}"],
-  "mappings": ";AAAe,SAAR,QAAyB,MAAM,MAAM;AAC1C,MAAI,MAAM;AACR,YAAQ,KAAK,YAAY,MAAM;AAAA,EACjC;AACF;",
-  "names": []
-}

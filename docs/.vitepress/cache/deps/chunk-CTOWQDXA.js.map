@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/navigation/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst MODE_HORIZONTAL = 'horizontal';\nconst MODE_VERTICAL = 'vertical';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-navigation`\n};\nconst strings = {\n  MODE: [MODE_VERTICAL, MODE_HORIZONTAL],\n  MODE_VERTICAL,\n  MODE_HORIZONTAL,\n  ICON_POS_LEFT: 'left',\n  ICON_POS_RIGHT: 'right',\n  DEFAULT_LOGO_ICON_SIZE: 'extra-large',\n  TOGGLE_ICON_LEFT: 'left',\n  TOGGLE_ICON_RIGHT: 'right'\n};\nconst numbers = {\n  DEFAULT_SUBNAV_MAX_HEIGHT: 999,\n  DEFAULT_TOOLTIP_SHOW_DELAY: 0,\n  DEFAULT_TOOLTIP_HIDE_DELAY: 100,\n  DEFAULT_SUBNAV_OPEN_DELAY: 0,\n  DEFAULT_SUBNAV_CLOSE_DELAY: 100 // ms\n\n};\nexport { cssClasses, strings, numbers };"],
-  "mappings": ";;;;;AACA,IAAM,kBAAkB;AACxB,IAAM,gBAAgB;AACtB,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,MAAM,CAAC,eAAe,eAAe;AAAA,EACrC;AAAA,EACA;AAAA,EACA,eAAe;AAAA,EACf,gBAAgB;AAAA,EAChB,wBAAwB;AAAA,EACxB,kBAAkB;AAAA,EAClB,mBAAmB;AACrB;AACA,IAAM,UAAU;AAAA,EACd,2BAA2B;AAAA,EAC3B,4BAA4B;AAAA,EAC5B,4BAA4B;AAAA,EAC5B,2BAA2B;AAAA,EAC3B,4BAA4B;AAAA;AAE9B;",
-  "names": []
-}

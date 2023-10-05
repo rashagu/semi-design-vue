@@ -10,6 +10,7 @@ brief: 分割线是一个呈线状的轻量化组件，用于有逻辑的组织�
 
 <script setup>
 import { useData } from 'vitepress';
+import LiveCode from '../../../LiveCode.vue';
 import DesignToken from '../../../DesignToken.vue';
 import DividerDemo0 from './demo/DividerDemo0.vue';
 import DividerDemo1 from './demo/DividerDemo1.vue';
@@ -51,7 +52,9 @@ import { Divider } from '@kousum/semi-ui-vue';
 :::
 
 
-
+<div style="width: 100%;height: 500px;">
+<LiveCode/>
+</div>
 
 ## API参考
 

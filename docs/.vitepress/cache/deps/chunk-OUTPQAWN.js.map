@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/isObject.js", "../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/isPromise.js"],
-  "sourcesContent": ["export default function isObject(obj) {\n  return obj !== null && typeof obj === 'object';\n}", "import isObject from './isObject';\nexport default function isPromise(value) {\n  return isObject(value) && typeof value.then === 'function';\n}"],
-  "mappings": ";AAAe,SAAR,SAA0B,KAAK;AACpC,SAAO,QAAQ,QAAQ,OAAO,QAAQ;AACxC;;;ACDe,SAAR,UAA2B,OAAO;AACvC,SAAO,SAAS,KAAK,KAAK,OAAO,MAAM,SAAS;AAClD;",
-  "names": []
-}

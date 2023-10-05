@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/modal/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  DIALOG: `${BASE_CLASS_PREFIX}-modal`\n};\nconst strings = {\n  cancelKey: 'cancel',\n  confirmKey: 'confirm',\n  SIZE: ['small', 'medium', 'large', 'full-width'],\n  directions: ['ltr', 'rtl']\n};\nexport { cssClasses, strings };"],
-  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,WAAW;AAAA,EACX,YAAY;AAAA,EACZ,MAAM,CAAC,SAAS,UAAU,SAAS,YAAY;AAAA,EAC/C,YAAY,CAAC,OAAO,KAAK;AAC3B;",
-  "names": []
-}

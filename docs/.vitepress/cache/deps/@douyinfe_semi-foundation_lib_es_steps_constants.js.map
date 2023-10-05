@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/steps/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst stepsClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-steps`,\n  ITEM: `${BASE_CLASS_PREFIX}-steps-item`\n};\nexport { stepsClasses };"],
-  "mappings": ";;;;;;AACA,IAAM,eAAe;AAAA,EACnB,QAAQ,GAAG;AAAA,EACX,MAAM,GAAG;AACX;",
-  "names": []
-}

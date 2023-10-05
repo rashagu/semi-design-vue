@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/slider/constants.js"],
-  "sourcesContent": ["import { BASE_CLASS_PREFIX } from '../base/constants';\nconst cssClasses = {\n  PREFIX: `${BASE_CLASS_PREFIX}-slider`,\n  DISABLED: `${BASE_CLASS_PREFIX}-slider-disabled`,\n  VERTICAL: `${BASE_CLASS_PREFIX}-slider-vertical`,\n  TRACK: `${BASE_CLASS_PREFIX}-slider-track`,\n  DOTS: `${BASE_CLASS_PREFIX}-slider-dots`,\n  MARKS: `${BASE_CLASS_PREFIX}-slider-marks`,\n  HANDLE: `${BASE_CLASS_PREFIX}-slider-handle`\n};\nconst strings = {\n  SIZE: ['small', 'large', 'default'],\n  POSITION: ['top', 'bottom'],\n  OPTIONS: ['children', 'option']\n};\nexport { cssClasses, strings };"],
-  "mappings": ";;;;;;AACA,IAAM,aAAa;AAAA,EACjB,QAAQ,GAAG;AAAA,EACX,UAAU,GAAG;AAAA,EACb,UAAU,GAAG;AAAA,EACb,OAAO,GAAG;AAAA,EACV,MAAM,GAAG;AAAA,EACT,OAAO,GAAG;AAAA,EACV,QAAQ,GAAG;AACb;AACA,IAAM,UAAU;AAAA,EACd,MAAM,CAAC,SAAS,SAAS,SAAS;AAAA,EAClC,UAAU,CAAC,OAAO,QAAQ;AAAA,EAC1B,SAAS,CAAC,YAAY,QAAQ;AAChC;",
-  "names": []
-}

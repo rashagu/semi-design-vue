@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/banner/foundation.js"],
-  "sourcesContent": ["import BaseFoundation from '../base/foundation';\nexport default class BannerFoundation extends BaseFoundation {\n  constructor(adapter) {\n    super(Object.assign(Object.assign({}, BannerFoundation.defaultAdapter), adapter));\n  }\n\n  removeBanner(e) {\n    this._adapter.notifyClose(e);\n\n    this._adapter.setVisible();\n  }\n\n}"],
-  "mappings": ";;;;;;;;;;;;;;;;AACA,IAAqB,mBAArB,cAA8C,mBAAe;AAAA,EAC3D,YAAY,SAAS;AACnB,UAAM,OAAO,OAAO,OAAO,OAAO,CAAC,GAAG,iBAAiB,cAAc,GAAG,OAAO,CAAC;AAAA,EAClF;AAAA,EAEA,aAAa,GAAG;AACd,SAAK,SAAS,YAAY,CAAC;AAE3B,SAAK,SAAS,WAAW;AAAA,EAC3B;AAEF;",
-  "names": []
-}

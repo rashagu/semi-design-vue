@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/base/env.js", "../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/base/constants.js"],
-  "sourcesContent": ["export const BASE_CLASS_PREFIX = 'semi';", "import { BASE_CLASS_PREFIX } from './env';\nconst VALIDATE_STATUS = ['default', 'error', 'warning', 'success']; // const VALIDATE_STATUS = ['default', 'error', 'warning', 'success', 'validating'] as const;\n\nexport { BASE_CLASS_PREFIX, VALIDATE_STATUS };"],
-  "mappings": ";AAAO,IAAM,oBAAoB;;;ACCjC,IAAM,kBAAkB,CAAC,WAAW,SAAS,WAAW,SAAS;",
-  "names": []
-}

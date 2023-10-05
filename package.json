@@ -28,9 +28,18 @@
     "packages/semi-ui-vue",
     "packages/semi-illustrations-vue"
   ],
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@algolia/client-search",
+        "search-insights"
+      ]
+    }
+  },
   "dependencies": {
     "@douyinfe/semi-foundation": "2.42.4",
     "@douyinfe/semi-theme-default": "2.42.4",
+    "@vue/repl": "^2.5.8",
     "vue": "^3.3.4",
     "lodash": "^4.17.21"
   },
@@ -47,9 +56,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.1.0",
-
-
-
     "@babel/core": "^7.18.2",
     "@babel/plugin-proposal-decorators": "^7.18.2",
     "@babel/plugin-transform-runtime": "^7.18.2",
@@ -93,7 +99,7 @@
     "vitest": "^0.28.4",
     "typescript": "^5.1.6",
     "vite": "4.3.9",
-    "vitepress": "1.0.0-alpha.75",
+    "vitepress": "1.0.0-rc.20",
     "vue-tsc": "^1.8.2"
   }
 }

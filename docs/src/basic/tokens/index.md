@@ -52,91 +52,91 @@ const { site, theme, page, frontmatter } = useData()
 
 用户界面主强调色及各交互态颜色，通常用于主操作按钮等
 
-<DesignToken componentName='global' reg={/color-primary/}/>
+<DesignToken componentName='global' reg="/color-primary/"/>
 
 ### 次要颜色 - secondary
 
 次要颜色 - secondary
 
-<DesignToken componentName='global' reg={/color-secondary/}/>
+<DesignToken componentName='global' reg="/color-secondary/"/>
 
 ### 第三颜色 - tertiary
 
 用户界面中非强调色及各交互态颜色，通常用于常规、非强调功能操作按钮等
 
-<DesignToken componentName='global' reg={/color-tertiary/}/>
+<DesignToken componentName='global' reg="/color-tertiary/"/>
 
 ### 信息 - info
 
 通常用于表达客观、中立信息，在带有上述语义的场景下使用
 
-<DesignToken componentName='global' reg={/color-info/}/>
+<DesignToken componentName='global' reg="/color-info/"/>
 
 ### 成功 - success
 
 通常用于表达成功、完成、开启状态，在带有上述语义的场景下使用
 
-<DesignToken componentName='global' reg={/color-success/}/>
+<DesignToken componentName='global' reg="/color-success/"/>
 
 ### 警示 - warning
 
 通常用于表达警告、不安全状态，在带有上述语义的场景下使用
 
-<DesignToken componentName='global' reg={/color-warning/}/>
+<DesignToken componentName='global' reg="/color-warning/"/>
 
 ### 危险 - danger
 
 通常用于表达危险状态，在带有上述语义的场景下使用
 
-<DesignToken componentName='global' reg={/color-danger/}/>
+<DesignToken componentName='global' reg="/color-danger/"/>
 
 ### 文本与图标颜色 - text
 
 四个不同层级的文本/图标颜色，依次代表产品界面中最主要、次主要、稍次要和最次要的内容
 
-<DesignToken componentName='global' reg={/color-text/}/>
+<DesignToken componentName='global' reg="/color-text/"/>
 
 ### 链接色 - link
 
 用于产品中超链接的文本
 
-<DesignToken componentName='global' reg={/color-link/}/>
+<DesignToken componentName='global' reg="/color-link/"/>
 
 ### 背景色 - bg
 
 应用中各级背景色，包括容器、菜单、导航栏等。在暗色模式下，我们通常用背景色来区分前后层级
 
-<DesignToken componentName='global' reg={/color-bg/}/>
+<DesignToken componentName='global' reg="/color-bg/"/>
 
 ### 填充色 - fill
 
 对于一个元素，如果其所处的容器背景颜色不固定，且这个元素的填充色与最上层背景色的对比度比较小，使用填充色作为 backgroundColor，确保这个元素不会“融于”某一级别背景颜色中，如表单控件。
 
-<DesignToken componentName='global' reg={/color-fill/}/>
+<DesignToken componentName='global' reg="/color-fill/"/>
 
 ### 描边色 - border
 
 界面中带有描边属性的颜色
 
-<DesignToken componentName='global' reg={/color-border/}/>
+<DesignToken componentName='global' reg="/color-border/"/>
 
 ### 禁用态 - disabled
 
 用于界面中各类表达禁用的元素填充，如背景、文本、描边、填充等
 
-<DesignToken componentName='global' reg={/color-disabled/}/>
+<DesignToken componentName='global' reg="/color-disabled/"/>
 
 ### 常量色 - static
 
 界面中不跟随主题及明暗模式切换的颜色
 
-<DesignToken componentName='global' reg={/((--semi-black)|(--semi-white))$/}/>
+<DesignToken componentName='global' reg="/((--semi-black)|(--semi-white))$/"/>
 
 ### 拟阴影色 - shadow
 
 浅阴影，通过 border 模拟的扁平阴影效果，主要用在 Table 组件
 
-<DesignToken componentName='global' reg={/^--semi-color-shadow$/}/>
+<DesignToken componentName='global' reg="/^--semi-color-shadow$/"/>
 
 ## 字体排版
 
@@ -146,13 +146,13 @@ const { site, theme, page, frontmatter } = useData()
 
 决定不同层级文本的大小
 
-<DesignToken componentName='global' reg={/font-size/}/>
+<DesignToken componentName='global' reg="/font-size/"/>
 
 ### 字重
 
 决定不同层级文本的粗细
 
-<DesignToken componentName='global' reg={/font-weight/}/>
+<DesignToken componentName='global' reg="/font-weight/"/>
 
 ### 字体
 
@@ -173,19 +173,19 @@ const { site, theme, page, frontmatter } = useData()
 
 ```
 
-<DesignToken componentName='global' reg={/font-family/}/>
+<DesignToken componentName='global' reg="/font-family/"/>
 
 ## 圆角
 
 使用圆角来描述容器与界面元素的轮廓，从一定程度决定产品的视觉调性
 
-<DesignToken componentName='global' reg={/border-radius/}/>
+<DesignToken componentName='global' reg="/border-radius/"/>
 
 ## 阴影
 
 阴影通常用来表达界面元素的层级，阴影越重的元素距离用户越近
 
-<DesignToken componentName='global' reg={/--semi-shadow/}/>
+<DesignToken componentName='global' reg="/--semi-shadow/"/>
 
 ## 尺寸
 
@@ -193,31 +193,32 @@ const { site, theme, page, frontmatter } = useData()
 
 ### 高度
 
-<DesignToken componentName='global' reg={/\height-control/}/>
+<DesignToken componentName='global' reg="/\height-control/"/>
 
 ### 描边尺寸
 
-<DesignToken componentName='global' reg={/\$border-thickness/}/>
+<DesignToken componentName='global' reg="/\$border-thickness/"/>
 
 ### 图标尺寸
 
-<DesignToken componentName='global' reg={/\$width-icon/}/>
+<DesignToken componentName='global' reg="/\$width-icon/"/>
 
 ## 间距
 
 间距变量被应用在各个组件内部，或组件与组件之间，用来调整产品整体的密集和紧凑程度
 
-<DesignToken componentName='global' reg={/(spacing-)|(width-base)|(loose)/}/>
+<DesignToken componentName='global' reg="/(spacing-)|(width-base)|(loose)/" />
 
 ## z-index
 
 用来描述界面元素的前后顺序关系
 
-<DesignToken componentName='global' reg={/z-/}/>
+<DesignToken componentName="global" reg="/z-/"/>
 
 ## 动画
 
-<DesignToken componentName="global" isAnimation={true} />
+<DesignToken componentName="global" :isAnimation="true" />
+
 
 ## 尚未支持的变量
 目前，Semi 尚未支持以下类别的全局变量，如果你有相关需求，可以通过issue进行反馈，详细描述你的预期需求，我们会在评估后进行处理

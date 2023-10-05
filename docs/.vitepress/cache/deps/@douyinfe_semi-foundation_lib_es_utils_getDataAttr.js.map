@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/getDataAttr.js"],
-  "sourcesContent": ["export default function getDataAttr(props) {\n  return Object.keys(props).reduce((prev, key) => {\n    if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {\n      prev[key] = props[key];\n    }\n\n    return prev;\n  }, {});\n}"],
-  "mappings": ";;;AAAe,SAAR,YAA6B,OAAO;AACzC,SAAO,OAAO,KAAK,KAAK,EAAE,OAAO,CAAC,MAAM,QAAQ;AAC9C,QAAI,IAAI,OAAO,GAAG,CAAC,MAAM,WAAW,IAAI,OAAO,GAAG,CAAC,MAAM,WAAW,QAAQ,QAAQ;AAClF,WAAK,GAAG,IAAI,MAAM,GAAG;AAAA,IACvB;AAEA,WAAO;AAAA,EACT,GAAG,CAAC,CAAC;AACP;",
-  "names": []
-}

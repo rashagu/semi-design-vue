@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/anchor/linkFoundation.js"],
-  "sourcesContent": ["import BaseFoundation from '../base/foundation';\nexport default class LinkFoundation extends BaseFoundation {\n  constructor(adapter) {\n    super(Object.assign({}, adapter));\n  }\n\n  init() {// this.setInitValue();\n  } // eslint-disable-next-line @typescript-eslint/no-empty-function\n\n\n  destroy() {}\n\n  handleAddLink() {\n    const href = this._adapter.getProp('href');\n\n    this._adapter.addLink(href);\n  }\n\n  handleUpdateLink(href, prevHref) {\n    if (href !== prevHref) {\n      this._adapter.removeLink(prevHref);\n\n      this._adapter.addLink(href);\n    }\n  }\n\n  handleRemoveLink() {\n    const href = this._adapter.getProp('href');\n\n    this._adapter.removeLink(href);\n  }\n\n}"],
-  "mappings": ";;;;;;;;;;;;;;;;AACA,IAAqB,iBAArB,cAA4C,mBAAe;AAAA,EACzD,YAAY,SAAS;AACnB,UAAM,OAAO,OAAO,CAAC,GAAG,OAAO,CAAC;AAAA,EAClC;AAAA,EAEA,OAAO;AAAA,EACP;AAAA;AAAA,EAGA,UAAU;AAAA,EAAC;AAAA,EAEX,gBAAgB;AACd,UAAM,OAAO,KAAK,SAAS,QAAQ,MAAM;AAEzC,SAAK,SAAS,QAAQ,IAAI;AAAA,EAC5B;AAAA,EAEA,iBAAiB,MAAM,UAAU;AAC/B,QAAI,SAAS,UAAU;AACrB,WAAK,SAAS,WAAW,QAAQ;AAEjC,WAAK,SAAS,QAAQ,IAAI;AAAA,IAC5B;AAAA,EACF;AAAA,EAEA,mBAAmB;AACjB,UAAM,OAAO,KAAK,SAAS,QAAQ,MAAM;AAEzC,SAAK,SAAS,WAAW,IAAI;AAAA,EAC/B;AAEF;",
-  "names": []
-}

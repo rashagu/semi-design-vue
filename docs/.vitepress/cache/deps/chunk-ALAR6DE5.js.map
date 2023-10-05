@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/@douyinfe+semi-foundation@2.34.0/node_modules/@douyinfe/semi-foundation/lib/es/utils/log.js"],
-  "sourcesContent": ["import _get from \"lodash/get\";\n\nconst log = function (text) {\n  if (_get(process, 'env.NODE_ENV') === 'development') {\n    for (var _len = arguments.length, rest = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {\n      rest[_key - 1] = arguments[_key];\n    }\n\n    console.log(text, ...rest);\n  }\n};\n\nexport default log;"],
-  "mappings": ";;;;;;;;AAAA,iBAAiB;AAEjB,IAAM,MAAM,SAAU,MAAM;AAC1B,UAAI,WAAAA,SAAK,SAAS,cAAc,MAAM,eAAe;AACnD,aAAS,OAAO,UAAU,QAAQ,OAAO,IAAI,MAAM,OAAO,IAAI,OAAO,IAAI,CAAC,GAAG,OAAO,GAAG,OAAO,MAAM,QAAQ;AAC1G,WAAK,OAAO,CAAC,IAAI,UAAU,IAAI;AAAA,IACjC;AAEA,YAAQ,IAAI,MAAM,GAAG,IAAI;AAAA,EAC3B;AACF;AAEA,IAAO,cAAQ;",
-  "names": ["_get"]
-}
