@@ -15,7 +15,7 @@ export default defineConfig({
     //   disabled: true,
     // },
     ssr: {
-      noExternal: ['@douyinfe\\semi-foundation', 'lodash', '@vue/repl', '@vue/repl/monaco-editor'],
+      noExternal: ['@douyinfe\\semi-foundation', 'lodash', '@vue/repl', '@vue/repl/monaco-editor', '@kousum/semi-icons-vue', '@kousum/semi-ui-vue'],
     },
   },
   themeConfig: {

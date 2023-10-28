@@ -41,7 +41,7 @@ for (const categoryArrKey in category) {
 }
 
 
-console.log(categoryArr)
+// console.log(categoryArr)
 //
 
 const columns = [

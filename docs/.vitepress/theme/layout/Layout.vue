@@ -439,7 +439,7 @@ function gotoGithub() {
 }
 
 function navSelect(v) {
-  console.log(v);
+  // console.log(v);
   router.go(v.itemKey);
 }
 const { page, site, theme } = useData();
@@ -477,6 +477,11 @@ const { page, site, theme } = useData();
   </Layout>
 </template>
 <style lang="scss">
+
+table{
+  display: table!important;
+  width:100%
+}
 .layout_header {
   position: fixed;
   z-index: 2;

@@ -1,14 +1,25 @@
 <script setup lang="ts">
-import {onMounted, watchEffect} from 'vue'
-import { Repl, ReplStore, File } from '@vue/repl'
-import Monaco from '@vue/repl/monaco-editor'
-import '@vue/repl/style.css'
-import {withBase} from "vitepress";
+import {defineClientComponent, inBrowser} from 'vitepress'
+
 
 const props = defineProps({
-  codeText: {
+  mainFile: {
     type: String,
-    default: `<script setup>
+  },
+  files: {
+    type: Object
+
+
+
+
+
+
+
+
+
+    ,
+    default: {
+      'App.vue': `<script setup>
 import { ref } from 'vue'
 import { Button } from '@kousum/semi-ui-vue'
 
@@ -19,48 +30,30 @@ const msg = ref('Hello World!')
   <Button>{{ msg }}</Button>
 </template>
 `
+    }
   }
 })
-// retrieve some configuration options from the URL
-const query = new URLSearchParams(location.search)
 
-const store = new ReplStore({
-  // initialize repl with previously serialized state
-  serializedState: location.hash.slice(1),
+const LiveCodeClient:any = defineClientComponent(
+    //@ts-ignore
+    () => import('./LiveCodeClient.vue'),
 
-  // starts on the output pane (mobile only) if the URL has a showOutput query
-  showOutput: query.has('showOutput'),
-  // starts on a different tab on the output pane if the URL has a outputMode query
-  // and default to the "preview" tab
-  outputMode: query.get('outputMode') || 'preview',
+    // args are passed to h() - https://vuejs.org/api/render-function.html#h
+    [
+      {
+        ...props
+      },
+      {
+      }
+    ],
 
-  // specify the default URL to import Vue runtime from in the sandbox
-  // default is the CDN link from jsdelivr.com with version matching Vue's version
-  // from peerDependency
-  defaultVueRuntimeURL: 'cdn link to vue.runtime.esm-browser.js',
-})
+    // callback after the component is loaded, can be async
+    () => {
+    }
+)
 
-// persist state to URL hash
-// watchEffect(() => history.replaceState({}, '', store.serialize()))
-// pre-set import map
-store.setImportMap({
-  imports: {
-    "@kousum/semi-ui-vue": 'http://localhost:1593/semi/semi-ui-vue.mjs',
-  },
-})
-
-const previewOptions = {
-  headHTML: '<link rel="stylesheet" href="http://localhost:1593/semi/style.css" data-n-g="">'
-}
-// use a specific version of Vue
-store.setVueVersion('3.3.4')
-
-store.setFiles({
-  ...store.getFiles(),
-  'App.vue': props.codeText
-})
 </script>
 
 <template>
-  <Repl :preview-options="previewOptions" style="width: 100%;height: 100%;" :store="store" :editor="Monaco" :showCompileOutput="true" />
+  <LiveCodeClient />
 </template>

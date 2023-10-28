@@ -804,7 +804,7 @@ function Table<RecordType extends Record<string, any>>() {
 
     const handleWheel = (event: WheelEvent) => {
       const { scroll = {} } = props;
-      if (window.navigator.userAgent.match(/Trident\/7\./) && scroll.y) {
+      if (window.navigator?.userAgent.match(/Trident\/7\./) && scroll.y) {
         event.preventDefault();
         const wd = event.deltaY;
         const { target } = event;
