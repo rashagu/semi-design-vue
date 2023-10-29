@@ -3,21 +3,8 @@ import {defineClientComponent, inBrowser} from 'vitepress'
 
 
 const props = defineProps({
-  mainFile: {
-    type: String,
-  },
   files: {
-    type: Object
-
-
-
-
-
-
-
-
-
-    ,
+    type: Object,
     default: {
       'App.vue': `<script setup>
 import { ref } from 'vue'
@@ -34,7 +21,7 @@ const msg = ref('Hello World!')
   }
 })
 
-const LiveCodeClient:any = defineClientComponent(
+const LiveCodeClient: any = defineClientComponent(
     //@ts-ignore
     () => import('./LiveCodeClient.vue'),
 
@@ -43,8 +30,7 @@ const LiveCodeClient:any = defineClientComponent(
       {
         ...props
       },
-      {
-      }
+      {}
     ],
 
     // callback after the component is loaded, can be async
@@ -55,5 +41,5 @@ const LiveCodeClient:any = defineClientComponent(
 </script>
 
 <template>
-  <LiveCodeClient />
+  <LiveCodeClient/>
 </template>

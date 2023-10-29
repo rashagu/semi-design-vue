@@ -7,6 +7,6 @@ import LiveCode from "../../../../LiveCode.vue";
 <template>
 
   <div style="width: 100%;height: 500px;">
-    <LiveCode :files="code0" :mainFile="'App.vue'"/>
+    <LiveCode :files="code0"/>
   </div>
 </template>

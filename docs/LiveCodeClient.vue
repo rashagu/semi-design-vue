@@ -6,10 +6,6 @@ import '@vue/repl/style.css'
 import {onMounted} from "vue";
 
 const props = defineProps({
-  mainFile: {
-    type: String,
-    default: 'App.vue'
-  },
   files: {
     type: Object,
   },
@@ -55,14 +51,12 @@ store.setFiles({
   'import-map.json': store.getFiles()['import-map.json'],
   ...props.files
 }, Object.keys(props.files)[0]).then(()=>{
-  // console.log(store.getFiles(),  props.mainFile)
   // store.setFiles(store.getFiles())
 })
 
 onMounted(()=>{
 setTimeout(()=>{
 
-  console.log(store.getFiles(),  props.mainFile)
 }, 3*1000)
 })
 </script>
