@@ -27,7 +27,7 @@ const { site, theme, page, frontmatter } = useData()
 -   Semi v2.0 版本 基于 v1.x 使用 ts 进行了重构，带来了更好的 ts 使用体验、以及更开箱即用的工程化方案，更好的a11y支持，支持局部启用暗色/亮色模式，解决了对微前端场景下多组件库共存的样式冲突问题等。Semi 2.x 为开源版本， Semi 团队后续所有长期工作都将基于 v2.x 版本进行
 -   v1.x 已停止迭代维护，不再进行feature添加或复杂变更，仅提供必要的 bug fix 变更。
 -   我们建议大家直接使用 2.x [@douyin/semi-ui](https://semi.design) 进行开发。现有旧项目，我们也建议大家尽快进行升级。为减轻升级成本，我们提供了 cli 工具一键迁移（@ies/semi-codemod-v2 ）可帮助大家自动完成高达 90%的迁移修改（受限于 AST 实现原理，仍存在一小部分 case 需人工 review 修改，但不多 😉 ）
--   Semi 1.x 升级至 Semi 2.x 详细操作步骤请查阅 [从 v1 到 v2](https://semi.design/zh-CN/start/update-to-v2)
+-   Semi 1.x 升级至 Semi 2.x 详细操作步骤请查阅 [从 v1 到 v2](https://semi.design)
 
 #### 各版本之间的关系
 
@@ -39,7 +39,7 @@ const { site, theme, page, frontmatter } = useData()
 
 #### Semi 的默认的主题风格跟我们系统的定位不符，可以配置另外的主题吗？
 
-- 具体请参考 [定制主题](/zh-CN/start/customize-theme) 。Semi 提供**多达 2300+ Design Token 允许用户进行深度定制**，无论你是研发还是设计师，在[Semi DSM](/dsm) 里可以非常方便地进行样式层配置，并在代码、设计稿始终保持双向同步。基于 Semi 你可以**低成本定制属于你自己的 Design System** 将 `Semi Design` 定制为 `Any Design`
+- 具体请参考 [定制主题]() 。Semi 提供**多达 2300+ Design Token 允许用户进行深度定制**，无论你是研发还是设计师，在[Semi DSM]() 里可以非常方便地进行样式层配置，并在代码、设计稿始终保持双向同步。基于 Semi 你可以**低成本定制属于你自己的 Design System** 将 `Semi Design` 定制为 `Any Design`
 - 并且在使用时，你也只需要在 webpack.config.js 里指定使用的主题包名即可完成接入（需接入 Semi 插件）。
 
 #### Semi 是否支持 Tree Shaking
@@ -60,7 +60,7 @@ Semi 组件中，所有的 defaultValue、defaultXXX 传参只会在组件被 mo
 
 #### Semi 支持 i18n 吗？
 
-Semi 目前支持 21 种语言，具体使用可以查阅 [Semi·LocaleProvider](/zh-CN/other/locale)
+Semi 目前支持 21 种语言，具体使用可以查阅 [Semi·LocaleProvider]()
 
 #### Semi 的样式是基于 Scss 还是 Less ？为什么不用 CSS Module？
 

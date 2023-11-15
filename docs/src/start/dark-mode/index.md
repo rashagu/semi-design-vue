@@ -21,11 +21,11 @@ const { site, theme, page, frontmatter } = useData()
 {{page.frontmatter.brief}}
 ## 能力介绍
 
-🤩 Semi 的默认主题或任意通过 [Semi DSM](/dsm) 配置的定制主题都自带了亮色模式与暗色模式，可以方便地进行切换。  
+🤩 Semi 的默认主题或任意通过 [Semi DSM]() 配置的定制主题都自带了亮色模式与暗色模式，可以方便地进行切换。  
 🌒 Semi 也支持在页面的局部范围使用亮/暗色模式。
 
 ## 推荐设置
-Semi 会自动在 body 元素上挂载全局色盘，我们内置了一些常用的 CSS Token，详细的 Token 详情可查阅 [设计变量](/zh-CN/basic/tokens)  
+Semi 会自动在 body 元素上挂载全局色盘，我们内置了一些常用的 CSS Token，详细的 Token 详情可查阅 [设计变量]()  
 我们推荐你在 body 上配置 `color`、`background-color`, 你的业务组件可从 body 自动继承获得默认的背景色、文本颜色，自适应亮/暗色切换
 
 ```css

@@ -2,7 +2,7 @@
 import { useData, Content, useRouter } from 'vitepress';
 import { Layout, LayoutContent, LayoutHeader, LayoutSider, Nav } from '@kousum/semi-ui-vue';
 
-import { h } from 'vue';
+import {h, onMounted} from 'vue';
 import { IconSetting, IconUser, IconStar, IconGithubLogo } from '@kousum/semi-icons-vue';
 import Icon from '@kousum/semi-icons-vue';
 import Accordion from '../../../images/docIcons/doc-accordion.vue';
@@ -443,12 +443,23 @@ function navSelect(v) {
   router.go(v.itemKey);
 }
 const { page, site, theme } = useData();
+
+
+
+onMounted(()=>{
+  const body = document.body;
+  if (body.hasAttribute('theme-mode')) {
+    body.removeAttribute('theme-mode');
+  } else {
+    body.setAttribute('theme-mode', 'dark');
+  }
+})
 </script>
 
 <template>
   <Layout className="components-layout-demo">
     <LayoutHeader className="layout_header">
-      <div class="header" style="">
+      <div class="header" style="background-color: var(--semi-color-nav-bg);">
         <div>
           <svg width="97" height="36" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -458,13 +469,13 @@ const { page, site, theme } = useData();
             ></path>
           </svg>
         </div>
-        <IconGithubLogo style="cursor: pointer" :size="'extra-large'" @click="gotoGithub" />
+        <a :href="theme?.socialLinks[0].link"><IconGithubLogo style="cursor: pointer" :size="'extra-large'" /></a>
       </div>
     </LayoutHeader>
     <Layout className="in_body">
       <LayoutSider className="layout_sider">
         <div style="height: 100vh; overflow: auto; background-color: white">
-          <Nav @select="navSelect" :items="navItem" />
+          <Nav style="height: 100%" @select="navSelect" :items="navItem" />
         </div>
       </LayoutSider>
       <LayoutContent className="in_content VPDoc">
@@ -522,6 +533,6 @@ img{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: #eee solid 1px;
+  border-bottom: var(--semi-color-nav-bg) solid 1px;
 }
 </style>

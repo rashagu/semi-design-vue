@@ -236,7 +236,7 @@ function ButtonDemo() {
 
 ### 链接按钮
 
-我们推荐使用 Typography 的 link 属性来实现链接型的文字按钮，具体用法详见[Typography](/zh-CN/basic/typography)
+我们推荐使用 Typography 的 link 属性来实现链接型的文字按钮，具体用法详见[Typography]()
 
 ```jsx live=true
 import { h } from 'vue';
