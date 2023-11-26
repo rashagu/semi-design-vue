@@ -1,5 +1,6 @@
 import './_base/base.scss';
 
+export {Link} from "./anchor";
 export { default as Button } from './button';
 export { default as ButtonGroup } from './button/ButtonGroup';
 export { default as ConfigProvider } from './configProvider';

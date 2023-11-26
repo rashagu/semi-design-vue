@@ -23,6 +23,7 @@ export default defineConfig({
         "**/locale/source/**",
         "**/lib/**",
         "**/scripts/**",
+        "script/**",
         "**/stories/**",
         "dist/**",
         "packages/*/test{,s}/**",

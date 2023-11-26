@@ -23,7 +23,7 @@ export default {
 }
 </script>
 <template>
-  <div v-html="svg"></div>
+  <span v-html="svg"></span>
 </template>
 
 <style scoped>

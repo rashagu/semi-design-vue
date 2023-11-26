@@ -6,6 +6,7 @@ import {h, onMounted, provide, watch, computed} from 'vue';
 import Icon, {IconGithubLogo} from '@kousum/semi-icons-vue';
 import VPContent from 'vitepress/dist/client/theme-default/components/VPContent.vue';
 import InlineSvg from './InlineSvg.vue';
+import {GetNavData} from "./navLink";
 
 const modules = import.meta.glob('../../../images/docIcons/*.svg', { as: 'raw', eager: true })
 
@@ -444,7 +445,7 @@ function gotoGithub() {
 const {page, site, theme, isDark} = useData();
 
 function navSelect(v) {
-  router.go((import.meta.env.BASE_URL + v.itemKey).replace('//', '/'));
+  // router.go((import.meta.env.BASE_URL + v.itemKey).replace('//', '/'));
 }
 
 
@@ -469,6 +470,9 @@ const headerStyle = computed(()=>{
 })
 
 provide('hero-image-slot-exists', null)
+
+
+
 </script>
 
 <template>
@@ -493,7 +497,9 @@ provide('hero-image-slot-exists', null)
     <Layout className="in_body">
       <LayoutSider className="layout_sider">
         <div class="layout_nav" style="height: calc(100vh - 60px); background-color: white">
-          <Nav :defaultOpenKeys="navItem.map(item=>item.itemKey)" style="height: calc(100%);width: 280px;" @select="navSelect" :items="navItem"/>
+          <Nav :defaultOpenKeys="navItem.map(item=>item.itemKey)" style="height: calc(100%);width: 280px;" @select="navSelect">
+            <GetNavData :navItem="navItem" />
+          </Nav>
         </div>
       </LayoutSider>
       <LayoutContent className="in_content VPDoc">
