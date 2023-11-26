@@ -33,14 +33,15 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install pnpm -g
       - run: pnpm install
-      - run: pnpm build:lib
-      - run: pnpm build-storybook:vite
+#      - run: pnpm build:lib
+#      - run: pnpm build-storybook:vite
+      - run: pnpm docs:build
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./storybook-static
+          source: ./docs/.vitepress/dist
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1

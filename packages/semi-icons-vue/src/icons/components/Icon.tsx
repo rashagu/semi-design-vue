@@ -36,6 +36,7 @@ export const vuePropsType:ComponentObjectPropsOptions<IconProps> = {
 
 const Icon = defineComponent<IconProps>((props, {slots}) => {
 
+  console.log(props)
   return ()=> {
     const { svg, spin = false, rotate, style, className, prefixCls = BASE_CLASS_PREFIX, type, size = 'default', ...restProps } = props;
     const classes = cls(`${prefixCls}-icon`, {
