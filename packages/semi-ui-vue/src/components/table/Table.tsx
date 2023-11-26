@@ -88,7 +88,6 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
 import { useTableContext } from './tableContext/Consumer';
-import {a} from "vitest/dist/types-aac763a5";
 
 export type NormalTableProps<RecordType extends Record<string, any> = Data> = Omit<TableProps<RecordType>, 'resizable'>;
 
