@@ -441,12 +441,11 @@ function gotoGithub() {
   window.open(theme.value.socialLinks[0].link);
 }
 
-function navSelect(v) {
-  // console.log(v);
-  router.go(v.itemKey);
-}
-
 const {page, site, theme, isDark} = useData();
+
+function navSelect(v) {
+  router.go((import.meta.env.BASE_URL + v.itemKey).replace('//', '/'));
+}
 
 
 function setThemeMode() {
