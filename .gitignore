@@ -15,3 +15,5 @@ coverage/
 /docs/.vitepress/dist/
 /docs/src/public/semi-ui-vue.mjs
 /docs/src/public/style.css
+/docs/src/public/semi/
+/docs/.vitepress/semi-design-vue/

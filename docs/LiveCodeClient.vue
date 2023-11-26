@@ -34,14 +34,14 @@ const store = new ReplStore({
 
 
 const previewOptions = {
-  headHTML: `<link rel="stylesheet" href="${import.meta.env.BASE_URL}style.css" data-n-g="">`
+  headHTML: `<link rel="stylesheet" href="${import.meta.env.BASE_URL}semi/style.css" data-n-g="">`
 }
 // persist state to URL hash
 // watchEffect(() => history.replaceState({}, '', store.serialize()))
 // pre-set import map
 store.setImportMap({
   imports: {
-    "@kousum/semi-ui-vue": import.meta.env.BASE_URL + 'semi-ui-vue.mjs',
+    "@kousum/semi-ui-vue": import.meta.env.BASE_URL + 'semi/semi-ui-vue.mjs',
   },
 })
 // use a specific version of Vue
