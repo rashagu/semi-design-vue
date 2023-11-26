@@ -10,7 +10,7 @@ export default defineConfig({
     port: 8888
   },
   build:{
-    outDir:'../../docs/src/public',
+    outDir:'../../docs/src/public/semi',
     lib: {
       entry: path.resolve(__dirname, 'src/components/index.ts'),
       formats: ['es'],
