@@ -1,6 +1,4 @@
 import { defineConfig } from 'vitepress';
-import { h } from 'vue';
-import Vue from "@vitejs/plugin-vue";
 import Jsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitepress.dev/reference/site-config

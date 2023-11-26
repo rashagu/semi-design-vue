@@ -13,3 +13,5 @@ coverage/
 /storybook-static/
 /docs/.vitepress/cache/
 /docs/.vitepress/dist/
+/docs/src/public/semi-ui-vue.mjs
+/docs/src/public/style.css

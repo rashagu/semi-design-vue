@@ -7,6 +7,7 @@
     "test:unit": "vitest --environment jsdom",
     "test": "vitest run --coverage",
     "test:watch": "vitest watch",
+    "build:mjs": "pnpm -C ./packages/semi-ui-vue build",
     "build:lib": "pnpm -C ./packages/semi-animation-vue build:lib & pnpm -C ./packages/semi-icons-vue build:lib & pnpm -C ./packages/semi-illustrations-vue build:lib & pnpm -C ./packages/semi-ui-vue build:vite",
     "pre": "build:lib",
     "build:publish": "pnpm build:lib & pnpm publish -r",

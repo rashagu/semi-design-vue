@@ -28,19 +28,20 @@ const store = new ReplStore({
   // specify the default URL to import Vue runtime from in the sandbox
   // default is the CDN link from jsdelivr.com with version matching Vue's version
   // from peerDependency
-  defaultVueRuntimeURL: 'cdn link to vue.runtime.esm-browser.js',
+  // defaultVueRuntimeURL: import.meta.env.BASE_URL + 'runtime-dom.esm-browser.js',
+  // defaultVueServerRendererURL: import.meta.env.BASE_URL + 'server-renderer.esm-browser.js',
 })
 
 
 const previewOptions = {
-  headHTML: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@kousum/semi-ui-vue@0.5.5/build/style.css" data-n-g="">'
+  headHTML: `<link rel="stylesheet" href="${import.meta.env.BASE_URL}style.css" data-n-g="">`
 }
 // persist state to URL hash
 // watchEffect(() => history.replaceState({}, '', store.serialize()))
 // pre-set import map
 store.setImportMap({
   imports: {
-    "@kousum/semi-ui-vue": 'https://cdn.jsdelivr.net/npm/@kousum/semi-ui-vue@0.5.5/build/semi-ui-vue.mjs',
+    "@kousum/semi-ui-vue": import.meta.env.BASE_URL + 'semi-ui-vue.mjs',
   },
 })
 // use a specific version of Vue
