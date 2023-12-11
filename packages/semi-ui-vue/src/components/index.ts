@@ -1,4 +1,5 @@
 import './_base/base.scss';
+import {RuleItem} from "async-validator/dist-types/interface";
 
 export {Link} from "./anchor";
 export { default as Button } from './button';
@@ -103,7 +104,7 @@ export { default as Switch } from './switch';
  * Table
  */
 export { default as Table, TableMaker } from './table';
-export type { ColumnProps, TablePaginationProps,  } from './table/interface';
+export type { ColumnProps, TablePaginationProps, Align  } from './table/interface';
 export type {TableStateRowSelection} from "./table/Table";
 
 export { default as Tabs } from './tabs';
@@ -152,3 +153,4 @@ export {
 export type { FormApi, FormFCChild } from './form/index';
 export { default as Image } from './image';
 export { Preview as ImagePreview } from './image';
+export type { RuleItem, BaseFormProps } from './form/interface';
