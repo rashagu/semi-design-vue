@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.5.6
+
+### Patch Changes
+
+- fd0e6ea: chore: icon export
+- Updated dependencies [fd0e6ea]
+  - @kousum/semi-animation-vue@0.5.5
+  - @kousum/semi-icons-vue@0.5.5
+  - @kousum/semi-illustrations-vue@0.5.5
+
 ## 0.5.4
 
 ### Patch Changes

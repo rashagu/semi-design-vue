@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.5.5
+
+### Patch Changes
+
+- fd0e6ea: chore: icon export
+
 ## 0.5.4
 
 ### Patch Changes
