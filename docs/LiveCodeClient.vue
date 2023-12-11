@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Repl, ReplStore, File } from '@vue/repl'
+import { Repl, ReplStore } from '@vue/repl'
 //@ts-ignore
 import Monaco from '@vue/repl/monaco-editor'
-import '@vue/repl/style.css'
+// import '@vue/repl/style.css'
 import {onMounted} from "vue";
 
 const props = defineProps({
@@ -63,5 +63,5 @@ setTimeout(()=>{
 </script>
 
 <template>
-  <Repl :preview-options="previewOptions" style="width: 100%;height: 100%;" :store="store" :editor="Monaco" :showCompileOutput="true" />
+  <Repl :theme="'dark'" :preview-options="previewOptions" style="width: 100%;height: 100%;" :store="store" :editor="Monaco" :showCompileOutput="true" />
 </template>

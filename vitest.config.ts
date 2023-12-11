@@ -38,9 +38,6 @@ export default defineConfig({
         "**/.{eslint,mocha,prettier}rc.{js,cjs,yml}",
       ]
     },
-    transformMode: {
-      web: [/.[tj]sx$/],
-    },
   },
   resolve:{
     alias:[

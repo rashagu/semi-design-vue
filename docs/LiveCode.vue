@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {defineClientComponent, inBrowser} from 'vitepress'
+import {defineClientComponent} from 'vitepress'
 
 
 const props = defineProps({
