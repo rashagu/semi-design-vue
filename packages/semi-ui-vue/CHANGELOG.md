@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.5.7
+
+### Patch Changes
+
+- ab1ab27: 导出一些类型
+- Updated dependencies [ab1ab27]
+  - @kousum/semi-animation-vue@0.5.6
+  - @kousum/semi-icons-vue@0.5.6
+  - @kousum/semi-illustrations-vue@0.5.6
+
 ## 0.5.6
 
 ### Patch Changes

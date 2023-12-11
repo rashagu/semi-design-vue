@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.5.6
+
+### Patch Changes
+
+- ab1ab27: 导出一些类型
+
 ## 0.5.5
 
 ### Patch Changes
