@@ -7,8 +7,8 @@ export type {
 } from './components/Icon';
 
 
-export default Icon;
 export {
+  Icon,
   ConvertIcon
 }
 
