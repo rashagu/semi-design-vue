@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.5.7
+
+### Patch Changes
+
+- 3f19079: fix
+
 ## 0.5.6
 
 ### Patch Changes
