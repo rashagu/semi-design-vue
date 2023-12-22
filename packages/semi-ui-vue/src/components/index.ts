@@ -32,7 +32,7 @@ export type { RadioChangeEvent } from './radio'
 export { default as AutoCompleteItems } from './autoComplete';
 export { default as Avatar } from './avatar';
 export { default as Cascader } from './cascader';
-export type { Value as CascaderValueType } from './cascader';
+export type { Value as CascaderValueType, CascaderData } from './cascader';
 export { default as Checkbox, CheckboxGroup } from './checkbox';
 export { default as DatePicker } from './datePicker';
 export type { BaseDatePicker } from './datePicker';

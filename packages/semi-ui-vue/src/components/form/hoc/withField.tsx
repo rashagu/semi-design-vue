@@ -297,7 +297,7 @@ function withField<
      */
     const handleChange = (newValue: any, e: any, ...other: any[]) => {
       // 不明来源事件触发过滤 😂
-      if (newValue[Symbol.toStringTag] && newValue[Symbol.toStringTag] === 'Event') {
+      if (newValue && newValue[Symbol.toStringTag] && newValue[Symbol.toStringTag] === 'Event') {
         return;
       }
 

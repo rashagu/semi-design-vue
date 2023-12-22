@@ -77,7 +77,6 @@ export interface TableProps<RecordType extends Record<string, any> = any> extend
 }
 
 export interface ColumnProps<RecordType extends Record<string, any> = any> {
-    [x: string]: any;
     align?: Align;
     children?: Array<ColumnProps<RecordType>>;
     className?: string;

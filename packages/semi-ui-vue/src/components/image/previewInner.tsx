@@ -80,6 +80,9 @@ const propTypes:ComponentObjectPropsOptions<PreviewInnerProps> = {
   onRatioChange: PropTypes.func as PropType<PreviewInnerProps['onRatioChange']>,
   onRotateChange: PropTypes.func as PropType<PreviewInnerProps['onRotateChange']>,
   // onRotateLeft: PropTypes.func as PropType<PreviewInnerProps['onRotateLeft']>,
+
+  setDownloadName: PropTypes.func as PropType<PreviewInnerProps['setDownloadName']>,
+  crossOrigin: PropTypes.string as PropType<PreviewInnerProps['crossOrigin']>,
 }
 
 const defaultProps = {
