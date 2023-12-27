@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
 import Button from "../../button";
-import {Form, FormInput, withFormApi} from "../index";
+import {Form, FormInput, FormInputNumber, withFormApi} from "../index";
 
 const SomeComponetInsideForm = props => (
   <Button onClick={() => {
@@ -25,7 +25,8 @@ const WithFormApiDemo = defineComponent<WithFormApiDemoProps>((props, {}) => {
   return () => (
     <div>
       <Form>
-        <FormInput field='name' initValue='semi'></FormInput>
+        <FormInput field='name' initValue='semi' size={'small'}></FormInput>
+        <FormInputNumber  field='name2' initValue='semi' size={'small'}></FormInputNumber>
         <FormInput field='familyName' initValue='design'></FormInput>
         <Button htmlType='submit' style={{ marginRight: 4 }}>submit</Button>
         <ComponentWithFormApi />

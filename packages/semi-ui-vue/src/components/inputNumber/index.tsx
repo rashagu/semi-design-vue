@@ -96,6 +96,7 @@ const propTypes:ComponentObjectPropsOptions<InputNumberProps> = {
   pressTimeout: PropTypes.number,
   preventScroll: PropTypes.bool,
   shiftStep: PropTypes.number,
+  size: PropTypes.string as PropType<InputNumberProps['size']>,
   step: PropTypes.number,
   style: PropTypes.object,
   suffix: {
