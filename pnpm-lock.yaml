@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -11,8 +15,8 @@ importers:
         specifier: 2.42.4
         version: 2.42.4
       '@vue/repl':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^3.1.0
+        version: 3.1.0
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -278,7 +282,7 @@ importers:
         version: 5.1.6
       vite:
         specifier: 4.3.9
-        version: 4.3.9(@types/node@20.1.4)(sass@1.57.1)
+        version: 4.3.9(@types/node@20.1.4)(sass@1.57.1)(terser@5.16.4)
       vue-tsc:
         specifier: ^1.8.2
         version: 1.8.2(typescript@5.1.6)
@@ -360,7 +364,7 @@ importers:
         version: 5.1.6
       vite:
         specifier: 4.3.9
-        version: 4.3.9(@types/node@20.1.4)(sass@1.57.1)
+        version: 4.3.9(@types/node@20.1.4)(sass@1.57.1)(terser@5.16.4)
       vue-tsc:
         specifier: ^1.8.2
         version: 1.8.2(typescript@5.1.6)
@@ -442,7 +446,7 @@ importers:
         version: 5.1.6
       vite:
         specifier: 4.3.9
-        version: 4.3.9(@types/node@20.1.4)(sass@1.57.1)
+        version: 4.3.9(@types/node@20.1.4)(sass@1.57.1)(terser@5.16.4)
       vue-tsc:
         specifier: ^1.8.2
         version: 1.8.2(typescript@5.1.6)
@@ -477,13 +481,13 @@ importers:
         specifier: ^1.5.2
         version: 1.5.2
       '@kousum/semi-animation-vue':
-        specifier: ^0.5.6
+        specifier: ^0.5.7
         version: link:../semi-animation-vue
       '@kousum/semi-icons-vue':
-        specifier: ^0.5.6
+        specifier: ^0.5.7
         version: link:../semi-icons-vue
       '@kousum/semi-illustrations-vue':
-        specifier: ^0.5.6
+        specifier: ^0.5.7
         version: link:../semi-illustrations-vue
       '@kousum/vue-draggable':
         specifier: 1.0.2
@@ -7031,7 +7035,7 @@ packages:
       ts-dedent: 2.2.0
       type-fest: 3.13.1
       vue: 3.3.4
-      vue-component-type-helpers: 1.8.25
+      vue-component-type-helpers: 1.8.27
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -7540,7 +7544,7 @@ packages:
       '@babel/core': 7.20.12
       '@babel/plugin-transform-typescript': 7.20.7(@babel/core@7.20.12)
       '@vue/babel-plugin-jsx': 1.1.1(@babel/core@7.20.12)
-      vite: 4.3.9(@types/node@20.1.4)(sass@1.57.1)
+      vite: 4.3.9(@types/node@20.1.4)(sass@1.57.1)(terser@5.16.4)
       vue: 3.3.4
     transitivePeerDependencies:
       - supports-color
@@ -7569,7 +7573,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.3.9(@types/node@20.1.4)(sass@1.57.1)
+      vite: 4.3.9(@types/node@20.1.4)(sass@1.57.1)(terser@5.16.4)
       vue: 3.3.4
     dev: true
 
@@ -7880,8 +7884,8 @@ packages:
       '@vue/shared': 3.3.9
     dev: true
 
-  /@vue/repl@3.0.0:
-    resolution: {integrity: sha512-tGYibiftMo5yEuIKPWVsNuuNDejjJk0JQmvKtTm12KNLFqtGD7fWoGv1qUzcN9EAxwVeDgnT9ljRgqGVgZkyEg==}
+  /@vue/repl@3.1.0:
+    resolution: {integrity: sha512-lnR010NTkysg71Z0TVsFCTfiF5ARZbyohqymGpOxOrSuSI4o9RlSvWH6YmJdv9OHm5j69HKLVVUhXlCScMCQrg==}
     dev: false
 
   /@vue/runtime-core@3.3.4:
@@ -16282,40 +16286,6 @@ packages:
       - terser
     dev: true
 
-  /vite@4.3.9(@types/node@20.1.4)(sass@1.57.1):
-    resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 20.1.4
-      esbuild: 0.17.12
-      postcss: 8.4.31
-      rollup: 3.29.4
-      sass: 1.57.1
-    optionalDependencies:
-      fsevents: 2.3.3
-    dev: true
-
   /vite@4.3.9(@types/node@20.1.4)(sass@1.57.1)(terser@5.16.4):
     resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -16548,8 +16518,8 @@ packages:
     resolution: {integrity: sha512-LK3wJHs3vJxHG292C8cnsRusgyC5SEZDCzDCD01mdE/AoREFMl2tzLRuzwyuEsOIz13tqgBcnvysN3Lxsa14Fw==}
     dev: true
 
-  /vue-component-type-helpers@1.8.25:
-    resolution: {integrity: sha512-NCA6sekiJIMnMs4DdORxATXD+/NRkQpS32UC+I1KQJUasx+Z7MZUb3Y+MsKsFmX+PgyTYSteb73JW77AibaCCw==}
+  /vue-component-type-helpers@1.8.27:
+    resolution: {integrity: sha512-0vOfAtI67UjeO1G6UiX5Kd76CqaQ67wrRZiOe7UAb9Jm6GzlUr/fC7CV90XfwapJRjpCMaZFhv1V0ajWRmE9Dg==}
     dev: true
 
   /vue-demi@0.14.6(vue@3.3.9):
@@ -17110,7 +17080,3 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

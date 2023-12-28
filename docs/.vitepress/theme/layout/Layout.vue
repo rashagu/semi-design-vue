@@ -3,7 +3,7 @@ import {useData, useRouter} from 'vitepress';
 import {Layout, LayoutContent, LayoutHeader, LayoutSider, Nav} from '@kousum/semi-ui-vue';
 
 import {h, onMounted, provide, watch, computed} from 'vue';
-import Icon, {IconGithubLogo} from '@kousum/semi-icons-vue';
+import {Icon, IconGithubLogo} from '@kousum/semi-icons-vue';
 import VPContent from 'vitepress/dist/client/theme-default/components/VPContent.vue';
 import InlineSvg from './InlineSvg.vue';
 import {GetNavData} from "./navLink";

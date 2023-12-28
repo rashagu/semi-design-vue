@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { Repl, ReplStore } from '@vue/repl'
-//@ts-ignore
 import Monaco from '@vue/repl/monaco-editor'
-// import '@vue/repl/style.css'
 import {onMounted} from "vue";
 
 const props = defineProps({
