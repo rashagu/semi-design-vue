@@ -124,6 +124,8 @@ const propTypes:ComponentObjectPropsOptions<DateInputProps> = {
   onRangeEndTabPress: PropTypes.func as PropType<DateInputProps['onRangeEndTabPress']>,
 
   inputRef: PropTypes.object,
+
+  showClearIgnoreDisabled: PropTypes.bool,
 }
 const defaultProps = {
   showClear: true,

@@ -22,6 +22,7 @@ export const vuePropsType = {
   placeholder: [String, Array],
   className: String,
   style: [Object, String],
+  showClearIgnoreDisabled: Boolean
 }
 
 // @ts-ignore
