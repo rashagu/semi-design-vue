@@ -582,13 +582,13 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
   }
 
   function blur() {
-    inputRef.current.blur();
+    inputRef.value.blur();
     foundation.clickOutsideCallBack();
   }
 
   function focus() {
     const { preventScroll, disabled } = props;
-    inputRef.current.focus();
+    inputRef.value?.focus();
     if (!disabled) {
       // register clickOutside event
       foundation.handleClick();

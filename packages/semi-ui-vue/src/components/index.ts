@@ -1,5 +1,6 @@
 import './_base/base.scss';
 import {RuleItem} from "async-validator/dist-types/interface";
+import {customRequestArgs} from "./upload";
 
 export {Link} from "./anchor";
 export { default as Button } from './button';
@@ -49,6 +50,8 @@ export { default as TimePicker } from './timePicker';
 export { default as InputNumber } from './inputNumber/index';
 export { default as Progress } from './progress/index';
 export { default as Upload } from './upload/index';
+export type { customRequestArgs, OnChangeProps, AfterUploadProps, BeforeUploadProps, FileItem, UploadListType } from './upload/interface'
+
 export { default as Slider } from './slider/index';
 export { default as Divider } from './divider/index';
 export { default as Rating } from './rating/index';

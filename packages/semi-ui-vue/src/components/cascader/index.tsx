@@ -291,8 +291,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
       focusInput: () => {
         const { preventScroll } = props;
         if (inputRef.value) {
-          // TODO: check the reason
-          (inputRef.value as any).focus({ preventScroll });
+          ;(inputRef.value as any).focus({ preventScroll });
         }
       },
       blurInput: () => {
@@ -630,7 +629,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
     return (
       <div class={wrappercls}>
         <span class={spanCls}>{displayText ? displayText : inputPlaceHolder}</span>
-        {showInput && <Input ref={inputRef} size={size} {...inputProps} />}
+        {showInput && <Input forwardRef={inputRef} size={size} {...inputProps} />}
       </div>
     );
   }

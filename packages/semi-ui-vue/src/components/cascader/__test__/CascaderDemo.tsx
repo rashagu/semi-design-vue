@@ -55,16 +55,21 @@ const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
   const value = ref<Value>(['zhejiang', 'hangzhou', 'xiaoshan'])
   return () => (
     <div>
-      <Cascader defaultOpen={true} onChange={(v)=>{
+      <Cascader onChange={(v)=>{
         console.log(v)
         value.value = v
-      }} value={value.value} treeData={treeData} placeholder="请选择所在地区" />
-      <Cascader treeData={treeData} multiple={true} placeholder="请选择所在地区" />
+      }} value={value.value}
+                filterTreeNode treeData={treeData} placeholder="请选择所在地区" />
+      {/*<Cascader defaultOpen={true} onChange={(v)=>{*/}
+      {/*  console.log(v)*/}
+      {/*  value.value = v*/}
+      {/*}} value={value.value} treeData={treeData} placeholder="请选择所在地区" />*/}
+      {/*<Cascader treeData={treeData} multiple={true} placeholder="请选择所在地区" />*/}
 
-      <ItemDdemo />
+      {/*<ItemDdemo />*/}
 
 
-      <TriggerRenderDemo />
+      {/*<TriggerRenderDemo />*/}
 
 
     </div>

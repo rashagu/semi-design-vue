@@ -474,8 +474,8 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
           inputRef.value = node;
         };
       } else if (Object.prototype.toString.call(forwardRef) === '[object Object]') {
-        inputRef.value = forwardRef.value;
-        return forwardRef.value;
+        inputRef = forwardRef;
+        return forwardRef;
       }
     }
     return inputRef.value;
