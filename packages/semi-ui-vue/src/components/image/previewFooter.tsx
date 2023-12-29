@@ -16,12 +16,11 @@ import {ComponentObjectPropsOptions, defineComponent, h, PropType, useSlots} fro
 import {useBaseComponent} from "../_base/baseComponent";
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
-import {AnchorProps} from "../anchor";
 
 const prefixCls = cssClasses.PREFIX;
 const footerPrefixCls = `${cssClasses.PREFIX}-preview-footer`;
 const LocaleConsumer = LocaleConsumerFunc<Locale["Image"]>()
-let mouseActiveTime: number = 0;
+
 
 
 const propTypes:ComponentObjectPropsOptions<FooterProps> = {
@@ -55,6 +54,7 @@ const propTypes:ComponentObjectPropsOptions<FooterProps> = {
     step: PropTypes.number,
     onRotate: PropTypes.func as PropType<FooterProps['onRotate']>,
     renderPreviewMenu: PropTypes.func as PropType<FooterProps['renderPreviewMenu']>,
+    forwardRef: PropTypes.object as PropType<FooterProps['forwardRef']>,
 }
 
 const defaultProps = {
@@ -73,9 +73,6 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
     function adapter_(): PreviewFooterAdapter<FooterProps> {
         return {
             ...adapterInject(),
-            setStartMouseOffset: (time: number) => {
-                mouseActiveTime = time;
-            }
         };
     }
     const adapter = adapter_()
@@ -290,7 +287,7 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
 
 
     return () => {
-        const { className, renderPreviewMenu } = props;
+        const { className, renderPreviewMenu, forwardRef } = props;
 
         const menuCls = cls(footerPrefixCls, `${footerPrefixCls}-wrapper`, className,
           {
@@ -298,7 +295,7 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
           },
         );
         return (
-          <section class={menuCls} >
+          <section class={menuCls} ref={forwardRef}>
               {renderPreviewMenu ? customRenderViewMenu() : getFooterMenu()}
           </section>
         );

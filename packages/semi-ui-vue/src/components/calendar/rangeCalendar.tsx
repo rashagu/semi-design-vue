@@ -142,7 +142,7 @@ const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
         const { parsedEvents } = state;
         const events = parsedEvents.day;
         const { week } = RangeData;
-        const { markWeekend, dateGridRender } = props;
+        const { markWeekend, dateGridRender, minEventHeight } = props;
         const inner = week.map(day => {
             const dateString = day.date.toString();
             const dayEvents = events.has(dateString) ? events.get(dateString) : [];
@@ -157,6 +157,7 @@ const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
                 showCurrTime={props.showCurrTime}
                 isWeekend={markWeekend && day.isWeekend}
                 dateGridRender={dateGridRender}
+                minEventHeight={minEventHeight}
               />
             );
         });
@@ -231,7 +232,7 @@ const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
         const { allDay } = state.parsedEvents;
         const parsed = foundation.parseRangeAllDayEvents(allDay);
         const style = allDayEventsRender ? null : {
-            height: `${calcRowHeight(parsed) }em`
+            height: `${calcRowHeight(parsed)}em`
         };
         const { markWeekend } = props;
         const { week } = RangeData;

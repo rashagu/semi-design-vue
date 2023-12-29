@@ -9,7 +9,7 @@ import {
   onUnmounted,
   PropType,
   reactive,
-  ref,
+  ref, shallowRef,
   useSlots,
   VNode,
   watch,
@@ -276,6 +276,9 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
   const triggerRef = ref(null);
   const optionsRef = ref(null);
   let clickOutsideHandler: any = null;
+  const loadingKeysRef = shallowRef<Set<string>>()
+  const loadedKeysRef = shallowRef<Set<string>>()
+
   // TODO context
   const { adapter: adapterInject, context, getDataAttr } = useBaseComponent<CascaderProps>(props, state);
 
@@ -402,6 +405,18 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
       updateFocusState: (isFocus: boolean) => {
         state.isFocus = isFocus;
       },
+      updateLoadingKeyRefValue: (keys: Set<string>) => {
+        loadingKeysRef.value = keys;
+      },
+      getLoadingKeyRefValue: () => {
+        return loadingKeysRef.value;
+      },
+      updateLoadedKeyRefValue: (keys: Set<string>) => {
+        loadedKeysRef.value = keys;
+      },
+      getLoadedKeyRefValue: () => {
+        return loadedKeysRef.value;
+      }
     };
   }
 
@@ -688,6 +703,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
       showNext,
       multiple,
       filterRender,
+      virtualizeInSearch
     } = props;
     const searchable = Boolean(filterTreeNode) && isSearching;
     const popoverCls = cls(dropdownClassName, `${prefixcls}-popover`);
@@ -715,6 +731,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
           checkedKeys={checkedKeys}
           halfCheckedKeys={halfCheckedKeys}
           filterRender={filterRender}
+          virtualize={virtualizeInSearch}
         />
         {bottomSlot}
       </div>

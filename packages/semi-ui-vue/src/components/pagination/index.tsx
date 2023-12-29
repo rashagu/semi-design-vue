@@ -291,7 +291,7 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
     // rtl modify the default position
     const { direction } = context.value;
     const defaultPopoverPosition = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
-    const { showSizeChanger, popoverPosition = defaultPopoverPosition, disabled } = props;
+    const { showSizeChanger, popoverPosition = defaultPopoverPosition, disabled, popoverZIndex } = props;
     const { pageSize } = state;
     const switchCls = classNames(`${prefixCls}-switch`);
     if (!showSizeChanger) {
@@ -317,6 +317,7 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
           key={pageSize}
           position={popoverPosition || 'bottomRight'}
           clickToHide
+          zIndex={popoverZIndex}
           dropdownClassName={`${prefixCls}-select-dropdown`}
         >
           {options}

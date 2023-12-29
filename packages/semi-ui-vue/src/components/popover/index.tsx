@@ -25,8 +25,9 @@ import {Motion} from '../_base/base';
 import {isFunction, noop} from 'lodash';
 import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
-import boolean from "async-validator/dist-types/validator/boolean";
-
+import type { ArrowProps } from './Arrow';
+import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
+export type { ArrowProps };
 export declare interface ArrowStyle {
   borderColor?: string;
   backgroundColor?: string;
@@ -47,7 +48,7 @@ export interface PopoverProps extends BaseProps {
   onVisibleChange?: (visible: boolean) => void;
   onClickOutSide?: (e: MouseEvent) => void;
   showArrow?: boolean;
-  spacing?: number;
+  spacing?: number | { x: number; y: number };
   stopPropagation?: boolean | string;
   arrowStyle?: ArrowStyle;
   arrowBounding?: ArrowBounding;
@@ -95,7 +96,7 @@ const propTypes:ComponentObjectPropsOptions<PopoverProps> = {
   onVisibleChange: PropTypes.func as PropType<PopoverProps['onVisibleChange']>,
   onClickOutSide: PropTypes.func as PropType<PopoverProps['onClickOutSide']>,
   style: PropTypes.object,
-  spacing: PropTypes.number,
+  spacing: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   zIndex: PropTypes.number,
   showArrow: PropTypes.bool,
   arrowStyle: Object,
@@ -216,7 +217,9 @@ const Popover = defineComponent<PopoverProps>((props, {slots, expose}) => {
     if (typeof spacing !== 'number') {
       spacing = showArrow ? numbers.SPACING_WITH_ARROW : numbers.SPACING;
     }
-
+    if (isNullOrUndefined(spacing)) {
+      spacing = showArrow ? numbers.SPACING_WITH_ARROW : numbers.SPACING;
+    }
     const role = trigger === 'click' || trigger === 'custom' ? 'dialog' : 'tooltip';
 
     return (

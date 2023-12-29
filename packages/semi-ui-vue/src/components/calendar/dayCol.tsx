@@ -36,6 +36,7 @@ const propTypes:ComponentObjectPropsOptions<DayColProps> = {
   currPos: PropTypes.number,
   handleClick: PropTypes.func as PropType<DayColProps['handleClick']>,
   mode: PropTypes.string as PropType<DayColProps['mode']>,
+  minEventHeight: PropTypes.number,
   isWeekend: PropTypes.bool,
   dateGridRender: PropTypes.func as PropType<DayColProps['dateGridRender']>,
 };
@@ -46,6 +47,7 @@ const defaultProps = {
   scrollHeight: 0,
   currPos: 0,
   mode: 'dayCol',
+  minEventHeight: Number.MIN_SAFE_INTEGER
 };
 export const vuePropsType = vuePropsMake<DayColProps>(propTypes, defaultProps);
 const DayCol = defineComponent<DayColProps>((props, {}) => {
@@ -80,17 +82,14 @@ const DayCol = defineComponent<DayColProps>((props, {}) => {
   });
 
   const renderEvents = () => {
-    const { events, scrollHeight } = props;
+    const { events, scrollHeight, minEventHeight  } = props;
     const list = events.map((event, ind) => {
       const { startPos, endPos, children, key } = event;
       const top = startPos * scrollHeight;
       const height = (endPos - startPos) * scrollHeight;
-      if (!height) {
-        return undefined;
-      }
       const style = {
         top: `${top}px`,
-        height: `${height}px`,
+        height: `${Math.max(minEventHeight, height)}px`,
       };
       return (
         <li

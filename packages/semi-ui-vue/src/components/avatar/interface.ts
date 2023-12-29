@@ -30,6 +30,7 @@ export interface AvatarProps extends BaseProps {
     src?: string;
     srcSet?: string;
     alt?: string;
+    gap?: number;
     onError?: (e:MouseEvent)=>void;
     onClick?: (e:MouseEvent)=>void;
     onMouseEnter?: (e:MouseEvent)=>void;

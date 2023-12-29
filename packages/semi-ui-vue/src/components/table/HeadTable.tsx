@@ -73,9 +73,6 @@ const HeadTable = defineComponent<HeadTableProps>((props, {}) => {
             sticky
         } = props;
 
-        if (!showHeader) {
-            return null;
-        }
 
         const Table = get(components, 'header.outer', 'table');
         const x = get(scroll, 'x');
@@ -98,6 +95,7 @@ const HeadTable = defineComponent<HeadTableProps>((props, {}) => {
 
         const headTableCls = classnames(`${prefixCls}-header`, {
             [`${prefixCls}-header-sticky`]: sticky,
+            [`${prefixCls}-header-hidden`]: !showHeader,
         });
 
         const stickyTop = get(sticky, 'top', 0);

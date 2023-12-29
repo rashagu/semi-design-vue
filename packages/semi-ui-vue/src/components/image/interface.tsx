@@ -1,6 +1,6 @@
 import {BaseProps} from "../_base/baseComponent";
 import {VueJsxNode} from "../interface";
-import {CSSProperties} from "vue";
+import {CSSProperties, Ref, ShallowRef} from "vue";
 
 
 export interface ImageStates {
@@ -20,6 +20,8 @@ export interface ImageProps extends BaseProps{
     onError?: (event: Event) => void;
     onLoad?: (event: Event) => void;
     crossOrigin?: "anonymous"| "use-credentials";
+    maxZoom?: number;
+    minZoom?: number;
     children?: VueJsxNode,
     imageID?: number;
     setDownloadName?: (src: string) => string
@@ -55,8 +57,9 @@ export interface PreviewProps extends BaseProps {
     zIndex?: number;
     children?: VueJsxNode,
     crossOrigin?: "anonymous"| "use-credentials";
+    maxZoom?: number;
+    minZoom?: number;
     renderHeader?: (info: any) => VueJsxNode;
-    renderPreviewMenu?: (props: MenuProps) => VueJsxNode;
     getPopupContainer?: () => HTMLElement;
     onVisibleChange?: (visible: boolean) => void;
     onChange?: (index: number) => void
@@ -66,9 +69,12 @@ export interface PreviewProps extends BaseProps {
     onPrev?: (index: number) => void;
     onNext?: (index: number) => void;
     onRatioChange?: (type: RatioType) => void;
+    onRotateLeft?: (angle: number) => void;
     onRotateChange?: (angle: number) => void;
     onDownload?: (src: string, index: number) => void;
     setDownloadName?: (src: string) => string
+    renderPreviewMenu?: (props: MenuProps) => VueJsxNode;
+    forwardRef?: ShallowRef<HTMLElement>
 }
 
 export interface MenuProps {
@@ -90,7 +96,6 @@ export interface MenuProps {
     onRatioClick?: () => void,
     onRotateLeft?: () => void,
     onRotateRight?: () => void,
-    setDownloadName?: (src: string) => string
 }
 
 export type RatioType = "adaptation" | "realSize";
@@ -120,6 +125,8 @@ export interface HeaderProps {
     titleStyle?: CSSProperties;
     className?: string;
     onClose?: () => void;
+
+    forwardRef?: Ref
 }
 
 export interface FooterProps extends SliderProps {
@@ -148,15 +155,17 @@ export interface FooterProps extends SliderProps {
     onRotate?: (direction: string) => void;
     onDownload?: () => void;
     renderPreviewMenu?: (props: MenuProps) => VueJsxNode;
+
+    forwardRef?: Ref<HTMLElement>
 }
 
 export interface PreviewImageProps {
     src?: string;
     rotation?: number;
     style?: CSSProperties;
-    maxZoom?: number;
-    minZoom?: number;
-    zoomStep?: number;
+    // maxZoom?: number;
+    // minZoom?: number;
+    // zoomStep?: number;
     zoom?: number;
     ratio?: RatioType;
     disableDownload?: boolean;

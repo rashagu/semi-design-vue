@@ -75,6 +75,8 @@ export interface BaseRowProps {
     style?: CSSProperties;
     virtualized?: Virtualized;
     visible?: boolean; // required
+    /** whether display none */
+    displayNone?: boolean;
 }
 
 const propTypes:ComponentObjectPropsOptions<BaseRowProps> = {
@@ -87,6 +89,7 @@ const propTypes:ComponentObjectPropsOptions<BaseRowProps> = {
     expandIcon: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.node]),
     expandableRow: PropTypes.bool,
     expanded: PropTypes.bool,
+    displayNone: PropTypes.bool,
     expandedRow: PropTypes.bool,
     fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -350,6 +353,7 @@ const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
             record,
             hovered,
             expanded,
+            displayNone,
             expandableRow,
             level,
             expandedRow,
@@ -374,6 +378,7 @@ const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
                   [`${prefixCls}-row-selected`]: selected,
                   [`${prefixCls}-row-expanded`]: expanded,
                   [`${prefixCls}-row-hovered`]: hovered,
+                  [`${prefixCls}-row-hidden`]: displayNone,
               },
               customClassName
             );

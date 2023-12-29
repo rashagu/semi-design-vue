@@ -83,6 +83,7 @@ export type TimePickerProps = {
   secondStep?: number;
   showClear?: boolean;
   size?: InputSize;
+  stopPropagation?: boolean;
   style?: CSSProperties;
   timeZone?: string | number;
   triggerRender?: (props?: any) => VNode | string;
@@ -128,6 +129,7 @@ export const defaultProps = {
   borderless: false,
   inputReadOnly: false,
   style: {},
+  stopPropagation: true,
   className: '',
   popupClassName: '',
   popupStyle: { left: '0px', top: '0px' },
@@ -438,6 +440,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
       triggerRender,
       motion,
       autoAdjustOverflow,
+      stopPropagation,
       ...rest
     } = props;
     const format = foundation.getDefaultFormatIfNeed();
@@ -497,6 +500,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
           motion={motion}
           margin={dropdownMargin}
           autoAdjustOverflow={autoAdjustOverflow}
+          stopPropagation={stopPropagation}
         >
           {useCustomTrigger ? (
             <Trigger

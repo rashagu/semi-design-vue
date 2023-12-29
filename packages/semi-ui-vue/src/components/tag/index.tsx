@@ -47,6 +47,8 @@ const propTypes:ComponentObjectPropsOptions<TagProps> = {
   onKeydown: Function as PropType<TagProps['onKeydown']>,
   tabIndex: Number, // use internal, when tag in taInput, we want to use left arrow and right arrow to control the tag focus, so the tabIndex need to be -1.
   onMouseenter: Function as PropType<TagProps['onMouseenter']>,
+  prefixIcon: PropTypes.node as PropType<TagProps['prefixIcon']>,
+  suffixIcon: PropTypes.node as PropType<TagProps['suffixIcon']>,
 };
 const defaultProps: TagProps = {
   size: tagSize[0] as TagSize,
@@ -61,6 +63,8 @@ const defaultProps: TagProps = {
   className: '',
   shape: 'square',
   avatarShape: 'square',
+  prefixIcon: null,
+  suffixIcon: null
 };
 export const vuePropsType = vuePropsMake<TagProps>(propTypes, defaultProps)
 const Index = defineComponent<TagProps>((props, {slots}) => {
@@ -131,7 +135,7 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
   }
   return () => {
     const children = slots.default?slots.default():null;
-    const {tagKey, size, color, closable, visible, onClose, className, onClick, type, shape, avatarSrc, avatarShape, tabIndex, children: tagChildren, ...attr } = props;
+    const { tagKey, size, color, closable, visible, onClose, onClick, className, type, shape, avatarSrc, avatarShape, tabIndex, prefixIcon, suffixIcon, ...attr } = props;
     const { visible: isVisible } = state;
     const clickable = onClick !== defaultProps.onClick || closable;
     // only when the Tag is clickable or closable, the value of tabIndex is allowed to be passed in.
@@ -168,12 +172,14 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
     const contentCls = cls(`${prefixCls}-content`, `${prefixCls}-content-${stringChild ? 'ellipsis' : 'center' }`);
 
     return (
-
-      <div aria-label={props['aria-label'] || stringChild ? `${closable ? 'Closable ' : ''}Tag: ${children}` : '' } {...wrapProps}>
+      <div
+        aria-label={props['aria-label'] || stringChild ? `${closable ? 'Closable ' : ''}Tag: ${children}` : ''} {...wrapProps}>
+        {prefixIcon ? <div class={`${prefixCls}-prefix-icon`}>{prefixIcon}</div> : null}
         {avatarSrc ? renderAvatar() : null}
         <div class={contentCls}>
           {children}
         </div>
+        {suffixIcon ? <div class={`${prefixCls}-suffix-icon`}>{suffixIcon}</div> : null}
         {closeIcon}
       </div>
     );
@@ -182,7 +188,6 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
   props: vuePropsType,
   name: 'Tag'
 })
-
 
 
 export default Index

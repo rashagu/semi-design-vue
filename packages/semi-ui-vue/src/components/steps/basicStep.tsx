@@ -133,6 +133,7 @@ const BasicStep = defineComponent<BasicStepProps>((props, {}) => {
         [`${prefixCls}-active`]: active,
         [`${prefixCls}-done`]: done,
         [`${prefixCls}-hover`]: onChange || props.onClick,
+        [`${prefixCls}-clickable`]: (onChange || onClick),
         [`${prefixCls}-${status}-hover`]: onChange || props.onClick,
       },
       className

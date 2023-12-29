@@ -126,7 +126,8 @@ const FillStep = defineComponent<FillStepProps>((props, {}) => {
           [prefixCls]: true,
           [`${prefixCls}-${status}`]: Boolean(status),
           [`${prefixCls}-${status}-hover`]: Boolean(status) && (onChange || onClick),
-          [`${prefixCls}-clickable`]: onClick,
+          [`${prefixCls}-${status}-active`]: Boolean(status) && (onChange || onClick),
+          [`${prefixCls}-clickable`]: (onChange || onClick),
         }, className)}
         style={style}
         onClick={e => {

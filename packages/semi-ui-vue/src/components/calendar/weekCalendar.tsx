@@ -148,7 +148,7 @@ const WeekCalendar = defineComponent<WeekCalendarProps>((props, {}) => {
         const { parsedEvents } = state;
         const events = parsedEvents.day;
         const { week } = weeklyData;
-        const { markWeekend, dateGridRender } = props;
+        const { markWeekend, dateGridRender, minEventHeight } = props;
         const inner = week.map(day => {
             const dateString = day.date.toString();
             const dayEvents = events.has(dateString) ? events.get(dateString) : [];
@@ -163,6 +163,7 @@ const WeekCalendar = defineComponent<WeekCalendarProps>((props, {}) => {
                 showCurrTime={props.showCurrTime}
                 isWeekend={markWeekend && day.isWeekend}
                 dateGridRender={dateGridRender}
+                minEventHeight={minEventHeight}
               />
             );
         });

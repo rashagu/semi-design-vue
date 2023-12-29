@@ -8,10 +8,12 @@ import { IconChevronRight, IconTick } from '@kousum/semi-icons-vue';
 import { Locale } from '../locale/interface';
 import Spin from '../spin';
 import Checkbox, { CheckboxEvent } from '../checkbox';
-import { BasicCascaderData, BasicEntity, ShowNextType, BasicData } from '@douyinfe/semi-foundation/cascader/foundation';
+import { BasicCascaderData, BasicEntity, ShowNextType, BasicData, Virtualize } from '@douyinfe/semi-foundation/cascader/foundation';
 import { BaseProps, useBaseComponent } from '../_base/baseComponent';
 import { VueJsxNode } from '../interface';
 import {ComponentObjectPropsOptions} from "vue";
+import { FixedSizeList as List } from '@kousum/vue3-window';
+import VirtualRow from './virtualRow';
 
 export interface CascaderData extends BasicCascaderData {
   label: VNode | string;
@@ -70,6 +72,7 @@ export interface CascaderItemProps extends BaseProps {
   checkedKeys: Set<string>;
   halfCheckedKeys: Set<string>;
   filterRender?: (props: FilterRenderProps) => VueJsxNode;
+  virtualize?: Virtualize
 }
 
 const prefixcls = cssClasses.PREFIX_OPTION;
@@ -86,6 +89,7 @@ export const vuePropsType:ComponentObjectPropsOptions<CascaderItemProps> = {
   onListScroll: Function as PropType<CascaderItemProps['onListScroll']>,
   searchable: Boolean,
   keyword: String,
+  virtualize: Object,
   emptyContent: [Object, String],
   loadData: Function as PropType<CascaderItemProps['loadData']>,
   data: Array,
@@ -200,61 +204,98 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
     return content;
   };
 
+
+  const renderFlattenOptionItem = (data: Data, index?: number, style?: any) => {
+    const { multiple, selectedKeys, checkedKeys, halfCheckedKeys, keyword, filterRender, virtualize } = props;
+    const { searchText, key, disabled, pathData } = data;
+    const selected = selectedKeys.has(key);
+    const className = cls(prefixcls, {
+      [`${prefixcls}-flatten`]: true && !filterRender,
+      [`${prefixcls}-disabled`]: disabled,
+      [`${prefixcls}-select`]: selected && !multiple,
+    });
+    const onClick_ = e => {
+      onClick(e, data);
+    };
+    const onKeyPress = e => handleItemEnterPress(e, data);
+    const onCheck = (e: CheckboxEvent) => onCheckboxChange(e, data);
+    if (filterRender) {
+      const props = {
+        className,
+        inputValue: keyword,
+        disabled,
+        data: pathData,
+        checkStatus: {
+          checked: checkedKeys.has(data.key),
+          halfChecked: halfCheckedKeys.has(data.key),
+        },
+        selected,
+        onClick: onClick_,
+        onCheck
+      };
+      const item = filterRender(props) as any;
+      const otherProps = virtualize ? {
+        key,
+        style: {
+          ...(item.props.style ?? {}),
+          ...style
+        },
+      } : { key };
+      return cloneVNode(item, otherProps );
+    }
+    return (
+      <li
+        role='menuitem'
+        class={className}
+        style={style}
+        key={key}
+        onClick={onClick_}
+        onKeypress={onKeyPress}
+      >
+                <span class={`${prefixcls}-label`}>
+                    {!multiple && renderIcon('empty')}
+                  {multiple && (
+                    <Checkbox
+                      onChange={onCheck}
+                      disabled={disabled}
+                      indeterminate={halfCheckedKeys.has(data.key)}
+                      checked={checkedKeys.has(data.key)}
+                      className={`${prefixcls}-label-checkbox`}
+                    />
+                  )}
+                  {highlight(searchText)}
+                </span>
+      </li>
+    );
+  }
+
   const renderFlattenOption = (data: Data[]) => {
-    const { multiple, selectedKeys, checkedKeys, halfCheckedKeys, keyword, filterRender } = props;
+    const { virtualize } = props;
     const content = (
       <ul class={`${prefixcls}-list`} key={'flatten-list'}>
-        {data.map((item) => {
-          const { searchText, key, disabled, pathData } = item;
-          const selected = selectedKeys.has(key);
-          const className = cls(prefixcls, {
-            [`${prefixcls}-flatten`]: true && !filterRender,
-            [`${prefixcls}-disabled`]: disabled,
-            [`${prefixcls}-select`]: selected && !multiple,
-          });
-          const onClick_ = (e) => {
-            onClick(e, item);
-          };
-          const onKeyPress = (e) => handleItemEnterPress(e, item);
-          const onCheck = (e: CheckboxEvent) => onCheckboxChange(e, item);
-          if (filterRender) {
-            const props = {
-              className,
-              inputValue: keyword,
-              disabled,
-              data: pathData,
-              checkStatus: {
-                checked: checkedKeys.has(item.key),
-                halfChecked: halfCheckedKeys.has(item.key),
-              },
-              selected,
-              onClick: onClick_,
-              onCheck,
-            };
-            return cloneVNode(filterRender(props) as any, { key });
-          }
-          return (
-            <li role="menuitem" class={className} key={key} onClick={onClick_} onKeypress={onKeyPress}>
-              <span class={`${prefixcls}-label`}>
-                {!multiple && renderIcon('empty')}
-                {multiple && (
-                  <Checkbox
-                    onChange={onCheck}
-                    disabled={disabled}
-                    indeterminate={halfCheckedKeys.has(item.key)}
-                    checked={checkedKeys.has(item.key)}
-                    className={`${prefixcls}-label-checkbox`}
-                  />
-                )}
-                {highlight(searchText)}
-              </span>
-            </li>
-          );
-        })}
+        {virtualize ? renderVirtualizeList(data) : data.map(item => renderFlattenOptionItem(item))}
       </ul>
     );
     return content;
   };
+
+
+  const renderVirtualizeList = (visibleOptions: any) => {
+    const { direction } = context.value;
+    const { virtualize } = props;
+    return (
+      <List
+        height={parseInt('' + virtualize.height)}
+        itemCount={visibleOptions.length}
+        itemSize={virtualize.itemSize}
+        itemData={{ visibleOptions, renderOption: renderFlattenOptionItem }}
+        width={virtualize.width ?? '100%'}
+        style={{ direction }}
+      >
+        {VirtualRow}
+      </List>
+    );
+  }
 
   function renderItem(renderData: Array<Entity>, content: Array<VNode> = []) {
     const { multiple, checkedKeys, halfCheckedKeys } = props;

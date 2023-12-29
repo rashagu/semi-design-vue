@@ -18,6 +18,7 @@ export interface CalendarProps extends BaseProps {
     onClose?: (e: MouseEvent) => void;
     renderTimeDisplay?: (time: number) => VueJsxNode;
     markWeekend?: boolean;
+    minEventHeight?: number;
     width?: number | string;
     height?: number | string;
     renderDateDisplay?: (date: Date) => VueJsxNode;
@@ -27,7 +28,7 @@ export interface CalendarProps extends BaseProps {
 
 export type DayCalendarProps = Omit<CalendarProps, 'mode'>;
 
-type DayCalendarPropsKeys = 'events' | 'displayValue' | 'showCurrTime' | 'mode' | 'dateGridRender';
+type DayCalendarPropsKeys = 'events' | 'displayValue' | 'showCurrTime' | 'mode' | 'dateGridRender' | 'minEventHeight';
 export interface DayColProps extends Pick<CalendarProps, DayCalendarPropsKeys>, BaseProps {
     scrollHeight: number;
     currPos?: number;

@@ -5,15 +5,13 @@ import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 import { debounce, isFunction, isString, get, isEmpty } from 'lodash';
 import { IconTreeTriangleDown, IconFile, IconFolder, IconFolderOpen } from '@kousum/semi-icons-vue';
 import { Checkbox } from '../checkbox';
-import TreeContext, { TreeContextValue } from './treeContext';
 import Spin from '../spin';
-import { TreeNodeProps, TreeNodeState } from './interface';
+import {RenderFullLabelProps, TreeNodeProps, TreeNodeState} from './interface';
 import { getHighLightTextHTML } from '../_utils/index';
 import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, reactive, ref, useSlots} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useTreeContext } from './TreeContext/Consumer';
 import {VueHTMLAttributes, VueJsxNode} from '../interface';
-import {BasicTreeNodeData} from "@douyinfe/semi-foundation/tree/foundation";
 
 const prefixcls = cssClasses.PREFIX_OPTION;
 
@@ -378,7 +376,7 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
       [`${prefixcls}-fullLabel-drag-over-gap-top`]: !disabled && dragOverGapTop && renderFullLabel,
       [`${prefixcls}-fullLabel-drag-over-gap-bottom`]: !disabled && dragOverGapBottom && renderFullLabel,
     });
-    const labelProps = {
+    const labelProps: RenderFullLabelProps = {
       onClick: onClick,
       onContextMenu: onContextMenu,
       onDoubleClick: onDoubleClick,
@@ -397,6 +395,8 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
         expanded,
         loading,
       },
+      filtered,
+      searchWord: rest.keyword,
     };
 
     const dragProps: VueHTMLAttributes = {

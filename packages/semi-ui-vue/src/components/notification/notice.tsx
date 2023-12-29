@@ -71,7 +71,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake<NoticeReactProps>(propTypes, defaultProps)
-const Notice = defineComponent<NoticeReactProps>((props, {}) => {
+const Notice = defineComponent<NoticeReactProps>((props, {expose}) => {
 
     const slots = useSlots()
 
@@ -147,6 +147,12 @@ const Notice = defineComponent<NoticeReactProps>((props, {}) => {
     const notifyClick = (e: MouseEvent) => {
         props.onClick(e);
     };
+
+    expose({
+        getFoundation(){
+            return foundation
+        }
+    })
 
     return () => {
         const direction = props.direction || context.value.direction;

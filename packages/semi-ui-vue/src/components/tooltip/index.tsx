@@ -78,7 +78,7 @@ export interface TooltipProps extends BaseProps {
   prefixCls?: string;
   onVisibleChange?: (visible: boolean) => void;
   onClickOutSide?: (e: MouseEvent) => void;
-  spacing?: number;
+  spacing?: number | { x: number; y: number };
   margin?: number | { marginLeft: number; marginTop: number; marginRight: number; marginBottom: number };
   showArrow?: boolean | VueJsxNode;
   zIndex?: number;
@@ -148,7 +148,7 @@ const propTypes:ComponentObjectPropsOptions<TooltipProps> = {
   prefixCls: PropTypes.string,
   onVisibleChange: PropTypes.func as PropType<TooltipProps['onVisibleChange']>,
   onClickOutSide: PropTypes.func as PropType<TooltipProps['onClickOutSide']>,
-  spacing: PropTypes.number,
+  spacing: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   margin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   showArrow: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   zIndex: PropTypes.number,
@@ -720,11 +720,13 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
     const { wrapperClassName } = props;
     const display = get(elem, 'props.style.display');
     const block = get(elem, 'props.block');
+    const isStringElem = typeof elem == 'string';
 
-    const style: CSSProperties = {
-      display: 'inline-block',
-    };
+    const style: CSSProperties = {};
 
+    if (!isStringElem) {
+      style.display = 'inline-block';
+    }
     if (block || blockDisplays.includes(display)) {
       style.width = '100%';
     }
@@ -771,7 +773,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
     // const { isInsert, triggerEventSet, visible, id } = state;
     const { wrapWhenSpecial, role, trigger } = props;
     let children: any = slots.default ? slots.default()[0] : null;
-    const childrenStyle:CSSProperties = { ...get(children, 'props.style') };
+    const childrenStyle = { ...get(children, 'props.style') as CSSProperties };
     const extraStyle: CSSProperties = {};
 
     if (wrapWhenSpecial) {

@@ -136,11 +136,11 @@ const ArrayFieldComponent = defineComponent<ArrayFieldProps>((props, {}) => {
     state.keys = keys
   }
 
-  function addWithInitValue(lineObject: Record<string, any>) {
+  function addWithInitValue(rowVal: Record<string, any> | string) {
     const updater = context;
     const {field} = props;
     const newArrayFieldVal = updater.value.getValue(field) ? updater.value.getValue(field).slice() : [];
-    newArrayFieldVal.push(lineObject);
+    newArrayFieldVal.push(rowVal);
     updater.value.updateStateValue(field, newArrayFieldVal, {});
     updater.value.updateArrayField(field, {updateKey: new Date().valueOf()});
   }

@@ -184,7 +184,7 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
             }
         }
         if (!isEqual(prevEventKeys, nowEventKeys) || itemLimitUpdate || !isEqual(prevPropsDisplayValue, props.displayValue)) {
-            foundation.parseMonthlyEvents((itemLimit || props.events) as any);
+            foundation.parseMonthlyEvents(itemLimit);
         }
     })
 
@@ -227,6 +227,7 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
     };
 
     const renderEvents = (events: ParsedRangeEvent[]) => {
+        const { itemLimit } = state;
         if (!events) {
             return undefined;
         }
@@ -237,15 +238,17 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
                 width: toPercent(width),
                 top: `${topInd}em`
             };
-            return (
-              <li
-                class={`${cssClasses.PREFIX}-event-item ${cssClasses.PREFIX}-event-month`}
-                key={key || `${ind}-monthevent`}
-                style={style}
-              >
-                  {children}
-              </li>
-            );
+            if (topInd < itemLimit)
+                return (
+                  <li
+                    class={`${cssClasses.PREFIX}-event-item ${cssClasses.PREFIX}-event-month`}
+                    key={key || `${ind}-monthevent`}
+                    style={style}
+                  >
+                      {children}
+                  </li>
+                );
+            return null;
         });
         return list;
     };

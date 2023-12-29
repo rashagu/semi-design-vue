@@ -1,4 +1,6 @@
 import './_base/base.scss';
+export { default as BaseFoundation } from "@douyinfe/semi-foundation/base/foundation";
+export { useBaseComponent } from "./_base/baseComponent";
 import {RuleItem} from "async-validator/dist-types/interface";
 import {customRequestArgs} from "./upload";
 

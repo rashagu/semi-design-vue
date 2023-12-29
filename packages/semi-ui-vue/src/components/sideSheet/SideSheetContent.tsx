@@ -25,6 +25,7 @@ const prefixCls = cssClasses.PREFIX;
 
 export interface SideSheetContentProps {
   onClose?: (e: MouseEvent) => void;
+  closeIcon?: VueJsxNode;
   mask?: boolean;
   maskStyle?: CSSProperties;
   maskClosable?: boolean;
@@ -51,6 +52,7 @@ export interface SideSheetContentProps {
 const propTypes:ComponentObjectPropsOptions<SideSheetContentProps> = {
   size: String as PropType<SideSheetContentProps['size']>,
   onClose: PropTypes.func as PropType<SideSheetContentProps['onClose']>,
+  closeIcon: PropTypes.node,
   mask: PropTypes.bool,
   maskStyle: PropTypes.object,
   maskClosable: PropTypes.bool,
@@ -118,7 +120,8 @@ const SideSheetContent = defineComponent<SideSheetContentProps>((props, {}) => {
   }
 
   function renderHeader() {
-    const { title, closable, headerStyle } = props;
+    const { title, closable, headerStyle,
+      closeIcon, } = props;
     let header, closer;
     if (title) {
       header = (
@@ -128,13 +131,14 @@ const SideSheetContent = defineComponent<SideSheetContentProps>((props, {}) => {
       );
     }
     if (closable) {
+      const iconType = closeIcon || <IconClose/>;
       closer = (
         <Button
           className={`${prefixCls}-close`}
           key="close-btn"
           onClick={close}
           type="tertiary"
-          icon={<IconClose />}
+          icon={iconType}
           theme="borderless"
           size="small"
         />

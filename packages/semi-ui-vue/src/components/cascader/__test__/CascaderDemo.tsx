@@ -1,9 +1,9 @@
-import {defineComponent, ref, h, Fragment, useSlots, computed} from 'vue';
-import Cascader, {TriggerRenderProps, Value} from '../index';
+import { defineComponent, ref, h, Fragment, useSlots, computed } from 'vue';
+import Cascader, { TriggerRenderProps, Value } from '../index';
 import Item from '../item';
-import {noop} from "lodash";
-import {IconChevronDown, IconClose, IconHome} from "@kousum/semi-icons-vue";
-import Button from "../../button";
+import { noop } from 'lodash';
+import { IconChevronDown, IconClose, IconHome } from '@kousum/semi-icons-vue';
+import Button from '../../button';
 interface ExampleProps {
   name?: string;
 }
@@ -52,30 +52,32 @@ const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
       ],
     },
   ];
-  const value = ref<Value>(['zhejiang', 'hangzhou', 'xiaoshan'])
+  const value = ref<Value>(['zhejiang', 'hangzhou', 'xiaoshan']);
   return () => (
     <div>
-      <Cascader onChange={(v)=>{
+      <Cascader
+        onChange={(v) => {
+          console.log(v);
+          value.value = v;
+        }}
+        value={value.value}
+        defaultOpen={true}
+        filterTreeNode
+        treeData={treeData}
+        placeholder="请选择所在地区"
+      />
+      <Cascader defaultOpen={true} onChange={(v)=>{
         console.log(v)
         value.value = v
-      }} value={value.value}
-                filterTreeNode treeData={treeData} placeholder="请选择所在地区" />
-      {/*<Cascader defaultOpen={true} onChange={(v)=>{*/}
-      {/*  console.log(v)*/}
-      {/*  value.value = v*/}
-      {/*}} value={value.value} treeData={treeData} placeholder="请选择所在地区" />*/}
-      {/*<Cascader treeData={treeData} multiple={true} placeholder="请选择所在地区" />*/}
+      }} value={value.value} treeData={treeData} placeholder="请选择所在地区" />
+      <Cascader treeData={treeData} multiple={true} placeholder="请选择所在地区" />
 
-      {/*<ItemDdemo />*/}
+      <ItemDdemo />
 
-
-      {/*<TriggerRenderDemo />*/}
-
-
+      <TriggerRenderDemo />
     </div>
   );
 });
-
 
 export default CascaderDemo;
 export const ItemDdemo = defineComponent(() => {
@@ -105,7 +107,7 @@ export const ItemDdemo = defineComponent(() => {
       parentKey: null,
       path: ['0'],
       valuePath: ['zhejiang'],
-    }
+    },
   ];
   return () => (
     <div>
@@ -117,10 +119,7 @@ export const ItemDdemo = defineComponent(() => {
   );
 });
 
-
-
 export const TriggerRenderDemo = defineComponent(() => {
-
   const value = ref([]);
   const treeData = computed(() => [
     {
@@ -156,25 +155,25 @@ export const TriggerRenderDemo = defineComponent(() => {
             {
               label: '江北区',
               value: 'jiangbei',
-            }
-          ]
+            },
+          ],
         },
       ],
-    }
+    },
   ]);
   const onChange = (val) => {
-    value.value = val
-  }
-  const onClear = e => {
+    value.value = val;
+  };
+  const onClear = (e) => {
     e && e.stopPropagation();
-    value.value = []
-  }
+    value.value = [];
+  };
 
   const closeIcon = computed(() => {
     return value.value && value.value.length ? <IconClose onClick={onClear} /> : <IconChevronDown />;
   });
 
-  const triggerRender = ({ value: innerStateValue, placeholder, ...rest }:TriggerRenderProps) => {
+  const triggerRender = ({ value: innerStateValue, placeholder, ...rest }: TriggerRenderProps) => {
     console.log(value);
     console.log(rest);
     return (
@@ -190,10 +189,10 @@ export const TriggerRenderDemo = defineComponent(() => {
         onChange={onChange}
         value={value.value}
         treeData={treeData.value}
-        placeholder='Custom Trigger'
+        placeholder="Custom Trigger"
         triggerRender={triggerRender}
-        suffix={<IconHome/>}
-        prefix={<IconHome/>}
+        suffix={<IconHome />}
+        prefix={<IconHome />}
       />
     </div>
   );

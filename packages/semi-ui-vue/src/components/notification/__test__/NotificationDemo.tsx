@@ -25,10 +25,11 @@ const NotificationDemo = defineComponent<NotificationDemoProps>((props, {}) => {
       content:'abc'
     })
   })
+
   return () => (
     <div>
       <NotificationList ref={(instance: any) => {
-        instance.add({...{
+        instance?.add({...{
             duration: 3,
             position: 'topRight' as NoticePosition,
             motion: true,

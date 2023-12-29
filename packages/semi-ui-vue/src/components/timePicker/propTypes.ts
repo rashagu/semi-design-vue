@@ -21,6 +21,7 @@ export const timePickerPropTypes:ComponentObjectPropsOptions<TimePickerProps> = 
   disabled: PropTypes.bool,
   showClear: PropTypes.bool,
   defaultValue: TimeShape,
+  stopPropagation: PropTypes.bool,
   open: PropTypes.bool,
   defaultOpen: PropTypes.bool,
   onOpenChange: {type: PropTypes.func as PropType<TimePickerProps['onOpenChange']>, default: noop},

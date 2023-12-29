@@ -15,7 +15,7 @@ import {cssClasses, strings} from '@douyinfe/semi-foundation/typography/constant
 import Typography from './typography';
 import Copyable from './copyable';
 import {IconSize as Size} from '../icons';
-import {isUndefined, omit, merge, isString, isNull} from 'lodash';
+import { isUndefined, omit, merge, isString, isNull, isFunction } from 'lodash';
 import Tooltip from '../tooltip';
 import Popover from '../popover';
 import getRenderText from './util';
@@ -287,7 +287,6 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     }
     const defaultOpts = {
       type: 'tooltip',
-      opts: {},
     };
     if (typeof showTooltip === 'object') {
       if (showTooltip.type && showTooltip.type.toLowerCase() === 'popover') {
@@ -298,7 +297,15 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
               showArrow: true,
             },
           },
-          showTooltip
+          showTooltip,
+          {
+            opts: {
+              className: cls({
+                [`${prefixCls}-ellipsis-popover`]: true,
+                [showTooltip?.opts?.className]: Boolean(showTooltip?.opts?.className)
+              }),
+            }
+          }
         );
       }
       return {...defaultOpts, ...showTooltip};
@@ -662,8 +669,10 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     const showTooltip_ = showTooltip();
     const content = renderContent();
     if (showTooltip_) {
-      const {type, opts} = showTooltip_ as ShowTooltip;
-      if (type.toLowerCase() === 'popover') {
+      const { type, opts, renderTooltip } = showTooltip_ as ShowTooltip;
+      if (isFunction(renderTooltip)) {
+        return renderTooltip(children, content);
+      } else if (type.toLowerCase() === 'popover') {
         return (
           <Popover content={children ? children[0] : null} position="top" {...opts}>
             {content}

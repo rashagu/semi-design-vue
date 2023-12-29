@@ -3,7 +3,7 @@ import warning from '@douyinfe/semi-foundation/utils/warning';
 import type { OptionProps } from './option';
 import type { OptionGroupProps } from './optionGroup';
 
-const generateOption = (child: VNode, parent: any, index: number): OptionProps => {
+const generateOption = (child: VNode, parent: any, index: number, newKey?: string | number): OptionProps => {
   const childProps = child.props;
   if (!child || !childProps) {
     return null;
@@ -23,6 +23,13 @@ const generateOption = (child: VNode, parent: any, index: number): OptionProps =
     ...childProps,
     _parentGroup: parent,
   };
+
+  // Props are collected from ReactNode, after React.Children.toArray
+  // no need to determine whether the key exists in child
+  // Even if the user does not explicitly declare it, React will always generate a key.
+  //@ts-ignore
+  option._keyInJsx = newKey || child.key;
+
   return option;
 };
 
@@ -61,16 +68,30 @@ const getOptionsFromGroup = (selectChildren: VNode[]) => {
       // Avoid saving children (reactNode) by... removing other props from the group except children, causing performance problems
       // eslint-disable-next-line prefer-const
       let { ...restGroupProps } = child.props;
+
+
       // @ts-ignore
       let children = child.children.default ? child.children.default() : [];
+      let originKeys = [];
+      if (Array.isArray(children)) {
+        // if group has children > 1
+        originKeys = children.map(item => item.key);
+      } else {
+        originKeys.push(children.key);
+      }
       // children = React.Children.toArray(children);
       if (Array.isArray(children[0])) {
         children = children[0];
       }
 
-      const childrenOption = children.map((option: VNode) => {
+      const childrenOption = children.map((option: VNode, index) => {
+        let newKey = option.key;
+        if (originKeys[index] === null) {
+          // @ts-ignore
+          newKey = child.key + '' + option.key; // if option in group and didn't set key, concat parent key to avoid conflict (default generate key just like .0, .1)
+        }
         optionIndex++;
-        return generateOption(option, restGroupProps, optionIndex);
+        return generateOption(option, restGroupProps, optionIndex, newKey as string);
       });
       const group = {
         ...child.props,

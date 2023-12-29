@@ -19,24 +19,15 @@ import {
   h,
   onBeforeUnmount,
   onMounted, PropType,
-  reactive,
+  reactive, ref,
   useSlots,
   watch
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {usePreviewContext} from "./previewContext/Consumer";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
-import {AnchorProps} from "../anchor";
 
 const prefixCls = cssClasses.PREFIX;
-
-let startMouseDown = {x: 0, y: 0};
-
-let mouseActiveTime: number = null;
-let stopTiming = false;
-let timer = null;
-// let bodyOverflowValue = document.body.style.overflow;
-
 
 const propTypes:ComponentObjectPropsOptions<PreviewInnerProps> = {
   style: PropTypes.object,
@@ -66,6 +57,8 @@ const propTypes:ComponentObjectPropsOptions<PreviewInnerProps> = {
   disableDownload: PropTypes.bool,
   viewerVisibleDelay: PropTypes.number,
   zIndex: PropTypes.number,
+  maxZoom: PropTypes.number as PropType<PreviewInnerProps['maxZoom']>,
+  minZoom: PropTypes.number,
   renderHeader: PropTypes.func as PropType<PreviewInnerProps['renderHeader']>,
   renderPreviewMenu: PropTypes.func as PropType<PreviewInnerProps['renderPreviewMenu']>,
   getPopupContainer: PropTypes.func as PropType<PreviewInnerProps['getPopupContainer']>,
@@ -96,6 +89,8 @@ const defaultProps = {
   zIndex: 1000,
   maskClosable: true,
   viewerVisibleDelay: 10000,
+  maxZoom: 5,
+  minZoom: 0.1
 };
 export const vuePropsType = vuePropsMake<PreviewInnerProps>(propTypes, defaultProps)
 const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
@@ -120,6 +115,11 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
   const {adapter: adapterInject} = useBaseComponent<PreviewInnerProps>(props, state)
   const {context} = usePreviewContext()
 
+  const imageWrapRef = ref()
+  const headerRef = ref<HTMLElement>();
+  const footerRef= ref<HTMLElement>();
+  const leftIconRef= ref<HTMLDivElement>();
+  const rightIconRef= ref<HTMLDivElement>();
   function adapter_(): PreviewInnerAdapter<PreviewInnerProps, PreviewInnerStates> {
     return {
       ...adapterInject(),
@@ -182,33 +182,32 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
       unregisterKeyDownListener: () => {
         window && window.removeEventListener("keydown", handleKeyDown);
       },
-      getMouseActiveTime: () => {
-        return mouseActiveTime;
-      },
-      getStopTiming: () => {
-        return stopTiming;
-      },
-      setStopTiming: (value) => {
-        stopTiming = value;
-      },
-      getStartMouseDown: () => {
-        return startMouseDown;
-      },
-      setStartMouseDown: (x: number, y: number) => {
-        startMouseDown = {x, y};
-      },
-      setMouseActiveTime: (time: number) => {
-        mouseActiveTime = time;
-      },
       getSetDownloadFunc: () => {
         return context.value?.setDownloadName ?? props.setDownloadName;
       },
+      isValidTarget: (e) => {
+        const headerDom = headerRef.value;
+        const footerDom = footerRef.value;
+        const leftIconDom = leftIconRef.value;
+        const rightIconDom = rightIconRef.value;
+        const target = e.target as any;
+        if (
+          headerDom && headerDom.contains(target) ||
+          footerDom && footerDom.contains(target) ||
+          leftIconDom && leftIconDom.contains(target) ||
+          rightIconDom && rightIconDom.contains(target)
+        ) {
+          // Move in the operation area, return false
+          return false;
+        }
+        // Move in the preview area except the operation area, return true
+        return true;
+      }
     };
 
   }
 
   const adapter = adapter_()
-  let timer;
   const foundation = new PreviewInnerFoundation(adapter);
 
   function getDerivedStateFromProps(props: PreviewInnerProps, state: PreviewInnerStates) {
@@ -225,6 +224,9 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
       willUpdateStates.visible = props.visible;
       if (props.visible) {
         willUpdateStates.preloadAfterVisibleChange = true;
+        willUpdateStates.viewerVisible = true;
+        willUpdateStates.rotation = 0;
+        willUpdateStates.ratio = 'adaptation';
       }
     }
     if ("currentIndex" in getProps(props) && props.currentIndex !== state.currentIndex) {
@@ -253,11 +255,9 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     }
   })
 
-  watch([() => state.visible, () => props.visible], (value, [prevStateVisible, prevPropsVisible], onCleanup) => {
-    if (prevStateVisible !== props.visible && props.visible) {
-      mouseActiveTime = new Date().getTime();
-      timer && clearInterval(timer);
-      timer = setInterval(viewVisibleChange, 1000);
+  watch([() => state.visible, () => props.visible, () => props.src], (value, [prevStateVisible, prevPropsVisible, prevPropsSrc], onCleanup) => {
+    if (prevPropsSrc !== props.src) {
+      foundation.updateTimer();
     }
     // hide => show
     if (!prevStateVisible && props.visible) {
@@ -270,7 +270,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
   }, {immediate: true})
 
   onBeforeUnmount(() => {
-    timer && clearInterval(timer);
+    foundation.clearTimer();
   })
 
 
@@ -314,10 +314,6 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     foundation.handleMouseMove(e);
   }
 
-  const handleMouseEvent = (e, event: string) => {
-    foundation.handleMouseMoveEvent(e, event);
-  }
-
   function handleKeyDown (e: KeyboardEvent) {
     foundation.handleKeyDown(e);
   }
@@ -333,6 +329,31 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
   function handleMouseDown(e): void {
     foundation.handleMouseDown(e);
   }
+
+  const handleWheel = (e) => {
+    foundation.handleWheel(e);
+  }
+
+  // 为什么通过 addEventListener 注册 wheel 事件而不是使用 onWheel 事件？
+  // 因为 Passive Event Listeners（https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#improving_scrolling_performance_with_passive_listeners）
+  // Passive Event Listeners 是一种优化技术，用于提高滚动性能。在默认情况下，浏览器会假设事件的监听器不会调用
+  // preventDefault() 方法来阻止事件的默认行为，从而允许进行一些优化操作，例如滚动平滑。
+  // 对于 Image 而言，如果使用触控板，双指朝不同方向分开放大图片，则需要  preventDefault 防止页面整体放大。
+  // Why register wheel event through addEventListener instead of using onWheel event？
+  // Because of Passive Event Listeners(an optimization technique used to improve scrolling performance. By default,
+  // the browser will assume that event listeners will not call preventDefault() method to prevent the default behavior of the event,
+  // allowing some optimization operations such as scroll smoothing.)
+  // For Image, if we use the trackpad and spread your fingers in different directions to enlarge the image, we need to preventDefault
+  // to prevent the page from being enlarged as a whole.
+  const registryImageWrapRef = (ref_): void => {
+    if (imageWrapRef.value) {
+      (imageWrapRef.value as any).removeEventListener("wheel", handleWheel);
+    }
+    if (ref_) {
+      ref_.addEventListener("wheel", handleWheel, { passive: false });
+    }
+    imageWrapRef.value = ref_;
+  };
 
 
   return () => {
@@ -393,11 +414,10 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
             style={style}
             onMousedown={handleMouseDown}
             onMouseup={handleMouseUp}
+            ref={registryImageWrapRef}
             onMousemove={handleMouseMove}
-            onMouseover={(e): void => handleMouseEvent(e, "over")}
-            onMouseout={(e): void => handleMouseEvent(e, "out")}
           >
-            <Header className={cls(hideViewerCls)} onClose={handlePreviewClose} renderHeader={renderHeader}/>
+            <Header ref={headerRef} className={cls(hideViewerCls)} onClose={handlePreviewClose} renderHeader={renderHeader}/>
             <PreviewImage
               src={imgSrc[currentIndex]}
               onZoom={handleZoomImage}
@@ -405,7 +425,6 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
               setRatio={handleAdjustRatio}
               zoom={zoom}
               ratio={ratio}
-              zoomStep={zoomStep}
               rotation={rotation}
               crossOrigin={crossOrigin}
               onError={onImageError}
@@ -414,6 +433,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
             {showPrev && (
               // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
               <div
+                ref={leftIconRef}
                 class={cls(`${previewPrefixCls}-icon`, `${previewPrefixCls}-prev`, hideViewerCls)}
                 onClick={(): void => handleSwitchImage("prev")}
               >
@@ -423,6 +443,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
             {showNext && (
               // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
               <div
+                ref={rightIconRef}
                 class={cls(`${previewPrefixCls}-icon`, `${previewPrefixCls}-next`, hideViewerCls)}
                 onClick={(): void => handleSwitchImage("next")}
               >
@@ -430,6 +451,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
               </div>
             )}
             <Footer
+              forwardRef={footerRef}
               className={hideViewerCls}
               totalNum={total}
               curPage={currentIndex + 1}

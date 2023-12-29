@@ -129,6 +129,7 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
           [`${prefixCls}-block`]: block,
           [`${prefixCls}-circle`]: circle,
           [`${prefixCls}-borderless`]: theme === 'borderless',
+          [`${prefixCls}-${type}-disabled`]: disabled && type,
         },
         className
       ),

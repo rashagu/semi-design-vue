@@ -40,6 +40,7 @@ const propTypes:ComponentObjectPropsOptions<DayCalendarProps> = {
     // mode: PropTypes.string as PropType<DayCalendarProps['mode']>,
     renderTimeDisplay: PropTypes.func as PropType<DayCalendarProps['renderTimeDisplay']>,
     markWeekend: PropTypes.bool,
+    minEventHeight: PropTypes.number,
     scrollTop: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -169,7 +170,7 @@ const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
     return () => {
 
         // eslint-disable-next-line max-len
-        const { dateGridRender, displayValue, showCurrTime, renderTimeDisplay, markWeekend, className, height, width, style, header } = props;
+        const { dateGridRender, displayValue, showCurrTime, renderTimeDisplay, markWeekend, className, height, width, style, header, minEventHeight } = props;
         const dayCls = cls(prefixCls, className);
         const dayStyle = {
             height: typeof height === 'string'?height:(height + 'px'),

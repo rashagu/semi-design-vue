@@ -19,6 +19,7 @@ export interface CollapsePanelProps {
   style?: CSSProperties;
   showArrow?: boolean;
   disabled?: boolean;
+  onMotionEnd?: () => void
 }
 
 const propTypes = {
@@ -129,7 +130,9 @@ const CollapsePanel = defineComponent<CollapsePanelProps>((props, {}) => {
           {renderHeader(active, children !== undefined && !disabled)}
         </div>
         {children && (
-          <Collapsible isOpen={active} keepDOM={keepDOM} motion={motion} reCalcKey={reCalcKey}>
+          <Collapsible isOpen={active} keepDOM={keepDOM} motion={motion} reCalcKey={reCalcKey}
+                       onMotionEnd={props.onMotionEnd}
+          >
             <div class={contentCls} aria-hidden={!active} id={ariaID}>
               <div class={`${cssClasses.PREFIX}-content-wrapper`}>{children}</div>
             </div>

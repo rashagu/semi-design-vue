@@ -32,7 +32,7 @@ import {
     watch,
     onMounted,
     Fragment,
-    nextTick, ComponentObjectPropsOptions, PropType
+    nextTick, ComponentObjectPropsOptions, PropType, onUnmounted
 } from 'vue'
 
 import type {
@@ -81,6 +81,7 @@ export interface UploadProps {
     dragMainText?: VNode | string;
     dragSubText?: VNode | string;
     draggable?: boolean;
+    addOnPasting?: boolean;
     fileList?: Array<FileItem>;
     fileName?: string;
     headers?: Record<string, any> | ((file: File) => Record<string, string>);
@@ -97,6 +98,7 @@ export interface UploadProps {
     onClear?: () => void;
     onDrop?: (e: Event, files: Array<File>, fileList: Array<FileItem>) => void;
     onError?: (e: CustomError, file: File, fileList: Array<FileItem>, xhr: XMLHttpRequest) => void;
+    onPastingError?: (error: Error | PermissionStatus) => void;
     onExceed?: (fileList: Array<File>) => void;
     onFileChange?: (files: Array<File>) => void;
     onOpenFileDialog?: () => void;
@@ -143,6 +145,7 @@ export interface UploadState {
 const propTypes:ComponentObjectPropsOptions<UploadProps> = {
     accept: PropTypes.string, // Limit allowed file types
     action: String,
+    addOnPasting: PropTypes.bool,
     afterUpload: PropTypes.func as PropType<UploadProps['afterUpload']>,
     beforeClear: PropTypes.func as PropType<UploadProps['beforeClear']>,
     beforeRemove: PropTypes.func as PropType<UploadProps['beforeRemove']>,
@@ -183,6 +186,7 @@ const propTypes:ComponentObjectPropsOptions<UploadProps> = {
     onRetry: PropTypes.func as PropType<UploadProps['onRetry']>,
     onSizeError: PropTypes.func as PropType<UploadProps['onSizeError']>,
     onSuccess: PropTypes.func as PropType<UploadProps['onSuccess']>,
+    onPastingError: PropTypes.func as PropType<UploadProps['onPastingError']>,
     previewFile: PropTypes.func as PropType<UploadProps['previewFile']>,
     prompt: PropTypes.node as PropType<UploadProps['prompt']>,
     promptPosition: String as PropType<UploadProps['promptPosition']>,
@@ -227,6 +231,7 @@ const defaultProps: Partial<UploadProps> = {
     onRetry: noop,
     onSizeError: noop,
     onSuccess: noop,
+    onPastingError: noop,
     promptPosition: 'right' as const,
     showClear: true,
     showPicInfo: false,
@@ -252,6 +257,7 @@ const Upload = defineComponent<UploadProps>((props, {expose}) => {
     })
     const inputRef = ref();
     const replaceInputRef = ref();
+    let pastingCb: null | ((params: any) => void);
 
     const {adapter: adapterInject, getDataAttr} = useBaseComponent<UploadProps>(props, state)
     function adapter_(): UploadAdapter<UploadProps, UploadState> {
@@ -288,6 +294,19 @@ const Upload = defineComponent<UploadProps>((props, {expose}) => {
             resetReplaceInput: (): void => {
                 state.replaceInputKey = Math.random()
             },
+            isMac: (): boolean => {
+                return navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+            },
+            registerPastingHandler: (cb?: (e: KeyboardEvent) => void): void => {
+                document.body.addEventListener('keydown', cb);
+                pastingCb = cb;
+            },
+            unRegisterPastingHandler: (): void => {
+                if (pastingCb) {
+                    document.body.removeEventListener('keydown',    pastingCb);
+                }
+            },
+            notifyPastingError: (error): void => props.onPastingError(error),
             updateDragAreaStatus: (dragAreaStatus: string): void =>state.dragAreaStatus = dragAreaStatus as any,
             notifyChange: ({ currentFile, fileList }): void => props.onChange({ currentFile, fileList }),
             updateLocalUrls: (urls): void => {state.localUrls = urls},
@@ -325,6 +344,9 @@ const Upload = defineComponent<UploadProps>((props, {expose}) => {
     })
 
     onMounted(()=>{
+        foundation.init();
+    })
+    onUnmounted(()=>{
         foundation.destroy();
     })
 

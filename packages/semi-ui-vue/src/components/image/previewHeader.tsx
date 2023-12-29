@@ -9,7 +9,7 @@ import {VueJsxNode} from "../interface";
 
 const prefixCls = `${cssClasses.PREFIX}-preview-header`;
 
-const Header: FunctionalComponent<HeaderProps> = ({ onClose, titleStyle, className, renderHeader }) => (
+const Header: FunctionalComponent<HeaderProps> = ({ onClose, titleStyle, className, renderHeader, forwardRef }) => (
     <PreviewContext.Consumer>
         {({ currentIndex, titles }) => {
             let title;
@@ -17,7 +17,7 @@ const Header: FunctionalComponent<HeaderProps> = ({ onClose, titleStyle, classNa
                 title = titles[currentIndex];
             }
             return (
-                <section class={cls(prefixCls, className)}>
+                <section ref={forwardRef} class={cls(prefixCls, className)}>
                     <section class={`${prefixCls}-title`} style={titleStyle}>{renderHeader ? renderHeader(title) : title}</section>
                     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
                     <section class={`${prefixCls}-close`} onMouseup={onClose}>

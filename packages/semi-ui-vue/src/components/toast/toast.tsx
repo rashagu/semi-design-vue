@@ -59,7 +59,7 @@ const propTypes: ComponentObjectPropsOptions<ToastReactProps> = {
   onAnimationEnd: PropTypes.func as PropType<ToastReactProps['onAnimationEnd']>,
   onAnimationStart: PropTypes.func as PropType<ToastReactProps['onAnimationStart']>,
   positionInList: PropTypes.object as PropType<ToastReactProps['positionInList']>,
-  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  icon: PropTypes.node,
   direction: String as PropType<ToastReactProps['direction']>,
   id: String as PropType<ToastReactProps['id']>,
 };

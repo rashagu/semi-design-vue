@@ -248,7 +248,7 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
             [prefix + '-horizontal']: layout === 'horizontal',
         });
 
-        const showldAppendRow = wrapperCol && labelCol;
+        const shouldAppendRow = wrapperCol && labelCol;
 
         const formContent = (
           <form
@@ -269,7 +269,7 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
           <FormUpdaterContext.Provider value={updaterApi}>
               <FormApiContext.Provider value={formApi as any}>
                   <FormStateContext.Provider value={formState}>
-                      {showldAppendRow ? withRowForm : formContent}
+                      {shouldAppendRow ? withRowForm : formContent}
                   </FormStateContext.Provider>
               </FormApiContext.Provider>
           </FormUpdaterContext.Provider>

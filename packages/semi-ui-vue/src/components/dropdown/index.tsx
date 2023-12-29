@@ -116,7 +116,7 @@ const propTypes:ComponentObjectPropsOptions<DropdownProps> = {
   rePosKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   showTick: PropTypes.bool,
   prefixCls: PropTypes.string,
-  spacing: PropTypes.number,
+  spacing: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   menu: PropTypes.array,
   name: String,
 }

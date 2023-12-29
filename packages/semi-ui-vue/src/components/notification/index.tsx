@@ -86,6 +86,7 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
   const state = reactive<NotificationListState>({
     notices: [],
     removedItems: [],
+    updatedItems: []
   })
 
   const {adapter: adapterInject} = useBaseComponent<BannerProps>(props, state)
@@ -93,12 +94,13 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
   function adapter_(): NotificationListAdapter {
     return {
       ...adapterInject(),
-      updateNotices: (notices: NoticeInstance[], removedItems: NoticeInstance[] = []) => {
+      updateNotices: (notices: NoticeInstance[], removedItems: NoticeInstance[] = [], updatedItems: NoticeInstance[] = []) => {
         noticeStorage = [...notices];
         removeItemStorage = [...removedItems];
         // setState is async sometimes and react often merges state, so use "this" , make sure other code always get right data.
         state.notices = notices
         state.removedItems = removedItems
+        state.updatedItems = updatedItems
       },
       getNotices: () => noticeStorage,
     };
@@ -111,9 +113,16 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
 
   const add = (noticeOpts: NoticeProps) => foundation.addNotice(noticeOpts);
 
+  const has = (id: string) => foundation.has(id);
+
   const remove = (id: string | number) => {
     foundation.removeNotice(String(id));
   };
+
+
+  const update = (id: string|number, opts: NoticeProps)=>{
+    return foundation.update('' + id, opts);
+  }
 
   const destroyAll = () => foundation.destroyAll();
 
@@ -121,7 +130,8 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
   const renderNoticeInPosition = (
     notices: NoticeInstance[],
     position: NoticePosition,
-    removedItems: NoticeInstance[] = []
+    removedItems: NoticeInstance[] = [],
+    updatedItems: NoticeInstance[] = []
   ) => {
     const className = cls(cssClasses.LIST);
     // TODO notifyOnClose
@@ -146,6 +156,13 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
                     transitionStyle => (
                       <Notice
                         {...notice}
+                        ref={(notice)=>{
+                          //@ts-ignore
+                          if (notice && updatedItems.some(item=>item.id === notice.$props.id)) {
+                            //@ts-ignore
+                            notice.getFoundation().restartCloseTimer();
+                          }
+                        }}
                         style={{...transitionStyle, ...notice.style}}
                         key={notice.id}
                         close={remove}
@@ -177,13 +194,15 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
 
   expose({
     add,
+    has,
     remove,
-    destroyAll
+    destroyAll,
+    update
   })
 
   return () => {
     let {notices} = state;
-    const {removedItems} = state;
+    const {removedItems, updatedItems} = state;
     notices = Array.from(new Set([...notices, ...removedItems]));
     const noticesInPosition: NoticesInPosition = {
       top: [],
@@ -203,7 +222,7 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
     const noticesList = Object.entries(noticesInPosition).map(obj => {
       const pos = obj[0];
       const noticesInPos = obj[1];
-      return renderNoticeInPosition(noticesInPos, pos as NoticePosition, removedItems);
+      return renderNoticeInPosition(noticesInPos, pos as NoticePosition, removedItems, updatedItems)
     });
 
 
@@ -225,7 +244,8 @@ export class NotificationListClass {
   static NotificationListRef = null;
 
   static addNotice(notice: NoticeProps) {
-    const id = getUuid('notification');
+    notice = { ...defaultConfig, ...notice };
+    const id = notice.id ?? getUuid('notification');
     if (!this.NotificationListRef) {
       const {getPopupContainer} = notice;
       const div = document.createElement('div');
@@ -254,7 +274,11 @@ export class NotificationListClass {
       );
       this.app.mount(div)
     } else {
-      this.NotificationListRef.add({...notice, id});
+      if (this.NotificationListRef.has(`${id}`)) {
+        this.NotificationListRef.update(id, notice);
+      } else {
+        this.NotificationListRef.add({ ...notice, id });
+      }
     }
     return id;
   }
@@ -268,23 +292,23 @@ export class NotificationListClass {
   }
 
   static info(opts: NoticeProps) {
-    return this.addNotice({...defaultConfig, ...opts, type: 'info'});
+    return this.addNotice({...opts, type: 'info'});
   }
 
   static success(opts: NoticeProps) {
-    return this.addNotice({...defaultConfig, ...opts, type: 'success'});
+    return this.addNotice({...opts, type: 'success'});
   }
 
   static error(opts: NoticeProps) {
-    return this.addNotice({...defaultConfig, ...opts, type: 'error'});
+    return this.addNotice({...opts, type: 'error'});
   }
 
   static warning(opts: NoticeProps) {
-    return this.addNotice({...defaultConfig, ...opts, type: 'warning'});
+    return this.addNotice({...opts, type: 'warning'});
   }
 
   static open(opts: NoticeProps) {
-    return this.addNotice({...defaultConfig, ...opts, type: 'default'});
+    return this.addNotice({...opts, type: 'default'});
   }
 
   static close(id: string) {

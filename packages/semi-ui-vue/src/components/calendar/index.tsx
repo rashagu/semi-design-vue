@@ -24,6 +24,7 @@ const propTypes:ComponentObjectPropsOptions<CalendarProps> = {
     renderTimeDisplay: PropTypes.func as PropType<CalendarProps['renderTimeDisplay']>,
     renderDateDisplay: PropTypes.func as PropType<CalendarProps['renderDateDisplay']>,
     markWeekend: PropTypes.bool,
+    minEventHeight: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     style: PropTypes.object,

@@ -35,6 +35,7 @@ export interface TableExpandedRowProps {
     store?: Store;
     style?: CSSProperties;
     virtualized?: Virtualized
+    displayNone?: boolean;
     onExpand?: any
     onExpandedRowsChange?: any
 }
@@ -89,6 +90,7 @@ const TableExpandedRow = defineComponent<TableExpandedRowProps>((props, {}) => {
             virtualized,
             indentSize,
             cellWidths,
+            displayNone
         } = props;
         const { tableWidth, anyColumnFixed, getCellWidths } = context.value;
         const cell: ExpandedRowRenderReturnType = expandedRowRender(record, index, expanded);
@@ -152,6 +154,7 @@ const TableExpandedRow = defineComponent<TableExpandedRowProps>((props, {}) => {
             virtualized={virtualized}
             indentSize={indentSize}
             cellWidths={baseRowCellWidths}
+            displayNone={displayNone}
           />
         );
     };

@@ -184,7 +184,7 @@ export type SelectProps = {
   showClear?: boolean;
   showArrow?: boolean;
   renderSelectedItem?: RenderSelectedItemFn;
-  renderCreateItem?: (inputValue: OptionProps['value'], focus: boolean) => VNode;
+  renderCreateItem?: (inputValue: OptionProps['value'], focus: boolean, style?: CSSProperties) => VNode;
   renderOptionItem?: (props: optionRenderProps) => VNode;
   onMouseEnter?: (e: MouseEvent) => any;
   onMouseLeave?: (e: MouseEvent) => any;
@@ -311,7 +311,7 @@ const propTypes:ComponentObjectPropsOptions<SelectProps> = {
   autoAdjustOverflow: PropTypes.bool,
   mouseEnterDelay: PropTypes.number,
   mouseLeaveDelay: PropTypes.number,
-  spacing: PropTypes.number,
+  spacing: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   onBlur: PropTypes.func as PropType<SelectProps['onBlur']>,
   onFocus: PropTypes.func as PropType<SelectProps['onFocus']>,
   onClear: PropTypes.func as PropType<SelectProps['onClear']>,
@@ -872,7 +872,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       return defaultCreateItem;
     }
 
-    const customCreateItem = renderCreateItem(option.value, isFocused);
+    const customCreateItem = renderCreateItem(option.value, isFocused, style);
 
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus
@@ -970,19 +970,19 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
         ref={setOptionContainerEl as any}
         onKeydown={e => foundation.handleContainerKeyDown(e)}
       >
-        {outerTopSlot ? <div class={`${prefixcls}-option-list-outer-top-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{outerTopSlot}</div> : null }
+        {outerTopSlot ? <div class={`${prefixcls}-option-list-outer-top-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{outerTopSlot}</div> : null}
         <div
-          style={{maxHeight: `${maxHeight}px`}}
+          style={{ maxHeight: `${maxHeight}px` }}
           class={optionListCls}
           role="listbox"
           aria-multiselectable={multiple}
           onScroll={e => foundation.handleListScroll(e)}
         >
-          {innerTopSlot ? <div class={`${prefixcls}-option-list-inner-top-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{innerTopSlot}</div> : null }
+          {innerTopSlot ? <div class={`${prefixcls}-option-list-inner-top-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{innerTopSlot}</div> : null}
           {loading ? renderLoading() : isEmpty ? renderEmpty() : listContent}
-          {innerBottomSlot ? <div class={`${prefixcls}-option-list-inner-bottom-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{innerBottomSlot}</div> : null }
+          {innerBottomSlot ? <div class={`${prefixcls}-option-list-inner-bottom-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{innerBottomSlot}</div> : null}
         </div>
-        {outerBottomSlot ? <div class={`${prefixcls}-option-list-outer-bottom-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{outerBottomSlot}</div> : null }
+        {outerBottomSlot ? <div class={`${prefixcls}-option-list-outer-bottom-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{outerBottomSlot}</div> : null}
       </div>
     );
   }
@@ -1148,9 +1148,8 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
   function handleOverflow(items: [VueJsxNode, any][]) {
     const { overflowItemCount, selections } = state;
     const { maxTagCount } = props;
-    const maxVisibleCount = selections.size - maxTagCount;
-    const newOverFlowItemCount = maxVisibleCount > 0 ? maxVisibleCount + items.length - 1 : items.length - 1;
-    if (items.length > 1 && overflowItemCount !== newOverFlowItemCount) {
+    const newOverFlowItemCount = selections.size - maxTagCount > 0 ? selections.size - maxTagCount + items.length - 1 : items.length - 1;
+    if (overflowItemCount !== newOverFlowItemCount) {
       foundation.updateOverflowItemCount(selections.size, newOverFlowItemCount);
     }
   }
@@ -1163,6 +1162,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       <div class={`${prefixcls}-content-wrapper-collapse`}>
         <OverflowList
           items={normalTags}
+          key={String(selections.length)}
           overflowRenderer={overflowItems => renderOverflow(overflowItems as [VueJsxNode, any][], length - 1)}
           onOverflow={overflowItems => handleOverflow(overflowItems as [VueJsxNode, any][])}
           visibleItemRenderer={(item, index) => renderTag(item as [VueJsxNode, any], index)}

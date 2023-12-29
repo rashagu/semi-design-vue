@@ -91,6 +91,8 @@ export interface BodyProps extends BaseProps {
     renderExpandIcon: (record: Record<string, any>, isNested: boolean) => VueJsxNode | null;
     headerRef?: any;
     onScroll?: VirtualizedOnScroll,
+    keepDOM?: boolean;
+
     bodyWrapperRef?: any
 
     expandRowByClick?: boolean
@@ -622,6 +624,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
             index,
             rowKey,
             virtualized,
+            displayNone
         } = props_;
         let key = getRecordKey(record, rowKey);
 
@@ -650,6 +653,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
             virtualized={virtualized}
             key={genExpandedRowKey(key)}
             cellWidths={cellWidths}
+            displayNone={displayNone}
           />
         );
     };
@@ -735,7 +739,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
      * @returns {VueJsxNode[]} renderedRows
      */
     const renderGroupedRows = () => {
-        const { groups, dataSource: data, rowKey, expandedRowKeys } = props;
+        const { groups, dataSource: data, rowKey, expandedRowKeys, keepDOM  } = props;
         const { flattenedColumns } = context.value;
         const groupsInData = new Map();
         const renderedRows: VueJsxNode[] = [];
@@ -775,7 +779,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
             );
 
             // Render the grouped content when the group is expanded
-            if (expanded) {
+            if (expanded || keepDOM) {
                 const dataInGroup: any[] = [];
 
                 group.forEach((recordKey: string) => {
@@ -789,20 +793,21 @@ const Body = defineComponent<BodyProps>((props, {}) => {
                 /**
                  * Render the contents of the group row
                  */
-                renderedRows.push(renderBodyRows(dataInGroup));
+                renderedRows.push(renderBodyRows(dataInGroup, undefined, [], !expanded));
             }
         });
 
         return renderedRows;
     };
 
-    function renderBodyRows(data: Record<string, any>[] = [], level = 0, renderedRows: VueJsxNode[] = []) {
+    function renderBodyRows(data: Record<string, any>[] = [], level = 0, renderedRows: VueJsxNode[] = [], displayNone = false) {
         const {
             rowKey,
             expandedRowRender,
             expandedRowKeys,
             childrenRecordName,
             rowExpandable,
+            keepDOM
         } = props;
 
         const hasExpandedRowRender = typeof expandedRowRender === 'function';
@@ -824,6 +829,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
                   ...props,
                   columns: flattenedColumns,
                   expandBtnShouldInRow,
+                  displayNone,
                   record,
                   key,
                   level,
@@ -833,7 +839,8 @@ const Body = defineComponent<BodyProps>((props, {}) => {
 
             // render expand row
             const expanded = isExpanded(expandedRowKeys, key);
-            if (hasExpandedRowRender && rowExpandable && rowExpandable(record) && expanded) {
+            const shouldRenderExpandedRows = expanded || keepDOM;
+            if (hasExpandedRowRender && rowExpandable && rowExpandable(record) && shouldRenderExpandedRows) {
                 const currentExpandRow = renderExpandedRow({
                     ...(props as any),
                     columns: flattenedColumns,
@@ -841,6 +848,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
                     index,
                     record,
                     expanded,
+                    displayNone: displayNone || !expanded,
                 });
                 /**
                  * If expandedRowRender returns falsy, this expanded row will not be rendered
@@ -852,7 +860,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
             }
 
             // render tree data
-            if (recordHasChildren && expanded) {
+            if (recordHasChildren && shouldRenderExpandedRows) {
                 const nestedRows = renderBodyRows(recordChildren, level + 1);
                 renderedRows.push(...nestedRows);
             }
@@ -986,7 +994,9 @@ export interface RenderExpandedRowProps {
     index?: number;
     rowKey?: RowKey<Record<string, any>>;
     virtualized?: Virtualized;
-    level?: number
+    level?: number;
+    keepDOM?: boolean;
+    displayNone?: boolean;
 }
 
 export interface RenderSectionRowProps {

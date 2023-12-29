@@ -51,6 +51,7 @@ const propTypes:ComponentObjectPropsOptions<SliderProps> = {
     type: PropTypes.bool,
     default: undefined,
   },
+  showMarkLabel: PropTypes.bool,
   included: {
     type: PropTypes.bool,
     default: undefined,
@@ -72,10 +73,12 @@ const propTypes:ComponentObjectPropsOptions<SliderProps> = {
   onAfterChange: PropTypes.func as PropType<SliderProps['onAfterChange']>, // OnmouseUp and triggered when clicked
   onChange: PropTypes.func as PropType<SliderProps['onChange']>,
   onMouseUp: PropTypes.func as PropType<SliderProps['onMouseUp']>,
+  tooltipOnMark: PropTypes.bool,
   tooltipVisible: {
     type: PropTypes.bool,
     default: undefined,
   },
+  showArrow: PropTypes.bool,
   style: PropTypes.object,
   className: PropTypes.string,
   showBoundary: {
@@ -93,10 +96,13 @@ const propTypes:ComponentObjectPropsOptions<SliderProps> = {
 const defaultProps: Partial<SliderProps> = {
   // allowClear: false,
   disabled: false,
+  showMarkLabel: true,
+  tooltipOnMark: false,
   included: true, // No is juxtaposition. Allow dragging
   max: 100,
   min: 0,
   range: false, // Whether both sides
+  showArrow: true,
   step: 1,
   tipFormatter: (value: tipFormatterBasicType | tipFormatterBasicType[]) => value,
   vertical: false,
@@ -373,6 +379,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
     const handleContents = !range ? (
       <Tooltip
         content={tipChildren.min}
+        showArrow={props.showArrow}
         position="top"
         trigger="custom"
         rePosKey={minPercent}
@@ -576,14 +583,15 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
               [`${prefixCls}-dot-active`]: foundation.isMarkActive(Number(mark)) === 'active',
             });
             const markPercent = (Number(mark) - min) / (max - min);
-            return activeResult ? (
-              // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+            const dotDOM = // eslint-disable-next-line jsx-a11y/no-static-element-interactions
               <span
                 key={mark}
                 onClick={foundation.handleWrapClick}
                 class={markClass}
                 style={{ [stylePos]: `calc(${markPercent * 100}% - 2px)` }}
-              />
+              />;
+            return activeResult ? (
+              props.tooltipOnMark?<Tooltip content={marks[mark]}>{dotDOM}</Tooltip>:dotDOM
             ) : null;
           })}
         </div>
@@ -592,6 +600,9 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   };
 
   const renderLabel = () => {
+    if (!props.showMarkLabel) {
+      return null;
+    }
     const { min, max, vertical, marks, verticalReverse } = props;
     const stylePos = vertical ? 'top' : 'left';
     const labelContent =

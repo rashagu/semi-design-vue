@@ -48,6 +48,7 @@ export interface PopconfirmProps extends PopoverProps {
     prefixCls?: string;
     zIndex?: number;
     trigger?: Trigger;
+    showCloseIcon?: boolean;
     position?: Position;
     onCancel?: (e: MouseEvent) => Promise<any> | void;
     onConfirm?: (e: MouseEvent) => Promise<any> | void;
@@ -89,6 +90,7 @@ const propTypes:ComponentObjectPropsOptions<PopconfirmProps> = {
     okButtonProps: PropTypes.object,
     cancelButtonProps: PropTypes.object,
     stopPropagation: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    showCloseIcon: PropTypes.bool,
     zIndex: PropTypes.number,
     // private
     trigger: PropTypes.string as PropType<PopconfirmProps['trigger']>,
@@ -105,6 +107,7 @@ const defaultProps = {
     cancelType: 'tertiary',
     prefixCls: cssClasses.PREFIX,
     zIndex: numbers.DEFAULT_Z_INDEX,
+    showCloseIcon: true,
     onCancel: noop,
     onConfirm: noop,
     onClickOutSide: noop,
@@ -221,7 +224,7 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
     }
 
     function renderConfirmPopCard({ initialFocusRef }: { initialFocusRef?: RenderContentProps['initialFocusRef'] }) {
-        const { content, title, className, style, cancelType, icon, prefixCls } = props;
+        const { content, title, className, style, cancelType, icon, prefixCls, showCloseIcon } = props;
         const { direction } = context.value;
         const popCardCls = cls(
           prefixCls,
@@ -233,14 +236,17 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
         const showTitle = title !== null && typeof title !== 'undefined';
         const showContent = !(content === null || typeof content === 'undefined');
 
+        const hasIcon = isVNode(icon);
+        const bodyCls = cls({
+            [`${prefixCls}-body`]: true,
+            [`${prefixCls}-body-withIcon`]: hasIcon
+        });
         return (
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
           <div class={popCardCls} onClick={stopImmediatePropagation} style={style}>
               <div class={`${prefixCls}-inner`}>
                   <div class={`${prefixCls}-header`}>
-                      <i class={`${prefixCls}-header-icon`} x-semi-prop="icon">
-                          {isVNode(icon) ? icon : null}
-                      </i>
+                      { hasIcon ? <i class={`${prefixCls}-header-icon`} x-semi-prop="icon">{icon}</i> : null}
                       <div class={`${prefixCls}-header-body`}>
                           {showTitle ? (
                             <div class={`${prefixCls}-header-title`} x-semi-prop="title">
@@ -248,17 +254,21 @@ const Popconfirm = defineComponent<PopconfirmProps>((props, {}) => {
                             </div>
                           ) : null}
                       </div>
-                      <Button
-                        className={`${prefixCls}-btn-close`}
-                        icon={<IconClose />}
-                        size="small"
-                        theme={'borderless'}
-                        type={cancelType}
-                        onClick={handleCancel}
-                      />
+                      {
+                          showCloseIcon ? (
+                            <Button
+                              className={`${prefixCls}-btn-close`}
+                              icon={<IconClose />}
+                              size="small"
+                              theme={'borderless'}
+                              type={cancelType}
+                              onClick={handleCancel}
+                            />
+                          ) : null
+                      }
                   </div>
                   {showContent ? (
-                    <div class={`${prefixCls}-body`} x-semi-prop="content">
+                    <div class={bodyCls} x-semi-prop="content">
                         {isFunction(content) ? content({ initialFocusRef }) : content}
                     </div>
                   ) : null}

@@ -149,7 +149,6 @@ const ToastList = defineComponent<ToastListProps>(
 
       const refFn = (toast) => {
         if (toast?.foundation?._id && updatedIds.includes(toast.foundation._id)) {
-          toast.foundation.setState({ duration: toast.props.duration });
           toast.foundation.restartCloseTimer();
         }
       };

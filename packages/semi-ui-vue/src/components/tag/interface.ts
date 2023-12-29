@@ -35,6 +35,8 @@ export interface TagProps {
     visible?: boolean;
     onClose?: (tagChildren: VueJsxNode, event: MouseEvent, tagKey: string | number) => void;
     onClick?: (e:Event)=>void;
+    prefixIcon?: VNode;
+    suffixIcon?: VNode;
     style?: CSSProperties;
     className?: string;
     avatarSrc?: string;

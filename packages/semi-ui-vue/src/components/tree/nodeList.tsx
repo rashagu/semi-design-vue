@@ -16,9 +16,7 @@ import {
 import {VueJsxNode} from "../interface";
 
 const getTreeNodeKey = (treeNode: FlattenNode) => {
-    const { data } = treeNode;
-    const { key } = data;
-    return key;
+    return treeNode.key;
 };
 
 

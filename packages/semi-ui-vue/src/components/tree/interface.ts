@@ -10,6 +10,7 @@ import {
     BasicFlattenNode,
     BasicTreeNodeData,
     BasicOnDragProps,
+    KeyMapProps,
 } from '@douyinfe/semi-foundation/tree/foundation';
 import {CSSProperties} from "vue";
 import {VueJsxNode} from "../interface";
@@ -67,6 +68,7 @@ export interface TreeProps extends BasicTreeProps {
     treeData?: TreeNodeData[];
     value?: Value;
     icon?: VueJsxNode;
+    keyMaps?: KeyMapProps;
     loadData?: (treeNode?: TreeNodeData) => Promise<void>;
     onChange?: (value?: Value) => void;
     onDoubleClick?: (e: MouseEvent, node: TreeNodeData) => void;
@@ -79,7 +81,7 @@ export interface TreeProps extends BasicTreeProps {
     onExpand?: (expandedKeys: string[], expandedOtherProps: ExpandedOtherProps) => void;
     onLoad?: (loadedKeys?: Set<string>, treeNode?: TreeNodeData) => void;
     onContextMenu?: (e: MouseEvent, node: TreeNodeData) => void;
-    onSelect?: (selectedKeys: string, selected: boolean, selectedNode: TreeNodeData) => void;
+    onSelect?: (selectedKey: string, selected: boolean, selectedNode: TreeNodeData) => void;
     renderDraggingNode?: (nodeInstance: HTMLElement, node: TreeNodeData) => HTMLElement;
     renderFullLabel?: (renderFullLabelProps: RenderFullLabelProps) => VueJsxNode;
     renderLabel?: (label?: VueJsxNode, treeNode?: TreeNodeData) => VueJsxNode;
@@ -109,11 +111,11 @@ export interface TreeState extends BasicTreeInnerData {
 }
 
 /* TreeNode */
-export interface TreeNodeProps{
+export interface TreeNodeProps extends BasicTreeNodeProps{
     label?:VueJsxNode,
     keyword?: string
     data?:BasicTreeNodeData,
-    filtered?: string
+    filtered?: any
     treeNodeFilterProp?: string
     emptyContent?: VueJsxNode
     nodeInstance?: VueJsxNode

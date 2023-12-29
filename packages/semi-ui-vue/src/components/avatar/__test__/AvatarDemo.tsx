@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment} from 'vue'
+import {defineComponent, ref, h, Fragment, onMounted} from 'vue'
 import Avatar from '../index'
 import AvatarGroup from '../avatarGroup'
 
@@ -12,6 +12,19 @@ export const vuePropsType = {
 const AvatarDemo = defineComponent<ExampleProps>((props, {slots}) => {
 
 
+  const src = ref('https://sf6-cdn-tos.douyinstatic.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/avatarDemo.jpeg')
+  onMounted(()=>{
+    setInterval(()=>{
+      src.value = 'sd' + (new Date).toString()
+    }, 1000)
+  })
+
+  // return ()=>{
+  //   return <Avatar
+  //     alt="a cat"
+  //     style={{ margin: 4 }}
+  //   >{src.value}</Avatar>
+  // }
   return () => (
     <div>
       <div>

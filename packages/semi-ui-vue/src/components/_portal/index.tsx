@@ -66,7 +66,7 @@ const Index = defineComponent<PortalProps>((props, {slots}) => {
   function initContainer(context: ContextValue, catchError = false){
     try {
       let container: HTMLElement | undefined = undefined;
-      if (!el) {
+      if (!el || !state?.container || !Array.from(state.container.childNodes).includes(el)) {
         el = document.createElement('div');
       }
       if (!state?.container) {

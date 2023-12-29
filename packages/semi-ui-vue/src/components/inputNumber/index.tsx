@@ -26,8 +26,6 @@ import {
   watch
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
-import {YearAndMonthProps} from "../datePicker";
-import {AnchorProps} from "../anchor";
 
 export interface InputNumberProps extends InputProps {
   autofocus?: boolean;
@@ -348,7 +346,7 @@ const InputNumber = defineComponent<InputNumberProps>((props, {}) => {
              * We need to set the status to false after trigger focus event
              */
             if (clickUpOrDown) {
-              obj.value = foundation.doFormat(valueStr, true);
+              obj.value = foundation.doFormat(obj.number, true);
               newValue = obj.value;
             }
             foundation.updateStates(obj, () => adapter.restoreCursor());
@@ -359,7 +357,7 @@ const InputNumber = defineComponent<InputNumberProps>((props, {}) => {
           } else {
             // Update input content when controlled input NaN
             newValue = foundation.doFormat(valueStr, false);
-            foundation.updateStates({value: newValue});
+            foundation.updateStates({value: valueStr});
           }
         } else if (foundation.isValidNumber(parsedNum)) {
           newValue = foundation.doFormat(parsedNum);
