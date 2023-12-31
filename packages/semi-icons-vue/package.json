@@ -23,10 +23,10 @@
     "@douyinfe/semi-theme-default": "2.49.2",
     "classnames": "^2.3.2",
     "sass": "^1.57.1",
-    "vue": "^3.3.4"
+    "vue": "^3.4.3"
   },
   "peerDependencies": {
-    "vue": ">=3.2.47"
+    "vue": ">=3.4.3"
   },
   "sideEffects": [
     "*.scss",
@@ -38,8 +38,8 @@
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
-    "@vitejs/plugin-vue": "^4.2.3",
-    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "@vitejs/plugin-vue": "^5.0.2",
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
     "camelcase": "^6.3.0",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
@@ -53,8 +53,8 @@
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
     "typescript": "^5.1.6",
-    "vite": "4.3.9",
-    "vue-tsc": "^1.8.2"
+    "vite": "5.0.10",
+    "vue-tsc": "^1.8.27"
   },
   "gitHead": "a9bb1553bd45dcf99595a45df0adf0d967083f1e"
 }
