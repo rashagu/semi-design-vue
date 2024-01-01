@@ -3,6 +3,7 @@
   "version": "0.5.7",
   "main": "lib/index.js",
   "module": "lib/index.js",
+  "type": "module",
   "files": [
     "lib/"
   ],
@@ -12,7 +13,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node ./scripts/compileLib.js",
+    "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/compileLib.cjs",
     "build:icon": "node scripts/build-illustration"
   },
   "dependencies": {

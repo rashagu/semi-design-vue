@@ -39,11 +39,11 @@ const previewOptions = {
 // pre-set import map
 store.setImportMap({
   imports: {
-    "@kousum/semi-ui-vue": import.meta.env.BASE_URL + 'semi/semi-ui-vue.mjs',
+    "@kousum/semi-ui-vue": import.meta.env.BASE_URL + 'semi/semi-ui-vue.js',
   },
 })
 // use a specific version of Vue
-store.setVueVersion('3.3.4')
+store.setVueVersion('3.4.3')
 
 store.setFiles({
   'tsconfig.json': store.getFiles()['tsconfig.json'],

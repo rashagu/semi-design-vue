@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "type": "module",
   "files": [
     "dist/"
   ],
@@ -14,7 +15,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build:vite": "rimraf lib && rimraf dist && vue-tsc --noEmit && tsc -b --force tsconfig.esm.json && node build.js && node ./scripts/compileLib.js",
+    "build:vite": "rimraf lib && rimraf dist && vue-tsc --noEmit && tsc -b --force tsconfig.esm.json && node build.cjs && node scripts/compileLib.cjs && vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "repository": {

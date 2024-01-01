@@ -16,6 +16,16 @@ export default defineConfig({
     ssr: {
       noExternal: ['@douyinfe\\semi-foundation', 'lodash', '@kousum/semi-icons-vue', '@kousum/semi-ui-vue'],
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `
+          @import "@douyinfe/semi-theme-default/scss/global.scss";
+          @import "@douyinfe/semi-theme-default/scss/index.scss";
+        `,
+        }
+      }
+    },
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

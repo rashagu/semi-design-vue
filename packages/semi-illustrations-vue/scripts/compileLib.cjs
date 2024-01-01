@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-require('../gulpfile');
+require('../gulpfile.cjs');
 
 function compileLib() {
     const taskInstance = gulp.task('compileLib');

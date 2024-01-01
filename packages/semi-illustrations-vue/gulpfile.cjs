@@ -8,7 +8,7 @@ const gulpTS = require('gulp-typescript');
 const sass = require('gulp-sass')(require('sass'));
 const replace = require('gulp-replace');
 const del = require('del');
-const getBabelConfig = require('./getBabelConfig');
+const getBabelConfig = require('./getBabelConfig.cjs');
 
 gulp.task('cleanLib', function cleanLib() {
     return del(['lib/**/*']);
