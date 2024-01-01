@@ -33,7 +33,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install pnpm -g
       - run: pnpm install
-#      - run: pnpm build:lib
+      - run: pnpm build:lib
 #      - run: pnpm build-storybook:vite
       - run: pnpm build:mjs
       - run: pnpm docs:build
