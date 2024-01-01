@@ -309,7 +309,7 @@ function Table<RecordType extends Record<string, any>>() {
           state.pagination = pagination;
         },
         setGroups: (groups) => {
-          state.groups = groups;
+          state.groups = groups as any;
         },
         setDataSource: (dataSource) => {
           state.dataSource = dataSource as any;
@@ -649,7 +649,7 @@ function Table<RecordType extends Record<string, any>>() {
 
         // Update the default expanded column
         if (expandAllRows !== prevPropsExpandAllRows || expandAllGroupRows !== prevPropsExpandAllGroupRows) {
-          foundation.initExpandedRowKeys({ groups: stateGroups });
+          foundation.initExpandedRowKeys({ groups: stateGroups as any });
         }
 
         /**

@@ -5,7 +5,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
-    "jsx": "react",
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
     "paths": {
       "@kousum/semi-foundation/*": ["../semi-foundation/*"],
       "@kousum/semi-icons-vue": ["../semi-icons-vue/src"]

@@ -271,8 +271,8 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     }
     const updateOverflow =
       rows <= 1 ?
-        wrapperRef.current.scrollWidth > wrapperRef.current.clientWidth :
-        wrapperRef.current.scrollHeight > wrapperRef.current.offsetHeight;
+        wrapperRef.value.scrollWidth > wrapperRef.value.clientWidth :
+        wrapperRef.value.scrollHeight > wrapperRef.value.offsetHeight;
     return updateOverflow;
   };
 
@@ -317,7 +317,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     const {rows, suffix, pos} = getEllipsisOpt();
     const children = props.children
     // wait until element mounted
-    if (!wrapperRef || !wrapperRef.current) {
+    if (!wrapperRef || !wrapperRef.value) {
       onResize();
       return false;
     }
@@ -350,7 +350,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       return undefined;
     }
 
-    const extraNode = [expandRef.current, copyRef && copyRef.current];
+    const extraNode = [expandRef.value, copyRef && copyRef.value];
     const content: any = getRenderText(
       wrapperRef.value,
       rows,
