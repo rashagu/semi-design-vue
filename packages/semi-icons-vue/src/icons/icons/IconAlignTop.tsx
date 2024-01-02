@@ -31,7 +31,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconAlignTop',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'align_top'} {...props}>

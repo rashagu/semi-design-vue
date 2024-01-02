@@ -78,7 +78,7 @@ async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOpt
   // const indexFileContent = arr.map((a, index) => `export { default as ${a.componentName} } from './${a.componentName}';`).join('\n');
   // fs.writeFileSync(resolve(outDir, indexFileName), indexFileContent, 'utf-8');
 
-  const o = `import Icon, {ConvertIcon} from './components/Icon';
+  const o = type === 'icons'?`import Icon, {ConvertIcon} from './components/Icon';
 
 export type {
   IconSize,
@@ -87,12 +87,12 @@ export type {
 } from './components/Icon';
 
 
-export default Icon;
 export {
+  Icon,
   ConvertIcon
 }
-`
-  const indexFileContent = arr.map((a, index) => `export { default as ${a.componentName} } from './icons/${a.componentName}';`).join('\n');
+`:''
+  const indexFileContent = arr.map((a, index) => `export { default as ${a.componentName} } from './${type}/${a.componentName}';`).join('\n');
   fs.writeFileSync(resolve(outDir, '../' + indexFileName), o + '\n' + indexFileContent, 'utf-8');
 
 

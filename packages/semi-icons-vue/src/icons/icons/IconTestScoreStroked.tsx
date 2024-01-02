@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconTestScoreStroked',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'test_score_stroked'} {...props}>

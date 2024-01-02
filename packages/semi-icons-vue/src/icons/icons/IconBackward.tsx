@@ -27,7 +27,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconBackward',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'backward'} {...props}>

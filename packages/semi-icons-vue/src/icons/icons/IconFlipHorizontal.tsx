@@ -29,7 +29,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconFlipHorizontal',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'flip_horizontal'} {...props}>

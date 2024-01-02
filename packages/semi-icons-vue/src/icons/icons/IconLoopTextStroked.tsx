@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconLoopTextStroked',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'loop_text_stroked'} {...props}>

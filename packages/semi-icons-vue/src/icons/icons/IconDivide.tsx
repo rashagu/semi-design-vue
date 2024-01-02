@@ -31,7 +31,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconDivide',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'divide'} {...props}>

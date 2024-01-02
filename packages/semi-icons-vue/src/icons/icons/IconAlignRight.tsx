@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconAlignRight',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'align_right'} {...props}>

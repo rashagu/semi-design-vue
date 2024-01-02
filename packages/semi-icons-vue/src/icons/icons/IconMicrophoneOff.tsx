@@ -32,7 +32,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconMicrophoneOff',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'microphone_off'} {...props}>

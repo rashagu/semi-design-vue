@@ -23,7 +23,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconTriangleArrowVertical',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'triangle_arrow_vertical'} {...props}>

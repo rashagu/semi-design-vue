@@ -37,7 +37,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconStrikeThrough',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'strike_through'} {...props}>

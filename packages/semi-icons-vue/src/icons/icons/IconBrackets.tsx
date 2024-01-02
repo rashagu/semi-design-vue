@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconBrackets',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'brackets'} {...props}>

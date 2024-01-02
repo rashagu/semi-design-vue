@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconCheckboxTick',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'checkbox_tick'} {...props}>

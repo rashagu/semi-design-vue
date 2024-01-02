@@ -43,7 +43,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconWholeWord',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'whole_word'} {...props}>

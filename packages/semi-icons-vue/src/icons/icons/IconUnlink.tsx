@@ -34,7 +34,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconUnlink',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'unlink'} {...props}>

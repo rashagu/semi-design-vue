@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconLikeThumb',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'like_thumb'} {...props}>

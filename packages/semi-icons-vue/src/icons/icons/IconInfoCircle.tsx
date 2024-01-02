@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconInfoCircle',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'info_circle'} {...props}>

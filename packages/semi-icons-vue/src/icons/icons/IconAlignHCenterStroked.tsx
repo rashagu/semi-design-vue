@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconAlignHCenterStroked',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'align_h_center_stroked'} {...props}>

@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconFolderOpen',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'folder_open'} {...props}>

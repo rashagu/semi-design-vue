@@ -35,7 +35,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconGridView',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'grid_view'} {...props}>

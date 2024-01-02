@@ -45,7 +45,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconCalendarClock',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'calendar_clock'} {...props}>

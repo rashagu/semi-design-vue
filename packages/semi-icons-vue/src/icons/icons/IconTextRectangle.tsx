@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconTextRectangle',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'text_rectangle'} {...props}>

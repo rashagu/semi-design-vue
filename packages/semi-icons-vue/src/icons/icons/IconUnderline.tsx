@@ -27,7 +27,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconUnderline',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'underline'} {...props}>

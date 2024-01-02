@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconFontColor',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'font_color'} {...props}>

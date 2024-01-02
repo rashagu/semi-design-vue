@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconCalendarStroked',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'calendar_stroked'} {...props}>

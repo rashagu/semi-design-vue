@@ -27,7 +27,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconLineHeight',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'line_height'} {...props}>

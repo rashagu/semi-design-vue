@@ -27,7 +27,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconFastFoward',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'fast_foward'} {...props}>

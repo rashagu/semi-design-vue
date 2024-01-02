@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "vite",
     "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/compileLib.cjs",
-    "build:icon": "node scripts/build-illustration"
+    "build:icon": "node scripts/build-illustration.cjs"
   },
   "dependencies": {
     "@douyinfe/semi-foundation": "2.49.2",

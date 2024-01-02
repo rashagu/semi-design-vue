@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconMarginLeftStroked',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'margin_left_stroked'} {...props}>

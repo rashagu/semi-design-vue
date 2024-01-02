@@ -31,7 +31,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconTabArrowStroked',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'tab_arrow_stroked'} {...props}>

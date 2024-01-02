@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconInnerSectionStroked',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'inner_section_stroked'} {...props}>

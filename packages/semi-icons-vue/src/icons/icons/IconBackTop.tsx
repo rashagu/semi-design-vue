@@ -31,7 +31,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconBackTop',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'back_top'} {...props}>

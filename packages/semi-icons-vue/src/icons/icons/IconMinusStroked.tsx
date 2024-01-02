@@ -23,7 +23,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconMinusStroked',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'minus_stroked'} {...props}>

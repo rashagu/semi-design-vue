@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconOrderedListStroked',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'ordered_list_stroked'} {...props}>

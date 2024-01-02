@@ -31,7 +31,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconListView',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'list_view'} {...props}>

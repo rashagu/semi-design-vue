@@ -23,7 +23,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconFilledArrowUp',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'filled_arrow_up'} {...props}>

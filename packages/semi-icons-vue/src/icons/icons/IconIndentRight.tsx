@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconIndentRight',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'indent_right'} {...props}>

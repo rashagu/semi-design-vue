@@ -20,7 +20,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconRadio',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'radio'} {...props}>

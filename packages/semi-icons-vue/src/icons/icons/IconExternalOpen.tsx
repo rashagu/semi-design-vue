@@ -27,7 +27,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconExternalOpen',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'external_open'} {...props}>

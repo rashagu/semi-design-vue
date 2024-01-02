@@ -23,7 +23,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconHistogram',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'histogram'} {...props}>

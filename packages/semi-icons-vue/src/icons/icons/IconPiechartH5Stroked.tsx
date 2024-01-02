@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconPiechartH5Stroked',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'piechart_h5_stroked'} {...props}>

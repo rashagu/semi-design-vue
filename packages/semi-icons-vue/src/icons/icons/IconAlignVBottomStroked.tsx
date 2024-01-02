@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconAlignVBottomStroked',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'align_v_bottom_stroked'} {...props}>

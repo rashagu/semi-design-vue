@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconShrinkScreenStroked',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'shrink_screen_stroked'} {...props}>

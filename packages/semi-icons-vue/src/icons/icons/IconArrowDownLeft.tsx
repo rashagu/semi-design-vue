@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconArrowDownLeft',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'arrow_down_left'} {...props}>

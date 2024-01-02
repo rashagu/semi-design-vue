@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconCaseSensitive',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'case_sensitive'} {...props}>

@@ -25,7 +25,6 @@ const SvgComponent = defineComponent((props, { slots }) => {
 });
 const IconComponent = defineComponent<IconProps>({
   name: 'IconAlertTriangle',
-
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'alert_triangle'} {...props}>
