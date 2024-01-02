@@ -103,7 +103,7 @@ const propTypes: ComponentObjectPropsOptions<ConfirmProps> = {
     type: PropTypes.bool,
     default: undefined
   },
-  content: String
+  content: [String, Object]
 };
 const defaultProps = {
 };
