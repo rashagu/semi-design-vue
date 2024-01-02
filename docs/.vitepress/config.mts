@@ -7,7 +7,7 @@ export default defineConfig({
   title: 'semi-design-vue',
   description: 'Vue3 UI components based on semi-design and Vue',
   srcDir: 'src',
-  outDir:'./.vitepress/semi-design-vue',
+  outDir:'./.vitepress/out/semi-design-vue',
   vite:{
     plugins: [Jsx()],
     // optimizeDeps: {
