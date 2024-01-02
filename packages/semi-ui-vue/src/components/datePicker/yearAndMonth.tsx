@@ -47,6 +47,8 @@ const propTypes:ComponentObjectPropsOptions<YearAndMonthProps> = {
   type: PropTypes.string as PropType<YearAndMonthProps['type']>,
   startYear: PropTypes.number,
   endYear: PropTypes.number,
+
+  onBackToMain: PropTypes.func as PropType<YearAndMonthProps['onBackToMain']>,
 };
 
 const defaultProps = {
@@ -338,7 +340,7 @@ const yearAndMonth = defineComponent<YearAndMonthProps>((props, {expose}) => {
   }
 }, {
   props: vuePropsType,
-  name: 'DatePicker_yearAndMonth'
+  name: 'DatePickerYearAndMonth'
 })
 
 
