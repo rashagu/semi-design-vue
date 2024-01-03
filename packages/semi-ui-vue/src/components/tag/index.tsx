@@ -28,7 +28,6 @@ export interface TagState {
 }
 
 const propTypes:ComponentObjectPropsOptions<TagProps> = {
-  children: PropTypes.node as PropType<any>,
   tagKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   size: String as PropType<TagProps['size']>,
   color: String as PropType<TagProps['color']>,

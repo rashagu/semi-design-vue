@@ -5,6 +5,7 @@ import Tag from './index';
 import Popover, { PopoverProps } from '../popover';
 import { AvatarShape, TagProps } from './interface';
 import {VueJsxNode, VueJsxNodeSingle} from "../interface";
+import {omit} from "lodash";
 
 const prefixCls = cssClasses.PREFIX;
 const tagSize = strings.TAG_SIZE;
@@ -117,7 +118,7 @@ const Group = defineComponent<TagGroupProps>((props, {slots}) => {
       if (!(tag as TagProps).avatarShape) {
         (tag as TagProps).avatarShape = avatarShape;
       }
-      return <Tag key={`${index}-tag`} {...(tag as TagProps)} >
+      return <Tag key={`${index}-tag`} {...(omit(tag, 'children') as TagProps)} >
         {{
           default: ()=> tag.children
         }}
