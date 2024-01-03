@@ -3,7 +3,7 @@ import Jsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base:'/semi-design-vue/',
+  base:'/',
   title: 'semi-design-vue',
   description: 'Vue3 UI components based on semi-design and Vue',
   srcDir: 'src',
