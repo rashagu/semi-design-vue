@@ -152,10 +152,12 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
             placeholder="拥有3k个Option的Select 虚拟滚动"
             style={{ width: '260px' }}
             filter
+            value={[50]}
             onSearch={handleSearch}
             virtualize={virtualize}
             optionList={optionList}
             multiple={true}
+            defaultOpen={true}
           ></Select>
         </div>
         <Select

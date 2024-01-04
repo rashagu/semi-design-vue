@@ -70,7 +70,7 @@ const EventDemo = defineComponent<EventDemoProps>((props, {}) => {
         key: '4',
         allDay: true,
         start: new Date(2019, 6, 22, 8, 0, 0),
-        children: <div style={allDayStyle}>7月22日 全天</div>,
+        children: <div style={allDayStyle} id={'calenderDemo_test_id'}>7月22日 全天</div>,
       },
       {
         key: '5',

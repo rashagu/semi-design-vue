@@ -61,6 +61,7 @@ const propTypes:ComponentObjectPropsOptions<WeekCalendarProps> = {
     range: PropTypes.array,
     weekStartsOn: PropTypes.number as PropType<WeekCalendarProps['weekStartsOn']>,
     onClick: PropTypes.func as PropType<WeekCalendarProps['onClick']>,
+    minEventHeight: PropTypes.number as PropType<WeekCalendarProps['minEventHeight']>,
 };
 
 const defaultProps = {

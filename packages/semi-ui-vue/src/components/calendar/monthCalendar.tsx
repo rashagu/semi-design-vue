@@ -58,8 +58,11 @@ const propTypes:ComponentObjectPropsOptions<MonthCalendarProps> = {
     onClose: PropTypes.func as PropType<MonthCalendarProps['onClose']>,
 
 
-
     weekStartsOn: PropTypes.number as PropType<MonthCalendarProps['weekStartsOn']>,
+
+    renderDateDisplay: PropTypes.func as PropType<MonthCalendarProps['renderDateDisplay']>,
+    minEventHeight: PropTypes.number as PropType<MonthCalendarProps['minEventHeight']>,
+
     // range: PropTypes.array as PropType<MonthCalendarProps['range']>,
     // showCurrTime: PropTypes.bool as PropType<MonthCalendarProps['showCurrTime']>,
     // scrollTop: PropTypes.number as PropType<MonthCalendarProps['scrollTop']>,

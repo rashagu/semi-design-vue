@@ -49,14 +49,30 @@ const Calendar = defineComponent<CalendarProps>((props, {}) => {
 
     return () => {
 
-        const { mode, ...rest } = props;
+        const {
+            mode,
+            range,
+            showCurrTime,
+            scrollTop,
+            renderTimeDisplay,
+            ...rest
+        } = props;
         const component = {
             month: (<MonthCalendar />),
             week: (<WeekCalendar />),
             day: (<DayCalendar />),
             range: (<RangeCalendar />)
         };
-        return cloneVNode(component[mode], { ...rest });
+        return cloneVNode(component[mode], {
+            ...rest,
+            // 去掉month不需要的参数
+            ...(mode === 'month' ? {} : {
+                range,
+                showCurrTime,
+                scrollTop,
+                renderTimeDisplay
+            })
+        });
     }
 },{props:vuePropsType, name:'Calendar'})
 
