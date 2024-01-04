@@ -52,7 +52,10 @@ export const vuePropsType:ComponentObjectPropsOptions<OptionProps> = {
   prefixCls: {
     type: String,
     default: cssClasses.PREFIX_OPTION,
-  }
+  },
+  _scrollIndex: Number,
+  _selected: Boolean,
+  _show: Boolean,
 }
 
 const Option = defineComponent<OptionProps>((props, {slots, attrs}) => {

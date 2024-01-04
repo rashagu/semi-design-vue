@@ -43,10 +43,10 @@ importers:
         specifier: ^2.26.0
         version: 2.26.0
       '@kousum/semi-icons-vue':
-        specifier: ^0.5.7
+        specifier: ^0.6.0
         version: link:packages/semi-icons-vue
       '@kousum/semi-ui-vue':
-        specifier: ^0.5.9
+        specifier: ^0.6.0
         version: link:packages/semi-ui-vue
       '@storybook/addon-essentials':
         specifier: 7.1.1
@@ -481,13 +481,13 @@ importers:
         specifier: ^1.5.2
         version: 1.5.2
       '@kousum/semi-animation-vue':
-        specifier: ^0.5.7
+        specifier: ^0.6.0
         version: link:../semi-animation-vue
       '@kousum/semi-icons-vue':
-        specifier: ^0.5.7
+        specifier: ^0.6.0
         version: link:../semi-icons-vue
       '@kousum/semi-illustrations-vue':
-        specifier: ^0.5.7
+        specifier: ^0.6.0
         version: link:../semi-illustrations-vue
       '@kousum/vue-draggable':
         specifier: 1.0.2
@@ -6717,7 +6717,7 @@ packages:
       '@babel/core': 7.23.7
       '@babel/plugin-transform-typescript': 7.23.6(@babel/core@7.23.7)
       '@vue/babel-plugin-jsx': 1.1.5(@babel/core@7.23.7)
-      vite: 5.0.10(@types/node@20.1.4)(sass@1.54.9)
+      vite: 5.0.10(@types/node@20.1.4)(sass@1.57.1)
       vue: 3.4.3(typescript@5.1.6)
     transitivePeerDependencies:
       - supports-color
@@ -6741,7 +6741,7 @@ packages:
       vite: ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.0.10(@types/node@20.1.4)(sass@1.54.9)
+      vite: 5.0.10(@types/node@20.1.4)(sass@1.57.1)
       vue: 3.4.3(typescript@5.1.6)
     dev: true
 
@@ -15027,6 +15027,43 @@ packages:
       postcss: 8.4.32
       rollup: 4.5.2
       sass: 1.54.9
+    optionalDependencies:
+      fsevents: 2.3.3
+    dev: true
+
+  /vite@5.0.10(@types/node@20.1.4)(sass@1.57.1):
+    resolution: {integrity: sha512-2P8J7WWgmc355HUMlFrwofacvr98DAjoE52BfdbwQtyLH06XKwaL/FMnmKM2crF0iX4MpmMKoDlNCB1ok7zHCw==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || >=20.0.0
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      '@types/node': 20.1.4
+      esbuild: 0.19.7
+      postcss: 8.4.32
+      rollup: 4.5.2
+      sass: 1.57.1
     optionalDependencies:
       fsevents: 2.3.3
     dev: true

@@ -550,10 +550,13 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
         state.dropdownMinWidth = width
       },
       updateSelection: (selections: Map<OptionProps['label'], any>) => {
+        state.selections = selections
         // TODO 直接赋值会有问题
-        setTimeout(()=>{
-          state.selections = selections
-        })
+        // setTimeout(()=>{
+        //   nextTick(()=>{
+        //     state.selections = selections
+        //   })
+        // })
       },
       // clone Map, important!!!, prevent unexpected modify on state
       getSelections: () => new Map(state.selections),
@@ -1305,8 +1308,9 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       });
       if (minItemIndex !== -1) {
         try {
-          virtualizeListRef.value.$el.scrollToItem(minItemIndex, 'center');
+          virtualizeListRef.value.scrollToItem(minItemIndex, 'center');
         } catch (error) {
+          console.error(error)
         }
       }
     } else {

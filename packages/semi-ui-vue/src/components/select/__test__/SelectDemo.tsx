@@ -128,13 +128,14 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
   return () => {
     let { optionList, optionList2 } = state;
     let virtualize = {
-      height: 300,
+      height: 270,
       width: '100%',
       itemSize: 36, // px
     };
     function handleSearch() {
 
     }
+
 
 
     return (
@@ -154,6 +155,7 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
             onSearch={handleSearch}
             virtualize={virtualize}
             optionList={optionList}
+            multiple={true}
           ></Select>
         </div>
         <Select
