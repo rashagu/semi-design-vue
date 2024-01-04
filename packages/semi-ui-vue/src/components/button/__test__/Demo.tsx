@@ -1,4 +1,4 @@
-import {defineComponent, ref, h} from 'vue'
+import {defineComponent, ref, h, onMounted} from 'vue'
 import Button from '../index';
 import ButtonGroup from '../ButtonGroup';
 import IconButton from "../../iconButton";
@@ -19,6 +19,12 @@ const Demo = defineComponent(() => {
     { node: 'item', name: '删除项目', type: 'danger' },
   ]
   const disabled= ref(false)
+
+  const loading = ref(false)
+  onMounted(()=>{
+    loading.value = true
+  })
+  return ()=><Button loading={loading.value}>sdsd</Button>
   return () => {
     return (
       <div style={{width:'50%'}}>
@@ -33,6 +39,7 @@ const Demo = defineComponent(() => {
           onClick={()=>disabled.value=false}
           type={'primary'}
           theme={'light'}
+          loading={true}
         >
           I am a Button
         </Button>

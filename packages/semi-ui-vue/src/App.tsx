@@ -117,7 +117,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TimelineDemo/>*/}
         {/*<SideSheetDemo />*/}
         {/*<ListDemo />*/}
-        <DescriptionsDemo />
+        {/*<DescriptionsDemo />*/}
         {/*<CollapseDemo />*/}
         {/*<CollapsibleDemo />*/}
         {/*<CarouselDemo/>*/}
@@ -193,7 +193,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TypeDemo />*/}
 
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
-        {/*  <Button />*/}
+          <Button />
         {/*</div>*/}
 
         {/*<IconTest />*/}

@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, reactive} from 'vue'
+import {defineComponent, ref, h, Fragment, reactive, onMounted} from 'vue'
 import Select, {optionRenderProps} from '../index'
 import Option from '../option'
 import OptGroup from '../optionGroup'
@@ -21,6 +21,20 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
     { value: 'steve', label: 'Caption' },
     { value: 'peter', label: 'SpiderBoy' },
   ];
+  const  optionListRef = ref([
+    { value: 'tony', label: 'Ironman' },
+    { value: 'Thor', label: 'Thor' },
+    { value: 'steve', label: 'Caption' },
+    { value: 'peter', label: 'SpiderBoy' },
+  ]);
+  onMounted(()=>{
+    setTimeout(()=>{
+      optionListRef.value = [
+        { value: 'tony', label: 'Ironman' },
+        { value: 'Thor', label: 'Thor' },
+      ]
+    }, 0)
+  })
   const renderOptionItem = (renderProps: optionRenderProps) => {
     const {
       disabled,
@@ -121,8 +135,17 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
     function handleSearch() {
 
     }
+
+
     return (
       <div>
+        <Select
+          placeholder="拥有3k个Option的Select 虚拟滚动"
+          style={{ width: '260px' }}
+          filter
+          optionList={optionListRef.value}
+        ></Select>
+
         <div>
           <Select
             placeholder="拥有3k个Option的Select 虚拟滚动"

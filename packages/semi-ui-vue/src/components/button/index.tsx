@@ -12,12 +12,12 @@ export interface ButtonProps extends IconButtonProps,BaseButtonProps {} // TODO 
 
 const Button = defineComponent<ButtonProps>((props, {slots}) => {
 
-    const hasIcon = Boolean(props.icon);
-    const isLoading = Boolean(props.loading);
-    const isDisabled = Boolean(props.disabled);
 
 
     return ()=>{
+        const hasIcon = Boolean(props.icon);
+        const isLoading = Boolean(props.loading);
+        const isDisabled = Boolean(props.disabled);
         return (
           hasIcon || (isLoading && !isDisabled)?
             <IconButton {...props}>
