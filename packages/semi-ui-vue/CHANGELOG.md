@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 0.6.1
+
+### Patch Changes
+
+- cb4bf56: fix
+
 ## 0.6.0
 
 ### Minor Changes
