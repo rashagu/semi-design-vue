@@ -42,6 +42,7 @@ export default defineConfig({
   resolve:{
     alias:[
       {find: '@kousum/semi-icons-vue', replacement: path.resolve('./packages/semi-icons-vue/src/icons/index')},
+      {find: '@kousum/semi-icons-lab-vue', replacement: path.resolve('./packages/semi-icons-lab-vue/src/icons/index')},
       {find: '@kousum/semi-animation-vue', replacement: path.resolve('./packages/semi-animation-vue/index')},
       {find: '@kousum/semi-illustrations-vue', replacement: path.resolve('./packages/semi-illustrations-vue/index')}
     ]

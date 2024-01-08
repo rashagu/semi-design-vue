@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@kousum/semi-icons-vue": "^0.6.0",
-    "@kousum/semi-ui-vue": "^0.6.0",
+    "@kousum/semi-ui-vue": "^0.6.1",
     "vue-inline-svg": "^2.1.3",
     "@storybook/addon-essentials": "7.1.1",
     "@storybook/addon-interactions": "7.1.1",

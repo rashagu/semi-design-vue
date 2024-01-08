@@ -1,5 +1,6 @@
 packages:
   - 'packages/semi-animation-vue'
   - 'packages/semi-icons-vue'
+  - 'packages/semi-icons-lab-vue'
   - 'packages/semi-ui-vue'
   - 'packages/semi-illustrations-vue'
