@@ -184,7 +184,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        <SelectDemo/>
+        {/*<SelectDemo/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}
@@ -207,7 +207,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<LayoutTest/>*/}
         {/*<SpaceTest/>*/}
         {/*<PopoverTest />*/}
-        {/*<NavigationDemo />*/}
+        <NavigationDemo />
         <div class={'aa'}>123</div>
       </ConfigProvider>
     </div>

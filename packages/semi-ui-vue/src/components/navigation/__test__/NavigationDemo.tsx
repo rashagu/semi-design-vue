@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, FunctionalComponent} from 'vue'
+import {defineComponent, ref, h, Fragment, FunctionalComponent, onMounted} from 'vue'
 import {IconUser, IconStar, IconSetting} from '@kousum/semi-icons-vue'
 import Nav from '../index'
 
@@ -14,6 +14,28 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
 
   const openKeys = ref([])
   const isCollapsed = ref(false)
+  const items = ref([])
+  onMounted(()=>{
+    items.value = [
+      {itemKey: 'user', text: '用户管理', icon: <IconUser/>},
+      {itemKey: 'union', text: '公会中心', icon: <IconStar/>},
+      {
+        text: '任务平台',
+        icon: <IconSetting/>,
+        itemKey: 'job',
+        items: ['任务管理', '用户任务查询'],
+      },
+    ]
+  })
+
+  const a = ref(0)
+
+  // onMounted(()=>{
+  //   setInterval(()=>{
+  //     a.value ++
+  //     console.log(a.value)
+  //   }, 1000)
+  // })
   return ()=>(
     <div
       id="container"
@@ -42,28 +64,19 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
         }}
         isCollapsed={isCollapsed.value}
         bodyStyle={{height: 320}}
-        items={[
-          {itemKey: 'user', text: '用户管理', icon: <IconUser/>},
-          {itemKey: 'union', text: '公会中心', icon: <IconStar/>},
-          {
-            text: '任务平台',
-            icon: <IconSetting/>,
-            itemKey: 'job',
-            items: ['任务管理', '用户任务查询'],
-          },
-        ]}
+        items={items.value}
         onOpenChange={data => {
           // console.log(data)
           openKeys.value = data.openKeys
         }}
         onCollapseChange={(val)=>{
-          console.log(val)
+          // console.log(val)
           isCollapsed.value = val
         }}
         openKeys={openKeys.value}
         onSelect={data => console.log('trigger onSelect: ', data)}
         onClick={data => console.log('trigger onClick: ', data)}
-      />
+      ></Nav>
     </div>
   );
 })

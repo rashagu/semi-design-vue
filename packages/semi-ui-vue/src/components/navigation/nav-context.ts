@@ -24,6 +24,7 @@ export interface NavContextType {
     subNavCloseDelay?: NavProps['subNavCloseDelay'];
     subNavOpenDelay?: NavProps['subNavOpenDelay'];
     canUpdateOpenKeys?: boolean;
+    renderWrapper?: NavProps['renderWrapper'];
     getPopupContainer?: DropdownProps['getPopupContainer'];
     tooltipShowDelay?: number;
     tooltipHideDelay?: number

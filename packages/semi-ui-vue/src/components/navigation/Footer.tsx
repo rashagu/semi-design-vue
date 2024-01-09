@@ -46,9 +46,7 @@ const NavFooter = defineComponent<NavFooterProps>((props, {slots}) => {
         prefixCls={prefixCls}
         isCollapsed={isCollapsed}
         locale={locale}
-        onClick={(val)=>{
-          onCollapseChange(val)
-        }}
+        onClick={onCollapseChange}
         collapseText={collapseText}
         {...(typeof collapseButton === 'object' ? collapseButton : {})}
       />

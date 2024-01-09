@@ -1,37 +1,37 @@
 import {
+  ComponentObjectPropsOptions,
+  CSSProperties,
   defineComponent,
-  ref,
-  h,
   Fragment,
-  reactive,
-  watchEffect,
-  watch,
-  VNode,
+  h,
   isVNode,
+  PropType,
+  reactive,
   useSlots,
-  CSSProperties, WatchStopHandle, nextTick, unref, ComponentObjectPropsOptions, PropType
+  VNode,
+  watch, watchEffect
 } from 'vue'
 import {BaseProps, useBaseComponent} from '../_base/baseComponent';
 import * as PropTypes from '../PropTypes';
+import {vuePropsMake} from '../PropTypes';
 import cls from 'classnames';
-import {noop, get, isEqual} from 'lodash';
+import {get, isEqual, noop} from 'lodash';
 
 import NavigationFoundation, {NavigationAdapter} from '@douyinfe/semi-foundation/navigation/foundation';
-import {strings, cssClasses, numbers} from '@douyinfe/semi-foundation/navigation/constants';
+import {cssClasses, numbers, strings} from '@douyinfe/semi-foundation/navigation/constants';
 
+import type {SubNavProps, ToggleIcon} from './SubNav';
 import SubNav from './SubNav';
+import type {NavItemProps} from './Item';
 import Item from './Item';
+import type {NavFooterProps} from './Footer';
 import Footer from './Footer';
+import type {NavHeaderProps} from './Header';
 import Header from './Header';
 import NavContext from './nav-context';
 import '@douyinfe/semi-foundation/navigation/navigation.scss';
 import {Motion} from '../_base/base';
-import {vuePropsMake} from "../PropTypes";
 import LocaleConsumer from "../locale/localeConsumer";
-import type {NavFooterProps} from './Footer';
-import type {NavHeaderProps} from './Header';
-import type {NavItemProps} from './Item';
-import type {ToggleIcon, SubNavProps} from './SubNav';
 import {VueJsxNode} from "../interface";
 
 export type Mode = 'vertical' | 'horizontal';
@@ -89,7 +89,7 @@ export interface NavProps extends BaseProps {
   onDeselect?: (data?: any) => void;
   onOpenChange?: (data: { itemKey: (string | number); openKeys: (string | number)[]; domEvent: MouseEvent; isOpen: boolean }) => void;
   onSelect?: (data: OnSelectedData) => void;
-  renderWrapper?: ({ itemElement, isSubNav, isInSubNav, props }: { itemElement: Element;isInSubNav: boolean; isSubNav: boolean; props: NavItemProps | SubNavProps }) => VNode
+  renderWrapper?: ({ itemElement, isSubNav, isInSubNav, props }: { itemElement: VNode;isInSubNav: boolean; isSubNav: boolean; props: NavItemProps | SubNavProps }) => VNode
 }
 
 export interface NavState {
@@ -272,10 +272,8 @@ const index = defineComponent<NavProps>((props, {slots}) => {
   // getDerivedStateFromProps 的存在只有一个目的：让组件在 props 变化时更新 state
   watch(()=>props.isCollapsed, (val)=>{
     state.isCollapsed = val;
+    foundation.handleItemsChange(false);
   })
-
-
-
 
   watch(() => props.selectedKeys, (value) => {
     if (value){
@@ -296,9 +294,20 @@ const index = defineComponent<NavProps>((props, {slots}) => {
     }
   })
 
-  watch(() => props.items, (value, oldValue, onCleanup) => {
+  watch([() => props.items], (value, oldValue, onCleanup) => {
     foundation.init('');
-  }, {deep: true, immediate: true})
+  }, {})
+  // watch(slots.default, (value, oldValue, onCleanup) => {
+  //   foundation.init('');
+  //   console.log('init')
+  // }, {})
+  watchEffect(()=>{
+    if (slots.default){
+      foundation.init('');
+    }
+  })
+
+
 
   // watch([
   //   // () => state.selectedKeys,// 0
@@ -347,6 +356,7 @@ const index = defineComponent<NavProps>((props, {slots}) => {
 
 
   return () => {
+
     const originChildren = slots.default?.()
     const {
       mode,

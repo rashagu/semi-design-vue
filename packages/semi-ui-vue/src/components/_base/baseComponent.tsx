@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, CSSProperties, Ref, getCurrentInstance, useAttrs,} from 'vue'
+import {defineComponent, ref, shallowRef, h, CSSProperties, Ref, getCurrentInstance, useAttrs,} from 'vue'
 import baseLog from '@douyinfe/semi-foundation/utils/log';
 import {DefaultAdapter} from '@douyinfe/semi-foundation/base/foundation';
 import {VALIDATE_STATUS} from '@douyinfe/semi-foundation/base/constants';
@@ -38,8 +38,8 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
     getDataAttr: () => Record<string, any>
   } = (props,state)=> {
   const attrs = useAttrs()
-  const cache = ref<any>({});
-  const foundation = ref<any>(null);
+  const cache = shallowRef<any>({});
+  const foundation = shallowRef<any>(null);
 
   const isControlled = (key: any) => {
 

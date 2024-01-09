@@ -91,6 +91,7 @@ const propTypes = {
   // Is it disabled
   disabled: PropTypes.bool,
   level: PropTypes.number,
+
 };
 
 const defaultProps = {
@@ -258,7 +259,7 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
       placeholderIcons = times(iconAmount, (index) => renderIcon(null, strings.ICON_POS_RIGHT, false, false, index));
     }
 
-      const isIconChevronRightShow = (!isCollapsed && isInSubNav && mode === strings.MODE_HORIZONTAL) || (isCollapsed && isInSubNav);
+    const isIconChevronRightShow = (!isCollapsed && isInSubNav && mode === strings.MODE_HORIZONTAL) || (isCollapsed && isInSubNav);
 
     const titleDiv = (
       <div
@@ -335,7 +336,7 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
     const children = useSlots().default?.();
     const { dropdownStyle, disabled } = props;
 
-    const { mode, isInSubNav, isCollapsed, subNavCloseDelay, subNavOpenDelay, prefixCls } = context.value;
+    const { mode, isInSubNav, isCollapsed, subNavCloseDelay, subNavOpenDelay, prefixCls, getPopupContainer  } = context.value;
 
     const isOpen = adapter.getIsOpen();
     const openKeysIsControlled = adapter.getOpenKeysIsControlled();
@@ -354,9 +355,13 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
       dropdownProps.visible = isOpen;
     }
 
+    if (getPopupContainer) {
+      dropdownProps.getPopupContainer = getPopupContainer;
+    }
+
     if (isCollapsed || mode === strings.MODE_HORIZONTAL) {
       // Do not show dropdown when disabled
-      return !disabled ? (
+      _elem = !disabled ? (
         <Dropdown
           className={subNavCls}
           render={
@@ -370,9 +375,8 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
           mouseLeaveDelay={subNavCloseDelay}
           onVisibleChange={handleDropdownVisible}
           {...dropdownProps}
-          trigger="click"
         >
-          <div>{_elem}</div>
+          {elem}
         </Dropdown>
       ) : (
         _elem

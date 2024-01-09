@@ -23,7 +23,7 @@
     "@douyinfe/semi-theme-default": "2.49.2",
     "classnames": "^2.3.2",
     "sass": "^1.57.1",
-    "vue": "^3.4.3"
+    "vue": "^3.4.5"
   },
   "peerDependencies": {
     "vue": ">=3.4.3"
@@ -53,7 +53,7 @@
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
     "typescript": "^5.1.6",
-    "vite": "5.0.10",
+    "vite": "5.0.11",
     "vue-tsc": "^1.8.27"
   },
   "gitHead": "a9bb1553bd45dcf99595a45df0adf0d967083f1e"

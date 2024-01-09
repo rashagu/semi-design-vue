@@ -22,7 +22,7 @@ import {
     reactive,
     VNode,
     Fragment,
-    ComponentObjectPropsOptions, PropType
+    ComponentObjectPropsOptions, PropType, watchEffect
 } from "vue";
 import {useNavContext} from "./nav-context/Consumer";
 import {VueJsxNode} from "../interface";
@@ -37,6 +37,7 @@ export interface NavItemProps extends ItemProps, BaseProps {
     level?: number;
     link?: string;
     linkOptions?: AnchorHTMLAttributes;
+    tabIndex?: number; // on the site we change the tabindex to -1 in order to use gatsby's navigate link
     text?: VueJsxNode;
     tooltipHideDelay?: number;
     tooltipShowDelay?: number;
@@ -45,6 +46,7 @@ export interface NavItemProps extends ItemProps, BaseProps {
     onMouseLeave?: any;
 
     items?: any
+    maxHeight?: number
 }
 
 export interface SelectedData extends SelectedItemProps<NavItemProps> {
@@ -101,7 +103,14 @@ export const vuePropsType:ComponentObjectPropsOptions<NavItemProps> = {
 
 
     items: Array as PropType<NavItemProps['items']>,
-    level: Number
+    level: Number,
+    maxHeight: Number,
+
+
+    tabIndex: {
+        type: PropTypes.number,
+        default: 0
+    }
 }
 const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
 
@@ -187,13 +196,14 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
             mouseEnterDelay={showDelay}
             mouseLeaveDelay={hideDelay}
           >
-              <Fragment>{node}</Fragment>
+              {node}
           </Tooltip>
         );
     };
 
     const handleClick = (e: MouseEvent) => foundation.handleClick(e);
     const handleKeyPress = (e: KeyboardEvent) => foundation.handleKeyPress(e);
+
 
     return () => {
         const {
@@ -210,6 +220,7 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
             linkOptions,
             disabled,
             level = 0,
+            tabIndex,
         } = props;
 
         const children = slots.default?.()
@@ -243,7 +254,7 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
 
         if (typeof link === 'string') {
             itemChildren = (
-              <a class={`${prefixCls}-item-link`} href={link} {...(linkOptions as any)}>
+              <a class={`${prefixCls}-item-link`} href={link} tabindex={-1} {...(linkOptions as any)}>
                   {itemChildren}
               </a>
             );
@@ -270,6 +281,7 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 disabled={disabled}
+                onKeyDown={handleKeyPress}
               >
                   {itemChildren}
               </DropdownItem>
@@ -282,6 +294,7 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
                 [`${clsPrefix}-selected`]: selected && !isSubNav,
                 [`${clsPrefix}-collapsed`]: isCollapsed,
                 [`${clsPrefix}-disabled`]: disabled,
+                [`${clsPrefix}-has-link`]: typeof link === 'string',
             });
             const ariaProps = {
                 'aria-disabled': disabled,
@@ -293,8 +306,8 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
 
             itemDom = (
               <li
-                role="menuitem"
-                tabindex={-1}
+                role={isSubNav ? null : "menuitem"}
+                tabindex={isSubNav ? -1 : tabIndex}
                 {...ariaProps}
                 style={style}
                 ref={setItemRef}
@@ -312,6 +325,16 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
         // Display Tooltip when disabled and SubNav
         if (isCollapsed && !isInSubNav && !isSubNav || isCollapsed && isSubNav && disabled) {
             itemDom = wrapTooltip(itemDom);
+        }
+
+
+        if (typeof context.value.renderWrapper === 'function') {
+            return context.value.renderWrapper({
+                itemElement: itemDom,
+                isSubNav: isSubNav,
+                isInSubNav: isInSubNav,
+                props: props
+            });
         }
 
         return itemDom;
