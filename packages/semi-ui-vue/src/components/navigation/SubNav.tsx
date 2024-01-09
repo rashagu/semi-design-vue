@@ -376,6 +376,7 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
           onVisibleChange={handleDropdownVisible}
           {...dropdownProps}
         >
+          {/*用_elem 会导致无限循环*/}
           {elem}
         </Dropdown>
       ) : (

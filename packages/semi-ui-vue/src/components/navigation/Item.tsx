@@ -201,7 +201,10 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
         );
     };
 
-    const handleClick = (e: MouseEvent) => foundation.handleClick(e);
+    const handleClick = (e: MouseEvent) => {
+        console.log(e)
+        foundation.handleClick(e)
+    };
     const handleKeyPress = (e: KeyboardEvent) => foundation.handleKeyPress(e);
 
 
@@ -278,8 +281,8 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
                 ref={setItemRef}
                 className={popoverItemCls}
                 onClick={handleClick}
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
+                onMouseenter={onMouseEnter}
+                onMouseleave={onMouseLeave}
                 disabled={disabled}
                 onKeyDown={handleKeyPress}
               >

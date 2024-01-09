@@ -9,6 +9,7 @@ import { noop } from 'lodash';
 import {vuePropsMake} from "../PropTypes";
 import {useDropdownContext} from "./context/Consumer";
 import {ComponentObjectPropsOptions} from "vue";
+import type {Events} from "vue";
 
 export type Type = 'primary' | 'secondary' | 'tertiary' | 'warning' | 'danger';
 
@@ -17,9 +18,9 @@ export interface DropdownItemProps extends BaseProps {
   disabled?: boolean;
   selected?: boolean;
   onClick?: (payload: MouseEvent) => void;
-  onMouseEnter?: (payload: MouseEvent) => void;
-  onMouseLeave?: (payload: MouseEvent) => void;
-  onContextMenu?: (payload: MouseEvent) => void;
+  onMouseenter?: (payload: MouseEvent) => void;
+  onMouseleave?: (payload: MouseEvent) => void;
+  onContextmenu?: (payload: MouseEvent) => void;
   type?: Type;
   active?: boolean;
   icon?: JSX.Element;
@@ -36,9 +37,9 @@ const propTypes: ComponentObjectPropsOptions<DropdownItemProps> = {
   disabled: PropTypes.bool,
   selected: PropTypes.bool,
   onClick: PropTypes.func as PropType<DropdownItemProps['onClick']>,
-  onMouseEnter: PropTypes.func as PropType<DropdownItemProps['onMouseEnter']>,
-  onMouseLeave: PropTypes.func as PropType<DropdownItemProps['onMouseLeave']>,
-  onContextMenu: PropTypes.func as PropType<DropdownItemProps['onContextMenu']>,
+  onMouseenter: PropTypes.func as PropType<DropdownItemProps['onMouseenter']>,
+  onMouseleave: PropTypes.func as PropType<DropdownItemProps['onMouseleave']>,
+  onContextmenu: PropTypes.func as PropType<DropdownItemProps['onContextmenu']>,
   className: PropTypes.string,
   style: PropTypes.object,
   forwardRef: [PropTypes.object, PropTypes.func],
@@ -89,11 +90,17 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
       [`${prefixCls}-item-active`]: active,
     });
 
-    const events = {};
+    const events:Partial<{
+      onClick: (e:MouseEvent)=>void;
+      onMousedown: (e:MouseEvent)=>void;
+      onMouseenter: (e:MouseEvent)=>void;
+      onMouseleave: (e:MouseEvent)=>void;
+      onContextmenu: (e:MouseEvent)=>void;
+    }> = {};
     if (!disabled) {
-      ['onClick', 'onMouseEnter', 'onMouseLeave', 'onContextMenu'].forEach(eventName => {
+      ['onClick', 'onMouseenter', 'onMouseleave', 'onContextmenu'].forEach(eventName => {
         if (eventName === "onClick") {
-          events["onMouseDown"] = props[eventName];
+          events.onMousedown = props[eventName];
         } else {
           events[eventName] = props[eventName];
         }
