@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { Repl, ReplStore } from '@vue/repl'
-import Monaco from '@vue/repl/monaco-editor'
+// import Monaco from '@vue/repl/monaco-editor'
+import CodeMirror from '@vue/repl/codemirror-editor'
 import {onMounted} from "vue";
+import {useData} from "vitepress";
 
 const props = defineProps({
   files: {
@@ -9,6 +11,7 @@ const props = defineProps({
   },
 })
 
+const {isDark} = useData();
 
 // retrieve some configuration options from the URL
 const query = new URLSearchParams(location.search)
@@ -32,7 +35,36 @@ const store = new ReplStore({
 
 
 const previewOptions = {
-  headHTML: `<link rel="stylesheet" href="${import.meta.env.BASE_URL}semi/style.css" data-n-g="">`
+  headHTML: `
+<link rel="stylesheet" href="${import.meta.env.BASE_URL}semi/style.css" data-n-g="">
+<script>
+
+const mql = window.matchMedia('(prefers-color-scheme: dark)');
+
+function matchMode(e) {
+    const body = document.body;
+    if (e.matches) {
+        if (!body.hasAttribute('theme-mode')) {
+            body.setAttribute('theme-mode', 'dark');
+            body.setAttribute('style', "background-color: var(--semi-color-nav-bg);color: #fff;")
+        }
+    } else {
+        if (body.hasAttribute('theme-mode')) {
+            body.removeAttribute('theme-mode');
+            body.removeAttribute('style')
+        }
+    }
+}
+
+mql.addEventListener('change', matchMode);
+document.addEventListener('DOMContentLoaded', function() {
+  if (${isDark.value}){
+    matchMode({matches: true})
+  }
+});
+
+<\/script>
+`
 }
 // persist state to URL hash
 // watchEffect(() => history.replaceState({}, '', store.serialize()))
@@ -61,5 +93,5 @@ setTimeout(()=>{
 </script>
 
 <template>
-  <Repl :theme="'dark'" :preview-options="previewOptions" style="width: 100%;height: 100%;" :store="store" :editor="Monaco" :showCompileOutput="true" />
+  <Repl :theme="'dark'" :preview-options="previewOptions" style="width: 100%;height: 100%;" :store="store" :editor="CodeMirror" :showCompileOutput="true" />
 </template>
