@@ -25,10 +25,12 @@ const store = new ReplStore({
   // starts on a different tab on the output pane if the URL has a outputMode query
   // and default to the "preview" tab
   outputMode: query.get('outputMode') || 'preview',
-
   // specify the default URL to import Vue runtime from in the sandbox
   // default is the CDN link from jsdelivr.com with version matching Vue's version
-  // from peerDependency
+  // from peerDependency,
+  defaultVueServerRendererURL:import.meta.env.BASE_URL + 'server-renderer.esm-browser.js',
+  defaultVueRuntimeProdURL:import.meta.env.BASE_URL + 'vue.runtime.esm-browser.prod.js',
+  defaultVueRuntimeURL:import.meta.env.BASE_URL + 'vue.runtime.esm-browser.js',
   // defaultVueRuntimeURL: import.meta.env.BASE_URL + 'runtime-dom.esm-browser.js',
   // defaultVueServerRendererURL: import.meta.env.BASE_URL + 'server-renderer.esm-browser.js',
 })
@@ -75,7 +77,7 @@ store.setImportMap({
   },
 })
 // use a specific version of Vue
-store.setVueVersion('3.4.3')
+// store.setVueVersion('3.4.3')
 
 store.setFiles({
   'tsconfig.json': store.getFiles()['tsconfig.json'],

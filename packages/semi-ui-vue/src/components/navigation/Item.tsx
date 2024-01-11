@@ -202,7 +202,7 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
     };
 
     const handleClick = (e: MouseEvent) => {
-        console.log(e)
+        // console.log(e)
         foundation.handleClick(e)
     };
     const handleKeyPress = (e: KeyboardEvent) => foundation.handleKeyPress(e);
