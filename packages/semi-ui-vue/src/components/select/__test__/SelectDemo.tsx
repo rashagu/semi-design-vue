@@ -125,6 +125,10 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
     optionList: newOptions,
     optionList2: newOptions2,
   });
+
+  function onChange(v) {
+    console.log(v)
+  }
   return () => {
     let { optionList, optionList2 } = state;
     let virtualize = {
@@ -137,6 +141,14 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
     }
 
 
+
+    return <Select
+      placeholder="拥有3k个Option的Select 虚拟滚动"
+      style={{ width: '260px' }}
+      filter
+      optionList={optionListRef.value}
+      onChange={onChange}
+    ></Select>
 
     return (
       <div>

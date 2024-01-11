@@ -550,13 +550,10 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
         state.dropdownMinWidth = width
       },
       updateSelection: (selections: Map<OptionProps['label'], any>) => {
-        state.selections = selections
-        // TODO 直接赋值会有问题
-        // setTimeout(()=>{
-        //   nextTick(()=>{
-        //     state.selections = selections
-        //   })
-        // })
+        // TODO 直接赋值会有问题: _diffSelections 比较结果会一直相同, 导致onChange事件不会触发
+        nextTick(()=>{
+          state.selections = selections
+        })
       },
       // clone Map, important!!!, prevent unexpected modify on state
       getSelections: () => new Map(state.selections),
