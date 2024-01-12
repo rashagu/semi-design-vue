@@ -18,6 +18,7 @@ export { default as Popover } from './popover';
 export { default as Space } from './space';
 export { default as Spin } from './spin';
 export { default as SplitButtonGroup } from './button/splitButtonGroup';
+export {type DropDownMenuItem} from "./dropdown";
 export { default as Tooltip } from './tooltip';
 export { default as LocaleProvider } from './locale/localeProvider';
 

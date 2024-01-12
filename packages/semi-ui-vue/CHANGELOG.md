@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.6.3
+
+### Patch Changes
+
+- dfd195b: fix
+- Updated dependencies [dfd195b]
+  - @kousum/semi-animation-vue@0.6.2
+  - @kousum/semi-icons-vue@0.6.2
+  - @kousum/semi-illustrations-vue@0.6.2
+
 ## 0.6.2
 
 ### Patch Changes

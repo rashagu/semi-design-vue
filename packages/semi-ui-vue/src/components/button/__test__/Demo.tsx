@@ -24,7 +24,12 @@ const Demo = defineComponent(() => {
   onMounted(()=>{
     loading.value = true
   })
-  return ()=><Button loading={loading.value}>sdsd</Button>
+  return ()=>          <SplitButtonGroup style={{marginRight:10}}>
+    <Button theme="solid" type="primary">分裂按钮</Button>
+    <Dropdown menu={menu} trigger="click" position="bottomRight">
+      <Button style={{padding:'8px 4px'}} theme="solid" type="primary" icon={<IconTreeTriangleDown />} />
+    </Dropdown>
+  </SplitButtonGroup>
   return () => {
     return (
       <div style={{width:'50%'}}>
