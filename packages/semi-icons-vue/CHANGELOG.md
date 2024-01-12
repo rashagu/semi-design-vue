@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.6.2
+
+### Patch Changes
+
+- dfd195b: fix
+
 ## 0.6.1
 
 ### Patch Changes
