@@ -17,6 +17,9 @@
       <excludeFolder url="file://$MODULE_DIR$/docs/.vitepress/semi-design-vue" />
       <excludeFolder url="file://$MODULE_DIR$/docs/src/public/semi" />
       <excludeFolder url="file://$MODULE_DIR$/docs/.vitepress/out" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/semi-icons-lab-vue/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/semi-icons-lab-vue/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/semi-icons-vue/dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
