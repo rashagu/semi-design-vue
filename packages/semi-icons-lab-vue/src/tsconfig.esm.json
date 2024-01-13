@@ -14,6 +14,8 @@
     "strictNullChecks": false,
     "module": "ES6",
     "target": "ES6",
-    "types": ["vite/client", "node"]
+    "jsx": "preserve",
+    "types": ["vite/client", "node"],
+    "noImplicitAny": false
   }
 }

@@ -8,7 +8,7 @@
     "test": "vitest run --coverage",
     "test:watch": "vitest watch",
     "build:mjs": "pnpm -C ./packages/semi-ui-vue build",
-    "build:lib": "pnpm -C ./packages/semi-animation-vue build:lib & pnpm -C ./packages/semi-icons-vue build:lib & pnpm -C ./packages/semi-illustrations-vue build:lib & pnpm -C ./packages/semi-ui-vue build:vite",
+    "build:lib": "pnpm -C ./packages/semi-animation-vue build:lib & pnpm -C ./packages/semi-icons-vue build:vite & pnpm -C ./packages/semi-icons-lab-vue build:vite & pnpm -C ./packages/semi-illustrations-vue build:lib & pnpm -C ./packages/semi-ui-vue build:vite",
     "pre": "build:lib",
     "build:publish": "pnpm build:lib & pnpm publish -r",
     "change": "pnpm changeset",
@@ -27,7 +27,8 @@
     "packages/semi-animation-vue",
     "packages/semi-icons-vue",
     "packages/semi-ui-vue",
-    "packages/semi-illustrations-vue"
+    "packages/semi-illustrations-vue",
+    "packages/semi-icons-lab-vue"
   ],
   "pnpm": {
     "peerDependencyRules": {
