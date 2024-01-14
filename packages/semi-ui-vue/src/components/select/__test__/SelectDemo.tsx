@@ -30,7 +30,7 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
   onMounted(()=>{
     setTimeout(()=>{
       optionListRef.value = [
-        { value: 'tony', label: 'Ironman' },
+        { value: 'tony', label: 'tony' },
         { value: 'Thor', label: 'Thor' },
       ]
     }, 0)
@@ -126,8 +126,10 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
     optionList2: newOptions2,
   });
 
+  const dd = ref()
   function onChange(v) {
     console.log(v)
+    dd.value = v
   }
   return () => {
     let { optionList, optionList2 } = state;
@@ -137,21 +139,21 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
       itemSize: 36, // px
     };
     function handleSearch() {
-
     }
 
 
 
-    return <Select
-      placeholder="拥有3k个Option的Select 虚拟滚动"
-      style={{ width: '260px' }}
-      filter
-      optionList={optionListRef.value}
-      onChange={onChange}
-    ></Select>
 
     return (
-      <div>
+      <div><Select
+        placeholder="onChange"
+        style={{ width: '260px' }}
+        filter
+        optionList={optionListRef.value}
+        onChange={onChange}
+      ></Select>
+        <input placeholder={'select_change_demo'} value={dd.value}/>
+
         <Select
           placeholder="拥有3k个Option的Select 虚拟滚动"
           style={{ width: '260px' }}
