@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.6.2
+
+### Patch Changes
+
+- build
+
 ## 0.6.1
 
 ### Patch Changes

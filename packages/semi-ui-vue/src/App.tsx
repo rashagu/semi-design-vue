@@ -184,10 +184,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        <SelectDemo/>
+        {/*<SelectDemo/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
-        {/*<RadioDemo />*/}
+        <RadioDemo />
 
         {/*<InputDemo />*/}
         {/*<TypeDemo />*/}

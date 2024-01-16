@@ -1,6 +1,7 @@
 import {defineComponent, ref, h, Fragment} from 'vue'
 import {Radio, Group as RadioGroup} from '../index'
 import Space from '../../space'
+import {Form, FormRadio, FormRadioGroup} from "../../form";
 
 interface ExampleProps {
   name?: string
@@ -19,13 +20,21 @@ const RadioDemo = defineComponent<ExampleProps>((props, {slots}) => {
       <br/>
       <br/>
       <h4>v-model</h4>
-      <RadioGroup aria-label="单选组合示例" v-model={[value.value, 'value']}>
+      <RadioGroup type='button' buttonSize='middle' aria-label="单选组合示例" v-model={[value.value, 'value']}>
         <Radio value={1}>A</Radio>
         <Radio value={2}>B</Radio>
         <Radio value={3}>C</Radio>
         <Radio value={4}>D</Radio>
       </RadioGroup>
       <br/>
+      <Form>
+        <FormRadioGroup type='button' buttonSize='middle' field={'sd'} initValue={1} aria-label="单选组合示例">
+          <FormRadio value={1}>A</FormRadio>
+          <FormRadio value={2}>B</FormRadio>
+          <FormRadio value={3}>C</FormRadio>
+          <FormRadio value={4}>D</FormRadio>
+        </FormRadioGroup>
+      </Form>
       <br/>
       <h4>defaultValue</h4>
       <RadioGroup aria-label="单选组合示例" defaultValue={value.value}>
