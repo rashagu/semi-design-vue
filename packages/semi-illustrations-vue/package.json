@@ -1,11 +1,12 @@
 {
   "name": "@kousum/semi-illustrations-vue",
   "version": "0.6.2",
-  "main": "lib/index.js",
-  "module": "lib/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "type": "module",
   "files": [
-    "lib/"
+    "dist/"
   ],
   "publishConfig": {
     "access": "public"
@@ -14,6 +15,7 @@
   "scripts": {
     "dev": "vite",
     "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/compileLib.cjs",
+    "build:vite": "rimraf lib && rimraf dist && vue-tsc --noEmit && tsc -b --force tsconfig.esm.json && node build.cjs && node scripts/compileLib.cjs && rimraf lib",
     "build:icon": "node scripts/build-illustration.cjs"
   },
   "dependencies": {
@@ -47,6 +49,7 @@
     "identity-obj-proxy": "^3.0.0",
     "merge2": "^1.4.1",
     "rimraf": "^3.0.2",
+    "fast-glob": "^3.2.12",
     "sass": "^1.57.1",
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",

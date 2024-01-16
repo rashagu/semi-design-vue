@@ -247,6 +247,9 @@ importers:
       del:
         specifier: ^6.0.0
         version: 6.1.1
+      fast-glob:
+        specifier: ^3.2.12
+        version: 3.2.12
       gulp:
         specifier: ^4.0.2
         version: 4.0.2
@@ -496,6 +499,9 @@ importers:
       del:
         specifier: ^6.0.0
         version: 6.1.1
+      fast-glob:
+        specifier: ^3.2.12
+        version: 3.2.12
       gulp:
         specifier: ^4.0.2
         version: 4.0.2

@@ -20,6 +20,8 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/semi-icons-lab-vue/dist" />
       <excludeFolder url="file://$MODULE_DIR$/packages/semi-icons-lab-vue/lib" />
       <excludeFolder url="file://$MODULE_DIR$/packages/semi-icons-vue/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/semi-animation-vue/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/semi-illustrations-vue/dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
