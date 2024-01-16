@@ -111,7 +111,7 @@ export interface TreeState extends BasicTreeInnerData {
 }
 
 /* TreeNode */
-export interface TreeNodeProps extends BasicTreeNodeProps{
+export interface TreeNodeProps extends BasicTreeNodeProps {
     label?:VueJsxNode,
     keyword?: string
     data?:BasicTreeNodeData,
@@ -140,6 +140,7 @@ export interface TreeNodeProps extends BasicTreeNodeProps{
     motionKey?: string[] | string;
     eventKey?: string;
     icon?: VueJsxNode;
+    isEnd?: boolean[];
     key: string
 }
 export interface TreeNodeState {
@@ -147,7 +148,7 @@ export interface TreeNodeState {
 }
 
 /* NodeList */
-export interface TreeNodeData extends BasicTreeNodeData{
+export interface TreeNodeData extends BasicTreeNodeData {
     label?: VueJsxNode;
     icon?: VueJsxNode;
     children?: TreeNodeData[];
@@ -157,6 +158,7 @@ export interface FlattenNode extends BasicFlattenNode {
     data?: BasicTreeNodeData;
     label?: VueJsxNode;
     parent?: null | FlattenNode;
+    isEnd?: boolean[]
 }
 export interface NodeListProps {
     flattenNodes: FlattenNode[];

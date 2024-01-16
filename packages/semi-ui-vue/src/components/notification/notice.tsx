@@ -42,7 +42,7 @@ const { types, themes, directions } = strings;
 
 const propTypes:ComponentObjectPropsOptions<NoticeReactProps> = {
     duration: PropTypes.number,
-    id: [PropTypes.string, PropTypes.number],
+    id: PropTypes.string,
     title: PropTypes.node,
     content: PropTypes.node, // strings、numbers、array、element
     type: String as PropType<NoticeReactProps['type']>,

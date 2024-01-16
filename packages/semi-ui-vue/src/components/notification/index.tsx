@@ -1,6 +1,5 @@
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
-import ConfigContext, {ContextValue} from '../configProvider/context';
 import NotificationListFoundation, {
   ConfigProps, NotificationListAdapter,
   NotificationListProps,
@@ -115,12 +114,12 @@ const NotificationList = defineComponent<NotificationListProps>((props, {expose}
 
   const has = (id: string) => foundation.has(id);
 
-  const remove = (id: string | number) => {
+  const remove = (id: string) => {
     foundation.removeNotice(String(id));
   };
 
 
-  const update = (id: string|number, opts: NoticeProps)=>{
+  const update = (id: string, opts: NoticeProps)=>{
     return foundation.update('' + id, opts);
   }
 

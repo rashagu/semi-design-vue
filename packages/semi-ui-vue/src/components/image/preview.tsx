@@ -26,6 +26,7 @@ import {getProps, useBaseComponent} from "../_base/baseComponent";
 import {VueJsxNode} from "../interface";
 import {getFragmentChildren} from "../_utils";
 import cls from "classnames";
+import { omit } from "lodash";
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -55,6 +56,8 @@ const propTypes:ComponentObjectPropsOptions<PreviewProps> = {
     lazyLoadMargin: PropTypes.string,
     preLoad: PropTypes.bool,
     preLoadGap: PropTypes.number,
+    previewCls: PropTypes.string,
+    previewStyle: PropTypes.object,
     disableDownload: PropTypes.bool,
     zIndex: PropTypes.number,
     renderHeader: PropTypes.func as PropType<PreviewProps['renderHeader']>,
@@ -76,6 +79,7 @@ const defaultProps = {
     src: [],
     lazyLoad: true,
     lazyLoadMargin: "0px 100px 100px 0px",
+    closable: true
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Preview = defineComponent<PreviewProps>((props, {}) => {
@@ -245,6 +249,11 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
         // @ts-ignore
         children.value = slots.default?.()?.[0]?.children || []
         const { src, className, style, lazyLoad, setDownloadName, ...restProps } = props;
+        const previewInnerProps = {
+            ...omit(restProps, ['previewCls', 'previewStyle']),
+            className: restProps?.previewCls,
+            style: restProps?.previewStyle
+        };
         const { currentIndex, visible } = state;
         const { srcListInChildren, newChildren, titles } = loopImageIndex();
         const srcArr = Array.isArray(src) ? src : (typeof src === "string" ? [src] : []);
@@ -268,7 +277,7 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
                   {newChildren}
               </div>
               <PreviewInner
-                {...restProps}
+                {...previewInnerProps}
                 ref={previewRef}
                 src={finalSrcList}
                 currentIndex={currentIndex}

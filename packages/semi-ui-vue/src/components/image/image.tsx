@@ -7,7 +7,7 @@ import PreviewInner from "./previewInner";
 import ImageFoundation, {ImageAdapter} from "@douyinfe/semi-foundation/image/imageFoundation";
 import {LocaleConsumerFunc} from "../locale/localeConsumer";
 import {Locale} from "../locale/interface";
-import {isBoolean, isObject, isUndefined} from "lodash";
+import {isBoolean, isObject, isUndefined, omit} from "lodash";
 import Skeleton, {SkeletonImage} from "../skeleton";
 import "@douyinfe/semi-foundation/image/image.scss";
 import {
@@ -41,6 +41,7 @@ const propTypes:ComponentObjectPropsOptions<ImageProps> = {
   preview: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   onLoad: PropTypes.func as PropType<ImageProps['onLoad']>,
   onError: PropTypes.func as PropType<ImageProps['onError']>,
+  onClick: PropTypes.func as PropType<ImageProps['onClick']>,
   crossOrigin: PropTypes.string as PropType<ImageProps['crossOrigin']>,
   imageID: PropTypes.number,
 }
@@ -225,7 +226,11 @@ const Image = defineComponent<ImageProps>((props, {}) => {
     const canPreview = loadStatus === "success" && preview && !isInGroup();
     const showPreviewCursor = preview && loadStatus === "success";
     const previewSrc = isObject(preview) ? (preview.src ?? src) : src;
-    const previewProps = isObject(preview) ? preview : {};
+    const previewProps = isObject(preview) && canPreview ? {
+      ...omit(preview, ['className', 'style', 'previewCls', 'previewStyle']),
+      className: preview?.previewCls,
+      style: preview?.previewStyle
+    }: {} as any;
     return (
       // eslint-disable jsx-a11y/no-static-element-interactions
       // eslint-disable jsx-a11y/click-events-have-key-events

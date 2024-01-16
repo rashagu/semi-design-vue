@@ -10,6 +10,7 @@ import {vuePropsMake} from "../PropTypes";
 import {useDropdownContext} from "./context/Consumer";
 import {ComponentObjectPropsOptions} from "vue";
 import type {Events} from "vue";
+import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
 
 export type Type = 'primary' | 'secondary' | 'tertiary' | 'warning' | 'danger';
 
@@ -61,7 +62,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake<DropdownItemProps>(propTypes, defaultProps)
-const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
+const DropdownItem = defineComponent<DropdownItemProps>((props, {slots, attrs}) => {
 
   const {context} = useDropdownContext();
   let elementType: string = 'Dropdown.Item'
@@ -128,7 +129,7 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots}) => {
     }
     return (
       <li role="menuitem" tabindex={-1} aria-disabled={disabled} {...events} onKeydown={onKeyDown} ref={forwardRef}
-          class={itemclass} style={style}>
+          class={itemclass} style={style} {...getDataAttr({...props, ...attrs} )}>
         {tick}
         {iconContent}
         {slots.default?.()}

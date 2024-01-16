@@ -112,7 +112,8 @@ export type OverrideCommonProps =
   | 'treeData'
   | 'value'
   | 'onExpand'
-  | 'keyMaps';
+  | 'keyMaps'
+  | 'showLine';
 
 /**
  * Type definition description:
@@ -233,6 +234,7 @@ const propTypes: ComponentObjectPropsOptions<TreeSelectProps> = {
   showSearchClear: PropTypes.bool,
   autoAdjustOverflow: PropTypes.bool,
   showFilteredOnly: PropTypes.bool,
+  showLine: PropTypes.bool,
   motionExpand: PropTypes.bool,
   emptyContent: PropTypes.node,
   leafOnly: PropTypes.bool,
@@ -1497,14 +1499,15 @@ const TreeSelect = defineComponent<TreeSelectProps>(
     const renderTreeNode = (treeNode: FlattenNode, ind: number, style: CSSProperties) => {
       const { data, key } = treeNode;
       const treeNodeProps = foundation.getTreeNodeProps(key);
+      const { showLine } = props;
       if (!treeNodeProps) {
         return null;
       }
-      const props: any = pick(treeNode, ['key', 'label', 'disabled', 'isLeaf', 'icon']);
-      const { keyMaps } = props;
+      const props_: any = pick(treeNode, ['key', 'label', 'disabled', 'isLeaf', 'icon', 'isEnd']);
+      const { keyMaps } = props_;
       const children = data[get(keyMaps, 'children', 'children')];
-      !isUndefined(children) && (props.children = children);
-      return <TreeNode {...treeNodeProps} {...data} {...props} data={data} style={style} />;
+      !isUndefined(children) && (props_.children = children);
+      return <TreeNode {...treeNodeProps} {...data} {...props_} data={data} style={style} showLine={showLine}/>;
     };
 
     const itemKey = (index: number, data: Record<string, any>) => {

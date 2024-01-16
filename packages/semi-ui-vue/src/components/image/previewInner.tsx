@@ -1,6 +1,6 @@
-import {PreviewProps as PreviewInnerProps, PreviewInnerStates, RatioType, PreviewImageProps} from "./interface";
+import {PreviewInnerProps, PreviewInnerStates, RatioType, PreviewImageProps} from "./interface";
 import * as PropTypes from "../PropTypes";
-import {cssClasses} from "@douyinfe/semi-foundation/image/constants";
+import {cssClasses, numbers} from "@douyinfe/semi-foundation/image/constants";
 import cls from "classnames";
 import {isEqual, isFunction} from "lodash";
 import Portal from "../_portal";
@@ -86,7 +86,7 @@ const defaultProps = {
   lazyLoad: false,
   preLoad: true,
   preLoadGap: 2,
-  zIndex: 1000,
+  zIndex: numbers.DEFAULT_Z_INDEX,
   maskClosable: true,
   viewerVisibleDelay: 10000,
   maxZoom: 5,
@@ -302,7 +302,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     foundation.handleRotateImage(direction);
   }
 
-  const handleZoomImage = (newZoom: number) => {
+  const handleZoomImage = (newZoom: number, notify: boolean = true) => {
     foundation.handleZoomImage(newZoom);
   }
 
@@ -359,6 +359,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
   return () => {
     const {
       getPopupContainer,
+      closable,
       zIndex,
       visible,
       className,
@@ -403,12 +404,11 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     const showPrev = total !== 1 && (infinite || currentIndex !== 0);
     const showNext = total !== 1 && (infinite || currentIndex !== total - 1);
     return (
-      <Portal
+      visible && <Portal
         getPopupContainer={getPopupContainer}
         style={wrapperStyle}
       >
-        {visible &&
-          // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events,jsx-a11y/no-static-element-interactions
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <div
             class={previewWrapperCls}
             style={style}
@@ -417,7 +417,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
             ref={registryImageWrapRef}
             onMousemove={handleMouseMove}
           >
-            <Header ref={headerRef} className={cls(hideViewerCls)} onClose={handlePreviewClose} renderHeader={renderHeader}/>
+            <Header ref={headerRef} className={cls(hideViewerCls)} onClose={handlePreviewClose} renderHeader={renderHeader} closable={closable}/>
             <PreviewImage
               src={imgSrc[currentIndex]}
               onZoom={handleZoomImage}
@@ -463,6 +463,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
               ratio={ratio}
               prevTip={prevTip}
               nextTip={nextTip}
+              zIndex={zIndex}
               zoomInTip={zoomInTip}
               zoomOutTip={zoomOutTip}
               rotateTip={rotateTip}
@@ -479,7 +480,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
               onAdjustRatio={handleAdjustRatio}
               renderPreviewMenu={renderPreviewMenu}
             />
-          </div>}
+          </div>
       </Portal>
     );
   }

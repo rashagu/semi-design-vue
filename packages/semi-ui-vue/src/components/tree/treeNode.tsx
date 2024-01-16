@@ -11,7 +11,8 @@ import { getHighLightTextHTML } from '../_utils/index';
 import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, reactive, ref, useSlots} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useTreeContext } from './TreeContext/Consumer';
-import {VueHTMLAttributes, VueJsxNode} from '../interface';
+import type {VueHTMLAttributes} from '../interface';
+import Indent from './indent';
 
 const prefixcls = cssClasses.PREFIX_OPTION;
 
@@ -62,6 +63,8 @@ const propTypes:ComponentObjectPropsOptions<TreeNodeProps> = {
   treeNodeFilterProp: PropTypes.string,
   selectedKey: PropTypes.string,
   motionKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  isEnd: PropTypes.array,
+  showLine: PropTypes.bool,
   eventKey: String,
   label: PropTypes.node,
   data: Object,
@@ -239,7 +242,7 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
 
   function renderArrow() {
     const showIcon = !isLeaf();
-    const { loading, expanded } = props;
+    const { loading, expanded, showLine } = props;
     if (loading) {
       return <Spin wrapperClassName={`${prefixcls}-spin-icon`} />;
     }
@@ -253,6 +256,9 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
           onClick={onExpand}
         />
       );
+    }
+    if (showLine) {
+      return renderSwitcher();
     }
     return <span class={`${prefixcls}-empty-icon`} />;
   }
@@ -273,6 +279,17 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
     );
   }
 
+  // Switcher
+  const renderSwitcher = () => {
+    if (isLeaf()) {
+      // if switcherIconDom is null, no render switcher span
+      return (<span class={cls(`${prefixcls}-switcher`)} >
+                <span class={`${prefixcls}-switcher-leaf-line`} />
+            </span>);
+
+    }
+    return null;
+  };
   function renderIcon() {
     const {
       directory,
@@ -351,18 +368,22 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
       // eslint-disable-next-line no-unused-vars
       display,
       style,
+      isEnd,
+      showLine,
       ...rest
     } = props;
     if (empty) {
       return renderEmptyNode();
     }
     const { multiple, draggable, renderFullLabel, dragOverNodeKey, dropPosition, labelEllipsis } = context.value;
+    const isEndNode = isEnd[isEnd.length - 1];
     const disabled = isDisabled();
     const dragOver = dragOverNodeKey === eventKey && dropPosition === 0;
     const dragOverGapTop = dragOverNodeKey === eventKey && dropPosition === -1;
     const dragOverGapBottom = dragOverNodeKey === eventKey && dropPosition === 1;
     const nodeCls = cls(prefixcls, {
       [`${prefixcls}-level-${level + 1}`]: true,
+      [`${prefixcls}-fullLabel-level-${level + 1}`]: renderFullLabel,
       [`${prefixcls}-collapsed`]: !expanded,
       [`${prefixcls}-disabled`]: Boolean(disabled),
       [`${prefixcls}-selected`]: selected,
@@ -375,6 +396,7 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
       // When draggable + renderFullLabel is turned on, the style of dragover
       [`${prefixcls}-fullLabel-drag-over-gap-top`]: !disabled && dragOverGapTop && renderFullLabel,
       [`${prefixcls}-fullLabel-drag-over-gap-bottom`]: !disabled && dragOverGapBottom && renderFullLabel,
+      [`${prefixcls}-tree-node-last-leaf`]: isEndNode,
     });
     const labelProps: RenderFullLabelProps = {
       onClick: onClick,
@@ -458,6 +480,7 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
           ...dragProps,
         }}
       >
+        <Indent showLine={showLine} prefixcls={prefixcls} level={level} isEnd={isEnd} />
         {renderArrow()}
         <span class={labelCls}>
           {multiple ? renderCheckbox() : null}

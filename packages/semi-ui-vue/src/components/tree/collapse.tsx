@@ -1,23 +1,10 @@
-import { Transition } from '@kousum/semi-animation-vue';
+import {Transition} from '@kousum/semi-animation-vue';
 import * as PropTypes from '../PropTypes';
-import { noop } from 'lodash';
-import { cssClasses } from '@douyinfe/semi-foundation/collapsible/constants';
+import {vuePropsMake} from '../PropTypes';
+import {noop} from 'lodash';
+import {cssClasses} from '@douyinfe/semi-foundation/collapsible/constants';
 import getMotionObjFromProps from '@douyinfe/semi-foundation/utils/getMotionObjFromProps';
-import {RefElement, VueJsxNode} from "../interface";
-import {
-    defineComponent,
-    h,
-    useSlots,
-    ref,
-    watch,
-    computed,
-    onUnmounted,
-    CSSProperties,
-    nextTick,
-    onMounted,
-    PropType
-} from "vue";
-import {vuePropsMake} from "../PropTypes";
+import {CSSProperties, defineComponent, h, nextTick, PropType, ref, useSlots, watch} from "vue";
 
 export interface CollapseProps {
     motion?: boolean;

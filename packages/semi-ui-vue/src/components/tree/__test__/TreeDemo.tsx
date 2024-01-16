@@ -46,6 +46,7 @@ const TreeDemo = defineComponent<ExampleProps>((props, {}) => {
     height: 420,
     border: '1px solid var(--semi-color-border)'
   };
+  // 虚拟化开启后，动画效果将被关闭
   return () => (
     <div>
       <Tree

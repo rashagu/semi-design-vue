@@ -9,7 +9,7 @@ import {VueJsxNode} from "../interface";
 
 const prefixCls = `${cssClasses.PREFIX}-preview-header`;
 
-const Header: FunctionalComponent<HeaderProps> = ({ onClose, titleStyle, className, renderHeader, forwardRef }) => (
+const Header: FunctionalComponent<HeaderProps> = ({ onClose, titleStyle, className, renderHeader, closable, forwardRef }) => (
     <PreviewContext.Consumer>
         {({ currentIndex, titles }) => {
             let title;
@@ -20,9 +20,9 @@ const Header: FunctionalComponent<HeaderProps> = ({ onClose, titleStyle, classNa
                 <section ref={forwardRef} class={cls(prefixCls, className)}>
                     <section class={`${prefixCls}-title`} style={titleStyle}>{renderHeader ? renderHeader(title) : title}</section>
                     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-                    <section class={`${prefixCls}-close`} onMouseup={onClose}>
+                    {closable && <section class={`${prefixCls}-close`} onMouseup={onClose}>
                         <IconClose />
-                    </section>
+                    </section>}
                 </section>
             );
         }}
@@ -30,11 +30,13 @@ const Header: FunctionalComponent<HeaderProps> = ({ onClose, titleStyle, classNa
 );
 
 Header.props = {
+    closable: Boolean,
+    forwardRef: [Object],
     renderHeader:Function as PropType<(info: any) => VueJsxNode>,
     title: String,
     titleStyle: Object as PropType<CSSProperties>,
     className: String,
-    onClose:Function as PropType< () => void>,
+    onClose:Function as PropType< () => void>
 }
 
 export default Header;

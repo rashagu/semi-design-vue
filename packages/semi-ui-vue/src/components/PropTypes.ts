@@ -1,5 +1,4 @@
 import {ComponentObjectPropsOptions} from "vue";
-import {DayColProps} from "./calendar";
 
 
 export const any = [Array, Object, String, Number, Boolean, Function];

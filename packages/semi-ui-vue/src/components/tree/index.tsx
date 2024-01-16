@@ -90,6 +90,7 @@ const propTypes: ComponentObjectPropsOptions<TreeProps> = {
   searchStyle: PropTypes.object,
   selectedKey: PropTypes.string as PropType<TreeProps['selectedKey']>,
   showFilteredOnly: PropTypes.bool,
+  showLine: PropTypes.bool,
   style: PropTypes.object,
   treeData: PropTypes.array,
   keyMaps: PropTypes.object,
@@ -138,6 +139,7 @@ const defaultProps = {
   motion: true,
   leafOnly: false,
   showFilteredOnly: false,
+  showLine: false,
   expandAction: false,
   disableStrictly: false,
   draggable: false,
@@ -715,11 +717,11 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
     if (!treeNodeProps) {
       return null;
     }
-    const { keyMaps } = props;
-    const props_: any = pick(treeNode, ['key', 'label', 'disabled', 'isLeaf', 'icon']);
+    const { keyMaps, showLine } = props;
+    const props_: any = pick(treeNode, ['key', 'label', 'disabled', 'isLeaf', 'icon', 'isEnd']);
     const children = data[get(keyMaps, 'children', 'children')];//TODO
     !isUndefined(children) && (props_.children = children);
-    return <TreeNode {...treeNodeProps} {...data} {...props_} data={data} style={isEmpty(style) ? {} : style} />;
+    return <TreeNode {...treeNodeProps} {...data} {...props_} showLine={showLine} data={data} style={isEmpty(style) ? {} : style} />;
   };
 
   const itemKey = (index: number, data: KeyEntity) => {
@@ -802,6 +804,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
       directory,
       multiple,
       showFilteredOnly,
+      showLine,
       motion,
       expandAction,
       loadData,

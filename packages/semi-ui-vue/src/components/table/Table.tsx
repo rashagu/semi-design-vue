@@ -1095,6 +1095,7 @@ function Table<RecordType extends Record<string, any>>() {
             <ColumnSorter
               key={strings.DEFAULT_KEY_COLUMN_SORTER}
               sortOrder={sortOrder}
+              sortIcon={column.sortIcon}
               onClick={(e) => foundation.handleSort(column, e)}
               title={TitleNode}
             />

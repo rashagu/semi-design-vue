@@ -18,6 +18,7 @@ export interface ImageProps extends BaseProps{
     fallback?: string | VueJsxNode;
     preview?: boolean | PreviewProps;
     onError?: (event: Event) => void;
+    onClick?: (event: any) => void;
     onLoad?: (event: Event) => void;
     crossOrigin?: "anonymous"| "use-credentials";
     maxZoom?: number;
@@ -59,6 +60,8 @@ export interface PreviewProps extends BaseProps {
     crossOrigin?: "anonymous"| "use-credentials";
     maxZoom?: number;
     minZoom?: number;
+    previewCls?: string;
+    previewStyle?: CSSProperties;
     renderHeader?: (info: any) => VueJsxNode;
     getPopupContainer?: () => HTMLElement;
     onVisibleChange?: (visible: boolean) => void;
@@ -76,6 +79,8 @@ export interface PreviewProps extends BaseProps {
     renderPreviewMenu?: (props: MenuProps) => VueJsxNode;
     forwardRef?: ShallowRef<HTMLElement>
 }
+
+export interface PreviewInnerProps extends Omit<PreviewProps, "previewCls" | "previewStyle"> {}
 
 export interface MenuProps {
     min?: number;
@@ -120,6 +125,7 @@ export interface SliderProps {
 }
 
 export interface HeaderProps {
+    closable: boolean;
     renderHeader?: (info: any) => VueJsxNode,
     title?: string;
     titleStyle?: CSSProperties;
@@ -147,6 +153,7 @@ export interface FooterProps extends SliderProps {
     adaptiveTip?: string;
     originTip?: string;
     showTooltip?: boolean;
+    zIndex?: number;
     onZoomIn?: (zoom: number) => void;
     onZoomOut?: (zoom: number) => void;
     onPrev?: () => void;

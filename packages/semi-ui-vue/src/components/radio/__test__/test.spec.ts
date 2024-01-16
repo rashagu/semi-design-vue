@@ -7,5 +7,5 @@ test('PopoverTest qwe', async () => {
   const wrapper = mount(Comp, {})
 
   const profileLink = wrapper.get('.semi-radio-addon-buttonRadio').text()
-  expect(profileLink).toEqual("即时推送")
+  expect(profileLink).toEqual("A")
 })

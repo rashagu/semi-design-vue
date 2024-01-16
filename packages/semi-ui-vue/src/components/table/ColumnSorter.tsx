@@ -5,7 +5,7 @@ import { IconCaretup, IconCaretdown } from '@kousum/semi-icons-vue';
 
 import { cssClasses, strings } from '@douyinfe/semi-foundation/table/constants';
 
-import { SortOrder } from './interface';
+import { SortIcon, SortOrder } from './interface';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots} from "vue";
 import {VueJsxNode} from "../interface";
@@ -17,7 +17,8 @@ export interface ColumnSorterProps {
     onClick?: (e: MouseEvent) => void;
     prefixCls?: string;
     sortOrder?: SortOrder;
-    title?: VueJsxNode
+    title?: VueJsxNode;
+    sortIcon?: SortIcon
 }
 
 const propTypes: ComponentObjectPropsOptions<ColumnSorterProps> = {
@@ -26,6 +27,7 @@ const propTypes: ComponentObjectPropsOptions<ColumnSorterProps> = {
     onClick: PropTypes.func as PropType<ColumnSorterProps['onClick']>,
     prefixCls: PropTypes.string,
     sortOrder: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    sortIcon: PropTypes.func as PropType<ColumnSorterProps['sortIcon']>,
     title: PropTypes.any as PropType<ColumnSorterProps['title']>,
 };
 
@@ -39,7 +41,7 @@ const ColumnSorter = defineComponent<ColumnSorterProps>((props, {}) => {
     const slots = useSlots();
 
     return () => {
-        const { prefixCls, onClick, sortOrder, style, title } = props;
+        const { prefixCls, onClick, sortOrder, style, title, sortIcon } = props;
 
         const iconBtnSize = 'default';
 
@@ -59,9 +61,26 @@ const ColumnSorter = defineComponent<ColumnSorterProps>((props, {}) => {
             'aria-roledescription': 'Sort data with this column',
         };
 
+        const renderSortIcon = () => {
+            if (typeof sortIcon === 'function') {
+                return sortIcon({ sortOrder });
+            } else {
+                return (
+                  <div style={style} class={`${prefixCls}-column-sorter`}>
+                        <span class={`${upCls}`}>
+                            <IconCaretup size={iconBtnSize} />
+                        </span>
+                      <span class={`${downCls}`}>
+                            <IconCaretdown size={iconBtnSize} />
+                        </span>
+                  </div>
+                );
+            }
+        };
+
         return (
           <div
-            role='button'
+            role="button"
             {...ariaProps}
             tabindex={-1}
             class={`${prefixCls}-column-sorter-wrapper`}
@@ -69,17 +88,7 @@ const ColumnSorter = defineComponent<ColumnSorterProps>((props, {}) => {
             onKeypress={e => isEnterPress(e) && onClick(e as any)}
           >
               {title}
-              <div
-                style={style}
-                class={`${prefixCls}-column-sorter`}
-              >
-                    <span class={`${upCls}`}>
-                        <IconCaretup size={iconBtnSize} />
-                    </span>
-                  <span class={`${downCls}`}>
-                        <IconCaretdown size={iconBtnSize} />
-                    </span>
-              </div>
+              {renderSortIcon()}
           </div>
         );
     };
