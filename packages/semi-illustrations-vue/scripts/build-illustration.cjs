@@ -7,7 +7,7 @@ const build = require('../../../script/build-svg');
 
 // Semi Illustrations
 const entryDir = resolve(__dirname, '../src/svgs');
-const outDir = resolve(__dirname, '../src/illustrations');
+const outDir = resolve(__dirname, '../src/components/illustrations');
 
 const svgoPlugins = [
     {

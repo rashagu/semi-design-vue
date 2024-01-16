@@ -7,13 +7,14 @@
     "vue",
     "semi-ui"
   ],
-  "files": [
-    "lib/"
-  ],
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "lib/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "type": "module",
+  "files": [
+    "dist/"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/rashagu/semi-design-vue"
@@ -26,6 +27,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "build_lib": "rimraf lib && tsc -b --force tsconfig.esm.json",
     "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json",
+    "build:vite": "rimraf lib && rimraf dist && vue-tsc --noEmit && tsc -b --force tsconfig.esm.json && node build.cjs && rimraf lib",
     "lib-vue-tsc": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json",
     "preview": "vite preview"
   },
@@ -64,6 +66,7 @@
     "identity-obj-proxy": "^3.0.0",
     "merge2": "^1.4.1",
     "rimraf": "^3.0.2",
+    "fast-glob": "^3.2.12",
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
     "typescript": "^5.1.6",

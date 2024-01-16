@@ -15,12 +15,12 @@ gulp.task('cleanLib', function cleanLib() {
 });
 
 function compileTSX(isESM) {
-  const jsStream = gulp.src(['lib/**/*.js','lib/**/*.d.ts'])
+  const jsStream = gulp.src(['dist/**/*.js','lib/**/*.d.ts'])
     .pipe(replace(/(import\s+)['"]@douyinfe\/semi-foundation\/([^'"]+)['"]/g, '$1\'@douyinfe/semi-foundation/lib/es/$2\''))
     .pipe(replace(/((?:import|export)\s+.+from\s+)['"]@douyinfe\/semi-foundation\/([^'"]+)['"]/g, '$1\'@douyinfe/semi-foundation/lib/es/$2\''))
     .pipe(replace(/(import\(['"])@douyinfe\/semi-foundation\/(.+)/g, '$1@douyinfe/semi-foundation/lib/es/$2'))
     .pipe(replace(/(import\s+)['"]([^'"]+)(\.scss)['"]/g, '$1\'$2.css\''))
-    .pipe(gulp.dest('lib'));
+    .pipe(gulp.dest('dist'));
 
   return merge2([jsStream]);
 }
@@ -34,7 +34,7 @@ gulp.task('compileTSXForCJS', function compileTSXForCJS() {
 });
 
 gulp.task('compileScss', function compileScss() {
-    return gulp.src(['src/icons/**/*.scss'])
+    return gulp.src(['src/components/**/*.scss'])
         .pipe(through2.obj(
             function (chunk, enc, cb) {
                 let rootPath = path.join(__dirname, '../../');
@@ -51,7 +51,7 @@ gulp.task('compileScss', function compileScss() {
 });
 
 gulp.task('moveScss', function moveScss() {
-    return gulp.src(['src/icons/**/*.scss'])
+    return gulp.src(['src/components/**/*.scss'])
         .pipe(gulp.dest('lib'))
 });
 
