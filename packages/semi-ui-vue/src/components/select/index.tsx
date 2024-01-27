@@ -833,7 +833,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
           focused={isFocused}
           onMouseEnter={() => onOptionHover(optionIndex)}
           style={optionStyle}
-          key={option.key || option.label as string + option.value as string + optionIndex}
+          key={option._keyInOptionList || option._keyInJsx || option.label as string + option.value as string + optionIndex}
           renderOptionItem={renderOptionItem}
           inputValue={inputValue}
           semiOptionId={`${selectID}-option-${optionIndex}`}
@@ -1014,24 +1014,22 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
 
     const contentWrapperCls = `${prefixcls}-content-wrapper`;
     return (
-      <Fragment>
-        <div class={contentWrapperCls}>
-          {
-            <span class={spanCls} x-semi-prop="placeholder">
-              {renderText || renderText === 0 ? renderText : placeholder}
+      <div class={contentWrapperCls}>
+        {
+          <span class={spanCls} x-semi-prop="placeholder" key={renderText}>
+              {renderText || renderText === 0 ? renderText: placeholder}
             </span>
-          }
-          {filterable && showInput ? renderInput() : null}
-        </div>
-      </Fragment>
+        }
+        {filterable && showInput ? renderInput() : null}
+      </div>
     );
   }
 
 
   const getTagItem = (item: any, i: number, renderSelectedItem: RenderSelectedItemFn) => {
-    const { size, disabled: selectDisabled } = props;
+    const {size, disabled: selectDisabled} = props;
     const label = item[0];
-    const { value } = item[1];
+    const {value} = item[1];
     const disabled = item[1].disabled || selectDisabled;
     const onClose = (tagContent: VueJsxNode, e: MouseEvent) => {
       if (e && typeof e.preventDefault === 'function') {

@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, reactive, onMounted} from 'vue'
+import {defineComponent, ref, h, Fragment, reactive, onMounted, createVNode, VNode} from 'vue'
 import Select, {optionRenderProps} from '../index'
 import Option from '../option'
 import OptGroup from '../optionGroup'
@@ -21,7 +21,7 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
     { value: 'steve', label: 'Caption' },
     { value: 'peter', label: 'SpiderBoy' },
   ];
-  const  optionListRef = ref([
+  const  optionListRef = ref<{value: string, label: VNode | string}[]>([
     { value: 'tony', label: 'Ironman' },
     { value: 'Thor', label: 'Thor' },
     { value: 'steve', label: 'Caption' },
@@ -30,8 +30,8 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
   onMounted(()=>{
     setTimeout(()=>{
       optionListRef.value = [
-        { value: 'tony', label: 'tony' },
-        { value: 'Thor', label: 'Thor' },
+        {value: 'tony', label: <span>tony</span>},
+        {value: 'Thor', label: <span>Thor</span>},
       ]
     }, 0)
   })
