@@ -1,10 +1,10 @@
-import {defineComponent, h, inject, Ref, ref, UnwrapRef, useSlots} from 'vue'
+import {defineComponent, h, inject, Ref, ref, shallowRef, UnwrapRef, useSlots} from 'vue'
 import {ArrayFieldContext} from "../../context";
 import {ArrayFieldType} from "./Provider";
 
 
 export function useArrayFieldContext (): { context: Ref<UnwrapRef<ArrayFieldType>> } {
-  const context = inject('ArrayFieldContext', ref<ArrayFieldType>({
+  const context = inject('ArrayFieldContext', shallowRef<ArrayFieldType>({
     shouldUseInitValue: true,
   }))
   return {

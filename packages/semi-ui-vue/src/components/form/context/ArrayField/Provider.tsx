@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, provide, watch} from 'vue'
+import {defineComponent, ref, h, Fragment, provide, watch, shallowRef} from 'vue'
 export type ArrayFieldType = {
   shouldUseInitValue: boolean,
 }
@@ -7,7 +7,7 @@ export const vuePropsType = {
   value: Object
 }
 const Provider = defineComponent<{value:ArrayFieldType}>((props, {slots}) => {
-  const ConfigContext = ref<ArrayFieldType>();
+  const ConfigContext = shallowRef<ArrayFieldType>();
 
   watch(()=>props.value, ()=>{
     ConfigContext.value = props.value

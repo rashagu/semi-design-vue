@@ -20,6 +20,11 @@ const FormDemo = defineComponent<ExampleProps>((props, { attrs }) => {
       console.log(values)
     })
   }
+
+  function onReset() {
+    formApi.value.reset()
+    console.log(formApi.value.getValues())
+  }
   return () => (
     <div>
       <Form getFormApi={v=>formApi.value = v} layout="horizontal" onValueChange={(values) => console.log(values)}>
@@ -50,6 +55,7 @@ const FormDemo = defineComponent<ExampleProps>((props, { attrs }) => {
           <FormSelectOption value="guest">访客</FormSelectOption>
         </FormSelect>
         <Button type="primary" html-type="submit" onClick={onSubmit}>刷新</Button>
+        <Button type="primary" onClick={onReset}>reset</Button>
       </Form>
     </div>
   );

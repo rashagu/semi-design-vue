@@ -1,9 +1,9 @@
-import {defineComponent, h, inject, Ref, ref, UnwrapRef, useSlots} from 'vue'
+import {defineComponent, h, inject, Ref, ref, shallowRef, UnwrapRef, useSlots} from 'vue'
 import {BaseFormApi} from "@douyinfe/semi-foundation/form/interface";
 
 
 export function useBaseFormApiContext (): { context: Ref<UnwrapRef<BaseFormApi>> } {
-  const context = inject('BaseFormApiContext', ref<BaseFormApi>({} as BaseFormApi))
+  const context = inject('BaseFormApiContext', shallowRef<BaseFormApi>({} as BaseFormApi))
   return {
     context
   }

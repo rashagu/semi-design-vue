@@ -52,8 +52,7 @@ const ModalForm = defineComponent<ModalFormProps>((props) => {
 
   function resetPartial() {
     const scope = state.formApi.getValue("resetScope");
-    // @ts-ignore
-    state.formApi.reset(scope); // 官方缺少 ts 类型
+    state.formApi.reset(scope);
   }
   return () => {
     const options = ["a", "b", "c", "d", "b.name"].map((item) => ({

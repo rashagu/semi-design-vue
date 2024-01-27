@@ -23,7 +23,7 @@ import {
     CSSProperties,
     defineComponent,
     getCurrentInstance,
-    h,
+    h, nextTick,
     onMounted,
     onUnmounted, PropType,
     reactive,
@@ -124,8 +124,13 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
                 // adapter.forceUpdate(callback);
                 // currentInstance.update()
                 // vue3 强制刷新
-                currentInstance.proxy.$forceUpdate();
-                callback?.()
+                // fix: 组件卸载时可能会重复执行 hmr
+                nextTick(()=>{
+                    currentInstance.proxy.$forceUpdate();
+                    nextTick(()=>{
+                        callback?.()
+                    })
+                })
             },
             notifyChange: (formState: FormState) => {
                 props.onChange(formState);

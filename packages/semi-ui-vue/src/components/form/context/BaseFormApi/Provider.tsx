@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, provide, watch} from 'vue'
+import {defineComponent, ref, h, Fragment, provide, watch, shallowRef} from 'vue'
 import type {BaseFormApi} from "@douyinfe/semi-foundation/form/interface";
 
 
@@ -6,7 +6,7 @@ export const vuePropsType = {
   value: Object
 }
 const Provider = defineComponent<{value:BaseFormApi}>((props, {slots}) => {
-  const ConfigContext = ref<BaseFormApi>();
+  const ConfigContext = shallowRef<BaseFormApi>();
 
   provide('BaseFormApiContext', ConfigContext)
   watch(()=>props.value, ()=>{

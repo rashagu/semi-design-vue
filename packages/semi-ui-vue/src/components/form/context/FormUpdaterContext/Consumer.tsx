@@ -1,9 +1,9 @@
-import {defineComponent, h, inject, Ref, ref, UnwrapRef, useSlots} from 'vue'
+import {defineComponent, h, inject, Ref, ref, shallowRef, UnwrapRef, useSlots} from 'vue'
 import {FormUpdaterContextType} from "@douyinfe/semi-foundation/form/interface";
 
 
 export function useFormUpdaterContext (): { context: Ref<UnwrapRef<FormUpdaterContextType>> } {
-  const context = inject('FormUpdaterContext', ref<FormUpdaterContextType>({} as FormUpdaterContextType))
+  const context = inject('FormUpdaterContext', shallowRef<FormUpdaterContextType>({} as FormUpdaterContextType))
   return {
     context
   }

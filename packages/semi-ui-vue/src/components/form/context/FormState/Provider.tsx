@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, provide, watch} from 'vue'
+import {defineComponent, ref, h, Fragment, provide, watch, shallowRef} from 'vue'
 import {FormState} from "@douyinfe/semi-foundation/form/interface";
 
 
@@ -6,7 +6,7 @@ export const vuePropsType = {
   value: Object
 }
 const Provider = defineComponent<{value:FormState}>((props, {slots}) => {
-  const ConfigContext = ref<FormState>();
+  const ConfigContext = shallowRef<FormState>();
 
   watch(()=>props.value, ()=>{
     ConfigContext.value = props.value
