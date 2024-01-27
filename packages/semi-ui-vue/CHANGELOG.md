@@ -1,5 +1,19 @@
 # @kousum/semi-ui-vue
 
+## 0.7.0
+
+### Minor Changes
+
+- fe9cfed: feat: semi 2.51.0
+
+### Patch Changes
+
+- fix select & form
+- Updated dependencies [fe9cfed]
+  - @kousum/semi-illustrations-vue@0.7.0
+  - @kousum/semi-animation-vue@0.7.0
+  - @kousum/semi-icons-vue@0.7.0
+
 ## 0.6.4
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.7.0
+
+### Minor Changes
+
+- fe9cfed: feat: semi 2.51.0
+
 ## 0.6.3
 
 ### Patch Changes
