@@ -439,7 +439,7 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
   }, {immediate: true})
 
   function propsChange([prevPropsValue, prevPropsTimeZone]) {
-    if (prevPropsValue !== props.value) {
+    if (!isEqual(prevPropsValue, props.value)) {
       foundation.initFromProps({
         ...(props as any),
       });

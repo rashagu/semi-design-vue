@@ -156,7 +156,7 @@ export {
   withFormState,
   withFormApi,
 } from './form/index';
-export type { FormApi, FormFCChild } from './form/index';
+export type { FormApi, FormFCChild, CommonFieldProps } from './form/index';
 export { default as Image } from './image';
 export { Preview as ImagePreview } from './image';
 export type { RuleItem, BaseFormProps } from './form/interface';

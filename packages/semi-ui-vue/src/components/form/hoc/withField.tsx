@@ -1,48 +1,44 @@
 import classNames from 'classnames';
 import * as PropTypes from '../../PropTypes';
-import { cssClasses } from '@douyinfe/semi-foundation/form/constants';
+import {cssClasses} from '@douyinfe/semi-foundation/form/constants';
 import {
   generateValidatesFromRules,
   mergeOptions,
   mergeProps,
-  getDisplayName,
-  transformTrigger, transformDefaultBooleanAPI
+  transformDefaultBooleanAPI,
+  transformTrigger
 } from '@douyinfe/semi-foundation/form/utils';
 import {isValid} from './utils'
 import * as ObjectUtil from '@douyinfe/semi-foundation/utils/object';
 import isPromise from '@douyinfe/semi-foundation/utils/isPromise';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 
-import { useFormState, useStateWithGetter, useFormUpdater, useArrayFieldState } from '../hooks/index';
+import {useArrayFieldState, useFormState, useStateWithGetter} from '../hooks/index';
 import ErrorMessage from '../errorMessage';
-import { isElement } from '../../_base/reactUtils';
+import {isElement} from '../../_base/reactUtils';
 import Label from '../label';
-import { Col } from '../../grid';
-import { CallOpts, WithFieldOption } from '@douyinfe/semi-foundation/form/interface';
-import { CommonFieldProps, CommonexcludeType } from '../interface';
-import { Subtract } from 'utility-types';
-import { noop } from 'lodash';
+import {Col} from '../../grid';
+import type {CallOpts, WithFieldOption} from '@douyinfe/semi-foundation/form/interface';
+import type {CommonexcludeType, CommonFieldProps} from '../interface';
+import type {Subtract} from 'utility-types';
 import {
+  defineComponent,
+  DefineComponent,
+  Fragment,
+  FunctionalComponent,
   h,
   onBeforeMount,
-  onBeforeUnmount,
   onMounted,
   Ref,
   ref,
-  Fragment,
-  VNode,
-  FunctionalComponent,
-  defineComponent,
-  useSlots,
-  withMemo,
-  watchEffect,
-  watch,
   shallowRef,
   unref,
+  useSlots,
+  watch,
+  withMemo,
 } from 'vue';
-import { VueHTMLAttributes, VueJsxNode } from '../../interface';
-import { DefineComponent } from 'vue';
-import { useFormUpdaterContext } from '../context/FormUpdaterContext/Consumer';
+import {VueHTMLAttributes} from '../../interface';
+import {useFormUpdaterContext} from '../context/FormUpdaterContext/Consumer';
 
 const prefix = cssClasses.PREFIX;
 
@@ -718,7 +714,7 @@ function withField<
       );
 
       const withColContent = (
-        <>
+        <Fragment>
           {mergeLabelPos === 'top' ? (
             <div style={{ overflow: 'hidden' }}>
               <Col {...mergeLabelCol} className={labelColCls}>
@@ -731,7 +727,7 @@ function withField<
             </Col>
           )}
           <Col {...mergeWrapperCol}>{fieldMainContent}</Col>
-        </>
+        </Fragment>
       );
 
       // !important optimization
@@ -759,10 +755,10 @@ function withField<
               {withCol ? (
                 withColContent
               ) : (
-                <>
+                <Fragment>
                   {labelContent}
                   {fieldMainContent}
-                </>
+                </Fragment>
               )}
             </div>
           );

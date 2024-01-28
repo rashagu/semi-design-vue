@@ -233,6 +233,8 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
   onUnmounted(() => {
     if (props.visible) {
       foundation.destroy();
+    } else {
+      foundation.enabledBodyScroll();
     }
   })
 

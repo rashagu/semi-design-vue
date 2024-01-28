@@ -6,7 +6,8 @@
   "typings": "dist/index.d.ts",
   "type": "module",
   "files": [
-    "dist/"
+    "dist/",
+    "CHANGELOG.md"
   ],
   "license": "MIT",
   "publishConfig": {
@@ -22,9 +23,9 @@
     "url": "https://github.com/rashagu/semi-design-vue"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.51.0",
-    "@douyinfe/semi-theme-default": "2.51.0",
-    "@douyinfe/semi-animation": "2.51.0",
+    "@douyinfe/semi-foundation": "2.51.3",
+    "@douyinfe/semi-theme-default": "2.51.3",
+    "@douyinfe/semi-animation": "2.51.3",
     "@kousum/semi-animation-vue": "^0.7.0",
     "@kousum/semi-icons-vue": "^0.7.0",
     "@kousum/semi-illustrations-vue": "^0.7.0",

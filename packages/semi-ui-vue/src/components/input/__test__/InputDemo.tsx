@@ -39,12 +39,13 @@ const InputDemo = defineComponent<ExampleProps>((props, {slots}) => {
       {/*<Input disabled suffix={<Text strong type='secondary' style={{ marginRight: 8 }}>Suffix</Text>} showClear></Input>*/}
       <br/><br/>
       <Input showClear mode={'password'} placeholder={'click to clear'} onChange={onChange}></Input>
-      <Input showClear defaultValue={'defaultValue.value'} value={defaultValue.value}  placeholder={'click to clear'}></Input>
+      <Input showClear defaultValue={'defaultValue.value'} value={defaultValue.value}
+             placeholder={'click to clear'}></Input>
       <Input showClear defaultValue={defaultValue.value} placeholder={'click to clear'}></Input>
       {defaultValue.value}
-      <TextArea defaultValue={defaultValue.value} placeholder={'请输入'} />
-      <TextArea value={defaultValue.value} placeholder={'请输入'} />
-      <TextArea v-model={[defaultValue.value,'value']} placeholder={'请输入'} />
+      <TextArea defaultValue={defaultValue.value} placeholder={'请输入'}/>
+      <TextArea value={defaultValue.value} placeholder={'请输入'}/>
+      <TextArea v-model={[defaultValue.value, 'value']} placeholder={'请输入'}/>
       <TextArea maxCount={100} showClear/>
 
       <Input defaultValue='ies' validateStatus='warning'></Input>
@@ -55,9 +56,11 @@ const InputDemo = defineComponent<ExampleProps>((props, {slots}) => {
 
 
       <InputGroup>
-        <Input placeholder="Name" style={{ width: '100px' }} />
-        <InputNumber placeholder="Score" style={{ width: '140px' }} />
+        <Input placeholder="Name" style={{width: '100px'}}/>
+        <InputNumber placeholder="Score" style={{width: '140px'}}/>
       </InputGroup>
+      <br/><br/>
+      <InputNumber placeholder="Score" style={{width: '140px'}}/>
     </div>
   )
 })

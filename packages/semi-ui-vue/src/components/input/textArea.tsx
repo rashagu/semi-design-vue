@@ -16,9 +16,11 @@ import TextAreaFoundation from '@douyinfe/semi-foundation/input/textareaFoundati
 import {cssClasses} from '@douyinfe/semi-foundation/input/constants';
 import {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/input/textarea.scss';
-import {noop, omit, isFunction, isUndefined, isObject} from 'lodash';
+import {noop, omit, isFunction, isUndefined, isObject, throttle} from 'lodash';
+import type { DebouncedFunc } from 'lodash';
 import {IconClear} from '@kousum/semi-icons-vue';
 import {vuePropsMake} from "../PropTypes";
+import ResizeObserver from '../resizeObserver';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -177,8 +179,6 @@ const VuePropsType = vuePropsMake(propTypes, defaultProps)
 const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
   let focusing = false;
   let libRef = ref(null);
-  let _resizeLock = false;
-  let _resizeListener: any;
 
   const onUpdateValueFunc = props["onUpdate:value"]
   const state = reactive<TextAreaState>({
@@ -251,32 +251,17 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
   }, {immediate: true})
 
   onMounted(() => {
-
-    foundation.init();
-    _resizeListener = null;
-    if (props.autosize) {
-      // Working around Firefox bug which runs resize listeners even when other JS is running at the same moment
-      // causing competing rerenders (due to setState in the listener) in React.
-      // More can be found here - facebook/react#6324
-      // // Reference to https://github.com/andreypopp/react-textarea-autosize/
-      _resizeListener = () => {
-        if (_resizeLock) {
-          return;
-        }
-        _resizeLock = true;
-        foundation.resizeTextarea(() => {
-          _resizeLock = false;
-        });
-      };
-      window.addEventListener('resize', _resizeListener);
+    if (throttledResizeTextarea) {
+      throttledResizeTextarea?.cancel?.();
+      throttledResizeTextarea = null;
     }
   })
 
 
-  onUnmounted(() => {
-    foundation.destroy();
-    _resizeListener && window.removeEventListener('resize', _resizeListener);
-  })
+  // onUnmounted(() => {
+  //   foundation.destroy();
+  //   _resizeListener && window.removeEventListener('resize', _resizeListener);
+  // })
 
   watch([() => props.value, () => props.autosize, ()=>props.placeholder], (value, [prevValue, prevAutosize, prevPlaceholder]) => {
     if ((props.value !== prevValue || props.placeholder !== prevPlaceholder) && props.autosize) {
@@ -352,6 +337,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
 
 
   let foundation: TextAreaFoundation = new TextAreaFoundation(theAdapter);
+  let throttledResizeTextarea: DebouncedFunc<typeof foundation.resizeTextarea> = throttle(foundation.resizeTextarea, 10);
 
 
   return () => {
@@ -439,7 +425,13 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
         onMouseenter={e => foundation.handleMouseEnter(e)}
         onMouseleave={e => foundation.handleMouseLeave(e)}
       >
-        <textarea {...itemProps} ref={setRef}/>
+        {autosize ? (
+          <ResizeObserver onResize={throttledResizeTextarea}>
+            <textarea {...itemProps} ref={setRef} />
+          </ResizeObserver>
+        ) : (
+          <textarea {...itemProps} ref={setRef} />
+        )}
         {renderClearBtn()}
         {renderCounter()}
       </div>

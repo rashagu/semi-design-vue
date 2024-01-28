@@ -130,7 +130,7 @@ export interface HeaderProps {
     title?: string;
     titleStyle?: CSSProperties;
     className?: string;
-    onClose?: () => void;
+    onClose?: (e: MouseEvent) => void;
 
     forwardRef?: Ref
 }

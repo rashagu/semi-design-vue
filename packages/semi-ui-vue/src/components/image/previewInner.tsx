@@ -290,8 +290,8 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
     foundation.handleDownload();
   }
 
-  const handlePreviewClose = () => {
-    foundation.handlePreviewClose();
+  const handlePreviewClose = (e: MouseEvent) => {
+    foundation.handlePreviewClose(e);
   }
 
   const handleAdjustRatio = (type: RatioType) => {

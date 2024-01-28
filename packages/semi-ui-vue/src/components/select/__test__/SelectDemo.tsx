@@ -30,8 +30,8 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
   onMounted(()=>{
     setTimeout(()=>{
       optionListRef.value = [
-        {value: 'tony', label: <span>tony</span>},
-        {value: 'Thor', label: <span>Thor</span>},
+        {value: 'tony', label: <span style={{color:'red'}}><span>tony</span></span>},
+        {value: 'Thor', label: <span style={{color:'#c300ff'}}><span>Thor</span></span>},
       ]
     }, 0)
   })
@@ -150,6 +150,7 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
         style={{ width: '260px' }}
         filter
         optionList={optionListRef.value}
+        multiple
         onChange={onChange}
       ></Select>
         <input placeholder={'select_change_demo'} value={dd.value}/>

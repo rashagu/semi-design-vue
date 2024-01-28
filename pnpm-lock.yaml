@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       '@douyinfe/semi-theme-default':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       '@vue/repl':
         specifier: ^3.2.0
         version: 3.2.0
@@ -43,10 +43,10 @@ importers:
         specifier: ^2.26.0
         version: 2.26.0
       '@kousum/semi-icons-vue':
-        specifier: ^0.6.0
+        specifier: ^0.7.0
         version: link:packages/semi-icons-vue
       '@kousum/semi-ui-vue':
-        specifier: ^0.6.1
+        specifier: ^0.7.0
         version: link:packages/semi-ui-vue
       '@storybook/addon-essentials':
         specifier: 7.1.1
@@ -65,10 +65,10 @@ importers:
         version: 0.2.2
       '@storybook/vue3':
         specifier: 7.1.1
-        version: 7.1.1(@vue/compiler-core@3.4.5)(vue@3.4.15)
+        version: 7.1.1(@vue/compiler-core@3.4.15)(vue@3.4.15)
       '@storybook/vue3-vite':
         specifier: 7.1.1
-        version: 7.1.1(@vue/compiler-core@3.4.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)(vite@5.0.12)(vue@3.4.15)
+        version: 7.1.1(@vue/compiler-core@3.4.15)(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)(vite@5.0.12)(vue@3.4.15)
       '@svgr/babel-plugin-add-jsx-attribute':
         specifier: 5.4.0
         version: 5.4.0
@@ -113,7 +113,7 @@ importers:
         version: 5.5.0
       '@testing-library/vue':
         specifier: ^6.6.1
-        version: 6.6.1(@vue/compiler-sfc@3.4.5)(vue@3.4.15)
+        version: 6.6.1(@vue/compiler-sfc@3.4.15)(vue@3.4.15)
       '@types/node':
         specifier: ^20.1.4
         version: 20.1.4
@@ -143,7 +143,7 @@ importers:
         version: 21.1.2
       postcss-loader:
         specifier: ^7.0.0
-        version: 7.3.4(postcss@8.4.32)(typescript@5.1.6)(webpack@5.89.0)
+        version: 7.3.4(postcss@8.4.33)(typescript@5.1.6)(webpack@5.89.0)
       prettier:
         specifier: ^2.8.3
         version: 2.8.3
@@ -182,7 +182,7 @@ importers:
         version: 5.0.12(@types/node@20.1.4)(sass@1.54.9)
       vitepress:
         specifier: 1.0.0-rc.36
-        version: 1.0.0-rc.36(@types/node@20.1.4)(postcss@8.4.32)(react-dom@18.2.0)(react@18.2.0)(sass@1.54.9)(typescript@5.1.6)
+        version: 1.0.0-rc.36(@types/node@20.1.4)(postcss@8.4.33)(react-dom@18.2.0)(react@18.2.0)(sass@1.54.9)(typescript@5.1.6)
       vitest:
         specifier: ^1.1.3
         version: 1.1.3(@types/node@20.1.4)(jsdom@21.1.2)(sass@1.54.9)
@@ -191,7 +191,7 @@ importers:
         version: 2.1.3
       vue-loader:
         specifier: ^16.8.3
-        version: 16.8.3(@vue/compiler-sfc@3.4.5)(vue@3.4.15)(webpack@5.89.0)
+        version: 16.8.3(@vue/compiler-sfc@3.4.15)(vue@3.4.15)(webpack@5.89.0)
       vue-tsc:
         specifier: ^1.8.27
         version: 1.8.27(typescript@5.1.6)
@@ -199,17 +199,17 @@ importers:
   packages/semi-animation-vue:
     dependencies:
       '@douyinfe/semi-animation':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       '@douyinfe/semi-animation-styled':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       '@douyinfe/semi-foundation':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       '@douyinfe/semi-theme-default':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -293,11 +293,11 @@ importers:
   packages/semi-icons-lab-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       '@douyinfe/semi-theme-default':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -378,11 +378,11 @@ importers:
   packages/semi-icons-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       '@douyinfe/semi-theme-default':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -463,11 +463,11 @@ importers:
   packages/semi-illustrations-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       '@douyinfe/semi-theme-default':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -563,25 +563,25 @@ importers:
         specifier: 0.0.5
         version: 0.0.5(vue@3.4.15)
       '@douyinfe/semi-animation':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       '@douyinfe/semi-foundation':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       '@douyinfe/semi-theme-default':
-        specifier: 2.51.0
-        version: 2.51.0
+        specifier: 2.51.3
+        version: 2.51.3
       '@kousum/resize-observer-polyfill':
         specifier: ^1.5.2
         version: 1.5.2
       '@kousum/semi-animation-vue':
-        specifier: ^0.6.3
+        specifier: ^0.7.0
         version: link:../semi-animation-vue
       '@kousum/semi-icons-vue':
-        specifier: ^0.6.5
+        specifier: ^0.7.0
         version: link:../semi-icons-vue
       '@kousum/semi-illustrations-vue':
-        specifier: ^0.6.3
+        specifier: ^0.7.0
         version: link:../semi-illustrations-vue
       '@kousum/vue-draggable':
         specifier: 1.0.2
@@ -4682,20 +4682,20 @@ packages:
       - '@algolia/client-search'
     dev: true
 
-  /@douyinfe/semi-animation-styled@2.51.0:
-    resolution: {integrity: sha512-JascXmOsZiOXRlbnkF67ymNSNyo6m4BFQ9FeiQoFRtuRHVGey3fO59DfisMgOTGQQ7EoAhyKRe/vjQn7s2F5Rg==}
+  /@douyinfe/semi-animation-styled@2.51.3:
+    resolution: {integrity: sha512-wb59wgq23ZRh/ma47CW6KDOU9U8PH/j12sk6pvLRPVmCsKQC+Ir3t+TIGOsEAAuaNN860KnW6ks2iJKfgS/2DQ==}
     dev: false
 
-  /@douyinfe/semi-animation@2.51.0:
-    resolution: {integrity: sha512-Fmy/eU+7mBBw/50v/62GChOAXGFo/UugODX/ySK1aJXsjkVKKIQSX3Sdu0mAtqZj00URHo1hoXFaU59fgmeVaw==}
+  /@douyinfe/semi-animation@2.51.3:
+    resolution: {integrity: sha512-S9MUvbzHQoV70G29QNpdJvOnGvU5NoQjZDEgcBSBVLcuAVXVTgbl3Syld0CYSzWfVUIdTbK9l7eHYPN2D1Bf0w==}
     dependencies:
       bezier-easing: 2.1.0
     dev: false
 
-  /@douyinfe/semi-foundation@2.51.0:
-    resolution: {integrity: sha512-9KUa8lYFNvRsMmd0JZ40KQCI3tZe+hPGN3V+lhTJ2+lDh4jaerESI8mmPRNn5L010t4yWGugBOBUbPegFvkKvA==}
+  /@douyinfe/semi-foundation@2.51.3:
+    resolution: {integrity: sha512-Tx9AVTkLhgaSsUo36XZP6OJhNPKE3qUv8u9STy/eDfCdZtBeqG0Zy5A6AkAR3Mnhp4PHyT8Nu8ix+XEcFS/tQQ==}
     dependencies:
-      '@douyinfe/semi-animation': 2.51.0
+      '@douyinfe/semi-animation': 2.51.3
       async-validator: 3.5.2
       classnames: 2.3.2
       date-fns: 2.30.0
@@ -4705,8 +4705,8 @@ packages:
       scroll-into-view-if-needed: 2.2.29
     dev: false
 
-  /@douyinfe/semi-theme-default@2.51.0:
-    resolution: {integrity: sha512-Kwyzlpii90oiJ2zPxBdPp3RurcvRTjJ4U64+uj0+rIfYr3aEzLakvrGYweWE4ny17zQqctMiG84zJsx662C8GA==}
+  /@douyinfe/semi-theme-default@2.51.3:
+    resolution: {integrity: sha512-WH3O3igZiYR2s2tPCyMz6GJmrITcP32gAgPCth7W6KofD3ez2JNDYhtSmwnsKEya9N3ER8ADRroZNbVrI4gK8A==}
     dependencies:
       glob: 7.2.3
     dev: false
@@ -5412,6 +5412,7 @@ packages:
     resolution: {integrity: sha512-7Pk/5mO11JW/cH+a8lL/i0ZxmRGrbpYqN0VwO2DHhU+SJWWOH2zE1RAcPaj8KqiwC8DCDIJOSxjV9+9lLb6aeA==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -5420,6 +5421,7 @@ packages:
     resolution: {integrity: sha512-KrRnuG5phJx756e62wxvWH2e+TK84MP2IVuPwfge+GBvWqIUfVzFRn09TKruuQBXzZp52Vyma7FjMDkwlA9xpg==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -5428,6 +5430,7 @@ packages:
     resolution: {integrity: sha512-My+53GasPa2D2tU5dXiyHYwrELAUouSfkNlZ3bUKpI7btaztO5vpALEs3mvFjM7aKTvEbc7GQckuXeXIDKQ0fg==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -5436,6 +5439,7 @@ packages:
     resolution: {integrity: sha512-/f0Q6Sc+Vw54Ws6N8fxaEe4R7at3b8pFyv+O/F2VaQ4hODUJcRUcCBJh6zuqtgQQt7w845VTkGLFgWZkP3tUoQ==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -6272,7 +6276,7 @@ packages:
       file-system-cache: 2.3.0
     dev: true
 
-  /@storybook/vue3-vite@7.1.1(@vue/compiler-core@3.4.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)(vite@5.0.12)(vue@3.4.15):
+  /@storybook/vue3-vite@7.1.1(@vue/compiler-core@3.4.15)(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)(vite@5.0.12)(vue@3.4.15):
     resolution: {integrity: sha512-BHBDbxz8XjXBcVZjeb5JKrS4czNCGJixb2E0cRxM1ZbxrtWozk0ped153PrwJzK73M6y+MynAR5ySchD36MlwA==}
     engines: {node: ^14.18 || >=16}
     peerDependencies:
@@ -6282,7 +6286,7 @@ packages:
     dependencies:
       '@storybook/builder-vite': 7.1.1(typescript@5.1.6)(vite@5.0.12)
       '@storybook/core-server': 7.1.1
-      '@storybook/vue3': 7.1.1(@vue/compiler-core@3.4.5)(vue@3.4.15)
+      '@storybook/vue3': 7.1.1(@vue/compiler-core@3.4.15)(vue@3.4.15)
       '@vitejs/plugin-vue': 4.5.0(vite@5.0.12)(vue@3.4.15)
       magic-string: 0.30.5
       react: 18.2.0
@@ -6301,7 +6305,7 @@ packages:
       - vue
     dev: true
 
-  /@storybook/vue3@7.1.1(@vue/compiler-core@3.4.5)(vue@3.4.15):
+  /@storybook/vue3@7.1.1(@vue/compiler-core@3.4.15)(vue@3.4.15):
     resolution: {integrity: sha512-Q72N+QQL3a4Ws+vZM79PQZq9TuxbTJgQHH0PhBOEvlAGKdCLUu7CNkLR2OwMYqryePLNTcj0MKJRoE7NUKRswQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -6313,7 +6317,7 @@ packages:
       '@storybook/global': 5.0.0
       '@storybook/preview-api': 7.1.1
       '@storybook/types': 7.1.1
-      '@vue/compiler-core': 3.4.5
+      '@vue/compiler-core': 3.4.15
       lodash: 4.17.21
       ts-dedent: 2.2.0
       type-fest: 3.13.1
@@ -6478,7 +6482,7 @@ packages:
       '@testing-library/dom': 9.3.1
     dev: true
 
-  /@testing-library/vue@6.6.1(@vue/compiler-sfc@3.4.5)(vue@3.4.15):
+  /@testing-library/vue@6.6.1(@vue/compiler-sfc@3.4.15)(vue@3.4.15):
     resolution: {integrity: sha512-vpyBPrHzKTwEGS7ehUC8/IXgnqTBEMk6jd52Gouf51arG2jUorPhmkbsxUwJOyxz6L0gj2ZcmWnznG1OJcTCDQ==}
     engines: {node: '>=12'}
     peerDependencies:
@@ -6487,7 +6491,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.20.7
       '@testing-library/dom': 8.20.0
-      '@vue/compiler-sfc': 3.4.5
+      '@vue/compiler-sfc': 3.4.15
       '@vue/test-utils': 2.4.3(vue@3.4.15)
       vue: 3.4.15(typescript@5.1.6)
     transitivePeerDependencies:
@@ -6958,16 +6962,6 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
-  /@vue/compiler-core@3.4.5:
-    resolution: {integrity: sha512-Daka7P1z2AgKjzuueWXhwzIsKu0NkLB6vGbNVEV2iJ8GJTrzraZo/Sk4GWCMRtd/qVi3zwnk+Owbd/xSZbwHtQ==}
-    dependencies:
-      '@babel/parser': 7.23.6
-      '@vue/shared': 3.4.5
-      entities: 4.5.0
-      estree-walker: 2.0.2
-      source-map-js: 1.0.2
-    dev: true
-
   /@vue/compiler-dom@3.4.15:
     resolution: {integrity: sha512-wox0aasVV74zoXyblarOM3AZQz/Z+OunYcIHe1OsGclCHt8RsRm04DObjefaI82u6XDzv+qGWZ24tIsRAIi5MQ==}
     dependencies:
@@ -6979,13 +6973,6 @@ packages:
     dependencies:
       '@vue/compiler-core': 3.4.3
       '@vue/shared': 3.4.3
-    dev: true
-
-  /@vue/compiler-dom@3.4.5:
-    resolution: {integrity: sha512-J8YlxknJVd90SXFJ4HwGANSAXsx5I0lK30sO/zvYV7s5gXf7gZR7r/1BmZ2ju7RGH1lnc6bpBc6nL61yW+PsAQ==}
-    dependencies:
-      '@vue/compiler-core': 3.4.5
-      '@vue/shared': 3.4.5
     dev: true
 
   /@vue/compiler-sfc@3.4.15:
@@ -7015,20 +7002,6 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
-  /@vue/compiler-sfc@3.4.5:
-    resolution: {integrity: sha512-jauvkDuSSUbP0ebhfNqljhShA90YEfX/0wZ+w40oZF43IjGyWYjqYaJbvMJwGOd+9+vODW6eSvnk28f0SGV7OQ==}
-    dependencies:
-      '@babel/parser': 7.23.6
-      '@vue/compiler-core': 3.4.5
-      '@vue/compiler-dom': 3.4.5
-      '@vue/compiler-ssr': 3.4.5
-      '@vue/shared': 3.4.5
-      estree-walker: 2.0.2
-      magic-string: 0.30.5
-      postcss: 8.4.32
-      source-map-js: 1.0.2
-    dev: true
-
   /@vue/compiler-ssr@3.4.15:
     resolution: {integrity: sha512-1jdeQyiGznr8gjFDadVmOJqZiLNSsMa5ZgqavkPZ8O2wjHv0tVuAEsw5hTdUoUW4232vpBbL/wJhzVW/JwY1Uw==}
     dependencies:
@@ -7040,13 +7013,6 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.4.3
       '@vue/shared': 3.4.3
-    dev: true
-
-  /@vue/compiler-ssr@3.4.5:
-    resolution: {integrity: sha512-DDdEcDzj2lWTMfUMMtEpLDhURai9LhM0zSZ219jCt7b2Vyl0/jy3keFgCPMitG0V1S1YG4Cmws3lWHWdxHQOpg==}
-    dependencies:
-      '@vue/compiler-dom': 3.4.5
-      '@vue/shared': 3.4.5
     dev: true
 
   /@vue/devtools-api@6.5.1:
@@ -7109,10 +7075,6 @@ packages:
 
   /@vue/shared@3.4.3:
     resolution: {integrity: sha512-rIwlkkP1n4uKrRzivAKPZIEkHiuwY5mmhMJ2nZKCBLz8lTUlE73rQh4n1OnnMurXt1vcUNyH4ZPfdh8QweTjpQ==}
-    dev: true
-
-  /@vue/shared@3.4.5:
-    resolution: {integrity: sha512-6XptuzlMvN4l4cDnDw36pdGEV+9njYkQ1ZE0Q6iZLwrKefKaOJyiFmcP3/KBDHbt72cJZGtllAc1GaHe6XGAyg==}
     dev: true
 
   /@vue/test-utils@2.4.3(vue@3.4.15):
@@ -12756,7 +12718,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /postcss-loader@7.3.4(postcss@8.4.32)(typescript@5.1.6)(webpack@5.89.0):
+  /postcss-loader@7.3.4(postcss@8.4.33)(typescript@5.1.6)(webpack@5.89.0):
     resolution: {integrity: sha512-iW5WTTBSC5BfsBJ9daFMPVrLT36MrNiC6fqOZTTaHjBNX6Pfd5p+hSBqe/fEeNd7pc13QiAyGt7VdGMw4eRC4A==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -12765,7 +12727,7 @@ packages:
     dependencies:
       cosmiconfig: 8.3.6(typescript@5.1.6)
       jiti: 1.21.0
-      postcss: 8.4.32
+      postcss: 8.4.33
       semver: 7.5.4
       webpack: 5.89.0(esbuild@0.18.14)
     transitivePeerDependencies:
@@ -15276,7 +15238,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitepress@1.0.0-rc.36(@types/node@20.1.4)(postcss@8.4.32)(react-dom@18.2.0)(react@18.2.0)(sass@1.54.9)(typescript@5.1.6):
+  /vitepress@1.0.0-rc.36(@types/node@20.1.4)(postcss@8.4.33)(react-dom@18.2.0)(react@18.2.0)(sass@1.54.9)(typescript@5.1.6):
     resolution: {integrity: sha512-2z4dpM9PplN/yvTifhavOIAazlCR6OJ5PvLoRbc+7LdcFeIlCsuDGENLX4HjMW18jQZF5/j7++PNqdBfeazxUA==}
     hasBin: true
     peerDependencies:
@@ -15298,7 +15260,7 @@ packages:
       focus-trap: 7.5.4
       mark.js: 8.11.1
       minisearch: 6.3.0
-      postcss: 8.4.32
+      postcss: 8.4.33
       shikiji: 0.9.18
       shikiji-core: 0.9.18
       shikiji-transformers: 0.9.18
@@ -15448,7 +15410,7 @@ packages:
     resolution: {integrity: sha512-rLuN4NBsCkUVhEUB5L9i3aMxZ4XuBHMZk6Ga5EXtN6S415QedKN9SrcXR7Wbntyh53JtC1QaTlcDSvIjD7cRpw==}
     dev: true
 
-  /vue-loader@16.8.3(@vue/compiler-sfc@3.4.5)(vue@3.4.15)(webpack@5.89.0):
+  /vue-loader@16.8.3(@vue/compiler-sfc@3.4.15)(vue@3.4.15)(webpack@5.89.0):
     resolution: {integrity: sha512-7vKN45IxsKxe5GcVCbc2qFU5aWzyiLrYJyUuMz4BQLKctCj/fmCa0w6fGiiQ2cLFetNcek1ppGJQDCup0c1hpA==}
     peerDependencies:
       '@vue/compiler-sfc': ^3.0.8
@@ -15460,7 +15422,7 @@ packages:
       vue:
         optional: true
     dependencies:
-      '@vue/compiler-sfc': 3.4.5
+      '@vue/compiler-sfc': 3.4.15
       chalk: 4.1.2
       hash-sum: 2.0.0
       loader-utils: 2.0.2

@@ -13,7 +13,8 @@
   "typings": "dist/index.d.ts",
   "type": "module",
   "files": [
-    "dist/"
+    "dist/",
+    "CHANGELOG.md"
   ],
   "repository": {
     "type": "git",
@@ -32,10 +33,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@douyinfe/semi-animation": "2.51.0",
-    "@douyinfe/semi-animation-styled": "2.51.0",
-    "@douyinfe/semi-foundation": "2.51.0",
-    "@douyinfe/semi-theme-default": "2.51.0",
+    "@douyinfe/semi-animation": "2.51.3",
+    "@douyinfe/semi-animation-styled": "2.51.3",
+    "@douyinfe/semi-foundation": "2.51.3",
+    "@douyinfe/semi-theme-default": "2.51.3",
     "classnames": "^2.3.2",
     "sass": "^1.57.1",
     "vue": "^3.4.15"

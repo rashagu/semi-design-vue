@@ -128,6 +128,7 @@ const Option = defineComponent<OptionProps>((props, {slots, attrs}) => {
         inputValue,
         onMouseEnter: (e: MouseEvent) => onMouseEnter(e),
         onClick: (e: MouseEvent) => onClick({value, label, children, ...rest}, e),
+        className,
         ...rest
       });
     }

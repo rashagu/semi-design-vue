@@ -159,7 +159,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<WithFieldDemo2/>*/}
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
-        <TreeDemo />
+        {/*<TreeDemo />*/}
         <div style={{backgroundColor: 'red', width: 300, height: 300}}>
 
         </div>
@@ -184,7 +184,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        {/*<SelectDemo/>*/}
+        <SelectDemo/>
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}
