@@ -312,6 +312,7 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, { slots }) => {
     if (foundation.isRangeType()) {
       if (isYearPickerOpen || isTimePickerOpen) {
         style.minWidth = wrap.getBoundingClientRect().width;
+        style.minWidth = typeof style.minWidth === 'string'?style.minWidth:(style.minWidth + 'px');
       }
 
       if (leftIsYearOrTime() && rightIsYearOrTime() && !insetInput) {

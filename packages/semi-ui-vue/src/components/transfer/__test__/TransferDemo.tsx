@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
+import {defineComponent, ref, h, Fragment, useSlots, onMounted} from 'vue'
 import Transfer from "../index";
 import {IconClose} from "@kousum/semi-icons-vue";
 import {Avatar} from "../../index";
@@ -107,6 +107,12 @@ const TransferDemo = defineComponent<TransferDemoProps>((props, {}) => {
   ];
 
 
+  const testValue = ref([6])
+  onMounted(()=>{
+    setTimeout(()=>{
+      testValue.value = []
+    }, 1000)
+  })
 
   return () => (
     <div>
@@ -118,7 +124,7 @@ const TransferDemo = defineComponent<TransferDemoProps>((props, {}) => {
       <div>
         <Transfer
           type="groupList"
-          defaultValue={[6]}
+          value={testValue.value}
           draggable
           style={{ width: '568px' }}
           dataSource={dataWithGroup}
@@ -136,7 +142,7 @@ const TransferDemo = defineComponent<TransferDemoProps>((props, {}) => {
       {/*  inputProps={{ placeholder: '搜索姓名或邮箱' }}*/}
       {/*  onChange={(values, items) => console.log(values, items)}*/}
       {/*/>*/}
-      <TransferTreeDemo/>
+      {/*<TransferTreeDemo/>*/}
     </div>
   )
 })
