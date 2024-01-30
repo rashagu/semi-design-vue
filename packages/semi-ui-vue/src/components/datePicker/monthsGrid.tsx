@@ -329,6 +329,7 @@ const monthsGrid = defineComponent<MonthsGridProps>((props, { slots }) => {
          */
 
         style.minHeight = currentPanelHeight ? currentPanelHeight : calcScrollListHeight();
+        style.minHeight = style.minHeight + 'px';
       }
     } else if (props.type !== 'year' && props.type !== 'month' && (isTimePickerOpen || isYearPickerOpen)) {
       monthCls = classnames(monthCls, `${prefixCls}-yam-showing`);

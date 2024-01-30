@@ -1,5 +1,16 @@
 # @kousum/semi-ui-vue
 
+## 0.7.1
+
+### Patch Changes
+
+- 305b963: fix: semi 2.51.3
+- fix ResizableTable & datePicker
+- Updated dependencies [305b963]
+  - @kousum/semi-illustrations-vue@0.7.1
+  - @kousum/semi-animation-vue@0.7.1
+  - @kousum/semi-icons-vue@0.7.1
+
 ## 0.7.0
 
 ### Minor Changes

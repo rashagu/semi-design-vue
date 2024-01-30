@@ -38,9 +38,11 @@ const AllDemo = defineComponent<AllDemoProps>((props, {}) => {
     <TableDemo12 />
     <TableDemo13Virtualized />
   </div>;
+},{
+  props: vuePropsType,
+  name: "AllDemo"
 });
 
-AllDemo.props = vuePropsType;
-AllDemo.name = "AllDemo";
+
 
 export default AllDemo;

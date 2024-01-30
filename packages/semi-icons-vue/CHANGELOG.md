@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.7.1
+
+### Patch Changes
+
+- 305b963: fix: semi 2.51.3
+
 ## 0.7.0
 
 ### Minor Changes
