@@ -12,10 +12,9 @@ import type { ResizableProps, TableProps, ColumnProps } from './interface';
 import {
     ComponentObjectPropsOptions,
     computed,
-    CSSProperties,
     defineComponent,
     h,
-    PropType,
+    PropType, Ref,
     ref,
     useSlots,
     watch
@@ -242,12 +241,12 @@ const ResizableTable = defineComponent<TableProps>((props, {}) => {
       }) :
       []);
 
-    const finalColumns = computed(()=>{
-        return assignResizableRender(columns.value)
-    });
+    const finalColumns: Ref<ColumnProps[]> = ref([])
+    watch(columns, ()=>{
+        finalColumns.value = assignResizableRender(columns.value)
+    }, {immediate: true})
 
     return () => {
-
         const { components: propComponents, columns: propColumns, resizable, ...restProps } = props;
 
         return <Table {...restProps} columns={finalColumns.value} components={components.value} />;

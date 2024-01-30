@@ -87,7 +87,6 @@ const Index = defineComponent<AvatarProps>(
         const newTextChildren = children[0].children as string
         if (textChildren !== newTextChildren){
           foundation.changeScale();
-          console.log('foundation.changeScale')
           textChildren = newTextChildren
         }
       }
@@ -262,7 +261,6 @@ const Index = defineComponent<AvatarProps>(
         </div>
       ) : null;
 
-      console.log(2)
       return (
         <span
           {...(others as any)}
