@@ -56,15 +56,15 @@ const TreeSelectDemo = defineComponent<ExampleProps>((props, {}) => {
           console.log(v)
           value.value = v
         }}
-        style={{ width: 300 }}
-        dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+        style={{ width: '300px' }}
+        dropdownStyle={{ maxHeight: '400px', overflow: 'auto' }}
         treeData={treeData}
         placeholder="请选择"
       />
       <TreeSelect
         defaultOpen={true}
-        style={{ width: 300 }}
-        dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+        style={{ width: '300px' }}
+        dropdownStyle={{overflow: 'auto' }}
         treeData={treeData}
         placeholder="请选择"
       />

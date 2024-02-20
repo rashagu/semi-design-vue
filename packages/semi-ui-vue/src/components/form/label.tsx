@@ -6,6 +6,7 @@ import { LocaleConsumerFunc } from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
 import {vuePropsMake} from "../PropTypes";
 import {ComponentObjectPropsOptions} from "vue";
+import {styleNum} from "../_utils";
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Form']>()
 const prefixCls = cssClasses.PREFIX;
@@ -68,7 +69,7 @@ const Label = defineComponent<LabelProps>((props, {slots}) => {
       [`${prefixCls}-field-label-with-extra`]: extra,
     });
     const labelStyle = style ? style : {};
-    width ? labelStyle.width = width : null;
+    width ? labelStyle.width = styleNum(width) : null;
 
     const optionalText = (
       <LocaleConsumer componentName="Form" >

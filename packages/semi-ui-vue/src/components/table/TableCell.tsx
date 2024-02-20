@@ -28,6 +28,7 @@ import {vuePropsMake} from "../PropTypes";
 import {useTableContext} from "./tableContext/Consumer";
 import {FooterProps} from "../image/interface";
 import {VueJsxNode} from "../interface";
+import {styleNum} from "../_utils";
 
 export interface TableCellProps extends BaseProps {
     record?: Record<string, any>;
@@ -330,7 +331,7 @@ const TableCell = defineComponent<TableCellProps>((props, {}) => {
             inner = (
               <div
                 class={classnames(`${prefixCls}-section-inner`)}
-                style={{ width: anyColumnFixed ? amendTableWidth(tableWidth) : undefined }}
+                style={{ width: anyColumnFixed ? styleNum(amendTableWidth(tableWidth)) : undefined }}
               >
                   {inner}
               </div>

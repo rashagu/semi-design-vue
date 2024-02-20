@@ -892,7 +892,7 @@ const TreeSelect = defineComponent<TreeSelectProps>(
     const renderContent = () => {
       const { dropdownMinWidth } = state;
       const { dropdownStyle, dropdownClassName } = props;
-      const style = { minWidth: dropdownMinWidth, ...dropdownStyle };
+      const style = { minWidth: isNaN(dropdownMinWidth)?dropdownMinWidth:(dropdownMinWidth + 'px'), ...dropdownStyle };
       const popoverCls = cls(dropdownClassName, `${prefixcls}-popover`);
       return (
         <div class={popoverCls} style={style}>

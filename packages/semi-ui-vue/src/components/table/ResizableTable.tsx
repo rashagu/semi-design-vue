@@ -19,7 +19,6 @@ import {
     useSlots,
     watch
 } from "vue";
-import {VueJsxNode} from "../interface";
 
 const Table = Table_()
 export const vuePropsType: ComponentObjectPropsOptions<TableProps> = {

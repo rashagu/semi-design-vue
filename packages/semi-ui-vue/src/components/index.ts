@@ -4,7 +4,6 @@ export { useBaseComponent } from "./_base/baseComponent";
 import {RuleItem} from "async-validator/dist-types/interface";
 import {customRequestArgs} from "./upload";
 
-export {Link} from "./anchor";
 export { default as Button } from './button';
 export { default as ButtonGroup } from './button/ButtonGroup';
 export { default as ConfigProvider } from './configProvider';
@@ -48,6 +47,8 @@ export { default as Select, SelectOption } from './select';
 export type { OptionProps } from './select';
 
 export { default as Tag } from './tag';
+export type { TagColor } from './tag';
+
 export { default as TagInput } from './tagInput';
 export { default as TimePicker } from './timePicker';
 export { default as InputNumber } from './inputNumber/index';
@@ -62,6 +63,8 @@ export { default as Tree, TreeNode } from './tree/index';
 export { default as TreeSelect } from './treeSelect/index';
 
 
+export {Link} from "./anchor";
+export {Link as AnchorLink} from "./anchor";
 export { default as Anchor } from './anchor';
 export { default as AutoComplete } from './autoComplete';
 export { default as AvatarGroup } from './avatar/avatarGroup';
@@ -119,6 +122,7 @@ export { default as TagGroup } from './tag/group';
 export { default as Timeline } from './timeline';
 export { default as Toast, ToastFactory } from './toast';
 export { default as Transfer } from './transfer';
+export type { DataItem, SelectedPanelProps, SourcePanelProps } from './transfer';
 export { default as Highlight } from './highlight';
 
 export { default as LocaleConsumer } from './locale/localeConsumer';

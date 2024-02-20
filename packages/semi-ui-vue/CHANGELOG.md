@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 0.7.2
+
+### Patch Changes
+
+- fix datePcker style
+
 ## 0.7.1
 
 ### Patch Changes

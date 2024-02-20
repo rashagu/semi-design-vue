@@ -14,6 +14,7 @@ import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, isVNode,
 import {vuePropsMake} from "../../PropTypes";
 import {useTableContext} from "../tableContext/Consumer";
 import {VueJsxNode} from "../../interface";
+import {styleNum} from "../../_utils";
 
 export interface TableExpandedRowProps {
     cellWidths: number[]; // required
@@ -127,7 +128,7 @@ const TableExpandedRow = defineComponent<TableExpandedRowProps>((props, {}) => {
                       <div
                         class={classnames(`${prefixCls}-expand-inner`)}
                         style={{
-                            width: anyColumnFixed ? amendTableWidth(tableWidth) : undefined,
+                            width: anyColumnFixed ? styleNum(amendTableWidth(tableWidth)) : undefined,
                         }}
                       >
                           {children}
