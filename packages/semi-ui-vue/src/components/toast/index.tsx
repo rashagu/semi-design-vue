@@ -46,7 +46,7 @@ const propTypes = {
   icon: PropTypes.node,
   direction: String,
   stack: PropTypes.bool,
-  ref: [Function, Object],
+  // ref: [Function, Object],
 };
 const defaultProps = {};
 const vuePropsType = vuePropsMake(propTypes, defaultProps);

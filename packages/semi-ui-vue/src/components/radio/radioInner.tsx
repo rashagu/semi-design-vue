@@ -31,7 +31,7 @@ export interface RadioInnerProps extends BaseProps {
     autoFocus?: boolean;
     name?: string;
     prefixCls?: string;
-    ref?: any;
+    // ref?: any;
     isPureCardRadioGroup?: boolean;
     addonId?: string;
     extraId?: string;
@@ -63,7 +63,7 @@ export const vuePropsType:ComponentObjectPropsOptions<RadioInnerProps> = {
     autoFocus: Boolean,
     name: String,
     prefixCls: String,
-    ref: [Object, String],
+    // ref: [Object, String],
     isPureCardRadioGroup: Boolean,
     addonId: String,
     extraId: String,

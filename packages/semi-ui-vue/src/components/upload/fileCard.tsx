@@ -81,7 +81,7 @@ const propTypes:ComponentObjectPropsOptions<FileCardProps> = {
     url: PropTypes.string,
     validateMessage: PropTypes.node as PropType<FileCardProps['validateMessage']>,
     index: PropTypes.number,
-    key: String,
+    // key: String,
     showPicInfo: Boolean,
     renderPicInfo: Function as PropType<FileCardProps['renderPicInfo']>,
     renderPicPreviewIcon: Function as PropType<FileCardProps['renderPicPreviewIcon']>,

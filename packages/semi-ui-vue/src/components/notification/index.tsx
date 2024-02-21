@@ -71,7 +71,7 @@ const propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
   direction: String,
-  ref: [Function, Object]
+  // ref: [Function, Object]
 };
 const defaultProps = {};
 

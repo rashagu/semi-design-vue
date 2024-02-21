@@ -51,7 +51,7 @@ export interface RenderFileItemProps extends FileItem {
     onRemove: () => void;
     onRetry: () => void;
     onReplace: () => void;
-    key: string;
+    // key: string;
     showPicInfo?: boolean;
     renderPicInfo?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
     renderPicPreviewIcon?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
