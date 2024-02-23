@@ -564,8 +564,11 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
   watch(
     () => props.rePosKey,
     () => {
-      rePosition();
-    }
+      // 获取更新后的dom
+      nextTick(()=>{
+        rePosition();
+      })
+    }, {}
   );
 
   const renderIcon = () => {
