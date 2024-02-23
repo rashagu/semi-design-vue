@@ -113,7 +113,7 @@ export { default as Switch } from './switch';
  * Table
  */
 export { default as Table, TableMaker } from './table';
-export type { ColumnProps, TablePaginationProps, Align  } from './table/interface';
+export type { ColumnProps, TablePaginationProps, Align, Data as TableColumnData  } from './table/interface';
 export type {TableStateRowSelection} from "./table/Table";
 
 export { default as Tabs } from './tabs';

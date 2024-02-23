@@ -1,5 +1,5 @@
 import { defineComponent, ref, h, Fragment, useSlots, computed, onMounted } from 'vue';
-import Table, {ColumnProps, RowSelection, TableColumn} from '../index';
+import Table, {ColumnProps, Data, RowSelection, TableColumn} from '../index';
 import Avatar from '../../avatar';
 import { IconMore } from '@kousum/semi-icons-vue';
 import { IllustrationNoResult, IllustrationNoResultDark } from '@kousum/semi-illustrations-vue';
@@ -8,6 +8,7 @@ import { IconDelete } from '@kousum/semi-icons-vue';
 import { TypographyText } from '../../typography';
 import * as dateFns from 'date-fns';
 import Tag from "../../tag";
+import {IconFilter} from "@kousum/semi-icons-vue";
 
 interface TableDemo1Props {
   name?: string;
@@ -22,7 +23,7 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
   const DAY = 24 * 60 * 60 * 1000;
   const figmaIconUrl = 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/figma-icon.png';
 
-  const columns = [
+  const columns:ColumnProps<Data>[] = [
     {
       title: '标题',
       dataIndex: 'name',
@@ -37,7 +38,7 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
       },
       filters: [
         {
-          text: 'Semi Design 设计稿',
+          text: 'Semi Design 设计稿 filterItemTestText',
           value: 'Semi Design 设计稿',
         },
         {
@@ -45,6 +46,9 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
           value: 'Semi Pro 设计稿',
         },
       ],
+      filterIcon: <div style={{display: 'flex', alignItems:'center', padding:'0 4px', cursor: 'pointer'}} data-testid="filterIcon">
+        <IconFilter />
+      </div>,
       onFilter: (value, record) => record.name.includes(value),
     },
     {
