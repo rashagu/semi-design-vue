@@ -194,6 +194,7 @@ const propTypes:ComponentObjectPropsOptions<CascaderProps> = {
 
   mouseEnterDelay: Number,
   mouseLeaveDelay: Number,
+  virtualizeInSearch: Object,
 };
 const defaultProps = {
   borderless: false,

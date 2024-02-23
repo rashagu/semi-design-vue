@@ -18,47 +18,99 @@ const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
       value: 'zhejiang',
       children: [
         {
-          label: '杭州市',
-          value: 'hangzhou',
+          label: '宁波市3335',
+          value: 'ningbo5',
           children: [
             {
-              label: '西湖区',
-              value: 'xihu',
+              label: '杭州市',
+              value: 'hangzhou',
+              children: [
+                {
+                  label: '西湖区',
+                  value: 'xihu',
+                },
+                {
+                  label: '萧山区',
+                  value: 'xiaoshan',
+                },
+                {
+                  label: '临安区',
+                  value: 'linan',
+                },
+                {
+                  label: '临安区1',
+                  value: 'linan1',
+                },
+                {
+                  label: '临安区2',
+                  value: 'linan2',
+                },
+                {
+                  label: '临安区3',
+                  value: 'linan3',
+                },
+                {
+                  label: '临安区4',
+                  value: 'linan4',
+                },
+              ],
             },
             {
-              label: '萧山区',
-              value: 'xiaoshan',
+              label: '宁波市',
+              value: 'ningbo',
+              children: [
+                {
+                  label: '海曙区',
+                  value: 'haishu',
+                },
+                {
+                  label: '江北区',
+                  value: 'jiangbei',
+                },
+              ],
             },
             {
-              label: '临安区',
-              value: 'linan',
-            },
-          ],
-        },
-        {
-          label: '宁波市',
-          value: 'ningbo',
-          children: [
-            {
-              label: '海曙区',
-              value: 'haishu',
+              label: '宁波市1',
+              value: 'ningbo1',
+              children: [],
             },
             {
-              label: '江北区',
-              value: 'jiangbei',
+              label: '宁波市2',
+              value: 'ningbo2',
+              children: [],
+            },
+            {
+              label: '宁波市3',
+              value: 'ningbo3',
+              children: [],
+            },
+            {
+              label: '宁波市4',
+              value: 'ningbo4',
+              children: [],
+            },
+            {
+              label: '宁波市5',
+              value: 'ningbo5',
+              children: [],
             },
           ],
         },
       ],
     },
   ];
-  const value = ref<Value>(['zhejiang', 'hangzhou', 'xiaoshan']);
+  const value = ref<Value>(['zhejiang', 'hangzhou', 'linan4']);
   return () => (
-    <div>
+    <div style={{display: 'flex', alignItems:'center', justifyContent:'flex-end'}}>
       <Cascader
         onChange={(v) => {
           console.log(v);
           value.value = v;
+        }}
+        virtualizeInSearch={{
+          height: 172,
+          width: 320,
+          itemSize: 36,
         }}
         value={value.value}
         defaultOpen={true}

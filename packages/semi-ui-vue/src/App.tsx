@@ -179,12 +179,12 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DatePickerDemo />*/}
         {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
-        {/*<CascaderDemo/>*/}
+        <CascaderDemo/>
         {/*<CheckboxDemo />*/}
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        <SelectDemo/>
+        {/*<SelectDemo/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}

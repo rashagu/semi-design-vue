@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, useSlots, VNode, cloneVNode, PropType} from 'vue';
+import {defineComponent, ref, h, Fragment, useSlots, VNode, cloneVNode, PropType, watch, onMounted} from 'vue';
 import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/cascader/constants';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
@@ -374,6 +374,33 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
       </LocaleConsumer>
     );
   }
+
+  function updateScrollTop() {
+    const optionList = document.querySelectorAll('.semi-cascader-option-list')
+    optionList.forEach((item, index)=>{
+      let optionId = `cascaderItem-${Array.from(props.activeKeys)[index]}`
+
+      let destNode = document.getElementById(optionId);
+      if (destNode) {
+        /**
+         * Scroll the first selected item into view.
+         * The reason why ScrollIntoView is not used here is that it may cause page to move.
+         */
+        const destParent = destNode.parentNode as HTMLDivElement;
+        destParent.scrollTop = destNode.offsetTop -
+          destParent.offsetTop -
+          (destParent.clientHeight / 2) +
+          (destNode.clientHeight / 2);
+      }
+    })
+  }
+
+  onMounted(()=>{
+    updateScrollTop()
+  })
+  watch(()=>props.activeKeys, ()=>{
+    updateScrollTop()
+  })
 
   return () => {
     const { data, searchable } = props;
