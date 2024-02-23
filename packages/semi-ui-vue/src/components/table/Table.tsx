@@ -1154,7 +1154,6 @@ function Table<RecordType extends Record<string, any>>() {
           isVNode(column.filterDropdown) ||
           typeof column.renderFilterDropdown === 'function'
         ) {
-
           const filter = (
             <ColumnFilter
               key={strings.DEFAULT_KEY_COLUMN_FILTER}

@@ -4,17 +4,17 @@ import { IconFilter } from '@kousum/semi-icons-vue';
 
 import { cssClasses } from '@douyinfe/semi-foundation/table/constants';
 
-import Dropdown, { DropdownMenu, DropdownItem } from '../dropdown';
+import Dropdown, {DropdownMenu, DropdownItem, DropdownVuePropsType} from '../dropdown';
 import type { DropdownProps } from '../dropdown';
 import { Radio } from '../radio';
 import { Checkbox } from '../checkbox';
 import { FilterIcon, Filter, OnFilterDropdownVisibleChange, RenderFilterDropdownItem } from './interface';
 import { VueJsxNode } from '../interface';
-import { cloneVNode, isVNode, h, ref, watch, defineComponent, VNode } from 'vue';
+import {cloneVNode, isVNode, h, ref, watch, defineComponent, VNode, ComponentObjectPropsOptions, PropType} from 'vue';
+import {vuePropsMake} from "../PropTypes";
 
 
-function renderDropdown(props_: RenderDropdownProps, nestedElem: VueJsxNode = null, level = 0) {
-  const props = omit(props_, 'title', 'dataIndex', 'width', 'filters', 'filteredValue', 'fixed');
+function renderDropdown(props: RenderDropdownProps, nestedElem: VueJsxNode = null, level = 0) {
   const {
     filterMultiple = true,
     filters = [],
@@ -26,10 +26,10 @@ function renderDropdown(props_: RenderDropdownProps, nestedElem: VueJsxNode = nu
     position = 'bottom',
     renderFilterDropdown,
     renderFilterDropdownItem,
-  } = props_ ?? {};
+  } = props ?? {};
 
 
-    const renderFilterDropdownProps: RenderFilterDropdownProps = pick(props_, [
+    const renderFilterDropdownProps: RenderFilterDropdownProps = pick(props, [
       'tempFilteredValue',
       'setTempFilteredValue',
       'confirm',
@@ -123,8 +123,9 @@ function renderDropdown(props_: RenderDropdownProps, nestedElem: VueJsxNode = nu
       </DropdownMenu>
     );
 
+
   const dropdownProps: DropdownProps = {
-    ...props,
+    ...(pick(props, ...Object.keys(DropdownVuePropsType))),
     onVisibleChange: (visible: boolean) => onFilterDropdownVisibleChange(visible),
     trigger,
     position,
@@ -146,6 +147,27 @@ function renderDropdown(props_: RenderDropdownProps, nestedElem: VueJsxNode = nu
   );
 }
 
+const propTypes: ComponentObjectPropsOptions<ColumnFilterProps> = {
+  ...DropdownVuePropsType,
+  prefixCls: String,
+  filteredValue: Array,
+  filterIcon: [Boolean, Object, Function] as PropType<ColumnFilterProps['filterIcon']>,
+  filterDropdown: [Boolean, Object, Function] as PropType<ColumnFilterProps['filterDropdown']>,
+  filterDropdownProps: Object,
+  filters: Array,
+  filterMultiple: Boolean,
+  filterDropdownVisible: Boolean,
+  onSelect: Function as PropType<ColumnFilterProps['onSelect']>,
+  onFilterDropdownVisibleChange: Function as PropType<ColumnFilterProps['onFilterDropdownVisibleChange']>,
+  renderFilterDropdown: Function as PropType<ColumnFilterProps['renderFilterDropdown']>,
+  renderFilterDropdownItem: Function as PropType<ColumnFilterProps['renderFilterDropdownItem']>,
+
+  title: String,
+  dataIndex: [Number, String],
+  width: [Number, String],
+}
+const defaultProps = {}
+const ColumnFilterVueProps = vuePropsMake(propTypes, defaultProps)
 export const ColumnFilter = defineComponent<ColumnFilterProps>(
   (props) => {
     // custom filter related status
@@ -157,17 +179,17 @@ export const ColumnFilter = defineComponent<ColumnFilterProps>(
     const tempFilteredValue = ref<any[]>(props.filteredValue);
     const dropdownVisible = ref<boolean | undefined>(dropdownVisibleInitValue);
 
-    watch([props.filterDropdownVisible], () => {
+    watch(()=>props.filterDropdownVisible, () => {
       if (typeof props.filterDropdownVisible !== 'undefined') {
         dropdownVisible.value = props.filterDropdownVisible;
       }
-    });
+    }, {immediate: true});
 
     watch(
       () => props.filteredValue,
       () => {
         tempFilteredValue.value = props.filteredValue;
-      }
+      }, {immediate: true}
     );
 
     const confirm: RenderFilterDropdownProps['confirm'] = (props_ = {}) => {
@@ -267,7 +289,7 @@ export const ColumnFilter = defineComponent<ColumnFilterProps>(
     };
   },
   {
-    props: {},
+    props: ColumnFilterVueProps,
     name: 'ColumnFilter',
   }
 );
@@ -279,6 +301,11 @@ export interface ColumnFilterProps extends Omit<RenderDropdownProps, keyof Rende
   filterDropdown?: VueJsxNode;
   filterDropdownProps?: FilterDropdownProps;
   filters?: Filter[];
+
+  // warning
+  title?: string;
+  dataIndex?: string | number;
+  width?: string | number;
 }
 
 export interface RenderDropdownProps extends FilterDropdownProps, RenderFilterDropdownProps {
