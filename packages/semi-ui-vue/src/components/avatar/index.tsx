@@ -16,16 +16,18 @@ import {
 } from 'vue';
 
 import cls from 'classnames';
-import { cssClasses, strings } from '@douyinfe/semi-foundation/avatar/constants';
-import AvatarFoundation, { AvatarAdapter } from '@douyinfe/semi-foundation/avatar/foundation';
+import {cssClasses, strings} from '@douyinfe/semi-foundation/avatar/constants';
+import AvatarFoundation, {AvatarAdapter} from '@douyinfe/semi-foundation/avatar/foundation';
 import '@douyinfe/semi-foundation/avatar/avatar.scss';
-import { noop } from '@douyinfe/semi-foundation/utils/function';
-import { useBaseComponent } from '../_base/baseComponent';
-import type { AvatarProps } from './interface';
+import {noop} from '@douyinfe/semi-foundation/utils/function';
+import {useBaseComponent} from '../_base/baseComponent';
+import type {AvatarProps} from './interface';
 // import {AvatarColor, AvatarShape, AvatarSize} from "./interface";
 // import {TooltipProps} from "../tooltip";
-import { RadioInnerProps } from '../radio/radioInner';
-import { handlePrevent } from '@douyinfe/semi-foundation/utils/a11y';
+import {RadioInnerProps} from '../radio/radioInner';
+import {handlePrevent} from '@douyinfe/semi-foundation/utils/a11y';
+import TopSlotSvg from "./TopSlotSvg";
+
 
 const sizeSet = strings.SIZE;
 const shapeSet = strings.SHAPE;
@@ -44,10 +46,10 @@ export interface AvatarState {
 export const vuePropsType: ComponentObjectPropsOptions<AvatarProps> = {
   style: [Object, String] as PropType<AvatarProps['style']>,
   className: String,
-  color: { type: String as PropType<AvatarProps['color']>, default: 'grey' },
-  shape: { type: String as PropType<AvatarProps['shape']>, default: 'circle' },
-  size: { type: String as PropType<AvatarProps['size']>, default: 'medium' },
-  gap: { type: Number as PropType<AvatarProps['gap']>, default: 3 },
+  color: {type: String as PropType<AvatarProps['color']>, default: 'grey'},
+  shape: {type: String as PropType<AvatarProps['shape']>, default: 'circle'},
+  size: {type: String as PropType<AvatarProps['size']>, default: 'medium'},
+  gap: {type: Number as PropType<AvatarProps['gap']>, default: 3},
   hoverMask: [Object, String, Number] as PropType<AvatarProps['hoverMask']>,
   src: String,
   srcSet: String,
@@ -66,9 +68,13 @@ export const vuePropsType: ComponentObjectPropsOptions<AvatarProps> = {
     default: noop,
   },
   imgAttr: Object,
+  bottomSlot: Object,
+  topSlot: Object,
+  border: [Object, Boolean],
+  contentMotion: Boolean,
 };
 const Index = defineComponent<AvatarProps>(
-  (props, { slots }) => {
+  (props, {slots}) => {
     let foundation!: AvatarFoundation;
 
     const state = reactive<AvatarState>({
@@ -81,16 +87,18 @@ const Index = defineComponent<AvatarProps>(
 
 
     let textChildren = ''
+
     function watchTextChildren() {
       const children = slots.default?.() || []
       if (foundation && children.length === 1 && children[0].type.toString() === 'Symbol(v-txt)') {
         const newTextChildren = children[0].children as string
-        if (textChildren !== newTextChildren){
+        if (textChildren !== newTextChildren) {
           foundation.changeScale();
           textChildren = newTextChildren
         }
       }
     }
+
     watch(
       () => props.src,
       () => {
@@ -108,7 +116,7 @@ const Index = defineComponent<AvatarProps>(
         watchTextChildren()
       }
     );
-    const { adapter: adapterInject } = useBaseComponent<RadioInnerProps>(props, state);
+    const {adapter: adapterInject} = useBaseComponent<RadioInnerProps>(props, state);
 
     const theAdapter = adapter();
 
@@ -119,15 +127,15 @@ const Index = defineComponent<AvatarProps>(
           state.isImgExist = isImgExist;
         },
         notifyEnter: (e: MouseEvent) => {
-          const { hoverMask } = props;
+          const {hoverMask} = props;
           state.hoverContent = hoverMask;
 
-          const { onMouseEnter } = props;
+          const {onMouseEnter} = props;
           onMouseEnter && onMouseEnter(e);
         },
         notifyLeave: (e: MouseEvent) => {
           state.hoverContent = '';
-          const { onMouseLeave } = props;
+          const {onMouseLeave} = props;
           onMouseLeave && onMouseLeave(e);
         },
         setFocusVisible: (focusVisible: boolean): void => {
@@ -164,7 +172,7 @@ const Index = defineComponent<AvatarProps>(
     }
 
     function handleKeyDown(event: any) {
-      const { onClick } = props;
+      const {onClick} = props;
       switch (event.key) {
         case 'Enter':
           onClick(event);
@@ -187,8 +195,8 @@ const Index = defineComponent<AvatarProps>(
     };
 
     const getContent = () => {
-      const { onClick, imgAttr, src, srcSet, alt } = props;
-      const { isImgExist } = state;
+      const {onClick, imgAttr, src, srcSet, alt} = props;
+      const {isImgExist} = state;
       const children = slots.default?.();
       let content = children;
       const clickable = onClick !== noop;
@@ -210,7 +218,7 @@ const Index = defineComponent<AvatarProps>(
             [`${prefixCls}-no-focus-visible`]: clickable,
           }),
         };
-        const imgProps = clickable ? { ...imgBasicProps, ...a11yFocusProps } : imgBasicProps;
+        const imgProps = clickable ? {...imgBasicProps, ...a11yFocusProps} : imgBasicProps;
         content = [<img alt={finalAlt} {...imgProps} />];
       } else if (typeof children === 'string') {
         const tempAlt = alt ?? children;
@@ -222,7 +230,7 @@ const Index = defineComponent<AvatarProps>(
             [`${prefixCls}-no-focus-visible`]: clickable,
           }),
         };
-        const finalProps = clickable ? { ...props, ...a11yFocusProps } : props;
+        const finalProps = clickable ? {...props, ...a11yFocusProps} : props;
         const stringStyle: CSSProperties = {
           transform: `scale(${state.scale})`,
         };
@@ -237,11 +245,91 @@ const Index = defineComponent<AvatarProps>(
       return content;
     };
 
+
+    const renderBottomSlot = () => {
+      if (!props.bottomSlot) {
+        return null;
+      }
+
+      if (props.bottomSlot.render) {
+        return props.bottomSlot.render();
+      }
+
+      const renderContent = props.bottomSlot.render ?? (() => {
+        const style: CSSProperties = {};
+        if (props.bottomSlot.bgColor) {
+          style['backgroundColor'] = props.bottomSlot.bgColor;
+        }
+        if (props.bottomSlot.textColor) {
+          style['color'] = props.bottomSlot.textColor;
+        }
+        return <span style={style}
+                     class={cls(`${prefixCls}-bottom_slot-shape_${props.bottomSlot.shape}`, `${prefixCls}-bottom_slot-shape_${props.bottomSlot.shape}-${props.size}`, props.bottomSlot.className ?? "")}>
+                {props.bottomSlot.text}
+            </span>;
+      });
+
+      return <div class={cls([`${prefixCls}-bottom_slot`])} style={props.bottomSlot.style ?? {}}>
+        {renderContent()}
+      </div>;
+
+    }
+
+
+    const renderTopSlot = () => {
+
+      if (!props.topSlot) {
+        return null;
+      }
+
+      if (props.topSlot.render) {
+        return props.topSlot.render();
+      }
+
+      const textStyle: CSSProperties = {};
+      if (props.topSlot.textColor) {
+        textStyle['color'] = props.topSlot.textColor;
+      }
+      return <div style={props.topSlot.style ?? {}}
+                  class={cls([`${prefixCls}-top_slot-wrapper`, props.topSlot.className ?? "", {
+                    [`${prefixCls}-animated`]: props.contentMotion,
+                  }])}>
+        <div class={cls([`${prefixCls}-top_slot-bg`, `${prefixCls}-top_slot-bg-${props.size}`])}>
+          <div
+            class={cls([`${prefixCls}-top_slot-bg-svg`, `${prefixCls}-top_slot-bg-svg-${props.size}`])}>
+            <TopSlotSvg gradientStart={props.topSlot.gradientStart ?? "var(--semi-color-primary)"}
+                        gradientEnd={props.topSlot.gradientEnd ?? "var(--semi-color-primary)"}/>
+          </div>
+        </div>
+        <div class={cls([`${prefixCls}-top_slot`])}>
+          <div
+            style={textStyle}
+            class={cls([`${prefixCls}-top_slot-content`, `${prefixCls}-top_slot-content-${props.size}`])}>{props.topSlot.text}</div>
+        </div>
+      </div>;
+    }
     return () => {
       watchTextChildren()
-      const { shape, size, color, className, hoverMask, onClick, imgAttr, src, srcSet, style, alt, gap, ...others } =
+      const {
+        shape,
+        size,
+        color,
+        className,
+        hoverMask,
+        onClick, imgAttr,
+        src,
+        srcSet,
+        style,
+        alt,
+        gap,
+        bottomSlot,
+        topSlot,
+        border,
+        contentMotion,
+        ...others
+      } =
         props;
-      const { isImgExist, hoverContent, focusVisible } = state;
+      const {isImgExist, hoverContent, focusVisible} = state;
       const isImg = src && isImgExist;
       const avatarCls = cls(
         prefixCls,
@@ -251,20 +339,18 @@ const Index = defineComponent<AvatarProps>(
           [`${prefixCls}-${color}`]: color && !isImg,
           [`${prefixCls}-img`]: isImg,
           [`${prefixCls}-focus`]: focusVisible,
+          [`${prefixCls}-animated`]: contentMotion,
         },
         className
       );
 
       const hoverRender = hoverContent ? (
-        <div class={`${prefixCls}-hover`} x-semi-prop="hoverContent">
-          {hoverContent}
-        </div>
-      ) : null;
+        <div class={`${prefixCls}-hover`} x-semi-prop="hoverContent">{hoverContent}</div>) : null;
 
-      return (
+      let avatar = (
         <span
           {...(others as any)}
-          style={style}
+          style={border || bottomSlot || topSlot || border ? {} : style}
           class={avatarCls}
           onClick={onClick as any}
           onMouseenter={onEnter as any}
@@ -276,6 +362,56 @@ const Index = defineComponent<AvatarProps>(
           {hoverRender}
         </span>
       );
+
+      if (border) {
+        const borderStyle: CSSProperties = {};
+        if (border?.color) {
+          borderStyle['borderColor'] = border.color;
+        }
+        avatar = (
+          <div style={{ position: 'relative', ...style }}>
+            {avatar}
+            <span
+              style={borderStyle}
+              class={cls([
+                `${prefixCls}-additionalBorder`,
+                `${prefixCls}-additionalBorder-${size}`,
+                {
+                  [`${prefixCls}-${shape}`]: shape,
+                },
+              ])}
+            ></span>
+            {props.border?.motion && (
+              <span
+                style={borderStyle}
+                class={cls([
+                  `${prefixCls}-additionalBorder`,
+                  `${prefixCls}-additionalBorder-${size}`,
+                  {
+                    [`${prefixCls}-${shape}`]: shape,
+                    [`${prefixCls}-additionalBorder-animated`]: props.border?.motion,
+                  },
+                ])}
+              />
+            )}
+          </div>
+        );
+      }
+
+      if (bottomSlot || topSlot || border) {
+        return (
+          <span class={cls([`${prefixCls}-wrapper`])} style={style}>
+            {avatar}
+            {topSlot &&
+              ['small', 'default', 'medium', 'large', 'extra-large'].includes(size) &&
+              shape === 'circle' &&
+              renderTopSlot()}
+            {bottomSlot && ['small', 'default', 'medium', 'large', 'extra-large'].includes(size) && renderBottomSlot()}
+          </span>
+        );
+      } else {
+        return avatar;
+      }
     };
   },
   {

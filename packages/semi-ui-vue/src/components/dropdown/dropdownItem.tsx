@@ -100,8 +100,13 @@ const DropdownItem = defineComponent<DropdownItemProps>((props, {slots, attrs}) 
     }> = {};
     if (!disabled) {
       ['onClick', 'onMouseenter', 'onMouseleave', 'onContextmenu'].forEach(eventName => {
-        if (eventName === "onClick") {
-          events.onMousedown = props[eventName];
+        const isInAnotherDropdown = context.value.level !== 1;
+        if (isInAnotherDropdown && eventName === "onClick") {
+          events["onMouseDown"] = (e: MouseEvent) => {
+            if (e.button === 0) {
+              props[eventName]?.(e);
+            }
+          };
         } else {
           events[eventName] = props[eventName];
         }

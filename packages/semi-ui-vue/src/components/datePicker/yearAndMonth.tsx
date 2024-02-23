@@ -67,12 +67,6 @@ const yearAndMonth = defineComponent<YearAndMonthProps>((props, {expose}) => {
 
   let { currentYear, currentMonth } = props;
 
-  const currentLeftYear = currentYear.left || now.getFullYear();
-  const currentLeftMonth = currentMonth.left || now.getMonth() + 1;
-
-  currentYear = { left: currentLeftYear, right: currentLeftYear };
-  currentMonth = { left: currentLeftMonth, right: currentMonth.right || currentLeftMonth + 1 };
-
   const state = reactive<YearAndMonthState>({
     years: getYears(props.startYear, props.endYear).map(year => ({
       value: year,
@@ -84,8 +78,8 @@ const yearAndMonth = defineComponent<YearAndMonthProps>((props, {expose}) => {
         value: idx + 1,
         month: idx + 1,
       })),
-    currentYear,
-    currentMonth,
+    currentYear: { left: currentYear.left || now.getFullYear(), right: currentYear.right || now.getFullYear() },
+    currentMonth: { left: currentMonth.left || now.getMonth() + 1, right: currentMonth.right || now.getMonth() + 2 },
   });
 
   const {adapter: adapterInject} = useBaseComponent<YearAndMonthProps>(props, state)
@@ -129,11 +123,14 @@ const yearAndMonth = defineComponent<YearAndMonthProps>((props, {expose}) => {
     const now = new Date();
 
     if (!isEqual(props.currentYear, state.currentYear) && props.currentYear.left !== 0) {
-      willUpdateStates.currentYear = props.currentYear;
+      const nowYear = new Date().getFullYear();
+      willUpdateStates.currentYear = { left: props.currentYear.left || nowYear, right: props.currentYear.right || nowYear };
     }
 
     if (!isEqual(props.currentMonth, state.currentMonth) && props.currentMonth.left !== 0) {
-      willUpdateStates.currentMonth = props.currentMonth;
+      const nowMonth = new Date().getMonth();
+      willUpdateStates.currentMonth = { left: props.currentMonth.left || nowMonth + 1, right: props.currentMonth.right || nowMonth + 2 };
+
     }
 
     return willUpdateStates;

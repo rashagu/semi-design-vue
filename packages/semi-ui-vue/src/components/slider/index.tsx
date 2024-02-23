@@ -91,6 +91,10 @@ const propTypes:ComponentObjectPropsOptions<SliderProps> = {
     default: undefined,
   },
   getAriaValueText: PropTypes.func as PropType<SliderProps['getAriaValueText']>,
+  handleDot: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+  ]),
 };
 
 const defaultProps: Partial<SliderProps> = {
@@ -431,7 +435,22 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
           aria-valuenow={currentValue as number}
           aria-valuemax={max}
           aria-valuemin={min}
-        />
+        >
+          {props.handleDot && (
+            <div
+              class={cssClasses.HANDLE_DOT}
+              style={{
+                ...(props.handleDot?.size
+                  ? {
+                      width: props.handleDot.size,
+                      height: props.handleDot.size,
+                    }
+                  : {}),
+                ...(props.handleDot?.color ? { backgroundColor: props.handleDot.color } : {}),
+              }}
+            />
+          )}
+        </span>
       </Tooltip>
     ) : (
       <Fragment>
@@ -487,7 +506,22 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
             aria-valuenow={currentValue[0]}
             aria-valuemax={currentValue[1]}
             aria-valuemin={min}
-          />
+          >
+            {props.handleDot?.[0] && (
+              <div
+                class={cssClasses.HANDLE_DOT}
+                style={{
+                  ...(props.handleDot[0]?.size
+                    ? {
+                        width: props.handleDot[0].size,
+                        height: props.handleDot[0].size,
+                      }
+                    : {}),
+                  ...(props.handleDot[0]?.color ? { backgroundColor: props.handleDot[0].color } : {}),
+                }}
+              />
+            )}
+          </span>
         </Tooltip>
         <Tooltip
           content={tipChildren.max}
@@ -541,7 +575,22 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
             aria-valuenow={currentValue[1]}
             aria-valuemax={max}
             aria-valuemin={currentValue[0]}
-          />
+          >
+            {props.handleDot?.[1] && (
+              <div
+                class={cssClasses.HANDLE_DOT}
+                style={{
+                  ...(props.handleDot[1]?.size
+                    ? {
+                        width: props.handleDot[1].size,
+                        height: props.handleDot[1].size,
+                      }
+                    : {}),
+                  ...(props.handleDot[1]?.color ? { backgroundColor: props.handleDot[1].color } : {}),
+                }}
+              />
+            )}
+          </span>
         </Tooltip>
       </Fragment>
     );

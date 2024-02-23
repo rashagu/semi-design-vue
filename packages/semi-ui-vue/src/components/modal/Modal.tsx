@@ -96,6 +96,7 @@ const propTypes:ComponentObjectPropsOptions<ModalReactProps> = {
   lazyRender: PropTypes.bool,
   direction: String,
   fullScreen: PropTypes.bool,
+  footerFill: PropTypes.bool,
   content: [Object, String],
   type: String as PropType<ModalReactProps['type']>,
 };
@@ -131,7 +132,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
     isFullScreen: props.fullScreen,
   });
   const modalRef = ref();
-  let bodyOverflow = '';
+  let bodyOverflow: string|null = null;
   let scrollBarWidth = 0;
   let originBodyWith = '100%';
   let _haveRendered: boolean;
@@ -153,7 +154,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
       },
       enabledBodyScroll: () => {
         const {getPopupContainer} = props;
-        if (!getPopupContainer && bodyOverflow !== 'hidden') {
+        if (!getPopupContainer && bodyOverflow !== null && bodyOverflow !== 'hidden') {
           document.body.style.overflow = bodyOverflow;
           document.body.style.width = originBodyWith;
         }
@@ -260,6 +261,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
       confirmLoading,
       cancelLoading,
       hasCancel,
+      footerFill,
     } = props;
     const getCancelButton = (locale: Locale['Modal']) => {
       if (!hasCancel) {
@@ -269,8 +271,9 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
           <Button
             aria-label="cancel"
             onClick={handleCancel}
-            loading={cancelLoading === undefined ? state.onCancelReturnPromiseStatus === "pending" : cancelLoading}
+            loading={cancelLoading === undefined ? state.onCancelReturnPromiseStatus === 'pending' : cancelLoading}
             type="tertiary"
+            block={footerFill}
             autoFocus={true}
             {...props.cancelButtonProps}
             x-semi-children-alias="cancelText"
@@ -284,13 +287,18 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
     return (
       <LocaleConsumer componentName="Modal">
         {(locale: Locale['Modal'], localeCode: Locale['code']) => (
-          <div>
+          <div
+            class={cls({
+              [`${cssClasses.DIALOG}-footerfill`]: footerFill,
+            })}
+          >
             {getCancelButton(locale)}
             <Button
               aria-label="confirm"
               type={okType}
               theme="solid"
-              loading={confirmLoading === undefined ? state.onOKReturnPromiseStatus === "pending" : confirmLoading}
+              block={footerFill}
+              loading={confirmLoading === undefined ? state.onOKReturnPromiseStatus === 'pending' : confirmLoading}
               onClick={handleOk}
               {...props.okButtonProps}
               x-semi-children-alias="okText"

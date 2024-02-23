@@ -14,7 +14,7 @@ import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import InputFoundation from '@douyinfe/semi-foundation/input/foundation';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/input/constants';
-import { isSemiIcon } from '../_utils';
+import {isSemiIcon, styleNum} from '../_utils';
 import { useBaseComponent } from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/input/input.scss';
 import { isString, noop, isFunction, isUndefined } from 'lodash';
@@ -88,6 +88,7 @@ export interface InputProps
   preventScroll?: boolean;    /** internal prop, DatePicker use it */
   showClearIgnoreDisabled?: boolean
   borderless?: boolean;
+  onlyBorder?: number
 }
 
 export interface InputState {
@@ -144,6 +145,7 @@ const propTypes:ComponentObjectPropsOptions<InputProps> = {
   getValueLength: PropTypes.func as PropType<InputProps['getValueLength']>,
   preventScroll: PropTypes.bool,
   borderless: PropTypes.bool,
+  onlyBorder: PropTypes.number,
 
   minlength: Number,
   maxlength: Number,
@@ -514,6 +516,7 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
       preventScroll,
       borderless,
       showClearIgnoreDisabled,
+      onlyBorder,
       ...rest
     } = props;
     const { value, isFocus, minlength: stateMinLength } = state;
@@ -539,7 +542,8 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
       [`${wrapperPrefix}-modebtn`]: mode === 'password',
       [`${wrapperPrefix}-hidden`]: type === 'hidden',
       [`${wrapperPrefix}-${size}`]: size,
-      [`${prefixCls}-borderless`]: borderless
+      [`${prefixCls}-borderless`]: borderless,
+      [`${prefixCls}-only_border`]: onlyBorder!==undefined && onlyBorder!==null,
     });
     const inputCls = cls(prefixCls, {
       [`${prefixCls}-${size}`]: size,
@@ -586,11 +590,22 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
     if (validateStatus === 'error') {
       inputProps['aria-invalid'] = 'true';
     }
+
+
+    let wrapperStyle = { ...style };
+    if (onlyBorder!==undefined) {
+      wrapperStyle = {
+        borderWidth: styleNum(onlyBorder),
+        ...style
+      };
+    }
+
+
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
       <div
         class={wrapperCls}
-        style={style}
+        style={wrapperStyle}
         onMouseenter={(e: any) => handleMouseOver(e)}
         onMouseleave={(e: any) => handleMouseLeave(e)}
         onClick={(e) => handleClick(e)}

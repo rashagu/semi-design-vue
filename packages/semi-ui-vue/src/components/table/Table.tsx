@@ -88,6 +88,7 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
 import { useTableContext } from './tableContext/Consumer';
+import {is} from "date-fns/locale";
 
 export type NormalTableProps<RecordType extends Record<string, any> = Data> = Omit<TableProps<RecordType>, 'resizable'>;
 
@@ -217,7 +218,7 @@ const defaultProps = {
 // 需要返回范型组件
 function Table<RecordType extends Record<string, any>>() {
   const vuePropsType = vuePropsMake<NormalTableProps<RecordType>>(propTypes, defaultProps);
-  const TableComp = defineComponent<NormalTableProps<RecordType>>((props, {}) => {
+  const TableComp = defineComponent<NormalTableProps<RecordType>>((props, {expose}) => {
     const slots = useSlots();
 
     let lastScrollTop!: number;
@@ -442,7 +443,8 @@ function Table<RecordType extends Record<string, any>>() {
             Boolean(column.useFullRender);
           });
         },
-        getNormalizeColumns: () => normalizeColumns,
+        //TODO 类型没对上
+        getNormalizeColumns: () => normalizeColumns as any,
         getHandleColumns: () => handleColumns as any,
         getMergePagination: () => mergePagination,
         setBodyHasScrollbar: (bodyHasScrollBar) => {
@@ -776,7 +778,7 @@ function Table<RecordType extends Record<string, any>>() {
 
     const getCurrentPageData = () => {
       const pageData = foundation.getCurrentPageData();
-      const retObj = ['dataSource', 'groups'].reduce((result, key) => {
+      const retObj: Pick<BasePageData<RecordType>, 'dataSource' | 'groups'> = ['dataSource', 'groups'].reduce((result, key) => {
         if (pageData[key]) {
           result[key] = pageData[key];
         }
@@ -924,36 +926,58 @@ function Table<RecordType extends Record<string, any>>() {
       }
     };
 
-    const renderSelection = (record = {} as any, inHeader = false): VueJsxNode => {
+    const renderSelection = (record = {} as any, inHeader = false, index?: number): VueJsxNode => {
       const { rowSelection, allDisabledRowKeysSet } = state;
 
       if (rowSelection && typeof rowSelection === 'object') {
-        const { selectedRowKeys = [], selectedRowKeysSet = new Set(), getCheckboxProps, disabled } = rowSelection;
+        const {
+          selectedRowKeys = [],
+          selectedRowKeysSet = new Set(),
+          getCheckboxProps,
+          disabled,
+          renderCell,
+        } = rowSelection;
+        const allRowKeys = cachedFilteredSortedRowKeys;
+        const allRowKeysSet = cachedFilteredSortedRowKeysSet;
+        const allIsSelected = foundation.allIsSelected(selectedRowKeysSet, allDisabledRowKeysSet, allRowKeys);
+        const hasRowSelected = foundation.hasRowSelected(selectedRowKeys, allRowKeysSet);
+        const indeterminate = hasRowSelected && !allIsSelected;
 
         if (inHeader) {
           const columnKey = get(rowSelection, 'key', strings.DEFAULT_KEY_COLUMN_SELECTION);
-          const allRowKeys = cachedFilteredSortedRowKeys;
-          const allRowKeysSet = cachedFilteredSortedRowKeysSet;
-          const allIsSelected = foundation.allIsSelected(selectedRowKeysSet, allDisabledRowKeysSet, allRowKeys);
-          const hasRowSelected = foundation.hasRowSelected(selectedRowKeys, allRowKeysSet);
-          return (
+
+          const originNode = (
             <ColumnSelection
               aria-label={`${allIsSelected ? 'Deselect' : 'Select'} all rows`}
               disabled={disabled}
               key={columnKey}
               selected={allIsSelected}
-              indeterminate={hasRowSelected && !allIsSelected}
+              indeterminate={indeterminate}
               onChange={(selected, e) => {
                 toggleSelectAllRow(selected, e);
               }}
             />
           );
+
+          const selectAll = (selected: boolean, e: Event) =>
+            toggleSelectAllRow(selected, e as TableSelectionCellEvent);
+
+          return isFunction(renderCell)
+            ? renderCell({
+              selected: allIsSelected,
+              record,
+              originNode,
+              inHeader,
+              disabled,
+              indeterminate,
+              selectAll,
+            })
+            : originNode;
         } else {
           const key = foundation.getRecordKey(record);
           const selected = selectedRowKeysSet.has(key);
           const checkboxPropsFn = () => (typeof getCheckboxProps === 'function' ? getCheckboxProps(record) : {});
-
-          return (
+          const originNode = (
             <ColumnSelection
               aria-label={`${selected ? 'Deselect' : 'Select'} this row`}
               getCheckboxProps={checkboxPropsFn}
@@ -961,13 +985,28 @@ function Table<RecordType extends Record<string, any>>() {
               onChange={(status, e) => toggleSelectRow(status, key, e)}
             />
           );
+          const selectRow = (selected: boolean, e: Event) =>
+            toggleSelectRow(selected, key, e as TableSelectionCellEvent);
+
+          return isFunction(renderCell)
+            ? renderCell({
+              selected,
+              record,
+              index,
+              originNode,
+              inHeader: false,
+              disabled,
+              indeterminate,
+              selectRow,
+            })
+            : originNode;
         }
       }
       return null;
     };
 
-    const renderRowSelectionCallback = (text: string, record: RecordType = {} as RecordType) => renderSelection(record);
-    const renderTitleSelectionCallback = () => renderSelection(null, true);
+    const renderRowSelectionCallback = (text: string, record: RecordType = {} as RecordType, index: number) => renderSelection(record, false, index);
+    const renderTitleSelectionCallback = () => renderSelection(undefined, true);
 
     const normalizeSelectionColumn = (
       props: { rowSelection?: TableStateRowSelection<RecordType>; prefixCls?: string } = {}
@@ -1063,7 +1102,7 @@ function Table<RecordType extends Record<string, any>>() {
      */
     const addFnsInColumn = (column: ColumnProps = {}) => {
       const { prefixCls } = props;
-      if (column && (column.sorter || column.filters || column.useFullRender)) {
+      if (column && (column.sorter || column.filters || column.onFilter || column.useFullRender)) {
         let hasSorterOrFilter = false;
         const { dataIndex, title: rawTitle, useFullRender } = column;
         const curQuery = foundation.getQuery(dataIndex);
@@ -1110,7 +1149,12 @@ function Table<RecordType extends Record<string, any>>() {
         const stateFilteredValue = get(curQuery, 'filteredValue');
         const defaultFilteredValue = get(curQuery, 'defaultFilteredValue');
         const filteredValue = stateFilteredValue ? stateFilteredValue : defaultFilteredValue;
-        if ((Array.isArray(column.filters) && column.filters.length) || isVNode(column.filterDropdown)) {
+        if (
+          (Array.isArray(column.filters) && column.filters.length) ||
+          isVNode(column.filterDropdown) ||
+          typeof column.renderFilterDropdown === 'function'
+        ) {
+
           const filter = (
             <ColumnFilter
               key={strings.DEFAULT_KEY_COLUMN_FILTER}
@@ -1411,6 +1455,7 @@ function Table<RecordType extends Record<string, any>>() {
      * @returns {Array}
      */
     const normalizeColumns = (columns: ColumnProps<RecordType>[], children: VueJsxNode) => {
+      // TODO
       console.error('TODO');
       const normalColumns = cloneDeep(getColumns(columns, children));
       return normalColumns;
@@ -1424,6 +1469,9 @@ function Table<RecordType extends Record<string, any>>() {
       return newPagination;
     }
 
+    expose({
+      getCurrentPageData
+    })
     return () => {
       let {
         scroll,

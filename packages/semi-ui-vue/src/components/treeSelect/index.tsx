@@ -169,6 +169,7 @@ export interface TreeSelectProps
   onChange?: OnChange;
   onFocus?: (e: MouseEvent) => void;
   onVisibleChange?: (isVisible: boolean) => void;
+  onClear?: (e: MouseEvent | KeyboardEvent) => void
   id?: string;
 }
 
@@ -221,6 +222,7 @@ const propTypes: ComponentObjectPropsOptions<TreeSelectProps> = {
   virtualize: PropTypes.object,
   treeNodeFilterProp: PropTypes.string,
   onChange: PropTypes.func as PropType<TreeSelectProps['onChange']>,
+  onClear: PropTypes.func as PropType<TreeSelectProps['onClear']>,
   onSearch: PropTypes.func as PropType<TreeSelectProps['onSearch']>,
   onSelect: PropTypes.func as PropType<TreeSelectProps['onSelect']>,
   onExpand: PropTypes.func as PropType<TreeSelectProps['onExpand']>,
@@ -405,7 +407,12 @@ const TreeSelect = defineComponent<TreeSelectProps>(
       };
       const treeAdapter: Pick<
         TreeSelectAdapter,
-        'updateState' | 'notifySelect' | 'notifySearch' | 'cacheFlattenNodes' | 'notifyLoad'
+        'updateState'
+        | 'notifySelect'
+        | 'notifySearch'
+        | 'cacheFlattenNodes'
+        | 'notifyLoad'
+        | 'notifyClear'
       > = {
         updateState: (states) => {
           Object.keys(states).forEach((key) => {
@@ -425,6 +432,9 @@ const TreeSelect = defineComponent<TreeSelectProps>(
           const { onLoad } = props;
           isFunction(onLoad) && onLoad(newLoadedKeys, data);
         },
+        notifyClear: (e: MouseEvent | KeyboardEvent) => {
+          props.onClear && props.onClear(e);
+        }
       };
       return {
         ...adapterInject<TreeSelectProps, TreeSelectState>(),
