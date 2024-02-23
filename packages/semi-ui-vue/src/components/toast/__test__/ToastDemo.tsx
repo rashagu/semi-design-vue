@@ -50,7 +50,7 @@ const ToastDemo = defineComponent<ExampleProps>((props, {}) => {
     <div>
 
       <ToastList ref={(instance: any) => {
-        instance.add({...{
+        instance?.add({...{
             motion: true,
             zIndex: 1010,
             content: 'test',

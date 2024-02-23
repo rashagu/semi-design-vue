@@ -2,6 +2,7 @@ import { expect, test, describe } from 'vitest'
 import CalenderDemo from "./CalenderDemo";
 import EventDemo from "./EventDemo";
 import {mount} from "@vue/test-utils";
+import {fireEvent, render, screen} from "@testing-library/vue";
 
 test('CalenderDemo qwe', async () => {
   expect(CalenderDemo).toBeTruthy()
@@ -11,5 +12,5 @@ test('CalenderDemo qwe', async () => {
 })
 
 test('EventDemo qwe', async () => {
-  expect(EventDemo).toBeTruthy()
+  render(EventDemo)
 })

@@ -34,6 +34,7 @@ const getImagePreview = defineComponent(()=>{
       {srcList.map((src, index) => {
         return (
           <Image
+            //@ts-ignore
             key={index}
             src={src}
             width={200}
