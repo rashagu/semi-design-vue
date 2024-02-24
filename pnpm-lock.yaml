@@ -636,8 +636,8 @@ importers:
         specifier: ^7.16.7
         version: 7.18.6(@babel/core@7.23.7)
       '@types/lodash':
-        specifier: ^4.14.178
-        version: 4.14.184
+        specifier: ^4.14.202
+        version: 4.14.202
       '@types/node':
         specifier: ^20.1.4
         version: 20.1.4
@@ -5791,7 +5791,7 @@ packages:
       '@storybook/preview-api': 7.1.1
       '@storybook/theming': 7.1.1(react-dom@18.2.0)(react@18.2.0)
       '@storybook/types': 7.1.1
-      '@types/lodash': 4.14.184
+      '@types/lodash': 4.14.202
       color-convert: 2.0.1
       dequal: 2.0.3
       lodash: 4.17.21
@@ -6675,8 +6675,8 @@ packages:
     resolution: {integrity: sha512-pTjcqY9E4nOI55Wgpz7eiI8+LzdYnw3qxXCfHyBDdPbYvbyLgWLJGh8EdPvqawwMK1Uo1794AUkkR38Fr0g+2g==}
     dev: true
 
-  /@types/lodash@4.14.184:
-    resolution: {integrity: sha512-RoZphVtHbxPZizt4IcILciSWiC6dcn+eZ8oX9IWEYfDMcocdd42f7NPI6fQj+6zI8y4E0L7gu2pcZKLGTRaV9Q==}
+  /@types/lodash@4.14.202:
+    resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
     dev: true
 
   /@types/markdown-it@13.0.7:

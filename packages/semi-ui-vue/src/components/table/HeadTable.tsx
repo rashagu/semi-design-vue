@@ -74,7 +74,7 @@ const HeadTable = defineComponent<HeadTableProps>((props, {}) => {
         } = props;
 
 
-        const Table = get(components, 'header.outer', 'table');
+        const Table = get(components, 'header.outer', 'table') as any;
         const x = get(scroll, 'x');
         const headStyle: Partial<CSSProperties> = {};
         const tableStyle: { width?: number | string } = {};

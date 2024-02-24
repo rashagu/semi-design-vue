@@ -94,7 +94,7 @@ export const vuePropsType:ComponentObjectPropsOptions<RadioGroupProps> = {
   'aria-invalid': String,
   'aria-labelledby': String,
   'aria-required': [String, Boolean],
-  id: String
+  id: String,
 }
 
 

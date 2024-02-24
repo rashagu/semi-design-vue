@@ -122,90 +122,8 @@ interface AutoCompleteState {
     keyboardEventSet?: KeyboardEventType;
 }
 
-function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}) {
-    const propTypes:ComponentObjectPropsOptions<AutoCompleteProps<T>> = {
-        'aria-label': PropTypes.string,
-        'aria-labelledby': PropTypes.string,
-        'aria-invalid': PropTypes.bool,
-        'aria-errormessage': PropTypes.string,
-        'aria-describedby': PropTypes.string,
-        'aria-required': PropTypes.bool,
-        autoFocus: PropTypes.bool,
-        autoAdjustOverflow: PropTypes.bool,
-        className: PropTypes.string,
-        children: PropTypes.node,
-        data: PropTypes.array,
-        defaultOpen: PropTypes.bool,
-        defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        defaultActiveFirstOption: PropTypes.bool,
-        disabled: PropTypes.bool,
-        dropdownMatchSelectWidth: PropTypes.bool,
-        dropdownClassName: PropTypes.string,
-        dropdownStyle: PropTypes.object,
-        emptyContent: PropTypes.node,
-        id: PropTypes.string,
-        insetLabel: PropTypes.node,
-        insetLabelId: PropTypes.string,
-        onSearch: PropTypes.func as PropType<AutoCompleteProps<T>['onSearch']>,
-        onSelect: PropTypes.func as PropType<AutoCompleteProps<T>['onSelect']>,
-        onClear: PropTypes.func as PropType<AutoCompleteProps<T>['onClear']>,
-        onBlur: PropTypes.func as PropType<AutoCompleteProps<T>['onBlur']>,
-        onFocus: PropTypes.func as PropType<AutoCompleteProps<T>['onFocus']>,
-        onChange: PropTypes.func as PropType<AutoCompleteProps<T>['onChange']>,
-        onKeyDown: PropTypes.func as PropType<AutoCompleteProps<T>['onKeyDown']>,
-        position: String as PropType<AutoCompleteProps<T>['position']>,
-        placeholder: PropTypes.string,
-        prefix: PropTypes.node,
-        onChangeWithObject: PropTypes.bool,
-        onSelectWithObject: PropTypes.bool,
-        onDropdownVisibleChange: PropTypes.func as PropType<AutoCompleteProps<T>['onDropdownVisibleChange']>,
-        renderItem: PropTypes.func as PropType<AutoCompleteProps<T>['renderItem']>,
-        renderSelectedItem: PropTypes.func as PropType<AutoCompleteProps<T>['renderSelectedItem']>,
-        suffix: PropTypes.node,
-        showClear: PropTypes.bool,
-        size: String as PropType<AutoCompleteProps<T>['size']>,
-        style: PropTypes.object,
-        stopPropagation: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-        maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        mouseEnterDelay: PropTypes.number,
-        mouseLeaveDelay: PropTypes.number,
-        motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
-        getPopupContainer: PropTypes.func as PropType<AutoCompleteProps<T>['getPopupContainer']>,
-        triggerRender: PropTypes.func as PropType<AutoCompleteProps<T>['triggerRender']>,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        validateStatus: String as PropType<AutoCompleteProps<T>['validateStatus']>,
-        zIndex: PropTypes.number,
-    };
-
-    const defaultProps = {
-        stopPropagation: true,
-        motion: true,
-        zIndex: popoverNumbers.DEFAULT_Z_INDEX,
-        position: 'bottomLeft' as const,
-        data: [] as [],
-        showClear: false,
-        size: 'default' as const,
-        onFocus: noop,
-        onSearch: noop,
-        onClear: noop,
-        onBlur: noop,
-        onSelect: noop,
-        onChange: noop,
-        onSelectWithObject: false,
-        onDropdownVisibleChange: noop,
-        defaultActiveFirstOption: false,
-        dropdownMatchSelectWidth: true,
-        loading: false,
-        maxHeight: 300,
-        validateStatus: 'default' as const,
-        autoFocus: false,
-        emptyContent: null as null,
-        onKeyDown: noop,
-        // onPressEnter: () => undefined,
-        // defaultOpen: false,
-    };
-    const vuePropsType_ = vuePropsMake(propTypes, defaultProps)
-
+function AutoCompleteFunc<T extends AutoCompleteItems>() {
+    const vuePropsType_ = AutoCompleteFuncVueProps<T>()
     const AutoComplete = defineComponent<AutoCompleteProps<T>>((props, {}) => {
 
         const slots = useSlots()
@@ -558,9 +476,97 @@ function AutoCompleteFunc<T extends AutoCompleteItems>(vuePropsType:PropObj = {}
     return AutoComplete
 }
 
+function AutoCompleteFuncVueProps<T>() {
+    const propTypes:ComponentObjectPropsOptions<AutoCompleteProps<T>> = {
+        'aria-label': PropTypes.string,
+        'aria-labelledby': PropTypes.string,
+        'aria-invalid': PropTypes.bool,
+        'aria-errormessage': PropTypes.string,
+        'aria-describedby': PropTypes.string,
+        'aria-required': PropTypes.bool,
+        autoFocus: PropTypes.bool,
+        autoAdjustOverflow: PropTypes.bool,
+        className: PropTypes.string,
+        children: PropTypes.node,
+        data: PropTypes.array,
+        defaultOpen: PropTypes.bool,
+        defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        defaultActiveFirstOption: PropTypes.bool,
+        disabled: PropTypes.bool,
+        dropdownMatchSelectWidth: PropTypes.bool,
+        dropdownClassName: PropTypes.string,
+        dropdownStyle: PropTypes.object,
+        emptyContent: PropTypes.node,
+        id: PropTypes.string,
+        insetLabel: PropTypes.node,
+        insetLabelId: PropTypes.string,
+        onSearch: PropTypes.func as PropType<AutoCompleteProps<T>['onSearch']>,
+        onSelect: PropTypes.func as PropType<AutoCompleteProps<T>['onSelect']>,
+        onClear: PropTypes.func as PropType<AutoCompleteProps<T>['onClear']>,
+        onBlur: PropTypes.func as PropType<AutoCompleteProps<T>['onBlur']>,
+        onFocus: PropTypes.func as PropType<AutoCompleteProps<T>['onFocus']>,
+        onChange: PropTypes.func as PropType<AutoCompleteProps<T>['onChange']>,
+        onKeyDown: PropTypes.func as PropType<AutoCompleteProps<T>['onKeyDown']>,
+        position: String as PropType<AutoCompleteProps<T>['position']>,
+        placeholder: PropTypes.string,
+        prefix: PropTypes.node,
+        onChangeWithObject: PropTypes.bool,
+        onSelectWithObject: PropTypes.bool,
+        onDropdownVisibleChange: PropTypes.func as PropType<AutoCompleteProps<T>['onDropdownVisibleChange']>,
+        renderItem: PropTypes.func as PropType<AutoCompleteProps<T>['renderItem']>,
+        renderSelectedItem: PropTypes.func as PropType<AutoCompleteProps<T>['renderSelectedItem']>,
+        suffix: PropTypes.node,
+        showClear: PropTypes.bool,
+        size: String as PropType<AutoCompleteProps<T>['size']>,
+        style: PropTypes.object,
+        stopPropagation: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+        maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        mouseEnterDelay: PropTypes.number,
+        mouseLeaveDelay: PropTypes.number,
+        motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
+        getPopupContainer: PropTypes.func as PropType<AutoCompleteProps<T>['getPopupContainer']>,
+        triggerRender: PropTypes.func as PropType<AutoCompleteProps<T>['triggerRender']>,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        validateStatus: String as PropType<AutoCompleteProps<T>['validateStatus']>,
+        zIndex: PropTypes.number,
+    };
 
+    const defaultProps = {
+        stopPropagation: true,
+        motion: true,
+        zIndex: popoverNumbers.DEFAULT_Z_INDEX,
+        position: 'bottomLeft' as const,
+        data: [] as [],
+        showClear: false,
+        size: 'default' as const,
+        onFocus: noop,
+        onSearch: noop,
+        onClear: noop,
+        onBlur: noop,
+        onSelect: noop,
+        onChange: noop,
+        onSelectWithObject: false,
+        onDropdownVisibleChange: noop,
+        defaultActiveFirstOption: false,
+        dropdownMatchSelectWidth: true,
+        loading: false,
+        maxHeight: 300,
+        validateStatus: 'default' as const,
+        autoFocus: false,
+        emptyContent: null as null,
+        onKeyDown: noop,
+        // onPressEnter: () => undefined,
+        // defaultOpen: false,
+    };
+    return vuePropsMake(propTypes, defaultProps)
+
+}
+
+
+const vuePropsType = AutoCompleteFuncVueProps()
 export {
-    AutoCompleteFunc
+    AutoCompleteFunc,
+    vuePropsType
 }
 
 export default AutoCompleteFunc()

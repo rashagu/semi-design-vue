@@ -14,7 +14,17 @@ import {
     getRTLAlign
 } from '@douyinfe/semi-foundation/table/utils';
 import { TableComponents, OnHeaderRow, Fixed } from './interface';
-import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, reactive, useSlots, watch} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    CSSProperties,
+    defineComponent,
+    h,
+    PropType,
+    reactive,
+    useSlots,
+    VNode,
+    watch
+} from "vue";
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 import {TableSelectionCellProps} from "./ColumnSelection";
@@ -106,8 +116,8 @@ const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
         const slicedColumns = sliceColumnsByLevel(columns, index);
         const headWidths = getCellWidths?.(slicedColumns) || [];
 
-        const HeaderRow = get(components, 'header.row', 'tr');
-        const HeaderCell = get(components, 'header.cell', 'th');
+        const HeaderRow = get(components, 'header.row', 'tr') as any;
+        const HeaderCell = get(components, 'header.cell', 'th') as any;
 
         const rowProps = onHeaderRow(columns, index) || {};
         set(rowProps, 'className', classnames(get(rowProps, 'className'), `${prefixCls}-row`));

@@ -404,7 +404,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
     };
 
     const handleVirtualizedScroll = (props_ = {}) => {
-        const onScroll = get(props.virtualized, 'onScroll');
+        const onScroll = get(props.virtualized, 'onScroll') as BodyProps['onScroll'];
         if (typeof onScroll === 'function') {
             onScroll(props_);
         }
@@ -903,8 +903,8 @@ const Body = defineComponent<BodyProps>((props, {}) => {
         const tableStyle: {
             width?: string | number
         } = {};
-        const Table = get(components, 'body.outer', 'table');
-        const BodyWrapper = get(components, 'body.wrapper') || 'tbody';
+        const Table = get(components, 'body.outer', 'table') as any;
+        const BodyWrapper = get(components, 'body.wrapper') as any || 'tbody';
 
         if (y) {
             bodyStyle.maxHeight = typeof y === 'string'? y: y + 'px';

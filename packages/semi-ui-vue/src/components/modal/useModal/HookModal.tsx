@@ -54,7 +54,7 @@ const HookModal = defineComponent<HookModalProps>((props_, {expose}) => {
             {
                 ...(motion as any),
                 didLeave: (...args: any[]) => {
-                    const didLeave = get(props.motion, 'didLeave');
+                    const didLeave = get(props.motion, 'didLeave') as (...value: any) => void;
 
                     if (typeof didLeave === 'function') {
                         didLeave(...args);
