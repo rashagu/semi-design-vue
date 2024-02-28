@@ -1,5 +1,21 @@
 # @kousum/semi-ui-vue
 
+## 0.8.0
+
+### Minor Changes
+
+- semi 2.53.2
+
+### Patch Changes
+
+- 0cf980f: perf: [Form] withField
+- 0cf980f: semi 2.52.3
+- Updated dependencies
+- Updated dependencies [0cf980f]
+  - @kousum/semi-animation-vue@0.8.0
+  - @kousum/semi-icons-vue@0.8.0
+  - @kousum/semi-illustrations-vue@0.8.0
+
 ## 0.7.3
 
 ### Patch Changes
