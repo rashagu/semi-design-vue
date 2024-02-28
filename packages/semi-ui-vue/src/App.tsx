@@ -140,7 +140,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TableDemo7 />*/}
         {/*<TableDemo8 />*/}
         {/*<TableDemo9 />*/}
-        <TableDemo10 />
+        {/*<TableDemo10 />*/}
         {/*<TableDemo11 />*/}
         {/*<TableDemo12 />*/}
         {/*<TableDemo13Virtualized />*/}
@@ -190,7 +190,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<RadioDemo />*/}
 
         {/*<InputDemo />*/}
-        {/*<TypeDemo />*/}
+        <TypeDemo />
 
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
         {/*  <Button />*/}

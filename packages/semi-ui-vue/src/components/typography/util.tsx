@@ -1,4 +1,5 @@
-import {defineComponent, ref, h, Fragment} from 'vue'
+import {defineComponent, ref, h, Fragment, createApp, type App} from 'vue'
+import {omit} from "lodash";
 
 
 /**
@@ -10,6 +11,7 @@ import {defineComponent, ref, h, Fragment} from 'vue'
  */
 
 let ellipsisContainer: HTMLElement;
+let ellipsisApp: App;
 function pxToNumber(value: string) {
   if (!value) {
     return 0;
@@ -25,17 +27,25 @@ function styleToString(style: CSSStyleDeclaration): string {
   return styleNames.map((name: string) => `${name}: ${style.getPropertyValue(name)};`).join('');
 }
 
-
+const EmptyComp = defineComponent(()=>{
+  return ()=>{
+    return <></>
+  }
+})
 const getRenderText = (
   originEle: HTMLElement,
   rows: number,
   content = '',
-  fixedContent: any[],
+  fixedContent: {
+    expand: Node;
+    copy: Node
+  },
   ellipsisStr: string,
   suffix: string,
   ellipsisPos: string
   // eslint-disable-next-line max-params
 ) => {
+
   if (content.length === 0) {
     return '';
   }
@@ -66,12 +76,14 @@ const getRenderText = (
   // clean up css overflow
   ellipsisContainer.style.textOverflow = 'clip';
   ellipsisContainer.style.webkitLineClamp = 'none';
-
   // Render fake container
-  // ReactDOM.render(
-  //   <></>,
-  //   ellipsisContainer
-  // );
+  if (ellipsisApp){
+    ellipsisApp.unmount()
+  }
+  ellipsisApp = createApp(
+    ()=>h('div'),
+  )
+  ellipsisApp.mount(ellipsisContainer);
 
   // Check if ellipsis in measure div is enough for content
   function inRange() {
@@ -85,13 +97,23 @@ const getRenderText = (
   // ========================= Find match ellipsis content =========================
   // Create origin content holder
   const ellipsisContentHolder = document.createElement('span');
-  const ellipsisTextNode = document.createTextNode(suffix);
-  ellipsisContentHolder.appendChild(ellipsisTextNode);
+  const textNode = document.createTextNode(content);
+  ellipsisContentHolder.appendChild(textNode);
+  if (suffix.length > 0) {
+    const ellipsisTextNode = document.createTextNode(suffix);
+    ellipsisContentHolder.appendChild(ellipsisTextNode);
+  }
   ellipsisContainer.appendChild(ellipsisContentHolder);
-  fixedContent.map((node: Node) => node && ellipsisContainer.appendChild(node.cloneNode(true)));
-  // Append before fixed nodes
-  function appendChildNode(node: ChildNode) {
-    ellipsisContentHolder.insertBefore(node, ellipsisTextNode);
+
+  // Expand node needs to be added only when text needTruncated
+  Object.values(omit(fixedContent, 'expand')).map(
+    node => node && ellipsisContainer.appendChild(node.cloneNode(true))
+  );
+
+  function appendExpandNode() {
+    ellipsisContainer.innerHTML = '';
+    ellipsisContainer.appendChild(ellipsisContentHolder);
+    Object.values(fixedContent).map(node => node && ellipsisContainer.appendChild(node.cloneNode(true)));
   }
 
   function getCurrentText(text: string, pos: number) {
@@ -99,7 +121,7 @@ const getRenderText = (
     if (!pos) {
       return ellipsisStr;
     }
-    if (ellipsisPos === 'end' || pos > end - pos) {
+    if (ellipsisPos === 'end') {
       return text.slice(0, pos) + ellipsisStr;
     }
     return text.slice(0, pos) + ellipsisStr + text.slice(end - pos, end);
@@ -121,8 +143,8 @@ const getRenderText = (
       for (let step = endLoc; step >= startLoc; step -= 1) {
         const currentStepText = getCurrentText(fullText, step);
         textNode.textContent = currentStepText;
-        if (inRange() || !currentStepText) {
-          return step === fullText.length ? fullText : currentStepText;
+        if (inRange()) {
+          return currentStepText;
         }
       }
     } else if (endLoc === 0) {
@@ -135,11 +157,18 @@ const getRenderText = (
     return measureText(textNode, fullText, startLoc, midLoc, lastSuccessLoc);
   }
 
-  const textNode = document.createTextNode(content);
-  appendChildNode(textNode);
-  const resText = measureText(textNode, content);
+  let resText = content;
+  // First judge whether the total length of fullText, plus suffix (possible)
+  // and copied icon (possible) meets expectations？
+  // If it does not meet expectations, add an expand button to find the largest  content that meets size limit
+  // 首先判断总文本长度，加上可能有的 suffix，复制按钮长度，看结果是否符合预期
+  // 如果不符合预期，则再加上展开按钮，找最大符合尺寸的内容
+  if (!inRange()) {
+    appendExpandNode();
+    resText = measureText(textNode, content, 0, ellipsisPos === 'middle' ? Math.floor((content.length) / 2) : content.length);
+  }
   ellipsisContainer.innerHTML = '';
-  return ()=>resText;
+  return resText;
 };
 
 

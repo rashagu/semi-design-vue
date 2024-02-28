@@ -15,12 +15,12 @@ const TypoDemo = defineComponent<ExampleProps>((props, {slots}) => {
 
 
 // return ()=>{
-//   return            <Paragraph>
-//     Semi Design 是由互娱社区前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
+//   return <Paragraph ellipsis={{ rows: 3, expandable: true, collapsible: true, collapseText: '折叠我吧', onExpand: (bool, e) => console.log(bool, e) }} style={{ width: '300px' }}>
+//     支持展开和折叠：Semi Design 是由互娱社区前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
 //   </Paragraph>
 // }
   return () => (
-    <div>
+    <div class={'111'}>
       <div>
         <Title  style={{margin: '8px 0'}} >h1. Semi Design</Title>
         <Title heading={2} style={{margin: '8px 0'}} >h2. Semi Design</Title>
@@ -99,7 +99,7 @@ const TypoDemo = defineComponent<ExampleProps>((props, {slots}) => {
       </div>
 
       <div>
-        <Title heading={5} ellipsis={{ showTooltip: true }} style={{ width: 250 }}>
+        <Title heading={5} ellipsis={{ showTooltip: true }} style={{ width: '250px' }}>
           是一个很长很长很长很长5号标题
         </Title>
         <br />
@@ -119,19 +119,19 @@ const TypoDemo = defineComponent<ExampleProps>((props, {slots}) => {
           是一个很长很长很长很长的链接
         </Text>
         <br/>
-        <Paragraph ellipsis={{ suffix: '小尾巴' }} style={{ width: 300 }}>
+        <Paragraph ellipsis={{ suffix: '小尾巴' }} style={{ width: '300px' }}>
           有后缀的情况：Semi Design 是由互娱社区前端团队与 UED 团队共同设计开发并维护的设计系统。
         </Paragraph>
         <br/>
-        <Paragraph ellipsis={{ rows: 3 }} style={{ width: 300 }}>
+        <Paragraph ellipsis={{ rows: 3 }} style={{ width: '300px' }}>
           这是一个多行截断的例子：Semi Design 是由互娱社区前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
         </Paragraph>
         <br/>
-        <Paragraph ellipsis={{ rows: 3, showTooltip: {type: 'popover', opts: {style: {width: 300}}} }} style={{ width: 300 }}>
+        <Paragraph ellipsis={{ rows: 3, showTooltip: {type: 'popover', opts: {style: {width: '300px'}}} }} style={{ width: '300px' }}>
           多行截断，展示 Popover：Semi Design 是由互娱社区前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
         </Paragraph>
         <br/>
-        <Paragraph ellipsis={{ rows: 3, expandable: true, collapsible: true, collapseText: '折叠我吧', onExpand: (bool, e) => console.log(bool, e) }} style={{ width: 300 }}>
+        <Paragraph ellipsis={{ rows: 3, expandable: true, collapsible: true, collapseText: '折叠我吧', onExpand: (bool, e) => console.log(bool, e) }} style={{ width: '300px' }}>
           支持展开和折叠：Semi Design 是由互娱社区前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
         </Paragraph>
       </div>

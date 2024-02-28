@@ -26,6 +26,7 @@ export {
   Text as TypographyText,
   Title as TypographyTitle,
   Paragraph as TypographyParagraph,
+  Numeral as TypographyNumeral,
 } from './typography';
 
 export { default as Input } from './input';

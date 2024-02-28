@@ -201,7 +201,7 @@ const SubNav = defineComponent<SubNavProps>((props, {}) => {
           animationState={isOpen ? 'enter' : 'leave'}
           startClassName={`${cssClasses.PREFIX}-icon-rotate-${isOpen ? '180' : '0'}`}
           children={({ animationClassName }) => {
-            return cloneVNode(icon, { size: iconSize, className: animationClassName });
+            return cloneVNode(icon, { size: iconSize, class: animationClassName });
           }}
         ></CSSAnimation>
       ) : (

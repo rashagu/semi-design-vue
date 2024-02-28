@@ -8,7 +8,6 @@ import {
   ComponentObjectPropsOptions,
   PropType
 } from 'vue'
-import { strings } from '@douyinfe/semi-foundation/typography/constants';
 import Base from './base';
 import { Ellipsis, TypographyBaseSize, TypographyBaseType, OmitTypographyProps } from './interface';
 import { CopyableConfig, LinkType } from './title';

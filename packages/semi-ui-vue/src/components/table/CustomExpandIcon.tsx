@@ -86,7 +86,7 @@ const CustomExpandIcon = defineComponent<CustomExpandIconProps>((props, {}) => {
                 animationState={expanded?"enter":"leave"}
                 startClassName={`${cssClasses.PREFIX}-expandedIcon-${expanded?'show':"hide"}`}
                 children={({ animationClassName })=>{
-                    return cloneVNode(originIcon, { className: (originIcon.props?.class || "")+" "+animationClassName });
+                    return cloneVNode(originIcon, { class: (originIcon.props?.class || "")+" "+animationClassName });
                 }}
               >
               </CSSAnimation>

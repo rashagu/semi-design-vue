@@ -23,10 +23,9 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
-import { PreviewImageProps } from '../image';
 import {ComponentObjectPropsOptions} from "vue";
 
-interface CollapsibleProps extends CollapsibleFoundationProps {
+export interface CollapsibleProps extends CollapsibleFoundationProps {
   motion?: boolean;
   isOpen?: boolean;
   duration?: number;

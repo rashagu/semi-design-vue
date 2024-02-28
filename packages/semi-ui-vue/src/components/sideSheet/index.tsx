@@ -234,6 +234,15 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
       closeOnEsc,
       ...props_
     } = props;
+    let wrapperStyle: CSSProperties = {
+      zIndex,
+    };
+    if (getPopupContainer) {
+      wrapperStyle = {
+        zIndex,
+        position: 'static',
+      };
+    }
     const { direction } = context.value;
     const isVertical = placement === 'left' || placement === 'right';
     const isHorizontal = placement === 'top' || placement === 'bottom';
@@ -281,19 +290,21 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
               onAnimationEnd={updateState /* for no mask case*/}
               children={({ animationClassName, animationStyle, animationEventsNeedBind }) => {
                 return shouldRender ? (
-                  <SideSheetContent
-                    {...contentProps}
-                    maskExtraProps={maskAnimationEventsNeedBind}
-                    wrapperExtraProps={animationEventsNeedBind}
-                    dialogClassName={animationClassName}
-                    maskClassName={maskAnimationClassName}
-                    maskStyle={{ ...maskStyle }}
-                    style={{ ...animationStyle, ...style }}
-                  >
-                    {{
-                      default: slots.default
-                    }}
-                  </SideSheetContent>
+                  <Portal getPopupContainer={getPopupContainer} style={wrapperStyle}>
+                    <SideSheetContent
+                      {...contentProps}
+                      maskExtraProps={maskAnimationEventsNeedBind}
+                      wrapperExtraProps={animationEventsNeedBind}
+                      dialogClassName={animationClassName}
+                      maskClassName={maskAnimationClassName}
+                      maskStyle={{ ...maskStyle }}
+                      style={{ ...animationStyle, ...style }}
+                    >
+                      {{
+                        default: slots.default,
+                      }}
+                    </SideSheetContent>
+                  </Portal>
                 ) : null;
               }}
             ></CSSAnimation>
@@ -304,21 +315,13 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
   }
 
   return () => {
-    const { zIndex, getPopupContainer } = props;
-    let wrapperStyle: CSSProperties = {
-      zIndex,
-    };
-    if (getPopupContainer) {
-      wrapperStyle = {
-        zIndex,
-        position: 'static',
-      };
-    }
-    return (
-      <Portal getPopupContainer={getPopupContainer} style={wrapperStyle}>
-        {renderContent()}
-      </Portal>
-    );
+    // const {
+    //   zIndex,
+    //   getPopupContainer,
+    //   visible
+    // } = props;
+
+    return renderContent();
   };
 }, {
   props: vuePropsType,

@@ -187,7 +187,7 @@ const ConfirmModal = defineComponent<ConfirmProps>((props, {}) => {
     });
     const typeCls = cls(`${cssClasses.DIALOG}-${type}`);
     const iconNode = isSemiIcon(icon)
-      ? cloneVNode(icon as any, {className: `${confirmCls}-icon ${typeCls}-icon`, size: 'extra-large'})
+      ? cloneVNode(icon as any, {class: `${confirmCls}-icon ${typeCls}-icon`, size: 'extra-large'})
       : icon;
     const titleNode = title == null ? null : <span class={`${confirmCls}-title-text`}>{title}</span>;
     const contentCls = cls(`${confirmCls}-content`, {

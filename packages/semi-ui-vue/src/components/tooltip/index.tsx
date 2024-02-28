@@ -584,7 +584,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
       if (isVNode(showArrow)) {
         icon = showArrow;
       } else {
-        icon = cloneVNode(iconComponent, { className: triangleCls, style: { color: bgColor, fill: 'currentColor' } });
+        icon = cloneVNode(iconComponent, { class: triangleCls, style: { color: bgColor, fill: 'currentColor' } });
       }
     }
 

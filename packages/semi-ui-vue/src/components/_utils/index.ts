@@ -200,6 +200,21 @@ export function getFocusableElements(node: HTMLElement) {
 }
 
 
+export async function runAfterTicks(func: (...args: any) => any, numberOfTicks: number) {
+    if (numberOfTicks===0) {
+        await func();
+        return;
+    } else {
+        await new Promise<void>(resolve=>{
+            setTimeout(async ()=>{
+                await runAfterTicks(func, numberOfTicks-1);
+                resolve();
+            }, 0);
+        });
+        return;
+    }
+}
+
 
 
 

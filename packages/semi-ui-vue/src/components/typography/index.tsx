@@ -2,11 +2,13 @@ import BaseTypography from './typography';
 import Text from './text';
 import Title from './title';
 import Paragraph from './paragraph';
+import Numeral from './numeral';
 
 export type TypographyType = typeof BaseTypography & {
     Text: typeof Text;
     Title: typeof Title;
     Paragraph: typeof Paragraph;
+    Numeral: typeof Numeral
 };
 
 const Typography = BaseTypography as TypographyType;
@@ -26,4 +28,5 @@ export {
     Title,
     Text,
     Paragraph,
+    Numeral,
 };

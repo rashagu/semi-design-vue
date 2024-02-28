@@ -11,7 +11,7 @@ export interface CopyableConfig {
   copyTip?: VNode;
   successTip?: VNode;
   icon?: VNode;
-  onCopy?(e: any, content: string, res: boolean): void;
+  onCopy?(e: MouseEvent, content: string, res: boolean): void;
 }
 
 export type LinkType = any | boolean;
@@ -32,6 +32,7 @@ export interface TitleProps extends Omit<any, OmitTitleProps>{
   style?: CSSProperties;
   type?: TypographyBaseType;
   underline?: boolean;
+  weight?: ArrayElement<typeof strings.WEIGHT> | number
 }
 export const vuePropsType:ComponentObjectPropsOptions<TitleProps> = {
   className: {
@@ -92,6 +93,7 @@ export const vuePropsType:ComponentObjectPropsOptions<TitleProps> = {
     default: 'primary'
   },
   underline: Boolean,
+  weight: [String, Number] as PropType<TitleProps['weight']>,
 }
 const Title = defineComponent<TitleProps>((props, {slots}) => {
 

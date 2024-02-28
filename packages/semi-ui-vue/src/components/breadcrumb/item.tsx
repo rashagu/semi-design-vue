@@ -107,7 +107,7 @@ const BreadcrumbItem = defineComponent<BreadcrumbItemProps>((props, {}) => {
     const iconSize = compact ? 'small' : 'default';
     const className = `${clsPrefix}-item-icon`;
     if (isVNode(iconType)) {
-      return cloneVNode(iconType, {className, size: iconSize});
+      return cloneVNode(iconType, {class: className, size: iconSize});
     }
     return iconType;
   };

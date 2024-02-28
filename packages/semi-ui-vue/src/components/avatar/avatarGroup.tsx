@@ -68,7 +68,7 @@ const AvatarGroup = defineComponent<AvatarGroupProps>((props, {slots}) => {
           [`${prefixCls}-item-start-${index}`]: overlapFrom === 'start',
           [`${prefixCls}-item-end-${index}`]: overlapFrom === 'end',
         });
-        return cloneVNode((itm as any), { ...rest, className, size, shape, key: index });
+        return cloneVNode((itm as any), { ...rest, class: className, size, shape, key: index });
       });
 
     }

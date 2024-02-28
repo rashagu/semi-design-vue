@@ -134,10 +134,10 @@ const Toast = defineComponent<ToastReactProps>(
       const iconSize = 'large';
       const iconCls = cls(`${prefixCls}-icon`, `${prefixCls}-icon-${type}`);
       if (icon) {
-        return isSemiIcon(icon) ? cloneVNode(icon as VNode, { size: iconSize, className: `${prefixCls}-icon` }) : icon;
+        return isSemiIcon(icon) ? cloneVNode(icon as VNode, { size: iconSize, class: `${prefixCls}-icon` }) : icon;
       }
       if (type && iconType) {
-        return cloneVNode(iconType, { size: iconSize, className: iconCls });
+        return cloneVNode(iconType, { size: iconSize, class: iconCls });
       }
       return null;
     }

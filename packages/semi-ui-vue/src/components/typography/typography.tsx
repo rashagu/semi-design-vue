@@ -28,8 +28,7 @@ const Typography = defineComponent<TypographyProps>((props, {slots}) => {
   // console.debug(component_,{class:classNames,ref:forwardRef,...rest})
   return ()=>{
     const children = slots.default?slots.default():null
-    // console.log(children)
-    return component_?h(component_, {class:classNames,ref:forwardRef,...rest}, children):<span />
+    return h(component_, {class:classNames,ref:forwardRef,...rest}, children)
   };
 }, {
   props: vuePropsType,

@@ -39,8 +39,8 @@
     }
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.52.3",
-    "@douyinfe/semi-theme-default": "2.52.3",
+    "@douyinfe/semi-foundation": "2.53.2",
+    "@douyinfe/semi-theme-default": "2.53.2",
     "@vue/repl": "^3.2.0",
     "vue": "^3.4.19",
     "lodash": "^4.17.21"
@@ -65,7 +65,7 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.16.7",
     "@changesets/cli": "^2.26.0",
-    "@douyinfe/semi-theme-default": "2.52.3",
+    "@douyinfe/semi-theme-default": "2.53.2",
     "@svgr/babel-plugin-add-jsx-attribute": "5.4.0",
     "@svgr/babel-plugin-remove-jsx-attribute": "5.4.0",
     "@svgr/babel-plugin-remove-jsx-empty-expression": "5.0.1",

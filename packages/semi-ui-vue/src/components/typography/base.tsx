@@ -3,12 +3,12 @@ import {
   ref,
   h,
   Fragment,
-  VNode,
-  CSSProperties,
+  type VNode,
+  type CSSProperties,
   reactive,
   onMounted,
   watchEffect,
-  onUnmounted, cloneVNode, watch, useSlots, ComponentObjectPropsOptions, PropType
+  onUnmounted, cloneVNode, watch, useSlots, type ComponentObjectPropsOptions, type PropType, nextTick
 } from 'vue'
 import cls from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/typography/constants';
@@ -23,19 +23,43 @@ import warning from '@douyinfe/semi-foundation/utils/warning';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 import LocaleConsumer from '../locale/localeConsumer';
 import {Locale} from '../locale/interface';
-import {Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseType} from './interface';
-import {CopyableConfig, LinkType} from './title';
-import {BaseProps} from '../_base/baseComponent';
-import {isSemiIcon} from '../_utils/index';
-import ResizeObserver from '../resizeObserver';
+import type {Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseType} from './interface';
+import type {CopyableConfig, LinkType} from './title';
+import type {BaseProps} from '../_base/baseComponent';
+import { isSemiIcon, runAfterTicks } from '../_utils';
+import ResizeObserver, { ObserverProperty, ResizeEntry } from '../resizeObserver';
+import  * as PropTypes from "../PropTypes"
+import {vuePropsMake} from "../PropTypes";
+
 
 
 export interface BaseTypographyProps extends BaseProps {
-  children: any,
+
   copyable?: CopyableConfig | boolean;
   delete?: boolean;
   disabled?: boolean;
   icon?: VNode;
+  /**
+   * ellipsis 用于设置截断相关参数.
+   * Ellipsis is used to set ellipsis related parameters.
+   * ellipsis 仅支持纯文本的截断，不支持 reactNode 等复杂类型，请确保 children 传入内容类型为 string.
+   * Ellipsis only supports ellipsis of plain text, and does not support complex types such as reactNode.
+   * Please ensure that the content type of children is string.
+   * Semi 截断有两种策略， CSS 截断和 JS 截断。
+   * Semi ellipsis has two strategies, CSS ellipsis and JS ellipsis.
+   *  - 当设置中间截断（pos='middle')、可展开（expandable)、有后缀（suffix 非空）、可复制（copyable），启用 JS 截断策略
+   *  - When setting middle ellipsis (pos='middle')、expandable、suffix is not empty string、copyable,
+   * the JS ellipsis strategy is enabled
+   *  - 非以上场景，启用 CSS 截断策略
+   *  - Otherwise, enable the CSS ellipsis strategy
+   *
+   * 通常来说 CSS 截断的性能优于 JS 截断。在 children 不变， 容器尺寸不变的情况下，CSS 截断只涉及 1-2 次计算，js 截断基于二分法，可能涉及多次计算。
+   * In general CSS ellipsis performs better than JS ellipsis. when the children and container size remain unchanged,
+   * CSS ellipsis only involves 1-2 calculations, while JS ellipsis is based on dichotomy and may require multiple calculations.
+   * 同时使用大量带有截断功能的 Typography 需注意性能消耗，如在 Table 中，可通过设置合理的页容量进行分页减少性能损耗
+   * Pay attention to performance consumption when using a large number of Typography with ellipsis. For example, in Table,
+   * you can reduce performance loss by setting a reasonable pageSize for paging
+   */
   ellipsis?: Ellipsis | boolean;
   mark?: boolean;
   underline?: boolean;
@@ -46,10 +70,13 @@ export interface BaseTypographyProps extends BaseProps {
   style?: CSSProperties;
   className?: string;
   code?: boolean;
-  component_?: any;
+  children?: any;
+  component?: any;
   spacing?: string;
   heading?: string;
   weight?: string | number
+
+  component_?: any;
 
   class?: string
   id?: string
@@ -60,10 +87,9 @@ interface BaseTypographyState {
   editable: boolean;
   copied: boolean;
   isOverflowed: boolean;
-  ellipsisContent: string;
+  ellipsisContent: string | VNode;
   expanded: boolean;
   isTruncated: boolean;
-  first: boolean;
   prevChildren: VNode | VNode[];
 }
 
@@ -71,16 +97,34 @@ const prefixCls = cssClasses.PREFIX;
 const ELLIPSIS_STR = '...';
 
 
-export const vuePropsType:ComponentObjectPropsOptions<BaseTypographyProps> = {
+const propTypes:ComponentObjectPropsOptions<BaseTypographyProps> = {
+  copyable: PropTypes.oneOfType([
+    PropTypes.object(),
+    PropTypes.bool,
+  ]),
+  delete: PropTypes.bool,
+  disabled: PropTypes.bool,
+  // editable: PropTypes.bool,
+  ellipsis: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool,
+  ]),
+  mark: PropTypes.bool,
+  underline: PropTypes.bool,
+  link: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  spacing: PropTypes.string,
+  strong: PropTypes.bool,
+  size: PropTypes.string as PropType<BaseTypographyProps['size']>,
+  type: PropTypes.string as PropType<BaseTypographyProps['type']>,
+  style: PropTypes.object,
+  className: PropTypes.string,
+  icon: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  heading: PropTypes.string,
+  component: PropTypes.string,
+  weight: [PropTypes.string, PropTypes.number],
+
+
   children: [Object, Array, Function],
-  style: {
-    type: [Object, String] as PropType<BaseTypographyProps['style']>,
-    default: {}
-  },
-  className: {
-    type: String,
-    default: ''
-  },
   class: {
     type: String,
     default:''
@@ -93,58 +137,27 @@ export const vuePropsType:ComponentObjectPropsOptions<BaseTypographyProps> = {
     type: String,
     default:''
   },
-  copyable: {
-    type: [Object, Boolean],
-    default: false,
-  },
-  delete: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  icon: {
-    type: [Object, String] as PropType<BaseTypographyProps['icon']>,
-    default: ()=>null,
-  },
-  ellipsis: {
-    type: [Object, Boolean],
-    default: false,
-  },
-  mark: {
-    type: Boolean,
-    default: false,
-  },
-  underline: {
-    type: Boolean,
-    default: false,
-  },
-  link: {
-    type: [Boolean, Object],
-    default: false,
-  },
-  strong: {
-    type: Boolean,
-    default: false,
-  },
-  type: {
-    type: String as PropType<BaseTypographyProps['type']>,
-    default: 'primary',
-  },
-  size: {
-    type: String as PropType<BaseTypographyProps['size']>,
-    default: 'normal',
-  },
   code: Boolean,
   component_: [String, Array, Boolean, Object, Number],
-  spacing: {
-    type: String,
-    default: 'normal',
-  },
-  heading: String,
-}
+};
+const defaultProps = {
+  copyable: false,
+  delete: false,
+  disabled: false,
+  // editable: false,
+  ellipsis: false,
+  icon: '',
+  mark: false,
+  underline: false,
+  strong: false,
+  link: false,
+  type: 'primary',
+  spacing: 'normal',
+  size: 'normal',
+  style: {},
+  className: '',
+};
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 
 
 const wrapperDecorations = (props: BaseTypographyProps, content: VNode) => {
@@ -179,26 +192,25 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
   let rafId: ReturnType<typeof requestAnimationFrame>;
   let expandStr: string;
   let collapseStr: string;
+  let observerTakingEffect: boolean = false
 
-  const state = reactive({
+  const state = reactive<BaseTypographyState>({
     editable: false,
     copied: false,
     // ellipsis
     // if text is overflow in container
     isOverflowed: true,
-    ellipsisContent: null,
+    ellipsisContent: props.children,
     expanded: false,
     // if text is truncated with js
-    isTruncated: false,
-    // record if has click expanded
-    first: true,
+    isTruncated: true,
     prevChildren: null,
   })
 
   onMounted(() => {
     if (props.ellipsis) {
-      getEllipsisState();
-      window.addEventListener('resize', onResize);
+      // runAfterTicks: make sure start observer on the next tick
+      onResize().then(()=>runAfterTicks(()=>observerTakingEffect = true, 1));
     }
   })
 
@@ -212,10 +224,9 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     if (props.ellipsis && prevChildren !== children) {
       // reset ellipsis state if children update
       newState.isOverflowed = true;
-      newState.ellipsisContent = null;
+      newState.ellipsisContent = props.children;
       newState.expanded = false;
       newState.isTruncated = false;
-      newState.first = true;
     }
     return newState;
   }
@@ -227,6 +238,11 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
   })
 
 
+  watch(()=>props.children, ()=>{
+    if (props.ellipsis) {
+      onResize();
+    }
+  })
   // watchEffect(()=>{
   //   // Render was based on outdated refs and needs to be rerun
   //   if (props.children !== prevProps.children) {
@@ -238,18 +254,20 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
   // })
 
   onUnmounted(() => {
-    if (props.ellipsis) {
-      window.removeEventListener('resize', onResize);
-    }
     if (rafId) {
       window.cancelAnimationFrame(rafId);
     }
   })
-  const onResize = () => {
+  const onResize = async (entries?: ResizeEntry[]) => {
     if (rafId) {
       window.cancelAnimationFrame(rafId);
     }
-    rafId = window.requestAnimationFrame(getEllipsisState.bind(this));
+    return new Promise<void>(resolve => {
+      rafId = window.requestAnimationFrame(async ()=>{
+        await getEllipsisState();
+        resolve();
+      });
+    });
   };
 
   const canUseCSSEllipsis = () => {
@@ -313,59 +331,88 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     return defaultOpts;
   };
 
+  const onHover = ()=>{
+    const canUseCSSEllipsis_ = canUseCSSEllipsis();
+    if (canUseCSSEllipsis_) {
+      const { rows, suffix, pos } = getEllipsisOpt();
+      const updateOverflow = shouldTruncated(rows);
+      // isOverflowed needs to be updated to show tooltip when using css ellipsis
+      state.isOverflowed = updateOverflow
+      state.isTruncated = false
+
+      return undefined;
+    }
+  }
   function getEllipsisState() {
     const {rows, suffix, pos} = getEllipsisOpt();
-    const children = props.children
+    const children = props.children[0].children
     // wait until element mounted
     if (!wrapperRef || !wrapperRef.value) {
       onResize();
       return false;
     }
-    const {ellipsisContent, isOverflowed, isTruncated, expanded} = state;
-    const updateOverflow = shouldTruncated(rows);
+
+    const { expanded } = state;
     const canUseCSSEllipsis_ = canUseCSSEllipsis();
+    if (canUseCSSEllipsis_) {
+      // const updateOverflow = this.shouldTruncated(rows);
+      // // isOverflowed needs to be updated to show tooltip when using css ellipsis
+      // this.setState({
+      //     isOverflowed: updateOverflow,
+      //     isTruncated: false
+      // });
 
-    const needUpdate = updateOverflow !== isOverflowed;
+      return ;
+    }
 
-    warning(
-      'children' in props && typeof children !== 'string',
-      "[Semi Typography] 'Only children with pure text could be used with ellipsis at this moment."
-    );
     // If children is null, css/js truncated flag isTruncate is false
     if (isNull(children)) {
-      state.isTruncated = false
-      state.isOverflowed = false
-      return undefined;
+      return new Promise<void>(resolve=>{
+        state.isOverflowed = false
+        state.isTruncated = false
+        nextTick(()=>{
+          resolve()
+        })
+      });
+
     }
+
+    // Currently only text truncation is supported, if there is non-text,
+    // both css truncation and js truncation should throw a warning
+    warning(
+      'children' in props && typeof children !== 'string',
+      "[Semi Typography] Only children with pure text could be used with ellipsis at this moment."
+    );
 
 
     if (!rows || rows < 0 || expanded) {
-      return undefined;
+      return;
     }
 
-    if (canUseCSSEllipsis_) {
-      if (needUpdate) {
-        state.expanded = !updateOverflow
-      }
-      return undefined;
-    }
 
-    const extraNode = [expandRef.value, copyRef && copyRef.value];
-    const content: any = getRenderText(
+    const extraNode = { expand: expandRef.value, copy: copyRef && copyRef.value };
+
+
+    const content = getRenderText(
       wrapperRef.value,
       rows,
-      children as any,
+      // Perform type conversion on children to prevent component crash due to non-string type of children
+      String(children),
       extraNode,
       ELLIPSIS_STR,
       suffix,
       pos
     );
 
-    state.isOverflowed = false
-    state.ellipsisContent = content
-    state.isTruncated = children !== content
+    return new Promise<void>(resolve=>{
+      state.isOverflowed = false
+      state.ellipsisContent = content as unknown as VNode
+      state.isTruncated = children !== content
+      nextTick(()=>{
+        resolve()
+      })
+    });
 
-    return undefined;
   }
 
   /**
@@ -378,7 +425,6 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     onExpand && onExpand(!expanded, e);
     if ((expandable && !expanded) || (collapsible && expanded)) {
       state.expanded = !expanded
-      state.first = false
     }
   };
 
@@ -403,15 +449,17 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
 
   const renderExpandable = () => {
+    const { expanded, isTruncated } = state;
+    if (!isTruncated) return null;
+
     const {expandText, expandable, collapseText, collapsible} = getEllipsisOpt();
-    const {expanded, first} = state;
     const noExpandText = !expandable && isUndefined(expandText);
     const noCollapseText = !collapsible && isUndefined(collapseText);
     let text;
 
     if (!expanded && !noExpandText) {
       text = expandText;
-    } else if (expanded && !first && !noCollapseText) {
+    } else if (expanded && !noCollapseText) {
       // if expanded is true but the text is initally mounted, we dont show collapseText
       text = collapseText;
     }
@@ -474,8 +522,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
    * @returns {Object}
    */
   const getEllipsisStyle = () => {
-    const {ellipsis} = props;
-    const {expandable} = getEllipsisOpt();
+    const {ellipsis, component_} = props;
     if (!ellipsis) {
       return {
         ellipsisCls: '',
@@ -484,41 +531,45 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       };
     }
     const {rows} = getEllipsisOpt();
-    const {isOverflowed, expanded, isTruncated} = state;
+    const {expanded, isTruncated} = state;
     const useCSS = !expanded && canUseCSSEllipsis();
     const ellipsisCls = cls({
       [`${prefixCls}-ellipsis`]: true,
       [`${prefixCls}-ellipsis-single-line`]: rows === 1,
       [`${prefixCls}-ellipsis-multiple-line`]: rows > 1,
+      // component === 'span', Text component, It should be externally displayed inline
+      [`${prefixCls}-ellipsis-multiple-line-text`]: rows > 1 && component_ === 'span',
       [`${prefixCls}-ellipsis-overflow-ellipsis`]: rows === 1 && useCSS,
+      // component === 'span', Text component, It should be externally displayed inline
+      [`${prefixCls}-ellipsis-overflow-ellipsis-text`]: rows === 1 && useCSS && component_ === 'span',
     });
     const ellipsisStyle = useCSS && rows > 1 ? {WebkitLineClamp: rows} : {};
     return {
       ellipsisCls,
-      ellipsisStyle: isOverflowed ? ellipsisStyle : {},
+      ellipsisStyle,
     };
   };
 
   const renderEllipsisText = (opt: Ellipsis) => {
-    const {suffix} = opt;
-    const children = props.children
+    const { suffix } = opt;
+    const children = props.children;
 
-    const {isTruncated, expanded, isOverflowed, ellipsisContent} = state;
+    const { isTruncated, expanded, isOverflowed, ellipsisContent } = state;
     // console.debug(suffix)
     if (expanded || !isTruncated) {
       return (
-        <>
+        <span onMouseenter={onHover}>
           {children}
           {suffix && suffix.length ? suffix : null}
-        </>
+        </span>
       );
     }
     return (
-      <span>
-                {ellipsisContent}
+      <span onMouseenter={onHover}>
+        {ellipsisContent}
         {/* {ELLIPSIS_STR} */}
         {suffix}
-            </span>
+      </span>
     );
   };
 
@@ -539,24 +590,25 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     if (!copyable) {
       return null;
     }
+    // If it is configured in the content of copyable, the copied content will be the content in copyable
+    const willCopyContent = (copyable as CopyableConfig)?.content ?? children;
     let copyContent: string;
     let hasObject = false;
-    if (Array.isArray(children)) {
+    if (Array.isArray(willCopyContent)) {
       copyContent = '';
-      children.forEach(value => {
+      willCopyContent.forEach(value => {
         // console.debug(value.children)
-        if (typeof value.children === 'object') {
+        if (typeof value.children === 'object' && value.type.toString() !== 'Symbol(v-txt)') {
           hasObject = true;
         }
         // // console.debug(value.children)
         copyContent += String(value.children);
       });
-    } else if (typeof children !== 'object') {
-      copyContent = String(children);
+    } else if (typeof willCopyContent !== 'object') {
+      copyContent = String(willCopyContent);
     } else {
-      console.debug(children)
       hasObject = true;
-      copyContent = String(children);
+      copyContent = String(willCopyContent);
     }
 
     warning(
@@ -579,7 +631,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     }
     const iconSize: Size = size === 'small' ? 'small' : 'default';
     return (
-      <span class={`${prefixCls}-icon`}>
+      <span class={`${prefixCls}-icon`} x-semi-prop="icon">
                 {isSemiIcon(icon) ? cloneVNode((icon as any), {size: iconSize}) : icon}
             </span>
     );
@@ -589,6 +641,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     // console.log(props)
     const {
       component_,
+      component,
       className,
       type,
       spacing,
@@ -610,9 +663,9 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       'copyable',
       'underline',
       'code',
-      'children',
       // 'link',
       'delete',
+      'children'
     ]);
     const iconNode = renderIcon();
     const ellipsisOpt = getEllipsisOpt();
@@ -643,10 +696,19 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       [`${prefixCls}-${heading}-weight-${weight}`]: isHeader && weight && isNaN(Number(weight)),
 
     });
+
+    const textStyle: CSSProperties = {
+      ...(
+        isNaN(Number(weight)) ? {} : { fontWeight: weight }
+      ),
+      ...style
+    };
+
+
     return (
       <Typography
         className={wrapperCls}
-        style={{...style, ...ellipsisStyle}}
+        style={{...textStyle, ...ellipsisStyle}}
         component_={component_}
         forwardRef={wrapperRef}
         {...textProps}
@@ -674,7 +736,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
         return renderTooltip(children, content);
       } else if (type.toLowerCase() === 'popover') {
         return (
-          <Popover content={children ? children[0] : null} position="top" {...opts}>
+          <Popover content={children ? children[0] : null} position="top" {...opts} visible={true}>
             {content}
           </Popover>
         );
@@ -706,7 +768,11 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     );
     if (props.ellipsis) {
       return (
-        <ResizeObserver onResize={onResize} observeParent>
+        <ResizeObserver onResize={(...args)=>{
+          if (observerTakingEffect) {
+            onResize(...args);
+          }
+        }} observeParent observerProperty={ObserverProperty.Width}>
           {content}
         </ResizeObserver>
       );

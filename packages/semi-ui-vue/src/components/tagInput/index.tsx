@@ -81,7 +81,7 @@ export interface TagInputProps {
   onFocus?: (e: MouseEvent) => void;
   onInputChange?: (value: string, e: MouseEvent) => void;
   onInputExceed?: ((value: string) => void);
-  onKeyDown?: (e: MouseEvent) => void;
+  onKeyDown?: (e: KeyboardEvent) => void;
   onRemove?: (removedValue: string, idx: number) => void;
   placeholder?: string;
   insetLabel?: VNode | string;

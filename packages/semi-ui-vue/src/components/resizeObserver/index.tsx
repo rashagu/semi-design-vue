@@ -22,16 +22,28 @@ export interface ResizeEntry {
 export interface ReactResizeObserverProps extends BaseProps {
   onResize?: (entries: ResizeEntry[]) => void;
   observeParent?: boolean;
+  observerProperty?: ObserverProperty;
+  delayTick?: number
 }
 
+
+export enum ObserverProperty {
+  Width='width',
+  Height = "height",
+  All = "all"
+}
 const propTypes: ComponentObjectPropsOptions<ReactResizeObserverProps> = {
   onResize: PropTypes.func as PropType<ReactResizeObserverProps['onResize']>,
   observeParent: PropTypes.bool,
+  observerProperty: PropTypes.string as PropType<ReactResizeObserverProps['observerProperty']>,
+  delayTick: PropTypes.number
 };
 
 const defaultProps = {
   onResize: () => {}, // eslint-disable-line
   observeParent: false,
+  observerProperty: "all",
+  delayTick: 0
 };
 export const vuePropsType = vuePropsMake<ReactResizeObserverProps>(propTypes, defaultProps);
 const ReactResizeObserver = defineComponent<ReactResizeObserverProps>(
@@ -39,11 +51,14 @@ const ReactResizeObserver = defineComponent<ReactResizeObserverProps>(
     const slots = useSlots();
     let observer: ResizeObserver;
     if (globalThis['ResizeObserver']) {
-      observer = new ResizeObserver(props.onResize);
+      observer = new ResizeObserver(handleResizeEventTriggered);
     }
     let childNode: any;
     let element: Element;
     let _parentNode: HTMLElement;
+
+    let formerPropertyValue: Map<Element, number> = new Map()
+
 
     onMounted(() => {
       if (globalThis['ResizeObserver']) {
@@ -80,10 +95,32 @@ const ReactResizeObserver = defineComponent<ReactResizeObserverProps>(
       }
     };
 
+    function handleResizeEventTriggered(entries: ResizeEntry[]){
+      if (props.observerProperty === ObserverProperty.All) {
+        props.onResize?.(entries);
+      } else {
+        const finalEntries: ResizeEntry[] = [];
+        for (const entry of entries) {
+          if (formerPropertyValue.has(entry.target)) {
+            if (entry.contentRect[props.observerProperty]!==formerPropertyValue.get(entry.target)) {
+              formerPropertyValue.set(entry.target, entry.contentRect[props.observerProperty]);
+              finalEntries.push(entry);
+            }
+          } else {
+            formerPropertyValue.set(entry.target, entry.contentRect[props.observerProperty]);
+            finalEntries.push(entry);
+          }
+        }
+        if (finalEntries.length>0) {
+          props.onResize?.(finalEntries);
+        }
+      }
+    }
+
     function observeElement(force = false) {
       const element_ = getElement();
       if (!observer) {
-        observer = new ResizeObserver(props.onResize);
+        observer = new ResizeObserver(handleResizeEventTriggered);
       }
       if (!(element_ && element_ instanceof Element)) {
         // stop everything if not defined

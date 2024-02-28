@@ -84,7 +84,7 @@ const ErrorMessage = defineComponent<ErrorMessageProps>((props, {}) => {
             icon = <IconAlertCircle className={iconCls} />;
         } else {
             if (iconMap[validateStatus]) {
-                icon = cloneVNode(iconMap[validateStatus], { className: iconCls });
+                icon = cloneVNode(iconMap[validateStatus], { class: iconCls });
             }
         }
 
