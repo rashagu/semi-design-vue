@@ -1,4 +1,13 @@
-import {defineComponent, ref, h, Fragment, CSSProperties, ComponentObjectPropsOptions, PropType} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  type CSSProperties,
+  type ComponentObjectPropsOptions,
+  type PropType,
+  type SVGAttributes
+} from 'vue'
 import classnames from 'classnames';
 import { get } from 'lodash';
 import { Position } from '@douyinfe/semi-foundation/tooltip/foundation';
@@ -40,12 +49,12 @@ const Arrow = defineComponent<ArrowProps>((props, {slots}) => {
       get(popStyle, 'borderColor', strings.DEFAULT_ARROW_STYLE.borderColor)
     );
 
-    const wrapProps = {
+    const wrapProps:SVGAttributes = {
       ...rest,
       width: numbers.ARROW_BOUNDING.width,
       height: numbers.ARROW_BOUNDING.height,
       xmlns: 'http://www.w3.org/2000/svg',
-      className: cls,
+      class: cls,
     };
 
     return isVertical ? (

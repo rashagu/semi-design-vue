@@ -736,7 +736,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
         return renderTooltip(children, content);
       } else if (type.toLowerCase() === 'popover') {
         return (
-          <Popover content={children ? children[0] : null} position="top" {...opts} visible={true}>
+          <Popover content={children ? children[0] : null} position="top" {...opts}>
             {content}
           </Popover>
         );

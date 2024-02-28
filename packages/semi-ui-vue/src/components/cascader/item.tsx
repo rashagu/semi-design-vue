@@ -398,9 +398,9 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
   onMounted(()=>{
     updateScrollTop()
   })
-  watch(()=>props.activeKeys, ()=>{
-    updateScrollTop()
-  })
+  // watch(()=>props.activeKeys, ()=>{
+  //   updateScrollTop()
+  // })
 
   return () => {
     const { data, searchable } = props;
