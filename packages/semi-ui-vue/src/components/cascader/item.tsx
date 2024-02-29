@@ -376,9 +376,8 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
   }
 
   function updateScrollTop() {
-    const optionList = document.querySelectorAll('.semi-cascader-option-list')
-    optionList.forEach((item, index)=>{
-      let optionId = `cascaderItem-${Array.from(props.activeKeys)[index]}`
+    props.activeKeys.forEach((item)=>{
+      let optionId = `cascaderItem-${item}`
 
       let destNode = document.getElementById(optionId);
       if (destNode) {
