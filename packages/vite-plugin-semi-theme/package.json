@@ -1,0 +1,44 @@
+{
+  "name": "@kousum/vite-plugin-semi-theme",
+  "version": "0.8.0",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rashagu/semi-design-vue.git",
+    "directory": "packages/vite-plugin-semi-theme"
+  },
+  "dependencies": {
+    "sass": "^1.57.1"
+  },
+  "devDependencies": {
+    "vite": "^5.1.4",
+    "unbuild": "^2.0.0"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0",
+    "vue": "^3.0.0"
+  }
+}

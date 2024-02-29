@@ -4,3 +4,4 @@ packages:
   - 'packages/semi-icons-lab-vue'
   - 'packages/semi-ui-vue'
   - 'packages/semi-illustrations-vue'
+  - 'packages/vite-plugin-semi-theme'

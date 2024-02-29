@@ -8,7 +8,7 @@
     "test": "vitest run --coverage",
     "test:watch": "vitest watch",
     "build:mjs": "pnpm -C ./packages/semi-ui-vue build",
-    "build:lib": "pnpm -C ./packages/semi-animation-vue build:vite & pnpm -C ./packages/semi-icons-vue build:vite & pnpm -C ./packages/semi-icons-lab-vue build:vite & pnpm -C ./packages/semi-illustrations-vue build:vite & pnpm -C ./packages/semi-ui-vue build:vite",
+    "build:lib": "pnpm -C ./packages/semi-animation-vue build:vite & pnpm -C ./packages/semi-icons-vue build:vite & pnpm -C ./packages/semi-icons-lab-vue build:vite & pnpm -C ./packages/semi-illustrations-vue build:vite & pnpm -C ./packages/semi-ui-vue build:vite & pnpm -C ./packages/vite-plugin-semi-theme build",
     "pre": "build:lib",
     "build:publish": "pnpm build:lib & pnpm publish -r",
     "change": "pnpm changeset",
@@ -28,7 +28,8 @@
     "packages/semi-icons-vue",
     "packages/semi-ui-vue",
     "packages/semi-illustrations-vue",
-    "packages/semi-icons-lab-vue"
+    "packages/semi-icons-lab-vue",
+    "packages/vite-plugin-semi-theme"
   ],
   "pnpm": {
     "peerDependencyRules": {
@@ -46,8 +47,8 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@kousum/semi-icons-vue": "^0.7.0",
-    "@kousum/semi-ui-vue": "^0.7.0",
+    "@kousum/semi-icons-vue": "./packages/semi-icons-vue",
+    "@kousum/semi-ui-vue": "./packages/semi-ui-vue",
     "vue-inline-svg": "^2.1.3",
     "@storybook/addon-essentials": "7.1.1",
     "@storybook/addon-interactions": "7.1.1",
@@ -64,7 +65,7 @@
     "@babel/plugin-transform-runtime": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.16.7",
-    "@changesets/cli": "^2.26.0",
+    "@changesets/cli": "^2.27.1",
     "@douyinfe/semi-theme-default": "2.53.2",
     "@svgr/babel-plugin-add-jsx-attribute": "5.4.0",
     "@svgr/babel-plugin-remove-jsx-attribute": "5.4.0",
@@ -83,8 +84,8 @@
     "@types/node": "^20.1.4",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
-    "@vitest/coverage-v8": "^1.1.3",
-    "@vue/test-utils": "^2.4.3",
+    "@vitest/coverage-v8": "^1.3.1",
+    "@vue/test-utils": "^2.4.4",
     "@testing-library/vue": "^6.6.1",
     "babel-loader": "^8.3.0",
     "css-loader": "^6.7.1",
@@ -99,7 +100,7 @@
     "svgo": "2.7.0",
     "ts-node": "^10.5.0",
     "tslib": "^2.4.1",
-    "vitest": "^1.1.3",
+    "vitest": "^1.3.1",
     "typescript": "^5.3.3",
     "vite": "5.1.4",
     "vitepress": "1.0.0-rc.36",
