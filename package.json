@@ -47,8 +47,8 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@kousum/semi-icons-vue": "./packages/semi-icons-vue",
-    "@kousum/semi-ui-vue": "./packages/semi-ui-vue",
+    "@kousum/semi-icons-vue": "latest",
+    "@kousum/semi-ui-vue": "latest",
     "vue-inline-svg": "^2.1.3",
     "@storybook/addon-essentials": "7.1.1",
     "@storybook/addon-interactions": "7.1.1",

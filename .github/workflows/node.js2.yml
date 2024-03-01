@@ -29,13 +29,12 @@ jobs:
         uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
           registry-url: 'https://registry.npmjs.org'
       - run: npm install pnpm -g
       - run: pnpm install
       - run: pnpm build:lib
 #      - run: pnpm build-storybook:vite
-      - run: pnpm build:mjs
       - run: pnpm docs:build
       - name: Setup Pages
         uses: actions/configure-pages@v3
