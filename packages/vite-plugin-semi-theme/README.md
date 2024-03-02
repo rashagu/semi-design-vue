@@ -1,7 +1,7 @@
 # vite-plugin-semi-theme
 
 - [theme options docs](https://github.com/DouyinFE/semi-design/tree/main/packages/semi-webpack#api)
-- support `vite > 5.0`
+- support `vite > 5.0` `pnpm`
 
 ```js
 // vite.config.js

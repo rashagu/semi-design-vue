@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.8.1
+
+### Patch Changes
+
+- chore: build
+- Updated dependencies
+  - @kousum/semi-illustrations-vue@0.8.1
+  - @kousum/semi-animation-vue@0.8.1
+  - @kousum/semi-icons-vue@0.8.1
+
 ## 0.8.0
 
 ### Minor Changes

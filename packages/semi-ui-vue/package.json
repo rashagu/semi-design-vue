@@ -1,10 +1,15 @@
 {
   "name": "@kousum/semi-ui-vue",
-  "version": "0.8.0",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "version": "0.8.1",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
   "files": [
     "dist/",
     "CHANGELOG.md"
@@ -26,9 +31,9 @@
     "@douyinfe/semi-foundation": "2.53.2",
     "@douyinfe/semi-theme-default": "2.53.2",
     "@douyinfe/semi-animation": "2.53.2",
-    "@kousum/semi-animation-vue": "^0.8.0",
-    "@kousum/semi-icons-vue": "^0.8.0",
-    "@kousum/semi-illustrations-vue": "^0.8.0",
+    "@kousum/semi-animation-vue": "^0.8.1",
+    "@kousum/semi-icons-vue": "^0.8.1",
+    "@kousum/semi-illustrations-vue": "^0.8.1",
     "@kousum/vue3-window": "0.0.6",
     "@dnd-kit-vue/core": "0.0.5",
     "@dnd-kit-vue/modifiers": "0.0.5",

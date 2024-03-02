@@ -14,7 +14,7 @@ export default defineConfig({
     //   disabled: true,
     // },
     ssr: {
-      noExternal: ['@douyinfe\\semi-foundation', 'lodash', '@kousum/semi-icons-vue', '@kousum/semi-ui-vue'],
+      noExternal: ['@douyinfe\\semi-foundation', 'lodash', '@kousum\\semi-icons-vue', '@kousum\\semi-ui-vue'],
     },
     css: {
       preprocessorOptions: {

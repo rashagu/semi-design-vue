@@ -1,5 +1,11 @@
 # @kousum/semi-animation-vue
 
+## 0.8.1
+
+### Patch Changes
+
+- chore: build
+
 ## 0.8.0
 
 ### Minor Changes
