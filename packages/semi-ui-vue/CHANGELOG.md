@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 0.8.2
+
+### Patch Changes
+
+- 导出 Notification 方法和类型
+
 ## 0.8.1
 
 ### Patch Changes

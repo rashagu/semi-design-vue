@@ -36,7 +36,9 @@ import {BannerProps} from "../banner";
 // TODO: Automatic folding + unfolding function when there are more than N
 
 export type {NoticeTransitionProps} from './NoticeTransition';
-
+export type {
+  NoticeProps
+}
 export interface NoticeReactProps extends NoticeProps {
   style?: CSSProperties;
 }
