@@ -25,7 +25,7 @@ const ContrlDemo = defineComponent<ContrlDemoProps>((props, {}) => {
   }
 
   function onChange(e) {
-    console.log('checked = ', e.target.checked);
+    console.trace('checked = ', e.target.checked);
     state.checked = e.target.checked;
   }
 

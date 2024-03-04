@@ -20,6 +20,7 @@ import classnames from 'classnames';
 import { IconRadio } from '@kousum/semi-icons-vue';
 import { noop } from 'lodash';
 import { RadioProps, RadioState } from './radio';
+import { symbol } from '../PropTypes';
 
 export type RadioInnerMode = 'advanced' | '';
 export interface RadioInnerProps extends BaseProps {
@@ -134,10 +135,13 @@ const RadioInner = defineComponent<RadioInnerProps>((props, { slots }) => {
         inputEntity.focus();
     }
 
-    function onChange(e: any) {
-        // console.log(e)
+    // vue
+    const radioKey = ref(symbol())
+    function onChange(e: Event) {
+        // console.log(e.target.value)
         // console.log(props)
         foundation.handleChange(e);
+        radioKey.value = symbol()
     }
 
     return () => {
@@ -180,6 +184,7 @@ const RadioInner = defineComponent<RadioInnerProps>((props, { slots }) => {
                     ref={ref => {
                         inputEntity = ref;
                     }}
+                    key={radioKey.value}
                     // eslint-disable-next-line jsx-a11y/no-autofocus
                     autofocus={autoFocus}
                     type={mode === 'advanced' ? 'checkbox' : 'radio'}

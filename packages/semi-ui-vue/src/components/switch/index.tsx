@@ -22,7 +22,7 @@ import {
     watch
 } from "vue";
 import {AriaAttributes} from "../AriaAttributes";
-import {vuePropsMake} from "../PropTypes";
+import { symbol, vuePropsMake } from '../PropTypes';
 import {TimeInputProps} from "../timePicker";
 export interface SwitchProps {
     'aria-label'?: AriaAttributes['aria-label'];
@@ -107,6 +107,7 @@ const Switch = defineComponent<SwitchProps>((props, {}) => {
     const switchRef = ref()
     const {adapter: adapterInject, getDataAttr} = useBaseComponent<SwitchProps>(props, state)
 
+    const inputKey = ref(symbol())
 
     function adapter_(): SwitchAdapter<SwitchProps, SwitchState> {
         return {
@@ -122,6 +123,7 @@ const Switch = defineComponent<SwitchProps>((props, {}) => {
             },
             notifyChange: (checked: boolean, e: any): void => {
                 props.onChange(checked, e);
+                inputKey.value = symbol()
             },
         };
     }
@@ -192,6 +194,7 @@ const Switch = defineComponent<SwitchProps>((props, {}) => {
               <input
                 {...switchProps}
                 ref={switchRef}
+                key={inputKey.value}
                 id={id}
                 role="switch"
                 aria-checked={nativeControlChecked}
