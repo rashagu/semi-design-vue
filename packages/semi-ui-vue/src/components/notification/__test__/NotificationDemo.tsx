@@ -1,57 +1,61 @@
-import {defineComponent, ref, h, Fragment, useSlots, onMounted} from 'vue'
-import Button from "../../button";
-import NotificationList, {NotificationListClass} from '../index'
-import {ToastList} from "../../toast";
-import {NoticePosition} from "@douyinfe/semi-foundation/notification/notificationFoundation";
-import useNotification from "../useNotification";
+import { defineComponent, ref, h, Fragment, useSlots, onMounted } from 'vue';
+import Button from '../../button';
+import NotificationList, { NotificationListClass } from '../index';
+import { ToastList } from '../../toast';
+import { NoticePosition } from '@douyinfe/semi-foundation/notification/notificationFoundation';
+import useNotification from '../useNotification';
 
 interface NotificationDemoProps {
-  name?: string
+  name?: string;
 }
 
 export const vuePropsType = {
-  name: String
-}
+  name: String,
+};
 const NotificationDemo = defineComponent<NotificationDemoProps>((props, {}) => {
-
-  const slots = useSlots()
+  const slots = useSlots();
 
   // 有bug，而且没有动画，不建议使用
-  const [e, d] = useNotification()
+  const [e, d] = useNotification();
 
-  onMounted(()=>{
+  onMounted(() => {
     NotificationListClass.open({
-      content:'abc'
-    })
-  })
+      content: 'abc',
+    });
+  });
 
   return () => (
     <div>
-      {/*<NotificationList ref={(instance: any) => {*/}
-      {/*  instance?.add({...{*/}
-      {/*      duration: 3,*/}
-      {/*      position: 'topRight' as NoticePosition,*/}
-      {/*      motion: true,*/}
-      {/*      content: 'test',*/}
-      {/*      title: 'test',*/}
-      {/*      zIndex: 1010,*/}
-      {/*    }, id: 'id'});*/}
-      {/*}}/>*/}
+      <NotificationList
+        ref={(instance: any) => {
+          instance?.add({
+            ...{
+              duration: 3,
+              position: 'topRight' as NoticePosition,
+              motion: true,
+              content: 'test',
+              title: 'test',
+              zIndex: 1010,
+            },
+            id: 'id',
+          });
+        }}
+      />
       <Button
         className={'test'}
-        onClick={() =>
-          // NotificationListClass.open({
-          //   title: 'Hi, Bytedance',
-          //   content: 'ies dance dance dance',
-          //   duration: 3,
-          // })
+        onClick={() => {
+          NotificationListClass.open({
+            title: 'Hi, Bytedance',
+            content: 'ies dance dance dance',
+            duration: 3,
+          });
           NotificationListClass.success({
-          title: 'Hi, Bytedance',
-          content: 'Hi, Bytedance dance dance',
-          duration: 3,
-          theme: 'light',
-        })
-        }
+            title: 'Hi, Bytedance',
+            content: 'Hi, Bytedance dance dance',
+            duration: 3,
+            theme: 'light',
+          });
+        }}
       >
         Display Notification
       </Button>
@@ -60,18 +64,15 @@ const NotificationDemo = defineComponent<NotificationDemoProps>((props, {}) => {
         className={'test'}
         onClick={() =>
           e.info({
-            content:'eeeeeeeeeee'
+            content: 'eeeeeeeeeee',
           })
         }
       >
         useNotification
       </Button>
-        {d()}
+      {d()}
     </div>
-  )
-})
+  );
+});
 
-
-
-export default NotificationDemo
-
+export default NotificationDemo;

@@ -98,7 +98,7 @@ export type {
   OnSelectedData,
 } from './navigation/index';
 
-export { default as Notification, NotificationListClass   } from './notification';
+export { default as NotificationList, NotificationListClass as Notification,    } from './notification';
 import useNotification from './notification/useNotification';
 export type {
   NoticeTransitionProps,
