@@ -43,10 +43,10 @@ importers:
         specifier: ^2.27.1
         version: 2.27.1
       '@kousum/semi-icons-vue':
-        specifier: latest
+        specifier: ./packages/semi-icons-vue
         version: link:packages/semi-icons-vue
       '@kousum/semi-ui-vue':
-        specifier: latest
+        specifier: ./packages/semi-ui-vue
         version: link:packages/semi-ui-vue
       '@storybook/addon-essentials':
         specifier: 7.1.1
@@ -572,13 +572,13 @@ importers:
         specifier: 2.53.2
         version: 2.53.2
       '@kousum/semi-animation-vue':
-        specifier: ^0.8.0
+        specifier: ^0.8.1
         version: link:../semi-animation-vue
       '@kousum/semi-icons-vue':
-        specifier: ^0.8.0
+        specifier: ^0.8.1
         version: link:../semi-icons-vue
       '@kousum/semi-illustrations-vue':
-        specifier: ^0.8.0
+        specifier: ^0.8.1
         version: link:../semi-illustrations-vue
       '@kousum/vue-draggable':
         specifier: 1.0.2
@@ -7539,7 +7539,7 @@ packages:
       ts-dedent: 2.2.0
       type-fest: 3.13.1
       vue: 3.4.19(typescript@5.3.3)
-      vue-component-type-helpers: 1.8.27
+      vue-component-type-helpers: 2.0.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -17368,6 +17368,10 @@ packages:
 
   /vue-component-type-helpers@1.8.27:
     resolution: {integrity: sha512-0vOfAtI67UjeO1G6UiX5Kd76CqaQ67wrRZiOe7UAb9Jm6GzlUr/fC7CV90XfwapJRjpCMaZFhv1V0ajWRmE9Dg==}
+    dev: true
+
+  /vue-component-type-helpers@2.0.1:
+    resolution: {integrity: sha512-TSOLgONQc8YzdLzTvPwcBdPnGAIIY3T8jWUQA9gt/LhmYKpJV/2ErD3nKzG4WZ255XYc4malvZDAvfKDCPI0Jg==}
     dev: true
 
   /vue-demi@0.14.7(vue@3.4.19):

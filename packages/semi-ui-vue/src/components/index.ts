@@ -77,7 +77,7 @@ export { default as Breadcrumb, BreadcrumbItem } from './breadcrumb';
 export { default as Card } from './card';
 export { default as CardGroup } from './card/cardGroup';
 export { default as Carousel } from './carousel';
-export { default as Collapse } from './collapse';
+export { default as Collapse, CollapsePanel } from './collapse';
 export { default as Collapsible } from './collapsible';
 export { default as Descriptions, DescriptionsItem } from './descriptions';
 export { default as Modal, ModalClass } from './modal';
@@ -98,7 +98,13 @@ export type {
   OnSelectedData,
 } from './navigation/index';
 
-export { default as Notification } from './notification';
+export { default as NotificationList, NotificationListClass as Notification } from './notification';
+export { default as useNotification } from './notification/useNotification';
+export type {
+  NoticeTransitionProps,
+  NoticeProps
+} from './notification';
+
 export { default as OverflowList } from './overflowList';
 export { default as Pagination } from './pagination';
 export { default as Popconfirm } from './popconfirm';

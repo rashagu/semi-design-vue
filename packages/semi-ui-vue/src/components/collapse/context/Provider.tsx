@@ -13,8 +13,6 @@ const Provider = defineComponent<{value:CollapseContextType}>((props, {slots}) =
   }, { deep: true, immediate: true})
   provide('CollapseContext', ConfigContext)
   return ()=>{
-
-    console.log(slots.default?.())
     return slots.default?slots.default(ConfigContext.value):null
   }
 }, {
