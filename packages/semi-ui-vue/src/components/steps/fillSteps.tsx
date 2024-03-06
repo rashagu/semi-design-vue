@@ -14,6 +14,7 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { FillStepProps } from './fillStep';
+import { getFragmentChildren } from '../_utils';
 
 export type Status = 'wait' | 'process' | 'finish' | 'error' | 'warning';
 export type Direction = 'horizontal' | 'vertical';
@@ -61,7 +62,7 @@ const FillSteps = defineComponent<FillStepsProps>((props, {}) => {
     const { current, status, children, prefixCls, initial, direction, className, style, onChange } = props;
 
     const inner = () => {
-      const filteredChildren = children.filter((c) => isVNode(c)) as Array<VNode>;
+      const filteredChildren = getFragmentChildren(slots).filter((c) => isVNode(c)) as Array<VNode>;
       const colStyle = direction === 'vertical' ? null : { width: `${100 / filteredChildren.length}%` };
       const content = filteredChildren.map((child: VNode, index) => {
         if (!child) {

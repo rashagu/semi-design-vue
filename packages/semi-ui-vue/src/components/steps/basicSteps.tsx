@@ -15,6 +15,7 @@ import {vuePropsMake} from "../PropTypes";
 import {noop} from "lodash";
 import {BasicStepProps} from "./basicStep";
 import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
+import { getFragmentChildren } from '../_utils';
 
 export type Direction = 'horizontal' | 'vertical';
 export type Status = 'wait' | 'process' | 'finish' | 'error' | 'warning';
@@ -84,7 +85,7 @@ const Steps = defineComponent<BasicStepsProps>((props, {}) => {
         } = props;
 
         const inner = () => {
-            const filteredChildren = children.filter(c => isVNode(c)) as Array<VNode>;
+            const filteredChildren = getFragmentChildren(slots).filter(c => isVNode(c)) as Array<VNode>;
             const content = filteredChildren.map((child: VNode, index) => {
                 if (!child) {
                     return null;
