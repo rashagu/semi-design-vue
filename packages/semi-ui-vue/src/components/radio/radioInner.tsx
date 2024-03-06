@@ -81,6 +81,7 @@ export const vuePropsType:ComponentObjectPropsOptions<RadioInnerProps> = {
     onInputFocus: Function as PropType<RadioInnerProps['onInputFocus']>,
     onInputBlur: Function as PropType<RadioInnerProps['onInputBlur']>,
     preventScroll: Boolean,
+    style: Object,
 };
 const RadioInner = defineComponent<RadioInnerProps>((props, { slots }) => {
     let inputEntity!: any;

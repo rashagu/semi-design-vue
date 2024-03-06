@@ -16,14 +16,53 @@ const RadioDemo = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <h4>受控</h4>
-      <RadioGroup type="button" buttonSize="middle" aria-label="单选组合示例" value={value.value} onChange={(v)=>{
-        console.log(v.target.value)
-      }}>
+      <RadioGroup
+        type="button"
+        buttonSize="middle"
+        aria-label="单选组合示例"
+        value={value.value}
+        onChange={(v) => {
+          console.log(v.target.value);
+        }}
+      >
         <Radio value={1}>A</Radio>
         <Radio value={2}>B</Radio>
         <Radio value={3}>C</Radio>
         <Radio value={4}>D</Radio>
       </RadioGroup>
+
+      <h4>卡片</h4>
+      <RadioGroup
+        type="card"
+        defaultValue={2}
+        direction="horizontal"
+        aria-label="单选组合示例"
+        name="demo-radio-group-card"
+      >
+        <Radio
+          value={1}
+          disabled
+          extra="Semi Design 是由互娱社区前端团队与 UED 团队共同设计开发并维护的设计系统"
+          style={{ width: '280px' }}
+        >
+          单选框标题
+        </Radio>
+        <Radio
+          value={2}
+          extra="Semi Design 是由互娱社区前端团队与 UED 团队共同设计开发并维护的设计系统"
+          style={{ width: '280px' }}
+        >
+          单选框标题
+        </Radio>
+        <Radio
+          value={3}
+          extra="Semi Design 是由互娱社区前端团队与 UED 团队共同设计开发并维护的设计系统"
+          style={{ width: 280 }}
+        >
+          单选框标题
+        </Radio>
+      </RadioGroup>
+
       <h4>单选示例</h4>
       <Radio aria-label="单选示例">Radio</Radio>
       <br />
