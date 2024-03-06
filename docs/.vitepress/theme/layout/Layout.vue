@@ -551,7 +551,6 @@ body {
   }
 }
 .layout_nav {
-
   .semi-navigation-list-wrapper{
     height: 100%;
     padding-left: 8px;

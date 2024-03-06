@@ -11,7 +11,7 @@ export default {
   plugins: [
     SemiTheme({
       // name: '@douyinfe/semi-theme-default'
-      name: '@semi-bot/semi-theme-nky'
+      theme: '@semi-bot/semi-theme-nky'
     })
   ],
 }

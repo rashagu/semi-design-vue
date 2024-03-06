@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 0.8.6
+
+### Patch Changes
+
+- fix 一些 bug
+
 ## 0.8.5
 
 ### Patch Changes

@@ -1,15 +1,14 @@
 import type { Plugin } from 'vite';
 import type { Options } from './types';
 import * as fs from 'fs';
-import FS from 'fs';
-import Path from 'path';
-import sass from 'sass';
+import * as Path from 'path';
+import * as sass from 'sass';
 import { pathToFileURL } from 'node:url';
 
 const { compileString } = sass;
 
 function viteSemiTheme(options: Options): Plugin {
-  if (!options.name){
+  if (!options.theme){
     console.error('name: 参数必填')
   }
   return {
@@ -21,7 +20,7 @@ function viteSemiTheme(options: Options): Plugin {
         /@douyinfe\/semi-(ui|icons|foundation)\/lib\/.+\.css$/.test(filepath) ||
         /@kousum\/semi-ui-vue\/dist\/.+\.css$/.test(filepath)
       ) {
-        const theme = options.name;
+        const theme = options.theme;
         // always inject
         const scssVarStr = `@import "${theme}/scss/index.scss";\n`;
         // inject once
@@ -40,7 +39,7 @@ function viteSemiTheme(options: Options): Plugin {
             pathToFileURL(scssFilePath.split('node_modules')[0] + 'node_modules/')
           );
 
-          if (FS.existsSync(p)) {
+          if (fs.existsSync(p)) {
             componentVariables = fs.readFileSync(p).toString('utf8')
           }
         } catch (e) {}
@@ -81,13 +80,13 @@ function viteSemiTheme(options: Options): Plugin {
             findFileUrl(url) {
               if (url.includes('/base/base')) {
                 return new URL(url.replace('~', ''), pathToFileURL(scssFilePath.match(/^(\S*\/node_modules\/)/)?.[0]!));
-              }else if (url.startsWith(options.name)) {
+              }else if (url.startsWith(options.theme)) {
                 return new URL(url, pathToFileURL(scssFilePath.split('node_modules')[0] + 'node_modules/'));
               }
 
               let filePath = Path.resolve(Path.dirname(scssFilePath), url);
 
-              if (FS.existsSync(filePath)) {
+              if (fs.existsSync(filePath)) {
                 return pathToFileURL(filePath);
               }
 
