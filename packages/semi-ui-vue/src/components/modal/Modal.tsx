@@ -32,7 +32,7 @@ import {
   watch
 } from "vue";
 
-export const destroyFns: any[] = [];
+export let destroyFns: any[] = [];
 export type ConfirmType = 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
 export type Directions = 'ltr' | 'rtl';
 export type {ModalState};
@@ -425,34 +425,34 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
 
 
 
-const info = function (props: ModalReactProps) {
-  return confirm<ReturnType<typeof withInfo>>(withInfo(props));
-};
-
-const success = function (props: ModalReactProps) {
-  return confirm<ReturnType<typeof withSuccess>>(withSuccess(props));
-};
-
-const error = function (props: ModalReactProps) {
-  return confirm<ReturnType<typeof withError>>(withError(props));
-};
-
-const warning = function (props: ModalReactProps) {
-  return confirm<ReturnType<typeof withWarning>>(withWarning(props));
-};
-
-const confirm_ = function (props: ModalReactProps) {
-  return confirm<ReturnType<typeof withConfirm>>(withConfirm(props));
-};
-
-const destroyAll = function destroyAllFn() {
-  while (destroyFns.length) {
-    const close = destroyFns.pop();
-    if (close) {
-      close();
-    }
-  }
-};
+// const info = function (props: ModalReactProps) {
+//   return confirm<ReturnType<typeof withInfo>>(withInfo(props));
+// };
+//
+// const success = function (props: ModalReactProps) {
+//   return confirm<ReturnType<typeof withSuccess>>(withSuccess(props));
+// };
+//
+// const error = function (props: ModalReactProps) {
+//   return confirm<ReturnType<typeof withError>>(withError(props));
+// };
+//
+// const warning = function (props: ModalReactProps) {
+//   return confirm<ReturnType<typeof withWarning>>(withWarning(props));
+// };
+//
+// const confirm_ = function (props: ModalReactProps) {
+//   return confirm<ReturnType<typeof withConfirm>>(withConfirm(props));
+// };
+//
+// const destroyAll = function destroyAllFn() {
+//   while (destroyFns.length) {
+//     const close = destroyFns.pop();
+//     if (close) {
+//       close();
+//     }
+//   }
+// };
 
 export class ModalClass {
   static useModal = useModal
@@ -478,12 +478,13 @@ export class ModalClass {
   };
 
   static destroyAll = function destroyAllFn() {
-    while (destroyFns.length) {
-      const close = destroyFns.pop();
+    for (let i = 0, len = destroyFns.length; i < len; i++) {
+      const close = destroyFns[i];
       if (close) {
         close();
       }
     }
+    destroyFns = [];
   };
 
 

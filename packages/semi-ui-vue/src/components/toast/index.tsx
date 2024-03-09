@@ -349,6 +349,9 @@ export function useToastHook(configProps?: ConfigProps) {
       }
     });
 
+    if (typeof opts.theme === 'string' && strings.themes.includes(opts.theme)) {
+      defaultOpts.theme = opts.theme;
+    }
     if (typeof opts.zIndex === 'number') {
       defaultOpts.zIndex = opts.zIndex;
     }

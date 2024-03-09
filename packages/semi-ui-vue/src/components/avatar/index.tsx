@@ -27,6 +27,7 @@ import type {AvatarProps} from './interface';
 import {RadioInnerProps} from '../radio/radioInner';
 import {handlePrevent} from '@douyinfe/semi-foundation/utils/a11y';
 import TopSlotSvg from "./TopSlotSvg";
+import { isNull } from 'lodash';
 
 
 const sizeSet = strings.SIZE;
@@ -365,8 +366,8 @@ const Index = defineComponent<AvatarProps>(
 
       if (border) {
         const borderStyle: CSSProperties = {};
-        if (border?.color) {
-          borderStyle['borderColor'] = border.color;
+        if (typeof border ==='object' && border?.color) {
+          borderStyle['borderColor'] = border?.color;
         }
         avatar = (
           <div style={{ position: 'relative', ...style }}>
@@ -381,7 +382,7 @@ const Index = defineComponent<AvatarProps>(
                 },
               ])}
             ></span>
-            {props.border?.motion && (
+            {typeof props.border === 'object' && (
               <span
                 style={borderStyle}
                 class={cls([
@@ -389,7 +390,7 @@ const Index = defineComponent<AvatarProps>(
                   `${prefixCls}-additionalBorder-${size}`,
                   {
                     [`${prefixCls}-${shape}`]: shape,
-                    [`${prefixCls}-additionalBorder-animated`]: props.border?.motion,
+                    [`${prefixCls}-additionalBorder-animated`]: typeof props.border === 'object' && props.border?.motion,
                   },
                 ])}
               />

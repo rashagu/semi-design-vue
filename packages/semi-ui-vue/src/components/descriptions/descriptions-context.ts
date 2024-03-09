@@ -3,9 +3,11 @@ import Consumer from "./context/Consumer";
 
 
 export type DescriptionsAlign = 'center' | 'justify' | 'left' | 'plain';
+export type DescriptionLayout = 'horizontal' | 'vertical'
 
 export interface DescriptionsContextValue {
-    align?: DescriptionsAlign
+    align?: DescriptionsAlign;
+    layout?: DescriptionLayout
 }
 
 const DescriptionsContext = {

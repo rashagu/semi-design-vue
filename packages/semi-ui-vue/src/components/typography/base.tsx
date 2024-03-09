@@ -199,11 +199,11 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     copied: false,
     // ellipsis
     // if text is overflow in container
-    isOverflowed: true,
+    isOverflowed: false,
     ellipsisContent: props.children,
     expanded: false,
     // if text is truncated with js
-    isTruncated: true,
+    isTruncated: false,
     prevChildren: null,
   })
 
@@ -223,7 +223,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
     if (props.ellipsis && prevChildren !== children) {
       // reset ellipsis state if children update
-      newState.isOverflowed = true;
+      newState.isOverflowed = false;
       newState.ellipsisContent = props.children;
       newState.expanded = false;
       newState.isTruncated = false;
@@ -270,7 +270,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     });
   };
 
-  const canUseCSSEllipsis = () => {
+  function canUseCSSEllipsis(){
     const {copyable} = props;
     const {expandable, expandText, pos, suffix} = getEllipsisOpt();
     return !expandable && isUndefined(expandText) && !copyable && pos === 'end' && !suffix.length;
@@ -297,7 +297,9 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
   const showTooltip = () => {
     const {isOverflowed, isTruncated, expanded} = state;
     const {showTooltip, expandable, expandText} = getEllipsisOpt();
-    const overflowed = !expanded && (isOverflowed || isTruncated);
+    const canUseCSSEllipsis_ = canUseCSSEllipsis();
+    // If the css is truncated, use isOverflowed to judge. If the css is truncated, use isTruncated to judge.
+    const overflowed = !expanded && (canUseCSSEllipsis_ ? isOverflowed : isTruncated);
     const noExpandText = !expandable && isUndefined(expandText);
     const show = noExpandText && overflowed && showTooltip;
     if (!show) {

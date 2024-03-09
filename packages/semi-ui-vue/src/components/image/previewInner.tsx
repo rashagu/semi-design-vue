@@ -176,6 +176,10 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
         const {onDownload} = props;
         isFunction(onDownload) && onDownload(src, index);
       },
+      notifyDownloadError: (src: string) => {
+        const { onDownloadError } = props;
+        isFunction(onDownloadError) && onDownloadError(src);
+      },
       registerKeyDownListener: () => {
         window && window.addEventListener("keydown", handleKeyDown);
       },

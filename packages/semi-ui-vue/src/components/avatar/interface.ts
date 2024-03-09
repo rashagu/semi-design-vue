@@ -58,7 +58,7 @@ export interface AvatarProps extends BaseProps {
     border?: {
         color?: string;
         motion?: boolean
-    } & boolean;
+    } | boolean;
     contentMotion?: boolean
 }
 

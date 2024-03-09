@@ -3,6 +3,7 @@ import Tag from '../../tag';
 import Descriptions from '../index';
 import { IconArrowUp } from '@kousum/semi-icons-vue';
 import DescriptionsItem from "../item";
+import DescriptionsHorizontalDemo from './DescriptionsHorizontalDemo';
 
 interface DescriptionsDemoProps {
   name?: string;
@@ -86,6 +87,8 @@ const DescriptionsDemo = defineComponent<DescriptionsDemoProps>((props, {}) => {
             <DescriptionsItem itemKey="认证状态">未认证</DescriptionsItem>
           </Descriptions>
         </div>
+
+        <DescriptionsHorizontalDemo/>
       </div>
     );
   };

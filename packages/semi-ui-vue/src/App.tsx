@@ -88,6 +88,7 @@ import TableDemo11 from "./components/table/__test__/TableDemo11";
 import VirtualizeTreeDemo from "./components/tree/__test__/VirtualizeTreeDemo";
 import FormAllDemo from "./components/form/__test__/FormAllDemo";
 import ModalForm from "./components/form/__test__/ModalForm";
+import DescriptionsHorizontalDemo from './components/descriptions/__test__/DescriptionsHorizontalDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -118,6 +119,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SideSheetDemo />*/}
         {/*<ListDemo />*/}
         {/*<DescriptionsDemo />*/}
+        <DescriptionsHorizontalDemo/>
         {/*<CollapseDemo />*/}
         {/*<CollapsibleDemo />*/}
         {/*<CarouselDemo/>*/}
@@ -187,7 +189,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SelectDemo/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
-        <RadioDemo />
+        {/*<RadioDemo />*/}
 
         {/*<InputDemo />*/}
         {/*<TypeDemo />*/}

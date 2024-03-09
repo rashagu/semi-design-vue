@@ -40,6 +40,7 @@ import type {
     UploadAdapter,
     BeforeUploadObjectResult,
     AfterUploadResult,
+    FileItemStatus
 } from '@douyinfe/semi-foundation/upload/foundation';
 import type { ValidateStatus } from '../_base/baseComponent';
 import {vuePropsMake} from "../PropTypes";
@@ -49,6 +50,7 @@ const prefixCls = cssClasses.PREFIX;
 
 export {
     FileItem,
+    FileItemStatus,
     RenderFileItemProps,
     UploadListType,
     PromptPositionType,

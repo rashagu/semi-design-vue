@@ -75,6 +75,7 @@ export interface PreviewProps extends BaseProps {
     onRotateLeft?: (angle: number) => void;
     onRotateChange?: (angle: number) => void;
     onDownload?: (src: string, index: number) => void;
+    onDownloadError?: (src: string) => void;
     setDownloadName?: (src: string) => string
     renderPreviewMenu?: (props: MenuProps) => VueJsxNode;
     forwardRef?: ShallowRef<HTMLElement>

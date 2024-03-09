@@ -101,6 +101,7 @@ export interface CascaderProps extends BasicCascaderProps {
   onFocus?: (e: MouseEvent) => void;
   validateStatus?: ValidateStatus;
   position?: Position;
+  searchPosition?: string
 
   loadedKeys?: any
   autoClearSearchValue?: boolean
@@ -186,6 +187,7 @@ const propTypes:ComponentObjectPropsOptions<CascaderProps> = {
   enableLeafClick: PropTypes.bool,
   preventScroll: PropTypes.bool,
   position: PropTypes.string as PropType<CascaderProps['position']>,
+  searchPosition: PropTypes.string as PropType<CascaderProps['searchPosition']>,
 
   autoClearSearchValue: {
     type: Boolean,
@@ -226,6 +228,7 @@ const defaultProps = {
   onListScroll: noop,
   enableLeafClick: false,
   'aria-label': 'Cascader',
+  searchPosition: strings.SEARCH_POSITION_TRIGGER,
 };
 
 export const vuePropsType = vuePropsMake<CascaderProps>(propTypes, defaultProps);
@@ -535,6 +538,11 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
     }
   });
 
+  // ref method
+  const search = (value: string) => {
+    handleInputChange(value);
+  };
+
   const handleInputChange = (value: string) => {
     foundation.handleInputChange(value);
   };
@@ -802,9 +810,9 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
   };
 
   const renderSelectContent = () => {
-    const { placeholder, filterTreeNode, multiple } = props;
+    const { placeholder, filterTreeNode, multiple, searchPosition } = props;
     const { checkedKeys } = state;
-    const searchable = Boolean(filterTreeNode);
+    const searchable = Boolean(filterTreeNode) && searchPosition === strings.SEARCH_POSITION_TRIGGER;
     if (!searchable) {
       if (multiple) {
         if (checkedKeys.size === 0) {

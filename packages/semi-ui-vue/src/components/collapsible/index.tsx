@@ -5,31 +5,30 @@ import type {
 } from '@douyinfe/semi-foundation/collapsible/foundation';
 import CollapsibleFoundation from '@douyinfe/semi-foundation/collapsible/foundation';
 import * as PropTypes from '../PropTypes';
+import { vuePropsMake } from '../PropTypes';
 import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/collapsible/constants';
-import { isEqual } from 'lodash';
 import '@douyinfe/semi-foundation/collapsible/collapsible.scss';
 import {
+  ComponentObjectPropsOptions,
   CSSProperties,
   defineComponent,
   h,
   onBeforeUnmount,
-  onMounted, PropType,
+  onMounted,
   reactive,
   ref,
   useSlots,
-  VNode,
   watch,
 } from 'vue';
-import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
-import {ComponentObjectPropsOptions} from "vue";
 
 export interface CollapsibleProps extends CollapsibleFoundationProps {
   motion?: boolean;
   isOpen?: boolean;
   duration?: number;
   keepDOM?: boolean;
+  lazyRender?: boolean;
   className?: string;
   style?: CSSProperties;
   collapseHeight?: number;
@@ -49,6 +48,7 @@ const propTypes:ComponentObjectPropsOptions<CollapsibleProps> = {
   isOpen: PropTypes.bool,
   duration: PropTypes.number,
   keepDOM: PropTypes.bool,
+  lazyRender: PropTypes.bool,
   collapseHeight: PropTypes.number,
   style: PropTypes.object,
   className: PropTypes.string,
@@ -59,6 +59,7 @@ const defaultProps = {
   duration: 250,
   motion: true,
   keepDOM: false,
+  lazyRender: true,
   collapseHeight: 0,
   fade: false,
 };
@@ -184,9 +185,8 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
   const isChildrenInRenderTree = () => {
     if (domRef.value) {
       return domRef.value.offsetHeight > 0;
-    } else {
-      return false;
     }
+    return false;
   };
 
   return () => {
@@ -206,6 +206,8 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
     );
 
     const children = slots.default?.()
+    const shouldRender = (props.keepDOM && !props.lazyRender) || props.collapseHeight !== 0 || state.visible || props.isOpen;
+
     return (
       <div
         class={wrapperCls}
@@ -226,7 +228,7 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
           id={props.id}
         >
           {
-            (props.keepDOM || props.collapseHeight !== 0 || state.visible || props.isOpen) && children
+            shouldRender && children
           }
         </div>
       </div>
