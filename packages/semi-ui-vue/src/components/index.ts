@@ -79,7 +79,7 @@ export { default as CardGroup } from './card/cardGroup';
 export { default as Carousel } from './carousel';
 export { default as Collapse, CollapsePanel } from './collapse';
 export { default as Collapsible } from './collapsible';
-export { default as Descriptions, DescriptionsItem } from './descriptions';
+export { default as Descriptions, DescriptionsItem, type Data as DescriptionsData } from './descriptions';
 export { default as Modal, ModalClass } from './modal';
 
 export { default as List } from './list';

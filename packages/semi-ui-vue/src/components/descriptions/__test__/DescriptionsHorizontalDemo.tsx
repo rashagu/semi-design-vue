@@ -24,12 +24,17 @@ const DescriptionsHorizontalDemo = defineComponent<DescriptionsDemoProps>((props
         <Tag size="small" shape='circle' color='violet'>编程</Tag>
       </Space>
     },
-    { key: '作品数量', value: '88888888' },
-    { key: '认证状态', value: '这是一个很长很长很长很长很长很长很长很长很长的值', span: 3 },
+    { key: '作品数量', value: '88888888', span: 2 },
+    { key: '认证状态', value: '这是一个很长很长很长很长很长很长很长很长很长的值' },
   ];
   return ()=>(
     <>
-      <Descriptions layout='horizontal' align='plain' data={data} column={4} />
+      {/*<Descriptions layout='horizontal' data={data} column={5} />*/}
+      <Descriptions layout='horizontal' align='center' column={4}>
+        {data.map((item, index)=>{
+          return <DescriptionsItem itemKey={item.key} span={item.span}>{item.value}</DescriptionsItem>
+        })}
+      </Descriptions>
     </>
   );
 });

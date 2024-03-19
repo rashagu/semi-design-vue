@@ -80,8 +80,10 @@ function viteSemiTheme(options: Options): Plugin {
             findFileUrl(url) {
               if (url.includes('/base/base')) {
                 return new URL(url.replace('~', ''), pathToFileURL(scssFilePath.match(/^(\S*\/node_modules\/)/)?.[0]!));
-              }else if (url.startsWith(options.theme)) {
-                return new URL(url, pathToFileURL(scssFilePath.split('node_modules')[0] + 'node_modules/'));
+              }
+
+              if (url.startsWith(options.theme)) {
+                return new URL(url, pathToFileURL(Path.resolve('./') + '/node_modules/'));
               }
 
               let filePath = Path.resolve(Path.dirname(scssFilePath), url);
