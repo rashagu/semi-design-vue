@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.9.0
+
+### Minor Changes
+
+- [Descriptions] layout
+
 ## 0.8.1
 
 ### Patch Changes
