@@ -1,5 +1,11 @@
 # @kousum/semi-animation-vue
 
+## 0.9.1
+
+### Patch Changes
+
+- dd
+
 ## 0.9.0
 
 ### Minor Changes

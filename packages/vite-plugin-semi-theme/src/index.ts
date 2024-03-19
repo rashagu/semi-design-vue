@@ -2,7 +2,7 @@ import type { Plugin } from 'vite';
 import type { Options } from './types';
 import * as fs from 'fs';
 import * as Path from 'path';
-import * as sass from 'sass';
+import sass from 'sass';
 import { pathToFileURL } from 'node:url';
 
 const { compileString } = sass;
@@ -18,7 +18,8 @@ function viteSemiTheme(options: Options): Plugin {
       const [filepath] = id.split('?');
       if (
         /@douyinfe\/semi-(ui|icons|foundation)\/lib\/.+\.css$/.test(filepath) ||
-        /@kousum\/semi-ui-vue\/dist\/.+\.css$/.test(filepath)
+        /@kousum\/semi-ui-vue\/dist\/.+\.css$/.test(filepath) ||
+        /_base\/base.css$/.test(filepath)
       ) {
         const theme = options.theme;
         // always inject
@@ -79,7 +80,12 @@ function viteSemiTheme(options: Options): Plugin {
           importer: {
             findFileUrl(url) {
               if (url.includes('/base/base')) {
-                return new URL(url.replace('~', ''), pathToFileURL(scssFilePath.match(/^(\S*\/node_modules\/)/)?.[0]!));
+                const path = scssFilePath.match(/^(\S*\/node_modules\/)/)
+                if (path){
+                  return new URL(url.replace('~', ''), pathToFileURL(path[0]));
+                }else{
+                  return new URL(url, pathToFileURL('E:/semi-design-vue/packages/semi-ui-vue/node_modules/'));
+                }
               }
 
               if (url.startsWith(options.theme)) {
