@@ -2,7 +2,7 @@ import type { Plugin } from 'vite';
 import type { Options } from './types';
 import * as fs from 'fs';
 import * as Path from 'path';
-import * as sass from 'sass';
+import sass from 'sass';
 import { pathToFileURL } from 'node:url';
 
 const { compileString } = sass;
