@@ -171,3 +171,25 @@ export type { FormApi, FormFCChild, CommonFieldProps } from './form/index';
 export { default as Image } from './image';
 export { Preview as ImagePreview } from './image';
 export type { RuleItem, BaseFormProps } from './form/interface';
+
+
+//v-model
+export {
+  AutoCompleteVModel,
+  CascaderVModel,
+  CheckboxGroupVModel,
+  DatePickerVModel,
+  InputVModel,
+  InputNumberVModel,
+  RadioGroupVModel,
+  RatingVModel,
+  SelectVModel,
+  SliderVModel,
+  SwitchVModel,
+  TagInputVModel,
+  TimePickerVModel,
+  TransferVModel,
+  TreeSelectVModel,
+  UploadVModel,
+} from "./withVModel/index"
+export {default as WithVModel} from "./withVModel/WithVModel"

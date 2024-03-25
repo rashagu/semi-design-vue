@@ -89,6 +89,8 @@ import VirtualizeTreeDemo from "./components/tree/__test__/VirtualizeTreeDemo";
 import FormAllDemo from "./components/form/__test__/FormAllDemo";
 import ModalForm from "./components/form/__test__/ModalForm";
 import DescriptionsHorizontalDemo from './components/descriptions/__test__/DescriptionsHorizontalDemo';
+import Input from './components/input';
+import WithVModelDemo from './components/withVModel/__test__/WithVModelDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -108,9 +110,12 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   //     a.value ++
   //   }, 1000)
   // })
+  // console.log(ConfigProvider);
+  const a = ref('sdsd')
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
+        <WithVModelDemo/>
         {/*<CalenderDemo />*/}
         {/*<TransferDemo/>*/}
         {/*<TransferTreeDemo />*/}
