@@ -59,9 +59,7 @@ function withField<
   C,
   T extends Subtract<VueHTMLAttributes, CommonexcludeType> & CommonFieldProps & VueHTMLAttributes & C
 >(Component: DefineComponent<C> | FunctionalComponent<C>, opts?: WithFieldOption, vuePropsType?: ComponentObjectPropsOptions<C>): DefineComponent<T> {
-  if (!vuePropsType){
-    warning(false, "请传入vue组件的props")
-  }
+
   // @ts-ignore
   const SemiField = defineComponent<T>((truthProps, { attrs: props }) => {
     const slots = useSlots();
@@ -139,6 +137,7 @@ function withField<
         allowEmpty,
       };
       updater.value.updateStateValue(field, val, newOpts);
+      // truthProps['onUpdate:modelValue']?.(val)
     };
 
     const reset = () => {
@@ -297,8 +296,9 @@ function withField<
      *
      */
     const handleChange = (newValue: any, e: any, ...other: any[]) => {
-      // 不明来源事件触发过滤 😂
+      // 不明来源事件触发过滤
       if (newValue && newValue[Symbol.toStringTag] && newValue[Symbol.toStringTag] === 'Event') {
+        console.trace('不明来源事件触发过滤', newValue);
         return;
       }
 
@@ -774,13 +774,15 @@ function withField<
     };
   }, {
     props: {
-      ...(omit(vuePropsType || {}, 'style', 'class')),
+      ...(omit({ ...Component.props, ...(vuePropsType || {}) } || {}, 'style', 'class')),
       label: [...PropTypes.node, PropTypes.func],
       validate: [PropTypes.func],
       id: [String],
       rules: Array,
       field: String,
-      className: String
+      className: String,
+      // modelValue: [String, Number, Object, Array],
+      // 'onUpdate:modelValue': Function
     },
     name: 'Form' + Component.name
   });
