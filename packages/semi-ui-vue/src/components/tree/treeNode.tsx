@@ -77,7 +77,6 @@ const propTypes:ComponentObjectPropsOptions<TreeNodeProps> = {
   empty: Boolean,
   style: [Object, String] as PropType<TreeNodeProps['style']>,
   display: PropTypes.any,
-  key:String
 };
 
 const defaultProps = {

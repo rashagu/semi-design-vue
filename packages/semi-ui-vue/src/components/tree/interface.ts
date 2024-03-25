@@ -141,7 +141,7 @@ export interface TreeNodeProps extends BasicTreeNodeProps {
     eventKey?: string;
     icon?: VueJsxNode;
     isEnd?: boolean[];
-    key: string
+    // key: string
 }
 export interface TreeNodeState {
     [x: string]: any;
