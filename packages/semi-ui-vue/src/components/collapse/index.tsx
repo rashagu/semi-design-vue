@@ -33,42 +33,45 @@ export interface CollapseReactProps extends CollapseProps {
   collapseIcon?: VNode;
   children?: VNode;
   style?: CSSProperties;
-  onChange?: (activeKey: CollapseProps['activeKey'], e: MouseEvent) => void
+  onChange?: (activeKey: CollapseProps['activeKey'], e: MouseEvent) => void;
+  lazyRender?: boolean
 }
 
 
 export type {CollapseState};
 
-const propTypes: ComponentObjectPropsOptions<CollapseProps> = {
+const propTypes: ComponentObjectPropsOptions<CollapseReactProps> = {
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   accordion: PropTypes.bool,
   clickHeaderToExpand: PropTypes.bool,
-  onChange: PropTypes.func as PropType<CollapseProps['onChange']>,
-  expandIcon: PropTypes.node,
-  collapseIcon: PropTypes.node,
+  onChange: PropTypes.func as PropType<CollapseReactProps['onChange']>,
+  expandIcon: PropTypes.node as PropType<CollapseReactProps['expandIcon']>,
+  collapseIcon: PropTypes.node as PropType<CollapseReactProps['collapseIcon']>,
   style: PropTypes.object,
   className: PropTypes.string,
   keepDOM: PropTypes.bool,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
-  expandIconPosition: PropTypes.string as PropType<CollapseProps['expandIconPosition']>,
+  expandIconPosition: PropTypes.string as PropType<CollapseReactProps['expandIconPosition']>,
+  lazyRender: PropTypes.bool as PropType<CollapseReactProps['lazyRender']>,
 };
 
 const defaultProps = {
   defaultActiveKey: '',
   clickHeaderToExpand: true,
   onChange: noop,
-  expandIconPosition: 'right'
+  expandIconPosition: 'right',
+  lazyRender: false,
 };
-export const vuePropsType = vuePropsMake<CollapseProps>(propTypes, defaultProps)
-const Collapse = defineComponent<CollapseProps>((props, {}) => {
+export const vuePropsType = vuePropsMake<CollapseReactProps>(propTypes, defaultProps)
+const Collapse = defineComponent<CollapseReactProps>((props, {}) => {
   const slots = useSlots()
 
 
   const state = reactive<CollapseState>({
     activeSet: new Set()
   });
-  const {adapter: adapterInject, getDataAttr} = useBaseComponent<CollapseProps>(props, state)
+  const {adapter: adapterInject, getDataAttr} = useBaseComponent<CollapseReactProps>(props, state)
 
   function adapter_(): CollapseAdapter {
     return {
@@ -125,6 +128,7 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
     // eslint-disable-next-line max-len
     const {
       defaultActiveKey,
+      lazyRender,
       accordion,
       style,
       motion,
@@ -149,7 +153,8 @@ const Collapse = defineComponent<CollapseProps>((props, {}) => {
             keepDOM,
             expandIconPosition,
             onClick: onChange,
-            motion
+            motion,
+            lazyRender,
           }}
         >
           {children}

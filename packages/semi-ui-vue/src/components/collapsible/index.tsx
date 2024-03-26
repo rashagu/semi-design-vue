@@ -59,7 +59,7 @@ const defaultProps = {
   duration: 250,
   motion: true,
   keepDOM: false,
-  lazyRender: true,
+  lazyRender: false,
   collapseHeight: 0,
   fade: false,
 };
@@ -69,6 +69,7 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
 
   const domRef = ref();
   let resizeObserver: ResizeObserver | null;
+  let hasBeenRendered: boolean = false;
 
   const state = reactive<CollapsibleState>({
     domInRenderTree: false,
@@ -206,7 +207,13 @@ const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
     );
 
     const children = slots.default?.()
-    const shouldRender = (props.keepDOM && !props.lazyRender) || props.collapseHeight !== 0 || state.visible || props.isOpen;
+    const shouldRender = (props.keepDOM &&
+        (props.lazyRender ? hasBeenRendered : true)) ||
+      props.collapseHeight !== 0 || state.visible || props.isOpen;
+
+    if (shouldRender && !hasBeenRendered) {
+      hasBeenRendered = true;
+    }
 
     return (
       <div

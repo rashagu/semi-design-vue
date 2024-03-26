@@ -93,42 +93,12 @@ const Descriptions = defineComponent<DescriptionsProps>(
     const adapter = adapter_();
     const foundation = new DescriptionsFoundation<DescriptionsProps>(adapter);
 
-    function getHorizontalList() {
-      const { column, data, children } = props;
-        //@ts-ignore
-      const columns = adapter.getColumns();
-      const horizontalList = [];
-      const curSpan = { totalSpan: 0, itemList: [] };
-      for (const item of columns) {
-        curSpan.totalSpan += item.span || 1;
-        curSpan.itemList.push(item);
-        if (curSpan.totalSpan >= column) {
-          horizontalList.push(curSpan.itemList);
-          curSpan.itemList = [];
-          curSpan.totalSpan = 0;
-        }
-      }
-      if (curSpan.itemList.length != 0) {
-        const lastSpan = curSpan.itemList[curSpan.itemList.length - 1];
-        if (isNaN(lastSpan.span)) {
-          let total = 0;
-          curSpan.itemList.forEach((item) => {
-            return (total += !isNaN(item.span) ? item.span : 1);
-          });
-          if (total < column) {
-            lastSpan.span = column - total + 1;
-          }
-        }
-        horizontalList.push(curSpan.itemList);
-      }
-      return horizontalList;
-    }
     const renderChildrenList = () => {
       const children = getFragmentChildren(slots);
 
       const { layout, data } = props;
       if (layout === 'horizontal') {
-        const horizontalList: Data[][] = getHorizontalList();
+        const horizontalList: Data[][] = foundation.getHorizontalList();
         return horizontalList.map((row, index) => {
           return (
             <tr key={index}>

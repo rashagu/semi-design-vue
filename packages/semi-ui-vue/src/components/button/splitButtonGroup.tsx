@@ -1,4 +1,14 @@
-import {defineComponent, ref, h, onActivated, Fragment, StyleValue, ComponentObjectPropsOptions, onMounted} from 'vue'
+import {
+  defineComponent,
+  ref,
+  h,
+  onActivated,
+  Fragment,
+  StyleValue,
+  ComponentObjectPropsOptions,
+  onMounted,
+  onUnmounted,
+} from 'vue';
 import classNames from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/button/constants';
 import '@douyinfe/semi-foundation/button/button.scss';
@@ -18,17 +28,38 @@ const SplitButtonGroup = defineComponent<SplitButtonGroupProps>((props, {slots})
   const { style, className } = props;
   const cls = classNames(`${prefixCls}-split`, className);
   const containerRef = ref()
-
+  let mutationObserver: MutationObserver | null = null;
 
 
   onMounted(()=>{
-    if (containerRef.value) {
+    const addClassName = () => {
       const buttons = containerRef.value.querySelectorAll('button');
       const firstButton = buttons[0];
       const lastButton = buttons[buttons.length - 1];
-      firstButton?.classList.add(`${prefixCls}-first`);
-      lastButton?.classList.add(`${prefixCls}-last`);
+      if (!firstButton?.classList.contains(`${prefixCls}-first`)) {
+        firstButton?.classList.add(`${prefixCls}-first`);
+      }
+      if (!lastButton?.classList.contains(`${prefixCls}-last`)) {
+        lastButton?.classList.add(`${prefixCls}-last`);
+      }
+
+    };
+    if (containerRef.value) {
+      addClassName();
+      const mutationObserver_ = new MutationObserver((mutations, observer) => {
+        for (const mutation of mutations) {
+          if ((mutation.type === 'attributes' && mutation.attributeName === 'class') || (mutation.type === 'childList' && Array.from(mutation.addedNodes).some(node => node.nodeName === 'BUTTON'))) {
+            addClassName();
+          }
+        }
+      });
+      mutationObserver_.observe(containerRef.value, { attributes: true, childList: true, subtree: true });
+      mutationObserver = mutationObserver_;
     }
+  })
+
+  onUnmounted(()=>{
+    mutationObserver?.disconnect();
   })
 
   return ()=>(

@@ -243,7 +243,19 @@ const index = defineComponent<NavProps>((props, {slots}) => {
       setItemKeysMap: itemKeysMap => state.itemKeysMap = {...itemKeysMap},
       addSelectedKeys: createAddKeysFn('selectedKeys'),
       removeSelectedKeys: createRemoveKeysFn( 'selectedKeys'),
-      updateSelectedKeys: selectedKeys => state.selectedKeys = [...selectedKeys],
+
+      /**
+       * when `includeParentKeys` is `true`, select a nested nav item will select parent nav sub
+       */
+      updateSelectedKeys: (selectedKeys: (string | number)[], includeParentKeys = true) => {
+        let willUpdateSelectedKeys = selectedKeys;
+        if (includeParentKeys) {
+          const parentSelectKeys = foundation.selectLevelZeroParentKeys(null, selectedKeys);
+          willUpdateSelectedKeys = Array.from(new Set(selectedKeys.concat(parentSelectKeys)));
+        }
+        state.selectedKeys = willUpdateSelectedKeys
+      },
+
       updateOpenKeys: openKeys => state.openKeys = [...openKeys],
       addOpenKeys: createAddKeysFn('openKeys'),
       removeOpenKeys: createRemoveKeysFn( 'openKeys'),
@@ -278,8 +290,11 @@ const index = defineComponent<NavProps>((props, {slots}) => {
   watch(() => props.selectedKeys, (value) => {
     if (value){
       adapter.updateSelectedKeys(props.selectedKeys);
+      const willOpenKeys = foundation.getWillOpenKeys(state.itemKeysMap);
+      adapter.updateOpenKeys(willOpenKeys);
     }
   })
+
   watch(() => props.openKeys, (value) => {
     if (value){
       // console.log(props.openKeys)
@@ -287,12 +302,12 @@ const index = defineComponent<NavProps>((props, {slots}) => {
     }
   })
 
-  watch(() => state.selectedKeys, (value,oldValue) => {
-    if (!isEqual(value,oldValue)){
-      const parentSelectKeys = foundation.selectLevelZeroParentKeys(null, ...state.selectedKeys);
-      adapter.addSelectedKeys(...parentSelectKeys);
-    }
-  })
+  // watch(() => state.selectedKeys, (value,oldValue) => {
+  //   if (!isEqual(value,oldValue)){
+  //     const parentSelectKeys = foundation.selectLevelZeroParentKeys(null, ...state.selectedKeys);
+  //     adapter.addSelectedKeys(...parentSelectKeys);
+  //   }
+  // })
 
   watch([() => props.items], (value, oldValue, onCleanup) => {
     foundation.init('');

@@ -84,51 +84,29 @@ const Tabs = defineComponent<TabsProps>((props, {}) => {
     const contentRef = ref();
     let contentHeight: string = 'auto';
 
+    const childrenRef = ref<VNode[]>([])
+
     const state = reactive<TabsState>({
         activeKey: '',
-        panes: [],
+        panes: getPanes(),
         prevActiveKey: null,
         forceDisableMotion: false
     });
-
-    const childrenRef = ref<VNode[]>([])
     const {adapter: adapterInject} = useBaseComponent<TabsProps>(props, state)
     function adapter_(): TabsAdapter<TabsProps, TabsState> {
         return {
             ...adapterInject(),
             collectPane: (): void => {
-                const { tabList } = props;
-                if (Array.isArray(tabList) && tabList.length) {
-                    state.panes  = tabList as any
-                    return;
-                }
-                const panes = childrenRef.value.map((child: any) => {
-                    if (child) {
-                        const { tab, icon, disabled, itemKey, closable } = child.props;
-                        return { tab, icon, disabled, itemKey, closable };
-                    }
-                    return undefined;
-                });
+                const panes = getPanes();
                 state.panes  = panes as any
             },
             collectActiveKey: (): void => {
-                let panes = [];
                 const { tabList, activeKey: propsActiveKey } = props;
                 if (typeof propsActiveKey !== 'undefined') {
                     return;
                 }
                 const { activeKey } = state;
-                if (Array.isArray(tabList) && tabList.length) {
-                    panes = tabList;
-                } else {
-                    panes = childrenRef.value.map((child: any) => {
-                        if (child) {
-                            const { tab, icon, disabled, itemKey, closable } = child.props;
-                            return { tab, icon, disabled, itemKey, closable };
-                        }
-                        return undefined;
-                    });
-                }
+                const panes = getPanes();
                 if (panes.findIndex(p => p.itemKey === activeKey) === -1) {
                     if (panes.length > 0) {
                         state.activeKey = panes[0].itemKey
@@ -240,6 +218,20 @@ const Tabs = defineComponent<TabsProps>((props, {}) => {
 
     const setContentRef = ref => {
         contentRef.value = ref
+    };
+
+    function getPanes(): PlainTab[] {
+        const { tabList, children } = props;
+        if (Array.isArray(tabList) && tabList.length) {
+            return tabList;
+        }
+        return childrenRef.value.map((child) => {
+            if (child) {
+                const { tab, icon, disabled, itemKey, closable } = child.props;
+                return { tab, icon, disabled, itemKey, closable };
+            }
+            return undefined;
+        });
     };
 
     const onTabClick = (activeKey: string, event: MouseEvent): void => {
