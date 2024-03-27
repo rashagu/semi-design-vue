@@ -27,7 +27,7 @@ import {
   Fragment,
   h, PropType,
   reactive,
-  ref,
+  ref, UnwrapRef,
   useSlots,
   VNode,
   watch,
@@ -252,7 +252,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
     const { value, dataSource, type, filter } = props;
     const mergedState = {} as TransferState;
     let newData:ResolvedDataItem[] = state.data as any;
-    let newSelectedItems = state.selectedItems;
+    let newSelectedItems = state.selectedItems as TransferState["selectedItems"];
     if (Boolean(dataSource) && Array.isArray(dataSource)) {
       newData = _generateDataByType(dataSource, type);
       mergedState.data = newData;
@@ -278,8 +278,8 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
 
   watch(
     [
-      () => state.selectedItems,
-      () => state.data,
+      () => state.selectedItems as TransferState["selectedItems"],
+      () => state.data as TransferState["data"],
       () => state.inputValue,
       () => props.value,
       () => props.dataSource,
@@ -303,7 +303,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
   function adapter_(): TransferAdapter<TransferProps, TransferState> {
     return {
       ...adapterInject(),
-      getSelected: () => new Map(state.selectedItems),
+      getSelected: () => new Map(state.selectedItems) as any,
       updateSelected: (selectedItems) => {
         state.selectedItems = selectedItems;
       },
@@ -532,7 +532,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
       allChecked: !leftContainesNotInSelected,
       showNumber,
       inputValue,
-      selectedItems,
+      selectedItems: selectedItems as TransferState["selectedItems"],
       value: values,
       onSelect: foundation.handleSelect.bind(foundation),
       onAllClick: () => foundation.handleAll(leftContainesNotInSelected),
@@ -687,7 +687,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
   function renderRight(locale: Locale['Transfer']) {
     const { selectedItems } = state;
     const { emptyContent, renderSelectedPanel, draggable } = props;
-    const selectedData = [...selectedItems.values()];
+    const selectedData = [...selectedItems.values()] as Array<DataItem>;
 
     // when custom render panel
     const renderProps: SelectedPanelProps = {

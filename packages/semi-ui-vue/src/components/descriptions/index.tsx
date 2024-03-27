@@ -69,7 +69,6 @@ const Descriptions = defineComponent<DescriptionsProps>(
     function adapter_(): DescriptionsAdapter<DescriptionsProps> {
       return {
         ...adapterInject(),
-          //@ts-ignore
         getColumns: () => {
           if (props.data?.length) {
             return props.data;

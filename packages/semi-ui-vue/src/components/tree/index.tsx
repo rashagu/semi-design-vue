@@ -526,7 +526,6 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
 
   watch([
     () => props.filterTreeNode,
-    () => props.expandedKeys,
     () => props.treeData,
     () => props.draggable,
     () => props.treeDataSimpleJson,
@@ -548,15 +547,15 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
 
     () => state.keyEntities,
     () => state.cachedKeyValuePairs,
-    () => state.inputValue,
-    () => state.expandedKeys,
-    () => state.flattenNodes,
-    () => state.treeData,
-    () => state.filteredExpandedKeys,
-    () => state.filteredShownKeys,
-    () => state.checkedKeys,
+    () => state.inputValue as any,
+    () => state.expandedKeys as any,
+    () => state.flattenNodes as any,
+    () => state.treeData as any,
+    () => state.filteredExpandedKeys as any,
+    () => state.filteredShownKeys as any,
+    () => state.checkedKeys as any,
   ], (value, oldValue, onCleanup) => {
-    const newState = getDerivedStateFromProps(props, {...state})
+    const newState = getDerivedStateFromProps(props, state as TreeState)
     newState && Object.keys(newState).forEach(key => {
       state[key] = newState[key]
     })

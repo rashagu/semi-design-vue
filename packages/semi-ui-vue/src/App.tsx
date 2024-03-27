@@ -115,7 +115,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
-        <WithVModelDemo/>
+        {/*<WithVModelDemo/>*/}
         {/*<CalenderDemo />*/}
         {/*<TransferDemo/>*/}
         {/*<TransferTreeDemo />*/}
@@ -124,7 +124,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SideSheetDemo />*/}
         {/*<ListDemo />*/}
         {/*<DescriptionsDemo />*/}
-        {/*<DescriptionsHorizontalDemo/>*/}
+        <DescriptionsHorizontalDemo/>
         {/*<CollapseDemo />*/}
         {/*<CollapsibleDemo />*/}
         {/*<CarouselDemo/>*/}

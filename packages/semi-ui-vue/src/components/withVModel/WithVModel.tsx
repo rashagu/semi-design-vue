@@ -1,9 +1,9 @@
-import { defineComponent, ref } from 'vue';
+import { defineComponent, DefineSetupFnComponent, ref } from 'vue';
 import { omit } from 'lodash';
 import { WithFieldOption } from '@douyinfe/semi-foundation/form/interface';
 import * as ObjectUtil from '@douyinfe/semi-foundation/utils/object';
 
-export default function WithVModel<T>(Comp: (props: T) => any, opt?: WithFieldOption) {
+export default function WithVModel<T>(Comp: DefineSetupFnComponent<T>, opt?: WithFieldOption) {
   return defineComponent<T>(
     (props: any, { emit, slots, expose }) => {
       const instance = ref();
