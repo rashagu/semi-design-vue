@@ -15,8 +15,8 @@ importers:
         specifier: 2.55.1
         version: 2.55.1
       '@vue/repl':
-        specifier: ^3.2.0
-        version: 3.2.0
+        specifier: ^4.1.1
+        version: 4.1.1
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -8622,8 +8622,8 @@ packages:
     dependencies:
       '@vue/shared': 3.4.21
 
-  /@vue/repl@3.2.0:
-    resolution: {integrity: sha512-heKXXwAm4p3wYqVsYqW5i9bAkiGqwbZygfBx8stZ48QqTvaTGiGY3qASJwvhc5FrZDPGoGcFRjab6XDImKxPvA==}
+  /@vue/repl@4.1.1:
+    resolution: {integrity: sha512-gkbnU+rM01/ILdnDJbsWS8+PW6qMAzprBo/U2+7eVci0kx6VAR26fL/qrcEPwEYa6q0vzzptZ4il0SaUGGqZKw==}
     dev: false
 
   /@vue/runtime-core@3.4.19:

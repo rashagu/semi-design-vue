@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Repl, ReplStore } from '@vue/repl'
+import { type OutputModes, Repl, useStore, useVueImportMap } from '@vue/repl';
 // import Monaco from '@vue/repl/monaco-editor'
 import CodeMirror from '@vue/repl/codemirror-editor'
-import {onMounted} from "vue";
+import { onMounted, ref } from 'vue';
 import {useData} from "vitepress";
 
 const props = defineProps({
@@ -16,24 +16,38 @@ const {isDark} = useData();
 // retrieve some configuration options from the URL
 const query = new URLSearchParams(location.search)
 
-const store = new ReplStore({
-  // initialize repl with previously serialized state
-  serializedState: location.hash.slice(1),
 
-  // starts on the output pane (mobile only) if the URL has a showOutput query
-  showOutput: query.has('showOutput'),
-  // starts on a different tab on the output pane if the URL has a outputMode query
-  // and default to the "preview" tab
-  outputMode: query.get('outputMode') || 'preview',
+const {
+  importMap: builtinImportMap,
+  vueVersion,
+  productionMode,
+} = useVueImportMap({
   // specify the default URL to import Vue runtime from in the sandbox
   // default is the CDN link from jsdelivr.com with version matching Vue's version
-  // from peerDependency,
-  defaultVueServerRendererURL:import.meta.env.BASE_URL + 'server-renderer.esm-browser.js',
-  defaultVueRuntimeProdURL:import.meta.env.BASE_URL + 'vue.runtime.esm-browser.prod.js',
-  defaultVueRuntimeURL:import.meta.env.BASE_URL + 'vue.runtime.esm-browser.js',
-  // defaultVueRuntimeURL: import.meta.env.BASE_URL + 'runtime-dom.esm-browser.js',
-  // defaultVueServerRendererURL: import.meta.env.BASE_URL + 'server-renderer.esm-browser.js',
+  // from peerDependency
+  // runtimeDev: import.meta.env.BASE_URL + 'vue.runtime.esm-browser.js',
+  // runtimeProd: import.meta.env.BASE_URL + 'vue.runtime.esm-browser.prod.js',
+  // serverRenderer: import.meta.env.BASE_URL + 'server-renderer.esm-browser.js',
 })
+builtinImportMap.value.imports = {
+  "@kousum/semi-ui-vue": import.meta.env.BASE_URL + 'semi/semi-ui-vue.js',
+}
+
+const store = useStore(
+  {
+    // pre-set import map
+    builtinImportMap,
+    vueVersion,
+    // starts on the output pane (mobile only) if the URL has a showOutput query
+    showOutput: ref(query.has('showOutput')),
+    // starts on a different tab on the output pane if the URL has a outputMode query
+    // and default to the "preview" tab
+    outputMode: ref((query.get('outputMode') || 'preview') as OutputModes),
+
+  },
+  // initialize repl with previously serialized state
+  location.hash,
+)
 
 
 const previewOptions = {
@@ -68,16 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <\/script>
 `
 }
-// persist state to URL hash
-// watchEffect(() => history.replaceState({}, '', store.serialize()))
-// pre-set import map
-store.setImportMap({
-  imports: {
-    "@kousum/semi-ui-vue": import.meta.env.BASE_URL + 'semi/semi-ui-vue.js',
-  },
-})
-// use a specific version of Vue
-// store.setVueVersion('3.4.3')
+
 
 store.setFiles({
   'tsconfig.json': store.getFiles()['tsconfig.json'],
@@ -87,11 +92,9 @@ store.setFiles({
   // store.setFiles(store.getFiles())
 })
 
-onMounted(()=>{
-setTimeout(()=>{
 
-}, 3*1000)
-})
+// production mode is enabled
+productionMode.value = true
 </script>
 
 <template>
