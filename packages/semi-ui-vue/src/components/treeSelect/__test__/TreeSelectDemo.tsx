@@ -1,8 +1,8 @@
-import {defineComponent, ref, h, Fragment, useSlots, onMounted} from 'vue'
-import TreeSelect from "../index";
+import { defineComponent, h, onMounted, ref, useSlots } from 'vue';
+import TreeSelect from '../index';
 
 interface ExampleProps {
-  name?: string
+  name?: string;
 }
 
 export const vuePropsType = {
@@ -36,7 +36,7 @@ const TreeSelectDemo = defineComponent<ExampleProps>((props, {}) => {
       ],
     },
     {
-      label: '北美洲',
+      label: '北美xxxxxxxxxxxxxxxxxxxxxxxxxxxx洲',
       value: 'North America',
       key: '1',
     }
@@ -60,6 +60,11 @@ const TreeSelectDemo = defineComponent<ExampleProps>((props, {}) => {
         dropdownStyle={{ maxHeight: '400px', overflow: 'auto' }}
         treeData={treeData}
         placeholder="请选择"
+        virtualize={{
+          height: 270,
+          width: '100%',
+          itemSize: 36, // px
+        }}
       />
       <TreeSelect
         defaultOpen={true}

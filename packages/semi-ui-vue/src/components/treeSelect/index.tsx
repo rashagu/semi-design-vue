@@ -42,7 +42,7 @@ import LocaleConsumer from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
 import Trigger from '../trigger';
 import TagInput from '../tagInput';
-import { isSemiIcon } from '../_utils';
+import { isSemiIcon, styleNum } from '../_utils';
 import type { FlattenNode, TreeNodeData, TreeNodeProps, TreeProps, TreeState } from '../tree/interface';
 import { Motion } from '../_base/base';
 import { IconChevronDown, IconClear, IconSearch } from '@kousum/semi-icons-vue';
@@ -169,7 +169,7 @@ export interface TreeSelectProps
   onChange?: OnChange;
   onFocus?: (e: MouseEvent) => void;
   onVisibleChange?: (isVisible: boolean) => void;
-  onClear?: (e: MouseEvent | KeyboardEvent) => void
+  onClear?: (e: MouseEvent | KeyboardEvent) => void;
   id?: string;
 }
 
@@ -376,7 +376,7 @@ const TreeSelect = defineComponent<TreeSelectProps>(
         'registerClickOutsideHandler' | 'unregisterClickOutsideHandler' | 'rePositionDropdown'
       > = {
         registerClickOutsideHandler: (cb) => {
-            clickOutsideHandler = (e: Event) => {
+          clickOutsideHandler = (e: Event) => {
             // 当组件内部使用了expose时，使用ref得到的内容只有expose的那部分
             const optionInstance = optionsRef && optionsRef.value.getRef?.().vnode.el;
             const triggerDom = triggerRef && triggerRef.value;
@@ -407,12 +407,7 @@ const TreeSelect = defineComponent<TreeSelectProps>(
       };
       const treeAdapter: Pick<
         TreeSelectAdapter,
-        'updateState'
-        | 'notifySelect'
-        | 'notifySearch'
-        | 'cacheFlattenNodes'
-        | 'notifyLoad'
-        | 'notifyClear'
+        'updateState' | 'notifySelect' | 'notifySearch' | 'cacheFlattenNodes' | 'notifyLoad' | 'notifyClear'
       > = {
         updateState: (states) => {
           Object.keys(states).forEach((key) => {
@@ -434,7 +429,7 @@ const TreeSelect = defineComponent<TreeSelectProps>(
         },
         notifyClear: (e: MouseEvent | KeyboardEvent) => {
           props.onClear && props.onClear(e);
-        }
+        },
       };
       return {
         ...adapterInject<TreeSelectProps, TreeSelectState>(),
@@ -902,7 +897,10 @@ const TreeSelect = defineComponent<TreeSelectProps>(
     const renderContent = () => {
       const { dropdownMinWidth } = state;
       const { dropdownStyle, dropdownClassName } = props;
-      const style = { minWidth: isNaN(dropdownMinWidth)?dropdownMinWidth:(dropdownMinWidth + 'px'), ...dropdownStyle };
+      const style = {
+        minWidth: isNaN(dropdownMinWidth) ? dropdownMinWidth : dropdownMinWidth + 'px',
+        ...dropdownStyle,
+      };
       const popoverCls = cls(dropdownClassName, `${prefixcls}-popover`);
       return (
         <div class={popoverCls} style={style}>
@@ -1517,7 +1515,7 @@ const TreeSelect = defineComponent<TreeSelectProps>(
       const { keyMaps } = props_;
       const children = data[get(keyMaps, 'children', 'children')];
       !isUndefined(children) && (props_.children = children);
-      return <TreeNode {...treeNodeProps} {...data} {...props_} data={data} style={style} showLine={showLine}/>;
+      return <TreeNode {...treeNodeProps} {...data} {...props_} data={data} style={style} showLine={showLine} />;
     };
 
     const itemKey = (index: number, data: Record<string, any>) => {
@@ -1554,12 +1552,14 @@ const TreeSelect = defineComponent<TreeSelectProps>(
       };
 
       return (
-        <AutoSizer defaultHeight={parseInt('' + virtualize.height)} defaultWidth={parseInt('' + virtualize.width)}>
-          {({ height, width }) => (
+        <AutoSizer
+          defaultHeight={styleNum(virtualize.height)}
+          defaultWidth={styleNum(virtualize.width)}
+          children={({ height, width }) => (
             <VirtualList
               itemCount={flattenNodes.length}
               itemSize={virtualize.itemSize}
-              height={height}
+              height={height as any}
               width={width}
               // @ts-ignore avoid strict check of itemKey
               itemKey={itemKey}
@@ -1570,7 +1570,7 @@ const TreeSelect = defineComponent<TreeSelectProps>(
               {VirtualRow}
             </VirtualList>
           )}
-        </AutoSizer>
+        ></AutoSizer>
       );
     };
 

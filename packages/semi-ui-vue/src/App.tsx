@@ -124,7 +124,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SideSheetDemo />*/}
         {/*<ListDemo />*/}
         {/*<DescriptionsDemo />*/}
-        <DescriptionsHorizontalDemo/>
+        {/*<DescriptionsHorizontalDemo/>*/}
         {/*<CollapseDemo />*/}
         {/*<CollapsibleDemo />*/}
         {/*<CarouselDemo/>*/}
@@ -164,7 +164,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<WithFormStateDemo/>*/}
         {/*<WithFieldDemo/>*/}
         {/*<WithFieldDemo2/>*/}
-        {/*<TreeSelectDemo/>*/}
+        <TreeSelectDemo/>
         {/*<TreeCheckDemo />*/}
         {/*<TreeDemo />*/}
         <div style={{backgroundColor: 'red', width: 300, height: 300}}>
@@ -214,7 +214,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<LayoutTest/>*/}
         {/*<SpaceTest/>*/}
         {/*<PopoverTest />*/}
-        <NavigationDemo />
+        {/*<NavigationDemo />*/}
         <div class={'aa'}>123</div>
       </ConfigProvider>
     </div>
