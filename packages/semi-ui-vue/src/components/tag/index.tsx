@@ -8,7 +8,7 @@ import {TagProps, TagSize, TagColor, TagType, AvatarShape, TagShape} from './int
 import { handlePrevent } from '@douyinfe/semi-foundation/utils/a11y';
 import '@douyinfe/semi-foundation/tag/tag.scss';
 import {VueJsxNode} from "../interface";
-import {vuePropsMake} from "../PropTypes";
+import { symbol, vuePropsMake } from '../PropTypes';
 import {isString} from "lodash";
 import cls from 'classnames';
 import {ComponentObjectPropsOptions} from "vue";
@@ -170,12 +170,13 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
     const stringChild = isString(children);
     const contentCls = cls(`${prefixCls}-content`, `${prefixCls}-content-${stringChild ? 'ellipsis' : 'center' }`);
 
+    const k = symbol()
     return (
       <div
         aria-label={props['aria-label'] || stringChild ? `${closable ? 'Closable ' : ''}Tag: ${children}` : ''} {...wrapProps}>
         {prefixIcon ? <div class={`${prefixCls}-prefix-icon`}>{prefixIcon}</div> : null}
         {avatarSrc ? renderAvatar() : null}
-        <div class={contentCls}>
+        <div class={contentCls} key={k}>
           {children}
         </div>
         {suffixIcon ? <div class={`${prefixCls}-suffix-icon`}>{suffixIcon}</div> : null}
