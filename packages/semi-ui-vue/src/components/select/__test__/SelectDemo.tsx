@@ -197,7 +197,7 @@ const SelectDemo = defineComponent<ExampleProps>((props, {slots}) => {
           <Option value='hotsoon'>火山</Option>
         </Select>
         <br/><br/>
-        <Select placeholder='请选择业务线' style={{ width: 120 }}>
+        <Select placeholder='请选择业务线1' style={{ width: 120 }}>
           <Option value='abc'>抖音</Option>
           <Option value='hotsoon'>火山</Option>
           <Option value='jianying' disabled>剪映</Option>

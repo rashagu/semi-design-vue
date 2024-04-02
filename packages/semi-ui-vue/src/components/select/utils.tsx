@@ -2,6 +2,7 @@ import { defineComponent, ref, h, Fragment, VNode } from 'vue';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import type { OptionProps } from './option';
 import type { OptionGroupProps } from './optionGroup';
+import { getFragmentChildren } from '../_utils';
 
 const generateOption = (child: VNode, parent: any, index: number, newKey?: string | number): OptionProps => {
   const childProps = child.props;
@@ -9,13 +10,14 @@ const generateOption = (child: VNode, parent: any, index: number, newKey?: strin
     return null;
   }
 
+
   const option = {
     value: childProps.value,
     // Drop-down menu rendering priority label value, children, value in turn downgrade
     label:
       childProps.label ||
       // @ts-ignore
-      (typeof child.children === 'object' && child.children.default ? child.children.default()[0].children : null) ||
+      (typeof child.children === 'object' && child.children.default ? child.children.default() : null) ||
       childProps.value,
     _show: true,
     _selected: false,
@@ -71,12 +73,13 @@ const getOptionsFromGroup = (selectChildren: VNode[]) => {
 
 
       // @ts-ignore
-      let children = child.children.default ? child.children.default() : [];
+      let children = getFragmentChildren(child.children);
       let originKeys = [];
       if (Array.isArray(children)) {
         // if group has children > 1
         originKeys = children.map(item => item.key);
       } else {
+        // @ts-ignore
         originKeys.push(children.key);
       }
       // children = React.Children.toArray(children);
@@ -93,9 +96,10 @@ const getOptionsFromGroup = (selectChildren: VNode[]) => {
         optionIndex++;
         return generateOption(option, restGroupProps, optionIndex, newKey as string);
       });
-      const group = {
+      const group: OptionGroupProps = {
         ...child.props,
-        children: childrenOption,
+        children: childrenOption as VNode[],
+        // @ts-ignore
         key: child.key,
       };
       optionGroups.push(group);

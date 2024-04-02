@@ -91,6 +91,8 @@ import ModalForm from "./components/form/__test__/ModalForm";
 import DescriptionsHorizontalDemo from './components/descriptions/__test__/DescriptionsHorizontalDemo';
 import Input from './components/input';
 import WithVModelDemo from './components/withVModel/__test__/WithVModelDemo';
+import SelectDemo2 from './components/select/__test__/SelectDemo2';
+import SelectDemo3 from './components/select/__test__/SelectDemo3.vue';
 export interface ExampleProps {
   name?: string
 }
@@ -164,7 +166,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<WithFormStateDemo/>*/}
         {/*<WithFieldDemo/>*/}
         {/*<WithFieldDemo2/>*/}
-        <TreeSelectDemo/>
+        {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
         {/*<TreeDemo />*/}
         <div style={{backgroundColor: 'red', width: 300, height: 300}}>
@@ -191,7 +193,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        {/*<SelectDemo/>*/}
+        <SelectDemo/>
+        {/*<SelectDemo2/>*/}
+        {/*<SelectDemo3/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}
