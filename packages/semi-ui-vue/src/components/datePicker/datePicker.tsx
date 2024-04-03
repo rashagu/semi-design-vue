@@ -178,6 +178,7 @@ const propTypes:ComponentObjectPropsOptions<DatePickerProps> = {
   presetPosition: PropTypes.string as PropType<DatePickerProps['presetPosition']>,
   dropdownMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   id: PropTypes.string as PropType<DatePickerProps['id']>,
+  onPresetClick: PropTypes.func as PropType<DatePickerProps['onClickOutSide']>,
   onClickOutSide: PropTypes.func as PropType<DatePickerProps['onClickOutSide']>,
 };
 
