@@ -19,11 +19,11 @@ import {
     h,
     isVNode, PropType,
     reactive,
-    ref,
+    ref, shallowRef,
     useSlots,
     VNode,
-    watch
-} from "vue";
+    watch,
+} from 'vue';
 import {vuePropsMake} from "../PropTypes";
 import {useBaseComponent} from "../_base/baseComponent";
 import {AutoCompleteProps} from "../autoComplete";
@@ -84,7 +84,7 @@ const Tabs = defineComponent<TabsProps>((props, {}) => {
     const contentRef = ref();
     let contentHeight: string = 'auto';
 
-    const childrenRef = ref<VNode[]>([])
+    const childrenRef = shallowRef<VNode[]>([])
 
     const state = reactive<TabsState>({
         activeKey: '',
@@ -272,8 +272,11 @@ const Tabs = defineComponent<TabsProps>((props, {}) => {
     }
 
     return () => {
-        const children = slots.default?.()
-        childrenRef.value = getFragmentChildren(slots)
+        const children = slots.default?.();
+        const children_ = getFragmentChildren(slots)
+        if(children_.length !== childrenRef.value.length){
+            childrenRef.value = children_
+        }
 
         const {
             className,
