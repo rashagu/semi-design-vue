@@ -28,6 +28,7 @@ export const vuePropsType:ComponentObjectPropsOptions<NodeListProps> = {
     searchTargetIsDeep: Boolean,
     renderTreeNode: Function as PropType<NodeListProps['renderTreeNode']>,
     onMotionEnd: Function as PropType<NodeListProps['onMotionEnd']>,
+    role: String
 }
 const NodeList = defineComponent<NodeListProps>((props, {}) => {
     const slots = useSlots()

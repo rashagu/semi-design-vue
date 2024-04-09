@@ -168,6 +168,7 @@ export interface NodeListProps {
     searchTargetIsDeep?: boolean;
     renderTreeNode: (treeNode: FlattenNode, ind?: number, style?: CSSProperties) => VueJsxNode;
     onMotionEnd: ()=>void
+    role?: string
 }
 export type TransitionNodes<T> = Array<T | Array<T>>;
 export interface NodeListState {

@@ -51,7 +51,7 @@ import ExpandedIcon from './CustomExpandIcon';
 import HeadTable, { HeadTableProps } from './HeadTable';
 import BodyTable, { BodyProps } from './Body';
 import { measureScrollbar, logger, cloneDeep, mergeComponents, mergeColumns } from './utils';
-import {
+import type {
   ColumnProps,
   TablePaginationProps,
   BodyScrollEvent,
@@ -1349,7 +1349,7 @@ function Table<RecordType extends Record<string, any>>() {
         ) : null;
       const bodyTable = (
         <BodyTable
-          {...(omit(props_, ['rowSelection', 'headWidths']) as any)}
+          {...(omit(props_, ['rowSelection', 'headWidths', 'allDisabledRowKeys', 'allDisabledRowKeysSet']) as any)}
           key="body"
           forwardedRef={bodyRef}
           columns={filteredColumns}
