@@ -36,7 +36,13 @@ import { strings, cssClasses, numbers } from '@douyinfe/semi-foundation/tooltip/
 import '@douyinfe/semi-foundation/tooltip/tooltip.scss';
 import { BaseProps, useBaseComponent } from '../_base/baseComponent';
 import { isHTMLElement } from '../_base/reactUtils';
-import { getActiveElement, getFocusableElements, stopPropagation } from '../_utils';
+import {
+  getActiveElement,
+  getFocusableElements,
+  getMultinodeToFragment,
+  isVNodeTypeNotSymbol,
+  stopPropagation,
+} from '../_utils';
 import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
 import Portal from '../_portal';
 import TriangleArrow from './TriangleArrow';
@@ -775,7 +781,8 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
     // 这里取的话，值可能会被缓存或者可能不是最新的
     // const { isInsert, triggerEventSet, visible, id } = state;
     const { wrapWhenSpecial, role, trigger } = props;
-    let children: any = slots.default ? slots.default()[0] : null;
+    let children = getMultinodeToFragment(slots)
+
     const childrenStyle = { ...get(children, 'props.style') as CSSProperties };
     const extraStyle: CSSProperties = {};
 
@@ -795,7 +802,7 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
           children = wrapSpan(children);
         }
         isWrapped = true;
-      } else if (!isVNode(children)) {
+      } else if (!isVNodeTypeNotSymbol(children)) {
         children = wrapSpan(children);
         isWrapped = true;
       }

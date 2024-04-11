@@ -268,3 +268,23 @@ export function styleNum(v: string | number) {
         return v + 'px'
     }
 }
+
+
+
+export function isVNodeTypeNotSymbol(children:VNode) {
+    if(['Symbol(v-fgt)', 'Symbol(v-cmt)', 'Symbol(v-txt)'].indexOf(children.type.toString()) > -1){
+        return false
+    }
+    return true
+}
+
+export function getMultinodeToFragment(slots: SetupContext['slots']):VNode {
+    let children = slots.default ? slots.default() : null;
+
+    if (Array.isArray(children) && children.length === 1) {
+        return children[0]
+    }
+    if (Array.isArray(children) && children.length > 1) {
+        return <>{children}</>
+    }
+}
