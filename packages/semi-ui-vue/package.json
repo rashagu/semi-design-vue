@@ -81,7 +81,7 @@
     "fast-glob": "^3.2.12",
     "typescript": "^5.3.3",
     "terser": "^5.16.4",
-    "vite": "5.2.6",
+    "vite": "5.2.8",
     "vue-tsc": "^1.8.27"
   },
   "gitHead": "a9bb1553bd45dcf99595a45df0adf0d967083f1e"

@@ -29,13 +29,13 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
   return () => {
     return (
       <div>
-        {/*<Tabs type="card" defaultActiveKey="1" onTabClose={close.bind(this)}>*/}
-        {/*  {state.tabList.map((t) => (*/}
-        {/*    <TabPane closable={t.closable as any} tab={t.tab} itemKey={t.itemKey} key={t.itemKey}>*/}
-        {/*      {t.text}*/}
-        {/*    </TabPane>*/}
-        {/*  ))}*/}
-        {/*</Tabs>*/}
+        <Tabs type="card" defaultActiveKey="1" onTabClose={close.bind(this)}>
+          {state.tabList.map((t) => (
+            <TabPane closable={t.closable as any} tab={t.tab} itemKey={t.itemKey} key={t.itemKey}>
+              {t.text}
+            </TabPane>
+          ))}
+        </Tabs>
         <Tabs type="button" keepDOM={false}>
           <TabPane tab="文档" itemKey="1">
             <div>
@@ -54,41 +54,41 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
           </TabPane>
         </Tabs>
 
-        {/*<Tabs>*/}
-        {/*  <TabPane*/}
-        {/*    tab={*/}
-        {/*      <span>*/}
-        {/*        <IconFile />*/}
-        {/*        文档*/}
-        {/*      </span>*/}
-        {/*    }*/}
-        {/*    itemKey="1"*/}
-        {/*  >*/}
-        {/*    <TestComponent/>*/}
-        {/*  </TabPane>*/}
-        {/*  <TabPane*/}
-        {/*    tab={*/}
-        {/*      <span>*/}
-        {/*        <IconGlobe />*/}
-        {/*        快速起步*/}
-        {/*      </span>*/}
-        {/*    }*/}
-        {/*    itemKey="2"*/}
-        {/*  >*/}
-        {/*    快速起步*/}
-        {/*  </TabPane>*/}
-        {/*  <TabPane*/}
-        {/*    tab={*/}
-        {/*      <span>*/}
-        {/*        <IconHelpCircle />*/}
-        {/*        帮助*/}
-        {/*      </span>*/}
-        {/*    }*/}
-        {/*    itemKey="3"*/}
-        {/*  >*/}
-        {/*    帮助*/}
-        {/*  </TabPane>*/}
-        {/*</Tabs>*/}
+        <Tabs>
+          <TabPane
+            tab={
+              <span>
+                <IconFile />
+                文档
+              </span>
+            }
+            itemKey="1"
+          >
+            <TestComponent/>
+          </TabPane>
+          <TabPane
+            tab={
+              <span>
+                <IconGlobe />
+                快速起步
+              </span>
+            }
+            itemKey="2"
+          >
+            快速起步
+          </TabPane>
+          <TabPane
+            tab={
+              <span>
+                <IconHelpCircle />
+                帮助
+              </span>
+            }
+            itemKey="3"
+          >
+            帮助
+          </TabPane>
+        </Tabs>
       </div>
     );
   };
