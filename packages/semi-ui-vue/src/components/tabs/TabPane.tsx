@@ -89,6 +89,7 @@ const TabPane = defineComponent<TabPaneProps>((props, {}) => {
           <div
             role="tabpanel"
             id={`semiTabPanel${itemKey}`}
+            key={`semiTabPanel${itemKey}`}
             aria-labelledby={`semiTab${itemKey}`}
             class={classNames}
             style={style}
