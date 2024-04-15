@@ -101,7 +101,9 @@ const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
                     const cardInstance = cardRef && cardRef.get(key);
                     // eslint-disable-next-line react/no-find-dom-node
                     const cardDom = cardInstance;
-                    if (cardDom && !cardDom.contains(e.target as any)) {
+                    const target = e.target as Element;
+                    const path = e.composedPath && e.composedPath() || [target];
+                    if (cardDom && !cardDom.contains(e.target as any) && !path.includes(cardDom)) {
                         cb();
                     }
                 };

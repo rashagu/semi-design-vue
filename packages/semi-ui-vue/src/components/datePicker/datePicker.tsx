@@ -274,15 +274,15 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
         clickOutSideHandler = e => {
           const triggerEl = triggerElRef.value;
           const panelEl = panelRef.value;
-          const isInTrigger = triggerEl && triggerEl.contains(e.target as Node);
-          const isInPanel = panelEl && panelEl.contains(e.target as Node);
-          const clickOutSide = !isInTrigger && !isInPanel && _mounted;
-          if (adapter.needConfirm()) {
-            clickOutSide && props.onClickOutSide();
-            return;
-          } else {
-            if (clickOutSide) {
-              props.onClickOutSide();
+          const target = e.target as Element;
+          const path = e.composedPath && e.composedPath() || [target];
+          if (
+            !(triggerEl && triggerEl.contains(target)) &&
+            !(panelEl && panelEl.contains(target)) &&
+            !(path.includes(triggerEl) || path.includes(panelEl))
+          ) {
+            props.onClickOutSide();
+            if (!adapter.needConfirm()) {
               foundation.closePanel(e);
             }
           }

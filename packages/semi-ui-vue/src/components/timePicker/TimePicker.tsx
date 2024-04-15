@@ -171,6 +171,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
   })
   const timePickerRef = ref()
   const savePanelRef = ref()
+  let useCustomTrigger: boolean = typeof props.triggerRender === 'function';
 
   let clickOutSideHandler: (e: MouseEvent) => void;
   const {
@@ -193,17 +194,15 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
         clickOutSideHandler = e => {
           // const panel = this.savePanelRef && this.savePanelRef.current;
           const panel = savePanelRef.value;
-          const isInPanel = e.target && panel && panel.contains(e.target as Node);
-          // const isInTimepicker =
-          //   timePickerRef &&
-          //   timePickerRef.current &&
-          //   timePickerRef.current.contains(e.target as Node);
-          const isInTimepicker = timePickerRef.value.contains(e.target as Node);
+          const trigger = timePickerRef.value;
+          const target = e.target as Element;
+          const path = e.composedPath && e.composedPath() || [target];
 
-
-          if (!isInTimepicker && !isInPanel) {
-            const clickedOutside = true;
-            foundation.handlePanelClose(clickedOutside, e);
+          if (!(panel && panel.contains(target)) &&
+            !(trigger && trigger.contains(target)) &&
+            !(path.includes(trigger) || path.includes(panel))
+          ) {
+            foundation.handlePanelClose(true, e);
           }
         };
         document.addEventListener('mousedown', clickOutSideHandler);
@@ -445,7 +444,6 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
     } = props;
     const format = foundation.getDefaultFormatIfNeed();
     const position = foundation.getPosition();
-    const useCustomTrigger = typeof triggerRender === 'function';
 
     const {open, inputValue, invalid, value} = state;
     const popupClassName = getPopupClassName();

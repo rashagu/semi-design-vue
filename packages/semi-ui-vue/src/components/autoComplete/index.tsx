@@ -219,11 +219,13 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
                         // eslint-disable-next-line
                         const optionsDom = optionInstance;
                         const target = e.target as Element;
+                        const path = e.composedPath && e.composedPath() || [target];
                         if (
                           optionsDom &&
                           (!optionsDom.contains(target) || !optionsDom.contains(target.parentNode)) &&
                           triggerDom &&
-                          !triggerDom.contains(target)
+                          !triggerDom.contains(target) &&
+                          !(path.includes(triggerDom) || path.includes(optionsDom))
                         ) {
                             cb(e);
                         }

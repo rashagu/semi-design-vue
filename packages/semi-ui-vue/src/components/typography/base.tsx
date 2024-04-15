@@ -1,36 +1,40 @@
 import {
-  defineComponent,
-  ref,
-  h,
-  Fragment,
-  type VNode,
+  cloneVNode,
+  type ComponentObjectPropsOptions,
   type CSSProperties,
-  reactive,
+  defineComponent,
+  Fragment,
+  h,
+  nextTick,
   onMounted,
-  watchEffect,
-  onUnmounted, cloneVNode, watch, useSlots, type ComponentObjectPropsOptions, type PropType, nextTick
-} from 'vue'
+  onUnmounted,
+  type PropType,
+  reactive,
+  ref,
+  useSlots,
+  type VNode,
+  watch,
+} from 'vue';
 import cls from 'classnames';
-import {cssClasses, strings} from '@douyinfe/semi-foundation/typography/constants';
+import { cssClasses } from '@douyinfe/semi-foundation/typography/constants';
 import Typography from './typography';
 import Copyable from './copyable';
-import {IconSize as Size} from '../icons';
-import { isUndefined, omit, merge, isString, isNull, isFunction } from 'lodash';
+import { IconSize as Size } from '../icons';
+import { isFunction, isNull, isString, isUndefined, merge, omit } from 'lodash';
 import Tooltip from '../tooltip';
 import Popover from '../popover';
 import getRenderText from './util';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 import LocaleConsumer from '../locale/localeConsumer';
-import {Locale} from '../locale/interface';
-import type {Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseType} from './interface';
-import type {CopyableConfig, LinkType} from './title';
-import type {BaseProps} from '../_base/baseComponent';
+import { Locale } from '../locale/interface';
+import type { Ellipsis, EllipsisPos, ShowTooltip, TypographyBaseSize, TypographyBaseType } from './interface';
+import type { CopyableConfig, LinkType } from './title';
+import type { BaseProps } from '../_base/baseComponent';
 import { isSemiIcon, runAfterTicks } from '../_utils';
 import ResizeObserver, { ObserverProperty, ResizeEntry } from '../resizeObserver';
-import  * as PropTypes from "../PropTypes"
-import {vuePropsMake} from "../PropTypes";
-
+import * as PropTypes from '../PropTypes';
+import { vuePropsMake } from '../PropTypes';
 
 
 export interface BaseTypographyProps extends BaseProps {
@@ -289,10 +293,34 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     }
     const updateOverflow =
       rows <= 1 ?
-        wrapperRef.value.scrollWidth > wrapperRef.value.clientWidth :
+        compareSingleRow() :
         wrapperRef.value.scrollHeight > wrapperRef.value.offsetHeight;
     return updateOverflow;
   };
+
+  /**
+   * 通过将 content 给到 Range 对象，借助 Range 的 getBoundingClientRect 拿到 content 的准确 width
+   * 不受 css ellipsis 与否的影响
+   * By giving the content to the Range object, get the exact width of the content with the help of Range's getBoundingClientRect
+   * Not affected by css ellipsis or not
+   * https://github.com/DouyinFE/semi-design/issues/1731
+   */
+  function compareSingleRow() {
+    if (!(document && document.createRange)) {
+      return false;
+    }
+    const containerNode = wrapperRef.value;
+    const containerWidth = containerNode.getBoundingClientRect().width;
+    const childNodes = Array.from(containerNode.childNodes) as Node[];
+    const range = document.createRange();
+    const contentWidth = childNodes.reduce((acc: number, node: Node) => {
+      range.selectNodeContents(node as Node);
+      return acc + (range.getBoundingClientRect().width ?? 0);
+    }, 0);
+    range.detach();
+    return contentWidth > containerWidth;
+  }
+
 
   const showTooltip = () => {
     const {isOverflowed, isTruncated, expanded} = state;
@@ -394,12 +422,16 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
     const extraNode = { expand: expandRef.value, copy: copyRef && copyRef.value };
 
+    // Perform type conversion on children to prevent component crash due to non-string type of children
+    // https://github.com/DouyinFE/semi-design/issues/2167
+    const realChildren = Array.isArray(children) ? children.join('') : String(children);
+
 
     const content = getRenderText(
       wrapperRef.value,
       rows,
       // Perform type conversion on children to prevent component crash due to non-string type of children
-      String(children),
+      realChildren,
       extraNode,
       ELLIPSIS_STR,
       suffix,
@@ -409,7 +441,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     return new Promise<void>(resolve=>{
       state.isOverflowed = false
       state.ellipsisContent = content as unknown as VNode
-      state.isTruncated = children !== content
+      state.isTruncated = realChildren !== content
       nextTick(()=>{
         resolve()
       })

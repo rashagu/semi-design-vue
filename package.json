@@ -40,8 +40,8 @@
     }
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.55.1",
-    "@douyinfe/semi-theme-default": "2.55.1",
+    "@douyinfe/semi-foundation": "2.56.0",
+    "@douyinfe/semi-theme-default": "2.56.0",
     "@vue/repl": "^4.1.1",
     "vue": "^3.4.21",
     "lodash": "^4.17.21"
@@ -70,7 +70,7 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.16.7",
     "@changesets/cli": "^2.27.1",
-    "@douyinfe/semi-theme-default": "2.55.1",
+    "@douyinfe/semi-theme-default": "2.56.0",
     "@svgr/babel-plugin-add-jsx-attribute": "5.4.0",
     "@svgr/babel-plugin-remove-jsx-attribute": "5.4.0",
     "@svgr/babel-plugin-remove-jsx-empty-expression": "5.0.1",
@@ -104,7 +104,7 @@
     "svgo": "2.7.0",
     "ts-node": "^10.5.0",
     "tslib": "^2.4.1",
-    "vitest": "^1.3.1",
+    "vitest": "^1.5.0",
     "typescript": "^5.3.3",
     "vite": "5.2.6",
     "vitepress": "^1.0.1",

@@ -473,12 +473,13 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
           // @ts-ignore TODO 比较重要的不同点 关于获取组建dom的 使用expose 得到的结果就不一样了
           const optionInstance = optionsRef.value && optionsRef.value.getRef?.().vnode.el;
           const triggerDom = (triggerRef.value) as Element;
-          // eslint-disable-next-line react/no-find-dom-node
           const optionsDom = optionInstance;
-          // let isInPanel = optionsDom && optionsDom.contains(e.target);
-          // let isInTrigger = triggerDom && triggerDom.contains(e.target);
-          if (optionsDom && !optionsDom.contains(e.target as Node) &&
-            triggerDom && !triggerDom.contains(e.target as Node)) {
+          const target = e.target as Element;
+          const path = (e as any).composedPath && (e as any).composedPath() || [target];
+          if (!(optionsDom && optionsDom.contains(target)) &&
+            !(triggerDom && triggerDom.contains(target)) &&
+            !(path.includes(triggerDom) || path.includes(optionsDom))
+          ) {
             cb(e);
           }
         };

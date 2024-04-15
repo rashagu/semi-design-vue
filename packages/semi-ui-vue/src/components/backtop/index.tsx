@@ -1,6 +1,7 @@
 
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
+import { throttle } from 'lodash';
 import { cssClasses } from '@douyinfe/semi-foundation/backtop/constants';
 import BackTopFoundation, { BackTopAdapter } from '@douyinfe/semi-foundation/backtop/foundation';
 
@@ -60,6 +61,7 @@ const BackTop = defineComponent<BackTopProps>((props, {}) => {
     const slots = useSlots()
 
 
+    let handler: (e: MouseEvent) => void;
     const state = reactive<BackTopState>({
         visible: false
     })
@@ -91,6 +93,8 @@ const BackTop = defineComponent<BackTopProps>((props, {}) => {
 
     onMounted(()=>{
         foundation.init();
+        handler = throttle(handleClick, props.duration ?? defaultProps.duration);
+
     })
 
     onBeforeUnmount(()=>{
@@ -124,7 +128,7 @@ const BackTop = defineComponent<BackTopProps>((props, {}) => {
             {...others}
             class={preCls}
             style={style}
-            onClick={e => handleClick(e)}
+            onClick={e => handler(e)}
             x-semi-prop="children"
           >
               {backtopBtn}

@@ -256,7 +256,8 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
         clickOutsideHandler = (e: Event) => {
           const tagInputDom = tagInputRef.value;
           const target = e.target as Element;
-          if (tagInputDom && !tagInputDom.contains(target)) {
+          const path = e.composedPath && e.composedPath() || [target];
+          if (tagInputDom && !tagInputDom.contains(target) && !path.includes(tagInputDom)) {
             cb(e);
           }
         };

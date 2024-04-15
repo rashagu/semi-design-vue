@@ -318,11 +318,13 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
           // 当组件内部使用了expose时，使用ref得到的内容只有expose的那部分
           const optionsDom = optionInstance?.getRef?.().vnode.el;
           const target = e.target as Element;
+          const path = e.composedPath && e.composedPath() || [target];
           if (
             optionsDom &&
             (!optionsDom.contains(target) || !optionsDom.contains(target.parentNode)) &&
             triggerDom &&
-            !triggerDom.contains(target)
+            !triggerDom.contains(target) &&
+            !(path.includes(triggerDom) || path.includes(optionsDom))
           ) {
             cb(e);
           }
@@ -461,12 +463,16 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
         formatItem.length > 0 && (formatValuePath.push(formatItem));
       });
       // formatKeys is used to save key of value
-      const formatKeys = formatValuePath.map(v => getKeyByValuePath(v));
+      const formatKeys = formatValuePath.reduce((acc, cur) => {
+        const key = getKeyByValuePath(cur);
+        keyEntities[key] && acc.push(key);
+        return acc;
+      }, []) as string[];
       return formatKeys;
     };
-    const needUpdateTreeData = needUpdate('treeData') || needUpdateData();
-    const needUpdateValue = needUpdate('value') || (isEmpty(prevProps) && defaultValue);
     if (multiple) {
+      const needUpdateTreeData = needUpdate('treeData') || needUpdateData();
+      const needUpdateValue = needUpdate('value') || (isEmpty(prevProps) && defaultValue);
       // when value and treedata need updated
       if (needUpdateTreeData || needUpdateValue) {
         // update state.keyEntities
@@ -527,9 +533,12 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
     foundation.destroy();
   });
 
-  watch([() => props.treeData, () => props.value], (value, [prevPropsTreeData, prevPropsValue]) => {
+  watch([() => props.treeData, () => props.value, ()=>props.multiple], (value, [prevPropsTreeData, prevPropsValue]) => {
+    if (props.multiple) {
+      return;
+    }
     let isOptionsChanged = false;
-    if (!isEqual(prevPropsTreeData, props.treeData) && !props.multiple) {
+    if (!isEqual(prevPropsTreeData, props.treeData)) {
       isOptionsChanged = true;
       foundation.collectOptions();
     }
@@ -560,10 +569,10 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
   const renderTagItem = (nodeKey: string, idx: number) => {
     const { keyEntities, disabledKeys } = state;
     const { size, disabled, displayProp, displayRender, disableStrictly } = props;
-    const isDsiabled = disabled || keyEntities[nodeKey].data.disabled || (disableStrictly && disabledKeys.has(nodeKey));
     if (keyEntities[nodeKey]) {
+      const isDisabled = disabled || keyEntities[nodeKey].data.disabled || (disableStrictly && disabledKeys.has(nodeKey));
       const tagCls = cls(`${prefixcls}-selection-tag`, {
-        [`${prefixcls}-selection-tag-disabled`]: isDsiabled,
+        [`${prefixcls}-selection-tag-disabled`]: isDisabled,
       });
       // custom render tags
       if (isFunction(displayRender)) {

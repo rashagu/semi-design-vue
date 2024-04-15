@@ -383,9 +383,14 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
           }
           let el = triggerEl.value;
           let popupEl = containerEl.value;
+          const target = e.target as Element;
+          const path = (e as any).composedPath && (e as any).composedPath() || [target];
+          const isClickTriggerToHide = props.clickTriggerToHide ? el && (el as any).contains(target) || path.includes(el) : false;
           if (
-            (el && !(el as any).contains(e.target) && popupEl && !(popupEl as any).contains(e.target)) ||
-            (props.clickTriggerToHide && el && (el as any).contains(e.target))
+            el && !(el as any).contains(target) &&
+            popupEl && !(popupEl as any).contains(target) &&
+            !(path.includes(popupEl) || path.includes(el)) ||
+            isClickTriggerToHide
           ) {
             props.onClickOutSide(e);
             cb();

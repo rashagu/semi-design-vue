@@ -114,7 +114,7 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
     }
     const { onNodeCheck } = context.value;
     e.stopPropagation();
-    e.stopImmediatePropagation();
+    e.stopImmediatePropagation?.();
     onNodeCheck(e, props);
   };
 
