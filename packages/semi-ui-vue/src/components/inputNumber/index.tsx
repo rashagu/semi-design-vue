@@ -26,6 +26,7 @@ import {
   watch
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
+import {propTypes as propTypesInput} from "../input/index"
 
 export interface InputNumberProps extends InputProps {
   autofocus?: boolean;
@@ -68,6 +69,7 @@ export interface InputNumberState extends BaseInputNumberState {
 
 
 const propTypes:ComponentObjectPropsOptions<InputNumberProps> = {
+  ...propTypesInput,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
   'aria-invalid': PropTypes.bool,

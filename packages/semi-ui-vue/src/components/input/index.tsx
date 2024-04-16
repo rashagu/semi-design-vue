@@ -104,7 +104,7 @@ export interface InputState {
   maxlength: number;
 }
 
-const propTypes:ComponentObjectPropsOptions<InputProps> = {
+export const propTypes:ComponentObjectPropsOptions<InputProps> = {
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
   'aria-invalid': PropTypes.bool,
