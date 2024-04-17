@@ -32,7 +32,7 @@ import {IconMore} from '@kousum/semi-icons-vue';
 
 import {AriaAttributes} from "../AriaAttributes";
 import {VueJsxNode} from "../interface";
-import {getVNodeChildren} from "../_utils";
+import { getFragmentChildren, getVNodeChildren } from '../_utils';
 
 const clsPrefix = cssClasses.PREFIX;
 
@@ -230,9 +230,9 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
         } = props;
         const { isCollapsed } = state;
         const hasRoutes = routes && routes.length > 0;
-        const items = getVNodeChildren(((hasRoutes ?
+        const items = hasRoutes ?
           foundation.genRoutes(routes) :
-          children) as VNode[]));
+          (getFragmentChildren(slots) || []);
 
         let template;
 

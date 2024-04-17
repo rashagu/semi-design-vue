@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment} from 'vue'
+import { defineComponent, ref, h, Fragment, onMounted } from 'vue';
 import Breadcrumb, {BreadcrumbItem} from "../index";
 import {IconArticle, IconHome} from "@kousum/semi-icons-vue";
 
@@ -12,6 +12,12 @@ export const vuePropsType = {
 const BreadcrumbDemo = defineComponent<BreadcrumbDemoProps>((props, {slots}) => {
 
 
+  const routes = ref([])
+  onMounted(()=>{
+    setTimeout(()=>{
+      routes.value = ['sd','sdsd']
+    }, 3000)
+  })
   return () => (
     <div>
       <Breadcrumb separator={'<'}>
@@ -44,6 +50,9 @@ const BreadcrumbDemo = defineComponent<BreadcrumbDemoProps>((props, {slots}) => 
             },
           ]
         }
+      />
+      <Breadcrumb
+        routes={routes.value}
       />
     </div>
   )
