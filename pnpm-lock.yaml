@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       '@douyinfe/semi-theme-default':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       '@vue/repl':
         specifier: ^4.1.1
         version: 4.1.1
@@ -199,17 +199,17 @@ importers:
   packages/semi-animation-vue:
     dependencies:
       '@douyinfe/semi-animation':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       '@douyinfe/semi-animation-styled':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       '@douyinfe/semi-foundation':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       '@douyinfe/semi-theme-default':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -293,11 +293,11 @@ importers:
   packages/semi-icons-lab-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       '@douyinfe/semi-theme-default':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -378,11 +378,11 @@ importers:
   packages/semi-icons-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       '@douyinfe/semi-theme-default':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -463,11 +463,11 @@ importers:
   packages/semi-illustrations-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       '@douyinfe/semi-theme-default':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -563,14 +563,14 @@ importers:
         specifier: 0.0.5
         version: 0.0.5(vue@3.4.21)
       '@douyinfe/semi-animation':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       '@douyinfe/semi-foundation':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       '@douyinfe/semi-theme-default':
-        specifier: 2.56.0
-        version: 2.56.0
+        specifier: 2.56.1
+        version: 2.56.1
       '@kousum/semi-animation-vue':
         specifier: ^0.9.1
         version: link:../semi-animation-vue
@@ -5805,20 +5805,20 @@ packages:
       - '@algolia/client-search'
     dev: true
 
-  /@douyinfe/semi-animation-styled@2.56.0:
-    resolution: {integrity: sha512-DDrepG2wSU1IQf4eBYQdDeOfG6lM4tw/ZvUu9tApp9lDXq46F7u3EZY90HrKV/hdQ/0KMjtETi07EEikMCjx9w==}
+  /@douyinfe/semi-animation-styled@2.56.1:
+    resolution: {integrity: sha512-BXaSuJMiQibz827Spkt+KFk8lMmPyFmC2DYACaJqwgaF5bN4ckQzYK8zTAScDWEiuMUiFZ/ECtX8kVaE7wu3eg==}
     dev: false
 
-  /@douyinfe/semi-animation@2.56.0:
-    resolution: {integrity: sha512-k4aEfHV3sxIPY/nU9l7SXpv2nOZj86htLapw1DPuQ+mYxvKIuSE8+OPIAASttZN1atL6Lq/P1V5uRCVgp2u5Ww==}
+  /@douyinfe/semi-animation@2.56.1:
+    resolution: {integrity: sha512-ilfnLAupV8kmo2YpE2x5L8TfQWVVjlLzE/SJyjqTmqTJXQ91C+O6NPM7apd+q/eY9h6mtj0BpvSrVDzGgjg/AA==}
     dependencies:
       bezier-easing: 2.1.0
     dev: false
 
-  /@douyinfe/semi-foundation@2.56.0:
-    resolution: {integrity: sha512-Fba8yorqWD1ylNasMT+KDfo24JhTWo5jaRX4SMsobTQ5WaWXfEpyzW27gkFA/ccol9VUwY7r8wg8ktb3EHAiBQ==}
+  /@douyinfe/semi-foundation@2.56.1:
+    resolution: {integrity: sha512-lzFV7OQZL6L0qAF4/uDpFNJlU/0LqJYfAVil/KzBAOSAw8U+EI3WfcWjVreWWhqxbGsE/EKlXixJKuXnBVCk3g==}
     dependencies:
-      '@douyinfe/semi-animation': 2.56.0
+      '@douyinfe/semi-animation': 2.56.1
       async-validator: 3.5.2
       classnames: 2.3.2
       date-fns: 2.30.0
@@ -5829,8 +5829,8 @@ packages:
       scroll-into-view-if-needed: 2.2.29
     dev: false
 
-  /@douyinfe/semi-theme-default@2.56.0:
-    resolution: {integrity: sha512-InVZG6h/rwH7NGk9kY9XJgBZGmW27VfqUjlU2WCOUrDYAWTePqKmxsMHyKbe7VX0+SCTAtVj3cFeCaon/9X2IQ==}
+  /@douyinfe/semi-theme-default@2.56.1:
+    resolution: {integrity: sha512-VoPPycmGWCztLF//C4PShVq1ZOmlEqLmOEyOliLelgLH8fRiQkMtME52BvPE2qR023oFeRcoLx/rFDK8V5tiEA==}
     dependencies:
       glob: 7.2.3
     dev: false
@@ -6558,7 +6558,7 @@ packages:
     resolution: {integrity: sha512-UTYAUj/wviwdsMfzoSJspJxbkH5o1snzwX0//0ENX1u/55kkZZkcTZP6u9bwKGkv+dkk9at4m1Cpt0uY80kcpQ==}
     dependencies:
       '@jridgewell/gen-mapping': 0.3.2
-      '@jridgewell/trace-mapping': 0.3.18
+      '@jridgewell/trace-mapping': 0.3.25
     dev: true
 
   /@jridgewell/sourcemap-codec@1.4.14:
@@ -16739,7 +16739,7 @@ packages:
       uglify-js:
         optional: true
     dependencies:
-      '@jridgewell/trace-mapping': 0.3.18
+      '@jridgewell/trace-mapping': 0.3.25
       esbuild: 0.18.20
       jest-worker: 27.5.1
       schema-utils: 3.3.0
