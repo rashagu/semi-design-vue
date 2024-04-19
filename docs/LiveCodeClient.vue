@@ -26,7 +26,7 @@ const {
   // default is the CDN link from jsdelivr.com with version matching Vue's version
   // from peerDependency
   // runtimeDev: import.meta.env.BASE_URL + 'vue.runtime.esm-browser.js',
-  // runtimeProd: import.meta.env.BASE_URL + 'vue.runtime.esm-browser.prod.js',
+  runtimeProd: import.meta.env.BASE_URL + 'runtime-dom.esm-browser.prod.js',
   // serverRenderer: import.meta.env.BASE_URL + 'server-renderer.esm-browser.js',
 })
 builtinImportMap.value.imports = {

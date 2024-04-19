@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@vue/repl@4.1.1':
+    hash: 46xa5b3wd6uhso7mep6nnu6f3a
+    path: patches/@vue__repl@4.1.1.patch
+
 importers:
 
   .:
@@ -15,8 +20,8 @@ importers:
         specifier: 2.56.1
         version: 2.56.1
       '@vue/repl':
-        specifier: ^4.1.1
-        version: 4.1.1
+        specifier: 4.1.1
+        version: 4.1.1(patch_hash=46xa5b3wd6uhso7mep6nnu6f3a)
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -8635,9 +8640,10 @@ packages:
     dependencies:
       '@vue/shared': 3.4.21
 
-  /@vue/repl@4.1.1:
+  /@vue/repl@4.1.1(patch_hash=46xa5b3wd6uhso7mep6nnu6f3a):
     resolution: {integrity: sha512-gkbnU+rM01/ILdnDJbsWS8+PW6qMAzprBo/U2+7eVci0kx6VAR26fL/qrcEPwEYa6q0vzzptZ4il0SaUGGqZKw==}
     dev: false
+    patched: true
 
   /@vue/runtime-core@3.4.19:
     resolution: {integrity: sha512-/Z3tFwOrerJB/oyutmJGoYbuoadphDcJAd5jOuJE86THNZji9pYjZroQ2NFsZkTxOq0GJbb+s2kxTYToDiyZzw==}

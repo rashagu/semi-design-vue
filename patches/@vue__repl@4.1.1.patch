@@ -1,0 +1,271 @@
+diff --git a/dist/vue-repl.js b/dist/vue-repl.js
+index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c92ffa34d 100644
+--- a/dist/vue-repl.js
++++ b/dist/vue-repl.js
+@@ -140,7 +140,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+ 
+ const Message = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-b80ebbc9"]]);
+ 
+-const srcdoc = "<!doctype html>\n<html>\n  <head>\n    <style>\n      html.dark {\n        color-scheme: dark;\n      }\n      body {\n        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,\n          Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\n      }\n    </style>\n    <!-- PREVIEW-OPTIONS-HEAD-HTML -->\n    <script>\n      ;(() => {\n        let scriptEls = []\n\n        window.process = { env: {} }\n        window.__modules__ = {}\n\n        window.__export__ = (mod, key, get) => {\n          Object.defineProperty(mod, key, {\n            enumerable: true,\n            configurable: true,\n            get,\n          })\n        }\n\n        window.__dynamic_import__ = (key) => {\n          return Promise.resolve(window.__modules__[key])\n        }\n\n        async function handle_message(ev) {\n          let { action, cmd_id } = ev.data\n          const send_message = (payload) =>\n            parent.postMessage({ ...payload }, ev.origin)\n          const send_reply = (payload) => send_message({ ...payload, cmd_id })\n          const send_ok = () => send_reply({ action: 'cmd_ok' })\n          const send_error = (message, stack) =>\n            send_reply({ action: 'cmd_error', message, stack })\n\n          if (action === 'eval') {\n            try {\n              if (scriptEls.length) {\n                scriptEls.forEach((el) => {\n                  document.head.removeChild(el)\n                })\n                scriptEls.length = 0\n              }\n\n              let { script: scripts } = ev.data.args\n              if (typeof scripts === 'string') scripts = [scripts]\n\n              for (const script of scripts) {\n                const scriptEl = document.createElement('script')\n                scriptEl.setAttribute('type', 'module')\n                // send ok in the module script to ensure sequential evaluation\n                // of multiple proxy.eval() calls\n                const done = new Promise((resolve) => {\n                  window.__next__ = resolve\n                })\n                scriptEl.innerHTML = script + `\\nwindow.__next__()`\n                document.head.appendChild(scriptEl)\n                scriptEl.onerror = (err) => send_error(err.message, err.stack)\n                scriptEls.push(scriptEl)\n                await done\n              }\n              send_ok()\n            } catch (e) {\n              send_error(e.message, e.stack)\n            }\n          }\n\n          if (action === 'catch_clicks') {\n            try {\n              const top_origin = ev.origin\n              document.body.addEventListener('click', (event) => {\n                if (event.which !== 1) return\n                if (event.metaKey || event.ctrlKey || event.shiftKey) return\n                if (event.defaultPrevented) return\n\n                // ensure target is a link\n                let el = event.target\n                while (el && el.nodeName !== 'A') el = el.parentNode\n                if (!el || el.nodeName !== 'A') return\n\n                if (\n                  el.hasAttribute('download') ||\n                  el.getAttribute('rel') === 'external' ||\n                  el.target ||\n                  el.href.startsWith('javascript:') ||\n                  !el.href\n                )\n                  return\n\n                event.preventDefault()\n\n                if (el.href.startsWith(top_origin)) {\n                  const url = new URL(el.href)\n                  if (url.hash[0] === '#') {\n                    window.location.hash = url.hash\n                    return\n                  }\n                }\n\n                window.open(el.href, '_blank')\n              })\n              send_ok()\n            } catch (e) {\n              send_error(e.message, e.stack)\n            }\n          }\n        }\n\n        window.addEventListener('message', handle_message, false)\n\n        window.onerror = function (msg, url, lineNo, columnNo, error) {\n          // ignore errors from import map polyfill - these are necessary for\n          // it to detect browser support\n          if (msg.includes('module specifier “vue”')) {\n            // firefox only error, ignore\n            return false\n          }\n          if (msg.includes(\"Module specifier, 'vue\")) {\n            // Safari only\n            return false\n          }\n          try {\n            parent.postMessage({ action: 'error', value: error }, '*')\n          } catch (e) {\n            parent.postMessage({ action: 'error', value: msg }, '*')\n          }\n        }\n\n        window.addEventListener('unhandledrejection', (event) => {\n          if (\n            event.reason.message &&\n            event.reason.message.includes('Cross-origin')\n          ) {\n            event.preventDefault()\n            return\n          }\n          try {\n            parent.postMessage(\n              { action: 'unhandledrejection', value: event.reason },\n              '*',\n            )\n          } catch (e) {\n            parent.postMessage(\n              { action: 'unhandledrejection', value: event.reason.message },\n              '*',\n            )\n          }\n        })\n\n        let previous = { level: null, args: null }\n\n        ;['clear', 'log', 'info', 'dir', 'warn', 'error', 'table'].forEach(\n          (level) => {\n            const original = console[level]\n            console[level] = (...args) => {\n              const msg = args[0]\n              if (typeof msg === 'string') {\n                if (\n                  msg.includes('You are running a development build of Vue') ||\n                  msg.includes('You are running the esm-bundler build of Vue')\n                ) {\n                  return\n                }\n              }\n\n              original(...args)\n\n              const stringifiedArgs = stringify(args)\n              if (\n                previous.level === level &&\n                previous.args &&\n                previous.args === stringifiedArgs\n              ) {\n                parent.postMessage(\n                  { action: 'console', level, duplicate: true },\n                  '*',\n                )\n              } else {\n                previous = { level, args: stringifiedArgs }\n\n                try {\n                  parent.postMessage({ action: 'console', level, args }, '*')\n                } catch (err) {\n                  parent.postMessage(\n                    { action: 'console', level, args: args.map(toString) },\n                    '*',\n                  )\n                }\n              }\n            }\n          },\n        )\n        ;[\n          { method: 'group', action: 'console_group' },\n          { method: 'groupEnd', action: 'console_group_end' },\n          { method: 'groupCollapsed', action: 'console_group_collapsed' },\n        ].forEach((group_action) => {\n          const original = console[group_action.method]\n          console[group_action.method] = (label) => {\n            parent.postMessage({ action: group_action.action, label }, '*')\n\n            original(label)\n          }\n        })\n\n        const timers = new Map()\n        const original_time = console.time\n        const original_timelog = console.timeLog\n        const original_timeend = console.timeEnd\n\n        console.time = (label = 'default') => {\n          original_time(label)\n          timers.set(label, performance.now())\n        }\n        console.timeLog = (label = 'default') => {\n          original_timelog(label)\n          const now = performance.now()\n          if (timers.has(label)) {\n            parent.postMessage(\n              {\n                action: 'console',\n                level: 'system-log',\n                args: [`${label}: ${now - timers.get(label)}ms`],\n              },\n              '*',\n            )\n          } else {\n            parent.postMessage(\n              {\n                action: 'console',\n                level: 'system-warn',\n                args: [`Timer '${label}' does not exist`],\n              },\n              '*',\n            )\n          }\n        }\n        console.timeEnd = (label = 'default') => {\n          original_timeend(label)\n          const now = performance.now()\n          if (timers.has(label)) {\n            parent.postMessage(\n              {\n                action: 'console',\n                level: 'system-log',\n                args: [`${label}: ${now - timers.get(label)}ms`],\n              },\n              '*',\n            )\n          } else {\n            parent.postMessage(\n              {\n                action: 'console',\n                level: 'system-warn',\n                args: [`Timer '${label}' does not exist`],\n              },\n              '*',\n            )\n          }\n          timers.delete(label)\n        }\n\n        const original_assert = console.assert\n        console.assert = (condition, ...args) => {\n          if (condition) {\n            const stack = new Error().stack\n            parent.postMessage(\n              { action: 'console', level: 'assert', args, stack },\n              '*',\n            )\n          }\n          original_assert(condition, ...args)\n        }\n\n        const counter = new Map()\n        const original_count = console.count\n        const original_countreset = console.countReset\n\n        console.count = (label = 'default') => {\n          counter.set(label, (counter.get(label) || 0) + 1)\n          parent.postMessage(\n            {\n              action: 'console',\n              level: 'system-log',\n              args: `${label}: ${counter.get(label)}`,\n            },\n            '*',\n          )\n          original_count(label)\n        }\n\n        console.countReset = (label = 'default') => {\n          if (counter.has(label)) {\n            counter.set(label, 0)\n          } else {\n            parent.postMessage(\n              {\n                action: 'console',\n                level: 'system-warn',\n                args: `Count for '${label}' does not exist`,\n              },\n              '*',\n            )\n          }\n          original_countreset(label)\n        }\n\n        const original_trace = console.trace\n\n        console.trace = (...args) => {\n          const stack = new Error().stack\n          parent.postMessage(\n            { action: 'console', level: 'trace', args, stack },\n            '*',\n          )\n          original_trace(...args)\n        }\n\n        function toString(value) {\n          if (value instanceof Error) {\n            return value.message\n          }\n          for (const fn of [\n            String,\n            (v) => Object.prototype.toString.call(v),\n            (v) => typeof v,\n          ]) {\n            try {\n              return fn(value)\n            } catch (err) {}\n          }\n        }\n\n        function isComponentProxy(value) {\n          return (\n            value &&\n            typeof value === 'object' &&\n            value.__v_skip === true &&\n            typeof value.$nextTick === 'function' &&\n            value.$ &&\n            value._\n          )\n        }\n\n        function stringify(args) {\n          try {\n            return JSON.stringify(args, (key, value) => {\n              return isComponentProxy(value) ? '{component proxy}' : value\n            })\n          } catch (error) {\n            return null\n          }\n        }\n      })()\n    </script>\n\n    <!-- ES Module Shims: Import maps polyfill for modules browsers without import maps support (all except Chrome 89+) -->\n    <script\n      async\n      src=\"https://cdn.jsdelivr.net/npm/es-module-shims@1.5.18/dist/es-module-shims.wasm.js\"\n    ></script>\n    <script type=\"importmap\">\n      <!--IMPORT_MAP-->\n    </script>\n  </head>\n  <body>\n    <!--PREVIEW-OPTIONS-PLACEHOLDER-HTML-->\n  </body>\n</html>\n";
++const srcdoc = "<!doctype html>\n<html>\n  <head>\n    <style>\n      html.dark {\n        color-scheme: dark;\n      }\n      body {\n        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,\n          Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\n      }\n    </style>\n    <!-- PREVIEW-OPTIONS-HEAD-HTML -->\n    <script>\n      ;(() => {\n        let scriptEls = []\n\n        window.process = { env: {} }\n        window.__modules__ = {}\n\n        window.__export__ = (mod, key, get) => {\n          Object.defineProperty(mod, key, {\n            enumerable: true,\n            configurable: true,\n            get,\n          })\n        }\n\n        window.__dynamic_import__ = (key) => {\n          return Promise.resolve(window.__modules__[key])\n        }\n\n        async function handle_message(ev) {\n          let { action, cmd_id } = ev.data\n          const send_message = (payload) =>\n            parent.postMessage({ ...payload }, ev.origin)\n          const send_reply = (payload) => send_message({ ...payload, cmd_id })\n          const send_ok = () => send_reply({ action: 'cmd_ok' })\n          const send_error = (message, stack) =>\n            send_reply({ action: 'cmd_error', message, stack })\n\n          if (action === 'eval') {\n            try {\n              if (scriptEls.length) {\n                scriptEls.forEach((el) => {\n                  document.head.removeChild(el)\n                })\n                scriptEls.length = 0\n              }\n\n              let { script: scripts } = ev.data.args\n              if (typeof scripts === 'string') scripts = [scripts]\n\n              for (const script of scripts) {\n                const scriptEl = document.createElement('script')\n                scriptEl.setAttribute('type', 'module')\n                // send ok in the module script to ensure sequential evaluation\n                // of multiple proxy.eval() calls\n                const done = new Promise((resolve) => {\n                  window.__next__ = resolve\n                })\n                scriptEl.innerHTML = script + `\\nwindow.__next__()`\n                document.head.appendChild(scriptEl)\n                scriptEl.onerror = (err) => send_error(err.message, err.stack)\n                scriptEls.push(scriptEl)\n                await done\n              }\n              send_ok()\n            } catch (e) {\n              send_error(e.message, e.stack)\n            }\n          }\n\n          if (action === 'catch_clicks') {\n            try {\n              const top_origin = ev.origin\n              document.body.addEventListener('click', (event) => {\n                if (event.which !== 1) return\n                if (event.metaKey || event.ctrlKey || event.shiftKey) return\n                if (event.defaultPrevented) return\n\n                // ensure target is a link\n                let el = event.target\n                while (el && el.nodeName !== 'A') el = el.parentNode\n                if (!el || el.nodeName !== 'A') return\n\n                if (\n                  el.hasAttribute('download') ||\n                  el.getAttribute('rel') === 'external' ||\n                  el.target ||\n                  el.href.startsWith('javascript:') ||\n                  !el.href\n                )\n                  return\n\n                event.preventDefault()\n\n                if (el.href.startsWith(top_origin)) {\n                  const url = new URL(el.href)\n                  if (url.hash[0] === '#') {\n                    window.location.hash = url.hash\n                    return\n                  }\n                }\n\n                window.open(el.href, '_blank')\n              })\n              send_ok()\n            } catch (e) {\n              send_error(e.message, e.stack)\n            }\n          }\n        }\n\n        window.addEventListener('message', handle_message, false)\n\n        window.onerror = function (msg, url, lineNo, columnNo, error) {\n          // ignore errors from import map polyfill - these are necessary for\n          // it to detect browser support\n          if (msg.includes('module specifier “vue”')) {\n            // firefox only error, ignore\n            return false\n          }\n          if (msg.includes(\"Module specifier, 'vue\")) {\n            // Safari only\n            return false\n          }\n          try {\n            parent.postMessage({ action: 'error', value: error }, '*')\n          } catch (e) {\n            parent.postMessage({ action: 'error', value: msg }, '*')\n          }\n        }\n\n        window.addEventListener('unhandledrejection', (event) => {\n          if (\n            event.reason.message &&\n            event.reason.message.includes('Cross-origin')\n          ) {\n            event.preventDefault()\n            return\n          }\n          try {\n            parent.postMessage(\n              { action: 'unhandledrejection', value: event.reason },\n              '*',\n            )\n          } catch (e) {\n            parent.postMessage(\n              { action: 'unhandledrejection', value: event.reason.message },\n              '*',\n            )\n          }\n        })\n\n        let previous = { level: null, args: null }\n\n        ;['clear', 'log', 'info', 'dir', 'warn', 'error', 'table'].forEach(\n          (level) => {\n            const original = console[level]\n            console[level] = (...args) => {\n              const msg = args[0]\n              if (typeof msg === 'string') {\n                if (\n                  msg.includes('You are running a development build of Vue') ||\n                  msg.includes('You are running the esm-bundler build of Vue')\n                ) {\n                  return\n                }\n              }\n\n              original(...args)\n\n              const stringifiedArgs = stringify(args)\n              if (\n                previous.level === level &&\n                previous.args &&\n                previous.args === stringifiedArgs\n              ) {\n                parent.postMessage(\n                  { action: 'console', level, duplicate: true },\n                  '*',\n                )\n              } else {\n                previous = { level, args: stringifiedArgs }\n\n                try {\n                  parent.postMessage({ action: 'console', level, args }, '*')\n                } catch (err) {\n                  parent.postMessage(\n                    { action: 'console', level, args: args.map(toString) },\n                    '*',\n                  )\n                }\n              }\n            }\n          },\n        )\n        ;[\n          { method: 'group', action: 'console_group' },\n          { method: 'groupEnd', action: 'console_group_end' },\n          { method: 'groupCollapsed', action: 'console_group_collapsed' },\n        ].forEach((group_action) => {\n          const original = console[group_action.method]\n          console[group_action.method] = (label) => {\n            parent.postMessage({ action: group_action.action, label }, '*')\n\n            original(label)\n          }\n        })\n\n        const timers = new Map()\n        const original_time = console.time\n        const original_timelog = console.timeLog\n        const original_timeend = console.timeEnd\n\n        console.time = (label = 'default') => {\n          original_time(label)\n          timers.set(label, performance.now())\n        }\n        console.timeLog = (label = 'default') => {\n          original_timelog(label)\n          const now = performance.now()\n          if (timers.has(label)) {\n            parent.postMessage(\n              {\n                action: 'console',\n                level: 'system-log',\n                args: [`${label}: ${now - timers.get(label)}ms`],\n              },\n              '*',\n            )\n          } else {\n            parent.postMessage(\n              {\n                action: 'console',\n                level: 'system-warn',\n                args: [`Timer '${label}' does not exist`],\n              },\n              '*',\n            )\n          }\n        }\n        console.timeEnd = (label = 'default') => {\n          original_timeend(label)\n          const now = performance.now()\n          if (timers.has(label)) {\n            parent.postMessage(\n              {\n                action: 'console',\n                level: 'system-log',\n                args: [`${label}: ${now - timers.get(label)}ms`],\n              },\n              '*',\n            )\n          } else {\n            parent.postMessage(\n              {\n                action: 'console',\n                level: 'system-warn',\n                args: [`Timer '${label}' does not exist`],\n              },\n              '*',\n            )\n          }\n          timers.delete(label)\n        }\n\n        const original_assert = console.assert\n        console.assert = (condition, ...args) => {\n          if (condition) {\n            const stack = new Error().stack\n            parent.postMessage(\n              { action: 'console', level: 'assert', args, stack },\n              '*',\n            )\n          }\n          original_assert(condition, ...args)\n        }\n\n        const counter = new Map()\n        const original_count = console.count\n        const original_countreset = console.countReset\n\n        console.count = (label = 'default') => {\n          counter.set(label, (counter.get(label) || 0) + 1)\n          parent.postMessage(\n            {\n              action: 'console',\n              level: 'system-log',\n              args: `${label}: ${counter.get(label)}`,\n            },\n            '*',\n          )\n          original_count(label)\n        }\n\n        console.countReset = (label = 'default') => {\n          if (counter.has(label)) {\n            counter.set(label, 0)\n          } else {\n            parent.postMessage(\n              {\n                action: 'console',\n                level: 'system-warn',\n                args: `Count for '${label}' does not exist`,\n              },\n              '*',\n            )\n          }\n          original_countreset(label)\n        }\n\n        const original_trace = console.trace\n\n        console.trace = (...args) => {\n          const stack = new Error().stack\n          parent.postMessage(\n            { action: 'console', level: 'trace', args, stack },\n            '*',\n          )\n          original_trace(...args)\n        }\n\n        function toString(value) {\n          if (value instanceof Error) {\n            return value.message\n          }\n          for (const fn of [\n            String,\n            (v) => Object.prototype.toString.call(v),\n            (v) => typeof v,\n          ]) {\n            try {\n              return fn(value)\n            } catch (err) {}\n          }\n        }\n\n        function isComponentProxy(value) {\n          return (\n            value &&\n            typeof value === 'object' &&\n            value.__v_skip === true &&\n            typeof value.$nextTick === 'function' &&\n            value.$ &&\n            value._\n          )\n        }\n\n        function stringify(args) {\n          try {\n            return JSON.stringify(args, (key, value) => {\n              return isComponentProxy(value) ? '{component proxy}' : value\n            })\n          } catch (error) {\n            return null\n          }\n        }\n      })()\n    </script>\n\n    <!-- ES Module Shims: Import maps polyfill for modules browsers without import maps support (all except Chrome 89+) -->\n    <script\n      async\n      src=\"/es-module-shims.wasm.js\"\n    ></script>\n    <script type=\"importmap\">\n      <!--IMPORT_MAP-->\n    </script>\n  </head>\n  <body>\n    <!--PREVIEW-OPTIONS-PLACEHOLDER-HTML-->\n  </body>\n</html>\n";
+ 
+ let uid = 1;
+ class PreviewProxy {
+@@ -1179,9 +1179,9 @@ function formatTokenType(tokenType) {
+ }
+ 
+ class Scope {
+-  
+-  
+-  
++
++
++
+ 
+   constructor(startTokenIndex, endTokenIndex, isFunctionScope) {
+     this.startTokenIndex = startTokenIndex;
+@@ -1411,8 +1411,8 @@ function augmentError(error) {
+ }
+ 
+ class Loc {
+-  
+-  
++
++
+   constructor(line, column) {
+     this.line = line;
+     this.column = column;
+@@ -2463,38 +2463,38 @@ class Token {
+     this.nullishStartIndex = null;
+   }
+ 
+-  
+-  
+-  
+-  
+-  
+-  
+-  
+-  
++
++
++
++
++
++
++
++
+   // Initially false for all tokens, then may be computed in a follow-up step that does scope
+   // analysis.
+-  
++
+   // Initially false for all tokens, but may be set during transform to mark it as containing an
+   // await operation.
+-  
+-  
++
++
+   // For assignments, the index of the RHS. For export tokens, the end of the export.
+-  
++
+   // For class tokens, records if the class is a class expression or a class statement.
+-  
++
+   // Number of times to insert a `nullishCoalesce(` snippet before this token.
+-  
++
+   // Number of times to insert a `)` snippet after this token.
+-  
++
+   // If true, insert an `optionalChain([` snippet before this token.
+-  
++
+   // If true, insert a `])` snippet after this token.
+-  
++
+   // Tag for `.`, `?.`, `[`, `?.[`, `(`, and `?.(` to denote the "root" token for this
+   // subscript chain. This can be used to determine if this chain is an optional chain.
+-  
++
+   // Tag for `??` operators to denote the root token for this nullish coalescing call.
+-  
++
+ }
+ 
+ // ## Tokenizer
+@@ -2563,8 +2563,8 @@ function lookaheadType() {
+ }
+ 
+ class TypeAndKeyword {
+-  
+-  
++
++
+   constructor(type, contextualKeyword) {
+     this.type = type;
+     this.contextualKeyword = contextualKeyword;
+@@ -3681,7 +3681,7 @@ function splitPragma(pragma) {
+ 
+ class Transformer {
+   // Return true if anything was processed, false otherwise.
+-  
++
+ 
+   getPrefixCode() {
+     return "";
+@@ -3697,9 +3697,9 @@ class Transformer {
+ }
+ 
+ class JSXTransformer extends Transformer {
+-  
+-  
+-  
++
++
++
+ 
+   // State for calculating the line number of each JSX tag in development.
+   __init() {this.lastLineNumber = 1;}
+@@ -4948,7 +4948,7 @@ function requireSetArray_umd () {
+ 		    Object.defineProperty(exports, '__esModule', { value: true });
+ 
+ 		}));
+-		
++
+ 	} (setArray_umd, setArray_umd.exports));
+ 	return setArray_umd.exports;
+ }
+@@ -5132,7 +5132,7 @@ function requireSourcemapCodec_umd () {
+ 		    Object.defineProperty(exports, '__esModule', { value: true });
+ 
+ 		}));
+-		
++
+ 	} (sourcemapCodec_umd, sourcemapCodec_umd.exports));
+ 	return sourcemapCodec_umd.exports;
+ }
+@@ -5393,7 +5393,7 @@ function requireResolveUri_umd () {
+ 		    return resolve;
+ 
+ 		}));
+-		
++
+ 	} (resolveUri_umd));
+ 	return resolveUri_umd.exports;
+ }
+@@ -5960,7 +5960,7 @@ function requireTraceMapping_umd () {
+ 		    exports.TraceMap = TraceMap;
+ 
+ 		}));
+-		
++
+ 	} (traceMapping_umd, traceMapping_umd.exports));
+ 	return traceMapping_umd.exports;
+ }
+@@ -6198,7 +6198,7 @@ function requireTraceMapping_umd () {
+ 	    Object.defineProperty(exports, '__esModule', { value: true });
+ 
+ 	}));
+-	
++
+ } (genMapping_umd, genMapping_umd.exports));
+ 
+ var genMapping_umdExports = genMapping_umd.exports;
+@@ -7280,7 +7280,7 @@ var DetailUnionResolver = /** @class */ (function () {
+ 	    Int32Array, Uint32Array, Float32Array, Float64Array, ArrayBuffer]; _i < _a.length; _i++) {
+ 	    var array_1 = _a[_i];
+ 	    _loop_1(array_1);
+-	} 
++	}
+ } (types));
+ 
+ (function (exports) {
+@@ -7506,7 +7506,7 @@ var DetailUnionResolver = /** @class */ (function () {
+ 	    };
+ 	    return Checker;
+ 	}());
+-	exports.Checker = Checker; 
++	exports.Checker = Checker;
+ } (dist));
+ 
+ /**
+@@ -7552,7 +7552,7 @@ const exportedTypeSuite = {
+ 
+ const {Options: OptionsChecker} = dist.createCheckers(exportedTypeSuite);
+ 
+- 
++
+ 
+ 
+ 
+@@ -9741,7 +9741,7 @@ function typedParseParenItem() {
+ 
+ 
+ class StopState {
+-  
++
+   constructor(stop) {
+     this.stop = stop;
+   }
+@@ -12984,8 +12984,8 @@ function parseFile() {
+ }
+ 
+ let File$1 = class File {
+-  
+-  
++
++
+ 
+   constructor(tokens, scopes) {
+     this.tokens = tokens;
+@@ -13833,7 +13833,7 @@ class CJSImportTransformer extends Transformer {
+    __init() {this.hadExport = false;}
+    __init2() {this.hadNamedExport = false;}
+    __init3() {this.hadDefaultExport = false;}
+-  
++
+ 
+   constructor(
+      rootTransformer,
+@@ -14727,9 +14727,9 @@ class CJSImportTransformer extends Transformer {
+  * type-only imports in TypeScript and Flow.
+  */
+ class ESMImportTransformer extends Transformer {
+-  
+-  
+-  
++
++
++
+ 
+   constructor(
+      tokens,
+@@ -16151,13 +16151,13 @@ class TypeScriptTransformer extends Transformer {
+ 
+ class RootTransformer {
+    __init() {this.transformers = [];}
+-  
+-  
++
++
+    __init2() {this.generatedVariables = [];}
+-  
+-  
+-  
+-  
++
++
++
++
+ 
+   constructor(
+     sucraseContext,
+@@ -16648,7 +16648,7 @@ var build = {};
+ 	    return LinesAndColumns;
+ 	}());
+ 	exports.LinesAndColumns = LinesAndColumns;
+-	exports["default"] = LinesAndColumns; 
++	exports["default"] = LinesAndColumns;
+ } (build));
+ 
+ /**
