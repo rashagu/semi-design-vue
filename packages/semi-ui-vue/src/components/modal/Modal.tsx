@@ -276,6 +276,10 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
             block={footerFill}
             autoFocus={true}
             {...props.cancelButtonProps}
+            style={{
+              ...footerFill ? { marginLeft: "unset" }:{},
+              ...(props.cancelButtonProps?.style as CSSProperties || {})
+            }}
             x-semi-children-alias="cancelText"
           >
             {cancelText || locale.cancel}

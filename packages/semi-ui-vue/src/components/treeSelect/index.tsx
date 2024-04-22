@@ -362,6 +362,7 @@ const TreeSelect = defineComponent<TreeSelectProps>(
 
     let onNodeClick;
     let onNodeDoubleClick;
+    let clearInputFlag: boolean = false;
 
     // TODO context
     const { adapter: adapterInject, context, getDataAttr } = useBaseComponent<TreeSelectProps>(props, state);
@@ -518,6 +519,12 @@ const TreeSelect = defineComponent<TreeSelectProps>(
         updateIsFocus: (bool) => {
           state.isFocus = bool;
         },
+        setClearInputFlag: (flag: boolean) => {
+          clearInputFlag = flag;
+        },
+        getClearInputFlag: () => {
+          return clearInputFlag;
+        }
       };
     }
     const adapter = adapter_();
@@ -1485,29 +1492,14 @@ const TreeSelect = defineComponent<TreeSelectProps>(
       return key;
     };
 
-    /* Event handler function after popover is closed */
-    const handlePopoverClose = (isVisible) => {
-      const { filterTreeNode } = props;
-      // 将 inputValue 清空，如果有选中值的话，选中项能够快速回显
-      // Clear the inputValue. If there is a selected value, the selected item can be quickly echoed.
-      if (isVisible === false && filterTreeNode) {
-        foundation.clearInputValue();
-      }
-      if (isVisible === false && Boolean(filterTreeNode)) {
-        foundation.clearInput();
-      }
-    };
+    /* Event handler function after popover visible change */
+    const handlePopoverVisibleChange = isVisible => {
+      foundation.handlePopoverVisibleChange(isVisible);
+    }
 
     const afterClose = () => {
-      // flattenNode 的变化将导致弹出层面板中的选项数目变化
-      // 在弹层完全收起之后，再通过 clearInput 重新计算 state 中的 expandedKey， flattenNode
-      // 防止在弹出层未收起时弹层面板中选项数目变化导致视觉上出现弹层闪动问题
-      // Changes to flattenNode will cause the number of options in the popup panel to change
-      // After the pop-up layer is completely closed, recalculate the expandedKey and flattenNode in the state through clearInput.
-      // Prevent the pop-up layer from flickering visually due to changes in the number of options in the pop-up panel when the pop-up layer is not collapsed.
-      const { filterTreeNode } = props;
-      filterTreeNode && foundation.clearInput();
-    };
+      foundation.handleAfterClose();
+    }
 
     const renderTreeNode = (treeNode: FlattenNode, ind: number, style: CSSProperties) => {
       const { data, key } = treeNode;
@@ -1694,7 +1686,7 @@ const TreeSelect = defineComponent<TreeSelectProps>(
           autoAdjustOverflow={autoAdjustOverflow}
           mouseLeaveDelay={mouseLeaveDelay}
           mouseEnterDelay={mouseEnterDelay}
-          onVisibleChange={handlePopoverClose}
+          onVisibleChange={handlePopoverVisibleChange}
           afterClose={afterClose}
         >
           {selection}
