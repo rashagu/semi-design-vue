@@ -8,7 +8,7 @@ import VPContent from 'vitepress/dist/client/theme-default/components/VPContent.
 import InlineSvg from './InlineSvg.vue';
 import {GetNavData} from "./navLink";
 
-const modules = import.meta.glob('../../../images/docIcons/*.svg', { as: 'raw', eager: true })
+const modules = import.meta.glob('../../../images/docIcons/*.svg', { query: '?raw', import: 'default', eager: true })
 
 function getIcon(icon) {
   return modules['../../../images/docIcons/doc-' + icon + '.svg']
@@ -466,7 +466,7 @@ onMounted(()=>{
   setThemeMode()
 })
 const headerStyle = computed(()=>{
-  return isDark?{backgroundColor: 'var(--semi-color-bg-0)', borderBottom: 'var(--semi-color-nav-bg) solid 1px'}:{}
+  return isDark.value?{backgroundColor: 'var(--semi-color-bg-0)', borderBottom: '1px solid var(--semi-color-border)'}:{}
 })
 
 provide('hero-image-slot-exists', null)
@@ -603,7 +603,7 @@ table {
 
 .layout_header {
   position: fixed;
-  z-index: 2;
+  z-index: 12;
   background-color: white;
   top: 0;
   width: 100%;

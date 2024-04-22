@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {defineClientComponent} from 'vitepress'
+import { PropType } from 'vue';
 
 
 const props = defineProps({
@@ -18,7 +19,8 @@ const msg = ref('Hello World!')
 </template>
 `
     }
-  }
+  },
+  layout: String as PropType<'vertical' | 'horizontal'>
 })
 
 const LiveCodeClient: any = defineClientComponent(

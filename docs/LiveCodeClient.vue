@@ -2,13 +2,14 @@
 import { type OutputModes, Repl, useStore, useVueImportMap } from '@vue/repl';
 // import Monaco from '@vue/repl/monaco-editor'
 import CodeMirror from '@vue/repl/codemirror-editor'
-import { onMounted, ref } from 'vue';
+import { onMounted, PropType, ref } from 'vue';
 import {useData} from "vitepress";
 
 const props = defineProps({
   files: {
     type: Object,
   },
+  layout: String as PropType<'vertical' | 'horizontal'>
 })
 
 const {isDark} = useData();
@@ -46,13 +47,35 @@ const store = useStore(
 
   },
   // initialize repl with previously serialized state
-  location.hash,
+  // location.hash,
 )
 
 
 const previewOptions = {
   headHTML: `
 <link rel="stylesheet" href="${import.meta.env.BASE_URL}semi/style.css" data-n-g="">
+<style>
+
+.grid .semi-row,.grid .semi-row-flex {
+    text-align: center
+}
+
+.grid .semi-row-flex .semi-col,.grid .semi-row .semi-col {
+    min-height: 30px;
+    line-height: 30px;
+    background: var(--semi-color-primary-light-default);
+    outline: 1px solid var(--semi-color-primary-light-active)
+}
+
+.grid.grid-gutter .semi-col .col-content,.grid.grid-gutter .semi-col .gutter-box {
+    background: var(--semi-color-primary-light-hover)
+}
+
+.grid-flex .semi-row-flex {
+    height: 50px;
+    background: var(--semi-color-fill-0)
+}
+</style>
 <script>
 
 const mql = window.matchMedia('(prefers-color-scheme: dark)');
@@ -98,5 +121,5 @@ productionMode.value = true
 </script>
 
 <template>
-  <Repl :theme="'dark'" :preview-options="previewOptions" style="width: 100%;height: 100%;" :store="store" :editor="CodeMirror" :showCompileOutput="true" />
+  <Repl :theme="'dark'" :layout="layout" :layoutReverse="true" :preview-options="previewOptions" style="width: 100%;height: 100%;" :store="store" :editor="CodeMirror" :showCompileOutput="true" />
 </template>
