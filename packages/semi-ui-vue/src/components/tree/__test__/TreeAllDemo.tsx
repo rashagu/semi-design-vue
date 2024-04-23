@@ -17,7 +17,7 @@ const TreeAllDemo = defineComponent<TreeAllDemoProps>((props, {}) => {
   return () => (
     <div>
       <TreeDemo />
-      <TreeCheckDemo />
+      {/*<TreeCheckDemo />*/}
     </div>
   )
 })

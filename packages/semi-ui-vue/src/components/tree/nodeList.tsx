@@ -71,12 +71,17 @@ const NodeList = defineComponent<NodeListProps>((props, {}) => {
         return newState;
     }
 
-    watch(()=>props, ()=>{
-        const newState = getDerivedStateFromProps(props)
+    watch([
+        ()=>props.flattenNodes,
+        ()=>props.motionKeys,
+        ()=>props.motionType,
+        ()=>props.flattenList,
+    ], ()=>{
+        const newState = getDerivedStateFromProps({...props})
         newState && Object.keys(newState).forEach(key=>{
             state[key] = newState[key]
         })
-    }, {deep: true})
+    }, {immediate: true})
 
 
     const onMotionEnd = () => {

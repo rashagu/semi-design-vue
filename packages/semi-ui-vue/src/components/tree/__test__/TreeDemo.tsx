@@ -1,5 +1,6 @@
-import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
+import { defineComponent, ref, h, Fragment, useSlots, onMounted } from 'vue';
 import Tree from "../index";
+import tree from '../index';
 
 interface ExampleProps {
   name?: string
@@ -10,37 +11,40 @@ export const vuePropsType = {
 }
 const TreeDemo = defineComponent<ExampleProps>((props, {}) => {
   const slots = useSlots()
-  const treeData = [
-    {
-      label: '亚洲',
-      value: 'Asia',
-      key: '0',
-      children: [
-        {
-          label: '中国',
-          value: 'China',
-          key: '0-0',
-          children: [
-            {
-              label: '北京',
-              value: 'Beijing',
-              key: '0-0-0',
-            },
-            {
-              label: '上海',
-              value: 'Shanghai',
-              key: '0-0-1',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      label: '北美洲',
-      value: 'North America',
-      key: '1',
-    }
-  ];
+  const treeData = ref([]);
+  onMounted(()=>{
+    treeData.value = [
+      {
+        label: '亚洲',
+        value: 'Asia',
+        key: '0',
+        children: [
+          {
+            label: '中国',
+            value: 'China',
+            key: '0-0',
+            children: [
+              {
+                label: '北京',
+                value: 'Beijing',
+                key: '0-0-0',
+              },
+              {
+                label: '上海',
+                value: 'Shanghai',
+                key: '0-0-1',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        label: '北美洲',
+        value: 'North America',
+        key: '1',
+      }
+    ]
+  })
   const style = {
     width: 260,
     height: 420,
@@ -50,8 +54,13 @@ const TreeDemo = defineComponent<ExampleProps>((props, {}) => {
   return () => (
     <div>
       <Tree
-        treeData={treeData}
+        treeData={treeData.value}
         defaultExpandAll
+        expandAll
+        style={style}
+      />
+      <Tree
+        treeData={treeData.value}
         style={style}
         virtualize={{
           height: 300,

@@ -545,8 +545,8 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
     () => props.checkRelation,
 
 
-    () => state.keyEntities,
-    () => state.cachedKeyValuePairs,
+    () => state.keyEntities as any,
+    () => state.cachedKeyValuePairs as any,
     () => state.inputValue as any,
     () => state.expandedKeys as any,
     () => state.flattenNodes as any,
@@ -555,7 +555,7 @@ const Tree = defineComponent<TreeProps>((props, {}) => {
     () => state.filteredShownKeys as any,
     () => state.checkedKeys as any,
   ], (value, oldValue, onCleanup) => {
-    const newState = getDerivedStateFromProps(props, state as TreeState)
+    const newState = getDerivedStateFromProps({...props}, {...state} as TreeState)
     newState && Object.keys(newState).forEach(key => {
       state[key] = newState[key]
     })
