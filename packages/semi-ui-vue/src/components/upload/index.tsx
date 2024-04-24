@@ -4,7 +4,7 @@ import * as PropTypes from '../PropTypes';
 import { noop, pick } from 'lodash';
 import UploadFoundation from '@douyinfe/semi-foundation/upload/foundation';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/upload/constants';
-import FileCard from './fileCard';
+import FileCard, { FileCardProps, vuePropsType as vuePropsTypeFileCard } from './fileCard';
 import { useBaseComponent } from '../_base/baseComponent';
 import LocaleConsumer from '../locale/localeConsumer';
 import { IconUpload } from '@kousum/semi-icons-vue';
@@ -442,9 +442,9 @@ const Upload = defineComponent<UploadProps>(
       const onReplace = (): void => {
         replace(index);
       };
-      const fileCardProps = {
+      const fileCardProps:FileCardProps = {
         ...pick(props, ['showRetry', 'showReplace', '']),
-        ...file,
+        ...(pick(file, [...Object.keys(vuePropsTypeFileCard)]) as FileItem),
         previewFile,
         listType,
         onRemove,
