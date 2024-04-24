@@ -13,6 +13,7 @@ test('Tree test', async () => {
 test('Tree test2', async () => {
   const wrapper = mount(Comp, {})
   // semi-tree-auto-wrapper
+  await (new Promise(resolve => setTimeout(resolve, 500)))
 
   const profileStyle = wrapper.get('.semi-tree-auto-wrapper')
 
