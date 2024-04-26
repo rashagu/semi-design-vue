@@ -83,7 +83,7 @@ const quickControl = defineComponent<QuickControlProps>((props, {}) => {
             {presets.map((item, index) => {
               const _item: PresetType = typeof item === 'function' ? item() : item;
               return (
-                <Button size="small" type="primary" onClick={e => onPresetClick(_item, e)} key={index}>
+                <Button size="small" type="primary" onClick={e => onPresetClick(typeof item === 'function' ? item() : item, e)} key={index}>
                   <div class={itemCls}>
                     <TypographyText
                       ellipsis={{ showTooltip: true }}
