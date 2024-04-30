@@ -42,7 +42,7 @@ const propTypes:ComponentObjectPropsOptions<TabBarProps> = {
 };
 
 export const vuePropsType = vuePropsMake(propTypes, {});
-const TabBar = defineComponent<TabBarProps>((props, {}) => {
+const TabBar = defineComponent<TabBarProps>((props, {attrs}) => {
   const slots = useSlots();
   const state = reactive({
     endInd: props.list.length,
@@ -87,7 +87,7 @@ const TabBar = defineComponent<TabBarProps>((props, {}) => {
       const key = _getItemKey(itemKey);
       // eslint-disable-next-line max-len
       const tabItem = document.querySelector(
-        `[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey="${key}"]`
+        `[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey=${JSON.stringify(key)}]`
       );
       tabItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
     }
@@ -126,7 +126,7 @@ const TabBar = defineComponent<TabBarProps>((props, {}) => {
     const key = _getItemKey(lastItem.itemKey);
     // eslint-disable-next-line max-len
     const tabItem = document.querySelector(
-      `[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey="${key}"]`
+      `[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey=${JSON.stringify(key)}]`
     );
     tabItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
   };
@@ -228,7 +228,6 @@ const TabBar = defineComponent<TabBarProps>((props, {}) => {
 
     const extra = renderExtra();
     const contents = collapsible ? renderCollapsedTab() : renderTabComponents(list);
-    console.log(contents);
     return (
       <div
         role="tablist"

@@ -39,7 +39,7 @@ const propTypes: ComponentObjectPropsOptions<TabItemProps> = {
 };
 export const vuePropsType = vuePropsMake(propTypes, {});
 const TabItem = defineComponent<TabItemProps>(
-  (props, {}) => {
+  (props, {attrs}) => {
     const slots = useSlots();
 
     const closableIcon = computed(() => {
@@ -93,7 +93,6 @@ const TabItem = defineComponent<TabItemProps>(
           [`${cssClasses.TABS_TAB}-medium`]: size === 'medium',
         }
       );
-
       return (
         <div
           role="tab"
