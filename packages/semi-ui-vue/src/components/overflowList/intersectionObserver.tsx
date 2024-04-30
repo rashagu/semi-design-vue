@@ -8,10 +8,11 @@ import {
   onMounted,
   PropType,
   useSlots,
-  watch
+  watch,
 } from 'vue';
 import {vuePropsMake} from '../PropTypes';
 import {VueJsxNode} from "../interface";
+import isElement from '@douyinfe/semi-foundation/utils/isElement';
 
 export interface ReactIntersectionObserverProps {
   onIntersect?: IntersectionObserverCallback;
@@ -94,7 +95,9 @@ const ReactIntersectionObserver = defineComponent<ReactIntersectionObserverProps
       if (!node) {
         return;
       }
-      observer.observe(node);
+      //@ts-ignore
+      const node_ = isElement(node)?node:node.$el
+      observer.observe(node_);
     });
   }
 
