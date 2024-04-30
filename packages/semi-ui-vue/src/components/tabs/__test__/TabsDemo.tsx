@@ -1,6 +1,7 @@
 import { defineComponent, ref, h, Fragment, useSlots, reactive } from 'vue';
 import Tabs, { TabPane } from '../index';
 import { IconFile, IconGlobe, IconHelpCircle } from '@kousum/semi-icons-vue';
+import TabsDemo2 from './TabsDemo2';
 
 interface TabsDemoProps {
   name?: string;
@@ -18,6 +19,10 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
       { tab: '文档', itemKey: '1', text: '文档', closable: true },
       { tab: '快速起步', itemKey: '2', text: '快速起步', closable: true },
       { tab: '帮助', itemKey: '3', text: '帮助' },
+      { tab: '帮助', itemKey: '4', text: '帮助' },
+      { tab: '帮助', itemKey: '5', text: '帮助' },
+      { tab: '帮助', itemKey: '6', text: '帮助' },
+      { tab: '帮助', itemKey: '7', text: '帮助' },
     ],
   });
   function close(key) {
@@ -29,13 +34,6 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
   return () => {
     return (
       <div>
-        <Tabs type="card" defaultActiveKey="1" onTabClose={close.bind(this)}>
-          {state.tabList.map((t) => (
-            <TabPane closable={t.closable as any} tab={t.tab} itemKey={t.itemKey} key={t.itemKey}>
-              {t.text}
-            </TabPane>
-          ))}
-        </Tabs>
         <Tabs type="button" keepDOM={false}>
           <TabPane tab="文档" itemKey="1">
             <div>
@@ -89,6 +87,7 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
             帮助
           </TabPane>
         </Tabs>
+        <TabsDemo2/>
       </div>
     );
   };

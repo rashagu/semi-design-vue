@@ -159,7 +159,7 @@ const Tabs = defineComponent<TabsProps>((props, {}) => {
         () => props.activeKey,
         () => state.activeKey
     ], () => {
-        const newState = getDerivedStateFromProps(props)
+        const newState = getDerivedStateFromProps({...props})
         if (newState) {
             Object.keys(newState).forEach(key => {
                 state[key] = newState[key]

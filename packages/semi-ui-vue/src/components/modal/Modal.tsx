@@ -202,7 +202,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
   }
 
   watch(() => props.fullScreen, (value) => {
-    const newState = getDerivedStateFromProps(props, state)
+    const newState = getDerivedStateFromProps({...props}, {...state})
     newState && Object.keys(newState).forEach(key=>{
       state[key] = newState[key]
     })

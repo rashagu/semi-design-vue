@@ -134,7 +134,7 @@ const Carousel = defineComponent<CarouselProps>((props, {expose}) => {
   }
 
   watch([() => props.activeIndex, () => state.activeIndex], (val) => {
-    const newState = getDerivedStateFromProps(props)
+    const newState = getDerivedStateFromProps({...props})
     if (newState) {
       Object.keys(newState).forEach(key => {
         state[key] = newState[key]

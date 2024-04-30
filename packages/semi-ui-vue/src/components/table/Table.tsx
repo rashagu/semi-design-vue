@@ -558,7 +558,7 @@ function Table<RecordType extends Record<string, any>>() {
     watch(
       () => props,
       () => {
-        const newState = getDerivedStateFromProps(props as any);
+        const newState = getDerivedStateFromProps({...props} as any);
         newState &&
           Object.keys(newState).forEach((key) => {
             state[key] = newState[key];

@@ -1,11 +1,15 @@
 import {mount} from "@vue/test-utils";
 import {beforeAll, expect, test, vi} from 'vitest'
 import Comp from "./OverListAllDemo";
+
 beforeAll(()=>{
   const intersectionObserverMock = () => ({
-    observe: () => null
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
   })
   window.IntersectionObserver = vi.fn().mockImplementation(intersectionObserverMock);
+
 })
 test('OverListAllDemo test', async () => {
   const wrapper = mount(Comp, {})

@@ -81,7 +81,7 @@ const Index = defineComponent<TagProps>((props, {slots}) => {
     return null;
   }
   watch(()=>props.visible, (val)=>{
-    const newState = getDerivedStateFromProps(props)
+    const newState = getDerivedStateFromProps({...props})
     if (newState){
       Object.keys(newState).forEach(key=>{
         state[key] = newState[key]

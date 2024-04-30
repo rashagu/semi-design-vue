@@ -136,7 +136,7 @@ const yearAndMonth = defineComponent<YearAndMonthProps>((props, {expose}) => {
     return willUpdateStates;
   }
   watch([()=>props.currentMonth, ()=>props.currentYear], (val)=>{
-    const newState = getDerivedStateFromProps(props, state)
+    const newState = getDerivedStateFromProps({...props}, {...state})
     if (newState){
       Object.keys(newState).forEach(key=>{
         state[key] = newState[key]

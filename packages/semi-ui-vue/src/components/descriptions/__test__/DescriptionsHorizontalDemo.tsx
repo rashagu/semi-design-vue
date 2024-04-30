@@ -22,7 +22,7 @@ const DescriptionsHorizontalDemo = defineComponent<DescriptionsDemoProps>((props
     { key: '垂类标签', value: <Space>
         <Tag size="small" shape='circle' color='amber'>互联网资讯</Tag>
         <Tag size="small" shape='circle' color='violet'>编程</Tag>
-      </Space>, span: 3
+      </Space>, span: 4
     },
     { key: '作品数量', value: '88888888', span: 2 },
     { key: '认证状态', value: '这是一个很长很长很长很长很长很长很长很长很长的值' },

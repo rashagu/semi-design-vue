@@ -163,7 +163,7 @@ const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
   }
 
   watch([() => props.visible, () => props.motion, () => state.displayNone], () => {
-    const newState = getDerivedStateFromProps(props);
+    const newState = getDerivedStateFromProps({...props});
     if (newState) {
       Object.keys(newState).forEach((key) => {
         state[key] = newState[key];

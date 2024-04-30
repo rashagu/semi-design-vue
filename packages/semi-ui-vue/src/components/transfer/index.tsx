@@ -289,7 +289,7 @@ const Transfer = defineComponent<TransferProps>((props, {}) => {
     (value, oldValue, onCleanup) => {
 
       if (!isEqual(value, oldValue)){
-        const newState = getDerivedStateFromProps(props);
+        const newState = getDerivedStateFromProps({...props});
         if (newState) {
           Object.keys(newState).forEach((key) => {
             state[key] = newState[key];

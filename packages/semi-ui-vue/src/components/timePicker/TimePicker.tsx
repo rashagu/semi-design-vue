@@ -237,7 +237,7 @@ const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
     return null;
   }
   watch([()=>props.open, ()=>state.open], (val)=>{
-    const newState = getDerivedStateFromProps(props, state)
+    const newState = getDerivedStateFromProps({ ...props }, { ...state })
     if (newState){
       Object.keys(newState).forEach(key=>{
         state[key] = newState[key]

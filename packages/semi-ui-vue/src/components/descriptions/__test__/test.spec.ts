@@ -1,5 +1,5 @@
 import {mount} from "@vue/test-utils";
-import { expect, test } from 'vitest'
+import { beforeAll, expect, test, vi } from 'vitest';
 import DescriptionsHorizontalDemo from "./DescriptionsHorizontalDemo";
 
 test('DatePickerDemo qwe', async () => {
@@ -8,5 +8,10 @@ test('DatePickerDemo qwe', async () => {
   const tr = wrapper.get('table').find('tr')
   const th = tr.findAll('th')
   const td = tr.findAll('td')
-  expect(th.length + td.length).toEqual(8)
+
+  let totalSpan = td.length
+  td.forEach(item=>{
+    totalSpan += +item.getRootNodes()[0].getAttribute('colspan')
+  })
+  expect(totalSpan).toEqual(8)
 })

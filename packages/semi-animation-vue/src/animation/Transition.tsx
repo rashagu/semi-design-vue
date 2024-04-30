@@ -115,7 +115,7 @@ const Transition = defineComponent<TransitionProps>((props, {}) => {
   // })
   // const internalInstance = getCurrentInstance();
   function updateState() {
-    const newState = getDerivedStateFromProps(props, state)
+    const newState = getDerivedStateFromProps({...props}, {...state})
     Object.keys(newState).forEach((key) => {
       // @ts-ignore
       state[key] = newState[key]

@@ -243,7 +243,7 @@ const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
   }
 
   watch(() => props, (val) => {
-    const newState = getDerivedStateFromProps(props, state)
+    const newState = getDerivedStateFromProps({...props}, {...state})
     if (newState) {
       Object.keys(newState).forEach(key => {
         state[key] = newState[key]

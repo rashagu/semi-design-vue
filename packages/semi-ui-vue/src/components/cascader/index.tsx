@@ -516,7 +516,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
   watch(
     () => props,
     (val) => {
-      const newState = getDerivedStateFromProps(props);
+      const newState = getDerivedStateFromProps({...props});
       newState &&
         Object.keys(newState).forEach((key) => {
           state[key] = newState[key];

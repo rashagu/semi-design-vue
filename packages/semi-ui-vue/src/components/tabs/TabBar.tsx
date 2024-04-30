@@ -228,7 +228,7 @@ const TabBar = defineComponent<TabBarProps>((props, {}) => {
 
     const extra = renderExtra();
     const contents = collapsible ? renderCollapsedTab() : renderTabComponents(list);
-
+    console.log(contents);
     return (
       <div
         role="tablist"

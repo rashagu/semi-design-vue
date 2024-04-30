@@ -101,7 +101,7 @@ const Image = defineComponent<ImageProps>((props, {}) => {
   }
 
   watch([() => props.src, ()=>props.preview], () => {
-    const newState = getDerivedStateFromProps(props, state)
+    const newState = getDerivedStateFromProps({...props}, {...state})
     if (newState) {
       Object.keys(newState).forEach(key => {
         state[key] = newState[key]

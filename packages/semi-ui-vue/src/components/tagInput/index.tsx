@@ -284,7 +284,7 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
     }
     return {
       tagsArray,
-      inputValue: isString(inputValue) ? inputValue : prevState.inputValue
+      inputValue: isString(inputValue) ? inputValue : prevState.inputValue,
     };
   }
   watch([
@@ -292,7 +292,7 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
     ()=>props.inputValue,
     ()=>state.inputValue,
   ], (val)=>{
-    const newState = getDerivedStateFromProps(props, state)
+    const newState = getDerivedStateFromProps({ ...props }, { ...state });
     if (newState){
       Object.keys(newState).forEach(key=>{
         state[key] = newState[key]

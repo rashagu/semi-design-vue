@@ -242,7 +242,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
     return willUpdateStates;
   }
   watch(()=>props.value, (val)=>{
-    const newState = getDerivedStateFromProps(props, state)
+    const newState = getDerivedStateFromProps({...props}, {...state})
     if (newState){
       Object.keys(newState).forEach(key=>{
         state[key] = newState[key]

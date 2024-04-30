@@ -89,7 +89,7 @@ const Index = defineComponent<SpinProps>((props, {slots}) => {
     };
   }
   watch(()=>props, (val)=>{
-    const newState = getDerivedStateFromProps(props)
+    const newState = getDerivedStateFromProps({...props})
     if (newState){
       Object.keys(newState).forEach(key=>{
         state[key] = newState[key]

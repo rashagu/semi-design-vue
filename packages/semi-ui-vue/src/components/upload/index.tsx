@@ -343,8 +343,8 @@ const Upload = defineComponent<UploadProps>(
     watch(
       () => props.fileList,
       (val) => {
-        if (val) {
-          state.fileList = val;
+        if ('fileList' in props) {
+          state.fileList = val || [];
         }
       },
       { immediate: true }
