@@ -17,10 +17,10 @@ import {
   Fragment,
   h,
   isVNode, nextTick, PropType,
-  reactive, shallowRef,
+  reactive, ref, shallowRef,
   useSlots,
-  watch
-} from "vue";
+  watch,
+} from 'vue';
 import {vuePropsMake} from "../PropTypes";
 import {getProps, useBaseComponent} from "../_base/baseComponent";
 import {AutoCompleteProps} from "../autoComplete";
@@ -172,7 +172,7 @@ const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
   const foundation = new OverflowListFoundation(adapter);
 
 
-  let itemRefs: Record<string, any> = {};
+  let itemRefs = ref({});
 
   let scroller: HTMLDivElement = null;
   let spacer: HTMLDivElement = null;
@@ -209,7 +209,7 @@ const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
     );
 
     if (!isEqual(prevItemsKeys, nowItemsKeys)) {
-      itemRefs = {};
+      itemRefs.value = {};
       state.visibleState = new Map()
     }
     if (isScrollMode() || state.overflowStatus !== "calculating") {
@@ -248,16 +248,17 @@ const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
   };
 
   const mergeRef = (ref: any, node: Element, key: Key): void => {
-    itemRefs[key] = node;
+    itemRefs.value[key] = node;
     if (typeof ref === 'function') {
       ref(node);
-    } else if (typeof ref === 'object' && ref && 'current' in ref) {
-      ref.current = node;
+    } else if (typeof ref === 'object' && ref && 'value' in ref) {
+      ref.value = node;
     }
   };
 
   const renderOverflow = (): VueJsxNode => {
     const overflow = foundation.getOverflowItem();
+
     return props.overflowRenderer(overflow);
   };
 
@@ -404,7 +405,7 @@ const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
           onIntersect={reintersect}
           root={scroller}
           threshold={props.threshold}
-          items={itemRefs}
+          items={itemRefs.value}
         >
           {list}
         </IntersectionObserver>

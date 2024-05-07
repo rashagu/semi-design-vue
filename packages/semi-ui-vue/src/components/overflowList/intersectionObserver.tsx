@@ -60,7 +60,7 @@ const ReactIntersectionObserver = defineComponent<ReactIntersectionObserverProps
   });
 
   watch(
-    () => props.items,
+    () => Object.keys(props.items),
     () => {
       const {items} = props;
       const itemKeys = Object.keys(items);
@@ -82,11 +82,11 @@ const ReactIntersectionObserver = defineComponent<ReactIntersectionObserverProps
     const {items} = props;
     if (isEmpty(items)) {
       // stop everything if not defined
-      observer.disconnect();
+      observer?.disconnect();
       return;
     }
     if (force) {
-      observer.disconnect();
+      observer?.disconnect();
     }
 
     // observer callback is invoked immediately when observing new elements
@@ -97,7 +97,7 @@ const ReactIntersectionObserver = defineComponent<ReactIntersectionObserverProps
       }
       //@ts-ignore
       const node_ = isElement(node)?node:node.$el
-      observer.observe(node_);
+      observer?.observe(node_);
     });
   }
 

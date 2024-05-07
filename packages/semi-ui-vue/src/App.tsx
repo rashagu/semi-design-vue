@@ -133,7 +133,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<StepsDemo />*/}
         {/*<BacktopDemo />*/}
         {/*<AnchorDemo />*/}
-        <TabsDemo />
+        {/*<TabsDemo />*/}
         {/*<CardDemo >*/}
         {/*  {a.value}*/}
         {/*</CardDemo>*/}
@@ -193,7 +193,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        {/*<SelectDemo/>*/}
+        <SelectDemo/>
         {/*<SelectDemo2/>*/}
         {/*<SelectDemo3/>*/}
         {/*<TagDemo/>*/}
