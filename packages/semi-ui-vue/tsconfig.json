@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "rootDir": "./src/components",
+    "outDir": "./lib",
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -25,5 +27,11 @@
     "noImplicitAny": false
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/semi-foundation/**/*.ts", "**/__test__/*", "**/__stories__/*"]
+  "exclude": ["src/**/*.spec.*","src/**/_stories/.*","src/**/_stories/.*","src/**/__stories__/.*",
+    "src/main.ts", "script/*",
+    "src/Comp1",
+    "src/App.tsx",
+    "src/**/__test__",
+    "node_modules", "**/*.spec.ts", "**/semi-foundation/**/*.ts", "**/__test__/*", "**/__stories__/*"
+  ]
 }
