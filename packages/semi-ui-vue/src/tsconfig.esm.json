@@ -10,10 +10,14 @@
     "rootDir": "./components",
     "outDir": "../lib",
     "strictNullChecks": false,
+    "noEmit": true,
     "module": "ES6",
     "target": "ES6",
     "jsx": "preserve",
-    "types": ["vite/client", "node"],
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "jsxImportSource": "vue",
+    "types": ["vite/client", "node", "vue"],
     "noImplicitAny": false
   }
 }

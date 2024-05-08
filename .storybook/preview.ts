@@ -4,9 +4,9 @@ export const parameters = {
       return a.id.localeCompare(b.id, undefined, { numeric: true })
     },
   },
-  actions: {
-    argTypesRegex: "^on[A-Z].*",
-  },
+  // actions: {
+  //   argTypesRegex: "^on[A-Z].*",
+  // },
   controls: {
     matchers: {
       color: /(background|color)$/i,

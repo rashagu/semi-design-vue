@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build:vite": "rimraf lib && rimraf dist && vue-tsc --noEmit && tsc -b --force tsconfig.esm.json && node build.cjs && node scripts/compileLib.cjs && rimraf lib && vue-tsc --noEmit && vite build --emptyOutDir",
+    "build:vite": "rimraf lib && rimraf dist && vue-tsc --noEmit && vue-tsc -b --force tsconfig.esm.json && node build.cjs && node scripts/compileLib.cjs && rimraf lib && vue-tsc --noEmit && vite build --emptyOutDir",
     "preview": "vite preview"
   },
   "repository": {
