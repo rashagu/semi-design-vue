@@ -25,7 +25,9 @@ export interface ImageProps extends BaseProps{
     minZoom?: number;
     children?: VueJsxNode,
     imageID?: number;
-    setDownloadName?: (src: string) => string
+    setDownloadName?: (src: string) => string;
+    imgStyle?: CSSProperties;
+    imgCls?: string
 }
 
 export interface PreviewProps extends BaseProps {

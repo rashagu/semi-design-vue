@@ -181,12 +181,14 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
   let libRef = ref(null);
 
   const onUpdateValueFunc = props["onUpdate:value"]
+  const initValue = 'value' in props ? props.value : props.defaultValue;
   const state = reactive<TextAreaState>({
-    value: '',
+    value: initValue,
     isFocus: false, maxlength: 0,
     isHover: false,
     height: 0,
-    minlength: props.minlength
+    minlength: props.minlength,
+    cachedValue: props.value,
   })
   const {adapter: adapterInject} = useBaseComponent<TextAreaProps>(props, state)
 

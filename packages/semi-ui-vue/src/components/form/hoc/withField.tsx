@@ -29,7 +29,7 @@ import {
   Fragment,
   type FunctionalComponent,
   h,
-  onBeforeMount,
+  onBeforeMount, onBeforeUnmount,
   onMounted,
   type Ref,
   ref,
@@ -102,6 +102,7 @@ function withField<
       //     setValue(typeof initVal !== undefined ? initVal : null)
       // })
 
+      const isUnmounted = shallowRef(false);
       const rulesRef: Ref = ref(mergeProps({ ...props, ...truthProps }).rules);
       const validateRef: Ref = ref(truthProps.validate);
       const validatePromise = shallowRef<Promise<any> | null>(null);
@@ -115,6 +116,9 @@ function withField<
       };
 
       const updateError = (errors: any, callOpts?: CallOpts) => {
+        if (isUnmounted.value) {
+          return;
+        }
         let { field } = mergeProps({ ...props, ...truthProps });
         if (errors === getError()) {
           // When the inspection result is unchanged, no need to update, saving a forceUpdate overhead
@@ -198,7 +202,7 @@ function withField<
               (errors, fields) => {}
             )
             .then((res) => {
-              if (validatePromise.value !== rootPromise) {
+              if (isUnmounted.value || validatePromise.value !== rootPromise) {
                 return;
               }
               // validation passed
@@ -207,7 +211,7 @@ function withField<
               resolve({});
             })
             .catch((err) => {
-              if (validatePromise.value !== rootPromise) {
+              if (isUnmounted.value || validatePromise.value !== rootPromise) {
                 return;
               }
 
@@ -254,7 +258,7 @@ function withField<
           } else if (isPromise(maybePromisedErrors)) {
             maybePromisedErrors.then((result: any) => {
               // If the async validate is outdated (a newer validate occurs), the result should be discarded
-              if (validatePromise.value !== rootPromise) {
+              if (isUnmounted.value || validatePromise.value !== rootPromise) {
                 return;
               }
 
@@ -460,6 +464,9 @@ function withField<
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
       });
+      onBeforeUnmount(()=>{
+        isUnmounted.value = true;
+      })
 
       watch(
         () => truthProps.field,

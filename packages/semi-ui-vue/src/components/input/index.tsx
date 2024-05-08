@@ -180,9 +180,11 @@ export const VuePropsType = vuePropsMake(propTypes, defaultProps);
 
 // Vue在这里的话 state 更新会导致整体重新渲染 导致value 无法更新到最新的
 const Input = defineComponent<InputProps>((props, { slots }) => {
+
+  const initValue = 'value' in props ? props.value : props.defaultValue;
   const state = reactive<InputState>({
-    value: '',
-    cachedValue: null, // Cache current props.value value
+    value: initValue,
+    cachedValue: props.value, // Cache current props.value value
     disabled: false,
     props: {},
     paddingLeft: '',

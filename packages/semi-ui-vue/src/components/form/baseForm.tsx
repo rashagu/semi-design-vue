@@ -175,7 +175,7 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
     let formApi = foundation.getFormApi();
 
     if (props.getFormApi) {
-       props.getFormApi(formApi as FormApi);
+       props.getFormApi(formApi as unknown as FormApi<any>);
     }
 
     onMounted(()=>{
@@ -199,7 +199,7 @@ const Form = defineComponent<BaseFormProps>((props, {}) => {
             return createVNode(component, props_);
         }
         if (render) {
-            return render(props_ as FormFCChild);
+            return render(props_ as unknown as FormFCChild);
         }
         return slots.default?.(props_);
     }

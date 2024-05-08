@@ -218,7 +218,7 @@ const Image = defineComponent<ImageProps>((props, {}) => {
       fallback,
       placeholder,
       imageID,
-      setDownloadName,
+      setDownloadName, imgCls, imgStyle,
       ...restProps
     } = props;
     const outerStyle = Object.assign({width, height}, style);
@@ -245,9 +245,11 @@ const Image = defineComponent<ImageProps>((props, {}) => {
           src={isInGroup() && isLazyLoad() ? undefined : src}
           data-src={src}
           alt={alt}
+          style={imgStyle}
           class={cls(`${prefixCls}-img`, {
             [`${prefixCls}-img-preview`]: showPreviewCursor,
             [`${prefixCls}-img-error`]: loadStatus === "error",
+            [imgCls]: Boolean(imgCls),
           })}
           width={parseInt('' + width)}
           height={height ? parseInt('' + height) : height}

@@ -41,6 +41,7 @@ import {
   getFocusableElements,
   getMultinodeToFragment,
   isVNodeTypeNotSymbol,
+  runAfterTicks,
   stopPropagation,
 } from '../_utils';
 import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
@@ -496,6 +497,15 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
     mounted = true;
     getPopupContainer = props.getPopupContainer || context.value.getPopupContainer || defaultGetContainer;
     foundation.init();
+    runAfterTicks(()=>{
+      let triggerEle = triggerEl.value;
+      if (triggerEle) {
+        if (!(triggerEle instanceof HTMLElement)) {
+          triggerEle = triggerEle.$el;
+        }
+      }
+      foundation.updateStateIfCursorOnTrigger(triggerEle as HTMLElement);
+    }, 1);
   });
 
   onUnmounted(() => {

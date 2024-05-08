@@ -335,6 +335,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
       zIndex,
       getPopupContainer,
       visible,
+      modalContentClass,
       getContainerContext,
       ...restProps
     } = props;
@@ -387,7 +388,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
                         contentExtraProps={animationEventsNeedBind}
                         maskExtraProps={maskAnimationEventsNeedBind}
                         isFullScreen={state.isFullScreen}
-                        contentClassName={animationClassName}
+                        contentClassName={`${animationClassName} ${modalContentClass}`}
                         maskClassName={maskAnimationClassName}
                         className={classList}
                         getPopupContainer={getPopupContainer}

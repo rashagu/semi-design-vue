@@ -423,8 +423,8 @@ const TreeSelect = defineComponent<TreeSelectProps>(
         notifySelect: (selectKey, bool, node) => {
           props.onSelect && props.onSelect(selectKey, bool, node);
         },
-        notifySearch: (input, filteredExpandedKeys) => {
-          props.onSearch && props.onSearch(input, filteredExpandedKeys);
+        notifySearch: (input, filteredExpandedKeys, filteredNodes) => {
+          props.onSearch && props.onSearch(input, filteredExpandedKeys, filteredNodes);
         },
         cacheFlattenNodes: (bool) => {
           state.cachedFlattenNodes = bool ? cloneDeep(state.flattenNodes) : undefined;
@@ -612,16 +612,6 @@ const TreeSelect = defineComponent<TreeSelectProps>(
             props.multiple,
             valueEntities
           );
-        } else if (!isExpandControlled && needUpdateTreeData && props.value) {
-          // 当 treeData 已经设置具体的值，并且设置了 props.loadData ，则认为 treeData 的更新是因为 loadData 导致的
-          // 如果是因为 loadData 导致 treeData改变， 此时在这里重新计算 key 会导致为未选中的展开项目被收起
-          // 所以此时不需要重新计算 expandedKeys，因为在点击展开按钮时候已经把被展开的项添加到 expandedKeys 中
-          // When treeData has a specific value and props.loadData is set, it is considered that the update of treeData is caused by loadData
-          // If the treeData is changed because of loadData, recalculating the key here will cause the unselected expanded items to be collapsed
-          // So there is no need to recalculate expandedKeys at this time, because the expanded item has been added to expandedKeys when the expand button is clicked
-          if (!(prevState.treeData && prevState.treeData?.length > 0 && props.loadData)) {
-            newState.expandedKeys = calcExpandedKeysForValues(props.value, keyEntities, props.multiple, valueEntities);
-          }
         }
 
         if (!newState.expandedKeys) {
@@ -1172,9 +1162,10 @@ const TreeSelect = defineComponent<TreeSelectProps>(
         searchPosition,
         triggerRender,
         borderless,
+        checkRelation,
         ...rest
       } = props;
-      const { inputValue, selectedKeys, checkedKeys, keyEntities, isFocus } = state;
+      const { inputValue, selectedKeys, checkedKeys, keyEntities, isFocus, realCheckedKeys } = state;
       const filterable = Boolean(filterTreeNode);
       const useCustomTrigger = typeof triggerRender === 'function';
       const mouseEvent: VueHTMLAttributes = showClear
@@ -1209,11 +1200,19 @@ const TreeSelect = defineComponent<TreeSelectProps>(
             },
             className
           );
-      const triggerRenderKeys = multiple
-        ? normalizeKeyList([...checkedKeys], keyEntities, leafOnly, true)
-        : selectedKeys;
-      const inner = useCustomTrigger ? (
-        <Trigger
+      let inner: VNode | VNode[];
+      if (useCustomTrigger) {
+        let triggerRenderKeys = [];
+        if (multiple) {
+          if (checkRelation === 'related') {
+            triggerRenderKeys = normalizeKeyList([...checkedKeys], keyEntities, leafOnly, true);
+          } else if (checkRelation === 'unRelated') {
+            triggerRenderKeys = [...realCheckedKeys];
+          }
+        } else {
+          triggerRenderKeys = selectedKeys;
+        }
+        inner = <Trigger
           inputValue={inputValue}
           value={triggerRenderKeys.map((key: string) => get(keyEntities, [key, 'data']))}
           disabled={disabled}
@@ -1224,20 +1223,25 @@ const TreeSelect = defineComponent<TreeSelectProps>(
           componentProps={{ ...props }}
           onSearch={search}
           onRemove={removeTag}
-        />
-      ) : (
-        [
+        />;
+      } else {
+        inner = [
           <Fragment key={'prefix'}>{prefix || insetLabel ? renderPrefix() : null}</Fragment>,
           <Fragment key={'selection'}>
             <div class={`${prefixcls}-selection`}>{renderSelectContent()}</div>
           </Fragment>,
           <Fragment key={'suffix'}>{suffix ? renderSuffix() : null}</Fragment>,
           <Fragment key={'clearBtn'}>
-            {showClear || (isTriggerPositionSearch && inputValue) ? renderClearBtn() : null}
+            {
+              (showClear || (isTriggerPositionSearch && inputValue)) ?
+                renderClearBtn() :
+                null
+            }
           </Fragment>,
           <Fragment key={'arrow'}>{renderArrow()}</Fragment>,
-        ]
-      );
+        ];
+      }
+
       const tabindex = disabled ? null : 0;
       /**
        * Reasons for disabling the a11y eslint rule:
