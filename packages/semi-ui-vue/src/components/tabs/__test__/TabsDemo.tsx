@@ -1,4 +1,4 @@
-import { defineComponent, ref, h, Fragment, useSlots, reactive } from 'vue';
+import { defineComponent, ref, h, Fragment, useSlots, reactive, onMounted } from 'vue';
 import Tabs, { TabPane } from '../index';
 import { IconFile, IconGlobe, IconHelpCircle } from '@kousum/semi-icons-vue';
 import TabsDemo2 from './TabsDemo2';
@@ -31,16 +31,23 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
     newTabList.splice(closeIndex, 1);
     state.tabList = newTabList;
   }
+  const txt = ref(1)
+  onMounted(()=>{
+    setInterval(()=>{
+      txt.value++
+    }, 1000)
+  })
   return () => {
     return (
       <div>
+        {txt.value}
         <Tabs type="button" keepDOM={false}>
-          <TabPane tab="文档" itemKey="1">
+          <TabPane tab={'文sdfsdsf档' + txt.value} itemKey="1">
             <div>
               <div>文档</div>
             </div>
           </TabPane>
-          <TabPane tab="快速起步" itemKey="2">
+          <TabPane tab="快速dfdffdfx起步" itemKey="2">
             <div>
               <div>快速起步</div>
             </div>

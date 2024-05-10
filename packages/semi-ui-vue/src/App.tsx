@@ -69,6 +69,7 @@ import OverflowListDemoScroll from "./components/overflowList/__test__/OverflowL
 import BadgeDemo from "./components/badge/__test__/BadgeDemo";
 import CardDemo from "./components/card/__test__/CardDemo";
 import TabsDemo from "./components/tabs/__test__/TabsDemo";
+import TabsDemoVueSFC from "./components/tabs/__test__/TabsDemoVueSFC.vue";
 import AnchorDemo from "./components/anchor/__test__/AnchorDemo";
 import BacktopDemo from "./components/backtop/__test__/BacktopDemo";
 import StepsDemo from "./components/steps/__test__/StepsDemo";
@@ -133,7 +134,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<StepsDemo />*/}
         {/*<BacktopDemo />*/}
         {/*<AnchorDemo />*/}
-        {/*<TabsDemo />*/}
+        <TabsDemo />
+        <TabsDemoVueSFC/>
         {/*<CardDemo >*/}
         {/*  {a.value}*/}
         {/*</CardDemo>*/}
@@ -200,7 +202,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}
 
-        <InputDemo />
+        {/*<InputDemo />*/}
         {/*<TypeDemo />*/}
 
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}

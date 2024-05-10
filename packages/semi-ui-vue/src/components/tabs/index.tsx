@@ -216,7 +216,9 @@ const Tabs = defineComponent<TabsProps>(
         return tabList;
       }
       return childrenRef.value
-        .filter((child) => typeof child.type !== 'symbol')
+        .filter((child) => {
+          return typeof child.type !== 'symbol' && (child.type as any)?.name === 'TabPane';
+        })
         .map((child) => {
           if (child) {
             const { tab, icon, disabled, itemKey, closable } = child.props;
@@ -266,7 +268,13 @@ const Tabs = defineComponent<TabsProps>(
     return () => {
       const children = slots.default?.();
       const children_ = getFragmentChildren(slots);
-      if (children_.length !== childrenRef.value.length) {
+      if (
+        children_.length !== childrenRef.value.length ||
+        !isEqual(
+          children_.map((item) => item.props),
+          childrenRef.value.map((item) => item.props)
+        )
+      ) {
         childrenRef.value = children_;
       }
 
