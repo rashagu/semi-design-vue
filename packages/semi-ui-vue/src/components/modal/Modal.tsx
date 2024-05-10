@@ -48,7 +48,7 @@ export interface ModalReactProps extends ModalProps {
   closeIcon?: VNode | string;
   title?: VNode | string;
   content?: VNode | string;
-  footer?: VNode | string;
+  footer?: VNode | string | null;
   header?: VNode | string;
   onCancel?: (e: MouseEvent) => void | Promise<any>;
   onOk?: (e: MouseEvent) => void | Promise<any>;

@@ -1,23 +1,23 @@
-import {defineComponent, ref, h, Fragment, onMounted} from 'vue'
-import Avatar from '../index'
-import AvatarGroup from '../avatarGroup'
+import { defineComponent, ref, h, Fragment, onMounted } from 'vue';
+import Avatar from '../index';
+import AvatarGroup from '../avatarGroup';
 
 interface ExampleProps {
-  name?: string
+  name?: string;
 }
 
 export const vuePropsType = {
-  name: String
-}
-const AvatarDemo = defineComponent<ExampleProps>((props, {slots}) => {
-
-
-  const src = ref('https://sf6-cdn-tos.douyinstatic.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/avatarDemo.jpeg')
-  onMounted(()=>{
-    setInterval(()=>{
-      src.value = 'sd' + (new Date).toString()
-    }, 1000)
-  })
+  name: String,
+};
+const AvatarDemo = defineComponent<ExampleProps>((props, { slots }) => {
+  const src = ref(
+    'https://sf6-cdn-tos.douyinstatic.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/avatarDemo.jpeg'
+  );
+  onMounted(() => {
+    setInterval(() => {
+      src.value = 'sd' + new Date().toString();
+    }, 1000);
+  });
 
   // return ()=>{
   //   return <Avatar
@@ -28,26 +28,26 @@ const AvatarDemo = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div>
       <div>
-      <Avatar size="extra-extra-small" style={{ margin: 4 }}>
-        U
-      </Avatar>
-      <Avatar size="extra-small" style={{ margin: 4 }}>
-        U
-      </Avatar>
-      <Avatar size="small" style={{ margin: 4 }}>
-        U
-      </Avatar>
-      <Avatar size="default" style={{ margin: 4 }}>
-        U
-      </Avatar>
-      <Avatar style={{ margin: 4 }}>U</Avatar>
-      <Avatar size="large" style={{ margin: 4 }}>
-        U
-      </Avatar>
-      <Avatar size="extra-large" style={{ margin: 4 }}>
-        U
-      </Avatar>
-    </div>
+        <Avatar size="extra-extra-small" style={{ margin: 4 }}>
+          U
+        </Avatar>
+        <Avatar size="extra-small" style={{ margin: 4 }}>
+          U
+        </Avatar>
+        <Avatar size="small" style={{ margin: 4 }}>
+          U
+        </Avatar>
+        <Avatar size="default" style={{ margin: 4 }}>
+          U
+        </Avatar>
+        <Avatar style={{ margin: 4 }}>U</Avatar>
+        <Avatar size="large" style={{ margin: 4 }}>
+          U
+        </Avatar>
+        <Avatar size="extra-large" style={{ margin: 4 }}>
+          U
+        </Avatar>
+      </div>
       <div>
         <Avatar style={{ margin: 4 }}>AS</Avatar>
         <Avatar color="red" style={{ margin: 4 }}>
@@ -86,7 +86,7 @@ const AvatarDemo = defineComponent<ExampleProps>((props, {slots}) => {
         <Avatar style={{ backgroundColor: '#87d068' }}>YZ</Avatar>
       </AvatarGroup>
 
-      <br/>
+      <br />
       <AvatarGroup overlapFrom={'end'}>
         <Avatar color="red">LL</Avatar>
         <Avatar>CX</Avatar>
@@ -94,7 +94,7 @@ const AvatarDemo = defineComponent<ExampleProps>((props, {slots}) => {
         <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>ZL</Avatar>
         <Avatar style={{ backgroundColor: '#87d068' }}>YZ</Avatar>
       </AvatarGroup>
-      <br/>
+      <br />
       <AvatarGroup maxCount={3}>
         <Avatar color="red">LL</Avatar>
         <Avatar>CX</Avatar>
@@ -103,11 +103,10 @@ const AvatarDemo = defineComponent<ExampleProps>((props, {slots}) => {
         <Avatar style={{ backgroundColor: '#87d068' }}>YZ</Avatar>
       </AvatarGroup>
     </div>
-  )
-})
+  );
+});
 
 // @ts-ignore
-AvatarDemo.props = vuePropsType
+AvatarDemo.props = vuePropsType;
 
-export default AvatarDemo
-
+export default AvatarDemo;

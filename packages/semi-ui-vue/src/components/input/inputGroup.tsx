@@ -79,7 +79,7 @@ const InputGroup = defineComponent<InputGroupProps>((props, { slots }) => {
     );
   }
   return () => {
-    const { size, style, className, label, onBlur: groupOnBlur, onFocus: groupOnFocus, disabled: groupDisabled, ...rest } = props;
+    const { size, style, className, label, onBlur: groupOnBlur, onFocus: groupOnFocus, disabled: groupDisabled, labelPosition,  ...rest } = props;
     const children = slots.default ? slots.default() : null;
     const groupCls = cls(
       `${prefixCls}-group`,

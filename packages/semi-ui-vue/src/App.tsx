@@ -193,14 +193,14 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        <SelectDemo/>
+        {/*<SelectDemo/>*/}
         {/*<SelectDemo2/>*/}
         {/*<SelectDemo3/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}
 
-        {/*<InputDemo />*/}
+        <InputDemo />
         {/*<TypeDemo />*/}
 
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}

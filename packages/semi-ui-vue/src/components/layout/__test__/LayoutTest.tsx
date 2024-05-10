@@ -1,18 +1,16 @@
-import {defineComponent, ref, h, Fragment} from 'vue'
-import Layout, { LayoutHeader,LayoutContent,LayoutFooter,LayoutSider } from '../index';
+import { defineComponent, ref, h, Fragment } from 'vue';
+import Layout, { LayoutHeader, LayoutContent, LayoutFooter, LayoutSider } from '../index';
 
 interface ExampleProps {
-  name?: string
+  name?: string;
 }
 
 export const vuePropsType = {
-  name: String
-}
-const LayoutTest = defineComponent<ExampleProps>((props, {slots}) => {
-
-
+  name: String,
+};
+const LayoutTest = defineComponent<ExampleProps>((props, { slots }) => {
   return () => (
-    <div style={{width:'100%', height:'100vh'}}>
+    <div style={{ width: '100%', height: '100vh' }}>
       <Layout className="components-layout-demo">
         <LayoutHeader>Header</LayoutHeader>
         <Layout>
@@ -22,11 +20,7 @@ const LayoutTest = defineComponent<ExampleProps>((props, {slots}) => {
         <LayoutFooter>Footer</LayoutFooter>
       </Layout>
     </div>
-  )
-})
+  );
+});
 
-
-
-
-export default LayoutTest
-
+export default LayoutTest;
