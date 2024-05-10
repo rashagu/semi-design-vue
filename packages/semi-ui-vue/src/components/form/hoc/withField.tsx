@@ -788,7 +788,7 @@ function withField<
       props: {
         ...omit(
           { ...(Component as unknown as DefineComponent).props, ...(vuePropsType || {}) } || {},
-          'style',
+          // 'style',
           'class'
         ),
         label: [...PropTypes.node, PropTypes.func],
