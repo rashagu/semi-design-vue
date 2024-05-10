@@ -1,5 +1,11 @@
 # @kousum/vite-plugin-semi-theme
 
+## 0.10.0
+
+### Minor Changes
+
+- semi 2.57.0 & bug fix
+
 ## 0.9.2
 
 ### Patch Changes

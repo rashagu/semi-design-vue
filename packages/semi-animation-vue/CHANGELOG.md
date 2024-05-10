@@ -1,5 +1,11 @@
 # @kousum/semi-animation-vue
 
+## 0.10.0
+
+### Minor Changes
+
+- semi 2.57.0 & bug fix
+
 ## 0.9.1
 
 ### Patch Changes
