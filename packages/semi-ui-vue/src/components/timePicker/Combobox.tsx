@@ -232,7 +232,7 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
     return (
       <ScrollItemFormatOptionReturn
         ref={current => cacheRefCurrent('hour', current)}
-        mode={'wheel'}
+        mode={'normal'}
         transform={transformHour}
         className={className}
         list={hourOptionsAdj.map(option => formatOption(option, disabledOptions))}
@@ -262,7 +262,7 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
     return (
       <ScrollItemFormatOptionReturn
         ref={current => cacheRefCurrent('minute', current)}
-        mode={'wheel'}
+        mode={'normal'}
         transform={transformMinute}
         list={minuteOptions.map(option => formatOption(option, disabledOptions))}
         selectedIndex={minuteOptions.indexOf(minute)}
@@ -293,7 +293,7 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
     return (
       <ScrollItemFormatOptionReturn
         ref={current => cacheRefCurrent('second', current)}
-        mode={'wheel'}
+        mode={'normal'}
         transform={transformSecond}
         list={secondOptions.map(option => formatOption(option, disabledOptions))}
         selectedIndex={secondOptions.indexOf(second)}
@@ -329,7 +329,7 @@ const Combobox = defineComponent<ComboboxProps>((props, {}) => {
     return (
       <ScrollItemAMPMOptionItem
         ref={current => cacheRefCurrent('ampm', current)}
-        mode={'wheel'}
+        mode={'normal'}
         className={className}
         list={AMPMOptions}
         selectedIndex={selected}

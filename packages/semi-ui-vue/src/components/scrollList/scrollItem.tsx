@@ -221,11 +221,17 @@ function scrollItemFunc<T extends Item>() {
     }, msPerFrame * 5);
 
 
-    watch([() => props.selectedIndex, willSelectNode, list], (value, [prevPropsSelectedIndex]) => {
+    watch([
+      () => props.selectedIndex,
+      willSelectNode,
+      list,
+      selectedNode,
+      selector,
+      wrapper,
+    ], (value, [prevPropsSelectedIndex]) => {
 
       const {selectedIndex} = props;
-
-      if (props.selectedIndex !== selectedIndex) {
+      if (prevPropsSelectedIndex !== selectedIndex) {
         // smooth scroll to selected option
         const willSelectIndex = getIndexByNode(willSelectNode.value);
 
@@ -392,7 +398,10 @@ function scrollItemFunc<T extends Item>() {
       }
     };
 
-    const getIndexByNode = (node: Element) => findIndex(list.value.children, node);
+    // 必须用函数判断一下 不然返回值一直是0
+    const getIndexByNode = (node: Element) => findIndex(list.value.children, function(o) {
+      return o == node;
+    });
 
     const getNodeByIndex = (index: number) => {
       if (index > -1) {
@@ -422,7 +431,6 @@ function scrollItemFunc<T extends Item>() {
     const scrollToNode = (node: HTMLElement, duration: number) => {
       const wrapperHeight = wrapper.value.offsetHeight;
       const itemHeight = getItmHeight(node);
-      // TODO 问题点 node.offsetTop 这个是负的？？？？
       const targetTop = (node.offsetTop || list.value.children.length * itemHeight / 2) - (wrapperHeight - itemHeight) / 2;
 
       scrollToPos(targetTop, duration);
