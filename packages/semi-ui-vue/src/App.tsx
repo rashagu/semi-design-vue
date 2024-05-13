@@ -69,6 +69,7 @@ import OverflowListDemoScroll from "./components/overflowList/__test__/OverflowL
 import BadgeDemo from "./components/badge/__test__/BadgeDemo";
 import CardDemo from "./components/card/__test__/CardDemo";
 import TabsDemo from "./components/tabs/__test__/TabsDemo";
+import TabsDemo3 from "./components/tabs/__test__/TabsDemo3";
 import TabsDemoVueSFC from "./components/tabs/__test__/TabsDemoVueSFC.vue";
 import AnchorDemo from "./components/anchor/__test__/AnchorDemo";
 import BacktopDemo from "./components/backtop/__test__/BacktopDemo";
@@ -135,6 +136,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<BacktopDemo />*/}
         {/*<AnchorDemo />*/}
         {/*<TabsDemo />*/}
+        <TabsDemo3/>
         {/*<TabsDemoVueSFC/>*/}
         {/*<CardDemo >*/}
         {/*  {a.value}*/}
@@ -188,7 +190,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}
         {/*<DatePickerDemo />*/}
-        <TimePickerDemo />
+        {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
         {/*<CheckboxDemo />*/}

@@ -31,12 +31,14 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
     newTabList.splice(closeIndex, 1);
     state.tabList = newTabList;
   }
-  const txt = ref(1)
-  onMounted(()=>{
-    setInterval(()=>{
-      txt.value++
-    }, 1000)
-  })
+  const txt = ref(1);
+  onMounted(() => {
+    setInterval(() => {
+      txt.value++;
+    }, 1000);
+  });
+
+
   return () => {
     return (
       <div>
@@ -69,7 +71,7 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
             }
             itemKey="1"
           >
-            <TestComponent/>
+            <TestComponent />
           </TabPane>
           <TabPane
             tab={
@@ -94,7 +96,9 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
             帮助
           </TabPane>
         </Tabs>
-        <TabsDemo2/>
+        <TabsDemo2 />
+
+
       </div>
     );
   };
@@ -102,9 +106,9 @@ const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
 
 export default TabsDemo;
 
-const TestComponent = defineComponent(()=>{
-  return ()=>{
+const TestComponent = defineComponent(() => {
+  return () => {
     console.log('render');
-    return <span>sdsd</span>
-  }
-})
+    return <span>sdsd</span>;
+  };
+});
