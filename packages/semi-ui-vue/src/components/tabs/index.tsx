@@ -65,6 +65,7 @@ const propTypes: ComponentObjectPropsOptions<TabsProps> = {
   type: PropTypes.string as PropType<TabsProps['type']>,
   onTabClose: PropTypes.func as PropType<TabsProps['onTabClose']>,
   preventScroll: PropTypes.bool,
+  more: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
 };
 
 const defaultProps = {
@@ -293,6 +294,7 @@ const Tabs = defineComponent<TabsProps>(
         tabPaneMotion,
         tabPosition,
         type,
+        more,
         ...restProps
       } = props;
       const { panes, activeKey } = state;
@@ -319,6 +321,7 @@ const Tabs = defineComponent<TabsProps>(
         type,
         deleteTabItem: deleteTabItem,
         handleKeyDown: foundation.handleKeyDown,
+        more,
       } as TabBarProps;
 
       const tabBar = renderTabBar ? renderTabBar(tabBarProps, TabBar) : <TabBar {...tabBarProps} />;

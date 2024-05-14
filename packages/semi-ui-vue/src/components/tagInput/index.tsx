@@ -618,6 +618,9 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
       disabled,
       placeholder,
       validateStatus,
+      prefix,
+      insetLabel,
+      suffix,
     } = props;
 
     const {
@@ -636,6 +639,8 @@ const Index = defineComponent<TagInputProps>((props, {expose}) => {
       [`${prefixCls}-warning`]: validateStatus === 'warning',
       [`${prefixCls}-small`]: size === 'small',
       [`${prefixCls}-large`]: size === 'large',
+      [`${prefixCls}-with-prefix`]: !!prefix || !!insetLabel,
+      [`${prefixCls}-with-suffix`]: !!suffix,
     });
 
     const inputCls = cls(`${prefixCls}-wrapper-input`, `${prefixCls}-wrapper-input-${size}`);

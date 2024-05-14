@@ -27,13 +27,10 @@ import {
     defineComponent,
     getCurrentInstance,
     h, PropType,
-    ref,
     useSlots,
-    watch
 } from "vue";
 import {vuePropsMake} from "../../PropTypes";
 import {useBaseComponent} from "../../_base/baseComponent";
-import {FooterProps} from "../../image/interface";
 import {VueJsxNode} from "../../interface";
 
 export interface BaseRowProps {
@@ -150,7 +147,6 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake<BaseRowProps>(propTypes, defaultProps);
 const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
     const slots = useSlots();
-    const nodeRef = ref()
 
     const {adapter: adapterInject} = useBaseComponent<BaseRowProps>(props, {})
     function adapter_(): TableRowAdapter<BaseRowProps> {
@@ -198,10 +194,6 @@ const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
     //         console.log(props.styleTrue)
     //     }
     // }, {deep: true})
-
-    const _cacheNode = (node: any) => {
-        nodeRef.value = node;
-    };
 
     // Pass true to render the tree-shaped expand button
     const renderExpandIcon = (record: Record<string, any>) => {
@@ -357,10 +349,11 @@ const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
             expandableRow,
             level,
             expandedRow,
-            isSection
+            isSection,
+            rowKey
         } = props;
 
-        const BodyRow: any = components.body.row;
+        const BodyRow = components.body.row;
 
         const { className: customClassName, style: customStyle, ...rowProps } = onRow(record, index) || {};
 
@@ -369,9 +362,9 @@ const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
         const baseRowStyle = { ...style, ...customStyle };
 
         const rowCls =
-          typeof replaceClassName === 'string' && replaceClassName.length ?
-            replaceClassName :
-            classnames(
+          typeof replaceClassName === 'string' && replaceClassName.length
+            ? classnames(replaceClassName, customClassName)
+            : classnames(
               className,
               `${prefixCls}-row`,
               {
@@ -407,9 +400,10 @@ const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
             {...rowProps}
             style={baseRowStyle}
             className={rowCls}
-            ref={_cacheNode}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            // used for dnd-kit sortable
+            data-row-key={rowKey}
+            onMouseenter={handleMouseEnter}
+            onMouseleave={handleMouseLeave}
             onClick={handleClick}
           >
               {renderCells()}

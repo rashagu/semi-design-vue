@@ -109,7 +109,7 @@ const TableExpandedRow = defineComponent<TableExpandedRowProps>((props, {}) => {
             column = { ...restProps };
         }
 
-        if (get(components, 'body.cell') !== strings.DEFAULT_COMPONENTS.body.cell) {
+        if (get(components, 'body.cell') as any !== strings.DEFAULT_COMPONENTS.body.cell) {
             if (virtualized) {
                 set(props_, 'style.height', '100%');
             }

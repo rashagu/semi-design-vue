@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { get } from 'lodash';
 import { cssClasses } from '@douyinfe/semi-foundation/table/constants';
 import { flattenColumns } from '@douyinfe/semi-foundation/table/utils';
-import { ColumnProps } from './interface';
+import { ColumnProps, TableComponents } from './interface';
 import {defineComponent, h, useSlots} from "vue";
 import type {CSSProperties} from "vue";
 import {vuePropsMake} from "../PropTypes";
@@ -13,7 +13,7 @@ export interface ColGroupProps {
     prefixCls?: string;
     className?: string;
     style?: CSSProperties;
-    components?: Record<string, any>
+    components?: TableComponents['body']
 }
 
 const propTypes = {

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
 import Demo from "../__test__/TabsDemo";
+import TabsDemoMore from "../__test__/TabsDemoMore";
 
 const meta = {
   /* 👇 The title prop is optional.
@@ -12,6 +13,7 @@ const meta = {
     setup() {
       return ()=>(<div style={{padding: '10px'}}>
         <Demo />
+        <TabsDemoMore/>
       </div>);
     },
   }),

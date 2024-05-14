@@ -1,9 +1,9 @@
 <script setup>
 import {useData, useRouter} from 'vitepress';
-import {Layout, LayoutContent, LayoutHeader, LayoutSider, Nav} from '@kousum/semi-ui-vue';
+import {Layout, LayoutContent, LayoutHeader, LayoutSider, Nav, Space, Button} from '@kousum/semi-ui-vue';
 
 import {h, onMounted, provide, watch, computed} from 'vue';
-import {Icon, IconGithubLogo} from '@kousum/semi-icons-vue';
+import { Icon, IconGithubLogo, IconMoon, IconSun } from '@kousum/semi-icons-vue';
 import VPContent from 'vitepress/dist/client/theme-default/components/VPContent.vue';
 import InlineSvg from './InlineSvg.vue';
 import {GetNavData} from "./navLink";
@@ -457,7 +457,16 @@ function setThemeMode() {
     body.removeAttribute('theme-mode');
   }
 }
-
+function changeTheme() {
+  const body = window.document.body;
+  if (!isDark.value) {
+    body.setAttribute('theme-mode', 'dark');
+    isDark.value = true
+  } else {
+    body.removeAttribute('theme-mode');
+    isDark.value = false
+  }
+}
 watch(isDark, () => {
   setThemeMode()
 }, {})
@@ -489,14 +498,20 @@ provide('hero-image-slot-exists', null)
             ></path>
           </svg>
         </div>
-        <a :href="theme?.socialLinks[0].link">
-          <IconGithubLogo style="cursor: pointer" :size="'extra-large'"/>
-        </a>
+        <Space>
+          <div style="margin: 0 10px;" @click="changeTheme()">
+            <IconSun v-if="isDark" style="cursor: pointer" :size="'extra-large'"/>
+            <IconMoon v-else style="cursor: pointer" :size="'extra-large'"/>
+          </div>
+          <a :href="theme?.socialLinks[0].link">
+            <IconGithubLogo style="cursor: pointer" :size="'extra-large'"/>
+          </a>
+        </Space>
       </div>
     </LayoutHeader>
     <Layout className="in_body">
       <LayoutSider className="layout_sider">
-        <div class="layout_nav" style="height: calc(100vh - 60px); background-color: white">
+        <div class="layout_nav" style="height: calc(100vh - 60px); background-color: var(--semi-color-bg-0)">
           <Nav :defaultOpenKeys="navItem.map(item=>item.itemKey)" style="height: calc(100%);width: 280px;" @select="navSelect">
             <GetNavData :navItem="navItem" />
           </Nav>
@@ -604,7 +619,7 @@ table {
 .layout_header {
   position: fixed;
   z-index: 12;
-  background-color: white;
+  background-color: var(--semi-color-bg-0);
   top: 0;
   width: 100%;
 }

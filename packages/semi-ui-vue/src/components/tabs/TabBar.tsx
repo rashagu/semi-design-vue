@@ -3,16 +3,18 @@ import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/tabs/constants';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import OverflowList from '../overflowList';
-import Dropdown, {DropdownItem, DropdownMenu} from '../dropdown';
+import Dropdown, { DropdownItem, DropdownMenu, DropDownMenuItem, type DropdownProps } from '../dropdown';
 import Button from '../button';
 import { TabBarProps, PlainTab } from './interface';
 import { isEmpty, pick } from 'lodash';
-import { IconChevronRight, IconChevronLeft, IconClose } from '@kousum/semi-icons-vue';
+import { IconChevronRight, IconChevronLeft, IconClose, IconChevronDown } from '@kousum/semi-icons-vue';
 import { getUuidv4 } from '@douyinfe/semi-foundation/utils/uuid';
 import TabItem from './TabItem';
-import {ComponentObjectPropsOptions, defineComponent, h, onMounted, PropType, reactive, useSlots, VNode} from 'vue';
+import { ComponentObjectPropsOptions, defineComponent, h, onMounted, PropType, reactive, useSlots, VNode } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
+import { Locale } from '../locale/interface';
+import LocaleConsumer from '../locale/localeConsumer';
 
 export interface TabBarState {
   endInd: number;
@@ -25,7 +27,8 @@ export interface OverflowItem extends PlainTab {
   key: string;
   active: boolean;
 }
-const propTypes:ComponentObjectPropsOptions<TabBarProps> = {
+
+const propTypes: ComponentObjectPropsOptions<TabBarProps> = {
   activeKey: PropTypes.string,
   className: PropTypes.string,
   collapsible: PropTypes.bool,
@@ -38,11 +41,12 @@ const propTypes:ComponentObjectPropsOptions<TabBarProps> = {
   type: PropTypes.string as PropType<TabBarProps['type']>,
   closable: PropTypes.bool,
   deleteTabItem: PropTypes.func as PropType<TabBarProps['deleteTabItem']>,
+  more: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   handleKeyDown: PropTypes.func as PropType<TabBarProps['handleKeyDown']>,
 };
 
 export const vuePropsType = vuePropsMake(propTypes, {});
-const TabBar = defineComponent<TabBarProps>((props, {attrs}) => {
+const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
   const slots = useSlots();
   const state = reactive({
     endInd: props.list.length,
@@ -87,7 +91,7 @@ const TabBar = defineComponent<TabBarProps>((props, {attrs}) => {
       const key = _getItemKey(itemKey);
       // eslint-disable-next-line max-len
       const tabItem = document.querySelector(
-        `[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey=${JSON.stringify(key)}]`
+        `[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey=${JSON.stringify(key)}]`,
       );
       tabItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
     }
@@ -97,7 +101,7 @@ const TabBar = defineComponent<TabBarProps>((props, {attrs}) => {
     props.handleKeyDown(event, itemKey, closable);
   };
 
-  const renderTabItem = (panel: PlainTab): VueJsxNode => {
+  const renderTabItem = (panel: PlainTab): VNode => {
     const { size, type, deleteTabItem, handleKeyDown, tabPosition } = props;
     const isSelected = _isActive(panel.itemKey);
 
@@ -126,7 +130,7 @@ const TabBar = defineComponent<TabBarProps>((props, {attrs}) => {
     const key = _getItemKey(lastItem.itemKey);
     // eslint-disable-next-line max-len
     const tabItem = document.querySelector(
-      `[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey=${JSON.stringify(key)}]`
+      `[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey=${JSON.stringify(key)}]`,
     );
     tabItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
   };
@@ -215,8 +219,69 @@ const TabBar = defineComponent<TabBarProps>((props, {attrs}) => {
   const _isActive = (key: string): boolean => key === props.activeKey;
 
   const _getItemKey = (key: string): string => `${key}-bar`;
+
+
+  const renderWithMoreTrigger = (): VNode => {
+    const { list, more } = props;
+    let tabElements: VNode[] = [];
+    let moreTrigger: VNode = <div class={cls({
+      [`${cssClasses.TABS_BAR}-more-trigger`]: true,
+      [`${cssClasses.TABS_BAR}-more-trigger-${props.type}`]: true,
+    })}>
+      <LocaleConsumer componentName="Tabs">
+        {(locale: Locale['Tabs'], localeCode: Locale['code']) => (
+          <div class={`${cssClasses.TABS_BAR}-more-trigger-content`}>
+            <div>{locale.more}</div>
+            <IconChevronDown className={`${cssClasses.TABS_BAR}-more-trigger-content-icon`} />
+          </div>
+        )}
+      </LocaleConsumer>
+    </div>;
+    let keepCount: number;
+    if (typeof more === 'number') {
+      keepCount = list.length - Math.min(more, list.length);
+      tabElements = list.slice(0, keepCount).map(panel => renderTabItem(panel));
+    } else if (typeof more === 'object') {
+      keepCount = list.length - Math.min(more.count, list.length);
+      tabElements = list.slice(0, keepCount).map(panel => renderTabItem(panel));
+      if (more.render) {
+        moreTrigger = more.render();
+      }
+
+    } else if (more !== undefined) {
+      throw new Error('[Semi Tabs]: invalid tab props format: more');
+    }
+
+    return <>
+      {tabElements}
+      {renderMoreDropdown(list.slice(keepCount), more?.['dropdownProps'], moreTrigger)}
+    </>;
+  };
+
+  const renderMoreDropdown = (panels: PlainTab[], dropDownProps: DropdownProps, trigger: VNode): VNode => {
+
+    return <Dropdown
+      trigger={'hover'}
+      showTick
+      position={'bottomLeft'}
+      className={`${cssClasses.TABS_BAR}-more-dropdown-${props.type}`}
+      clickToHide={true}
+      menu={panels.map(panel => ({
+        node: 'item',
+        name: panel.tab as string,
+        icon: panel.icon,
+        onClick: (e) => props.onTabClick(panel.itemKey, e),
+        active: props.activeKey === panel.itemKey,
+      })) as DropDownMenuItem[]}
+      {...dropDownProps}
+    >
+      {trigger}
+    </Dropdown>;
+  };
+
+
   return () => {
-    const { type, style, className, list, tabPosition, collapsible, handleKeyDown, ...restProps } = props;
+    const { type, style, className, list, tabPosition, more, collapsible, handleKeyDown, ...restProps } = props;
     const classNames = cls(className, {
       [cssClasses.TABS_BAR]: true,
       [cssClasses.TABS_BAR_LINE]: type === 'line',
@@ -227,7 +292,7 @@ const TabBar = defineComponent<TabBarProps>((props, {attrs}) => {
     });
 
     const extra = renderExtra();
-    const contents = collapsible ? renderCollapsedTab() : renderTabComponents(list);
+    const contents = collapsible ? renderCollapsedTab() : (more ? renderWithMoreTrigger() : renderTabComponents(list));
     return (
       <div
         role="tablist"
@@ -244,7 +309,7 @@ const TabBar = defineComponent<TabBarProps>((props, {attrs}) => {
   };
 }, {
   props: vuePropsType,
-  name: 'TabBar'
+  name: 'TabBar',
 });
 
 

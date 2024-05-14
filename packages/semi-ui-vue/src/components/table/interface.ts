@@ -22,7 +22,7 @@ import type {
 } from '@douyinfe/semi-foundation/table/foundation';
 import type { ScrollDirection, CSSDirection } from '@kousum/vue3-window';
 import type {VueJsxNode} from "../interface";
-import type {CSSProperties, HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes, VNode} from "vue"
+import { CSSProperties, DefineSetupFnComponent, HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes, VNode } from 'vue';
 import type { ColumnFilterProps } from './ColumnFilter';
 
 export interface TableProps<RecordType extends Record<string, any> = any> extends BaseProps {
@@ -192,7 +192,7 @@ export interface OnRowReturnObject {
     style?: CSSProperties;
     onClick?: (e: MouseEvent) => void
 }
-export interface OnGroupedRowReturnObject extends Omit<HTMLAttributes, 'className'> {
+export interface OnGroupedRowReturnObject extends HTMLAttributes {
     [x: string]: any;
     style?: CSSProperties;
     onClick?: (e: MouseEvent) => void
@@ -210,29 +210,31 @@ export interface Data {
     key?: string | number
 }
 
+
+
 export interface TableComponents {
-    table?: VueJsxNode;
+    table?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>;
     header?: {
-        outer?: VueJsxNode;
-        wrapper?: VueJsxNode;
-        row?: VueJsxNode;
-        cell?: VueJsxNode
+        outer?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>;
+        wrapper?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>;
+        row?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>;
+        cell?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>
     };
     body?: {
-        outer?: VueJsxNode;
-        wrapper?: VueJsxNode;
-        row?: VueJsxNode;
-        cell?: VueJsxNode;
+        outer?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>;
+        wrapper?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>;
+        row?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>;
+        cell?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>;
         colgroup?: {
-            wrapper?: VueJsxNode;
-            col?: VueJsxNode
+            wrapper?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>;
+            col?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>
         }
     };
     footer?: {
-        wrapper?: VueJsxNode;
-        row?: VueJsxNode;
-        cell?: VueJsxNode;
-        outer?: VueJsxNode
+        wrapper?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>;
+        row?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>;
+        cell?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>;
+        outer?: DefineSetupFnComponent<HTMLAttributes & {className?: string}>
     }
 }
 

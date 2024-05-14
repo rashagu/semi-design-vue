@@ -1,7 +1,8 @@
 import { Motion } from '../_base/base';
 import TabBar from './TabBar';
 import {VueJsxNode} from "../interface";
-import {CSSProperties} from "vue";
+import { CSSProperties, VNode } from 'vue';
+import { DropdownProps } from "../dropdown";
 
 export type TabType = 'line' | 'card' | 'button';
 export type TabSize = 'small' | 'medium' | 'large';
@@ -38,7 +39,9 @@ export interface TabsProps {
     tabPosition?: TabPosition;
     type?: TabType;
     onTabClose?: (tabKey: string) => void;
-    preventScroll?: boolean
+    preventScroll?: boolean;
+    more?: number | { count: number; render?: () => VNode; dropdownProps?: DropdownProps }
+
 }
 
 export interface TabBarProps {
@@ -56,7 +59,8 @@ export interface TabBarProps {
     dropdownStyle?: CSSProperties;
     closable?: boolean;
     deleteTabItem?: (tabKey: string, event: MouseEvent) => void;
-    handleKeyDown?: (event: KeyboardEvent, itemKey: string, closable: boolean) => void
+    handleKeyDown?: (event: KeyboardEvent, itemKey: string, closable: boolean) => void;
+    more?: TabsProps['more']
 }
 
 export interface TabPaneProps {
@@ -86,6 +90,6 @@ export interface TabContextValue {
     panes?: PlainTab[];
     tabPaneMotion?: boolean;
     tabPosition?: TabPosition;
-    prevActiveKey?: string|null;
+    prevActiveKey?: string | null;
     forceDisableMotion?: boolean
 }

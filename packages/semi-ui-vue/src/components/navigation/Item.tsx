@@ -26,6 +26,7 @@ import {
 } from "vue";
 import {useNavContext} from "./nav-context/Consumer";
 import {VueJsxNode} from "../interface";
+import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 
 const clsPrefix = `${cssClasses.PREFIX}-item`;
 
@@ -319,6 +320,7 @@ const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
                 onMouseenter={onMouseEnter}
                 onMouseleave={onMouseLeave}
                 onKeypress={handleKeyPress}
+                {...getDataAttr(props)}
               >
                   {itemChildren}
               </li>

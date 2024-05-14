@@ -10,7 +10,7 @@ const {htmlTypes, btnTypes} = strings;
 
 export type HtmlType = 'button' | 'reset' | 'submit';
 export type Size = 'default' | 'small' | 'large';
-export type Theme = 'solid' | 'borderless' | 'light';
+export type Theme = 'solid' | 'borderless' | 'light' | 'outline';
 export type Type = 'primary' | 'secondary' | 'tertiary' | 'warning' | 'danger';
 
 
@@ -129,6 +129,7 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
           [`${prefixCls}-block`]: block,
           [`${prefixCls}-circle`]: circle,
           [`${prefixCls}-borderless`]: theme === 'borderless',
+          [`${prefixCls}-outline`]: theme === "outline",
           [`${prefixCls}-${type}-disabled`]: disabled && type,
         },
         className

@@ -5,7 +5,16 @@ import { noop, isFunction, get } from 'lodash';
 import { shouldShowEllipsisTitle } from '@douyinfe/semi-foundation/table/utils';
 
 import TableHeaderRow from './TableHeaderRow';
-import {ComponentObjectPropsOptions, defineComponent, h, PropType, reactive, useSlots} from "vue";
+import {
+    ComponentObjectPropsOptions,
+    defineComponent,
+    DefineSetupFnComponent,
+    h,
+    PropType,
+    reactive,
+    useSlots,
+    VNode,
+} from 'vue';
 import {VueJsxNode} from "../interface";
 import {vuePropsMake} from "../PropTypes";
 import {TableSelectionCellProps} from "./ColumnSelection";
@@ -156,7 +165,7 @@ const TableHeader = defineComponent<TableHeaderProps>((props, {}) => {
         const { components, columns, prefixCls, fixed, onHeaderRow, forwardedRef, selectedRowKeysSet } = props;
 
         const rows = parseHeaderRows(columns);
-        const HeaderWrapper: any = components.header.wrapper;
+        const HeaderWrapper = components.header.wrapper;
 
         return (
           <HeaderWrapper className={`${prefixCls}-thead`} ref={forwardedRef}>

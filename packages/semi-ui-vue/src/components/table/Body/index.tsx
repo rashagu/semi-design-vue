@@ -903,8 +903,8 @@ const Body = defineComponent<BodyProps>((props, {}) => {
         const tableStyle: {
             width?: string | number
         } = {};
-        const Table = get(components, 'body.outer', 'table') as any;
-        const BodyWrapper = get(components, 'body.wrapper') as any || 'tbody';
+        const Table = get(components, 'body.outer', 'table');
+        const BodyWrapper = get(components, 'body.wrapper') || 'tbody';
 
         if (y) {
             bodyStyle.maxHeight = typeof y === 'string'? y: y + 'px';
@@ -948,7 +948,7 @@ const Body = defineComponent<BodyProps>((props, {}) => {
                   {includeHeader && showHeader ? (
                     <TableHeader {...props} ref={headerRef} components={components} columns={columns} />
                   ) : null}
-                  <BodyWrapper ref={props.bodyWrapperRef} className={`${prefixCls}-tbody`} onScroll={onScroll}>
+                  <BodyWrapper ref={props.bodyWrapperRef} className={`${prefixCls}-tbody`} onScroll={onScroll as any}>
                       {isMap(groups) ? renderGroupedRows() : renderBodyRows(dataSource)}
                   </BodyWrapper>
               </Table>

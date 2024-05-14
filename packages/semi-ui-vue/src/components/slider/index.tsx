@@ -161,9 +161,11 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
       getSliderLengths: () => {
         if (sliderEl && sliderEl.value) {
           const rect = sliderEl.value.getBoundingClientRect();
+          const offsetParentRect = sliderEl.value.offsetParent?.getBoundingClientRect();
+
           const offset = {
-            x: sliderEl.value.offsetLeft,
-            y: sliderEl.value.offsetTop,
+            x: offsetParentRect ? (rect.left - offsetParentRect.left): sliderEl.value.offsetLeft,
+            y: offsetParentRect ? (rect.top - offsetParentRect.top) : sliderEl.value.current.offsetTop,
           };
           return {
             sliderX: offset.x,
@@ -220,7 +222,9 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
           callback?.();
         });
       },
-      notifyChange: (cbValue: number | number[]) => props.onChange(cbValue),
+      notifyChange: (cbValue: number | number[]) => {
+        props.onChange(Array.isArray(cbValue) ? [...cbValue].sort() : cbValue);
+      },
       setDragging: (value: boolean[]) => {
         dragging = value;
       },
@@ -602,15 +606,15 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
     const percentInfo = foundation.getMinAndMaxPercent(state.currentValue);
     const minPercent = percentInfo.min;
     const maxPercent = percentInfo.max;
-    let trackStyle: CSSProperties = !vertical
-      ? {
-          width: range ? `${(maxPercent - minPercent) * 100}%` : `${minPercent * 100}%`,
-          left: range ? `${minPercent * 100}%` : 0,
-        }
-      : {
-          height: range ? `${(maxPercent - minPercent) * 100}%` : `${minPercent * 100}%`,
-          top: range ? `${minPercent * 100}%` : 0,
-        };
+    let trackStyle: CSSProperties = !vertical ?
+      {
+        width: range ? `${Math.abs(maxPercent - minPercent) * 100}%` : `${minPercent * 100}%`,
+        left: range ? `${Math.min(minPercent, maxPercent) * 100}%` : 0,
+      } :
+      {
+        height: range ? `${Math.abs(maxPercent - minPercent) * 100}%` : `${minPercent * 100}%`,
+        top: range ? `${Math.min(minPercent, maxPercent) * 100}%` : 0,
+      };
     trackStyle = included ? trackStyle : {};
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -722,9 +726,10 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
       [`${prefixCls}`]: !vertical,
       [cssClasses.VERTICAL]: vertical,
     });
-    const ariaLabel = range
-      ? `Range: ${_getAriaValueText(currentValue[0], 0)} to ${_getAriaValueText(currentValue[1], 1)}`
-      : undefined;
+
+    const fixedCurrentValue = Array.isArray(currentValue) ? [...currentValue].sort() : currentValue;
+    const ariaLabel = range ? `Range: ${_getAriaValueText(fixedCurrentValue[0], 0)} to ${_getAriaValueText(fixedCurrentValue[1], 1)}` : undefined;
+
     const slider = (
       <div
         class={wrapperClass}
