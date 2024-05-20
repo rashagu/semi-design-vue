@@ -6,6 +6,7 @@ import {Locale} from "../../locale/interface";
 import Month from "../month";
 import YearAndMonth from "../yearAndMonth";
 import Navigation from "../navigation";
+import { Form, FormDatePicker } from '../../form';
 
 interface ExampleProps {
   name?: string
@@ -30,6 +31,7 @@ const DatePickerDemo = defineComponent<ExampleProps>((props, {}) => {
   ]
   const dateValue = ref("2023-01-01")
 
+
   return () => (
     <div>
       <DatePicker value={dateValue.value} onChange={(date, dateString) => {
@@ -49,6 +51,9 @@ const DatePickerDemo = defineComponent<ExampleProps>((props, {}) => {
       {/*// @ts-ignore*/}
       <YearAndMonth locale={Zh_CN['DatePicker']} currentYear={{ left: 0,  right: 0 }} currentMonth={{ left: 0,  right: 0 }}></YearAndMonth>
       <Navigation></Navigation>
+      <Form>
+        <FormDatePicker field='ssss'/>
+      </Form>
     </div>
   )
 })

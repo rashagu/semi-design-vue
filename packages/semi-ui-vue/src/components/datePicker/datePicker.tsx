@@ -606,7 +606,9 @@ const DatePicker = defineComponent<DatePickerProps>((props, {}) => {
     foundation.handleInputFocus(...args)
   };
   const handleInputClear: DatePickerFoundation['handleInputClear'] = e => foundation.handleInputClear(e);
-  const handleTriggerWrapperClick: DatePickerFoundation['handleTriggerWrapperClick'] = e => foundation.handleTriggerWrapperClick(e);
+  const handleTriggerWrapperClick: DatePickerFoundation['handleTriggerWrapperClick'] = e => {
+    foundation.handleTriggerWrapperClick(e)
+  };
   const handleSetRangeFocus: DatePickerFoundation['handleSetRangeFocus'] = rangeInputFocus => foundation.handleSetRangeFocus(rangeInputFocus);
   const handleRangeInputBlur = (value: any, e: any) => foundation.handleRangeInputBlur(value, e);
   const handleRangeInputClear: DatePickerFoundation['handleRangeInputClear'] = e => foundation.handleRangeInputClear(e);

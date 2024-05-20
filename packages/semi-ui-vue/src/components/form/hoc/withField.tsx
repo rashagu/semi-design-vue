@@ -29,7 +29,8 @@ import {
   Fragment,
   type FunctionalComponent,
   h,
-  onBeforeMount, onBeforeUnmount,
+  onBeforeMount,
+  onBeforeUnmount,
   onMounted,
   type Ref,
   ref,
@@ -65,10 +66,15 @@ function withField<
   opts?: WithFieldOption,
   vuePropsType?: ComponentObjectPropsOptions<C>
 ): DefineSetupFnComponent<T> {
-  //@ts-ignore
-  const SemiField = defineComponent<T>((truthProps, { attrs: props }) => {
+  const SemiField = defineComponent<T>(
+    //@ts-ignore
+    (truthProps, { attrs: props }) => {
       const slots = useSlots();
-      const {hasInProps} = useHasInProps()
+      const { getProps, hasInProps } = useHasInProps();
+
+      function _getProps() {
+        return getProps({ ...props, ...truthProps });
+      }
 
       // grab formUpdater (the api for field to read/modify FormState) from context
       const { context: updater } = useFormUpdaterContext();
@@ -77,20 +83,20 @@ function withField<
 
       // To prevent user forgetting to pass the field, use undefined as the key, and updater.value.getValue will get the wrong value.
       let initValueInFormOpts =
-        typeof mergeProps({ ...props, ...truthProps }).field !== 'undefined'
-          ? updater.value.getValue(mergeProps({ ...props, ...truthProps }).field)
+        typeof mergeProps(_getProps()).field !== 'undefined'
+          ? updater.value.getValue(mergeProps(_getProps()).field)
           : undefined; // Get the init value of form from formP rops.init Values Get the initial value set in the initValues of Form
       let initVal =
-        typeof mergeProps({ ...props, ...truthProps }).initValue !== 'undefined'
-          ? mergeProps({ ...props, ...truthProps }).initValue
+        typeof mergeProps(_getProps()).initValue !== 'undefined'
+          ? mergeProps(_getProps()).initValue
           : initValueInFormOpts;
 
       try {
         if (arrayFieldState.value) {
           initVal =
             arrayFieldState.value.shouldUseInitValue &&
-            typeof mergeProps({ ...props, ...truthProps }).initValue !== 'undefined'
-              ? mergeProps({ ...props, ...truthProps }).initValue
+            typeof mergeProps(_getProps()).initValue !== 'undefined'
+              ? mergeProps(_getProps()).initValue
               : initValueInFormOpts;
         }
       } catch (err) {}
@@ -105,14 +111,14 @@ function withField<
       // })
 
       const isUnmounted = shallowRef(false);
-      const rulesRef: Ref = ref(mergeProps({ ...props, ...truthProps }).rules);
+      const rulesRef: Ref = ref(mergeProps(_getProps()).rules);
       const validateRef: Ref = ref(truthProps.validate);
       const validatePromise = shallowRef<Promise<any> | null>(null);
 
       // notNotify is true means that the onChange of the Form does not need to be triggered
       // notUpdate is true means that this operation does not need to trigger the forceUpdate
       const updateTouched = (isTouched: boolean, callOpts?: CallOpts) => {
-        let { field } = mergeProps({ ...props, ...truthProps });
+        let { field } = mergeProps(_getProps());
         setTouched(isTouched);
         updater.value.updateStateTouched(field, isTouched, callOpts);
       };
@@ -121,7 +127,7 @@ function withField<
         if (isUnmounted.value) {
           return;
         }
-        let { field } = mergeProps({ ...props, ...truthProps });
+        let { field } = mergeProps(_getProps());
         if (errors === getError()) {
           // When the inspection result is unchanged, no need to update, saving a forceUpdate overhead
           // When errors is an array, deepEqual is not used, and it is always treated as a need to update
@@ -143,7 +149,7 @@ function withField<
       }
 
       const updateValue = (val: any, callOpts?: CallOpts) => {
-        let { field, allowEmpty } = mergeProps({ ...props, ...truthProps });
+        let { field, allowEmpty } = mergeProps(_getProps());
         allowEmpty = getAllowEmpty(allowEmpty);
         setValue(val);
         let newOpts = {
@@ -169,12 +175,15 @@ function withField<
       // Execute the validation rules specified by rules
       const _validateInternal = (val: any, callOpts: CallOpts) => {
         let latestRules = rulesRef.value || [];
-        const validator = generateValidatesFromRules(mergeProps({ ...props, ...truthProps }).field, latestRules);
+        const validator = generateValidatesFromRules(
+          mergeProps(_getProps()).field,
+          latestRules
+        );
         const model = {
-          [mergeProps({ ...props, ...truthProps }).field]: val,
+          [mergeProps(_getProps()).field]: val,
         };
 
-        let { stopValidateWithError } = mergeProps({ ...props, ...truthProps });
+        let { stopValidateWithError } = mergeProps(_getProps());
         let formProps = updater.value.getFormProps([
           'labelPosition',
           'labelWidth',
@@ -293,8 +302,8 @@ function withField<
       const fieldValidate = (val: any, callOpts?: CallOpts) => {
         let finalVal = val;
         let latestRules = rulesRef.value;
-        if (mergeProps({ ...props, ...truthProps }).transform) {
-          finalVal = mergeProps({ ...props, ...truthProps }).transform(val);
+        if (mergeProps(_getProps()).transform) {
+          finalVal = mergeProps(_getProps()).transform(val);
         }
         if (validateRef.value) {
           return _validate(finalVal, updater.value.getValue(), callOpts);
@@ -316,8 +325,8 @@ function withField<
           return;
         }
 
-        let { trigger, emptyValue } = mergeProps({ ...props, ...truthProps });
-        let { allowEmptyString, allowEmpty } = mergeProps({ ...props, ...truthProps });
+        let { trigger, emptyValue } = mergeProps(_getProps());
+        let { allowEmptyString, allowEmpty } = mergeProps(_getProps());
         allowEmpty = getAllowEmpty(allowEmpty);
         let { options, shouldInject } = mergeOptions(opts, props);
         let fnKey = options.onKeyChangeFnName;
@@ -335,8 +344,8 @@ function withField<
         }
 
         // User can use convert function to updateValue before Component UI render
-        if (typeof mergeProps({ ...props, ...truthProps }).convert === 'function') {
-          val = mergeProps({ ...props, ...truthProps }).convert(val);
+        if (typeof mergeProps(_getProps()).convert === 'function') {
+          val = mergeProps(_getProps()).convert(val);
         }
 
         // TODO: allowEmptyString split into allowEmpty, emptyValue
@@ -388,7 +397,7 @@ function withField<
       };
 
       const handleBlur = (e: FocusEvent) => {
-        let { trigger } = mergeProps({ ...props, ...truthProps });
+        let { trigger } = mergeProps(_getProps());
         let formProps = updater.value.getFormProps([
           'labelPosition',
           'labelWidth',
@@ -428,7 +437,7 @@ function withField<
       }
 
       const [cursor, setCursor, getCursor] = useStateWithGetter(0);
-      const status = ref(mergeProps({ ...props, ...truthProps }).validateStatus); // use props.validateStatus to init
+      const status = ref(mergeProps(_getProps()).validateStatus); // use props.validateStatus to init
       function setStatus(val) {
         status.value = val;
       }
@@ -437,7 +446,7 @@ function withField<
       watch(
         [() => truthProps.rules, () => truthProps.validate],
         () => {
-          rulesRef.value = mergeProps({ ...props, ...truthProps }).rules;
+          rulesRef.value = mergeProps(_getProps()).rules;
           validateRef.value = truthProps.validate;
         },
         { immediate: true }
@@ -445,7 +454,7 @@ function withField<
 
       // exec validate once when trigger inlcude 'mount'
       useIsomorphicEffect(() => {
-        let { trigger } = mergeProps({ ...props, ...truthProps });
+        let { trigger } = mergeProps(_getProps());
         let formProps = updater.value.getFormProps([
           'labelPosition',
           'labelWidth',
@@ -466,9 +475,9 @@ function withField<
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
       });
-      onBeforeUnmount(()=>{
+      onBeforeUnmount(() => {
         isUnmounted.value = true;
-      })
+      });
 
       watch(
         () => truthProps.field,
@@ -479,7 +488,7 @@ function withField<
             allowEmptyString,
             allowEmpty,
             keepState,
-          } = mergeProps({ ...props, ...truthProps });
+          } = mergeProps(_getProps());
           allowEmpty = getAllowEmpty(allowEmpty);
           /** Field level maintains a separate layer of data, which is convenient for Form to control Field to update the UI */
           // The field level maintains a separate layer of data, which is convenient for the Form to control the Field for UI updates.
@@ -519,7 +528,7 @@ function withField<
 
           // eslint-disable-next-line react-hooks/exhaustive-deps
           onCleanup(() => {
-            updater.value.unRegister(mergeProps({ ...props, ...truthProps }).field);
+            updater.value.unRegister(mergeProps(_getProps()).field);
           });
         },
         { immediate: true }
@@ -560,7 +569,7 @@ function withField<
           extraTextPosition,
           pure,
           rest: rest_,
-        } = mergeProps({ ...props, ...truthProps });
+        } = mergeProps(_getProps());
 
         const rest = truthProps.prefix ? { ...rest_, prefix: truthProps.prefix } : rest_;
         let { options, shouldInject } = mergeOptions(opts, props);
