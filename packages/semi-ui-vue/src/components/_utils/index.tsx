@@ -234,7 +234,7 @@ export function getFragmentChildren(slots: SetupContext['slots']):VNode[] {
         })
         return newChildren
     }else{
-        return children
+        return children || []
     }
 }
 

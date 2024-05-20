@@ -12,8 +12,8 @@ import {
   CSSProperties,
   getCurrentInstance,
   inject,
-  computed
-} from 'vue'
+  computed, watch,
+} from 'vue';
 import type {Arguments} from "@dnd-kit-vue/sortable";
 import {omit} from "lodash";
 
@@ -54,6 +54,7 @@ const SortableItem = defineComponent<SortableItemProps>((props, {attrs}) => {
   const style0 = {...(props.style as Object || {}), cursor: 'move'};
 
   let index = 0
+
   return () => {
     const style: CSSProperties = {
       ...style0,
@@ -66,6 +67,8 @@ const SortableItem = defineComponent<SortableItemProps>((props, {attrs}) => {
       // console.log(attrs, props)
       index++
     }
+
+    console.log(style, listeners?.value);
     return h(props.componentsTag as any, {
       id: 'asd_' + props.id,
       ref: setNodeRef as any,
@@ -77,6 +80,7 @@ const SortableItem = defineComponent<SortableItemProps>((props, {attrs}) => {
 
   }
 }, {
+  props: vuePropsType,
   name: 'SortableItem'
 })
 

@@ -165,11 +165,12 @@ const propTypes: ComponentObjectPropsOptions<ColumnFilterProps> = {
   title: String,
   dataIndex: [Number, String],
   width: [Number, String],
+  fixed: [Boolean, String]
 }
 const defaultProps = {}
 const ColumnFilterVueProps = vuePropsMake(propTypes, defaultProps)
 export const ColumnFilter = defineComponent<ColumnFilterProps>(
-  (props) => {
+  (props, {attrs}) => {
     // custom filter related status
     const isFilterDropdownVisibleControlled_ = typeof props.filterDropdownVisible !== 'undefined';
     const isCustomFilterDropdown_ = typeof props.renderFilterDropdown === 'function';
@@ -306,6 +307,7 @@ export interface ColumnFilterProps extends Omit<RenderDropdownProps, keyof Rende
   title?: string;
   dataIndex?: string | number;
   width?: string | number;
+  fixed?: string | boolean
 }
 
 export interface RenderDropdownProps extends FilterDropdownProps, RenderFilterDropdownProps {

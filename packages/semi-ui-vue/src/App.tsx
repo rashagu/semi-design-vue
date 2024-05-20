@@ -95,6 +95,8 @@ import Input from './components/input';
 import WithVModelDemo from './components/withVModel/__test__/WithVModelDemo';
 import SelectDemo2 from './components/select/__test__/SelectDemo2';
 import SelectDemo3 from './components/select/__test__/SelectDemo3.vue';
+import SelectDemo4 from './components/select/__test__/SelectDemo4.vue';
+import SelectDemo5 from './components/select/__test__/SelectDemo5';
 export interface ExampleProps {
   name?: string
 }
@@ -136,7 +138,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<BacktopDemo />*/}
         {/*<AnchorDemo />*/}
         {/*<TabsDemo />*/}
-        <TabsDemo3/>
+        {/*<TabsDemo3/>*/}
         {/*<TabsDemoVueSFC/>*/}
         {/*<CardDemo >*/}
         {/*  {a.value}*/}
@@ -200,6 +202,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SelectDemo/>*/}
         {/*<SelectDemo2/>*/}
         {/*<SelectDemo3/>*/}
+        <SelectDemo4/>
+        {/*<SelectDemo5/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}

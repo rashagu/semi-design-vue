@@ -9,18 +9,18 @@ import {
   onMounted,
   onUnmounted, PropType,
   reactive,
-  ref,
+  ref, shallowRef, toRaw,
   useSlots,
   VNode,
   watch,
-} from 'vue'
+} from 'vue';
 import * as PropTypes from '../PropTypes'
 import {vuePropsMake} from '../PropTypes'
 import {FixedSizeList as List} from '@kousum/vue3-window'
 import cls from 'classnames';
 import SelectFoundation, {SelectAdapter} from '@douyinfe/semi-foundation/select/foundation';
 import {cssClasses, numbers} from '@douyinfe/semi-foundation/select/constants';
-import {useBaseComponent, ValidateStatus} from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps, type ValidateStatus } from '../_base/baseComponent';
 import {get, isEqual, isFunction, isNumber, isString, noop} from 'lodash';
 import Tag from '../tag';
 import TagGroup from '../tag/group';
@@ -42,7 +42,7 @@ import OptionGroup from './optionGroup';
 import Spin from '../spin';
 import Trigger from '../trigger';
 import {IconChevronDown, IconClear} from '@kousum/semi-icons-vue';
-import {getActiveElement, getFocusableElements, getFragmentChildren, isSemiIcon} from '../_utils';
+import { getActiveElement, getFocusableElements, getFragmentChildren, isSemiIcon } from '../_utils';
 import {Subtract} from 'utility-types';
 
 import warning from '@douyinfe/semi-foundation/utils/warning';
@@ -423,12 +423,13 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
     '[Semi Select] \'labelInValue\' has already been deprecated, please use \'onChangeWithObject\' instead.'
   );
 
+  const {hasInProps} = useHasInProps()
   const eventManager = new Event();
   // TODO context
   const {adapter: adapterInject, context: context_, getDataAttr} = useBaseComponent<SelectProps>(props, state)
   const setOptionContainerEl = (node: HTMLDivElement) => (optionContainerEl.value = node);
 
-  let preChildren:VNode[] = []
+  let preChildren = shallowRef<VNode[]>([])
   function adapter(): SelectAdapter<SelectProps, SelectState> {
     const keyboardAdapter = {
       registerKeyDown: (cb: () => void) => {
@@ -514,7 +515,6 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       // Collect all subitems, each item is visible by default when collected, and is not selected
       //slots.default?slots.default():null
       getOptionsFromChildren: () => {
-        let children:VueJsxNode = preChildren || []
         let optionGroups = [];
         let options = [];
         const {optionList} = props;
@@ -527,6 +527,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
           }));
           optionGroups[0] = {children: options, label: ''};
         } else {
+          let children = getFragmentChildren(slots)
           const result = getOptionsFromGroup(children as any);
           optionGroups = result.optionGroups;
           options = result.options;
@@ -551,10 +552,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
         state.dropdownMinWidth = width
       },
       updateSelection: (selections: Map<OptionProps['label'], any>) => {
-        // TODO 直接赋值会有问题: _diffSelections 比较结果会一直相同, 导致onChange事件不会触发
-        nextTick(()=>{
-          state.selections = selections
-        })
+        state.selections = selections
       },
       // clone Map, important!!!, prevent unexpected modify on state
       getSelections: () => new Map(state.selections),
@@ -667,12 +665,13 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
 
 
 
-  watch([() => props.value, () => props.optionList], (value, [prevPropsValue, prevPropsOptionList],) => {
+  watch([() => props.value, () => props.optionList, preChildren], (value, [prevPropsValue, prevPropsOptionList, preChildren_],) => {
+
     // TODO Children VNode 更新时
-    // const prevChildrenKeys = React.Children.toArray(prevProps.children).map((child: any) => child.key);
-    // const nowChildrenKeys = React.Children.toArray(props.children).map((child: any) => child.key);
-    const prevChildrenKeys = [];
-    const nowChildrenKeys = [];
+    const prevChildrenKeys = preChildren_.map((child: any) => child.key);
+    const nowChildrenKeys = preChildren.value.map((child: any) => child.key);
+    // const prevChildrenKeys = [];
+    // const nowChildrenKeys = [];
 
     let isOptionsChanged = false;
 
@@ -683,20 +682,20 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
 
     // Add isOptionChanged: There may be cases where the value is unchanged, but the optionList is updated. At this time, the label corresponding to the value may change, and the selected item needs to be updated
     if (prevPropsValue !== props.value || isOptionsChanged) {
-      if ('value' in props) {
+      if (hasInProps('value')) {
         foundation.handleValueChange(props.value as any);
       } else {
         foundation.handleOptionListChangeHadDefaultValue();
       }
     }
   })
-  watch(() => props.value, ()=>{
-    if ('value' in props) {
-      foundation.handleValueChange(props.value as any);
-    } else {
-      foundation.handleOptionListChangeHadDefaultValue();
-    }
-  })
+  // watch(() => props.value, ()=>{
+  //   if ('value' in theAdapter.getProps()) {
+  //     foundation.handleValueChange(props.value as any);
+  //   } else {
+  //     foundation.handleOptionListChangeHadDefaultValue();
+  //   }
+  // })
 
 
   const handleInputChange = (value: string, event: Event) => {
@@ -780,7 +779,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
 
 
   function onSelect(option: OptionProps, optionIndex: number, e: any) {
-    foundation.onSelect(option, optionIndex, e);
+    foundation.onSelect(toRaw(option), optionIndex, e);
   }
 
   function onClear(e: MouseEvent) {
@@ -1476,7 +1475,18 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
 
 
   return () => {
-    preChildren = getFragmentChildren(slots);
+    const children_ = getFragmentChildren(slots);
+    if (
+      children_.length !== preChildren.value.length ||
+      !isEqual(
+        children_.map((item) => item.props),
+        preChildren.value.map((item) => item.props)
+      )
+    ) {
+      preChildren.value = children_;
+    }
+
+
     const {direction} = context_.value;
     const defaultPosition = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
     const {

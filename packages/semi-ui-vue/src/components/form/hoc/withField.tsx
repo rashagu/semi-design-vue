@@ -42,6 +42,7 @@ import {
 import { VueHTMLAttributes } from '../../interface';
 import { useFormUpdaterContext } from '../context/FormUpdaterContext/Consumer';
 import { omit } from 'lodash';
+import { useHasInProps } from '../../_base/baseComponent';
 
 const prefix = cssClasses.PREFIX;
 
@@ -67,6 +68,7 @@ function withField<
   //@ts-ignore
   const SemiField = defineComponent<T>((truthProps, { attrs: props }) => {
       const slots = useSlots();
+      const {hasInProps} = useHasInProps()
 
       // grab formUpdater (the api for field to read/modify FormState) from context
       const { context: updater } = useFormUpdaterContext();
@@ -319,7 +321,7 @@ function withField<
         allowEmpty = getAllowEmpty(allowEmpty);
         let { options, shouldInject } = mergeOptions(opts, props);
         let fnKey = options.onKeyChangeFnName;
-        if (fnKey in props && typeof props[options.onKeyChangeFnName] === 'function') {
+        if (hasInProps(fnKey) && typeof props[options.onKeyChangeFnName] === 'function') {
           // @ts-ignore
           props[options.onKeyChangeFnName](newValue, e, ...other);
         }
@@ -405,7 +407,7 @@ function withField<
           // @ts-ignore
           props.onBlur(e);
         }
-        if (!touched) {
+        if (!touched.value) {
           updateTouched(true);
         }
         if (mergeTrigger.includes('blur')) {

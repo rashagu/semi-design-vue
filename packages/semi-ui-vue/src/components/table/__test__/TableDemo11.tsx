@@ -123,7 +123,7 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
   );
 
   function handleDragEnd(event: DragEndEvent) {
-    // console.log(event)
+    console.log(event)
     const { active, over } = event;
 
     if (active && over && active.id !== over?.id) {
@@ -142,6 +142,7 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
   const tableDragOverlayRef = ref();
   function onDragStart(event: DragEndEvent) {
     const { active, over } = event;
+    console.log(active);
     dragIngIndex.value = +active.id;
   }
 
@@ -163,11 +164,11 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
   const pageData = ref(data.value.slice(0, PAGE_SIZE));
 
   const DraggableBodyRow = SortableItem as unknown;
-  const components = computed<TableComponents>(() => ({
+  const components = {
     body: {
-      row: DraggableBodyRow as VNode,
+      row: DraggableBodyRow as any,
     },
-  }));
+  };
 
   const moveRow = (dragIndex, hoverIndex) => {
     console.log(dragIndex);
@@ -200,6 +201,8 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
     return data.value.slice((currentPage.value - 1) * PAGE_SIZE, currentPage.value * PAGE_SIZE);
   });
   return () => {
+    console.log(1);
+
     return (
       <div id="components-table-demo-drag-sorting">
         <DndContext
@@ -219,7 +222,7 @@ const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
                 currentPage: currentPage.value,
                 onPageChange: handlePageChange,
               }}
-              components={components.value}
+              components={components}
               onRow={(record, index) => ({
                 index,
                 moveRow,

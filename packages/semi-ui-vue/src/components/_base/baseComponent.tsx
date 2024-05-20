@@ -1,4 +1,4 @@
-import {defineComponent, ref, shallowRef, h, CSSProperties, Ref, getCurrentInstance, useAttrs,} from 'vue'
+import { defineComponent, ref, shallowRef, h, CSSProperties, Ref, getCurrentInstance, useAttrs, toRaw } from 'vue';
 import baseLog from '@douyinfe/semi-foundation/utils/log';
 import {DefaultAdapter} from '@douyinfe/semi-foundation/base/foundation';
 import {VALIDATE_STATUS} from '@douyinfe/semi-foundation/base/constants';
@@ -35,7 +35,7 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
     adapter: <P extends BaseProps, S={}>() => DefaultAdapter<P, S>,
     log: (text: string, ...rest: any) => any,
     context: Ref<ContextValue>, foundation: any, state: any,
-    getDataAttr: () => Record<string, any>
+    getDataAttr: () => Record<string, any>,
   } = (props,state)=> {
   const attrs = useAttrs()
   const cache = shallowRef<any>({});
@@ -76,15 +76,30 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
         return context_
       }, // eslint-disable-line
       getProp: key => {
-        // //console.log(key,props,props[key])
         return props[key]
       }, // eslint-disable-line
       // return all props
       // @ts-ignore
-      getProps: ()=>getProps(props), // eslint-disable-line
+      getProps: ()=>{
+        if(!currentInstance.vnode.props){
+          return getProps(props)
+        }
+        const tProps:any = {}
+        for (const tPropsKey in props) {
+          if (props.hasOwnProperty(tPropsKey) && props[tPropsKey] !== undefined){
+            tProps[tPropsKey] = props[tPropsKey];
+          }
+
+          if (props.hasOwnProperty(tPropsKey) && tPropsKey in currentInstance.vnode.props){
+            tProps[tPropsKey] = props[tPropsKey];
+          }
+
+        }
+        return tProps
+      }, // eslint-disable-line
       getState: key => {
         //console.log(key,state,state[key])
-        return state[key]
+        return toRaw(state[key])
       }, // eslint-disable-line
       getStates: () => state, // eslint-disable-line
       setState: (states, cb) => {
@@ -132,4 +147,21 @@ export const useBaseComponent: <U extends BaseProps = {}>(props: U,state:any) =>
   }
 
 
+}
+
+
+export function useHasInProps() {
+
+  const instance = getCurrentInstance();
+
+  function hasInProps(key: string):boolean | undefined {
+    if (instance) {
+      // 检查vnode的props是否包含value键
+      return instance.vnode.props && key in instance.vnode.props;
+    }
+  }
+
+  return {
+    hasInProps
+  }
 }

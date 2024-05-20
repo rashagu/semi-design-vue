@@ -1,13 +1,13 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties, ComponentObjectPropsOptions, PropType} from 'vue'
+import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, toRaw, VNode } from 'vue';
 import classNames from 'classnames';
 
-import {isString} from 'lodash';
-import {cssClasses} from '@douyinfe/semi-foundation/select/constants';
-import {LocaleConsumerFunc} from '../locale/localeConsumer';
-import {IconTick} from '@kousum/semi-icons-vue';
-import {getHighLightTextHTML} from '../_utils/index';
-import {Locale} from '../locale/interface';
-import {BasicOptionProps} from '@douyinfe/semi-foundation/select/optionFoundation';
+import { isString } from 'lodash';
+import { cssClasses } from '@douyinfe/semi-foundation/select/constants';
+import { LocaleConsumerFunc } from '../locale/localeConsumer';
+import { IconTick } from '@kousum/semi-icons-vue';
+import { getHighLightTextHTML } from '../_utils/index';
+import { Locale } from '../locale/interface';
+import { BasicOptionProps } from '@douyinfe/semi-foundation/select/optionFoundation';
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>()
 
@@ -63,7 +63,7 @@ const Option = defineComponent<OptionProps>((props, {slots, attrs}) => {
   function onClick({value, label, children, ...rest}: Partial<OptionProps>, event: MouseEvent) {
     const isDisabled = props.disabled;
     if (!isDisabled) {
-      props.onSelect({...rest, value, label: label || children}, event);
+      props.onSelect({...rest, value, label: toRaw(label || children)}, event);
     }
   }
 
