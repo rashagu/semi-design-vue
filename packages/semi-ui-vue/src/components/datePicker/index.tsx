@@ -28,6 +28,7 @@ export type { QuickControlProps } from './quickControl';
 export type { YearAndMonthProps } from './yearAndMonth';
 export type { InsetInputProps } from '@douyinfe/semi-foundation/datePicker/inputFoundation';
 export type { DatePicker as BaseDatePicker };
+import {useHasInProps} from "../_base/baseComponent";
 
 export const vuePropsType = {
   ...vuePropsTypeDatePickerProps,
@@ -35,9 +36,9 @@ export const vuePropsType = {
 };
 const index = defineComponent<DatePickerProps>((props, {}) => {
   const slots = useSlots();
-
+  const {getProps} = useHasInProps()
   return () => {
-    const propsObj: DatePickerProps = { ...props };
+    const propsObj: DatePickerProps = getProps(props);
     const { type, format, rangeSeparator } = propsObj;
 
     if (typeof format === 'string' && format) {

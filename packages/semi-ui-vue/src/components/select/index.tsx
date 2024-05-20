@@ -527,8 +527,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
           }));
           optionGroups[0] = {children: options, label: ''};
         } else {
-          let children = getFragmentChildren(slots)
-          const result = getOptionsFromGroup(children as any);
+          const result = getOptionsFromGroup(preChildren.value as any);
           optionGroups = result.optionGroups;
           options = result.options;
         }
@@ -1477,13 +1476,14 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
   return () => {
     const children_ = getFragmentChildren(slots);
     if (
-      children_.length !== preChildren.value.length ||
-      !isEqual(
-        children_.map((item) => item.props),
-        preChildren.value.map((item) => item.props)
-      )
+      !props.optionList && children_ && (
+        children_?.length !== preChildren.value.length ||
+        !isEqual(
+          children_.map((item) => item.props),
+          preChildren.value.map((item) => item.props)
+        ))
     ) {
-      preChildren.value = children_;
+      preChildren.value = children_ || [];
     }
 
 

@@ -191,7 +191,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}
-        {/*<DatePickerDemo />*/}
+        <DatePickerDemo />
         {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
@@ -202,7 +202,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SelectDemo/>*/}
         {/*<SelectDemo2/>*/}
         {/*<SelectDemo3/>*/}
-        <SelectDemo4/>
+        {/*<SelectDemo4/>*/}
         {/*<SelectDemo5/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}

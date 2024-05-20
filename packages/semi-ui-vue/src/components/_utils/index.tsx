@@ -218,7 +218,7 @@ export async function runAfterTicks(func: (...args: any) => any, numberOfTicks: 
 
 
 
-export function getFragmentChildren(slots: SetupContext['slots']):VNode[] {
+export function getFragmentChildren(slots: SetupContext['slots']):VNode[] | undefined {
     const children = slots.default?.()
     if (children && Array.isArray(children) && children.length){
 
@@ -234,7 +234,7 @@ export function getFragmentChildren(slots: SetupContext['slots']):VNode[] {
         })
         return newChildren
     }else{
-        return children || []
+        return children
     }
 }
 

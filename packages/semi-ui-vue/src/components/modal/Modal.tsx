@@ -336,9 +336,10 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
       getPopupContainer,
       visible,
       modalContentClass,
+      //@ts-ignore
       getContainerContext,
       ...restProps
-    } = props;
+    } = adapter.getProps();
 
     let style = styleFromProps;
     const maskStyle = maskStyleFromProps;

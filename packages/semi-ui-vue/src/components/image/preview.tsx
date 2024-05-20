@@ -22,7 +22,7 @@ import {
     onBeforeUnmount, ComponentObjectPropsOptions, PropType, shallowRef, nextTick
 } from "vue";
 import {vuePropsMake} from "../PropTypes";
-import {getProps, useBaseComponent} from "../_base/baseComponent";
+import { getProps, useBaseComponent, useHasInProps } from '../_base/baseComponent';
 import {VueJsxNode} from "../interface";
 import {getFragmentChildren} from "../_utils";
 import cls from "classnames";
@@ -84,6 +84,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Preview = defineComponent<PreviewProps>((props, {}) => {
 
+    const {getProps} = useHasInProps()
     const slots = useSlots()
     const state = reactive({
         currentIndex: props.currentIndex || props.defaultCurrentIndex || 0,
@@ -248,7 +249,7 @@ const Preview = defineComponent<PreviewProps>((props, {}) => {
     return () => {
         // @ts-ignore
         children.value = slots.default?.()?.[0]?.children || []
-        const { src, className, style, lazyLoad, setDownloadName, ...restProps } = props;
+        const { src, className, style, lazyLoad, setDownloadName, ...restProps } = getProps(props);
         const previewInnerProps = {
             ...omit(restProps, ['previewCls', 'previewStyle']),
             className: restProps?.previewCls,

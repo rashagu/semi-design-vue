@@ -57,15 +57,18 @@ export const vuePropsType = {
 const WithFieldDemo = defineComponent<WithFieldDemoProps>((props, {}) => {
   const slots = useSlots();
 
-  return () => (
-    <div>
-      <Form>
-        <CustomField field="baseInfo" label={{ text: '基本信息', required: true }} />
-        <ComponentUsingFormState />
-      </Form>
-      <div>FormDemo</div>
-    </div>
-  );
+  return () => {
+
+    return (
+      <div>
+        <Form>
+          <CustomField field="baseInfo" label={{ text: '基本信息', required: true }} />
+          <ComponentUsingFormState />
+        </Form>
+        <div>FormDemo</div>
+      </div>
+    )
+  };
 });
 
 

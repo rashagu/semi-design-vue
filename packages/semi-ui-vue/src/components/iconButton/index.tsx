@@ -11,6 +11,7 @@ import '@douyinfe/semi-foundation/button/iconButton.scss';
 import {getFragmentChildren} from "../_utils";
 import {vuePropsMake} from "../PropTypes";
 import {BaseFormProps} from "../form";
+import { useHasInProps } from '../_base/baseComponent';
 
 
 
@@ -61,6 +62,7 @@ const vuePropsType= vuePropsMake<IconButtonProps>({
 // TODO: icon configuration
 const Index = defineComponent<IconButtonProps>((props, {slots}) => {
 
+  const {getProps} = useHasInProps()
 
   return () => {
 
@@ -76,7 +78,7 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
       prefixCls,
       loading,
       ...otherProps
-    } = props;
+    } = getProps(props);
 
     const style: any = originStyle;
     // TODO: review check
