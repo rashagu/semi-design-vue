@@ -33,7 +33,7 @@ import '@douyinfe/semi-foundation/cascader/cascader.scss';
 import {IconChevronDown, IconClear} from '@kousum/semi-icons-vue';
 import {calcMergeType, convertDataToEntities, getKeyByValuePath, getKeyByPos} from '@douyinfe/semi-foundation/cascader/util';
 import {calcCheckedKeys, calcDisabledKeys, normalizeKeyList} from '@douyinfe/semi-foundation/tree/treeUtil';
-import {getProps, useBaseComponent, ValidateStatus} from '../_base/baseComponent';
+import {useBaseComponent, ValidateStatus, useHasInProps} from '../_base/baseComponent';
 import Input from '../input';
 import Popover, {PopoverProps} from '../popover';
 import Item, {CascaderData, Data, Entities, Entity, FilterRenderProps} from './item';
@@ -234,6 +234,8 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake<CascaderProps>(propTypes, defaultProps);
 const Index = defineComponent<CascaderProps>((props, { expose }) => {
   const slots = useSlots();
+
+  const {getProps} = useHasInProps()
 
   const state = reactive<CascaderState>({
     disabledKeys: new Set(),
@@ -516,13 +518,14 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
   watch(
     () => props,
     (val) => {
-      const newState = getDerivedStateFromProps({...props});
+      const newState = getDerivedStateFromProps({...getProps(props)});
+      // console.log(props.value);
       newState &&
         Object.keys(newState).forEach((key) => {
           state[key] = newState[key];
         });
     },
-    { deep: true }
+    { deep: true, immediate: true }
   );
 
   onMounted(() => {
@@ -712,10 +715,11 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
       multiple,
       filterRender,
       virtualizeInSearch
-    } = props;
+    } = getProps(props);
     const searchable = Boolean(filterTreeNode) && isSearching;
     const popoverCls = cls(dropdownClassName, `${prefixcls}-popover`);
     const renderData = foundation.getRenderData();
+    // console.log(activeKeys, selectedKeys);
     const content = (
       <div class={popoverCls} role="listbox" style={dropdownStyle}>
         {topSlot}
@@ -898,7 +902,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
         disabled={disabled}
         triggerRender={triggerRender}
         componentName={'Cascader'}
-        componentProps={{ ...props }}
+        componentProps={{ ...getProps(props) }}
         onSearch={handleInputChange}
         onRemove={handleTagRemoveInTrigger}
       />
