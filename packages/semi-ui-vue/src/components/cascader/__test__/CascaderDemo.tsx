@@ -1,9 +1,11 @@
-import { defineComponent, ref, h, Fragment, useSlots, computed } from 'vue';
+import { defineComponent, ref, h, Fragment, useSlots, computed, onMounted } from 'vue';
 import Cascader, { TriggerRenderProps, Value } from '../index';
 import Item from '../item';
 import { noop } from 'lodash';
 import { IconChevronDown, IconClose, IconHome } from '@kousum/semi-icons-vue';
 import Button from '../../button';
+import { Form, FormCascader } from '../../form';
+import { BaseFormApi } from '@douyinfe/semi-foundation/form/interface';
 interface ExampleProps {
   name?: string;
 }
@@ -99,7 +101,29 @@ const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
       ],
     },
   ];
-  const value = ref<Value>(['zhejiang', 'hangzhou', 'linan4']);
+  const value = ref<Value>([
+    [
+      "zhejiang",
+      "ningbo5",
+      "ningbo",
+      "jiangbei"
+    ],
+    [
+      "zhejiang",
+      "ningbo5",
+      "ningbo",
+      "haishu"
+    ]
+  ]);
+
+  const formApi = ref<BaseFormApi>()
+  onMounted(()=>{
+    setTimeout(()=>{
+      formApi.value.setValue('sss', ['zhejiang', 'ningbo', 'jiangbei'])
+    }, 1000)
+  })
+
+
   return () => (
     <div style={{display: 'flex', alignItems:'center', justifyContent:'flex-end'}}>
       <Cascader
@@ -127,6 +151,107 @@ const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
       <ItemDdemo />
 
       <TriggerRenderDemo />
+
+
+      <Cascader
+        defaultValue={['zhejiang', 'ningbo', 'jiangbei']}
+        style={{ width: '300px' }}
+        treeData={[
+          {
+            label: '浙江省',
+            value: 'zhejiang',
+            children: [
+              {
+                label: '杭州市',
+                value: 'hangzhou',
+                children: [
+                  {
+                    label: '西湖区',
+                    value: 'xihu',
+                  },
+                  {
+                    label: '萧山区',
+                    value: 'xiaoshan',
+                  },
+                  {
+                    label: '临安区',
+                    value: 'linan',
+                  },
+                ],
+              },
+              {
+                label: '宁波市',
+                value: 'ningbo',
+                children: [
+                  {
+                    label: '海曙区',
+                    value: 'haishu',
+                  },
+                  {
+                    label: '江北区',
+                    value: 'jiangbei',
+                  }
+                ]
+              },
+            ],
+          }
+        ]}
+        placeholder="请选择所在地区_test0"
+        multiple
+      />
+
+      <Form getFormApi={(v)=>formApi.value = v}>
+        <FormCascader
+          field='sss'
+          style={{ width: '300px' }}
+          treeData={[
+            {
+              label: '浙江省',
+              value: 'zhejiang',
+              children: [
+                {
+                  label: '杭州市',
+                  value: 'hangzhou',
+                  children: [
+                    {
+                      label: '西湖区',
+                      value: 'xihu',
+                    },
+                    {
+                      label: '萧山区',
+                      value: 'xiaoshan',
+                    },
+                    {
+                      label: '临安区',
+                      value: 'linan',
+                    },
+                  ],
+                },
+                {
+                  label: '宁波市',
+                  value: 'ningbo',
+                  children: [
+                    {
+                      label: '海曙区',
+                      value: 'haishu',
+                    },
+                    {
+                      label: '江北区',
+                      value: 'jiangbei',
+                    }
+                  ]
+                },
+              ],
+            }
+          ]}
+          placeholder="请选择所在地区_test1"
+          leafOnly
+
+          multiple
+        >
+
+        </FormCascader>
+      </Form>
     </div>
   );
 });

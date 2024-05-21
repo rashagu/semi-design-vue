@@ -21,6 +21,7 @@ import CascaderDemo from "./components/cascader/__test__/CascaderDemo";
 import ScrollListDemo from "./components/scrollList/__test__/ScrollListDemo";
 import TimePickerDemo from "./components/timePicker/__test__/TimePickerDemo";
 import DatePickerDemo from "./components/datePicker/__test__/DatePickerDemo";
+import DatePickerDemo2 from "./components/datePicker/__test__/DatePickerDemo2";
 import ConfigProvider from "./components/configProvider";
 // import {UseVirtualList} from "@vueuse/components";
 import zh_CN from './components/locale/source/zh_CN';
@@ -97,6 +98,8 @@ import SelectDemo2 from './components/select/__test__/SelectDemo2';
 import SelectDemo3 from './components/select/__test__/SelectDemo3.vue';
 import SelectDemo4 from './components/select/__test__/SelectDemo4.vue';
 import SelectDemo5 from './components/select/__test__/SelectDemo5';
+import ModalDemo2 from './components/modal/__test__/ModalDemo2';
+import NotificationDemo2 from './components/notification/__test__/NotificationDemo2';
 export interface ExampleProps {
   name?: string
 }
@@ -162,6 +165,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<PaginationDemo />*/}
         {/*<PopconfirmDemo/>*/}
         {/*<NotificationDemo/>*/}
+        <NotificationDemo2/>
         {/*<BannerDemo/>*/}
         {/*<ToastDemo/>*/}
         {/*<ImageDemo/>*/}
@@ -187,11 +191,13 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
         {/*<ModalDemo/>*/}
+        {/*<ModalDemo2/>*/}
         {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}
-        <DatePickerDemo />
+        {/*<DatePickerDemo />*/}
+        {/*<DatePickerDemo2/>*/}
         {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}

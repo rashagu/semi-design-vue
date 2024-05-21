@@ -9,10 +9,10 @@ interface ModalDemoProps {
 export const vuePropsType = {
   name: String
 }
-const ModalDemo = defineComponent<ModalDemoProps>((props, {}) => {
+const ModalDemo2 = defineComponent<ModalDemoProps>((props, {}) => {
 
   const slots = useSlots()
-  const visible = ref(true);
+  const visible = ref(false);
   function setVisible(val) {
     visible.value = val
   }
@@ -37,9 +37,14 @@ const ModalDemo = defineComponent<ModalDemoProps>((props, {}) => {
   const popupContainer = ref()
   return () => (
     <div ref={popupContainer}>
-      {/*getPopupContainer 单节点 否则关闭时报错*/}
       <div>
-        <Button onClick={showDialog}>打开弹窗</Button>
+
+        <Button
+          //@ts-ignore
+          role={'bt'}
+          onClick={showDialog}
+        >打开弹窗
+        </Button>
         <Modal
           getPopupContainer={()=>popupContainer.value}
           title="基本对话框"
@@ -61,5 +66,5 @@ const ModalDemo = defineComponent<ModalDemoProps>((props, {}) => {
 })
 
 
-export default ModalDemo
+export default ModalDemo2
 
