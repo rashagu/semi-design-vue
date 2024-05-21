@@ -1,5 +1,18 @@
 # @kousum/semi-ui-vue
 
+## 0.12.0
+
+### Minor Changes
+
+- semi 2.28.0 & fix key in props
+
+### Patch Changes
+
+- Updated dependencies
+  - @kousum/semi-animation-vue@0.11.0
+  - @kousum/semi-icons-vue@0.11.0
+  - @kousum/semi-illustrations-vue@0.11.0
+
 ## 0.11.0
 
 ### Minor Changes

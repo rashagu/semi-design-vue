@@ -1,5 +1,11 @@
 # @kousum/semi-animation-vue
 
+## 0.11.0
+
+### Minor Changes
+
+- semi 2.28.0 & fix key in props
+
 ## 0.10.0
 
 ### Minor Changes
