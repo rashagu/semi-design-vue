@@ -1,28 +1,16 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable eqeqeq */
 import cls from 'classnames';
-import {cssClasses} from '@douyinfe/semi-foundation/modal/constants';
+import { cssClasses } from '@douyinfe/semi-foundation/modal/constants';
 import Modal from './Modal';
-import {isSemiIcon} from '../_utils';
+import { isSemiIcon } from '../_utils';
 
 import '@douyinfe/semi-foundation/modal/modal.scss';
-import {ConfirmProps} from './confirm';
-import {
-  cloneVNode,
-  ComponentObjectPropsOptions,
-  computed,
-  defineComponent,
-  h,
-  onMounted,
-  onUnmounted, PropType,
-  ref,
-  useSlots
-} from 'vue';
-import {vuePropsMake} from "../PropTypes";
-import * as PropTypes from "../PropTypes";
-import {noop} from "lodash";
-import {getProps, useBaseComponent} from "../_base/baseComponent";
-import {ListItemProps} from "../list";
+import { ConfirmProps } from './confirm';
+import { cloneVNode, ComponentObjectPropsOptions, computed, defineComponent, h, PropType, ref, useSlots } from 'vue';
+import * as PropTypes from '../PropTypes';
+import { vuePropsMake } from '../PropTypes';
+import { getProps } from '../_base/baseComponent';
 
 const propTypes: ComponentObjectPropsOptions<ConfirmProps> = {
   type: undefined,

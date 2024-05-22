@@ -28,7 +28,11 @@ const PopconfirmDemo = defineComponent<PopconfirmDemoProps>((props, {}) => {
         onConfirm={onConfirm}
         onCancel={onCancel}
       >
-        <Button className={'test'}>保存</Button>
+        <Button
+          //@ts-ignore
+          role={'bt'}
+          className={'test'}
+        >保存</Button>
       </Popconfirm>
     </div>
   )

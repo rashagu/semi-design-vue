@@ -1,6 +1,7 @@
 import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
 import type { ComponentObjectPropsOptions } from 'vue';
 import { Form, FormDatePicker } from '../../form';
+import DatePicker from '../index';
 
 interface DatePickerDemo2Props {
   name?: string;
@@ -18,6 +19,7 @@ const DatePickerDemo2 = defineComponent<DatePickerDemo2Props>((props, {}) => {
       <Form>
         <FormDatePicker field='ssss'/>
       </Form>
+      <DatePicker type={'month'}/>
     </div>
   );
 }, {

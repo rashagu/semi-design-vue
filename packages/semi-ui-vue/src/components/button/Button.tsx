@@ -34,6 +34,7 @@ export interface ButtonProps {
   onMouseEnter?: any;
   onMouseLeave?: any;
   autoFocus?: boolean
+  role?: string;
 }
 
 
@@ -92,7 +93,8 @@ export const vuePropsType: ComponentObjectPropsOptions<ButtonProps> = {
   autoFocus: {
     type: Boolean,
     default: undefined
-  }
+  },
+  role: String,
 }
 const Button = defineComponent<ButtonProps>((props, {slots}) => {
 

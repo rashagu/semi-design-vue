@@ -1,7 +1,9 @@
 import { expect, test, describe } from 'vitest'
 import Comp from "./TreeAllDemo";
+import TreeDemo2 from "./TreeDemo2";
 import TreeCheckDemo from "./TreeCheckDemo";
 import {mount} from "@vue/test-utils";
+import { fireEvent, render, screen } from '@testing-library/vue';
 
 test('Tree test', async () => {
   const wrapper = mount(TreeCheckDemo, {})
@@ -20,3 +22,11 @@ test('Tree test2', async () => {
 
   expect( profileStyle.attributes('style')).toEqual("height: 300px; overflow: visible;")
 })
+
+test('Tree Render', async () => {
+  render(TreeDemo2)
+  const menuitem = await screen.findByText("上海")
+
+  expect(menuitem.getAttribute('class')).toContain('semi-tree-option-label-text');
+
+});

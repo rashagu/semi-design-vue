@@ -44,7 +44,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         }}
       </Transition>:null}
 
-      <button onClick={() => {
+      <button role={'bt1'} onClick={() => {
         visible.value = !visible.value;
       }}>toggle</button>
       <div class={'aa'}>123</div>

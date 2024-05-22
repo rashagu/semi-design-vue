@@ -100,6 +100,9 @@ import SelectDemo4 from './components/select/__test__/SelectDemo4.vue';
 import SelectDemo5 from './components/select/__test__/SelectDemo5';
 import ModalDemo2 from './components/modal/__test__/ModalDemo2';
 import NotificationDemo2 from './components/notification/__test__/NotificationDemo2';
+import TreeDemo2 from './components/tree/__test__/TreeDemo2';
+import NotificationDemo3 from './components/notification/__test__/NotificationDemo3';
+import TypoDemo2 from './components/typography/__test__/TypoDemo2';
 export interface ExampleProps {
   name?: string
 }
@@ -165,7 +168,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<PaginationDemo />*/}
         {/*<PopconfirmDemo/>*/}
         {/*<NotificationDemo/>*/}
-        <NotificationDemo2/>
+        {/*<NotificationDemo2/>*/}
+        {/*<NotificationDemo3/>*/}
         {/*<BannerDemo/>*/}
         {/*<ToastDemo/>*/}
         {/*<ImageDemo/>*/}
@@ -178,7 +182,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<WithFieldDemo2/>*/}
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
-        {/*<TreeDemo />*/}
+        {/*<TreeDemo2 />*/}
         <div style={{backgroundColor: 'red', width: 300, height: 300}}>
 
         </div>
@@ -192,7 +196,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemoConfirm/>*/}
         {/*<ModalDemo/>*/}
         {/*<ModalDemo2/>*/}
-        {/*<UploadDemo/>*/}
+        <UploadDemo/>
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}
@@ -217,6 +221,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<InputDemo />*/}
         {/*<TypeDemo />*/}
 
+        {/*<TypoDemo2/>*/}
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
         {/*  <Button />*/}
         {/*</div>*/}

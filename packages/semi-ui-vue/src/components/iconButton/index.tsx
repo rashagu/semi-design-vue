@@ -48,7 +48,8 @@ const vuePropsType= vuePropsMake<IconButtonProps>({
   className: PropTypes.string,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
-  class: String
+  class: String,
+  role: String
 }, {
   iconPosition: strings.DEFAULT_ICON_POSITION,
   prefixCls: cssClasses.PREFIX,

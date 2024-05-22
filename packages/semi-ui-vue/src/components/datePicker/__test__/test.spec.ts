@@ -13,10 +13,16 @@ test('DatePickerDemo qwe', async () => {
 
 test('DatePickerDemo2 render', async () => {
   render(Demo2)
-  const input = await screen.findByRole("combobox")
-  await fireEvent.click(input)
+  const input = await screen.findAllByRole("combobox")
+  for (let i = 0; i < input.length; i++) {
+    await fireEvent.click(input[i])
+  }
   // const value = await screen.findByText("00时间")
   await (new Promise(resolve => setTimeout(resolve, 500)))
   const menuitem = await screen.findByText("六")
+
+  const options = await screen.findAllByRole("option")
+  expect(options.length).toEqual(213)
+
 
 });

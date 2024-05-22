@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
 /* argus-disable unPkgSensitiveInfo */
-import { cloneDeepWith, set, get } from 'lodash';
+import { cloneDeepWith, get, set } from 'lodash';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import { findAll } from '@douyinfe/semi-foundation/utils/getHighlight';
-import {ComponentInternalInstance, h, isVNode, VNode} from "vue";
+import type { SetupContext } from 'vue';
+import { h, isVNode, VNode } from 'vue';
 import { isHTMLElement } from '@douyinfe/semi-foundation/utils/dom';
-import {VueJsxNode} from "../interface";
-import type {SetupContext} from "vue";
+
 /**
  * stop propagation
  *

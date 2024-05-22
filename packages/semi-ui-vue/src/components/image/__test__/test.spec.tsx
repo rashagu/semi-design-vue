@@ -67,4 +67,20 @@ test('ImageDemo inner qwe', async () => {
   await fireEvent.click(img[0])
   const value = await screen.findByAltText("previewImag")
 
+
+  const prev_bt = await screen.findByRole("prev_bt")
+  await fireEvent.click(prev_bt)
+  const next_bt = await screen.findByRole("next_bt")
+  await fireEvent.click(next_bt)
+  const plus_bt = await screen.findByRole("plus_bt")
+  await fireEvent.click(plus_bt)
+  const rotate_bt = await screen.findByRole("rotate_bt")
+  await fireEvent.click(rotate_bt)
+  const minus_bt = await screen.findByRole("minus_bt")
+  await fireEvent.click(minus_bt)
+  const download_bt = await screen.findByRole("minus_bt")
+  await fireEvent.click(download_bt)
+
+
+
 })

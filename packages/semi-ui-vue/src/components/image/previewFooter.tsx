@@ -149,6 +149,7 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
         const { disabledPrev, onPrev, prevTip } = props;
         const icon = <IconChevronLeft
           key="chevron-left"
+          role={'prev_bt'}
           size="large"
           className={disabledPrev ? `${footerPrefixCls}-disabled` : ""}
           onClick={!disabledPrev ? onPrev : undefined}
@@ -161,6 +162,7 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
         const { disabledNext, onNext, nextTip } = props;
         const icon = <IconChevronRight
           key="chevron-right"
+          role={'next_bt'}
           size="large"
           className={disabledNext ? `${footerPrefixCls}-disabled` : ""}
           onClick={!disabledNext ? onNext : undefined}
@@ -174,6 +176,7 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
         const disabledZoomOut = zoom === min;
         const icon = <IconMinus
           key="minus"
+          role={'minus_bt'}
           size="large"
           onClick={!disabledZoomOut ? handleMinusClick : undefined}
           className={disabledZoomOut ? `${footerPrefixCls}-disabled` : ""}
@@ -187,6 +190,7 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
         const disabledZoomIn = zoom === max;
         const icon = <IconPlus
           key="plus"
+          role={'plus_bt'}
           size="large"
           onClick={!disabledZoomIn ? handlePlusClick : undefined}
           className={disabledZoomIn ? `${footerPrefixCls}-disabled` : ""}
@@ -217,6 +221,7 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
         const { rotateTip } = props;
         const icon = <IconRotate
           key="rotate"
+          role={'rotate_bt'}
           size="large"
           onClick={handleRotateLeft}
         />;
@@ -228,6 +233,7 @@ const Footer = defineComponent<FooterProps>((props, {}) => {
         const { downloadTip, onDownload, disableDownload } = props;
         const icon = <IconDownload
           key='download'
+          role={'download_bt'}
           size="large"
           onClick={!disableDownload ? onDownload : undefined}
           className={cls(`${footerPrefixCls}-gap`,

@@ -3,7 +3,6 @@ import { cssClasses } from '@douyinfe/semi-foundation/form/constants';
 import { isString, isNumber, isObject } from 'lodash';
 import Label, { LabelProps } from './label';
 import { Col } from '../grid';
-import { FormUpdaterContext } from './context';
 import ErrorMessage, { ErrorMessageProps } from './errorMessage';
 import {h, Fragment, CSSProperties, isVNode} from "vue";
 import {VueJsxNode} from "../interface";
