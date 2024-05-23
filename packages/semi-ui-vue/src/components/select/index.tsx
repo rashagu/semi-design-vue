@@ -629,7 +629,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
         if (index !== undefined) {
           optionClassName = `.${prefixcls}-option:nth-child(${index})`;
         }
-        let destNode = document.querySelector(`#${prefixcls}-${selectOptionListID} ${optionClassName}`) as HTMLDivElement;
+        let destNode = optionContainerEl.value?.querySelector(`#${prefixcls}-${selectOptionListID} ${optionClassName}`) as HTMLDivElement;
         if (Array.isArray(destNode)) {
           // eslint-disable-next-line prefer-destructuring
           destNode = destNode[0];

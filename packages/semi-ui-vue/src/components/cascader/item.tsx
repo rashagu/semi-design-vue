@@ -1,4 +1,16 @@
-import {defineComponent, ref, h, Fragment, useSlots, VNode, cloneVNode, PropType, watch, onMounted} from 'vue';
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  useSlots,
+  VNode,
+  cloneVNode,
+  PropType,
+  watch,
+  onMounted,
+  nextTick, toRaw, onUnmounted,
+} from 'vue';
 import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/cascader/constants';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
@@ -220,7 +232,7 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
     const onKeyPress = e => handleItemEnterPress(e, data);
     const onCheck = (e: CheckboxEvent) => onCheckboxChange(e, data);
     if (filterRender) {
-      const props = {
+      const props_ = {
         className,
         inputValue: keyword,
         disabled,
@@ -233,7 +245,7 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
         onClick: onClick_,
         onCheck
       };
-      const item = filterRender(props) as any;
+      const item = filterRender(props_) as any;
       const otherProps = virtualize ? {
         key,
         style: {
@@ -297,6 +309,7 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
     );
   }
 
+  const contentNode = ref()
   function renderItem(renderData: Array<Entity>, content: Array<VNode> = []) {
     const { multiple, checkedKeys, halfCheckedKeys } = props;
     let showChildItem: Entity;
@@ -377,9 +390,10 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
 
   function updateScrollTop() {
     props.activeKeys.forEach((item)=>{
-      let optionId = `cascaderItem-${item}`
+      let optionId = `cascaderItem-${item}`;
 
-      let destNode = document.getElementById(optionId);
+      let destNode = (contentNode.value as HTMLDivElement)?.querySelector('#' + optionId) as HTMLElement
+      // let destNode = document.getElementById(optionId);
       if (destNode) {
         /**
          * Scroll the first selected item into view.
@@ -397,9 +411,13 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
   onMounted(()=>{
     updateScrollTop()
   })
-  // watch(()=>props.activeKeys, ()=>{
-  //   updateScrollTop()
+  // onUnmounted(()=>{
+  //   console.log('onUnmounted');
   // })
+  //
+  // watch(()=>props, (value, oldValue, onCleanup)=>{
+  //   console.log(toRaw(value), toRaw(oldValue));
+  // }, {deep: true})
 
   return () => {
     const { data, searchable } = props;
@@ -417,7 +435,7 @@ const Item = defineComponent<CascaderItemProps>((props, {}) => {
     } else {
       content = searchable ? renderFlattenOption(data as Data[]) : renderItem(data as Entity[]);
     }
-    return <div class={listsCls}>{content}</div>;
+    return <div ref={contentNode} class={listsCls}>{content}</div>;
   };
 }, {
   props: vuePropsType,
