@@ -104,6 +104,7 @@ import TreeDemo2 from './components/tree/__test__/TreeDemo2';
 import NotificationDemo3 from './components/notification/__test__/NotificationDemo3';
 import TypoDemo2 from './components/typography/__test__/TypoDemo2';
 import CascaderDemo3 from './components/cascader/__test__/CascaderDemo3';
+import TabsDemo4 from './components/tabs/__test__/TabsDemo4';
 export interface ExampleProps {
   name?: string
 }
@@ -146,6 +147,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<AnchorDemo />*/}
         {/*<TabsDemo />*/}
         {/*<TabsDemo3/>*/}
+        <TabsDemo4/>
         {/*<TabsDemoVueSFC/>*/}
         {/*<CardDemo >*/}
         {/*  {a.value}*/}
@@ -211,11 +213,11 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
-        <SelectDemo/>
-        <SelectDemo2/>
-        <SelectDemo3/>
-        <SelectDemo4/>
-        <SelectDemo5/>
+        {/*<SelectDemo/>*/}
+        {/*<SelectDemo2/>*/}
+        {/*<SelectDemo3/>*/}
+        {/*<SelectDemo4/>*/}
+        {/*<SelectDemo5/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}

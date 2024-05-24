@@ -10,7 +10,17 @@ import { isEmpty, pick } from 'lodash';
 import { IconChevronRight, IconChevronLeft, IconClose, IconChevronDown } from '@kousum/semi-icons-vue';
 import { getUuidv4 } from '@douyinfe/semi-foundation/utils/uuid';
 import TabItem from './TabItem';
-import { ComponentObjectPropsOptions, defineComponent, h, onMounted, PropType, reactive, useSlots, VNode } from 'vue';
+import {
+  ComponentObjectPropsOptions,
+  defineComponent,
+  h,
+  onMounted,
+  PropType,
+  reactive,
+  useSlots,
+  VNode,
+  watch,
+} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
 import { Locale } from '../locale/interface';
@@ -59,6 +69,12 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
     state.uuid = getUuidv4();
   });
 
+  watch(()=>props.activeKey, ()=>{
+    if (props.collapsible) {
+      scrollActiveTabItemIntoView()
+    }
+  })
+
   function renderIcon(icon: VueJsxNode): VueJsxNode {
     return <span>{icon}</span>;
   }
@@ -87,14 +103,6 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
 
   const handleItemClick = (itemKey: string, e: MouseEvent): void => {
     props.onTabClick(itemKey, e);
-    if (props.collapsible) {
-      const key = _getItemKey(itemKey);
-      // eslint-disable-next-line max-len
-      const tabItem = document.querySelector(
-        `[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey=${JSON.stringify(key)}]`,
-      );
-      tabItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-    }
   };
 
   const handleKeyDown = (event: KeyboardEvent, itemKey: string, closable: boolean) => {
@@ -120,6 +128,16 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
     );
   };
 
+  const scrollTabItemIntoViewByKey = (key: string, logicalPosition: ScrollLogicalPosition = 'nearest') => {
+    const tabItem = document.querySelector(`[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey="${key}"]`);
+    tabItem?.scrollIntoView({ behavior: 'smooth', block: logicalPosition, inline: logicalPosition });
+  }
+
+  const scrollActiveTabItemIntoView = (logicalPosition?: ScrollLogicalPosition) => {
+    const key = _getItemKey(props.activeKey);
+    scrollTabItemIntoViewByKey(key, logicalPosition)
+  }
+
   const renderTabComponents = (list: Array<PlainTab>): Array<VueJsxNode> => list.map((panel) => renderTabItem(panel));
 
   const handleArrowClick = (items: Array<OverflowItem>, pos: 'start' | 'end'): void => {
@@ -128,11 +146,7 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
       return;
     }
     const key = _getItemKey(lastItem.itemKey);
-    // eslint-disable-next-line max-len
-    const tabItem = document.querySelector(
-      `[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey=${JSON.stringify(key)}]`,
-    );
-    tabItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+    scrollTabItemIntoViewByKey(key)
   };
 
   const renderCollapse = (items: Array<OverflowItem>, icon: VueJsxNode, pos: 'start' | 'end'): VueJsxNode => {
