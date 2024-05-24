@@ -17,7 +17,7 @@ const TabsDemo4 = defineComponent<TabsDemo4Props>((props, {}) => {
 
   return () => {
     return (
-      <Fragment>
+      <div style={{width:'400px'}}>
         <Tabs activeKey={activeKey.value} collapsible onChange={(v)=>activeKey.value = v}>
           <TabPane tab={<span role={'symbol'}>symbol0</span>} itemKey={'0'}>
             <div>symbol0</div>
@@ -32,13 +32,14 @@ const TabsDemo4 = defineComponent<TabsDemo4Props>((props, {}) => {
         </Tabs>
         {activeKey.value}
         <Button
+          role={'bt'}
           onClick={() => {
             activeKey.value = '10';
           }}
         >
           set
         </Button>
-      </Fragment>
+      </div>
     );
   };
 });

@@ -16,7 +16,7 @@ import {
   h,
   onMounted,
   PropType,
-  reactive,
+  reactive, ref,
   useSlots,
   VNode,
   watch,
@@ -128,8 +128,9 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
     );
   };
 
+  const tabListNode = ref()
   const scrollTabItemIntoViewByKey = (key: string, logicalPosition: ScrollLogicalPosition = 'nearest') => {
-    const tabItem = document.querySelector(`[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey="${key}"]`);
+    const tabItem = (tabListNode.value as HTMLElement).querySelector(`[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey="${key}"]`);
     tabItem?.scrollIntoView({ behavior: 'smooth', block: logicalPosition, inline: logicalPosition });
   }
 
@@ -310,6 +311,7 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
     return (
       <div
         role="tablist"
+        ref={tabListNode}
         aria-orientation={tabPosition === 'left' ? 'vertical' : 'horizontal'}
         class={classNames}
         style={style}

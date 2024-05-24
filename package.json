@@ -102,7 +102,7 @@
     "style-loader": "^3.3.1",
     "vue-loader": "^16.8.3",
     "camelcase": "^6.3.0",
-    "jsdom": "^21.1.2",
+    "jsdom": "^24.0.0",
     "prettier": "^2.8.3",
     "svgo": "2.7.0",
     "ts-node": "^10.9.2",
