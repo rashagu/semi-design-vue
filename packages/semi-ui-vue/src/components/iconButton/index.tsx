@@ -113,6 +113,8 @@ const Index = defineComponent<IconButtonProps>((props, {slots}) => {
               IconElem = () => <SpinIcon/>;
             } else if (isVNode(icon)) {
               IconElem = () => icon;
+            }else if (typeof icon.setup === 'function'){
+              IconElem = () => <icon/>;
             }
             const children = () => getFragmentChildren(slots) ?
               <span class={IconElem() ? btnTextCls : ''}>{slots.default ? slots.default() : null}</span> : null;
