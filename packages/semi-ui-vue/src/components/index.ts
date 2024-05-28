@@ -92,6 +92,8 @@ export { ListItem } from './list';
 export { default as InputGroup } from './input/inputGroup';
 export { default as Nav } from './navigation/index';
 export { default as NavItem } from './navigation/Item';
+export { default as NavHeader } from './navigation/Header';
+export { default as NavFooter } from './navigation/Footer';
 export { default as SubNav } from './navigation/SubNav';
 export type {
   NavFooterProps,
@@ -112,7 +114,14 @@ export { default as Pagination } from './pagination';
 export { default as Popconfirm } from './popconfirm';
 export { default as ScrollItem } from './scrollList/scrollItem';
 export { default as SideSheet } from './sideSheet';
-export { default as Skeleton } from './skeleton';
+export {
+  default as Skeleton,
+  SkeletonAvatar,
+  SkeletonImage,
+  SkeletonTitle,
+  SkeletonButton,
+  SkeletonParagraph
+} from './skeleton';
 
 export { default as Step } from './steps/step';
 export { default as Steps } from './steps';

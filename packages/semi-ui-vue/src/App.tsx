@@ -105,6 +105,9 @@ import NotificationDemo3 from './components/notification/__test__/NotificationDe
 import TypoDemo2 from './components/typography/__test__/TypoDemo2';
 import CascaderDemo3 from './components/cascader/__test__/CascaderDemo3';
 import TabsDemo4 from './components/tabs/__test__/TabsDemo4';
+import DemoButtonSFC from './components/button/__test__/DemoButtonSFC.vue';
+import SkeletonDemoSFC from './components/skeleton/__test__/SkeletonDemoSFC.vue';
+import BreadcrumbDemo2 from './components/breadcrumb/__test__/BreadcrumbDemo2';
 export interface ExampleProps {
   name?: string
 }
@@ -203,11 +206,12 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}
+        <BreadcrumbDemo2/>
         {/*<DatePickerDemo />*/}
         {/*<DatePickerDemo2/>*/}
         {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
-        <CascaderDemo/>
+        {/*<CascaderDemo/>*/}
         {/*<CascaderDemo3/>*/}
         {/*<CheckboxDemo />*/}
         {/*<TagInputDemo />*/}
@@ -228,7 +232,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TypoDemo2/>*/}
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
         {/*  <Button />*/}
+        {/*<DemoButtonSFC/>*/}
         {/*</div>*/}
+        {/*<SkeletonDemo/>*/}
+        {/*<SkeletonDemoSFC/>*/}
 
         {/*<IconTest />*/}
         {/*<br/>*/}
