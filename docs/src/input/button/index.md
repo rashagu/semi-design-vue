@@ -11,9 +11,12 @@ brief: 用户使用按钮来触发一个操作或者进行跳转。
 
 <script setup>
 import { useData } from 'vitepress';
+import LiveCode from '../../../LiveCode.vue';
 import DesignToken from '../../../DesignToken.vue';
 
 
+
+const modules = import.meta.glob('./demo/*.vue', { query: '?raw', import: 'default', eager: true });
 
 const { site, theme, page, frontmatter } = useData()
 </script>
@@ -39,23 +42,9 @@ import { Button, SplitButtonGroup } from '@kousum/semi-ui-vue';
 -   警告按钮（"warning"）
 -   危险按钮（"danger"）
 
-```jsx live=true dir="column"
-import { h } from 'vue';
-import { Button } from '@kousum/semi-ui-vue';
-
-function ButtonDemo() {
-    return (
-        <div className="btn-margin-right">
-            <Button>主要按钮</Button>
-            <Button type="secondary">次要按钮</Button>
-            <Button type="tertiary">第三按钮</Button>
-            <Button type="warning">警告按钮</Button>
-            <Button type="danger">危险按钮</Button>
-        </div>
-    );
-}
-
-```
+<div style="width: 100%;height: 400px;">
+<LiveCode :files="{'src/base.vue':modules['./demo/base.vue']}"/>
+</div>
 
 #### 关于类型字体色值
 

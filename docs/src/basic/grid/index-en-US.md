@@ -31,7 +31,7 @@ From stacking to horizontal arrangement.
 Using a single set of Row and Col grid components, you can create a basic grid system. All Col must be placed in the Row.
 
 ```jsx live=true dir="column"
-import React from 'react';
+
 import { Col, Row } from '@douyinfe/semi-ui';
 
 () => (
@@ -74,7 +74,7 @@ If you want to support responsiveness, you can write {xs: 8, sm: 16, md: 24, lg:
 Dark for content area, light for spacing
 
 ```jsx live=true dir="column"
-import React from 'react';
+
 import { Col, Row } from '@douyinfe/semi-ui';
 
 () => (
@@ -142,7 +142,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 ### Offset
 
 ```jsx live=true dir="column"
-import React from 'react';
+
 import { Col, Row } from '@douyinfe/semi-ui';
 
 () => (
@@ -177,7 +177,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 Use `row-flex` to define a Flex layout whose child elements are based on different values `start`,`center`,`end`,`space-between`,`space-around`, define their typesetting methods in the parent node respectively.
 
 ```jsx live=true dir="column"
-import React from 'react';
+
 import { Col, Row } from '@douyinfe/semi-ui';
 
 () => (
@@ -228,7 +228,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 ### Flex subelements vertically aligned
 
 ```jsx live=true dir="column"
-import React from 'react';
+
 import { Col, Row } from '@douyinfe/semi-ui';
 
 () => (
@@ -265,7 +265,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 Change the sorting of elements through `order` of the Col.
 
 ```jsx live=true dir="column"
-import React from 'react';
+
 import { Col, Row } from '@douyinfe/semi-ui';
 
 () => (
@@ -285,7 +285,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 Referring to Bootstrap's responsive design, preset six response sizes:`xs`, `sm`, `md`, `lg`, `Xl`, `xxl`.
 
 ```jsx live=true dir="column"
-import React from 'react';
+
 import { Col, Row } from '@douyinfe/semi-ui';
 
 () => (

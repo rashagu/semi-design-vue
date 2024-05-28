@@ -103,18 +103,18 @@ export default defineConfig({
             link: '/basic/divider/',
             text: 'Divider 分割线',
           },
-          // {
-          //   link: '/basic/grid/',
-          //   text: 'Grid 栅格',
-          // },
+          {
+            link: '/basic/grid/',
+            text: 'Grid 栅格',
+          },
           // {
           //   link: '/basic/icon/',
           //   text: 'Icon 图标',
           // },
-          // {
-          //   link: '/basic/layout/',
-          //   text: 'Layout 布局',
-          // },
+          {
+            link: '/basic/layout/',
+            text: 'Layout 布局',
+          },
           // {
           //   link: '/basic/tokens/',
           //   text: 'Tokens 设计变量',
@@ -394,6 +394,7 @@ export default defineConfig({
       // },
     ],
 
+    outline:{level: [1,4]},
     socialLinks: [{ icon: 'github', link: 'https://github.com/rashagu/semi-design-vue' }],
   },
 });
