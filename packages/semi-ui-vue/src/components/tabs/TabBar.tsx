@@ -130,7 +130,7 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
 
   const tabListNode = ref()
   const scrollTabItemIntoViewByKey = (key: string, logicalPosition: ScrollLogicalPosition = 'nearest') => {
-    const tabItem = (tabListNode.value as HTMLElement).querySelector(`[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey="${key}"]`);
+    const tabItem = (tabListNode.value as HTMLElement).querySelector(`[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey=${JSON.stringify(key)}]`);
     tabItem?.scrollIntoView({ behavior: 'smooth', block: logicalPosition, inline: logicalPosition });
   }
 

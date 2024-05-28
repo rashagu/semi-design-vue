@@ -516,7 +516,16 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
     return newState;
   }
   watch(
-    () => props,
+    [
+      () => props.multiple,
+      () => props.value,
+      () => props.defaultValue,
+      () => props.onChangeWithObject,
+      () => props.leafOnly,
+      () => props.autoMergeValue,
+      () => props.treeData,
+      () => props.disableStrictly,
+    ],
     (val) => {
       const newState = getDerivedStateFromProps({...getProps(props)});
       // console.log(props.value);
@@ -525,7 +534,7 @@ const Index = defineComponent<CascaderProps>((props, { expose }) => {
           state[key] = newState[key];
         });
     },
-    { deep: true, immediate: true }
+    { immediate: true }
   );
 
   onMounted(() => {

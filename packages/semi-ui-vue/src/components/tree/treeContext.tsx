@@ -7,13 +7,13 @@ import {
     RenderFullLabelProps
 } from './interface';
 import {VueJsxNode} from "../interface";
-import {CSSProperties} from "vue";
+import { CSSProperties, VNode } from 'vue';
 import Provider from "./TreeContext/Provider";
 import Consumer from "./TreeContext/Consumer";
 
 export interface TreeContextValue {
     treeDisabled?: boolean;
-    treeIcon?: VueJsxNode;
+    treeIcon?: VNode | ((props: TreeNodeProps) => VNode);
     motion?: boolean;
     motionKeys?: Set<string>;
     motionType?: string;

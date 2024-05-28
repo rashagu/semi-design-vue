@@ -33,8 +33,10 @@ import type { CopyableConfig, LinkType } from './title';
 import type { BaseProps } from '../_base/baseComponent';
 import { isSemiIcon, runAfterTicks } from '../_utils';
 import ResizeObserver, { ObserverProperty, ResizeEntry } from '../resizeObserver';
+import SizeContext from './context';
 import * as PropTypes from '../PropTypes';
 import { vuePropsMake } from '../PropTypes';
+import { useTypographyBaseSizeContext } from './context/Consumer';
 
 
 export interface BaseTypographyProps extends BaseProps {
@@ -189,6 +191,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
   const slots = useSlots()
 
 
+  const {context} = useTypographyBaseSizeContext()
   const wrapperRef = ref<any>(null)
   const expandRef = ref<any>(null)
   const copyRef = ref<any>(null)
@@ -660,13 +663,14 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
   function renderIcon() {
     const {icon, size} = props;
+    const realSize = size === 'inherit' ? context.value : size;
     if (!icon) {
       return null;
     }
-    const iconSize: Size = size === 'small' ? 'small' : 'default';
+    const iconSize: Size = realSize === 'small' ? 'small' : 'default';
     return (
       <span class={`${prefixCls}-icon`} x-semi-prop="icon">
-                {isSemiIcon(icon) ? cloneVNode((icon as any), {size: iconSize}) : icon}
+                {isSemiIcon(icon) ? cloneVNode((icon as any), {realSize: iconSize}) : icon}
             </span>
     );
   }
@@ -701,6 +705,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       'delete',
       'children'
     ]);
+    const realSize = size === 'inherit' ? context.value : size;
     const iconNode = renderIcon();
     const ellipsisOpt = getEllipsisOpt();
     // console.debug(ellipsisOpt)
@@ -722,7 +727,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     const wrapperCls = cls(className, ellipsisCls, {
       // [`${prefixCls}-primary`]: !type || type === 'primary',
       [`${prefixCls}-${type}`]: type && !link,
-      [`${prefixCls}-${size}`]: size,
+      [`${prefixCls}-${realSize}`]: realSize,
       [`${prefixCls}-link`]: link,
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-${spacing}`]: spacing,
@@ -787,18 +792,21 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
 
   return () => {
-
+    const { size } = props;
+    const realSize = size === 'inherit' ? context.value : size;
     const content = (
-      <LocaleConsumer componentName="Typography">
-        {{
-          default: (locale: Locale['Typography']) => {
-            expandStr = locale.expand;
-            collapseStr = locale.collapse;
-            // // console.debug(locale)
-            return renderTipWrapper();
-          }
-        }}
-      </LocaleConsumer>
+      <SizeContext.Provider value={realSize}>
+        <LocaleConsumer componentName="Typography">
+          {{
+            default: (locale: Locale['Typography']) => {
+              expandStr = locale.expand;
+              collapseStr = locale.collapse;
+              // // console.debug(locale)
+              return renderTipWrapper();
+            }
+          }}
+        </LocaleConsumer>
+      </SizeContext.Provider>
     );
     if (props.ellipsis) {
       return (

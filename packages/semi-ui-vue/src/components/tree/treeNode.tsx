@@ -292,30 +292,24 @@ const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
   function renderIcon() {
     const {
       directory,
-      // @ts-ignore
       treeIcon
     } = context.value;
-    const { expanded, icon } = props;
-    const hasChild = !isLeaf();
-    const hasIcon = icon || treeIcon;
-    let itemIcon;
-    if (hasIcon || directory) {
-      if (hasIcon) {
-        itemIcon = icon || treeIcon;
+    const { expanded, icon, data } = props;
+    if (icon) {
+      return icon;
+    }
+    if (treeIcon) {
+      return typeof treeIcon === 'function' ? treeIcon(props) : treeIcon;
+    }
+    if (directory) {
+      const hasChild = !isLeaf();
+      if (!hasChild) {
+        return <IconFile className={`${prefixcls}-item-icon`} />;
       } else {
-        if (!hasChild) {
-          itemIcon = <IconFile className={`${prefixcls}-item-icon`} />;
-        } else {
-          // eslint-disable-next-line max-len
-          itemIcon = expanded ? (
-            <IconFolderOpen className={`${prefixcls}-item-icon`} />
-          ) : (
-            <IconFolder className={`${prefixcls}-item-icon`} />
-          );
-        }
+        return expanded ? <IconFolderOpen className={`${prefixcls}-item-icon`} /> : <IconFolder className={`${prefixcls}-item-icon`} />;
       }
     }
-    return itemIcon;
+    return null;
   }
 
   function renderEmptyNode() {

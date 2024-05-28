@@ -470,6 +470,7 @@ function withField<
         let mergeTrigger = transformTrigger(trigger, formProps.trigger);
 
         const validateOnMount = mergeTrigger.includes('mount');
+        isUnmounted.value = false;
         if (validateOnMount) {
           fieldValidate(value);
         }

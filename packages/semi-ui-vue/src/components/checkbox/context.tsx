@@ -1,4 +1,3 @@
-import {defineComponent, ref, h, Fragment, useSlots, provide} from 'vue'
 import {  BasicCheckboxEvent } from '@douyinfe/semi-foundation/checkbox/checkboxFoundation';
 import Provider from "./context/Provider";
 import Consumer from "./context/Consumer";

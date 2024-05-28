@@ -14,11 +14,11 @@ importers:
   .:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       '@vue/repl':
         specifier: 4.1.1
         version: 4.1.1(patch_hash=46xa5b3wd6uhso7mep6nnu6f3a)
@@ -201,17 +201,17 @@ importers:
   packages/semi-animation-vue:
     dependencies:
       '@douyinfe/semi-animation':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       '@douyinfe/semi-animation-styled':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       '@douyinfe/semi-foundation':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -295,11 +295,11 @@ importers:
   packages/semi-icons-lab-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -380,11 +380,11 @@ importers:
   packages/semi-icons-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -465,11 +465,11 @@ importers:
   packages/semi-illustrations-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -565,14 +565,14 @@ importers:
         specifier: 0.0.5
         version: 0.0.5(vue@3.4.27)
       '@douyinfe/semi-animation':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       '@douyinfe/semi-foundation':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.58.0
-        version: 2.58.0
+        specifier: 2.59.0
+        version: 2.59.0
       '@kousum/semi-animation-vue':
         specifier: ^0.11.0
         version: link:../semi-animation-vue
@@ -2596,20 +2596,20 @@ packages:
       - '@algolia/client-search'
     dev: true
 
-  /@douyinfe/semi-animation-styled@2.58.0:
-    resolution: {integrity: sha512-PqWUfRn4q0BDkPt5hxYYDEZwokiIpNa4S+7F5mP4nYyVJppkkylnpJcktSDy25YMfSdkXYcF7wrPAIsGfoZQ8g==}
+  /@douyinfe/semi-animation-styled@2.59.0:
+    resolution: {integrity: sha512-KgIpTgQjnEVfZKIgwgvI8r7UoHhFEtp1cMgYXTG9TnI7fapJ9Rcd+qE5taWFbuGjANWXY3dL9NM1D6RMf9f2rw==}
     dev: false
 
-  /@douyinfe/semi-animation@2.58.0:
-    resolution: {integrity: sha512-ks1v8xqTV/YkXO/9HKr7yooWgtvfKvAWJ0nhsZOUi9xL04PbTjjvbD80FMOvemHFY320PZpurIXwIPrx72xtUQ==}
+  /@douyinfe/semi-animation@2.59.0:
+    resolution: {integrity: sha512-ad+87vIQMYJdVdJgoME1Eip+D9p1EYQk/2q7aFnMm4EmaXOxNBd48tt1NVyX49tJs259UpSTa2MSM9ajMMqbDA==}
     dependencies:
       bezier-easing: 2.1.0
     dev: false
 
-  /@douyinfe/semi-foundation@2.58.0:
-    resolution: {integrity: sha512-jMmaTuGHG/MUW5d1CvEmWuxMI+vdLUElM2ol1B4pglDx0lOHBCyGRk9j78H1rZg15fxXXxByOD/CZmNNv1l7Cg==}
+  /@douyinfe/semi-foundation@2.59.0:
+    resolution: {integrity: sha512-YF8blKhVFcCNrLoo1gqtrPZev15Briz3f7/mx/SfPq6m3v5PeIw3aKwvi9PdcxrHbdj7WEmUtMtsMmfy8b61tg==}
     dependencies:
-      '@douyinfe/semi-animation': 2.58.0
+      '@douyinfe/semi-animation': 2.59.0
       async-validator: 3.5.2
       classnames: 2.5.1
       date-fns: 2.30.0
@@ -2620,10 +2620,8 @@ packages:
       scroll-into-view-if-needed: 2.2.31
     dev: false
 
-  /@douyinfe/semi-theme-default@2.58.0:
-    resolution: {integrity: sha512-YDVJCa/VupAA2rAwbLKiUeMy46W8W0ZVqWWydoA2Rv8XB+65RkWY/w7D3Yg2FG0+Eg4f9/DwazD9IFUWPeIhCA==}
-    dependencies:
-      glob: 7.2.3
+  /@douyinfe/semi-theme-default@2.59.0:
+    resolution: {integrity: sha512-EKxOfQSYkNroLaQWUg2PeJDPbWHMC3ahEXecnO3akQUo4hlcXNo68hUhUyvRQxwYLQMIo2jEGjNOF31A0G/OEQ==}
     dev: false
 
   /@emotion/use-insertion-effect-with-fallbacks@1.0.1(react@18.3.1):
@@ -6013,6 +6011,7 @@ packages:
 
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+    dev: true
 
   /base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
@@ -6124,6 +6123,7 @@ packages:
     dependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
+    dev: true
 
   /brace-expansion@2.0.1:
     resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
@@ -6651,6 +6651,7 @@ packages:
 
   /concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    dev: true
 
   /concat-stream@1.6.2:
     resolution: {integrity: sha512-27HBghJxjiZtIk3Ycvn/4kbJk/1uZuJFfuPEns6LaEvpvG1f0hTea8lilrouyo9mVc2GWdcEZ8OLoGmSADlrCw==}
@@ -8324,6 +8325,7 @@ packages:
 
   /fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
+    dev: true
 
   /fsevents@1.2.13:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
@@ -8512,6 +8514,7 @@ packages:
       minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
+    dev: true
 
   /glob@8.1.0:
     resolution: {integrity: sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==}
@@ -8988,9 +8991,11 @@ packages:
     dependencies:
       once: 1.4.0
       wrappy: 1.0.2
+    dev: true
 
   /inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
+    dev: true
 
   /ini@1.3.8:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
@@ -10178,6 +10183,7 @@ packages:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
       brace-expansion: 1.1.11
+    dev: true
 
   /minimatch@5.1.6:
     resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
@@ -10634,6 +10640,7 @@ packages:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
     dependencies:
       wrappy: 1.0.2
+    dev: true
 
   /onetime@5.1.2:
     resolution: {integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==}
@@ -10852,6 +10859,7 @@ packages:
   /path-is-absolute@1.0.1:
     resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /path-key@3.1.1:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
@@ -14273,6 +14281,7 @@ packages:
 
   /wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
+    dev: true
 
   /write-file-atomic@2.4.3:
     resolution: {integrity: sha512-GaETH5wwsX+GcnzhPgKcKjJ6M2Cq3/iZp1WyY/X1CSqrW+jVNM9Y7D8EC2sM4ZG/V8wZlSniJnCKWPmBYAucRQ==}

@@ -12,7 +12,7 @@ import {
     BasicOnDragProps,
     KeyMapProps,
 } from '@douyinfe/semi-foundation/tree/foundation';
-import {CSSProperties} from "vue";
+import { CSSProperties, VNode } from 'vue';
 import {VueJsxNode} from "../interface";
 
 /* Tree */
@@ -67,7 +67,7 @@ export interface TreeProps extends BasicTreeProps {
     style?: CSSProperties;
     treeData?: TreeNodeData[];
     value?: Value;
-    icon?: VueJsxNode;
+    icon?: VNode | ((props: TreeNodeProps) => VNode);
     keyMaps?: KeyMapProps;
     loadData?: (treeNode?: TreeNodeData) => Promise<void>;
     onChange?: (value?: Value) => void;

@@ -150,6 +150,7 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
   const maxHanleEl = ref();
   let dragging = [false, false];
   const eventListenerSet = new Set();
+  const handleDownEventListenerSet: Set<() => void> = new Set();
 
   const { adapter: adapterInject, getDataAttr } = useBaseComponent<SliderProps>(props, state);
 
@@ -242,9 +243,9 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
       getMinHandleEl: () => minHanleEl.value,
       getMaxHandleEl: () => maxHanleEl.value,
       onHandleDown: (e: MouseEvent) => {
-        _addEventListener(document.body, 'mousemove', foundation.onHandleMove, false);
-        _addEventListener(window, 'mouseup', foundation.onHandleUp, false);
-        _addEventListener(document.body, 'touchmove', foundation.onHandleTouchMove, false);
+        handleDownEventListenerSet.add(_addEventListener(document.body, 'mousemove', foundation.onHandleMove, false));
+        handleDownEventListenerSet.add(_addEventListener(window, 'mouseup', foundation.onHandleUp, false));
+        handleDownEventListenerSet.add(_addEventListener(document.body, 'touchmove', foundation.onHandleTouchMove, false));
       },
       onHandleMove: (
         mousePos: number,
@@ -305,8 +306,8 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
         props.onMouseUp?.(e);
         e.stopPropagation();
         e.preventDefault();
-        document.body.removeEventListener('mousemove', foundation.onHandleMove, false);
-        document.body.removeEventListener('mouseup', foundation.onHandleUp, false);
+        Array.from(handleDownEventListenerSet).forEach((clear) => clear());
+        handleDownEventListenerSet.clear();
       },
       onHandleUpAfter: () => {
         const { currentValue } = state;
@@ -414,9 +415,6 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
           onMouseleave={() => {
             foundation.onHandleLeave();
           }}
-          onMouseup={(e) => {
-            foundation.onHandleUp(e);
-          }}
           onKeyup={(e) => {
             foundation.onHandleUp(e);
           }}
@@ -485,9 +483,6 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
             onMouseleave={() => {
               foundation.onHandleLeave();
             }}
-            onMouseup={(e) => {
-              foundation.onHandleUp(e);
-            }}
             onKeyup={(e) => {
               foundation.onHandleUp(e);
             }}
@@ -550,9 +545,6 @@ const Slider = defineComponent<SliderProps>((props, {}) => {
             }}
             onMouseleave={() => {
               foundation.onHandleLeave();
-            }}
-            onMouseup={(e) => {
-              foundation.onHandleUp(e);
             }}
             onKeyup={(e) => {
               foundation.onHandleUp(e);

@@ -75,7 +75,7 @@ const propTypes: ComponentObjectPropsOptions<TreeProps> = {
   expandAll: PropTypes.bool,
   expandedKeys: PropTypes.array,
   filterTreeNode: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-  icon: PropTypes.node,
+  icon: [PropTypes.object, PropTypes.func] as PropType<TreeProps['icon']>,
   onChangeWithObject: PropTypes.bool,
   motion: PropTypes.bool,
   multiple: PropTypes.bool,
