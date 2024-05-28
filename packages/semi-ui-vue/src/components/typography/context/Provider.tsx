@@ -1,8 +1,8 @@
-import { defineComponent, provide, ref, watch } from 'vue';
+import { defineComponent, PropType, provide, ref, watch } from 'vue';
 import { TypographyBaseSize } from '../interface';
 
 export const vuePropsType = {
-  value: Object,
+  value: String as PropType<TypographyBaseSize>,
 };
 const Provider = defineComponent<{ value: TypographyBaseSize }>(
   (props, { slots }) => {

@@ -220,7 +220,6 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
 
     const slots = useSlots()
     const renderList = (): Array<VNode> => {
-        const children = slots.default?.()
         const {
             routes,
             autoCollapse,
