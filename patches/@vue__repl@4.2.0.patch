@@ -1,5 +1,5 @@
 diff --git a/dist/vue-repl.js b/dist/vue-repl.js
-index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c92ffa34d 100644
+index 865eebc7204409e00c05b91357f20a2790e6b8eb..0787ccdac07f2ce07cd9ba948f886d200963d10f 100644
 --- a/dist/vue-repl.js
 +++ b/dist/vue-repl.js
 @@ -140,7 +140,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
@@ -126,7 +126,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  
    // State for calculating the line number of each JSX tag in development.
    __init() {this.lastLineNumber = 1;}
-@@ -4948,7 +4948,7 @@ function requireSetArray_umd () {
+@@ -4973,7 +4973,7 @@ function requireSetArray_umd () {
  		    Object.defineProperty(exports, '__esModule', { value: true });
  
  		}));
@@ -135,7 +135,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  	} (setArray_umd, setArray_umd.exports));
  	return setArray_umd.exports;
  }
-@@ -5132,7 +5132,7 @@ function requireSourcemapCodec_umd () {
+@@ -5157,7 +5157,7 @@ function requireSourcemapCodec_umd () {
  		    Object.defineProperty(exports, '__esModule', { value: true });
  
  		}));
@@ -144,7 +144,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  	} (sourcemapCodec_umd, sourcemapCodec_umd.exports));
  	return sourcemapCodec_umd.exports;
  }
-@@ -5393,7 +5393,7 @@ function requireResolveUri_umd () {
+@@ -5408,7 +5408,7 @@ function requireResolveUri_umd () {
  		    return resolve;
  
  		}));
@@ -153,8 +153,8 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  	} (resolveUri_umd));
  	return resolveUri_umd.exports;
  }
-@@ -5960,7 +5960,7 @@ function requireTraceMapping_umd () {
- 		    exports.TraceMap = TraceMap;
+@@ -6015,7 +6015,7 @@ function requireTraceMapping_umd () {
+ 		    exports.traceSegment = traceSegment;
  
  		}));
 -		
@@ -162,7 +162,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  	} (traceMapping_umd, traceMapping_umd.exports));
  	return traceMapping_umd.exports;
  }
-@@ -6198,7 +6198,7 @@ function requireTraceMapping_umd () {
+@@ -6263,7 +6263,7 @@ function requireTraceMapping_umd () {
  	    Object.defineProperty(exports, '__esModule', { value: true });
  
  	}));
@@ -171,7 +171,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  } (genMapping_umd, genMapping_umd.exports));
  
  var genMapping_umdExports = genMapping_umd.exports;
-@@ -7280,7 +7280,7 @@ var DetailUnionResolver = /** @class */ (function () {
+@@ -7345,7 +7345,7 @@ var DetailUnionResolver = /** @class */ (function () {
  	    Int32Array, Uint32Array, Float32Array, Float64Array, ArrayBuffer]; _i < _a.length; _i++) {
  	    var array_1 = _a[_i];
  	    _loop_1(array_1);
@@ -180,7 +180,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  } (types));
  
  (function (exports) {
-@@ -7506,7 +7506,7 @@ var DetailUnionResolver = /** @class */ (function () {
+@@ -7571,7 +7571,7 @@ var DetailUnionResolver = /** @class */ (function () {
  	    };
  	    return Checker;
  	}());
@@ -189,7 +189,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  } (dist));
  
  /**
-@@ -7552,7 +7552,7 @@ const exportedTypeSuite = {
+@@ -7617,7 +7617,7 @@ const exportedTypeSuite = {
  
  const {Options: OptionsChecker} = dist.createCheckers(exportedTypeSuite);
  
@@ -198,7 +198,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  
  
  
-@@ -9741,7 +9741,7 @@ function typedParseParenItem() {
+@@ -9806,7 +9806,7 @@ function typedParseParenItem() {
  
  
  class StopState {
@@ -207,7 +207,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
    constructor(stop) {
      this.stop = stop;
    }
-@@ -12984,8 +12984,8 @@ function parseFile() {
+@@ -13049,8 +13049,8 @@ function parseFile() {
  }
  
  let File$1 = class File {
@@ -218,7 +218,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  
    constructor(tokens, scopes) {
      this.tokens = tokens;
-@@ -13833,7 +13833,7 @@ class CJSImportTransformer extends Transformer {
+@@ -13898,7 +13898,7 @@ class CJSImportTransformer extends Transformer {
     __init() {this.hadExport = false;}
     __init2() {this.hadNamedExport = false;}
     __init3() {this.hadDefaultExport = false;}
@@ -227,7 +227,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  
    constructor(
       rootTransformer,
-@@ -14727,9 +14727,9 @@ class CJSImportTransformer extends Transformer {
+@@ -14792,9 +14792,9 @@ class CJSImportTransformer extends Transformer {
   * type-only imports in TypeScript and Flow.
   */
  class ESMImportTransformer extends Transformer {
@@ -240,7 +240,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  
    constructor(
       tokens,
-@@ -16151,13 +16151,13 @@ class TypeScriptTransformer extends Transformer {
+@@ -16216,13 +16216,13 @@ class TypeScriptTransformer extends Transformer {
  
  class RootTransformer {
     __init() {this.transformers = [];}
@@ -260,7 +260,7 @@ index cb575272175761c2a04350e5f4f7778dffaa45f7..cb74e165e9c58d3bafcdfe400439181c
  
    constructor(
      sucraseContext,
-@@ -16648,7 +16648,7 @@ var build = {};
+@@ -16713,7 +16713,7 @@ var build = {};
  	    return LinesAndColumns;
  	}());
  	exports.LinesAndColumns = LinesAndColumns;

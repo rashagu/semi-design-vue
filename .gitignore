@@ -19,3 +19,5 @@ coverage/
 /docs/.vitepress/semi-design-vue/
 /docs/.vitepress/out/
 /packages/vite-plugin-semi-theme/dist/
+/docs/src/public/semiIcons/favicon.ico
+/docs/src/public/semiIcons/
