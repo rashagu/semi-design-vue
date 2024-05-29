@@ -8,7 +8,7 @@ import Button from '../button';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/datePicker/constants';
 import { IconChevronLeft, IconChevronRight, IconDoubleChevronLeft, IconDoubleChevronRight } from '@kousum/semi-icons-vue';
 import { PanelType } from '@douyinfe/semi-foundation/datePicker/monthsGridFoundation';
-import monthsGrid from "./monthsGrid";
+
 
 const prefixCls = cssClasses.NAVIGATION;
 
