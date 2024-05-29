@@ -13,6 +13,8 @@ import {
 import { CopyableConfig, LinkType } from './title';
 import FormatNumeral from '@douyinfe/semi-foundation/typography/formatNumeral';
 import {vuePropsMake} from "../PropTypes";
+import { getFragmentChildren } from '../_utils';
+import { omit } from 'lodash';
 
 type OmitNumeralProps = OmitTypographyProps;
 
@@ -101,10 +103,12 @@ const Numeral = defineComponent<NumeralProps>((props, {}) => {
       if (typeof item === 'function') {
         return formatNodeDFS(item());
       }
-      if (typeof item === 'object' && 'children' in item['props']) {
+      if (typeof item === 'object' && 'children' in item) {
+        const children = formatNodeDFS(item['children'])
         return {
           ...item,
-          props: { ...item['props'], children: formatNodeDFS(item['props']['children']) },
+          props: { ...item['props'] },
+          children: Array.isArray(children)?children:[children],
         };
       }
       return item;
@@ -118,8 +122,9 @@ const Numeral = defineComponent<NumeralProps>((props, {}) => {
     delete baseProps.rule;
     delete baseProps.parser;
     // Each piece of content in the virtual DOM is formatted by the `formatNumeral` function.
-    baseProps.children = formatNodeDFS(props.children);
-    return <Base component_={'span'} {...baseProps} />;
+    baseProps.children = formatNodeDFS(getFragmentChildren(slots));
+    return <Base component_={'span'} {...omit(baseProps, 'precision', 'truncate')} >
+    </Base>;
   }
 }, {
   props: vuePropsType,
