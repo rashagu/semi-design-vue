@@ -25,7 +25,6 @@ const Typography = defineComponent<TypographyProps>((props, {slots}) => {
 
   const { component_, className, forwardRef, ...rest } = props;
   const classNames = cls(prefixCls, className);
-  // console.debug(component_,{class:classNames,ref:forwardRef,...rest})
   return ()=>{
     const children = slots.default?slots.default():null
     return h(component_, {class:classNames,ref:forwardRef,...rest}, children)

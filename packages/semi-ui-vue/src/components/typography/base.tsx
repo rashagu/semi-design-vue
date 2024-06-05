@@ -746,19 +746,23 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
 
     return (
       <Typography
-        className={wrapperCls}
-        style={{...textStyle, ...ellipsisStyle}}
-        component_={component_}
-        forwardRef={wrapperRef}
-        {...textProps}
+        {...{
+          className: wrapperCls,
+          style: { ...textStyle, ...ellipsisStyle },
+          component_,
+          forwardRef: wrapperRef,
+          ...textProps,
+        }}
       >
         {{
           default: () => {
-            return <>
-              {textNode}
-              {renderOperations()}
-            </>
-          }
+            return (
+              <>
+                {textNode}
+                {renderOperations()}
+              </>
+            );
+          },
         }}
       </Typography>
     );

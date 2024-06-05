@@ -5,6 +5,7 @@ import './docDemo.scss'
 import IconTest from "./components/__test__/IconTest";
 import TooltipDemo from "./components/tooltip/__test__/TooltipDemo";
 import DropdownDemo1 from "./components/dropdown/__test__/DropdownDemo1";
+import DropdownDemoSFC from "./components/dropdown/__test__/DropdownDemoSFC.vue";
 import GridTest from "./components/grid/__test__/GridTest";
 import LayoutTest from "./components/layout/__test__/LayoutTest";
 import SpaceTest from "./components/space/__test__/SpaceTest";
@@ -108,6 +109,7 @@ import TabsDemo4 from './components/tabs/__test__/TabsDemo4';
 import DemoButtonSFC from './components/button/__test__/DemoButtonSFC.vue';
 import SkeletonDemoSFC from './components/skeleton/__test__/SkeletonDemoSFC.vue';
 import BreadcrumbDemo2 from './components/breadcrumb/__test__/BreadcrumbDemo2';
+import TypoDemo3 from './components/typography/__test__/TypoDemo3';
 export interface ExampleProps {
   name?: string
 }
@@ -206,7 +208,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}
-        <BreadcrumbDemo2/>
+        {/*<BreadcrumbDemo2/>*/}
         {/*<DatePickerDemo />*/}
         {/*<DatePickerDemo2/>*/}
         {/*<TimePickerDemo />*/}
@@ -228,6 +230,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
         {/*<InputDemo />*/}
         {/*<TypeDemo />*/}
+        {/*<TypoDemo3/>*/}
 
         {/*<TypoDemo2/>*/}
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
@@ -243,6 +246,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<br/>*/}
         {/*<br/>*/}
         {/*<DropdownDemo1/>*/}
+        <DropdownDemoSFC/>
         {/*<br/>*/}
         {/*<GridTest />*/}
         {/*<LayoutTest/>*/}
