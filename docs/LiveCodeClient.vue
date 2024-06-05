@@ -54,9 +54,20 @@ const store = useStore(
 
 const previewOptions = {
   headHTML: `
+<link rel="stylesheet" href="${import.meta.env.BASE_URL}reset.css" data-n-g="">
 <link rel="stylesheet" href="${import.meta.env.BASE_URL}semi/style.css" data-n-g="">
 <link rel="stylesheet" href="${import.meta.env.BASE_URL}semiIcons/style.css" data-n-g="">
 <style>
+
+@font-face {
+  font-family: "Inter";
+  src: url("${import.meta.env.BASE_URL}font/Inter-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter-Bold";
+  src: url("${import.meta.env.BASE_URL}font/Inter-Bold.ttf") format("truetype");
+}
 
 .grid .semi-row,.grid .semi-row-flex {
     text-align: center

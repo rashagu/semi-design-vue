@@ -1,18 +1,18 @@
 
 <template>
   <Layout className="components-layout-demo">
-    <Header :style="commonStyle">Header</Header>
+    <LayoutHeader :style="commonStyle">Header</LayoutHeader>
     <Layout>
-      <Sider
+      <LayoutSider
         style="width: 120px; background: var(--semi-color-fill-2);"
         :breakpoint="['md']"
         @onBreakpoint="onbreakpoint"
       >
         Sider
-      </Sider>
-      <Content style="height: 300px; line-height: 300px;">Content</Content>
+      </LayoutSider>
+      <LayoutContent style="height: 300px; line-height: 300px;">Content</LayoutContent>
     </Layout>
-    <Footer :style="commonStyle">Footer</Footer>
+    <LayoutFooter :style="commonStyle">Footer</LayoutFooter>
   </Layout>
 </template>
 

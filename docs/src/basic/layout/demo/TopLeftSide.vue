@@ -49,7 +49,7 @@
         </div>
       </LayoutContent>
     </Layout>
-    <Footer
+    <LayoutFooter
       style="
         display: flex;
         justify-content: space-between;
@@ -66,7 +66,7 @@
         <span style="margin-right: 24px">平台客服</span>
         <span>反馈建议</span>
       </span>
-    </Footer>
+    </LayoutFooter>
   </Layout>
 </template>
 

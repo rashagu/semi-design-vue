@@ -17,9 +17,9 @@ const emit = defineEmits<{
 
 const data = useData()
 
-
+const { page } = useData()
 const count = ref(0)
-const designTokenData = designToken[props.title?.split(' ')[0].toLowerCase()] || []
+const designTokenData = designToken[(props.title || page.value.title)?.split(' ')[0].toLowerCase()] || []
 
 const category = {}
 

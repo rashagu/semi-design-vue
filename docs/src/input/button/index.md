@@ -390,59 +390,10 @@ function ButtonDemo() {
 
 #### 基础使用
 
-```jsx live=true dir="column"
-import React, { useState } from 'react';
-import { SplitButtonGroup, Dropdown, Button } from '@kousum/semi-ui-vue';
-import { IconTreeTriangleDown } from '@kousum/semi-icons-vue';
+<div style="width: 100%;height: 600px;">
+<LiveCode layout="vertical" :files="{'src/SplitButtonDemo.vue':modules['./demo/SplitButtonDemo.vue']}"/>
+</div>
 
-function SplitButtonDemo(){
-
-    const menu = [
-        { node: 'item', name: '编辑项目', onClick: () => console.log('编辑项目点击') },
-        { node: 'item', name: '重置项目' },
-        { node: 'divider' },
-        { node: 'item', name: '复制项目' },
-        { node: 'item', name: '从项目创建模版' },
-        { node: 'divider' },
-        { node: 'item', name: '删除项目', type: 'danger' },
-    ];
-
-    const [btnVisible, setBtnVisible] = useState({
-        1: false,
-        2: false,
-        3: false
-    });
-
-    const handleVisibleChange = (key, visible)=>{
-        newBtnVisible = { ...btnVisible };
-        newBtnVisible[key] = visible;
-        setBtnVisible(newBtnVisible);
-    };
-
-    return (
-        <div>
-            <SplitButtonGroup style={{ marginRight: 10 }} aria-label="项目操作按钮组">
-                <Button theme="solid" type="primary">分裂按钮</Button>
-                <Dropdown onVisibleChange={(v)=>handleVisibleChange(1, v)} menu={menu} trigger="click" position="bottomRight">
-                    <Button style={btnVisible[1] ? { background: 'var(--semi-color-primary-hover)', padding: '8px 4px' } : { padding: '8px 4px' }} theme="solid" type="primary" icon={<IconTreeTriangleDown />}></Button>
-                </Dropdown>
-            </SplitButtonGroup>
-            <SplitButtonGroup style={{ marginRight: 10 }} aria-label="项目操作按钮组">
-                <Button theme="light" type="primary">分裂按钮</Button>
-                <Dropdown onVisibleChange={(v)=>handleVisibleChange(2, v)} menu={menu} trigger="click" position="bottomRight">
-                    <Button style={btnVisible[2]?{ background: 'var(--semi-color-fill-1)', padding: '8px 4px' }:{ padding: '8px 4px' }} theme="light" type="primary" icon={<IconTreeTriangleDown />}></Button>
-                </Dropdown>
-            </SplitButtonGroup>
-            <SplitButtonGroup aria-label="项目操作按钮组">
-                <Button style={btnVisible[3]?{ background: 'var(--semi-color-fill-0)' }:{}} theme="borderless" type="primary">分裂按钮</Button>
-                <Dropdown onVisibleChange={(v)=>handleVisibleChange(3, v)} menu={menu} trigger="click" position="bottomRight">
-                    <Button style={btnVisible[3]?{ background: 'var(--semi-color-fill-1)', padding: '8px 4px' }:{ padding: '8px 4px' }} theme="borderless" type="primary" icon={<IconTreeTriangleDown />}></Button>
-                </Dropdown>
-            </SplitButtonGroup>
-        </div>
-    );
-}
-```
 
 
 ## API 参考
@@ -525,15 +476,11 @@ function SplitButtonDemo(){
 | Edit profile | Edit |
 
 ## 设计变量
-<DesignToken/>
+<DesignToken :title="page.title"/>
 
 ## FAQ
 - #### 为什么Button中的icon属性不起作用？  
   请检查你的Button import路径，正确的import路径应该为```import { Button } from '@kousum/semi-ui-vue;'```，如果你错误地从 @kousum/semi-ui-vue/button/button中import的话，获取到的是不带icon功能的基础Button组件
 
-<!-- ## 相关物料
-```material
-5
-``` -->
-## 相关物料
-<semi-material-list code="5"></semi-material-list>
+
+
