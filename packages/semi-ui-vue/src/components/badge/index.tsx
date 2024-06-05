@@ -67,7 +67,7 @@ const Badge = defineComponent<BadgeProps>((props, {}) => {
     // DefaultPosition here, static can't get this
     const defaultPosition = direction === 'rtl' ? 'leftTop' : 'rightTop';
     // eslint-disable-next-line max-len
-    const { count, dot, type, countClassName,countStyle, theme, position = defaultPosition, overflowCount, style, className, ...rest } = props;
+    const { count, dot, type, countClassName,countStyle, theme, position = defaultPosition, overflowCount, className, ...rest } = props;
     const children = slots.default?.();
     const custom = count && !(isNumber(count) || isString(count));
     const showBadge = count !== null && typeof count !== 'undefined';
@@ -89,7 +89,7 @@ const Badge = defineComponent<BadgeProps>((props, {}) => {
     return (
       <span class={cls(prefixCls, className)} {...rest}>
         {children}
-        <span class={wrapper} style={style || countStyle} x-semi-prop="count">
+        <span class={wrapper} style={countStyle} x-semi-prop="count">
           {dot ? null : content}
         </span>
       </span>
