@@ -7,7 +7,8 @@ import { LocaleConsumerFunc } from '../locale/localeConsumer';
 import { IconTick } from '@kousum/semi-icons-vue';
 import { getHighLightTextHTML } from '../_utils/index';
 import { Locale } from '../locale/interface';
-import { BasicOptionProps } from '@douyinfe/semi-foundation/select/optionFoundation';
+import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
+import type { BasicOptionProps } from '@douyinfe/semi-foundation/select/optionFoundation';
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>()
 
@@ -153,6 +154,7 @@ const Option = defineComponent<OptionProps>((props, {slots, attrs}) => {
         aria-selected={selected ? "true" : "false"}
         aria-disabled={disabled ? "true" : "false"}
         style={style}
+        {...getDataAttr(attrs)}
       >
         {showTick ? (
           <div class={selectedIconClassName}>

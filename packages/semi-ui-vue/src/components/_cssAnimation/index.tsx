@@ -11,6 +11,7 @@ import {
     watch
 } from "vue";
 import {VueJsxNode} from "../interface";
+import * as PropTypes from '../PropTypes';
 
 
 interface AnimationEventsNeedBind {
@@ -52,7 +53,7 @@ export const vuePropsType:ComponentObjectPropsOptions<AnimationProps> = {
     onAnimationEnd: Function as PropType<AnimationProps['onAnimationEnd']>,
     onAnimationStart: Function as PropType<AnimationProps['onAnimationStart']>,
     motion: {
-        type: Boolean,
+        type: [PropTypes.bool, PropTypes.func, PropTypes.object] as PropType<AnimationProps['motion']>,
         default: true
     },
     replayKey: {

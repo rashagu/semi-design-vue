@@ -377,6 +377,7 @@ const TreeSelect = defineComponent<TreeSelectProps>(
         'registerClickOutsideHandler' | 'unregisterClickOutsideHandler' | 'rePositionDropdown'
       > = {
         registerClickOutsideHandler: (cb) => {
+          adapter.unregisterClickOutsideHandler();
           clickOutsideHandler = (e: Event) => {
             // 当组件内部使用了expose时，使用ref得到的内容只有expose的那部分
             const optionInstance = optionsRef && optionsRef.value.getRef?.().vnode.el;

@@ -151,8 +151,19 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
   };
 
   const renderCollapse = (items: Array<OverflowItem>, icon: VueJsxNode, pos: 'start' | 'end'): VueJsxNode => {
+    const arrowCls = cls({
+      [`${cssClasses.TABS_BAR}-arrow-${pos}`]: pos,
+      [`${cssClasses.TABS_BAR}-arrow`]: true,
+    });
+
     if (isEmpty(items)) {
-      return <Button disabled={true} icon={icon} theme="borderless" />;
+      return <Button disabled={true} icon={icon} theme="borderless" />
+      //TODO next vision
+      // return (
+      //   <div role="presentation" class={arrowCls}>
+      //     <Button disabled={true} icon={icon} theme="borderless" />
+      //   </div>
+      // );
     }
     const { dropdownClassName, dropdownStyle } = props;
     const { rePosKey } = state;
@@ -172,11 +183,6 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
         })}
       </DropdownMenu>
     );
-
-    const arrowCls = cls({
-      [`${cssClasses.TABS_BAR}-arrow-${pos}`]: pos,
-      [`${cssClasses.TABS_BAR}-arrow`]: true,
-    });
 
     const dropdownCls = cls(dropdownClassName, {
       [`${cssClasses.TABS_BAR}-dropdown`]: true,

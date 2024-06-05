@@ -34,6 +34,7 @@ export interface IconButtonProps extends ButtonProps {
   noHorizontalPadding?: boolean | HorizontalPaddingType | HorizontalPaddingType[];
   prefixCls?: string;
   autoFocus?: boolean
+  contentClassName?: string;
 }
 const vuePropsType= vuePropsMake<IconButtonProps>({
   iconStyle: PropTypes.object,
@@ -49,7 +50,8 @@ const vuePropsType= vuePropsMake<IconButtonProps>({
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   class: String,
-  role: String
+  role: String,
+  contentClassName: String,
 }, {
   iconPosition: strings.DEFAULT_ICON_POSITION,
   prefixCls: cssClasses.PREFIX,

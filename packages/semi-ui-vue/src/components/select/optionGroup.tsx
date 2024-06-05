@@ -1,6 +1,7 @@
 import {defineComponent, ref, h, Fragment, VNode, CSSProperties, ComponentObjectPropsOptions, PropType} from 'vue'
 import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/select/constants';
+import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 
 export interface OptionGroupProps {
   children?: string | number | VNode | VNode[];
@@ -17,9 +18,9 @@ export const vuePropsType:ComponentObjectPropsOptions<OptionGroupProps> = {
   className: String,
   style: [String, Object] as PropType<OptionGroupProps['style']>,
 }
-const OptionGroup = defineComponent<OptionGroupProps>((props, {slots}) => {
+const OptionGroup = defineComponent<OptionGroupProps>((props, {slots, attrs}) => {
   return () => {
-    const { label, className, style } = props;
+    const { label, className, style, ...rest } = props;
     const groupCls = cls(className, {
       [prefixCls]: true,
     });
@@ -27,7 +28,7 @@ const OptionGroup = defineComponent<OptionGroupProps>((props, {slots}) => {
       return null;
     }
     return (
-      <div class={groupCls} style={style}>
+      <div class={groupCls} style={style} {...getDataAttr(attrs)}>
         {label}
       </div>
     );

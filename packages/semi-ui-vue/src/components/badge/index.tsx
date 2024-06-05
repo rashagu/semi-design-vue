@@ -26,6 +26,8 @@ export interface BadgeProps {
   onMouseEnter?: (e: MouseEvent) => any;
   onMouseLeave?: (e: MouseEvent) => any;
   onClick?: (e: MouseEvent) => any;
+  countClassName?: string;
+  countStyle?: CSSProperties;
 }
 
 const propTypes:ComponentObjectPropsOptions<BadgeProps> = {
@@ -40,6 +42,8 @@ const propTypes:ComponentObjectPropsOptions<BadgeProps> = {
   onClick: PropTypes.func as PropType<BadgeProps['onClick']>,
   onMouseEnter: PropTypes.func as PropType<BadgeProps['onMouseEnter']>,
   onMouseLeave: PropTypes.func as PropType<BadgeProps['onMouseLeave']>,
+  countClassName: PropTypes.string,
+  countStyle: PropTypes.object,
 };
 
 const defaultProps = {
@@ -63,11 +67,11 @@ const Badge = defineComponent<BadgeProps>((props, {}) => {
     // DefaultPosition here, static can't get this
     const defaultPosition = direction === 'rtl' ? 'leftTop' : 'rightTop';
     // eslint-disable-next-line max-len
-    const { count, dot, type, theme, position = defaultPosition, overflowCount, style, className, ...rest } = props;
+    const { count, dot, type, countClassName,countStyle, theme, position = defaultPosition, overflowCount, style, className, ...rest } = props;
     const children = slots.default?.();
     const custom = count && !(isNumber(count) || isString(count));
     const showBadge = count !== null && typeof count !== 'undefined';
-    const wrapper = cls(className, {
+    const wrapper = cls(countClassName, {
       [`${prefixCls}-${type}`]: !custom,
       [`${prefixCls}-${theme}`]: !custom,
       [`${prefixCls}-${position}`]: Boolean(position) && Boolean(children),
@@ -83,9 +87,9 @@ const Badge = defineComponent<BadgeProps>((props, {}) => {
       content = count;
     }
     return (
-      <span class={prefixCls} {...rest}>
+      <span class={cls(prefixCls, className)} {...rest}>
         {children}
-        <span class={wrapper} style={style} x-semi-prop="count">
+        <span class={wrapper} style={style || countStyle} x-semi-prop="count">
           {dot ? null : content}
         </span>
       </span>

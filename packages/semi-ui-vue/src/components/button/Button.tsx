@@ -1,9 +1,10 @@
-import {defineComponent, ref, h, StyleValue, ComponentObjectPropsOptions, PropType} from 'vue'
+import { defineComponent, ref, h, StyleValue, ComponentObjectPropsOptions, PropType, AriaAttributes } from 'vue';
 /* eslint-disable react/destructuring-assignment */
 import classNames from 'classnames';
 import {cssClasses, strings} from '@douyinfe/semi-foundation/button/constants';
 import '@douyinfe/semi-foundation/button/button.scss';
 import {noop} from '@douyinfe/semi-foundation/utils/function';
+import cls from "classnames";
 
 const btnSizes = typeof strings.sizes;
 const {htmlTypes, btnTypes} = strings;
@@ -35,6 +36,8 @@ export interface ButtonProps {
   onMouseLeave?: any;
   autoFocus?: boolean
   role?: string;
+  'aria-label'?: AriaAttributes['aria-label'];
+  contentClassName?: string
 }
 
 
@@ -95,6 +98,8 @@ export const vuePropsType: ComponentObjectPropsOptions<ButtonProps> = {
     default: undefined
   },
   role: String,
+  'aria-label': String,
+  contentClassName: String,
 }
 const Button = defineComponent<ButtonProps>((props, {slots}) => {
 
@@ -144,7 +149,7 @@ const Button = defineComponent<ButtonProps>((props, {slots}) => {
         onMousedown={props.onMouseDown}
         style={style}
       >
-      <span class={`${prefixCls}-content`}
+      <span class={cls(`${prefixCls}-content`, props.contentClassName)}
             onClick={e => props.disabled && e.stopPropagation()}>
                     {slots.default ? slots.default() : null}
           </span>

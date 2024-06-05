@@ -5,15 +5,28 @@ import { fireEvent, render, screen } from '@testing-library/vue';
 import Demo2 from './NotificationDemo2';
 
 test('NotificationDemo test', async () => {
-  const wrapper = mount(Comp, {})
+  render(Comp, {
+    global: {
+      stubs: {
+        // 因为有同名的自定义组件 与vue的transition组件冲突
+        transition: false,
+      },
+    },
+  })
 
-  const profileLink = wrapper.get('.test').text()
-  expect(profileLink).toEqual('Display Notification')
+  const menuitem = await screen.findByText("Display Notification")
 })
 
 
 test('NotificationDemo render', async () => {
-  render(Demo2)
+  render(Demo2, {
+    global: {
+      stubs: {
+        // 因为有同名的自定义组件 与vue的transition组件冲突
+        transition: false,
+      },
+    },
+  })
   const input = await screen.findByRole("bt")
   await fireEvent.click(input)
   // const value = await screen.findByText("00时间")
