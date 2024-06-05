@@ -91,7 +91,7 @@ const propTypes: ComponentObjectPropsOptions<ConfirmProps> = {
     type: PropTypes.bool,
     default: undefined
   },
-  content: [String, Object]
+  content: [String, Object, Function] as PropType<ConfirmProps['content']>
 };
 const defaultProps = {
 };
@@ -198,7 +198,7 @@ const ConfirmModal = defineComponent<ConfirmProps>((props, {}) => {
           }}
       >
         <div class={contentCls} x-semi-prop="content">
-          {content}
+          {typeof content === 'function'?content():content}
         </div>
       </Modal>
     );
