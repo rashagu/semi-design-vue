@@ -574,13 +574,13 @@ importers:
         specifier: 2.59.1
         version: 2.59.1
       '@kousum/semi-animation-vue':
-        specifier: ^0.11.0
+        specifier: ^0.13.0
         version: link:../semi-animation-vue
       '@kousum/semi-icons-vue':
-        specifier: ^0.11.0
+        specifier: ^0.13.0
         version: link:../semi-icons-vue
       '@kousum/semi-illustrations-vue':
-        specifier: ^0.11.0
+        specifier: ^0.13.0
         version: link:../semi-illustrations-vue
       '@kousum/vue-draggable':
         specifier: 1.0.2

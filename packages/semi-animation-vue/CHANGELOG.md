@@ -1,5 +1,11 @@
 # @kousum/semi-animation-vue
 
+## 0.12.0
+
+### Minor Changes
+
+- semi 2.59.1
+
 ## 0.11.0
 
 ### Minor Changes
