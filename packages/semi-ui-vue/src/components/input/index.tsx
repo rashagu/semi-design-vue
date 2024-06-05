@@ -15,7 +15,7 @@ import * as PropTypes from '../PropTypes';
 import InputFoundation from '@douyinfe/semi-foundation/input/foundation';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/input/constants';
 import {isSemiIcon, styleNum} from '../_utils';
-import { useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/input/input.scss';
 import { isString, noop, isFunction, isUndefined } from 'lodash';
 import { IconClear, IconEyeOpened, IconEyeClosedSolid } from '@kousum/semi-icons-vue';
@@ -181,7 +181,8 @@ export const VuePropsType = vuePropsMake(propTypes, defaultProps);
 // Vue在这里的话 state 更新会导致整体重新渲染 导致value 无法更新到最新的
 const Input = defineComponent<InputProps>((props, { slots }) => {
 
-  const initValue = 'value' in props ? props.value : props.defaultValue;
+  const {getProps} = useHasInProps()
+  const initValue = 'value' in getProps(props) ? props.value : props.defaultValue;
   const state = reactive<InputState>({
     value: initValue,
     cachedValue: props.value, // Cache current props.value value
@@ -231,7 +232,6 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
       toggleHovering: (isHovering: boolean) => (state.isHovering = isHovering),
       getIfFocusing: () => state.isFocus,
       notifyChange: (cbValue: string, e: any) => {
-        // console.log('notifyChange')
         props.onChange(cbValue, e);
       },
       notifyBlur: (val: string, e: any) => props.onBlur(e),
@@ -265,7 +265,7 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
   watch(
     () => props.value,
     (val) => {
-      const newState = getDerivedStateFromProps({...props}, {...state});
+      const newState = getDerivedStateFromProps({...getProps(props)}, {...state});
       if (newState) {
         Object.keys(newState).forEach((key) => {
           state[key] = newState[key];
@@ -486,7 +486,7 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
   }
 
   // onMounted(()=>{
-  //   console.log(props, props["onUpdate:value"])
+  //   console.log('onMounted')
   // })
   return () => {
     const {
@@ -601,7 +601,6 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
         ...style
       };
     }
-
 
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions

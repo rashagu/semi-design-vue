@@ -242,11 +242,11 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
         {/*<IconTest />*/}
         {/*<br/>*/}
-        {/*<TooltipDemo />*/}
+        <TooltipDemo />
         {/*<br/>*/}
         {/*<br/>*/}
         {/*<DropdownDemo1/>*/}
-        <DropdownDemoSFC/>
+        {/*<DropdownDemoSFC/>*/}
         {/*<br/>*/}
         {/*<GridTest />*/}
         {/*<LayoutTest/>*/}

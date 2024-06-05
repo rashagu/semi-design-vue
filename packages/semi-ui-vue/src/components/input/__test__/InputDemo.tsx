@@ -3,7 +3,7 @@ import Input from '../index'
 import TextArea from "../textArea";
 import {IconSearch} from '@kousum/semi-icons-vue'
 import {Text} from '../../typography'
-import { AutoComplete, InputGroup, Select, SelectOption } from '../../index';
+import { AutoComplete, Button, InputGroup, ModalClass, Select, SelectOption } from '../../index';
 import InputNumber from "../../inputNumber";
 
 interface ExampleProps {
@@ -24,12 +24,46 @@ const InputDemo = defineComponent<ExampleProps>((props, {slots}) => {
     // }, 1000)
   })
 
+  //
+  const value = ref()
   function onChange(v: any) {
     console.log(v);
+    value.value = v
   }
+
+  //
+  const pwd = ref()
+  function check(){
+    ModalClass.confirm({
+      title: "验证密码",
+      content: ()=><Input value={pwd.value} onChange={(v: string) => {
+           pwd.value = v
+        }}/>,
+      // content: h(Input, {
+      //   type:"password",
+      //   placeholder: '请输入密码',
+      //   value: pwd.value,
+      //   onChange: (v: string) => {
+      //     pwd.value = v
+      //   },
+      // }) as any,
+      onOk(){
+        alert('ok' + pwd.value)
+      }
+
+    })
+  }
+
+  onMounted(()=>{
+    setTimeout(()=>{
+      pwd.value = 'ddd'
+    }, 1000)
+  })
 
   return () => (
     <div id={'a'}>
+      <Button onClick={check}>confirm</Button>
+
       {/*<Input  prefix={<IconSearch />} placeholder={'请输入'} showClear></Input>*/}
       {/*<br/><br/>*/}
       {/*<Input prefix="Prefix" showClear></Input>*/}
@@ -39,7 +73,7 @@ const InputDemo = defineComponent<ExampleProps>((props, {slots}) => {
       {/*<Input disabled suffix={<Text strong type='secondary' style={{ marginRight: 8 }}>Suffix</Text>} showClear></Input>*/}
       <br />
       <br />
-      <Input showClear mode={'password'} placeholder={'click to clear'} onChange={onChange}></Input>
+      <Input showClear mode={'password'} value={value.value} placeholder={'click to clear password'} onChange={onChange}></Input>
       <Input
         showClear
         defaultValue={'defaultValue.value'}

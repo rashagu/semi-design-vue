@@ -13,10 +13,14 @@ export const vuePropsType = {
 
 const TooltipDemo = defineComponent<ExampleProps>((props, {slots}) => {
 
+  //
+  const pwd = ref()
   return () => (
     <div>
       <div>
-        <Tooltip content={'hi bytedance'} motion trigger={'click'}>
+        <Tooltip content={<Input value={pwd.value} onChange={(v: string) => {
+          pwd.value = v
+        }}/>} motion trigger={'click'}>
           <div style={{ color: 'red' }}>click</div>
         </Tooltip>
       </div>
