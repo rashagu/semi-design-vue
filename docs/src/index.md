@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "semi-design-vue"
-  text: "Vue3 UI components"
+  name: 'semi-design-vue'
+  text: 'Vue3 UI components'
   tagline: based on semi-design
   actions:
     - theme: brand
@@ -22,3 +22,7 @@ features:
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
+
+<div style="position: fixed;left: 50%;bottom: 2rem;">
+<a href="https://beian.miit.gov.cn/">浙ICP备2021003967号-1</a>
+</div>
