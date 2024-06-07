@@ -21,3 +21,4 @@ coverage/
 /packages/vite-plugin-semi-theme/dist/
 /docs/src/public/semiIcons/favicon.ico
 /docs/src/public/semiIcons/
+/qodana.yaml
