@@ -66,6 +66,15 @@ function withField<
   opts?: WithFieldOption,
   vuePropsType?: ComponentObjectPropsOptions<C>
 ): DefineSetupFnComponent<T> {
+  const propsFromComponent_ = (Component as unknown as DefineComponent).props
+  const propsFromComponent = {}
+  Object.keys(propsFromComponent_).forEach((key) => {
+    propsFromComponent[key] = {
+      ...propsFromComponent_[key],
+      default: undefined
+    }
+    delete propsFromComponent[key].default
+  })
   const SemiField = defineComponent<T>(
     //@ts-ignore
     (truthProps, { attrs: props }) => {
@@ -799,7 +808,7 @@ function withField<
     {
       props: {
         ...omit(
-          { ...(Component as unknown as DefineComponent).props, ...(vuePropsType || {}) } || {},
+          { ...propsFromComponent, ...(vuePropsType || {}) } || {},
           // 'style',
           'class'
         ),
