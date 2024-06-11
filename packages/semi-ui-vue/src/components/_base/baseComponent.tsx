@@ -155,7 +155,7 @@ export function useHasInProps() {
         tProps[tPropsKey] = props[tPropsKey];
       }
 
-      if (props.hasOwnProperty(tPropsKey) && props[tPropsKey] !== undefined) {
+      if (props.hasOwnProperty(tPropsKey) && props[tPropsKey] !== undefined && props[tPropsKey] !== false) {
         tProps[tPropsKey] = props[tPropsKey];
       }
     }
