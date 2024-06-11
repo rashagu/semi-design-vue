@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 0.13.1
+
+### Patch Changes
+
+- fix: [Form] withField 去除 props default
+
 ## 0.13.0
 
 ### Minor Changes
