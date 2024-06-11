@@ -66,7 +66,7 @@ function withField<
   opts?: WithFieldOption,
   vuePropsType?: ComponentObjectPropsOptions<C>
 ): DefineSetupFnComponent<T> {
-  const propsFromComponent_ = (Component as unknown as DefineComponent).props
+  const propsFromComponent_ = (Component as unknown as DefineComponent).props || {}
   const propsFromComponent = {}
   Object.keys(propsFromComponent_).forEach((key) => {
     propsFromComponent[key] = {
