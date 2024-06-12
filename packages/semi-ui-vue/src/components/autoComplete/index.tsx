@@ -336,7 +336,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
             const innerProps:VueHTMLAttributes & InputProps = {
                 disabled,
                 placeholder,
-                autofocus: autoFocus,
+                autoFocus: autoFocus,
                 // @ts-ignore
                 onChange: onSearch,
                 onClear: onInputClear,

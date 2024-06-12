@@ -25,6 +25,7 @@ import type { AvatarProps } from './interface';
 import { RadioInnerProps } from '../radio/radioInner';
 import { handlePrevent } from '@douyinfe/semi-foundation/utils/a11y';
 import TopSlotSvg from './TopSlotSvg';
+import { styleNum } from '../_utils';
 
 const sizeSet = strings.SIZE;
 const shapeSet = strings.SHAPE;
@@ -346,6 +347,11 @@ const Index = defineComponent<AvatarProps>(
         ...others
       } = props;
       const { isImgExist, hoverContent, focusVisible } = state;
+      let customStyle: CSSProperties = {};
+      if (!strings.SIZE.includes(size)) {
+        customStyle = { width: styleNum(size), height: styleNum(size) };
+      }
+      customStyle = { ...customStyle, ...style };
       const shouldWrap = bottomSlot || topSlot || border;
       const mouseEvent: HtmlHTMLAttributes = {
         onClick: onClick,
@@ -375,7 +381,7 @@ const Index = defineComponent<AvatarProps>(
       let avatar = (
         <span
           {...(others as any)}
-          style={shouldWrap ? {} : style}
+          style={shouldWrap ? {} : customStyle}
           class={avatarCls}
           {...(shouldWrap ? {} : mouseEvent)}
           role="listitem"
@@ -392,7 +398,7 @@ const Index = defineComponent<AvatarProps>(
           borderStyle['borderColor'] = border?.color;
         }
         avatar = (
-          <div style={{ position: 'relative', ...style }}>
+          <div style={{ position: 'relative', ...customStyle }}>
             {avatar}
             <span
               style={borderStyle}
@@ -424,7 +430,7 @@ const Index = defineComponent<AvatarProps>(
 
       if (shouldWrap) {
         return (
-          <span class={cls([`${prefixCls}-wrapper`])} style={style} {...mouseEvent}>
+          <span class={cls([`${prefixCls}-wrapper`])} style={customStyle} {...mouseEvent}>
             {avatar}
             {topSlot &&
               ['extra-small', 'small', 'default', 'medium', 'large', 'extra-large'].includes(size) &&

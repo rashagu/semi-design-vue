@@ -31,6 +31,7 @@ export interface TextProps extends Omit<HTMLAttributes, OmitTextProps> {
   style?: CSSProperties;
   type?: TypographyBaseType;
   underline?: boolean;
+  weight?: number
 }
 
 
@@ -88,6 +89,8 @@ export const vuePropsType:ComponentObjectPropsOptions<TextProps> = {
     type: String,
     default: '',
   },
+  weight: Number,
+  code: Boolean,
 }
 
 

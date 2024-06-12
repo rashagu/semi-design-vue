@@ -27,8 +27,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.59.1",
-    "@douyinfe/semi-theme-default": "2.59.1",
+    "@douyinfe/semi-foundation": "2.60.0",
+    "@douyinfe/semi-theme-default": "2.60.0",
     "classnames": "^2.3.2",
     "sass": "^1.57.1",
     "vue": "^3.4.27"
