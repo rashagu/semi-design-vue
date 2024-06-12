@@ -110,6 +110,7 @@ import DemoButtonSFC from './components/button/__test__/DemoButtonSFC.vue';
 import SkeletonDemoSFC from './components/skeleton/__test__/SkeletonDemoSFC.vue';
 import BreadcrumbDemo2 from './components/breadcrumb/__test__/BreadcrumbDemo2';
 import TypoDemo3 from './components/typography/__test__/TypoDemo3';
+import ModalDemoVueSFC from './components/modal/__test__/ModalDemoVueSFC.vue';
 export interface ExampleProps {
   name?: string
 }
@@ -183,7 +184,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
         {/*<FormAllDemo />*/}
-        <FormDemo />
+        {/*<FormDemo />*/}
         {/*<WithFormApiDemo />*/}
         {/*<WithFormStateDemo/>*/}
         {/*<WithFieldDemo/>*/}
@@ -203,6 +204,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
         {/*<ModalDemo/>*/}
+        <ModalDemoVueSFC/>
         {/*<ModalDemo2/>*/}
         {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}

@@ -239,7 +239,7 @@ const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
         } = props;
         let closer;
         if (closable) {
-            const iconType = closeIcon || <IconClose x-semi-prop="closeIcon"/>;
+            const iconType = (typeof closeIcon === 'function'?closeIcon():closeIcon) || <IconClose x-semi-prop="closeIcon"/>;
             closer = (
               <Button
                 aria-label="close"
@@ -258,12 +258,12 @@ const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
 
     const renderIcon = () => {
         const { icon } = props;
-        return icon ? <span class={`${cssClasses.DIALOG}-icon-wrapper`} x-semi-prop="icon">{icon}</span> : null;
+        return icon ? <span class={`${cssClasses.DIALOG}-icon-wrapper`} x-semi-prop="icon">{(typeof icon === 'function'?icon():icon)}</span> : null;
     };
 
     const renderHeader = () => {
         if ('header' in adapter.getProps()) {
-            return props.header;
+            return typeof props.header === 'function'?props.header():props.header;
         }
         const { title } = props;
         const closer = renderCloseBtn();
@@ -296,7 +296,7 @@ const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
         });
         const closer = renderCloseBtn();
         const icon = renderIcon();
-        const hasHeader = title !== null && title !== undefined || 'header' in props;
+        const hasHeader = title !== null && title !== undefined || 'header' in adapter.getProps();
         return hasHeader ? (
           <div class={bodyCls} id={`${cssClasses.DIALOG}-body`} style={bodyStyle} x-semi-prop="children">
               {{

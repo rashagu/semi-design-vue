@@ -5,6 +5,7 @@ import ModalDemoHook from './ModalDemoHook';
 import ModalDemoConfirm from './ModalDemoConfirm';
 import { mount } from '@vue/test-utils';
 import { fireEvent, render, screen } from '@testing-library/vue';
+import ModalDemoVueSFC from './ModalDemoVueSFC.vue';
 
 
 test('ModalDemo test', async () => {
@@ -30,6 +31,17 @@ test('ModalDemo inner qwe', async () => {
 
 test('ModalDemo header', async () => {
   render(ModalDemo2)
+  const input = await screen.findByRole("bt")
+  await fireEvent.click(input)
+  // const value = await screen.findByText("00时间")
+  await (new Promise(resolve => setTimeout(resolve, 500)))
+  const menuitem = await screen.findByText("基本对话框")
+
+  expect(menuitem.innerHTML).toContain('基本对话框');
+
+});
+test('ModalDemo sfc', async () => {
+  render(ModalDemoVueSFC)
   const input = await screen.findByRole("bt")
   await fireEvent.click(input)
   // const value = await screen.findByText("00时间")

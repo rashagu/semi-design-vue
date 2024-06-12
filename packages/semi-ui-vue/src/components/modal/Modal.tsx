@@ -44,12 +44,12 @@ export interface ModalReactProps extends ModalProps {
   bodyStyle?: CSSProperties;
   maskStyle?: CSSProperties;
   style?: CSSProperties;
-  icon?: VNode | string;
-  closeIcon?: VNode | string;
-  title?: VNode | string;
+  icon?: VNode | string | (()=>VNode | string);
+  closeIcon?: VNode | string | (()=>VNode | string);
+  title?: VNode | string | (()=>VNode | string);
   content?: VNode | string | (()=>VNode | string);
-  footer?: VNode | string | null;
-  header?: VNode | string;
+  footer?: VNode | string | null | (()=>VNode | string);
+  header?: VNode | string | (()=>VNode | string);
   onCancel?: (e: MouseEvent) => void | Promise<any>;
   onOk?: (e: MouseEvent) => void | Promise<any>;
   type?: string
@@ -80,10 +80,10 @@ const propTypes:ComponentObjectPropsOptions<ModalReactProps> = {
   maskStyle: PropTypes.object,
   bodyStyle: PropTypes.object,
   zIndex: PropTypes.number,
-  title: PropTypes.node as PropType<ModalReactProps['title']>,
+  title: PropTypes.any as PropType<ModalReactProps['title']>,
   icon: PropTypes.node as PropType<ModalReactProps['icon']>,
-  header: PropTypes.node as PropType<ModalReactProps['header']>,
-  footer: PropTypes.node as PropType<ModalReactProps['footer']>,
+  header: PropTypes.any as PropType<ModalReactProps['header']>,
+  footer: PropTypes.any as PropType<ModalReactProps['footer']>,
   hasCancel: PropTypes.bool,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
   getPopupContainer: PropTypes.func as PropType<ModalReactProps['getPopupContainer']>,
@@ -343,7 +343,7 @@ const Modal = defineComponent<ModalReactProps>((props, {expose}) => {
 
     let style = styleFromProps;
     const maskStyle = maskStyleFromProps;
-    const renderFooter_ = 'footer' in adapter.getProps() ? footer : renderFooter();
+    const renderFooter_ = 'footer' in adapter.getProps() ? (typeof footer === 'function'?footer():footer) : renderFooter();
     let wrapperStyle: CSSProperties = {
       zIndex
     };
