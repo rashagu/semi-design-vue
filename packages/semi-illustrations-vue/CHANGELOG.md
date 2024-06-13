@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.14.1
+
+### Patch Changes
+
+- fix ts5.5
+
 ## 0.14.0
 
 ### Minor Changes
