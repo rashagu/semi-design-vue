@@ -1,6 +1,6 @@
 {
   "name": "@kousum/vite-plugin-semi-theme",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -34,8 +34,9 @@
     "sass": "^1.57.1"
   },
   "devDependencies": {
-    "vite": "^5.1.4",
-    "unbuild": "^2.0.0"
+    "vite": "^5.2.13",
+    "typescript": "^5.5.1-rc",
+    "unbuild": "^3.0.0-rc.2"
   },
   "peerDependencies": {
     "vite": "^5.0.0",

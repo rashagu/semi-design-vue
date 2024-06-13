@@ -1,5 +1,19 @@
 # @kousum/semi-ui-vue
 
+## 0.14.0
+
+### Minor Changes
+
+- deps
+
+### Patch Changes
+
+- bbe6408: make props VNode
+- Updated dependencies
+  - @kousum/semi-animation-vue@0.14.0
+  - @kousum/semi-icons-vue@0.14.0
+  - @kousum/semi-illustrations-vue@0.14.0
+
 ## 0.13.4
 
 ### Patch Changes
