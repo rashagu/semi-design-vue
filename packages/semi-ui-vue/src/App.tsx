@@ -204,7 +204,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemoHook />*/}
         {/*<ModalDemoConfirm/>*/}
         {/*<ModalDemo/>*/}
-        <ModalDemoVueSFC/>
+        {/*<ModalDemoVueSFC/>*/}
         {/*<ModalDemo2/>*/}
         {/*<UploadDemo/>*/}
         {/*<ProgressDemo/>*/}
@@ -218,7 +218,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<CascaderDemo/>*/}
         {/*<CascaderDemo3/>*/}
         {/*<CheckboxDemo />*/}
-        {/*<TagInputDemo />*/}
+        <TagInputDemo />
 
         {/*<AutoCompleteDemo/>*/}
         {/*<SelectDemo/>*/}

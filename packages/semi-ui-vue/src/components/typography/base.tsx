@@ -313,8 +313,8 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
       return false;
     }
     const containerNode = wrapperRef.value;
-    const containerWidth = containerNode.getBoundingClientRect().width;
-    const childNodes = Array.from(containerNode.childNodes) as Node[];
+    const containerWidth = containerNode?.getBoundingClientRect().width;
+    const childNodes = Array.from(containerNode?.childNodes || []) as Node[];
     const range = document.createRange();
     const contentWidth = childNodes.reduce((acc: number, node: Node) => {
       range.selectNodeContents(node as Node);
