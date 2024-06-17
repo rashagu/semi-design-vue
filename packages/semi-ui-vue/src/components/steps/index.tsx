@@ -105,5 +105,5 @@ const Steps = defineComponent((props, {}) => {
 
 export default Steps
 export {
-    Step
+    Step as StepsStep
 }

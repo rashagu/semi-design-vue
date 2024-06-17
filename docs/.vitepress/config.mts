@@ -108,7 +108,12 @@ export default defineConfig({
       // md.use(require('markdown-it-some-plugin'));
     },
   },
-  vite: {
+  vite: { // ...
+    define: {
+      'process.env': {
+        BABEL_TYPES_8_BREAKING: true
+      }
+    },
     plugins: [Jsx()],
     // optimizeDeps: {
     //   disabled: true,

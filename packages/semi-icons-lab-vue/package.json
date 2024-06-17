@@ -31,7 +31,7 @@
     "@douyinfe/semi-theme-default": "2.60.0",
     "classnames": "^2.3.2",
     "sass": "^1.57.1",
-    "vue": "^3.4.27"
+    "vue": "^3.4.29"
   },
   "peerDependencies": {
     "vue": ">=3.4.3"
@@ -62,7 +62,7 @@
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
     "typescript": "^5.5.1-rc",
-    "vite": "5.2.13",
+    "vite": "5.3.1",
     "vue-tsc": "^2.0.21"
   }
 }

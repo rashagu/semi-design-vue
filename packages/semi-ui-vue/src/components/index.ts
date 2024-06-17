@@ -124,7 +124,7 @@ export {
 } from './skeleton';
 
 export { default as Step } from './steps/step';
-export { default as Steps } from './steps';
+export { default as Steps, StepsStep } from './steps';
 export { default as Switch } from './switch';
 
 /**
@@ -137,7 +137,7 @@ export type { TableStateRowSelection } from './table/Table';
 export { default as Tabs } from './tabs';
 export { default as TabPane } from './tabs/TabPane';
 export { default as TagGroup } from './tag/group';
-export { default as Timeline } from './timeline';
+export { default as Timeline, TimelineItem } from './timeline';
 export { default as Toast, ToastFactory } from './toast';
 export { default as Transfer } from './transfer';
 export type {

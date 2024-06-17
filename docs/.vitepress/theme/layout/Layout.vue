@@ -564,6 +564,12 @@ provide('hero-image-slot-exists', null);
     }
   }
 }
+.vp-doc ul, .vp-doc ol {
+  padding-left: initial;
+  margin: initial;
+}
+
+
 html,
 body {
   height: 100vh;
