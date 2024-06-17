@@ -58,6 +58,9 @@ const previewOptions = {
 <link rel="stylesheet" href="${import.meta.env.BASE_URL}semi/style.css" data-n-g="">
 <link rel="stylesheet" href="${import.meta.env.BASE_URL}semiIcons/style.css" data-n-g="">
 <style>
+#app{
+padding: 10px;
+}
 
 @font-face {
   font-family: "Inter";

@@ -19,15 +19,7 @@ const { site, theme, page, frontmatter } = useData()
 # {{page.title}}
 
 {{page.frontmatter.brief}}
-#### Semi 提供了 Figma UI Kit，考虑提供 Sketch 或基于其他设计工具的版本吗？
-- 目前没有这方面的计划，具体原因请参考 [Issue 74](https://github.com/DouyinFE/semi-design/issues/74)
 
-#### Semi 2.x 与 Semi 1.x 有什么不同？
-
--   Semi v2.0 版本 基于 v1.x 使用 ts 进行了重构，带来了更好的 ts 使用体验、以及更开箱即用的工程化方案，更好的a11y支持，支持局部启用暗色/亮色模式，解决了对微前端场景下多组件库共存的样式冲突问题等。Semi 2.x 为开源版本， Semi 团队后续所有长期工作都将基于 v2.x 版本进行
--   v1.x 已停止迭代维护，不再进行feature添加或复杂变更，仅提供必要的 bug fix 变更。
--   我们建议大家直接使用 2.x [@douyin/semi-ui](https://semi.design) 进行开发。现有旧项目，我们也建议大家尽快进行升级。为减轻升级成本，我们提供了 cli 工具一键迁移（@ies/semi-codemod-v2 ）可帮助大家自动完成高达 90%的迁移修改（受限于 AST 实现原理，仍存在一小部分 case 需人工 review 修改，但不多 😉 ）
--   Semi 1.x 升级至 Semi 2.x 详细操作步骤请查阅 [从 v1 到 v2](https://semi.design)
 
 #### 各版本之间的关系
 
@@ -51,9 +43,6 @@ const { site, theme, page, frontmatter } = useData()
 
 Semi 组件中，所有的 defaultValue、defaultXXX 传参只会在组件被 mounted 时进行消费（即仅消费一次）。如果你的 defaultXXX 属性是后期进行异步更新的，组件不会重新进行消费该值。如有需要，你应该使用受控的 value，受控的 xxx。或者直接通过传入一个不一样的`key`值，强制 React 重新挂载该组件。
 
-#### TS 类型检查报错，提示 xxx 上不存在属性 children 或 XXX 不能用作 JSX 组件
-这是由于 `@types/react` v18 进行了 breaking change，大部分情况下你的项目里会安装了两个不同版本的 @types/react，导致无法匹配。请参考 [Issue 793](https://github.com/DouyinFE/semi-design/issues/793) 锁定版本确保只有单个版本存在
-
 #### 安装新版本 Semi 后，提示 can't resolve date-fns/esm/\_libs/cloneObject.js 或其他有 date-fns 相关的依赖错误
 
 检查下项目中的 package-lock.json，是否有其他包依赖了 date-fns（大概率是 1.x 的），导致 semi 依赖声明的 date-fns 2.x 没有被安装上。手动 install date-fns，确保是 2.x 版本的即可 `npm install date-fns date-fns-tz`
@@ -74,9 +63,6 @@ Semi 目前支持 21 种语言，具体使用可以查阅 [Semi·LocaleProvider]
 
 右上角问题反馈，提交 Issue，描述你的需求以及业务场景，Label 选择 `Feature Request` / `New Component Request`
 
-#### 对组件的使用有疑惑？不知道有没有能满足你业务需求场景的组件？
-
-欢迎进我们的 [客服飞书 Lark 群](https://bytedance.feishu.cn/docs/doccnw93Dujm3UCkHRDTMTm1qwe) 进行咨询提问。
 
 #### 希望自定义滚动条的样式？
 

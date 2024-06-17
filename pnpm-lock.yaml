@@ -53,6 +53,9 @@ importers:
       '@kousum/semi-icons-vue':
         specifier: 'workspace: *'
         version: link:packages/semi-icons-vue
+      '@kousum/semi-illustrations-vue':
+        specifier: 'workspace: *'
+        version: link:packages/semi-illustrations-vue
       '@kousum/semi-ui-vue':
         specifier: 'workspace: *'
         version: link:packages/semi-ui-vue
