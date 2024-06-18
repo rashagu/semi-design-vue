@@ -57,7 +57,7 @@ const defaultProps = {
     prefixCls: cssClasses.PREFIX_OPTION
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Option = defineComponent<OptionProps>((props, {}) => {
+const Option = defineComponent<OptionProps>((props, {attrs}) => {
 
     const slots = useSlots()
 
@@ -93,8 +93,12 @@ const Option = defineComponent<OptionProps>((props, {}) => {
             prefixCls,
             renderOptionItem,
             inputValue,
-            ...rest
+            ...rest_
         } = props;
+        const rest = {
+            ...rest_,
+            ...attrs
+        }
         const optionClassName = classNames(prefixCls, {
             [`${prefixCls}-disabled`]: disabled,
             [`${prefixCls}-selected`]: selected,
