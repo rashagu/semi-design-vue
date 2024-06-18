@@ -511,8 +511,8 @@ provide('hero-image-slot-exists', null);
         </Space>
       </div>
     </LayoutHeader>
-    <VPContent v-if="page.filePath === 'index.md'" />
-    <Layout v-else className="in_body">
+<!--    <VPContent v-if="page.filePath === 'index.md'" />-->
+    <Layout className="in_body">
       <LayoutSider className="layout_sider">
         <div class="layout_nav" style="height: calc(100vh - 60px); background-color: var(--semi-color-bg-0)">
           <Nav
