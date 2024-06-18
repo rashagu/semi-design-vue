@@ -72,7 +72,7 @@ export interface AutoCompleteProps<T extends AutoCompleteItems> {
     dropdownMatchSelectWidth?: boolean;
     dropdownClassName?: string;
     dropdownStyle?: CSSProperties;
-    emptyContent?: VueJsxNode;
+    emptyContent?: () => VueJsxNode;
     getPopupContainer?: () => HTMLElement;
     insetLabel?: VueJsxNode;
     insetLabelId?: string;
@@ -398,7 +398,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
                 focused={isFocused}
                 onMouseEnter={() => foundation.handleOptionMouseEnter(optionIndex)}
                 key={option.key || option.label + option.value + optionIndex}
-                {...option}
+                option={option}
               >
                   {option.label}
               </Option>
@@ -418,7 +418,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
             let optionsNode;
 
             if (options.length === 0) {
-                optionsNode = emptyContent;
+                optionsNode = emptyContent?.();
             } else {
                 optionsNode = options.filter(option => option.show).map((option, i) => renderOption(option, i));
             }
@@ -499,7 +499,7 @@ function AutoCompleteFuncVueProps<T>() {
         dropdownMatchSelectWidth: PropTypes.bool,
         dropdownClassName: PropTypes.string,
         dropdownStyle: PropTypes.object,
-        emptyContent: PropTypes.node,
+        emptyContent: PropTypes.func as PropType<AutoCompleteProps<T>['emptyContent']>,
         id: PropTypes.string,
         insetLabel: PropTypes.node,
         insetLabelId: PropTypes.string,
@@ -532,6 +532,7 @@ function AutoCompleteFuncVueProps<T>() {
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         validateStatus: String as PropType<AutoCompleteProps<T>['validateStatus']>,
         zIndex: PropTypes.number,
+        loading: PropTypes.bool,
     };
 
     const defaultProps = {
@@ -556,7 +557,7 @@ function AutoCompleteFuncVueProps<T>() {
         maxHeight: 300,
         validateStatus: 'default' as const,
         autoFocus: false,
-        emptyContent: null as null,
+        emptyContent: noop,
         onKeyDown: noop,
         // onPressEnter: () => undefined,
         // defaultOpen: false,

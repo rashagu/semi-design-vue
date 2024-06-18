@@ -72,7 +72,7 @@ export { default as TreeSelect } from './treeSelect/index';
 export { Link } from './anchor';
 export { Link as AnchorLink } from './anchor';
 export { default as Anchor } from './anchor';
-export { default as AutoComplete } from './autoComplete';
+export { default as AutoComplete, AutoCompleteFunc } from './autoComplete';
 export { default as AvatarGroup } from './avatar/avatarGroup';
 export { default as BackTop } from './backtop';
 export { default as Badge } from './badge';

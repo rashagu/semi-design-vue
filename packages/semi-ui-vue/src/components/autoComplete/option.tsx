@@ -4,12 +4,13 @@ import { isString } from 'lodash';
 import { cssClasses } from '@douyinfe/semi-foundation/autoComplete/constants';
 import {LocaleConsumerFunc} from '../locale/localeConsumer';
 import { IconTick } from '@kousum/semi-icons-vue';
-import { getHighLightTextHTML } from '../_utils/index';
+import { getFragmentChildren, getHighLightTextHTML } from '../_utils/index';
 import { Locale } from '../locale/interface';
 import { BasicOptionProps } from '@douyinfe/semi-foundation/autoComplete/optionFoundation';
 import {VueJsxNode} from "../interface";
 import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, useSlots} from "vue";
 import {vuePropsMake} from "../PropTypes";
+import { StateOptionItem } from '@douyinfe/semi-foundation/autoComplete/foundation';
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>()
 
@@ -22,6 +23,7 @@ export interface OptionProps extends BasicOptionProps {
     showTick?: boolean;
     className?: string;
     style?: CSSProperties;
+    option?: StateOptionItem
 }
 interface renderOptionContentArgument {
     config: {
@@ -51,13 +53,14 @@ const propTypes:ComponentObjectPropsOptions<OptionProps> = {
     prefixCls: PropTypes.string,
     renderOptionItem: PropTypes.func,
     inputValue: PropTypes.string,
+    option: PropTypes.object,
 };
 
 const defaultProps = {
     prefixCls: cssClasses.PREFIX_OPTION
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Option = defineComponent<OptionProps>((props, {attrs}) => {
+const Option = defineComponent<OptionProps>((props, {}) => {
 
     const slots = useSlots()
 
@@ -76,7 +79,7 @@ const Option = defineComponent<OptionProps>((props, {attrs}) => {
     }
 
     return () => {
-        const children = slots.default?.()
+        const children = getFragmentChildren(slots)
         const {
             disabled,
             value,
@@ -97,7 +100,7 @@ const Option = defineComponent<OptionProps>((props, {attrs}) => {
         } = props;
         const rest = {
             ...rest_,
-            ...attrs
+            ...props.option
         }
         const optionClassName = classNames(prefixCls, {
             [`${prefixCls}-disabled`]: disabled,

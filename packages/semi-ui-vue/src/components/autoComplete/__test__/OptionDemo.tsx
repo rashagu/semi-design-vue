@@ -26,7 +26,9 @@ const OptionDemo = defineComponent<OptionDemoProps>((props, {}) => {
   </div>)
 });
 
+//@ts-ignore
 OptionDemo.props = vuePropsType;
+//@ts-ignore
 OptionDemo.name = "OptionDemo";
 
 export default OptionDemo;
