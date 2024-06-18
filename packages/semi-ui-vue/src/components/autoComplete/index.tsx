@@ -32,6 +32,7 @@ import {
 import {DefineComponent} from "vue";
 import {PropObj, vuePropsMake} from "../PropTypes";
 import {PreviewImageProps} from "../image";
+import { styleNum } from '../_utils';
 
 const prefixCls = cssClasses.PREFIX;
 const sizeSet = strings.SIZE;
@@ -423,8 +424,8 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
             }
 
             const style = {
-                maxHeight: maxHeight,
-                minWidth: dropdownMinWidth,
+                maxHeight: styleNum(maxHeight),
+                minWidth: styleNum(dropdownMinWidth),
                 ...dropdownStyle,
             };
             return (
