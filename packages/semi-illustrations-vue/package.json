@@ -20,8 +20,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
     "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json && node scripts/compileLib.cjs",
-    "build:vite": "rimraf lib && rimraf dist && vue-tsc --noEmit && tsc -b --force tsconfig.esm.json && node build.cjs && node scripts/compileLib.cjs && rimraf lib",
+    "build:vite": "rimraf lib && rimraf dist && vue-tsc --noEmit && tsc -b --force tsconfig.esm.json && node build.cjs && node scripts/compileLib.cjs && rimraf lib && vite build",
     "build:icon": "node scripts/build-illustration.cjs"
   },
   "dependencies": {

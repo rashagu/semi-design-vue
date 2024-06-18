@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "vite --force",
     "build": "vue-tsc --noEmit && vite build",
-    "build:vite": "rimraf lib && rimraf dist && vue-tsc --noEmit && tsc -b --force && node build.cjs && node scripts/compileLib.cjs && rimraf lib && vue-tsc --noEmit && vite build --emptyOutDir",
+    "build:vite": "rimraf lib && rimraf dist && vue-tsc --noEmit && tsc -b --force && node build.cjs && node scripts/compileLib.cjs && rimraf lib && vite build --emptyOutDir",
     "preview": "vite preview"
   },
   "repository": {
@@ -65,6 +65,7 @@
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "reset-css": "^5.0.2",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
     "del": "^6.0.0",

@@ -5,7 +5,7 @@
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "strict": true,
     "jsx": "preserve",
     "jsxImportSource": "vue",

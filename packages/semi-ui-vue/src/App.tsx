@@ -111,6 +111,9 @@ import SkeletonDemoSFC from './components/skeleton/__test__/SkeletonDemoSFC.vue'
 import BreadcrumbDemo2 from './components/breadcrumb/__test__/BreadcrumbDemo2';
 import TypoDemo3 from './components/typography/__test__/TypoDemo3';
 import ModalDemoVueSFC from './components/modal/__test__/ModalDemoVueSFC.vue';
+import AutoCompleteSFC from './components/autoComplete/__test__/AutoCompleteSFC.vue';
+import DiyItemAutoComplete from './components/autoComplete/__test__/diyItemAutoComplete.vue';
+import RemoteAutoComplete from './components/autoComplete/__test__/remoteAutoComplete.vue';
 export interface ExampleProps {
   name?: string
 }
@@ -218,9 +221,12 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<CascaderDemo/>*/}
         {/*<CascaderDemo3/>*/}
         {/*<CheckboxDemo />*/}
-        <TagInputDemo />
+        {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
+        {/*<DiyItemAutoComplete/>*/}
+        <RemoteAutoComplete/>
+        {/*<AutoCompleteSFC/>*/}
         {/*<SelectDemo/>*/}
         {/*<SelectDemo2/>*/}
         {/*<SelectDemo3/>*/}
