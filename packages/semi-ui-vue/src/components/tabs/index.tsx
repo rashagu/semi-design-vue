@@ -1,6 +1,7 @@
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
-import { cssClasses, strings } from '@douyinfe/semi-foundation/tabs/constants';
+import { vuePropsMake } from '../PropTypes';
+import { cssClasses } from '@douyinfe/semi-foundation/tabs/constants';
 import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import TabsFoundation, { TabsAdapter } from '@douyinfe/semi-foundation/tabs/foundation';
@@ -14,7 +15,6 @@ import TabsContext from './tabs-context';
 import type { PlainTab, TabBarProps, TabContextValue, TabsProps } from './interface';
 import {
   ComponentObjectPropsOptions,
-  computed,
   defineComponent,
   h,
   isVNode,
@@ -26,9 +26,7 @@ import {
   VNode,
   watch,
 } from 'vue';
-import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
-import { AutoCompleteProps } from '../autoComplete';
 import { VueJsxNode } from '../interface';
 import { getFragmentChildren } from '../_utils';
 

@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "vite": "^5.3.1",
-    "typescript": "^5.5.1-rc",
+    "typescript": "^5.5.2",
     "unbuild": "^3.0.0-rc.2"
   },
   "peerDependencies": {

@@ -104,6 +104,120 @@ export default defineConfig({
         };
       }, {});
 
+      // 使用 markdown-it 插件 jsx codeLive
+      md.use((md, params) => {
+        // 定义一个新的代码块规则
+        md.block.ruler.before('fence', 'jsx',
+          (state, startLine, endLine, silent) => {
+          const start = state.bMarks[startLine] + state.tShift[startLine];
+          const max = state.eMarks[startLine];
+
+          // 检查是否以 ```liveCode 开头
+          if (state.src.slice(start, max).trim().indexOf('```jsx live=true') !== 0) {
+            return false;
+          }
+
+
+          let nextLine = startLine + 1;
+
+          // 查找结束标记 ```
+          while (nextLine < endLine) {
+            const start = state.bMarks[nextLine] + state.tShift[nextLine];
+            const max = state.eMarks[nextLine];
+
+            if (state.src.slice(start, max).trim() === '```') {
+              break;
+            }
+
+            nextLine++;
+          }
+
+          // 如果没有找到结束标记，则返回 false
+          if (nextLine >= endLine) {
+            return false;
+          }
+
+          // 如果是静默模式，则返回 true
+          if (silent) {
+            return true;
+          }
+
+          // 添加 token
+          const token = state.push('livecode', 'div', 0);
+          token.content = state.getLines(startLine + 1, nextLine, state.tShift[startLine], true);
+          token.map = [startLine, nextLine];
+
+          state.line = nextLine + 1;
+          return true;
+        });
+
+        // 定义渲染规则
+        md.renderer.rules.livecode = (tokens, idx) => {
+          const content = tokens[idx].content.trim();
+          const code = btoa(encodeURIComponent(content));
+          // <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/components/" alt=""/>
+          return `<div style="width: 100%;height: 800px;">
+<LiveCode2 layout="vertical" :files="{'src/demo.tsx':'${code}'}"/>
+</div>`;
+        };
+      }, {});
+      // 使用 markdown-it 插件 jsx codeLive
+      md.use((md, params) => {
+        // 定义一个新的代码块规则
+        md.block.ruler.before('fence', 'vue',
+          (state, startLine, endLine, silent) => {
+            const start = state.bMarks[startLine] + state.tShift[startLine];
+            const max = state.eMarks[startLine];
+
+            // 检查是否以 ```liveCode 开头
+            if (state.src.slice(start, max).trim().indexOf('```vue live=true') !== 0) {
+              return false;
+            }
+
+
+            let nextLine = startLine + 1;
+
+            // 查找结束标记 ```
+            while (nextLine < endLine) {
+              const start = state.bMarks[nextLine] + state.tShift[nextLine];
+              const max = state.eMarks[nextLine];
+
+              if (state.src.slice(start, max).trim() === '```') {
+                break;
+              }
+
+              nextLine++;
+            }
+
+            // 如果没有找到结束标记，则返回 false
+            if (nextLine >= endLine) {
+              return false;
+            }
+
+            // 如果是静默模式，则返回 true
+            if (silent) {
+              return true;
+            }
+
+            // 添加 token
+            const token = state.push('livecode2', 'div', 0);
+            token.content = state.getLines(startLine + 1, nextLine, state.tShift[startLine], true);
+            token.map = [startLine, nextLine];
+
+            state.line = nextLine + 1;
+            return true;
+          });
+
+        // 定义渲染规则
+        md.renderer.rules.livecode2 = (tokens, idx) => {
+          const content = tokens[idx].content.trim();
+          const code = btoa(encodeURIComponent(content));
+          // <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/components/" alt=""/>
+          return `<div style="width: 100%;height: 800px;">
+<LiveCode2 layout="vertical" :files="{'src/${code.slice(100, 120)}.vue':'${code}'}"/>
+</div>`;
+        };
+      }, {});
       // 你可以在这里添加更多的 markdown-it 插件
       // md.use(require('markdown-it-some-plugin'));
     },

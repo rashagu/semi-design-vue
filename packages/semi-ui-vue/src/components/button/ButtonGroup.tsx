@@ -13,7 +13,6 @@ import {BaseProps} from '../_base/baseComponent';
 
 import {cssClasses, strings} from '@douyinfe/semi-foundation/button/constants';
 import {Type, Size} from './Button';
-import {noop} from "@douyinfe/semi-foundation/utils/function";
 
 
 export type Theme = 'solid' | 'borderless' | 'light';
@@ -30,6 +29,7 @@ const btnSizes = strings.sizes;
 
 
 export const vuePropsType:ComponentObjectPropsOptions<ButtonGroupProps> = {
+  disabled: Boolean,
   size: {
     type: String as PropType<ButtonGroupProps['size']>,
     default: 'default',

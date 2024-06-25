@@ -24,6 +24,6 @@
     "types": ["vite/client", "node"],
     "noImplicitAny": false
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "docs/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "docs/**/*.vue", "node_modules/vitepress/dist/node/index.d.ts"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/semi-foundation/**/*.ts", "**/__test__/*"]
 }

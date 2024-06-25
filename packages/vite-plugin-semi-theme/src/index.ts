@@ -2,14 +2,14 @@ import type { Plugin } from 'vite';
 import type { Options } from './types';
 import * as fs from 'fs';
 import * as Path from 'path';
-import sass from 'sass';
+import * as sass from 'sass';
 import { pathToFileURL } from 'node:url';
 
 const { compileString } = sass;
 
 function viteSemiTheme(options: Options): Plugin {
   if (!options.theme){
-    console.error('name: 参数必填')
+    console.error('theme: 参数必填')
   }
   return {
     name: 'vite:semi-theme',

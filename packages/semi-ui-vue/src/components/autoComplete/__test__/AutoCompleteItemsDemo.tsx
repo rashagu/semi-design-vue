@@ -51,7 +51,7 @@ const AutoCompleteItemsDemo = defineComponent<ExampleProps>((props, { slots }) =
         <AutoComplete
           data={[]}
           emptyContent={
-            <Empty
+            ()=><Empty
               style={{ padding: '12px', width: '300px' }}
               image={<IllustrationNoContent style={{ width: '150px', height: '150px' }} />}
               description={'暂无内容'}

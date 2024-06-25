@@ -568,7 +568,29 @@ provide('hero-image-slot-exists', null);
   padding-left: initial;
   margin: initial;
 }
+table{
+  td:nth-of-type(2) {
+    word-break: break-word;
+  }
+  td:nth-of-type(3), .gatsby-table td:nth-of-type(4) {
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+  }
 
+  td:nth-of-type(3) {
+    letter-spacing: -.02em;
+    color: var(--semi-color-warning);
+  }
+
+
+  td:nth-of-type(4) {
+    color: var(--semi-color-success);
+    width: 150px;
+  }
+
+  td:nth-of-type(3), .gatsby-table td:nth-of-type(4) {
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+  }
+}
 
 html,
 body {

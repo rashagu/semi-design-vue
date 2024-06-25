@@ -225,7 +225,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
         {/*<AutoCompleteDemo/>*/}
         {/*<DiyItemAutoComplete/>*/}
-        <RemoteAutoComplete/>
+        {/*<RemoteAutoComplete/>*/}
         {/*<AutoCompleteSFC/>*/}
         {/*<SelectDemo/>*/}
         {/*<SelectDemo2/>*/}
@@ -242,7 +242,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
         {/*<TypoDemo2/>*/}
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
-        {/*  <Button />*/}
+          <Button />
         {/*<DemoButtonSFC/>*/}
         {/*</div>*/}
         {/*<SkeletonDemo/>*/}

@@ -53,7 +53,7 @@ const Demo = defineComponent(() => {
           </Button>
         </div>
         <div style={{padding:'1rem'}}>
-          <ButtonGroup type={'danger'} theme={'solid'}>
+          <ButtonGroup type={'danger'} theme={'solid'} disabled={true}>
             <Button icon={<IconEdit />}>
               编辑
             </Button>

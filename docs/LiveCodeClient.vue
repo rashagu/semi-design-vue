@@ -116,6 +116,10 @@ padding: 10px;
     box-shadow: 0 0 0 2px rgba(var(--semi-red-4), 1), 15px 0 0 2px rgba(var(--semi-yellow-4), 1), 30px 0 0 2px rgba(var(--semi-green-4), 1);
 }
 
+.btn-margin-right button{
+  margin-right: 10px;
+}
+
 </style>
 <script>
 

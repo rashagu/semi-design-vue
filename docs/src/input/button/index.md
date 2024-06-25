@@ -12,6 +12,7 @@ brief: 用户使用按钮来触发一个操作或者进行跳转。
 <script setup>
 import { useData } from 'vitepress';
 import LiveCode from '../../../LiveCode.vue';
+import LiveCode2 from '../../../LiveCode2.vue';
 import DesignToken from '../../../DesignToken.vue';
 
 
@@ -58,20 +59,18 @@ import { Button, SplitButtonGroup } from '@kousum/semi-ui-vue';
 
 你可以直接使用这些主题色定义你的元素。
 
-```jsx live=true dir="column"
-import { h } from 'vue';
-
-function ButtonDemo() {
-    const types = [['primary', '主要'], ['secondary', '次要'], ['tertiary', '第三'], ['warning', '警告'], ['danger', '危险']];
-
-    return (
-        <article>
-            {types.map((type, index) => (
-                <strong key={index} style={{ color: `var(--semi-color-${Array.isArray(type) ? type[0] : type})`, marginRight: 10 }}>{Array.isArray(type) ? type[1]: type}</strong>
-            ))}
-        </article>
-    );
-}
+```vue live=true dir="column"
+<template>
+  <article>
+    <strong v-for="(type, index) in types" :key="index"
+            :style="{ color: `var(--semi-color-${Array.isArray(type) ? type[0] : type})`, marginRight: '10px' }">
+      {{Array.isArray(type) ? type[1]: type}}
+    </strong>
+  </article>
+</template>
+<script setup>
+  const types = [['primary', '主要'], ['secondary', '次要'], ['tertiary', '第三'], ['warning', '警告'], ['danger', '危险']];
+</script>
 ```
 
 ### 按钮主题
@@ -90,14 +89,14 @@ function ButtonDemo() {
 import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
-function ButtonDemo() {
+export default function() {
     return (
         <>
-            <Button theme='light' type='primary' style={{ marginRight: 8 }}>浅色主要</Button>
-            <Button theme='light' type='secondary' style={{ marginRight: 8 }}>浅色次要</Button>
-            <Button theme='light' type='tertiary' style={{ marginRight: 8 }}>浅色第三</Button>
-            <Button theme='light' type='warning' style={{ marginRight: 8 }}>浅色警告</Button>
-            <Button theme='light' type='danger' style={{ marginRight: 8 }}>浅色危险</Button>
+            <Button theme='light' type='primary' style={{ marginRight: '8px' }}>浅色主要</Button>
+            <Button theme='light' type='secondary' style={{ marginRight: '8px' }}>浅色次要</Button>
+            <Button theme='light' type='tertiary' style={{ marginRight: '8px' }}>浅色第三</Button>
+            <Button theme='light' type='warning' style={{ marginRight: '8px' }}>浅色警告</Button>
+            <Button theme='light' type='danger' style={{ marginRight: '8px' }}>浅色危险</Button>
         </>
     );
 }
@@ -110,14 +109,14 @@ function ButtonDemo() {
 import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
-function ButtonDemo() {
+export default function() {
     return (
         <>
-            <Button theme='solid' type='primary' style={{ marginRight: 8 }}>深色主要</Button>
-            <Button theme='solid' type='secondary' style={{ marginRight: 8 }}>深色次要</Button>
-            <Button theme='solid' type='tertiary' style={{ marginRight: 8 }}>深色第三</Button>
-            <Button theme='solid' type='warning' style={{ marginRight: 8 }}>深色警告</Button>
-            <Button theme='solid' type='danger' style={{ marginRight: 8 }}>深色危险</Button>
+            <Button theme='solid' type='primary' style={{ marginRight: '8px' }}>深色主要</Button>
+            <Button theme='solid' type='secondary' style={{ marginRight: '8px' }}>深色次要</Button>
+            <Button theme='solid' type='tertiary' style={{ marginRight: '8px' }}>深色第三</Button>
+            <Button theme='solid' type='warning' style={{ marginRight: '8px' }}>深色警告</Button>
+            <Button theme='solid' type='danger' style={{ marginRight: '8px' }}>深色危险</Button>
         </>
     );
 }
@@ -130,14 +129,14 @@ function ButtonDemo() {
 import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
-function ButtonDemo() {
+export default function() {
     return (
         <>
-            <Button theme='borderless' type='primary' style={{ marginRight: 8 }}>主要</Button>
-            <Button theme='borderless' type='secondary' style={{ marginRight: 8 }}>次要</Button>
-            <Button theme='borderless' type='tertiary' style={{ marginRight: 8 }}>第三</Button>
-            <Button theme='borderless' type='warning' style={{ marginRight: 8 }}>警告</Button>
-            <Button theme='borderless' type='danger' style={{ marginRight: 8 }}>危险</Button>
+            <Button theme='borderless' type='primary' style={{ marginRight: '8px' }}>主要</Button>
+            <Button theme='borderless' type='secondary' style={{ marginRight: '8px' }}>次要</Button>
+            <Button theme='borderless' type='tertiary' style={{ marginRight: '8px' }}>第三</Button>
+            <Button theme='borderless' type='warning' style={{ marginRight: '8px' }}>警告</Button>
+            <Button theme='borderless' type='danger' style={{ marginRight: '8px' }}>危险</Button>
         </>
     );
 }
@@ -156,11 +155,11 @@ function ButtonDemo() {
 import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
-function ButtonDemo() {
+export default function() {
     return (
         <div>
-            <Button size='large' style={{ marginRight: 8 }}>大尺寸</Button>
-            <Button size='default' style={{ marginRight: 8 }}>默认尺寸</Button>
+            <Button size='large' style={{ marginRight: '8px' }}>大尺寸</Button>
+            <Button size='default' style={{ marginRight: '8px' }}>默认尺寸</Button>
             <Button size='small'>小尺寸</Button>
         </div>
     );
@@ -175,7 +174,7 @@ function ButtonDemo() {
 import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
-function ButtonDemo() {
+export default function() {
     return (
         <div>
             <Button block>块级按钮</Button>
@@ -193,7 +192,7 @@ import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 import { IconCamera, IconSidebar, IconChevronDown } from '@kousum/semi-icons-vue';
 
-function ButtonDemo() {
+export default function() {
     return (
         <div>
             <strong>默认状态：</strong>
@@ -211,11 +210,11 @@ function ButtonDemo() {
             </span>
             <br/><br/>
             <strong>更改主题：</strong>
-            <Button icon={<IconCamera />} theme="solid" style={{ marginRight: 10 }} aria-label="截屏" />
+            <Button icon={<IconCamera />} theme="solid" style={{ marginRight: '10px' }} aria-label="截屏" />
             <Button icon={<IconCamera />} theme="light" aria-label="截屏" />
             <br/><br/>
             <strong>更改图标位置：</strong>
-            <Button icon={<IconSidebar />} theme="solid" style={{ marginRight: 10 }}>收起</Button>
+            <Button icon={<IconSidebar />} theme="solid" style={{ marginRight: '10px' }}>收起</Button>
             <Button icon={<IconChevronDown />} theme="solid" iconPosition="right">展开选项</Button>
             <br/><br/>
         </div>
@@ -229,20 +228,19 @@ function ButtonDemo() {
 
 ```jsx live=true
 import { h } from 'vue';
-import { Typography } from '@kousum/semi-ui-vue';
+import { Typography, TypographyText } from '@kousum/semi-ui-vue';
 import { IconLink } from '@kousum/semi-icons-vue';
 
-function Demo() {
-    const { Text } = Typography;
+export default function() {
     return (
         <div>
-            <Text link={{ href: 'https://semi.design/' }}>链接文本</Text>
+            <TypographyText link={{ href: 'https://semi.design/' }}>链接文本</TypographyText>
             <br />
             <br />
-            <Text link={{ href: 'https://semi.design/' }}>打开网站</Text>
+            <TypographyText link={{ href: 'https://semi.design/' }}>打开网站</TypographyText>
             <br />
             <br />
-            <Text link icon={<IconLink />} underline>带下划线的网页链接</Text>
+            <TypographyText link icon={<IconLink />} underline>带下划线的网页链接</TypographyText>
         </div>
     );
 }
@@ -254,7 +252,7 @@ function Demo() {
 import { h } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 
-function ButtonDemo() {
+export default function() {
     return (
         <div>
             <Button disabled>禁用</Button>
@@ -272,35 +270,35 @@ function ButtonDemo() {
 按钮支持加载状态，通过设置 loading 参数值为 true 即可，注意：disabled 状态优先级高于 loading 状态。
 
 ```jsx live=true dir="column"
-import React, { useState } from 'react';
+import { h, ref } from 'vue';
 import { Button } from '@kousum/semi-ui-vue';
 import { IconDelete } from '@kousum/semi-icons-vue';
 
-function ButtonDemo() {
-    const [saveLoading, setSaveLoading] = useState(false);
-    const [delLoading, setDelLoading] = useState(true);
-    const [repLoading, setRepLoading] = useState(true);
+export default function() {
+    const saveLoading = ref(false);
+    const delLoading = ref(true);
+    const repLoading = ref(true);
 
     const reset = status => {
         status = !!status;
-        setSaveLoading(status);
-        setDelLoading(status);
-        setRepLoading(status);
+        saveLoading.value = status
+        delLoading.value = status
+        repLoading.value = status
     };
 
     return (
         <div>
             <div> 
-                <div className="btn-margin-right" style={{ display: 'inline-flex', alignItems: 'center', paddingBottom: 14 }}>
+                <div className="btn-margin-right" style={{ display: 'inline-flex', alignItems: 'center', paddingBottom: '14px' }}>
                     <Button onClick={() => reset(false)}>关闭加载态</Button>
                     <Button onClick={() => reset(true)}>开启加载态</Button>
                 </div>
             </div>
             <hr/>
-            <Button loading={saveLoading} onClick={() => setSaveLoading(true)} style={{ marginRight: 14 }}>保存</Button>
-            <Button loading={delLoading} icon={<IconDelete />} type="danger" onClick={() => setDelLoading(true)} style={{ marginRight: 14 }}>删除</Button>
-            <div style={{ width: 200, display: 'inline-block' }}>
-                <Button loading={repLoading} type="warning" block theme="solid" onClick={() => setRepLoading(true)}>撤销</Button>
+            <Button loading={saveLoading.value} onClick={() => saveLoading.value = true} style={{ marginRight: '14px' }}>保存</Button>
+            <Button loading={delLoading.value} icon={<IconDelete />} type="danger" onClick={() => delLoading.value = true} style={{ marginRight: '14px' }}>删除</Button>
+            <div style={{ width: '200px', display: 'inline-block' }}>
+                <Button loading={repLoading.value} type="warning" block theme="solid" onClick={() => repLoading.value = true}>撤销</Button>
             </div>
         </div>
     );
@@ -317,13 +315,13 @@ function ButtonDemo() {
 import { h } from 'vue';
 import { ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
-function ButtonDemo() {
+export default function() {
     const sizes = ['large', 'default', 'small'];
 
     return (
         <div style={{ display: 'flex' }}>
             {sizes.map(size => (
-                <div style={{ marginRight: 10 }} key={size}>
+                <div style={{ marginRight: '10px' }} key={size}>
                     <ButtonGroup size={size}>
                         <Button>拷贝</Button>
                         <Button>查询</Button>
@@ -342,10 +340,10 @@ function ButtonDemo() {
 import { h } from 'vue';
 import { ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
-function ButtonDemo() {
+export default function() {
     return (
         <div style={{ display: 'flex' }}>
-            <div style={{ marginRight: 10 }}>
+            <div style={{ marginRight: '10px' }}>
                 <ButtonGroup disabled>
                     <Button>拷贝</Button>
                     <Button>查询</Button>
@@ -363,13 +361,13 @@ function ButtonDemo() {
 import { h } from 'vue';
 import { ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
-function ButtonDemo() {
+export default function() {
     const types = ['primary', 'secondary', 'tertiary', 'warning', 'danger'];
 
     return (
         <div style={{ display: 'flex' }}>
             {types.map(type => (
-                <div style={{ marginRight: 10 }} key={type}>
+                <div style={{ marginRight: '10px' }} key={type}>
                     <ButtonGroup type={type} aria-label="操作按钮组">
                         <Button>拷贝</Button>
                         <Button>查询</Button>
