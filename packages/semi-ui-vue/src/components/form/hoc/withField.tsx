@@ -16,13 +16,13 @@ import warning from '@douyinfe/semi-foundation/utils/warning';
 import { useArrayFieldState, useFormState, useStateWithGetter } from '../hooks/index';
 import ErrorMessage from '../errorMessage';
 import { isElement } from '../../_base/reactUtils';
-import Label from '../label';
+import Label, { type LabelProps } from '../label';
 import { Col } from '../../grid';
 import type { CallOpts, WithFieldOption } from '@douyinfe/semi-foundation/form/interface';
 import type { CommonexcludeType, CommonFieldProps } from '../interface';
 import type { Subtract } from 'utility-types';
 import {
-  type ComponentObjectPropsOptions,
+  type ComponentObjectPropsOptions, type CSSProperties,
   defineComponent,
   type DefineComponent,
   type DefineSetupFnComponent,
@@ -31,16 +31,16 @@ import {
   h,
   onBeforeMount,
   onBeforeUnmount,
-  onMounted,
+  onMounted, PropType,
   type Ref,
   ref,
   shallowRef,
   unref,
-  useSlots,
+  useSlots, type VNode,
   watch,
   withMemo,
 } from 'vue';
-import { VueHTMLAttributes } from '../../interface';
+import { VueHTMLAttributes, type VueJsxNode } from '../../interface';
 import { useFormUpdaterContext } from '../context/FormUpdaterContext/Consumer';
 import { omit } from 'lodash';
 import { useHasInProps } from '../../_base/baseComponent';
@@ -813,11 +813,43 @@ function withField<
           'class'
         ),
         label: [...PropTypes.node, PropTypes.func],
-        validate: [PropTypes.func],
         id: [String],
-        rules: Array,
         field: String,
         className: String,
+
+        labelPosition: String as PropType<CommonFieldProps['label']>,
+        labelAlign: String,
+        labelWidth: [String, Number],
+        noLabel: Boolean,
+        noErrorMessage: Boolean,
+        name: String,
+        fieldClassName: String,
+        fieldStyle: Object,
+        initValue: PropTypes.any,
+        validate: PropTypes.any,
+        /** Check rules, check library based on async-validator */
+        rules: PropTypes.array,
+        /** Check trigger timing */
+        trigger: [PropTypes.string, PropTypes.array,],
+        // onChange: (fieldValue: any) => void;
+        /** Converts form control values before validation */
+        transform: PropTypes.func,
+        /** Make a second change to the component's value before the UI update */
+        convert: PropTypes.func,
+        allowEmptyString: PropTypes.bool,
+        /** When true, use rules verification, after encountering the first rule that fails the test, the verification of subsequent rules will no longer be triggered */
+        stopValidateWithError: PropTypes.bool,
+        /* Custom prompt information is displayed in the same block as the verification information. When both have values, the verification information is displayed first */
+        helpText: PropTypes.any,
+        /* Extra message, you can use this when you need an error message and the prompt text to appear at the same time, after helpText/errorMessage */
+        extraText: PropTypes.any,
+        extraTextPosition: PropTypes.string,
+        /** These declaration just hack for Subtract, not valid props in CommonFieldProps */
+        defaultValue: PropTypes.any,
+        /** Whether to take over only the data stream, when true, it will not automatically insert modules such as ErrorMessage, Label, extraText, etc. The style and DOM structure are consistent with the original component */
+        pure: PropTypes.bool,
+
+
         // modelValue: [String, Number, Object, Array],
         // 'onUpdate:modelValue': Function
       },
