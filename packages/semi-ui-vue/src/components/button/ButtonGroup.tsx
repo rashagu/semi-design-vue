@@ -32,7 +32,7 @@ export const vuePropsType:ComponentObjectPropsOptions<ButtonGroupProps> = {
   disabled: Boolean,
   size: {
     type: String as PropType<ButtonGroupProps['size']>,
-    default: 'default',
+    default: 'default'
   },
   type: {
     type: String as PropType<ButtonGroupProps['type']>,

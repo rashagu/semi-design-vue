@@ -216,7 +216,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<BreadcrumbDemo2/>*/}
         {/*<DatePickerDemo />*/}
         {/*<DatePickerDemo2/>*/}
-        {/*<TimePickerDemo />*/}
+        <TimePickerDemo />
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
         {/*<CascaderDemo3/>*/}
@@ -242,7 +242,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
 
         {/*<TypoDemo2/>*/}
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
-          <Button />
+        {/*  <Button />*/}
         {/*<DemoButtonSFC/>*/}
         {/*</div>*/}
         {/*<SkeletonDemo/>*/}

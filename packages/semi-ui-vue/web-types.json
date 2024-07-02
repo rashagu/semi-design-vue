@@ -1,0 +1,13 @@
+{
+  "$schema": "../schema/web-types.json",
+  "name": "hammerjs",
+  "framework": "angular",
+  "version": "2.0.0",
+  "contributions": {
+    "html": {
+      "types-syntax": "typescript",
+      "description-markup": "markdown",
+      "tags": []
+    }
+  }
+}

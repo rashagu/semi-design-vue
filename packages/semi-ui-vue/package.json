@@ -17,7 +17,8 @@
     "dev": "vite --force",
     "build": "vue-tsc --noEmit && vite build",
     "build:vite": "rimraf lib && rimraf dist && vue-tsc --noEmit && tsc -b --force && node build.cjs && node scripts/compileLib.cjs && rimraf lib && vite build --emptyOutDir",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test2": "node --import tsx ./scripts/test.ts"
   },
   "repository": {
     "url": "https://github.com/rashagu/semi-design-vue"
@@ -68,6 +69,7 @@
     "reset-css": "^5.0.2",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "@types/stringify-object": "^4.0.5",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
@@ -79,6 +81,11 @@
     "rimraf": "^3.0.2",
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
+    "ts-morph": "^23.0.0",
+    "deepmerge": "^4.3.1",
+    "piscina": "^4.4.0",
+    "prettier": "^3.2.5",
+    "tsx": "^4.15.7",
     "fast-glob": "^3.2.12",
     "typescript": "^5.5.2",
     "terser": "^5.16.4",
