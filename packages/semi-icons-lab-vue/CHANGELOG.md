@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.14.2
+
+### Patch Changes
+
+- fix timePicker & #13
+
 ## 0.14.1
 
 ### Patch Changes

@@ -23,7 +23,7 @@ Data can be passed in as an array of key-value pairs `{ key: value }` through `p
 Both key and value support the `ReactNode` type. You can pass in a string or a higher degree of freedom ReactNode to freely customize the render dom.
 
 ```jsx live=true dir="column"
-import React from 'react';
+
 import { Descriptions, Tag } from '@douyinfe/semi-ui';
 
 () => {
@@ -44,7 +44,7 @@ You can use `align` to set alignment of key-value. Supporting values including: 
 When `row` is true, this configuration is invalid
 
 ```jsx live=true dir="column"
-import React from 'react';
+
 import { Descriptions, Tag } from '@douyinfe/semi-ui';
 
 () => {
@@ -81,7 +81,7 @@ import { Descriptions, Tag } from '@douyinfe/semi-ui';
 Set `row` to display the data to two-row, supporting three sizes: `small`, `medium`(default), and `large`.
 
 ```jsx live=true dir="column"
-import React from 'react';
+
 import { Descriptions } from '@douyinfe/semi-ui';
 import { IconArrowUp } from '@douyinfe/semi-icons';
 
@@ -124,7 +124,7 @@ import { IconArrowUp } from '@douyinfe/semi-icons';
 Version: >= 1.17.0
 
 ```jsx live=true dir="column"
-import React from 'react';
+
 import { Descriptions } from '@douyinfe/semi-ui';
 
 () => {
@@ -146,7 +146,7 @@ The layout mode can be set through `layout`, which supports `horizontal` and `ve
 When horizontal is set, column can be used to specify the maximum number of columns per row.
 
 ```jsx live=true dir="column"
-import React from 'react';
+
 import { Descriptions, Space, Tag } from '@douyinfe/semi-ui';
 
 () => {

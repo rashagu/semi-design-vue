@@ -583,14 +583,14 @@ importers:
         specifier: 2.60.0
         version: 2.60.0
       '@kousum/semi-animation-vue':
-        specifier: ^0.14.1
-        version: 0.14.1(vue@3.4.29(typescript@5.5.2))
+        specifier: ^0.14.2
+        version: 0.14.2(vue@3.4.29(typescript@5.5.2))
       '@kousum/semi-icons-vue':
-        specifier: ^0.14.1
-        version: 0.14.1(vue@3.4.29(typescript@5.5.2))
+        specifier: ^0.14.2
+        version: 0.14.2(vue@3.4.29(typescript@5.5.2))
       '@kousum/semi-illustrations-vue':
-        specifier: ^0.14.1
-        version: 0.14.1(vue@3.4.29(typescript@5.5.2))
+        specifier: ^0.14.2
+        version: 0.14.2(vue@3.4.29(typescript@5.5.2))
       '@kousum/vue-draggable':
         specifier: 1.0.2
         version: 1.0.2(lodash@4.17.21)(vue@3.4.29(typescript@5.5.2))
@@ -2083,18 +2083,18 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@kousum/semi-animation-vue@0.14.1':
-    resolution: {integrity: sha512-kvdLyWnDmnxVhUsrDxAQtv49ZzfYb2m/VsGSJHf88hPpPc3J6ygYksm5QSunLubFYc7+RLuRglI10fJ10VivBg==}
+  '@kousum/semi-animation-vue@0.14.2':
+    resolution: {integrity: sha512-1OornOpzMCF1i+ZxDuU4IchDD6kM4Smg7nhf0fOBh6Gl1J0QTX92RbbQAEzfvDnOKXG8i7BcJ3u/iQoUGVCiFg==}
     peerDependencies:
       vue: '>=3.4.3'
 
-  '@kousum/semi-icons-vue@0.14.1':
-    resolution: {integrity: sha512-7yq4BUzDSYiV1HRQyzqOTyIvsHj2gmPAYsweXhCIQKqi9hJnmLzqbhbRxCz9y27cgdvEDXk1K88uW1KDfk4kAQ==}
+  '@kousum/semi-icons-vue@0.14.2':
+    resolution: {integrity: sha512-a9ob8w1kDaDJU3pNoNUm7QWXV/K9b/J35fjsSy3zT5anYP/evjSpN8C0KyhOoTH2FiTOyOHKVtn6PB3Rx/LXEw==}
     peerDependencies:
       vue: '>=3.4.3'
 
-  '@kousum/semi-illustrations-vue@0.14.1':
-    resolution: {integrity: sha512-JrFVlYNJHI55gz8tmRml5AMQrmxzYWXQDDqw7oNtGi6D0VNxau+bD5s9m+E32v4p1OLKPKLbd8GtBl4iL3UExw==}
+  '@kousum/semi-illustrations-vue@0.14.2':
+    resolution: {integrity: sha512-LZcgxsPtFbMqeJfdpBtbnznwOwAKRw+587CHMTcVSWfbVwNiplVIyEWxnVYednvrWjCaI8AHEryZWaQbN9wTDQ==}
     peerDependencies:
       vue: '>=3.4.3'
 
@@ -7799,8 +7799,8 @@ packages:
   vue-component-type-helpers@2.0.19:
     resolution: {integrity: sha512-cN3f1aTxxKo4lzNeQAkVopswuImUrb5Iurll9Gaw5cqpnbTAxtEMM1mgi6ou4X79OCyqYv1U1mzBHJkzmiK82w==}
 
-  vue-component-type-helpers@2.0.22:
-    resolution: {integrity: sha512-gPr2Ba7efUwy/Vfbuf735bHSVdN4ycoZUCHfypkI33M9DUH+ieRblLLVM2eImccFYaWNWwEzURx02EgoXDBmaQ==}
+  vue-component-type-helpers@2.0.24:
+    resolution: {integrity: sha512-Jr5N8QVYEcbQuMN1LRgvg61758G8HTnzUlQsAFOxx6Y6X8kmhJ7C+jOvWsQruYxi3uHhhS6BghyRlyiwO99DBg==}
 
   vue-demi@0.14.8:
     resolution: {integrity: sha512-Uuqnk9YE9SsWeReYqK2alDI5YzciATE0r2SkA6iMAtuXvNTMNACJLJEXNXaEy94ECuBe4Sk6RzRU80kjdbIo1Q==}
@@ -10249,7 +10249,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@kousum/semi-animation-vue@0.14.1(vue@3.4.29(typescript@5.5.2))':
+  '@kousum/semi-animation-vue@0.14.2(vue@3.4.29(typescript@5.5.2))':
     dependencies:
       '@douyinfe/semi-animation': 2.60.0
       '@douyinfe/semi-animation-styled': 2.60.0
@@ -10259,7 +10259,7 @@ snapshots:
       sass: 1.77.1
       vue: 3.4.29(typescript@5.5.2)
 
-  '@kousum/semi-icons-vue@0.14.1(vue@3.4.29(typescript@5.5.2))':
+  '@kousum/semi-icons-vue@0.14.2(vue@3.4.29(typescript@5.5.2))':
     dependencies:
       '@douyinfe/semi-foundation': 2.60.0
       '@douyinfe/semi-theme-default': 2.60.0
@@ -10267,7 +10267,7 @@ snapshots:
       sass: 1.77.1
       vue: 3.4.29(typescript@5.5.2)
 
-  '@kousum/semi-illustrations-vue@0.14.1(vue@3.4.29(typescript@5.5.2))':
+  '@kousum/semi-illustrations-vue@0.14.2(vue@3.4.29(typescript@5.5.2))':
     dependencies:
       '@douyinfe/semi-foundation': 2.60.0
       '@douyinfe/semi-theme-default': 2.60.0
@@ -11322,7 +11322,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.4.29(typescript@5.5.2)
-      vue-component-type-helpers: 2.0.22
+      vue-component-type-helpers: 2.0.24
     transitivePeerDependencies:
       - encoding
       - prettier
@@ -17216,7 +17216,7 @@ snapshots:
 
   vue-component-type-helpers@2.0.19: {}
 
-  vue-component-type-helpers@2.0.22: {}
+  vue-component-type-helpers@2.0.24: {}
 
   vue-demi@0.14.8(vue@3.4.29(typescript@5.5.2)):
     dependencies:

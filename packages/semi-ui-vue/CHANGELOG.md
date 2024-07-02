@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 0.14.2
+
+### Patch Changes
+
+- fix timePicker & #13
+- Updated dependencies
+  - @kousum/semi-animation-vue@0.14.2
+  - @kousum/semi-icons-vue@0.14.2
+  - @kousum/semi-illustrations-vue@0.14.2
+
 ## 0.14.1
 
 ### Patch Changes
