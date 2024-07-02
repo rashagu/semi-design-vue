@@ -21,6 +21,7 @@ const TimePickerDemo = defineComponent<ExampleProps>((props, {}) => {
   const value = ref('04:05:03')
   return () => (
     <div>
+      <TimePicker  placeholder={'请选择时间'} />
       <TimePicker value={value.value} onChange={(v)=>{
         console.log(v)
         value.value = v

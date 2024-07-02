@@ -10,6 +10,7 @@ import { get } from 'lodash';
 import { Locale } from '../locale/interface';
 import {vuePropsMake} from "../PropTypes";
 import Context from "../configProvider/context";
+import { useHasInProps } from '../_base/baseComponent';
 
 
 export type { TimeInputProps } from './TimeInput';
@@ -26,6 +27,7 @@ export type LocalePickerProps = BasePickerProps;
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const index = defineComponent<LocalePickerProps>((props, {}) => {
   const slots = useSlots()
+  const { getProps, hasInProps } = useHasInProps();
 
   return () =>  {
     const { type } = props;
@@ -37,7 +39,7 @@ const index = defineComponent<LocalePickerProps>((props, {}) => {
               <BaseTimePicker
                 timeZone={timeZone}
                 placeholder={get(locale, ['placeholder', type])}
-                {...props}
+                {...getProps(props)}
                 locale={locale}
                 localeCode={localeCode}
                 dateFnsLocale={dateFnsLocale}
