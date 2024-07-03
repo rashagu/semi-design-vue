@@ -12,7 +12,10 @@ export type TypographyType = typeof BaseTypography & {
 };
 
 const Typography = BaseTypography as TypographyType;
-
+Typography.Text = Text
+Typography.Title = Title
+Typography.Paragraph = Paragraph
+Typography.Numeral = Numeral
 
 
 

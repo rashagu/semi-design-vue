@@ -1733,7 +1733,7 @@ interface TriggerRenderProps {
 <script setup lang="tsx">
 import { ref, computed } from 'vue';
 import { Cascader, Button, Tag, TagInput } from '@kousum/semi-ui-vue';
-import { IconClose, IconChevronDown } from '@douyinfe/semi-icons';
+import { IconClose, IconChevronDown } from '@kousum/semi-icons-vue';
 
 const treeData = ref([
     {

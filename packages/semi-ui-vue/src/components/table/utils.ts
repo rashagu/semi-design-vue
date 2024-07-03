@@ -120,7 +120,7 @@ export function mergeComponents(components: TableComponents, virtualized: Virtua
     );
 }
 
-export const logger = new Logger('[@douyinfe/semi-ui Table]');
+export const logger = new Logger('[@kousum/semi-ui-vue Table]');
 
 export function mergeColumns(oldColumns: any[] = [], newColumns: any[] = [], keyPropNames: any[] = null, deep = true) {
     const finalColumns: any[] = [];

@@ -37,7 +37,7 @@ const { site, theme, page, frontmatter } = useData()
 ### 如何引入
 
 ```jsx import
-import { AutoComplete } from '@douyinfe/semi-ui';
+import { AutoComplete } from '@kousum/semi-ui-vue';
 ```
 
 ### 基本用法

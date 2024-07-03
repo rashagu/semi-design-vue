@@ -164,9 +164,9 @@ const ReactResizeObserver = defineComponent<ReactResizeObserverProps>(
 
     return () => {
       const child = slots.default?.();
-      const { ref } = child as any;
+      const { ref } = child?.[0] as any;
       return cloneVNode(child[0], {
-        ref: (node: any) => mergeRef(ref, node),
+        ref: (node: any) => mergeRef(ref?.r, node),
       });
     };
   },

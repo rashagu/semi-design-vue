@@ -22,7 +22,7 @@ Our grid system supports the Flex layout, allowing the horizontal alignment of c
 ### How to import
 
 ```jsx import
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 ```
 ### Basic Usage
 
@@ -32,7 +32,7 @@ Using a single set of Row and Col grid components, you can create a basic grid s
 
 ```jsx live=true dir="column"
 
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid">
@@ -75,7 +75,7 @@ Dark for content area, light for spacing
 
 ```jsx live=true dir="column"
 
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid grid-gutter">
@@ -143,7 +143,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid">
@@ -178,7 +178,7 @@ Use `row-flex` to define a Flex layout whose child elements are based on differe
 
 ```jsx live=true dir="column"
 
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid">
@@ -229,7 +229,7 @@ import { Col, Row } from '@douyinfe/semi-ui';
 
 ```jsx live=true dir="column"
 
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid grid-flex">
@@ -266,7 +266,7 @@ Change the sorting of elements through `order` of the Col.
 
 ```jsx live=true dir="column"
 
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid">
@@ -286,7 +286,7 @@ Referring to Bootstrap's responsive design, preset six response sizes:`xs`, `sm`
 
 ```jsx live=true dir="column"
 
-import { Col, Row } from '@douyinfe/semi-ui';
+import { Col, Row } from '@kousum/semi-ui-vue';
 
 () => (
     <div className="grid">

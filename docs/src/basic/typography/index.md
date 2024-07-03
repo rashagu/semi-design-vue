@@ -9,6 +9,7 @@ brief: 文字，图片，段落，数值的基本格式。
 <script setup>
 import { useData } from 'vitepress';
 import LiveCode from '../../../LiveCode.vue';
+import LiveCode2 from '../../../LiveCode2.vue';
 import DesignToken from '../../../DesignToken.vue';
 import Notice from '../../../Notice';
 import PureA from '../../../PureA';
@@ -31,7 +32,7 @@ const { site, theme, page, frontmatter } = useData()
 ### 如何引入
 
 ```jsx import
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
 ```
 ### 标题组件
 通过设置 heading 可以展示不同级别的标题。
@@ -87,10 +88,10 @@ Numeral 组件在Text组件的基础上，添加了属性: `rule`, `precision`, 
 
 ```jsx live=true
 
-import { Typography } from '@douyinfe/semi-ui';
+import { TypographyNumeral } from '@kousum/semi-ui-vue';
+const Numeral = TypographyNumeral;
 
-function Demo() {
-    const { Numeral } = Typography;
+export default function () {
 
     function parserTCH(oldVal) {
         return oldVal.split(' ').map(item =>
@@ -119,7 +120,7 @@ function Demo() {
         <div>
             <Numeral parser={parserTCH} component="div">
                 Semi Design 重视我们的用户，加入并助力我们不断完善
-                {Infos}
+                {Infos()}
             </Numeral>
             <br />
             <Numeral link={{ href: 'https://semi.design', target: '_blank' }} parser={parserTCH}>
@@ -128,6 +129,7 @@ function Demo() {
         </div>
     );
 }
+
 ```
 
 ### 文本大小
@@ -137,25 +139,24 @@ function Demo() {
 
 ```jsx live=true
 
-import { Typography } from '@douyinfe/semi-ui';
+import { TypographyParagraph, TypographyText } from '@kousum/semi-ui-vue';
 
-function Demo() {
-    const { Paragraph, Text } = Typography;
+export default function () {
     return (
         <div>
-            <Text>正常文本</Text>
-            <Paragraph spacing="extended">
+            <TypographyText>正常文本</TypographyText>
+            <TypographyParagraph spacing="extended">
                 Semi Design 是由抖音前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
-            </Paragraph>
+            </TypographyParagraph>
             <br />
-            <Text size='small'>小文本</Text>
-            <Paragraph size='small'>
+            <TypographyText size='small'>小文本</TypographyText>
+            <TypographyParagraph size='small'>
                 Semi Design 是由抖音前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
-            </Paragraph>
+            </TypographyParagraph>
             <br />
-            <Text size="small">这是一段文本，样式为 small
-                <Text link size="inherit">这是一段链接，设置 size 为 inherit 继承外部样式设置</Text>
-            </Text>
+            <TypographyText size="small">这是一段文本，样式为 small
+                <TypographyText link size="inherit">这是一段链接，设置 size 为 inherit 继承外部样式设置</TypographyText>
+            </TypographyText>
         </div>
     );
 }
@@ -168,11 +169,11 @@ function Demo() {
 
 ```jsx live=true
 
-import { Typography, TextArea } from '@douyinfe/semi-ui';
-import { IconSetting } from '@douyinfe/semi-icons';
+import { Typography, TextArea, Toast } from '@kousum/semi-ui-vue';
+import { IconSetting } from '@kousum/semi-icons-vue';
+const { Paragraph, Text, Numeral } = Typography;
 
-function Demo() {
-    const { Paragraph, Text, Numeral } = Typography;
+export default function () {
 
     return (
         <div>
@@ -204,127 +205,127 @@ function Demo() {
 
 ```jsx live=true
 
-import { Typography, Tooltip } from '@douyinfe/semi-ui';
+import { Typography, Tooltip } from '@kousum/semi-ui-vue';
+const { Paragraph, Title, Text } = Typography;
 
-function Demo() {
-    const { Paragraph, Title, Text } = Typography;
-    const customRenderTooltip = useCallback((content, children) => {
-        return <Tooltip content={content} style={{ backgroundColor: 'var(--semi-color-primary)' }}>{children}</Tooltip>;
-    }, []);
+export default function () {
+  const customRenderTooltip = (content, children) => {
+    return <Tooltip content={content} style={{ backgroundColor: 'var(--semi-color-primary)' }}>{children}</Tooltip>;
+  };
 
-    return (
-        <div>
-            <Title heading={5} ellipsis={{ showTooltip: true }} style={{ width: 250 }}>
-                是一个很长很长很长很长5号标题
-            </Title>
-            <br />
-            <Text 
-                ellipsis={{ 
-                    showTooltip: {
-                        opts: { content: '这是自定义要展示的内容' }
-                    }
-                }}
-                style={{ width: 150 }}
-            >
-                可以自定义浮层里的展示内容试试看吧
-            </Text>
-            <br/>
-            {/* link还可以传入object，如link={{ href: 'https://semi.design/zh-CN/basic/typography', target: '_blank' }} */}
-            <Text link ellipsis={{ showTooltip: true, pos: 'middle' }} style={{ width: 150 }}>
-                是一个很长很长很长很长的链接
-            </Text>
-            <br/>
-            <Paragraph ellipsis={{ suffix: '小尾巴' }} style={{ width: 300 }}>
-                有后缀的情况：Semi Design 是由抖音前端团队与 UED 团队共同设计开发并维护的设计系统。
-            </Paragraph>
-            <br/>
-            <Paragraph ellipsis={{ rows: 3 }} style={{ width: 300 }}>
-                这是一个多行截断的例子：Semi Design 是由抖音前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
-            </Paragraph>
-            <br/>
-            <Paragraph ellipsis={{ rows: 3, showTooltip: { type: 'popover', opts: { style: { width: 300 } } } }} style={{ width: 300 }}>
-                多行截断，展示 Popover：Semi Design 是由抖音前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
-            </Paragraph>
-            <br/>
-            <Paragraph ellipsis={{ rows: 3, expandable: true, collapsible: true, collapseText: '折叠我吧', onExpand: (bool, e) => console.log(bool, e) }} style={{ width: 300 }}>
-                支持展开和折叠：Semi Design 是由抖音前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
-            </Paragraph>
-            <br/>
-            <Text 
-                ellipsis={{ 
-                    showTooltip: {
-                        opts: { content: '全英文设置了word-break' }
-                    },
-                    pos: 'middle'
-                }}
-                style={{ width: 150, wordBreak: 'break-word' }}
-            >
-                sssssssssssssssssssssssss
-            </Text>
-            <br/><br/>
-            <Title 
-                heading={5} 
-                ellipsis={{ 
-                    showTooltip: {
-                        renderTooltip: customRenderTooltip
-                    }
-                }} 
-                style={{ width: 250 }}
-            >
-                这是一个自定义弹出层组件的省略文本，背景色是蓝色
-            </Title>
-        </div>
-    );
+  return (
+    <div>
+      <Title heading={5} ellipsis={{ showTooltip: true }} style={{ width: '250px' }}>
+        是一个很长很长很长很长5号标题
+      </Title>
+      <br />
+      <Text
+        ellipsis={{
+          showTooltip: {
+            opts: { content: '这是自定义要展示的内容' }
+          }
+        }}
+        style={{ width: 150 }}
+      >
+        可以自定义浮层里的展示内容试试看吧
+      </Text>
+      <br/>
+      {/* link还可以传入object，如link={{ href: 'https://semi.design/zh-CN/basic/typography', target: '_blank' }} */}
+      <Text link ellipsis={{ showTooltip: true, pos: 'middle' }} style={{ width: '150px' }}>
+        是一个很长很长很长很长的链接
+      </Text>
+      <br/>
+      <Paragraph ellipsis={{ suffix: '小尾巴' }} style={{ width: '300px' }}>
+        有后缀的情况：Semi Design 是由抖音前端团队与 UED 团队共同设计开发并维护的设计系统。
+      </Paragraph>
+      <br/>
+      <Paragraph ellipsis={{ rows: 3 }} style={{ width: '300px' }}>
+        这是一个多行截断的例子：Semi Design 是由抖音前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
+      </Paragraph>
+      <br/>
+      <Paragraph ellipsis={{ rows: 3, showTooltip: { type: 'popover', opts: { style: { width: '300px' } } } }} style={{ width: '300px' }}>
+        多行截断，展示 Popover：Semi Design 是由抖音前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
+      </Paragraph>
+      <br/>
+      <Paragraph ellipsis={{ rows: 3, expandable: true, collapsible: true, collapseText: '折叠我吧', onExpand: (bool, e) => console.log(bool, e) }} style={{ width: '300px' }}>
+        支持展开和折叠：Semi Design 是由抖音前端团队与 UED 团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的 Web 应用。
+      </Paragraph>
+      <br/>
+      <Text
+        ellipsis={{
+          showTooltip: {
+            opts: { content: '全英文设置了word-break' }
+          },
+          pos: 'middle'
+        }}
+        style={{ width: '150px', wordBreak: 'break-word' }}
+      >
+        sssssssssssssssssssssssss
+      </Text>
+      <br/><br/>
+      <Title
+        heading={5}
+        ellipsis={{
+          showTooltip: {
+            renderTooltip: customRenderTooltip
+          }
+        }}
+        style={{ width: '250px' }}
+      >
+        这是一个自定义弹出层组件的省略文本，背景色是蓝色
+      </Title>
+    </div>
+  );
 }
 ```
-
+<br/>
 <Notice type="primary" title="注意事项">
     <div>当发生超长文本在弹出的 tooltip 没有换行时，可通过手动设置一下 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/word-break" target="_blank" rel="noopener noreferrer">word-break</a> 或者 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap" target= "_blank" rel="noopener noreferrer">word-wrap</a> 等换行相关属性进行调整, 更多细节可查看 Tooltip 的 FAQ 部分</div>
 </Notice>
 
-```jsx live=true
+```jsx live=true dir="column"
 
-import { Typography } from '@douyinfe/semi-ui';
+import { Typography } from '@kousum/semi-ui-vue';
+const { Text } = Typography;
 
-function Demo() {
-    const { Text } = Typography;
+export default function () {
 
-    return (
-        <div>
-            <Text 
-                ellipsis={{ 
-                    showTooltip: {
-                        opts: { content: '架构|Semi-inf|graph.cheet.relation' }
-                    }
-                }}
-                style={{ width: 150 }}
-            >
-                有问题的超长文本发生截断时可按需进行自定义配置
-            </Text>
-            <br />
-            <Text 
-                ellipsis={{ 
-                    showTooltip: {
-                        opts: { content: '架构|Semi-inf|graph.cheet.relation', className: 'components-typography-demo' }
-                    }
-                }}
-                style={{ width: 150 }}
-            >
-                覆盖类名超长文本发生截断时可使用类名覆盖进行自定义配置
-            </Text>
-            <br />
-            <Text 
-                ellipsis={{
-                    showTooltip: {
-                        opts: { content: '架构|Semi-inf|graph.cheet.relation', style: { wordBreak: 'break-all' } }
-                    }
-                }}
-                style={{ width: 150 }}
-            >
-                覆盖style超长文本发生截断时可使用style进行自定义配置
-            </Text>
-        </div>
-    );
+  return (
+    <div>
+      <Text
+        ellipsis={{
+          showTooltip: {
+            opts: { content: '架构|Semi-inf|graph.cheet.relation' }
+          }
+        }}
+        style={{ width: '150px' }}
+      >
+        有问题的超长文本发生截断时可按需进行自定义配置
+      </Text>
+      <br />
+      <Text
+        ellipsis={{
+          showTooltip: {
+            opts: { content: '架构|Semi-inf|graph.cheet.relation', className: 'components-typography-demo' }
+          }
+        }}
+        style={{ width: '150px' }}
+      >
+        覆盖类名超长文本发生截断时可使用类名覆盖进行自定义配置
+      </Text>
+      <br />
+      <Text
+        ellipsis={{
+          showTooltip: {
+            opts: { content: '架构|Semi-inf|graph.cheet.relation', style: { wordBreak: 'break-all' } }
+          }
+        }}
+        style={{ width: '150px' }}
+      >
+        覆盖style超长文本发生截断时可使用style进行自定义配置
+      </Text>
+    </div>
+  );
 }
 ```
 

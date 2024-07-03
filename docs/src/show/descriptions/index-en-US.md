@@ -14,7 +14,7 @@ breif: The description list is used to render key-value pairs.
 ### How to import
 
 ```jsx import
-import { Descriptions } from '@douyinfe/semi-ui';
+import { Descriptions } from '@kousum/semi-ui-vue';
 ```
 
 ### Basic Usage
@@ -24,7 +24,7 @@ Both key and value support the `ReactNode` type. You can pass in a string or a h
 
 ```jsx live=true dir="column"
 
-import { Descriptions, Tag } from '@douyinfe/semi-ui';
+import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [
@@ -45,7 +45,7 @@ When `row` is true, this configuration is invalid
 
 ```jsx live=true dir="column"
 
-import { Descriptions, Tag } from '@douyinfe/semi-ui';
+import { Descriptions, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [
@@ -82,8 +82,8 @@ Set `row` to display the data to two-row, supporting three sizes: `small`, `medi
 
 ```jsx live=true dir="column"
 
-import { Descriptions } from '@douyinfe/semi-ui';
-import { IconArrowUp } from '@douyinfe/semi-icons';
+import { Descriptions } from '@kousum/semi-ui-vue';
+import { IconArrowUp } from '@kousum/semi-icons-vue';
 
 () => {
     const data = [
@@ -125,7 +125,7 @@ Version: >= 1.17.0
 
 ```jsx live=true dir="column"
 
-import { Descriptions } from '@douyinfe/semi-ui';
+import { Descriptions } from '@kousum/semi-ui-vue';
 
 () => {
     return (
@@ -147,7 +147,7 @@ When horizontal is set, column can be used to specify the maximum number of colu
 
 ```jsx live=true dir="column"
 
-import { Descriptions, Space, Tag } from '@douyinfe/semi-ui';
+import { Descriptions, Space, Tag } from '@kousum/semi-ui-vue';
 
 () => {
     const data = [

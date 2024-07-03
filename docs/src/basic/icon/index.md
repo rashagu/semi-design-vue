@@ -119,7 +119,7 @@ Icon组件支持size、rotate、spin等属性
 
 ```jsx live=true
 
-import { Icon } from '@douyinfe/semi-ui';
+import { Icon } from '@kousum/semi-ui-vue';
 
 () => {
     function CustomIcon() {

@@ -101,7 +101,7 @@ Icon component supports size, rotate, spin and other attributes
 
 ```jsx live=true
 
-import { Icon } from '@douyinfe/semi-ui';
+import { Icon } from '@kousum/semi-ui-vue';
 
 () => {
     function CustomIcon() {
@@ -134,7 +134,7 @@ If the icons provided by Semi are not enough to meet business needs, you can als
   use: ['@svgr/webpack'],
 }
 
-import { Icon } from '@douyinfe/semi-ui';
+import { Icon } from '@kousum/semi-ui-vue';
 import StarIcon from './star.svg';
 
 <Icon svg={<StarIcon />} />

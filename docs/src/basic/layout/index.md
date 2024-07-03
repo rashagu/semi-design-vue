@@ -39,7 +39,7 @@ const { site, theme, page, frontmatter } = useData()
 ### 如何引入
 
 ```jsx import
-import { Layout } from '@douyinfe/semi-ui';
+import { Layout } from '@kousum/semi-ui-vue';
 ```
 
 ##### 三行布局

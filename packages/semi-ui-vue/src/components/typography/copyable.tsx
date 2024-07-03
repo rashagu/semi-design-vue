@@ -1,16 +1,13 @@
 import {
-  defineComponent,
-  ref,
-  h,
-  Fragment,
-  reactive,
-  onMounted,
-  ComponentObjectPropsOptions,
-  PropType,
-  VNode,
-  onUnmounted,
-  isVNode,
   cloneVNode,
+  ComponentObjectPropsOptions,
+  defineComponent,
+  h,
+  isVNode,
+  onUnmounted,
+  PropType,
+  reactive,
+  VNode,
 } from 'vue';
 import Tooltip from '../tooltip';
 import { cssClasses } from '@douyinfe/semi-foundation/typography/constants';
@@ -22,6 +19,7 @@ import { IconCopy, IconTick } from '@kousum/semi-icons-vue';
 import { BaseProps } from '../_base/baseComponent';
 import { Locale } from '../locale/interface';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
+import * as PropTypes from '../PropTypes';
 
 const prefixCls = cssClasses.PREFIX;
 export interface CopyableProps extends BaseProps {
@@ -60,6 +58,9 @@ export const vuePropsType: ComponentObjectPropsOptions<CopyableProps> = {
     type: String,
     default: '',
   },
+  copyTip: PropTypes.node,
+  successTip: PropTypes.node,
+  icon: PropTypes.node as PropType<CopyableProps['icon']>,
 };
 
 const Copyable = defineComponent<CopyableProps>(

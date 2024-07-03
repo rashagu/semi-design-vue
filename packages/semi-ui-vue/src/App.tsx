@@ -2,6 +2,7 @@ import {defineComponent, ref, h, onMounted, watch,} from 'vue'
 import AvatarDemo from './components/avatar/__test__/AvatarDemo'
 import Button from "./components/button/__test__/Demo";
 import './docDemo.scss'
+
 import IconTest from "./components/__test__/IconTest";
 import TooltipDemo from "./components/tooltip/__test__/TooltipDemo";
 import DropdownDemo1 from "./components/dropdown/__test__/DropdownDemo1";
@@ -110,10 +111,16 @@ import DemoButtonSFC from './components/button/__test__/DemoButtonSFC.vue';
 import SkeletonDemoSFC from './components/skeleton/__test__/SkeletonDemoSFC.vue';
 import BreadcrumbDemo2 from './components/breadcrumb/__test__/BreadcrumbDemo2';
 import TypoDemo3 from './components/typography/__test__/TypoDemo3';
+
 import ModalDemoVueSFC from './components/modal/__test__/ModalDemoVueSFC.vue';
 import AutoCompleteSFC from './components/autoComplete/__test__/AutoCompleteSFC.vue';
 import DiyItemAutoComplete from './components/autoComplete/__test__/diyItemAutoComplete.vue';
 import RemoteAutoComplete from './components/autoComplete/__test__/remoteAutoComplete.vue';
+import TypoDemoSFC from './components/typography/__test__/TypoDemoSFC.vue';
+import NumeralDemo from './components/typography/__test__/NumeralDemo';
+import TextDemo from './components/typography/__test__/textDemo.vue';
+import LinkDemo from './components/typography/__test__/linkDemo.vue';
+import TypoCopyDemo from './components/typography/__test__/TypoCopyDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -216,7 +223,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<BreadcrumbDemo2/>*/}
         {/*<DatePickerDemo />*/}
         {/*<DatePickerDemo2/>*/}
-        <TimePickerDemo />
+        {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
         {/*<CascaderDemo3/>*/}
@@ -241,6 +248,11 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TypoDemo3/>*/}
 
         {/*<TypoDemo2/>*/}
+        {/*<TypoDemoSFC/>*/}
+        {/*<NumeralDemo/>*/}
+        {/*<TextDemo/>*/}
+        {/*<LinkDemo/>*/}
+        <TypoCopyDemo/>
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
         {/*  <Button />*/}
         {/*<DemoButtonSFC/>*/}

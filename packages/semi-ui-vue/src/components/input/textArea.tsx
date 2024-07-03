@@ -327,7 +327,7 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
 
   // TODO later
   const setRef = (node: any) => {
-    (libRef.value as any) = node;
+    libRef.value = node;
     const {forwardRef} = props;
     if (typeof forwardRef === 'function') {
       forwardRef(node);
@@ -419,7 +419,6 @@ const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
     if (stateMinLength) {
       (itemProps as any).minLength = stateMinLength;
     }
-
     return (
       <div
         class={wrapperCls}

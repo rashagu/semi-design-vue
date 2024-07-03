@@ -3,6 +3,7 @@ import Title from '../title'
 import Text from '../text'
 import Paragraph from '../paragraph'
 import {IconLink} from "@kousum/semi-icons-vue";
+import { Typography } from '../index';
 interface ExampleProps {
   name?: string
 }

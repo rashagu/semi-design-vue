@@ -105,6 +105,7 @@ export default defineConfig({
       }, {});
 
       // 使用 markdown-it 插件 jsx codeLive
+      // 使用 markdown-it 插件 jsx codeLive
       md.use((md, params) => {
         // 定义一个新的代码块规则
         md.block.ruler.before('fence', 'jsx',
@@ -116,7 +117,6 @@ export default defineConfig({
           if (state.src.slice(start, max).trim().indexOf('```jsx live=true') !== 0) {
             return false;
           }
-
 
           let nextLine = startLine + 1;
 
@@ -152,7 +152,8 @@ export default defineConfig({
         });
 
         // 定义渲染规则
-        md.renderer.rules.livecode = (tokens, idx) => {
+        md.renderer.rules.livecode = (tokens, idx, options, env, renderer) => {
+
           const content = tokens[idx].content.trim();
           const code = btoa(encodeURIComponent(content));
           // <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/components/" alt=""/>
@@ -161,7 +162,7 @@ export default defineConfig({
 </div>`;
         };
       }, {});
-      // 使用 markdown-it 插件 jsx codeLive
+      // 使用 markdown-it 插件 vue codeLive
       md.use((md, params) => {
         // 定义一个新的代码块规则
         md.block.ruler.before('fence', 'vue',

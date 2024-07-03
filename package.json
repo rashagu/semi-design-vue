@@ -36,7 +36,7 @@
     "@douyinfe/semi-theme-default": "2.60.0",
     "@vue/repl": "4.2.1",
     "lodash": "^4.17.21",
-    "vue": "^3.4.29"
+    "vue": "^3.4.31"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.5",
@@ -93,7 +93,7 @@
     "ts-node": "^10.9.2",
     "tslib": "^2.4.1",
     "typescript": "^5.5.2",
-    "vite": "5.3.1",
+    "vite": "5.3.2",
     "vitepress": "^1.2.3",
     "vitest": "^1.6.0",
     "vue-inline-svg": "^2.1.3",

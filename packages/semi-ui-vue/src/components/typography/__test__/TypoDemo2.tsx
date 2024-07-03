@@ -3,6 +3,7 @@ import Title from '../title'
 import Text from '../text'
 import Paragraph from '../paragraph'
 import {IconLink} from "@kousum/semi-icons-vue";
+import { TypographyNumeral } from '../../index';
 interface ExampleProps {
   name?: string
 }
@@ -22,6 +23,9 @@ const TypoDemo = defineComponent<ExampleProps>((props, {slots}) => {
   return () => (
     <div class={'111'}>
       <Paragraph copyable>点击右边的图标复制文本。</Paragraph>
+      <TypographyNumeral precision={1}>
+      <p>点赞量：1.6111e1 K</p>
+    </TypographyNumeral>
     </div>
   )
 })
