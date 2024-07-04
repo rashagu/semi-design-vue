@@ -163,7 +163,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<AnchorDemo />*/}
         {/*<TabsDemo />*/}
         {/*<TabsDemo3/>*/}
-        {/*<TabsDemo4/>*/}
+        <TabsDemo4/>
         {/*<TabsDemoVueSFC/>*/}
         {/*<CardDemo >*/}
         {/*  {a.value}*/}
@@ -252,7 +252,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<NumeralDemo/>*/}
         {/*<TextDemo/>*/}
         {/*<LinkDemo/>*/}
-        <TypoCopyDemo/>
+        {/*<TypoCopyDemo/>*/}
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
         {/*  <Button />*/}
         {/*<DemoButtonSFC/>*/}

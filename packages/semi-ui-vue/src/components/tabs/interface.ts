@@ -1,8 +1,9 @@
 import { Motion } from '../_base/base';
-import TabBar from './TabBar';
+import TabBar, { OverflowItem } from './TabBar';
 import {VueJsxNode} from "../interface";
 import { CSSProperties, VNode } from 'vue';
 import { DropdownProps } from "../dropdown";
+import { OverflowListProps } from "../overflowList";
 
 export type TabType = 'line' | 'card' | 'button';
 export type TabSize = 'small' | 'medium' | 'large';
@@ -29,6 +30,7 @@ export interface TabsProps {
     onChange?: (activeKey: string) => void;
     onTabClick?: (activeKey: string, e: MouseEvent) => void;
     renderTabBar?: (tabBarProps: TabBarProps, defaultTabBar: typeof TabBar) => VueJsxNode;
+    showRestInDropdown?: boolean;
     size?: TabSize;
     style?: CSSProperties;
     tabBarClassName?: string;
@@ -40,7 +42,11 @@ export interface TabsProps {
     type?: TabType;
     onTabClose?: (tabKey: string) => void;
     preventScroll?: boolean;
-    more?: number | { count: number; render?: () => VNode; dropdownProps?: DropdownProps }
+    more?: number | { count: number; render?: () => VNode; dropdownProps?: DropdownProps };
+    onVisibleTabsChange?: TabBarProps["onVisibleTabsChange"];
+    visibleTabsStyle?: TabBarProps['visibleTabsStyle'];
+    arrowPosition?: TabBarProps['arrowPosition'];
+    renderArrow?: TabBarProps['renderArrow']
 
 }
 
@@ -50,6 +56,7 @@ export interface TabBarProps {
     collapsible?: boolean;
     list?: PlainTab[];
     onTabClick?: (activeKey: string, event: MouseEvent) => void;
+    showRestInDropdown?: boolean;
     size?: TabSize;
     style?: CSSProperties;
     tabBarExtraContent?: VueJsxNode;
@@ -60,7 +67,11 @@ export interface TabBarProps {
     closable?: boolean;
     deleteTabItem?: (tabKey: string, event: MouseEvent) => void;
     handleKeyDown?: (event: KeyboardEvent, itemKey: string, closable: boolean) => void;
-    more?: TabsProps['more']
+    more?: TabsProps['more'];
+    onVisibleTabsChange?: (visibleState: Map<string, boolean>) => void;
+    visibleTabsStyle?: CSSProperties;
+    arrowPosition?: OverflowListProps['overflowRenderDirection'];
+    renderArrow?: (items: OverflowItem[], pos: "start"|"end", handleArrowClick: () => void) => VNode
 }
 
 export interface TabPaneProps {

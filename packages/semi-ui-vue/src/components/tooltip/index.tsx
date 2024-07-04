@@ -488,6 +488,13 @@ const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
       setId: () => {
         state.id = getUuidShort();
       },
+      getTriggerDOM: ()=>{
+        if (triggerEl.value) {
+          return triggerEl.value;
+        } else {
+          return null;
+        }
+      }
     };
   }
 

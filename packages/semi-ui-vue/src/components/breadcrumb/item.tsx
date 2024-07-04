@@ -226,9 +226,7 @@ const BreadcrumbItem = defineComponent<BreadcrumbItemProps>(
       } = props;
       const pageLabel = active ? { 'aria-current': 'page' as const } : {};
       const item = renderItem();
-      const separator = !active
-        ? props.separator || <span class={`${clsPrefix}-separator`}>{(context.value as any).separator}</span>
-        : null;
+      const separator = props.separator || <span class={`${clsPrefix}-separator`}>{context.value.separator}</span>;
       const wrapperCLs = cls({
         [`${clsPrefix}-item-wrap`]: true,
         // [`${clsPrefix}-item-wrap-iconOnly`]: !!children && props.icon,

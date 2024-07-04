@@ -383,6 +383,7 @@ const Pagination = defineComponent<PaginationProps>((props, {}) => {
         i < 3 ? (content = restLeftPageList) : (content = restRightPageList);
         return (
           <Popover
+            rePosKey={props.currentPage}
             trigger="hover"
             // onVisibleChange={visible=>handleRestHover(visible, i < 3 ? 'left' : 'right')}
             content={renderRestPageList(content)}

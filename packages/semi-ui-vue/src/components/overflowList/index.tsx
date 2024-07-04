@@ -18,7 +18,7 @@ import {
   h,
   isVNode, nextTick, PropType,
   reactive, ref, shallowRef,
-  useSlots,
+  useSlots, VNode,
   watch,
 } from 'vue';
 import {vuePropsMake} from "../PropTypes";
@@ -49,7 +49,10 @@ export interface OverflowListProps {
   visibleItemRenderer?: (item: OverflowItem, index: number) => VueJsxNode;
   wrapperClassName?: string;
   wrapperStyle?: CSSProperties;
-  itemKey?: Key | ((item: OverflowItem) => Key)
+  itemKey?: Key | ((item: OverflowItem) => Key);
+  onVisibleStateChange?: (visibleState: Map<string, boolean>) => void;
+  overflowRenderDirection?: "both"|"start"|'end' // used in tabs, not exposed to user
+  collapseMask?: any
 }
 
 export interface OverflowListState {
@@ -76,6 +79,7 @@ const defaultProps = {
   threshold: 0.75,
   visibleItemRenderer: (): VueJsxNode => null,
   onOverflow: () => null,
+  overflowRenderDirection: "both",
 };
 const propTypes:ComponentObjectPropsOptions<OverflowListProps> = {
   // if render in scroll mode, key is required in items
@@ -93,6 +97,9 @@ const propTypes:ComponentObjectPropsOptions<OverflowListProps> = {
   visibleItemRenderer: PropTypes.func as PropType<OverflowListProps['visibleItemRenderer']>,
   wrapperClassName: PropTypes.string,
   wrapperStyle: PropTypes.object,
+  collapseMask: PropTypes.object as PropType<OverflowListProps['collapseMask']>,
+  overflowRenderDirection: PropTypes.string as PropType<OverflowListProps['overflowRenderDirection']>,
+  onVisibleStateChange: PropTypes.func as PropType<OverflowListProps['onVisibleStateChange']>,
 };
 export const vuePropsType = vuePropsMake<OverflowListProps>(propTypes, defaultProps)
 const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
@@ -152,6 +159,7 @@ const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
       ...adapterInject(),
       updateVisibleState: (visibleState): void => {
         state.visibleState = visibleState
+        props.onVisibleStateChange?.(visibleState);
       },
       updateStates: (states): void => {
         states && Object.keys(states).forEach(key => {
@@ -307,28 +315,36 @@ const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
     }
     const inner =
       renderMode === RenderMode.SCROLL ?
-        [
-          overflow[0],
-          <div
+        (()=>{
+          const list = [<div
             class={cls(wrapperClassName, `${prefixCls}-scroll-wrapper`)}
             ref={(ref): void => {
-              // @ts-ignore
-              scroller = ref;
+              scroller = ref as any;
             }}
-            style={{...wrapperStyle}}
+            style={{ ...wrapperStyle }}
             key={`${prefixCls}-scroll-wrapper`}
           >
-            {visible.map(visibleItemRenderer).map((item: VueJsxNode) => {
-              const {forwardRef, key} = item as any;
-              return cloneVNode(item as any, {
+            {visible.map(visibleItemRenderer).map((item) => {
+              const { forwardRef, key } = item as any;
+              return cloneVNode(item as VNode, {
                 ref: (node: any) => mergeRef(forwardRef, node, key),
                 'data-scrollkey': `${key}`,
                 key,
               });
             })}
-          </div>,
-          overflow[1],
-        ] :
+          </div>];
+          if (props.overflowRenderDirection === "both") {
+            list.unshift(overflow[0]);
+            list.push(overflow[1]);
+          } else if (props.overflowRenderDirection === "start") {
+            list.unshift(overflow[1]);
+            list.unshift(overflow[0]);
+          } else {
+            list.push(overflow[0]);
+            list.push(overflow[1]);
+          }
+          return list;
+        })() :
         [
           collapseFrom === Boundary.START ? overflow : null,
           visible.map((item, idx) => {

@@ -1,27 +1,29 @@
 import * as PropTypes from '../PropTypes';
+import { vuePropsMake } from '../PropTypes';
 import cls from 'classnames';
-import { cssClasses, strings } from '@douyinfe/semi-foundation/tabs/constants';
+import { cssClasses } from '@douyinfe/semi-foundation/tabs/constants';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import OverflowList from '../overflowList';
 import Dropdown, { DropdownItem, DropdownMenu, DropDownMenuItem, type DropdownProps } from '../dropdown';
 import Button from '../button';
-import { TabBarProps, PlainTab } from './interface';
+import { PlainTab, TabBarProps } from './interface';
 import { isEmpty, pick } from 'lodash';
-import { IconChevronRight, IconChevronLeft, IconClose, IconChevronDown } from '@kousum/semi-icons-vue';
+import { IconChevronDown, IconChevronLeft, IconChevronRight } from '@kousum/semi-icons-vue';
 import { getUuidv4 } from '@douyinfe/semi-foundation/utils/uuid';
 import TabItem from './TabItem';
 import {
   ComponentObjectPropsOptions,
   defineComponent,
+  Fragment,
   h,
   onMounted,
   PropType,
-  reactive, ref,
+  reactive,
+  ref,
   useSlots,
   VNode,
   watch,
 } from 'vue';
-import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
 import { Locale } from '../locale/interface';
 import LocaleConsumer from '../locale/localeConsumer';
@@ -31,6 +33,7 @@ export interface TabBarState {
   rePosKey: number;
   startInd: number;
   uuid: string;
+  currentVisibleItems: string[];
 }
 
 export interface OverflowItem extends PlainTab {
@@ -53,6 +56,7 @@ const propTypes: ComponentObjectPropsOptions<TabBarProps> = {
   deleteTabItem: PropTypes.func as PropType<TabBarProps['deleteTabItem']>,
   more: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   handleKeyDown: PropTypes.func as PropType<TabBarProps['handleKeyDown']>,
+  showRestInDropdown: PropTypes.bool,
 };
 
 export const vuePropsType = vuePropsMake(propTypes, {});
@@ -63,6 +67,7 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
     rePosKey: 0,
     startInd: 0,
     uuid: '',
+    currentVisibleItems: []
   });
 
   onMounted(() => {
@@ -116,7 +121,7 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
     return (
       <TabItem
         {...pick(panel, ['disabled', 'icon', 'itemKey', 'tab', 'closable'])}
-        key={_getItemKey(panel.itemKey)}
+        key={_getBarItemKeyByItemKey(panel.itemKey)}
         selected={isSelected}
         size={size}
         type={type}
@@ -135,7 +140,7 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
   }
 
   const scrollActiveTabItemIntoView = (logicalPosition?: ScrollLogicalPosition) => {
-    const key = _getItemKey(props.activeKey);
+    const key = _getBarItemKeyByItemKey(props.activeKey);
     scrollTabItemIntoViewByKey(key, logicalPosition)
   }
 
@@ -146,7 +151,7 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
     if (!lastItem) {
       return;
     }
-    const key = _getItemKey(lastItem.itemKey);
+    const key = _getBarItemKeyByItemKey(lastItem.itemKey);
     scrollTabItemIntoViewByKey(key)
   };
 
@@ -157,15 +162,13 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
     });
 
     if (isEmpty(items)) {
-      return <Button disabled={true} icon={icon} theme="borderless" />
-      //TODO next vision
-      // return (
-      //   <div role="presentation" class={arrowCls}>
-      //     <Button disabled={true} icon={icon} theme="borderless" />
-      //   </div>
-      // );
+      return (
+        <div role="presentation" class={arrowCls}>
+          <Button disabled={true} icon={icon} theme="borderless" />
+        </div>
+      );
     }
-    const { dropdownClassName, dropdownStyle } = props;
+    const { dropdownClassName, dropdownStyle, showRestInDropdown } = props;
     const { rePosKey } = state;
     const disabled = !items.length;
 
@@ -184,62 +187,82 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
       </DropdownMenu>
     );
 
+    const button = (
+      <div role="presentation" class={arrowCls} onClick={(e): void => handleArrowClick(items, pos)}>
+        <Button
+          disabled={disabled}
+          icon={icon}
+          theme="borderless"
+        />
+      </div>
+    );
+
     const dropdownCls = cls(dropdownClassName, {
       [`${cssClasses.TABS_BAR}-dropdown`]: true,
     });
 
     return (
-      <Dropdown
-        className={dropdownCls}
-        clickToHide
-        clickTriggerToHide
-        key={`${rePosKey}-${pos}`}
-        position={pos === 'start' ? 'bottomLeft' : 'bottomRight'}
-        render={disabled ? null : menu}
-        showTick
-        style={dropdownStyle}
-        trigger={'hover'}
-        disableFocusListener // prevent the panel from popping up again after clicking
-      >
-        <div role="presentation" class={arrowCls} onClick={(e): void => handleArrowClick(items, pos)}>
-          <Button
-            disabled={disabled}
-            icon={icon}
-            // size="small"
-            theme="borderless"
-          />
-        </div>
-      </Dropdown>
+      <Fragment>
+        {showRestInDropdown ? (
+          <Dropdown
+            className={dropdownCls}
+            clickToHide
+            clickTriggerToHide
+            key={`${rePosKey}-${pos}`}
+            position={pos === 'start' ? 'bottomLeft' : 'bottomRight'}
+            render={disabled ? null : menu}
+            showTick
+            style={dropdownStyle}
+            trigger={'hover'}
+            disableFocusListener // prevent the panel from popping up again after clicking
+          >
+            {button}
+          </Dropdown>
+        ) : (button)}
+      </Fragment>
     );
   };
 
-  const renderOverflow = (items: any[]): Array<VueJsxNode> =>
-    items.map((item, ind) => {
-      const icon = ind === 0 ? <IconChevronLeft /> : <IconChevronRight />;
-      const pos = ind === 0 ? 'start' : 'end';
-      return renderCollapse(item, icon, pos);
-    });
+  const renderOverflow = (items: any[]): Array<VueJsxNode> => items.map((item, index) => {
+    const pos = index === 0 ? 'start' : 'end';
+    if (props.renderArrow) {
+      return props.renderArrow(item, pos, ()=>handleArrowClick(item, pos));
+    }
+    const icon = index === 0 ? <IconChevronLeft/> : <IconChevronRight/>;
+    return renderCollapse(item, icon, pos);
+  });
+
 
   const renderCollapsedTab = (): VueJsxNode => {
     const { list } = props;
     const renderedList = list.map((item) => {
       const { itemKey } = item;
-      return { key: _getItemKey(itemKey), active: _isActive(itemKey), ...item };
+      return { key: _getBarItemKeyByItemKey(itemKey), active: _isActive(itemKey), ...item };
     });
     return (
       <OverflowList
         items={renderedList}
+        overflowRenderDirection={props.arrowPosition}
+        wrapperStyle={props.visibleTabsStyle}
         overflowRenderer={renderOverflow}
         renderMode="scroll"
         className={`${cssClasses.TABS_BAR}-overflow-list`}
         visibleItemRenderer={renderTabItem as any}
+        onVisibleStateChange={(visibleMap)=>{
+          const visibleMapWithItemKey: Map<string, boolean> = new Map();
+          visibleMap.forEach((v, k )=>{
+            visibleMapWithItemKey.set(_getItemKeyByBarItemKey(k), v);
+          });
+          props.onVisibleTabsChange?.(visibleMapWithItemKey);
+        }}
       />
     );
   };
 
   const _isActive = (key: string): boolean => key === props.activeKey;
 
-  const _getItemKey = (key: string): string => `${key}-bar`;
+  const _getBarItemKeyByItemKey = (key: string): string => `${key}-bar`;
+  const _getItemKeyByBarItemKey = (key: string): string => key.replace(/-bar$/, "");
 
 
   const renderWithMoreTrigger = (): VNode => {
@@ -273,10 +296,10 @@ const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
       throw new Error('[Semi Tabs]: invalid tab props format: more');
     }
 
-    return <>
+    return <Fragment>
       {tabElements}
       {renderMoreDropdown(list.slice(keepCount), more?.['dropdownProps'], moreTrigger)}
-    </>;
+    </Fragment>;
   };
 
   const renderMoreDropdown = (panels: PlainTab[], dropDownProps: DropdownProps, trigger: VNode): VNode => {

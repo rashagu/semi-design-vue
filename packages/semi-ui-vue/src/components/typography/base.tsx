@@ -670,7 +670,7 @@ const Base = defineComponent<BaseTypographyProps>((props, {}) => {
     const iconSize: Size = realSize === 'small' ? 'small' : 'default';
     return (
       <span class={`${prefixCls}-icon`} x-semi-prop="icon">
-                {isSemiIcon(icon) ? cloneVNode((icon as any), {realSize: iconSize}) : icon}
+                {isSemiIcon(icon) ? cloneVNode((icon as any), {size: iconSize}) : icon}
             </span>
     );
   }

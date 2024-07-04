@@ -55,6 +55,6 @@ test('TabsDemo4', async () => {
   await fireEvent.click(bt)
   await (new Promise(resolve => setTimeout(resolve, 500)))
 
-  const presentation = await screen.findByRole("presentation")
-  expect(presentation.getAttribute('aria-haspopup')).toContain('true')
+  const presentation = await screen.findAllByRole("presentation")
+  expect(presentation[1].getAttribute('aria-haspopup')).toEqual('true')
 })

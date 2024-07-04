@@ -24,9 +24,9 @@
     "url": "https://github.com/rashagu/semi-design-vue"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.60.0",
-    "@douyinfe/semi-theme-default": "2.60.0",
-    "@douyinfe/semi-animation": "2.60.0",
+    "@douyinfe/semi-foundation": "2.61.0",
+    "@douyinfe/semi-theme-default": "2.61.0",
+    "@douyinfe/semi-animation": "2.61.0",
     "@kousum/semi-animation-vue": "^0.14.2",
     "@kousum/semi-icons-vue": "^0.14.2",
     "@kousum/semi-illustrations-vue": "^0.14.2",

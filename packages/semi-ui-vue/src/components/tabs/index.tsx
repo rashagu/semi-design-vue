@@ -52,6 +52,7 @@ const propTypes: ComponentObjectPropsOptions<TabsProps> = {
   onChange: PropTypes.func as PropType<TabsProps['onChange']>,
   onTabClick: PropTypes.func as PropType<TabsProps['onTabClick']>,
   renderTabBar: PropTypes.func as PropType<TabsProps['renderTabBar']>,
+  showRestInDropdown: PropTypes.bool,
   size: PropTypes.string as PropType<TabsProps['size']>,
   style: PropTypes.object,
   tabBarClassName: PropTypes.string,
@@ -64,9 +65,11 @@ const propTypes: ComponentObjectPropsOptions<TabsProps> = {
   onTabClose: PropTypes.func as PropType<TabsProps['onTabClose']>,
   preventScroll: PropTypes.bool,
   more: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  arrowPosition: PropTypes.string as PropType<TabsProps['arrowPosition']>,
+  renderArrow: PropTypes.func as PropType<TabsProps['renderArrow']>,
 };
 
-const defaultProps = {
+const defaultProps:TabsProps = {
   children: [],
   collapsible: false,
   keepDOM: true,
@@ -78,6 +81,8 @@ const defaultProps = {
   tabPosition: 'top',
   type: 'line',
   onTabClose: () => undefined,
+  showRestInDropdown: true,
+  arrowPosition: "both",
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Tabs = defineComponent<TabsProps>(
@@ -284,6 +289,7 @@ const Tabs = defineComponent<TabsProps>(
         keepDOM,
         lazyRender,
         renderTabBar,
+        showRestInDropdown,
         size,
         style,
         tabBarClassName,
@@ -293,6 +299,10 @@ const Tabs = defineComponent<TabsProps>(
         tabPosition,
         type,
         more,
+        onVisibleTabsChange,
+        visibleTabsStyle,
+        arrowPosition,
+        renderArrow,
         ...restProps
       } = props;
       const { panes, activeKey } = state;
@@ -312,6 +322,7 @@ const Tabs = defineComponent<TabsProps>(
         collapsible,
         list: panes as any,
         onTabClick: onTabClick,
+        showRestInDropdown,
         size,
         style: tabBarStyle,
         tabBarExtraContent,
@@ -320,6 +331,10 @@ const Tabs = defineComponent<TabsProps>(
         deleteTabItem: deleteTabItem,
         handleKeyDown: foundation.handleKeyDown,
         more,
+        onVisibleTabsChange,
+        visibleTabsStyle,
+        arrowPosition,
+        renderArrow
       } as TabBarProps;
 
       const tabBar = renderTabBar ? renderTabBar(tabBarProps, TabBar) : <TabBar {...tabBarProps} />;

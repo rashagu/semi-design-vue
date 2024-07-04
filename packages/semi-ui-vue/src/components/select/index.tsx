@@ -19,7 +19,7 @@ import {vuePropsMake} from '../PropTypes'
 import {FixedSizeList as List} from '@kousum/vue3-window'
 import cls from 'classnames';
 import SelectFoundation, {SelectAdapter} from '@douyinfe/semi-foundation/select/foundation';
-import {cssClasses, numbers} from '@douyinfe/semi-foundation/select/constants';
+import {cssClasses, strings, numbers} from '@douyinfe/semi-foundation/select/constants';
 import { useBaseComponent, useHasInProps, type ValidateStatus } from '../_base/baseComponent';
 import {get, isEqual, isFunction, isNumber, isString, noop} from 'lodash';
 import Tag from '../tag';
@@ -41,7 +41,7 @@ import Option from './option';
 import OptionGroup from './optionGroup';
 import Spin from '../spin';
 import Trigger from '../trigger';
-import {IconChevronDown, IconClear} from '@kousum/semi-icons-vue';
+import { IconChevronDown, IconClear, IconSearch } from '@kousum/semi-icons-vue';
 import { getActiveElement, getFocusableElements, getFragmentChildren, isSemiIcon } from '../_utils';
 import {Subtract} from 'utility-types';
 
@@ -177,6 +177,8 @@ export type SelectProps = {
   defaultActiveFirstOption?: boolean;
   onChangeWithObject?: boolean;
   suffix?: VNode | string;
+  searchPosition?: string;
+  searchPlaceholder?: string;
   prefix?: VNode | string;
   insetLabel?: VNode | string;
   insetLabelId?: string;
@@ -331,6 +333,9 @@ const propTypes:ComponentObjectPropsOptions<SelectProps> = {
   expandRestTagsOnClick: PropTypes.bool,
   ellipsisTrigger: PropTypes.bool,
 
+
+  searchPosition: String,
+  searchPlaceholder: String,
 };
 
 const defaultProps: Partial<SelectProps> = {
@@ -365,6 +370,7 @@ const defaultProps: Partial<SelectProps> = {
   defaultActiveFirstOption: true, // In order to meet the needs of A11y, change to true
   showArrow: true,
   showClear: false,
+  searchPosition: strings.SEARCH_POSITION_TRIGGER,
   remote: false,
   autoAdjustOverflow: true,
   autoClearSearchValue: true,
@@ -406,6 +412,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
   let selectID = '';
   let virtualizeListRef = ref()
   let inputRef = ref()
+  let dropdownInputRef = ref()
   let triggerRef = ref()
   let optionsRef = ref()
   const optionContainerEl = ref()
@@ -465,6 +472,12 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
           inputRef.value.$el.children[0].focus({preventScroll});
         }
       },
+      focusDropdownInput: () => {
+        const { preventScroll } = props;
+        if (dropdownInputRef.value) {
+          dropdownInputRef.value.focus({ preventScroll });
+        }
+      }
     };
     const multipleAdapter = {
       notifyMaxLimit: (option: OptionProps) => props.onExceed(option),
@@ -537,8 +550,11 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       updateOptions: (options: OptionProps[]) => {
         state.options = options
       },
-      openMenu: () => {
+      openMenu: (cb?: () => void) => {
         state.isOpen = true
+        nextTick(()=>{
+          cb?.();
+        })
       },
       closeMenu: () => {
         state.isOpen = false
@@ -701,7 +717,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
     foundation.handleInputChange(value, event)
   };
 
-  function renderInput() {
+  function renderTriggerInput() {
     const {size, multiple, disabled, inputProps, filter} = props;
     const inputPropsCls = get(inputProps, 'className');
     const inputcls = cls(`${prefixcls}-input`, {
@@ -744,6 +760,45 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
     );
   }
 
+  function renderDropdownInput() {
+    const { size, multiple, disabled, inputProps, filter, searchPosition, searchPlaceholder } = props;
+    const { inputValue, focusIndex } = state;
+    const wrapperCls = cls(`${prefixcls}-dropdown-search-wrapper`, {
+
+    });
+    const inputPropsCls = get(inputProps, 'className');
+    const inputCls = cls(`${prefixcls}-dropdown-input`, {
+      [`${prefixcls}-dropdown-input-single`]: !multiple,
+      [`${prefixcls}-dropdown-input-multiple`]: multiple,
+    }, inputPropsCls);
+
+    const selectInputProps: Record<string, any> = {
+      value: inputValue,
+      disabled,
+      className: inputCls,
+      onChange: handleInputChange,
+      placeholder: searchPlaceholder,
+      showClear: true,
+      ...inputProps,
+      /**
+       * When searchPosition is trigger, the keyboard events are bound to the outer trigger div, so there is no need to listen in input.
+       * When searchPosition is dropdown, the popup and the outer trigger div are not parent- child relationships,
+       * and bubbles cannot occur, so onKeydown needs to be listened in input.
+       *  */
+      onKeyDown: (e) => this.foundation._handleKeyDown(e)
+    };
+
+    return (
+      <div class={wrapperCls}>
+        <Input
+          ref={dropdownInputRef}
+          prefix={<IconSearch></IconSearch>}
+          aria-activedescendant={focusIndex !== -1 ? `${selectID}-option-${focusIndex}` : ''}
+          {...selectInputProps}
+        />
+      </div>
+    );
+  }
   function close() {
     foundation.close();
   }
@@ -942,7 +997,9 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       loading,
       virtualize,
       multiple,
-      emptyContent
+      emptyContent,
+      searchPosition,
+      filter,
     } = props;
 
 
@@ -970,6 +1027,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
         onKeydown={e => foundation.handleContainerKeyDown(e)}
       >
         {outerTopSlot ? <div class={`${prefixcls}-option-list-outer-top-slot`} onMouseenter={() => foundation.handleSlotMouseEnter()}>{outerTopSlot}</div> : null}
+        {searchPosition === strings.SEARCH_POSITION_DROPDOWN && filter ? renderDropdownInput() : null}
         <div
           style={{ maxHeight: `${maxHeight}px` }}
           class={optionListCls}
@@ -987,7 +1045,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
   }
 
   function renderSingleSelection(selections: Map<OptionProps['label'], any>, filterable: boolean) {
-    let {renderSelectedItem} = props;
+    let { renderSelectedItem, searchPosition } = props;
     const {placeholder} = props;
     const {showInput, inputValue} = state;
     let renderText: any = '';
@@ -1004,11 +1062,13 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
 
     }
 
+    const showInputInTrigger = searchPosition === strings.SEARCH_POSITION_TRIGGER;
+
     const spanCls = cls({
       [`${prefixcls}-selection-text`]: true,
       [`${prefixcls}-selection-placeholder`]: !renderText && renderText !== 0,
-      [`${prefixcls}-selection-text-hide`]: inputValue && showInput, // show Input
-      [`${prefixcls}-selection-text-inactive`]: !inputValue && showInput, // Stack Input & RenderText(opacity 0.4)
+      [`${prefixcls}-selection-text-hide`]: inputValue && showInput && showInputInTrigger, // show Input
+      [`${prefixcls}-selection-text-inactive`]: !inputValue && showInput && showInputInTrigger, // Stack Input & RenderText(opacity 0.4)
     });
 
     const contentWrapperCls = `${prefixcls}-content-wrapper`;
@@ -1019,7 +1079,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
               {renderText || renderText === 0 ? renderText: placeholder}
             </span>
         }
-        {filterable && showInput ? renderInput() : null}
+        {filterable && showInput && showInputInTrigger ? renderTriggerInput() : null}
       </div>
     );
   }
@@ -1226,7 +1286,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
 
 
   function renderMultipleSelection(selections: Map<OptionProps['label'], any>, filterable: boolean) {
-    let { renderSelectedItem } = props;
+    let { renderSelectedItem, searchPosition } = props;
     const { placeholder, maxTagCount, expandRestTagsOnClick, ellipsisTrigger } = props;
     const { inputValue, isOpen } = state;
 
@@ -1260,13 +1320,15 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
       ? selectedItems.map((item, i) => renderTag(item, i))
       : oneLineTags;
 
+    const showTriggerInput = filterable && searchPosition === strings.SEARCH_POSITION_TRIGGER;
+
     return (
-      <>
+      <Fragment>
         <div class={contentWrapperCls}>
           {selectedItems && selectedItems.length ? tagContent : placeholderText}
-          {!filterable ? null : renderInput()}
+          {!filterable ? null : renderTriggerInput()}
         </div>
-      </>
+      </Fragment>
     );
   }
 

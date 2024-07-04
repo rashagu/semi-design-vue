@@ -62,6 +62,7 @@ export interface BreadcrumbProps extends BaseProps {
     /* Style type for ellipsis area */
     moreType?: MoreType;
     'aria-label'?: AriaAttributes['aria-label'];
+    activeIndex?: number
 }
 
 interface BreadcrumbState {
@@ -70,6 +71,7 @@ interface BreadcrumbState {
 
 
 const propTypes_:ComponentObjectPropsOptions<BreadcrumbProps> = {
+    activeIndex: propTypes.number,
     routes: propTypes.array,
     onClick: propTypes.func as PropType<BreadcrumbProps['onClick']>,
     separator: propTypes.node as PropType<BreadcrumbProps['separator']>,
@@ -205,10 +207,10 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
                 <BreadcrumbItem
                   {...route}
                   key={key}
-                  active={idx === items.length - 1}
+                  active={props.activeIndex !== undefined ? props.activeIndex===idx : idx === items.length - 1}
                   route={route._origin}
                   // eslint-disable-next-line max-len
-                  shouldRenderSeparator={!(shouldCollapse && (hasRenderMore || moreTypeIsPopover) && inCollapseArea)}
+                  shouldRenderSeparator={ (idx !== items.length - 1) && !(shouldCollapse && (hasRenderMore || moreTypeIsPopover) && inCollapseArea)}
                 >
                     {renderItem ? renderItem(route._origin) : route.name}
                 </BreadcrumbItem>
@@ -260,8 +262,8 @@ const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
 
                   return cloneVNode(item, {
                       key: `${idx}-item`,
-                      active: idx === items.length - 1,
-                      shouldRenderSeparator: !(shouldCollapse && (hasRenderMore || moreTypeIsPopover) && inCollapseArea)
+                      active: props.activeIndex !== undefined ? props.activeIndex === idx : idx === items.length - 1,
+                      shouldRenderSeparator: (idx !== items.length - 1) && (!(shouldCollapse && (hasRenderMore || moreTypeIsPopover) && inCollapseArea))
                   });
               })
             );

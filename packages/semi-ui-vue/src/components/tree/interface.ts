@@ -85,6 +85,7 @@ export interface TreeProps extends BasicTreeProps {
     renderDraggingNode?: (nodeInstance: HTMLElement, node: TreeNodeData) => HTMLElement;
     renderFullLabel?: (renderFullLabelProps: RenderFullLabelProps) => VueJsxNode;
     renderLabel?: (label?: VueJsxNode, treeNode?: TreeNodeData) => VueJsxNode;
+    autoMergeValue?: boolean
 
     selectedKey?: string
     role?: string

@@ -25,10 +25,22 @@ export { default as VPTeamPageTitle } from 'vitepress/dist/client/theme-default/
 export { default as VPTeamPageSection } from 'vitepress/dist/client/theme-default/components/VPTeamPageSection.vue';
 export { default as VPTeamMembers } from 'vitepress/dist/client/theme-default/components/VPTeamMembers.vue';
 export { useSidebar } from 'vitepress/dist/client/theme-default/composables/sidebar';
+import LiveCode from '../../../LiveCode.vue';
+import LiveCode2 from '../../../LiveCode2.vue';
+import DesignToken from '../../../DesignToken.vue';
+import Notice from '../../../Notice';
+import PureA from '../../../PureA';
+
 const theme = {
   Layout,
   enhanceApp: ({ app }) => {
     app.component('Badge', VPBadge);
+    // 注册自定义全局组件
+    app.component('LiveCode', LiveCode);
+    app.component('LiveCode2', LiveCode2);
+    app.component('DesignToken', DesignToken);
+    app.component('Notice', Notice);
+    app.component('PureA', PureA);
   }
-};
+}
 export default theme;

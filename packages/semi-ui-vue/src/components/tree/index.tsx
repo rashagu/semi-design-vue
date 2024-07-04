@@ -63,6 +63,7 @@ const prefixcls = cssClasses.PREFIX;
 
 
 const propTypes: ComponentObjectPropsOptions<TreeProps> = {
+  autoMergeValue: PropTypes.bool,
   blockNode: PropTypes.bool,
   className: PropTypes.string,
   showClear: PropTypes.bool,
@@ -145,6 +146,7 @@ const defaultProps = {
   draggable: false,
   autoExpandWhenDragEnter: true,
   checkRelation: 'related',
+  autoMergeValue: true,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 const Tree = defineComponent<TreeProps>((props, {}) => {
