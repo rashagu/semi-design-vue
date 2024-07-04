@@ -91,5 +91,6 @@
     "terser": "^5.16.4",
     "vite": "5.3.2",
     "vue-tsc": "^2.0.21"
-  }
+  },
+  "web-types": "web-types.json"
 }
