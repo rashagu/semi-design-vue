@@ -785,7 +785,7 @@ const Index = defineComponent<SelectProps>((props, {expose}) => {
        * When searchPosition is dropdown, the popup and the outer trigger div are not parent- child relationships,
        * and bubbles cannot occur, so onKeydown needs to be listened in input.
        *  */
-      onKeyDown: (e) => this.foundation._handleKeyDown(e)
+      onKeyDown: (e) => foundation._handleKeyDown(e)
     };
 
     return (
