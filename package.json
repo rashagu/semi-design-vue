@@ -14,6 +14,8 @@
     "change": "pnpm changeset",
     "version": "pnpm changeset version",
     "publish": "pnpm changeset publish",
+    "alpha-enter": "pnpm changeset pre enter alpha",
+    "alpha-exit": "pnpm changeset pre exit alpha",
     "storybook": "storybook dev -p 6006",
     "build-storybook:vite": "storybook build",
     "docs:dev": "vitepress dev docs",

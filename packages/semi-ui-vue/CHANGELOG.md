@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 0.14.3-alpha.0
+
+### Patch Changes
+
+- props type test
+
 ## 0.14.2
 
 ### Patch Changes
