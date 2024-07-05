@@ -1,5 +1,19 @@
 # @kousum/semi-ui-vue
 
+## 0.15.0
+
+### Minor Changes
+
+- semi 2.61.0 & webstorm vue sfc 属性提示问题
+
+### Patch Changes
+
+- df83161: props type test
+- Updated dependencies
+  - @kousum/semi-animation-vue@0.15.0
+  - @kousum/semi-icons-vue@0.15.0
+  - @kousum/semi-illustrations-vue@0.15.0
+
 ## 0.14.3-alpha.0
 
 ### Patch Changes

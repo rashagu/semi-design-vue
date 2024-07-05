@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.15.0
+
+### Minor Changes
+
+- semi 2.61.0 & webstorm vue sfc 属性提示问题
+
 ## 0.14.2
 
 ### Patch Changes

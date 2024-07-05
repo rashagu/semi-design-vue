@@ -1,6 +1,6 @@
 {
   "name": "@kousum/vite-plugin-semi-theme",
-  "version": "0.14.2",
+  "version": "0.15.0",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
