@@ -31,7 +31,7 @@ const defaultProps = {
   defaultWidth: '100%',
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const AutoSizer = defineComponent<AutoSizerProps>((props, {}) => {
+const AutoSizer = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const state = reactive<AutoSizerState>({

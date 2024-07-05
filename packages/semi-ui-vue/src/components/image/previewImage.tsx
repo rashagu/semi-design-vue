@@ -46,7 +46,7 @@ const defaultProps = {
     zoom: undefined,
 };
 export const vuePropsType = vuePropsMake<PreviewImageProps>(propTypes, defaultProps)
-const PreviewImage = defineComponent<PreviewImageProps>((props, {}) => {
+const PreviewImage = defineComponent((props, {}) => {
 
     const slots = useSlots()
 

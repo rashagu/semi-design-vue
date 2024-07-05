@@ -120,7 +120,7 @@ const defaultProps: Partial<SliderProps> = {
   verticalReverse: false,
 };
 export const vuePropsType = vuePropsMake<SliderProps>(propTypes, defaultProps);
-const Slider = defineComponent<SliderProps>((props, {}) => {
+const Slider = defineComponent((props, {}) => {
   const slots = useSlots();
 
   let { value } = props;

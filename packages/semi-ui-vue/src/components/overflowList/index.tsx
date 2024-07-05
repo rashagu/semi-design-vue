@@ -102,7 +102,7 @@ const propTypes:ComponentObjectPropsOptions<OverflowListProps> = {
   onVisibleStateChange: PropTypes.func as PropType<OverflowListProps['onVisibleStateChange']>,
 };
 export const vuePropsType = vuePropsMake<OverflowListProps>(propTypes, defaultProps)
-const OverflowList = defineComponent<OverflowListProps>((props, {}) => {
+const OverflowList = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const state = reactive<OverflowListState>({

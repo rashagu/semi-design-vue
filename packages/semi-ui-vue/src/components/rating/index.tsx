@@ -108,7 +108,7 @@ const defaultProps = {
     size: 'default' as const,
 };
 export const vuePropsType = vuePropsMake<RatingProps>(propTypes, defaultProps)
-const Rating = defineComponent<RatingProps>((props, {}) => {
+const Rating = defineComponent((props, {}) => {
     const slots = useSlots()
 
     const rate = ref()

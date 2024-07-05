@@ -11,7 +11,7 @@ interface SideSheetDemoProps {
 export const vuePropsType = {
   name: String
 }
-const SideSheetDemo = defineComponent<SideSheetDemoProps>((props, {}) => {
+const SideSheetDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const visible = ref(false);

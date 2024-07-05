@@ -11,7 +11,7 @@ export const vuePropsType: ComponentObjectPropsOptions<TopSlotSvgProps> = {
   gradientStart: String,
   gradientEnd: String,
 }
-const TopSlotSvg = defineComponent<TopSlotSvgProps>((props, {}) => {
+const TopSlotSvg = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

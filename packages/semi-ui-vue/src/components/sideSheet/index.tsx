@@ -92,7 +92,7 @@ const defaultProps: SideSheetReactProps = {
   keepDOM: false,
 };
 export const vuePropsType = vuePropsMake<SideSheetProps>(propTypes, defaultProps);
-const SideSheet = defineComponent<SideSheetProps>((props, {}) => {
+const SideSheet = defineComponent((props, {}) => {
   const slots = useSlots();
 
   let bodyOverflow: string = '';

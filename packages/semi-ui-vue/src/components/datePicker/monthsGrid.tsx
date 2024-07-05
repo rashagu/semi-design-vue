@@ -105,7 +105,7 @@ const defaultProps = {
   locale: {},
 };
 export const vuePropsType = vuePropsMake<MonthsGridProps>(propTypes, defaultProps);
-const monthsGrid = defineComponent<MonthsGridProps>((props, { slots }) => {
+const monthsGrid = defineComponent((props, { slots }) => {
   const validFormat = props.format || getDefaultFormatTokenByType(props.type);
   const { nowDate, nextDate } = getDefaultPickerDate({
     defaultPickerValue: props.defaultPickerValue,

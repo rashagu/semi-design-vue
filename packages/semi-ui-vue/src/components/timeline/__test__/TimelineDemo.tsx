@@ -9,7 +9,7 @@ interface TimelineDemoProps {
 export const vuePropsType = {
   name: String
 }
-const TimelineDemo = defineComponent<TimelineDemoProps>((props, {}) => {
+const TimelineDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

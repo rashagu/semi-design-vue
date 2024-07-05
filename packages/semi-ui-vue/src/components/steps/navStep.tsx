@@ -46,7 +46,7 @@ const defaultProps = {
   onChange: noop
 };
 export const vuePropsType = vuePropsMake<NavStepProps>(propTypes, defaultProps);
-const NavStep = defineComponent<NavStepProps>((props, {}) => {
+const NavStep = defineComponent((props, {}) => {
   const slots = useSlots();
 
   return () => {

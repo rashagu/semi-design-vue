@@ -19,7 +19,7 @@ interface TableDemo1Props {
 export const vuePropsType = {
   name: String,
 };
-const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
+const TableDemo1 = defineComponent((props, {}) => {
   const DAY = 24 * 60 * 60 * 1000;
   const figmaIconUrl = 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/figma-icon.png';
 

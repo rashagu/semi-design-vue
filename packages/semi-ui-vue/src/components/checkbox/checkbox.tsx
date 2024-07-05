@@ -64,7 +64,7 @@ const defaultProps = {
   type: 'default',
 };
 export const vuePropsType = vuePropsMake<CheckboxProps>(propTypesCheckbox, defaultProps)
-const Checkbox = defineComponent<CheckboxProps>((props, {}) => {
+const Checkbox = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const checked = false;

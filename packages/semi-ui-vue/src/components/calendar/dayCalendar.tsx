@@ -60,7 +60,7 @@ const defaultProps = {
     // mode: 'day',
 };
 export const vuePropsType = vuePropsMake<DayCalendarProps>(propTypes, defaultProps)
-const DayCalendar = defineComponent<DayCalendarProps>((props, {}) => {
+const DayCalendar = defineComponent((props, {}) => {
     const slots = useSlots()
     let dom = ref()
     let scrollDom = ref()

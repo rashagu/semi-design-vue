@@ -18,7 +18,7 @@ export const vuePropsType:ComponentObjectPropsOptions<OptionGroupProps> = {
   className: String,
   style: [String, Object] as PropType<OptionGroupProps['style']>,
 }
-const OptionGroup = defineComponent<OptionGroupProps>((props, {slots, attrs}) => {
+const OptionGroup = defineComponent((props, {slots, attrs}) => {
   return () => {
     const { label, className, style, ...rest } = props;
     const groupCls = cls(className, {

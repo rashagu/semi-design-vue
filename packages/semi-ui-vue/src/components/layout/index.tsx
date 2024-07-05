@@ -34,7 +34,7 @@ const basicVuePropsType:ComponentObjectPropsOptions<BasicProps> = {
   type: String,
 }
 
-const Basic = defineComponent<BasicProps>((props, {slots}) => {
+const Basic = defineComponent((props, {slots}) => {
 
   return () => {
     const { prefixCls, type, className, tagName, ...others } = props;
@@ -50,7 +50,7 @@ const Basic = defineComponent<BasicProps>((props, {slots}) => {
 function generator<P extends { type?: string; tagName?: string; role?: any; 'aria-label'?: string }>(type: string) {
   const tagName = htmlTag[type];
   const typeName = type.toLowerCase();
-  return (BasicComponent) => defineComponent<P>((props, {slots}) => {
+  return (BasicComponent) => defineComponent((props, {slots}) => {
     return ()=>
       <BasicComponent role={props.role} aria-label={props['aria-label']} type={typeName}
                       tagName={tagName} {...props} >
@@ -88,7 +88,7 @@ export const vuePropsType:ComponentObjectPropsOptions<BasicLayoutProps> = {
     default: 'section'
   },
 }
-const Layout = defineComponent<BasicLayoutProps>((props, {slots}) => {
+const Layout = defineComponent((props, {slots}) => {
 
   const state = reactive<BasicLayoutState>({
     siders: [],

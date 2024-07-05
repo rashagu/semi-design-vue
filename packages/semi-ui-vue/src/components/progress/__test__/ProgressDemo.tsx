@@ -8,7 +8,7 @@ interface ProgressDemoProps {
 export const vuePropsType = {
   name: String
 }
-const ProgressDemo = defineComponent<ProgressDemoProps>((props, {}) => {
+const ProgressDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
   return () => (

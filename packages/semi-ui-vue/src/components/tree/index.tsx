@@ -149,7 +149,7 @@ const defaultProps = {
   autoMergeValue: true,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Tree = defineComponent<TreeProps>((props, {}) => {
+const Tree = defineComponent((props, {}) => {
   const slots = useSlots()
 
   let onNodeClick: any;

@@ -11,7 +11,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const TypoDemo = defineComponent<ExampleProps>((props, {slots}) => {
+const TypoDemo = defineComponent((props, {slots}) => {
 
 
 

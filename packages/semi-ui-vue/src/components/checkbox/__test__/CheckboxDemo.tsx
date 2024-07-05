@@ -9,7 +9,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const CheckboxDemo = defineComponent<ExampleProps>((props, {}) => {
+const CheckboxDemo = defineComponent((props, {}) => {
   const slots = useSlots()
   function onChange(checkedValues) {
     console.log('checked = ', checkedValues);

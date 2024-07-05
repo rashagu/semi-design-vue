@@ -14,7 +14,7 @@ export const vuePropsType = {
   id: [String, Number],
   item: Function
 }
-const SortableItem = defineComponent<SortableItemProps>((props, {}) => {
+const SortableItem = defineComponent((props, {}) => {
 
   const slots = useSlots()
 

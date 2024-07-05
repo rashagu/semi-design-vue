@@ -24,7 +24,7 @@ export interface RadioContextValue {
 export const vuePropsType = {
   value: Object,
 }
-const RadioContext = defineComponent<{value:any}>((props, {slots}) => {
+const RadioContext = defineComponent((props, {slots}) => {
   const ConfigContext = ref<RadioContextValue>(props.value);
   watch(()=>JSON.parse(JSON.stringify(props.value)), value =>{
     // console.log('value 更新', props.value)

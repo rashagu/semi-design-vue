@@ -9,7 +9,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String,
 };
-const AvatarDemo = defineComponent<ExampleProps>((props, { slots }) => {
+const AvatarDemo = defineComponent((props, { slots }) => {
   const src = ref(
     'https://sf6-cdn-tos.douyinstatic.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/avatarDemo.jpeg'
   );

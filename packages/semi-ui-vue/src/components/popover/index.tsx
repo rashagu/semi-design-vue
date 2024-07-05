@@ -145,7 +145,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<PopoverProps>(propTypes, defaultProps)
 
-const Popover = defineComponent<PopoverProps>((props, {slots, expose}) => {
+const Popover = defineComponent((props, {slots, expose}) => {
   const {context} = useConfigContext()
   const tooltipRef = ref()
 

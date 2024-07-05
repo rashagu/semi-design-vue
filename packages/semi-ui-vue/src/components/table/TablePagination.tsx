@@ -29,7 +29,7 @@ const defaultProps = {
     prefixCls: cssClasses.PREFIX,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const TablePagination = defineComponent<TablePaginationProps>((props, {}) => {
+const TablePagination = defineComponent((props, {}) => {
     const slots = useSlots();
 
     return () => {

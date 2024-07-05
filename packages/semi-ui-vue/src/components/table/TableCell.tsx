@@ -104,7 +104,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const TableCell = defineComponent<TableCellProps>((props, {}) => {
+const TableCell = defineComponent((props, {}) => {
     const slots = useSlots();
     let {context} = useTableContext();
     const nodeRef = ref()

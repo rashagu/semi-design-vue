@@ -71,7 +71,7 @@ export const vuePropsType: ComponentObjectPropsOptions<AvatarProps> = {
   border: [Object, Boolean],
   contentMotion: Boolean,
 };
-const Index = defineComponent<AvatarProps>(
+const Index = defineComponent(
   (props, { slots }) => {
     let foundation!: AvatarFoundation;
 

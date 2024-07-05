@@ -8,7 +8,7 @@ interface PaginationDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const PaginationDemo = defineComponent<PaginationDemoProps>((props, {}) => {
+const PaginationDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
   return () => {

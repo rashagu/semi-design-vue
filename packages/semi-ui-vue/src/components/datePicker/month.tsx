@@ -63,7 +63,7 @@ const defaultProps = {
   weeksRowNum: 0,
 };
 export const vuePropsType = vuePropsMake<MonthProps>(propTypes, defaultProps)
-const month = defineComponent<MonthProps>((props, {slots}) => {
+const month = defineComponent((props, {slots}) => {
 
   const monthRef = ref()
   const state = reactive<MonthState>({

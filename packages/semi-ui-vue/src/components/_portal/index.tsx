@@ -44,7 +44,7 @@ export const vuePropsType:ComponentObjectPropsOptions<PortalProps> = {
   didUpdate: Function as PropType<PortalProps['didUpdate']>,
 }
 
-const Index = defineComponent<PortalProps>((props, {slots}) => {
+const Index = defineComponent((props, {slots}) => {
   const {context} = useConfigContext()
   let el: HTMLElement;
   const state = reactive({

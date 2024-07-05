@@ -57,7 +57,7 @@ const propTypes:ComponentObjectPropsOptions<RatingItemProps> = {
     preventScroll: PropTypes.bool,
 };
 export const vuePropsType = vuePropsMake<RatingItemProps>(propTypes, {});
-const Item = defineComponent<RatingItemProps>((props, {expose}) => {
+const Item = defineComponent((props, {expose}) => {
     const slots = useSlots();
 
     const state = reactive<RatingItemState>({

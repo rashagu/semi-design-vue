@@ -43,7 +43,7 @@ export const vuePropsType:ComponentObjectPropsOptions<ButtonGroupProps> = {
     default: 'light',
   },
 }
-const ButtonGroup = defineComponent<ButtonGroupProps>((props, {slots}) => {
+const ButtonGroup = defineComponent((props, {slots}) => {
 
   // rest 剩下的
   const { disabled, size, type, ...rest } = props;

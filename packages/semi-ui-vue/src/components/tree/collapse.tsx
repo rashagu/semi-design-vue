@@ -32,7 +32,7 @@ export const vuePropsType = vuePropsMake<CollapseProps>({
     motion: true,
     onMotionEnd: noop,
 })
-const Collapse = defineComponent<CollapseProps>((props, {}) => {
+const Collapse = defineComponent((props, {}) => {
     const slots = useSlots()
 
     const ref_ = ref();

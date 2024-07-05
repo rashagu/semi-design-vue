@@ -10,7 +10,7 @@ export const vuePropsType = {
   name: String,
   isVitest: Boolean,
 };
-const TabsDemo2 = defineComponent<TabsDemo2Props>((props, {}) => {
+const TabsDemo2 = defineComponent((props, {}) => {
   const slots = useSlots();
   return () => {
     return (

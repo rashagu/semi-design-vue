@@ -85,7 +85,7 @@ const defaultProps:TabsProps = {
   arrowPosition: "both",
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const Tabs = defineComponent<TabsProps>(
+const Tabs = defineComponent(
   (props, {}) => {
     const slots = useSlots();
     const contentRef = ref();

@@ -9,7 +9,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const RatingDemo = defineComponent<ExampleProps>((props, {}) => {
+const RatingDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const value = ref(1)

@@ -10,7 +10,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const RadioDemo = defineComponent<ExampleProps>((props, {slots}) => {
+const RadioDemo = defineComponent((props, {slots}) => {
 
   const value = ref(1)
   return () => (

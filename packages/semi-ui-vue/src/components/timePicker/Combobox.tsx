@@ -107,7 +107,7 @@ const staticDefaultProps = {
   format: strings.DEFAULT_FORMAT,
 };
 export const vuePropsType = vuePropsMake(staticPropTypes, staticDefaultProps)
-const Combobox = defineComponent<ComboboxProps>((props, {}) => {
+const Combobox = defineComponent((props, {}) => {
   const slots = useSlots()
   const state = reactive<ComboboxState>({
     hourOptions: [],

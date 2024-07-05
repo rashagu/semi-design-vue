@@ -67,7 +67,7 @@ const defaultProps = {
   onChange: noop,
 };
 export const vuePropsType = vuePropsMake<BasicStepProps>(propTypes, defaultProps);
-const BasicStep = defineComponent<BasicStepProps>((props, {}) => {
+const BasicStep = defineComponent((props, {}) => {
   const slots = useSlots();
 
   return () => {

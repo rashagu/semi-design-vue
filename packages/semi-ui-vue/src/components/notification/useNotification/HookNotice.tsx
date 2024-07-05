@@ -11,7 +11,7 @@ export const vuePropsType:ComponentObjectPropsOptions<HookNoticeProps> = {
     afterClose: Function as PropType<HookNoticeProps['afterClose']>,
     motion: [Object, String, Boolean,] as PropType<HookNoticeProps['motion']>,
 }
-const HookNotice = defineComponent<HookNoticeProps>((props, {expose, attrs}) => {
+const HookNotice = defineComponent((props, {expose, attrs}) => {
 
     const slots = useSlots()
     const visible = ref(true);

@@ -94,7 +94,7 @@ const data = getData();
 export const vuePropsType = {
   name: String,
 };
-const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
+const TableDemo1 = defineComponent((props, {}) => {
   let virtualizedListRef = ref();
   const scroll = { y: 400, x: 900 };
   const style = { width: '750px', margin: '0 auto' };

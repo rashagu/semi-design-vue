@@ -66,7 +66,7 @@ const defaultProps: TagProps = {
   suffixIcon: null
 };
 export const vuePropsType = vuePropsMake<TagProps>(propTypes, defaultProps)
-const Index = defineComponent<TagProps>((props, {slots}) => {
+const Index = defineComponent((props, {slots}) => {
 
   const state = reactive<TagState>({
     visible: true,

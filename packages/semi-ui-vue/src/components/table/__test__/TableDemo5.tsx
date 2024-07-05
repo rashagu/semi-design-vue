@@ -72,7 +72,7 @@ const DAY = 24 * 60 * 60 * 1000;
 export const vuePropsType = {
   name: String,
 };
-const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
+const TableDemo1 = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const pagination = {

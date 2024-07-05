@@ -13,7 +13,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const DropdownDemo1 = defineComponent<ExampleProps>((props, {slots}) => {
+const DropdownDemo1 = defineComponent((props, {slots}) => {
   // 在keep-alive = true时  相当于 onShow
   onActivated(() => {
 

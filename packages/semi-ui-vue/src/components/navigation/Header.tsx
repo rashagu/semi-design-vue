@@ -32,7 +32,7 @@ export const vuePropsType:ComponentObjectPropsOptions<NavHeaderProps> = {
   link: PropTypes.string,
   linkOptions: PropTypes.object,
 }
-const NavHeader = defineComponent<NavHeaderProps>((props, {slots}) => {
+const NavHeader = defineComponent((props, {slots}) => {
 
   const {context} = useNavContext()
 

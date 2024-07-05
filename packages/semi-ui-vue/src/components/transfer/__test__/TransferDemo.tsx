@@ -12,7 +12,7 @@ interface TransferDemoProps {
 export const vuePropsType = {
   name: String
 }
-const TransferDemo = defineComponent<TransferDemoProps>((props, {}) => {
+const TransferDemo = defineComponent((props, {}) => {
   const slots = useSlots()
   const data = Array.from({ length: 100 }, (v, i) => {
     return {

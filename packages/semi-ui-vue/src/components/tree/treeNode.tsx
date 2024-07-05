@@ -84,7 +84,7 @@ const defaultProps = {
   motionKey: '',
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const TreeNode = defineComponent<TreeNodeProps>((props, {}) => {
+const TreeNode = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const refNode = ref();

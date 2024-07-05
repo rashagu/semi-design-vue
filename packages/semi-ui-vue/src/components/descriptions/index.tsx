@@ -60,7 +60,7 @@ const defaultProps = {
   column: 3,
 };
 export const vuePropsType = vuePropsMake<DescriptionsProps>(propTypes, defaultProps);
-const Descriptions = defineComponent<DescriptionsProps>(
+const Descriptions = defineComponent(
   (props, {}) => {
     const slots = useSlots();
     const attr = useAttrs();

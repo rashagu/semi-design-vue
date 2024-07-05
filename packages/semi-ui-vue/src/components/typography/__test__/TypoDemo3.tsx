@@ -9,7 +9,7 @@ interface TypoDemo3Props {
 export const vuePropsType: ComponentObjectPropsOptions<TypoDemo3Props> = {
   name: String,
 };
-const TypoDemo3 = defineComponent<TypoDemo3Props>(
+const TypoDemo3 = defineComponent(
   (props, {}) => {
     const slots = useSlots();
 

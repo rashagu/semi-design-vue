@@ -15,7 +15,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const TimePickerDemo = defineComponent<ExampleProps>((props, {}) => {
+const TimePickerDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const value = ref('04:05:03')

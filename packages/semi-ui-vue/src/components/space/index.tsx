@@ -40,7 +40,7 @@ export const vuePropsType:ComponentObjectPropsOptions<SpaceProps> = {
   style: [String, Object] as PropType<SpaceProps['style']>,
   className: String,
 }
-const Index = defineComponent<SpaceProps>((props, {slots}) => {
+const Index = defineComponent((props, {slots}) => {
 
 
   return ()=>{

@@ -27,7 +27,7 @@ export const vuePropsType:ComponentObjectPropsOptions<NoticeTransitionProps> = {
     children: [Object, Function] as PropType<NoticeTransitionProps['children']>,
     motion: [Object, String, Boolean],
 }
-const NoticeTransition = defineComponent<NoticeTransitionProps>((props, {}) => {
+const NoticeTransition = defineComponent((props, {}) => {
     const slots = useSlots()
     let children
 

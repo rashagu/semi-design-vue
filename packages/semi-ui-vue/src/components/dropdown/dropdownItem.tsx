@@ -62,7 +62,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake<DropdownItemProps>(propTypes, defaultProps)
-const DropdownItem = defineComponent<DropdownItemProps>((props, {slots, attrs}) => {
+const DropdownItem = defineComponent((props, {slots, attrs}) => {
 
   const {context} = useDropdownContext();
   let elementType: string = 'Dropdown.Item'

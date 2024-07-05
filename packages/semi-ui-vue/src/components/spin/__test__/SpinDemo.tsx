@@ -8,7 +8,7 @@ interface SpinDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const SpinDemo = defineComponent<SpinDemoProps>((props, {}) => {
+const SpinDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
   return () => <div>

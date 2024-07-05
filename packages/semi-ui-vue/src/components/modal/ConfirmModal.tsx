@@ -99,7 +99,7 @@ export const vuePropsType: ComponentObjectPropsOptions<ConfirmProps> = {
   ...vuePropsMake<ConfirmProps>(propTypes, defaultProps),
   type: String as PropType<ConfirmProps['type']>
 }
-const ConfirmModal = defineComponent<ConfirmProps>((props, {}) => {
+const ConfirmModal = defineComponent((props, {}) => {
 
   const slots = useSlots()
 

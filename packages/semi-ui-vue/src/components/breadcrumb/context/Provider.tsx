@@ -5,7 +5,7 @@ import {BreadContextType} from "../bread-context";
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:BreadContextType}>((props, {slots}) => {
+const Provider = defineComponent((props, {slots}) => {
   const ConfigContext = ref<BreadContextType>(props.value);
 
   watch(()=>props.value, ()=>{

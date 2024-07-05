@@ -118,7 +118,7 @@ export const vuePropsType: ComponentObjectPropsOptions<ParagraphProps> = {
     default: '',
   },
 };
-const paragraph = defineComponent<ParagraphProps>(
+const paragraph = defineComponent(
   (props, { slots }) => {
     const { className } = props;
     const paragraphCls = cls(className, `${prefixCls}-paragraph`);

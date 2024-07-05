@@ -64,7 +64,7 @@ const defaultProps = {
   fade: false,
 };
 export const vuePropsType = vuePropsMake<CollapsibleProps>(propTypes, defaultProps);
-const Collapsible = defineComponent<CollapsibleProps>((props, {}) => {
+const Collapsible = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const domRef = ref();

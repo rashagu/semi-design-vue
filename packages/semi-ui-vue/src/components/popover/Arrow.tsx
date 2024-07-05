@@ -29,7 +29,7 @@ export const vuePropsType:ComponentObjectPropsOptions<ArrowProps> = {
   arrowStyle: [String, Object] as PropType<ArrowProps['arrowStyle']>,
   popStyle: [String, Object] as PropType<ArrowProps['popStyle']>,
 }
-const Arrow = defineComponent<ArrowProps>((props, {slots}) => {
+const Arrow = defineComponent((props, {slots}) => {
 
   return ()=>{
 

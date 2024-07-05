@@ -11,7 +11,7 @@ interface CardDemoProps {
 export const vuePropsType = {
   name: String
 }
-const CardDemo = defineComponent<CardDemoProps>((props, {}) => {
+const CardDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const spacing = ref(12);

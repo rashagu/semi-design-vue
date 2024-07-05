@@ -76,7 +76,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const Toast = defineComponent<ToastReactProps>(
+const Toast = defineComponent(
   (props, { expose }) => {
     const slots = useSlots();
 

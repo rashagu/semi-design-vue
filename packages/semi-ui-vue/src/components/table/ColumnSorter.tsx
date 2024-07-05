@@ -37,7 +37,7 @@ const defaultProps = {
     sortOrder: false,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const ColumnSorter = defineComponent<ColumnSorterProps>((props, {}) => {
+const ColumnSorter = defineComponent((props, {}) => {
     const slots = useSlots();
 
     return () => {

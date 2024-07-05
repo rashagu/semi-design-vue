@@ -11,7 +11,7 @@ interface UploadDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const UploadDemo = defineComponent<UploadDemoProps>((props, {}) => {
+const UploadDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const fileList = ref<FileItem[]>([

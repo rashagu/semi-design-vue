@@ -9,7 +9,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const TreeDemo = defineComponent<ExampleProps>((props, {}) => {
+const TreeDemo = defineComponent((props, {}) => {
   const slots = useSlots()
   const treeData = ref([]);
   onMounted(()=>{

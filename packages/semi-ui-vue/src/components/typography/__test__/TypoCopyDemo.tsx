@@ -11,7 +11,7 @@ interface TypoCopyDemoProps {
 export const vuePropsType: ComponentObjectPropsOptions<TypoCopyDemoProps> = {
   name: String,
 };
-const TypoCopyDemo = defineComponent<TypoCopyDemoProps>((props, {}) => {
+const TypoCopyDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
 

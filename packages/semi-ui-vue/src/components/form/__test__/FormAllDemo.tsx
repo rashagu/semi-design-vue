@@ -12,7 +12,7 @@ interface FormAllDemoProps {
 export const vuePropsType = {
   name: String
 }
-const FormAllDemo = defineComponent<FormAllDemoProps>((props, {}) => {
+const FormAllDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

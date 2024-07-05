@@ -62,7 +62,7 @@ export const vuePropsType:ComponentObjectPropsOptions<NavigationProps> = {
 
 
 }
-const navigation = defineComponent<NavigationProps>((props, {slots}) => {
+const navigation = defineComponent((props, {slots}) => {
   const navRef = ref()
 
   return () => {

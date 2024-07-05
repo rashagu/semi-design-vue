@@ -179,7 +179,7 @@ const defaultProps = {
 
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Index = defineComponent<TagInputProps>((props, {expose}) => {
+const Index = defineComponent((props, {expose}) => {
   const slots = useSlots()
   const inputRef = ref(null);
   const tagInputRef = ref<any>(null);

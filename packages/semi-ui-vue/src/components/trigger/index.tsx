@@ -1,5 +1,5 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties} from 'vue'
-import {VueJsxNode} from "../interface";
+import { defineComponent, ref, h, Fragment, VNode, CSSProperties } from 'vue';
+import { VueJsxNode } from '../interface';
 
 export interface TriggerProps {
   triggerRender?: (props?: any) => VueJsxNode;
@@ -10,35 +10,37 @@ export interface TriggerProps {
   placeholder?: string | string[];
   className?: string;
   style?: CSSProperties;
+  onChange: (value: string)=>void
   [x: string]: any;
 }
 
 export const vuePropsType = {
-  triggerRender:Function,
+  triggerRender: Function,
   componentName: String,
-  componentProps:Object,
-  value:[Object,Number,String,Array],
+  componentProps: Object,
+  value: [Object, Number, String, Array],
   inputValue: String,
   placeholder: [String, Array],
   className: String,
   style: [Object, String],
-  showClearIgnoreDisabled: Boolean
-}
+  showClearIgnoreDisabled: Boolean,
+  onChange: Function,
+  onClear: Function,
+  disabled: Boolean,
+  onSearch: Function,
+  onRemove: Function,
+};
 
-// @ts-ignore
-const Index = defineComponent<TriggerProps>((props, {slots}) => {
-
-
-  return () => {
-    // eslint-disable-next-line no-unused-vars
-    const { triggerRender, componentName, ...rest } = props;
-    return triggerRender({ ...rest });
-  }
-}, {
+const Index = defineComponent({
   props: vuePropsType,
-  name: 'Trigger'
-})
+  name: 'Trigger',
+  setup(props, { slots }) {
+    return () => {
+      // eslint-disable-next-line no-unused-vars
+      const { triggerRender, componentName, ...rest } = props;
+      return triggerRender({ ...rest });
+    };
+  },
+});
 
-
-export default Index
-
+export default Index;

@@ -10,7 +10,7 @@ interface DatePickerDemo2Props {
 export const vuePropsType: ComponentObjectPropsOptions<DatePickerDemo2Props> = {
   name: String,
 };
-const DatePickerDemo2 = defineComponent<DatePickerDemo2Props>((props, {}) => {
+const DatePickerDemo2 = defineComponent((props, {}) => {
   const slots = useSlots();
 
 

@@ -10,7 +10,7 @@ interface NotificationDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const NotificationDemo2 = defineComponent<NotificationDemoProps>((props, {}) => {
+const NotificationDemo2 = defineComponent((props, {}) => {
   const slots = useSlots();
 
   // 有bug，而且没有动画，不建议使用

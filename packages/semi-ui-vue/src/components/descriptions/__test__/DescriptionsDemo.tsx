@@ -12,7 +12,7 @@ interface DescriptionsDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const DescriptionsDemo = defineComponent<DescriptionsDemoProps>((props, {}) => {
+const DescriptionsDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const data0 = [

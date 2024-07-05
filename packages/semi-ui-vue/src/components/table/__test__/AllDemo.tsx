@@ -20,7 +20,7 @@ interface AllDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const AllDemo = defineComponent<AllDemoProps>((props, {}) => {
+const AllDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
   return () => <div>

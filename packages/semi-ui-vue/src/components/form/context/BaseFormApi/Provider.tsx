@@ -5,7 +5,7 @@ import type {BaseFormApi} from "@douyinfe/semi-foundation/form/interface";
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:BaseFormApi}>((props, {slots}) => {
+const Provider = defineComponent((props, {slots}) => {
   const ConfigContext = shallowRef<BaseFormApi>();
 
   provide('BaseFormApiContext', ConfigContext)

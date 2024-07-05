@@ -46,7 +46,7 @@ const defaultProps = {
   delayTick: 0
 };
 export const vuePropsType = vuePropsMake<ReactResizeObserverProps>(propTypes, defaultProps);
-const ReactResizeObserver = defineComponent<ReactResizeObserverProps>(
+const ReactResizeObserver = defineComponent(
   (props, {}) => {
     const slots = useSlots();
     let observer: ResizeObserver;

@@ -98,7 +98,7 @@ export const vuePropsType:ComponentObjectPropsOptions<RadioGroupProps> = {
 }
 
 
-const RadioGroup = defineComponent<RadioGroupProps>((props, {slots}) => {
+const RadioGroup = defineComponent((props, {slots}) => {
 
   const onUpdateValueFunc = props["onUpdate:value"]
   // console.log(props)

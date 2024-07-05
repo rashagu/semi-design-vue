@@ -83,7 +83,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake(propTypes_, defaultProps);
-const BreadcrumbItem = defineComponent<BreadcrumbItemProps>(
+const BreadcrumbItem = defineComponent(
   (props, {}) => {
     const slots = useSlots();
     const state = reactive<BreadcrumbItemState>({});

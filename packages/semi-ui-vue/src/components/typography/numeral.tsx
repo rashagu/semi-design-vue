@@ -91,7 +91,7 @@ const defaultProps = {
   className: '',
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const Numeral = defineComponent<NumeralProps>(
+const Numeral = defineComponent(
   (props, {}) => {
     const slots = useSlots();
 

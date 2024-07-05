@@ -18,7 +18,7 @@ export const vuePropsType: ComponentObjectPropsOptions<TableContextProps> = {
   setBodyHasScrollbar: PropTypes.func as PropType<TableContextProps['setBodyHasScrollbar']>,
   direction: PropTypes.string as PropType<TableContextProps['direction']>,
 };
-const TableContextProvider = defineComponent<TableContextProps>((props, {}) => {
+const TableContextProvider = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const tableContextValue = computed(() => ({

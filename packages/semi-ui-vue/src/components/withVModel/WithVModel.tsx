@@ -4,7 +4,7 @@ import { WithFieldOption } from '@douyinfe/semi-foundation/form/interface';
 import * as ObjectUtil from '@douyinfe/semi-foundation/utils/object';
 
 export default function WithVModel<T>(Comp: DefineSetupFnComponent<T>, opt?: WithFieldOption) {
-  return defineComponent<T>(
+  return defineComponent(
     (props: any, { emit, slots, expose }) => {
       const instance = ref();
 

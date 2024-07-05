@@ -9,7 +9,7 @@ interface BodyDemoProps {
 export const vuePropsType = {
   name: String
 }
-const BodyDemo = defineComponent<BodyDemoProps>((props, {}) => {
+const BodyDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const ns = new Set()

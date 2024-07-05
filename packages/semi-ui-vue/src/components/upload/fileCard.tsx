@@ -106,7 +106,7 @@ export const vuePropsType = vuePropsMake<FileCardProps>(propTypes, defaultProps)
 export interface FileCardState {
     fallbackPreview?: boolean
 }
-const FileCard = defineComponent<FileCardProps>((props, {}) => {
+const FileCard = defineComponent((props, {}) => {
 
     const slots = useSlots()
     const state = reactive({

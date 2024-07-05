@@ -63,7 +63,7 @@ export const vuePropsType: ComponentObjectPropsOptions<CopyableProps> = {
   icon: PropTypes.node as PropType<CopyableProps['icon']>,
 };
 
-const Copyable = defineComponent<CopyableProps>(
+const Copyable = defineComponent(
   (props, { slots }) => {
     let _timeId: ReturnType<typeof setTimeout>;
 

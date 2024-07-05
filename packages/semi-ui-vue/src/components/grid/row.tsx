@@ -61,7 +61,7 @@ export const vuePropsType:ComponentObjectPropsOptions<RowProps> = {
     default: cssClasses.PREFIX
   },
 }
-const Row = defineComponent<RowProps>((props, {slots}) => {
+const Row = defineComponent((props, {slots}) => {
 
 
   const RowContext = {

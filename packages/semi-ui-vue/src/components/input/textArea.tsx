@@ -176,7 +176,7 @@ const defaultProps = {
 };
 
 export const VuePropsType = vuePropsMake(propTypes, defaultProps)
-const TextArea = defineComponent<TextAreaProps>((props, {slots}) => {
+const TextArea = defineComponent((props, {slots}) => {
   let focusing = false;
   let libRef = ref(null);
 

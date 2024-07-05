@@ -9,7 +9,7 @@ interface TableDemo1Props {
 export const vuePropsType = {
   name: String,
 };
-const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
+const TableDemo1 = defineComponent((props, {}) => {
   const slots = useSlots();
 
   return () => {

@@ -29,7 +29,7 @@ const propTypes = {
     title: PropTypes.node
 };
 export const vuePropsType = vuePropsMake(propTypes, {})
-const Meta = defineComponent<MetaProps>((props, {}) => {
+const Meta = defineComponent((props, {}) => {
     const slots = useSlots()
 
 

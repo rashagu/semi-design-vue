@@ -50,7 +50,7 @@ const defaultProps = {
   minEventHeight: Number.MIN_SAFE_INTEGER
 };
 export const vuePropsType = vuePropsMake<DayColProps>(propTypes, defaultProps);
-const DayCol = defineComponent<DayColProps>((props, {}) => {
+const DayCol = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const state = reactive<DayColState>({

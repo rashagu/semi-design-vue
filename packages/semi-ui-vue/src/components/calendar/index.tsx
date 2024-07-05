@@ -44,7 +44,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake<CalendarProps>(propTypes, defaultProps)
-const Calendar = defineComponent<CalendarProps>((props, {}) => {
+const Calendar = defineComponent((props, {}) => {
     const slots = useSlots()
 
     return () => {

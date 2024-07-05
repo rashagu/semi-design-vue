@@ -8,7 +8,7 @@ export const VuePropsType = {
   name: String
 }
 
-const App = defineComponent<ExampleProps>((props, {slots}) => {
+const App = defineComponent((props, {slots}) => {
 
 
   const visible = ref(false);

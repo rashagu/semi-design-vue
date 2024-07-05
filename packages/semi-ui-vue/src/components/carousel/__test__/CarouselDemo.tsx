@@ -10,7 +10,7 @@ interface CarouselDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const CarouselDemo = defineComponent<CarouselDemoProps>((props, {}) => {
+const CarouselDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const style = {

@@ -226,7 +226,7 @@ const defaultProps = {
   showPath: false,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const Transfer = defineComponent<TransferProps>((props, {}) => {
+const Transfer = defineComponent((props, {}) => {
   const slots = useSlots();
   const _treeRef = ref();
 

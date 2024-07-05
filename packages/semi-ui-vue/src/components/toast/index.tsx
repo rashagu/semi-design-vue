@@ -51,7 +51,7 @@ const propTypes = {
 const defaultProps = {};
 const vuePropsType = vuePropsMake(propTypes, defaultProps);
 
-const ToastList = defineComponent<ToastListProps>(
+const ToastList = defineComponent(
   (props, { expose }) => {
     const slots = useSlots();
     const stack = shallowRef<boolean>(false);

@@ -18,7 +18,7 @@ export const vuePropsType = {
     className: PropTypes.string,
     style: PropTypes.object,
 }
-const Section = defineComponent<SectionProps>((props, {}) => {
+const Section = defineComponent((props, {}) => {
     const slots = useSlots()
 
     return () => {

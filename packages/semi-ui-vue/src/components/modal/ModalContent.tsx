@@ -107,7 +107,7 @@ const defaultProps = {
     maskClassName: ''
 };
 export const vuePropsType = vuePropsMake<ModalContentReactProps>(propTypes, defaultProps)
-const ModalContent = defineComponent<ModalContentReactProps>((props, {}) => {
+const ModalContent = defineComponent((props, {}) => {
 
     const slots = useSlots()
     const attr = useAttrs()

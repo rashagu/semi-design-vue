@@ -187,7 +187,7 @@ const wrapperDecorations = (props: BaseTypographyProps, content: VNode) => {
   wrap(link, disabled ? 'span' : 'a');
   return wrapped;
 };
-const Base = defineComponent<BaseTypographyProps>((props, {}) => {
+const Base = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

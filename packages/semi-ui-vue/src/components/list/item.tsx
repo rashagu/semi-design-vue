@@ -44,7 +44,7 @@ const defaultProps = {
     onMouseLeave: noop,
 };
 export const vuePropsType = vuePropsMake<ListItemProps>(propTypes, defaultProps)
-const ListItem = defineComponent<ListItemProps>((props, {}) => {
+const ListItem = defineComponent((props, {}) => {
     const slots = useSlots()
     const attr = useAttrs()
 

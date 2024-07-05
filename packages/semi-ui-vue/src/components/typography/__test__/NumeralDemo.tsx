@@ -9,7 +9,7 @@ interface NumeralDemoProps {
 export const vuePropsType: ComponentObjectPropsOptions<NumeralDemoProps> = {
   name: String,
 };
-const NumeralDemo = defineComponent<NumeralDemoProps>(
+const NumeralDemo = defineComponent(
   (props, {}) => {
     const slots = useSlots();
 

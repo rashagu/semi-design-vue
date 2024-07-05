@@ -12,7 +12,7 @@ export const vuePropsType:ComponentObjectPropsOptions<HookToastProps> = {
     motion: Boolean as PropType<HookToastProps['motion']>,
     afterClose: Function as PropType<HookToastProps['afterClose']>
 }
-const HookToast = defineComponent<HookToastProps>((props, {attrs}) => {
+const HookToast = defineComponent((props, {attrs}) => {
     const slots = useSlots()
     const config:any = attrs
 

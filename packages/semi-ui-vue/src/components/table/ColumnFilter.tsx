@@ -169,7 +169,7 @@ const propTypes: ComponentObjectPropsOptions<ColumnFilterProps> = {
 }
 const defaultProps = {}
 const ColumnFilterVueProps = vuePropsMake(propTypes, defaultProps)
-export const ColumnFilter = defineComponent<ColumnFilterProps>(
+export const ColumnFilter = defineComponent(
   (props, {attrs}) => {
     // custom filter related status
     const isFilterDropdownVisibleControlled_ = typeof props.filterDropdownVisible !== 'undefined';

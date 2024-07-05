@@ -28,7 +28,7 @@ interface WithVModelDemoProps {
 export const vuePropsType: ComponentObjectPropsOptions<WithVModelDemoProps> = {
   name: String,
 };
-const WithVModelDemo = defineComponent<WithVModelDemoProps>((props, {}) => {
+const WithVModelDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
 

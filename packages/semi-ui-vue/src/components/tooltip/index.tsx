@@ -220,7 +220,7 @@ const defaultProps = {
 
 const vuePropsType = vuePropsMake(propTypes, defaultProps);
 
-const Tooltip = defineComponent<TooltipProps>((props, { expose }) => {
+const Tooltip = defineComponent((props, { expose }) => {
   const slots = useSlots();
   const eventManager = ref<Event>(new Event());
   let triggerEl = ref();

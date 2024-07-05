@@ -32,7 +32,7 @@ const defaultProps = {
     spacing: 16
 };
 export const vuePropsType = vuePropsMake<CardGroupProps>(propTypes, defaultProps)
-const CardGroup = defineComponent<CardGroupProps>((props, {}) => {
+const CardGroup = defineComponent((props, {}) => {
     const slots = useSlots()
 
 

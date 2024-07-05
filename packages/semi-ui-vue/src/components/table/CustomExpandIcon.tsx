@@ -44,7 +44,7 @@ const defaultProps = {
     prefixCls: cssClasses.PREFIX,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const CustomExpandIcon = defineComponent<CustomExpandIconProps>((props, {}) => {
+const CustomExpandIcon = defineComponent((props, {}) => {
     const slots = useSlots();
 
 

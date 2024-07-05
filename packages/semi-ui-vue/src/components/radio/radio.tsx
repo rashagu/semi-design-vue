@@ -97,7 +97,7 @@ export const vuePropsType: ComponentObjectPropsOptions<RadioProps> = {
   name: String,
   preventScroll: Boolean,
 }
-const Radio = defineComponent<RadioProps>((props, {slots}) => {
+const Radio = defineComponent((props, {slots}) => {
   let radioEntity: any;
   let context!: Ref<RadioContextValue>;
   let foundation: RadioFoundation;

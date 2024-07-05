@@ -5,7 +5,7 @@ import {Locale} from '../interface';
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:Locale}>((props, {slots}) => {
+const Provider = defineComponent((props, {slots}) => {
   const ConfigContext = ref<Locale>(props.value);
 
   watch(()=>props.value, ()=>{

@@ -34,7 +34,7 @@ const defaultProps = {
   onPresetClick: noop,
 };
 export const vuePropsType = vuePropsMake<QuickControlProps>(propTypes, defaultProps)
-const quickControl = defineComponent<QuickControlProps>((props, {}) => {
+const quickControl = defineComponent((props, {}) => {
   const slots = useSlots()
 
   return () => {

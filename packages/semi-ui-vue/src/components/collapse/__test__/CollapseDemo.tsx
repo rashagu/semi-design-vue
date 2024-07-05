@@ -10,7 +10,7 @@ interface CollapseDemoProps {
 export const vuePropsType = {
   name: String
 }
-const CollapseDemo = defineComponent<CollapseDemoProps>((props, {}) => {
+const CollapseDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

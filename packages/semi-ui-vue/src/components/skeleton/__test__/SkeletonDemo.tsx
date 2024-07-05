@@ -11,7 +11,7 @@ interface SkeletonDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const SkeletonDemo = defineComponent<SkeletonDemoProps>((props, {}) => {
+const SkeletonDemo = defineComponent((props, {}) => {
   const slots = useSlots();
   const loading = ref(true);
   const showContent = () => {

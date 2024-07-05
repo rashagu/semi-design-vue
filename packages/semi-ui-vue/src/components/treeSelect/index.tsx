@@ -322,7 +322,7 @@ const defaultProps: Partial<TreeSelectProps> = {
   autoMergeValue: true,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const TreeSelect = defineComponent<TreeSelectProps>(
+const TreeSelect = defineComponent(
   (props, {}) => {
     const slots = useSlots();
 

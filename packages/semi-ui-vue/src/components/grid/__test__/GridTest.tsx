@@ -9,7 +9,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const GridTest = defineComponent<ExampleProps>((props, {slots}) => {
+const GridTest = defineComponent((props, {slots}) => {
 
 
   return () => (

@@ -13,7 +13,7 @@ export const vuePropsType:ComponentObjectPropsOptions<CarouselArrowProps> = {
     next: Function as PropType<CarouselArrowProps['next']>,
     arrowProps: Object
 }
-const CarouselArrow = defineComponent<CarouselArrowProps>((props, {}) => {
+const CarouselArrow = defineComponent((props, {}) => {
     const slots = useSlots()
 
     const renderLeftIcon = () => {

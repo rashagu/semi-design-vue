@@ -109,7 +109,7 @@ interface ColType {
   key: string;
 }
 const Table = TableMaker<ColType>();
-const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
+const TableDemo1 = defineComponent((props, {}) => {
   const dataSource = ref<ColType[]>([]);
   const loading = ref(false);
   const currentPage = ref(1);

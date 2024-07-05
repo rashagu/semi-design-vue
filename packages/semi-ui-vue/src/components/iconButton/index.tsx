@@ -63,7 +63,7 @@ const vuePropsType= vuePropsMake<IconButtonProps>({
 
 // TODO: add a buttonGroup component
 // TODO: icon configuration
-const Index = defineComponent<IconButtonProps>((props, {slots}) => {
+const Index = defineComponent((props, {slots}) => {
 
   const {getProps} = useHasInProps()
 

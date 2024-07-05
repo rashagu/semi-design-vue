@@ -37,7 +37,7 @@ const defaultProps = {
     sourceString: '',
 };
 export const vuePropsType = vuePropsMake<HighlightProps>(propTypes, defaultProps)
-const Highlight = defineComponent<HighlightProps>((props, {}) => {
+const Highlight = defineComponent((props, {}) => {
     const slots = useSlots()
 
 

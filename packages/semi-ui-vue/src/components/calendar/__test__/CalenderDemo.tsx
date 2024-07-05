@@ -9,7 +9,7 @@ interface CalenderDemoProps {
 export const vuePropsType = {
   name: String
 }
-const CalenderDemo = defineComponent<CalenderDemoProps>((props, {}) => {
+const CalenderDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const DemoDiy = () => {

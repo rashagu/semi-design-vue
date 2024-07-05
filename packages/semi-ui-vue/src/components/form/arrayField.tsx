@@ -72,7 +72,7 @@ export const vuePropsType = {
   initValue: Array,
   field: String
 }
-const ArrayFieldComponent = defineComponent<ArrayFieldProps>((props, {}) => {
+const ArrayFieldComponent = defineComponent((props, {}) => {
   const slots = useSlots()
   let cacheFieldValues: any[];
   let shouldUseInitValue: boolean;

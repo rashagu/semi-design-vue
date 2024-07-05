@@ -9,7 +9,7 @@ interface Demo2Props {
 export const vuePropsType: ComponentObjectPropsOptions<Demo2Props> = {
   name: String,
 };
-const Demo2 = defineComponent<Demo2Props>((props, {}) => {
+const Demo2 = defineComponent((props, {}) => {
   const slots = useSlots();
 
 

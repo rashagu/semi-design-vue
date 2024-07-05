@@ -46,7 +46,7 @@ interface WithFieldDemoProps {
 export const vuePropsType = {
   name: String
 }
-const WithFieldDemo = defineComponent<WithFieldDemoProps>((props, {}) => {
+const WithFieldDemo = defineComponent((props, {}) => {
 
   const slots = useSlots()
 

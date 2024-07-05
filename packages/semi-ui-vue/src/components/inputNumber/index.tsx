@@ -134,7 +134,7 @@ const defaultProps: InputNumberProps = {
   onUpClick: noop,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const InputNumber = defineComponent<InputNumberProps>((props, {}) => {
+const InputNumber = defineComponent((props, {}) => {
   let cursorStart!: number;
   let cursorEnd!: number;
   let currentValue!: number | string;

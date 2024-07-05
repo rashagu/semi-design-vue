@@ -57,7 +57,7 @@ const propTypes:ComponentObjectPropsOptions<BackTopProps> = {
 };
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const BackTop = defineComponent<BackTopProps>((props, {}) => {
+const BackTop = defineComponent((props, {}) => {
     const slots = useSlots()
 
 

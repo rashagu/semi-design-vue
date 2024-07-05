@@ -18,7 +18,7 @@ export const vuePropsType = {
   name: String
 }
 
-const WithFormApiDemo = defineComponent<WithFormApiDemoProps>((props, {}) => {
+const WithFormApiDemo = defineComponent((props, {}) => {
 
   const slots = useSlots()
 

@@ -94,7 +94,7 @@ const defaultProps: Partial<SwitchProps> = {
     size: 'default',
 };
 export const vuePropsType = vuePropsMake<SwitchProps>(propTypes, defaultProps)
-const Switch = defineComponent<SwitchProps>((props, {}) => {
+const Switch = defineComponent((props, {}) => {
 
     const slots = useSlots()
 

@@ -44,7 +44,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const TimelineItem = defineComponent<TimelineItemProps>((props, {}) => {
+const TimelineItem = defineComponent((props, {}) => {
     const slots = useSlots()
     const attr = useAttrs()
 

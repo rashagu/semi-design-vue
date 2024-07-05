@@ -64,7 +64,7 @@ export const VuePropsType:ComponentObjectPropsOptions<SpinProps> = {
   style: Object,
   childStyle: Object,
 }
-const Index = defineComponent<SpinProps>((props, {slots}) => {
+const Index = defineComponent((props, {slots}) => {
 
   const state = reactive<SpinState>({
     delay: props.delay,

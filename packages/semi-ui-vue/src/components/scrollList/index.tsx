@@ -23,8 +23,13 @@ export const vuePropsType = {
   children: [Object, String],
   bodyHeight: [Number, String],
   prefixCls: [String],
+  className: String,
+  style: Object,
 }
-const index = defineComponent<ScrollListProps>((props, {}) => {
+const index = defineComponent({
+  props: vuePropsType,
+  name: 'ScrollList',
+  setup(props, {}) {
   const slots = useSlots()
   const {adapter: adapterInject, getDataAttr} = useBaseComponent<CheckboxProps>(props, {})
 
@@ -57,9 +62,7 @@ const index = defineComponent<ScrollListProps>((props, {}) => {
       </div>
     );
   }
-}, {
-  props: vuePropsType,
-  name: 'ScrollList'
+}
 })
 
 

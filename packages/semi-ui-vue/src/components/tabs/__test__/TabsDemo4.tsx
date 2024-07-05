@@ -11,7 +11,7 @@ export const vuePropsType = {
   name: String,
   isVitest: Boolean,
 };
-const TabsDemo4 = defineComponent<TabsDemo4Props>((props, {}) => {
+const TabsDemo4 = defineComponent((props, {}) => {
   const slots = useSlots();
   const activeKey = ref('0');
 

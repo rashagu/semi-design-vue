@@ -12,7 +12,7 @@ export const vuePropsType = {
   name: String,
   isVitest: Boolean,
 };
-const TabsDemo = defineComponent<TabsDemoProps>((props, {}) => {
+const TabsDemo = defineComponent((props, {}) => {
   const slots = useSlots();
   const state = reactive({
     tabList: [
