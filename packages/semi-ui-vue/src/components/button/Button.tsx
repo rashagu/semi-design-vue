@@ -1,19 +1,18 @@
 import { defineComponent, ref, h, StyleValue, ComponentObjectPropsOptions, PropType, AriaAttributes } from 'vue';
 /* eslint-disable react/destructuring-assignment */
 import classNames from 'classnames';
-import {cssClasses, strings} from '@douyinfe/semi-foundation/button/constants';
+import { cssClasses, strings } from '@douyinfe/semi-foundation/button/constants';
 import '@douyinfe/semi-foundation/button/button.scss';
-import {noop} from '@douyinfe/semi-foundation/utils/function';
-import cls from "classnames";
+import { noop } from '@douyinfe/semi-foundation/utils/function';
+import cls from 'classnames';
 
 const btnSizes = typeof strings.sizes;
-const {htmlTypes, btnTypes} = strings;
+const { htmlTypes, btnTypes } = strings;
 
 export type HtmlType = 'button' | 'reset' | 'submit';
 export type Size = 'default' | 'small' | 'large';
 export type Theme = 'solid' | 'borderless' | 'light' | 'outline';
 export type Type = 'primary' | 'secondary' | 'tertiary' | 'warning' | 'danger';
-
 
 export interface ButtonProps {
   id?: string;
@@ -21,7 +20,7 @@ export interface ButtonProps {
   circle?: boolean;
   disabled?: boolean;
   className?: string;
-  htmlType?: "button" | "reset" | "submit",
+  htmlType?: 'button' | 'reset' | 'submit';
   icon?: any;
   iconPosition?: 'left' | 'right';
   loading?: boolean;
@@ -34,12 +33,11 @@ export interface ButtonProps {
   onMouseDown?: any;
   onMouseEnter?: any;
   onMouseLeave?: any;
-  autoFocus?: boolean
+  autoFocus?: boolean;
   role?: string;
   'aria-label'?: AriaAttributes['aria-label'];
-  contentClassName?: string
+  contentClassName?: string;
 }
-
 
 export const vuePropsType: ComponentObjectPropsOptions<ButtonProps> = {
   id: String,
@@ -50,7 +48,7 @@ export const vuePropsType: ComponentObjectPropsOptions<ButtonProps> = {
   loading: Boolean,
   block: {
     type: Boolean,
-    default: false
+    default: false,
   },
   htmlType: {
     type: String as PropType<ButtonProps['htmlType']>,
@@ -95,72 +93,66 @@ export const vuePropsType: ComponentObjectPropsOptions<ButtonProps> = {
   },
   autoFocus: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
   role: String,
   'aria-label': String,
   contentClassName: String,
-}
-const Button = defineComponent((props, {slots}) => {
-
-
-  return () => {
-    const {
-      block,
-      loading,
-      circle,
-      className,
-      style,
-      disabled,
-      size,
-      theme,
-      type,
-      prefixCls,
-      iconPosition,
-      htmlType,
-      ...attr
-    } = props;
-
-    const baseProps = {
-      type: htmlType,
-      ...attr,
-      class: classNames(
-        prefixCls,
-        {
-          [`${prefixCls}-${type}`]: !props.disabled && type,
-          [`${prefixCls}-disabled`]: props.disabled,
-          [`${prefixCls}-size-large`]: size === 'large',
-          [`${prefixCls}-size-small`]: size === 'small',
-          // [`${prefixCls}-loading`]: loading,
-          [`${prefixCls}-light`]: theme === 'light',
-          [`${prefixCls}-block`]: block,
-          [`${prefixCls}-circle`]: circle,
-          [`${prefixCls}-borderless`]: theme === 'borderless',
-          [`${prefixCls}-outline`]: theme === "outline",
-          [`${prefixCls}-${type}-disabled`]: disabled && type,
-        },
-        className
-      ),
-    };
-    return (
-      <button
-        {...baseProps}
-        onClick={props.onClick}
-        onMousedown={props.onMouseDown}
-        style={style}
-      >
-      <span class={cls(`${prefixCls}-content`, props.contentClassName)}
-            onClick={e => props.disabled && e.stopPropagation()}>
-                    {slots.default ? slots.default() : null}
-          </span>
-      </button>
-    )
-  };
-}, {
+};
+const Button = defineComponent({
   props: vuePropsType,
-  name: 'Button'
-})
+  name: 'Button',
+  setup(props, { slots }) {
+    return () => {
+      const {
+        block,
+        loading,
+        circle,
+        className,
+        style,
+        disabled,
+        size,
+        theme,
+        type,
+        prefixCls,
+        iconPosition,
+        htmlType,
+        ...attr
+      } = props;
 
+      const baseProps = {
+        type: htmlType,
+        ...attr,
+        class: classNames(
+          prefixCls,
+          {
+            [`${prefixCls}-${type}`]: !props.disabled && type,
+            [`${prefixCls}-disabled`]: props.disabled,
+            [`${prefixCls}-size-large`]: size === 'large',
+            [`${prefixCls}-size-small`]: size === 'small',
+            // [`${prefixCls}-loading`]: loading,
+            [`${prefixCls}-light`]: theme === 'light',
+            [`${prefixCls}-block`]: block,
+            [`${prefixCls}-circle`]: circle,
+            [`${prefixCls}-borderless`]: theme === 'borderless',
+            [`${prefixCls}-outline`]: theme === 'outline',
+            [`${prefixCls}-${type}-disabled`]: disabled && type,
+          },
+          className
+        ),
+      };
+      return (
+        <button {...baseProps} onClick={props.onClick} onMousedown={props.onMouseDown} style={style}>
+          <span
+            class={cls(`${prefixCls}-content`, props.contentClassName)}
+            onClick={(e) => props.disabled && e.stopPropagation()}
+          >
+            {slots.default ? slots.default() : null}
+          </span>
+        </button>
+      );
+    };
+  },
+});
 
-
-export default Button
+export default Button;

@@ -42,7 +42,7 @@ const FormCheckbox = withField(Checkbox, {
     valueKey: 'checked',
     valuePath: 'target.checked',
     shouldInject: false,
-}) as typeof FormCheckboxType;
+});
 const FormRadioGroup = withField(RadioGroup, { valuePath: 'target.value' });
 const FormRadio = withField(Radio, {
     valueKey: 'checked',

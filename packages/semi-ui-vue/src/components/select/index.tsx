@@ -260,7 +260,7 @@ const propTypes: ComponentObjectPropsOptions<SelectProps> = {
   onChange: PropTypes.func as PropType<SelectProps['onChange']>,
   multiple: PropTypes.bool,
   // Whether to turn on the input box filtering function, when it is a function, it represents a custom filtering function
-  filter: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  filter: [PropTypes.func, PropTypes.bool] as PropType<SelectProps['filter']>,
   // How many tags can you choose?
   max: PropTypes.number,
   // How many tabs are displayed at most, and the rest are displayed in + N
