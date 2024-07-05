@@ -1,5 +1,11 @@
 # @kousum/vite-plugin-semi-theme
 
+## 0.15.1
+
+### Patch Changes
+
+- fix 0.15.0
+
 ## 0.15.0
 
 ### Minor Changes
