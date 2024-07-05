@@ -65,7 +65,7 @@ const defaultProps = {
     disableDownload: false,
 }
 export const vuePropsType = vuePropsMake<FooterProps>(propTypes, defaultProps)
-const Footer = defineComponent<FooterProps>((props, {}) => {
+const Footer = defineComponent((props, {}) => {
 
     const slots = useSlots()
 

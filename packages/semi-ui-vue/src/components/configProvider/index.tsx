@@ -15,7 +15,7 @@ export const vuePropsType: ComponentObjectPropsOptions<ConfigProviderProps> = {
   getPopupContainer: Function as PropType<ConfigProviderProps['getPopupContainer']>,
   direction: { type: String as PropType<ConfigProviderProps['direction']>, default: 'ltr' },
 };
-const ConfigProvider = defineComponent<ConfigProviderProps>(
+const ConfigProvider = defineComponent(
   (props, { slots }) => {
     function renderChildren() {
       const { direction } = props;

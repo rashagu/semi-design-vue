@@ -64,7 +64,7 @@ export const vuePropsType:ComponentObjectPropsOptions<AnimationProps> = {
 }
 
 
-const CSSAnimation = defineComponent<AnimationProps>((props, {}) => {
+const CSSAnimation = defineComponent((props, {}) => {
 
     const slots = useSlots()
 

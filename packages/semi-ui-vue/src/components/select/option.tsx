@@ -59,7 +59,7 @@ export const vuePropsType:ComponentObjectPropsOptions<OptionProps> = {
   _show: Boolean,
 }
 
-const Option = defineComponent<OptionProps>((props, {slots, attrs}) => {
+const Option = defineComponent((props, {slots, attrs}) => {
 
   function onClick({value, label, children, ...rest}: Partial<OptionProps>, event: MouseEvent) {
     const isDisabled = props.disabled;

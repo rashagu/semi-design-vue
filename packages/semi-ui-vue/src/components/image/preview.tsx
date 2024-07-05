@@ -82,7 +82,7 @@ const defaultProps = {
     closable: true
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Preview = defineComponent<PreviewProps>((props, {}) => {
+const Preview = defineComponent((props, {}) => {
 
     const {getProps} = useHasInProps()
     const slots = useSlots()

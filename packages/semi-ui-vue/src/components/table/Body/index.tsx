@@ -226,7 +226,7 @@ export {
     propTypes as BodyPropTypes
 }
 export const vuePropsType = vuePropsMake<BodyProps>(propTypes, {});
-const Body = defineComponent<BodyProps>((props, {}) => {
+const Body = defineComponent((props, {}) => {
     const slots = useSlots();
 
     const nodeRef = ref()

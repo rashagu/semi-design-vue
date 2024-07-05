@@ -8,7 +8,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const DividerDemo = defineComponent<ExampleProps>((props, {slots}) => {
+const DividerDemo = defineComponent((props, {slots}) => {
 
 
   return () => (

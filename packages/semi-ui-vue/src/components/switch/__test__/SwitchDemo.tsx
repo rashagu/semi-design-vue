@@ -10,7 +10,7 @@ interface SwitchDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const SwitchDemo = defineComponent<SwitchDemoProps>(
+const SwitchDemo = defineComponent(
   (props, {}) => {
     const slots = useSlots();
 

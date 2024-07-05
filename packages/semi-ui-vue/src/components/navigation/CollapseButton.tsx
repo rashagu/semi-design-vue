@@ -27,7 +27,7 @@ const vuePropsType:ComponentObjectPropsOptions<CollapseButtonProps> = {
   },
   onClick: Function as PropType<CollapseButtonProps['onClick']>,
 }
-const CollapseButton = defineComponent<CollapseButtonProps>((props, ctx) => {
+const CollapseButton = defineComponent((props, ctx) => {
 
 
   const handleClick = () => {

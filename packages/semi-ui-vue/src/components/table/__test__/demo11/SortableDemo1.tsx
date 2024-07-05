@@ -25,7 +25,7 @@ interface Demo1Props {
 export const vuePropsType = {
   name: String
 }
-const SortableDemo1 = defineComponent<Demo1Props>((props, {}) => {
+const SortableDemo1 = defineComponent((props, {}) => {
 
   const slots = useSlots()
 

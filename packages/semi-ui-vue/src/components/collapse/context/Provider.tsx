@@ -5,7 +5,7 @@ import {CollapseContextType} from "../collapse-context";
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:CollapseContextType}>((props, {slots}) => {
+const Provider = defineComponent((props, {slots}) => {
   const ConfigContext = ref<CollapseContextType>();
 
   watch(()=>props.value, ()=>{

@@ -11,7 +11,7 @@ export const vuePropsType = {
   name: String
 }
 
-const TooltipDemo = defineComponent<ExampleProps>((props, {slots}) => {
+const TooltipDemo = defineComponent((props, {slots}) => {
 
   //
   const pwd = ref()

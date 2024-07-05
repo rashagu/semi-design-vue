@@ -155,7 +155,7 @@ export const defaultProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 // console.log(vuePropsType)
 // debugger
-const TimePicker = defineComponent<TimePickerProps>((props, {slots}) => {
+const TimePicker = defineComponent((props, {slots}) => {
 
   const {format = strings.DEFAULT_FORMAT} = props;
   const state = reactive<TimePickerState>({

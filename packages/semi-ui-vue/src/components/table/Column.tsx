@@ -8,7 +8,7 @@ const propTypes = {
     ...ColumnShape,
 };
 export const vuePropsType = vuePropsMake<ColumnProps>(propTypes, {});
-const Column = defineComponent<ColumnProps>((props, {}) => {
+const Column = defineComponent((props, {}) => {
     const slots = useSlots();
 
     return () => null;

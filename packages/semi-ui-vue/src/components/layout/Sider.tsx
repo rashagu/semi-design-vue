@@ -57,7 +57,7 @@ export const vuePropsType:ComponentObjectPropsOptions<SiderProps> = {
   'aria-label': String,
   'role': String,
 }
-const Sider = defineComponent<SiderProps>((props, {slots}) => {
+const Sider = defineComponent((props, {slots}) => {
 
   let unRegisters: Array<() => void> = [];
   const uniqueId = generateId();

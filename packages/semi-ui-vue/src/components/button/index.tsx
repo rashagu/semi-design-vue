@@ -7,7 +7,7 @@ import IconButton, { IconButtonProps } from '../iconButton';
 export interface ButtonProps extends IconButtonProps,BaseButtonProps {} // TODO check
 
 
-const Button = defineComponent<ButtonProps>((props, {slots}) => {
+const Button = defineComponent((props, {slots}) => {
 
 
 

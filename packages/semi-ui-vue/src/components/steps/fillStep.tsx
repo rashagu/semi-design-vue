@@ -48,7 +48,7 @@ const defaultProps = {
   onChange: noop
 };
 export const vuePropsType = vuePropsMake<FillStepProps>(propTypes, defaultProps)
-const FillStep = defineComponent<FillStepProps>((props, {}) => {
+const FillStep = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

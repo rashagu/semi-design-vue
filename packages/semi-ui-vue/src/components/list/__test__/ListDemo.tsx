@@ -12,7 +12,7 @@ interface ListDemoProps {
 export const vuePropsType = {
   name: String
 }
-const ListDemo = defineComponent<ListDemoProps>((props, {}) => {
+const ListDemo = defineComponent((props, {}) => {
   const slots = useSlots()
   const data = [
     '从明天起，做一个幸福的人',

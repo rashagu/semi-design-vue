@@ -46,7 +46,7 @@ const defaultProps = {
     mode: 'left',
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Timeline = defineComponent<TimelineProps>((props, {}) => {
+const Timeline = defineComponent((props, {}) => {
     const slots = useSlots()
     const attr = useAttrs()
 

@@ -145,7 +145,7 @@ const defaultProps = {
     disabled: false,
 };
 export const vuePropsType = vuePropsMake<BaseRowProps>(propTypes, defaultProps);
-const TableRow = defineComponent<BaseRowProps>((props, {attrs}) => {
+const TableRow = defineComponent((props, {attrs}) => {
     const slots = useSlots();
 
     const {adapter: adapterInject} = useBaseComponent<BaseRowProps>(props, {})

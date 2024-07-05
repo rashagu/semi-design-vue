@@ -13,7 +13,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String,
 };
-const CascaderDemo = defineComponent<ExampleProps>((props, {}) => {
+const CascaderDemo = defineComponent((props, {}) => {
   const treeData = [
     {
       label: '浙江省',

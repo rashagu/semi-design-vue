@@ -74,7 +74,7 @@ const defaultProps: CarouselProps = {
   trigger: 'click'
 };
 export const vuePropsType = vuePropsMake<CarouselProps>(propTypes, defaultProps)
-const Carousel = defineComponent<CarouselProps>((props, {expose}) => {
+const Carousel = defineComponent((props, {expose}) => {
   const slots = useSlots()
   const childrenRef = shallowRef<{children:VNode[]}>({
     children: []

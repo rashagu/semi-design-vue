@@ -114,7 +114,7 @@ export const vuePropsType:ComponentObjectPropsOptions<CascaderItemProps> = {
     default: false,
   },
 };
-const Item = defineComponent<CascaderItemProps>((props, {}) => {
+const Item = defineComponent((props, {}) => {
   const slots = useSlots();
 
   // TODO context

@@ -60,7 +60,7 @@ const defaultProps = {
   type: 'month',
 };
 export const vuePropsType = vuePropsMake<YearAndMonthProps>(propTypes, defaultProps)
-const yearAndMonth = defineComponent<YearAndMonthProps>((props, {expose}) => {
+const yearAndMonth = defineComponent((props, {expose}) => {
   const slots = useSlots()
 
   const now = new Date();

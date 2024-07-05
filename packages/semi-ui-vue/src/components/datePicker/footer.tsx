@@ -20,7 +20,7 @@ export const vuePropsType = vuePropsMake({
   onCancelClick: Function,
   onConfirmClick: Function
 }, {})
-const Footer = defineComponent<FooterProps>((props, {}) => {
+const Footer = defineComponent((props, {}) => {
   const slots = useSlots()
   const { prefixCls, locale, onCancelClick, onConfirmClick } = props;
   const wrapCls = classnames(`${prefixCls}-footer`);

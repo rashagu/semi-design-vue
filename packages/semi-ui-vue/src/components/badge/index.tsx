@@ -57,7 +57,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake<BadgeProps>(propTypes, defaultProps);
-const Badge = defineComponent<BadgeProps>((props, {}) => {
+const Badge = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const { context } = useConfigContext();

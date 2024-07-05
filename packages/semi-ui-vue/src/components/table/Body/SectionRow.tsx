@@ -81,7 +81,7 @@ const defaultProps = {
     },
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const SectionRow = defineComponent<SectionRowProps>((props, {}) => {
+const SectionRow = defineComponent((props, {}) => {
     const slots = useSlots();
     const {context} = useTableContext()
 

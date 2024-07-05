@@ -8,7 +8,7 @@ interface AnchorDemoProps {
 export const vuePropsType = {
   name: String
 }
-const AnchorDemo = defineComponent<AnchorDemoProps>((props, {}) => {
+const AnchorDemo = defineComponent((props, {}) => {
   const slots = useSlots()
   const getContainer = ():HTMLElement => {
     return document.querySelector('window');

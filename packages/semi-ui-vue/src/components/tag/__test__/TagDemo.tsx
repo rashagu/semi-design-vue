@@ -9,7 +9,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const TagDemo = defineComponent<ExampleProps>((props, {slots}) => {
+const TagDemo = defineComponent((props, {slots}) => {
 
   const tagList:(TagProps | VNode)[] = [
     { color: 'white', children:'抖音'},

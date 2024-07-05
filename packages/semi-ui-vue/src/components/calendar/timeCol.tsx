@@ -17,7 +17,7 @@ const propTypes:ComponentObjectPropsOptions<TimeColProps> = {
     renderTimeDisplay: PropTypes.func as PropType<TimeColProps['renderTimeDisplay']>,
 };
 export const vuePropsType = vuePropsMake<TimeColProps>(propTypes, {})
-const TimeCol = defineComponent<TimeColProps>((props, {}) => {
+const TimeCol = defineComponent((props, {}) => {
     const slots = useSlots()
 
 

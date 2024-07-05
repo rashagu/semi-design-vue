@@ -16,7 +16,7 @@ export const vuePropsType = {
   name: String
 }
 
-const DatePickerDemo = defineComponent<ExampleProps>((props, {}) => {
+const DatePickerDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const types = [

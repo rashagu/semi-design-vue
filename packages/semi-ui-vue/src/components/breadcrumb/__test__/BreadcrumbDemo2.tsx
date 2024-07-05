@@ -9,7 +9,7 @@ interface BreadcrumbDemoProps {
 export const vuePropsType = {
   name: String
 }
-const BreadcrumbDemo2 = defineComponent<BreadcrumbDemoProps>((props, {slots}) => {
+const BreadcrumbDemo2 = defineComponent((props, {slots}) => {
 
   const routes:any = ['首页', '当这个页面标题很长很长很长时需要省略', '详情页'];
   return () => (

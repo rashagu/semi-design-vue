@@ -10,7 +10,7 @@ interface EmptyDemoProps {
 export const vuePropsType = {
   name: String
 }
-const EmptyDemo = defineComponent<EmptyDemoProps>((props, {slots}) => {
+const EmptyDemo = defineComponent((props, {slots}) => {
 
 
   return () => (

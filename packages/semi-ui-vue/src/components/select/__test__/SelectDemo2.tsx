@@ -13,7 +13,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String,
 };
-const SelectDemo2 = defineComponent<ExampleProps>((props, { slots }) => {
+const SelectDemo2 = defineComponent((props, { slots }) => {
   let optionList = [
     { value: 'tony', label: 'Ironman' },
     { value: 'Thor', label: 'Thor' },

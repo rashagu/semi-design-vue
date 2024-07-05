@@ -76,7 +76,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake<MonthCalendarProps>(propTypes, defaultProps)
-const MonthCalendar = defineComponent<MonthCalendarProps>((props, {}) => {
+const MonthCalendar = defineComponent((props, {}) => {
     const slots = useSlots()
 
     const cellDom = ref()

@@ -11,7 +11,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String,
 };
-const FormDemo = defineComponent<ExampleProps>((props, { attrs }) => {
+const FormDemo = defineComponent((props, { attrs }) => {
   const slots = useSlots();
   const formApi = ref<FormApi<any>>()
 

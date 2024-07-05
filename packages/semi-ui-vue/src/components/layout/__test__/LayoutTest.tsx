@@ -8,7 +8,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String,
 };
-const LayoutTest = defineComponent<ExampleProps>((props, { slots }) => {
+const LayoutTest = defineComponent((props, { slots }) => {
   return () => (
     <div style={{ width: '100%', height: '100vh' }}>
       <Layout className="components-layout-demo">

@@ -50,7 +50,7 @@ const defaultProps = {
   preview: true,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Image = defineComponent<ImageProps>((props, {}) => {
+const Image = defineComponent((props, {}) => {
 
   const slots = useSlots()
 

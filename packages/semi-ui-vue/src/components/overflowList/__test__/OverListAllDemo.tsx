@@ -10,7 +10,7 @@ interface OverListAllDemoProps {
 export const vuePropsType = {
   name: String
 }
-const OverListAllDemo = defineComponent<OverListAllDemoProps>((props, {}) => {
+const OverListAllDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

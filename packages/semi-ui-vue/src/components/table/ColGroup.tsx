@@ -30,7 +30,10 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const ColGroup = defineComponent<ColGroupProps>((props, {}) => {
+const ColGroup = defineComponent({
+    props: vuePropsType,
+    name: 'ColGroup',
+    setup(props, {}) {
     const slots = useSlots();
 
     return () => {
@@ -68,9 +71,7 @@ const ColGroup = defineComponent<ColGroupProps>((props, {}) => {
           </ColGroup>
         );
     };
-}, {
-    props: vuePropsType,
-    name: 'ColGroup'
+}
 });
 
 

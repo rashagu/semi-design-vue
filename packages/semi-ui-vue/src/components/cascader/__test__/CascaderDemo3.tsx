@@ -14,7 +14,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String,
 };
-const CascaderDemo3 = defineComponent<ExampleProps>((props, {}) => {
+const CascaderDemo3 = defineComponent((props, {}) => {
 
   const value = ref<Value>([
     "zhejiang",

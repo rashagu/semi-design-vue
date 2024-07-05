@@ -52,7 +52,7 @@ const defaultProps = {
     className: '',
 };
 export const vuePropsType = vuePropsMake<LinkProps>(propTypes, defaultProps)
-const Link = defineComponent<LinkProps>((props, {}) => {
+const Link = defineComponent((props, {}) => {
     const slots = useSlots()
     const {context} = useAnchorContext()
 

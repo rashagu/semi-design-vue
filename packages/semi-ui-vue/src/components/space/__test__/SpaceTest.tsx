@@ -8,7 +8,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const SpaceTest = defineComponent<ExampleProps>((props, {slots}) => {
+const SpaceTest = defineComponent((props, {slots}) => {
 
 
   return () => (

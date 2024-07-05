@@ -12,7 +12,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String,
 };
-const AutoCompleteItemsDemo = defineComponent<ExampleProps>((props, { slots }) => {
+const AutoCompleteItemsDemo = defineComponent((props, { slots }) => {
   const stringData = ref([]);
   const value = ref('');
   const handleStringSearch = value => {

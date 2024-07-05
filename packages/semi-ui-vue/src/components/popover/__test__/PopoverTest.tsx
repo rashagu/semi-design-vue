@@ -26,7 +26,7 @@ const POSITION_SET: string[] = [
   // 'leftTopOver',
   // 'rightTopOver',
 ]
-const PopoverTest = defineComponent<ExampleProps>((props, {slots}) => {
+const PopoverTest = defineComponent((props, {slots}) => {
 
 
   return () => (

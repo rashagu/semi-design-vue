@@ -4,7 +4,7 @@ import { TypographyBaseSize } from '../interface';
 export const vuePropsType = {
   value: String as PropType<TypographyBaseSize>,
 };
-const Provider = defineComponent<{ value: TypographyBaseSize }>(
+const Provider = defineComponent(
   (props, { slots }) => {
     const ConfigContext = ref<TypographyBaseSize>(props.value);
 

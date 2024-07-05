@@ -10,7 +10,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const Test = defineComponent<ExampleProps>((props, {slots}) => {
+const Test = defineComponent((props, {slots}) => {
 
   const openKeys = ref([])
   const isCollapsed = ref(false)

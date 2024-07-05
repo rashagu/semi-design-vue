@@ -49,7 +49,7 @@ const defaultProps = {
     prefixCls: cssClasses.PREFIX,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const TableSelectionCell = defineComponent<TableSelectionCellProps>((props, {}) => {
+const TableSelectionCell = defineComponent((props, {}) => {
     const slots = useSlots();
     const state = reactive({})
     const {adapter: adapterInject} = useBaseComponent<TableSelectionCellProps>(props, state)

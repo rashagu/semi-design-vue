@@ -80,7 +80,7 @@ const defaultProps = {
   onClose: noop,
 };
 export const vuePropsType = vuePropsMake<SideSheetContentProps>(propTypes, defaultProps);
-const SideSheetContent = defineComponent<SideSheetContentProps>((props, {}) => {
+const SideSheetContent = defineComponent((props, {}) => {
   const slots = useSlots();
   let sideSheetId: string;
   let timeoutId: number;

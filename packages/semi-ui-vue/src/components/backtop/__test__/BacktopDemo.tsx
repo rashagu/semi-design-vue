@@ -9,7 +9,7 @@ interface BacktopDeemoProps {
 export const vuePropsType = {
   name: String
 }
-const BacktopDemo = defineComponent<BacktopDeemoProps>((props, {}) => {
+const BacktopDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const style = {

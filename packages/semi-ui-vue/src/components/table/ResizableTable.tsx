@@ -71,7 +71,7 @@ export const vuePropsType: ComponentObjectPropsOptions<TableProps> = {
     sticky: PropTypes.element as PropType<TableProps['sticky']>,
     direction: PropTypes.string as PropType<TableProps['direction']>,
 };
-const ResizableTable = defineComponent<TableProps>((props, {}) => {
+const ResizableTable = defineComponent((props, {}) => {
     const slots = useSlots();
     const childrenColumnName = 'children';
 

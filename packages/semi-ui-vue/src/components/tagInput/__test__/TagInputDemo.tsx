@@ -7,7 +7,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const TagInputDemo = defineComponent<ExampleProps>((props, {}) => {
+const TagInputDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const value = ref(['抖音','火山','西瓜视频'])

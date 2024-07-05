@@ -9,7 +9,7 @@ interface CollapsibleDemoProps {
 export const vuePropsType = {
   name: String
 }
-const CollapsibleDemo = defineComponent<CollapsibleDemoProps>((props, {}) => {
+const CollapsibleDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const isOpen = ref();

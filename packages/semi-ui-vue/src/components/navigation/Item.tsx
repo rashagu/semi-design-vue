@@ -113,7 +113,7 @@ export const vuePropsType:ComponentObjectPropsOptions<NavItemProps> = {
         default: 0
     }
 }
-const NavItem = defineComponent<NavItemProps>((props, {attrs, slots}) => {
+const NavItem = defineComponent((props, {attrs, slots}) => {
 
     const {context} = useNavContext()
     const state = reactive<NavItemState>({

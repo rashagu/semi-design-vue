@@ -78,7 +78,7 @@ const propTypes = {
 const defaultProps = {};
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const NotificationList = defineComponent<NotificationListProps>((props, {expose}) => {
+const NotificationList = defineComponent((props, {expose}) => {
 
   const slots = useSlots()
   let noticeStorage: NoticeInstance[] = [];

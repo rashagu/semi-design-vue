@@ -10,7 +10,7 @@ interface ModalDemoConfirmProps {
 export const vuePropsType = {
   name: String
 }
-const ModalDemoConfirm = defineComponent<ModalDemoConfirmProps>((props, {}) => {
+const ModalDemoConfirm = defineComponent((props, {}) => {
 
   const slots = useSlots()
   function success() {

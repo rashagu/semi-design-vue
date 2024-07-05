@@ -71,7 +71,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake<NoticeReactProps>(propTypes, defaultProps)
-const Notice = defineComponent<NoticeReactProps>((props, {expose}) => {
+const Notice = defineComponent((props, {expose}) => {
 
     const slots = useSlots()
 

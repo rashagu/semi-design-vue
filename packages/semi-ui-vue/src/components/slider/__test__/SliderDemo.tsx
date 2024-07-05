@@ -8,7 +8,7 @@ interface SliderDemoProps {
 export const vuePropsType = {
   name: String
 }
-const SliderDemo = defineComponent<SliderDemoProps>((props, {}) => {
+const SliderDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

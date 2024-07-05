@@ -97,7 +97,7 @@ const defaultProps = {
     defaultAnchor: '',
 };
 export const vuePropsType = vuePropsMake<AnchorProps>(propTypes, defaultProps)
-const Anchor = defineComponent<AnchorProps>((props, {}) => {
+const Anchor = defineComponent((props, {}) => {
     const slots = useSlots()
 
     const { context } =  useConfigContext()

@@ -108,7 +108,7 @@ export const vuePropsType = {
   name: String,
 };
 const Table = TableMaker();
-const TableDemo1 = defineComponent<TableDemo1Props>((props, {}) => {
+const TableDemo1 = defineComponent((props, {}) => {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       // activationConstraint: {

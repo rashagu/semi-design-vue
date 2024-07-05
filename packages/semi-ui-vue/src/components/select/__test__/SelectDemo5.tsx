@@ -9,7 +9,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String,
 };
-const SelectDemo5 = defineComponent<ExampleProps>((props, { slots }) => {
+const SelectDemo5 = defineComponent((props, { slots }) => {
 
     const ops = ref(['www']);
 

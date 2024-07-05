@@ -8,7 +8,7 @@ interface ContrlDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const ContrlDemo = defineComponent<ContrlDemoProps>((props, {}) => {
+const ContrlDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const state = reactive({

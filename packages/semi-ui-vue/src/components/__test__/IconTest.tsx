@@ -9,7 +9,7 @@ export const VuePropsType = {
   name: String
 }
 
-const App = defineComponent<ExampleProps>((props, {slots}) => {
+const App = defineComponent((props, {slots}) => {
 
   const domArr = ref<{vNode:JSX.Element,name:string}[]>([])
 

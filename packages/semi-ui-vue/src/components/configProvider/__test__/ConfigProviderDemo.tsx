@@ -11,7 +11,7 @@ export const vuePropsType = {
 
 
 }
-const ConfigProviderDemo = defineComponent<ConfigProviderDemoProps>((props, {slots}) => {
+const ConfigProviderDemo = defineComponent((props, {slots}) => {
 
 
   return () => (

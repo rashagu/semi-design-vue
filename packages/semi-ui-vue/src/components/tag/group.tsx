@@ -53,7 +53,7 @@ export const vuePropsType: ComponentObjectPropsOptions<TagGroupProps> = {
   onTagClose: Function as PropType<TagGroupProps['onTagClose']>,
   onPlusNMouseEnter: Function as PropType<TagGroupProps['onPlusNMouseEnter']>,
 }
-const Group = defineComponent<TagGroupProps>((props, {slots}) => {
+const Group = defineComponent((props, {slots}) => {
 
   function renderNTag(n: number, restTags: (TagProps | VNode)[]) {
     const { size, showPopover, popoverProps } = props;

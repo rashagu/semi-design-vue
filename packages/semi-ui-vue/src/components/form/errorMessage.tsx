@@ -39,7 +39,7 @@ const propTypes = {
 };
 
 export const vuePropsType = vuePropsMake<ErrorMessageProps>(propTypes, {})
-const ErrorMessage = defineComponent<ErrorMessageProps>((props, {}) => {
+const ErrorMessage = defineComponent((props, {}) => {
     const slots = useSlots()
 
     function generatorText(error: ReactFieldError) {

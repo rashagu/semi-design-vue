@@ -10,7 +10,7 @@ interface PopconfirmDemoProps {
 export const vuePropsType = {
   name: String
 }
-const PopconfirmDemo = defineComponent<PopconfirmDemoProps>((props, {}) => {
+const PopconfirmDemo = defineComponent((props, {}) => {
 
   const slots = useSlots()
   const onConfirm = () => {

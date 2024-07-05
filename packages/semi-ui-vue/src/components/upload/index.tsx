@@ -244,7 +244,7 @@ const defaultProps: Partial<UploadProps> = {
   withCredentials: false,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const Upload = defineComponent<UploadProps>(
+const Upload = defineComponent(
   (props, { expose }) => {
     const slots = useSlots();
 

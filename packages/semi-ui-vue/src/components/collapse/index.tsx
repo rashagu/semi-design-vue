@@ -64,7 +64,7 @@ const defaultProps = {
   lazyRender: false,
 };
 export const vuePropsType = vuePropsMake<CollapseReactProps>(propTypes, defaultProps)
-const Collapse = defineComponent<CollapseReactProps>((props, {}) => {
+const Collapse = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

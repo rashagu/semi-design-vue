@@ -30,7 +30,7 @@ export const vuePropsTypeInsetDateInput: ComponentObjectPropsOptions<InsetDateIn
   onChange: Function as PropType<InsetDateInputProps['onChange']>,
   onFocus: Function as PropType<InsetDateInputProps['onFocus']>,
 }
-const InsetDateInput = defineComponent<InsetDateInputProps>((props, {}) => {
+const InsetDateInput = defineComponent((props, {}) => {
   const {insetInputValue, valuePath, onFocus, onChange, placeholder, forwardRef} = props;
   const value = get(insetInputValue, valuePath);
 
@@ -75,7 +75,7 @@ export const vuePropsTypeInsetTimeInput: ComponentObjectPropsOptions<InsetTimeIn
   onChange: Function as PropType<InsetTimeInputProps['onChange']>,
   onFocus: Function as PropType<InsetTimeInputProps['onFocus']>,
 }
-const InsetTimeInput = defineComponent<InsetTimeInputProps>((props, {}) => {
+const InsetTimeInput = defineComponent((props, {}) => {
   const {insetInputValue, valuePath, type, onFocus, onChange, placeholder, disabled} = props;
   const _isTimeType = type.includes('Time');
   if (!_isTimeType) {

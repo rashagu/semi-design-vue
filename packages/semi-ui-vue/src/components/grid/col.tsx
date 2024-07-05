@@ -53,7 +53,7 @@ export const vuePropsType:ComponentObjectPropsOptions<ColProps> = {
   xl: [Number, Object],
   xxl: [Number, Object],
 }
-const Col = defineComponent<ColProps>((props, {slots}) => {
+const Col = defineComponent((props, {slots}) => {
   const { prefixCls, span, order, offset, push, pull, className, ...others } = props;
 
   let sizeClassObj = {};

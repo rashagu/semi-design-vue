@@ -142,7 +142,7 @@ const defaultProps = {
   rangeSeparator: strings.DEFAULT_SEPARATOR_RANGE,
 };
 export const vuePropsType = vuePropsMake<DateInputProps>(propTypes, defaultProps)
-const dateInput = defineComponent<DateInputProps>((props, {}) => {
+const dateInput = defineComponent((props, {}) => {
   const slots = useSlots()
   const state = reactive({isFocusing: false})
   const {adapter: adapterInject} = useBaseComponent<DateInputProps>(props, state)

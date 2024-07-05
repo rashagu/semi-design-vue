@@ -42,7 +42,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake<ReactIntersectionObserverProps>(propTypes, defaultProps);
-const ReactIntersectionObserver = defineComponent<ReactIntersectionObserverProps>((props, {}) => {
+const ReactIntersectionObserver = defineComponent((props, {}) => {
   const slots = useSlots();
   let observer: IntersectionObserver;
   let cachedKeys: Array<string>;

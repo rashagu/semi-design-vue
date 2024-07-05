@@ -83,7 +83,7 @@ export const vuePropsType:ComponentObjectPropsOptions<RadioInnerProps> = {
     preventScroll: Boolean,
     style: Object,
 };
-const RadioInner = defineComponent<RadioInnerProps>((props, { slots }) => {
+const RadioInner = defineComponent((props, { slots }) => {
     let inputEntity!: any;
     let foundation: RadioInnerFoundation;
 

@@ -53,7 +53,7 @@ const defaultProps = {
     handleBodyScroll: noop,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const HeadTable = defineComponent<HeadTableProps>((props, {}) => {
+const HeadTable = defineComponent((props, {}) => {
     const slots = useSlots();
 
     return () => {

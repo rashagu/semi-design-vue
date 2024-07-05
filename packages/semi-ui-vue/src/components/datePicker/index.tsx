@@ -34,7 +34,7 @@ export const vuePropsType = {
   ...vuePropsTypeDatePickerProps,
   forwardRef: [Object, Function],
 };
-const index = defineComponent<DatePickerProps>((props, {}) => {
+const index = defineComponent((props, {}) => {
   const slots = useSlots();
   const {getProps} = useHasInProps()
   return () => {

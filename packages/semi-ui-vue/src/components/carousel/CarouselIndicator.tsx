@@ -22,7 +22,7 @@ const propTypes:ComponentObjectPropsOptions<CarouselIndicatorProps> = {
 };
 
 export const vuePropsType = vuePropsMake<CarouselIndicatorProps>(propTypes, {})
-const CarouselIndicator = defineComponent<CarouselIndicatorProps>((props, {}) => {
+const CarouselIndicator = defineComponent((props, {}) => {
     const slots = useSlots()
 
     const onIndicatorChange = (activeIndex: number): void => {

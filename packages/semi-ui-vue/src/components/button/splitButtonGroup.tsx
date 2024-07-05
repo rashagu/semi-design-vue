@@ -24,7 +24,7 @@ export const vuePropsType:ComponentObjectPropsOptions<SplitButtonGroupProps> = {
   style: Object,
   className: String,
 }
-const SplitButtonGroup = defineComponent<SplitButtonGroupProps>((props, {slots}) => {
+const SplitButtonGroup = defineComponent((props, {slots}) => {
   const { style, className } = props;
   const cls = classNames(`${prefixCls}-split`, className);
   const containerRef = ref()

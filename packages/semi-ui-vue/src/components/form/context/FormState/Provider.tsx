@@ -5,7 +5,7 @@ import {FormState} from "@douyinfe/semi-foundation/form/interface";
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:FormState}>((props, {slots}) => {
+const Provider = defineComponent((props, {slots}) => {
   const ConfigContext = shallowRef<FormState>();
 
   watch(()=>props.value, ()=>{

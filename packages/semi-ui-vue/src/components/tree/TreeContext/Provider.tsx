@@ -5,7 +5,7 @@ import {TreeContextValue} from "../treeContext";
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:TreeContextValue}>((props, {slots}) => {
+const Provider = defineComponent((props, {slots}) => {
   const ConfigContext = ref<TreeContextValue>();
 
   watch(()=>props.value, ()=>{

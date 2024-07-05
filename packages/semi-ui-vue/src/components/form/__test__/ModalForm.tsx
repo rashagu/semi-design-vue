@@ -16,7 +16,7 @@ interface ModalFormProps {
 export const vuePropsType = {
   name: String,
 };
-const ModalForm = defineComponent<ModalFormProps>((props) => {
+const ModalForm = defineComponent((props) => {
   const slots = useSlots();
   const state = reactive<{ formApi: FormApi<any> }>({ formApi: null });
 

@@ -9,7 +9,7 @@ interface ModalDemoProps {
 export const vuePropsType = {
   name: String
 }
-const ModalDemo = defineComponent<ModalDemoProps>((props, {}) => {
+const ModalDemo = defineComponent((props, {}) => {
 
   const slots = useSlots()
   const visible = ref(true);

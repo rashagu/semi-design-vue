@@ -5,7 +5,7 @@ import {NavContextType} from "../nav-context";
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:NavContextType}>((props, {slots}) => {
+const Provider = defineComponent((props, {slots}) => {
   const ConfigContext = ref<NavContextType>(props.value);
 
   watch(()=>props.value, ()=>{

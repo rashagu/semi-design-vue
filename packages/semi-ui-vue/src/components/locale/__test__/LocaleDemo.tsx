@@ -11,7 +11,7 @@ interface LocaleDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const LocaleDemo = defineComponent<LocaleDemoProps>((props, {}) => {
+const LocaleDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
   return () => <div>

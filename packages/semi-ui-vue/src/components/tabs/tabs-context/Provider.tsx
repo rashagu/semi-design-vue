@@ -5,7 +5,7 @@ import { TabContextValue } from '../interface';
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:TabContextValue}>((props, {slots}) => {
+const Provider = defineComponent((props, {slots}) => {
   const ConfigContext = ref<TabContextValue>();
 
   watch(()=>props.value, ()=>{

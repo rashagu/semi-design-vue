@@ -60,7 +60,7 @@ const defaultProps = {
     prefixCls: cssClasses.PREFIX_OPTION
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Option = defineComponent<OptionProps>((props, {}) => {
+const Option = defineComponent((props, {}) => {
 
     const slots = useSlots()
 

@@ -13,7 +13,7 @@ interface ExampleProps {
 export const VuePropsType = {
   name: String
 }
-const InputDemo = defineComponent<ExampleProps>((props, {slots}) => {
+const InputDemo = defineComponent((props, {slots}) => {
 
   const defaultValue = ref('asd')
   onMounted(()=>{

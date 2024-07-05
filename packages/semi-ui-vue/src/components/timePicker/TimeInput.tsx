@@ -92,7 +92,7 @@ const defaultProps = {
   format: strings.DEFAULT_FORMAT,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const TimeInput = defineComponent<TimeInputProps>((props, {slots}) => {
+const TimeInput = defineComponent((props, {slots}) => {
   const state = reactive<Record<any, any>>({
     // focusing: props.focusOnOpen,
   });

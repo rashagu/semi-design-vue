@@ -20,7 +20,7 @@ export const vuePropsType:ComponentObjectPropsOptions<AvatarGroupProps> = {
   maxCount: Number,
   renderMore: Function as PropType<AvatarGroupProps['renderMore']>
 }
-const AvatarGroup = defineComponent<AvatarGroupProps>((props, {slots}) => {
+const AvatarGroup = defineComponent((props, {slots}) => {
 
 
 

@@ -60,7 +60,7 @@ const propTypes: ComponentObjectPropsOptions<TabBarProps> = {
 };
 
 export const vuePropsType = vuePropsMake(propTypes, {});
-const TabBar = defineComponent<TabBarProps>((props, { attrs }) => {
+const TabBar = defineComponent((props, { attrs }) => {
   const slots = useSlots();
   const state = reactive({
     endInd: props.list.length,

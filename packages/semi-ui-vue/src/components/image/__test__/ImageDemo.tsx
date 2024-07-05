@@ -8,7 +8,7 @@ interface ImageDemoProps {
 export const vuePropsType = {
   name: String
 }
-const ImageDemo = defineComponent<ImageDemoProps>((props, {}) => {
+const ImageDemo = defineComponent((props, {}) => {
 
   const slots = useSlots()
   const srcList = ref([

@@ -30,7 +30,7 @@ export const vuePropsType:ComponentObjectPropsOptions<NodeListProps> = {
     onMotionEnd: Function as PropType<NodeListProps['onMotionEnd']>,
     role: String
 }
-const NodeList = defineComponent<NodeListProps>((props, {}) => {
+const NodeList = defineComponent((props, {}) => {
     const slots = useSlots()
 
     const state = reactive<NodeListState>({

@@ -128,7 +128,7 @@ const defaultProps = {
   disabled: false,
 };
 export const vuePropsType = vuePropsMake<PaginationProps>(propTypes, defaultProps);
-const Pagination = defineComponent<PaginationProps>((props, {}) => {
+const Pagination = defineComponent((props, {}) => {
   const slots = useSlots();
   const { context } = useConfigContext();
   const total = props.total;

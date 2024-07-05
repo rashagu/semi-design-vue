@@ -10,7 +10,7 @@ interface OverflowListDemo1Props {
 export const vuePropsType = {
   name: String
 }
-const OverflowListDemo1 = defineComponent<OverflowListDemo1Props>((props, {}) => {
+const OverflowListDemo1 = defineComponent((props, {}) => {
   const slots = useSlots()
   const width = ref(100);
   const renderOverflow = items => {

@@ -88,7 +88,7 @@ const defaultProps = {
     type: strings.DEFAULT_TYPE,
 };
 export const vuePropsType = vuePropsMake<ProgressProps>(propTypes, defaultProps)
-const Progress = defineComponent<ProgressProps>((props, {}) => {
+const Progress = defineComponent((props, {}) => {
 
     const attr = useAttrs()
     const slots = useSlots()

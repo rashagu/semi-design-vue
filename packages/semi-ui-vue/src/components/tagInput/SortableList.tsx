@@ -12,7 +12,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit-vue/sortable';
-import {defineComponent, ref, h, Fragment, useSlots, Teleport} from 'vue'
+import { defineComponent, ref, h, Fragment, useSlots, Teleport, ComponentObjectPropsOptions } from 'vue';
 import SortableItem from './SortableItem';
 
 interface SortableListProps {
@@ -23,14 +23,17 @@ interface SortableListProps {
   axis: any,
 }
 
-export const vuePropsType = {
+export const vuePropsType:ComponentObjectPropsOptions<SortableListProps> = {
   items: Array,
   onSortEnd: Function,
   useDragHandle: [Boolean],
   helperClass: String,
   axis: String
 }
-const SortableList = defineComponent<SortableListProps>((props, {}) => {
+const SortableList = defineComponent({
+  props: vuePropsType,
+  name: 'SortableList',
+  setup(props, {}) {
 
 
   const slots = useSlots()
@@ -91,9 +94,7 @@ const SortableList = defineComponent<SortableListProps>((props, {}) => {
     );
 
   }
-}, {
-  props: vuePropsType,
-  name: 'SortableList'
+}
 })
 
 

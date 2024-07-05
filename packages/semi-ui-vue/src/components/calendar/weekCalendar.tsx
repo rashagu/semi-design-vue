@@ -70,7 +70,7 @@ const defaultProps = {
     mode: 'week',
 };
 export const vuePropsType = vuePropsMake<WeekCalendarProps>(propTypes, defaultProps)
-const WeekCalendar = defineComponent<WeekCalendarProps>((props, {}) => {
+const WeekCalendar = defineComponent((props, {}) => {
     const slots = useSlots()
 
     const dom = ref()

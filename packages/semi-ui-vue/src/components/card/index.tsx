@@ -85,7 +85,7 @@ const defaultProps = {
   loading: false,
 };
 export const vuePropsType = vuePropsMake<CardProps>(propTypes, defaultProps);
-const Card = defineComponent<CardProps>((props, {}) => {
+const Card = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const renderHeader = () => {

@@ -95,7 +95,7 @@ export const vuePropsType:ComponentObjectPropsOptions<TitleProps> = {
   underline: Boolean,
   weight: [String, Number] as PropType<TitleProps['weight']>,
 }
-const Title = defineComponent<TitleProps>((props, {slots}) => {
+const Title = defineComponent((props, {slots}) => {
 
 
   return () => {

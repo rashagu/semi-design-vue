@@ -54,7 +54,7 @@ export const vuePropsType:ComponentObjectPropsOptions<EmptyProps> = {
 }
 
 
-const Empty = defineComponent<EmptyProps>((props, ) => {
+const Empty = defineComponent((props, ) => {
 
   const attr = useAttrs()
   let body: any;

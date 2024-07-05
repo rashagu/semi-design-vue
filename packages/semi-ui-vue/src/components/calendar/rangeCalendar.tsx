@@ -69,7 +69,7 @@ const defaultProps = {
     mode: 'range',
 };
 export const vuePropsType = vuePropsMake<RangeCalendarProps>(propTypes, defaultProps)
-const RangeCalendar = defineComponent<RangeCalendarProps>((props, {}) => {
+const RangeCalendar = defineComponent((props, {}) => {
     const slots = useSlots()
 
     let dom = ref()

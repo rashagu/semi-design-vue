@@ -137,7 +137,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake<DropdownProps>(propTypes, defaultProps)
 
 
-const Dropdown = defineComponent<DropdownProps>((props, {slots, expose}) => {
+const Dropdown = defineComponent((props, {slots, expose}) => {
 
   const state = reactive({
     popVisible: props.visible,

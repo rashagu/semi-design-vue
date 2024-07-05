@@ -10,7 +10,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const ToastDemo = defineComponent<ExampleProps>((props, {}) => {
+const ToastDemo = defineComponent((props, {}) => {
   const slots = useSlots()
   const Toast = useToastHook()
   const id = Toast.info({

@@ -109,7 +109,7 @@ const defaultProps = {
     'aria-label': 'Breadcrumb'
 };
 export const vuePropsType = vuePropsMake(propTypes_, defaultProps)
-const Breadcrumb = defineComponent<BreadcrumbProps>((props, {}) => {
+const Breadcrumb = defineComponent((props, {}) => {
     const state = reactive<BreadcrumbState>({
         isCollapsed: true,
     });

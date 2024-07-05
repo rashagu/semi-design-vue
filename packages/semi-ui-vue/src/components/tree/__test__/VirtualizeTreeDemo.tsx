@@ -9,7 +9,7 @@ interface VirtualizeTreeDemoProps {
 export const vuePropsType = {
   name: String
 }
-const VirtualizeTreeDemo = defineComponent<VirtualizeTreeDemoProps>((props, {}) => {
+const VirtualizeTreeDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
   const state = reactive({

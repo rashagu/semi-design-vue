@@ -69,7 +69,7 @@ const defaultProps = {
     },
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const TableHeaderRow = defineComponent<TableHeaderRowProps>((props, {}) => {
+const TableHeaderRow = defineComponent((props, {}) => {
     const slots = useSlots();
     let headerNode: HTMLElement = null;
     const {context} = useTableContext()

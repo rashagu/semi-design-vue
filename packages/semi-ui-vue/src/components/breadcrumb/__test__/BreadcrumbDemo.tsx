@@ -9,7 +9,7 @@ interface BreadcrumbDemoProps {
 export const vuePropsType = {
   name: String
 }
-const BreadcrumbDemo = defineComponent<BreadcrumbDemoProps>((props, {slots}) => {
+const BreadcrumbDemo = defineComponent((props, {slots}) => {
 
 
   const routes = ref([])

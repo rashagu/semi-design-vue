@@ -6,7 +6,7 @@ export type ArrayFieldType = {
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:ArrayFieldType}>((props, {slots}) => {
+const Provider = defineComponent((props, {slots}) => {
   const ConfigContext = shallowRef<ArrayFieldType>();
 
   watch(()=>props.value, ()=>{

@@ -10,7 +10,7 @@ interface BadgeDemoProps {
 export const vuePropsType = {
   name: String
 }
-const BadgeDemo = defineComponent<BadgeDemoProps>((props, {}) => {
+const BadgeDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

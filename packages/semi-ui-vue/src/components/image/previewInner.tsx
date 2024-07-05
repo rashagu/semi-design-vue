@@ -93,7 +93,7 @@ const defaultProps = {
   minZoom: 0.1
 };
 export const vuePropsType = vuePropsMake<PreviewInnerProps>(propTypes, defaultProps)
-const PreviewInner = defineComponent<PreviewInnerProps>((props, {}) => {
+const PreviewInner = defineComponent((props, {}) => {
 
   const slots = useSlots()
 

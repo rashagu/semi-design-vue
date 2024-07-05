@@ -86,7 +86,7 @@ const defaultProps: Partial<CheckboxGroupProps> = {
 };
 export const vuePropsType = vuePropsMake<CheckboxGroupProps>(propTypes, defaultProps)
 
-const CheckboxGroup = defineComponent<CheckboxGroupProps>((props, {}) => {
+const CheckboxGroup = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

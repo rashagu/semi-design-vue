@@ -179,7 +179,7 @@ const defaultProps = {
 export const VuePropsType = vuePropsMake(propTypes, defaultProps);
 
 // Vue在这里的话 state 更新会导致整体重新渲染 导致value 无法更新到最新的
-const Input = defineComponent<InputProps>((props, { slots }) => {
+const Input = defineComponent((props, { slots }) => {
 
   const {getProps} = useHasInProps()
   const initValue = 'value' in getProps(props) ? props.value : props.defaultValue;
@@ -628,7 +628,7 @@ const Input = defineComponent<InputProps>((props, { slots }) => {
 
 
 
-// const ForwardInput = defineComponent<InputProps>((props, {slots}) => {
+// const ForwardInput = defineComponent((props, {slots}) => {
 //   console.log(props.ref)
 //   return <Input {...props} forwardRef={ref} />
 // })

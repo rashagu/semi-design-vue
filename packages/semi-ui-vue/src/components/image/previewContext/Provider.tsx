@@ -5,7 +5,7 @@ import {PreviewContextProps} from "../previewContext";
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:PreviewContextProps}>((props, {slots}) => {
+const Provider = defineComponent((props, {slots}) => {
   const ConfigContext = ref<PreviewContextProps>(props.value);
 
   watch(()=>props.value, ()=>{

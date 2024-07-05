@@ -67,7 +67,7 @@ export const vuePropsType:ComponentObjectPropsOptions<InputGroupProps> = {
     labelPosition: String as PropType<InputGroupProps['labelPosition']>,
     disabled: Boolean,
 }
-const FormInputGroup = defineComponent<InputGroupProps>((props, {}) => {
+const FormInputGroup = defineComponent((props, {}) => {
     const slots = useSlots()
 
     const {context} = useFormUpdaterContext()

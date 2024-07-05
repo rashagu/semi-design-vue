@@ -38,7 +38,7 @@ const propTypes: ComponentObjectPropsOptions<TabItemProps> = {
   forwardRef: [PropTypes.object, PropTypes.func],
 };
 export const vuePropsType = vuePropsMake(propTypes, {});
-const TabItem = defineComponent<TabItemProps>(
+const TabItem = defineComponent(
   (props, {attrs}) => {
     const slots = useSlots();
 

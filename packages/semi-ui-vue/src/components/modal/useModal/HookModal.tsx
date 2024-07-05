@@ -23,7 +23,7 @@ export const vuePropsType:ComponentObjectPropsOptions<HookModalProps> = {
     motion: [Object, Function]
 }
 
-const HookModal = defineComponent<HookModalProps>((props_, {expose}) => {
+const HookModal = defineComponent((props_, {expose}) => {
 
     const slots = useSlots()
 

@@ -53,7 +53,7 @@ const defaultProps = {
   optional: false,
 };
 export const VuePropsType = vuePropsMake<LabelProps>(propTypes, defaultProps)
-const Label = defineComponent<LabelProps>((props, {slots}) => {
+const Label = defineComponent((props, {slots}) => {
 
   return () => {
     const children = slots.default?slots.default():null

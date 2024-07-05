@@ -10,7 +10,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const ScrollListDemo = defineComponent<ExampleProps>((props, {}) => {
+const ScrollListDemo = defineComponent((props, {}) => {
   const slots = useSlots()
   const state = reactive({
     selectIndex1: 1,

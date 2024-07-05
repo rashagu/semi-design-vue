@@ -8,7 +8,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const TreeCheckDemo = defineComponent<ExampleProps>((props, {}) => {
+const TreeCheckDemo = defineComponent((props, {}) => {
   const slots = useSlots()
   const treeData = [
     {

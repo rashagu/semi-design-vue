@@ -28,7 +28,7 @@ export const vuePropsType:ComponentObjectPropsOptions<NavFooterProps> = {
   collapseText: PropTypes.func as PropType<NavFooterProps['collapseText']>,
   onClick: {type: PropTypes.func as PropType<NavFooterProps['onClick']>, default: noop},
 }
-const NavFooter = defineComponent<NavFooterProps>((props, {slots}) => {
+const NavFooter = defineComponent((props, {slots}) => {
 
   const {context} = useNavContext()
 

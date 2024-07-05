@@ -67,7 +67,7 @@ const defaultProps = {
     fullMode: true,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const Banner = defineComponent<BannerProps>((props, {}) => {
+const Banner = defineComponent((props, {}) => {
 
     warning(
       'target' in props,

@@ -10,7 +10,7 @@ interface TreeAllDemoProps {
 export const vuePropsType = {
   name: String
 }
-const TreeAllDemo = defineComponent<TreeAllDemoProps>((props, {}) => {
+const TreeAllDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

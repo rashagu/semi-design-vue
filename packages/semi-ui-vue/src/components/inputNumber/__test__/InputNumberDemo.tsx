@@ -8,7 +8,7 @@ interface InputNumberDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const InputNumberDemo = defineComponent<InputNumberDemoProps>((props, {}) => {
+const InputNumberDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const value = ref(1);

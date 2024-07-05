@@ -9,7 +9,7 @@ interface EventDemoProps {
 export const vuePropsType = {
   name: String
 }
-const EventDemo = defineComponent<EventDemoProps>((props, {}) => {
+const EventDemo = defineComponent((props, {}) => {
   const slots = useSlots()
   const state = reactive<{mode:"week" | "month" | "range" | "day"}>({
     mode: 'week',

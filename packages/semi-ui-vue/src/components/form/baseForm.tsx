@@ -85,7 +85,7 @@ const defaultProps = {
     showValidateIcon: true,
 };
 export const vuePropsType = vuePropsMake<BaseFormProps>(propTypes, defaultProps)
-const Form = defineComponent<BaseFormProps>((props, {}) => {
+const Form = defineComponent((props, {}) => {
     const slots = useSlots()
     let currentInstance = getCurrentInstance()
 

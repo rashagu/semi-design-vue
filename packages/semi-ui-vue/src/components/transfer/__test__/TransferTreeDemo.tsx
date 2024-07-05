@@ -8,7 +8,7 @@ interface TreeDemoProps {
 export const vuePropsType = {
   name: String,
 };
-const TransferTreeDemo = defineComponent<TreeDemoProps>((props, {}) => {
+const TransferTreeDemo = defineComponent((props, {}) => {
   const slots = useSlots();
 
   const treeData = [

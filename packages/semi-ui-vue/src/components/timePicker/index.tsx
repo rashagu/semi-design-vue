@@ -25,7 +25,7 @@ export {
 export type LocalePickerProps = BasePickerProps;
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
-const index = defineComponent<LocalePickerProps>((props, {}) => {
+const index = defineComponent((props, {}) => {
   const slots = useSlots()
   const { getProps, hasInProps } = useHasInProps();
 

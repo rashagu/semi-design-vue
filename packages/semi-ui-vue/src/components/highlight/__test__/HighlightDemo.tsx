@@ -8,7 +8,7 @@ interface HighlightDemoProps {
 export const vuePropsType = {
   name: String
 }
-const HighlightDemo = defineComponent<HighlightDemoProps>((props, {}) => {
+const HighlightDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
 

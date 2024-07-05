@@ -18,13 +18,14 @@ export const vuePropsType = {
   style: Object,
   className: String,
 }
-const DropdownDivider = defineComponent<DropdownDividerProps>((props, {slots}) => {
+const DropdownDivider = defineComponent({
+  props:vuePropsType,
+  name:'DropdownDivider',
+  setup(props, {slots}) {
 
   const { style, className } = props;
   return ()=> <div class={classnames(`${prefixCls}-divider`, className)} style={style}/>;
-}, {
-  props:vuePropsType,
-  name:'DropdownDivider'
+}
 })
 
 

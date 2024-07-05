@@ -101,7 +101,7 @@ export const vuePropsType: ComponentObjectPropsOptions<ButtonProps> = {
   'aria-label': String,
   contentClassName: String,
 }
-const Button = defineComponent<ButtonProps>((props, {slots}) => {
+const Button = defineComponent((props, {slots}) => {
 
 
   return () => {

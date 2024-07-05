@@ -10,7 +10,7 @@ interface ExampleProps {
 export const vuePropsType = {
   locale: { type: Object, default: DefaultLocale }
 }
-const LocaleProvider = defineComponent<ExampleProps>((props, {slots}) => {
+const LocaleProvider = defineComponent((props, {slots}) => {
 
 
   return () => (

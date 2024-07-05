@@ -155,7 +155,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const TableHeader = defineComponent<TableHeaderProps>((props, {}) => {
+const TableHeader = defineComponent((props, {}) => {
     const slots = useSlots();
 
     const state = reactive({})

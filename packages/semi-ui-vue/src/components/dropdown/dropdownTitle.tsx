@@ -14,7 +14,7 @@ export const vuePropsType:ComponentObjectPropsOptions<DropdownTitleProps> = {
   style: [Object, String] as PropType<DropdownTitleProps['style']>,
   className: String,
 }
-const DropdownTitle = defineComponent<DropdownTitleProps>((props, {slots}) => {
+const DropdownTitle = defineComponent((props, {slots}) => {
   const { className, style,  } = props;
   const {context} = useDropdownContext();
   const titleCls = cls({

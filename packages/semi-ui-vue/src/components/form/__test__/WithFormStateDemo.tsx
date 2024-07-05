@@ -13,7 +13,7 @@ interface WithFormStateDemoProps {
 export const vuePropsType = {
   name: String
 }
-const WithFormStateDemo = defineComponent<WithFormStateDemoProps>((props, {}) => {
+const WithFormStateDemo = defineComponent((props, {}) => {
 
   const slots = useSlots()
 

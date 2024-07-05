@@ -5,7 +5,7 @@ import {DescriptionsContextValue} from "../descriptions-context";
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent<{value:DescriptionsContextValue}>((props, {slots}) => {
+const Provider = defineComponent((props, {slots}) => {
   const ConfigContext = ref<DescriptionsContextValue>();
 
   watch(()=>props.value, ()=>{

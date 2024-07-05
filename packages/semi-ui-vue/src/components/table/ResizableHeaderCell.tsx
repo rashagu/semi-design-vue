@@ -16,7 +16,7 @@ export const vuePropsType: ComponentObjectPropsOptions<ResizableHeaderCellProps>
     onResizeStop: Function as PropType<ResizableHeaderCellProps['onResizeStop']>,
     width: [Number, String]
 };
-const ResizableHeaderCell = defineComponent<ResizableHeaderCellProps>((props, {attrs}) => {
+const ResizableHeaderCell = defineComponent((props, {attrs}) => {
     const slots = useSlots();
 
     return () => {

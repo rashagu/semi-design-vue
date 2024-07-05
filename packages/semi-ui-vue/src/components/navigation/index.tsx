@@ -176,7 +176,7 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake<NavProps>(propTypes, defaultProps)
-const index = defineComponent<NavProps>((props, {slots}) => {
+const index = defineComponent((props, {slots}) => {
   const slots_ = useSlots()
   let itemsChanged: boolean = true;
 
