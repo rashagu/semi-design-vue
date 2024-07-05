@@ -90,7 +90,7 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
 import { useTableContext } from './tableContext/Consumer';
-import { is } from 'date-fns/locale';
+
 
 export type NormalTableProps<RecordType extends Record<string, any> = Data> = Omit<TableProps<RecordType>, 'resizable'>;
 

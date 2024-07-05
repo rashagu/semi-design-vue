@@ -5,7 +5,7 @@ import Column from './Column';
 import { strings } from '@douyinfe/semi-foundation/table/constants';
 import type { TableProps, Data } from './interface';
 
-import { defineComponent, h, ref, useSlots } from 'vue';
+import { ComponentObjectPropsOptions, defineComponent, h, ref, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
 
@@ -22,7 +22,7 @@ function Table<RecordType extends Record<string, any> = Data>() {
   const NormalTable = NormalTable_<RecordType>();
   const vuePropsType = vuePropsMake<TableProps<RecordType>>(propTypes, defaultProps);
   const Table = defineComponent({
-    props: vuePropsType,
+    props: vuePropsType as ComponentObjectPropsOptions<TableProps<RecordType>>,
     name: 'TableIndex',
     setup(props, { expose }) {
       const slots = useSlots();

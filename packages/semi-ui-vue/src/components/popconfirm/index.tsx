@@ -110,10 +110,12 @@ const defaultProps = {
   onClickOutSide: noop,
 };
 export const vuePropsType = vuePropsMake<PopconfirmProps>(propTypes, defaultProps);
-const Popconfirm = defineComponent(
-  (props, {}) => {
+const Popconfirm = defineComponent({
+  props: vuePropsType,
+  name: 'Popconfirm',
+  setup(props, {}) {
     const slots = useSlots();
-    const {getProps} = useHasInProps()
+    const { getProps } = useHasInProps();
 
     const { context } = useConfigContext();
     const state = reactive<PopconfirmState>({
@@ -336,10 +338,6 @@ const Popconfirm = defineComponent(
       );
     };
   },
-  {
-    props: vuePropsType,
-    name: 'Popconfirm',
-  }
-);
+});
 
 export default Popconfirm;

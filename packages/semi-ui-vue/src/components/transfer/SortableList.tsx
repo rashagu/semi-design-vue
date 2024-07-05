@@ -8,15 +8,8 @@ import {
   DragEndEvent,
   DropAnimation,
   defaultDropAnimationSideEffects,
-  DragOverlay,
 } from '@dnd-kit-vue/core';
-import {
-  arrayMove,
-  horizontalListSortingStrategy,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from '@dnd-kit-vue/sortable';
+import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit-vue/sortable';
 import { defineComponent, ref, h, Fragment, useSlots, Teleport, ComponentObjectPropsOptions } from 'vue';
 import SortableItem from './SortableItem';
 import { prefixCls } from '../transfer';

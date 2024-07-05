@@ -4,15 +4,22 @@ import { WithFieldOption } from '@douyinfe/semi-foundation/form/interface';
 import * as ObjectUtil from '@douyinfe/semi-foundation/utils/object';
 
 export default function WithVModel<T>(Comp: DefineSetupFnComponent<T>, opt?: WithFieldOption) {
-  return defineComponent(
-    (props: any, { emit, slots, expose }) => {
+  return defineComponent({
+    name: Comp.name,
+    props: {
+      //@ts-ignore
+      ...Comp.props,
+      modelValue: [Number, String, Object, Array, Boolean],
+      'onUpdate:modelValue': Function,
+    },
+    setup(props: any, { emit, slots, expose }) {
       const instance = ref();
 
       expose({
         ...instance.value,
       });
       return () => {
-        if (props['onUpdate:modelValue']){
+        if (props['onUpdate:modelValue']) {
           return (
             //@ts-ignore
             <Comp
@@ -21,9 +28,9 @@ export default function WithVModel<T>(Comp: DefineSetupFnComponent<T>, opt?: Wit
                 [opt?.valueKey || 'value']: props.modelValue,
                 [opt?.onKeyChangeFnName || 'onChange']: (v) => {
                   console.log(v);
-                  let val = opt?.valuePath ? ObjectUtil.get(v, opt.valuePath) : v
-                  if (Array.isArray(val)){
-                    val = [...val]
+                  let val = opt?.valuePath ? ObjectUtil.get(v, opt.valuePath) : v;
+                  if (Array.isArray(val)) {
+                    val = [...val];
                   }
                   props['onUpdate:modelValue']?.(val);
                 },
@@ -32,22 +39,11 @@ export default function WithVModel<T>(Comp: DefineSetupFnComponent<T>, opt?: Wit
               {{ default: slots.default }}
             </Comp>
           );
-        }else{
+        } else {
           //@ts-ignore
-          return <Comp
-            {...omit(props, 'update:modelValue', 'modelValue')}
-          />
+          return <Comp {...omit(props, 'update:modelValue', 'modelValue')} />;
         }
       };
     },
-    {
-      name: Comp.name,
-      props: {
-        //@ts-ignore
-        ...Comp.props,
-        modelValue: [Number, String, Object, Array, Boolean],
-        'onUpdate:modelValue': Function,
-      },
-    }
-  );
+  });
 }

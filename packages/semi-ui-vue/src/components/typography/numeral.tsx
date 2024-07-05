@@ -1,30 +1,17 @@
-import {
-  defineComponent,
-  ref,
-  h,
-  Fragment,
-  useSlots,
-  type HTMLAttributes,
-  VNode,
-  CSSProperties,
-  PropType,
-  cloneVNode,
-  Text,
-} from 'vue';
 import type { ComponentObjectPropsOptions } from 'vue';
+import { CSSProperties, defineComponent, h, PropType, Text, useSlots, VNode } from 'vue';
 import * as PropTypes from '../PropTypes';
-import { strings } from '@douyinfe/semi-foundation/typography/constants';
+import { vuePropsMake } from '../PropTypes';
 import Base from './base';
 import {
-  TypographyBaseSize,
-  TypographyBaseType,
-  TypographyBaseRule,
   OmitTypographyProps,
+  TypographyBaseRule,
+  TypographyBaseSize,
   TypographyBaseTruncate,
+  TypographyBaseType,
 } from './interface';
 import { CopyableConfig, LinkType } from './title';
 import FormatNumeral from '@douyinfe/semi-foundation/typography/formatNumeral';
-import { vuePropsMake } from '../PropTypes';
 import { getFragmentChildren } from '../_utils';
 import { omit } from 'lodash';
 
@@ -91,10 +78,11 @@ const defaultProps = {
   className: '',
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const Numeral = defineComponent(
-  (props, {}) => {
+const Numeral = defineComponent({
+  props: vuePropsType,
+  name: 'Numeral',
+  setup(props, {}) {
     const slots = useSlots();
-
 
     // Traverse the entire virtual DOM using a depth-first traversal algorithm, then format each piece. (in react)
     function formatNodeDFS(node) {
@@ -112,19 +100,19 @@ const Numeral = defineComponent(
         }
         if (typeof item === 'object' && 'children' in item) {
           let children = formatNodeDFS(item['children']);
-          function checkChildren(){
-            if(Array.isArray(children)){
+          function checkChildren() {
+            if (Array.isArray(children)) {
               return children;
             }
-            if(typeof children === 'object'){
+            if (typeof children === 'object') {
               return [children];
             }
 
             // 当ctx有值时是jsx组件，否则是template组件？？
             // type: Symbol(v-txt) 组件的children只能是文本不能是VNode
-            if(item.ctx && item.type !== Text){
+            if (item.ctx && item.type !== Text) {
               return [h(Text, children)];
-            }else{
+            } else {
               return children;
             }
           }
@@ -150,10 +138,6 @@ const Numeral = defineComponent(
       return <Base component_={'span'} {...omit(baseProps, 'precision', 'truncate', 'component_')}></Base>;
     };
   },
-  {
-    props: vuePropsType,
-    name: 'Numeral',
-  }
-);
+});
 
 export default Numeral;

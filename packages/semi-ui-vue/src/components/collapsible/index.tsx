@@ -43,7 +43,7 @@ interface CollapsibleState extends CollapsibleFoundationState {
   visible: boolean;
   isTransitioning: boolean;
 }
-const propTypes:ComponentObjectPropsOptions<CollapsibleProps> = {
+const propTypes: ComponentObjectPropsOptions<CollapsibleProps> = {
   motion: PropTypes.bool,
   isOpen: PropTypes.bool,
   duration: PropTypes.number,
@@ -64,187 +64,182 @@ const defaultProps = {
   fade: false,
 };
 export const vuePropsType = vuePropsMake<CollapsibleProps>(propTypes, defaultProps);
-const Collapsible = defineComponent((props, {}) => {
-  const slots = useSlots();
+const Collapsible = defineComponent({
+  props: vuePropsType,
+  name: 'Collapsible',
+  setup(props, {}) {
+    const slots = useSlots();
 
-  const domRef = ref();
-  let resizeObserver: ResizeObserver | null;
-  let hasBeenRendered: boolean = false;
+    const domRef = ref();
+    let resizeObserver: ResizeObserver | null;
+    let hasBeenRendered: boolean = false;
 
-  const state = reactive<CollapsibleState>({
-    domInRenderTree: false,
-    domHeight: 0,
-    visible: props.isOpen,
-    isTransitioning: false,
-  });
-  const { adapter: adapterInject, getDataAttr } = useBaseComponent<CollapsibleProps>(props, state);
-  function adapter_(): CollapsibleAdapter<CollapsibleProps, CollapsibleState> {
-    return {
-      ...adapterInject(),
-      setDOMInRenderTree: (domInRenderTree) => {
-        if (state.domInRenderTree !== domInRenderTree) {
-          state.domInRenderTree = domInRenderTree;
-        }
-      },
-      setDOMHeight: (domHeight) => {
-        if (state.domHeight !== domHeight) {
-          state.domHeight = domHeight;
-        }
-      },
-      setVisible: (visible) => {
-        if (state.visible !== visible) {
-          state.visible = visible;
-        }
-      },
-      setIsTransitioning: (isTransitioning) => {
-        if (state.isTransitioning !== isTransitioning) {
-          state.isTransitioning = isTransitioning;
-        }
-      },
+    const state = reactive<CollapsibleState>({
+      domInRenderTree: false,
+      domHeight: 0,
+      visible: props.isOpen,
+      isTransitioning: false,
+    });
+    const { adapter: adapterInject, getDataAttr } = useBaseComponent<CollapsibleProps>(props, state);
+    function adapter_(): CollapsibleAdapter<CollapsibleProps, CollapsibleState> {
+      return {
+        ...adapterInject(),
+        setDOMInRenderTree: (domInRenderTree) => {
+          if (state.domInRenderTree !== domInRenderTree) {
+            state.domInRenderTree = domInRenderTree;
+          }
+        },
+        setDOMHeight: (domHeight) => {
+          if (state.domHeight !== domHeight) {
+            state.domHeight = domHeight;
+          }
+        },
+        setVisible: (visible) => {
+          if (state.visible !== visible) {
+            state.visible = visible;
+          }
+        },
+        setIsTransitioning: (isTransitioning) => {
+          if (state.isTransitioning !== isTransitioning) {
+            state.isTransitioning = isTransitioning;
+          }
+        },
+      };
+    }
+
+    const adapter = adapter_();
+    const foundation = new CollapsibleFoundation(adapter);
+    const getEntryInfo = (entry: ResizeObserverEntry) => {
+      //judge whether parent or self display none
+      let inRenderTree: boolean;
+      if (entry.borderBoxSize) {
+        inRenderTree = !(entry.borderBoxSize[0].blockSize === 0 && entry.borderBoxSize[0].inlineSize === 0);
+      } else {
+        inRenderTree = !(entry.contentRect.height === 0 && entry.contentRect.width === 0);
+      }
+
+      let height = 0;
+      if (entry.borderBoxSize) {
+        height = Math.ceil(entry.borderBoxSize[0].blockSize);
+      } else {
+        const target = entry.target as HTMLElement;
+        height = target.clientHeight;
+      }
+
+      return {
+        isShown: inRenderTree,
+        height,
+      };
     };
-  }
 
-  const adapter = adapter_();
-  const foundation = new CollapsibleFoundation(adapter);
-  const getEntryInfo = (entry: ResizeObserverEntry) => {
-    //judge whether parent or self display none
-    let inRenderTree: boolean;
-    if (entry.borderBoxSize) {
-      inRenderTree = !(entry.borderBoxSize[0].blockSize === 0 && entry.borderBoxSize[0].inlineSize === 0);
-    } else {
-      inRenderTree = !(entry.contentRect.height === 0 && entry.contentRect.width === 0);
-    }
-
-    let height = 0;
-    if (entry.borderBoxSize) {
-      height = Math.ceil(entry.borderBoxSize[0].blockSize);
-    } else {
-      const target = entry.target as HTMLElement;
-      height = target.clientHeight;
-    }
-
-    return {
-      isShown: inRenderTree,
-      height,
-    };
-  };
-
-  onMounted(() => {
-    // super.componentDidMount();
-    resizeObserver = new ResizeObserver(handleResize);
-    resizeObserver.observe(domRef.value);
-    const domInRenderTree = isChildrenInRenderTree();
-    foundation.updateDOMInRenderTree(domInRenderTree);
-    if (domInRenderTree) {
-      foundation.updateDOMHeight(domRef.value.scrollHeight);
-    }
-  });
-
-  watch(
-    () => props.reCalcKey,
-    (value, oldValue, onCleanup) => {
-      foundation.updateDOMHeight(domRef.value.scrollHeight);
-    }
-  );
-  watch(
-    () => state.domInRenderTree,
-    (value, oldValue, onCleanup) => {
-      if (state.domInRenderTree) {
+    onMounted(() => {
+      // super.componentDidMount();
+      resizeObserver = new ResizeObserver(handleResize);
+      resizeObserver.observe(domRef.value);
+      const domInRenderTree = isChildrenInRenderTree();
+      foundation.updateDOMInRenderTree(domInRenderTree);
+      if (domInRenderTree) {
         foundation.updateDOMHeight(domRef.value.scrollHeight);
       }
-    }
-  );
-  watch(
-    () => props.isOpen,
-    (value, oldValue, onCleanup) => {
-      if (props.isOpen || !props.motion) {
-        foundation.updateVisible(props.isOpen);
+    });
+
+    watch(
+      () => props.reCalcKey,
+      (value, oldValue, onCleanup) => {
+        foundation.updateDOMHeight(domRef.value.scrollHeight);
       }
-    }
-  );
+    );
+    watch(
+      () => state.domInRenderTree,
+      (value, oldValue, onCleanup) => {
+        if (state.domInRenderTree) {
+          foundation.updateDOMHeight(domRef.value.scrollHeight);
+        }
+      }
+    );
+    watch(
+      () => props.isOpen,
+      (value, oldValue, onCleanup) => {
+        if (props.isOpen || !props.motion) {
+          foundation.updateVisible(props.isOpen);
+        }
+      }
+    );
 
-  watch([() => props.isOpen, () => props.motion], (value, oldValue, onCleanup) => {
-    if (props.motion && oldValue[0] !== props.isOpen) {
-      foundation.updateIsTransitioning(true);
-    }
-  });
+    watch([() => props.isOpen, () => props.motion], (value, oldValue, onCleanup) => {
+      if (props.motion && oldValue[0] !== props.isOpen) {
+        foundation.updateIsTransitioning(true);
+      }
+    });
 
-  onBeforeUnmount(() => {
-    // super.componentWillUnmount();
-    resizeObserver.disconnect();
-  });
+    onBeforeUnmount(() => {
+      // super.componentWillUnmount();
+      resizeObserver.disconnect();
+    });
 
-  const handleResize = (entryList: ResizeObserverEntry[]) => {
-    const entry = entryList[0];
-    if (entry) {
-      const entryInfo = getEntryInfo(entry);
-      foundation.updateDOMHeight(entryInfo.height);
-      foundation.updateDOMInRenderTree(entryInfo.isShown);
-    }
-  };
-
-  const isChildrenInRenderTree = () => {
-    if (domRef.value) {
-      return domRef.value.offsetHeight > 0;
-    }
-    return false;
-  };
-
-  return () => {
-    const wrapperStyle: CSSProperties = {
-      overflow: 'hidden',
-      height: (props.isOpen ? state.domHeight : props.collapseHeight) + 'px',
-      opacity: props.isOpen || !props.fade || props.collapseHeight !== 0 ? 1 : 0,
-      transitionDuration: `${props.motion && state.isTransitioning ? props.duration : 0}ms`,
-      ...props.style,
+    const handleResize = (entryList: ResizeObserverEntry[]) => {
+      const entry = entryList[0];
+      if (entry) {
+        const entryInfo = getEntryInfo(entry);
+        foundation.updateDOMHeight(entryInfo.height);
+        foundation.updateDOMInRenderTree(entryInfo.isShown);
+      }
     };
-    const wrapperCls = cls(
-      `${cssClasses.PREFIX}-wrapper`,
-      {
-        [`${cssClasses.PREFIX}-transition`]: props.motion && state.isTransitioning,
-      },
-      props.className
-    );
 
-    const children = slots.default?.()
-    const shouldRender = (props.keepDOM &&
-        (props.lazyRender ? hasBeenRendered : true)) ||
-      props.collapseHeight !== 0 || state.visible || props.isOpen;
+    const isChildrenInRenderTree = () => {
+      if (domRef.value) {
+        return domRef.value.offsetHeight > 0;
+      }
+      return false;
+    };
 
-    if (shouldRender && !hasBeenRendered) {
-      hasBeenRendered = true;
-    }
+    return () => {
+      const wrapperStyle: CSSProperties = {
+        overflow: 'hidden',
+        height: (props.isOpen ? state.domHeight : props.collapseHeight) + 'px',
+        opacity: props.isOpen || !props.fade || props.collapseHeight !== 0 ? 1 : 0,
+        transitionDuration: `${props.motion && state.isTransitioning ? props.duration : 0}ms`,
+        ...props.style,
+      };
+      const wrapperCls = cls(
+        `${cssClasses.PREFIX}-wrapper`,
+        {
+          [`${cssClasses.PREFIX}-transition`]: props.motion && state.isTransitioning,
+        },
+        props.className
+      );
 
-    return (
-      <div
-        class={wrapperCls}
-        style={wrapperStyle}
-        onTransitionend={() => {
-          if (!props.isOpen) {
-            foundation.updateVisible(false);
-          }
-          foundation.updateIsTransitioning(false);
-          props.onMotionEnd?.();
-        }}
-        {...getDataAttr()}
-      >
+      const children = slots.default?.();
+      const shouldRender =
+        (props.keepDOM && (props.lazyRender ? hasBeenRendered : true)) ||
+        props.collapseHeight !== 0 ||
+        state.visible ||
+        props.isOpen;
+
+      if (shouldRender && !hasBeenRendered) {
+        hasBeenRendered = true;
+      }
+
+      return (
         <div
-          x-semi-prop="children"
-          ref={domRef}
-          style={{ overflow: 'hidden' }}
-          id={props.id}
+          class={wrapperCls}
+          style={wrapperStyle}
+          onTransitionend={() => {
+            if (!props.isOpen) {
+              foundation.updateVisible(false);
+            }
+            foundation.updateIsTransitioning(false);
+            props.onMotionEnd?.();
+          }}
+          {...getDataAttr()}
         >
-          {
-            shouldRender && children
-          }
+          <div x-semi-prop="children" ref={domRef} style={{ overflow: 'hidden' }} id={props.id}>
+            {shouldRender && children}
+          </div>
         </div>
-      </div>
-    );
-  };
-}, {
-  props: vuePropsType,
-  name: 'Collapsible'
+      );
+    };
+  },
 });
-
 
 export default Collapsible;

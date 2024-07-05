@@ -1,21 +1,21 @@
 import * as PropTypes from '../PropTypes';
 import ColumnShape from './ColumnShape';
 import { ColumnProps } from './interface';
-import {defineComponent, h, useSlots} from "vue";
-import {vuePropsMake} from "../PropTypes";
+import { ComponentObjectPropsOptions, defineComponent, h, useSlots } from 'vue';
+import { vuePropsMake } from '../PropTypes';
 
-const propTypes = {
-    ...ColumnShape,
+const propTypes: ComponentObjectPropsOptions<ColumnProps> = {
+  ...ColumnShape,
 };
-export const vuePropsType = vuePropsMake<ColumnProps>(propTypes, {});
-const Column = defineComponent((props, {}) => {
+export const vuePropsType = vuePropsMake(propTypes, {});
+const Column = defineComponent({
+  props: vuePropsType,
+  name: 'Column',
+  setup(props, {}) {
     const slots = useSlots();
 
     return () => null;
-}, {
-    props: vuePropsType,
-    name: 'Column'
+  },
 });
-
 
 export default Column;

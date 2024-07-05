@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, Fragment, VNode, CSSProperties, ComponentObjectPropsOptions, PropType} from 'vue'
+import { defineComponent, ref, h, Fragment, VNode, CSSProperties, ComponentObjectPropsOptions, PropType } from 'vue';
 import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/select/constants';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
@@ -11,34 +11,31 @@ export interface OptionGroupProps {
 }
 const prefixCls = cssClasses.PREFIX_GROUP;
 
-
-export const vuePropsType:ComponentObjectPropsOptions<OptionGroupProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<OptionGroupProps> = {
   label: [String, Number, Object, Array],
   children: [String, Number, Object, Array],
   className: String,
   style: [String, Object] as PropType<OptionGroupProps['style']>,
-}
-const OptionGroup = defineComponent((props, {slots, attrs}) => {
-  return () => {
-    const { label, className, style, ...rest } = props;
-    const groupCls = cls(className, {
-      [prefixCls]: true,
-    });
-    if (!label && typeof label !== 'number') {
-      return null;
-    }
-    return (
-      <div class={groupCls} style={style} {...getDataAttr(attrs)}>
-        {label}
-      </div>
-    );
-  }
-}, {
+};
+const OptionGroup = defineComponent({
   props: vuePropsType,
-  name: 'isSelectOptionGroup'
-})
+  name: 'isSelectOptionGroup',
+  setup(props, { slots, attrs }) {
+    return () => {
+      const { label, className, style, ...rest } = props;
+      const groupCls = cls(className, {
+        [prefixCls]: true,
+      });
+      if (!label && typeof label !== 'number') {
+        return null;
+      }
+      return (
+        <div class={groupCls} style={style} {...getDataAttr(attrs)}>
+          {label}
+        </div>
+      );
+    };
+  },
+});
 
-
-
-export default OptionGroup
-
+export default OptionGroup;

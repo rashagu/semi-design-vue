@@ -2,12 +2,6 @@ import {
   defineComponent,
   ref,
   h,
-  Fragment,
-  VNode,
-  CSSProperties,
-  inject,
-  Ref,
-  watch,
   getCurrentInstance,
   ComponentObjectPropsOptions, PropType
 } from 'vue'
@@ -145,7 +139,10 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<PopoverProps>(propTypes, defaultProps)
 
-const Popover = defineComponent((props, {slots, expose}) => {
+const Popover = defineComponent({
+  props: vuePropsType,
+  name: 'Popover',
+  setup(props, {slots, expose}) {
   const {context} = useConfigContext()
   const tooltipRef = ref()
 
@@ -243,9 +240,7 @@ const Popover = defineComponent((props, {slots, expose}) => {
       </Tooltip>
     );
   }
-}, {
-  props: vuePropsType,
-  name: 'Popover'
+}
 })
 
 

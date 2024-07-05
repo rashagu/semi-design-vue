@@ -1,4 +1,4 @@
-import {defineComponent, ref, h, onActivated, Fragment, provide, inject, PropType} from 'vue'
+import { defineComponent, ref, h, onActivated, Fragment, provide, inject, PropType } from 'vue';
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { cssClasses as css, strings } from '@douyinfe/semi-foundation/dropdown/constants';
@@ -6,16 +6,16 @@ import { cssClasses as css, strings } from '@douyinfe/semi-foundation/dropdown/c
 import { BaseProps } from '../_base/baseComponent';
 import { IconTick } from '@kousum/semi-icons-vue';
 import { noop } from 'lodash';
-import {vuePropsMake} from "../PropTypes";
-import {useDropdownContext} from "./context/Consumer";
-import {ComponentObjectPropsOptions} from "vue";
-import type {Events} from "vue";
-import getDataAttr from "@douyinfe/semi-foundation/utils/getDataAttr";
+import { vuePropsMake } from '../PropTypes';
+import { useDropdownContext } from './context/Consumer';
+import { ComponentObjectPropsOptions } from 'vue';
+import type { Events } from 'vue';
+import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 
 export type Type = 'primary' | 'secondary' | 'tertiary' | 'warning' | 'danger';
 
 export interface DropdownItemProps extends BaseProps {
-  forwardRef?: any,
+  forwardRef?: any;
   disabled?: boolean;
   selected?: boolean;
   onClick?: (payload: MouseEvent) => void;
@@ -28,8 +28,8 @@ export interface DropdownItemProps extends BaseProps {
   onKeyDown?: (e: KeyboardEvent) => void;
   showTick?: boolean;
   /** internal prop, please do not use  */
-  hover?: boolean
-  name?: string
+  hover?: boolean;
+  name?: string;
 }
 
 const prefixCls = css.PREFIX;
@@ -61,91 +61,83 @@ const defaultProps = {
   forwardRef: noop,
 };
 
-export const vuePropsType = vuePropsMake<DropdownItemProps>(propTypes, defaultProps)
-const DropdownItem = defineComponent((props, {slots, attrs}) => {
-
-  const {context} = useDropdownContext();
-  let elementType: string = 'Dropdown.Item'
-
-  return ()=>{
-    const {
-      disabled,
-      className,
-      forwardRef,
-      style,
-      type,
-      active,
-      icon,
-      onKeyDown,
-      showTick,
-      hover
-    } = props;
-    const { showTick: contextShowTick } = context.value;
-    const realShowTick = contextShowTick ?? showTick;
-    const itemclass = cls(className, {
-      [`${prefixCls}-item`]: true,
-      [`${prefixCls}-item-disabled`]: disabled,
-      [`${prefixCls}-item-hover`]: hover,
-      [`${prefixCls}-item-withTick`]: realShowTick,
-      [`${prefixCls}-item-${type}`]: type,
-      [`${prefixCls}-item-active`]: active,
-    });
-
-    const events:Partial<{
-      onClick: (e:MouseEvent)=>void;
-      onMousedown: (e:MouseEvent)=>void;
-      onMouseenter: (e:MouseEvent)=>void;
-      onMouseleave: (e:MouseEvent)=>void;
-      onContextmenu: (e:MouseEvent)=>void;
-    }> = {};
-    if (!disabled) {
-      ['onClick', 'onMouseenter', 'onMouseleave', 'onContextmenu'].forEach(eventName => {
-        const isInAnotherDropdown = context.value.level !== 1;
-        if (isInAnotherDropdown && eventName === "onClick") {
-          events["onMouseDown"] = (e: MouseEvent) => {
-            if (e.button === 0) {
-              props[eventName]?.(e);
-            }
-          };
-        } else {
-          events[eventName] = props[eventName];
-        }
-      });
-    }
-    let tick = null;
-    switch (true) {
-      case realShowTick && active:
-        tick = <IconTick/>;
-        break;
-      case realShowTick && !active:
-        tick = <IconTick style={{ color: 'transparent' }}/>;
-        break;
-      default:
-        tick = null;
-        break;
-    }
-    let iconContent = null;
-    if (icon) {
-      iconContent = (
-        <div class={`${prefixCls}-item-icon`}>
-          {icon}
-        </div>
-      );
-    }
-    return (
-      <li role="menuitem" tabindex={-1} aria-disabled={disabled} {...events} onKeydown={onKeyDown} ref={forwardRef}
-          class={itemclass} style={style} {...getDataAttr({...props, ...attrs} )}>
-        {tick}
-        {iconContent}
-        {slots.default?.()}
-      </li>
-    );
-  }
-}, {
+export const vuePropsType = vuePropsMake<DropdownItemProps>(propTypes, defaultProps);
+const DropdownItem = defineComponent({
   props: vuePropsType,
-  name: 'DropdownItem'
-})
+  name: 'DropdownItem',
+  setup(props, { slots, attrs }) {
+    const { context } = useDropdownContext();
+    let elementType: string = 'Dropdown.Item';
 
+    return () => {
+      const { disabled, className, forwardRef, style, type, active, icon, onKeyDown, showTick, hover } = props;
+      const { showTick: contextShowTick } = context.value;
+      const realShowTick = contextShowTick ?? showTick;
+      const itemclass = cls(className, {
+        [`${prefixCls}-item`]: true,
+        [`${prefixCls}-item-disabled`]: disabled,
+        [`${prefixCls}-item-hover`]: hover,
+        [`${prefixCls}-item-withTick`]: realShowTick,
+        [`${prefixCls}-item-${type}`]: type,
+        [`${prefixCls}-item-active`]: active,
+      });
 
-export default DropdownItem
+      const events: Partial<{
+        onClick: (e: MouseEvent) => void;
+        onMousedown: (e: MouseEvent) => void;
+        onMouseenter: (e: MouseEvent) => void;
+        onMouseleave: (e: MouseEvent) => void;
+        onContextmenu: (e: MouseEvent) => void;
+      }> = {};
+      if (!disabled) {
+        ['onClick', 'onMouseenter', 'onMouseleave', 'onContextmenu'].forEach((eventName) => {
+          const isInAnotherDropdown = context.value.level !== 1;
+          if (isInAnotherDropdown && eventName === 'onClick') {
+            events['onMouseDown'] = (e: MouseEvent) => {
+              if (e.button === 0) {
+                props[eventName]?.(e);
+              }
+            };
+          } else {
+            events[eventName] = props[eventName];
+          }
+        });
+      }
+      let tick = null;
+      switch (true) {
+        case realShowTick && active:
+          tick = <IconTick />;
+          break;
+        case realShowTick && !active:
+          tick = <IconTick style={{ color: 'transparent' }} />;
+          break;
+        default:
+          tick = null;
+          break;
+      }
+      let iconContent = null;
+      if (icon) {
+        iconContent = <div class={`${prefixCls}-item-icon`}>{icon}</div>;
+      }
+      return (
+        <li
+          role="menuitem"
+          tabindex={-1}
+          aria-disabled={disabled}
+          {...events}
+          onKeydown={onKeyDown}
+          ref={forwardRef}
+          class={itemclass}
+          style={style}
+          {...getDataAttr({ ...props, ...attrs })}
+        >
+          {tick}
+          {iconContent}
+          {slots.default?.()}
+        </li>
+      );
+    };
+  },
+});
 
+export default DropdownItem;

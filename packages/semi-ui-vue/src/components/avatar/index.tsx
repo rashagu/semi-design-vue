@@ -20,8 +20,6 @@ import '@douyinfe/semi-foundation/avatar/avatar.scss';
 import { noop } from '@douyinfe/semi-foundation/utils/function';
 import { useBaseComponent } from '../_base/baseComponent';
 import type { AvatarProps } from './interface';
-// import {AvatarColor, AvatarShape, AvatarSize} from "./interface";
-// import {TooltipProps} from "../tooltip";
 import { RadioInnerProps } from '../radio/radioInner';
 import { handlePrevent } from '@douyinfe/semi-foundation/utils/a11y';
 import TopSlotSvg from './TopSlotSvg';
@@ -71,8 +69,10 @@ export const vuePropsType: ComponentObjectPropsOptions<AvatarProps> = {
   border: [Object, Boolean],
   contentMotion: Boolean,
 };
-const Index = defineComponent(
-  (props, { slots }) => {
+const Index = defineComponent({
+  props: vuePropsType,
+  name: 'Avatar',
+  setup(props, { slots }) {
     let foundation!: AvatarFoundation;
 
     const state = reactive<AvatarState>({
@@ -446,10 +446,6 @@ const Index = defineComponent(
       }
     };
   },
-  {
-    props: vuePropsType,
-    name: 'Avatar',
-  }
-);
+});
 
 export default Index;

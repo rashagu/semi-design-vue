@@ -1,5 +1,4 @@
 import {defineComponent, h, inject, Ref, ref, shallowRef, UnwrapRef, useSlots} from 'vue'
-import {ArrayFieldContext} from "../../context";
 import {ArrayFieldType} from "./Provider";
 
 

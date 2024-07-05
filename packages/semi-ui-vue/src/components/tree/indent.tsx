@@ -1,14 +1,14 @@
 import classNames from 'classnames';
-import type {VNode} from "vue";
+import type { VNode } from 'vue';
 
 interface IndentProps {
   prefixcls: string;
   level: number;
   isEnd: boolean[];
-  showLine: boolean
+  showLine: boolean;
 }
 
-const Indent = ({prefixcls, level, isEnd, showLine}: IndentProps) => {
+const Indent = ({ prefixcls, level, isEnd, showLine }: IndentProps) => {
   const baseClassName = `${prefixcls}-indent-unit`;
   const list: VNode[] = [];
   for (let i = 0; i < level; i += 1) {
@@ -18,18 +18,19 @@ const Indent = ({prefixcls, level, isEnd, showLine}: IndentProps) => {
         class={classNames(baseClassName, {
           [`${baseClassName}-end`]: isEnd[i],
         })}
-      />,
+      />
     );
   }
 
   return (
-    <span aria-hidden="true" class={
-      classNames(`${prefixcls}-indent`, {
+    <span
+      aria-hidden="true"
+      class={classNames(`${prefixcls}-indent`, {
         [`${prefixcls}-indent-show-line`]: showLine,
-      })
-    }>
-            {list}
-        </span>
+      })}
+    >
+      {list}
+    </span>
   );
 };
 export default Indent;

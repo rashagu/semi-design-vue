@@ -3,76 +3,68 @@ import * as PropTypes from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/highlight/constants';
 import { getHighLightTextHTML } from '../_utils/index';
 import '@douyinfe/semi-foundation/highlight/highlight.scss';
-import {CSSProperties, defineComponent, h, useSlots} from "vue";
-import {vuePropsMake} from "../PropTypes";
+import { CSSProperties, defineComponent, h, useSlots } from 'vue';
+import { vuePropsMake } from '../PropTypes';
 
 export interface HighlightProps {
-    autoEscape?: boolean;
-    caseSensitive?: boolean;
-    sourceString?: string;
-    searchWords?: Array<string>;
-    highlightStyle?: CSSProperties;
-    highlightClassName?: string;
-    component?: string
+  autoEscape?: boolean;
+  caseSensitive?: boolean;
+  sourceString?: string;
+  searchWords?: Array<string>;
+  highlightStyle?: CSSProperties;
+  highlightClassName?: string;
+  component?: string;
 }
 
 const prefixCls = cssClasses.PREFIX;
 
 const propTypes = {
-    style: PropTypes.object,
-    className: PropTypes.string,
-    autoEscape: PropTypes.bool,
-    caseSensitive: PropTypes.bool,
-    sourceString: PropTypes.string,
-    searchWords: PropTypes.array,
-    highlightStyle: PropTypes.object,
-    highlightClassName: PropTypes.string,
-    component: PropTypes.string
+  style: PropTypes.object,
+  className: PropTypes.string,
+  autoEscape: PropTypes.bool,
+  caseSensitive: PropTypes.bool,
+  sourceString: PropTypes.string,
+  searchWords: PropTypes.array,
+  highlightStyle: PropTypes.object,
+  highlightClassName: PropTypes.string,
+  component: PropTypes.string,
 };
 
 const defaultProps = {
-    component: 'mark',
-    autoEscape: true,
-    caseSensitive: false,
-    sourceString: '',
+  component: 'mark',
+  autoEscape: true,
+  caseSensitive: false,
+  sourceString: '',
 };
-export const vuePropsType = vuePropsMake<HighlightProps>(propTypes, defaultProps)
-const Highlight = defineComponent((props, {}) => {
-    const slots = useSlots()
-
+export const vuePropsType = vuePropsMake<HighlightProps>(propTypes, defaultProps);
+const Highlight = defineComponent({
+  props: vuePropsType,
+  name: 'Highlight',
+  setup(props, {}) {
+    const slots = useSlots();
 
     return () => {
+      const { searchWords, sourceString, component, highlightClassName, highlightStyle, caseSensitive, autoEscape } =
+        props;
 
-        const {
-            searchWords,
-            sourceString,
-            component,
-            highlightClassName,
-            highlightStyle,
-            caseSensitive,
-            autoEscape,
-        } = props;
+      const tagCls = cls(
+        {
+          [`${prefixCls}-tag`]: true,
+        },
+        highlightClassName
+      );
 
-        const tagCls = cls({
-            [`${prefixCls}-tag`]: true,
-        }, highlightClassName);
+      const option = {
+        highlightTag: component,
+        highlightClassName: tagCls,
+        highlightStyle,
+        caseSensitive,
+        autoEscape,
+      };
 
-        const option = {
-            highlightTag: component,
-            highlightClassName: tagCls,
-            highlightStyle,
-            caseSensitive,
-            autoEscape,
-        };
+      return getHighLightTextHTML({ sourceString, searchWords, option });
+    };
+  },
+});
 
-        return (
-          getHighLightTextHTML({ sourceString, searchWords, option })
-        );
-    }
-},{
-    props:vuePropsType,
-    name:'Highlight'
-})
-
-
-export default Highlight
+export default Highlight;

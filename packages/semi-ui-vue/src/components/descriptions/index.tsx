@@ -60,8 +60,10 @@ const defaultProps = {
   column: 3,
 };
 export const vuePropsType = vuePropsMake<DescriptionsProps>(propTypes, defaultProps);
-const Descriptions = defineComponent(
-  (props, {}) => {
+const Descriptions = defineComponent({
+  props: vuePropsType,
+  name: 'Descriptions',
+  setup(props, {}) {
     const slots = useSlots();
     const attr = useAttrs();
 
@@ -78,8 +80,8 @@ const Descriptions = defineComponent(
             return children.map((item) => {
               return isVNode(item)
                 ? {
-                //@ts-ignore
-                  value: item.children.default?.(),
+                    //@ts-ignore
+                    value: item.children.default?.(),
                     ...item.props,
                   }
                 : [];
@@ -105,8 +107,8 @@ const Descriptions = defineComponent(
       }
 
       let total = 0;
-      itemRow.forEach((item: { span: number })=>{
-        return total += !isNaN(item.span)?item.span:1;
+      itemRow.forEach((item: { span: number }) => {
+        return (total += !isNaN(item.span) ? item.span : 1);
       });
 
       if (total < maxColumnPerLine) {
@@ -128,14 +130,14 @@ const Descriptions = defineComponent(
         } else {
           // 剩余空间放不下当前item，需要另起一行
           // 若新行放不下当前item，极端情况，例如用户给当前span数值远大于 maxColumnPerLine，即使另起新行都无法放得下，itemSpan直接按props.column处理
-          itemSpan > maxColumnPerLine ? itemSpan = maxColumnPerLine : null;
+          itemSpan > maxColumnPerLine ? (itemSpan = maxColumnPerLine) : null;
           // 新行能放得下当前item，将原有行push到horizontalList中，然后重置curRow，将当前item存到curRow中
           _rowFillRemainder(curRow.itemList);
           horizontalList.push(curRow.itemList);
           curRow.totalSpan = itemSpan;
           curRow.itemList = [item];
         }
-        if (index === columns.length -1) {
+        if (index === columns.length - 1) {
           _rowFillRemainder(curRow.itemList);
           horizontalList.push(curRow.itemList);
         }
@@ -197,11 +199,7 @@ const Descriptions = defineComponent(
       );
     };
   },
-  {
-    props: vuePropsType,
-    name: 'Descriptions',
-  }
-);
+});
 
 export default Descriptions;
 export { Item as DescriptionsItem };

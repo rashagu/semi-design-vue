@@ -6,8 +6,8 @@ import {
   HTMLAttributes,
   CSSProperties,
   ComponentObjectPropsOptions,
-  PropType
-} from 'vue'
+  PropType,
+} from 'vue';
 import Base from './base';
 import { Ellipsis, TypographyBaseSize, TypographyBaseType, OmitTypographyProps } from './interface';
 import { CopyableConfig, LinkType } from './title';
@@ -31,11 +31,10 @@ export interface TextProps extends Omit<HTMLAttributes, OmitTextProps> {
   style?: CSSProperties;
   type?: TypographyBaseType;
   underline?: boolean;
-  weight?: number
+  weight?: number;
 }
 
-
-export const vuePropsType:ComponentObjectPropsOptions<TextProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<TextProps> = {
   copyable: {
     type: [Object, Boolean],
     default: false,
@@ -49,7 +48,7 @@ export const vuePropsType:ComponentObjectPropsOptions<TextProps> = {
     default: false,
   },
   icon: {
-    type: [Object,String],
+    type: [Object, String],
     default: '',
   },
   // editable: false,
@@ -91,23 +90,22 @@ export const vuePropsType:ComponentObjectPropsOptions<TextProps> = {
   },
   weight: Number,
   code: Boolean,
-}
+};
 
-
-const Text = defineComponent((props, {slots}) => {
-
-  return () => {
-    return <Base children={slots.default?.()} component_={'span'} {...props} >
-      {{
-        default: slots.default
-      }}
-    </Base>;
-  }
-}, {
+const Text = defineComponent({
   props: vuePropsType,
-  name: 'Text'
-})
+  name: 'Text',
+  setup(props, { slots }) {
+    return () => {
+      return (
+        <Base children={slots.default?.()} component_={'span'} {...props}>
+          {{
+            default: slots.default,
+          }}
+        </Base>
+      );
+    };
+  },
+});
 
-
-export default Text
-
+export default Text;

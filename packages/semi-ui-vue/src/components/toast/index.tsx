@@ -24,7 +24,9 @@ import {
   createApp,
   App,
   ref,
-  createVNode, getCurrentInstance, shallowRef,
+  createVNode,
+  getCurrentInstance,
+  shallowRef,
 } from 'vue';
 import { VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
@@ -51,19 +53,20 @@ const propTypes = {
 const defaultProps = {};
 const vuePropsType = vuePropsMake(propTypes, defaultProps);
 
-const ToastList = defineComponent(
-  (props, { expose }) => {
+const ToastList = defineComponent({
+  props: vuePropsType,
+  name: 'ToastList',
+  setup(props, { expose }) {
     const slots = useSlots();
     const stack = shallowRef<boolean>(false);
 
     function setStack(v: boolean) {
-      stack.value = v
+      stack.value = v;
     }
     function getStack() {
-      return stack.value
+      return stack.value;
     }
-    const currentInstance = getCurrentInstance()
-
+    const currentInstance = getCurrentInstance();
 
     let innerWrapperRef = ref();
 
@@ -174,27 +177,25 @@ const ToastList = defineComponent(
                   startClassName={
                     isRemoved ? `${cssClasses.PREFIX}-animation-hide` : `${cssClasses.PREFIX}-animation-show`
                   }
-                  children=
-                    {({ animationClassName, animationEventsNeedBind, isAnimating }) => {
-                      return isRemoved && !isAnimating ? null : (
-                        <Toast
-                          {...item}
-                          stack={stack.value}
-                          stackExpanded={state.mouseInSide}
-                          positionInList={{ length: list.length, index }}
-                          className={cls({
-                            [item.className]: Boolean(item.className),
-                            [animationClassName]: true,
-                          })}
-                          {...animationEventsNeedBind}
-                          style={{ ...item.style }}
-                          close={(id) => remove(id)}
-                          ref={refFn}
-                        />
-                      );
-                    }}
-                >
-                </CSSAnimation>
+                  children={({ animationClassName, animationEventsNeedBind, isAnimating }) => {
+                    return isRemoved && !isAnimating ? null : (
+                      <Toast
+                        {...item}
+                        stack={stack.value}
+                        stackExpanded={state.mouseInSide}
+                        positionInList={{ length: list.length, index }}
+                        className={cls({
+                          [item.className]: Boolean(item.className),
+                          [animationClassName]: true,
+                        })}
+                        {...animationEventsNeedBind}
+                        style={{ ...item.style }}
+                        close={(id) => remove(id)}
+                        ref={refFn}
+                      />
+                    );
+                  }}
+                ></CSSAnimation>
               );
             })}
           </div>
@@ -202,11 +203,7 @@ const ToastList = defineComponent(
       );
     };
   },
-  {
-    props: vuePropsType,
-    name: 'ToastList',
-  }
-);
+});
 
 export { ToastList };
 
@@ -264,7 +261,7 @@ export function useToastHook(configProps?: ConfigProps) {
           ref: (instance: any) => {
             if (!ToastListRef) {
               instance.add({ ...opts, id });
-              instance.setStack(Boolean(opts.stack))
+              instance.setStack(Boolean(opts.stack));
             }
             ToastListRef = instance;
           },
@@ -280,7 +277,7 @@ export function useToastHook(configProps?: ConfigProps) {
       });
 
       if (Boolean(opts.stack) !== ToastListRef.getStack()) {
-        ToastListRef.setStack(Boolean(opts.stack))
+        ToastListRef.setStack(Boolean(opts.stack));
       }
 
       if (ToastListRef.has(id)) {

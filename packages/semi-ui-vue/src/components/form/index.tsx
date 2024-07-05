@@ -8,7 +8,6 @@
 
 // FormComponent
 import Form from './baseForm';
-import Label from './label';
 import ArrayField from './arrayField';
 
 // Form Hooks

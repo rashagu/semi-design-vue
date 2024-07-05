@@ -66,8 +66,10 @@ const defaultProps = {
   onChange: noop,
 };
 export const vuePropsType = vuePropsMake<CheckboxInnerProps>(propTypes, defaultProps);
-const CheckboxInner = defineComponent(
-  (props, { expose }) => {
+const CheckboxInner = defineComponent({
+  props: vuePropsType,
+  name: 'vuePropsType',
+  setup(props, { expose }) {
     const slots = useSlots();
     const inputEntity = ref();
 
@@ -151,10 +153,6 @@ const CheckboxInner = defineComponent(
       );
     };
   },
-  {
-    props: vuePropsType,
-    name: 'vuePropsType',
-  }
-);
+});
 
 export default CheckboxInner;

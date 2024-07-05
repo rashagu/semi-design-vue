@@ -1,4 +1,3 @@
-
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import LocaleConsumer from '../locale/localeConsumer';
@@ -7,65 +6,64 @@ import { cssClasses } from '@douyinfe/semi-foundation/calendar/constants';
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
 import { TimeColProps } from './interface';
 import { Locale } from '../locale/interface';
-import {ComponentObjectPropsOptions, defineComponent, h, PropType, useSlots} from "vue";
-import {vuePropsMake} from "../PropTypes";
+import { ComponentObjectPropsOptions, defineComponent, h, PropType, useSlots } from 'vue';
+import { vuePropsMake } from '../PropTypes';
 
 const prefixCls = `${cssClasses.PREFIX}-time`;
 
-const propTypes:ComponentObjectPropsOptions<TimeColProps> = {
-    className: PropTypes.string,
-    renderTimeDisplay: PropTypes.func as PropType<TimeColProps['renderTimeDisplay']>,
+const propTypes: ComponentObjectPropsOptions<TimeColProps> = {
+  className: PropTypes.string,
+  renderTimeDisplay: PropTypes.func as PropType<TimeColProps['renderTimeDisplay']>,
 };
-export const vuePropsType = vuePropsMake<TimeColProps>(propTypes, {})
-const TimeCol = defineComponent((props, {}) => {
-    const slots = useSlots()
-
+export const vuePropsType = vuePropsMake<TimeColProps>(propTypes, {});
+const TimeCol = defineComponent({
+  props: vuePropsType,
+  name: 'TimeCol',
+  setup(props, {}) {
+    const slots = useSlots();
 
     function formatTime(item: number) {
-        const { renderTimeDisplay } = props;
-        if (typeof renderTimeDisplay === 'function') {
-            return renderTimeDisplay(item);
-        } else {
-            const replaceTime = (template: string, time: number) => template.replace('${time}', String(time));
-            return (
-              <LocaleConsumer componentName="Calendar" key={`locale-${item}`}>
-                  {(locale: Locale['Calendar']) => {
-                      let time = item < 12 ? replaceTime(locale.AM, item) : replaceTime(locale.PM, item - 12);
-                      if (item === 12) {
-                          time = replaceTime(locale.PM, item);
-                      }
-                      return time;
-                  }}
-              </LocaleConsumer>
-            );
-        }
+      const { renderTimeDisplay } = props;
+      if (typeof renderTimeDisplay === 'function') {
+        return renderTimeDisplay(item);
+      } else {
+        const replaceTime = (template: string, time: number) => template.replace('${time}', String(time));
+        return (
+          <LocaleConsumer componentName="Calendar" key={`locale-${item}`}>
+            {(locale: Locale['Calendar']) => {
+              let time = item < 12 ? replaceTime(locale.AM, item) : replaceTime(locale.PM, item - 12);
+              if (item === 12) {
+                time = replaceTime(locale.PM, item);
+              }
+              return time;
+            }}
+          </LocaleConsumer>
+        );
+      }
     }
 
     function renderTime() {
-        const { className } = props;
-        const wrapperCls = cls(className, `${prefixCls}`);
-        const list = [...Array(24).keys()].map(item => formatTime(item));
-        list.splice(0, 1, '');
-        const inner = list.map((item, index) => (
-          <li key={`time-${index}`} class={`${prefixCls}-item`}>
-              <span>{item}</span>
-          </li>
-        ));
-        return (
-          <div class={wrapperCls}>
-              <ul class={`${prefixCls}-items`}>
-                  {inner}
-              </ul>
-          </div>
-        );
+      const { className } = props;
+      const wrapperCls = cls(className, `${prefixCls}`);
+      const list = [...Array(24).keys()].map((item) => formatTime(item));
+      list.splice(0, 1, '');
+      const inner = list.map((item, index) => (
+        <li key={`time-${index}`} class={`${prefixCls}-item`}>
+          <span>{item}</span>
+        </li>
+      ));
+      return (
+        <div class={wrapperCls}>
+          <ul class={`${prefixCls}-items`}>{inner}</ul>
+        </div>
+      );
     }
 
     return () => {
-        const time = renderTime();
-        return time;
-    }
-}, {props:vuePropsType, name:'TimeCol'})
+      const time = renderTime();
+      return time;
+    };
+  },
+});
 
-
-
-export default TimeCol
+export default TimeCol;

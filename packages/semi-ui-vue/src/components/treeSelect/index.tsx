@@ -170,7 +170,7 @@ export interface TreeSelectProps
   onFocus?: (e: MouseEvent) => void;
   onVisibleChange?: (isVisible: boolean) => void;
   onClear?: (e: MouseEvent | KeyboardEvent) => void;
-  autoMergeValue?: boolean
+  autoMergeValue?: boolean;
   id?: string;
 }
 
@@ -322,8 +322,10 @@ const defaultProps: Partial<TreeSelectProps> = {
   autoMergeValue: true,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const TreeSelect = defineComponent(
-  (props, {}) => {
+const TreeSelect = defineComponent({
+  props: vuePropsType,
+  name: 'TreeSelect',
+  setup(props, {}) {
     const slots = useSlots();
 
     // let _flattenNodes: TreeState['flattenNodes'];
@@ -388,14 +390,11 @@ const TreeSelect = defineComponent(
             // eslint-disable-next-line
             const optionsDom = optionInstance;
             const target = e.target as Element;
-            const path = e.composedPath && e.composedPath() || [target];
+            const path = (e.composedPath && e.composedPath()) || [target];
             // console.log(optionsRef.value, (optionInstance as HTMLElement).parentNode, target)
             if (
               optionsDom &&
-              (
-                !optionsDom.contains(target) ||
-                !optionsDom.contains(target.parentNode)
-              ) &&
+              (!optionsDom.contains(target) || !optionsDom.contains(target.parentNode)) &&
               triggerDom &&
               !triggerDom.contains(target) &&
               !(path.includes(triggerDom) || path.includes(optionsDom))
@@ -528,7 +527,7 @@ const TreeSelect = defineComponent(
         },
         getClearInputFlag: () => {
           return clearInputFlag;
-        }
+        },
       };
     }
     const adapter = adapter_();
@@ -1023,9 +1022,11 @@ const TreeSelect = defineComponent(
         [`${prefixcls}-selection-TriggerSearchItem-placeholder`]: (inputTriggerFocus || !renderText) && !disabled,
         [`${prefixcls}-selection-TriggerSearchItem-disabled`]: disabled,
       });
-      return <span class={spanCls} onClick={foundation.onClickSingleTriggerSearchItem}>
-        {renderText ? renderText : placeholder}
-      </span>;
+      return (
+        <span class={spanCls} onClick={foundation.onClickSingleTriggerSearchItem}>
+          {renderText ? renderText : placeholder}
+        </span>
+      );
     };
 
     /**
@@ -1205,7 +1206,7 @@ const TreeSelect = defineComponent(
       let triggerRenderKeys = [];
       if (multiple) {
         if (!autoMergeValue) {
-          triggerRenderKeys =[...checkedKeys];
+          triggerRenderKeys = [...checkedKeys];
         } else if (checkRelation === 'related') {
           triggerRenderKeys = normalizeKeyList([...checkedKeys], keyEntities, leafOnly, true);
         } else if (checkRelation === 'unRelated') {
@@ -1215,18 +1216,20 @@ const TreeSelect = defineComponent(
         triggerRenderKeys = selectedKeys;
       }
       if (useCustomTrigger) {
-        inner = <Trigger
-          inputValue={inputValue}
-          value={triggerRenderKeys.map((key: string) => get(keyEntities, [key, 'data']))}
-          disabled={disabled}
-          placeholder={placeholder}
-          onClear={handleClear}
-          componentName={'TreeSelect'}
-          triggerRender={triggerRender}
-          componentProps={{ ...props }}
-          onSearch={search}
-          onRemove={removeTag}
-        />;
+        inner = (
+          <Trigger
+            inputValue={inputValue}
+            value={triggerRenderKeys.map((key: string) => get(keyEntities, [key, 'data']))}
+            disabled={disabled}
+            placeholder={placeholder}
+            onClear={handleClear}
+            componentName={'TreeSelect'}
+            triggerRender={triggerRender}
+            componentProps={{ ...props }}
+            onSearch={search}
+            onRemove={removeTag}
+          />
+        );
       } else {
         inner = [
           <Fragment key={'prefix'}>{prefix || insetLabel ? renderPrefix() : null}</Fragment>,
@@ -1235,11 +1238,7 @@ const TreeSelect = defineComponent(
           </Fragment>,
           <Fragment key={'suffix'}>{suffix ? renderSuffix() : null}</Fragment>,
           <Fragment key={'clearBtn'}>
-            {
-              (showClear || (isTriggerPositionSearch && inputValue)) ?
-                renderClearBtn() :
-                null
-            }
+            {showClear || (isTriggerPositionSearch && inputValue) ? renderClearBtn() : null}
           </Fragment>,
           <Fragment key={'arrow'}>{renderArrow()}</Fragment>,
         ];
@@ -1346,9 +1345,7 @@ const TreeSelect = defineComponent(
         filterTreeNode,
         preventScroll,
       } = props;
-      const {
-        inputValue,
-      } = state;
+      const { inputValue } = state;
       // auto focus search input divide into two parts
       // 1. filterTreeNode && searchPosition === strings.SEARCH_POSITION_TRIGGER
       //    Implemented by passing autofocus to the underlying input's autofocus
@@ -1494,13 +1491,13 @@ const TreeSelect = defineComponent(
     };
 
     /* Event handler function after popover visible change */
-    const handlePopoverVisibleChange = isVisible => {
+    const handlePopoverVisibleChange = (isVisible) => {
       foundation.handlePopoverVisibleChange(isVisible);
-    }
+    };
 
     const afterClose = () => {
       foundation.handleAfterClose();
-    }
+    };
 
     const renderTreeNode = (treeNode: FlattenNode, ind: number, style: CSSProperties) => {
       const { data, key } = treeNode;
@@ -1695,10 +1692,6 @@ const TreeSelect = defineComponent(
       );
     };
   },
-  {
-    props: vuePropsType,
-    name: 'TreeSelect',
-  }
-);
+});
 
 export default TreeSelect;

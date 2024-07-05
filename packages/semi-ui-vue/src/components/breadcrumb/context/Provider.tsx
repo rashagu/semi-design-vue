@@ -5,7 +5,10 @@ import {BreadContextType} from "../bread-context";
 export const vuePropsType = {
   value: Object
 }
-const Provider = defineComponent((props, {slots}) => {
+const Provider = defineComponent({
+  props:vuePropsType,
+  name: 'BreadContextProvider',
+  setup(props, {slots}) {
   const ConfigContext = ref<BreadContextType>(props.value);
 
   watch(()=>props.value, ()=>{
@@ -13,9 +16,7 @@ const Provider = defineComponent((props, {slots}) => {
   }, { deep: true})
   provide('BreadContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
-}, {
-  props:vuePropsType,
-  name: 'BreadContextProvider'
+}
 })
 
 

@@ -8,14 +8,17 @@ import {
   CSSProperties,
   reactive,
   isVNode,
-  cloneVNode, inject, provide, ComponentObjectPropsOptions, PropType
-} from 'vue'
+  cloneVNode,
+  inject,
+  provide,
+  ComponentObjectPropsOptions,
+  PropType,
+} from 'vue';
 import classnames from 'classnames';
-import * as PropTypes from '../PropTypes'
+import * as PropTypes from '../PropTypes';
 import { cssClasses, strings, numbers } from '@douyinfe/semi-foundation/dropdown/constants';
 
-import {useBaseComponent} from '../_base/baseComponent';
-
+import { useBaseComponent } from '../_base/baseComponent';
 
 import Tooltip, { TooltipProps, Trigger } from '../tooltip';
 
@@ -30,10 +33,10 @@ import DropdownTitle, { DropdownTitleProps } from './dropdownTitle';
 import '@douyinfe/semi-foundation/dropdown/dropdown.scss';
 import { noop, get } from 'lodash';
 import { Motion } from '../_base/base';
-import {ArrayElement} from "@douyinfe/semi-foundation/utils/type";
-import {vuePropsMake} from "../PropTypes";
-import {useDropdownContext} from "./context/Consumer";
-import {DropdownContext} from "./context";
+import { ArrayElement } from '@douyinfe/semi-foundation/utils/type';
+import { vuePropsMake } from '../PropTypes';
+import { useDropdownContext } from './context/Consumer';
+import { DropdownContext } from './context';
 
 const positionSet = strings.POSITION_SET;
 const triggerSet = strings.TRIGGER_SET;
@@ -45,14 +48,14 @@ export type { DropdownTitleProps } from './dropdownTitle';
 
 export interface DropDownMenuItemItem extends DropdownItemProps {
   node: 'item';
-  name?: string
+  name?: string;
 }
 export interface DropDownMenuItemDivider extends DropdownDividerProps {
-  node: 'divider'
+  node: 'divider';
 }
 export interface DropDownMenuItemTitle extends DropdownTitleProps {
   node: 'title';
-  name?: string
+  name?: string;
 }
 
 export type DropDownMenuItem = DropDownMenuItemItem | DropDownMenuItemDivider | DropDownMenuItemTitle;
@@ -81,19 +84,19 @@ export interface DropdownProps extends TooltipProps {
   onVisibleChange?: (visible: boolean) => void;
   rePosKey?: string | number;
   showTick?: boolean;
-  prefixCls?: string,
+  prefixCls?: string;
   spacing?: number;
 
   closeOnEsc?: TooltipProps['closeOnEsc'];
-  onEscKeyDown?: TooltipProps['onEscKeyDown']
+  onEscKeyDown?: TooltipProps['onEscKeyDown'];
 
-  name?: string
+  name?: string;
 }
 
 interface DropdownState {
   popVisible: boolean;
 }
-const propTypes:ComponentObjectPropsOptions<DropdownProps> = {
+const propTypes: ComponentObjectPropsOptions<DropdownProps> = {
   onFilter: PropTypes.func,
   onFilterDropdownVisibleChange: PropTypes.func,
   onSelect: PropTypes.func,
@@ -119,8 +122,8 @@ const propTypes:ComponentObjectPropsOptions<DropdownProps> = {
   spacing: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   menu: PropTypes.array,
   name: String,
-}
-export const DropdownVuePropsType = propTypes
+};
+export const DropdownVuePropsType = propTypes;
 const defaultProps = {
   onVisibleChange: noop,
   prefixCls: cssClasses.PREFIX,
@@ -134,166 +137,166 @@ const defaultProps = {
   onEscKeyDown: noop,
 };
 
-export const vuePropsType = vuePropsMake<DropdownProps>(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake<DropdownProps>(propTypes, defaultProps);
 
-
-const Dropdown = defineComponent((props, {slots, expose}) => {
-
-  const state = reactive({
-    popVisible: props.visible,
-  })
-  const tooltipRef = ref()
-  const {adapter: adapterInject} = useBaseComponent<TooltipProps>(props, state)
-
-  const adapterFunc = function (){
-    return {
-      ...adapterInject(),
-      setPopVisible: (popVisible: boolean) => state.popVisible = popVisible,
-      notifyVisibleChange: (visible: boolean) => props.onVisibleChange(visible),
-      getPopupId: () => tooltipRef.value.getPopupId()
-    };
-  }
-  const adapter = adapterFunc()
-  const foundation = new Foundation(adapter);
-
-  const handleVisibleChange = (visible: boolean) => {
-    foundation.handleVisibleChange(visible)
-  };
-
-  const {context} = useDropdownContext()
-  const { level = 0 } = context.value;
-
-  function renderContent() {
-    const { render, menu, contentClassName, style, showTick, prefixCls, trigger } = props;
-    const className = classnames(prefixCls, contentClassName);
-    const contextValue = { showTick, level: level + 1, trigger };
-    let content:any = null;
-    if (isVNode(render)) {
-      content = render;
-    } else if (Array.isArray(menu)) {
-      content = renderMenu();
-    }
-    return (
-      <DropdownContext.Provider value={contextValue}>
-        <div class={className} style={style}>
-          <div class={`${prefixCls}-content`} x-semi-prop="render">{content}</div>
-        </div>
-      </DropdownContext.Provider>
-    );
-  }
-
-
-  function renderMenu() {
-    const { menu } = props;
-    const content = menu.map((m, index) => {
-      switch (m.node) {
-        case 'title': {
-          const { name, node, ...rest } = m;
-          return (
-            <DropdownTitle {...rest} key={node + name + index}>
-              {{
-                default:()=>name
-              }}
-            </DropdownTitle>
-          );
-        }
-
-        case 'item': {
-          const { node, name, ...rest } = m;
-          return (
-            <DropdownItem {...rest} key={node + name + index}>
-              {{
-                default:()=>name
-              }}
-            </DropdownItem>
-          );
-        }
-
-        case 'divider': {
-          return <DropdownDivider key={m.node + index} />;
-        }
-
-        default:
-          return null;
-      }
+const Dropdown = defineComponent({
+  props: vuePropsType,
+  name: 'Dropdown',
+  setup(props, { slots, expose }) {
+    const state = reactive({
+      popVisible: props.visible,
     });
-    return <DropdownMenu>{{default:()=>content}}</DropdownMenu>;
-  }
+    const tooltipRef = ref();
+    const { adapter: adapterInject } = useBaseComponent<TooltipProps>(props, state);
 
-  function renderPopCard() {
-    const { render, contentClassName, style, showTick, prefixCls } = props;
-    const className = classnames(prefixCls, contentClassName);
+    const adapterFunc = function () {
+      return {
+        ...adapterInject(),
+        setPopVisible: (popVisible: boolean) => (state.popVisible = popVisible),
+        notifyVisibleChange: (visible: boolean) => props.onVisibleChange(visible),
+        getPopupId: () => tooltipRef.value.getPopupId(),
+      };
+    };
+    const adapter = adapterFunc();
+    const foundation = new Foundation(adapter);
+
+    const handleVisibleChange = (visible: boolean) => {
+      foundation.handleVisibleChange(visible);
+    };
+
+    const { context } = useDropdownContext();
     const { level = 0 } = context.value;
-    const contextValue = { showTick, level: level + 1 };
-    return (
-      <DropdownContext.Provider value={contextValue}>
-        <div class={className} style={style}>
-          <div class={`${prefixCls}-content`}>{render}</div>
-        </div>
-      </DropdownContext.Provider>
-    );
-  }
 
-  expose({
-    renderPopCard
-  })
-
-  return () => {
-
-    const {
-      position,
-      trigger,
-      onVisibleChange,
-      zIndex,
-      className,
-      motion,
-      style,
-      prefixCls,
-
-      render,
-      menu,
-      showTick,
-      //
-      onFilter,
-      onFilterDropdownVisibleChange,
-      onSelect,
-      onHeaderCell,
-      onGroupedRow,
-      name,
-      contentClassName,
-      ...attr
-    } = props;
-    let { spacing } = props;
-    const { level } = context.value;
-    const { popVisible } = state;
-    const pop = renderContent();
-
-    if (level > 0) {
-      spacing = typeof spacing === 'number' ? spacing : numbers.NESTED_SPACING;
-    } else if (spacing === null || typeof spacing === 'undefined') {
-      spacing = numbers.SPACING;
+    function renderContent() {
+      const { render, menu, contentClassName, style, showTick, prefixCls, trigger } = props;
+      const className = classnames(prefixCls, contentClassName);
+      const contextValue = { showTick, level: level + 1, trigger };
+      let content: any = null;
+      if (isVNode(render)) {
+        content = render;
+      } else if (Array.isArray(menu)) {
+        content = renderMenu();
+      }
+      return (
+        <DropdownContext.Provider value={contextValue}>
+          <div class={className} style={style}>
+            <div class={`${prefixCls}-content`} x-semi-prop="render">
+              {content}
+            </div>
+          </div>
+        </DropdownContext.Provider>
+      );
     }
 
-    let children:any = slots.default?slots.default()[0]:null;
+    function renderMenu() {
+      const { menu } = props;
+      const content = menu.map((m, index) => {
+        switch (m.node) {
+          case 'title': {
+            const { name, node, ...rest } = m;
+            return (
+              <DropdownTitle {...rest} key={node + name + index}>
+                {{
+                  default: () => name,
+                }}
+              </DropdownTitle>
+            );
+          }
 
-    return (
-      <Tooltip
-        zIndex={zIndex}
-        motion={motion}
-        content={pop}
-        className={className}
-        prefixCls={prefixCls}
-        spacing={spacing}
-        position={position}
-        trigger={trigger}
-        onVisibleChange={handleVisibleChange}
-        showArrow={false}
-        returnFocusOnClose={true}
-        ref={tooltipRef}
-        {...attr}
-      >
-        {
-          cloneVNode(children, {
+          case 'item': {
+            const { node, name, ...rest } = m;
+            return (
+              <DropdownItem {...rest} key={node + name + index}>
+                {{
+                  default: () => name,
+                }}
+              </DropdownItem>
+            );
+          }
+
+          case 'divider': {
+            return <DropdownDivider key={m.node + index} />;
+          }
+
+          default:
+            return null;
+        }
+      });
+      return <DropdownMenu>{{ default: () => content }}</DropdownMenu>;
+    }
+
+    function renderPopCard() {
+      const { render, contentClassName, style, showTick, prefixCls } = props;
+      const className = classnames(prefixCls, contentClassName);
+      const { level = 0 } = context.value;
+      const contextValue = { showTick, level: level + 1 };
+      return (
+        <DropdownContext.Provider value={contextValue}>
+          <div class={className} style={style}>
+            <div class={`${prefixCls}-content`}>{render}</div>
+          </div>
+        </DropdownContext.Provider>
+      );
+    }
+
+    expose({
+      renderPopCard,
+    });
+
+    return () => {
+      const {
+        position,
+        trigger,
+        onVisibleChange,
+        zIndex,
+        className,
+        motion,
+        style,
+        prefixCls,
+
+        render,
+        menu,
+        showTick,
+        //
+        onFilter,
+        onFilterDropdownVisibleChange,
+        onSelect,
+        onHeaderCell,
+        onGroupedRow,
+        name,
+        contentClassName,
+        ...attr
+      } = props;
+      let { spacing } = props;
+      const { level } = context.value;
+      const { popVisible } = state;
+      const pop = renderContent();
+
+      if (level > 0) {
+        spacing = typeof spacing === 'number' ? spacing : numbers.NESTED_SPACING;
+      } else if (spacing === null || typeof spacing === 'undefined') {
+        spacing = numbers.SPACING;
+      }
+
+      let children: any = slots.default ? slots.default()[0] : null;
+
+      return (
+        <Tooltip
+          zIndex={zIndex}
+          motion={motion}
+          content={pop}
+          className={className}
+          prefixCls={prefixCls}
+          spacing={spacing}
+          position={position}
+          trigger={trigger}
+          onVisibleChange={handleVisibleChange}
+          showArrow={false}
+          returnFocusOnClose={true}
+          ref={tooltipRef}
+          {...attr}
+        >
+          {cloneVNode(children, {
             className: classnames(get(children, 'props.class'), {
               [`${prefixCls}-showing`]: popVisible,
             }),
@@ -303,18 +306,13 @@ const Dropdown = defineComponent((props, {slots, expose}) => {
               foundation.handleKeyDown(e);
               const childrenKeyDown: (e: KeyboardEvent) => void = get(children, 'props.onKeyDown');
               childrenKeyDown && childrenKeyDown(e);
-            }
+            },
           })}
-      </Tooltip>
-    )
-  }
-}, {
-  props: vuePropsType,
-  name: 'Dropdown'
-})
+        </Tooltip>
+      );
+    };
+  },
+});
 
-
-
-export {DropdownMenu, DropdownItem, DropdownDivider, DropdownTitle,Dropdown}
-export default Dropdown
-
+export { DropdownMenu, DropdownItem, DropdownDivider, DropdownTitle, Dropdown };
+export default Dropdown;

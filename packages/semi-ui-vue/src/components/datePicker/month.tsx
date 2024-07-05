@@ -10,8 +10,6 @@ import { isBefore, isAfter, isBetween, isSameDay } from '@douyinfe/semi-foundati
 import { noop, stubFalse, isFunction } from 'lodash';
 import { parseISO } from 'date-fns';
 import { Locale } from '../locale/interface';
-import {CheckboxProps} from "../checkbox";
-import {InsetTimeInput} from "./insetInput";
 import {vuePropsMake} from "../PropTypes";
 import {ComponentObjectPropsOptions} from "vue";
 

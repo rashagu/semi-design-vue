@@ -1,4 +1,4 @@
-import { defineComponent, ref, h, VueElement } from 'vue';
+import { defineComponent, ref, h, VueElement, ComponentObjectPropsOptions } from 'vue';
 import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
 
 let _id = -1;
@@ -11,7 +11,7 @@ export interface IconProps {
   type?: string;
 }
 
-export const VuePropsType = {
+export const VuePropsType: ComponentObjectPropsOptions<IconProps> = {
   id: Number,
   component: Object,
   size: Number,

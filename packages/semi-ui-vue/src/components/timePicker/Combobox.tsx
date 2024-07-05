@@ -8,44 +8,50 @@ import {
   onMounted,
   watch,
   ComponentObjectPropsOptions,
-  PropType
-} from 'vue'
+  PropType,
+} from 'vue';
 
 import { format as dateFnsFormat } from 'date-fns';
-import {noop, omit} from 'lodash';
+import { noop, omit } from 'lodash';
 
-import {BaseProps, useBaseComponent} from '../_base/baseComponent';
+import { BaseProps, useBaseComponent } from '../_base/baseComponent';
 import { strings } from '@douyinfe/semi-foundation/timePicker/constants';
 import ScrollList from '../scrollList/index';
-import {scrollItemFunc} from '../scrollList/scrollItem';
+import { scrollItemFunc } from '../scrollList/scrollItem';
 import ComboboxFoundation, { formatOption } from '@douyinfe/semi-foundation/timePicker/ComboxFoundation';
 import LocaleConsumer from '../locale/localeConsumer';
-import type {TimePickerProps} from './TimePicker';
+import type { TimePickerProps } from './TimePicker';
 import { Locale } from '../locale/interface';
-import {vuePropsMake} from "../PropTypes";
-import * as PropTypes from "../PropTypes";
-import {timePickerPropTypes} from "./propTypes";
-const ScrollItemFormatOptionReturn = scrollItemFunc<FormatOptionReturn>()
-const ScrollItemAMPMOptionItem = scrollItemFunc<AMPMOptionItem>()
+import { vuePropsMake } from '../PropTypes';
+import * as PropTypes from '../PropTypes';
+import { timePickerPropTypes } from './propTypes';
+const ScrollItemFormatOptionReturn = scrollItemFunc<FormatOptionReturn>();
+const ScrollItemAMPMOptionItem = scrollItemFunc<AMPMOptionItem>();
 
-export type ComboboxProps = Pick<TimePickerProps, 'format' | 'prefixCls' | 'disabledHours' |
-  'disabledMinutes' |
-  'disabledSeconds' |
-  'hideDisabledOptions' |
-  'use12Hours' |
-  'scrollItemProps' |
-  'panelFooter' |
-  'panelHeader'> & BaseProps & {
-  defaultOpenValue?: TimePickerProps['value'];
-  showHour?: boolean;
-  showMinute?: boolean;
-  showSecond?: boolean;
-  onChange?: (value: { isAM: boolean; value: string; timeStampValue: number }) => void;
-  onCurrentSelectPanelChange?: (range: string) => void;
-  isAM?: boolean;
-  timeStampValue?: any;
-  class?: string
-};
+export type ComboboxProps = Pick<
+  TimePickerProps,
+  | 'format'
+  | 'prefixCls'
+  | 'disabledHours'
+  | 'disabledMinutes'
+  | 'disabledSeconds'
+  | 'hideDisabledOptions'
+  | 'use12Hours'
+  | 'scrollItemProps'
+  | 'panelFooter'
+  | 'panelHeader'
+> &
+  BaseProps & {
+    defaultOpenValue?: TimePickerProps['value'];
+    showHour?: boolean;
+    showMinute?: boolean;
+    showSecond?: boolean;
+    onChange?: (value: { isAM: boolean; value: string; timeStampValue: number }) => void;
+    onCurrentSelectPanelChange?: (range: string) => void;
+    isAM?: boolean;
+    timeStampValue?: any;
+    class?: string;
+  };
 
 export interface ComboboxState {
   showHour: boolean;
@@ -62,10 +68,7 @@ export interface AMPMOptionItem {
   text: string;
 }
 
-
-
-
-const staticPropTypes:ComponentObjectPropsOptions<ComboboxProps> = {
+const staticPropTypes: ComponentObjectPropsOptions<ComboboxProps> = {
   class: [PropTypes.string, PropTypes.object],
   style: [PropTypes.string, PropTypes.object] as PropType<ComboboxProps['style']>,
   format: PropTypes.string,
@@ -87,16 +90,17 @@ const staticPropTypes:ComponentObjectPropsOptions<ComboboxProps> = {
 
   panelHeader: PropTypes.string as PropType<ComboboxProps['panelHeader']>,
 
-
   ...omit(timePickerPropTypes, [
-    "prefixCls", "format", "style",
-    "disabledHours",
-    "disabledMinutes",
-    "disabledSeconds",
-    "hideDisabledOptions",
-    "onChange",
-    "use12Hours",
-    "scrollItemProps"
+    'prefixCls',
+    'format',
+    'style',
+    'disabledHours',
+    'disabledMinutes',
+    'disabledSeconds',
+    'hideDisabledOptions',
+    'onChange',
+    'use12Hours',
+    'scrollItemProps',
   ]),
 };
 
@@ -106,271 +110,265 @@ const staticDefaultProps = {
   disabledSeconds: noop,
   format: strings.DEFAULT_FORMAT,
 };
-export const vuePropsType = vuePropsMake(staticPropTypes, staticDefaultProps)
-const Combobox = defineComponent((props, {}) => {
-  const slots = useSlots()
-  const state = reactive<ComboboxState>({
-    hourOptions: [],
-    minuteOptions: [],
-    secondOptions: [],
-    showHour: false,
-    showMinute: false,
-    showSecond: false
-  })
+export const vuePropsType = vuePropsMake(staticPropTypes, staticDefaultProps);
+const Combobox = defineComponent({
+  props: vuePropsType,
+  name: 'Combobox',
+  setup(props, {}) {
+    const slots = useSlots();
+    const state = reactive<ComboboxState>({
+      hourOptions: [],
+      minuteOptions: [],
+      secondOptions: [],
+      showHour: false,
+      showMinute: false,
+      showSecond: false,
+    });
 
-  const {adapter: adapterInject} = useBaseComponent<ComboboxProps>(props, state)
+    const { adapter: adapterInject } = useBaseComponent<ComboboxProps>(props, state);
 
-  const foundation = new ComboboxFoundation(adapterInject());
+    const foundation = new ComboboxFoundation(adapterInject());
 
-  function setState() {
-    const foundationState = foundation.initData()
-    Object.keys(foundationState).forEach(key=>{
-      state[key] = foundationState[key]
-    })
-  }
-
-  setState()
-
-  watch([()=>props.timeStampValue, ()=>props.format], ([],[prevPropsTimeStampValue, prevPropsFormat])=>{
-    if (prevPropsTimeStampValue !== props.timeStampValue || prevPropsFormat !== props.format) {
-      setState()
+    function setState() {
+      const foundationState = foundation.initData();
+      Object.keys(foundationState).forEach((key) => {
+        state[key] = foundationState[key];
+      });
     }
-  })
 
+    setState();
 
-
-  const cacheRefCurrent = (key: string, current: any) => {
-    if (key && typeof key === 'string') {
-      adapterInject().setCache(key, current);
-    }
-  };
-
-  const reselect = () => {
-    const currentKeys = ['ampm', 'hour', 'minute', 'second'];
-
-    currentKeys.forEach(key => {
-      const current = adapterInject().getCache(key);
-
-      if (current && current.scrollToIndex) {
-        current.scrollToIndex();
+    watch([() => props.timeStampValue, () => props.format], ([], [prevPropsTimeStampValue, prevPropsFormat]) => {
+      if (prevPropsTimeStampValue !== props.timeStampValue || prevPropsFormat !== props.format) {
+        setState();
       }
     });
-  };
 
-  const onItemChange = ({ type, value, disabled }: { type?: string; value: string; disabled?: boolean; }) => {
-    // eslint-disable-next-line prefer-const
-    let { onChange, use12Hours, isAM, format, timeStampValue } = props;
-    const transformValue = foundation.getDisplayDateFromTimeStamp(timeStampValue);
-    // TODO: foundation
-    if (type === 'hour') {
-      if (use12Hours) {
-        if (isAM) {
-          transformValue.setHours(Number(value) % 12);
+    const cacheRefCurrent = (key: string, current: any) => {
+      if (key && typeof key === 'string') {
+        adapterInject().setCache(key, current);
+      }
+    };
+
+    const reselect = () => {
+      const currentKeys = ['ampm', 'hour', 'minute', 'second'];
+
+      currentKeys.forEach((key) => {
+        const current = adapterInject().getCache(key);
+
+        if (current && current.scrollToIndex) {
+          current.scrollToIndex();
+        }
+      });
+    };
+
+    const onItemChange = ({ type, value, disabled }: { type?: string; value: string; disabled?: boolean }) => {
+      // eslint-disable-next-line prefer-const
+      let { onChange, use12Hours, isAM, format, timeStampValue } = props;
+      const transformValue = foundation.getDisplayDateFromTimeStamp(timeStampValue);
+      // TODO: foundation
+      if (type === 'hour') {
+        if (use12Hours) {
+          if (isAM) {
+            transformValue.setHours(Number(value) % 12);
+          } else {
+            transformValue.setHours((Number(value) % 12) + 12);
+          }
         } else {
-          transformValue.setHours((Number(value) % 12) + 12);
+          transformValue.setHours(Number(value));
+        }
+      } else if (type === 'minute') {
+        transformValue.setMinutes(Number(value));
+      } else if (type === 'ampm') {
+        const ampm = value.toUpperCase();
+        if (use12Hours) {
+          if (ampm === 'PM') {
+            isAM = false;
+            transformValue.getHours() < 12 && transformValue.setHours((transformValue.getHours() % 12) + 12);
+          }
+
+          if (ampm === 'AM') {
+            isAM = true;
+            transformValue.getHours() >= 12 && transformValue.setHours(transformValue.getHours() - 12);
+          }
         }
       } else {
-        transformValue.setHours(Number(value));
+        transformValue.setSeconds(Number(value));
       }
-    } else if (type === 'minute') {
-      transformValue.setMinutes(Number(value));
-    } else if (type === 'ampm') {
-      const ampm = value.toUpperCase();
+
+      onChange &&
+        onChange({
+          isAM,
+          value: dateFnsFormat(transformValue, format && format.replace(/(\s+)A/g, '$1a')), // dateFns only supports "h: mm: ss a"
+          timeStampValue: Number(transformValue),
+        });
+    };
+
+    const onEnterSelectPanel = (range: string) => {
+      const { onCurrentSelectPanelChange } = props;
+
+      onCurrentSelectPanelChange(range);
+    };
+
+    function renderHourSelect(hour: number, locale: Locale['TimePicker']) {
+      const { prefixCls, disabledHours, use12Hours, scrollItemProps } = props;
+
+      const { showHour, hourOptions } = state;
+
+      if (!showHour) {
+        return null;
+      }
+      const disabledOptions = disabledHours();
+
+      let hourOptionsAdj, hourAdj;
       if (use12Hours) {
-        if (ampm === 'PM') {
-          isAM = false;
-          transformValue.getHours() < 12 && transformValue.setHours((transformValue.getHours() % 12) + 12);
-        }
-
-        if (ampm === 'AM') {
-          isAM = true;
-          transformValue.getHours() >= 12 && transformValue.setHours(transformValue.getHours() - 12);
-        }
+        hourOptionsAdj = [12].concat(hourOptions.filter((h) => h < 12 && h > 0));
+        hourAdj = hour % 12 || 12;
+      } else {
+        hourOptionsAdj = hourOptions;
+        hourAdj = hour;
       }
-    } else {
-      transformValue.setSeconds(Number(value));
+
+      const transformHour = (value: string) => value + locale.hour;
+
+      const className = `${prefixCls}-list-hour`;
+      return (
+        <ScrollItemFormatOptionReturn
+          ref={(current) => cacheRefCurrent('hour', current)}
+          mode={'normal'}
+          transform={transformHour}
+          className={className}
+          list={hourOptionsAdj.map((option) => formatOption(option, disabledOptions))}
+          selectedIndex={hourOptionsAdj.indexOf(hourAdj)}
+          type="hour"
+          onSelect={onItemChange}
+          {...scrollItemProps}
+        />
+      );
     }
 
+    function renderMinuteSelect(minute: number, locale: Locale['TimePicker']) {
+      const { prefixCls, disabledMinutes, timeStampValue, scrollItemProps } = props;
 
-    onChange &&
-    onChange({
-      isAM,
-      value: dateFnsFormat(transformValue, format && format.replace(/(\s+)A/g, '$1a')), // dateFns only supports "h: mm: ss a"
-      timeStampValue: Number(transformValue),
-    });
-  };
+      const { showMinute, minuteOptions } = state;
 
-  const onEnterSelectPanel = (range: string) => {
-    const { onCurrentSelectPanelChange } = props;
+      if (!showMinute) {
+        return null;
+      }
+      const value = new Date(timeStampValue);
+      const disabledOptions = disabledMinutes && disabledMinutes(value.getHours());
 
-    onCurrentSelectPanelChange(range);
-  };
+      const className = `${prefixCls}-list-minute`;
 
-  function renderHourSelect(hour: number, locale: Locale['TimePicker']) {
-    const { prefixCls, disabledHours, use12Hours, scrollItemProps } = props;
+      const transformMinute = (min: string) => min + locale.minute;
 
-    const { showHour, hourOptions } = state;
-
-    if (!showHour) {
-      return null;
-    }
-    const disabledOptions = disabledHours();
-
-    let hourOptionsAdj,
-      hourAdj;
-    if (use12Hours) {
-      hourOptionsAdj = [12].concat(hourOptions.filter(h => h < 12 && h > 0));
-      hourAdj = hour % 12 || 12;
-    } else {
-      hourOptionsAdj = hourOptions;
-      hourAdj = hour;
+      return (
+        <ScrollItemFormatOptionReturn
+          ref={(current) => cacheRefCurrent('minute', current)}
+          mode={'normal'}
+          transform={transformMinute}
+          list={minuteOptions.map((option) => formatOption(option, disabledOptions))}
+          selectedIndex={minuteOptions.indexOf(minute)}
+          type="minute"
+          onSelect={onItemChange}
+          className={className}
+          {...scrollItemProps}
+        />
+      );
     }
 
-    const transformHour = (value: string) => value + locale.hour;
+    function renderSecondSelect(second: number, locale: Locale['TimePicker']) {
+      const { prefixCls, disabledSeconds, timeStampValue, scrollItemProps } = props;
 
-    const className = `${prefixCls}-list-hour`;
-    return (
-      <ScrollItemFormatOptionReturn
-        ref={current => cacheRefCurrent('hour', current)}
-        mode={'normal'}
-        transform={transformHour}
-        className={className}
-        list={hourOptionsAdj.map(option => formatOption(option, disabledOptions))}
-        selectedIndex={hourOptionsAdj.indexOf(hourAdj)}
-        type="hour"
-        onSelect={onItemChange}
-        {...scrollItemProps}
-      />
-    );
-  }
+      const { showSecond, secondOptions } = state;
 
-  function renderMinuteSelect(minute: number, locale: Locale['TimePicker']) {
-    const { prefixCls, disabledMinutes, timeStampValue, scrollItemProps } = props;
+      if (!showSecond) {
+        return null;
+      }
+      const value = new Date(timeStampValue);
 
-    const { showMinute, minuteOptions } = state;
+      const disabledOptions = disabledSeconds && disabledSeconds(value.getHours(), value.getMinutes());
 
-    if (!showMinute) {
-      return null;
-    }
-    const value = new Date(timeStampValue);
-    const disabledOptions = disabledMinutes && disabledMinutes(value.getHours());
+      const className = `${prefixCls}-list-second`;
 
-    const className = `${prefixCls}-list-minute`;
+      const transformSecond = (sec: number) => String(sec) + locale.second;
 
-    const transformMinute = (min: string) => min + locale.minute;
-
-    return (
-      <ScrollItemFormatOptionReturn
-        ref={current => cacheRefCurrent('minute', current)}
-        mode={'normal'}
-        transform={transformMinute}
-        list={minuteOptions.map(option => formatOption(option, disabledOptions))}
-        selectedIndex={minuteOptions.indexOf(minute)}
-        type="minute"
-        onSelect={onItemChange}
-        className={className}
-        {...scrollItemProps}
-      />
-    );
-  }
-
-  function renderSecondSelect(second: number, locale: Locale['TimePicker']) {
-    const { prefixCls, disabledSeconds, timeStampValue, scrollItemProps } = props;
-
-    const { showSecond, secondOptions } = state;
-
-    if (!showSecond) {
-      return null;
-    }
-    const value = new Date(timeStampValue);
-
-    const disabledOptions = disabledSeconds && disabledSeconds(value.getHours(), value.getMinutes());
-
-    const className = `${prefixCls}-list-second`;
-
-    const transformSecond = (sec: number) => String(sec) + locale.second;
-
-    return (
-      <ScrollItemFormatOptionReturn
-        ref={current => cacheRefCurrent('second', current)}
-        mode={'normal'}
-        transform={transformSecond}
-        list={secondOptions.map(option => formatOption(option, disabledOptions))}
-        selectedIndex={secondOptions.indexOf(second)}
-        className={className}
-        type="second"
-        onSelect={onItemChange}
-        {...scrollItemProps}
-      />
-    );
-  }
-
-  function renderAMPMSelect(locale: Locale['TimePicker'], localeCode: string) {
-    const { prefixCls, use12Hours, isAM, scrollItemProps } = props;
-    if (!use12Hours) {
-      return null;
+      return (
+        <ScrollItemFormatOptionReturn
+          ref={(current) => cacheRefCurrent('second', current)}
+          mode={'normal'}
+          transform={transformSecond}
+          list={secondOptions.map((option) => formatOption(option, disabledOptions))}
+          selectedIndex={secondOptions.indexOf(second)}
+          className={className}
+          type="second"
+          onSelect={onItemChange}
+          {...scrollItemProps}
+        />
+      );
     }
 
-    const AMPMOptions: AMPMOptionItem[] = [
-      {
-        value: 'AM',
-        text: locale.AM || '上午',
-      },
-      {
-        value: 'PM',
-        text: locale.PM || '下午',
-      },
-    ];
+    function renderAMPMSelect(locale: Locale['TimePicker'], localeCode: string) {
+      const { prefixCls, use12Hours, isAM, scrollItemProps } = props;
+      if (!use12Hours) {
+        return null;
+      }
 
-    const selected = isAM ? 0 : 1;
+      const AMPMOptions: AMPMOptionItem[] = [
+        {
+          value: 'AM',
+          text: locale.AM || '上午',
+        },
+        {
+          value: 'PM',
+          text: locale.PM || '下午',
+        },
+      ];
 
-    const className = `${prefixCls}-list-ampm`;
+      const selected = isAM ? 0 : 1;
 
-    return (
-      <ScrollItemAMPMOptionItem
-        ref={current => cacheRefCurrent('ampm', current)}
-        mode={'normal'}
-        className={className}
-        list={AMPMOptions}
-        selectedIndex={selected}
-        type="ampm"
-        onSelect={onItemChange}
-        {...scrollItemProps}
-      />
-    );
-  }
+      const className = `${prefixCls}-list-ampm`;
 
-  const getDisplayDateFromTimeStamp = (timeStampValue: Date | string) => foundation.getDisplayDateFromTimeStamp(timeStampValue);
+      return (
+        <ScrollItemAMPMOptionItem
+          ref={(current) => cacheRefCurrent('ampm', current)}
+          mode={'normal'}
+          className={className}
+          list={AMPMOptions}
+          selectedIndex={selected}
+          type="ampm"
+          onSelect={onItemChange}
+          {...scrollItemProps}
+        />
+      );
+    }
 
+    const getDisplayDateFromTimeStamp = (timeStampValue: Date | string) =>
+      foundation.getDisplayDateFromTimeStamp(timeStampValue);
 
+    return () => {
+      const { timeStampValue, panelHeader, panelFooter } = props;
 
-  return () => {
-    const { timeStampValue, panelHeader, panelFooter } = props;
+      const value = getDisplayDateFromTimeStamp(timeStampValue);
+      return (
+        <LocaleConsumer componentName="TimePicker">
+          {(locale: Locale['TimePicker'], localeCode: Locale['code']) => (
+            <ScrollList
+              header={panelHeader}
+              footer={panelFooter}
+              x-semi-header-alias="panelHeader"
+              x-semi-footer-alias="panelFooter"
+            >
+              {renderAMPMSelect(locale, localeCode)}
+              {renderHourSelect(value.getHours(), locale)}
+              {renderMinuteSelect(value.getMinutes(), locale)}
+              {renderSecondSelect(value.getSeconds(), locale)}
+            </ScrollList>
+          )}
+        </LocaleConsumer>
+      );
+    };
+  },
+});
 
-    const value = getDisplayDateFromTimeStamp(timeStampValue);
-    return (
-      <LocaleConsumer componentName="TimePicker">
-        {(locale: Locale['TimePicker'], localeCode: Locale['code']) => (
-          <ScrollList
-            header={panelHeader}
-            footer={panelFooter}
-            x-semi-header-alias="panelHeader"
-            x-semi-footer-alias="panelFooter"
-          >
-            {renderAMPMSelect(locale, localeCode)}
-            {renderHourSelect(value.getHours(), locale)}
-            {renderMinuteSelect(value.getMinutes(), locale)}
-            {renderSecondSelect(value.getSeconds(), locale)}
-          </ScrollList>
-        )}
-      </LocaleConsumer>
-    );
-  }
-}, {
-  props: vuePropsType,
-  name: 'Combobox'
-})
-
-
-export default Combobox
-
+export default Combobox;

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { BaseFormApi, FormUpdaterContextType, FormState } from '@douyinfe/semi-foundation/form/interface';
 import FormStateProvider from "./context/FormState/Provider";
 import FormStateConsumer from "./context/FormState/Consumer";
 import BaseFormApiProvider from "./context/BaseFormApi/Provider";

@@ -9,83 +9,71 @@ import { cloneDeep, mergeColumns } from './utils';
 import getColumns from './getColumns';
 import ResizableHeaderCell from './ResizableHeaderCell';
 import type { ResizableProps, TableProps, ColumnProps } from './interface';
-import {
-    ComponentObjectPropsOptions,
-    computed,
-    defineComponent,
-    h,
-    PropType, Ref,
-    ref,
-    useSlots,
-    watch
-} from "vue";
+import { ComponentObjectPropsOptions, computed, defineComponent, h, PropType, Ref, ref, useSlots, watch } from 'vue';
 
-const Table = Table_()
+const Table = Table_();
 export const vuePropsType: ComponentObjectPropsOptions<TableProps> = {
-    bordered: PropTypes.bool,
-    children: PropTypes.element,
-    childrenRecordName: PropTypes.string,
-    className: PropTypes.string,
-    clickGroupedRowToExpand: PropTypes.bool,
-    columns: PropTypes.array,
-    components: PropTypes.element as PropType<TableProps['components']>,
-    dataSource: PropTypes.array,
-    defaultExpandAllGroupRows: PropTypes.bool,
-    defaultExpandAllRows: PropTypes.bool,
-    defaultExpandedRowKeys: PropTypes.array,
-    empty: PropTypes.element,
-    expandAllGroupRows: PropTypes.bool,
-    expandAllRows: PropTypes.bool,
-    expandCellFixed: PropTypes.bool,
-    expandIcon: PropTypes.element,
-    expandedRowKeys: PropTypes.array,
-    expandedRowRender: PropTypes.func as PropType<TableProps['expandedRowRender']>,
-    expandRowByClick: PropTypes.bool,
-    footer: PropTypes.element,
-    getVirtualizedListRef: PropTypes.element as PropType<TableProps['getVirtualizedListRef']>,
-    groupBy: PropTypes.element as PropType<TableProps['groupBy']>,
-    hideExpandedColumn: PropTypes.bool,
-    id: PropTypes.string,
-    indentSize: PropTypes.number,
-    loading: PropTypes.bool,
-    pagination: PropTypes.object,
-    prefixCls: PropTypes.string,
-    renderGroupSection: PropTypes.element as PropType<TableProps['renderGroupSection']>,
-    renderPagination: PropTypes.element as PropType<TableProps['renderPagination']>,
-    resizable: [PropTypes.bool, PropTypes.object],
-    rowExpandable: PropTypes.any as PropType<TableProps['rowExpandable']>,
-    rowKey: PropTypes.string,
-    rowSelection: PropTypes.element as PropType<TableProps['rowSelection']>,
-    scroll: PropTypes.any as PropType<TableProps['scroll']>,
-    showHeader: PropTypes.bool,
-    size: PropTypes.object,
-    style: PropTypes.object,
-    title: PropTypes.element,
-    virtualized: PropTypes.bool,
-    onChange: PropTypes.func as PropType<TableProps['onChange']>,
-    onExpand: PropTypes.func as PropType<TableProps['onExpand']>,
-    onExpandedRowsChange: PropTypes.func as PropType<TableProps['onExpandedRowsChange']>,
-    onGroupedRow: PropTypes.func as PropType<TableProps['onGroupedRow']>,
-    onHeaderRow: PropTypes.func as PropType<TableProps['onHeaderRow']>,
-    onRow: PropTypes.func as PropType<TableProps['onRow']>,
-    sticky: PropTypes.element as PropType<TableProps['sticky']>,
-    direction: PropTypes.string as PropType<TableProps['direction']>,
+  bordered: PropTypes.bool,
+  children: PropTypes.element,
+  childrenRecordName: PropTypes.string,
+  className: PropTypes.string,
+  clickGroupedRowToExpand: PropTypes.bool,
+  columns: PropTypes.array,
+  components: PropTypes.element as PropType<TableProps['components']>,
+  dataSource: PropTypes.array,
+  defaultExpandAllGroupRows: PropTypes.bool,
+  defaultExpandAllRows: PropTypes.bool,
+  defaultExpandedRowKeys: PropTypes.array,
+  empty: PropTypes.element,
+  expandAllGroupRows: PropTypes.bool,
+  expandAllRows: PropTypes.bool,
+  expandCellFixed: PropTypes.bool,
+  expandIcon: PropTypes.element,
+  expandedRowKeys: PropTypes.array,
+  expandedRowRender: PropTypes.func as PropType<TableProps['expandedRowRender']>,
+  expandRowByClick: PropTypes.bool,
+  footer: PropTypes.element,
+  getVirtualizedListRef: PropTypes.element as PropType<TableProps['getVirtualizedListRef']>,
+  groupBy: PropTypes.element as PropType<TableProps['groupBy']>,
+  hideExpandedColumn: PropTypes.bool,
+  id: PropTypes.string,
+  indentSize: PropTypes.number,
+  loading: PropTypes.bool,
+  pagination: PropTypes.object,
+  prefixCls: PropTypes.string,
+  renderGroupSection: PropTypes.element as PropType<TableProps['renderGroupSection']>,
+  renderPagination: PropTypes.element as PropType<TableProps['renderPagination']>,
+  resizable: [PropTypes.bool, PropTypes.object],
+  rowExpandable: PropTypes.any as PropType<TableProps['rowExpandable']>,
+  rowKey: PropTypes.string,
+  rowSelection: PropTypes.element as PropType<TableProps['rowSelection']>,
+  scroll: PropTypes.any as PropType<TableProps['scroll']>,
+  showHeader: PropTypes.bool,
+  size: PropTypes.object,
+  style: PropTypes.object,
+  title: PropTypes.element,
+  virtualized: PropTypes.bool,
+  onChange: PropTypes.func as PropType<TableProps['onChange']>,
+  onExpand: PropTypes.func as PropType<TableProps['onExpand']>,
+  onExpandedRowsChange: PropTypes.func as PropType<TableProps['onExpandedRowsChange']>,
+  onGroupedRow: PropTypes.func as PropType<TableProps['onGroupedRow']>,
+  onHeaderRow: PropTypes.func as PropType<TableProps['onHeaderRow']>,
+  onRow: PropTypes.func as PropType<TableProps['onRow']>,
+  sticky: PropTypes.element as PropType<TableProps['sticky']>,
+  direction: PropTypes.string as PropType<TableProps['direction']>,
 };
-const ResizableTable = defineComponent((props, {}) => {
+const ResizableTable = defineComponent({
+  props: vuePropsType,
+  name: 'ResizableTable',
+  setup(props, {}) {
     const slots = useSlots();
     const childrenColumnName = 'children';
 
     const columns = ref<Record<string, any>[]>([]);
-    watch([
-        () => props.columns,
-        () => props.expandedRowRender,
-        () => props.hideExpandedColumn,
-        () => props.rowSelection
-    ], () => {
+    watch(
+      [() => props.columns, () => props.expandedRowRender, () => props.hideExpandedColumn, () => props.rowSelection],
+      () => {
         const { components: propComponents, columns: propColumns, resizable, ...restProps } = props;
-
-
-
 
         /**
          * 此处关于 columns 有三个存储
@@ -105,7 +93,8 @@ const ResizableTable = defineComponent((props, {}) => {
          * 3. columns is the state stored in the current component, which is generally equal to newColumns, but it will save the current stretched width of the column
          */
 
-        const parsedColumns = Array.isArray(propColumns) && propColumns.length ? propColumns : getColumns(props.children);
+        const parsedColumns =
+          Array.isArray(propColumns) && propColumns.length ? propColumns : getColumns(props.children);
 
         const rawColumns = assignColumnKeys(cloneDeep(parsedColumns), childrenColumnName);
 
@@ -114,147 +103,154 @@ const ResizableTable = defineComponent((props, {}) => {
         if (
           typeof props.expandedRowRender === 'function' &&
           !props.hideExpandedColumn &&
-          !find(rawColumns, item => item.key === strings.DEFAULT_KEY_COLUMN_EXPAND)
+          !find(rawColumns, (item) => item.key === strings.DEFAULT_KEY_COLUMN_EXPAND)
         ) {
-            newColumns.unshift({ key: strings.DEFAULT_KEY_COLUMN_EXPAND, width: numbers.DEFAULT_WIDTH_COLUMN_EXPAND });
+          newColumns.unshift({ key: strings.DEFAULT_KEY_COLUMN_EXPAND, width: numbers.DEFAULT_WIDTH_COLUMN_EXPAND });
         }
 
-        if (props.rowSelection && !get(props.rowSelection, 'hidden') && !find(rawColumns, item => item.key === strings.DEFAULT_KEY_COLUMN_SELECTION)) {
-            newColumns.unshift({
-                width: get(props, 'rowSelection.width', numbers.DEFAULT_WIDTH_COLUMN_SELECTION),
-                key: strings.DEFAULT_KEY_COLUMN_SELECTION,
-            });
+        if (
+          props.rowSelection &&
+          !get(props.rowSelection, 'hidden') &&
+          !find(rawColumns, (item) => item.key === strings.DEFAULT_KEY_COLUMN_SELECTION)
+        ) {
+          newColumns.unshift({
+            width: get(props, 'rowSelection.width', numbers.DEFAULT_WIDTH_COLUMN_SELECTION),
+            key: strings.DEFAULT_KEY_COLUMN_SELECTION,
+          });
         }
 
-        const oldColumns = Array.from(columns.value)
+        const oldColumns = Array.from(columns.value);
         // If there is a resize value, the width does not use the default value fix#1072
         const _newColumns = withResizeWidth(oldColumns, newColumns);
-        columns.value = mergeColumns(oldColumns, _newColumns)
-    }, {deep: true, immediate: true});
+        columns.value = mergeColumns(oldColumns, _newColumns);
+      },
+      { deep: true, immediate: true }
+    );
 
-
-    const components = computed(()=>{
-        return merge(
-          {
-              header: {
-                  cell: ResizableHeaderCell,
-              },
+    const components = computed(() => {
+      return merge(
+        {
+          header: {
+            cell: ResizableHeaderCell,
           },
-          props.components
-        )
-    })
+        },
+        props.components
+      );
+    });
 
-
-    const handleResize = (column: ColumnProps) => (e: MouseEvent, { size }: { size: { width: number } }) => {
-        const onResize = get(props.resizable, 'onResize', noop) as ResizableProps<any>['onResize']
+    const handleResize =
+      (column: ColumnProps) =>
+      (e: MouseEvent, { size }: { size: { width: number } }) => {
+        const onResize = get(props.resizable, 'onResize', noop) as ResizableProps<any>['onResize'];
 
         const nextColumns = cloneDeep(columns.value);
         const curColumn: ColumnProps = findColumn(nextColumns, column, childrenColumnName);
         let nextColumn = {
-            ...curColumn,
-            width: size.width,
+          ...curColumn,
+          width: size.width,
         };
 
         const customProps = onResize(nextColumn) || {};
 
         nextColumn = {
-            ...nextColumn,
-            ...customProps,
+          ...nextColumn,
+          ...customProps,
         };
 
         Object.assign(curColumn, nextColumn);
-        columns.value = nextColumns
-    };
+        columns.value = nextColumns;
+      };
 
     const handleResizeStart = (column: ColumnProps<any>) => (e: MouseEvent) => {
-        const onResizeStart = get(props.resizable, 'onResizeStart', noop) as ResizableProps<any>['onResize']
-        const handlerClassName = get(props.resizable, 'handlerClassName', 'resizing');
+      const onResizeStart = get(props.resizable, 'onResizeStart', noop) as ResizableProps<any>['onResize'];
+      const handlerClassName = get(props.resizable, 'handlerClassName', 'resizing');
 
-        const nextColumns = cloneDeep(columns.value);
+      const nextColumns = cloneDeep(columns.value);
 
-        const curColumn: ColumnProps = findColumn(nextColumns, column, childrenColumnName);
+      const curColumn: ColumnProps = findColumn(nextColumns, column, childrenColumnName);
 
-        let nextColumn: ColumnProps = {
-            ...curColumn,
-            className: addClass(curColumn.className, handlerClassName),
-        };
+      let nextColumn: ColumnProps = {
+        ...curColumn,
+        className: addClass(curColumn.className, handlerClassName),
+      };
 
-        const customProps = onResizeStart(nextColumn) || {};
+      const customProps = onResizeStart(nextColumn) || {};
 
-        nextColumn = {
-            ...nextColumn,
-            ...customProps,
-        };
+      nextColumn = {
+        ...nextColumn,
+        ...customProps,
+      };
 
-        Object.assign(curColumn, nextColumn);
+      Object.assign(curColumn, nextColumn);
 
-        columns.value = nextColumns
+      columns.value = nextColumns;
     };
 
     const handleResizeStop = (column: ColumnProps) => (e: MouseEvent) => {
-        const onResizeStop = get(props.resizable, 'onResizeStop', noop) as ResizableProps<any>['onResize']
-        const handlerClassName = get(props.resizable, 'handlerClassName', 'resizing');
-        const nextColumns = cloneDeep(columns.value);
+      const onResizeStop = get(props.resizable, 'onResizeStop', noop) as ResizableProps<any>['onResize'];
+      const handlerClassName = get(props.resizable, 'handlerClassName', 'resizing');
+      const nextColumns = cloneDeep(columns.value);
 
-        const curColumn: ColumnProps = findColumn(nextColumns, column, childrenColumnName);
+      const curColumn: ColumnProps = findColumn(nextColumns, column, childrenColumnName);
 
-        let nextColumn = {
-            ...curColumn,
-            className: removeClass(curColumn.className, handlerClassName),
-        };
+      let nextColumn = {
+        ...curColumn,
+        className: removeClass(curColumn.className, handlerClassName),
+      };
 
-        const customProps = onResizeStop(nextColumn) || {};
+      const customProps = onResizeStop(nextColumn) || {};
 
-        nextColumn = {
-            ...nextColumn,
-            ...customProps,
-        };
+      nextColumn = {
+        ...nextColumn,
+        ...customProps,
+      };
 
-        Object.assign(curColumn, nextColumn);
+      Object.assign(curColumn, nextColumn);
 
-        columns.value = nextColumns
+      columns.value = nextColumns;
     };
 
     const resizableRender = (col: ColumnProps, index: number, level = 0, originalHeaderCellProps) => ({
-        ...col,
-        onHeaderCell: (column: ColumnProps) => ({
-            ...originalHeaderCellProps,
-            width: column.width,
-            onResize: handleResize(column),
-            onResizeStart: handleResizeStart(column),
-            onResizeStop: handleResizeStop(column),
-        }),
+      ...col,
+      onHeaderCell: (column: ColumnProps) => ({
+        ...originalHeaderCellProps,
+        width: column.width,
+        onResize: handleResize(column),
+        onResizeStart: handleResizeStart(column),
+        onResizeStop: handleResizeStop(column),
+      }),
     });
 
-    const assignResizableRender = (columns: ColumnProps[] = [], level = 0) => (Array.isArray(columns) && columns.length ?
-      columns.map((col, index) => {
-          const originalHeaderCellProps = col.onHeaderCell?.(col, index, level) ?? {};
-          Object.assign(col, resizableRender(col, index, level, originalHeaderCellProps));
-          const children = col[childrenColumnName];
+    const assignResizableRender = (columns: ColumnProps[] = [], level = 0) =>
+      Array.isArray(columns) && columns.length
+        ? columns.map((col, index) => {
+            const originalHeaderCellProps = col.onHeaderCell?.(col, index, level) ?? {};
+            Object.assign(col, resizableRender(col, index, level, originalHeaderCellProps));
+            const children = col[childrenColumnName];
 
-          if (Array.isArray(children) && children.length) {
+            if (Array.isArray(children) && children.length) {
               col[childrenColumnName] = assignResizableRender(children, level + 1);
-          }
+            }
 
-          return col;
-      }) :
-      []);
+            return col;
+          })
+        : [];
 
-    const finalColumns: Ref<ColumnProps[]> = ref([])
-    watch(columns, ()=>{
-        finalColumns.value = assignResizableRender(columns.value)
-    }, {immediate: true})
+    const finalColumns: Ref<ColumnProps[]> = ref([]);
+    watch(
+      columns,
+      () => {
+        finalColumns.value = assignResizableRender(columns.value);
+      },
+      { immediate: true }
+    );
 
     return () => {
-        const { components: propComponents, columns: propColumns, resizable, ...restProps } = props;
+      const { components: propComponents, columns: propColumns, resizable, ...restProps } = props;
 
-        return <Table {...restProps} columns={finalColumns.value} components={components.value} />;
+      return <Table {...restProps} columns={finalColumns.value} components={components.value} />;
     };
-}, {
-    props: vuePropsType,
-    name: 'ResizableTable'
+  },
 });
-
-
 
 export default ResizableTable;

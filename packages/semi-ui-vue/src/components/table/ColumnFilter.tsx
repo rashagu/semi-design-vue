@@ -4,15 +4,14 @@ import { IconFilter } from '@kousum/semi-icons-vue';
 
 import { cssClasses } from '@douyinfe/semi-foundation/table/constants';
 
-import Dropdown, {DropdownMenu, DropdownItem, DropdownVuePropsType} from '../dropdown';
+import Dropdown, { DropdownMenu, DropdownItem, DropdownVuePropsType } from '../dropdown';
 import type { DropdownProps } from '../dropdown';
 import { Radio } from '../radio';
 import { Checkbox } from '../checkbox';
 import { FilterIcon, Filter, OnFilterDropdownVisibleChange, RenderFilterDropdownItem } from './interface';
 import { VueJsxNode } from '../interface';
-import {cloneVNode, isVNode, h, ref, watch, defineComponent, VNode, ComponentObjectPropsOptions, PropType} from 'vue';
-import {vuePropsMake} from "../PropTypes";
-
+import { cloneVNode, isVNode, h, ref, watch, defineComponent, VNode, ComponentObjectPropsOptions, PropType } from 'vue';
+import { vuePropsMake } from '../PropTypes';
 
 function renderDropdown(props: RenderDropdownProps, nestedElem: VueJsxNode = null, level = 0) {
   const {
@@ -28,15 +27,14 @@ function renderDropdown(props: RenderDropdownProps, nestedElem: VueJsxNode = nul
     renderFilterDropdownItem,
   } = props ?? {};
 
-
-    const renderFilterDropdownProps: RenderFilterDropdownProps = pick(props, [
-      'tempFilteredValue',
-      'setTempFilteredValue',
-      'confirm',
-      'clear',
-      'close',
-      'filters',
-    ]);
+  const renderFilterDropdownProps: RenderFilterDropdownProps = pick(props, [
+    'tempFilteredValue',
+    'setTempFilteredValue',
+    'confirm',
+    'clear',
+    'close',
+    'filters',
+  ]);
 
   const render =
     typeof renderFilterDropdown === 'function' ? (
@@ -123,9 +121,8 @@ function renderDropdown(props: RenderDropdownProps, nestedElem: VueJsxNode = nul
       </DropdownMenu>
     );
 
-
   const dropdownProps: DropdownProps = {
-    ...(pick(props, ...Object.keys(DropdownVuePropsType))),
+    ...pick(props, ...Object.keys(DropdownVuePropsType)),
     onVisibleChange: (visible: boolean) => onFilterDropdownVisibleChange(visible),
     trigger,
     position,
@@ -165,12 +162,14 @@ const propTypes: ComponentObjectPropsOptions<ColumnFilterProps> = {
   title: String,
   dataIndex: [Number, String],
   width: [Number, String],
-  fixed: [Boolean, String]
-}
-const defaultProps = {}
-const ColumnFilterVueProps = vuePropsMake(propTypes, defaultProps)
-export const ColumnFilter = defineComponent(
-  (props, {attrs}) => {
+  fixed: [Boolean, String],
+};
+const defaultProps = {};
+const ColumnFilterVueProps = vuePropsMake(propTypes, defaultProps);
+export const ColumnFilter = defineComponent({
+  props: ColumnFilterVueProps,
+  name: 'ColumnFilter',
+  setup(props, { attrs }) {
     // custom filter related status
     const isFilterDropdownVisibleControlled_ = typeof props.filterDropdownVisible !== 'undefined';
     const isCustomFilterDropdown_ = typeof props.renderFilterDropdown === 'function';
@@ -180,17 +179,22 @@ export const ColumnFilter = defineComponent(
     const tempFilteredValue = ref<any[]>(props.filteredValue);
     const dropdownVisible = ref<boolean | undefined>(dropdownVisibleInitValue);
 
-    watch(()=>props.filterDropdownVisible, () => {
-      if (typeof props.filterDropdownVisible !== 'undefined') {
-        dropdownVisible.value = props.filterDropdownVisible;
-      }
-    }, {immediate: true});
+    watch(
+      () => props.filterDropdownVisible,
+      () => {
+        if (typeof props.filterDropdownVisible !== 'undefined') {
+          dropdownVisible.value = props.filterDropdownVisible;
+        }
+      },
+      { immediate: true }
+    );
 
     watch(
       () => props.filteredValue,
       () => {
         tempFilteredValue.value = props.filteredValue;
-      }, {immediate: true}
+      },
+      { immediate: true }
     );
 
     const confirm: RenderFilterDropdownProps['confirm'] = (props_ = {}) => {
@@ -215,15 +219,15 @@ export const ColumnFilter = defineComponent(
       dropdownVisible.value = false;
     };
 
-      const handleFilterDropdownVisibleChange = (visible: boolean) => {
-        const isFilterDropdownVisibleControlled = typeof props.filterDropdownVisible !== 'undefined';
-        const isCustomFilterDropdown = typeof props.renderFilterDropdown === 'function';
-        const isCustomDropdownVisible = !isFilterDropdownVisibleControlled && isCustomFilterDropdown;
-        if (isCustomDropdownVisible) {
-          dropdownVisible.value = visible;
-        }
-        props.onFilterDropdownVisibleChange(visible);
-      };
+    const handleFilterDropdownVisibleChange = (visible: boolean) => {
+      const isFilterDropdownVisibleControlled = typeof props.filterDropdownVisible !== 'undefined';
+      const isCustomFilterDropdown = typeof props.renderFilterDropdown === 'function';
+      const isCustomDropdownVisible = !isFilterDropdownVisibleControlled && isCustomFilterDropdown;
+      if (isCustomDropdownVisible) {
+        dropdownVisible.value = visible;
+      }
+      props.onFilterDropdownVisibleChange(visible);
+    };
 
     return () => {
       const {
@@ -289,11 +293,7 @@ export const ColumnFilter = defineComponent(
       return filterDropdown;
     };
   },
-  {
-    props: ColumnFilterVueProps,
-    name: 'ColumnFilter',
-  }
-);
+});
 
 export interface ColumnFilterProps extends Omit<RenderDropdownProps, keyof RenderFilterDropdownProps> {
   prefixCls?: string;
@@ -307,7 +307,7 @@ export interface ColumnFilterProps extends Omit<RenderDropdownProps, keyof Rende
   title?: string;
   dataIndex?: string | number;
   width?: string | number;
-  fixed?: string | boolean
+  fixed?: string | boolean;
 }
 
 export interface RenderDropdownProps extends FilterDropdownProps, RenderFilterDropdownProps {

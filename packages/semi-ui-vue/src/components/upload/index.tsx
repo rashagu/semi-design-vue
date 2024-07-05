@@ -244,8 +244,10 @@ const defaultProps: Partial<UploadProps> = {
   withCredentials: false,
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const Upload = defineComponent(
-  (props, { expose }) => {
+const Upload = defineComponent({
+  props: vuePropsType,
+  name: 'Upload',
+  setup(props, { expose }) {
     const slots = useSlots();
 
     const state = reactive<UploadState>({
@@ -325,12 +327,12 @@ const Upload = defineComponent(
     const foundation = new UploadFoundation(adapter);
 
     /**
-     * Notes:
-     *   The input parameter and return value here do not declare the type, otherwise tsc may report an error in form/fields.tsx when wrap after withField
-     *   `The types of the parameters "props" and "nextProps" are incompatible.
-     The attribute "action" is missing in the type "Readonly<any>", but it is required in the type "UploadProps".`
-     *   which seems to be a bug, remove props type declare here
-     */
+   * Notes:
+   *   The input parameter and return value here do not declare the type, otherwise tsc may report an error in form/fields.tsx when wrap after withField
+   *   `The types of the parameters "props" and "nextProps" are incompatible.
+   The attribute "action" is missing in the type "Readonly<any>", but it is required in the type "UploadProps".`
+   *   which seems to be a bug, remove props type declare here
+   */
     function getDerivedStateFromProps(props) {
       const { fileList } = props;
       if ('fileList' in props) {
@@ -442,7 +444,7 @@ const Upload = defineComponent(
       const onReplace = (): void => {
         replace(index);
       };
-      const fileCardProps:FileCardProps = {
+      const fileCardProps: FileCardProps = {
         ...pick(props, ['showRetry', 'showReplace', '']),
         ...(pick(file, [...Object.keys(vuePropsTypeFileCard)]) as FileItem),
         previewFile,
@@ -770,10 +772,6 @@ const Upload = defineComponent(
       );
     };
   },
-  {
-    props: vuePropsType,
-    name: 'Upload',
-  }
-);
+});
 
 export default Upload;

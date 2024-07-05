@@ -76,8 +76,10 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const Toast = defineComponent(
-  (props, { expose }) => {
+const Toast = defineComponent({
+  props: vuePropsType,
+  name: 'Toast',
+  setup(props, { expose }) {
     const slots = useSlots();
 
     const { context } = useConfigContext();
@@ -164,9 +166,7 @@ const Toast = defineComponent(
       const btnTheme = 'borderless';
       const btnSize = 'small';
 
-      const reservedIndex = props.positionInList
-        ? props.positionInList.length - props.positionInList.index - 1
-        : 0;
+      const reservedIndex = props.positionInList ? props.positionInList.length - props.positionInList.index - 1 : 0;
       const toastEle_ = (
         <div
           ref={toastEle}
@@ -202,8 +202,7 @@ const Toast = defineComponent(
         </div>
       );
       if (props.stack) {
-        const height =
-          (props.stackExpanded && toastEle.value && getComputedStyle(toastEle.value).height) || 0;
+        const height = (props.stackExpanded && toastEle.value && getComputedStyle(toastEle.value).height) || 0;
         return (
           <div class={`${prefixCls}-zero-height-wrapper`} style={{ height }}>
             {toastEle_}
@@ -214,10 +213,6 @@ const Toast = defineComponent(
       }
     };
   },
-  {
-    props: vuePropsType,
-    name: 'Toast',
-  }
-);
+});
 
 export default Toast;

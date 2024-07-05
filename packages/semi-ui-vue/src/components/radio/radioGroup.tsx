@@ -9,8 +9,11 @@ import {
   onMounted,
   watch,
   onUnmounted,
-  cloneVNode, isVNode, ComponentObjectPropsOptions, PropType
-} from 'vue'
+  cloneVNode,
+  isVNode,
+  ComponentObjectPropsOptions,
+  PropType,
+} from 'vue';
 
 import classnames from 'classnames';
 import { noop } from 'lodash';
@@ -19,9 +22,9 @@ import { radioGroupClasses as css, strings } from '@douyinfe/semi-foundation/rad
 import RadioGroupFoundation, { RadioGroupAdapter } from '@douyinfe/semi-foundation/radio/radioGroupFoundation';
 import { RadioChangeEvent } from '@douyinfe/semi-foundation/radio/radioInnerFoundation';
 
-import {useBaseComponent} from '../_base/baseComponent';
+import { useBaseComponent } from '../_base/baseComponent';
 import { ArrayElement } from '../_base/base';
-import Radio, {RadioProps, RadioState, RadioType} from './radio';
+import Radio, { RadioProps, RadioState, RadioType } from './radio';
 import Context, { RadioGroupButtonSize, RadioMode } from './context';
 
 export interface OptionItem {
@@ -53,40 +56,40 @@ export type RadioGroupProps = {
   'aria-errormessage'?: any;
   'aria-invalid'?: any;
   'aria-labelledby'?: any;
-  'aria-required'?: any
+  'aria-required'?: any;
   id?: string;
-  'onUpdate:value'?:(v:any)=>void
+  'onUpdate:value'?: (v: any) => void;
 };
 
 export interface RadioGroupState {
   value?: any;
 }
 
-export const vuePropsType:ComponentObjectPropsOptions<RadioGroupProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<RadioGroupProps> = {
   'onUpdate:value': Function as PropType<RadioGroupProps['onUpdate:value']>,
   defaultValue: {
     type: [String, Number],
-// @ts-ignore
+    // @ts-ignore
     default: undefined,
   },
-  disabled: {type:Boolean,default:false},
+  disabled: { type: Boolean, default: false },
   name: String,
   options: [Object, Array],
   value: {
     type: [String, Number],
-// @ts-ignore
+    // @ts-ignore
     default: undefined,
   },
-  onChange: {type:Function as PropType<RadioGroupProps['onChange']>,default:noop},
+  onChange: { type: Function as PropType<RadioGroupProps['onChange']>, default: noop },
   className: String,
   style: [Object, String] as PropType<RadioGroupProps['style']>,
   direction: {
-    type: [String, Object,Array,Boolean] as PropType<RadioGroupProps['direction']>,
+    type: [String, Object, Array, Boolean] as PropType<RadioGroupProps['direction']>,
     default: strings.DEFAULT_DIRECTION,
   },
-  mode: {type: String as PropType<RadioGroupProps['mode']>, default:''},
-  type: {type:String as PropType<RadioGroupProps['type']>, default:strings.TYPE_DEFAULT},
-  buttonSize: {type:String as PropType<RadioGroupProps['buttonSize']>, default:'middle'},
+  mode: { type: String as PropType<RadioGroupProps['mode']>, default: '' },
+  type: { type: String as PropType<RadioGroupProps['type']>, default: strings.TYPE_DEFAULT },
+  buttonSize: { type: String as PropType<RadioGroupProps['buttonSize']>, default: 'middle' },
   prefixCls: String,
   'aria-label': String,
   'aria-describedby': String,
@@ -95,177 +98,157 @@ export const vuePropsType:ComponentObjectPropsOptions<RadioGroupProps> = {
   'aria-labelledby': String,
   'aria-required': [String, Boolean],
   id: String,
-}
+};
 
+const RadioGroup = defineComponent({
+  props: vuePropsType,
+  name: 'RadioGroup',
+  setup(props, { slots }) {
+    const onUpdateValueFunc = props['onUpdate:value'];
+    // console.log(props)
+    let foundation: RadioGroupFoundation;
+    const state = reactive({
+      value: undefined,
+    });
+    const { adapter: adapterInject, getDataAttr } = useBaseComponent<RadioGroupProps>(props, state);
 
-const RadioGroup = defineComponent((props, {slots}) => {
-
-  const onUpdateValueFunc = props["onUpdate:value"]
-  // console.log(props)
-  let foundation: RadioGroupFoundation;
-  const state = reactive({
-    value: undefined,
-  })
-  const {adapter: adapterInject, getDataAttr} = useBaseComponent<RadioGroupProps>(props, state)
-
-  const theAdapter = adapter()
-  function adapter(): RadioGroupAdapter {
-    return {
-      ...adapterInject<RadioGroupProps, RadioGroupState>(),
-      setValue: (value: any) => {
-        // console.log(value)
-        state.value = value
-      },
-      // getProps: () => props,
-      isInProps: (name: string) => {
-        return Boolean(name in props) && props[name] !== undefined
-      },
-      notifyChange: (evt: RadioChangeEvent) => {
-        props.onChange && props.onChange(evt);
-      },
-    };
-  }
-  foundation = new RadioGroupFoundation(theAdapter);
-
-  onMounted(()=>{
-    foundation.init();
-  })
-
-  watch(()=>props.value,(prevPropsValue, nextPropsValue)=>{
-    if (prevPropsValue !== nextPropsValue) {
-      foundation.handlePropValueChange(props.value);
+    const theAdapter = adapter();
+    function adapter(): RadioGroupAdapter {
+      return {
+        ...adapterInject<RadioGroupProps, RadioGroupState>(),
+        setValue: (value: any) => {
+          // console.log(value)
+          state.value = value;
+        },
+        // getProps: () => props,
+        isInProps: (name: string) => {
+          return Boolean(name in props) && props[name] !== undefined;
+        },
+        notifyChange: (evt: RadioChangeEvent) => {
+          props.onChange && props.onChange(evt);
+        },
+      };
     }
-  })
+    foundation = new RadioGroupFoundation(theAdapter);
 
-  onUnmounted(()=>{
-    foundation.destroy();
-  })
-
-
-  const onChange = (evt: RadioChangeEvent) => {
-    // console.error(evt.target.value)
-    if (onUpdateValueFunc){
-      onUpdateValueFunc(evt.target.value)
-    }
-    foundation.handleChange(evt);
-  };
-
-  const getFormatName = () => props.name || 'default';
-
-  return () => {
-
-    const children = slots.default?slots.default():null;
-    const {
-      options,
-      mode,
-      prefixCls,
-      className,
-      style,
-      direction,
-      type,
-      buttonSize,
-      id,
-      ...rest
-    } = props;
-
-    const isButtonRadio = type === strings.TYPE_BUTTON;
-    const isPureCardRadio = type === strings.TYPE_PURECARD;
-    const isCardRadio = type === strings.TYPE_CARD || isPureCardRadio;
-    const isDefaultRadio = type === strings.TYPE_DEFAULT;
-
-    const prefix = prefixCls || css.PREFIX;
-    const prefixClsDisplay = classnames(className, {
-      [prefix]: true,
-      [`${prefix}-wrapper`]: true,
-      [`${prefix}-${direction}`]: direction && !isButtonRadio,
-      [`${prefix}-${direction}-default`]: direction && isDefaultRadio,
-      [`${prefix}-${direction}-card`]: direction && isCardRadio,
-      [`${prefix}-buttonRadio`]: isButtonRadio,
+    onMounted(() => {
+      foundation.init();
     });
 
-    const realValue = state.value;
-
-    let inner:any;
-    // // console.log(options, children)
-    if (options) {
-      inner = (options || []).map((option, index) => {
-        if (typeof option === 'string') {
-          return (
-            <Radio
-              key={index}
-              disabled={props.disabled}
-              value={option}
-            >
-              {option}
-            </Radio>
-          );
-        } else {
-          return (
-            <Radio
-              key={index}
-              disabled={option.disabled || props.disabled}
-              value={option.value}
-              extra={option.extra}
-              className={option.className}
-              style={option.style}
-            >
-              {option.label}
-            </Radio>
-          );
+    watch(
+      () => props.value,
+      (prevPropsValue, nextPropsValue) => {
+        if (prevPropsValue !== nextPropsValue) {
+          foundation.handlePropValueChange(props.value);
         }
-      });
-    } else if (children) {
-      // TODO React???
-      inner = children.map((itm, index) => (isVNode(itm) ?
-        cloneVNode(itm, { key: index }) :
-        null));
-    }
-
-    // console.log(realValue)
-    return (
-      <div
-        class={prefixClsDisplay}
-        style={style}
-        id={id}
-        aria-label={props['aria-label']}
-        aria-invalid={props['aria-invalid']}
-        aria-errormessage={props['aria-errormessage']}
-        aria-labelledby={props['aria-labelledby']}
-        aria-describedby={props['aria-describedby']}
-        aria-required={props['aria-required']}
-        {...getDataAttr()}
-      >
-        <Context
-          value={{
-            radioGroup: {
-              onChange: onChange,
-              value: realValue,
-              disabled: props.disabled,
-              name: getFormatName(),
-              isButtonRadio,
-              isCardRadio,
-              isPureCardRadio,
-              buttonSize,
-              prefixCls
-            },
-            mode
-          }}
-        >
-          {{
-            default: ()=> {
-              return inner
-            }
-          }}
-        </Context>
-      </div>
+      }
     );
-  }
-}, {
-  props: vuePropsType,
-  name: 'RadioGroup'
-})
 
+    onUnmounted(() => {
+      foundation.destroy();
+    });
 
+    const onChange = (evt: RadioChangeEvent) => {
+      // console.error(evt.target.value)
+      if (onUpdateValueFunc) {
+        onUpdateValueFunc(evt.target.value);
+      }
+      foundation.handleChange(evt);
+    };
 
-export default RadioGroup
+    const getFormatName = () => props.name || 'default';
 
+    return () => {
+      const children = slots.default ? slots.default() : null;
+      const { options, mode, prefixCls, className, style, direction, type, buttonSize, id, ...rest } = props;
+
+      const isButtonRadio = type === strings.TYPE_BUTTON;
+      const isPureCardRadio = type === strings.TYPE_PURECARD;
+      const isCardRadio = type === strings.TYPE_CARD || isPureCardRadio;
+      const isDefaultRadio = type === strings.TYPE_DEFAULT;
+
+      const prefix = prefixCls || css.PREFIX;
+      const prefixClsDisplay = classnames(className, {
+        [prefix]: true,
+        [`${prefix}-wrapper`]: true,
+        [`${prefix}-${direction}`]: direction && !isButtonRadio,
+        [`${prefix}-${direction}-default`]: direction && isDefaultRadio,
+        [`${prefix}-${direction}-card`]: direction && isCardRadio,
+        [`${prefix}-buttonRadio`]: isButtonRadio,
+      });
+
+      const realValue = state.value;
+
+      let inner: any;
+      // // console.log(options, children)
+      if (options) {
+        inner = (options || []).map((option, index) => {
+          if (typeof option === 'string') {
+            return (
+              <Radio key={index} disabled={props.disabled} value={option}>
+                {option}
+              </Radio>
+            );
+          } else {
+            return (
+              <Radio
+                key={index}
+                disabled={option.disabled || props.disabled}
+                value={option.value}
+                extra={option.extra}
+                className={option.className}
+                style={option.style}
+              >
+                {option.label}
+              </Radio>
+            );
+          }
+        });
+      } else if (children) {
+        // TODO React???
+        inner = children.map((itm, index) => (isVNode(itm) ? cloneVNode(itm, { key: index }) : null));
+      }
+
+      // console.log(realValue)
+      return (
+        <div
+          class={prefixClsDisplay}
+          style={style}
+          id={id}
+          aria-label={props['aria-label']}
+          aria-invalid={props['aria-invalid']}
+          aria-errormessage={props['aria-errormessage']}
+          aria-labelledby={props['aria-labelledby']}
+          aria-describedby={props['aria-describedby']}
+          aria-required={props['aria-required']}
+          {...getDataAttr()}
+        >
+          <Context
+            value={{
+              radioGroup: {
+                onChange: onChange,
+                value: realValue,
+                disabled: props.disabled,
+                name: getFormatName(),
+                isButtonRadio,
+                isCardRadio,
+                isPureCardRadio,
+                buttonSize,
+                prefixCls,
+              },
+              mode,
+            }}
+          >
+            {{
+              default: () => {
+                return inner;
+              },
+            }}
+          </Context>
+        </div>
+      );
+    };
+  },
+});
+
+export default RadioGroup;

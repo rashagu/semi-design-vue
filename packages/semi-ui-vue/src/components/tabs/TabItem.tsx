@@ -38,8 +38,10 @@ const propTypes: ComponentObjectPropsOptions<TabItemProps> = {
   forwardRef: [PropTypes.object, PropTypes.func],
 };
 export const vuePropsType = vuePropsMake(propTypes, {});
-const TabItem = defineComponent(
-  (props, {attrs}) => {
+const TabItem = defineComponent({
+  props: vuePropsType,
+  name: 'Tabs.TabItem',
+  setup(props, { attrs }) {
     const slots = useSlots();
 
     const closableIcon = computed(() => {
@@ -115,10 +117,6 @@ const TabItem = defineComponent(
       );
     };
   },
-  {
-    props: vuePropsType,
-    name: 'Tabs.TabItem',
-  }
-);
+});
 
 export default TabItem;

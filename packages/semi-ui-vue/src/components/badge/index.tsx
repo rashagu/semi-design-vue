@@ -3,7 +3,7 @@ import * as PropTypes from '../PropTypes';
 import { isNumber, isString, noop } from 'lodash';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/badge/constants';
 import '@douyinfe/semi-foundation/badge/badge.scss';
-import {ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots} from 'vue';
+import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { VueJsxNode } from '../interface';
@@ -30,7 +30,7 @@ export interface BadgeProps {
   countStyle?: CSSProperties;
 }
 
-const propTypes:ComponentObjectPropsOptions<BadgeProps> = {
+const propTypes: ComponentObjectPropsOptions<BadgeProps> = {
   count: PropTypes.node,
   dot: PropTypes.bool,
   type: PropTypes.string as PropType<BadgeProps['type']>,
@@ -57,48 +57,59 @@ const defaultProps = {
 };
 
 export const vuePropsType = vuePropsMake<BadgeProps>(propTypes, defaultProps);
-const Badge = defineComponent((props, {}) => {
-  const slots = useSlots();
-
-  const { context } = useConfigContext();
-
-  return () => {
-    const { direction } = context.value;
-    // DefaultPosition here, static can't get this
-    const defaultPosition = direction === 'rtl' ? 'leftTop' : 'rightTop';
-    // eslint-disable-next-line max-len
-    const { count, dot, type, countClassName,countStyle, theme, position = defaultPosition, overflowCount, className, ...rest } = props;
-    const children = slots.default?.();
-    const custom = count && !(isNumber(count) || isString(count));
-    const showBadge = count !== null && typeof count !== 'undefined';
-    const wrapper = cls(countClassName, {
-      [`${prefixCls}-${type}`]: !custom,
-      [`${prefixCls}-${theme}`]: !custom,
-      [`${prefixCls}-${position}`]: Boolean(position) && Boolean(children),
-      [`${prefixCls}-block`]: !children,
-      [`${prefixCls}-dot`]: dot,
-      [`${prefixCls}-count`]: !dot && !custom && showBadge,
-      [`${prefixCls}-custom`]: custom,
-    });
-    let content;
-    if (isNumber(count)) {
-      content = overflowCount && overflowCount < count ? `${overflowCount}+` : `${count}`;
-    } else {
-      content = count;
-    }
-    return (
-      <span class={cls(prefixCls, className)} {...rest}>
-        {children}
-        <span class={wrapper} style={countStyle} x-semi-prop="count">
-          {dot ? null : content}
-        </span>
-      </span>
-    );
-  };
-},{
+const Badge = defineComponent({
   props: vuePropsType,
-  name:'Badge'
-});
+  name: 'Badge',
+  setup(props, {}) {
+    const slots = useSlots();
 
+    const { context } = useConfigContext();
+
+    return () => {
+      const { direction } = context.value;
+      // DefaultPosition here, static can't get this
+      const defaultPosition = direction === 'rtl' ? 'leftTop' : 'rightTop';
+      // eslint-disable-next-line max-len
+      const {
+        count,
+        dot,
+        type,
+        countClassName,
+        countStyle,
+        theme,
+        position = defaultPosition,
+        overflowCount,
+        className,
+        ...rest
+      } = props;
+      const children = slots.default?.();
+      const custom = count && !(isNumber(count) || isString(count));
+      const showBadge = count !== null && typeof count !== 'undefined';
+      const wrapper = cls(countClassName, {
+        [`${prefixCls}-${type}`]: !custom,
+        [`${prefixCls}-${theme}`]: !custom,
+        [`${prefixCls}-${position}`]: Boolean(position) && Boolean(children),
+        [`${prefixCls}-block`]: !children,
+        [`${prefixCls}-dot`]: dot,
+        [`${prefixCls}-count`]: !dot && !custom && showBadge,
+        [`${prefixCls}-custom`]: custom,
+      });
+      let content;
+      if (isNumber(count)) {
+        content = overflowCount && overflowCount < count ? `${overflowCount}+` : `${count}`;
+      } else {
+        content = count;
+      }
+      return (
+        <span class={cls(prefixCls, className)} {...rest}>
+          {children}
+          <span class={wrapper} style={countStyle} x-semi-prop="count">
+            {dot ? null : content}
+          </span>
+        </span>
+      );
+    };
+  },
+});
 
 export default Badge;

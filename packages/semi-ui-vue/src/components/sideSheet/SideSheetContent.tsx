@@ -10,15 +10,15 @@ import {
   defineComponent,
   h,
   onBeforeUnmount,
-  onMounted, PropType,
+  onMounted,
+  PropType,
   ref,
-  useSlots
+  useSlots,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
-import { SideSheetProps } from "@douyinfe/semi-foundation/sideSheet/sideSheetFoundation";
+import { SideSheetProps } from '@douyinfe/semi-foundation/sideSheet/sideSheetFoundation';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
-
 
 let uuid = 0;
 const prefixCls = cssClasses.PREFIX;
@@ -49,7 +49,7 @@ export interface SideSheetContentProps {
   visible?: boolean;
 }
 
-const propTypes:ComponentObjectPropsOptions<SideSheetContentProps> = {
+const propTypes: ComponentObjectPropsOptions<SideSheetContentProps> = {
   size: String as PropType<SideSheetContentProps['size']>,
   onClose: PropTypes.func as PropType<SideSheetContentProps['onClose']>,
   closeIcon: PropTypes.node,
@@ -73,168 +73,167 @@ const propTypes:ComponentObjectPropsOptions<SideSheetContentProps> = {
   // children: PropTypes.node as PropType<SideSheetContentProps['children']>,
 
   motion: PropTypes.bool as PropType<SideSheetContentProps['motion']>,
-  visible: PropTypes.bool as PropType<SideSheetContentProps['visible']>
+  visible: PropTypes.bool as PropType<SideSheetContentProps['visible']>,
 };
 
 const defaultProps = {
   onClose: noop,
 };
 export const vuePropsType = vuePropsMake<SideSheetContentProps>(propTypes, defaultProps);
-const SideSheetContent = defineComponent((props, {}) => {
-  const slots = useSlots();
-  let sideSheetId: string;
-  let timeoutId: number;
-  onMounted(() => {
-    sideSheetId = `sidesheet-${uuid++}`;
-  });
-  onBeforeUnmount(() => {
-    clearTimeout(timeoutId);
-  });
-
-  const onMaskClick = (e: MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      close(e);
-    }
-  };
-
-  const close = (e: MouseEvent) => {
-    const { onClose } = props;
-    onClose && onClose(e);
-  };
-
-  function getMaskElement() {
-    const { mask, maskStyle, maskClosable } = props;
-    if (mask) {
-      return (
-        <div
-          aria-hidden={true}
-          key="mask"
-          class={cls(`${prefixCls}-mask`, props.maskClassName ?? '')}
-          style={maskStyle}
-          onClick={maskClosable ? onMaskClick : null}
-          {...props.maskExtraProps}
-        />
-      );
-    }
-    return null;
-  }
-
-  function renderHeader() {
-    const { title, closable, headerStyle,
-      closeIcon, } = props;
-    let header, closer;
-    if (title) {
-      header = (
-        <div class={`${prefixCls}-title`} x-semi-prop="title">
-          {props.title}
-        </div>
-      );
-    }
-    if (closable) {
-      const iconType = closeIcon || <IconClose/>;
-      closer = (
-        <Button
-          className={`${prefixCls}-close`}
-          key="close-btn"
-          onClick={close}
-          type="tertiary"
-          icon={iconType}
-          theme="borderless"
-          size="small"
-        />
-      );
-    }
-    return (
-      <div class={`${prefixCls}-header`} role={'heading'} aria-level={1} style={{ ...headerStyle }}>
-        {header}
-        {closer}
-      </div>
-    );
-  }
-
-  function getDialogElement() {
-    const style: CSSProperties = {};
-    if (props.width) {
-      style.width = typeof props.width === 'string' ? props.width : props.width + 'px';
-      // When the mask is false, the width is set on the wrapper. At this time, sidesheet-inner does not need to set the width again, otherwise, the percentage will be accumulated repeatedly when the width is a percentage
-      if (!props.mask) {
-        style.width = '100%';
-      }
-    }
-    if (props.height) {
-      style.height = typeof props.height === 'string' ? props.height : props.height + 'px';
-    }
-    const header = renderHeader();
-    const dialogElement = (
-      <div
-        key="dialog-element"
-        role="dialog"
-        tabindex={-1}
-        class={cls(`${prefixCls}-inner`, `${prefixCls}-inner-wrap`, props.dialogClassName ?? '')}
-        // onMouseDown={this.onDialogMouseDown}
-        style={{ ...props.style, ...style }}
-        {...props.wrapperExtraProps}
-        // id={this.dialogId}
-      >
-        <div class={`${prefixCls}-content`}>
-          {header}
-          <div class={`${prefixCls}-body`} style={props.bodyStyle} x-semi-prop="children">
-            {slots.default?.()}
-          </div>
-          {props.footer ? (
-            <div class={`${prefixCls}-footer`} x-semi-prop="footer">
-              {props.footer}
-            </div>
-          ) : null}
-        </div>
-      </div>
-    );
-    return dialogElement;
-  }
-
-  return () => {
-    const {
-      mask,
-      className,
-      width,
-      onClose,
-      maskStyle,
-      maskClosable,
-      maskClassName,
-      title,
-      closable,
-      headerStyle,
-      height,
-      style,
-      size,
-      bodyStyle,
-      dialogClassName,
-      footer,
-      maskExtraProps,
-      wrapperExtraProps,
-      ...rest
-    } = props;
-    const wrapperCls = cls(className, {
-      [`${prefixCls}-fixed`]: !mask,
-    });
-    const wrapperStyle: CSSProperties = {};
-    if (!mask && width) {
-      wrapperStyle.width = typeof width === 'string' ? width : width + 'px';
-    }
-
-    const dataAttr = getDataAttr(rest);
-
-    return (
-      <div class={wrapperCls} style={wrapperStyle}  {...dataAttr}>
-        {getMaskElement()}
-        {getDialogElement()}
-      </div>
-    );
-  };
-}, {
+const SideSheetContent = defineComponent({
   props: vuePropsType,
-  name: 'SideSheetContent'
-});
+  name: 'SideSheetContent',
+  setup(props, {}) {
+    const slots = useSlots();
+    let sideSheetId: string;
+    let timeoutId: number;
+    onMounted(() => {
+      sideSheetId = `sidesheet-${uuid++}`;
+    });
+    onBeforeUnmount(() => {
+      clearTimeout(timeoutId);
+    });
 
+    const onMaskClick = (e: MouseEvent) => {
+      if (e.target === e.currentTarget) {
+        close(e);
+      }
+    };
+
+    const close = (e: MouseEvent) => {
+      const { onClose } = props;
+      onClose && onClose(e);
+    };
+
+    function getMaskElement() {
+      const { mask, maskStyle, maskClosable } = props;
+      if (mask) {
+        return (
+          <div
+            aria-hidden={true}
+            key="mask"
+            class={cls(`${prefixCls}-mask`, props.maskClassName ?? '')}
+            style={maskStyle}
+            onClick={maskClosable ? onMaskClick : null}
+            {...props.maskExtraProps}
+          />
+        );
+      }
+      return null;
+    }
+
+    function renderHeader() {
+      const { title, closable, headerStyle, closeIcon } = props;
+      let header, closer;
+      if (title) {
+        header = (
+          <div class={`${prefixCls}-title`} x-semi-prop="title">
+            {props.title}
+          </div>
+        );
+      }
+      if (closable) {
+        const iconType = closeIcon || <IconClose />;
+        closer = (
+          <Button
+            className={`${prefixCls}-close`}
+            key="close-btn"
+            onClick={close}
+            type="tertiary"
+            icon={iconType}
+            theme="borderless"
+            size="small"
+          />
+        );
+      }
+      return (
+        <div class={`${prefixCls}-header`} role={'heading'} aria-level={1} style={{ ...headerStyle }}>
+          {header}
+          {closer}
+        </div>
+      );
+    }
+
+    function getDialogElement() {
+      const style: CSSProperties = {};
+      if (props.width) {
+        style.width = typeof props.width === 'string' ? props.width : props.width + 'px';
+        // When the mask is false, the width is set on the wrapper. At this time, sidesheet-inner does not need to set the width again, otherwise, the percentage will be accumulated repeatedly when the width is a percentage
+        if (!props.mask) {
+          style.width = '100%';
+        }
+      }
+      if (props.height) {
+        style.height = typeof props.height === 'string' ? props.height : props.height + 'px';
+      }
+      const header = renderHeader();
+      const dialogElement = (
+        <div
+          key="dialog-element"
+          role="dialog"
+          tabindex={-1}
+          class={cls(`${prefixCls}-inner`, `${prefixCls}-inner-wrap`, props.dialogClassName ?? '')}
+          // onMouseDown={this.onDialogMouseDown}
+          style={{ ...props.style, ...style }}
+          {...props.wrapperExtraProps}
+          // id={this.dialogId}
+        >
+          <div class={`${prefixCls}-content`}>
+            {header}
+            <div class={`${prefixCls}-body`} style={props.bodyStyle} x-semi-prop="children">
+              {slots.default?.()}
+            </div>
+            {props.footer ? (
+              <div class={`${prefixCls}-footer`} x-semi-prop="footer">
+                {props.footer}
+              </div>
+            ) : null}
+          </div>
+        </div>
+      );
+      return dialogElement;
+    }
+
+    return () => {
+      const {
+        mask,
+        className,
+        width,
+        onClose,
+        maskStyle,
+        maskClosable,
+        maskClassName,
+        title,
+        closable,
+        headerStyle,
+        height,
+        style,
+        size,
+        bodyStyle,
+        dialogClassName,
+        footer,
+        maskExtraProps,
+        wrapperExtraProps,
+        ...rest
+      } = props;
+      const wrapperCls = cls(className, {
+        [`${prefixCls}-fixed`]: !mask,
+      });
+      const wrapperStyle: CSSProperties = {};
+      if (!mask && width) {
+        wrapperStyle.width = typeof width === 'string' ? width : width + 'px';
+      }
+
+      const dataAttr = getDataAttr(rest);
+
+      return (
+        <div class={wrapperCls} style={wrapperStyle} {...dataAttr}>
+          {getMaskElement()}
+          {getDialogElement()}
+        </div>
+      );
+    };
+  },
+});
 
 export default SideSheetContent;

@@ -63,8 +63,10 @@ export const vuePropsType: ComponentObjectPropsOptions<CopyableProps> = {
   icon: PropTypes.node as PropType<CopyableProps['icon']>,
 };
 
-const Copyable = defineComponent(
-  (props, { slots }) => {
+const Copyable = defineComponent({
+  props: vuePropsType,
+  name: 'Copyable',
+  setup(props, { slots }) {
     let _timeId: ReturnType<typeof setTimeout>;
 
     const state = reactive({
@@ -124,26 +126,25 @@ const Copyable = defineComponent(
     const renderCopyIcon = () => {
       const { icon } = props;
       const copyProps = {
-        role: "button",
+        role: 'button',
         tabIndex: 0,
         onClick: copy,
-        onKeyPress: e => isEnterPress(e) && copy(e as any),
+        onKeyPress: (e) => isEnterPress(e) && copy(e as any),
       };
 
-      {/* TODO: replace `a` tag with `span` in next major version
-            NOTE: may have effect on style */}
+      {
+        /* TODO: replace `a` tag with `span` in next major version
+            NOTE: may have effect on style */
+      }
       const defaultIcon = (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a class={`${prefixCls}-action-copy-icon`}>
-          <IconCopy
-            onClick={copy}
-            {...copyProps}
-          />
+          <IconCopy onClick={copy} {...copyProps} />
         </a>
       );
 
       return isVNode(icon) ? cloneVNode(icon, copyProps) : defaultIcon;
-    }
+    };
     return () => {
       const { style, className, forwardRef, copyTip } = props;
       const { copied } = state;
@@ -166,10 +167,6 @@ const Copyable = defineComponent(
       );
     };
   },
-  {
-    props: vuePropsType,
-    name: 'Copyable',
-  }
-);
+});
 
 export default Copyable;

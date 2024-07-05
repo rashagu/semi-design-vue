@@ -103,7 +103,6 @@ function viteSemiTheme(options: Options): Plugin {
             }
             return `body:not(:not(body)){${customStr}};`;
           })();
-          console.log(customStr);
           finalCSS = `${animationStr}${cssVarStr}${scssVarStr}${prefixClsStr}${fileStr}${customStr}`;
         } else {
           finalCSS = `${scssVarStr}${prefixClsStr}${fileStr}`;

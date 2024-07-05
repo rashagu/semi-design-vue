@@ -51,8 +51,10 @@ const defaultProps = {
 };
 
 export const vuePropsTypeGeneric = vuePropsMake(propTypes, defaultProps);
-const Generic = defineComponent(
-  (props, {}) => {
+const Generic = defineComponent({
+  props: vuePropsTypeGeneric,
+  name: 'Generic',
+  setup(props, {}) {
     const slots = useSlots();
 
     return () => {
@@ -70,11 +72,7 @@ const Generic = defineComponent(
       return h('div', { className: classString, ...others });
     };
   },
-  {
-    props: vuePropsTypeGeneric,
-    name: 'Generic',
-  }
-);
+});
 
 export const Avatar = generator<AvatarProps>('avatar')(Generic);
 export const Image = generator<BasicProps>('image')(Generic);

@@ -1,41 +1,43 @@
-
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
-import {useBaseComponent} from "../_base/baseComponent";
-import {CarouselProps} from './interface';
-import {cssClasses, numbers, strings} from '@douyinfe/semi-foundation/carousel/constants';
-import CarouselFoundation, {CarouselAdapter} from '@douyinfe/semi-foundation/carousel/foundation';
+import { useBaseComponent } from '../_base/baseComponent';
+import { CarouselProps } from './interface';
+import { cssClasses, numbers, strings } from '@douyinfe/semi-foundation/carousel/constants';
+import CarouselFoundation, { CarouselAdapter } from '@douyinfe/semi-foundation/carousel/foundation';
 import CarouselIndicator from './CarouselIndicator';
 import CarouselArrow from './CarouselArrow';
 import '@douyinfe/semi-foundation/carousel/carousel.scss';
-import {debounce, isEqual, pick} from 'lodash';
+import { debounce, isEqual, pick } from 'lodash';
 import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
 import {
-  cloneVNode, ComponentObjectPropsOptions,
+  cloneVNode,
+  ComponentObjectPropsOptions,
   defineComponent,
   Fragment,
   h,
   isVNode,
   onBeforeUnmount,
-  onMounted, PropType,
-  reactive, shallowRef,
+  onMounted,
+  PropType,
+  reactive,
+  shallowRef,
   useSlots,
   VNode,
-  watch
-} from "vue";
-import {vuePropsMake} from "../PropTypes";
-import {ToastReactProps} from "../toast/toast";
-import {getFragmentChildren} from "../_utils";
+  watch,
+} from 'vue';
+import { vuePropsMake } from '../PropTypes';
+import { ToastReactProps } from '../toast/toast';
+import { getFragmentChildren } from '../_utils';
 
 export interface CarouselState {
   activeIndex: number;
   children: VNode[];
   preIndex: number;
   isReverse: boolean;
-  isInit: boolean
+  isInit: boolean;
 }
 
-const propTypes:ComponentObjectPropsOptions<CarouselProps> = {
+const propTypes: ComponentObjectPropsOptions<CarouselProps> = {
   activeIndex: PropTypes.number,
   animation: PropTypes.string as PropType<CarouselProps['animation']>,
   arrowProps: PropTypes.object,
@@ -71,276 +73,265 @@ const defaultProps: CarouselProps = {
   showIndicator: true,
   slideDirection: 'left',
   speed: numbers.DEFAULT_SPEED,
-  trigger: 'click'
+  trigger: 'click',
 };
-export const vuePropsType = vuePropsMake<CarouselProps>(propTypes, defaultProps)
-const Carousel = defineComponent((props, {expose}) => {
-  const slots = useSlots()
-  const childrenRef = shallowRef<{children:VNode[]}>({
-    children: []
-  })
+export const vuePropsType = vuePropsMake<CarouselProps>(propTypes, defaultProps);
+const Carousel = defineComponent({
+  props: vuePropsType,
+  name: 'Carousel',
+  setup(props, { expose }) {
+    const slots = useSlots();
+    const childrenRef = shallowRef<{ children: VNode[] }>({
+      children: [],
+    });
 
-  let preChildren:VNode[] = []
-  const state = reactive<CarouselState>({
-    activeIndex: -1,
-    children: [],
-    preIndex: -1,
-    isReverse: false,
-    isInit: true
-  })
+    let preChildren: VNode[] = [];
+    const state = reactive<CarouselState>({
+      activeIndex: -1,
+      children: [],
+      preIndex: -1,
+      isReverse: false,
+      isInit: true,
+    });
 
-  const {adapter: adapterInject, getDataAttr} = useBaseComponent<CarouselProps>(props, state)
+    const { adapter: adapterInject, getDataAttr } = useBaseComponent<CarouselProps>(props, state);
 
-  function adapter_(): CarouselAdapter<CarouselProps, CarouselState> {
-    return {
-      ...adapterInject(),
-      getStates(){
-        return {
-          ...state,
-          children: preChildren
-        }
-      },
-      notifyChange: (activeIndex: number, preIndex: number): void => {
-        props.onChange(activeIndex, preIndex);
-      },
-      setNewActiveIndex: (activeIndex: number): void => {
-        state.activeIndex = activeIndex
-      },
-      setPreActiveIndex: (preIndex: number): void => {
-        state.preIndex = preIndex
-      },
-      setIsReverse: (isReverse: boolean): void => {
-        state.isReverse = isReverse
-      },
-      setIsInit: (isInit: boolean): void => {
-        state.isInit = isInit
+    function adapter_(): CarouselAdapter<CarouselProps, CarouselState> {
+      return {
+        ...adapterInject(),
+        getStates() {
+          return {
+            ...state,
+            children: preChildren,
+          };
+        },
+        notifyChange: (activeIndex: number, preIndex: number): void => {
+          props.onChange(activeIndex, preIndex);
+        },
+        setNewActiveIndex: (activeIndex: number): void => {
+          state.activeIndex = activeIndex;
+        },
+        setPreActiveIndex: (preIndex: number): void => {
+          state.preIndex = preIndex;
+        },
+        setIsReverse: (isReverse: boolean): void => {
+          state.isReverse = isReverse;
+        },
+        setIsInit: (isInit: boolean): void => {
+          state.isInit = isInit;
+        },
+      };
+    }
+
+    const adapter = adapter_();
+    const foundation = new CarouselFoundation(adapter);
+
+    const defaultActiveIndex = foundation.getDefaultActiveIndex();
+    state.activeIndex = defaultActiveIndex;
+    state.preIndex = defaultActiveIndex;
+
+    function getDerivedStateFromProps(props: CarouselProps): Partial<CarouselState> {
+      const states: Partial<CarouselState> = {};
+      if (!isNullOrUndefined(props.activeIndex) && props.activeIndex !== state.activeIndex) {
+        states.activeIndex = props.activeIndex;
+      }
+      return states;
+    }
+
+    watch([() => props.activeIndex, () => state.activeIndex], (val) => {
+      const newState = getDerivedStateFromProps({ ...props });
+      if (newState) {
+        Object.keys(newState).forEach((key) => {
+          state[key] = newState[key];
+        });
+      }
+    });
+
+    onMounted(() => {
+      handleAutoPlay();
+    });
+    onBeforeUnmount(() => {
+      foundation.destroy();
+    });
+
+    const play = (): void => {
+      foundation.setForcePlay(true);
+      return foundation.handleAutoPlay();
+    };
+
+    const stop = (): void => {
+      foundation.setForcePlay(false);
+      return foundation.stop();
+    };
+
+    const goTo = (targetIndex: number): void => {
+      return foundation.goTo(targetIndex);
+    };
+
+    const prev = (): void => {
+      return foundation.prev();
+    };
+
+    const next = (): void => {
+      return foundation.next();
+    };
+
+    expose({
+      play,
+      stop,
+      goTo,
+      prev,
+      next,
+    });
+
+    const handleAutoPlay = (): void => {
+      if (!foundation.getIsControlledComponent()) {
+        foundation.handleAutoPlay();
       }
     };
-  }
 
-  const adapter = adapter_()
-  const foundation = new CarouselFoundation(adapter);
+    const handleMouseEnter = (): void => {
+      const { autoPlay } = props;
+      if (autoPlay === true || (typeof autoPlay === 'object' && autoPlay.hoverToPause)) {
+        foundation.stop();
+      }
+    };
 
-  const defaultActiveIndex = foundation.getDefaultActiveIndex();
-  state.activeIndex = defaultActiveIndex
-  state.preIndex = defaultActiveIndex
+    const handleMouseLeave = (): void => {
+      const { autoPlay } = props;
+      if ((typeof autoPlay !== 'object' || autoPlay.hoverToPause) && !foundation.getIsControlledComponent()) {
+        foundation.handleAutoPlay();
+      }
+    };
 
-  function getDerivedStateFromProps(props: CarouselProps): Partial<CarouselState> {
-    const states: Partial<CarouselState> = {};
-    if (!isNullOrUndefined(props.activeIndex) && props.activeIndex !== state.activeIndex) {
-      states.activeIndex = props.activeIndex;
-    }
-    return states;
-  }
+    const onIndicatorChange = (activeIndex: number): void => {
+      return foundation.onIndicatorChange(activeIndex);
+    };
 
-  watch([() => props.activeIndex, () => state.activeIndex], (val) => {
-    const newState = getDerivedStateFromProps({...props})
-    if (newState) {
-      Object.keys(newState).forEach(key => {
-        state[key] = newState[key]
-      })
-    }
-  })
+    // function getChildren() {
+    //   const originChildren:VNode[] = slots.default?.()?.[0].children as any  || [];
+    //   return originChildren.filter(child => {
+    //     return isVNode(child);
+    //   });
+    // }
 
-  onMounted(() => {
-    handleAutoPlay();
-  })
-  onBeforeUnmount(() => {
-    foundation.destroy();
-  })
+    const getValidIndex = (activeIndex: number): number => {
+      return foundation.getValidIndex(activeIndex);
+    };
 
+    const renderChildren = () => {
+      const { speed, animation } = props;
+      const { activeIndex, preIndex, isInit } = state;
 
-  const play = (): void => {
-    foundation.setForcePlay(true);
-    return foundation.handleAutoPlay();
-  }
-
-  const stop = (): void => {
-    foundation.setForcePlay(false);
-    return foundation.stop();
-  };
-
-  const goTo = (targetIndex: number): void => {
-    return foundation.goTo(targetIndex);
-  };
-
-  const prev = (): void => {
-    return foundation.prev();
-  };
-
-  const next = (): void => {
-    return foundation.next();
-  };
-
-  expose({
-    play,
-    stop,
-    goTo,
-    prev,
-    next
-  })
-
-
-  const handleAutoPlay = (): void => {
-    if (!foundation.getIsControlledComponent()) {
-      foundation.handleAutoPlay();
-    }
-  }
-
-  const handleMouseEnter = (): void => {
-    const {autoPlay} = props;
-    if ((autoPlay === true) || (typeof autoPlay === 'object' && autoPlay.hoverToPause)){
-      foundation.stop();
-    }
-  }
-
-  const handleMouseLeave = (): void => {
-    const {autoPlay} = props;
-    if ((typeof autoPlay !== 'object' || autoPlay.hoverToPause) && !foundation.getIsControlledComponent()) {
-      foundation.handleAutoPlay();
-    }
-  }
-
-  const onIndicatorChange = (activeIndex: number): void => {
-    return foundation.onIndicatorChange(activeIndex);
-  };
-
-  // function getChildren() {
-  //   const originChildren:VNode[] = slots.default?.()?.[0].children as any  || [];
-  //   return originChildren.filter(child => {
-  //     return isVNode(child);
-  //   });
-  // }
-
-  const getValidIndex = (activeIndex: number): number => {
-    return foundation.getValidIndex(activeIndex);
-  };
-
-
-  const renderChildren = () => {
-    const {speed, animation} = props;
-    const {activeIndex, preIndex, isInit} = state;
-
-    return (
-      <Fragment>
-        {preChildren.map((child: any, index: number) => {
-          const isCurrent = index === activeIndex;
-          const isPrev = index === getValidIndex(activeIndex - 1);
-          const isNext = index === getValidIndex(activeIndex + 1);
-
-          const animateStyle = {
-            transitionTimingFunction: 'ease',
-            transitionDuration: `${speed}ms`,
-            animationTimingFunction: 'ease',
-            animationDuration: `${speed}ms`,
-          };
-
-          return cloneVNode(child, {
-            style: {
-              ...child.props.style,
-              ...animateStyle,
-            },
-            className: cls(child.props.class, {
-              [`${cssClasses.CAROUSEL_CONTENT}-item-prev`]: isPrev,
-              [`${cssClasses.CAROUSEL_CONTENT}-item-next`]: isNext,
-              [`${cssClasses.CAROUSEL_CONTENT}-item-current`]: isCurrent,
-              [`${cssClasses.CAROUSEL_CONTENT}-item`]: true,
-              [`${cssClasses.CAROUSEL_CONTENT}-item-active`]: isCurrent,
-              [`${cssClasses.CAROUSEL_CONTENT}-item-slide-in`]: animation === 'slide' && !isInit && isCurrent,
-              [`${cssClasses.CAROUSEL_CONTENT}-item-slide-out`]: animation === 'slide' && !isInit && index === preIndex,
-            })
-          });
-        })}
-      </Fragment>
-    );
-  }
-
-  const renderIndicator = () => {
-    const {activeIndex} = state;
-    const {showIndicator, indicatorType, theme, indicatorPosition, indicatorSize, trigger} = props;
-
-    const carouselIndicatorCls = cls({
-      [cssClasses.CAROUSEL_INDICATOR]: true
-    });
-
-    if (showIndicator && preChildren.length > 1) {
       return (
-        <div class={carouselIndicatorCls}>
-          <CarouselIndicator
-            type={indicatorType}
-            total={preChildren.length}
-            activeIndex={activeIndex}
-            position={indicatorPosition}
-            trigger={trigger}
-            size={indicatorSize}
-            theme={theme}
-            onIndicatorChange={onIndicatorChange}
-          />
-        </div>
-      );
-    }
-    return null;
-  }
+        <Fragment>
+          {preChildren.map((child: any, index: number) => {
+            const isCurrent = index === activeIndex;
+            const isPrev = index === getValidIndex(activeIndex - 1);
+            const isNext = index === getValidIndex(activeIndex + 1);
 
-  const renderArrow = () => {
-    const {showArrow, arrowType, theme, arrowProps} = props;
+            const animateStyle = {
+              transitionTimingFunction: 'ease',
+              transitionDuration: `${speed}ms`,
+              animationTimingFunction: 'ease',
+              animationDuration: `${speed}ms`,
+            };
 
-    if (showArrow && preChildren.length > 1) {
-      return (
-        <CarouselArrow
-          type={arrowType}
-          theme={theme}
-          prev={prev}
-          next={next}
-          arrowProps={arrowProps}
-        />
-      );
-    }
-    return null;
-  };
-
-
-  return () => {
-    preChildren = getFragmentChildren(slots);
-
-    const {animation, className, style, slideDirection} = props;
-    const {isReverse} = state;
-
-    const carouselWrapperCls = cls(className, {
-      [cssClasses.CAROUSEL]: true
-    });
-
-    return (
-      <div
-        // role='listbox'
-        // tabIndex={0}
-        class={carouselWrapperCls}
-        style={style}
-        onMouseenter={debounce(handleMouseEnter, 400)}
-        onMouseleave={debounce(handleMouseLeave, 400)}
-        {...getDataAttr()}
-        // onMouseEnter={handleMouseEnter}
-        // onMouseLeave={handleMouseLeave}
-        // onKeyDown={e => foundation.handleKeyDown(e)}
-      >
-        <div
-          class={cls([`${cssClasses.CAROUSEL_CONTENT}-${animation}`], {
-            [`${cssClasses.CAROUSEL_CONTENT}`]: true,
-            [`${cssClasses.CAROUSEL_CONTENT}-reverse`]: slideDirection === 'left' ? isReverse : !isReverse,
+            return cloneVNode(child, {
+              style: {
+                ...child.props.style,
+                ...animateStyle,
+              },
+              className: cls(child.props.class, {
+                [`${cssClasses.CAROUSEL_CONTENT}-item-prev`]: isPrev,
+                [`${cssClasses.CAROUSEL_CONTENT}-item-next`]: isNext,
+                [`${cssClasses.CAROUSEL_CONTENT}-item-current`]: isCurrent,
+                [`${cssClasses.CAROUSEL_CONTENT}-item`]: true,
+                [`${cssClasses.CAROUSEL_CONTENT}-item-active`]: isCurrent,
+                [`${cssClasses.CAROUSEL_CONTENT}-item-slide-in`]: animation === 'slide' && !isInit && isCurrent,
+                [`${cssClasses.CAROUSEL_CONTENT}-item-slide-out`]:
+                  animation === 'slide' && !isInit && index === preIndex,
+              }),
+            });
           })}
-          x-semi-prop="children"
+        </Fragment>
+      );
+    };
+
+    const renderIndicator = () => {
+      const { activeIndex } = state;
+      const { showIndicator, indicatorType, theme, indicatorPosition, indicatorSize, trigger } = props;
+
+      const carouselIndicatorCls = cls({
+        [cssClasses.CAROUSEL_INDICATOR]: true,
+      });
+
+      if (showIndicator && preChildren.length > 1) {
+        return (
+          <div class={carouselIndicatorCls}>
+            <CarouselIndicator
+              type={indicatorType}
+              total={preChildren.length}
+              activeIndex={activeIndex}
+              position={indicatorPosition}
+              trigger={trigger}
+              size={indicatorSize}
+              theme={theme}
+              onIndicatorChange={onIndicatorChange}
+            />
+          </div>
+        );
+      }
+      return null;
+    };
+
+    const renderArrow = () => {
+      const { showArrow, arrowType, theme, arrowProps } = props;
+
+      if (showArrow && preChildren.length > 1) {
+        return <CarouselArrow type={arrowType} theme={theme} prev={prev} next={next} arrowProps={arrowProps} />;
+      }
+      return null;
+    };
+
+    return () => {
+      preChildren = getFragmentChildren(slots);
+
+      const { animation, className, style, slideDirection } = props;
+      const { isReverse } = state;
+
+      const carouselWrapperCls = cls(className, {
+        [cssClasses.CAROUSEL]: true,
+      });
+
+      return (
+        <div
+          // role='listbox'
+          // tabIndex={0}
+          class={carouselWrapperCls}
+          style={style}
+          onMouseenter={debounce(handleMouseEnter, 400)}
+          onMouseleave={debounce(handleMouseLeave, 400)}
+          {...getDataAttr()}
+          // onMouseEnter={handleMouseEnter}
+          // onMouseLeave={handleMouseLeave}
+          // onKeyDown={e => foundation.handleKeyDown(e)}
         >
-          {renderChildren()}
+          <div
+            class={cls([`${cssClasses.CAROUSEL_CONTENT}-${animation}`], {
+              [`${cssClasses.CAROUSEL_CONTENT}`]: true,
+              [`${cssClasses.CAROUSEL_CONTENT}-reverse`]: slideDirection === 'left' ? isReverse : !isReverse,
+            })}
+            x-semi-prop="children"
+          >
+            {renderChildren()}
+          </div>
+          {renderIndicator()}
+          {renderArrow()}
         </div>
-        {renderIndicator()}
-        {renderArrow()}
-      </div>
-    );
-  }
-}, {
-  props: vuePropsType,
-  name: 'Carousel'
-})
+      );
+    };
+  },
+});
 
-
-export default Carousel
+export default Carousel;

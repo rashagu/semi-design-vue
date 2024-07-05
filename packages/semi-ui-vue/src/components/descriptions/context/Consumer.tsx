@@ -1,25 +1,23 @@
-import {defineComponent, h, inject, Ref, ref, UnwrapRef, useSlots} from 'vue'
-import DescriptionsContext, {DescriptionsContextValue} from "../descriptions-context";
+import { defineComponent, h, inject, Ref, ref, UnwrapRef, useSlots } from 'vue';
+import DescriptionsContext, { DescriptionsContextValue } from '../descriptions-context';
 
-
-export function useDescriptionsContext (): { context: Ref<UnwrapRef<DescriptionsContextValue>> } {
-  const context = inject('DescriptionsContext', ref<DescriptionsContextValue>(null))
+export function useDescriptionsContext(): { context: Ref<UnwrapRef<DescriptionsContextValue>> } {
+  const context = inject('DescriptionsContext', ref<DescriptionsContextValue>(null));
   return {
-    context
-  }
+    context,
+  };
 }
 export const vuePropsType = {
-  name: String
-}
-const Consumer = defineComponent(() => {
-  const slots = useSlots()
-  const {context} = useDescriptionsContext()
-  return () => slots.default ? slots.default(context) : null
-}, {
+  name: String,
+};
+const Consumer = defineComponent({
   props: vuePropsType,
-  name: 'DescriptionsConsumer'
-})
+  name: 'DescriptionsConsumer',
+  setup() {
+    const slots = useSlots();
+    const { context } = useDescriptionsContext();
+    return () => (slots.default ? slots.default(context) : null);
+  },
+});
 
-
-export default Consumer
-
+export default Consumer;

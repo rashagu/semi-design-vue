@@ -118,16 +118,14 @@ export const vuePropsType: ComponentObjectPropsOptions<ParagraphProps> = {
     default: '',
   },
 };
-const paragraph = defineComponent(
-  (props, { slots }) => {
+const paragraph = defineComponent({
+  props: vuePropsType,
+  name: 'Paragraph',
+  setup(props, { slots }) {
     const { className } = props;
     const paragraphCls = cls(className, `${prefixCls}-paragraph`);
     return () => <Base children={slots.default?.()} component_={'p'} {...props} className={paragraphCls}></Base>;
   },
-  {
-    props: vuePropsType,
-    name: 'Paragraph',
-  }
-);
+});
 
 export default paragraph;

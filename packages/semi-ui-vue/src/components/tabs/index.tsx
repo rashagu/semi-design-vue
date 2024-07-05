@@ -69,7 +69,7 @@ const propTypes: ComponentObjectPropsOptions<TabsProps> = {
   renderArrow: PropTypes.func as PropType<TabsProps['renderArrow']>,
 };
 
-const defaultProps:TabsProps = {
+const defaultProps: TabsProps = {
   children: [],
   collapsible: false,
   keepDOM: true,
@@ -82,11 +82,13 @@ const defaultProps:TabsProps = {
   type: 'line',
   onTabClose: () => undefined,
   showRestInDropdown: true,
-  arrowPosition: "both",
+  arrowPosition: 'both',
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const Tabs = defineComponent(
-  (props, {}) => {
+const Tabs = defineComponent({
+  props: vuePropsType,
+  name: 'Tabs',
+  setup(props, {}) {
     const slots = useSlots();
     const contentRef = ref();
     let contentHeight: string = 'auto';
@@ -334,7 +336,7 @@ const Tabs = defineComponent(
         onVisibleTabsChange,
         visibleTabsStyle,
         arrowPosition,
-        renderArrow
+        renderArrow,
       } as TabBarProps;
 
       const tabBar = renderTabBar ? renderTabBar(tabBarProps, TabBar) : <TabBar {...tabBarProps} />;
@@ -364,11 +366,7 @@ const Tabs = defineComponent(
       );
     };
   },
-  {
-    props: vuePropsType,
-    name: 'Tabs',
-  }
-);
+});
 
 export default Tabs;
 

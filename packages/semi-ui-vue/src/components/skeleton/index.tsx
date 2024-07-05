@@ -3,7 +3,7 @@ import * as PropTypes from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/skeleton/constants';
 import '@douyinfe/semi-foundation/skeleton/skeleton.scss';
 import { Avatar, Image, Title, Button, Paragraph } from './item';
-import { CSSProperties, defineComponent, h, useSlots } from 'vue';
+import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, useSlots } from 'vue';
 import type { VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 
@@ -22,7 +22,7 @@ export interface SkeletonProps {
 const defaultProps = {
   loading: true,
 };
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<SkeletonProps> = {
   active: PropTypes.bool,
   placeholder: PropTypes.node,
   style: PropTypes.object,

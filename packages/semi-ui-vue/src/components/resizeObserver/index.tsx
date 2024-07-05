@@ -23,31 +23,32 @@ export interface ReactResizeObserverProps extends BaseProps {
   onResize?: (entries: ResizeEntry[]) => void;
   observeParent?: boolean;
   observerProperty?: ObserverProperty;
-  delayTick?: number
+  delayTick?: number;
 }
 
-
 export enum ObserverProperty {
-  Width='width',
-  Height = "height",
-  All = "all"
+  Width = 'width',
+  Height = 'height',
+  All = 'all',
 }
 const propTypes: ComponentObjectPropsOptions<ReactResizeObserverProps> = {
   onResize: PropTypes.func as PropType<ReactResizeObserverProps['onResize']>,
   observeParent: PropTypes.bool,
   observerProperty: PropTypes.string as PropType<ReactResizeObserverProps['observerProperty']>,
-  delayTick: PropTypes.number
+  delayTick: PropTypes.number,
 };
 
 const defaultProps = {
   onResize: () => {}, // eslint-disable-line
   observeParent: false,
-  observerProperty: "all",
-  delayTick: 0
+  observerProperty: 'all',
+  delayTick: 0,
 };
 export const vuePropsType = vuePropsMake<ReactResizeObserverProps>(propTypes, defaultProps);
-const ReactResizeObserver = defineComponent(
-  (props, {}) => {
+const ReactResizeObserver = defineComponent({
+  props: vuePropsType,
+  name: 'ReactResizeObserver',
+  setup(props, {}) {
     const slots = useSlots();
     let observer: ResizeObserver;
     if (globalThis['ResizeObserver']) {
@@ -57,8 +58,7 @@ const ReactResizeObserver = defineComponent(
     let element: Element;
     let _parentNode: HTMLElement;
 
-    let formerPropertyValue: Map<Element, number> = new Map()
-
+    let formerPropertyValue: Map<Element, number> = new Map();
 
     onMounted(() => {
       if (globalThis['ResizeObserver']) {
@@ -95,14 +95,14 @@ const ReactResizeObserver = defineComponent(
       }
     };
 
-    function handleResizeEventTriggered(entries: ResizeEntry[]){
+    function handleResizeEventTriggered(entries: ResizeEntry[]) {
       if (props.observerProperty === ObserverProperty.All) {
         props.onResize?.(entries);
       } else {
         const finalEntries: ResizeEntry[] = [];
         for (const entry of entries) {
           if (formerPropertyValue.has(entry.target)) {
-            if (entry.contentRect[props.observerProperty]!==formerPropertyValue.get(entry.target)) {
+            if (entry.contentRect[props.observerProperty] !== formerPropertyValue.get(entry.target)) {
               formerPropertyValue.set(entry.target, entry.contentRect[props.observerProperty]);
               finalEntries.push(entry);
             }
@@ -111,7 +111,7 @@ const ReactResizeObserver = defineComponent(
             finalEntries.push(entry);
           }
         }
-        if (finalEntries.length>0) {
+        if (finalEntries.length > 0) {
           props.onResize?.(finalEntries);
         }
       }
@@ -170,10 +170,6 @@ const ReactResizeObserver = defineComponent(
       });
     };
   },
-  {
-    props: vuePropsType,
-    name: 'ReactResizeObserver',
-  }
-);
+});
 
 export default ReactResizeObserver;

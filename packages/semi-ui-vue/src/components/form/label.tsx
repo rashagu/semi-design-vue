@@ -1,14 +1,14 @@
-import {defineComponent, ref, h, CSSProperties, VNode, Fragment, PropType} from 'vue'
+import { defineComponent, ref, h, CSSProperties, VNode, Fragment, PropType } from 'vue';
 import classNames from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/form/constants';
 import { LocaleConsumerFunc } from '../locale/localeConsumer';
 import { Locale } from '../locale/interface';
-import {vuePropsMake} from "../PropTypes";
-import {ComponentObjectPropsOptions} from "vue";
-import {styleNum} from "../_utils";
+import { vuePropsMake } from '../PropTypes';
+import { ComponentObjectPropsOptions } from 'vue';
+import { styleNum } from '../_utils';
 
-const LocaleConsumer = LocaleConsumerFunc<Locale['Form']>()
+const LocaleConsumer = LocaleConsumerFunc<Locale['Form']>();
 const prefixCls = cssClasses.PREFIX;
 
 export interface LabelProps {
@@ -31,8 +31,7 @@ export interface LabelProps {
   optional?: boolean;
 }
 
-
-const propTypes:ComponentObjectPropsOptions<LabelProps> = {
+const propTypes: ComponentObjectPropsOptions<LabelProps> = {
   id: PropTypes.string,
   required: PropTypes.bool,
   text: PropTypes.node,
@@ -52,62 +51,57 @@ const defaultProps = {
   className: '',
   optional: false,
 };
-export const VuePropsType = vuePropsMake<LabelProps>(propTypes, defaultProps)
-const Label = defineComponent((props, {slots}) => {
-
-  return () => {
-    const children = slots.default?slots.default():null
-    const { required, text, disabled, name, width, align, style, className, extra, id, optional } = props;
-
-
-    const labelCls = classNames(className, {
-      [`${prefixCls}-field-label`]: true,
-      [`${prefixCls}-field-label-left`]: align === 'left',
-      [`${prefixCls}-field-label-right`]: align === 'right',
-      [`${prefixCls}-field-label-required`]: required,
-      [`${prefixCls}-field-label-disabled`]: disabled,
-      [`${prefixCls}-field-label-with-extra`]: extra,
-    });
-    const labelStyle = style ? style : {};
-    width ? labelStyle.width = styleNum(width) : null;
-
-    const optionalText = (
-      <LocaleConsumer componentName="Form" >
-        {{
-          default: (locale: Locale['Form']) => {
-            return (
-              <span class={`${prefixCls}-field-label-optional-text`}>{locale.optional}</span>
-            )
-          }
-        }}
-      </LocaleConsumer>
-    );
-
-    const textContent = (
-      <div class={`${prefixCls}-field-label-text`} x-semi-prop="label">
-        {typeof text !== 'undefined' ? text : children}
-        {optional ? optionalText : null}
-      </div>
-    );
-
-    const contentWithExtra = (
-      <>
-        {textContent}
-        <div class={`${prefixCls}-field-label-extra`}>{extra}</div>
-      </>
-    );
-
-    return (
-      <label class={labelCls} for={name} style={labelStyle} id={id}>
-        {extra ? contentWithExtra : textContent}
-      </label>
-    );
-  }
-}, {
+export const VuePropsType = vuePropsMake<LabelProps>(propTypes, defaultProps);
+const Label = defineComponent({
   props: VuePropsType,
-  name: 'Label'
-})
+  name: 'Label',
+  setup(props, { slots }) {
+    return () => {
+      const children = slots.default ? slots.default() : null;
+      const { required, text, disabled, name, width, align, style, className, extra, id, optional } = props;
 
+      const labelCls = classNames(className, {
+        [`${prefixCls}-field-label`]: true,
+        [`${prefixCls}-field-label-left`]: align === 'left',
+        [`${prefixCls}-field-label-right`]: align === 'right',
+        [`${prefixCls}-field-label-required`]: required,
+        [`${prefixCls}-field-label-disabled`]: disabled,
+        [`${prefixCls}-field-label-with-extra`]: extra,
+      });
+      const labelStyle = style ? style : {};
+      width ? (labelStyle.width = styleNum(width)) : null;
 
+      const optionalText = (
+        <LocaleConsumer componentName="Form">
+          {{
+            default: (locale: Locale['Form']) => {
+              return <span class={`${prefixCls}-field-label-optional-text`}>{locale.optional}</span>;
+            },
+          }}
+        </LocaleConsumer>
+      );
 
-export default Label
+      const textContent = (
+        <div class={`${prefixCls}-field-label-text`} x-semi-prop="label">
+          {typeof text !== 'undefined' ? text : children}
+          {optional ? optionalText : null}
+        </div>
+      );
+
+      const contentWithExtra = (
+        <>
+          {textContent}
+          <div class={`${prefixCls}-field-label-extra`}>{extra}</div>
+        </>
+      );
+
+      return (
+        <label class={labelCls} for={name} style={labelStyle} id={id}>
+          {extra ? contentWithExtra : textContent}
+        </label>
+      );
+    };
+  },
+});
+
+export default Label;
