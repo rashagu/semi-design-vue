@@ -7,15 +7,14 @@ import { IconTick } from '@kousum/semi-icons-vue';
 import { getFragmentChildren, getHighLightTextHTML } from '../_utils/index';
 import { Locale } from '../locale/interface';
 import { BasicOptionProps } from '@douyinfe/semi-foundation/autoComplete/optionFoundation';
-import { VueJsxNode } from '../interface';
-import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, useSlots } from 'vue';
+import { type RemoveIndexSignature, VueJsxNode } from '../interface';
+import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots, type VNode } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { StateOptionItem } from '@douyinfe/semi-foundation/autoComplete/foundation';
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>();
 
-export interface OptionProps extends BasicOptionProps {
-  [x: string]: any;
+export interface OptionProps extends RemoveIndexSignature<BasicOptionProps> {
   value?: string | number;
   label?: string | number | VueJsxNode;
   children?: VueJsxNode;
@@ -24,6 +23,17 @@ export interface OptionProps extends BasicOptionProps {
   className?: string;
   style?: CSSProperties;
   option?: StateOptionItem;
+
+  //官方暂时还没有的类型
+  selected?: boolean
+  empty?: boolean,
+  emptyContent?: string | number | VNode | VNode[] | (()=>VNode),
+  inputValue?: string
+  renderOptionItem?: (...args: any)=>VNode
+  onMouseEnter?:  (e: MouseEvent) => any,
+  focused?: boolean,
+  onSelect?:  (opts: OptionProps, e: MouseEvent) => any,
+  prefixCls?: string,
 }
 interface renderOptionContentArgument {
   config: {
@@ -43,14 +53,14 @@ const propTypes: ComponentObjectPropsOptions<OptionProps> = {
   label: PropTypes.node,
   empty: PropTypes.bool,
   emptyContent: PropTypes.node,
-  onSelect: PropTypes.func,
+  onSelect: PropTypes.func as PropType<OptionProps['onSelect']>,
   focused: PropTypes.bool,
   showTick: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object,
-  onMouseEnter: PropTypes.func,
+  onMouseEnter: PropTypes.func as PropType<OptionProps['onMouseEnter']>,
   prefixCls: PropTypes.string,
-  renderOptionItem: PropTypes.func,
+  renderOptionItem: PropTypes.func as PropType<OptionProps['renderOptionItem']>,
   inputValue: PropTypes.string,
   option: PropTypes.object,
 };
@@ -60,7 +70,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Option = defineComponent({
-  props: vuePropsType,
+  props: vuePropsType as ComponentObjectPropsOptions<OptionProps>,
   name: 'Option',
   setup(props, {}) {
     const slots = useSlots();

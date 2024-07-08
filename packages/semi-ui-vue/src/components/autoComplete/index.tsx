@@ -20,7 +20,7 @@ import warning from '@douyinfe/semi-foundation/utils/warning';
 import '@douyinfe/semi-foundation/autoComplete/autoComplete.scss';
 import { Motion } from '../_base/base';
 import { AriaAttributes } from '../AriaAttributes';
-import { VueHTMLAttributes, VueJsxNode } from '../interface';
+import { type RemoveIndexSignature, VueHTMLAttributes, VueJsxNode } from '../interface';
 import {
   ComponentObjectPropsOptions,
   CSSProperties,
@@ -51,7 +51,7 @@ const statusSet = strings.STATUS;
  * 3. Select props.value supports incoming object, but autoComplete only supports string (because the value needs to be displayed in Input)
  */
 
-export interface BaseDataItem extends DataItem {
+export interface BaseDataItem extends RemoveIndexSignature<DataItem> {
   label?: VueJsxNode;
 }
 
