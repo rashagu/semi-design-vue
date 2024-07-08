@@ -15,3 +15,8 @@ export type VueHTMLAttributes = HTMLAttributes & {
 }
 
 export type RefElement = Element | ComponentPublicInstance | null
+
+// 去除 [x: string]: any; ，vue 的props不支持这种
+export type RemoveIndexSignature<T> = {
+  [K in keyof T as K extends `${infer _}` ? K : never]: T[K];
+};

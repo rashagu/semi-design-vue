@@ -1,4 +1,4 @@
-import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, toRaw, VNode } from 'vue';
+import { type ComponentObjectPropsOptions, type CSSProperties, defineComponent, h, type PropType, toRaw, type VNode } from 'vue';
 import classNames from 'classnames';
 
 import { isString } from 'lodash';
@@ -6,13 +6,14 @@ import { cssClasses } from '@douyinfe/semi-foundation/select/constants';
 import { LocaleConsumerFunc } from '../locale/localeConsumer';
 import { IconTick } from '@kousum/semi-icons-vue';
 import { getHighLightTextHTML } from '../_utils/index';
-import { Locale } from '../locale/interface';
+import type { Locale } from '../locale/interface';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import type { BasicOptionProps } from '@douyinfe/semi-foundation/select/optionFoundation';
+import type { RemoveIndexSignature } from '../interface';
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>();
 
-export interface OptionProps extends BasicOptionProps {
+export interface OptionProps extends RemoveIndexSignature<BasicOptionProps> {
   value?: string | number;
   label?: string | number | VNode | VNode[];
   children?: string | number | VNode | VNode[];
@@ -20,6 +21,21 @@ export interface OptionProps extends BasicOptionProps {
   showTick?: boolean;
   className?: string;
   style?: CSSProperties;
+
+  //官方暂时还没有的类型
+  selected?: boolean
+  empty?: boolean,
+  emptyContent?: string | number | VNode | VNode[] | (()=>VNode),
+  inputValue?: string
+  renderOptionItem?: (...args: any)=>VNode
+  onMouseEnter?:  (e: MouseEvent) => any,
+  focused?: boolean,
+  onSelect?:  (opts: OptionProps, e: MouseEvent) => any,
+  prefixCls?: string,
+  _scrollIndex?: number,
+  _selected?: boolean,
+  _show?: boolean,
+  semiOptionId?: string
 }
 
 interface renderOptionContentArgument {
@@ -40,16 +56,16 @@ export const vuePropsType: ComponentObjectPropsOptions<OptionProps> = {
   selected: Boolean,
 
   empty: Boolean,
-  emptyContent: [Object, String, Number],
+  emptyContent: [Object, String, Number, Function] as PropType<OptionProps['emptyContent']>,
   inputValue: String,
-  renderOptionItem: Function,
-  onMouseEnter: Function,
+  renderOptionItem: Function as PropType<OptionProps['renderOptionItem']>,
+  onMouseEnter: Function as PropType<OptionProps['onMouseEnter']>,
   focused: Boolean,
 
   showTick: Boolean,
   className: String,
   style: [String, Object] as PropType<OptionProps['style']>,
-  onSelect: Function,
+  onSelect: Function as PropType<OptionProps['onSelect']>,
   prefixCls: {
     type: String,
     default: cssClasses.PREFIX_OPTION,
@@ -57,6 +73,7 @@ export const vuePropsType: ComponentObjectPropsOptions<OptionProps> = {
   _scrollIndex: Number,
   _selected: Boolean,
   _show: Boolean,
+  semiOptionId: String,
 };
 
 const Option = defineComponent({
