@@ -50,7 +50,7 @@ interface RadioInnerState {
   checked?: boolean;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<RadioInnerProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<RadioInnerProps>> = {
   checked: {
     type: Boolean,
     // @ts-ignore

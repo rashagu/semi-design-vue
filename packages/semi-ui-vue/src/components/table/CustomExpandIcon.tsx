@@ -34,7 +34,7 @@ export interface CustomExpandIconProps {
  * render expand icon
  */
 
-const propTypes: ComponentObjectPropsOptions<CustomExpandIconProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<CustomExpandIconProps>> = {
   expanded: PropTypes.bool,
   componentType: String as PropType<CustomExpandIconProps['componentType']>,
   onClick: PropTypes.func as PropType<CustomExpandIconProps['onClick']>,

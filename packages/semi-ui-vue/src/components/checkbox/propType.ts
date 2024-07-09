@@ -4,7 +4,7 @@ import {CheckboxProps} from "./checkbox";
 import {PropType} from "vue";
 
 
-export const propTypesCheckbox:ComponentObjectPropsOptions<CheckboxProps> = {
+export const propTypesCheckbox:ComponentObjectPropsOptions<Required<CheckboxProps>> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,
@@ -37,4 +37,6 @@ export const propTypesCheckbox:ComponentObjectPropsOptions<CheckboxProps> = {
   role: String,
   addonId: String,
   extraId: String,
+  id: String,
+  autoFocus: Boolean,
 };

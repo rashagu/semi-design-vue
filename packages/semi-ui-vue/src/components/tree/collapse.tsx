@@ -4,7 +4,17 @@ import { vuePropsMake } from '../PropTypes';
 import { noop } from 'lodash';
 import { cssClasses } from '@douyinfe/semi-foundation/collapsible/constants';
 import getMotionObjFromProps from '@douyinfe/semi-foundation/utils/getMotionObjFromProps';
-import { CSSProperties, defineComponent, h, nextTick, PropType, ref, useSlots, watch } from 'vue';
+import {
+  ComponentObjectPropsOptions,
+  CSSProperties,
+  defineComponent,
+  h,
+  nextTick,
+  PropType,
+  ref,
+  useSlots,
+  watch,
+} from 'vue';
 
 export interface CollapseProps {
   motion?: boolean;
@@ -19,14 +29,14 @@ export interface TransitionStyle {
 }
 
 const ease = 'cubicBezier(.25,.1,.25,1)';
-
+const propsType: ComponentObjectPropsOptions<Required<CollapseProps>> = {
+  motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
+  duration: PropTypes.number,
+  onMotionEnd: PropTypes.func as PropType<CollapseProps['onMotionEnd']>,
+  motionType: String,
+}
 export const vuePropsType = vuePropsMake<CollapseProps>(
-  {
-    motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
-    duration: PropTypes.number,
-    onMotionEnd: PropTypes.func as PropType<CollapseProps['onMotionEnd']>,
-    motionType: String,
-  },
+  propsType,
   {
     duration: 250,
     motion: true,

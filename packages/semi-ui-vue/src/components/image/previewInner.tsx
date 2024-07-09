@@ -27,11 +27,11 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { usePreviewContext } from './previewContext/Consumer';
-import { getProps, useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<PreviewInnerProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<PreviewInnerProps>> = {
   style: PropTypes.object,
   className: PropTypes.string,
   lazyLoadMargin: PropTypes.string,
@@ -78,6 +78,11 @@ const propTypes: ComponentObjectPropsOptions<PreviewInnerProps> = {
 
   setDownloadName: PropTypes.func as PropType<PreviewInnerProps['setDownloadName']>,
   crossOrigin: PropTypes.string as PropType<PreviewInnerProps['crossOrigin']>,
+  previewTitle: PropTypes.node as PropType<PreviewInnerProps['previewTitle']>,
+  rotateTip: PropTypes.string,
+  onRotateLeft: PropTypes.func as PropType<PreviewInnerProps['onRotateLeft']>,
+  onDownloadError: PropTypes.func as PropType<PreviewInnerProps['onDownloadError']>,
+  forwardRef: [PropTypes.func, PropTypes.object] as PropType<PreviewInnerProps['forwardRef']>,
 };
 
 const defaultProps = {
@@ -99,6 +104,7 @@ const PreviewInner = defineComponent({
   props: vuePropsType,
   name: 'PreviewInner',
   setup(props, {}) {
+    const { getProps } = useHasInProps();
     const slots = useSlots();
 
     let bodyOverflow: string;

@@ -38,7 +38,7 @@ export interface RatingItemState {
   secondStarFocus: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<RatingItemProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<RatingItemProps>> = {
   value: PropTypes.number,
   index: PropTypes.number,
   prefixCls: PropTypes.string,
@@ -55,6 +55,8 @@ const propTypes: ComponentObjectPropsOptions<RatingItemProps> = {
   onFocus: PropTypes.func as PropType<RatingItemProps['onFocus']>,
   onBlur: PropTypes.func as PropType<RatingItemProps['onBlur']>,
   preventScroll: PropTypes.bool,
+  style: PropTypes.object,
+  className: PropTypes.string,
 };
 export const vuePropsType = vuePropsMake<RatingItemProps>(propTypes, {});
 const Item = defineComponent({

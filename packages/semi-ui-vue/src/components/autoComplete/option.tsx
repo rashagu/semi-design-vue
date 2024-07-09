@@ -45,7 +45,7 @@ interface renderOptionContentArgument {
   prefixCls: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<OptionProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<OptionProps>> = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -70,7 +70,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Option = defineComponent({
-  props: vuePropsType as ComponentObjectPropsOptions<OptionProps>,
+  props: vuePropsType as ComponentObjectPropsOptions<Required<OptionProps>>,
   name: 'Option',
   setup(props, {}) {
     const slots = useSlots();

@@ -43,7 +43,7 @@ export interface ToastReactProps extends ToastProps {
   id?: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<ToastReactProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<ToastReactProps>> = {
   onClose: PropTypes.func as PropType<ToastReactProps['onClose']>,
   content: PropTypes.node,
   close: PropTypes.func as PropType<ToastReactProps['close']>,
@@ -62,6 +62,12 @@ const propTypes: ComponentObjectPropsOptions<ToastReactProps> = {
   icon: PropTypes.node,
   direction: String as PropType<ToastReactProps['direction']>,
   id: String as PropType<ToastReactProps['id']>,
+  top: [PropTypes.string,PropTypes.number],
+  bottom: [PropTypes.string,PropTypes.number],
+  left: [PropTypes.string,PropTypes.number],
+  right: [PropTypes.string,PropTypes.number],
+  zIndex: PropTypes.number,
+  getPopupContainer: PropTypes.func as PropType<ToastReactProps['getPopupContainer']>,
 };
 const defaultProps = {
   onClose: noop,

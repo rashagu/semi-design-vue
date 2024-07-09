@@ -6,7 +6,7 @@ import type { ContextValue } from './context';
 
 export interface ConfigProviderProps extends ContextValue {}
 
-export const vuePropsType: ComponentObjectPropsOptions<ConfigProviderProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<ConfigProviderProps>> = {
   locale: {
     type: Object,
     default: DefaultLocale,

@@ -9,7 +9,7 @@ interface SortableItemProps {
   item: any;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<SortableItemProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<SortableItemProps>> = {
   id: [String, Number],
   item: Function,
 };

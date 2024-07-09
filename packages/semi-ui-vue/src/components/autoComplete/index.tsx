@@ -13,7 +13,7 @@ import { Position } from '../tooltip';
 import Spin from '../spin';
 import Popover from '../popover';
 import Input, { InputProps } from '../input';
-import Trigger from '../trigger';
+import Trigger, { TriggerProps } from '../trigger';
 
 import Option from './option';
 import warning from '@douyinfe/semi-foundation/utils/warning';
@@ -130,7 +130,7 @@ interface AutoCompleteState {
 function AutoCompleteFunc<T extends AutoCompleteItems>() {
   const vuePropsType_ = AutoCompleteFuncVueProps<T>();
   return defineComponent({
-    props: vuePropsType_ as ComponentObjectPropsOptions<AutoCompleteProps<T>>,
+    props: vuePropsType_ as ComponentObjectPropsOptions<Required<AutoCompleteProps<T>>>,
     name: 'AutoComplete',
     setup(props, {}) {
       const slots = useSlots();
@@ -345,7 +345,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
           ...getDataAttr(),
         };
 
-        const innerProps: VueHTMLAttributes & InputProps = {
+        const innerProps: InputProps | TriggerProps = {
           disabled,
           placeholder,
           autoFocus: autoFocus,
@@ -374,7 +374,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
           <div {...outerProps}>
             {typeof triggerRender === 'function' ? (
               <Trigger
-                {...innerProps}
+                {...(innerProps as TriggerProps)}
                 inputValue={(typeof value !== 'undefined' ? value : inputValue) as string}
                 value={Array.from(selection.values())}
                 triggerRender={triggerRender}
@@ -382,7 +382,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
                 componentProps={{ ...props }}
               />
             ) : (
-              <Input {...innerProps} value={typeof value !== 'undefined' ? value : inputValue} />
+              <Input {...(innerProps as InputProps)} value={typeof value !== 'undefined' ? value : inputValue} />
             )}
           </div>
         );
@@ -486,7 +486,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
 }
 
 function AutoCompleteFuncVueProps<T>() {
-  const propTypes: ComponentObjectPropsOptions<AutoCompleteProps<T>> = {
+  const propTypes: ComponentObjectPropsOptions<Required<AutoCompleteProps<T>>> = {
     'aria-label': PropTypes.string,
     'aria-labelledby': PropTypes.string,
     'aria-invalid': PropTypes.bool,

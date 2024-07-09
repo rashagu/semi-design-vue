@@ -6,7 +6,7 @@ interface TopSlotSvgProps {
   gradientEnd: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<TopSlotSvgProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<TopSlotSvgProps>> = {
   gradientStart: String,
   gradientEnd: String,
 };

@@ -11,7 +11,7 @@ import { vuePropsMake } from '../PropTypes';
 
 export * from './interface';
 
-const propTypes: ComponentObjectPropsOptions<CalendarProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<CalendarProps>> = {
   displayValue: PropTypes.object,
   header: PropTypes.node,
   events: PropTypes.array,
@@ -29,6 +29,9 @@ const propTypes: ComponentObjectPropsOptions<CalendarProps> = {
   style: PropTypes.object,
   className: PropTypes.string,
   range: PropTypes.array,
+  onClose: PropTypes.func as PropType<CalendarProps['onClose']>,
+  dateGridRender: PropTypes.func as PropType<CalendarProps['dateGridRender']>,
+  allDayEventsRender: PropTypes.func as PropType<CalendarProps['allDayEventsRender']>,
 };
 
 const defaultProps = {

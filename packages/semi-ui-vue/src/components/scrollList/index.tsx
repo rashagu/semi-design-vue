@@ -17,7 +17,7 @@ export interface ScrollListProps extends BaseProps {
   prefixCls?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<ScrollListProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<ScrollListProps>> = {
   header: [Object, String],
   footer: [Object, String],
   children: [Object, String],

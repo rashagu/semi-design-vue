@@ -31,7 +31,7 @@ export interface ColProps {
   xxl?: number | ColSize;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<ColProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<ColProps>> = {
   span: Number,
   order: Number,
   offset: Number,

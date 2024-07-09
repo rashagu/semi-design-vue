@@ -20,7 +20,7 @@ export interface NavHeaderProps extends BaseProps {
   class?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<NavHeaderProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<NavHeaderProps>> = {
   prefixCls: {
     type: PropTypes.string,
     default: cssClasses.PREFIX,
@@ -31,6 +31,7 @@ export const vuePropsType: ComponentObjectPropsOptions<NavHeaderProps> = {
   class: PropTypes.string as PropType<NavHeaderProps['class']>,
   link: PropTypes.string,
   linkOptions: PropTypes.object,
+  className: PropTypes.string,
 };
 const NavHeader = defineComponent({
   props: vuePropsType,

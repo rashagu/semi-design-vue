@@ -38,7 +38,7 @@ let uuid = 0;
 
 export interface ModalContentReactProps extends ModalContentProps {}
 
-const propTypes: ComponentObjectPropsOptions<ModalContentReactProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<ModalContentReactProps>> = {
   onClose: Function as PropType<ModalContentReactProps['onClose']>,
   // close: PropTypes.func as PropType<ModalContentReactProps['close']>,
   getContainerContext: PropTypes.func as PropType<ModalContentReactProps['getContainerContext']>,
@@ -97,6 +97,8 @@ const propTypes: ComponentObjectPropsOptions<ModalContentReactProps> = {
   keepDOM: PropTypes.bool,
   direction: PropTypes.any,
   fullScreen: PropTypes.bool,
+  modalContentClass: String,
+  footerFill: Boolean,
 };
 const defaultProps = {
   close: noop,

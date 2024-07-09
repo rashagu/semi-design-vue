@@ -33,7 +33,7 @@ export interface TableSelectionCellProps {
  * render selection cell
  */
 
-const propTypes: ComponentObjectPropsOptions<TableSelectionCellProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TableSelectionCellProps>> = {
   columnTitle: PropTypes.string,
   getCheckboxProps: PropTypes.func as PropType<TableSelectionCellProps['getCheckboxProps']>,
   type: PropTypes.string,

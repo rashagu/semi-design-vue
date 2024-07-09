@@ -17,7 +17,7 @@ const getTreeNodeKey = (treeNode: FlattenNode) => {
   return treeNode.key;
 };
 
-export const vuePropsType: ComponentObjectPropsOptions<NodeListProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<NodeListProps>> = {
   flattenNodes: Array,
   motionKeys: Object,
   motionType: String,

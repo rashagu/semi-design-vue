@@ -36,7 +36,7 @@ export interface LinkProps {
   direction?: 'ltr' | 'rtl';
 }
 
-const propTypes: ComponentObjectPropsOptions<LinkProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<LinkProps>> = {
   href: PropTypes.string,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   className: PropTypes.string,

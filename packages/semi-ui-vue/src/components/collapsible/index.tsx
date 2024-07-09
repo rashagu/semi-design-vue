@@ -15,7 +15,7 @@ import {
   defineComponent,
   h,
   onBeforeUnmount,
-  onMounted,
+  onMounted, PropType,
   reactive,
   ref,
   useSlots,
@@ -43,7 +43,7 @@ interface CollapsibleState extends CollapsibleFoundationState {
   visible: boolean;
   isTransitioning: boolean;
 }
-const propTypes: ComponentObjectPropsOptions<CollapsibleProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<CollapsibleProps>> = {
   motion: PropTypes.bool,
   isOpen: PropTypes.bool,
   duration: PropTypes.number,
@@ -53,6 +53,9 @@ const propTypes: ComponentObjectPropsOptions<CollapsibleProps> = {
   style: PropTypes.object,
   className: PropTypes.string,
   reCalcKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  id: PropTypes.string,
+  onMotionEnd: PropTypes.func as PropType<CollapsibleProps['onMotionEnd']>  ,
+  fade: PropTypes.bool,
 };
 const defaultProps = {
   isOpen: false,

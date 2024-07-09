@@ -20,7 +20,7 @@ export interface BasicProps {
   type?: string;
 }
 
-const basicVuePropsType: ComponentObjectPropsOptions<BasicProps> = {
+const basicVuePropsType: ComponentObjectPropsOptions<Required<BasicProps>> = {
   prefixCls: {
     type: String,
     default: cssClasses.PREFIX,

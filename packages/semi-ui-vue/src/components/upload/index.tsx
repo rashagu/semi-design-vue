@@ -144,7 +144,7 @@ export interface UploadState {
   replaceInputKey: number;
 }
 
-const propTypes: ComponentObjectPropsOptions<UploadProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<UploadProps>> = {
   accept: PropTypes.string, // Limit allowed file types
   action: String,
   addOnPasting: PropTypes.bool,
@@ -211,6 +211,7 @@ const propTypes: ComponentObjectPropsOptions<UploadProps> = {
   validateMessage: PropTypes.node as PropType<UploadProps['validateMessage']>,
   validateStatus: String as PropType<UploadProps['validateStatus']>,
   withCredentials: PropTypes.bool,
+  capture: [PropTypes.bool, PropTypes.string] as PropType<UploadProps['capture']>,
 };
 const defaultProps: Partial<UploadProps> = {
   defaultFileList: [],

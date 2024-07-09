@@ -49,7 +49,7 @@ export interface SideSheetReactProps extends SideSheetProps {
 
 export type { SideSheetState };
 
-const propTypes: ComponentObjectPropsOptions<SideSheetProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<Omit<SideSheetProps, 'children'>>> = {
   bodyStyle: PropTypes.object,
   headerStyle: PropTypes.object,
   className: PropTypes.string,
@@ -74,6 +74,7 @@ const propTypes: ComponentObjectPropsOptions<SideSheetProps> = {
   footer: PropTypes.node,
   keepDOM: PropTypes.bool,
   'aria-label': PropTypes.string,
+  closeIcon: PropTypes.node,
 };
 
 const defaultProps: SideSheetReactProps = {

@@ -19,7 +19,7 @@ const prefixCls = cssClasses.PREFIX;
 // eslint-disable-next-line
 export interface SplitButtonGroupProps extends BaseProps {}
 
-export const vuePropsType: ComponentObjectPropsOptions<SplitButtonGroupProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<SplitButtonGroupProps>> = {
   style: Object,
   className: String,
 };

@@ -10,7 +10,7 @@ import {VueJsxNode} from "../interface";
 import type { ContextValue } from '../configProvider/context';
 
 export interface TableContextProps {
-    children?: VueJsxNode;
+    // children?: VueJsxNode;
     anyColumnFixed?: boolean;
     flattenedColumns?: ColumnProps[];
     tableWidth?: number;

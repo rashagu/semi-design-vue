@@ -26,7 +26,6 @@ import {
   watch,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { ToastReactProps } from '../toast/toast';
 import { getFragmentChildren } from '../_utils';
 
 export interface CarouselState {
@@ -37,7 +36,7 @@ export interface CarouselState {
   isInit: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<CarouselProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<CarouselProps>> = {
   activeIndex: PropTypes.number,
   animation: PropTypes.string as PropType<CarouselProps['animation']>,
   arrowProps: PropTypes.object,
@@ -59,7 +58,7 @@ const propTypes: ComponentObjectPropsOptions<CarouselProps> = {
 };
 
 const defaultProps: CarouselProps = {
-  children: [],
+  // children: [],
   animation: 'slide',
   autoPlay: true,
   arrowType: 'always',

@@ -23,7 +23,7 @@ export interface ImageProps extends BaseProps{
     crossOrigin?: "anonymous"| "use-credentials";
     maxZoom?: number;
     minZoom?: number;
-    children?: VueJsxNode,
+    // children?: VueJsxNode,
     imageID?: number;
     setDownloadName?: (src: string) => string;
     imgStyle?: CSSProperties;
@@ -58,7 +58,7 @@ export interface PreviewProps extends BaseProps {
     viewerVisibleDelay?: number;
     disableDownload?: boolean;
     zIndex?: number;
-    children?: VueJsxNode,
+    // children?: VueJsxNode,
     crossOrigin?: "anonymous"| "use-credentials";
     maxZoom?: number;
     minZoom?: number;

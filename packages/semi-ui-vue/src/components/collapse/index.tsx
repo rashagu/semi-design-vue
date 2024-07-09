@@ -31,7 +31,7 @@ export type { CollapsePanelProps } from './item';
 export interface CollapseReactProps extends CollapseProps {
   expandIcon?: VNode;
   collapseIcon?: VNode;
-  children?: VNode;
+  // children?: VNode;
   style?: CSSProperties;
   onChange?: (activeKey: CollapseProps['activeKey'], e: MouseEvent) => void;
   lazyRender?: boolean;
@@ -39,7 +39,7 @@ export interface CollapseReactProps extends CollapseProps {
 
 export type { CollapseState };
 
-const propTypes: ComponentObjectPropsOptions<CollapseReactProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<CollapseReactProps>> = {
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   accordion: PropTypes.bool,

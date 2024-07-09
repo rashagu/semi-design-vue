@@ -18,7 +18,7 @@ export interface InsetDateInputProps {
   onFocus: InputProps['onFocus'];
 }
 
-export const vuePropsTypeInsetDateInput: ComponentObjectPropsOptions<InsetDateInputProps> = {
+export const vuePropsTypeInsetDateInput: ComponentObjectPropsOptions<Required<InsetDateInputProps>> = {
   forwardRef: [Function, Object],
   insetInputValue: Object,
   placeholder: String,

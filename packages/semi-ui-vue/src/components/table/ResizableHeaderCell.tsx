@@ -10,11 +10,12 @@ export interface ResizableHeaderCellProps {
   /** For compatibility with previous versions, the default value is true. If you don't want to resize, set it to false */
   resize?: boolean;
 }
-export const vuePropsType: ComponentObjectPropsOptions<ResizableHeaderCellProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<ResizableHeaderCellProps>> = {
   onResize: Function as PropType<ResizableHeaderCellProps['onResize']>,
   onResizeStart: Function as PropType<ResizableHeaderCellProps['onResizeStart']>,
   onResizeStop: Function as PropType<ResizableHeaderCellProps['onResizeStop']>,
   width: [Number, String],
+  resize: Boolean,
 };
 const ResizableHeaderCell = defineComponent({
   props: vuePropsType,

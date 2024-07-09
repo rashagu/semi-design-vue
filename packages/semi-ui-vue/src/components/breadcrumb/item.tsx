@@ -58,7 +58,7 @@ interface GetTooltipOptType {
   opts?: ShowTooltipType['opts'];
 }
 
-const propTypes_: ComponentObjectPropsOptions<BreadcrumbItemProps> = {
+const propTypes_: ComponentObjectPropsOptions<Required<BreadcrumbItemProps>> = {
   onClick: propTypes.func as PropType<BreadcrumbItemProps['onClick']>,
   route: [propTypes.object, propTypes.string],
   active: propTypes.bool,
@@ -228,7 +228,7 @@ const BreadcrumbItem = defineComponent({
       } = props;
       const pageLabel = active ? { 'aria-current': 'page' as const } : {};
       const item = renderItem();
-      const separator = props.separator || <span class={`${clsPrefix}-separator`}>{context.value.separator}</span>;
+      const separator = props.separator || <span class={`${clsPrefix}-separator`}>{context.value?.separator}</span>;
       const wrapperCLs = cls({
         [`${clsPrefix}-item-wrap`]: true,
         // [`${clsPrefix}-item-wrap-iconOnly`]: !!children && props.icon,

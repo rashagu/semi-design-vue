@@ -43,7 +43,7 @@ export interface SiderProps {
   role?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<SiderProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<SiderProps>> = {
   prefixCls: {
     type: String as PropType<SiderProps['prefixCls']>,
     default: cssClasses.PREFIX,
@@ -54,6 +54,7 @@ export const vuePropsType: ComponentObjectPropsOptions<SiderProps> = {
   // onBreakpoin: Function as PropType<SiderProps['onBreakpoin']>,
   'aria-label': String,
   role: String,
+  onBreakpoint: Function as PropType<SiderProps['onBreakpoint']>,
 };
 const Sider = defineComponent({
   props: vuePropsType,

@@ -56,7 +56,7 @@ export interface ModalReactProps extends ModalProps {
   type?: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<ModalReactProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<ModalReactProps>> = {
   mask: PropTypes.bool,
   closable: PropTypes.bool,
   centered: PropTypes.bool,
@@ -98,6 +98,8 @@ const propTypes: ComponentObjectPropsOptions<ModalReactProps> = {
   footerFill: PropTypes.bool,
   content: [Object, String],
   type: String as PropType<ModalReactProps['type']>,
+  modalContentClass: String,
+  preventScroll: Boolean,
 };
 const defaultProps = {
   zIndex: 1000,

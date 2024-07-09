@@ -6,7 +6,7 @@ import { useBaseComponent } from '../_base/baseComponent';
 import { DayColProps } from './interface';
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
 import {
-  ComponentObjectPropsOptions,
+  ComponentObjectPropsOptions, CSSProperties,
   defineComponent,
   Fragment,
   h,
@@ -29,7 +29,7 @@ export interface DayColState {
   showCurrTime: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<DayColProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<DayColProps>> = {
   events: PropTypes.array,
   displayValue: PropTypes.object,
   showCurrTime: PropTypes.bool,
@@ -40,6 +40,8 @@ const propTypes: ComponentObjectPropsOptions<DayColProps> = {
   minEventHeight: PropTypes.number,
   isWeekend: PropTypes.bool,
   dateGridRender: PropTypes.func as PropType<DayColProps['dateGridRender']>,
+  style: Object as PropType<CSSProperties>,
+  className: String
 };
 
 const defaultProps = {

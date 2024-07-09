@@ -11,7 +11,7 @@ import { vuePropsMake } from '../PropTypes';
 
 const prefixCls = `${cssClasses.PREFIX}-time`;
 
-const propTypes: ComponentObjectPropsOptions<TimeColProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TimeColProps>> = {
   className: PropTypes.string,
   renderTimeDisplay: PropTypes.func as PropType<TimeColProps['renderTimeDisplay']>,
 };

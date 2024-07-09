@@ -122,7 +122,7 @@ export interface CascaderState extends BasicCascaderInnerData {
 const prefixcls = cssClasses.PREFIX;
 const resetkey = 0;
 
-const propTypes: ComponentObjectPropsOptions<CascaderProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<CascaderProps>> = {
   'aria-labelledby': PropTypes.string,
   'aria-invalid': PropTypes.bool,
   'aria-errormessage': PropTypes.string,
@@ -203,6 +203,8 @@ const propTypes: ComponentObjectPropsOptions<CascaderProps> = {
   mouseEnterDelay: Number,
   mouseLeaveDelay: Number,
   virtualizeInSearch: Object,
+  filterSorter: PropTypes.func as PropType<CascaderProps['filterSorter']>,
+  filterRender: PropTypes.func as PropType<CascaderProps['filterRender']>,
 };
 const defaultProps = {
   borderless: false,

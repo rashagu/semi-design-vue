@@ -44,7 +44,7 @@ export interface BannerState {
   visible: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<BannerProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<BannerProps>> = {
   // target: PropTypes.func,
   fullMode: PropTypes.bool,
   // insertAfter: PropTypes.func,

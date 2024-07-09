@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import classNames from 'classnames';
 import { isString } from 'lodash';
+import * as PropTypes from '../PropTypes';
 import { isValid } from '@douyinfe/semi-foundation/form/utils';
 import { cssClasses } from '@douyinfe/semi-foundation/form/constants';
 import * as ObjectUtil from '@douyinfe/semi-foundation/utils/object';
@@ -47,7 +48,7 @@ const GroupError = (props: GroupErrorProps) => {
   return <ErrorMessage error={error} showValidateIcon={props.showValidateIcon} isInInputGroup={props.isInInputGroup} />;
 };
 
-export const vuePropsType: ComponentObjectPropsOptions<InputGroupProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<InputGroupProps>> = {
   className: { type: String, default: '' },
   size: { type: String as PropType<InputGroupProps['size']>, default: 'default' },
   style: [String, Object],
@@ -62,6 +63,8 @@ export const vuePropsType: ComponentObjectPropsOptions<InputGroupProps> = {
   label: Object,
   labelPosition: String as PropType<InputGroupProps['labelPosition']>,
   disabled: Boolean,
+  extraText: PropTypes.node,
+  extraTextPosition: String as PropType<InputGroupProps['extraTextPosition']>,
 };
 const FormInputGroup = defineComponent({
   props: vuePropsType,

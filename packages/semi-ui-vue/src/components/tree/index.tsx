@@ -55,14 +55,14 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
-import { getProps, useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent } from '../_base/baseComponent';
 
 export * from './interface';
 export type { AutoSizerProps } from './autoSizer';
 
 const prefixcls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<TreeProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<Omit<TreeProps, 'children'>>> = {
   autoMergeValue: PropTypes.bool,
   blockNode: PropTypes.bool,
   className: PropTypes.string,
@@ -547,7 +547,7 @@ const Tree = defineComponent({
         () => state.checkedKeys as any,
       ],
       (value, oldValue, onCleanup) => {
-        const newState = getDerivedStateFromProps({ ...props }, { ...state } as TreeState);
+        const newState = getDerivedStateFromProps({ ...props }, { ...state } as any);
         newState &&
           Object.keys(newState).forEach((key) => {
             state[key] = newState[key];

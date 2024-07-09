@@ -36,7 +36,7 @@ export interface DayCalendarState {
   cachedKeys: Array<string>;
 }
 
-const propTypes: ComponentObjectPropsOptions<DayCalendarProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<DayCalendarProps>> = {
   displayValue: PropTypes.object,
   events: PropTypes.array,
   header: PropTypes.node,
@@ -56,6 +56,8 @@ const propTypes: ComponentObjectPropsOptions<DayCalendarProps> = {
 
   range: PropTypes.array,
   weekStartsOn: PropTypes.number as PropType<DayCalendarProps['weekStartsOn']>,
+  onClose: PropTypes.func as PropType<DayCalendarProps['onClose']>,
+  renderDateDisplay: PropTypes.func as PropType<DayCalendarProps['renderDateDisplay']>,
 };
 
 const defaultProps = {

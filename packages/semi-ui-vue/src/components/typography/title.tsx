@@ -16,7 +16,10 @@ export interface CopyableConfig {
 
 export type LinkType = any | boolean;
 
-export interface TitleProps extends Omit<any, OmitTitleProps> {
+export interface TitleProps {
+  className?: string;
+  id?: string;
+  'x-semi-prop'?: string;
   class?: string;
   component_?: any;
   copyable?: CopyableConfig | boolean;
@@ -32,7 +35,7 @@ export interface TitleProps extends Omit<any, OmitTitleProps> {
   underline?: boolean;
   weight?: ArrayElement<typeof strings.WEIGHT> | number;
 }
-export const vuePropsType: ComponentObjectPropsOptions<TitleProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<TitleProps>> = {
   className: {
     type: String,
     default: '',

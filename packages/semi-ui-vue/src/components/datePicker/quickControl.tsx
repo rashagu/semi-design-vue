@@ -19,7 +19,7 @@ export interface QuickControlProps {
   insetInput: DateInputFoundationProps['insetInput'];
   locale: any;
 }
-const propTypes: ComponentObjectPropsOptions<QuickControlProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<QuickControlProps>> = {
   presets: PropTypes.array,
   presetPosition: PropTypes.string as PropType<QuickControlProps['presetPosition']>,
   onPresetClick: PropTypes.func as PropType<QuickControlProps['onPresetClick']>,

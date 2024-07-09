@@ -29,7 +29,7 @@ const prefixCls = cssClasses.PREFIX;
 const footerPrefixCls = `${cssClasses.PREFIX}-preview-footer`;
 const LocaleConsumer = LocaleConsumerFunc<Locale['Image']>();
 
-const propTypes: ComponentObjectPropsOptions<FooterProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<FooterProps>> = {
   curPage: PropTypes.number,
   totalNum: PropTypes.number,
   disabledPrev: PropTypes.bool,
@@ -61,6 +61,7 @@ const propTypes: ComponentObjectPropsOptions<FooterProps> = {
   onRotate: PropTypes.func as PropType<FooterProps['onRotate']>,
   renderPreviewMenu: PropTypes.func as PropType<FooterProps['renderPreviewMenu']>,
   forwardRef: PropTypes.object as PropType<FooterProps['forwardRef']>,
+  zIndex: PropTypes.number,
 };
 
 const defaultProps = {

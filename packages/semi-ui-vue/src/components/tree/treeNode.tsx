@@ -6,7 +6,7 @@ import { debounce, isFunction, isString, get, isEmpty } from 'lodash';
 import { IconTreeTriangleDown, IconFile, IconFolder, IconFolderOpen } from '@kousum/semi-icons-vue';
 import { Checkbox } from '../checkbox';
 import Spin from '../spin';
-import { RenderFullLabelProps, TreeNodeProps, TreeNodeState } from './interface';
+import type { RenderFullLabelProps, TreeNodeProps, TreeNodeState } from './interface';
 import { getHighLightTextHTML } from '../_utils/index';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, reactive, ref, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
@@ -16,7 +16,7 @@ import Indent from './indent';
 
 const prefixcls = cssClasses.PREFIX_OPTION;
 
-const propTypes: ComponentObjectPropsOptions<TreeNodeProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TreeNodeProps>> = {
   expanded: {
     type: PropTypes.bool,
     default: undefined,

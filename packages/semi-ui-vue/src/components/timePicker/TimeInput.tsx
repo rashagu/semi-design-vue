@@ -61,7 +61,7 @@ export type TimeInputProps = Pick<
     secondOptions?: any[];
   };
 
-const propTypes: ComponentObjectPropsOptions<TimeInputProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TimeInputProps>> = {
   value: String,
   borderless: PropTypes.bool,
   format: { type: PropTypes.string, default: strings.DEFAULT_FORMAT },
@@ -89,6 +89,14 @@ const propTypes: ComponentObjectPropsOptions<TimeInputProps> = {
   insetLabel: PropTypes.node as PropType<TimeInputProps['insetLabel']>,
   validateStatus: PropTypes.string as PropType<TimeInputProps['validateStatus']>,
   preventScroll: PropTypes.bool,
+  disabled: PropTypes.bool,
+  type: PropTypes.string as PropType<TimeInputProps['type']>,
+  timeZone: [PropTypes.string, PropTypes.number],
+  defaultOpen: PropTypes.bool,
+  dateFnsLocale: PropTypes.object,
+  style: PropTypes.object,
+  className: PropTypes.string,
+  invalid: PropTypes.bool,
 };
 const defaultProps = {
   borderless: false,

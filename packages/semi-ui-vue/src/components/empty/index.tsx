@@ -19,6 +19,7 @@ import '@douyinfe/semi-foundation/empty/empty.scss';
 import { Title } from '../typography';
 import { ArrayElement } from '../_base/base';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
+import { useHasInProps } from '../_base/baseComponent';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -43,7 +44,7 @@ interface EmptyState {
   mode: any;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<EmptyProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<EmptyProps>> = {
   layout: { type: String as PropType<EmptyProps['layout']>, default: 'vertical' },
   imageStyle: [Object, String] as PropType<EmptyProps['imageStyle']>,
   title: [Object, String],
@@ -58,6 +59,7 @@ const Empty = defineComponent({
   props: vuePropsType,
   name: 'Empty',
   setup(props) {
+    const {getProps} = useHasInProps()
     const attr = useAttrs();
     let body: any;
     let observer: MutationObserver;
@@ -96,7 +98,7 @@ const Empty = defineComponent({
     const slots = useSlots();
     return () => {
       const children = slots.default ? slots.default() : null;
-      const { className, image, description, style, title, imageStyle, layout, darkModeImage, ...rest } = props;
+      const { className, image, description, style, title, imageStyle, layout, darkModeImage, ...rest } = getProps(props);
 
       const alt = typeof description === 'string' ? description : 'empty';
       const imgSrc = state.mode && darkModeImage ? darkModeImage : image;

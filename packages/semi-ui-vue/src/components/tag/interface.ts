@@ -26,7 +26,7 @@ export type AvatarShape = 'circle' | 'square';
 export type TagShape = 'circle' | 'square';
 
 export interface TagProps {
-    children?: VNode | string,
+    // children?: VNode | string,
     tagKey?: string | number;
     size?: TagSize;
     color?: TagColor;

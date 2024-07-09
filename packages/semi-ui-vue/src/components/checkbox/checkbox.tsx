@@ -9,7 +9,7 @@ import CheckboxFoundation, {
   BaseCheckboxProps,
 } from '@douyinfe/semi-foundation/checkbox/checkboxFoundation';
 import CheckboxInner from './checkboxInner';
-import { getProps, useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/checkbox/checkbox.scss';
 import { isUndefined, isBoolean, noop } from 'lodash';
 import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
@@ -66,6 +66,7 @@ const Checkbox = defineComponent({
   props: vuePropsType,
   name: 'Checkbox',
   setup(props, {}) {
+    const { getProps } = useHasInProps();
     const slots = useSlots();
 
     const checked = false;

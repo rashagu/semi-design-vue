@@ -33,7 +33,7 @@ export interface YearAndMonthProps extends YearAndMonthFoundationProps, BaseProp
 
 export type YearAndMonthState = YearAndMonthFoundationState;
 
-const propTypes: ComponentObjectPropsOptions<YearAndMonthProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<YearAndMonthProps>> = {
   currentYear: PropTypes.object,
   currentMonth: PropTypes.object,
   onSelect: PropTypes.func as PropType<YearAndMonthProps['onSelect']>,
@@ -54,6 +54,8 @@ const propTypes: ComponentObjectPropsOptions<YearAndMonthProps> = {
   endYear: PropTypes.number,
 
   onBackToMain: PropTypes.func as PropType<YearAndMonthProps['onBackToMain']>,
+  className: PropTypes.string,
+  style: PropTypes.object,
 };
 
 const defaultProps = {

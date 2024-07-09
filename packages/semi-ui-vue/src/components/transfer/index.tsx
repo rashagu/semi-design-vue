@@ -189,7 +189,7 @@ export interface TransferProps {
 
 export const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<TransferProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TransferProps>> = {
   style: PropTypes.object,
   className: PropTypes.string,
   disabled: PropTypes.bool,
@@ -212,6 +212,8 @@ const propTypes: ComponentObjectPropsOptions<TransferProps> = {
   renderSourcePanel: PropTypes.func as PropType<TransferProps['renderSourcePanel']>,
   renderSelectedPanel: PropTypes.func as PropType<TransferProps['renderSelectedPanel']>,
   draggable: PropTypes.bool,
+  renderSourceHeader: PropTypes.func as PropType<TransferProps['renderSourceHeader']>,
+  renderSelectedHeader: PropTypes.func as PropType<TransferProps['renderSelectedHeader']>,
 };
 
 const defaultProps = {

@@ -16,7 +16,7 @@ export interface ColGroupProps {
   components?: TableComponents['body'];
 }
 
-const propTypes: ComponentObjectPropsOptions<ColGroupProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<ColGroupProps>> = {
   columns: PropTypes.array,
   prefixCls: PropTypes.string,
   className: PropTypes.string,

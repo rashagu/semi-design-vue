@@ -42,7 +42,7 @@ export interface TableHeaderRowProps {
   selectedRowKeysSet: Set<any>;
 }
 
-const propTypes: ComponentObjectPropsOptions<TableHeaderRowProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TableHeaderRowProps>> = {
   components: PropTypes.object,
   row: PropTypes.array,
   prefixCls: PropTypes.string,

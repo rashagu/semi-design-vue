@@ -85,7 +85,7 @@ export type PaginationLocale = Locale['Pagination'];
 export type PopoverPosition = Position;
 export type { PageList };
 
-const propTypes: ComponentObjectPropsOptions<PaginationProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<PaginationProps>> = {
   total: PropTypes.number,
   showTotal: PropTypes.bool,
   pageSize: PropTypes.number,

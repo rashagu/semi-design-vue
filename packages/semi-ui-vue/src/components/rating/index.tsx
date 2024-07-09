@@ -1,4 +1,4 @@
-import { getProps, useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 import cls from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/rating/constants';
 import * as PropTypes from '../PropTypes';
@@ -65,7 +65,7 @@ export interface RatingState {
   emptyStarFocusVisible: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<RatingProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<RatingProps>> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,
@@ -93,6 +93,7 @@ const propTypes: ComponentObjectPropsOptions<RatingProps> = {
   tooltips: Array,
   id: PropTypes.string,
   preventScroll: PropTypes.bool,
+  onClick: PropTypes.func as PropType<RatingProps['onClick']>,
 };
 
 const defaultProps = {
@@ -112,6 +113,7 @@ const Rating = defineComponent({
   props: vuePropsType,
   name: 'Rating',
   setup(props, {}) {
+    const { getProps } = useHasInProps();
     const slots = useSlots();
 
     const rate = ref();

@@ -20,7 +20,7 @@ export interface PlainTab {
 
 export interface TabsProps {
     activeKey?: string;
-    children?: VueJsxNode | Array<VueJsxNode>;
+    // children?: VueJsxNode | Array<VueJsxNode>;
     className?: string;
     collapsible?: boolean;
     contentStyle?: CSSProperties;

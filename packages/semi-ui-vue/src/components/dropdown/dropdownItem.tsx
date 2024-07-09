@@ -9,7 +9,6 @@ import { noop } from 'lodash';
 import { vuePropsMake } from '../PropTypes';
 import { useDropdownContext } from './context/Consumer';
 import { ComponentObjectPropsOptions } from 'vue';
-import type { Events } from 'vue';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 
 export type Type = 'primary' | 'secondary' | 'tertiary' | 'warning' | 'danger';
@@ -33,7 +32,7 @@ export interface DropdownItemProps extends BaseProps {
 }
 
 const prefixCls = css.PREFIX;
-const propTypes: ComponentObjectPropsOptions<DropdownItemProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<DropdownItemProps>> = {
   name: PropTypes.string,
   disabled: PropTypes.bool,
   selected: PropTypes.bool,

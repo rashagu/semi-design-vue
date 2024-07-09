@@ -22,7 +22,7 @@ export interface NoticeTransitionProps {
 
 type NoticeTransitionFormatFuncType = (styles: { translate: string; opacity: string | number }) => any;
 
-export const vuePropsType: ComponentObjectPropsOptions<NoticeTransitionProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<NoticeTransitionProps>> = {
   position: String as PropType<NoticeTransitionProps['position']>,
   children: [Object, Function] as PropType<NoticeTransitionProps['children']>,
   motion: [Object, String, Boolean],

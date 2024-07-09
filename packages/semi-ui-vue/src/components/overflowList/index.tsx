@@ -28,7 +28,7 @@ import {
   watch,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { getProps, useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 
 const prefixCls = cssClasses.PREFIX;
 const Boundary = strings.BOUNDARY_MAP;
@@ -86,7 +86,7 @@ const defaultProps = {
   onOverflow: () => null,
   overflowRenderDirection: 'both',
 };
-const propTypes: ComponentObjectPropsOptions<OverflowListProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<OverflowListProps>> = {
   // if render in scroll mode, key is required in items
   className: PropTypes.string,
   collapseFrom: PropTypes.string as PropType<OverflowListProps['collapseFrom']>,
@@ -105,12 +105,14 @@ const propTypes: ComponentObjectPropsOptions<OverflowListProps> = {
   collapseMask: PropTypes.object as PropType<OverflowListProps['collapseMask']>,
   overflowRenderDirection: PropTypes.string as PropType<OverflowListProps['overflowRenderDirection']>,
   onVisibleStateChange: PropTypes.func as PropType<OverflowListProps['onVisibleStateChange']>,
+  itemKey: [PropTypes.string, PropTypes.bool, PropTypes.func] as PropType<OverflowListProps['itemKey']>,
 };
 export const vuePropsType = vuePropsMake<OverflowListProps>(propTypes, defaultProps);
 const OverflowList = defineComponent({
   props: vuePropsType,
   name: 'OverflowList',
   setup(props, {}) {
+    const { getProps } = useHasInProps();
     const slots = useSlots();
 
     const state = reactive<OverflowListState>({

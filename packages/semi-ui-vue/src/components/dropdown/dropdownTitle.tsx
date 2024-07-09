@@ -9,7 +9,7 @@ import { useDropdownContext } from './context/Consumer';
 const prefixCls = cssClasses.PREFIX;
 export type DropdownTitleProps = BaseProps;
 
-export const vuePropsType: ComponentObjectPropsOptions<DropdownTitleProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<DropdownTitleProps>> = {
   style: [Object, String] as PropType<DropdownTitleProps['style']>,
   className: String,
 };

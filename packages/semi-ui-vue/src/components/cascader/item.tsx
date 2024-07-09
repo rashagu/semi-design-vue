@@ -83,7 +83,7 @@ export interface CascaderItemProps extends BaseProps {
 
 const prefixcls = cssClasses.PREFIX_OPTION;
 
-export const vuePropsType: ComponentObjectPropsOptions<CascaderItemProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<CascaderItemProps>> = {
   activeKeys: Object,
   selectedKeys: Object,
   loadedKeys: Object,
@@ -107,6 +107,9 @@ export const vuePropsType: ComponentObjectPropsOptions<CascaderItemProps> = {
     type: Boolean,
     default: false,
   },
+  filterRender: Function as PropType<CascaderItemProps['filterRender']>,
+  style: Object,
+  className: String,
 };
 const Item = defineComponent({
   props: vuePropsType,

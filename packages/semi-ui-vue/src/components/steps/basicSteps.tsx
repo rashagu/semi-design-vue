@@ -37,7 +37,7 @@ export interface BasicStepsProps {
   'aria-label'?: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<BasicStepsProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<BasicStepsProps>> = {
   prefixCls: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,

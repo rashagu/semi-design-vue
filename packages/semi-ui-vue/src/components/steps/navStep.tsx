@@ -24,7 +24,7 @@ export interface NavStepProps {
   stepNumber?: number;
 }
 
-const propTypes: ComponentObjectPropsOptions<NavStepProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<NavStepProps>> = {
   prefixCls: PropTypes.string,
   title: PropTypes.node,
   className: PropTypes.string,
@@ -37,6 +37,8 @@ const propTypes: ComponentObjectPropsOptions<NavStepProps> = {
   onKeyDown: PropTypes.func,
   role: PropTypes.string,
   'aria-label': PropTypes.string,
+  index: PropTypes.number,
+  total: PropTypes.number,
 };
 const defaultProps = {
   prefixCls: css.ITEM,

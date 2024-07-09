@@ -32,7 +32,7 @@ export interface ListItemProps {
 }
 
 const prefixCls = cssClasses.PREFIX;
-const propTypes: ComponentObjectPropsOptions<ListItemProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<ListItemProps>> = {
   extra: PropTypes.node as PropType<ListItemProps['extra']>,
   header: PropTypes.node,
   main: PropTypes.node,

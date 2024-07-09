@@ -17,7 +17,7 @@ export interface CollapseButtonProps {
   onClick?(e: boolean): void;
 }
 
-const vuePropsType: ComponentObjectPropsOptions<CollapseButtonProps> = {
+const vuePropsType: ComponentObjectPropsOptions<Required<CollapseButtonProps>> = {
   prefixCls: String,
   locale: Object,
   collapseText: Function as PropType<CollapseButtonProps['collapseText']>,

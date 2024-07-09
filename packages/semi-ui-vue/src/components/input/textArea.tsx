@@ -17,7 +17,7 @@ import * as PropTypes from '../PropTypes';
 import cls from 'classnames';
 import TextAreaFoundation from '@douyinfe/semi-foundation/input/textareaFoundation';
 import { cssClasses } from '@douyinfe/semi-foundation/input/constants';
-import { getProps, useBaseComponent, ValidateStatus } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps, ValidateStatus } from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/input/textarea.scss';
 import { noop, omit, isFunction, isUndefined, isObject, throttle } from 'lodash';
 import type { DebouncedFunc } from 'lodash';
@@ -44,7 +44,7 @@ export type AutosizeRow = {
   maxRows?: number;
 };
 
-export interface TextAreaProps extends Omit<TextareaHTMLAttributes, OmitTextareaAttr> {
+export interface TextAreaProps {
   style?: CSSProperties;
   autosize?: boolean | AutosizeRow;
   borderless?: boolean;
@@ -90,7 +90,7 @@ export interface TextAreaState {
   cachedValue?: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<TextAreaProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TextAreaProps>> = {
   autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   borderless: PropTypes.bool,
   placeholder: PropTypes.string,
@@ -181,7 +181,8 @@ export const VuePropsType = vuePropsMake(propTypes, defaultProps);
 const TextArea = defineComponent({
   props: VuePropsType,
   name: 'TextArea',
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
+    const { getProps } = useHasInProps();
     let focusing = false;
     let libRef = ref(null);
     const onUpdateValueFunc = props['onUpdate:value'];
@@ -386,12 +387,13 @@ const TextArea = defineComponent({
         [`${prefixCls}-textarea-autosize`]: isObject(autosize) ? isUndefined(autosize?.maxRows) : autosize,
         [`${prefixCls}-textarea-showClear`]: showClear,
       });
-      const itemProps = {
+      const itemProps: TextareaHTMLAttributes = {
+        ...attrs,
         ...omit(rest, 'insetLabel', 'insetLabelId', 'getValueLength', 'onClear', 'showClear'),
-        className: itemCls,
+        class: itemCls,
         disabled,
-        autofocus: autoFocus || props.autofocus,
-        readOnly: readonly,
+        autofocus: (autoFocus || attrs.autofocus) as boolean,
+        readonly: readonly,
         placeholder: !placeholder ? null : placeholder,
         onInput: (e: any) => {
           // console.log(e)

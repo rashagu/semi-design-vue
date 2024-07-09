@@ -49,7 +49,7 @@ export interface SideSheetContentProps {
   visible?: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<SideSheetContentProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<SideSheetContentProps>> = {
   size: String as PropType<SideSheetContentProps['size']>,
   onClose: PropTypes.func as PropType<SideSheetContentProps['onClose']>,
   closeIcon: PropTypes.node,

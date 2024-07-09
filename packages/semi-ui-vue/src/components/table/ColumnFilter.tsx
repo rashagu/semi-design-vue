@@ -12,6 +12,7 @@ import { FilterIcon, Filter, OnFilterDropdownVisibleChange, RenderFilterDropdown
 import { VueJsxNode } from '../interface';
 import { cloneVNode, isVNode, h, ref, watch, defineComponent, VNode, ComponentObjectPropsOptions, PropType } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { useHasInProps } from '../_base/baseComponent';
 
 function renderDropdown(props: RenderDropdownProps, nestedElem: VueJsxNode = null, level = 0) {
   const {
@@ -144,7 +145,7 @@ function renderDropdown(props: RenderDropdownProps, nestedElem: VueJsxNode = nul
   );
 }
 
-const propTypes: ComponentObjectPropsOptions<ColumnFilterProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<ColumnFilterProps>> = {
   ...DropdownVuePropsType,
   prefixCls: String,
   filteredValue: Array,
@@ -167,9 +168,10 @@ const propTypes: ComponentObjectPropsOptions<ColumnFilterProps> = {
 const defaultProps = {};
 const ColumnFilterVueProps = vuePropsMake(propTypes, defaultProps);
 export const ColumnFilter = defineComponent({
-  props: ColumnFilterVueProps,
+  props: ColumnFilterVueProps as ComponentObjectPropsOptions<Required<ColumnFilterProps>>,
   name: 'ColumnFilter',
   setup(props, { attrs }) {
+    const {getProps} = useHasInProps()
     // custom filter related status
     const isFilterDropdownVisibleControlled_ = typeof props.filterDropdownVisible !== 'undefined';
     const isCustomFilterDropdown_ = typeof props.renderFilterDropdown === 'function';
@@ -239,7 +241,7 @@ export const ColumnFilter = defineComponent({
         filterDropdownVisible,
         renderFilterDropdown,
         onFilterDropdownVisibleChange,
-      } = props;
+      } = getProps(props);
       let { filterDropdown = null } = props;
 
       // custom filter related status
@@ -281,7 +283,7 @@ export const ColumnFilter = defineComponent({
       }
 
       const renderProps: RenderDropdownProps = {
-        ...props,
+        ...getProps(props),
         ...filterDropdownProps,
         ...renderFilterDropdownProps,
         filterDropdownVisible: isFilterDropdownVisibleControlled ? filterDropdownVisible : dropdownVisible.value,

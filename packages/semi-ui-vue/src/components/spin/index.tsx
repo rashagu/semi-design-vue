@@ -14,7 +14,7 @@ import { cssClasses as css, strings } from '@douyinfe/semi-foundation/spin/const
 import SpinFoundation from '@douyinfe/semi-foundation/spin/foundation';
 import SpinIcon from './icon';
 import '@douyinfe/semi-foundation/spin/spin.scss';
-import { useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 
 const prefixCls = css.PREFIX;
 
@@ -44,7 +44,7 @@ interface SpinState {
  *         indicator: null,
  *         delay: 0,
  */
-export const VuePropsType: ComponentObjectPropsOptions<SpinProps> = {
+export const VuePropsType: ComponentObjectPropsOptions<Required<SpinProps>> = {
   size: {
     type: String as PropType<SpinProps['size']>,
     default: 'middle',
@@ -67,6 +67,7 @@ const Index = defineComponent({
   props: VuePropsType,
   name: 'Spin',
   setup(props, { slots }) {
+    const {getProps} = useHasInProps()
     const state = reactive<SpinState>({
       delay: props.delay,
       loading: true,
@@ -92,7 +93,7 @@ const Index = defineComponent({
     watch(
       () => props,
       (val) => {
-        const newState = getDerivedStateFromProps({ ...props });
+        const newState = getDerivedStateFromProps({ ...getProps(props) });
         if (newState) {
           Object.keys(newState).forEach((key) => {
             state[key] = newState[key];
@@ -140,7 +141,7 @@ const Index = defineComponent({
 
     return () => {
       foundation.value.updateLoadingIfNeedDelay();
-      const { style, wrapperClassName, childStyle, size, ...rest } = props;
+      const { style, wrapperClassName, childStyle, size, ...rest } = getProps(props);
       const { loading } = state;
       return (
         <div

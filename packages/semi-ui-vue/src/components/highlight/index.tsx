@@ -3,7 +3,7 @@ import * as PropTypes from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/highlight/constants';
 import { getHighLightTextHTML } from '../_utils/index';
 import '@douyinfe/semi-foundation/highlight/highlight.scss';
-import { CSSProperties, defineComponent, h, useSlots } from 'vue';
+import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 
 export interface HighlightProps {
@@ -18,9 +18,9 @@ export interface HighlightProps {
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes = {
-  style: PropTypes.object,
-  className: PropTypes.string,
+const propTypes: ComponentObjectPropsOptions<Required<HighlightProps>> = {
+  // style: PropTypes.object,
+  // className: PropTypes.string,
   autoEscape: PropTypes.bool,
   caseSensitive: PropTypes.bool,
   sourceString: PropTypes.string,
@@ -36,7 +36,7 @@ const defaultProps = {
   caseSensitive: false,
   sourceString: '',
 };
-export const vuePropsType = vuePropsMake<HighlightProps>(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Highlight = defineComponent({
   props: vuePropsType,
   name: 'Highlight',

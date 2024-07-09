@@ -41,11 +41,8 @@ export type InputMode = 'password';
 // Although we do not consume success in the input to configure special styles, we should allow it as a legal props value, otherwise a warning will be thrown
 export type ValidateStatus = 'default' | 'error' | 'warning' | 'success';
 
-export interface InputProps
-  extends Omit<
-    InputHTMLAttributes,
-    'onChange' | 'prefix' | 'size' | 'autoFocus' | 'placeholder' | 'onFocus' | 'onBlur'
-  > {
+export interface InputProps{
+  role?: string,
   'aria-label'?: AriaAttributes['aria-label'];
   'aria-describedby'?: AriaAttributes['aria-describedby'];
   'aria-errormessage'?: AriaAttributes['aria-errormessage'];
@@ -91,6 +88,8 @@ export interface InputProps
   showClearIgnoreDisabled?: boolean;
   borderless?: boolean;
   onlyBorder?: number;
+  onCompositionstart?: any
+  onCompositionend?: any
 }
 
 export interface InputState {
@@ -106,7 +105,8 @@ export interface InputState {
   maxlength: number;
 }
 
-export const propTypes: ComponentObjectPropsOptions<InputProps> = {
+export const propTypes: ComponentObjectPropsOptions<Required<InputProps>> = {
+  role: PropTypes.string,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
   'aria-invalid': PropTypes.bool,
@@ -152,6 +152,9 @@ export const propTypes: ComponentObjectPropsOptions<InputProps> = {
   minlength: Number,
   maxlength: Number,
   forwardRef: [PropTypes.object, PropTypes.func],
+  showClearIgnoreDisabled: PropTypes.bool,
+  onCompositionstart: PropTypes.func as PropType<InputProps['onCompositionstart']>,
+  onCompositionend: PropTypes.func as PropType<InputProps['onCompositionend']>,
 };
 
 const defaultProps = {
@@ -184,7 +187,7 @@ export const VuePropsType = vuePropsMake(propTypes, defaultProps);
 const Input = defineComponent({
   props: VuePropsType,
   name: 'Input',
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { getProps } = useHasInProps();
     const initValue = 'value' in getProps(props) ? props.value : props.defaultValue;
     const state = reactive<InputState>({
@@ -290,8 +293,8 @@ const Input = defineComponent({
 
     onMounted(() => {
       foundation.init();
-      const { disabled, autofocus, preventScroll } = props;
-      if (!disabled && (autofocus || props.autoFocus)) {
+      const { disabled, autoFocus, preventScroll } = props;
+      if (!disabled && (props.autoFocus || attrs.autofocus)) {
         inputRef.value.focus({ preventScroll });
       }
     });
@@ -524,7 +527,7 @@ const Input = defineComponent({
         showClearIgnoreDisabled,
         onlyBorder,
         ...rest
-      } = props;
+      } = getProps(props);
       const { value, isFocus, minlength: stateMinLength } = state;
       const suffixAllowClear = foundation.isAllowClear();
       const suffixIsIcon = isSemiIcon(suffix);
@@ -561,6 +564,7 @@ const Input = defineComponent({
       // const inputValue = value === null || value === undefined ? '' : value;
       const inputValue = value === null || value === undefined ? '' : value;
       const inputProps: InputHTMLAttributes = {
+        ...attrs,
         ...rest,
         style: { ...inputStyle },
         autofocus: autoFocus,

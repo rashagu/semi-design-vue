@@ -4,7 +4,7 @@ import cls from 'classnames';
 import Space from '../space';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import { useHasInProps } from '../_base/baseComponent';
 
 const prefixcls = cssClasses.PREFIX;
 
@@ -20,7 +20,7 @@ export interface CardGroupProps {
   /** Card set type */
   type?: CardGroupType;
 }
-const propTypes: ComponentObjectPropsOptions<CardGroupProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<CardGroupProps>> = {
   className: PropTypes.string,
   spacing: [PropTypes.number, PropTypes.array],
   style: PropTypes.object,
@@ -35,11 +35,12 @@ const CardGroup = defineComponent({
   props: vuePropsType,
   name: 'CardGroup',
   setup(props, {}) {
+    const {getProps} = useHasInProps()
     const slots = useSlots();
 
     return () => {
       const children = slots.default?.();
-      const { className, spacing, style, type, ...others } = props;
+      const { className, spacing, style, type, ...others } = getProps(props);
       const isGrid = type === 'grid';
       const cardGroupCls = cls(`${prefixcls}-group`, className, {
         [`${prefixcls}-group-grid`]: isGrid,

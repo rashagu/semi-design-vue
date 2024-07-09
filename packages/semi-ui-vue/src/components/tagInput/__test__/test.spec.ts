@@ -1,11 +1,8 @@
-import { expect, test, describe } from 'vitest'
-import Comp from "./TagInputDemo";
-import {mount} from "@vue/test-utils";
+import { test } from 'vitest';
+import Comp from './TagInputDemo';
+import { render, screen } from '@testing-library/vue';
 
-test('TagInputDemo qwe', async () => {
-  expect(Comp).toBeTruthy()
-  const wrapper = mount(Comp, {})
-
-  const profileLink = wrapper.get('p').text()
-  expect(profileLink).toEqual('抖音')
+test('TagInputDemo', async () => {
+  render(Comp)
+  const input = await screen.findAllByText("抖音")
 })

@@ -17,14 +17,14 @@ import isElement from '@douyinfe/semi-foundation/utils/isElement';
 export interface ReactIntersectionObserverProps {
   onIntersect?: IntersectionObserverCallback;
   option?: IntersectionObserverInit;
-  children?: VueJsxNode;
+  // children?: VueJsxNode;
   root?: IntersectionObserverInit['root'];
   threshold?: IntersectionObserverInit['threshold'];
   rootMargin?: IntersectionObserverInit['rootMargin'];
   items?: Record<string, Element>;
 }
 
-const propTypes: ComponentObjectPropsOptions<ReactIntersectionObserverProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<ReactIntersectionObserverProps>> = {
   onIntersect: PropTypes.func as PropType<ReactIntersectionObserverProps['onIntersect']>,
   option: PropTypes.object,
   root: PropTypes.any as PropType<ReactIntersectionObserverProps['root']>,

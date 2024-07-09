@@ -72,7 +72,7 @@ function isInvalidRenderCellText(text: any) {
   return text && !isVNode(text) && Object.prototype.toString.call(text) === '[object Object]';
 }
 
-const propTypes: ComponentObjectPropsOptions<TableCellProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TableCellProps>> = {
   record: PropTypes.object,
   prefixCls: PropTypes.string,
   index: PropTypes.number,
@@ -97,6 +97,8 @@ const propTypes: ComponentObjectPropsOptions<TableCellProps> = {
   colIndex: PropTypes.number,
 
   disabled: PropTypes.bool,
+  style: PropTypes.object,
+  className: PropTypes.string,
 };
 const defaultProps = {
   indent: 0,

@@ -4,7 +4,15 @@ import { cssClasses } from '@douyinfe/semi-foundation/skeleton/constants';
 import { strings } from '@douyinfe/semi-foundation/avatar/constants';
 
 import '@douyinfe/semi-foundation/skeleton/skeleton.scss';
-import { CSSProperties, FunctionalComponent, h, DefineComponent, defineComponent, useSlots } from 'vue';
+import {
+  CSSProperties,
+  FunctionalComponent,
+  h,
+  DefineComponent,
+  defineComponent,
+  useSlots,
+  ComponentObjectPropsOptions,
+} from 'vue';
 import { vuePropsMake } from '../PropTypes';
 
 export type BasicProps = {
@@ -35,7 +43,7 @@ const generator =
     return <BasicComponent type={type} {...props} />;
   };
 
-const propTypes = {
+const propTypes:ComponentObjectPropsOptions<Required<AvatarProps & BasicProps>> = {
   type: PropTypes.string,
   prefixCls: PropTypes.string,
   style: PropTypes.object,

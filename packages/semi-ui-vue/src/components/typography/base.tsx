@@ -100,7 +100,7 @@ interface BaseTypographyState {
 const prefixCls = cssClasses.PREFIX;
 const ELLIPSIS_STR = '...';
 
-const propTypes: ComponentObjectPropsOptions<BaseTypographyProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<BaseTypographyProps>> = {
   copyable: PropTypes.oneOfType([PropTypes.object(), PropTypes.bool]),
   delete: PropTypes.bool,
   disabled: PropTypes.bool,

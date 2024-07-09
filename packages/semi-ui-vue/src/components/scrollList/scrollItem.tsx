@@ -57,8 +57,9 @@ export interface ScrollItemState {
 }
 
 function scrollItemFunc<T extends Item>() {
-  const vuePropsType: ComponentObjectPropsOptions<ScrollItemProps<T>> = {
+  const vuePropsType: ComponentObjectPropsOptions<Required<ScrollItemProps<T>>> = {
     className: String,
+    style: Object,
     class: String,
     selectedIndex: {
       type: Number,

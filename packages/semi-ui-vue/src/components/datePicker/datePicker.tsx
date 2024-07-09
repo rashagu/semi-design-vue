@@ -36,7 +36,7 @@ import type { MonthsGridProps } from './monthsGrid';
 import MonthsGrid from './monthsGrid';
 import QuickControl from './quickControl';
 import Footer from './footer';
-import Trigger from '../trigger';
+import Trigger, { TriggerProps } from '../trigger';
 import type { YearAndMonthProps } from './yearAndMonth';
 import YearAndMonth from './yearAndMonth';
 import '@douyinfe/semi-foundation/datePicker/datePicker.scss';
@@ -91,7 +91,7 @@ export interface DatePickerProps extends DatePickerFoundationProps {
 
 export type DatePickerState = DatePickerFoundationState;
 
-const propTypes: ComponentObjectPropsOptions<DatePickerProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<DatePickerProps>> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,
@@ -172,6 +172,10 @@ const propTypes: ComponentObjectPropsOptions<DatePickerProps> = {
   id: PropTypes.string as PropType<DatePickerProps['id']>,
   onPresetClick: PropTypes.func as PropType<DatePickerProps['onClickOutSide']>,
   onClickOutSide: PropTypes.func as PropType<DatePickerProps['onClickOutSide']>,
+  localeCode: PropTypes.string,
+  insetInput: [PropTypes.bool, PropTypes.object] as PropType<DatePickerProps['insetInput']>,
+  startYear: PropTypes.number,
+  endYear: PropTypes.number,
 };
 
 const defaultProps = {
@@ -213,7 +217,7 @@ const defaultProps = {
   insetInput: false,
   onClickOutSide: noop,
 };
-export const vuePropsTypeDatePickerProps = vuePropsMake<DatePickerProps>(propTypes, defaultProps);
+export const vuePropsTypeDatePickerProps = vuePropsMake(propTypes, defaultProps);
 
 const DatePicker = defineComponent({
   props: vuePropsTypeDatePickerProps,
@@ -583,7 +587,7 @@ const DatePicker = defineComponent({
       const { insetInput, dateFnsLocale, density, type, format, rangeSeparator, defaultPickerValue } = props;
       const { insetInputValue, value } = state;
 
-      const props_ = {
+      const props_: DateInputProps = {
         dateFnsLocale,
         format,
         insetInputValue,
@@ -738,7 +742,7 @@ const DatePicker = defineComponent({
         >
           {typeof triggerRender === 'function' ? (
             <Trigger
-              {...props_}
+              {...(props_ as TriggerProps)}
               triggerRender={triggerRender}
               componentName="DatePicker"
               componentProps={{ ...props }}

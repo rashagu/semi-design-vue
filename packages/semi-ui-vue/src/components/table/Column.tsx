@@ -4,7 +4,7 @@ import { ColumnProps } from './interface';
 import { ComponentObjectPropsOptions, defineComponent, h, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 
-const propTypes: ComponentObjectPropsOptions<ColumnProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<ColumnProps>> = {
   ...ColumnShape,
 };
 export const vuePropsType = vuePropsMake(propTypes, {});

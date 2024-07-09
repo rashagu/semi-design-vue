@@ -3,7 +3,7 @@ import * as PropTypes from '../PropTypes';
 import classNames from 'classnames';
 import { noop, get, values } from 'lodash';
 
-import { getProps, useBaseComponent, ValidateStatus } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps, ValidateStatus } from '../_base/baseComponent';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/timePicker/constants';
 import Popover, { PopoverProps } from '../popover';
 import { numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/constants';
@@ -157,6 +157,7 @@ const TimePicker = defineComponent({
   props: vuePropsType,
   name: 'TimePicker',
   setup(props, { slots }) {
+    const { getProps } = useHasInProps();
     const { format = strings.DEFAULT_FORMAT } = props;
     const state = reactive<TimePickerState>({
       open: props.open || props.defaultOpen || false,

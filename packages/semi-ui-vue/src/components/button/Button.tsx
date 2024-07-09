@@ -39,7 +39,7 @@ export interface ButtonProps {
   contentClassName?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<ButtonProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<ButtonProps>> = {
   id: String,
   circle: Boolean,
   className: String,

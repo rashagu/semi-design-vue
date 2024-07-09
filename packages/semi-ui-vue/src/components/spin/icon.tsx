@@ -11,7 +11,7 @@ export interface IconProps {
   type?: string;
 }
 
-export const VuePropsType: ComponentObjectPropsOptions<IconProps> = {
+export const VuePropsType: ComponentObjectPropsOptions<Required<IconProps>> = {
   id: Number,
   component: Object,
   size: Number,

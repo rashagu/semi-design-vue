@@ -48,7 +48,7 @@ export interface WeekCalendarState {
   cachedKeys: Array<string>;
 }
 
-const propTypes: ComponentObjectPropsOptions<WeekCalendarProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<WeekCalendarProps>> = {
   displayValue: PropTypes.object,
   header: PropTypes.node,
   events: PropTypes.array,
@@ -69,6 +69,7 @@ const propTypes: ComponentObjectPropsOptions<WeekCalendarProps> = {
   weekStartsOn: PropTypes.number as PropType<WeekCalendarProps['weekStartsOn']>,
   onClick: PropTypes.func as PropType<WeekCalendarProps['onClick']>,
   minEventHeight: PropTypes.number as PropType<WeekCalendarProps['minEventHeight']>,
+  onClose: PropTypes.func as PropType<WeekCalendarProps['onClose']>,
 };
 
 const defaultProps = {

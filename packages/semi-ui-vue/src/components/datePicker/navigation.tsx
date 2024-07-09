@@ -33,7 +33,7 @@ interface NavigationProps {
   panelType?: PanelType;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<NavigationProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<NavigationProps>> = {
   monthText: { type: PropTypes.string, default: '' },
   density: PropTypes.string,
   onMonthClick: {
@@ -62,6 +62,7 @@ export const vuePropsType: ComponentObjectPropsOptions<NavigationProps> = {
   shouldBimonthSwitch: PropTypes.bool,
   // Panel type, divided into left panel and right panel
   panelType: PropTypes.string as PropType<NavigationProps['panelType']>,
+  forwardRef: [PropTypes.object, PropTypes.func]
 };
 const navigation = defineComponent({
   props: vuePropsType,

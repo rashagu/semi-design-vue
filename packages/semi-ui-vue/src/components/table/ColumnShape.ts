@@ -1,29 +1,30 @@
 import * as PropTypes from '../PropTypes';
-import {ComponentObjectPropsOptions} from "vue";
+import { ComponentObjectPropsOptions, PropType } from 'vue';
 import {ColumnProps} from "./interface";
 
-export default {
-    align: String,
+const ColumnShape: ComponentObjectPropsOptions<Required<ColumnProps>> = {
+    align: String as PropType<ColumnProps['align']>,
     className: PropTypes.string,
     colSpan: PropTypes.number,
     dataIndex: PropTypes.string,
-    defaultSortOrder: String,
+    defaultSortOrder: String as PropType<ColumnProps['defaultSortOrder']>,
     filterChildrenRecord: PropTypes.bool,
     filterDropdownProps: PropTypes.object,
     filterDropdown: PropTypes.node,
     filterDropdownVisible: PropTypes.bool,
-    filterIcon: PropTypes.func,
+    filterIcon: [PropTypes.object, PropTypes.func] as PropType<ColumnProps['filterIcon']>,
     filterMultiple: PropTypes.bool,
-    filteredValue: PropTypes.any,
+    filteredValue: PropTypes.array,
     filters: PropTypes.array,
-    fixed: String,
-    onCell: PropTypes.func,
-    onFilter: PropTypes.func,
-    onFilterDropdownVisibleChange: PropTypes.func,
-    onHeaderCell: PropTypes.func,
-    onSorterChange: PropTypes.func, // TODO: future api
-    render: PropTypes.func,
-    renderFilterDropdownItem: PropTypes.func,
+    fixed: String as PropType<ColumnProps['fixed']>,
+    onCell: PropTypes.func as PropType<ColumnProps['onCell']>,
+    onFilter: PropTypes.func as PropType<ColumnProps['onFilter']>,
+    onFilterDropdownVisibleChange: PropTypes.func as PropType<ColumnProps['onFilterDropdownVisibleChange']>,
+    onHeaderCell: PropTypes.func as PropType<ColumnProps['onHeaderCell']>,
+    //@ts-ignore
+    onSorterChange: PropTypes.func as PropType<ColumnProps['onSorterChange']>, // TODO: future api
+    render: PropTypes.func as PropType<ColumnProps['render']>,
+    renderFilterDropdownItem: PropTypes.func as PropType<ColumnProps['renderFilterDropdownItem']>,
     sortChildrenRecord: PropTypes.bool,
     sortDirections: String, // TODO: future api
     sortOrder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
@@ -31,4 +32,5 @@ export default {
     title: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     useFullRender: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-} as ComponentObjectPropsOptions<ColumnProps>;
+}
+export default ColumnShape

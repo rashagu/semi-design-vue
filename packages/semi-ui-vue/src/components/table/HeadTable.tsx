@@ -8,6 +8,7 @@ import TableHeader from './TableHeader';
 import { Fixed, TableComponents, Scroll, BodyScrollEvent, ColumnProps, OnHeaderRow, Sticky } from './interface';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { useHasInProps } from '../_base/baseComponent';
 
 export interface HeadTableProps {
   tableLayout?: 'fixed' | 'auto';
@@ -32,7 +33,7 @@ export interface HeadTableProps {
  * When there are fixed columns, the header is rendered as a separate Table
  */
 
-const propTypes: ComponentObjectPropsOptions<HeadTableProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<HeadTableProps>> = {
   tableLayout: PropTypes.string as PropType<HeadTableProps['tableLayout']>,
   bodyHasScrollBar: PropTypes.bool,
   columns: PropTypes.array,
@@ -47,6 +48,8 @@ const propTypes: ComponentObjectPropsOptions<HeadTableProps> = {
   showHeader: PropTypes.bool,
   onDidUpdate: PropTypes.func as PropType<HeadTableProps['onDidUpdate']>,
   onHeaderRow: PropTypes.func as PropType<HeadTableProps['onHeaderRow']>,
+  anyColumnFixed: PropTypes.bool,
+  sticky: [PropTypes.bool, PropTypes.object],
 };
 
 const defaultProps = {
@@ -57,6 +60,7 @@ const HeadTable = defineComponent({
   props: vuePropsType,
   name: 'HeadTable',
   setup(props, {}) {
+    const {getProps} = useHasInProps()
     const slots = useSlots();
 
     return () => {
@@ -74,7 +78,7 @@ const HeadTable = defineComponent({
         anyColumnFixed,
         bodyHasScrollBar,
         sticky,
-      } = props;
+      } = getProps(props);
 
       const Table = get(components, 'header.outer', 'table') as any;
       const x = get(scroll, 'x');
@@ -91,7 +95,7 @@ const HeadTable = defineComponent({
 
       const colgroup = <ColGroup columns={columns} prefixCls={prefixCls} />;
       const tableHeader = (
-        <TableHeader {...props} columns={columns} components={components} onDidUpdate={onDidUpdate} />
+        <TableHeader {...getProps(props)} columns={columns} components={components} onDidUpdate={onDidUpdate} />
       );
 
       const headTableCls = classnames(`${prefixCls}-header`, {

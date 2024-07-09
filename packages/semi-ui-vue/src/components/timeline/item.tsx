@@ -11,7 +11,7 @@ import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 
 export interface TimelineItemProps {
   color?: string;
-  children?: VNode[];
+  // children?: VNode[];
   time?: VueJsxNode;
   type?: 'default' | 'ongoing' | 'success' | 'warning' | 'error';
   dot?: VueJsxNode;
@@ -24,7 +24,7 @@ export interface TimelineItemProps {
 
 const prefixCls = cssClasses.ITEM;
 
-const propTypes: ComponentObjectPropsOptions<TimelineItemProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TimelineItemProps>> = {
   color: PropTypes.string,
   time: PropTypes.node,
   type: PropTypes.string as PropType<TimelineItemProps['type']>,

@@ -21,7 +21,7 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/tagInput/constant
 import '@douyinfe/semi-foundation/tagInput/tagInput.scss';
 import TagInputFoundation, { TagInputAdapter, OnSortEndProps } from '@douyinfe/semi-foundation/tagInput/foundation';
 import { ArrayElement } from '../_base/base';
-import { getProps, useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 import Tag from '../tag';
 import Input from '../input';
 import Popover, { PopoverProps } from '../popover';
@@ -99,7 +99,7 @@ export interface TagInputState {
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<TagInputProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TagInputProps>> = {
   // children: PropTypes.node as PropType<TagInputProps['children']>,
   clearIcon: PropTypes.node,
   style: PropTypes.object,
@@ -138,6 +138,8 @@ const propTypes: ComponentObjectPropsOptions<TagInputProps> = {
   suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   'aria-label': PropTypes.string,
   preventScroll: PropTypes.bool,
+  insetLabel: PropTypes.node as PropType<TagInputProps['insetLabel']>,
+  insetLabelId: PropTypes.string,
 };
 const defaultProps = {
   showClear: false,
@@ -166,6 +168,7 @@ const Index = defineComponent({
   props: vuePropsType,
   name: 'TagInput',
   setup(props, { expose }) {
+    const { getProps } = useHasInProps();
     const slots = useSlots();
     const inputRef = ref(null);
     const tagInputRef = ref<any>(null);

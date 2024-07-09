@@ -22,7 +22,7 @@ export interface MonthProps extends MonthFoundationProps, BaseProps {
 }
 
 export type MonthState = MonthFoundationState;
-const propTypes: ComponentObjectPropsOptions<MonthProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<MonthProps>> = {
   forwardRef: undefined,
   localeCode: undefined,
   month: {type: PropTypes.object, default: new Date()},
@@ -45,7 +45,9 @@ const propTypes: ComponentObjectPropsOptions<MonthProps> = {
   rangeInputFocus: [PropTypes.string, PropTypes.bool],
   focusRecordsRef: PropTypes.object,
   multiple: PropTypes.bool,
-  locale:Object
+  locale:Object,
+  style: PropTypes.object,
+  className: PropTypes.string,
 }
 
 const defaultProps = {

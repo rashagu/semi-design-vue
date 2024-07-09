@@ -22,6 +22,9 @@ import DateInputFoundation, {
   InsetInputProps,
   RangeType,
 } from '@douyinfe/semi-foundation/datePicker/inputFoundation';
+import type {
+  RangeType as RangeType2,
+} from '@douyinfe/semi-foundation/datePicker/foundation';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/datePicker/constants';
 import { noop } from '@douyinfe/semi-foundation/utils/function';
 import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
@@ -29,13 +32,14 @@ import { IconCalendar, IconCalendarClock, IconClear } from '@kousum/semi-icons-v
 import { BaseValueType, ValueType } from '@douyinfe/semi-foundation/datePicker/foundation';
 
 import { BaseProps, useBaseComponent } from '../_base/baseComponent';
-import Input from '../input/index';
+import Input, { InputProps } from '../input/index';
 import { InsetDateInput, InsetTimeInput } from './insetInput';
 import * as PropTypes from '../PropTypes';
 import { vuePropsMake } from '../PropTypes';
 import { ComponentObjectPropsOptions } from 'vue';
+import { RemoveIndexSignature } from '../interface';
 
-export interface DateInputProps extends DateInputFoundationProps, BaseProps {
+export interface DateInputProps extends RemoveIndexSignature<DateInputFoundationProps>, BaseProps {
   insetLabel?: VNode;
   prefix?: VNode;
   onClick?: (e: MouseEvent) => void;
@@ -50,9 +54,29 @@ export interface DateInputProps extends DateInputFoundationProps, BaseProps {
   rangeInputStartRef?: Ref;
   rangeInputEndRef?: Ref;
   showClearIgnoreDisabled?: boolean;
+
+
+  //TODO
+  dateFnsLocale?: any
+  placeholder?: any
+  rangeInputFocus?: RangeType2
+  clearIcon?: any
+  inputValue?: string
+  block?: boolean
+  insetLabelId?: string
+  multiple?: boolean
+  size?: InputProps['size']
+  autofocus?: boolean
+  onRangeBlur?: (value: any, e: any) => void
+  onRangeClear?: (e: MouseEvent) => void
+  text?: string
+  handleInsetDateFocus?: (e: FocusEvent, rangeType: 'rangeStart' | 'rangeEnd') => void
+  handleInsetTimeFocus?: (e: FocusEvent) => void
+  suffix?: VNode,
+  inputCls?: string
 }
 
-const propTypes: ComponentObjectPropsOptions<DateInputProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<DateInputProps>> = {
   borderless: {
     type: PropTypes.bool,
     default: false,
@@ -103,7 +127,7 @@ const propTypes: ComponentObjectPropsOptions<DateInputProps> = {
   prefixCls: { type: PropTypes.string, default: cssClasses.PREFIX },
   dateFnsLocale: PropTypes.any, // Foundation useful to
   placeholder: PropTypes.any,
-  rangeInputFocus: PropTypes.any,
+  rangeInputFocus: PropTypes.string as PropType<DateInputProps['rangeInputFocus']>,
   rangeInputStartRef: PropTypes.object,
   rangeInputEndRef: PropTypes.object,
   rangeSeparator: { type: PropTypes.string, default: strings.DEFAULT_SEPARATOR_RANGE },
@@ -116,16 +140,27 @@ const propTypes: ComponentObjectPropsOptions<DateInputProps> = {
   block: PropTypes.bool,
   insetLabelId: PropTypes.string,
   multiple: PropTypes.bool,
-  size: PropTypes.string,
+  size: PropTypes.string as PropType<InputProps['size']>,
   autofocus: PropTypes.bool,
 
-  onRangeBlur: PropTypes.func,
-  onRangeClear: PropTypes.func,
+  onRangeBlur: PropTypes.func as PropType<DateInputProps['onRangeBlur']>,
+  onRangeClear: PropTypes.func as PropType<DateInputProps['onRangeClear']>,
   onRangeEndTabPress: PropTypes.func as PropType<DateInputProps['onRangeEndTabPress']>,
 
   inputRef: PropTypes.object,
 
   showClearIgnoreDisabled: PropTypes.bool,
+  onInsetInputChange: PropTypes.func as PropType<DateInputProps['onInsetInputChange']>,
+  panelType: PropTypes.string as PropType<DateInputProps['panelType']>,
+  density: PropTypes.string as PropType<DateInputProps['density']>,
+  onRangeInputClear: PropTypes.func as PropType<DateInputProps['onRangeInputClear']>,
+  style: PropTypes.object,
+  className: PropTypes.string,
+  text: PropTypes.string,
+  handleInsetDateFocus: PropTypes.func as PropType<DateInputProps['handleInsetDateFocus']>,
+  handleInsetTimeFocus: PropTypes.func as PropType<DateInputProps['handleInsetTimeFocus']>,
+  suffix: PropTypes.node as PropType<DateInputProps['suffix']>,
+  inputCls: String,
 };
 const defaultProps = {
   showClear: true,
@@ -357,7 +392,7 @@ const dateInput = defineComponent({
               onChange={(rangeEndValue, e) => handleRangeInputChange(rangeStart, rangeEndValue, e)}
               onEnterPress={(e) => handleRangeInputEnterPress(e, rangeStart, rangeEnd)}
               onFocus={(e) => handleRangeInputFocus(e as any, 'rangeEnd')}
-              onKeydown={handleRangeInputEndKeyPress} // only monitor tab button on range end
+              onKeyDown={handleRangeInputEndKeyPress} // only monitor tab button on range end
               forwardRef={rangeInputEndRef}
             />
           </div>
@@ -479,7 +514,7 @@ const dateInput = defineComponent({
         defaultPickerValue,
         showClearIgnoreDisabled,
         ...rest
-      } = props;
+      } = props as DateInputProps;
       const dateIcon = <IconCalendar aria-hidden />;
       const dateTimeIcon = <IconCalendarClock aria-hidden />;
       const suffix = type.includes('Time') ? dateTimeIcon : dateIcon;

@@ -74,8 +74,7 @@ export interface PopoverState {
 const positionSet = strings.POSITION_SET;
 const triggerSet = strings.TRIGGER_SET;
 
-const propTypes:ComponentObjectPropsOptions<PopoverProps> = {
-
+const propTypes:ComponentObjectPropsOptions<Required<PopoverProps>> = {
   // children: PropTypes.node,
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   visible: PropTypes.bool,
@@ -117,6 +116,11 @@ const propTypes:ComponentObjectPropsOptions<PopoverProps> = {
   afterClose: Function as PropType<PopoverProps['afterClose']>,
   disableFocusListener: Boolean,
   keepDOM: Boolean,
+  margin: [PropTypes.number, PropTypes.object],
+  closeOnEsc: Boolean,
+  returnFocusOnClose: Boolean,
+  onEscKeyDown: Function as PropType<PopoverProps['onEscKeyDown']>,
+  clickToHide: Boolean,
 };
 
 const defaultProps = {
@@ -137,7 +141,7 @@ const defaultProps = {
   guardFocus: true,
   disableFocusListener: true,
 };
-export const vuePropsType = vuePropsMake<PopoverProps>(propTypes, defaultProps)
+export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 
 const Popover = defineComponent({
   props: vuePropsType,

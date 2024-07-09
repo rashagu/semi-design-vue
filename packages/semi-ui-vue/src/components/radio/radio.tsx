@@ -64,7 +64,7 @@ export interface RadioState {
   checked?: boolean;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<RadioProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<RadioProps>> = {
   autoFocus: {
     type: Boolean,
     default: false,

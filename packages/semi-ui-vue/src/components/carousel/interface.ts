@@ -16,7 +16,7 @@ export interface CarouselProps {
     arrowProps?: ArrowProps;
     autoPlay?: boolean | {interval?: number; hoverToPause?: boolean};
     arrowType?: typeof strings.ARROW_MAP[number];
-    children?: VNode | Array<VNode>;
+    // children?: VNode | Array<VNode>;
     className?: string;
     defaultActiveIndex?: number;
     indicatorPosition?: typeof strings.POSITION_MAP[number];

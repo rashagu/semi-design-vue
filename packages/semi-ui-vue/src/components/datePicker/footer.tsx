@@ -1,9 +1,8 @@
-import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
+import { defineComponent, ref, h, Fragment, useSlots, ComponentObjectPropsOptions } from 'vue';
 import classnames from 'classnames';
 import Button from '../button';
 import { get } from 'lodash';
 import { Locale } from '../locale/interface';
-import dateInput from './dateInput';
 import { vuePropsMake } from '../PropTypes';
 
 interface FooterProps {
@@ -13,14 +12,15 @@ interface FooterProps {
   onCancelClick?: any;
   onConfirmClick?: any;
 }
+const propsType: ComponentObjectPropsOptions<Required<FooterProps>> = {
+  prefixCls: String,
+  locale: Object,
+  localeCode: String,
+  onCancelClick: Function,
+  onConfirmClick: Function,
+}
 export const vuePropsType = vuePropsMake(
-  {
-    prefixCls: String,
-    locale: Object,
-    localeCode: String,
-    onCancelClick: Function,
-    onConfirmClick: Function,
-  },
+  propsType,
   {}
 );
 const Footer = defineComponent({

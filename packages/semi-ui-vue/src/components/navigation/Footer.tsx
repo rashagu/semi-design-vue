@@ -17,7 +17,7 @@ export interface NavFooterProps extends BaseProps {
   onClick?: (event: MouseEvent) => void;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<NavFooterProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<NavFooterProps>> = {
   // children: PropTypes.node,
   style: PropTypes.object,
   className: PropTypes.string,

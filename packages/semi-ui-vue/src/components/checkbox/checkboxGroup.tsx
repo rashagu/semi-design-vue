@@ -58,7 +58,7 @@ export type CheckboxGroupState = {
   value?: any[];
 };
 
-const propTypes: ComponentObjectPropsOptions<CheckboxGroupProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<CheckboxGroupProps>> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,

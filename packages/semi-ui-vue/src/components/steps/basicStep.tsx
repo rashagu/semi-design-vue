@@ -7,8 +7,8 @@ import { VueJsxNode } from '../interface';
 import { CSSProperties, defineComponent, useSlots, h, isVNode, ComponentObjectPropsOptions, PropType } from 'vue';
 import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
-import { getProps } from '../_base/baseComponent';
 import { Direction } from './fillSteps';
+import { useHasInProps } from '../_base/baseComponent';
 
 export type Status = 'wait' | 'process' | 'finish' | 'error' | 'warning';
 export type Size = 'default' | 'small';
@@ -36,7 +36,7 @@ export enum stepSizeMapIconSize {
   default = 'extra-large',
 }
 
-const propTypes: ComponentObjectPropsOptions<BasicStepProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<BasicStepProps>> = {
   prefixCls: PropTypes.string,
   description: PropTypes.node,
   icon: PropTypes.node,
@@ -71,6 +71,7 @@ const BasicStep = defineComponent({
   props: vuePropsType,
   name: 'BasicStep',
   setup(props, {}) {
+    const { getProps } = useHasInProps();
     const slots = useSlots();
 
     return () => {

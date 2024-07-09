@@ -49,7 +49,7 @@ export interface ProgressState {
   percentNumber: number;
 }
 
-const propTypes: ComponentObjectPropsOptions<ProgressProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<ProgressProps>> = {
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
   'aria-valuetext': PropTypes.string,

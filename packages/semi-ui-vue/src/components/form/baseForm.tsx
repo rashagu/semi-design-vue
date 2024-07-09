@@ -34,7 +34,7 @@ interface BaseFormState {
   formId: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<BaseFormProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<BaseFormProps>> = {
   'aria-label': PropTypes.string,
   onSubmit: PropTypes.func as PropType<BaseFormProps['onSubmit']>,
   onSubmitFail: PropTypes.func as PropType<BaseFormProps['onSubmitFail']>,

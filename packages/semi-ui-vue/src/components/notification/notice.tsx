@@ -40,7 +40,7 @@ const prefixCls = cssClasses.NOTICE;
 const { duration } = numbers;
 const { types, themes, directions } = strings;
 
-const propTypes: ComponentObjectPropsOptions<NoticeReactProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<NoticeReactProps>> = {
   duration: PropTypes.number,
   id: PropTypes.string,
   title: PropTypes.node,
@@ -56,6 +56,11 @@ const propTypes: ComponentObjectPropsOptions<NoticeReactProps> = {
   close: PropTypes.func as PropType<NoticeReactProps['close']>,
   direction: String as PropType<NoticeReactProps['direction']>,
   onHookClose: PropTypes.func as PropType<NoticeReactProps['onHookClose']>,
+  style: PropTypes.object,
+  className: PropTypes.string,
+  position: PropTypes.string as PropType<NoticeReactProps['position']>,
+  zIndex: PropTypes.number,
+  getPopupContainer: PropTypes.func as PropType<NoticeReactProps['getPopupContainer']>,
 };
 const defaultProps = {
   duration,

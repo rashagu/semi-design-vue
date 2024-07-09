@@ -31,7 +31,7 @@ export interface LabelProps {
   optional?: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<LabelProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<LabelProps>> = {
   id: PropTypes.string,
   required: PropTypes.bool,
   text: PropTypes.node,

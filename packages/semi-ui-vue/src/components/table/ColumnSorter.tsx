@@ -21,7 +21,7 @@ export interface ColumnSorterProps {
   sortIcon?: SortIcon;
 }
 
-const propTypes: ComponentObjectPropsOptions<ColumnSorterProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<ColumnSorterProps>> = {
   className: PropTypes.string,
   style: PropTypes.object,
   onClick: PropTypes.func as PropType<ColumnSorterProps['onClick']>,

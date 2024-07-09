@@ -22,7 +22,7 @@ export interface TabItemProps {
   onClick?: (itemKey: string, e: MouseEvent) => void;
   forwardRef?: any;
 }
-const propTypes: ComponentObjectPropsOptions<TabItemProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TabItemProps>> = {
   tab: PropTypes.node,
   icon: PropTypes.node,
   size: PropTypes.string as PropType<TabItemProps['size']>,

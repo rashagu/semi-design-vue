@@ -26,7 +26,7 @@ export interface TagGroupProps {
   onPlusNMouseEnter?: () => void;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<TagGroupProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<TagGroupProps>> = {
   maxTagCount: Number,
   restCount: Number,
   tagList: Array,

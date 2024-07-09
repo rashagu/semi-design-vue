@@ -27,7 +27,7 @@ export interface NavStepsAllProps extends NavStepsProps {
 }
 export type StepsProps = FillStepsAllProps | BasicStepsAllProps | NavStepsAllProps;
 
-const propTypes: ComponentObjectPropsOptions<StepsProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<StepsProps>> = {
   onChange: PropTypes.func as PropType<StepsProps['onChange']>,
   // @ts-ignore
   type: PropTypes.string as PropType<StepsProps['type']>,

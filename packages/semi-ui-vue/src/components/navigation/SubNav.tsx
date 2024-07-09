@@ -9,10 +9,7 @@ import SubNavFoundation, { SubNavAdapter } from '@douyinfe/semi-foundation/navig
 import { strings, numbers, cssClasses } from '@douyinfe/semi-foundation/navigation/constants';
 import { IconChevronDown, IconChevronUp, IconChevronRight } from '@kousum/semi-icons-vue';
 
-// @ts-ignore
 import NavItem from './Item';
-// @ts-ignore
-import type { NavItemProps, NavItemState } from './Item';
 import Dropdown, { DropdownMenu } from '../dropdown';
 import type { DropdownProps } from '../dropdown';
 import NavContext, { NavContextType } from './nav-context';
@@ -21,7 +18,18 @@ import { times, get } from 'lodash';
 import Collapsible from '../collapsible';
 import CSSAnimation from '../_cssAnimation';
 
-import { cloneVNode, CSSProperties, defineComponent, h, isVNode, reactive, ref, useSlots, VNode } from 'vue';
+import {
+  cloneVNode,
+  ComponentObjectPropsOptions,
+  CSSProperties,
+  defineComponent,
+  h,
+  isVNode, PropType,
+  reactive,
+  ref,
+  useSlots,
+  VNode,
+} from 'vue';
 import { useNavContext } from './nav-context/Consumer';
 import { vuePropsMake } from '../PropTypes';
 import {VueJsxNode} from "../interface";
@@ -45,13 +53,14 @@ export interface SubNavProps extends BaseProps {
   onMouseLeave?: any;
   text?: VueJsxNode;
   expandIcon?: VueJsxNode
+  toggleIcon?: VueJsxNode
 }
 
 export interface SubNavState {
   isHovered: boolean;
 }
 
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<Required<SubNavProps>> = {
   /**
    * Unique identification
    */
@@ -76,7 +85,7 @@ const propTypes = {
   /**
    * The icon name of the right control switch (on and off status)
    */
-  toggleIcon: PropTypes.any,
+  toggleIcon: PropTypes.node as PropType<SubNavProps['toggleIcon']>,
   style: PropTypes.object,
   /**
    * Icon name on the left
@@ -91,7 +100,8 @@ const propTypes = {
   // Is it disabled
   disabled: PropTypes.bool,
   level: PropTypes.number,
-  dropdownStyle: PropTypes.object
+  dropdownStyle: PropTypes.object,
+  className: PropTypes.string,
 
 };
 

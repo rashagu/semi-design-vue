@@ -22,7 +22,7 @@ export interface NumeralProps {
   precision?: number;
   truncate?: TypographyBaseTruncate;
   parser?: (value: string) => string;
-  children?: VNode;
+  // children?: VNode;
   className?: string;
   code?: boolean;
   component_?: VNode | string;
@@ -39,7 +39,7 @@ export interface NumeralProps {
   underline?: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<NumeralProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<NumeralProps>> = {
   rule: PropTypes.string as PropType<NumeralProps['rule']>,
   precision: PropTypes.number,
   truncate: PropTypes.string as PropType<NumeralProps['truncate']>,

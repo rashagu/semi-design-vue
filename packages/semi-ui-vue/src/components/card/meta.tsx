@@ -1,9 +1,10 @@
 import * as PropTypes from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/card/constants';
 import cls from 'classnames';
-import { CSSProperties, defineComponent, h, useSlots } from 'vue';
+import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
+import { useHasInProps } from '../_base/baseComponent';
 
 const prefixcls = cssClasses.PREFIX;
 
@@ -21,7 +22,7 @@ export interface MetaProps {
   /** Title */
   title?: VueJsxNode;
 }
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<Required<MetaProps>> = {
   avatar: PropTypes.node,
   className: PropTypes.string,
   description: PropTypes.node,
@@ -33,11 +34,12 @@ const Meta = defineComponent({
   props: vuePropsType,
   name: 'Meta',
   setup(props, {}) {
+    const {getProps} = useHasInProps()
     const slots = useSlots();
 
     return () => {
       // const children = slots.default?.()
-      const { avatar, className, description, style, title, ...others } = props;
+      const { avatar, className, description, style, title, ...others } = getProps(props);
       const metaCls = cls(`${prefixcls}-meta`, className);
       const avatarNode = avatar && <div class={`${prefixcls}-meta-avatar`}>{avatar}</div>;
       const titleNode = title && <div class={`${prefixcls}-meta-wrapper-title`}>{title}</div>;

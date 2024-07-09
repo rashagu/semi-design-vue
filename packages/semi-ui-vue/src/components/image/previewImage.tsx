@@ -17,12 +17,12 @@ import {
   watch,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { getProps, useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent } from '../_base/baseComponent';
 
 const prefixCls = cssClasses.PREFIX;
 const preViewImgPrefixCls = `${prefixCls}-preview-image`;
 
-const propTypes: ComponentObjectPropsOptions<PreviewImageProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<PreviewImageProps>> = {
   src: PropTypes.string,
   rotation: PropTypes.number,
   style: PropTypes.object,
@@ -37,6 +37,7 @@ const propTypes: ComponentObjectPropsOptions<PreviewImageProps> = {
   onZoom: PropTypes.func as PropType<PreviewImageProps['onZoom']>,
   onLoad: PropTypes.func as PropType<PreviewImageProps['onLoad']>,
   onError: PropTypes.func as PropType<PreviewImageProps['onError']>,
+  crossOrigin: PropTypes.string as PropType<PreviewImageProps['crossOrigin']>,
 };
 
 const defaultProps = {

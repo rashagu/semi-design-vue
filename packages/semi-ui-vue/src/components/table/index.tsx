@@ -8,6 +8,7 @@ import type { TableProps, Data } from './interface';
 import { ComponentObjectPropsOptions, defineComponent, h, ref, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
+import { useHasInProps } from '../_base/baseComponent';
 
 const propTypes = {
   ...TablePropTypes,
@@ -22,9 +23,10 @@ function Table<RecordType extends Record<string, any> = Data>() {
   const NormalTable = NormalTable_<RecordType>();
   const vuePropsType = vuePropsMake<TableProps<RecordType>>(propTypes, defaultProps);
   const Table = defineComponent({
-    props: vuePropsType as ComponentObjectPropsOptions<TableProps<RecordType>>,
+    props: vuePropsType as ComponentObjectPropsOptions<Required<TableProps<RecordType>>>,
     name: 'TableIndex',
     setup(props, { expose }) {
+      const {getProps} = useHasInProps()
       const slots = useSlots();
       const tableRef = ref();
       const { context } = useConfigContext();
@@ -41,7 +43,7 @@ function Table<RecordType extends Record<string, any> = Data>() {
         if (props.resizable) {
           return (
             <ResizableTable
-              {...props}
+              {...getProps(props)}
               children={slots.default?.()}
               ref={tableRef}
               direction={direction}
@@ -49,7 +51,7 @@ function Table<RecordType extends Record<string, any> = Data>() {
           );
         } else {
           return (
-            <NormalTable {...props} children={slots.default?.()} ref={tableRef} direction={direction}></NormalTable>
+            <NormalTable {...getProps(props)} children={slots.default?.()} ref={tableRef} direction={direction}></NormalTable>
           );
         }
       };

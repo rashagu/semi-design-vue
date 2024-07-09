@@ -5,7 +5,7 @@ import { IconChevronLeft, IconChevronRight } from '@kousum/semi-icons-vue';
 import { get } from 'lodash';
 import { ComponentObjectPropsOptions, defineComponent, h, PropType, useSlots } from 'vue';
 
-export const vuePropsType: ComponentObjectPropsOptions<CarouselArrowProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<CarouselArrowProps>> = {
   type: String as PropType<CarouselArrowProps['type']>,
   theme: String as PropType<CarouselArrowProps['theme']>,
   prev: Function as PropType<CarouselArrowProps['prev']>,

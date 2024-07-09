@@ -34,7 +34,7 @@ export interface FillStepsProps {
   size?: Size;
 }
 
-const propTypes: ComponentObjectPropsOptions<FillStepsProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<FillStepsProps>> = {
   prefixCls: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
@@ -45,6 +45,7 @@ const propTypes: ComponentObjectPropsOptions<FillStepsProps> = {
   children: PropTypes.node as PropType<FillStepsProps['children']>,
   onChange: PropTypes.func as PropType<FillStepsProps['onChange']>,
   size: PropTypes.string as PropType<FillStepsProps['size']>,
+  'aria-label': PropTypes.string,
 };
 
 const defaultProps = {

@@ -10,9 +10,10 @@ import getColumns from './getColumns';
 import ResizableHeaderCell from './ResizableHeaderCell';
 import type { ResizableProps, TableProps, ColumnProps } from './interface';
 import { ComponentObjectPropsOptions, computed, defineComponent, h, PropType, Ref, ref, useSlots, watch } from 'vue';
+import { useHasInProps } from '../_base/baseComponent';
 
 const Table = Table_();
-export const vuePropsType: ComponentObjectPropsOptions<TableProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<TableProps>> = {
   bordered: PropTypes.bool,
   children: PropTypes.element,
   childrenRecordName: PropTypes.string,
@@ -61,11 +62,14 @@ export const vuePropsType: ComponentObjectPropsOptions<TableProps> = {
   onRow: PropTypes.func as PropType<TableProps['onRow']>,
   sticky: PropTypes.element as PropType<TableProps['sticky']>,
   direction: PropTypes.string as PropType<TableProps['direction']>,
+  bodyWrapperRef: [PropTypes.func, PropTypes.object] as PropType<TableProps['bodyWrapperRef']>,
+  keepDOM: PropTypes.bool
 };
 const ResizableTable = defineComponent({
   props: vuePropsType,
   name: 'ResizableTable',
   setup(props, {}) {
+    const {getProps} = useHasInProps()
     const slots = useSlots();
     const childrenColumnName = 'children';
 
@@ -73,7 +77,7 @@ const ResizableTable = defineComponent({
     watch(
       [() => props.columns, () => props.expandedRowRender, () => props.hideExpandedColumn, () => props.rowSelection],
       () => {
-        const { components: propComponents, columns: propColumns, resizable, ...restProps } = props;
+        const { components: propComponents, columns: propColumns, resizable, ...restProps } = getProps(props);
 
         /**
          * 此处关于 columns 有三个存储
@@ -246,7 +250,7 @@ const ResizableTable = defineComponent({
     );
 
     return () => {
-      const { components: propComponents, columns: propColumns, resizable, ...restProps } = props;
+      const { components: propComponents, columns: propColumns, resizable, ...restProps } = getProps(props);
 
       return <Table {...restProps} columns={finalColumns.value} components={components.value} />;
     };

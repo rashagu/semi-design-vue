@@ -14,7 +14,7 @@ import { CSSProperties, defineComponent, Fragment, h, isVNode, PropType, useAttr
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
 import { ComponentObjectPropsOptions } from 'vue';
-import { getProps, useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent } from '../_base/baseComponent';
 import DescriptionsFoundation, { DescriptionsAdapter } from '@douyinfe/semi-foundation/descriptions/foundation';
 import { getFragmentChildren } from '../_utils';
 
@@ -32,7 +32,7 @@ export interface DescriptionsProps {
   size?: DescriptionsSize;
   style?: CSSProperties;
   className?: string;
-  children?: VNode[];
+  // children?: VNode[];
   data?: Data[];
   layout?: DescriptionLayout;
   column?: number;
@@ -40,7 +40,7 @@ export interface DescriptionsProps {
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<DescriptionsProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<DescriptionsProps>> = {
   align: PropTypes.string as PropType<DescriptionsProps['align']>,
   row: PropTypes.bool,
   size: PropTypes.string as PropType<DescriptionsProps['size']>,

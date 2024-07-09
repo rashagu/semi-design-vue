@@ -88,7 +88,7 @@ import {
   watch,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 import { useTableContext } from './tableContext/Consumer';
 
 
@@ -135,7 +135,7 @@ export interface RenderTableProps<RecordType> extends HeadTableProps, BodyProps 
   bodyHasScrollBar: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<NormalTableProps<any>> = {
+const propTypes: ComponentObjectPropsOptions<Required<NormalTableProps<any>>> = {
   children: PropTypes.any as PropType<NormalTableProps['children']>,
   className: PropTypes.string,
   style: PropTypes.object,
@@ -224,6 +224,7 @@ function Table<RecordType extends Record<string, any>>() {
     props: vuePropsType,
     name: 'Table',
     setup(props, { expose }) {
+      const {getProps} = useHasInProps()
       const slots = useSlots();
 
       let lastScrollTop!: number;
@@ -1498,7 +1499,7 @@ function Table<RecordType extends Record<string, any>>() {
           rowSelection: propRowSelection,
           children,
           ...rest
-        } = props;
+        } = getProps(props);
 
         const wrapStyle: CSSProperties = {
           ...props.style,

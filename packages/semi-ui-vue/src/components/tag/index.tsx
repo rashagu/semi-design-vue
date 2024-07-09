@@ -12,6 +12,7 @@ import { symbol, vuePropsMake } from '../PropTypes';
 import { isString } from 'lodash';
 import cls from 'classnames';
 import { ComponentObjectPropsOptions } from 'vue';
+import { useHasInProps } from '../_base/baseComponent';
 
 export * from './interface';
 
@@ -27,7 +28,7 @@ export interface TagState {
   visible: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<TagProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TagProps>> = {
   tagKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   size: String as PropType<TagProps['size']>,
   color: String as PropType<TagProps['color']>,
@@ -70,6 +71,7 @@ const Index = defineComponent({
   props: vuePropsType,
   name: 'Tag',
   setup(props, { slots }) {
+    const {getProps} = useHasInProps()
     const state = reactive<TagState>({
       visible: true,
     });
@@ -156,7 +158,7 @@ const Index = defineComponent({
         prefixIcon,
         suffixIcon,
         ...attr
-      } = props;
+      } = getProps(props);
       const { visible: isVisible } = state;
       const clickable = onClick !== defaultProps.onClick || closable;
       // only when the Tag is clickable or closable, the value of tabIndex is allowed to be passed in.

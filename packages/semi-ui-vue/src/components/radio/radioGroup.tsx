@@ -65,7 +65,7 @@ export interface RadioGroupState {
   value?: any;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<RadioGroupProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<RadioGroupProps>> = {
   'onUpdate:value': Function as PropType<RadioGroupProps['onUpdate:value']>,
   defaultValue: {
     type: [String, Number],

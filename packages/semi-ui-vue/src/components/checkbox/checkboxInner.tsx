@@ -35,7 +35,7 @@ export interface CheckboxInnerProps {
   value?: any;
 }
 
-const propTypes: ComponentObjectPropsOptions<CheckboxInnerProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<CheckboxInnerProps>> = {
   ...propTypesCheckbox,
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,

@@ -67,7 +67,7 @@ export interface InputNumberProps extends InputProps {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface InputNumberState extends BaseInputNumberState {}
 
-const propTypes: ComponentObjectPropsOptions<InputNumberProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<InputNumberProps>> = {
   ...propTypesInput,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
@@ -130,7 +130,7 @@ const defaultProps: InputNumberProps = {
   onFocus: noop,
   onKeyDown: noop,
   onNumberChange: noop,
-  onUpClick: noop,
+  onUpClick: noop
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const InputNumber = defineComponent({

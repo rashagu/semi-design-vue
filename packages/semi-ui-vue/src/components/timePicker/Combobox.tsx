@@ -68,8 +68,9 @@ export interface AMPMOptionItem {
   text: string;
 }
 
-const staticPropTypes: ComponentObjectPropsOptions<ComboboxProps> = {
+const staticPropTypes: ComponentObjectPropsOptions<Required<ComboboxProps>> = {
   class: [PropTypes.string, PropTypes.object],
+  className: PropTypes.string,
   style: [PropTypes.string, PropTypes.object] as PropType<ComboboxProps['style']>,
   format: PropTypes.string,
   defaultOpenValue: PropTypes.object,
@@ -102,6 +103,7 @@ const staticPropTypes: ComponentObjectPropsOptions<ComboboxProps> = {
     'use12Hours',
     'scrollItemProps',
   ]),
+  panelFooter: PropTypes.node as PropType<ComboboxProps['panelFooter']>,
 };
 
 const staticDefaultProps = {

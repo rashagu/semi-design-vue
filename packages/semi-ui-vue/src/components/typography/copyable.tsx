@@ -36,7 +36,7 @@ interface CopyableState {
   item: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<CopyableProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<CopyableProps>> = {
   forwardRef: Object,
   content: {
     type: String,

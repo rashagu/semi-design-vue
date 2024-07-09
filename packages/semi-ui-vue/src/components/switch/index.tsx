@@ -52,7 +52,7 @@ export interface SwitchState {
   focusVisible: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<SwitchProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<SwitchProps>> = {
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
   'aria-invalid': PropTypes.bool,

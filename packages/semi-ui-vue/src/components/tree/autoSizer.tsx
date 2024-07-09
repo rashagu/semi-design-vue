@@ -20,7 +20,7 @@ export interface AutoSizerState {
 
 const prefixcls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<AutoSizerProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<Required<AutoSizerProps>>> = {
   defaultHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   defaultWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   children: PropTypes.func as PropType<AutoSizerProps['children']>,

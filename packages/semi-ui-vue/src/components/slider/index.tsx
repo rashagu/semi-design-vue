@@ -46,8 +46,11 @@ function domIsInRenderTree(e: HTMLElement) {
   return Boolean(e.offsetWidth || e.offsetHeight || e.getClientRects().length);
 }
 
-const propTypes: ComponentObjectPropsOptions<SliderProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<SliderProps>> = {
   // allowClear: PropTypes.bool,
+  'aria-label': PropTypes.string,
+  'aria-labelledby': PropTypes.string,
+  'aria-valuetext': PropTypes.string,
   defaultValue: [PropTypes.number, PropTypes.array],
   disabled: {
     type: PropTypes.bool,

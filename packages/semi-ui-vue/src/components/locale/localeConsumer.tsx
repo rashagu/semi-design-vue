@@ -11,11 +11,11 @@ import { Locale } from './interface';
 type ChildrenRender<T> = (componentLocal: T, localeCode: string, dateFnsLocale: dateFns) => VNode;
 export interface LocaleConsumerProps<T> {
   componentName: string;
-  children?: ChildrenRender<T>;
+  // children?: ChildrenRender<T>;
 }
 
 function LocaleConsumerFunc<T>() {
-  const vuePropsType: ComponentObjectPropsOptions<LocaleConsumerProps<T>> = {
+  const vuePropsType: ComponentObjectPropsOptions<Required<LocaleConsumerProps<T>>> = {
     componentName: {
       type: String,
       default: '',

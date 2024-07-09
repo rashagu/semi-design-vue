@@ -34,7 +34,7 @@ export interface NavStepsProps {
   status?: Status;
 }
 
-const propTypes: ComponentObjectPropsOptions<NavStepsProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<NavStepsProps>> = {
   prefixCls: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
@@ -45,6 +45,7 @@ const propTypes: ComponentObjectPropsOptions<NavStepsProps> = {
   'aria-label': PropTypes.string,
   direction: PropTypes.string as PropType<NavStepsProps['direction']>,
   size: PropTypes.string as PropType<NavStepsProps['size']>,
+  status: PropTypes.string as PropType<NavStepsProps['status']>,
 };
 const defaultProps = {
   prefixCls: css.PREFIX,

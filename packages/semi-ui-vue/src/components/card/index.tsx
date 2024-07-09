@@ -9,6 +9,7 @@ import Space from '../space';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { VueJsxNode } from '../interface';
+import { useHasInProps } from '../_base/baseComponent';
 
 const prefixcls = cssClasses.PREFIX;
 
@@ -56,7 +57,7 @@ export interface CardProps {
   'aria-label'?: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<CardProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<CardProps>> = {
   actions: PropTypes.array,
   bodyStyle: PropTypes.object,
   bordered: PropTypes.bool,
@@ -88,6 +89,7 @@ const Card = defineComponent({
   props: vuePropsType,
   name: 'Card',
   setup(props, {}) {
+    const {getProps} = useHasInProps()
     const slots = useSlots();
 
     const renderHeader = () => {
@@ -193,7 +195,7 @@ const Card = defineComponent({
     };
 
     return () => {
-      const { bordered, shadows, style, className, children, ...otherProps } = props;
+      const { bordered, shadows, style, className, children, ...otherProps } = getProps(props);
       const others = omit(otherProps, [
         // Remove APIs in otherProps that do not need to be hung on the outer node
         'actions',

@@ -4,7 +4,7 @@ import * as PropTypes from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/form/constants';
 import { IconAlertTriangle, IconAlertCircle } from '@kousum/semi-icons-vue';
 import { VueJsxNode } from '../interface';
-import { cloneVNode, CSSProperties, defineComponent, h, isVNode, useSlots } from 'vue';
+import { cloneVNode, ComponentObjectPropsOptions, CSSProperties, defineComponent, h, isVNode, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 
 const prefix = cssClasses.PREFIX;
@@ -23,7 +23,7 @@ export interface ErrorMessageProps {
   helpTextId?: string;
 }
 
-const propTypes = {
+const propTypes: ComponentObjectPropsOptions<Required<ErrorMessageProps>> = {
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.array, PropTypes.node]),
   className: PropTypes.string,
   style: PropTypes.object,
@@ -36,7 +36,7 @@ const propTypes = {
   helpTextId: PropTypes.string,
 };
 
-export const vuePropsType = vuePropsMake<ErrorMessageProps>(propTypes, {});
+export const vuePropsType = vuePropsMake(propTypes, {});
 const ErrorMessage = defineComponent({
   props: vuePropsType,
   name: 'ErrorMessage',

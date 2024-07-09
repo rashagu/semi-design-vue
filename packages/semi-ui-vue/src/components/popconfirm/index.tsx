@@ -5,6 +5,8 @@ import { cssClasses, numbers } from '@douyinfe/semi-foundation/popconfirm/consta
 import PopconfirmFoundation, { PopconfirmAdapter } from '@douyinfe/semi-foundation/popconfirm/popconfirmFoundation';
 import { IconClose, IconAlertTriangle } from '@kousum/semi-icons-vue';
 import Popover, { PopoverProps } from '../popover';
+import { vuePropsType as popoverVuePropsType } from '../popover';
+
 import { Position, Trigger, RenderContentProps } from '../tooltip';
 import Button, { ButtonProps } from '../button';
 import { Type as ButtonType } from '../button/Button';
@@ -65,7 +67,8 @@ interface PopProps {
   [x: string]: any;
 }
 
-const propTypes: ComponentObjectPropsOptions<PopconfirmProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<PopconfirmProps>> = {
+  ...popoverVuePropsType,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
   disabled: PropTypes.bool,
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -109,7 +112,7 @@ const defaultProps = {
   onConfirm: noop,
   onClickOutSide: noop,
 };
-export const vuePropsType = vuePropsMake<PopconfirmProps>(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Popconfirm = defineComponent({
   props: vuePropsType,
   name: 'Popconfirm',

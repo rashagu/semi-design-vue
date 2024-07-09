@@ -2,7 +2,6 @@ import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import '@douyinfe/semi-foundation/timeline/timeline.scss';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/timeline/constants';
-import ConfigContext from '../configProvider/context';
 import Item, { TimelineItemProps } from './item';
 import {
   cloneVNode,
@@ -36,7 +35,7 @@ export interface TimelineProps extends Pick<AriaAttributes, 'aria-label'> {
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<TimelineProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TimelineProps>> = {
   mode: PropTypes.string as PropType<TimelineProps['mode']>,
   className: PropTypes.string,
   style: PropTypes.object,

@@ -20,7 +20,7 @@ export type SpaceProps = {
   className?: string;
 };
 
-export const vuePropsType: ComponentObjectPropsOptions<SpaceProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<SpaceProps>> = {
   wrap: {
     type: Boolean,
     default: false,

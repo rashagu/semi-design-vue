@@ -3,9 +3,7 @@ import {
   CSSProperties,
   defineComponent,
   Fragment,
-  getCurrentInstance,
   h,
-  isVNode,
   nextTick,
   onMounted,
   onUnmounted,
@@ -244,7 +242,7 @@ export interface SelectState {
 
 // Notes: Use the label of the option as the identifier, that is, the option in Select, the value is allowed to be the same, but the label must be unique
 
-const propTypes: ComponentObjectPropsOptions<SelectProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<SelectProps>> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,
@@ -342,6 +340,8 @@ const propTypes: ComponentObjectPropsOptions<SelectProps> = {
 
   searchPosition: String,
   searchPlaceholder: String,
+  clearIcon: PropTypes.node,
+  dropdownMargin: [PropTypes.number, PropTypes.object,]
 };
 
 const defaultProps: Partial<SelectProps> = {
@@ -897,9 +897,9 @@ const Index = defineComponent({
             onMouseEnter={() => onOptionHover(optionIndex)}
             style={optionStyle}
             key={
-              option._keyInOptionList ||
+              (option._keyInOptionList ||
               option._keyInJsx ||
-              (((option.label as string) + option.value) as string) + optionIndex
+              (((option.label as string) + option.value) as string) + optionIndex) as any
             }
             renderOptionItem={renderOptionItem}
             inputValue={inputValue}
@@ -967,7 +967,7 @@ const Index = defineComponent({
         const optionContent = renderOption(option, optionIndex);
         if (parentGroup && !groupStatus.has(parentGroup.label)) {
           // when use with OptionGroup and group content not already insert
-          const groupContent = <OptionGroup {...parentGroup} key={parentGroup.label} />;
+          const groupContent = <OptionGroup {...parentGroup} key={parentGroup.label as any} />;
           groupStatus.set(parentGroup.label, true);
           content.push(groupContent);
         }

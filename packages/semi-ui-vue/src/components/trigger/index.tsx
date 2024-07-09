@@ -1,4 +1,4 @@
-import { defineComponent, ref, h, Fragment, VNode, CSSProperties } from 'vue';
+import { defineComponent, ref, h, Fragment, VNode, CSSProperties, ComponentObjectPropsOptions, PropType } from 'vue';
 import { VueJsxNode } from '../interface';
 
 export interface TriggerProps {
@@ -10,35 +10,39 @@ export interface TriggerProps {
   placeholder?: string | string[];
   className?: string;
   style?: CSSProperties;
-  onChange: (value: string)=>void
-  [x: string]: any;
+  onChange: (value: string, event: any)=>void;
+  showClearIgnoreDisabled?: boolean
+  onClear?: (e: MouseEvent)=>void;
+  onSearch?: (value: string, event: any)=>void;
+  onRemove?: (value: any, event: any)=>void;
+  disabled?: boolean
 }
 
-export const vuePropsType = {
-  triggerRender: Function,
+export const vuePropsType: ComponentObjectPropsOptions<Required<TriggerProps>> = {
+  triggerRender: Function as PropType<TriggerProps['triggerRender']>,
   componentName: String,
   componentProps: Object,
   value: [Object, Number, String, Array],
   inputValue: String,
   placeholder: [String, Array],
   className: String,
-  style: [Object, String],
+  style: [Object],
   showClearIgnoreDisabled: Boolean,
-  onChange: Function,
-  onClear: Function,
+  onChange: Function as PropType<TriggerProps['onChange']>,
+  onClear: Function as PropType<TriggerProps['onClear']>,
   disabled: Boolean,
-  onSearch: Function,
-  onRemove: Function,
+  onSearch: Function as PropType<TriggerProps['onSearch']>,
+  onRemove: Function as PropType<TriggerProps['onRemove']>,
 };
 
 const Index = defineComponent({
   props: vuePropsType,
   name: 'Trigger',
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     return () => {
       // eslint-disable-next-line no-unused-vars
       const { triggerRender, componentName, ...rest } = props;
-      return triggerRender({ ...rest });
+      return triggerRender({ ...attrs, ...rest });
     };
   },
 });

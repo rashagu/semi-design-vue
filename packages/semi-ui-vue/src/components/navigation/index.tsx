@@ -113,7 +113,7 @@ export interface NavState {
 
 const { hasOwnProperty } = Object.prototype;
 
-const propTypes: ComponentObjectPropsOptions<NavProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<NavProps>> = {
   // Initial expanded SubNav navigation key array
   defaultOpenKeys: Array,
   openKeys: Array,
@@ -163,6 +163,8 @@ const propTypes: ComponentObjectPropsOptions<NavProps> = {
     default: undefined,
   },
   getPopupContainer: PropTypes.func as PropType<NavProps['getPopupContainer']>,
+  expandIcon: PropTypes.node as PropType<NavProps['expandIcon']>,
+  renderWrapper: PropTypes.func as PropType<NavProps['renderWrapper']>,
 };
 
 const defaultProps = {

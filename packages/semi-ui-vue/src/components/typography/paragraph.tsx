@@ -22,7 +22,7 @@ import { CopyableConfig, LinkType } from './title';
 
 type OmitParagraphProps = OmitTypographyProps;
 
-export interface ParagraphProps extends Omit<HTMLAttributes, OmitParagraphProps> {
+export interface ParagraphProps {
   className?: string;
   component_?: any;
   copyable?: CopyableConfig | boolean;
@@ -63,7 +63,7 @@ export interface ParagraphProps extends Omit<HTMLAttributes, OmitParagraphProps>
 
 const prefixCls = cssClasses.PREFIX;
 
-export const vuePropsType: ComponentObjectPropsOptions<ParagraphProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<ParagraphProps>> = {
   copyable: {
     type: [Object, Boolean],
     default: false,
@@ -117,14 +117,17 @@ export const vuePropsType: ComponentObjectPropsOptions<ParagraphProps> = {
     type: String,
     default: '',
   },
+  component_: {
+    type: [Object, String, Function],
+  },
 };
 const paragraph = defineComponent({
   props: vuePropsType,
   name: 'Paragraph',
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { className } = props;
     const paragraphCls = cls(className, `${prefixCls}-paragraph`);
-    return () => <Base children={slots.default?.()} component_={'p'} {...props} className={paragraphCls}></Base>;
+    return () => <Base children={slots.default?.()} component_={'p'} {...props} {...attrs} className={paragraphCls}></Base>;
   },
 });
 

@@ -2,7 +2,7 @@ import { ComponentObjectPropsOptions, computed, defineComponent, h, PropType, us
 import Context, { TableContextProps } from './table-context';
 import * as PropTypes from '../PropTypes';
 
-export const vuePropsType: ComponentObjectPropsOptions<TableContextProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<TableContextProps>> = {
   headWidths: PropTypes.array,
   setHeadWidths: PropTypes.func as PropType<TableContextProps['setHeadWidths']>,
   handleRowExpanded: PropTypes.func as PropType<TableContextProps['handleRowExpanded']>,

@@ -16,7 +16,7 @@ export interface TablePaginationProps {
   info?: VueJsxNode;
   renderPagination?: RenderPagination;
 }
-const propTypes: ComponentObjectPropsOptions<TablePaginationProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TablePaginationProps>> = {
   style: PropTypes.object,
   prefixCls: PropTypes.string,
   pagination: PropTypes.object,

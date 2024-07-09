@@ -9,6 +9,7 @@ import {
   VNode,
   ComponentObjectPropsOptions,
   PropType,
+  CSSProperties
 } from 'vue';
 import { BaseProps } from '../_base/baseComponent';
 
@@ -27,7 +28,7 @@ export interface ButtonGroupProps extends BaseProps {
 const prefixCls = cssClasses.PREFIX;
 const btnSizes = strings.sizes;
 
-export const vuePropsType: ComponentObjectPropsOptions<ButtonGroupProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<ButtonGroupProps>> = {
   disabled: Boolean,
   size: {
     type: String as PropType<ButtonGroupProps['size']>,
@@ -41,6 +42,8 @@ export const vuePropsType: ComponentObjectPropsOptions<ButtonGroupProps> = {
     type: String as PropType<ButtonGroupProps['theme']>,
     default: 'light',
   },
+  style: Object as PropType<CSSProperties>,
+  className: String
 };
 const ButtonGroup = defineComponent({
   props: vuePropsType,
@@ -50,7 +53,7 @@ const ButtonGroup = defineComponent({
       // rest 剩下的
       const { disabled, size, type, ...rest } = props;
       return (
-        <div class={`${prefixCls}-group`}>
+        <div class={`${prefixCls}-group` + ' ' + props.className} style={props.style}>
           {slots.default
             ? slots
                 .default()

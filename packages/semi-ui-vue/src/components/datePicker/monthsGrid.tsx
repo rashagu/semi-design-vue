@@ -45,7 +45,7 @@ export interface MonthsGridProps extends MonthsGridFoundationProps, BaseProps {
 
 export type MonthsGridState = MonthsGridFoundationState;
 
-const propTypes: ComponentObjectPropsOptions<MonthsGridProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<MonthsGridProps>> = {
   type: PropTypes.string as PropType<MonthsGridProps['type']>,
   defaultValue: PropTypes.array,
   defaultPickerValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object, PropTypes.array]),
@@ -93,6 +93,9 @@ const propTypes: ComponentObjectPropsOptions<MonthsGridProps> = {
   setRangeInputFocus: Function as PropType<MonthsGridProps['setRangeInputFocus']>,
   isAnotherPanelHasOpened: Function as PropType<MonthsGridProps['isAnotherPanelHasOpened']>,
   insetInput: Boolean,
+  yearAndMonthOpts: Object as PropType<MonthsGridProps['yearAndMonthOpts']>,
+  startYear: Number,
+  endYear: Number
 };
 
 const defaultProps = {

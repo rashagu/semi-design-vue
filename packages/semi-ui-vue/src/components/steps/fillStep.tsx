@@ -7,8 +7,8 @@ import { VueJsxNode } from '../interface';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots } from 'vue';
 import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
-import { getProps } from '../_base/baseComponent';
 import { Direction } from './fillSteps';
+import { useHasInProps } from '../_base/baseComponent';
 
 export type Status = 'wait' | 'process' | 'finish' | 'error' | 'warning';
 
@@ -29,7 +29,7 @@ export interface FillStepProps {
   direction?: Direction;
 }
 
-const propTypes: ComponentObjectPropsOptions<FillStepProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<FillStepProps>> = {
   prefixCls: PropTypes.string,
   description: PropTypes.node,
   icon: PropTypes.node,
@@ -40,6 +40,10 @@ const propTypes: ComponentObjectPropsOptions<FillStepProps> = {
   onClick: PropTypes.func,
   onChange: PropTypes.func as PropType<FillStepProps['onChange']>,
   direction: PropTypes.string as PropType<FillStepProps['direction']>,
+  stepNumber: PropTypes.string,
+  onKeyDown: PropTypes.func as PropType<FillStepProps['onKeyDown']>,
+  role: PropTypes.string,
+  'aria-label': PropTypes.string,
 };
 const defaultProps = {
   prefixCls: css.ITEM,
@@ -52,6 +56,7 @@ const FillStep = defineComponent({
   props: vuePropsType,
   name: 'FillStep',
   setup(props, {}) {
+    const { getProps } = useHasInProps();
     const slots = useSlots();
 
     return () => {

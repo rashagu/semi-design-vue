@@ -18,9 +18,9 @@ import classnames from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { cssClasses, strings, numbers } from '@douyinfe/semi-foundation/dropdown/constants';
 
-import { useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 
-import Tooltip, { TooltipProps, Trigger } from '../tooltip';
+import Tooltip, { type TooltipProps, type Trigger, vuePropsType as tooltipPropTypes } from '../tooltip';
 
 import { numbers as tooltipNumbers } from '@douyinfe/semi-foundation/tooltip/constants';
 import Foundation from '@douyinfe/semi-foundation/dropdown/foundation';
@@ -96,7 +96,8 @@ export interface DropdownProps extends TooltipProps {
 interface DropdownState {
   popVisible: boolean;
 }
-const propTypes: ComponentObjectPropsOptions<DropdownProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<DropdownProps>> = {
+  ...tooltipPropTypes,
   onFilter: PropTypes.func,
   onFilterDropdownVisibleChange: PropTypes.func,
   onSelect: PropTypes.func,
@@ -143,6 +144,7 @@ const Dropdown = defineComponent({
   props: vuePropsType,
   name: 'Dropdown',
   setup(props, { slots, expose }) {
+    const { getProps } = useHasInProps();
     const state = reactive({
       popVisible: props.visible,
     });
@@ -266,7 +268,7 @@ const Dropdown = defineComponent({
         name,
         contentClassName,
         ...attr
-      } = props;
+      } = getProps(props);
       let { spacing } = props;
       const { level } = context.value;
       const { popVisible } = state;

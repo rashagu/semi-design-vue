@@ -34,7 +34,6 @@ export interface BackTopProps {
   onClick?: (e: MouseEvent) => void;
   style?: CSSProperties;
   className?: string;
-  children?: VueJsxNode;
 }
 
 export interface BackTopState {
@@ -47,7 +46,7 @@ const defaultProps = {
   duration: 450,
 };
 
-const propTypes: ComponentObjectPropsOptions<BackTopProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<BackTopProps>> = {
   target: PropTypes.func as PropType<BackTopProps['target']>,
   visibilityHeight: PropTypes.number,
   duration: PropTypes.number,

@@ -21,7 +21,7 @@ export interface ArrowProps {
   popStyle?: CSSProperties;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<ArrowProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<ArrowProps>> = {
   position: String as PropType<ArrowProps['position']>,
   className: String,
   arrowStyle: [String, Object] as PropType<ArrowProps['arrowStyle']>,

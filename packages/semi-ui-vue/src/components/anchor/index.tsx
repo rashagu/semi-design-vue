@@ -28,7 +28,6 @@ import {
 } from 'vue';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { useBaseComponent } from '../_base/baseComponent';
-import { TabsProps } from '../tabs';
 import { vuePropsMake } from '../PropTypes';
 import { AriaAttributes } from '../AriaAttributes';
 
@@ -64,7 +63,7 @@ export interface AnchorState {
   slideBarTop: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<AnchorProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<AnchorProps>> = {
   size: PropTypes.string as PropType<AnchorProps['size']>,
   railTheme: PropTypes.string as PropType<AnchorProps['railTheme']>,
   className: PropTypes.string,

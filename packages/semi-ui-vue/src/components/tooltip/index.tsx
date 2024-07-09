@@ -137,7 +137,7 @@ const triggerSet = strings.TRIGGER_SET;
 const blockDisplays = ['flex', 'block', 'table', 'flow-root', 'grid'];
 const defaultGetContainer = () => document.body;
 
-const propTypes: ComponentObjectPropsOptions<TooltipProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TooltipProps>> = {
   // children: PropTypes.node,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
   autoAdjustOverflow: PropTypes.bool,
@@ -220,10 +220,10 @@ const defaultProps = {
   keepDOM: false,
 };
 
-const vuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 
 const Tooltip = defineComponent({
-  props: vuePropsType,
+  props: vuePropsType as ComponentObjectPropsOptions<Required<TooltipProps>>,
   name: 'Tooltip',
   setup(props, { expose }) {
     const slots = useSlots();

@@ -29,7 +29,7 @@ import { numbers as popoverNumbers } from '@douyinfe/semi-foundation/popover/con
 import { FixedSizeList as VirtualList } from '@kousum/vue3-window';
 import '@douyinfe/semi-foundation/tree/tree.scss';
 import '@douyinfe/semi-foundation/treeSelect/treeSelect.scss';
-import { getProps, useBaseComponent, ValidateStatus } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps, ValidateStatus } from '../_base/baseComponent';
 import TagGroup from '../tag/group';
 import Tag, { TagProps } from '../tag/index';
 import Input, { InputProps } from '../input/index';
@@ -195,7 +195,7 @@ const prefixTree = cssClasses.PREFIX_TREE;
 
 const key = 0;
 
-const propTypes: ComponentObjectPropsOptions<TreeSelectProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TreeSelectProps>> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,
@@ -323,11 +323,11 @@ const defaultProps: Partial<TreeSelectProps> = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TreeSelect = defineComponent({
-  props: vuePropsType,
+  props: vuePropsType as ComponentObjectPropsOptions<Required<TreeSelectProps>>,
   name: 'TreeSelect',
   setup(props, {}) {
+    const { getProps } = useHasInProps();
     const slots = useSlots();
-
     // let _flattenNodes: TreeState['flattenNodes'];
     const state = reactive<TreeSelectState>({
       inputTriggerFocus: false,

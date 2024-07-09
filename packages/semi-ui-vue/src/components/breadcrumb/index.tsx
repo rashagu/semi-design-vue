@@ -68,7 +68,7 @@ interface BreadcrumbState {
   isCollapsed: boolean;
 }
 
-const propTypes_: ComponentObjectPropsOptions<BreadcrumbProps> = {
+const propTypes_: ComponentObjectPropsOptions<Required<BreadcrumbProps>> = {
   activeIndex: propTypes.number,
   routes: propTypes.array,
   onClick: propTypes.func as PropType<BreadcrumbProps['onClick']>,

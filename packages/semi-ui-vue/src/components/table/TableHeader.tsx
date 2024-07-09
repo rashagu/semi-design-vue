@@ -1,4 +1,4 @@
-import { BaseProps, useBaseComponent } from '../_base/baseComponent';
+import { BaseProps, useBaseComponent, useHasInProps } from '../_base/baseComponent';
 import * as PropTypes from '../PropTypes';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/table/constants';
 import { noop, isFunction, get } from 'lodash';
@@ -127,7 +127,7 @@ export interface TableHeaderProps extends BaseProps {
  * Render the header of the table header, and control the merging of the columns of the header
  */
 
-const propTypes: ComponentObjectPropsOptions<TableHeaderProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TableHeaderProps>> = {
   ...BodyPropTypes,
   components: PropTypes.any as PropType<TableHeaderProps['components']>,
   columns: PropTypes.array,
@@ -137,6 +137,9 @@ const propTypes: ComponentObjectPropsOptions<TableHeaderProps> = {
   onDidUpdate: PropTypes.func as PropType<TableHeaderProps['onDidUpdate']>,
   fixed: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   selectedRowKeysSet: PropTypes.object,
+  forwardedRef: [PropTypes.func, PropTypes.object] as PropType<TableHeaderProps['forwardedRef']>,
+  style: PropTypes.object,
+  className: PropTypes.string,
 };
 
 const defaultProps = {
@@ -158,13 +161,14 @@ const TableHeader = defineComponent({
   props: vuePropsType,
   name: 'TableHeader',
   setup(props, {}) {
+    const {getProps} = useHasInProps()
     const slots = useSlots();
 
     const state = reactive({});
     const { adapter: adapterInject } = useBaseComponent<TableSelectionCellProps>(props, state);
     const adapter = adapterInject();
     return () => {
-      const { components, columns, prefixCls, fixed, onHeaderRow, forwardedRef, selectedRowKeysSet } = props;
+      const { components, columns, prefixCls, fixed, onHeaderRow, forwardedRef, selectedRowKeysSet } = getProps(props);
 
       const rows = parseHeaderRows(columns);
       const HeaderWrapper = components.header.wrapper;

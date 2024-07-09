@@ -48,7 +48,7 @@ const responsiveMap = {
   xxl: '(min-width: 1600px)',
 };
 
-export const vuePropsType: ComponentObjectPropsOptions<RowProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<RowProps>> = {
   type: String as PropType<RowProps['type']>,
   align: String as PropType<RowProps['align']>,
   justify: String as PropType<RowProps['justify']>,

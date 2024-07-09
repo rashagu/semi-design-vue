@@ -28,7 +28,7 @@ import { useBaseComponent } from '../_base/baseComponent';
 const LocaleConsumer = LocaleConsumerFunc<Locale['Image']>();
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<ImageProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<ImageProps>> = {
   style: PropTypes.object,
   className: PropTypes.string,
   src: PropTypes.string,
@@ -43,6 +43,11 @@ const propTypes: ComponentObjectPropsOptions<ImageProps> = {
   onClick: PropTypes.func as PropType<ImageProps['onClick']>,
   crossOrigin: PropTypes.string as PropType<ImageProps['crossOrigin']>,
   imageID: PropTypes.number,
+  maxZoom: PropTypes.number,
+  minZoom: PropTypes.number,
+  setDownloadName: PropTypes.func as PropType<ImageProps['setDownloadName']>,
+  imgStyle: PropTypes.object,
+  imgCls: PropTypes.string,
 };
 
 const defaultProps = {

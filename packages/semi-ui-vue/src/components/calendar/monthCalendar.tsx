@@ -52,7 +52,7 @@ export interface MonthCalendarState {
   cachedKeys: Array<string>;
 }
 
-const propTypes: ComponentObjectPropsOptions<MonthCalendarProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<MonthCalendarProps>> = {
   displayValue: PropTypes.object,
   header: PropTypes.node,
   events: PropTypes.array,
@@ -70,7 +70,7 @@ const propTypes: ComponentObjectPropsOptions<MonthCalendarProps> = {
 
   renderDateDisplay: PropTypes.func as PropType<MonthCalendarProps['renderDateDisplay']>,
   minEventHeight: PropTypes.number as PropType<MonthCalendarProps['minEventHeight']>,
-
+  allDayEventsRender: PropTypes.func as PropType<MonthCalendarProps['allDayEventsRender']>,
   // range: PropTypes.array as PropType<MonthCalendarProps['range']>,
   // showCurrTime: PropTypes.bool as PropType<MonthCalendarProps['showCurrTime']>,
   // scrollTop: PropTypes.number as PropType<MonthCalendarProps['scrollTop']>,

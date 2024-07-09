@@ -26,7 +26,7 @@ import {
   nextTick,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { getProps, useBaseComponent, useHasInProps } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 import { VueJsxNode } from '../interface';
 import { getFragmentChildren } from '../_utils';
 import cls from 'classnames';
@@ -34,7 +34,7 @@ import { omit } from 'lodash';
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<PreviewProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<PreviewProps>> = {
   style: PropTypes.object,
   className: PropTypes.string,
   visible: PropTypes.bool,
@@ -76,6 +76,16 @@ const propTypes: ComponentObjectPropsOptions<PreviewProps> = {
   onDownload: PropTypes.func as PropType<PreviewProps['onDownload']>,
   onRatioChange: PropTypes.func as PropType<PreviewProps['onRatioChange']>,
   onRotateChange: PropTypes.func as PropType<PreviewProps['onRotateChange']>,
+  previewTitle: PropTypes.node as PropType<PreviewProps['previewTitle']>,
+  rotateTip: PropTypes.string,
+  viewerVisibleDelay: PropTypes.number,
+  crossOrigin: PropTypes.string as PropType<PreviewProps['crossOrigin']>,
+  maxZoom: PropTypes.number,
+  minZoom: PropTypes.number,
+  onRotateLeft: PropTypes.func as PropType<PreviewProps['onRotateLeft']>,
+  onDownloadError: PropTypes.func as PropType<PreviewProps['onDownloadError']>,
+  setDownloadName: PropTypes.func as PropType<PreviewProps['setDownloadName']>,
+  forwardRef: [Function, Object] as PropType<PreviewProps['forwardRef']>,
 };
 
 const defaultProps = {

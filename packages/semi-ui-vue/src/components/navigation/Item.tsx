@@ -32,7 +32,7 @@ import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 
 const clsPrefix = `${cssClasses.PREFIX}-item`;
 
-export interface NavItemProps extends ItemProps, BaseProps {
+export interface NavItemProps extends Omit<ItemProps, 'children'>, BaseProps {
   disabled?: boolean;
   forwardRef?: (ele: HTMLLIElement) => void;
   icon?: VNode;
@@ -60,7 +60,7 @@ export interface NavItemState {
   tooltipShow: boolean;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<NavItemProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<NavItemProps>> = {
   text: PropTypes.node,
   itemKey: [PropTypes.string, PropTypes.number],
   onClick: {
@@ -110,6 +110,8 @@ export const vuePropsType: ComponentObjectPropsOptions<NavItemProps> = {
     type: PropTypes.number,
     default: 0,
   },
+  tooltipHideDelay: PropTypes.number,
+  tooltipShowDelay: PropTypes.number,
 };
 const NavItem = defineComponent({
   props: vuePropsType,

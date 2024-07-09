@@ -11,7 +11,7 @@ interface TypographyProps extends BaseProps {
   className?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<TypographyProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<TypographyProps>> = {
   component_: {
     type: [String, Array, Boolean, Object, Number] as PropType<TypographyProps['component_']>,
     default: 'article',

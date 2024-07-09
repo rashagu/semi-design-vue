@@ -41,7 +41,7 @@ export interface OverflowItem extends PlainTab {
   active: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<TabBarProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TabBarProps>> = {
   activeKey: PropTypes.string,
   className: PropTypes.string,
   collapsible: PropTypes.bool,
@@ -57,6 +57,12 @@ const propTypes: ComponentObjectPropsOptions<TabBarProps> = {
   more: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   handleKeyDown: PropTypes.func as PropType<TabBarProps['handleKeyDown']>,
   showRestInDropdown: PropTypes.bool,
+  dropdownClassName: PropTypes.string,
+  dropdownStyle: PropTypes.object,
+  onVisibleTabsChange: PropTypes.func as PropType<TabBarProps['onVisibleTabsChange']>,
+  visibleTabsStyle: PropTypes.object,
+  arrowPosition: PropTypes.string as PropType<TabBarProps['arrowPosition']>,
+  renderArrow: PropTypes.func as PropType<TabBarProps['renderArrow']>,
 };
 
 export const vuePropsType = vuePropsMake(propTypes, {});

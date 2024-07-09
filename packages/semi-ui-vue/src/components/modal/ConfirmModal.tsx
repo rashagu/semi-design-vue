@@ -10,10 +10,10 @@ import { ConfirmProps } from './confirm';
 import { cloneVNode, ComponentObjectPropsOptions, computed, defineComponent, h, PropType, ref, useSlots } from 'vue';
 import * as PropTypes from '../PropTypes';
 import { vuePropsMake } from '../PropTypes';
-import { getProps } from '../_base/baseComponent';
+import { useHasInProps } from '../_base/baseComponent';
 
-const propTypes: ComponentObjectPropsOptions<ConfirmProps> = {
-  type: undefined,
+const propTypes: ComponentObjectPropsOptions<Required<ConfirmProps>> = {
+  type: String as PropType<ConfirmProps['type']>,
   mask: {
     type: PropTypes.bool,
     default: undefined,
@@ -92,16 +92,17 @@ const propTypes: ComponentObjectPropsOptions<ConfirmProps> = {
     default: undefined,
   },
   content: [String, Object, Function] as PropType<ConfirmProps['content']>,
+  modalContentClass: String,
+  preventScroll: Boolean,
+  footerFill: Boolean,
 };
 const defaultProps = {};
-export const vuePropsType: ComponentObjectPropsOptions<ConfirmProps> = {
-  ...vuePropsMake<ConfirmProps>(propTypes, defaultProps),
-  type: String as PropType<ConfirmProps['type']>,
-};
+export const vuePropsType = vuePropsMake<ConfirmProps>(propTypes, defaultProps);
 const ConfirmModal = defineComponent({
   props: vuePropsType,
   name: 'ConfirmModal',
   setup(props, {}) {
+    const { getProps } = useHasInProps();
     const slots = useSlots();
 
     const visible = ref<boolean>(true);

@@ -14,8 +14,8 @@ import { CopyableConfig, LinkType } from './title';
 
 type OmitTextProps = OmitTypographyProps;
 
-export interface TextProps extends Omit<HTMLAttributes, OmitTextProps> {
-  children?: any;
+export interface TextProps {
+  // children?: any;
   className?: string;
   code?: boolean;
   component_?: any;
@@ -34,7 +34,7 @@ export interface TextProps extends Omit<HTMLAttributes, OmitTextProps> {
   weight?: number;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<TextProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<TextProps>> = {
   copyable: {
     type: [Object, Boolean],
     default: false,
@@ -87,6 +87,9 @@ export const vuePropsType: ComponentObjectPropsOptions<TextProps> = {
   className: {
     type: String,
     default: '',
+  },
+  component_: {
+    type: [Object, String, Function],
   },
   weight: Number,
   code: Boolean,

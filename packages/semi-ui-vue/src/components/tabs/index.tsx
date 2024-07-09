@@ -41,7 +41,7 @@ export interface TabsState {
   forceDisableMotion: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<TabsProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<TabsProps>> = {
   activeKey: PropTypes.string,
   className: PropTypes.string,
   collapsible: PropTypes.bool,
@@ -67,10 +67,12 @@ const propTypes: ComponentObjectPropsOptions<TabsProps> = {
   more: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   arrowPosition: PropTypes.string as PropType<TabsProps['arrowPosition']>,
   renderArrow: PropTypes.func as PropType<TabsProps['renderArrow']>,
+  onVisibleTabsChange: PropTypes.func as PropType<TabsProps['onVisibleTabsChange']>,
+  visibleTabsStyle: PropTypes.object,
 };
 
 const defaultProps: TabsProps = {
-  children: [],
+  // children: [],
   collapsible: false,
   keepDOM: true,
   lazyRender: false,
@@ -217,7 +219,7 @@ const Tabs = defineComponent({
     };
 
     function getPanes(): PlainTab[] {
-      const { tabList, children } = props;
+      const { tabList } = props;
       if (Array.isArray(tabList) && tabList.length) {
         return tabList;
       }

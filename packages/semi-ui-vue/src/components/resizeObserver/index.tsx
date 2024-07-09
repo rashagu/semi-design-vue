@@ -31,11 +31,13 @@ export enum ObserverProperty {
   Height = 'height',
   All = 'all',
 }
-const propTypes: ComponentObjectPropsOptions<ReactResizeObserverProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<ReactResizeObserverProps>> = {
   onResize: PropTypes.func as PropType<ReactResizeObserverProps['onResize']>,
   observeParent: PropTypes.bool,
   observerProperty: PropTypes.string as PropType<ReactResizeObserverProps['observerProperty']>,
   delayTick: PropTypes.number,
+  style: PropTypes.object,
+  className: PropTypes.string,
 };
 
 const defaultProps = {

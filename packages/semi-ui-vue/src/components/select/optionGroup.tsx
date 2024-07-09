@@ -11,7 +11,7 @@ export interface OptionGroupProps {
 }
 const prefixCls = cssClasses.PREFIX_GROUP;
 
-export const vuePropsType: ComponentObjectPropsOptions<OptionGroupProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<OptionGroupProps>> = {
   label: [String, Number, Object, Array],
   children: [String, Number, Object, Array],
   className: String,

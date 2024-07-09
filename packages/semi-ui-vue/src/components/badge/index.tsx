@@ -7,6 +7,7 @@ import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropTyp
 import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { VueJsxNode } from '../interface';
+import { useHasInProps } from '../_base/baseComponent';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -30,7 +31,7 @@ export interface BadgeProps {
   countStyle?: CSSProperties;
 }
 
-const propTypes: ComponentObjectPropsOptions<BadgeProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<BadgeProps>> = {
   count: PropTypes.node,
   dot: PropTypes.bool,
   type: PropTypes.string as PropType<BadgeProps['type']>,
@@ -61,6 +62,7 @@ const Badge = defineComponent({
   props: vuePropsType,
   name: 'Badge',
   setup(props, {}) {
+    const {getProps} = useHasInProps()
     const slots = useSlots();
 
     const { context } = useConfigContext();
@@ -81,7 +83,7 @@ const Badge = defineComponent({
         overflowCount,
         className,
         ...rest
-      } = props;
+      } = getProps(props);
       const children = slots.default?.();
       const custom = count && !(isNumber(count) || isString(count));
       const showBadge = count !== null && typeof count !== 'undefined';

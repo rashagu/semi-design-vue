@@ -22,7 +22,7 @@ export interface SkeletonProps {
 const defaultProps = {
   loading: true,
 };
-const propTypes: ComponentObjectPropsOptions<SkeletonProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<SkeletonProps>> = {
   active: PropTypes.bool,
   placeholder: PropTypes.node,
   style: PropTypes.object,

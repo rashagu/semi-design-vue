@@ -10,6 +10,7 @@ import type { Locale } from '../locale/interface';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import type { BasicOptionProps } from '@douyinfe/semi-foundation/select/optionFoundation';
 import type { RemoveIndexSignature } from '../interface';
+import { OptionGroupProps } from './optionGroup';
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>();
 
@@ -35,7 +36,12 @@ export interface OptionProps extends RemoveIndexSignature<BasicOptionProps> {
   _scrollIndex?: number,
   _selected?: boolean,
   _show?: boolean,
-  semiOptionId?: string
+  semiOptionId?: string,
+  key?: any,
+  _parentGroup?: OptionGroupProps,
+  _keyInOptionList?: boolean,
+  _keyInJsx?: boolean,
+  _inputCreateOnly?: boolean,
 }
 
 interface renderOptionContentArgument {
@@ -48,7 +54,7 @@ interface renderOptionContentArgument {
   prefixCls: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<OptionProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<OptionProps>> = {
   value: [String, Number],
   label: [String, Number, Object, Array],
   children: [String, Number, Object, Array],
@@ -74,6 +80,11 @@ export const vuePropsType: ComponentObjectPropsOptions<OptionProps> = {
   _selected: Boolean,
   _show: Boolean,
   semiOptionId: String,
+  key: [Object, String, Number],
+  _parentGroup: Object,
+  _keyInOptionList: Boolean,
+  _keyInJsx: Boolean,
+  _inputCreateOnly: Boolean,
 };
 
 const Option = defineComponent({

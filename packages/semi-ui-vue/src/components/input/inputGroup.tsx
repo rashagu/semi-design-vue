@@ -28,7 +28,7 @@ export interface InputGroupProps {
 // eslint-disable-next-line
 export interface InputGroupState {}
 
-export const VuePropsType: ComponentObjectPropsOptions<InputGroupProps> = {
+export const VuePropsType: ComponentObjectPropsOptions<Required<InputGroupProps>> = {
   className: { type: String, default: '' },
   size: { type: String as PropType<InputGroupProps['size']>, default: 'default' },
   style: [String, Object],

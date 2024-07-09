@@ -47,7 +47,7 @@ export interface RangeCalendarState {
   cachedKeys: Array<string>;
 }
 
-const propTypes: ComponentObjectPropsOptions<RangeCalendarProps> = {
+const propTypes: ComponentObjectPropsOptions<Required<RangeCalendarProps>> = {
   // displayValue: PropTypes.instanceOf(Date),
   range: PropTypes.array,
   header: PropTypes.node,
@@ -68,6 +68,8 @@ const propTypes: ComponentObjectPropsOptions<RangeCalendarProps> = {
   displayValue: PropTypes.object,
   weekStartsOn: PropTypes.number as PropType<RangeCalendarProps['weekStartsOn']>,
   onClick: PropTypes.func as PropType<RangeCalendarProps['onClick']>,
+  onClose: PropTypes.func as PropType<RangeCalendarProps['onClose']>,
+  minEventHeight: PropTypes.number as PropType<RangeCalendarProps['minEventHeight']>,
 };
 
 const defaultProps = {

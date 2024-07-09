@@ -1,10 +1,11 @@
-import { defineComponent, ref, h, StyleValue, isVNode, Fragment, PropType } from 'vue';
+import { defineComponent, ref, h, StyleValue, isVNode, Fragment, PropType, ComponentObjectPropsOptions } from 'vue';
 import classNames from 'classnames';
 import * as PropTypes from '../PropTypes';
 
 import { cssClasses, strings } from '@douyinfe/semi-foundation/button/constants';
 import { strings as iconStrings } from '@douyinfe/semi-foundation/icons/constants';
 import Button, { Theme, ButtonProps, Size, Type } from '../button/Button';
+import { vuePropsType as buttonVuePropsType } from '../button/Button';
 import SpinIcon from '../spin/icon';
 import { noop } from 'lodash';
 import '@douyinfe/semi-foundation/button/iconButton.scss';
@@ -32,24 +33,26 @@ export interface IconButtonProps extends ButtonProps {
   autoFocus?: boolean;
   contentClassName?: string;
 }
+const propsType: ComponentObjectPropsOptions<Required<IconButtonProps>> = {
+  ...buttonVuePropsType,
+  iconStyle: PropTypes.object,
+  style: PropTypes.object,
+  loading: PropTypes.bool,
+  prefixCls: PropTypes.string,
+  icon: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.node]),
+  iconSize: PropTypes.string,
+  noHorizontalPadding: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.array]),
+  theme: PropTypes.string as PropType<IconButtonProps['theme']>,
+  iconPosition: PropTypes.string as PropType<IconButtonProps['iconPosition']>,
+  className: PropTypes.string,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+  class: String,
+  role: String,
+  contentClassName: String,
+}
 const vuePropsType = vuePropsMake<IconButtonProps>(
-  {
-    iconStyle: PropTypes.object,
-    style: PropTypes.object,
-    loading: PropTypes.bool,
-    prefixCls: PropTypes.string,
-    icon: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.node]),
-    iconSize: PropTypes.string,
-    noHorizontalPadding: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.array]),
-    theme: PropTypes.string as PropType<IconButtonProps['theme']>,
-    iconPosition: PropTypes.string as PropType<IconButtonProps['iconPosition']>,
-    className: PropTypes.string,
-    onMouseEnter: PropTypes.func,
-    onMouseLeave: PropTypes.func,
-    class: String,
-    role: String,
-    contentClassName: String,
-  },
+  propsType,
   {
     iconPosition: strings.DEFAULT_ICON_POSITION,
     prefixCls: cssClasses.PREFIX,

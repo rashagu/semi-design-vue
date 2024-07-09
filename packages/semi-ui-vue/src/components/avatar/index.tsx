@@ -39,7 +39,7 @@ export interface AvatarState {
   scale: number;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<AvatarProps> = {
+export const vuePropsType: ComponentObjectPropsOptions<Required<AvatarProps>> = {
   style: [Object, String] as PropType<AvatarProps['style']>,
   className: String,
   color: { type: String as PropType<AvatarProps['color']>, default: 'grey' },
