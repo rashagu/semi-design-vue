@@ -44,13 +44,13 @@ export const useBaseComponent: <U extends BaseProps = {}>(
   const attrs = useAttrs();
   const cache = shallowRef<any>({});
   const foundation = shallowRef<any>(null);
+  const {getProps: getPropsUseHasInProps} = useHasInProps()
 
   const isControlled = (key: any) => {
     return Boolean(key && props && typeof props === 'object' && hasOwnProperty.call(adapter().getProps(), key));
   };
 
   const { context } = useConfigContext();
-  const {getProps: getPropsUseHasInProps} = useHasInProps()
   const currentInstance = getCurrentInstance();
   function adapter<P extends BaseProps = {}, S = {}>(): DefaultAdapter<P, S> {
     return {
@@ -157,6 +157,11 @@ export function useHasInProps() {
 
       if (props.hasOwnProperty(tPropsKey) && props[tPropsKey] !== undefined && props[tPropsKey] !== false) {
         tProps[tPropsKey] = props[tPropsKey];
+      }
+      //@ts-ignore
+      const defaultProps = instance.propsOptions[0]
+      if(tProps[tPropsKey] === undefined && defaultProps[tPropsKey].default !== undefined) {
+        tProps[tPropsKey] = defaultProps[tPropsKey].default;
       }
     }
     return tProps;
