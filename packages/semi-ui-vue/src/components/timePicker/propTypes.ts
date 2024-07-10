@@ -6,8 +6,9 @@ import {strings} from "@douyinfe/semi-foundation/timePicker/constants";
 import {PanelShape} from "./PanelShape";
 import type {ComponentObjectPropsOptions, PropType} from "vue";
 import type {TimePickerProps} from "./TimePicker";
+import { CombineProps } from '../interface';
 
-export const timePickerPropTypes:ComponentObjectPropsOptions<Required<TimePickerProps>> = {
+export const timePickerPropTypes:CombineProps<TimePickerProps> = {
   'aria-labelledby': PropTypes.string,
   'aria-invalid': PropTypes.bool,
   'aria-errormessage': PropTypes.string,

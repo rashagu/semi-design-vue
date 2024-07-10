@@ -28,10 +28,11 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { usePreviewContext } from './previewContext/Consumer';
 import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<Required<PreviewInnerProps>> = {
+const propTypes: CombineProps<PreviewInnerProps> = {
   style: PropTypes.object,
   className: PropTypes.string,
   lazyLoadMargin: PropTypes.string,

@@ -15,6 +15,7 @@ import {
   useSlots,
   watch,
 } from 'vue';
+import { CombineProps } from '../interface';
 
 export interface CollapseProps {
   motion?: boolean;
@@ -29,7 +30,7 @@ export interface TransitionStyle {
 }
 
 const ease = 'cubicBezier(.25,.1,.25,1)';
-const propsType: ComponentObjectPropsOptions<Required<CollapseProps>> = {
+const propsType: CombineProps<CollapseProps> = {
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
   duration: PropTypes.number,
   onMotionEnd: PropTypes.func as PropType<CollapseProps['onMotionEnd']>,

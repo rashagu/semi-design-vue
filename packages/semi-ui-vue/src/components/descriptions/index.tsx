@@ -12,7 +12,7 @@ import DescriptionsContext, {
 import Item from './item';
 import { CSSProperties, defineComponent, Fragment, h, isVNode, PropType, useAttrs, useSlots, VNode } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { ComponentObjectPropsOptions } from 'vue';
 import { useBaseComponent } from '../_base/baseComponent';
 import DescriptionsFoundation, { DescriptionsAdapter } from '@douyinfe/semi-foundation/descriptions/foundation';
@@ -40,7 +40,7 @@ export interface DescriptionsProps {
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<Required<DescriptionsProps>> = {
+const propTypes: CombineProps<DescriptionsProps> = {
   align: PropTypes.string as PropType<DescriptionsProps['align']>,
   row: PropTypes.bool,
   size: PropTypes.string as PropType<DescriptionsProps['size']>,

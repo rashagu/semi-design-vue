@@ -19,6 +19,7 @@ import type { CSSProperties, FunctionalComponent, VNode } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { styleNum } from '../_utils';
 import { useBaseComponent } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -99,17 +100,40 @@ export interface FileCardProps extends RenderFileItemProps {
   style?: CSSProperties;
   picWidth?: string | number;
   picHeight?: string | number;
+
+  renderThumbnail?: any
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<FileCardProps>> = {
+const propTypes: CombineProps<FileCardProps> = {
   className: PropTypes.string,
-  disabled: PropTypes.bool,
-  listType: PropTypes.string as PropType<FileCardProps['listType']>,
-  name: PropTypes.string,
-  onPreviewClick: PropTypes.func as PropType<FileCardProps['onPreviewClick']>,
-  onRemove: PropTypes.func as PropType<FileCardProps['onRemove']>,
-  onReplace: PropTypes.func as PropType<FileCardProps['onReplace']>,
-  onRetry: PropTypes.func as PropType<FileCardProps['onRetry']>,
+  disabled: {
+    type: PropTypes.bool,
+    required: true,
+  },
+  listType: {
+    type: PropTypes.string as PropType<FileCardProps['listType']>,
+    required: true,
+  },
+  name: {
+    type: PropTypes.string,
+    required: true,
+  },
+  onPreviewClick: {
+    type: PropTypes.func as PropType<FileCardProps['onPreviewClick']>,
+    required: true,
+  },
+  onRemove: {
+    type: PropTypes.func as PropType<FileCardProps['onRemove']>,
+    required: true,
+  },
+  onReplace: {
+    type: PropTypes.func as PropType<FileCardProps['onReplace']>,
+    required: true,
+  },
+  onRetry: {
+    type: PropTypes.func as PropType<FileCardProps['onRetry']>,
+    required: true,
+  },
   percent: PropTypes.number,
   preview: PropTypes.bool,
   previewFile: PropTypes.func as PropType<FileCardProps['previewFile']>,
@@ -117,8 +141,14 @@ const propTypes: ComponentObjectPropsOptions<Required<FileCardProps>> = {
   picHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   showReplace: PropTypes.bool,
   showRetry: PropTypes.bool,
-  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  status: PropTypes.string as PropType<FileCardProps['status']>,
+  size: {
+    type: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    required: true,
+  },
+  status: {
+    type: PropTypes.string as PropType<FileCardProps['status']>,
+    required: true,
+  },
   style: PropTypes.object,
   url: PropTypes.string,
   validateMessage: PropTypes.node as PropType<FileCardProps['validateMessage']>,
@@ -128,7 +158,10 @@ const propTypes: ComponentObjectPropsOptions<Required<FileCardProps>> = {
   renderPicInfo: Function as PropType<FileCardProps['renderPicInfo']>,
   renderPicPreviewIcon: Function as PropType<FileCardProps['renderPicPreviewIcon']>,
   renderFileOperation: Function as PropType<FileCardProps['renderFileOperation']>,
-  uid: String,
+  uid: {
+    type: String,
+    required: true,
+  },
   fileInstance: Object,
   renderThumbnail: Function,
   response: Object,
@@ -146,18 +179,23 @@ const defaultProps = {
   size: '',
 };
 
-export const vuePropsType = vuePropsMake<FileCardProps>(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake(propTypes, defaultProps);
+
 export interface FileCardState {
   fallbackPreview?: boolean;
 }
-const FileCard = defineComponent(
-  (props, {}) => {
+
+const FileCard = defineComponent({
+  props: vuePropsType,
+  name: 'FileCard',
+  setup(props, {}) {
     const slots = useSlots();
     const state = reactive({
       fallbackPreview: false,
     });
 
     const { adapter: adapterInject } = useBaseComponent<FileCardProps>(props, state);
+
     function adapter_(): FileCardAdapter<FileCardProps, FileCardState> {
       return {
         ...adapterInject(),
@@ -166,8 +204,10 @@ const FileCard = defineComponent(
         },
       };
     }
+
     const adapter = adapter_();
     const foundation = new FileCardFoundation(adapter);
+
     function transSize(size: string | number): string {
       if (typeof size === 'number') {
         return getFileSize(size);
@@ -464,10 +504,6 @@ const FileCard = defineComponent(
       return null;
     };
   },
-  {
-    props: vuePropsType,
-    name: 'FileCard',
-  }
-);
+});
 
 export default FileCard;

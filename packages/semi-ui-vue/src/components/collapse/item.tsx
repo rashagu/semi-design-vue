@@ -17,7 +17,7 @@ import {
 } from 'vue';
 import { useCollapseContext } from './context/Consumer';
 import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 
 export interface CollapsePanelProps {
   itemKey: string;
@@ -32,8 +32,11 @@ export interface CollapsePanelProps {
   onMotionEnd?: () => void;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<CollapsePanelProps>> = {
-  itemKey: PropTypes.string,
+const propTypes: CombineProps<CollapsePanelProps> = {
+  itemKey: {
+    type: PropTypes.string,
+    required: true
+  },
   extra: PropTypes.node,
   header: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   className: PropTypes.string,

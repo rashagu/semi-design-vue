@@ -20,6 +20,7 @@ import classnames from 'classnames';
 import { IconRadio } from '@kousum/semi-icons-vue';
 import { noop } from 'lodash';
 import { symbol } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 export type RadioInnerMode = 'advanced' | '';
 export interface RadioInnerProps extends BaseProps {
@@ -50,7 +51,7 @@ interface RadioInnerState {
   checked?: boolean;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<RadioInnerProps>> = {
+export const vuePropsType: CombineProps<RadioInnerProps> = {
   checked: {
     type: Boolean,
     // @ts-ignore

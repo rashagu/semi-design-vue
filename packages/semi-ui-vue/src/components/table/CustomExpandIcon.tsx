@@ -16,7 +16,7 @@ import {
   PropType,
   useSlots,
 } from 'vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 
 export interface CustomExpandIconProps {
@@ -34,7 +34,7 @@ export interface CustomExpandIconProps {
  * render expand icon
  */
 
-const propTypes: ComponentObjectPropsOptions<Required<CustomExpandIconProps>> = {
+const propTypes: CombineProps<CustomExpandIconProps> = {
   expanded: PropTypes.bool,
   componentType: String as PropType<CustomExpandIconProps['componentType']>,
   onClick: PropTypes.func as PropType<CustomExpandIconProps['onClick']>,

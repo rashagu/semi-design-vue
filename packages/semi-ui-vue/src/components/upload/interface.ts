@@ -2,6 +2,7 @@ import { BaseFileItem } from '@douyinfe/semi-foundation/upload/foundation';
 import { strings } from '@douyinfe/semi-foundation/upload/constants';
 import { ArrayElement } from '../_base/base';
 import { VNode, CSSProperties } from 'vue'
+import { RemoveIndexSignature } from '../interface';
 
 export type PromptPositionType = ArrayElement<typeof strings.PROMPT_POSITION>;
 export type UploadListType = ArrayElement<typeof strings.LIST_TYPE>;
@@ -40,7 +41,7 @@ export interface CustomError extends Error {
     url: string;
 }
 
-export interface FileItem extends BaseFileItem {
+export interface FileItem extends RemoveIndexSignature<BaseFileItem> {
     validateMessage?: VNode | string;
 }
 

@@ -5,7 +5,7 @@ import FillStep from './fillStep';
 import * as PropTypes from '../PropTypes';
 import NavStep from './navStep';
 import { useStepsContext } from './context/Consumer';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 
 export type Status = 'wait' | 'process' | 'finish' | 'error' | 'warning';
 
@@ -19,7 +19,7 @@ export interface StepProps {
   onClick?: any;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<StepProps>> = {
+export const vuePropsType: CombineProps<StepProps> = {
   description: PropTypes.node,
   icon: PropTypes.node,
   status: PropTypes.string as PropType<StepProps['status']>,

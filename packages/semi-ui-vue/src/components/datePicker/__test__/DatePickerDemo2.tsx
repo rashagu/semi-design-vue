@@ -7,7 +7,7 @@ interface DatePickerDemo2Props {
   name?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<DatePickerDemo2Props> = {
+export const vuePropsType: CombineProps<DatePickerDemo2Props> = {
   name: String,
 };
 const DatePickerDemo2 = defineComponent((props, {}) => {

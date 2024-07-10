@@ -26,7 +26,7 @@ import { IconCalendar, IconClock } from '@kousum/semi-icons-vue';
 import { getDefaultFormatTokenByType } from '@douyinfe/semi-foundation/datePicker/_utils/getDefaultFormatToken';
 import getDefaultPickerDate from '@douyinfe/semi-foundation/datePicker/_utils/getDefaultPickerDate';
 import { DayStatusType } from '@douyinfe/semi-foundation/datePicker/foundation';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import type { ScrollItemProps } from '../scrollList';
 import { ComponentObjectPropsOptions } from 'vue';
 
@@ -45,7 +45,7 @@ export interface MonthsGridProps extends MonthsGridFoundationProps, BaseProps {
 
 export type MonthsGridState = MonthsGridFoundationState;
 
-const propTypes: ComponentObjectPropsOptions<Required<MonthsGridProps>> = {
+const propTypes: CombineProps<MonthsGridProps> = {
   type: PropTypes.string as PropType<MonthsGridProps['type']>,
   defaultValue: PropTypes.array,
   defaultPickerValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object, PropTypes.array]),
@@ -92,7 +92,10 @@ const propTypes: ComponentObjectPropsOptions<Required<MonthsGridProps>> = {
   onChange: Function as PropType<MonthsGridProps['onChange']>,
   setRangeInputFocus: Function as PropType<MonthsGridProps['setRangeInputFocus']>,
   isAnotherPanelHasOpened: Function as PropType<MonthsGridProps['isAnotherPanelHasOpened']>,
-  insetInput: Boolean,
+  insetInput: {
+    type: Boolean,
+    required: true
+  },
   yearAndMonthOpts: Object as PropType<MonthsGridProps['yearAndMonthOpts']>,
   startYear: Number,
   endYear: Number

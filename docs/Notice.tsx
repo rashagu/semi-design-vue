@@ -9,7 +9,7 @@ interface NoticeProps {
   icon: any,
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<NoticeProps> = {
+export const vuePropsType: CombineProps<NoticeProps> = {
   type: { type: String, default: 'primary' },
   title: String,
   icon: {

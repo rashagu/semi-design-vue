@@ -3,15 +3,22 @@ import { useSortable } from '@dnd-kit-vue/sortable';
 import { CSS } from '@dnd-kit-vue/utilities';
 
 import { ComponentObjectPropsOptions, computed, CSSProperties, defineComponent, h, useSlots } from 'vue';
+import { CombineProps } from '../interface';
 
 interface SortableItemProps {
   id: number | string;
   item: any;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<SortableItemProps>> = {
-  id: [String, Number],
-  item: Function,
+export const vuePropsType: CombineProps<SortableItemProps> = {
+  id: {
+    type: [String, Number],
+    required: true
+  },
+  item: {
+    type: Function,
+    required: true
+  },
 };
 const SortableItem = defineComponent({
   props: vuePropsType,

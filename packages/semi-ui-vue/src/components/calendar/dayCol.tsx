@@ -17,6 +17,7 @@ import {
   useSlots,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 const prefixCls = `${cssClasses.PREFIX}-grid`;
 
@@ -29,16 +30,25 @@ export interface DayColState {
   showCurrTime: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<DayColProps>> = {
+const propTypes: CombineProps<DayColProps> = {
   events: PropTypes.array,
   displayValue: PropTypes.object,
   showCurrTime: PropTypes.bool,
-  scrollHeight: PropTypes.number,
+  scrollHeight: {
+    type: PropTypes.number,
+    required: true,
+  },
   currPos: PropTypes.number,
-  handleClick: PropTypes.func as PropType<DayColProps['handleClick']>,
+  handleClick: {
+    type: PropTypes.func as PropType<DayColProps['handleClick']>,
+    required: true,
+  },
   mode: PropTypes.string as PropType<DayColProps['mode']>,
   minEventHeight: PropTypes.number,
-  isWeekend: PropTypes.bool,
+  isWeekend: {
+    type: PropTypes.bool,
+    required: true,
+  },
   dateGridRender: PropTypes.func as PropType<DayColProps['dateGridRender']>,
   style: Object as PropType<CSSProperties>,
   className: String

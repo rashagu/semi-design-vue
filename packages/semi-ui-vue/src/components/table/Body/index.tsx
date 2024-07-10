@@ -49,7 +49,7 @@ import type {
   Direction,
   RowKey,
 } from '../interface';
-import { VueJsxNode } from '../../interface';
+import { CombineProps, VueJsxNode } from '../../interface';
 import {
   ComponentObjectPropsOptions,
   CSSProperties,
@@ -157,13 +157,16 @@ export interface BodyContext {
   getCellWidths: (flattenedColumns: ColumnProps[]) => number[];
 }
 
-const propTypes: ComponentObjectPropsOptions<BodyProps> = {
+const propTypes: CombineProps<BodyProps> = {
   anyColumnFixed: PropTypes.bool,
   childrenRecordName: PropTypes.string,
   columns: PropTypes.array,
   components: PropTypes.object,
   dataSource: PropTypes.array,
-  disabledRowKeysSet: PropTypes.object,
+  disabledRowKeysSet: {
+    type: PropTypes.object,
+    required: true
+  },
   emptySlot: PropTypes.node,
   expandRowByClick: PropTypes.bool as PropType<BodyProps['expandRowByClick']>,
   expandedRowKeys: PropTypes.array,
@@ -177,14 +180,23 @@ const propTypes: ComponentObjectPropsOptions<BodyProps> = {
   includeHeader: PropTypes.bool,
   onScroll: PropTypes.func as PropType<BodyProps['onScroll']>,
   prefixCls: PropTypes.string,
-  renderExpandIcon: PropTypes.func as PropType<BodyProps['renderExpandIcon']>,
+  renderExpandIcon: {
+    type: PropTypes.func as PropType<BodyProps['renderExpandIcon']>,
+    required: true
+  },
   rowExpandable: PropTypes.func as PropType<BodyProps['rowExpandable']>,
   rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.func]),
   scroll: PropTypes.object,
-  selectedRowKeysSet: PropTypes.object,
+  selectedRowKeysSet: {
+    type: PropTypes.object,
+    required: true
+  },
   showHeader: PropTypes.bool,
   size: PropTypes.string as PropType<BodyProps['size']>,
-  store: PropTypes.object,
+  store: {
+    type: PropTypes.object,
+    required: true
+  },
   virtualized: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
 
   tableWidth: PropTypes.number as PropType<BodyProps['tableWidth']>,
@@ -226,6 +238,9 @@ const propTypes: ComponentObjectPropsOptions<BodyProps> = {
   onRow: PropTypes.func as PropType<BodyProps['onRow']>,
   bodyWrapperRef: [PropTypes.func, PropTypes.object],
   onGroupedRow: PropTypes.func as PropType<BodyProps['onGroupedRow']>,
+  keepDOM: PropTypes.bool,
+  style: PropTypes.object,
+  className: PropTypes.string
 };
 export { propTypes as BodyPropTypes };
 export const vuePropsType = vuePropsMake<BodyProps>(propTypes, {});

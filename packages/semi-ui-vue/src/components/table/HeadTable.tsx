@@ -9,6 +9,7 @@ import { Fixed, TableComponents, Scroll, BodyScrollEvent, ColumnProps, OnHeaderR
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useHasInProps } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 export interface HeadTableProps {
   tableLayout?: 'fixed' | 'auto';
@@ -33,7 +34,7 @@ export interface HeadTableProps {
  * When there are fixed columns, the header is rendered as a separate Table
  */
 
-const propTypes: ComponentObjectPropsOptions<Required<HeadTableProps>> = {
+const propTypes: CombineProps<HeadTableProps> = {
   tableLayout: PropTypes.string as PropType<HeadTableProps['tableLayout']>,
   bodyHasScrollBar: PropTypes.bool,
   columns: PropTypes.array,
@@ -44,7 +45,10 @@ const propTypes: ComponentObjectPropsOptions<Required<HeadTableProps>> = {
   prefixCls: PropTypes.string,
   forwardedRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   scroll: PropTypes.object,
-  selectedRowKeysSet: PropTypes.object, // Useful when update is selected
+  selectedRowKeysSet: {
+    type: PropTypes.object,
+    required: true,
+  }, // Useful when update is selected
   showHeader: PropTypes.bool,
   onDidUpdate: PropTypes.func as PropType<HeadTableProps['onDidUpdate']>,
   onHeaderRow: PropTypes.func as PropType<HeadTableProps['onHeaderRow']>,

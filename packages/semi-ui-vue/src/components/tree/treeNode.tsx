@@ -11,12 +11,12 @@ import { getHighLightTextHTML } from '../_utils/index';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, reactive, ref, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useTreeContext } from './TreeContext/Consumer';
-import type { VueHTMLAttributes } from '../interface';
+import type { CombineProps, VueHTMLAttributes } from '../interface';
 import Indent from './indent';
 
 const prefixcls = cssClasses.PREFIX_OPTION;
 
-const propTypes: ComponentObjectPropsOptions<Required<TreeNodeProps>> = {
+const propTypes: CombineProps<TreeNodeProps> = {
   expanded: {
     type: PropTypes.bool,
     default: undefined,

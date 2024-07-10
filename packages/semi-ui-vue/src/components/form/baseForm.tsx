@@ -28,13 +28,14 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 const prefix = cssClasses.PREFIX;
 
 interface BaseFormState {
   formId: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<BaseFormProps>> = {
+const propTypes: CombineProps<BaseFormProps> = {
   'aria-label': PropTypes.string,
   onSubmit: PropTypes.func as PropType<BaseFormProps['onSubmit']>,
   onSubmitFail: PropTypes.func as PropType<BaseFormProps['onSubmitFail']>,

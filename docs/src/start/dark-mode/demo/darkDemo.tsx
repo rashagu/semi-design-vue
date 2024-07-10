@@ -43,7 +43,7 @@ interface darkDemoProps {
   name?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<darkDemoProps> = {
+export const vuePropsType: CombineProps<darkDemoProps> = {
   name: String,
 };
 const darkDemo = defineComponent<darkDemoProps>(

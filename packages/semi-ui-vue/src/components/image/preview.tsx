@@ -27,14 +27,14 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { getFragmentChildren } from '../_utils';
 import cls from 'classnames';
 import { omit } from 'lodash';
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<Required<PreviewProps>> = {
+const propTypes: CombineProps<PreviewProps> = {
   style: PropTypes.object,
   className: PropTypes.string,
   visible: PropTypes.bool,

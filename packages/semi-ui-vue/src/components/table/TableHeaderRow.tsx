@@ -29,6 +29,7 @@ import { useBaseComponent } from '../_base/baseComponent';
 import { TableSelectionCellProps } from './ColumnSelection';
 import { useTableContext } from './tableContext/Consumer';
 import type { TableHeaderCell } from './TableHeader';
+import { CombineProps } from '../interface';
 
 export interface TableHeaderRowProps {
   components?: TableComponents;
@@ -42,7 +43,7 @@ export interface TableHeaderRowProps {
   selectedRowKeysSet: Set<any>;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<TableHeaderRowProps>> = {
+const propTypes: CombineProps<TableHeaderRowProps> = {
   components: PropTypes.object,
   row: PropTypes.array,
   prefixCls: PropTypes.string,
@@ -51,7 +52,10 @@ const propTypes: ComponentObjectPropsOptions<Required<TableHeaderRowProps>> = {
   style: PropTypes.object,
   columns: PropTypes.array,
   fixed: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  selectedRowKeysSet: PropTypes.object,
+  selectedRowKeysSet: {
+    type: PropTypes.object,
+    required: true
+  },
 };
 
 const defaultProps = {

@@ -25,6 +25,7 @@ import {
 import { AriaAttributes } from '../AriaAttributes';
 import { symbol, vuePropsMake } from '../PropTypes';
 import { TimeInputProps } from '../timePicker';
+import { CombineProps } from '../interface';
 export interface SwitchProps {
   'aria-label'?: AriaAttributes['aria-label'];
   'aria-describedby'?: AriaAttributes['aria-describedby'];
@@ -52,7 +53,7 @@ export interface SwitchState {
   focusVisible: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<SwitchProps>> = {
+const propTypes: CombineProps<SwitchProps> = {
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
   'aria-invalid': PropTypes.bool,

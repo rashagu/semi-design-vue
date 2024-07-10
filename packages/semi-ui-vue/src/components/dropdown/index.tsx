@@ -37,6 +37,7 @@ import { ArrayElement } from '@douyinfe/semi-foundation/utils/type';
 import { vuePropsMake } from '../PropTypes';
 import { useDropdownContext } from './context/Consumer';
 import { DropdownContext } from './context';
+import { CombineProps } from '../interface';
 
 const positionSet = strings.POSITION_SET;
 const triggerSet = strings.TRIGGER_SET;
@@ -96,7 +97,7 @@ export interface DropdownProps extends TooltipProps {
 interface DropdownState {
   popVisible: boolean;
 }
-const propTypes: ComponentObjectPropsOptions<Required<DropdownProps>> = {
+const propTypes: CombineProps<DropdownProps> = {
   ...tooltipPropTypes,
   onFilter: PropTypes.func,
   onFilterDropdownVisibleChange: PropTypes.func,

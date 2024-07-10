@@ -43,7 +43,7 @@ import {
   watch,
   withMemo,
 } from 'vue';
-import { VueHTMLAttributes, type VueJsxNode } from '../../interface';
+import { CombineProps, VueHTMLAttributes, type VueJsxNode } from '../../interface';
 import { useFormUpdaterContext } from '../context/FormUpdaterContext/Consumer';
 import { omit } from 'lodash';
 import { useHasInProps } from '../../_base/baseComponent';
@@ -67,7 +67,7 @@ function withField<
 >(
   Component: DefineSetupFnComponent<C> | ((props: C) => any),
   opts?: WithFieldOption,
-  vuePropsType?: ComponentObjectPropsOptions<C>
+  vuePropsType?: CombineProps<C>
 ) {
   const propsFromComponent_ = (Component as unknown as DefineComponent).props || {};
   const propsFromComponent = {};

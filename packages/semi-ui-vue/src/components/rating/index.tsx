@@ -22,7 +22,7 @@ import {
   VNode,
   watch,
 } from 'vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 
 export type { RatingItemProps } from './item';
@@ -65,7 +65,7 @@ export interface RatingState {
   emptyStarFocusVisible: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<RatingProps>> = {
+const propTypes: CombineProps<RatingProps> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,

@@ -11,7 +11,7 @@ import {
   watch,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import isElement from '@douyinfe/semi-foundation/utils/isElement';
 
 export interface ReactIntersectionObserverProps {
@@ -24,7 +24,7 @@ export interface ReactIntersectionObserverProps {
   items?: Record<string, Element>;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<ReactIntersectionObserverProps>> = {
+const propTypes: CombineProps<ReactIntersectionObserverProps> = {
   onIntersect: PropTypes.func as PropType<ReactIntersectionObserverProps['onIntersect']>,
   option: PropTypes.object,
   root: PropTypes.any as PropType<ReactIntersectionObserverProps['root']>,

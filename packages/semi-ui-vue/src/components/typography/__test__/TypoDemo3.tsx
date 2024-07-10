@@ -6,7 +6,7 @@ interface TypoDemo3Props {
   name?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<TypoDemo3Props> = {
+export const vuePropsType: CombineProps<TypoDemo3Props> = {
   name: String,
 };
 const TypoDemo3 = defineComponent(

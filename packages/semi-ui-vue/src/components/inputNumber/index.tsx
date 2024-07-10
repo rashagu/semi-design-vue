@@ -28,6 +28,7 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { propTypes as propTypesInput } from '../input/index';
+import { CombineProps } from '../interface';
 
 export interface InputNumberProps extends InputProps {
   autofocus?: boolean;
@@ -67,7 +68,7 @@ export interface InputNumberProps extends InputProps {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface InputNumberState extends BaseInputNumberState {}
 
-const propTypes: ComponentObjectPropsOptions<Required<InputNumberProps>> = {
+const propTypes: CombineProps<InputNumberProps> = {
   ...propTypesInput,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,

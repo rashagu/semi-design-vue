@@ -5,6 +5,7 @@ import '@douyinfe/semi-foundation/space/space.scss';
 import { isString, isArray, isNumber } from 'lodash';
 import { flatten } from './utils';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -20,7 +21,7 @@ export type SpaceProps = {
   className?: string;
 };
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<SpaceProps>> = {
+export const vuePropsType: CombineProps<SpaceProps> = {
   wrap: {
     type: Boolean,
     default: false,

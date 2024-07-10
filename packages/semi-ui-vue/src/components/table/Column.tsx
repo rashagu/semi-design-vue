@@ -3,8 +3,9 @@ import ColumnShape from './ColumnShape';
 import { ColumnProps } from './interface';
 import { ComponentObjectPropsOptions, defineComponent, h, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
-const propTypes: ComponentObjectPropsOptions<Required<ColumnProps>> = {
+const propTypes: CombineProps<ColumnProps> = {
   ...ColumnShape,
 };
 export const vuePropsType = vuePropsMake(propTypes, {});

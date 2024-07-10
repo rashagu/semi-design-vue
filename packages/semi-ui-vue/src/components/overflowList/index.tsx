@@ -8,7 +8,7 @@ import IntersectionObserver from './intersectionObserver';
 import OverflowListFoundation, { OverflowListAdapter } from '@douyinfe/semi-foundation/overflowList/foundation';
 
 import '@douyinfe/semi-foundation/overflowList/overflowList.scss';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import {
   cloneVNode,
   ComponentObjectPropsOptions,
@@ -86,7 +86,7 @@ const defaultProps = {
   onOverflow: () => null,
   overflowRenderDirection: 'both',
 };
-const propTypes: ComponentObjectPropsOptions<Required<OverflowListProps>> = {
+const propTypes: CombineProps<OverflowListProps> = {
   // if render in scroll mode, key is required in items
   className: PropTypes.string,
   collapseFrom: PropTypes.string as PropType<OverflowListProps['collapseFrom']>,

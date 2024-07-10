@@ -6,7 +6,7 @@ interface NumeralDemoProps {
   name?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<NumeralDemoProps> = {
+export const vuePropsType: CombineProps<NumeralDemoProps> = {
   name: String,
 };
 const NumeralDemo = defineComponent(

@@ -34,7 +34,7 @@ import {
   VNode,
   watch,
 } from 'vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import SortableList from './SortableList';
 import type { SortableItemFuncArg } from '../tagInput';
 import { DragEndEvent } from '@dnd-kit-vue/core';
@@ -189,7 +189,7 @@ export interface TransferProps {
 
 export const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<Required<TransferProps>> = {
+const propTypes: CombineProps<TransferProps> = {
   style: PropTypes.object,
   className: PropTypes.string,
   disabled: PropTypes.bool,

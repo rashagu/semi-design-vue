@@ -14,6 +14,7 @@ import {
   ComponentObjectPropsOptions,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 export type BasicProps = {
   prefixCls?: string;
@@ -43,7 +44,7 @@ const generator =
     return <BasicComponent type={type} {...props} />;
   };
 
-const propTypes:ComponentObjectPropsOptions<Required<AvatarProps & BasicProps>> = {
+const propTypes:CombineProps<AvatarProps & BasicProps> = {
   type: PropTypes.string,
   prefixCls: PropTypes.string,
   style: PropTypes.object,
@@ -87,7 +88,7 @@ export const Image = generator<BasicProps>('image')(Generic);
 export const Title = generator<BasicProps>('title')(Generic);
 export const Button = generator<BasicProps>('button')(Generic);
 
-const propTypesParagraph = {
+const propTypesParagraph: CombineProps<{rows?: number, prefixCls?: string, style?: any, className?: string}> = {
   rows: PropTypes.number,
   prefixCls: PropTypes.string,
   style: PropTypes.object,

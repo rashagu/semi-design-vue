@@ -6,7 +6,7 @@ interface Demo2Props {
   name?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Demo2Props> = {
+export const vuePropsType: CombineProps<Demo2Props> = {
   name: String,
 };
 const Demo2 = defineComponent((props, {}) => {

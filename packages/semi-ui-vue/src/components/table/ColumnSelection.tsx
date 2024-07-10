@@ -15,6 +15,7 @@ import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
 import { BaseFormProps } from '../form';
+import { CombineProps } from '../interface';
 
 export interface TableSelectionCellProps {
   columnTitle?: string; // TODO: future api
@@ -33,7 +34,7 @@ export interface TableSelectionCellProps {
  * render selection cell
  */
 
-const propTypes: ComponentObjectPropsOptions<Required<TableSelectionCellProps>> = {
+const propTypes: CombineProps<TableSelectionCellProps> = {
   columnTitle: PropTypes.string,
   getCheckboxProps: PropTypes.func as PropType<TableSelectionCellProps['getCheckboxProps']>,
   type: PropTypes.string,

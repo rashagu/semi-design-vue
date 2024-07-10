@@ -22,6 +22,7 @@ import {
   watch,
 } from 'vue';
 import { useBaseComponent } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 export interface CollapsibleProps extends CollapsibleFoundationProps {
   motion?: boolean;
@@ -43,7 +44,7 @@ interface CollapsibleState extends CollapsibleFoundationState {
   visible: boolean;
   isTransitioning: boolean;
 }
-const propTypes: ComponentObjectPropsOptions<Required<CollapsibleProps>> = {
+const propTypes: CombineProps<CollapsibleProps> = {
   motion: PropTypes.bool,
   isOpen: PropTypes.bool,
   duration: PropTypes.number,

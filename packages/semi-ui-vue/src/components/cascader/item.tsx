@@ -16,7 +16,7 @@ import {
   Virtualize,
 } from '@douyinfe/semi-foundation/cascader/foundation';
 import { BaseProps, useBaseComponent } from '../_base/baseComponent';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { ComponentObjectPropsOptions } from 'vue';
 import { FixedSizeList as List } from '@kousum/vue3-window';
 import VirtualRow from './virtualRow';
@@ -83,26 +83,80 @@ export interface CascaderItemProps extends BaseProps {
 
 const prefixcls = cssClasses.PREFIX_OPTION;
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<CascaderItemProps>> = {
-  activeKeys: Object,
-  selectedKeys: Object,
-  loadedKeys: Object,
-  loadingKeys: Object,
-  onItemClick: Function as PropType<CascaderItemProps['onItemClick']>,
-  onItemHover: Function as PropType<CascaderItemProps['onItemHover']>,
-  showNext: String as PropType<CascaderItemProps['showNext']>,
-  onItemCheckboxClick: Function as PropType<CascaderItemProps['onItemCheckboxClick']>,
-  onListScroll: Function as PropType<CascaderItemProps['onListScroll']>,
-  searchable: Boolean,
-  keyword: String,
+export const vuePropsType: CombineProps<CascaderItemProps> = {
+  activeKeys: {
+    type: Object,
+    required: true
+  },
+  selectedKeys: {
+    type: Object,
+    required: true
+  },
+  loadedKeys: {
+    type: Object,
+    required: true
+  },
+  loadingKeys: {
+    type: Object,
+    required: true
+  },
+  onItemClick: {
+    type: Function as PropType<CascaderItemProps['onItemClick']>,
+    required: true
+  },
+  onItemHover: {
+    type: Function as PropType<CascaderItemProps['onItemHover']>,
+    required: true
+  },
+  showNext: {
+    type: String as PropType<CascaderItemProps['showNext']>,
+    required: true
+  },
+  onItemCheckboxClick: {
+    type: Function as PropType<CascaderItemProps['onItemCheckboxClick']>,
+    required: true
+  },
+  onListScroll: {
+    type: Function as PropType<CascaderItemProps['onListScroll']>,
+    required: true
+  },
+  searchable: {
+    type: Boolean,
+    required: true
+  },
+  keyword: {
+    type: String,
+    required: true
+  },
   virtualize: Object,
-  emptyContent: [Object, String],
-  loadData: Function as PropType<CascaderItemProps['loadData']>,
-  data: Array,
-  separator: String,
-  multiple: Boolean,
-  checkedKeys: Object,
-  halfCheckedKeys: Object,
+  emptyContent: {
+    type: [Object, String],
+    required: true
+  },
+  loadData: {
+    type: Function as PropType<CascaderItemProps['loadData']>,
+    required: true
+  },
+  data: {
+    type: Array,
+    required: true
+  },
+  separator: {
+    type: String,
+    required: true
+  },
+  multiple: {
+    type: Boolean,
+    required: true
+  },
+  checkedKeys: {
+    type: Object,
+    required: true
+  },
+  halfCheckedKeys: {
+    type: Object,
+    required: true
+  },
   empty: {
     type: Boolean,
     default: false,

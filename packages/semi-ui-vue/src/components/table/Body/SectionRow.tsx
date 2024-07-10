@@ -16,7 +16,7 @@ import {
   RowKey,
   OnRowReturnObject,
 } from '../interface';
-import { VueJsxNode } from '../../interface';
+import { CombineProps, VueJsxNode } from '../../interface';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, isVNode, PropType, useSlots } from 'vue';
 import { vuePropsMake } from '../../PropTypes';
 import { useTableContext } from '../tableContext/Consumer';
@@ -46,12 +46,15 @@ export interface SectionRowProps {
 /**
  * Grouping component title row
  */
-const propTypes: ComponentObjectPropsOptions<SectionRowProps> = {
+const propTypes: CombineProps<SectionRowProps> = {
   record: PropTypes.object,
   index: PropTypes.number,
   columns: PropTypes.array,
   group: PropTypes.object,
-  groupKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  groupKey: {
+    type: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    required: true
+  },
   data: PropTypes.array,
   renderGroupSection: PropTypes.func as PropType<SectionRowProps['renderGroupSection']>, // render group title
   onGroupedRow: PropTypes.func as PropType<SectionRowProps['onGroupedRow']>,

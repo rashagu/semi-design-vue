@@ -15,6 +15,7 @@ import { BaseProps } from '../_base/baseComponent';
 
 import { cssClasses, strings } from '@douyinfe/semi-foundation/button/constants';
 import { Type, Size } from './Button';
+import { CombineProps } from '../interface';
 
 export type Theme = 'solid' | 'borderless' | 'light';
 
@@ -28,7 +29,7 @@ export interface ButtonGroupProps extends BaseProps {
 const prefixCls = cssClasses.PREFIX;
 const btnSizes = strings.sizes;
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<ButtonGroupProps>> = {
+export const vuePropsType: CombineProps<ButtonGroupProps> = {
   disabled: Boolean,
   size: {
     type: String as PropType<ButtonGroupProps['size']>,

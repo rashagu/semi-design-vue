@@ -1,5 +1,5 @@
 import * as PropTypes from '../PropTypes';
-import NormalTable_, { TablePropTypes } from './Table';
+import NormalTable_, { NormalTableProps, TablePropTypes } from './Table';
 import ResizableTable from './ResizableTable';
 import Column from './Column';
 import { strings } from '@douyinfe/semi-foundation/table/constants';
@@ -9,8 +9,9 @@ import { ComponentObjectPropsOptions, defineComponent, h, ref, useSlots } from '
 import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { useHasInProps } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
-const propTypes = {
+const propTypes: CombineProps<NormalTableProps<any> & {resizable?: any}> = {
   ...TablePropTypes,
   resizable: [PropTypes.bool, PropTypes.object],
 };

@@ -1,49 +1,49 @@
 import Notice from '../notice';
 import { NoticeInstance } from '@douyinfe/semi-foundation/notification/notificationFoundation';
-import {ComponentObjectPropsOptions, defineComponent, h, PropType, ref, useSlots, watch} from "vue";
+import { ComponentObjectPropsOptions, defineComponent, h, PropType, ref, useSlots, watch } from 'vue';
+import { CombineProps } from '../../interface';
 
-export interface HookNoticeProps extends NoticeInstance{
-    afterClose: (id: string) => void;
+export interface HookNoticeProps extends NoticeInstance {
+  afterClose: (id: string) => void;
 }
 
-export const vuePropsType:ComponentObjectPropsOptions<HookNoticeProps> = {
-    id: String,
-    afterClose: Function as PropType<HookNoticeProps['afterClose']>,
-    motion: [Object, String, Boolean,] as PropType<HookNoticeProps['motion']>,
-}
-const HookNotice = defineComponent((props, {expose, attrs}) => {
-
-    const slots = useSlots()
+export const vuePropsType = {
+  id: String,
+  afterClose: {
+    type: Function as PropType<HookNoticeProps['afterClose']>,
+    required: true,
+  },
+  motion: [Object, String, Boolean] as PropType<HookNoticeProps['motion']>,
+};
+const HookNotice = defineComponent({
+  props: vuePropsType,
+  name: 'HookNotice',
+  setup(props, { expose, attrs }) {
+    const slots = useSlots();
     const visible = ref(true);
 
-    function setVisible(val:boolean) {
-        visible.value = val
+    function setVisible(val: boolean) {
+      visible.value = val;
     }
     const close = () => {
-        setVisible(false);
+      setVisible(false);
     };
-    watch(visible, ()=>{
+    watch(
+      visible,
+      () => {
         if (!visible.value) {
-            props.afterClose(String(props.id));
+          props.afterClose(String(props.id));
         }
-    }, {immediate:true})
+      },
+      { immediate: true }
+    );
 
     return () => {
+      const { afterClose, ...config } = attrs;
 
-        const { afterClose, ...config } = attrs
+      return visible ? <Notice {...config} onHookClose={close} /> : null;
+    };
+  },
+});
 
-        return visible ? (
-          <Notice
-            {...config}
-            onHookClose={close}
-          />
-        ) : null;
-    }
-}, {
-    props: vuePropsType,
-    name: 'HookNotice'
-})
-
-
-export default HookNotice
-
+export default HookNotice;

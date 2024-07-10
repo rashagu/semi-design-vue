@@ -21,7 +21,7 @@ import Select, { SelectOption } from '../select/index';
 import InputNumber from '../inputNumber/index';
 import Popover from '../popover/index';
 import { Position } from '../tooltip';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import {
   ComponentObjectPropsOptions,
   CSSProperties,
@@ -85,7 +85,7 @@ export type PaginationLocale = Locale['Pagination'];
 export type PopoverPosition = Position;
 export type { PageList };
 
-const propTypes: ComponentObjectPropsOptions<Required<PaginationProps>> = {
+const propTypes: CombineProps<PaginationProps> = {
   total: PropTypes.number,
   showTotal: PropTypes.bool,
   pageSize: PropTypes.number,

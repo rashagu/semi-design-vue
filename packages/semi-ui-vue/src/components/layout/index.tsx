@@ -4,6 +4,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/layout/constants';
 import '@douyinfe/semi-foundation/layout/layout.scss';
 import LayoutContext, { ContextType } from './layoutContext';
 import Sider from './Sider';
+import { CombineProps } from '../interface';
 
 const htmlTag = {
   Header: 'header',
@@ -20,7 +21,7 @@ export interface BasicProps {
   type?: string;
 }
 
-const basicVuePropsType: ComponentObjectPropsOptions<Required<BasicProps>> = {
+const basicVuePropsType: CombineProps<BasicProps> = {
   prefixCls: {
     type: String,
     default: cssClasses.PREFIX,
@@ -72,7 +73,7 @@ export interface BasicLayoutProps {
 export interface BasicLayoutState {
   siders: Array<string>;
 }
-export const vuePropsType: ComponentObjectPropsOptions<BasicLayoutProps> = {
+export const vuePropsType: CombineProps<BasicLayoutProps> = {
   prefixCls: {
     type: String,
     default: cssClasses.PREFIX,

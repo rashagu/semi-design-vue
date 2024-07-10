@@ -37,7 +37,7 @@ import { InsetDateInput, InsetTimeInput } from './insetInput';
 import * as PropTypes from '../PropTypes';
 import { vuePropsMake } from '../PropTypes';
 import { ComponentObjectPropsOptions } from 'vue';
-import { RemoveIndexSignature } from '../interface';
+import { CombineProps, RemoveIndexSignature } from '../interface';
 
 export interface DateInputProps extends RemoveIndexSignature<DateInputFoundationProps>, BaseProps {
   insetLabel?: VNode;
@@ -76,7 +76,7 @@ export interface DateInputProps extends RemoveIndexSignature<DateInputFoundation
   inputCls?: string
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<DateInputProps>> = {
+const propTypes: CombineProps<DateInputProps> = {
   borderless: {
     type: PropTypes.bool,
     default: false,

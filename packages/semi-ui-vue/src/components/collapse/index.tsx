@@ -25,6 +25,7 @@ import {
   watch,
 } from 'vue';
 import { useBaseComponent } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 export type { CollapsePanelProps } from './item';
 
@@ -39,7 +40,7 @@ export interface CollapseReactProps extends CollapseProps {
 
 export type { CollapseState };
 
-const propTypes: ComponentObjectPropsOptions<Required<CollapseReactProps>> = {
+const propTypes: CombineProps<CollapseReactProps> = {
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   accordion: PropTypes.bool,

@@ -35,6 +35,7 @@ import {
   watch,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 const toPercent = (num: number) => {
   const res = num < 1 ? num * 100 : 100;
@@ -52,7 +53,7 @@ export interface MonthCalendarState {
   cachedKeys: Array<string>;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<MonthCalendarProps>> = {
+const propTypes: CombineProps<MonthCalendarProps> = {
   displayValue: PropTypes.object,
   header: PropTypes.node,
   events: PropTypes.array,

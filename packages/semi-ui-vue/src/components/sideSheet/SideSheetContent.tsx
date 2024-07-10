@@ -16,7 +16,7 @@ import {
   useSlots,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { SideSheetProps } from '@douyinfe/semi-foundation/sideSheet/sideSheetFoundation';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 
@@ -49,8 +49,11 @@ export interface SideSheetContentProps {
   visible?: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<SideSheetContentProps>> = {
-  size: String as PropType<SideSheetContentProps['size']>,
+const propTypes: CombineProps<SideSheetContentProps> = {
+  size: {
+    type: String as PropType<SideSheetContentProps['size']>,
+    required: true
+  },
   onClose: PropTypes.func as PropType<SideSheetContentProps['onClose']>,
   closeIcon: PropTypes.node,
   mask: PropTypes.bool,
@@ -60,11 +63,23 @@ const propTypes: ComponentObjectPropsOptions<Required<SideSheetContentProps>> = 
   title: PropTypes.node,
   closable: PropTypes.bool,
   headerStyle: PropTypes.object,
-  width: [PropTypes.string, PropTypes.number],
-  height: [PropTypes.string, PropTypes.number],
-  style: PropTypes.object,
+  width: {
+    type: [PropTypes.string, PropTypes.number],
+    required: true
+  },
+  height: {
+    type: [PropTypes.string, PropTypes.number],
+    required: true
+  },
+  style: {
+    type: PropTypes.object,
+    required: true
+  },
   bodyStyle: PropTypes.object,
-  className: PropTypes.string,
+  className: {
+    type: PropTypes.string,
+    required: true
+  },
   dialogClassName: PropTypes.string,
   footer: PropTypes.node,
   'aria-label': PropTypes.string,

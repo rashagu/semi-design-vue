@@ -5,6 +5,7 @@ import { defineComponent, ref, h, Fragment, CSSProperties, inject, ComponentObje
 // import { RowContext } from './row';
 import classnames from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/grid/constants';
+import { CombineProps } from '../interface';
 
 export interface ColSize {
   span?: number;
@@ -31,7 +32,7 @@ export interface ColProps {
   xxl?: number | ColSize;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<ColProps>> = {
+export const vuePropsType: CombineProps<ColProps> = {
   span: Number,
   order: Number,
   offset: Number,

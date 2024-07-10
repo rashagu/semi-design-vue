@@ -12,6 +12,7 @@ import {
   watch,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 /** A parallel type to `ResizeObserverEntry` (from resize-observer-polyfill). */
 export interface ResizeEntry {
@@ -31,7 +32,7 @@ export enum ObserverProperty {
   Height = 'height',
   All = 'all',
 }
-const propTypes: ComponentObjectPropsOptions<Required<ReactResizeObserverProps>> = {
+const propTypes: CombineProps<ReactResizeObserverProps> = {
   onResize: PropTypes.func as PropType<ReactResizeObserverProps['onResize']>,
   observeParent: PropTypes.bool,
   observerProperty: PropTypes.string as PropType<ReactResizeObserverProps['observerProperty']>,

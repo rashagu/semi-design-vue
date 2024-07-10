@@ -48,6 +48,7 @@ import type {
 import type { ValidateStatus } from '../_base/baseComponent';
 import { vuePropsMake } from '../PropTypes';
 import { styleNum } from '../_utils';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -144,9 +145,12 @@ export interface UploadState {
   replaceInputKey: number;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<UploadProps>> = {
+const propTypes: CombineProps<UploadProps> = {
   accept: PropTypes.string, // Limit allowed file types
-  action: String,
+  action: {
+    type: String,
+    required: true,
+  },
   addOnPasting: PropTypes.bool,
   afterUpload: PropTypes.func as PropType<UploadProps['afterUpload']>,
   beforeClear: PropTypes.func as PropType<UploadProps['beforeClear']>,
@@ -453,6 +457,7 @@ const Upload = defineComponent({
         onRemove,
         onRetry,
         index,
+        //@ts-ignore
         key: uid || `${name}${index}`,
         style: itemStyle,
         disabled,

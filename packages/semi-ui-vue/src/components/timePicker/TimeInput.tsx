@@ -20,6 +20,7 @@ import InputFoundation, { TimeInputAdapter } from '@douyinfe/semi-foundation/tim
 import { IconClock } from '@kousum/semi-icons-vue';
 import { TimePickerProps } from './TimePicker';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 export type TimeInputProps = Pick<
   TimePickerProps,
@@ -61,7 +62,7 @@ export type TimeInputProps = Pick<
     secondOptions?: any[];
   };
 
-const propTypes: ComponentObjectPropsOptions<Required<TimeInputProps>> = {
+const propTypes: CombineProps<TimeInputProps> = {
   value: String,
   borderless: PropTypes.bool,
   format: { type: PropTypes.string, default: strings.DEFAULT_FORMAT },

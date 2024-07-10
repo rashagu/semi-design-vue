@@ -2,6 +2,7 @@ import { defineComponent, ref, h, Fragment, VNode, CSSProperties, ComponentObjec
 import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/select/constants';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
+import { CombineProps } from '../interface';
 
 export interface OptionGroupProps {
   children?: string | number | VNode | VNode[];
@@ -11,7 +12,7 @@ export interface OptionGroupProps {
 }
 const prefixCls = cssClasses.PREFIX_GROUP;
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<OptionGroupProps>> = {
+export const vuePropsType: CombineProps<OptionGroupProps> = {
   label: [String, Number, Object, Array],
   children: [String, Number, Object, Array],
   className: String,

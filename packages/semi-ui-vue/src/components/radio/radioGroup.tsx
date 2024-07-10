@@ -26,6 +26,7 @@ import { useBaseComponent } from '../_base/baseComponent';
 import { ArrayElement } from '../_base/base';
 import Radio, { RadioProps, RadioState, RadioType } from './radio';
 import Context, { RadioGroupButtonSize, RadioMode } from './context';
+import { CombineProps } from '../interface';
 
 export interface OptionItem {
   label?: VNode | string;
@@ -65,7 +66,7 @@ export interface RadioGroupState {
   value?: any;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<RadioGroupProps>> = {
+export const vuePropsType: CombineProps<RadioGroupProps> = {
   'onUpdate:value': Function as PropType<RadioGroupProps['onUpdate:value']>,
   defaultValue: {
     type: [String, Number],

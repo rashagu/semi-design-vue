@@ -4,7 +4,7 @@ import { IconSidebar } from '@kousum/semi-icons-vue';
 import Button from '../button';
 import Tooltip from '../tooltip';
 import { Locale } from '../locale/interface';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 
 export interface CollapseButtonProps {
   prefixCls?: string;
@@ -17,7 +17,7 @@ export interface CollapseButtonProps {
   onClick?(e: boolean): void;
 }
 
-const vuePropsType: ComponentObjectPropsOptions<Required<CollapseButtonProps>> = {
+const vuePropsType: CombineProps<CollapseButtonProps> = {
   prefixCls: String,
   locale: Object,
   collapseText: Function as PropType<CollapseButtonProps['collapseText']>,

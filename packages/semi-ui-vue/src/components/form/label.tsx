@@ -7,6 +7,7 @@ import { Locale } from '../locale/interface';
 import { vuePropsMake } from '../PropTypes';
 import { ComponentObjectPropsOptions } from 'vue';
 import { styleNum } from '../_utils';
+import { CombineProps } from '../interface';
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Form']>();
 const prefixCls = cssClasses.PREFIX;
@@ -31,7 +32,7 @@ export interface LabelProps {
   optional?: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<LabelProps>> = {
+const propTypes: CombineProps<LabelProps> = {
   id: PropTypes.string,
   required: PropTypes.bool,
   text: PropTypes.node,

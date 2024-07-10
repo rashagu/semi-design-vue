@@ -11,9 +11,13 @@ import { cloneVNode, ComponentObjectPropsOptions, computed, defineComponent, h, 
 import * as PropTypes from '../PropTypes';
 import { vuePropsMake } from '../PropTypes';
 import { useHasInProps } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
-const propTypes: ComponentObjectPropsOptions<Required<ConfirmProps>> = {
-  type: String as PropType<ConfirmProps['type']>,
+const propTypes: CombineProps<ConfirmProps> = {
+  type: {
+    type: String as PropType<ConfirmProps['type']>,
+    required: true,
+  },
   mask: {
     type: PropTypes.bool,
     default: undefined,

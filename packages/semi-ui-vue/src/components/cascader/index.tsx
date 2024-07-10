@@ -49,7 +49,7 @@ import TagInput from '../tagInput';
 import { isSemiIcon } from '../_utils/index';
 import { Position } from '../tooltip/index';
 import { AriaAttributes } from '../AriaAttributes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 
 export type { CascaderType, ShowNextType } from '@douyinfe/semi-foundation/cascader/foundation';
 export type { CascaderData, Entity, Data, CascaderItemProps, FilterRenderProps } from './item';
@@ -122,7 +122,7 @@ export interface CascaderState extends BasicCascaderInnerData {
 const prefixcls = cssClasses.PREFIX;
 const resetkey = 0;
 
-const propTypes: ComponentObjectPropsOptions<Required<CascaderProps>> = {
+const propTypes: CombineProps<CascaderProps> = {
   'aria-labelledby': PropTypes.string,
   'aria-invalid': PropTypes.bool,
   'aria-errormessage': PropTypes.string,

@@ -29,6 +29,7 @@ import type { CheckboxEvent } from './checkbox';
 import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
 import { ComponentObjectPropsOptions } from 'vue';
+import { CombineProps } from '../interface';
 
 export type CheckboxDirection = 'horizontal' | 'vertical';
 export type CheckboxType = 'default' | 'card' | 'pureCard';
@@ -58,7 +59,7 @@ export type CheckboxGroupState = {
   value?: any[];
 };
 
-const propTypes: ComponentObjectPropsOptions<Required<CheckboxGroupProps>> = {
+const propTypes: CombineProps<CheckboxGroupProps> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,

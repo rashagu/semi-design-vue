@@ -1,5 +1,6 @@
 import { defineComponent, ref, h, VueElement, ComponentObjectPropsOptions } from 'vue';
 import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
+import { CombineProps } from '../interface';
 
 let _id = -1;
 
@@ -11,7 +12,7 @@ export interface IconProps {
   type?: string;
 }
 
-export const VuePropsType: ComponentObjectPropsOptions<Required<IconProps>> = {
+export const VuePropsType: CombineProps<IconProps> = {
   id: Number,
   component: Object,
   size: Number,

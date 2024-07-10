@@ -18,7 +18,7 @@ import {
   reactive,
   useSlots,
 } from 'vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { useBaseComponent } from '../_base/baseComponent';
 import { TabsProps } from '../tabs';
 import { vuePropsMake } from '../PropTypes';
@@ -46,7 +46,7 @@ const defaultProps = {
   duration: 450,
 };
 
-const propTypes: ComponentObjectPropsOptions<Required<BackTopProps>> = {
+const propTypes: CombineProps<BackTopProps> = {
   target: PropTypes.func as PropType<BackTopProps['target']>,
   visibilityHeight: PropTypes.number,
   duration: PropTypes.number,

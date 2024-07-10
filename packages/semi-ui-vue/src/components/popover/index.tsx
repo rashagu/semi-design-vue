@@ -21,6 +21,7 @@ import {vuePropsMake} from "../PropTypes";
 import {useConfigContext} from "../configProvider/context/Consumer";
 import type { ArrowProps } from './Arrow';
 import isNullOrUndefined from '@douyinfe/semi-foundation/utils/isNullOrUndefined';
+import { CombineProps } from '../interface';
 export type { ArrowProps };
 export declare interface ArrowStyle {
   borderColor?: string;
@@ -74,7 +75,7 @@ export interface PopoverState {
 const positionSet = strings.POSITION_SET;
 const triggerSet = strings.TRIGGER_SET;
 
-const propTypes:ComponentObjectPropsOptions<Required<PopoverProps>> = {
+const propTypes:CombineProps<PopoverProps> = {
   // children: PropTypes.node,
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   visible: PropTypes.bool,

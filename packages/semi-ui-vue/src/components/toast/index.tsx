@@ -41,20 +41,16 @@ export interface ToastReactProps extends ToastProps {
 
 export type { ConfigProps, ToastListProps, ToastListState, ToastState };
 
-const propTypes = {
-  content: PropTypes.node,
-  duration: PropTypes.number,
-  onClose: PropTypes.func,
-  icon: PropTypes.node,
-  direction: String,
-  stack: PropTypes.bool,
-  // ref: [Function, Object],
-};
-const defaultProps = {};
-const vuePropsType = vuePropsMake(propTypes, defaultProps);
-
 const ToastList = defineComponent({
-  props: vuePropsType,
+  props: {
+    content: PropTypes.node,
+    duration: PropTypes.number,
+    onClose: PropTypes.func,
+    icon: PropTypes.node,
+    direction: String,
+    stack: PropTypes.bool,
+    // ref: [Function, Object],
+  },
   name: 'ToastList',
   setup(props, { expose }) {
     const slots = useSlots();

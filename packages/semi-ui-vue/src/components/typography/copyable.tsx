@@ -20,6 +20,7 @@ import { BaseProps } from '../_base/baseComponent';
 import { Locale } from '../locale/interface';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 import * as PropTypes from '../PropTypes';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 export interface CopyableProps extends BaseProps {
@@ -36,7 +37,7 @@ interface CopyableState {
   item: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<CopyableProps>> = {
+export const vuePropsType: CombineProps<CopyableProps> = {
   forwardRef: Object,
   content: {
     type: String,

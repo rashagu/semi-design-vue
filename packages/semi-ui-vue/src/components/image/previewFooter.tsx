@@ -22,14 +22,14 @@ import { Locale } from '../locale/interface';
 import { throttle } from 'lodash';
 import { ComponentObjectPropsOptions, defineComponent, h, PropType, useSlots } from 'vue';
 import { useBaseComponent } from '../_base/baseComponent';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 
 const prefixCls = cssClasses.PREFIX;
 const footerPrefixCls = `${cssClasses.PREFIX}-preview-footer`;
 const LocaleConsumer = LocaleConsumerFunc<Locale['Image']>();
 
-const propTypes: ComponentObjectPropsOptions<Required<FooterProps>> = {
+const propTypes: CombineProps<FooterProps> = {
   curPage: PropTypes.number,
   totalNum: PropTypes.number,
   disabledPrev: PropTypes.bool,

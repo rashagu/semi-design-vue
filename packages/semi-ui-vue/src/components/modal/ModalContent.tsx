@@ -33,15 +33,22 @@ import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import { useAttrs } from 'vue';
+import { CombineProps } from '../interface';
 
 let uuid = 0;
 
 export interface ModalContentReactProps extends ModalContentProps {}
 
-const propTypes: ComponentObjectPropsOptions<Required<ModalContentReactProps>> = {
-  onClose: Function as PropType<ModalContentReactProps['onClose']>,
+const propTypes: CombineProps<ModalContentReactProps> = {
+  onClose: {
+    type: Function as PropType<ModalContentReactProps['onClose']>,
+    required: true
+  },
   // close: PropTypes.func as PropType<ModalContentReactProps['close']>,
-  getContainerContext: PropTypes.func as PropType<ModalContentReactProps['getContainerContext']>,
+  getContainerContext: {
+    type: PropTypes.func as PropType<ModalContentReactProps['getContainerContext']>,
+    required: true
+  },
   contentClassName: PropTypes.string,
   maskClassName: PropTypes.string,
   onAnimationEnd: PropTypes.func as PropType<ModalContentReactProps['onAnimationEnd']>,

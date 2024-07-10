@@ -3,7 +3,7 @@ import * as PropTypes from '../PropTypes';
 import classnames from 'classnames';
 import { stepsClasses as css } from '@douyinfe/semi-foundation/steps/constants';
 import { IconTickCircle, IconAlertCircle, IconAlertTriangle } from '@kousum/semi-icons-vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { CSSProperties, defineComponent, useSlots, h, isVNode, ComponentObjectPropsOptions, PropType } from 'vue';
 import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
@@ -36,7 +36,7 @@ export enum stepSizeMapIconSize {
   default = 'extra-large',
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<BasicStepProps>> = {
+const propTypes: CombineProps<BasicStepProps> = {
   prefixCls: PropTypes.string,
   description: PropTypes.node,
   icon: PropTypes.node,

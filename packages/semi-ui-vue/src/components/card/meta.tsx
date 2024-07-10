@@ -3,7 +3,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/card/constants';
 import cls from 'classnames';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { useHasInProps } from '../_base/baseComponent';
 
 const prefixcls = cssClasses.PREFIX;
@@ -22,7 +22,7 @@ export interface MetaProps {
   /** Title */
   title?: VueJsxNode;
 }
-const propTypes: ComponentObjectPropsOptions<Required<MetaProps>> = {
+const propTypes: CombineProps<MetaProps> = {
   avatar: PropTypes.node,
   className: PropTypes.string,
   description: PropTypes.node,

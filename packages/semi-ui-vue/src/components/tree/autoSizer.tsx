@@ -4,7 +4,7 @@ import ResizeObserver from '../resizeObserver';
 import type { ResizeEntry } from '../resizeObserver';
 import { get } from 'lodash';
 import { ComponentObjectPropsOptions, defineComponent, h, onMounted, PropType, reactive, useSlots } from 'vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 
 export interface AutoSizerProps {
@@ -20,7 +20,7 @@ export interface AutoSizerState {
 
 const prefixcls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<Required<Required<AutoSizerProps>>> = {
+const propTypes: CombineProps<AutoSizerProps> = {
   defaultHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   defaultWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   children: PropTypes.func as PropType<AutoSizerProps['children']>,

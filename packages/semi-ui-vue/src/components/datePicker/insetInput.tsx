@@ -8,6 +8,7 @@ import {
   InsetInputChangeFoundationProps,
 } from '@douyinfe/semi-foundation/datePicker/inputFoundation';
 import Input, { InputProps } from '../input';
+import { CombineProps } from '../interface';
 
 export interface InsetDateInputProps {
   forwardRef: InputProps['forwardRef'];
@@ -18,13 +19,31 @@ export interface InsetDateInputProps {
   onFocus: InputProps['onFocus'];
 }
 
-export const vuePropsTypeInsetDateInput: ComponentObjectPropsOptions<Required<InsetDateInputProps>> = {
-  forwardRef: [Function, Object],
-  insetInputValue: Object,
-  placeholder: String,
-  valuePath: String,
-  onChange: Function as PropType<InsetDateInputProps['onChange']>,
-  onFocus: Function as PropType<InsetDateInputProps['onFocus']>,
+export const vuePropsTypeInsetDateInput: CombineProps<InsetDateInputProps> = {
+  forwardRef: {
+    type: [Function, Object],
+    required: true,
+  },
+  insetInputValue: {
+    type: Object,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    required: true,
+  },
+  valuePath: {
+    type: String,
+    required: true
+  },
+  onChange: {
+    type: Function as PropType<InsetDateInputProps['onChange']>,
+    required: true
+  },
+  onFocus: {
+    type: Function as PropType<InsetDateInputProps['onFocus']>,
+    required: true
+  },
 };
 const InsetDateInput = defineComponent({
   props: vuePropsTypeInsetDateInput,
@@ -62,14 +81,35 @@ export interface InsetTimeInputProps {
   onFocus: InputProps['onFocus'];
 }
 
-export const vuePropsTypeInsetTimeInput: ComponentObjectPropsOptions<InsetTimeInputProps> = {
-  disabled: Boolean,
-  insetInputValue: Object,
-  placeholder: String,
-  valuePath: String,
-  type: String as PropType<InsetTimeInputProps['type']>,
-  onChange: Function as PropType<InsetTimeInputProps['onChange']>,
-  onFocus: Function as PropType<InsetTimeInputProps['onFocus']>,
+export const vuePropsTypeInsetTimeInput: CombineProps<InsetTimeInputProps> = {
+  disabled: {
+    type: Boolean,
+    required: true
+  },
+  insetInputValue: {
+    type: Object,
+    required: true
+  },
+  placeholder: {
+    type: String,
+    required: true
+  },
+  valuePath: {
+    type: String,
+    required: true
+  },
+  type: {
+    type: String as PropType<InsetTimeInputProps['type']>,
+    required: true
+  },
+  onChange: {
+    type: Function as PropType<InsetTimeInputProps['onChange']>,
+    required: true
+  },
+  onFocus: {
+    type: Function as PropType<InsetTimeInputProps['onFocus']>,
+    required: true
+  },
 };
 const InsetTimeInput = defineComponent(
   (props, {}) => {

@@ -32,7 +32,7 @@ import {
 } from 'vue';
 import { useNavContext } from './nav-context/Consumer';
 import { vuePropsMake } from '../PropTypes';
-import {VueJsxNode} from "../interface";
+import { CombineProps, VueJsxNode } from '../interface';
 
 export interface ToggleIcon {
   open?: string;
@@ -60,7 +60,7 @@ export interface SubNavState {
   isHovered: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<SubNavProps>> = {
+const propTypes: CombineProps<SubNavProps> = {
   /**
    * Unique identification
    */

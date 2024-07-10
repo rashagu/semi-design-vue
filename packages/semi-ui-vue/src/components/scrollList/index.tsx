@@ -6,6 +6,7 @@ import Foundation from '@douyinfe/semi-foundation/scrollList/foundation';
 
 import '@douyinfe/semi-foundation/scrollList/scrollList.scss';
 import { CheckboxProps } from '../checkbox';
+import { CombineProps } from '../interface';
 
 export type { ScrollItemProps } from './scrollItem';
 
@@ -17,7 +18,7 @@ export interface ScrollListProps extends BaseProps {
   prefixCls?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<ScrollListProps>> = {
+export const vuePropsType: CombineProps<ScrollListProps> = {
   header: [Object, String],
   footer: [Object, String],
   children: [Object, String],

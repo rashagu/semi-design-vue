@@ -32,6 +32,7 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const toPercent = (num: number) => {
   const res = num < 1 ? num * 100 : 100;
@@ -47,7 +48,7 @@ export interface RangeCalendarState {
   cachedKeys: Array<string>;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<RangeCalendarProps>> = {
+const propTypes: CombineProps<RangeCalendarProps> = {
   // displayValue: PropTypes.instanceOf(Date),
   range: PropTypes.array,
   header: PropTypes.node,

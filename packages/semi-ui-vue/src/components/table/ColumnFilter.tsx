@@ -9,7 +9,7 @@ import type { DropdownProps } from '../dropdown';
 import { Radio } from '../radio';
 import { Checkbox } from '../checkbox';
 import { FilterIcon, Filter, OnFilterDropdownVisibleChange, RenderFilterDropdownItem } from './interface';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { cloneVNode, isVNode, h, ref, watch, defineComponent, VNode, ComponentObjectPropsOptions, PropType } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useHasInProps } from '../_base/baseComponent';
@@ -145,7 +145,7 @@ function renderDropdown(props: RenderDropdownProps, nestedElem: VueJsxNode = nul
   );
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<ColumnFilterProps>> = {
+const propTypes: CombineProps<ColumnFilterProps> = {
   ...DropdownVuePropsType,
   prefixCls: String,
   filteredValue: Array,
@@ -168,7 +168,7 @@ const propTypes: ComponentObjectPropsOptions<Required<ColumnFilterProps>> = {
 const defaultProps = {};
 const ColumnFilterVueProps = vuePropsMake(propTypes, defaultProps);
 export const ColumnFilter = defineComponent({
-  props: ColumnFilterVueProps as ComponentObjectPropsOptions<Required<ColumnFilterProps>>,
+  props: ColumnFilterVueProps as CombineProps<ColumnFilterProps>,
   name: 'ColumnFilter',
   setup(props, { attrs }) {
     const {getProps} = useHasInProps()

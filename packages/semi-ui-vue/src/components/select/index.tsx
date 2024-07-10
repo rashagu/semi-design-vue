@@ -55,7 +55,7 @@ import { Locale } from '../locale/interface';
 import type { Position } from '@douyinfe/semi-foundation/tooltip/foundation';
 import type { TooltipProps } from '../tooltip';
 import { AriaAttributes } from '../AriaAttributes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 
 export type { OptionProps } from './option';
 export type { OptionGroupProps } from './optionGroup';
@@ -242,7 +242,7 @@ export interface SelectState {
 
 // Notes: Use the label of the option as the identifier, that is, the option in Select, the value is allowed to be the same, but the label must be unique
 
-const propTypes: ComponentObjectPropsOptions<Required<SelectProps>> = {
+const propTypes: CombineProps<SelectProps> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,

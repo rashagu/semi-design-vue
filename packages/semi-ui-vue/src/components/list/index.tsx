@@ -19,7 +19,7 @@ import {
   useSlots,
   VNode,
 } from 'vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import { useAttrs } from 'vue';
@@ -50,7 +50,7 @@ const prefixCls = cssClasses.PREFIX;
 
 export function List_<T>(){
 
-  const propTypes: ComponentObjectPropsOptions<Required<ListProps<T>>> = {
+  const propTypes: CombineProps<ListProps<T>> = {
     style: PropTypes.object,
     className: PropTypes.string,
     bordered: PropTypes.bool,

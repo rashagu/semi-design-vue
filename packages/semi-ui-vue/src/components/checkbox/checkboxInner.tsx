@@ -6,7 +6,7 @@ import { checkboxClasses as css } from '@douyinfe/semi-foundation/checkbox/const
 import { IconCheckboxTick, IconCheckboxIndeterminate } from '@kousum/semi-icons-vue';
 import { AriaAttributes } from '../AriaAttributes';
 import { symbol, vuePropsMake } from '../PropTypes';
-import { VueHTMLAttributes } from '../interface';
+import { CombineProps, VueHTMLAttributes } from '../interface';
 import { propTypesCheckbox } from './propType';
 import { ComponentObjectPropsOptions } from 'vue';
 
@@ -35,7 +35,7 @@ export interface CheckboxInnerProps {
   value?: any;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<CheckboxInnerProps>> = {
+const propTypes: CombineProps<CheckboxInnerProps> = {
   ...propTypesCheckbox,
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,

@@ -26,7 +26,7 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 
 export interface NoticeReactProps extends NoticeProps {
   style?: CSSProperties;
@@ -40,7 +40,7 @@ const prefixCls = cssClasses.NOTICE;
 const { duration } = numbers;
 const { types, themes, directions } = strings;
 
-const propTypes: ComponentObjectPropsOptions<Required<NoticeReactProps>> = {
+const propTypes: CombineProps<NoticeReactProps> = {
   duration: PropTypes.number,
   id: PropTypes.string,
   title: PropTypes.node,

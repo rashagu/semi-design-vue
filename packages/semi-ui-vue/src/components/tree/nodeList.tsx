@@ -12,19 +12,38 @@ import {
   type VNode,
   watch,
 } from 'vue';
+import { CombineProps } from '../interface';
 
 const getTreeNodeKey = (treeNode: FlattenNode) => {
   return treeNode.key;
 };
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<NodeListProps>> = {
-  flattenNodes: Array,
-  motionKeys: Object,
-  motionType: String,
-  flattenList: Array,
+export const vuePropsType: CombineProps<NodeListProps> = {
+  flattenNodes: {
+    type: Array,
+    required: true
+  },
+  motionKeys: {
+    type: Object,
+    required: true
+  },
+  motionType: {
+    type: String,
+    required: true
+  },
+  flattenList: {
+    type: Array,
+    required: true
+  },
   searchTargetIsDeep: Boolean,
-  renderTreeNode: Function as PropType<NodeListProps['renderTreeNode']>,
-  onMotionEnd: Function as PropType<NodeListProps['onMotionEnd']>,
+  renderTreeNode: {
+    type: Function as PropType<NodeListProps['renderTreeNode']>,
+    required: true
+  },
+  onMotionEnd: {
+    type: Function as PropType<NodeListProps['onMotionEnd']>,
+    required: true
+  },
   role: String,
 };
 const NodeList = defineComponent({

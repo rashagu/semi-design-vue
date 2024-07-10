@@ -6,7 +6,7 @@ import { IconStar } from '@kousum/semi-icons-vue';
 import { RatingItemFoundation, RatingItemAdapter } from '@douyinfe/semi-foundation/rating/foundation';
 import { BaseProps, useBaseComponent } from '../_base/baseComponent';
 import { ComponentObjectPropsOptions, defineComponent, h, PropType, reactive, ref, useSlots } from 'vue';
-import { VueHTMLAttributes, VueJsxNode } from '../interface';
+import { CombineProps, VueHTMLAttributes, VueJsxNode } from '../interface';
 import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
 
@@ -38,19 +38,55 @@ export interface RatingItemState {
   secondStarFocus: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<RatingItemProps>> = {
-  value: PropTypes.number,
-  index: PropTypes.number,
-  prefixCls: PropTypes.string,
-  allowHalf: PropTypes.bool,
-  onHover: PropTypes.func as PropType<RatingItemProps['onHover']>,
-  onClick: PropTypes.func as PropType<RatingItemProps['onClick']>,
-  character: PropTypes.node,
-  focused: PropTypes.bool,
-  disabled: PropTypes.bool,
-  count: PropTypes.number,
-  ariaLabelPrefix: PropTypes.string,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+const propTypes: CombineProps<RatingItemProps> = {
+  value: {
+    type: PropTypes.number,
+    required: true
+  },
+  index: {
+    type: PropTypes.number,
+    required: true
+  },
+  prefixCls: {
+    type: PropTypes.string,
+    required: true
+  },
+  allowHalf: {
+    type: PropTypes.bool,
+    required: true
+  },
+  onHover: {
+    type: PropTypes.func as PropType<RatingItemProps['onHover']>,
+    required: true
+  },
+  onClick: {
+    type: PropTypes.func as PropType<RatingItemProps['onClick']>,
+    required: true
+  },
+  character: {
+    type: PropTypes.node,
+    required: true
+  },
+  focused: {
+    type: PropTypes.bool,
+    required: true
+  },
+  disabled: {
+    type: PropTypes.bool,
+    required: true
+  },
+  count: {
+    type: PropTypes.number,
+    required: true
+  },
+  ariaLabelPrefix: {
+    type: PropTypes.string,
+    required: true
+  },
+  size: {
+    type: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    required: true
+  },
   'aria-describedby': PropTypes.string,
   onFocus: PropTypes.func as PropType<RatingItemProps['onFocus']>,
   onBlur: PropTypes.func as PropType<RatingItemProps['onBlur']>,

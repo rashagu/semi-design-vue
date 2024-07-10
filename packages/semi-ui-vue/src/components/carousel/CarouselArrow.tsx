@@ -4,8 +4,9 @@ import { ArrowProps, CarouselArrowProps } from './interface';
 import { IconChevronLeft, IconChevronRight } from '@kousum/semi-icons-vue';
 import { get } from 'lodash';
 import { ComponentObjectPropsOptions, defineComponent, h, PropType, useSlots } from 'vue';
+import { CombineProps } from '../interface';
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<CarouselArrowProps>> = {
+export const vuePropsType: CombineProps<CarouselArrowProps> = {
   type: String as PropType<CarouselArrowProps['type']>,
   theme: String as PropType<CarouselArrowProps['theme']>,
   prev: Function as PropType<CarouselArrowProps['prev']>,

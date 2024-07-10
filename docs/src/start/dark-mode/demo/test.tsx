@@ -5,7 +5,7 @@ interface testProps {
   name?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<testProps> = {
+export const vuePropsType: CombineProps<testProps> = {
   name: String,
 };
 const test = defineComponent<testProps>((props, {}) => {

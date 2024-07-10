@@ -11,6 +11,7 @@ import {
 import Base from './base';
 import { Ellipsis, TypographyBaseSize, TypographyBaseType, OmitTypographyProps } from './interface';
 import { CopyableConfig, LinkType } from './title';
+import { CombineProps } from '../interface';
 
 type OmitTextProps = OmitTypographyProps;
 
@@ -34,7 +35,7 @@ export interface TextProps {
   weight?: number;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<TextProps>> = {
+export const vuePropsType: CombineProps<TextProps> = {
   copyable: {
     type: [Object, Boolean],
     default: false,

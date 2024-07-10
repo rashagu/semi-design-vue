@@ -5,6 +5,7 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/button/constants'
 import '@douyinfe/semi-foundation/button/button.scss';
 import { noop } from '@douyinfe/semi-foundation/utils/function';
 import cls from 'classnames';
+import type { CombineProps } from '../interface';
 
 const btnSizes = typeof strings.sizes;
 const { htmlTypes, btnTypes } = strings;
@@ -37,19 +38,6 @@ export interface ButtonProps {
   role?: string;
   'aria-label'?: AriaAttributes['aria-label'];
   contentClassName?: string;
-}
-// 约束vuePropsType
-export type IsOptional<T, K extends keyof T> = {} extends Pick<T, K> ? true : false;
-export type CombineProps<T> = {
-  [K in keyof Required<T>]: IsOptional<T, K> extends true ?({
-    type: PropType<T[K]>;
-    default?: any;
-    required?: boolean;
-  } | PropType<T[K]>):({
-    type: PropType<T[K]>;
-    default?: any;
-    required: true;
-  })
 }
 export const vuePropsType: CombineProps<ButtonProps> = {
   id: String,

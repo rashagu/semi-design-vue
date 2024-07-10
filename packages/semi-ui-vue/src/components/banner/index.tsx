@@ -21,7 +21,7 @@ import {
   useSlots,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 const types = strings.TYPE;
@@ -44,7 +44,7 @@ export interface BannerState {
   visible: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<BannerProps>> = {
+const propTypes: CombineProps<BannerProps> = {
   // target: PropTypes.func,
   fullMode: PropTypes.bool,
   // insertAfter: PropTypes.func,

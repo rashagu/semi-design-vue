@@ -32,7 +32,7 @@ import type { InputGroupProps } from './inputGroup';
 import type { TextAreaProps } from './textArea';
 import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 export type { TextAreaProps, InputGroupProps };
 
 export type InputSize = 'small' | 'large' | 'default';
@@ -105,7 +105,7 @@ export interface InputState {
   maxlength: number;
 }
 
-export const propTypes: ComponentObjectPropsOptions<Required<InputProps>> = {
+export const propTypes: CombineProps<InputProps> = {
   role: PropTypes.string,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,

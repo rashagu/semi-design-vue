@@ -24,11 +24,12 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { usePreviewContext } from './previewContext/Consumer';
 import { useBaseComponent } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Image']>();
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<Required<ImageProps>> = {
+const propTypes: CombineProps<ImageProps> = {
   style: PropTypes.object,
   className: PropTypes.string,
   src: PropTypes.string,
@@ -36,8 +37,8 @@ const propTypes: ComponentObjectPropsOptions<Required<ImageProps>> = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   alt: PropTypes.string,
   placeholder: PropTypes.node,
-  fallback: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  preview: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  fallback: [PropTypes.string, PropTypes.node] as PropType<ImageProps['fallback']>,
+  preview: [PropTypes.bool, PropTypes.object] as PropType<ImageProps['preview']>,
   onLoad: PropTypes.func as PropType<ImageProps['onLoad']>,
   onError: PropTypes.func as PropType<ImageProps['onError']>,
   onClick: PropTypes.func as PropType<ImageProps['onClick']>,
@@ -224,9 +225,9 @@ const Image = defineComponent({
       const outerCls = cls(prefixCls, className);
       const canPreview = loadStatus === 'success' && preview && !isInGroup();
       const showPreviewCursor = preview && loadStatus === 'success';
-      const previewSrc = isObject(preview) ? preview.src ?? src : src;
+      const previewSrc = typeof preview !== 'boolean'? preview.src ?? src : src;
       const previewProps =
-        isObject(preview) && canPreview
+        typeof preview !== 'boolean' && canPreview
           ? {
               ...omit(preview, ['className', 'style', 'previewCls', 'previewStyle']),
               className: preview?.previewCls,

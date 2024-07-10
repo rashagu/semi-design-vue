@@ -17,7 +17,7 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { AriaAttributes } from '../AriaAttributes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 
 export type { TimelineItemProps } from './item';
@@ -35,7 +35,7 @@ export interface TimelineProps extends Pick<AriaAttributes, 'aria-label'> {
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<Required<TimelineProps>> = {
+const propTypes: CombineProps<TimelineProps> = {
   mode: PropTypes.string as PropType<TimelineProps['mode']>,
   className: PropTypes.string,
   style: PropTypes.object,

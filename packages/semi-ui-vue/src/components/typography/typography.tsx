@@ -3,6 +3,7 @@ import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/typography/constants';
 import '@douyinfe/semi-foundation/typography/typography.scss';
 import { BaseProps } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 const prefixCls = cssClasses.PREFIX;
 interface TypographyProps extends BaseProps {
   component_?: any;
@@ -11,7 +12,7 @@ interface TypographyProps extends BaseProps {
   className?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<TypographyProps>> = {
+export const vuePropsType: CombineProps<TypographyProps> = {
   component_: {
     type: [String, Array, Boolean, Object, Number] as PropType<TypographyProps['component_']>,
     default: 'article',

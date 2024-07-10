@@ -31,7 +31,7 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../../PropTypes';
 import { useBaseComponent } from '../../_base/baseComponent';
-import { VueJsxNode } from '../../interface';
+import { CombineProps, VueJsxNode } from '../../interface';
 
 export interface BaseRowProps {
   anyColumnFixed?: boolean;
@@ -76,11 +76,14 @@ export interface BaseRowProps {
   displayNone?: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<BaseRowProps> = {
+const propTypes: CombineProps<BaseRowProps> = {
   anyColumnFixed: PropTypes.bool,
   cellWidths: PropTypes.array,
   className: PropTypes.string,
-  columns: PropTypes.array,
+  columns: {
+    type: PropTypes.array,
+    required: true
+  },
   components: PropTypes.object,
   disabled: PropTypes.bool,
   expandIcon: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.node]),
@@ -142,7 +145,7 @@ const defaultProps = {
   selected: false,
   disabled: false,
 };
-export const vuePropsType = vuePropsMake<BaseRowProps>(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TableRow = defineComponent({
   props: vuePropsType,
   name: 'TableRow',

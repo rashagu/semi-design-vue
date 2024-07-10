@@ -18,6 +18,7 @@ import { noop } from 'lodash';
 import { NavStepProps } from './navStep';
 import { Direction, Status } from './basicSteps';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
+import { CombineProps } from '../interface';
 
 export type Size = 'default' | 'small';
 export interface NavStepsProps {
@@ -34,7 +35,7 @@ export interface NavStepsProps {
   status?: Status;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<NavStepsProps>> = {
+const propTypes: CombineProps<NavStepsProps> = {
   prefixCls: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,

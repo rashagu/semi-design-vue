@@ -34,7 +34,7 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { useTableContext } from './tableContext/Consumer';
 import { FooterProps } from '../image/interface';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { styleNum } from '../_utils';
 
 export interface TableCellProps extends BaseProps {
@@ -72,7 +72,7 @@ function isInvalidRenderCellText(text: any) {
   return text && !isVNode(text) && Object.prototype.toString.call(text) === '[object Object]';
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<TableCellProps>> = {
+const propTypes: CombineProps<TableCellProps> = {
   record: PropTypes.object,
   prefixCls: PropTypes.string,
   index: PropTypes.number,

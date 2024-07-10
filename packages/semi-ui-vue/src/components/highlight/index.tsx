@@ -5,6 +5,7 @@ import { getHighLightTextHTML } from '../_utils/index';
 import '@douyinfe/semi-foundation/highlight/highlight.scss';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 export interface HighlightProps {
   autoEscape?: boolean;
@@ -18,7 +19,7 @@ export interface HighlightProps {
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<Required<HighlightProps>> = {
+const propTypes: CombineProps<HighlightProps> = {
   // style: PropTypes.object,
   // className: PropTypes.string,
   autoEscape: PropTypes.bool,

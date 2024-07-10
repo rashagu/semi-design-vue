@@ -12,6 +12,7 @@ import '@douyinfe/semi-foundation/button/iconButton.scss';
 import { getFragmentChildren } from '../_utils';
 import { vuePropsMake } from '../PropTypes';
 import { useHasInProps } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const iconSizes = iconStrings.SIZE;
 
@@ -33,7 +34,7 @@ export interface IconButtonProps extends ButtonProps {
   autoFocus?: boolean;
   contentClassName?: string;
 }
-const propsType: ComponentObjectPropsOptions<Required<IconButtonProps>> = {
+const propsType: CombineProps<IconButtonProps> = {
   ...buttonVuePropsType,
   iconStyle: PropTypes.object,
   style: PropTypes.object,

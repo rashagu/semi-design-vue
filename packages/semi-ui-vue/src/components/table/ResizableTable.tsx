@@ -11,9 +11,10 @@ import ResizableHeaderCell from './ResizableHeaderCell';
 import type { ResizableProps, TableProps, ColumnProps } from './interface';
 import { ComponentObjectPropsOptions, computed, defineComponent, h, PropType, Ref, ref, useSlots, watch } from 'vue';
 import { useHasInProps } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const Table = Table_();
-export const vuePropsType: ComponentObjectPropsOptions<Required<TableProps>> = {
+export const vuePropsType: CombineProps<TableProps> = {
   bordered: PropTypes.bool,
   children: PropTypes.element,
   childrenRecordName: PropTypes.string,

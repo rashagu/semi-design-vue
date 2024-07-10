@@ -4,7 +4,7 @@ import * as PropTypes from '../PropTypes';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/timeline/constants';
 import '@douyinfe/semi-foundation/timeline/timeline.scss';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots, VNode } from 'vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 import { useAttrs } from 'vue';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
@@ -24,7 +24,7 @@ export interface TimelineItemProps {
 
 const prefixCls = cssClasses.ITEM;
 
-const propTypes: ComponentObjectPropsOptions<Required<TimelineItemProps>> = {
+const propTypes: CombineProps<TimelineItemProps> = {
   color: PropTypes.string,
   time: PropTypes.node,
   type: PropTypes.string as PropType<TimelineItemProps['type']>,

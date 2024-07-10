@@ -7,8 +7,19 @@ import { PlainTab, TabPaneProps } from './interface';
 import CSSAnimation from '../_cssAnimation';
 import { defineComponent, h, useSlots } from 'vue';
 import { useTabsContext } from './tabs-context/Consumer';
+import { CombineProps } from '../interface';
 
-const propTypes = {
+const propTypes: CombineProps<{
+  className?: string;
+  style?: any;
+  children?: any;
+  disabled?: boolean;
+  itemKey?: string;
+  tab?: any;
+  icon?: any;
+  closable?: boolean;
+  tabIndex?: number;
+}> = {
   className: PropTypes.string,
   style: PropTypes.object,
   children: PropTypes.node,

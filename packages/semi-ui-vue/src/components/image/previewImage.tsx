@@ -18,11 +18,12 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 const preViewImgPrefixCls = `${prefixCls}-preview-image`;
 
-const propTypes: ComponentObjectPropsOptions<Required<PreviewImageProps>> = {
+const propTypes: CombineProps<PreviewImageProps> = {
   src: PropTypes.string,
   rotation: PropTypes.number,
   style: PropTypes.object,

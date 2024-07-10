@@ -27,6 +27,7 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const prefixCls = `${cssClasses.PREFIX}-day`;
 
@@ -36,7 +37,7 @@ export interface DayCalendarState {
   cachedKeys: Array<string>;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<DayCalendarProps>> = {
+const propTypes: CombineProps<DayCalendarProps> = {
   displayValue: PropTypes.object,
   events: PropTypes.array,
   header: PropTypes.node,

@@ -34,6 +34,7 @@ import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { useBaseComponent } from '../_base/baseComponent';
 import { BannerProps } from '../banner';
+import { CombineProps } from '../interface';
 // TODO: Automatic folding + unfolding function when there are more than N
 
 export type { NoticeTransitionProps } from './NoticeTransition';
@@ -62,7 +63,7 @@ const defaultConfig = {
   zIndex: 1010,
 };
 
-const propTypes = {
+const propTypes: CombineProps<{ style?: any; className?: string; direction?: string }> = {
   style: PropTypes.object,
   className: PropTypes.string,
   direction: String,

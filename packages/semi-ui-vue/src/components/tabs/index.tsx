@@ -27,7 +27,7 @@ import {
   watch,
 } from 'vue';
 import { useBaseComponent } from '../_base/baseComponent';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { getFragmentChildren } from '../_utils';
 
 const panePickKeys = ['className', 'style', 'disabled', 'itemKey', 'tab', 'icon'];
@@ -41,7 +41,7 @@ export interface TabsState {
   forceDisableMotion: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<TabsProps>> = {
+const propTypes: CombineProps<TabsProps> = {
   activeKey: PropTypes.string,
   className: PropTypes.string,
   collapsible: PropTypes.bool,

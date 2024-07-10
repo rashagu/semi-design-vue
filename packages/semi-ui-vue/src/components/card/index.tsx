@@ -8,7 +8,7 @@ import { Title } from '../typography';
 import Space from '../space';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { useHasInProps } from '../_base/baseComponent';
 
 const prefixcls = cssClasses.PREFIX;
@@ -57,7 +57,7 @@ export interface CardProps {
   'aria-label'?: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<CardProps>> = {
+const propTypes: CombineProps<CardProps> = {
   actions: PropTypes.array,
   bodyStyle: PropTypes.object,
   bordered: PropTypes.bool,

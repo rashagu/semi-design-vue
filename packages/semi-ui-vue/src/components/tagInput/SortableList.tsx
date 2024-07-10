@@ -13,6 +13,7 @@ import {
 import { horizontalListSortingStrategy, SortableContext, sortableKeyboardCoordinates } from '@dnd-kit-vue/sortable';
 import { defineComponent, ref, h, Fragment, useSlots, Teleport, ComponentObjectPropsOptions } from 'vue';
 import SortableItem from './SortableItem';
+import { CombineProps } from '../interface';
 
 interface SortableListProps {
   items: any;
@@ -22,7 +23,7 @@ interface SortableListProps {
   axis: any;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<SortableListProps> = {
+export const vuePropsType: CombineProps<Partial<SortableListProps>> = {
   items: Array,
   onSortEnd: Function,
   useDragHandle: [Boolean],

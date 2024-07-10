@@ -30,6 +30,7 @@ import { useConfigContext } from '../configProvider/context/Consumer';
 import { useBaseComponent } from '../_base/baseComponent';
 import { vuePropsMake } from '../PropTypes';
 import { AriaAttributes } from '../AriaAttributes';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -63,7 +64,7 @@ export interface AnchorState {
   slideBarTop: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<AnchorProps>> = {
+const propTypes: CombineProps<AnchorProps> = {
   size: PropTypes.string as PropType<AnchorProps['size']>,
   railTheme: PropTypes.string as PropType<AnchorProps['railTheme']>,
   className: PropTypes.string,

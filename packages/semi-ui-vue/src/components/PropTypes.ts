@@ -1,4 +1,5 @@
 import {ComponentObjectPropsOptions} from "vue";
+import { CombineProps } from './interface';
 
 
 export const any = [Array, Object, String, Number, Boolean, Function];
@@ -32,7 +33,7 @@ export type PropObj = Record<any, {
   default?: any;
   validator?(value: unknown): boolean;
 } | Prop>
-export function vuePropsMake<T>(typeObj:ComponentObjectPropsOptions<T>, defaultProps:{[key:string]: any}) {
+export function vuePropsMake<T>(typeObj:CombineProps<T>, defaultProps:{[key:string]: any}) {
   const obj = {}
   Object.keys(typeObj).forEach(typeKey=>{
     if (defaultProps.hasOwnProperty(typeKey)){
@@ -63,5 +64,5 @@ export function vuePropsMake<T>(typeObj:ComponentObjectPropsOptions<T>, defaultP
 
 
   })
-  return obj as ComponentObjectPropsOptions<T>
+  return obj as CombineProps<T>
 }

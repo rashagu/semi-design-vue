@@ -5,7 +5,8 @@ import { CarouselIndicatorProps } from './interface';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots, VNode } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-const propTypes: ComponentObjectPropsOptions<Required<CarouselIndicatorProps>> = {
+import { CombineProps } from '../interface';
+const propTypes: CombineProps<CarouselIndicatorProps> = {
   activeKey: PropTypes.number,
   className: PropTypes.string,
   position: PropTypes.string as PropType<CarouselIndicatorProps['position']>,

@@ -33,6 +33,7 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const toPercent = (num: number) => {
   const res = num < 1 ? num * 100 : 100;
@@ -48,7 +49,7 @@ export interface WeekCalendarState {
   cachedKeys: Array<string>;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<WeekCalendarProps>> = {
+const propTypes: CombineProps<WeekCalendarProps> = {
   displayValue: PropTypes.object,
   header: PropTypes.node,
   events: PropTypes.array,

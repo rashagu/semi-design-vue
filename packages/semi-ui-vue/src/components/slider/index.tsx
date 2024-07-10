@@ -29,6 +29,7 @@ import {
   PropType,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -46,7 +47,7 @@ function domIsInRenderTree(e: HTMLElement) {
   return Boolean(e.offsetWidth || e.offsetHeight || e.getClientRects().length);
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<SliderProps>> = {
+const propTypes: CombineProps<SliderProps> = {
   // allowClear: PropTypes.bool,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,

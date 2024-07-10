@@ -15,6 +15,7 @@ import SpinFoundation from '@douyinfe/semi-foundation/spin/foundation';
 import SpinIcon from './icon';
 import '@douyinfe/semi-foundation/spin/spin.scss';
 import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const prefixCls = css.PREFIX;
 
@@ -44,7 +45,7 @@ interface SpinState {
  *         indicator: null,
  *         delay: 0,
  */
-export const VuePropsType: ComponentObjectPropsOptions<Required<SpinProps>> = {
+export const VuePropsType: CombineProps<SpinProps> = {
   size: {
     type: String as PropType<SpinProps['size']>,
     default: 'middle',

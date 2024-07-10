@@ -52,7 +52,7 @@ import TriangleArrow from './TriangleArrow';
 import TriangleArrowVertical from './TriangleArrowVertical';
 import CSSAnimation from '../_cssAnimation';
 import { Motion } from '../_base/base';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 
 export type Trigger = ArrayElement<typeof strings.TRIGGER_SET>;
@@ -137,7 +137,7 @@ const triggerSet = strings.TRIGGER_SET;
 const blockDisplays = ['flex', 'block', 'table', 'flow-root', 'grid'];
 const defaultGetContainer = () => document.body;
 
-const propTypes: ComponentObjectPropsOptions<Required<TooltipProps>> = {
+const propTypes: CombineProps<TooltipProps> = {
   // children: PropTypes.node,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
   autoAdjustOverflow: PropTypes.bool,
@@ -223,7 +223,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 
 const Tooltip = defineComponent({
-  props: vuePropsType as ComponentObjectPropsOptions<Required<TooltipProps>>,
+  props: vuePropsType as CombineProps<TooltipProps>,
   name: 'Tooltip',
   setup(props, { expose }) {
     const slots = useSlots();

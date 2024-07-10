@@ -20,6 +20,7 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -49,7 +50,7 @@ export interface ProgressState {
   percentNumber: number;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<ProgressProps>> = {
+const propTypes: CombineProps<ProgressProps> = {
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
   'aria-valuetext': PropTypes.string,

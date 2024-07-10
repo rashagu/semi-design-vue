@@ -14,6 +14,7 @@ import { CopyableConfig, LinkType } from './title';
 import FormatNumeral from '@douyinfe/semi-foundation/typography/formatNumeral';
 import { getFragmentChildren } from '../_utils';
 import { omit } from 'lodash';
+import { CombineProps } from '../interface';
 
 type OmitNumeralProps = OmitTypographyProps;
 
@@ -39,7 +40,7 @@ export interface NumeralProps {
   underline?: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<NumeralProps>> = {
+const propTypes: CombineProps<NumeralProps> = {
   rule: PropTypes.string as PropType<NumeralProps['rule']>,
   precision: PropTypes.number,
   truncate: PropTypes.string as PropType<NumeralProps['truncate']>,

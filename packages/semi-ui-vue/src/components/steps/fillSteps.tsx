@@ -16,6 +16,7 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { FillStepProps } from './fillStep';
 import { getFragmentChildren } from '../_utils';
+import { CombineProps } from '../interface';
 
 export type Status = 'wait' | 'process' | 'finish' | 'error' | 'warning';
 export type Direction = 'horizontal' | 'vertical';
@@ -34,7 +35,7 @@ export interface FillStepsProps {
   size?: Size;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<FillStepsProps>> = {
+const propTypes: CombineProps<FillStepsProps> = {
   prefixCls: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,

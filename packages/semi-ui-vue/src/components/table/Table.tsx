@@ -68,7 +68,7 @@ import type {
 } from './interface';
 import { ArrayElement } from '../_base/base';
 
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import {
   ComponentInternalInstance,
   ComponentObjectPropsOptions,
@@ -135,7 +135,7 @@ export interface RenderTableProps<RecordType> extends HeadTableProps, BodyProps 
   bodyHasScrollBar: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<NormalTableProps<any>>> = {
+const propTypes: CombineProps<NormalTableProps<any>> = {
   children: PropTypes.any as PropType<NormalTableProps['children']>,
   className: PropTypes.string,
   style: PropTypes.object,
@@ -447,6 +447,7 @@ function Table<RecordType extends Record<string, any>>() {
           },
           isAnyColumnUseFullRender: (columns: ColumnProps<RecordType>[]) => {
             return some(columns, (column) => {
+              //@ts-ignore
               Boolean(column.useFullRender);
             });
           },
@@ -688,10 +689,11 @@ function Table<RecordType extends Record<string, any>>() {
           // when dataSource has change, should reset currentPage
           if (dataSource !== prevPropsDataSource) {
             // @ts-ignore
-            states.pagination = isObject(statePagination)
+            states.pagination = typeof statePagination !== 'boolean'
               ? {
                   ...statePagination,
                   currentPage:
+                  //@ts-ignore
                     isObject(propsPagination) && propsPagination.currentPage ? propsPagination.currentPage : 1,
                 }
               : statePagination;

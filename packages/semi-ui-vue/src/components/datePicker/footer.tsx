@@ -4,6 +4,7 @@ import Button from '../button';
 import { get } from 'lodash';
 import { Locale } from '../locale/interface';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 interface FooterProps {
   prefixCls?: string;
@@ -12,10 +13,16 @@ interface FooterProps {
   onCancelClick?: any;
   onConfirmClick?: any;
 }
-const propsType: ComponentObjectPropsOptions<Required<FooterProps>> = {
+const propsType: CombineProps<FooterProps> = {
   prefixCls: String,
-  locale: Object,
-  localeCode: String,
+  locale: {
+    type: Object,
+    required: true
+  },
+  localeCode: {
+    type: String,
+    required: true
+  },
   onCancelClick: Function,
   onConfirmClick: Function,
 }

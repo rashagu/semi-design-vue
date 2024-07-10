@@ -8,6 +8,7 @@ import '@douyinfe/semi-foundation/navigation/navigation.scss';
 import { BaseProps } from '../_base/baseComponent';
 import { defineComponent, h, isVNode, VNode, Fragment, ComponentObjectPropsOptions, PropType } from 'vue';
 import { useNavContext } from './nav-context/Consumer';
+import { CombineProps } from '../interface';
 
 export type Logo = VNode;
 
@@ -20,7 +21,7 @@ export interface NavHeaderProps extends BaseProps {
   class?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<NavHeaderProps>> = {
+export const vuePropsType: CombineProps<NavHeaderProps> = {
   prefixCls: {
     type: PropTypes.string,
     default: cssClasses.PREFIX,

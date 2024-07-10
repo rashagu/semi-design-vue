@@ -3,10 +3,11 @@ import { BASE_CLASS_PREFIX } from '@douyinfe/semi-foundation/base/constants';
 import DefaultLocale from '../locale/source/zh_CN';
 import Context from './context';
 import type { ContextValue } from './context';
+import { CombineProps } from '../interface';
 
 export interface ConfigProviderProps extends ContextValue {}
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<ConfigProviderProps>> = {
+export const vuePropsType: CombineProps<ConfigProviderProps> = {
   locale: {
     type: Object,
     default: DefaultLocale,

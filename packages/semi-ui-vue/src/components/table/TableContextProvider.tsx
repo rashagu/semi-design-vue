@@ -1,8 +1,9 @@
 import { ComponentObjectPropsOptions, computed, defineComponent, h, PropType, useSlots } from 'vue';
 import Context, { TableContextProps } from './table-context';
 import * as PropTypes from '../PropTypes';
+import { CombineProps } from '../interface';
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<TableContextProps>> = {
+export const vuePropsType: CombineProps<TableContextProps> = {
   headWidths: PropTypes.array,
   setHeadWidths: PropTypes.func as PropType<TableContextProps['setHeadWidths']>,
   handleRowExpanded: PropTypes.func as PropType<TableContextProps['handleRowExpanded']>,

@@ -5,11 +5,12 @@ import cls from 'classnames';
 import { BaseProps } from '../_base/baseComponent';
 import { DropdownContext } from './context';
 import { useDropdownContext } from './context/Consumer';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 export type DropdownTitleProps = BaseProps;
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<DropdownTitleProps>> = {
+export const vuePropsType: CombineProps<DropdownTitleProps> = {
   style: [Object, String] as PropType<DropdownTitleProps['style']>,
   className: String,
 };

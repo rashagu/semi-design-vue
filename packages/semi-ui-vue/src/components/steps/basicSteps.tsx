@@ -18,6 +18,7 @@ import { noop } from 'lodash';
 import { BasicStepProps } from './basicStep';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import { getFragmentChildren } from '../_utils';
+import { CombineProps } from '../interface';
 
 export type Direction = 'horizontal' | 'vertical';
 export type Status = 'wait' | 'process' | 'finish' | 'error' | 'warning';
@@ -37,7 +38,7 @@ export interface BasicStepsProps {
   'aria-label'?: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<BasicStepsProps>> = {
+const propTypes: CombineProps<BasicStepsProps> = {
   prefixCls: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,

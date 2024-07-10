@@ -5,7 +5,7 @@ interface PureAProps {
   style?: CSSProperties;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<PureAProps> = {
+export const vuePropsType: CombineProps<PureAProps> = {
   style: [Object],
 };
 const PureA = defineComponent<PureAProps>((props, {}) => {

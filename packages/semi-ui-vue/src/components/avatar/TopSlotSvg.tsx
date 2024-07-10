@@ -1,14 +1,21 @@
 import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
 import type { ComponentObjectPropsOptions } from 'vue';
 import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
+import { CombineProps } from '../interface';
 interface TopSlotSvgProps {
   gradientStart: string;
   gradientEnd: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<TopSlotSvgProps>> = {
-  gradientStart: String,
-  gradientEnd: String,
+export const vuePropsType: CombineProps<TopSlotSvgProps> = {
+  gradientStart: {
+    type: String,
+    required: true,
+  },
+  gradientEnd: {
+    type: String,
+    required: true,
+  },
 };
 const TopSlotSvg = defineComponent({
   props: vuePropsType,

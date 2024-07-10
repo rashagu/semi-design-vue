@@ -56,13 +56,14 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { useBaseComponent } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 export * from './interface';
 export type { AutoSizerProps } from './autoSizer';
 
 const prefixcls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<Required<Omit<TreeProps, 'children'>>> = {
+const propTypes: CombineProps<Omit<TreeProps, 'children'>> = {
   autoMergeValue: PropTypes.bool,
   blockNode: PropTypes.bool,
   className: PropTypes.string,

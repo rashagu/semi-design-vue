@@ -47,7 +47,7 @@ import type { InsetInputChangeProps, InsetInputValue } from '@douyinfe/semi-foun
 import type { AriaAttributes } from '../AriaAttributes';
 import * as PropTypes from '../PropTypes';
 import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { ComponentObjectPropsOptions } from 'vue';
 
@@ -91,7 +91,7 @@ export interface DatePickerProps extends DatePickerFoundationProps {
 
 export type DatePickerState = DatePickerFoundationState;
 
-const propTypes: ComponentObjectPropsOptions<Required<DatePickerProps>> = {
+const propTypes: CombineProps<DatePickerProps> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,

@@ -7,7 +7,7 @@ import { IconClose } from '@kousum/semi-icons-vue';
 import { TagProps, TagSize, TagColor, TagType, AvatarShape, TagShape } from './interface';
 import { handlePrevent } from '@douyinfe/semi-foundation/utils/a11y';
 import '@douyinfe/semi-foundation/tag/tag.scss';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { symbol, vuePropsMake } from '../PropTypes';
 import { isString } from 'lodash';
 import cls from 'classnames';
@@ -28,7 +28,7 @@ export interface TagState {
   visible: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<TagProps>> = {
+const propTypes: CombineProps<TagProps> = {
   tagKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   size: String as PropType<TagProps['size']>,
   color: String as PropType<TagProps['color']>,

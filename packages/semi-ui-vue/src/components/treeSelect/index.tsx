@@ -65,7 +65,7 @@ import {
   watch,
 } from 'vue';
 import { AriaAttributes } from '../AriaAttributes';
-import { VueHTMLAttributes, VueJsxNode, VueJsxNodeSingle } from '../interface';
+import { CombineProps, VueHTMLAttributes, VueJsxNode, VueJsxNodeSingle } from '../interface';
 import Popover, { PopoverProps } from '../popover/index';
 import VirtualRow from '../select/virtualRow';
 
@@ -195,7 +195,7 @@ const prefixTree = cssClasses.PREFIX_TREE;
 
 const key = 0;
 
-const propTypes: ComponentObjectPropsOptions<Required<TreeSelectProps>> = {
+const propTypes: CombineProps<TreeSelectProps> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,
@@ -323,7 +323,7 @@ const defaultProps: Partial<TreeSelectProps> = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TreeSelect = defineComponent({
-  props: vuePropsType as ComponentObjectPropsOptions<Required<TreeSelectProps>>,
+  props: vuePropsType as CombineProps<TreeSelectProps>,
   name: 'TreeSelect',
   setup(props, {}) {
     const { getProps } = useHasInProps();

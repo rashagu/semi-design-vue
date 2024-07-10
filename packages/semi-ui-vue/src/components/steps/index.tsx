@@ -7,6 +7,7 @@ import NavSteps, { NavStepsProps } from './navSteps';
 import Context from './context';
 import { defineComponent, useSlots, h, ref, VNode, ComponentObjectPropsOptions, PropType } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 export type { Status, Size, BasicStepProps } from './basicStep';
 export type { Direction, BasicStepsProps } from './basicSteps';
@@ -27,7 +28,7 @@ export interface NavStepsAllProps extends NavStepsProps {
 }
 export type StepsProps = FillStepsAllProps | BasicStepsAllProps | NavStepsAllProps;
 
-const propTypes: ComponentObjectPropsOptions<Required<StepsProps>> = {
+const propTypes: CombineProps<StepsProps> = {
   onChange: PropTypes.func as PropType<StepsProps['onChange']>,
   // @ts-ignore
   type: PropTypes.string as PropType<StepsProps['type']>,

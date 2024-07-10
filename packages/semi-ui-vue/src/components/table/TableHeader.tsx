@@ -15,7 +15,7 @@ import {
   useSlots,
   VNode,
 } from 'vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 import { TableSelectionCellProps } from './ColumnSelection';
 import { BodyPropTypes } from './Body';
@@ -127,7 +127,7 @@ export interface TableHeaderProps extends BaseProps {
  * Render the header of the table header, and control the merging of the columns of the header
  */
 
-const propTypes: ComponentObjectPropsOptions<Required<TableHeaderProps>> = {
+const propTypes: CombineProps<TableHeaderProps> = {
   ...BodyPropTypes,
   components: PropTypes.any as PropType<TableHeaderProps['components']>,
   columns: PropTypes.array,
@@ -136,7 +136,10 @@ const propTypes: ComponentObjectPropsOptions<Required<TableHeaderProps>> = {
   onHeaderRow: PropTypes.func as PropType<TableHeaderProps['onHeaderRow']>,
   onDidUpdate: PropTypes.func as PropType<TableHeaderProps['onDidUpdate']>,
   fixed: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  selectedRowKeysSet: PropTypes.object,
+  selectedRowKeysSet: {
+    type: PropTypes.object,
+    required: true
+  },
   forwardedRef: [PropTypes.func, PropTypes.object] as PropType<TableHeaderProps['forwardedRef']>,
   style: PropTypes.object,
   className: PropTypes.string,

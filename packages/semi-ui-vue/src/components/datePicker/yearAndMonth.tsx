@@ -24,6 +24,7 @@ import { vuePropsMake } from '../PropTypes';
 import { strings } from '@douyinfe/semi-foundation/datePicker/constants';
 import { PanelType } from '@douyinfe/semi-foundation/datePicker/monthsGridFoundation';
 import { ComponentObjectPropsOptions } from 'vue';
+import { CombineProps } from '../interface';
 
 const prefixCls = `${BASE_CLASS_PREFIX}-datepicker`;
 
@@ -33,9 +34,15 @@ export interface YearAndMonthProps extends YearAndMonthFoundationProps, BaseProp
 
 export type YearAndMonthState = YearAndMonthFoundationState;
 
-const propTypes: ComponentObjectPropsOptions<Required<YearAndMonthProps>> = {
-  currentYear: PropTypes.object,
-  currentMonth: PropTypes.object,
+const propTypes: CombineProps<YearAndMonthProps> = {
+  currentYear: {
+    type: PropTypes.object,
+    required: true
+  },
+  currentMonth: {
+    type: PropTypes.object,
+    required: true
+  },
   onSelect: PropTypes.func as PropType<YearAndMonthProps['onSelect']>,
   locale: PropTypes.object,
   localeCode: PropTypes.string,

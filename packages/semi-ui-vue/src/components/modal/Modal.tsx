@@ -32,6 +32,7 @@ import {
   VNode,
   watch,
 } from 'vue';
+import { CombineProps } from '../interface';
 
 export let destroyFns: any[] = [];
 export type ConfirmType = 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
@@ -56,7 +57,7 @@ export interface ModalReactProps extends ModalProps {
   type?: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<ModalReactProps>> = {
+const propTypes: CombineProps<ModalReactProps> = {
   mask: PropTypes.bool,
   closable: PropTypes.bool,
   centered: PropTypes.bool,

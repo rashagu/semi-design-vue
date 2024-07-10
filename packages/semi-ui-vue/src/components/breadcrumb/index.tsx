@@ -31,7 +31,7 @@ import { TooltipProps } from '../tooltip';
 import { IconMore } from '@kousum/semi-icons-vue';
 
 import { AriaAttributes } from '../AriaAttributes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { getFragmentChildren, getVNodeChildren } from '../_utils';
 
 const clsPrefix = cssClasses.PREFIX;
@@ -68,7 +68,7 @@ interface BreadcrumbState {
   isCollapsed: boolean;
 }
 
-const propTypes_: ComponentObjectPropsOptions<Required<BreadcrumbProps>> = {
+const propTypes_: CombineProps<BreadcrumbProps> = {
   activeIndex: propTypes.number,
   routes: propTypes.array,
   onClick: propTypes.func as PropType<BreadcrumbProps['onClick']>,

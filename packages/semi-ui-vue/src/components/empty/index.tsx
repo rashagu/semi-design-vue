@@ -20,6 +20,7 @@ import { Title } from '../typography';
 import { ArrayElement } from '../_base/base';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import { useHasInProps } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -44,7 +45,7 @@ interface EmptyState {
   mode: any;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<EmptyProps>> = {
+export const vuePropsType: CombineProps<EmptyProps> = {
   layout: { type: String as PropType<EmptyProps['layout']>, default: 'vertical' },
   imageStyle: [Object, String] as PropType<EmptyProps['imageStyle']>,
   title: [Object, String],

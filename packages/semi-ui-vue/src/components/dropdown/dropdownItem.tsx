@@ -10,6 +10,7 @@ import { vuePropsMake } from '../PropTypes';
 import { useDropdownContext } from './context/Consumer';
 import { ComponentObjectPropsOptions } from 'vue';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
+import { CombineProps } from '../interface';
 
 export type Type = 'primary' | 'secondary' | 'tertiary' | 'warning' | 'danger';
 
@@ -32,7 +33,7 @@ export interface DropdownItemProps extends BaseProps {
 }
 
 const prefixCls = css.PREFIX;
-const propTypes: ComponentObjectPropsOptions<Required<DropdownItemProps>> = {
+const propTypes: CombineProps<DropdownItemProps> = {
   name: PropTypes.string,
   disabled: PropTypes.bool,
   selected: PropTypes.bool,

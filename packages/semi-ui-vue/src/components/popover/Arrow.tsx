@@ -13,6 +13,7 @@ import { get } from 'lodash';
 import { Position } from '@douyinfe/semi-foundation/tooltip/foundation';
 import { numbers, cssClasses, strings } from '@douyinfe/semi-foundation/popover/constants';
 import { ArrowStyle } from './index';
+import { CombineProps } from '../interface';
 
 export interface ArrowProps {
   position?: Position;
@@ -21,7 +22,7 @@ export interface ArrowProps {
   popStyle?: CSSProperties;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<ArrowProps>> = {
+export const vuePropsType: CombineProps<ArrowProps> = {
   position: String as PropType<ArrowProps['position']>,
   className: String,
   arrowStyle: [String, Object] as PropType<ArrowProps['arrowStyle']>,

@@ -1,8 +1,9 @@
 import * as PropTypes from '../PropTypes';
 import { ComponentObjectPropsOptions, PropType } from 'vue';
 import {ColumnProps} from "./interface";
+import { CombineProps } from '../interface';
 
-const ColumnShape: ComponentObjectPropsOptions<Required<ColumnProps>> = {
+const ColumnShape: CombineProps<ColumnProps> = {
     align: String as PropType<ColumnProps['align']>,
     className: PropTypes.string,
     colSpan: PropTypes.number,

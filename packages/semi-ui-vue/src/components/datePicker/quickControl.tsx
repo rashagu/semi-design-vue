@@ -10,6 +10,7 @@ import * as PropTypes from '../PropTypes';
 import { vuePropsMake } from '../PropTypes';
 
 import { ComponentObjectPropsOptions } from 'vue';
+import { CombineProps } from '../interface';
 const prefixCls = cssClasses.PREFIX;
 export interface QuickControlProps {
   presets: PresetsType;
@@ -19,13 +20,31 @@ export interface QuickControlProps {
   insetInput: DateInputFoundationProps['insetInput'];
   locale: any;
 }
-const propTypes: ComponentObjectPropsOptions<Required<QuickControlProps>> = {
-  presets: PropTypes.array,
-  presetPosition: PropTypes.string as PropType<QuickControlProps['presetPosition']>,
-  onPresetClick: PropTypes.func as PropType<QuickControlProps['onPresetClick']>,
-  type: PropTypes.string,
-  insetInput: [PropTypes.bool, PropTypes.object],
-  locale: PropTypes.object,
+const propTypes: CombineProps<QuickControlProps> = {
+  presets: {
+    type: PropTypes.array,
+    required: true
+  },
+  presetPosition: {
+    type: PropTypes.string as PropType<QuickControlProps['presetPosition']>,
+    required: true
+  },
+  onPresetClick: {
+    type: PropTypes.func as PropType<QuickControlProps['onPresetClick']>,
+    required: true
+  },
+  type: {
+    type: PropTypes.string,
+    required: true
+  },
+  insetInput: {
+    type: [PropTypes.bool, PropTypes.object],
+    required: true
+  },
+  locale: {
+    type: PropTypes.object,
+    required: true
+  },
 };
 
 const defaultProps = {

@@ -5,7 +5,7 @@ import { stepsClasses as css } from '@douyinfe/semi-foundation/steps/constants';
 import { IconChevronRight } from '@kousum/semi-icons-vue';
 import { defineComponent, useSlots, h, CSSProperties, ComponentObjectPropsOptions, PropType } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { AriaAttributes } from '../AriaAttributes';
 
 export interface NavStepProps {
@@ -24,7 +24,7 @@ export interface NavStepProps {
   stepNumber?: number;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<NavStepProps>> = {
+const propTypes: CombineProps<NavStepProps> = {
   prefixCls: PropTypes.string,
   title: PropTypes.node,
   className: PropTypes.string,

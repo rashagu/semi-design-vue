@@ -3,6 +3,7 @@ import { strings } from '@douyinfe/semi-foundation/typography/constants';
 import Base from './base';
 import { Ellipsis, TypographyBaseType, OmitTypographyProps } from './interface';
 import { ArrayElement } from '@douyinfe/semi-foundation/utils/type';
+import { CombineProps } from '../interface';
 
 type OmitTitleProps = OmitTypographyProps;
 
@@ -35,7 +36,7 @@ export interface TitleProps {
   underline?: boolean;
   weight?: ArrayElement<typeof strings.WEIGHT> | number;
 }
-export const vuePropsType: ComponentObjectPropsOptions<Required<TitleProps>> = {
+export const vuePropsType: CombineProps<TitleProps> = {
   className: {
     type: String,
     default: '',

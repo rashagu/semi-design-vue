@@ -15,7 +15,7 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useListContext } from './context/Consumer';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 
 export interface ListItemProps {
@@ -32,7 +32,7 @@ export interface ListItemProps {
 }
 
 const prefixCls = cssClasses.PREFIX;
-const propTypes: ComponentObjectPropsOptions<Required<ListItemProps>> = {
+const propTypes: CombineProps<ListItemProps> = {
   extra: PropTypes.node as PropType<ListItemProps['extra']>,
   header: PropTypes.node,
   main: PropTypes.node,

@@ -1,4 +1,4 @@
-import {HTMLAttributes, VNode} from "vue";
+import { HTMLAttributes, PropType, VNode } from 'vue';
 import {ComponentPublicInstance, VNodeRef} from "vue";
 
 export type VueJsxNodeSingle = VNode | string | boolean | number
@@ -20,3 +20,17 @@ export type RefElement = Element | ComponentPublicInstance | null
 export type RemoveIndexSignature<T> = {
   [K in keyof T as K extends `${infer _}` ? K : never]: T[K];
 };
+
+// 约束vuePropsType
+export type IsOptional<T, K extends keyof T> = {} extends Pick<T, K> ? true : false;
+export type CombineProps<T> = {
+  [K in keyof Required<T>]: IsOptional<T, K> extends true ?({
+    type: PropType<T[K]>;
+    default?: any;
+    required?: boolean;
+  } | PropType<T[K]>):({
+    type: PropType<T[K]>;
+    default?: any;
+    required: true;
+  })
+}

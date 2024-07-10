@@ -26,7 +26,7 @@ import {
   ComponentObjectPropsOptions,
   PropType,
 } from 'vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
@@ -67,7 +67,7 @@ interface PopProps {
   [x: string]: any;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<PopconfirmProps>> = {
+const propTypes: CombineProps<PopconfirmProps> = {
   ...popoverVuePropsType,
   motion: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
   disabled: PropTypes.bool,

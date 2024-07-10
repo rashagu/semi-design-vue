@@ -4,7 +4,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/skeleton/constants';
 import '@douyinfe/semi-foundation/skeleton/skeleton.scss';
 import { Avatar, Image, Title, Button, Paragraph } from './item';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, useSlots } from 'vue';
-import type { VueJsxNode } from '../interface';
+import type { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 
 export type { ParagraphProps, AvatarProps, GenericProps } from './item';
@@ -22,7 +22,7 @@ export interface SkeletonProps {
 const defaultProps = {
   loading: true,
 };
-const propTypes: ComponentObjectPropsOptions<Required<SkeletonProps>> = {
+const propTypes: CombineProps<SkeletonProps> = {
   active: PropTypes.bool,
   placeholder: PropTypes.node,
   style: PropTypes.object,

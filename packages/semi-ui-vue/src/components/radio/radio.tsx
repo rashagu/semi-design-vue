@@ -22,6 +22,7 @@ import '@douyinfe/semi-foundation/radio/radio.scss';
 import { useBaseComponent } from '../_base/baseComponent';
 import RadioInner from './radioInner';
 import Context, { RadioContextValue, RadioMode } from './context';
+import { CombineProps } from '../interface';
 
 export type { RadioChangeEvent };
 export type RadioDisplayMode = 'vertical' | '';
@@ -64,7 +65,7 @@ export interface RadioState {
   checked?: boolean;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<RadioProps>> = {
+export const vuePropsType: CombineProps<RadioProps> = {
   autoFocus: {
     type: Boolean,
     default: false,

@@ -22,7 +22,7 @@ import {
   VNode,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { useBaseComponent } from '../_base/baseComponent';
 
@@ -43,9 +43,12 @@ export interface ToastReactProps extends ToastProps {
   id?: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<ToastReactProps>> = {
+export const propTypes: CombineProps<ToastReactProps> = {
   onClose: PropTypes.func as PropType<ToastReactProps['onClose']>,
-  content: PropTypes.node,
+  content: {
+    type: PropTypes.node,
+    required: true
+  },
   close: PropTypes.func as PropType<ToastReactProps['close']>,
   duration: PropTypes.number,
   theme: String as PropType<ToastReactProps['theme']>,

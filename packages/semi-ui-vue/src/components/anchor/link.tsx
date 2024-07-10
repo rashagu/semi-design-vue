@@ -20,7 +20,7 @@ import { vuePropsMake } from '../PropTypes';
 import { useAnchorContext } from './anchor-content/Consumer';
 import { useBaseComponent } from '../_base/baseComponent';
 import { TabsProps } from '../tabs';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { isObject } from 'lodash';
 
 const prefixCls = cssClasses.PREFIX;
@@ -36,7 +36,7 @@ export interface LinkProps {
   direction?: 'ltr' | 'rtl';
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<LinkProps>> = {
+const propTypes: CombineProps<LinkProps> = {
   href: PropTypes.string,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   className: PropTypes.string,

@@ -1,5 +1,5 @@
 import { defineComponent, ref, h, Fragment, VNode, CSSProperties, ComponentObjectPropsOptions, PropType } from 'vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 
 export interface TriggerProps {
   triggerRender?: (props?: any) => VueJsxNode;
@@ -10,7 +10,7 @@ export interface TriggerProps {
   placeholder?: string | string[];
   className?: string;
   style?: CSSProperties;
-  onChange: (value: string, event: any)=>void;
+  onChange?: (value: string, event: any)=>void;
   showClearIgnoreDisabled?: boolean
   onClear?: (e: MouseEvent)=>void;
   onSearch?: (value: string, event: any)=>void;
@@ -18,7 +18,7 @@ export interface TriggerProps {
   disabled?: boolean
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<TriggerProps>> = {
+export const vuePropsType: CombineProps<TriggerProps> = {
   triggerRender: Function as PropType<TriggerProps['triggerRender']>,
   componentName: String,
   componentProps: Object,
@@ -28,7 +28,9 @@ export const vuePropsType: ComponentObjectPropsOptions<Required<TriggerProps>> =
   className: String,
   style: [Object],
   showClearIgnoreDisabled: Boolean,
-  onChange: Function as PropType<TriggerProps['onChange']>,
+  onChange: {
+    type: Function as PropType<TriggerProps['onChange']>,
+  },
   onClear: Function as PropType<TriggerProps['onClear']>,
   disabled: Boolean,
   onSearch: Function as PropType<TriggerProps['onSearch']>,

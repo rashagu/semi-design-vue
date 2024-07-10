@@ -24,7 +24,7 @@ import {
   VNode,
   watch,
 } from 'vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { Locale } from '../locale/interface';
 import LocaleConsumer from '../locale/localeConsumer';
 
@@ -41,7 +41,7 @@ export interface OverflowItem extends PlainTab {
   active: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<TabBarProps>> = {
+const propTypes: CombineProps<TabBarProps> = {
   activeKey: PropTypes.string,
   className: PropTypes.string,
   collapsible: PropTypes.bool,

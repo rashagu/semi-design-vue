@@ -8,6 +8,7 @@ import Label, { LabelProps } from '../form/label';
 
 import { noop } from '@douyinfe/semi-foundation/utils/function';
 import { get, isFunction } from 'lodash';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 const sizeSet = strings.SIZE;
@@ -28,7 +29,7 @@ export interface InputGroupProps {
 // eslint-disable-next-line
 export interface InputGroupState {}
 
-export const VuePropsType: ComponentObjectPropsOptions<Required<InputGroupProps>> = {
+export const VuePropsType: CombineProps<InputGroupProps> = {
   className: { type: String, default: '' },
   size: { type: String as PropType<InputGroupProps['size']>, default: 'default' },
   style: [String, Object],

@@ -16,7 +16,7 @@ import { Col, Row } from '../grid/index';
 import { defineComponent, h, useSlots, Fragment, cloneVNode, PropType } from 'vue';
 import { useFormUpdaterContext } from './context/FormUpdaterContext/Consumer';
 import { noop } from '@douyinfe/semi-foundation/utils/function';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { ComponentObjectPropsOptions } from 'vue';
 interface GroupErrorProps {
   showValidateIcon?: boolean;
@@ -48,7 +48,7 @@ const GroupError = (props: GroupErrorProps) => {
   return <ErrorMessage error={error} showValidateIcon={props.showValidateIcon} isInInputGroup={props.isInInputGroup} />;
 };
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<InputGroupProps>> = {
+export const vuePropsType: CombineProps<InputGroupProps> = {
   className: { type: String, default: '' },
   size: { type: String as PropType<InputGroupProps['size']>, default: 'default' },
   style: [String, Object],

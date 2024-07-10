@@ -7,6 +7,7 @@ import { ColumnProps, TableComponents } from './interface';
 import { ComponentObjectPropsOptions, defineComponent, h, useSlots } from 'vue';
 import type { CSSProperties } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 export interface ColGroupProps {
   columns?: ColumnProps[];
@@ -16,7 +17,7 @@ export interface ColGroupProps {
   components?: TableComponents['body'];
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<ColGroupProps>> = {
+const propTypes: CombineProps<ColGroupProps> = {
   columns: PropTypes.array,
   prefixCls: PropTypes.string,
   className: PropTypes.string,

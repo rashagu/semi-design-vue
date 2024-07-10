@@ -5,7 +5,7 @@ import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import { CSSProperties, defineComponent, h, useSlots, VNode } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useDescriptionsContext } from './context/Consumer';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { useAttrs } from 'vue';
 
 export interface DescriptionsItemProps {
@@ -21,7 +21,14 @@ const prefixCls = cssClasses.PREFIX;
 const keyCls = `${prefixCls}-key`;
 const valCls = `${prefixCls}-value`;
 
-const propTypes = {
+const propTypes: CombineProps<{
+  itemKey?: any;
+  hidden?: boolean;
+  className?: string;
+  style?: any;
+  span?: number;
+  value?: any;
+}> = {
   itemKey: PropTypes.node,
   hidden: PropTypes.bool,
   className: PropTypes.string,

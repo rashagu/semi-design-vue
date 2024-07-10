@@ -37,6 +37,7 @@ import SizeContext from './context';
 import * as PropTypes from '../PropTypes';
 import { vuePropsMake } from '../PropTypes';
 import { useTypographyBaseSizeContext } from './context/Consumer';
+import { CombineProps } from '../interface';
 
 export interface BaseTypographyProps extends BaseProps {
   copyable?: CopyableConfig | boolean;
@@ -100,7 +101,7 @@ interface BaseTypographyState {
 const prefixCls = cssClasses.PREFIX;
 const ELLIPSIS_STR = '...';
 
-const propTypes: ComponentObjectPropsOptions<Required<BaseTypographyProps>> = {
+const propTypes: CombineProps<BaseTypographyProps> = {
   copyable: PropTypes.oneOfType([PropTypes.object(), PropTypes.bool]),
   delete: PropTypes.bool,
   disabled: PropTypes.bool,

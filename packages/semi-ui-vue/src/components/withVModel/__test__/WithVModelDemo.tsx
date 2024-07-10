@@ -25,7 +25,7 @@ interface WithVModelDemoProps {
   name?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<WithVModelDemoProps> = {
+export const vuePropsType: CombineProps<WithVModelDemoProps> = {
   name: String,
 };
 const WithVModelDemo = defineComponent((props, {}) => {

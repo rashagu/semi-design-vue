@@ -27,7 +27,7 @@ import {
   watchEffect,
 } from 'vue';
 import { useNavContext } from './nav-context/Consumer';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 
 const clsPrefix = `${cssClasses.PREFIX}-item`;
@@ -60,7 +60,7 @@ export interface NavItemState {
   tooltipShow: boolean;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<NavItemProps>> = {
+export const vuePropsType: CombineProps<NavItemProps> = {
   text: PropTypes.node,
   itemKey: [PropTypes.string, PropTypes.number],
   onClick: {

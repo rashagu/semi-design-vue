@@ -8,7 +8,7 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/table/constants';
 import { SortIcon, SortOrder } from './interface';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots } from 'vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 
 export interface ColumnSorterProps {
@@ -21,7 +21,7 @@ export interface ColumnSorterProps {
   sortIcon?: SortIcon;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<ColumnSorterProps>> = {
+const propTypes: CombineProps<ColumnSorterProps> = {
   className: PropTypes.string,
   style: PropTypes.object,
   onClick: PropTypes.func as PropType<ColumnSorterProps['onClick']>,

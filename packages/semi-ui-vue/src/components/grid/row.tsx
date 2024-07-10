@@ -16,6 +16,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/grid/constants';
 import '@douyinfe/semi-foundation/grid/grid.scss';
 import { registerMediaQuery } from '../_utils/index';
 import { ComponentObjectPropsOptions } from 'vue';
+import { CombineProps } from '../interface';
 
 const responsiveArray = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
 
@@ -48,7 +49,7 @@ const responsiveMap = {
   xxl: '(min-width: 1600px)',
 };
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<RowProps>> = {
+export const vuePropsType: CombineProps<RowProps> = {
   type: String as PropType<RowProps['type']>,
   align: String as PropType<RowProps['align']>,
   justify: String as PropType<RowProps['justify']>,

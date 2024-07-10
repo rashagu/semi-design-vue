@@ -12,7 +12,7 @@ import { ColumnProps, ExpandIcon, TableComponents, Virtualized, Fixed } from '..
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, isVNode, PropType, useSlots } from 'vue';
 import { vuePropsMake } from '../../PropTypes';
 import { useTableContext } from '../tableContext/Consumer';
-import { VueJsxNode } from '../../interface';
+import { CombineProps, VueJsxNode } from '../../interface';
 import { styleNum } from '../../_utils';
 
 export interface TableExpandedRowProps {
@@ -40,8 +40,11 @@ export interface TableExpandedRowProps {
   onExpandedRowsChange?: any;
 }
 
-const propTypes: ComponentObjectPropsOptions<TableExpandedRowProps> = {
-  cellWidths: PropTypes.array,
+const propTypes: CombineProps<TableExpandedRowProps> = {
+  cellWidths: {
+    type: PropTypes.array,
+    required: true,
+  },
   className: PropTypes.string,
   columns: PropTypes.array,
   components: PropTypes.object,
@@ -62,6 +65,7 @@ const propTypes: ComponentObjectPropsOptions<TableExpandedRowProps> = {
   store: PropTypes.object,
   style: PropTypes.object,
   virtualized: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  displayNone: PropTypes.bool,
 };
 const defaultProps = {
   record: {},

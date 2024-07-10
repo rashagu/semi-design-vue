@@ -8,10 +8,11 @@ import { TimeColProps } from './interface';
 import { Locale } from '../locale/interface';
 import { ComponentObjectPropsOptions, defineComponent, h, PropType, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 const prefixCls = `${cssClasses.PREFIX}-time`;
 
-const propTypes: ComponentObjectPropsOptions<Required<TimeColProps>> = {
+const propTypes: CombineProps<TimeColProps> = {
   className: PropTypes.string,
   renderTimeDisplay: PropTypes.func as PropType<TimeColProps['renderTimeDisplay']>,
 };

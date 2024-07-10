@@ -13,13 +13,14 @@ import classNames from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/button/constants';
 import '@douyinfe/semi-foundation/button/button.scss';
 import { BaseProps } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 
 // eslint-disable-next-line
 export interface SplitButtonGroupProps extends BaseProps {}
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<SplitButtonGroupProps>> = {
+export const vuePropsType: CombineProps<SplitButtonGroupProps> = {
   style: Object,
   className: String,
 };

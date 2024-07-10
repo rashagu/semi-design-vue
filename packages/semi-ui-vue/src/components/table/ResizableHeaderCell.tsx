@@ -1,6 +1,7 @@
 import { Resizable } from '@kousum/vue-resizable';
 import { ComponentObjectPropsOptions, defineComponent, Fragment, h, PropType, useSlots } from 'vue';
 import { omit } from 'lodash';
+import { CombineProps } from '../interface';
 
 export interface ResizableHeaderCellProps {
   onResize?: ResizeFn;
@@ -10,7 +11,7 @@ export interface ResizableHeaderCellProps {
   /** For compatibility with previous versions, the default value is true. If you don't want to resize, set it to false */
   resize?: boolean;
 }
-export const vuePropsType: ComponentObjectPropsOptions<Required<ResizableHeaderCellProps>> = {
+export const vuePropsType: CombineProps<ResizableHeaderCellProps> = {
   onResize: Function as PropType<ResizableHeaderCellProps['onResize']>,
   onResizeStart: Function as PropType<ResizableHeaderCellProps['onResizeStart']>,
   onResizeStop: Function as PropType<ResizableHeaderCellProps['onResizeStop']>,

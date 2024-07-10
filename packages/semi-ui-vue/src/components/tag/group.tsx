@@ -4,7 +4,7 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/tag/constants';
 import Tag from './index';
 import Popover, { PopoverProps } from '../popover';
 import { AvatarShape, TagProps } from './interface';
-import { VueJsxNode, VueJsxNodeSingle } from '../interface';
+import { CombineProps, VueJsxNode, VueJsxNodeSingle } from '../interface';
 import { omit } from 'lodash';
 
 const prefixCls = cssClasses.PREFIX;
@@ -26,7 +26,7 @@ export interface TagGroupProps {
   onPlusNMouseEnter?: () => void;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<TagGroupProps>> = {
+export const vuePropsType: CombineProps<TagGroupProps> = {
   maxTagCount: Number,
   restCount: Number,
   tagList: Array,

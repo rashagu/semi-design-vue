@@ -7,7 +7,7 @@ import { IconTick } from '@kousum/semi-icons-vue';
 import { getFragmentChildren, getHighLightTextHTML } from '../_utils/index';
 import { Locale } from '../locale/interface';
 import { BasicOptionProps } from '@douyinfe/semi-foundation/autoComplete/optionFoundation';
-import { type RemoveIndexSignature, VueJsxNode } from '../interface';
+import { CombineProps, type RemoveIndexSignature, VueJsxNode } from '../interface';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots, type VNode } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { StateOptionItem } from '@douyinfe/semi-foundation/autoComplete/foundation';
@@ -45,7 +45,7 @@ interface renderOptionContentArgument {
   prefixCls: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<OptionProps>> = {
+const propTypes: CombineProps<OptionProps> = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -70,7 +70,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Option = defineComponent({
-  props: vuePropsType as ComponentObjectPropsOptions<Required<OptionProps>>,
+  props: vuePropsType as CombineProps<OptionProps>,
   name: 'Option',
   setup(props, {}) {
     const slots = useSlots();

@@ -5,13 +5,14 @@ import Avatar, { AvatarGroupOverlapFrom, AvatarGroupShape, AvatarGroupSize } fro
 import { AvatarGroupProps } from './interface';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/avatar/constants';
 import { ComponentObjectPropsOptions } from 'vue/dist/vue';
+import { CombineProps } from '../interface';
 
 const sizeSet = strings.SIZE;
 const shapeSet = strings.SHAPE;
 const overlapFromSet = strings.OVERLAP_FROM;
 const prefixCls = cssClasses.PREFIX;
 
-export const vuePropsType: ComponentObjectPropsOptions<AvatarGroupProps> = {
+export const vuePropsType: CombineProps<AvatarGroupProps> = {
   style: [Object, String] as PropType<AvatarGroupProps['style']>,
   className: String,
   shape: { type: String as PropType<AvatarGroupProps['shape']>, default: 'circle' },

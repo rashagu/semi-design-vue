@@ -9,7 +9,7 @@ import { noop } from 'lodash';
 import { BaseProps } from '../_base/baseComponent';
 import { ComponentObjectPropsOptions, defineComponent, h, isVNode, PropType, VNode } from 'vue';
 import { useNavContext } from './nav-context/Consumer';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 
 export interface NavFooterProps extends BaseProps {
   collapseButton?: VueJsxNode;
@@ -17,7 +17,7 @@ export interface NavFooterProps extends BaseProps {
   onClick?: (event: MouseEvent) => void;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<NavFooterProps>> = {
+export const vuePropsType: CombineProps<NavFooterProps> = {
   // children: PropTypes.node,
   style: PropTypes.object,
   className: PropTypes.string,

@@ -27,6 +27,7 @@ import {
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { getFragmentChildren } from '../_utils';
+import { CombineProps } from '../interface';
 
 export interface CarouselState {
   activeIndex: number;
@@ -36,7 +37,7 @@ export interface CarouselState {
   isInit: boolean;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<CarouselProps>> = {
+const propTypes: CombineProps<CarouselProps> = {
   activeIndex: PropTypes.number,
   animation: PropTypes.string as PropType<CarouselProps['animation']>,
   arrowProps: PropTypes.object,

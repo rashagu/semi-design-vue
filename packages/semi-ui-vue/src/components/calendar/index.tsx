@@ -8,10 +8,11 @@ import { CalendarProps } from './interface';
 import '@douyinfe/semi-foundation/calendar/calendar.scss';
 import { cloneVNode, ComponentObjectPropsOptions, defineComponent, h, PropType, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import { CombineProps } from '../interface';
 
 export * from './interface';
 
-const propTypes: ComponentObjectPropsOptions<Required<CalendarProps>> = {
+const propTypes: CombineProps<CalendarProps> = {
   displayValue: PropTypes.object,
   header: PropTypes.node,
   events: PropTypes.array,

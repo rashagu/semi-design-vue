@@ -30,6 +30,7 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { useBreadContext } from './context/Consumer';
 import { getFragmentChildren, styleNum } from '../_utils';
+import { CombineProps } from '../interface';
 
 const clsPrefix = cssClasses.PREFIX;
 
@@ -58,7 +59,7 @@ interface GetTooltipOptType {
   opts?: ShowTooltipType['opts'];
 }
 
-const propTypes_: ComponentObjectPropsOptions<Required<BreadcrumbItemProps>> = {
+const propTypes_: CombineProps<BreadcrumbItemProps> = {
   onClick: propTypes.func as PropType<BreadcrumbItemProps['onClick']>,
   route: [propTypes.object, propTypes.string],
   active: propTypes.bool,
@@ -228,7 +229,9 @@ const BreadcrumbItem = defineComponent({
       } = props;
       const pageLabel = active ? { 'aria-current': 'page' as const } : {};
       const item = renderItem();
-      const separator = props.separator || <span class={`${clsPrefix}-separator`}>{context.value?.separator}</span>;
+      const separator = props.separator || <span class={`${clsPrefix}-separator`}>
+        {(context.value as any)?.separator}
+      </span>;
       const wrapperCLs = cls({
         [`${clsPrefix}-item-wrap`]: true,
         // [`${clsPrefix}-item-wrap-iconOnly`]: !!children && props.icon,

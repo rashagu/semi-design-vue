@@ -2,9 +2,10 @@ import * as PropTypes from "../PropTypes";
 import {ComponentObjectPropsOptions} from "vue";
 import {CheckboxProps} from "./checkbox";
 import {PropType} from "vue";
+import { CombineProps } from '../interface';
 
 
-export const propTypesCheckbox:ComponentObjectPropsOptions<Required<CheckboxProps>> = {
+export const propTypesCheckbox:CombineProps<CheckboxProps> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
   'aria-invalid': PropTypes.bool,

@@ -13,6 +13,7 @@ import {
   IconDoubleChevronRight,
 } from '@kousum/semi-icons-vue';
 import { PanelType } from '@douyinfe/semi-foundation/datePicker/monthsGridFoundation';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.NAVIGATION;
 
@@ -33,7 +34,7 @@ interface NavigationProps {
   panelType?: PanelType;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<NavigationProps>> = {
+export const vuePropsType: CombineProps<NavigationProps> = {
   monthText: { type: PropTypes.string, default: '' },
   density: PropTypes.string,
   onMonthClick: {

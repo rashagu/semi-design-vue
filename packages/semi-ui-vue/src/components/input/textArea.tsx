@@ -24,6 +24,7 @@ import type { DebouncedFunc } from 'lodash';
 import { IconClear } from '@kousum/semi-icons-vue';
 import { vuePropsMake } from '../PropTypes';
 import ResizeObserver from '../resizeObserver';
+import { CombineProps } from '../interface';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -90,8 +91,8 @@ export interface TextAreaState {
   cachedValue?: string;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<TextAreaProps>> = {
-  autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+const propTypes: CombineProps<TextAreaProps> = {
+  autosize: [PropTypes.bool, PropTypes.object] as PropType<TextAreaProps['autosize']>,
   borderless: PropTypes.bool,
   placeholder: PropTypes.string,
   value: PropTypes.string,
@@ -384,7 +385,7 @@ const TextArea = defineComponent({
       const itemCls = cls(`${prefixCls}-textarea`, {
         [`${prefixCls}-textarea-disabled`]: disabled,
         [`${prefixCls}-textarea-readonly`]: readonly,
-        [`${prefixCls}-textarea-autosize`]: isObject(autosize) ? isUndefined(autosize?.maxRows) : autosize,
+        [`${prefixCls}-textarea-autosize`]: typeof autosize !== 'boolean'? isUndefined(autosize?.maxRows) : autosize,
         [`${prefixCls}-textarea-showClear`]: showClear,
       });
       const itemProps: TextareaHTMLAttributes = {

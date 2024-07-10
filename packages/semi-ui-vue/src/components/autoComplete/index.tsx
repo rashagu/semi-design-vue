@@ -20,7 +20,7 @@ import warning from '@douyinfe/semi-foundation/utils/warning';
 import '@douyinfe/semi-foundation/autoComplete/autoComplete.scss';
 import { Motion } from '../_base/base';
 import { AriaAttributes } from '../AriaAttributes';
-import { type RemoveIndexSignature, VueHTMLAttributes, VueJsxNode } from '../interface';
+import { CombineProps, type RemoveIndexSignature, VueHTMLAttributes, VueJsxNode } from '../interface';
 import {
   ComponentObjectPropsOptions,
   CSSProperties,
@@ -486,7 +486,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
 }
 
 function AutoCompleteFuncVueProps<T>() {
-  const propTypes: ComponentObjectPropsOptions<Required<AutoCompleteProps<T>>> = {
+  const propTypes: CombineProps<AutoCompleteProps<T>> = {
     'aria-label': PropTypes.string,
     'aria-labelledby': PropTypes.string,
     'aria-invalid': PropTypes.bool,

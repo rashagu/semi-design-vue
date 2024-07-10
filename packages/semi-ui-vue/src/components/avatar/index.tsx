@@ -24,6 +24,7 @@ import { RadioInnerProps } from '../radio/radioInner';
 import { handlePrevent } from '@douyinfe/semi-foundation/utils/a11y';
 import TopSlotSvg from './TopSlotSvg';
 import { styleNum } from '../_utils';
+import { CombineProps } from '../interface';
 
 const sizeSet = strings.SIZE;
 const shapeSet = strings.SHAPE;
@@ -39,7 +40,7 @@ export interface AvatarState {
   scale: number;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<AvatarProps>> = {
+export const vuePropsType: CombineProps<AvatarProps> = {
   style: [Object, String] as PropType<AvatarProps['style']>,
   className: String,
   color: { type: String as PropType<AvatarProps['color']>, default: 'grey' },

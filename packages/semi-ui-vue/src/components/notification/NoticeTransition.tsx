@@ -11,6 +11,7 @@ import {
   useSlots,
   VNode,
 } from 'vue';
+import { CombineProps } from '../interface';
 
 export type ArgsType<T> = T extends (...args: infer A) => any ? A : never;
 
@@ -22,9 +23,12 @@ export interface NoticeTransitionProps {
 
 type NoticeTransitionFormatFuncType = (styles: { translate: string; opacity: string | number }) => any;
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<NoticeTransitionProps>> = {
+export const vuePropsType: CombineProps<NoticeTransitionProps> = {
   position: String as PropType<NoticeTransitionProps['position']>,
-  children: [Object, Function] as PropType<NoticeTransitionProps['children']>,
+  children: {
+    type: [Object, Function] as PropType<NoticeTransitionProps['children']>,
+    required: true
+  },
   motion: [Object, String, Boolean],
 };
 const NoticeTransition = defineComponent({

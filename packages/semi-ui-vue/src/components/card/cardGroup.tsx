@@ -5,6 +5,7 @@ import Space from '../space';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useHasInProps } from '../_base/baseComponent';
+import { CombineProps } from '../interface';
 
 const prefixcls = cssClasses.PREFIX;
 
@@ -20,7 +21,7 @@ export interface CardGroupProps {
   /** Card set type */
   type?: CardGroupType;
 }
-const propTypes: ComponentObjectPropsOptions<Required<CardGroupProps>> = {
+const propTypes: CombineProps<CardGroupProps> = {
   className: PropTypes.string,
   spacing: [PropTypes.number, PropTypes.array],
   style: PropTypes.object,

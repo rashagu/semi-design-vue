@@ -1,25 +1,33 @@
-import Toast from '../toast';
+import Toast, { propTypes } from '../toast';
 import { ToastInstance } from '@douyinfe/semi-foundation/toast/toastFoundation';
-import {ComponentObjectPropsOptions, defineComponent, h, PropType, ref, useSlots, watch} from "vue";
+import { ComponentObjectPropsOptions, defineComponent, h, PropType, ref, useSlots, watch } from 'vue';
+import { CombineProps } from '../../interface';
 
-interface HookToastProps extends ToastInstance{
-    afterClose: (id: string) => void;
+interface HookToastProps extends ToastInstance {
+  afterClose: (id: string) => void;
 }
 
-export const vuePropsType:ComponentObjectPropsOptions<HookToastProps> = {
-    content: undefined,
-    id: String as PropType<HookToastProps['id']>,
-    motion: Boolean as PropType<HookToastProps['motion']>,
-    afterClose: Function as PropType<HookToastProps['afterClose']>
-}
-const HookToast = defineComponent((props, {attrs}) => {
-    const slots = useSlots()
-    const config:any = attrs
+export const vuePropsType: CombineProps<HookToastProps> = {
+  ...propTypes,
+  content: undefined,
+  id: String as PropType<HookToastProps['id']>,
+  motion: Boolean as PropType<HookToastProps['motion']>,
+  afterClose: {
+    type: Function as PropType<HookToastProps['afterClose']>,
+    required: true,
+  },
+};
+const HookToast = defineComponent({
+  props: vuePropsType,
+  name: 'HookToast',
+  setup(props, { attrs }) {
+    const slots = useSlots();
+    const config: any = attrs;
 
-    const visible = ref()
+    const visible = ref();
 
     const close = () => {
-        visible.value = false
+      visible.value = false;
     };
 
     // React.useImperativeHandle(ref, () => ({
@@ -28,24 +36,15 @@ const HookToast = defineComponent((props, {attrs}) => {
     //     }
     // }));
 
-    watch(visible, ()=>{
-        if (!visible.value) {
-            props.afterClose(config.id);
-        }
-    })
+    watch(visible, () => {
+      if (!visible.value) {
+        props.afterClose(config.id);
+      }
+    });
     return () => {
-        return visible ? (
-          <Toast
-            {...config}
-            close={close}
-          />
-        ) : null;
-    }
-}, {
-    props: vuePropsType,
-    name: 'HookToast'
-})
+      return visible ? <Toast {...config} close={close} /> : null;
+    };
+  },
+});
 
-
-
-export default HookToast
+export default HookToast;

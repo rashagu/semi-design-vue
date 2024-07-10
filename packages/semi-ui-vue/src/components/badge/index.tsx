@@ -6,7 +6,7 @@ import '@douyinfe/semi-foundation/badge/badge.scss';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { useHasInProps } from '../_base/baseComponent';
 
 const prefixCls = cssClasses.PREFIX;
@@ -31,7 +31,7 @@ export interface BadgeProps {
   countStyle?: CSSProperties;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<BadgeProps>> = {
+const propTypes: CombineProps<BadgeProps> = {
   count: PropTypes.node,
   dot: PropTypes.bool,
   type: PropTypes.string as PropType<BadgeProps['type']>,

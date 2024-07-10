@@ -27,7 +27,7 @@ import Input from '../input';
 import Popover, { PopoverProps } from '../popover';
 import Paragraph from '../typography/paragraph';
 import { IconClear, IconHandle } from '@kousum/semi-icons-vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 import { isSemiIcon } from '../_utils';
 import SortableList from './SortableList';
@@ -99,7 +99,7 @@ export interface TagInputState {
 
 const prefixCls = cssClasses.PREFIX;
 
-const propTypes: ComponentObjectPropsOptions<Required<TagInputProps>> = {
+const propTypes: CombineProps<TagInputProps> = {
   // children: PropTypes.node as PropType<TagInputProps['children']>,
   clearIcon: PropTypes.node,
   style: PropTypes.object,

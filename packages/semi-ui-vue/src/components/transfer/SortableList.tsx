@@ -13,6 +13,7 @@ import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrate
 import { defineComponent, ref, h, Fragment, useSlots, Teleport, ComponentObjectPropsOptions } from 'vue';
 import SortableItem from './SortableItem';
 import { prefixCls } from '../transfer';
+import { CombineProps } from '../interface';
 
 interface SortableListProps {
   items: any;
@@ -22,11 +23,23 @@ interface SortableListProps {
   axis?: any;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<SortableListProps> = {
-  items: Array,
-  onSortEnd: Function,
-  useDragHandle: [Boolean],
-  helperClass: String,
+export const vuePropsType: CombineProps<SortableListProps> = {
+  items: {
+    type: Array,
+    required: true
+  },
+  onSortEnd: {
+    type: Function,
+    required: true
+  },
+  useDragHandle: {
+    type: [Boolean],
+    required: true
+  },
+  helperClass: {
+    type: String,
+    required: true
+  },
   axis: String,
 };
 const SortableList = defineComponent({

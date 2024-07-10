@@ -8,7 +8,7 @@ interface TypoCopyDemoProps {
   name?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<TypoCopyDemoProps> = {
+export const vuePropsType: CombineProps<TypoCopyDemoProps> = {
   name: String,
 };
 const TypoCopyDemo = defineComponent((props, {}) => {

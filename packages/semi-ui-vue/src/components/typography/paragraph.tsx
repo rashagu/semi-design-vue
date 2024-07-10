@@ -19,6 +19,7 @@ import {
   OmitTypographyProps,
 } from './interface';
 import { CopyableConfig, LinkType } from './title';
+import { CombineProps } from '../interface';
 
 type OmitParagraphProps = OmitTypographyProps;
 
@@ -63,7 +64,7 @@ export interface ParagraphProps {
 
 const prefixCls = cssClasses.PREFIX;
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<ParagraphProps>> = {
+export const vuePropsType: CombineProps<ParagraphProps> = {
   copyable: {
     type: [Object, Boolean],
     default: false,

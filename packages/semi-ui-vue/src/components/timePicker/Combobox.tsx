@@ -25,6 +25,7 @@ import { Locale } from '../locale/interface';
 import { vuePropsMake } from '../PropTypes';
 import * as PropTypes from '../PropTypes';
 import { timePickerPropTypes } from './propTypes';
+import { CombineProps } from '../interface';
 const ScrollItemFormatOptionReturn = scrollItemFunc<FormatOptionReturn>();
 const ScrollItemAMPMOptionItem = scrollItemFunc<AMPMOptionItem>();
 
@@ -68,7 +69,7 @@ export interface AMPMOptionItem {
   text: string;
 }
 
-const staticPropTypes: ComponentObjectPropsOptions<Required<ComboboxProps>> = {
+const staticPropTypes: CombineProps<ComboboxProps> = {
   class: [PropTypes.string, PropTypes.object],
   className: PropTypes.string,
   style: [PropTypes.string, PropTypes.object] as PropType<ComboboxProps['style']>,

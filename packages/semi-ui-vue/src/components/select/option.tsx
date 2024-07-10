@@ -9,7 +9,7 @@ import { getHighLightTextHTML } from '../_utils/index';
 import type { Locale } from '../locale/interface';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import type { BasicOptionProps } from '@douyinfe/semi-foundation/select/optionFoundation';
-import type { RemoveIndexSignature } from '../interface';
+import type { CombineProps, RemoveIndexSignature } from '../interface';
 import { OptionGroupProps } from './optionGroup';
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>();
@@ -54,7 +54,7 @@ interface renderOptionContentArgument {
   prefixCls: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<OptionProps>> = {
+export const vuePropsType: CombineProps<OptionProps> = {
   value: [String, Number],
   label: [String, Number, Object, Array],
   children: [String, Number, Object, Array],

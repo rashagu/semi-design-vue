@@ -4,6 +4,7 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/layout/constants'
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import { registerMediaQuery } from '../_utils/index';
 import { useLayoutContext } from './context/Consumer';
+import { CombineProps } from '../interface';
 
 export interface ResponsiveMap {
   xs: string;
@@ -43,7 +44,7 @@ export interface SiderProps {
   role?: string;
 }
 
-export const vuePropsType: ComponentObjectPropsOptions<Required<SiderProps>> = {
+export const vuePropsType: CombineProps<SiderProps> = {
   prefixCls: {
     type: String as PropType<SiderProps['prefixCls']>,
     default: cssClasses.PREFIX,

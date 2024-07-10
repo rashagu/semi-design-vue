@@ -26,7 +26,7 @@ import {
   watch,
 } from 'vue';
 import { useConfigContext } from '../configProvider/context/Consumer';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { func, vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
 import { getScrollbarWidth } from '../_utils';
@@ -49,7 +49,7 @@ export interface SideSheetReactProps extends SideSheetProps {
 
 export type { SideSheetState };
 
-const propTypes: ComponentObjectPropsOptions<Required<Omit<SideSheetProps, 'children'>>> = {
+const propTypes: CombineProps<Omit<SideSheetProps, 'children'>> = {
   bodyStyle: PropTypes.object,
   headerStyle: PropTypes.object,
   className: PropTypes.string,
@@ -92,7 +92,7 @@ const defaultProps: SideSheetReactProps = {
   afterVisibleChange: noop,
   keepDOM: false,
 };
-export const vuePropsType = vuePropsMake<SideSheetProps>(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const SideSheet = defineComponent({
   props: vuePropsType,
   name: 'SideSheet',

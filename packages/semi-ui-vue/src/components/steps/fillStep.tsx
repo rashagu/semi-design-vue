@@ -3,7 +3,7 @@ import * as PropTypes from '../PropTypes';
 import classnames from 'classnames';
 import { stepsClasses as css } from '@douyinfe/semi-foundation/steps/constants';
 import { IconTickCircle, IconAlertCircle, IconAlertTriangle } from '@kousum/semi-icons-vue';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, useSlots } from 'vue';
 import { AriaAttributes } from '../AriaAttributes';
 import { vuePropsMake } from '../PropTypes';
@@ -29,7 +29,7 @@ export interface FillStepProps {
   direction?: Direction;
 }
 
-const propTypes: ComponentObjectPropsOptions<Required<FillStepProps>> = {
+const propTypes: CombineProps<FillStepProps> = {
   prefixCls: PropTypes.string,
   description: PropTypes.node,
   icon: PropTypes.node,

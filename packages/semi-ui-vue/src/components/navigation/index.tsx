@@ -33,7 +33,7 @@ import NavContext from './nav-context';
 import '@douyinfe/semi-foundation/navigation/navigation.scss';
 import { Motion } from '../_base/base';
 import LocaleConsumer from '../locale/localeConsumer';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 
 export type Mode = 'vertical' | 'horizontal';
 export { NavFooterProps, NavHeaderProps, ToggleIcon, SubNavProps, NavItemProps };
@@ -113,7 +113,7 @@ export interface NavState {
 
 const { hasOwnProperty } = Object.prototype;
 
-const propTypes: ComponentObjectPropsOptions<Required<NavProps>> = {
+const propTypes: CombineProps<NavProps> = {
   // Initial expanded SubNav navigation key array
   defaultOpenKeys: Array,
   openKeys: Array,

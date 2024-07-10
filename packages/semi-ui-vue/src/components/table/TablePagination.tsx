@@ -4,7 +4,7 @@ import { get, isFunction } from 'lodash';
 import { cssClasses } from '@douyinfe/semi-foundation/table/constants';
 import Pagination from '../pagination';
 import { RenderPagination, TablePaginationProps as PaginationProps } from './interface';
-import { VueJsxNode } from '../interface';
+import { CombineProps, VueJsxNode } from '../interface';
 import type { ComponentObjectPropsOptions, CSSProperties, PropType } from 'vue';
 import { defineComponent, h, useSlots, Fragment, isVNode } from 'vue';
 import { vuePropsMake } from '../PropTypes';
@@ -16,7 +16,7 @@ export interface TablePaginationProps {
   info?: VueJsxNode;
   renderPagination?: RenderPagination;
 }
-const propTypes: ComponentObjectPropsOptions<Required<TablePaginationProps>> = {
+const propTypes: CombineProps<TablePaginationProps> = {
   style: PropTypes.object,
   prefixCls: PropTypes.string,
   pagination: PropTypes.object,
