@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 0.15.2-alpha.0
+
+### Patch Changes
+
+- test CombineProps
+
 ## 0.15.1
 
 ### Patch Changes

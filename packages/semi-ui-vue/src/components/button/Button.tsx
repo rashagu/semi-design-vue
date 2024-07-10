@@ -38,8 +38,20 @@ export interface ButtonProps {
   'aria-label'?: AriaAttributes['aria-label'];
   contentClassName?: string;
 }
-
-export const vuePropsType: ComponentObjectPropsOptions<Required<ButtonProps>> = {
+// 约束vuePropsType
+export type IsOptional<T, K extends keyof T> = {} extends Pick<T, K> ? true : false;
+export type CombineProps<T> = {
+  [K in keyof Required<T>]: IsOptional<T, K> extends true ?({
+    type: PropType<T[K]>;
+    default?: any;
+    required?: boolean;
+  } | PropType<T[K]>):({
+    type: PropType<T[K]>;
+    default?: any;
+    required: true;
+  })
+}
+export const vuePropsType: CombineProps<ButtonProps> = {
   id: String,
   circle: Boolean,
   className: String,

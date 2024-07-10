@@ -1,0 +1,15 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "@kousum/semi-animation-vue": "0.15.1",
+    "@kousum/semi-icons-lab-vue": "0.15.1",
+    "@kousum/semi-icons-vue": "0.15.1",
+    "@kousum/semi-illustrations-vue": "0.15.1",
+    "@kousum/semi-ui-vue": "0.15.1",
+    "@kousum/vite-plugin-semi-theme": "0.15.1"
+  },
+  "changesets": [
+    "hip-parrots-end"
+  ]
+}
