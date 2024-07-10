@@ -1,5 +1,5 @@
 {
-  "mode": "pre",
+  "mode": "exit",
   "tag": "alpha",
   "initialVersions": {
     "@kousum/semi-animation-vue": "0.15.1",
