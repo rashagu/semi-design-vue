@@ -25,6 +25,7 @@ import animatedScrollTo from '@douyinfe/semi-foundation/scrollList/scrollTo';
 import isElement from '@douyinfe/semi-foundation/utils/isElement';
 import { Motion } from '../_base/base';
 import { AriaAttributes } from '../AriaAttributes';
+import { CombineProps } from '../interface';
 
 const msPerFrame = 1000 / 60;
 const blankReg = /^\s*$/;
@@ -57,7 +58,7 @@ export interface ScrollItemState {
 }
 
 function scrollItemFunc<T extends Item>() {
-  const vuePropsType: ComponentObjectPropsOptions<Required<ScrollItemProps<T>>> = {
+  const vuePropsType: CombineProps<ScrollItemProps<T>> = {
     className: String,
     style: Object,
     class: String,

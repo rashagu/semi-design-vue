@@ -130,7 +130,7 @@ interface AutoCompleteState {
 function AutoCompleteFunc<T extends AutoCompleteItems>() {
   const vuePropsType_ = AutoCompleteFuncVueProps<T>();
   return defineComponent({
-    props: vuePropsType_ as ComponentObjectPropsOptions<Required<AutoCompleteProps<T>>>,
+    props: vuePropsType_ as CombineProps<AutoCompleteProps<T>>,
     name: 'AutoComplete',
     setup(props, {}) {
       const slots = useSlots();

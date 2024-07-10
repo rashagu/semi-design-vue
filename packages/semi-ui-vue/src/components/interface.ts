@@ -27,7 +27,7 @@ export type CombineProps<T> = {
   [K in keyof Required<T>]: IsOptional<T, K> extends true ?({
     type: PropType<T[K]>;
     default?: any;
-    required?: boolean;
+    required?: false;
   } | PropType<T[K]>):({
     type: PropType<T[K]>;
     default?: any;

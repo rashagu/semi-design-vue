@@ -7,6 +7,7 @@ import Context, { ContextValue } from '../configProvider/context';
 
 import DefaultLocale from './source/zh_CN';
 import { Locale } from './interface';
+import { CombineProps } from '../interface';
 
 type ChildrenRender<T> = (componentLocal: T, localeCode: string, dateFnsLocale: dateFns) => VNode;
 export interface LocaleConsumerProps<T> {
@@ -15,10 +16,11 @@ export interface LocaleConsumerProps<T> {
 }
 
 function LocaleConsumerFunc<T>() {
-  const vuePropsType: ComponentObjectPropsOptions<Required<LocaleConsumerProps<T>>> = {
+  const vuePropsType: CombineProps<LocaleConsumerProps<T>> = {
     componentName: {
       type: String,
       default: '',
+      required: true
     },
     // children: [String, Boolean,Object,Array],
   };
