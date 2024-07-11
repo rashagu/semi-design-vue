@@ -111,5 +111,10 @@ const Timeline = defineComponent({
   },
 });
 
-export default Timeline;
+export type TimeLineType = typeof Timeline & {
+  Item: typeof Item
+}
+const BaseTimeline = Timeline as TimeLineType
+BaseTimeline.Item = Item
+export default BaseTimeline;
 export { Item as TimelineItem };

@@ -68,4 +68,18 @@ export {
   Button as SkeletonButton,
   Paragraph as SkeletonParagraph,
 };
-export default Skeleton;
+
+export type SkeletonType = typeof Skeleton & {
+  Avatar: typeof Avatar;
+  Image: typeof Image;
+  Title: typeof Title;
+  Button: typeof Button;
+  Paragraph: typeof Paragraph;
+}
+const BaseSkeleton = Skeleton as SkeletonType
+BaseSkeleton.Avatar = Avatar
+BaseSkeleton.Image = Image
+BaseSkeleton.Title = Title
+BaseSkeleton.Button = Button
+BaseSkeleton.Paragraph = Paragraph
+export default BaseSkeleton;

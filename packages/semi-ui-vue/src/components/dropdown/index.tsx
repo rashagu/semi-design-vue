@@ -316,6 +316,16 @@ const Dropdown = defineComponent({
     };
   },
 });
-
+export type DropdownType = typeof Dropdown & {
+  Menu: typeof DropdownMenu,
+  Item: typeof DropdownItem,
+  Divider: typeof DropdownDivider,
+  Title: typeof DropdownTitle,
+}
+const BaseDropdown =  Dropdown as DropdownType
+BaseDropdown.Menu = DropdownMenu
+BaseDropdown.Item = DropdownItem
+BaseDropdown.Divider = DropdownDivider
+BaseDropdown.Title = DropdownTitle
 export { DropdownMenu, DropdownItem, DropdownDivider, DropdownTitle, Dropdown };
-export default Dropdown;
+export default BaseDropdown;
