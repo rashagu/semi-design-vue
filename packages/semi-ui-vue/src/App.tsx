@@ -121,6 +121,7 @@ import NumeralDemo from './components/typography/__test__/NumeralDemo';
 import TextDemo from './components/typography/__test__/textDemo.vue';
 import LinkDemo from './components/typography/__test__/linkDemo.vue';
 import TypoCopyDemo from './components/typography/__test__/TypoCopyDemo';
+import UpdateDemo2 from './components/upload/__test__/UpdateDemo2';
 export interface ExampleProps {
   name?: string
 }
@@ -180,7 +181,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TableDemo7 />*/}
         {/*<TableDemo8 />*/}
         {/*<TableDemo9 />*/}
-        <TableDemo10 />
+        {/*<TableDemo10 />*/}
         {/*<TableDemo11 />*/}
         {/*<TableDemo12 />*/}
         {/*<TableDemo13Virtualized />*/}
@@ -217,6 +218,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemoVueSFC/>*/}
         {/*<ModalDemo2/>*/}
         {/*<UploadDemo/>*/}
+        <UpdateDemo2/>
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}
