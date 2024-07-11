@@ -10,6 +10,8 @@
     "@kousum/vite-plugin-semi-theme": "0.15.1"
   },
   "changesets": [
-    "great-pillows-buy"
+    "great-kings-compare",
+    "great-pillows-buy",
+    "sharp-stingrays-turn"
   ]
 }

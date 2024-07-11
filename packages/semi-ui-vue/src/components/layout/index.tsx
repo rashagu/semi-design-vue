@@ -131,5 +131,16 @@ const Layout = defineComponent(
   }
 );
 
+export type LayoutType = typeof Layout & {
+  Header: typeof LayoutHeader;
+  Footer: typeof LayoutFooter;
+  Content: typeof LayoutContent;
+  Sider: typeof LayoutSider;
+}
+const BaseLayout = Layout as LayoutType
+BaseLayout.Header = LayoutHeader
+BaseLayout.Footer = LayoutFooter
+BaseLayout.Content = LayoutContent
+BaseLayout.Sider = LayoutSider
 export { LayoutHeader, LayoutFooter, LayoutContent, LayoutSider };
-export default Layout;
+export default BaseLayout;

@@ -82,8 +82,53 @@ export const TagInput = FormTagInput;
 export const InputGroup = FormInputGroup;
 
 
+
+export type FormType = typeof Form & {
+    TextArea: typeof FormTextArea;
+    InputNumber: typeof FormInputNumber;
+    Select: typeof FormSelect;
+    Input: typeof FormInput;
+    SelectOption: typeof FormSelectOption;
+    SelectOptionGroup: typeof FormSelectOptionGroup;
+    AutoComplete: typeof FormAutoComplete;
+    Cascader: typeof FormCascader;
+    Checkbox: typeof FormCheckbox;
+    CheckboxGroup: typeof FormCheckboxGroup;
+    DatePicker: typeof FormDatePicker;
+    Radio: typeof FormRadio;
+    RadioGroup: typeof FormRadioGroup;
+    Rating: typeof FormRating;
+    Slider: typeof FormSlider;
+    Switch: typeof FormSwitch;
+    TagInput: typeof FormTagInput;
+    TimePicker: typeof FormTimePicker;
+    TreeSelect: typeof FormTreeSelect;
+    Upload: typeof FormUpload;
+}
+const BaseForm = Form as FormType
+BaseForm.TextArea = FormTextArea
+BaseForm.InputNumber = FormInputNumber
+BaseForm.Select = FormSelect
+BaseForm.Input = FormInput
+BaseForm.SelectOption = FormSelectOption
+BaseForm.SelectOptionGroup = FormSelectOptionGroup
+BaseForm.AutoComplete = FormAutoComplete
+BaseForm.Cascader = FormCascader
+BaseForm.Checkbox = FormCheckbox
+BaseForm.CheckboxGroup = FormCheckboxGroup
+BaseForm.DatePicker = FormDatePicker
+BaseForm.Radio = FormRadio
+BaseForm.RadioGroup = FormRadioGroup
+BaseForm.Rating = FormRating
+BaseForm.Slider = FormSlider
+BaseForm.Switch = FormSwitch
+BaseForm.TagInput = FormTagInput
+BaseForm.TimePicker = FormTimePicker
+BaseForm.TreeSelect = FormTreeSelect
+BaseForm.Upload = FormUpload
+export default BaseForm;
 export {
-    Form,
+    BaseForm as Form,
     ArrayField,
     withField,
     useFormApi,

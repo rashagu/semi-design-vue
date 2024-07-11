@@ -175,7 +175,7 @@ export {
   FormTimePicker,
   FormTreeSelect,
   FormUpload,
-  Form,
+  default as Form,
   ArrayField,
   withField,
   useFormApi,

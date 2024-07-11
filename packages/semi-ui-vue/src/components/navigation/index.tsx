@@ -34,6 +34,7 @@ import '@douyinfe/semi-foundation/navigation/navigation.scss';
 import { Motion } from '../_base/base';
 import LocaleConsumer from '../locale/localeConsumer';
 import { CombineProps, VueJsxNode } from '../interface';
+import { NavFooter, NavHeader, NavItem } from '../index';
 
 export type Mode = 'vertical' | 'horizontal';
 export { NavFooterProps, NavHeaderProps, ToggleIcon, SubNavProps, NavItemProps };
@@ -531,4 +532,16 @@ const index = defineComponent({
   },
 });
 
-export default index;
+export type NavType = typeof index & {
+  Item: typeof Item;
+  Header: typeof Header;
+  Footer: typeof Footer;
+  SubNav: typeof SubNav
+}
+
+const BaseNav = index as NavType
+BaseNav.Item = Item
+BaseNav.Header = Header
+BaseNav.Footer = Footer
+BaseNav.SubNav = SubNav
+export default BaseNav;

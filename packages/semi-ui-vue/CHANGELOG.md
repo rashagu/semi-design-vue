@@ -1,5 +1,17 @@
 # @kousum/semi-ui-vue
 
+## 0.15.4-alpha.2
+
+### Patch Changes
+
+- fix
+
+## 0.15.4-alpha.1
+
+### Patch Changes
+
+- allowed Form.Select
+
 ## 0.15.4-alpha.0
 
 ### Patch Changes

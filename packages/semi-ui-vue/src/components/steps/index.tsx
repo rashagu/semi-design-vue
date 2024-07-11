@@ -105,5 +105,10 @@ const Steps = defineComponent({
   },
 });
 
-export default Steps;
+export type StepsType = typeof Steps & {
+  Step: typeof Step
+};
+const BaseSteps = Steps as StepsType
+BaseSteps.Step = Step
 export { Step as StepsStep };
+export default BaseSteps;
