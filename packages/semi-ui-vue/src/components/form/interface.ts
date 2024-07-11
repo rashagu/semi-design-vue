@@ -20,6 +20,9 @@ import type {AriaAttributes} from "../AriaAttributes";
 export type { FormState, FormApi, WithFieldOption, RuleItem };
 
 export type CommonFieldProps = {
+    id?: string
+    className?: string
+    prefix?: string
     /** Field is required (except Form. Checkbox within the Group, Form. Radio) */
     field: string;
     /** The label text of the form control is the same name as the field by default when it is not passed */

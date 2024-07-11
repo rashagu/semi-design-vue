@@ -47,6 +47,7 @@ import { CombineProps, VueHTMLAttributes, type VueJsxNode } from '../../interfac
 import { useFormUpdaterContext } from '../context/FormUpdaterContext/Consumer';
 import { omit } from 'lodash';
 import { useHasInProps } from '../../_base/baseComponent';
+import { LooseRequired } from '@vue/shared';
 
 const prefix = cssClasses.PREFIX;
 
@@ -78,54 +79,58 @@ function withField<
     };
     delete propsFromComponent[key].default;
   });
+  const vueProps: CombineProps<CommonFieldProps> = {
+    ...omit(
+      { ...propsFromComponent, ...(vuePropsType || {}) } || {},
+      // 'style',
+      'class'
+    ),
+    label: [...PropTypes.node, PropTypes.func],
+    id: [String],
+    field: {
+      type: String,
+      required: true
+    },
+    className: String,
+    prefix: String,
+    labelPosition: String as PropType<CommonFieldProps['labelPosition']>,
+    labelAlign: String as PropType<CommonFieldProps['labelAlign']>,
+    labelWidth: [String, Number],
+    noLabel: Boolean,
+    noErrorMessage: Boolean,
+    name: String,
+    fieldClassName: String,
+    fieldStyle: Object,
+    initValue: PropTypes.any,
+    validate: PropTypes.node as PropType<CommonFieldProps['validate']>,
+    /** Check rules, check library based on async-validator */
+    rules: PropTypes.array,
+    /** Check trigger timing */
+    trigger: [PropTypes.string, PropTypes.array] as PropType<CommonFieldProps['trigger']>,
+    // onChange: (fieldValue: any) => void;
+    /** Converts form control values before validation */
+    transform: PropTypes.func as PropType<CommonFieldProps['transform']>,
+    /** Make a second change to the component's value before the UI update */
+    convert: PropTypes.func as PropType<CommonFieldProps['convert']>,
+    allowEmptyString: PropTypes.bool,
+    /** When true, use rules verification, after encountering the first rule that fails the test, the verification of subsequent rules will no longer be triggered */
+    stopValidateWithError: PropTypes.bool,
+    /* Custom prompt information is displayed in the same block as the verification information. When both have values, the verification information is displayed first */
+    helpText: PropTypes.node as PropType<CommonFieldProps['helpText']>,
+    /* Extra message, you can use this when you need an error message and the prompt text to appear at the same time, after helpText/errorMessage */
+    extraText: PropTypes.node as PropType<CommonFieldProps['extraText']>,
+    extraTextPosition: PropTypes.string as PropType<CommonFieldProps['extraTextPosition']>,
+    /** These declaration just hack for Subtract, not valid props in CommonFieldProps */
+    defaultValue: PropTypes.any,
+    /** Whether to take over only the data stream, when true, it will not automatically insert modules such as ErrorMessage, Label, extraText, etc. The style and DOM structure are consistent with the original component */
+    pure: PropTypes.bool,
+  };
   const SemiField = defineComponent({
     props: {
-      ...omit(
-        { ...propsFromComponent, ...(vuePropsType || {}) } || {},
-        // 'style',
-        'class'
-      ),
-      label: [...PropTypes.node, PropTypes.func],
-      id: [String],
-      field: String,
-      className: String,
-      prefix: String,
-      labelPosition: String as PropType<CommonFieldProps['label']>,
-      labelAlign: String,
-      labelWidth: [String, Number],
-      noLabel: Boolean,
-      noErrorMessage: Boolean,
-      name: String,
-      fieldClassName: String,
-      fieldStyle: Object,
-      initValue: PropTypes.any,
-      validate: PropTypes.any,
-      /** Check rules, check library based on async-validator */
-      rules: PropTypes.array,
-      /** Check trigger timing */
-      trigger: [PropTypes.string, PropTypes.array],
-      // onChange: (fieldValue: any) => void;
-      /** Converts form control values before validation */
-      transform: PropTypes.func,
-      /** Make a second change to the component's value before the UI update */
-      convert: PropTypes.func,
-      allowEmptyString: PropTypes.bool,
-      /** When true, use rules verification, after encountering the first rule that fails the test, the verification of subsequent rules will no longer be triggered */
-      stopValidateWithError: PropTypes.bool,
-      /* Custom prompt information is displayed in the same block as the verification information. When both have values, the verification information is displayed first */
-      helpText: PropTypes.any,
-      /* Extra message, you can use this when you need an error message and the prompt text to appear at the same time, after helpText/errorMessage */
-      extraText: PropTypes.any,
-      extraTextPosition: PropTypes.string,
-      /** These declaration just hack for Subtract, not valid props in CommonFieldProps */
-      defaultValue: PropTypes.any,
-      /** Whether to take over only the data stream, when true, it will not automatically insert modules such as ErrorMessage, Label, extraText, etc. The style and DOM structure are consistent with the original component */
-      pure: PropTypes.bool,
-
-      // modelValue: [String, Number, Object, Array],
-      // 'onUpdate:modelValue': Function
+      ...vueProps as CombineProps<CommonFieldProps & C>
     },
     name: 'Form' + Component.name,
+    //@ts-ignore
     setup(truthProps, { attrs: props }) {
       const slots = useSlots();
       const { getProps, hasInProps } = useHasInProps();
@@ -169,7 +174,7 @@ function withField<
 
       const isUnmounted = shallowRef(false);
       const rulesRef: Ref = ref(mergeProps(_getProps()).rules);
-      const validateRef: Ref = ref(truthProps.validate);
+      const validateRef: Ref = ref(( truthProps as CommonFieldProps & C).validate);
       const validatePromise = shallowRef<Promise<any> | null>(null);
 
       // notNotify is true means that the onChange of the Form does not need to be triggered
@@ -498,10 +503,10 @@ function withField<
 
       // avoid hooks capture value, fixed issue 346
       watch(
-        [() => truthProps.rules, () => truthProps.validate],
+        [() => ( truthProps as CommonFieldProps & C).rules, () => ( truthProps as CommonFieldProps & C).validate],
         () => {
           rulesRef.value = mergeProps(_getProps()).rules;
-          validateRef.value = truthProps.validate;
+          validateRef.value = ( truthProps as CommonFieldProps & C).validate;
         },
         { immediate: true }
       );
@@ -535,7 +540,7 @@ function withField<
       });
 
       watch(
-        () => truthProps.field,
+        () => ( truthProps as CommonFieldProps & C).field,
         (value, oldValue, onCleanup) => {
           let {
             // condition,
@@ -590,8 +595,8 @@ function withField<
       );
 
       return (_ctx, _cache) => {
-        const label = truthProps.label;
-        const id = truthProps.id;
+        const label = ( truthProps as CommonFieldProps & C).label;
+        const id = ( truthProps as CommonFieldProps & C).id;
         let {
           // condition,
           field,
@@ -626,7 +631,7 @@ function withField<
           rest: rest_,
         } = mergeProps(_getProps());
 
-        const rest = truthProps.prefix ? { ...rest_, prefix: truthProps.prefix } : rest_;
+        const rest = ( truthProps as CommonFieldProps & C).prefix ? { ...rest_, prefix: ( truthProps as CommonFieldProps & C).prefix } : rest_;
         let { options, shouldInject } = mergeOptions(opts, props);
 
         warning(
