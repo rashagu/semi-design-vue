@@ -127,7 +127,7 @@ const propTypes: CombineProps<DateInputProps> = {
   prefixCls: { type: PropTypes.string, default: cssClasses.PREFIX },
   dateFnsLocale: PropTypes.any, // Foundation useful to
   placeholder: PropTypes.any,
-  rangeInputFocus: PropTypes.string as PropType<DateInputProps['rangeInputFocus']>,
+  rangeInputFocus: [PropTypes.string, PropTypes.bool] as PropType<DateInputProps['rangeInputFocus']>,
   rangeInputStartRef: PropTypes.object,
   rangeInputEndRef: PropTypes.object,
   rangeSeparator: { type: PropTypes.string, default: strings.DEFAULT_SEPARATOR_RANGE },

@@ -47,7 +47,6 @@ import { CombineProps, VueHTMLAttributes, type VueJsxNode } from '../../interfac
 import { useFormUpdaterContext } from '../context/FormUpdaterContext/Consumer';
 import { omit } from 'lodash';
 import { useHasInProps } from '../../_base/baseComponent';
-import { LooseRequired } from '@vue/shared';
 
 const prefix = cssClasses.PREFIX;
 
