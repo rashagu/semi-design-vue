@@ -77,7 +77,7 @@ const defaultProps: CarouselProps = {
 };
 export const vuePropsType = vuePropsMake<CarouselProps>(propTypes, defaultProps);
 const Carousel = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Carousel',
   setup(props, { expose }) {
     const slots = useSlots();

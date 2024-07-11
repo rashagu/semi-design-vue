@@ -23,7 +23,7 @@ const DatePickerDemo2 = defineComponent((props, {}) => {
     </div>
   );
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DatePickerDemo2',
 });
 

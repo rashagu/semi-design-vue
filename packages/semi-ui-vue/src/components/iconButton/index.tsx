@@ -67,7 +67,7 @@ const vuePropsType = vuePropsMake<IconButtonProps>(
 // TODO: add a buttonGroup component
 // TODO: icon configuration
 const Index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'IconButton',
   setup(props, { slots }) {
     const { getProps } = useHasInProps();

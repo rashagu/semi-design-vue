@@ -44,7 +44,7 @@ const CollapseDemo = defineComponent((props, {}) => {
     </div>
   )
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'CollapseDemo'
 })
 

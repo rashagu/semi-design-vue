@@ -18,7 +18,7 @@ export const vuePropsType: CombineProps<HookToastProps> = {
   },
 };
 const HookToast = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'HookToast',
   setup(props, { attrs }) {
     const slots = useSlots();

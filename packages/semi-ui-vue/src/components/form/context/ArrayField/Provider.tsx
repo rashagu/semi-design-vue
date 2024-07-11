@@ -15,7 +15,7 @@ const Provider = defineComponent((props, {slots}) => {
   provide('ArrayFieldContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ArrayFieldContextProvider'
 })
 

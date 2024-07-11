@@ -25,7 +25,7 @@ export const vuePropsType: CombineProps<SplitButtonGroupProps> = {
   className: String,
 };
 const SplitButtonGroup = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'SplitButtonGroup',
   setup(props, { slots }) {
     const containerRef = ref();

@@ -49,7 +49,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<PreviewImageProps>(propTypes, defaultProps);
 const PreviewImage = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'PreviewImage',
   setup(props, {}) {
     const slots = useSlots();

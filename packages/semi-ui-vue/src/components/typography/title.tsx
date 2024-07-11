@@ -98,7 +98,7 @@ export const vuePropsType: CombineProps<TitleProps> = {
   weight: [String, Number] as PropType<TitleProps['weight']>,
 };
 const Title = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Title',
   setup(props, { slots }) {
     return () => {

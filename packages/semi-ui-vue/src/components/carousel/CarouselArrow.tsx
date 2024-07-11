@@ -14,7 +14,7 @@ export const vuePropsType: CombineProps<CarouselArrowProps> = {
   arrowProps: Object,
 };
 const CarouselArrow = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'CarouselArrow',
   setup(props, {}) {
     const slots = useSlots();

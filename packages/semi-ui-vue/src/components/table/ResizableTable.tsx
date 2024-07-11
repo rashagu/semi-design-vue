@@ -67,7 +67,7 @@ export const vuePropsType: CombineProps<TableProps> = {
   keepDOM: PropTypes.bool
 };
 const ResizableTable = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ResizableTable',
   setup(props, {}) {
     const {getProps} = useHasInProps()

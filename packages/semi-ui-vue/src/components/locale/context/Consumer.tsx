@@ -8,7 +8,7 @@ const Consumer = defineComponent(() => {
   const config = inject('LocalContext', ref<Locale | null>(null))
   return ()=>slots.default?slots.default(config):null
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'LocaleContextConsumer'
 })
 

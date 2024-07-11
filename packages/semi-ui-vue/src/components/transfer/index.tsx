@@ -230,7 +230,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Transfer = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Transfer',
   setup(props, {}) {
     const slots = useSlots();

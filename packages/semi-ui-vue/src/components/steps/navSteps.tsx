@@ -59,7 +59,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<NavStepsProps>(propTypes, defaultProps);
 const NavSteps = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'NavSteps',
   setup(props, {}) {
     const slots = useSlots();

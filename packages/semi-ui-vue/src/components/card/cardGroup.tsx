@@ -33,7 +33,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<CardGroupProps>(propTypes, defaultProps);
 const CardGroup = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'CardGroup',
   setup(props, {}) {
     const {getProps} = useHasInProps()

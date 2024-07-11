@@ -17,7 +17,7 @@ export const vuePropsType: CombineProps<ConfigProviderProps> = {
   direction: { type: String as PropType<ConfigProviderProps['direction']>, default: 'ltr' },
 };
 const ConfigProvider = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ConfigProvider',
   setup(props, { slots }) {
     function renderChildren() {

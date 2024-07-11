@@ -190,7 +190,7 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake<NavProps>(propTypes, defaultProps);
 const index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Navigation',
   setup(props, { slots }) {
     const slots_ = useSlots();

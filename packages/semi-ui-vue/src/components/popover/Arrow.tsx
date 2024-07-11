@@ -29,7 +29,7 @@ export const vuePropsType: CombineProps<ArrowProps> = {
   popStyle: [String, Object] as PropType<ArrowProps['popStyle']>,
 };
 const Arrow = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Arrow',
   setup(props, { slots }) {
     return () => {

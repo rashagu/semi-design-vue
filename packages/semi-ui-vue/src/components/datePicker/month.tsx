@@ -123,7 +123,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<MonthProps>(propTypes, defaultProps);
 const month = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Month',
   setup(props, { slots }) {
     const monthRef = ref();

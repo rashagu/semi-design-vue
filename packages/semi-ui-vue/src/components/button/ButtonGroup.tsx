@@ -47,7 +47,7 @@ export const vuePropsType: CombineProps<ButtonGroupProps> = {
   className: String
 };
 const ButtonGroup = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ButtonGroup',
   setup(props, { slots }) {
     return () => {

@@ -67,7 +67,7 @@ const propTypes: CombineProps<TabBarProps> = {
 
 export const vuePropsType = vuePropsMake(propTypes, {});
 const TabBar = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TabBar',
   setup(props, { attrs }) {
     const slots = useSlots();

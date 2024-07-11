@@ -28,7 +28,7 @@ const vuePropsType: CombineProps<CollapseButtonProps> = {
   onClick: Function as PropType<CollapseButtonProps['onClick']>,
 };
 const CollapseButton = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'CollapseButton',
   setup(props, ctx) {
     const handleClick = () => {

@@ -7,6 +7,7 @@ import { IconClose } from '@kousum/semi-icons-vue';
 import {
   ComponentObjectPropsOptions,
   CSSProperties,
+  StyleValue,
   defineComponent,
   h,
   onBeforeUnmount,
@@ -33,8 +34,8 @@ export interface SideSheetContentProps {
   title?: VueJsxNode;
   closable?: boolean;
   headerStyle?: CSSProperties;
-  width: CSSProperties['width'];
-  height: CSSProperties['height'];
+  width: string | number;
+  height: string | number;
   style: CSSProperties;
   size: SideSheetProps['size'];
   bodyStyle?: CSSProperties;
@@ -57,25 +58,25 @@ const propTypes: CombineProps<SideSheetContentProps> = {
   onClose: PropTypes.func as PropType<SideSheetContentProps['onClose']>,
   closeIcon: PropTypes.node,
   mask: PropTypes.bool,
-  maskStyle: PropTypes.object,
+  maskStyle: PropTypes.object as PropType<SideSheetContentProps['maskStyle']>,
   maskClosable: PropTypes.bool,
   maskClassName: PropTypes.string,
   title: PropTypes.node,
   closable: PropTypes.bool,
-  headerStyle: PropTypes.object,
+  headerStyle: PropTypes.object as PropType<SideSheetContentProps['headerStyle']>,
   width: {
-    type: [PropTypes.string, PropTypes.number],
+    type: [PropTypes.string, PropTypes.number] as PropType<SideSheetContentProps['width']>,
     required: true
   },
   height: {
-    type: [PropTypes.string, PropTypes.number],
+    type: [PropTypes.string, PropTypes.number] as PropType<SideSheetContentProps['height']>,
     required: true
   },
   style: {
-    type: PropTypes.object,
+    type: PropTypes.object as PropType<SideSheetContentProps['style']>,
     required: true
   },
-  bodyStyle: PropTypes.object,
+  bodyStyle: PropTypes.object as PropType<SideSheetContentProps['bodyStyle']>,
   className: {
     type: PropTypes.string,
     required: true
@@ -94,9 +95,9 @@ const propTypes: CombineProps<SideSheetContentProps> = {
 const defaultProps = {
   onClose: noop,
 };
-export const vuePropsType = vuePropsMake<SideSheetContentProps>(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const SideSheetContent = defineComponent({
-  props: vuePropsType,
+  props: {...vuePropsType},
   name: 'SideSheetContent',
   setup(props, {}) {
     const slots = useSlots();

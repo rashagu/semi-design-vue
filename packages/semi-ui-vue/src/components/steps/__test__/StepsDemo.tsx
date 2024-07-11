@@ -39,7 +39,7 @@ const StepsDemo = defineComponent((props, {}) => {
     </div>
   )
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name:'StepsDemo'
 })
 

@@ -97,7 +97,7 @@ export const vuePropsType: CombineProps<TextProps> = {
 };
 
 const Text = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Text',
   setup(props, { slots }) {
     return () => {

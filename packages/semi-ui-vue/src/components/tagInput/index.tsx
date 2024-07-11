@@ -165,7 +165,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TagInput',
   setup(props, { expose }) {
     const { getProps } = useHasInProps();

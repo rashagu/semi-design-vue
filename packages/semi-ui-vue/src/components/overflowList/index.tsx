@@ -109,7 +109,7 @@ const propTypes: CombineProps<OverflowListProps> = {
 };
 export const vuePropsType = vuePropsMake<OverflowListProps>(propTypes, defaultProps);
 const OverflowList = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'OverflowList',
   setup(props, {}) {
     const { getProps } = useHasInProps();

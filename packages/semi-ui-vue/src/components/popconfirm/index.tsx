@@ -114,7 +114,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Popconfirm = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Popconfirm',
   setup(props, {}) {
     const slots = useSlots();

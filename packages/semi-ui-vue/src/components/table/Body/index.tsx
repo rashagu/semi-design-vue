@@ -245,7 +245,7 @@ const propTypes: CombineProps<BodyProps> = {
 export { propTypes as BodyPropTypes };
 export const vuePropsType = vuePropsMake<BodyProps>(propTypes, {});
 const Body = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Body',
   setup(props, {}) {
     const slots = useSlots();

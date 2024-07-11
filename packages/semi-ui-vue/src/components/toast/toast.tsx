@@ -86,7 +86,7 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Toast = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Toast',
   setup(props, { expose }) {
     const slots = useSlots();

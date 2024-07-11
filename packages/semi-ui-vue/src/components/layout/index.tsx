@@ -126,7 +126,7 @@ const Layout = defineComponent(
     };
   },
   {
-    props: vuePropsType,
+    props: { ...vuePropsType },
     name: 'Layout',
   }
 );

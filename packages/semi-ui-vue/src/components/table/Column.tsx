@@ -10,7 +10,7 @@ const propTypes: CombineProps<ColumnProps> = {
 };
 export const vuePropsType = vuePropsMake(propTypes, {});
 const Column = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Column',
   setup(props, {}) {
     const slots = useSlots();

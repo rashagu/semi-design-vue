@@ -17,7 +17,7 @@ const Consumer = defineComponent(() => {
   const {context} = useTypographyBaseSizeContext()
   return () => slots.default ? slots.default(context) : null
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TypographyBaseSizeConsumer'
 })
 

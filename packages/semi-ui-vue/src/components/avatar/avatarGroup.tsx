@@ -22,7 +22,7 @@ export const vuePropsType: CombineProps<AvatarGroupProps> = {
   renderMore: Function as PropType<AvatarGroupProps['renderMore']>,
 };
 const AvatarGroup = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'AvatarGroup',
   setup(props, { slots }) {
     function getMergeAvatars(avatars: VNode[]) {

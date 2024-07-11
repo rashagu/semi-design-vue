@@ -13,7 +13,7 @@ export const vuePropsType = {
   className: String,
 };
 const DropdownMenu = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DropdownMenu',
   setup(props, { slots }) {
     const { className, style, ...rest } = props;

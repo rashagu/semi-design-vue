@@ -67,7 +67,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<CheckboxInnerProps>(propTypes, defaultProps);
 const CheckboxInner = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'vuePropsType',
   setup(props, { expose }) {
     const slots = useSlots();

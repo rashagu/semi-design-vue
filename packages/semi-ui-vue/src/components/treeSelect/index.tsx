@@ -323,7 +323,7 @@ const defaultProps: Partial<TreeSelectProps> = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TreeSelect = defineComponent({
-  props: vuePropsType as CombineProps<TreeSelectProps>,
+  props: { ...vuePropsType } as CombineProps<TreeSelectProps>,
   name: 'TreeSelect',
   setup(props, {}) {
     const { getProps } = useHasInProps();

@@ -103,7 +103,7 @@ const propTypes: CombineProps<ConfirmProps> = {
 const defaultProps = {};
 export const vuePropsType = vuePropsMake<ConfirmProps>(propTypes, defaultProps);
 const ConfirmModal = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ConfirmModal',
   setup(props, {}) {
     const { getProps } = useHasInProps();

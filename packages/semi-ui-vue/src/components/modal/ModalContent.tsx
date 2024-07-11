@@ -116,7 +116,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<ModalContentReactProps>(propTypes, defaultProps);
 const ModalContent = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ModalContent',
   setup(props, {}) {
     const slots = useSlots();

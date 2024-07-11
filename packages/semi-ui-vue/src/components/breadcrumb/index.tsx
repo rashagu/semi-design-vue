@@ -105,7 +105,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes_, defaultProps);
 const Breadcrumb = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Breadcrumb',
   setup(props, {}) {
     const state = reactive<BreadcrumbState>({

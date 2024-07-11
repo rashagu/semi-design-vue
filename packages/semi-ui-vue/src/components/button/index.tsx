@@ -6,7 +6,7 @@ import IconButton, { IconButtonProps } from '../iconButton';
 export interface ButtonProps extends IconButtonProps, BaseButtonProps {} // TODO check
 
 const Button = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Button',
   setup(props, { slots }) {
     return () => {

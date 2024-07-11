@@ -154,7 +154,7 @@ export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 // console.log(vuePropsType)
 // debugger
 const TimePicker = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TimePicker',
   setup(props, { slots }) {
     const { getProps } = useHasInProps();

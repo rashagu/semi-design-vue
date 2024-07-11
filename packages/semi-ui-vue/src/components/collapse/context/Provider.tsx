@@ -5,7 +5,7 @@ export const vuePropsType = {
   value: Object as PropType<CollapseContextType>,
 };
 const Provider = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'CollapseProvider',
   setup(props, { slots }) {
     const ConfigContext = ref<CollapseContextType>();

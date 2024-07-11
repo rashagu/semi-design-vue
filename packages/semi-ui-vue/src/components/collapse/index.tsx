@@ -65,7 +65,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<CollapseReactProps>(propTypes, defaultProps);
 const Collapse = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Collapse',
   setup(props, {}) {
     const slots = useSlots();

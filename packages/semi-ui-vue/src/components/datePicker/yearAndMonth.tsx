@@ -75,7 +75,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<YearAndMonthProps>(propTypes, defaultProps);
 const yearAndMonth = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DatePickerYearAndMonth',
   setup(props, { expose }) {
     const slots = useSlots();

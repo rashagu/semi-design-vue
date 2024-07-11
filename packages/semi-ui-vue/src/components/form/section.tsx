@@ -18,7 +18,7 @@ export const vuePropsType = {
   style: PropTypes.object,
 };
 const Section = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Section',
   setup(props, {}) {
     const slots = useSlots();

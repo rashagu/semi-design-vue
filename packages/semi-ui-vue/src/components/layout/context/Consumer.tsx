@@ -22,7 +22,7 @@ const Consumer = defineComponent(() => {
   const {context} = useLayoutContext()
   return () => slots.default ? slots.default(context) : null
 },{
-  props:vuePropsType,
+  props: { ...vuePropsType },
   name: 'LayoutConsumer'
 })
 

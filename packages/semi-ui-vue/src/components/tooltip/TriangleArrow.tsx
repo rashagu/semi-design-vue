@@ -12,7 +12,7 @@ export const vuePropsType = {
   style: [String, Object],
 };
 const TriangleArrow = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TriangleArrow',
   setup(props, { slots }) {
     return () => {

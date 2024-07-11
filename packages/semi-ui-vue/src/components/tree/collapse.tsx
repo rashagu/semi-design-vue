@@ -45,7 +45,7 @@ export const vuePropsType = vuePropsMake<CollapseProps>(
   }
 );
 const Collapse = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Collapse',
   setup(props, {}) {
     const slots = useSlots();

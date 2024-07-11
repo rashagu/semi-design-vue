@@ -15,7 +15,7 @@ const Consumer = defineComponent(() => {
   const { context } = usePreviewContext();
   return () => (slots.default ? slots.default(context) : null);
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'PreviewContextConsumer'
 });
 

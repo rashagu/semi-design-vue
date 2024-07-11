@@ -11,7 +11,7 @@ export const vuePropsType = {
   name: String,
 };
 const UpdateDemo2 = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'UpdateDemo2',
   setup(props, { attrs }) {
     const slots = useSlots();

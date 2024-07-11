@@ -86,7 +86,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<CardProps>(propTypes, defaultProps);
 const Card = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Card',
   setup(props, {}) {
     const {getProps} = useHasInProps()

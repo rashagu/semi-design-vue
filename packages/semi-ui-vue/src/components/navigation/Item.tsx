@@ -114,7 +114,7 @@ export const vuePropsType: CombineProps<NavItemProps> = {
   tooltipShowDelay: PropTypes.number,
 };
 const NavItem = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'NavItem',
   setup(props, { attrs, slots }) {
     const { context } = useNavContext();

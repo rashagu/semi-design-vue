@@ -54,7 +54,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Link = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Link',
   setup(props, {}) {
     const slots = useSlots();

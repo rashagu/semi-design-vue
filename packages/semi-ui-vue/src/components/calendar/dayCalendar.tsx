@@ -68,7 +68,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<DayCalendarProps>(propTypes, defaultProps);
 const DayCalendar = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DayCalendar',
   setup(props, {}) {
     const slots = useSlots();

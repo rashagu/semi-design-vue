@@ -43,7 +43,7 @@ export const vuePropsType: CombineProps<SortableListProps> = {
   axis: String,
 };
 const SortableList = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'SortableList',
   setup(props, {}) {
     const slots = useSlots();

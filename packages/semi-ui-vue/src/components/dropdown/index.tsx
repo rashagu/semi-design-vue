@@ -142,7 +142,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake<DropdownProps>(propTypes, defaultProps);
 
 const Dropdown = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Dropdown',
   setup(props, { slots, expose }) {
     const { getProps } = useHasInProps();

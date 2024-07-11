@@ -100,7 +100,7 @@ export const vuePropsType: CombineProps<RadioProps> = {
   preventScroll: Boolean,
 };
 const Radio = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Radio',
   setup(props, { slots }) {
     let radioEntity: any;

@@ -84,7 +84,7 @@ export const vuePropsType: CombineProps<RadioInnerProps> = {
   style: Object,
 };
 const RadioInner = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'RadioInner',
   setup(props, { slots }) {
     let inputEntity!: any;

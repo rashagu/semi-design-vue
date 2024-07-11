@@ -5,7 +5,7 @@ export const vuePropsType = {
   value: Object,
 };
 const Provider = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DropdownProvider',
   setup(props, { slots }) {
     const ConfigContext = ref<DropdownContextType>(props.value);

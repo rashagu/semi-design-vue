@@ -166,7 +166,7 @@ export const vuePropsType: CombineProps<CascaderItemProps> = {
   className: String,
 };
 const Item = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'CascaderItem',
   setup(props, {}) {
     const slots = useSlots();

@@ -58,7 +58,7 @@ export const vuePropsType: CombineProps<SiderProps> = {
   onBreakpoint: Function as PropType<SiderProps['onBreakpoint']>,
 };
 const Sider = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'LayoutSider',
   setup(props, { slots }) {
     let unRegisters: Array<() => void> = [];

@@ -50,7 +50,7 @@ const NumeralDemo = defineComponent(
     };
   },
   {
-    props: vuePropsType,
+    props: { ...vuePropsType },
     name: 'NumeralDemo',
   }
 );

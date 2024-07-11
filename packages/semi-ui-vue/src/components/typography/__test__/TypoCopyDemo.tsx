@@ -35,7 +35,7 @@ const TypoCopyDemo = defineComponent((props, {}) => {
     );
   };
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TypoCopyDemo',
 });
 

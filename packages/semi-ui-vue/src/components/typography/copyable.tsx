@@ -65,7 +65,7 @@ export const vuePropsType: CombineProps<CopyableProps> = {
 };
 
 const Copyable = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Copyable',
   setup(props, { slots }) {
     let _timeId: ReturnType<typeof setTimeout>;

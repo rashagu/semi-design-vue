@@ -186,7 +186,7 @@ export interface FileCardState {
 }
 
 const FileCard = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'FileCard',
   setup(props, {}) {
     const slots = useSlots();

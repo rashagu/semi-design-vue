@@ -67,7 +67,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Banner = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Banner',
   setup(props, {}) {
     warning('target' in props, "[Semi Banner] 'target' has been deprecated, please write JSX directly instead.");

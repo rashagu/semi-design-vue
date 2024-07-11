@@ -31,7 +31,7 @@ const propTypes: CombineProps<SkeletonProps> = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Skeleton = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Skeleton',
   setup(props, {}) {
     const slots = useSlots();

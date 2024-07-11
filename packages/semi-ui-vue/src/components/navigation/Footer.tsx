@@ -29,7 +29,7 @@ export const vuePropsType: CombineProps<NavFooterProps> = {
   onClick: { type: PropTypes.func as PropType<NavFooterProps['onClick']>, default: noop },
 };
 const NavFooter = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'NavFooter',
   setup(props, { slots }) {
     const { context } = useNavContext();

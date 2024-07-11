@@ -54,7 +54,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TableSelectionCell = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TableSelectionCell',
   setup(props, {}) {
     const slots = useSlots();

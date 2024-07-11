@@ -21,7 +21,7 @@ export type LocalePickerProps = BasePickerProps;
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TimePickerIndex',
   setup(props, {}) {
     const slots = useSlots();

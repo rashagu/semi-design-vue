@@ -88,7 +88,7 @@ const defaultProps: TabsProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Tabs = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Tabs',
   setup(props, {}) {
     const slots = useSlots();

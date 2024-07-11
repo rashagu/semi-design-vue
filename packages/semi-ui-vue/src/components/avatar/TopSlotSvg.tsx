@@ -18,7 +18,7 @@ export const vuePropsType: CombineProps<TopSlotSvgProps> = {
   },
 };
 const TopSlotSvg = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TopSlotSvg',
   setup(props, {}) {
     const slots = useSlots();

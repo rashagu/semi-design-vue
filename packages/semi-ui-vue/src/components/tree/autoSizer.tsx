@@ -32,7 +32,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const AutoSizer = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'AutoSizer',
   setup(props, {}) {
     const slots = useSlots();

@@ -19,7 +19,7 @@ export const vuePropsType: CombineProps<OptionGroupProps> = {
   style: [String, Object] as PropType<OptionGroupProps['style']>,
 };
 const OptionGroup = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'isSelectOptionGroup',
   setup(props, { slots, attrs }) {
     return () => {

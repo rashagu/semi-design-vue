@@ -16,7 +16,7 @@ const Consumer = defineComponent(() => {
   const {context} = useBaseFormApiContext()
   return () => slots.default ? slots.default(context) : null
 },{
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'BaseFormApiContextConsumer'
 })
 

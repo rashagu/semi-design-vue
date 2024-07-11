@@ -91,7 +91,7 @@ function scrollItemFunc<T extends Item>() {
     'aria-label': String,
   };
   const scrollItem_ = defineComponent({
-    props: vuePropsType,
+    props: { ...vuePropsType },
     name: 'ScrollItem',
     setup(props, {}) {
       const slots = useSlots();

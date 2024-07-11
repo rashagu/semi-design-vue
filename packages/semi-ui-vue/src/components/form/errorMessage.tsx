@@ -38,7 +38,7 @@ const propTypes: CombineProps<ErrorMessageProps> = {
 
 export const vuePropsType = vuePropsMake(propTypes, {});
 const ErrorMessage = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ErrorMessage',
   setup(props, {}) {
     const slots = useSlots();

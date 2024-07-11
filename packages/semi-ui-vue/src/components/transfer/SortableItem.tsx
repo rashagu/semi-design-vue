@@ -21,7 +21,7 @@ export const vuePropsType: CombineProps<SortableItemProps> = {
   },
 };
 const SortableItem = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'SortableItem',
   setup(props, {}) {
     const slots = useSlots();

@@ -28,7 +28,7 @@ export const vuePropsType: CombineProps<ScrollListProps> = {
   style: Object,
 };
 const index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ScrollList',
   setup(props, {}) {
     const slots = useSlots();

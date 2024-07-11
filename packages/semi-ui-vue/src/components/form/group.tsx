@@ -67,7 +67,7 @@ export const vuePropsType: CombineProps<InputGroupProps> = {
   extraTextPosition: String as PropType<InputGroupProps['extraTextPosition']>,
 };
 const FormInputGroup = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'FormInputGroup',
   setup(props, {}) {
     const slots = useSlots();

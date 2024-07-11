@@ -52,7 +52,7 @@ export const vuePropsType: CombineProps<ColProps> = {
   xxl: [Number, Object],
 };
 const Col = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Col',
   setup(props, { slots }) {
     return () => {

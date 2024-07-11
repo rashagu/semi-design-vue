@@ -59,7 +59,7 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake<BadgeProps>(propTypes, defaultProps);
 const Badge = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Badge',
   setup(props, {}) {
     const {getProps} = useHasInProps()

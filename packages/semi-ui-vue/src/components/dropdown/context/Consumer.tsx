@@ -16,7 +16,7 @@ export const vuePropsType = {
   name: String,
 };
 const Consumer = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DropdownConsumer',
   setup() {
     const slots = useSlots();

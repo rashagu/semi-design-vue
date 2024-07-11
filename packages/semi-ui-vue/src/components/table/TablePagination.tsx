@@ -29,7 +29,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TablePagination = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TablePagination',
   setup(props, {}) {
     const slots = useSlots();

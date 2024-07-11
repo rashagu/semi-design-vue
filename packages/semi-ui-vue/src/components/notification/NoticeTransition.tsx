@@ -32,7 +32,7 @@ export const vuePropsType: CombineProps<NoticeTransitionProps> = {
   motion: [Object, String, Boolean],
 };
 const NoticeTransition = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'NoticeTransition',
   setup(props, {}) {
     const slots = useSlots();

@@ -11,7 +11,7 @@ export const vuePropsType = {
   locale: { type: Object, default: DefaultLocale },
 };
 const LocaleProvider = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'LocaleProvider',
   setup(props, { slots }) {
     return () => <LocaleContext.Provider value={props.locale}>{slots.default?.()}</LocaleContext.Provider>;

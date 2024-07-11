@@ -18,7 +18,7 @@ const Consumer = defineComponent(() => {
   const {context} = useArrayFieldContext()
   return () => slots.default ? slots.default(context) : null
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ArrayFieldContextConsumer'
 })
 

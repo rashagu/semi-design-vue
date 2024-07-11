@@ -221,7 +221,7 @@ const defaultProps = {
 function Table<RecordType extends Record<string, any>>() {
   const vuePropsType = vuePropsMake<NormalTableProps<RecordType>>(propTypes, defaultProps);
   const TableComp = defineComponent({
-    props: vuePropsType,
+    props: { ...vuePropsType },
     name: 'Table',
     setup(props, { expose }) {
       const {getProps} = useHasInProps()

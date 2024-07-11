@@ -5,7 +5,7 @@ export const vuePropsType = {
   value: Object,
 };
 const Provider = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DescriptionsProvider',
   setup(props, { slots }) {
     const ConfigContext = ref<DescriptionsContextValue>();

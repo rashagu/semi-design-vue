@@ -63,7 +63,7 @@ const Demo2 = defineComponent((props, {}) => {
     />
   );
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Demo2',
 });
 

@@ -49,7 +49,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<ReactResizeObserverProps>(propTypes, defaultProps);
 const ReactResizeObserver = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ReactResizeObserver',
   setup(props, {}) {
     const slots = useSlots();

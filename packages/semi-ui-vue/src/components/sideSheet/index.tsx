@@ -35,7 +35,8 @@ const prefixCls = cssClasses.PREFIX;
 const defaultWidthList = strings.WIDTH;
 const defaultHeight = strings.HEIGHT;
 
-export type { SideSheetContentProps } from './SideSheetContent';
+import type { SideSheetContentProps } from './SideSheetContent';
+export type { SideSheetContentProps }
 
 export interface SideSheetReactProps extends SideSheetProps {
   bodyStyle?: CSSProperties;
@@ -94,7 +95,7 @@ const defaultProps: SideSheetReactProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const SideSheet = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'SideSheet',
   setup(props, {}) {
     const slots = useSlots();
@@ -258,7 +259,7 @@ const SideSheet = defineComponent({
         [`${prefixCls}-rtl`]: direction === 'rtl',
         [`${prefixCls}-hidden`]: keepDOM && state.displayNone,
       });
-      const contentProps = {
+      const contentProps: Omit<SideSheetContentProps, 'style'> = {
         ...(isVertical ? (width ? { width } : {}) : { width: '100%' }),
         ...props_,
         visible,

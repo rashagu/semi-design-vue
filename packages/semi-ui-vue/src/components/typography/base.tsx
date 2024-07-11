@@ -178,7 +178,7 @@ const wrapperDecorations = (props: BaseTypographyProps, content: VNode) => {
   return wrapped;
 };
 const Base = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Base',
   setup(props, {}) {
     const slots = useSlots();

@@ -94,7 +94,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<ProgressProps>(propTypes, defaultProps);
 const Progress = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Progress',
   setup(props, {}) {
     const attr = useAttrs();

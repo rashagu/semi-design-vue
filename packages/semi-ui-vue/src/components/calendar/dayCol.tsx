@@ -64,7 +64,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<DayColProps>(propTypes, defaultProps);
 const DayCol = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DayCol',
   setup(props, {}) {
     const slots = useSlots();

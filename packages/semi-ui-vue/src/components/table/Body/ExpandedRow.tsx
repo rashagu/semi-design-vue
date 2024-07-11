@@ -74,7 +74,7 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TableExpandedRow = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TableExpandedRow',
   setup(props, {}) {
     const slots = useSlots();

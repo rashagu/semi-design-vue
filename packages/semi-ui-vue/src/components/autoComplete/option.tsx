@@ -70,7 +70,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Option = defineComponent({
-  props: vuePropsType as CombineProps<OptionProps>,
+  props: { ...vuePropsType } as CombineProps<OptionProps>,
   name: 'Option',
   setup(props, {}) {
     const slots = useSlots();

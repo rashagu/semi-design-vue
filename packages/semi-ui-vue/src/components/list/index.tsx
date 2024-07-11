@@ -80,7 +80,7 @@ export function List_<T>(){
   };
   const vuePropsType = vuePropsMake(propTypes, defaultProps);
   return  defineComponent({
-    props: vuePropsType,
+    props: { ...vuePropsType },
     name: 'List',
     setup(props, {}) {
       const slots = useSlots();

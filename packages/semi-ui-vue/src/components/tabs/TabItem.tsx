@@ -39,7 +39,7 @@ const propTypes: CombineProps<TabItemProps> = {
 };
 export const vuePropsType = vuePropsMake(propTypes, {});
 const TabItem = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Tabs.TabItem',
   setup(props, { attrs }) {
     const slots = useSlots();

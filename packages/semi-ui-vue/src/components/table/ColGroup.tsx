@@ -32,7 +32,7 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const ColGroup = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ColGroup',
   setup(props, {}) {
     const slots = useSlots();

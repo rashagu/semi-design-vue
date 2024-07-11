@@ -54,7 +54,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<QuickControlProps>(propTypes, defaultProps);
 const quickControl = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DatePicker_quickControl',
   setup(props, {}) {
     const slots = useSlots();

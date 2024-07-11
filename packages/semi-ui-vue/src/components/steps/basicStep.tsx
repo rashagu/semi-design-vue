@@ -68,7 +68,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<BasicStepProps>(propTypes, defaultProps);
 const BasicStep = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'BasicStep',
   setup(props, {}) {
     const { getProps } = useHasInProps();

@@ -31,7 +31,7 @@ export const vuePropsType: CombineProps<Partial<SortableListProps>> = {
   axis: String,
 };
 const SortableList = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'SortableList',
   setup(props, {}) {
     const slots = useSlots();

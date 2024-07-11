@@ -80,7 +80,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Numeral = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Numeral',
   setup(props, {}) {
     const slots = useSlots();

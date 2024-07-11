@@ -62,7 +62,7 @@ export const vuePropsType: CombineProps<RowProps> = {
   },
 };
 const Row = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Row',
   setup(props, { slots }) {
     const RowContext = {

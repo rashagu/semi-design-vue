@@ -14,7 +14,7 @@ const Provider = defineComponent((props, {slots}) => {
   provide('LocalContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'LocalContextProvider'
 })
 

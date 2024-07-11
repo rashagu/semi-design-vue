@@ -16,7 +16,7 @@ const Consumer = defineComponent(() => {
   const {context} = useStepsContext()
   return () => slots.default ? slots.default(context) : null
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'StepsContextConsumer'
 })
 

@@ -135,7 +135,7 @@ const defaultProps: InputNumberProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const InputNumber = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'InputNumber',
   setup(props, {}) {
     let cursorStart!: number;

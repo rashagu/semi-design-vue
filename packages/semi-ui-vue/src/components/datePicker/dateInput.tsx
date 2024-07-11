@@ -178,7 +178,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<DateInputProps>(propTypes, defaultProps);
 const dateInput = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'dateInput',
   setup(props, {}) {
     const slots = useSlots();

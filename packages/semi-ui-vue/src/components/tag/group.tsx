@@ -53,7 +53,7 @@ export const vuePropsType: CombineProps<TagGroupProps> = {
   onPlusNMouseEnter: Function as PropType<TagGroupProps['onPlusNMouseEnter']>,
 };
 const Group = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TagGroup',
   setup(props, { slots }) {
     function renderNTag(n: number, restTags: (TagProps | VNode)[]) {

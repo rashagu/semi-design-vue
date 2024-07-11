@@ -70,7 +70,7 @@ export const vuePropsType: CombineProps<AnimationProps> = {
 };
 
 const CSSAnimation = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'CSSAnimation',
   setup(props, {}) {
     const slots = useSlots();

@@ -130,7 +130,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<PaginationProps>(propTypes, defaultProps);
 const Pagination = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Pagination',
   setup(props, {}) {
     const slots = useSlots();

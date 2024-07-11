@@ -19,7 +19,7 @@ export const vuePropsType: CombineProps<ResizableHeaderCellProps> = {
   resize: Boolean,
 };
 const ResizableHeaderCell = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ResizableHeaderCell',
   setup(props, { attrs }) {
     const slots = useSlots();

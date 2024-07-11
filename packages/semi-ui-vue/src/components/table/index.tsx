@@ -24,7 +24,7 @@ function Table<RecordType extends Record<string, any> = Data>() {
   const NormalTable = NormalTable_<RecordType>();
   const vuePropsType = vuePropsMake<TableProps<RecordType>>(propTypes, defaultProps);
   const Table = defineComponent({
-    props: vuePropsType as CombineProps<TableProps<RecordType>>,
+    props: { ...vuePropsType } as CombineProps<TableProps<RecordType>>,
     name: 'TableIndex',
     setup(props, { expose }) {
       const {getProps} = useHasInProps()

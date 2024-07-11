@@ -53,7 +53,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<FillStepProps>(propTypes, defaultProps);
 const FillStep = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'FillStep',
   setup(props, {}) {
     const { getProps } = useHasInProps();

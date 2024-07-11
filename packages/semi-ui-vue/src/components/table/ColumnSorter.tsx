@@ -38,7 +38,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const ColumnSorter = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ColumnSorter',
   setup(props, {}) {
     const slots = useSlots();

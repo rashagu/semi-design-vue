@@ -102,7 +102,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Anchor = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Anchor',
   setup(props, {}) {
     const slots = useSlots();

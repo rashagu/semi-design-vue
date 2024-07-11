@@ -124,7 +124,7 @@ const defaultProps: Partial<SliderProps> = {
 };
 export const vuePropsType = vuePropsMake<SliderProps>(propTypes, defaultProps);
 const Slider = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Slider',
   setup(props, {}) {
     const slots = useSlots();

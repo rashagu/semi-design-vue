@@ -49,7 +49,7 @@ export const vuePropsType: CombineProps<PortalProps> = {
 };
 
 const Index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Portal',
   setup(props, { slots }) {
     const { context } = useConfigContext();

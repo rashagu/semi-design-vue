@@ -47,7 +47,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Timeline = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Timeline',
   setup(props, {}) {
     const slots = useSlots();

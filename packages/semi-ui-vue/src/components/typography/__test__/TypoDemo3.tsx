@@ -22,7 +22,7 @@ const TypoDemo3 = defineComponent(
     );
   },
   {
-    props: vuePropsType,
+    props: { ...vuePropsType },
     name: 'TypoDemo3',
   }
 );

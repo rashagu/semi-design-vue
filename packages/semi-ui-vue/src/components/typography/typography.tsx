@@ -22,7 +22,7 @@ export const vuePropsType: CombineProps<TypographyProps> = {
   forwardRef: Object,
 };
 const Typography = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Typography',
   setup(props, { slots }) {
     return () => {

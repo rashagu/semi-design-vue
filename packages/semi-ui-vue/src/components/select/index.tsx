@@ -393,7 +393,7 @@ const defaultProps: Partial<SelectProps> = {
 };
 export const vuePropsType = vuePropsMake<SelectProps>(propTypes, defaultProps);
 const Index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Select',
   setup(props, { expose }) {
     const slots = useSlots();

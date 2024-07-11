@@ -80,7 +80,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<WeekCalendarProps>(propTypes, defaultProps);
 const WeekCalendar = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'WeekCalendar',
   setup(props, {}) {
     const slots = useSlots();

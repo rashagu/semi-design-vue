@@ -112,7 +112,7 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TableCell = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TableCell',
   setup(props, {}) {
     const slots = useSlots();

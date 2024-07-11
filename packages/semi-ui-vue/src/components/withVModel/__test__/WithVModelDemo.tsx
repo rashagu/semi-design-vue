@@ -163,7 +163,7 @@ const WithVModelDemo = defineComponent((props, {}) => {
     </div>
   );
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'WithVModelDemo',
 });
 

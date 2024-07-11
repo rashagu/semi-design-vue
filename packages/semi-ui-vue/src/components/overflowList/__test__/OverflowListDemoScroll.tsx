@@ -56,7 +56,7 @@ const OverflowListDemo1 = defineComponent((props, {}) => {
     </div>
   )
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'OverflowList'
 })
 

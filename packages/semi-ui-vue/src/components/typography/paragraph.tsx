@@ -123,7 +123,7 @@ export const vuePropsType: CombineProps<ParagraphProps> = {
   },
 };
 const paragraph = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Paragraph',
   setup(props, { slots, attrs }) {
     const { className } = props;

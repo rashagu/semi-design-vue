@@ -54,7 +54,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const CustomExpandIcon = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'CustomExpandIcon',
   setup(props, {}) {
     const slots = useSlots();

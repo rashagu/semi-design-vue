@@ -24,7 +24,7 @@ const propTypes: CombineProps<CarouselIndicatorProps> = {
 
 export const vuePropsType = vuePropsMake<CarouselIndicatorProps>(propTypes, {});
 const CarouselIndicator = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'CarouselIndicator',
   setup(props, {}) {
     const slots = useSlots();

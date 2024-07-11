@@ -25,7 +25,7 @@ export const vuePropsType = {
   value: Object,
 };
 const RadioContext = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'RadioContext',
   setup(props, { slots }) {
     const ConfigContext = ref<RadioContextValue>(props.value);

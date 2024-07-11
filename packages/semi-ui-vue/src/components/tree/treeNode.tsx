@@ -85,7 +85,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TreeNode = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TreeNode',
   setup(props, {}) {
     const slots = useSlots();

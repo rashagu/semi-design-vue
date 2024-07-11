@@ -102,7 +102,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<PreviewInnerProps>(propTypes, defaultProps);
 const PreviewInner = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'PreviewInner',
   setup(props, {}) {
     const { getProps } = useHasInProps();

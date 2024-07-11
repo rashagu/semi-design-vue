@@ -78,7 +78,7 @@ const CarouselDemo = defineComponent((props, {}) => {
     </div>
   );
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'CarouselDemo'
 });
 

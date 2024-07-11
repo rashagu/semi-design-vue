@@ -54,7 +54,7 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const CollapsePanel = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'CollapsePanel',
   setup(props, {}) {
     let ariaID: string = '';

@@ -25,7 +25,7 @@ function LocaleConsumerFunc<T>() {
     // children: [String, Boolean,Object,Array],
   };
   const vn = defineComponent({
-    props: vuePropsType,
+    props: { ...vuePropsType },
     name: 'LocaleConsumer',
     setup(props, { slots }) {
       // const config = inject('ConfigContext', ref<ContextValue>({}))

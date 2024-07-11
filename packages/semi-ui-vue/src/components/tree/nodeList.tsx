@@ -47,7 +47,7 @@ export const vuePropsType: CombineProps<NodeListProps> = {
   role: String,
 };
 const NodeList = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'NodeList',
   setup(props, {}) {
     const slots = useSlots();

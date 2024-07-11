@@ -100,7 +100,7 @@ export const vuePropsType: CombineProps<ButtonProps> = {
   contentClassName: String,
 };
 const Button = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Button',
   setup(props, { slots }) {
     return () => {

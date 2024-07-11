@@ -71,7 +71,7 @@ export const vuePropsType: CombineProps<AvatarProps> = {
   contentMotion: Boolean,
 };
 const Index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Avatar',
   setup(props, { slots }) {
     let foundation!: AvatarFoundation;

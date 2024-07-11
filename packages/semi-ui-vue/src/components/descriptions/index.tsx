@@ -61,7 +61,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<DescriptionsProps>(propTypes, defaultProps);
 const Descriptions = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Descriptions',
   setup(props, {}) {
     const slots = useSlots();

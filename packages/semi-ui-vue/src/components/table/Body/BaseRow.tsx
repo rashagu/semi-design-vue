@@ -147,7 +147,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TableRow = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TableRow',
   setup(props, { attrs }) {
     const slots = useSlots();

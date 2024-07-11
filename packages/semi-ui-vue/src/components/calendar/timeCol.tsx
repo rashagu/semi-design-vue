@@ -18,7 +18,7 @@ const propTypes: CombineProps<TimeColProps> = {
 };
 export const vuePropsType = vuePropsMake<TimeColProps>(propTypes, {});
 const TimeCol = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TimeCol',
   setup(props, {}) {
     const slots = useSlots();

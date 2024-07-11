@@ -223,7 +223,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 
 const Tooltip = defineComponent({
-  props: vuePropsType as CombineProps<TooltipProps>,
+  props: { ...vuePropsType } as CombineProps<TooltipProps>,
   name: 'Tooltip',
   setup(props, { expose }) {
     const slots = useSlots();

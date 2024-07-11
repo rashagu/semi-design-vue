@@ -63,7 +63,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<CheckboxProps>(propTypesCheckbox, defaultProps);
 const Checkbox = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Checkbox',
   setup(props, {}) {
     const { getProps } = useHasInProps();

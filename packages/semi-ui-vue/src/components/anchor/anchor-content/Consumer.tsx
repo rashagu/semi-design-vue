@@ -16,7 +16,7 @@ const Consumer = defineComponent(() => {
   const slots = useSlots()
   const {context} = useAnchorContext()
   return () => slots.default ? slots.default(context) : null
-},{props: vuePropsType})
+},{props: { ...vuePropsType }})
 
 
 

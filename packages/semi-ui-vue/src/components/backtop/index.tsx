@@ -57,7 +57,7 @@ const propTypes: CombineProps<BackTopProps> = {
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const BackTop = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'BackTop',
   setup(props, {}) {
     const slots = useSlots();

@@ -29,7 +29,7 @@ export const vuePropsType: CombineProps<StepProps> = {
   onClick: PropTypes.func as PropType<StepProps['onClick']>,
 };
 const Step = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Step',
   setup(props, {}) {
     const { context } = useStepsContext();

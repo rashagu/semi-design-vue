@@ -15,7 +15,7 @@ export const vuePropsType: CombineProps<DropdownTitleProps> = {
   className: String,
 };
 const DropdownTitle = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DropdownTitle',
   setup(props, { slots }) {
     const { context } = useDropdownContext();

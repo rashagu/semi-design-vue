@@ -124,8 +124,8 @@ const EventDemo = defineComponent((props, {}) => {
     );
   }
 }, {
-  props: vuePropsType,
-  name :'EventDemo'
+  props: { ...vuePropsType },
+  name: 'EventDemo'
 })
 
 

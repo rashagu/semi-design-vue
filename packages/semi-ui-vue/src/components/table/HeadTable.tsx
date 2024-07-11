@@ -61,7 +61,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const HeadTable = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'HeadTable',
   setup(props, {}) {
     const {getProps} = useHasInProps()

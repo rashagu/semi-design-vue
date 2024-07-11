@@ -97,7 +97,7 @@ const defaultProps: Partial<SwitchProps> = {
 };
 export const vuePropsType = vuePropsMake<SwitchProps>(propTypes, defaultProps);
 const Switch = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Switch',
   setup(props, {}) {
     const slots = useSlots();

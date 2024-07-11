@@ -37,12 +37,12 @@ const CalenderDemo = defineComponent((props, {}) => {
       <Calendar mode="week"></Calendar>
       <Calendar mode="month"></Calendar>
       <Calendar mode="range" range={[new Date(2020, 8, 26), new Date(2020, 8, 31)]}></Calendar>
-      <EventDemo/>
+      <EventDemo name={''}/>
       <DemoDiy />
     </div>
   )
 }, {
-  props:vuePropsType,
+  props: { ...vuePropsType },
   name:'CalenderDemo',
 })
 

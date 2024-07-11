@@ -59,7 +59,7 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake<FillStepsProps>(propTypes, defaultProps);
 const FillSteps = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'FillSteps',
   setup(props, {}) {
     const slots = useSlots();

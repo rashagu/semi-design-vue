@@ -113,7 +113,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TimeInput = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TimeInput',
   setup(props, { slots }) {
     const state = reactive<Record<any, any>>({

@@ -31,7 +31,7 @@ const propTypes: CombineProps<MetaProps> = {
 };
 export const vuePropsType = vuePropsMake(propTypes, {});
 const Meta = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Meta',
   setup(props, {}) {
     const {getProps} = useHasInProps()

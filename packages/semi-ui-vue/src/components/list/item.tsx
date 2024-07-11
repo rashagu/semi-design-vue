@@ -52,7 +52,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<ListItemProps>(propTypes, defaultProps);
 const ListItem = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ListItem',
   setup(props, {}) {
     const slots = useSlots();

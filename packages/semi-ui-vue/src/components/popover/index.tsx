@@ -145,7 +145,7 @@ const defaultProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps)
 
 const Popover = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Popover',
   setup(props, {slots, expose}) {
   const {context} = useConfigContext()

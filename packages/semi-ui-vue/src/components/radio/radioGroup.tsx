@@ -102,7 +102,7 @@ export const vuePropsType: CombineProps<RadioGroupProps> = {
 };
 
 const RadioGroup = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'RadioGroup',
   setup(props, { slots }) {
     const onUpdateValueFunc = props['onUpdate:value'];

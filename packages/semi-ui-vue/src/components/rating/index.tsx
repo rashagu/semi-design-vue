@@ -110,7 +110,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<RatingProps>(propTypes, defaultProps);
 const Rating = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Rating',
   setup(props, {}) {
     const { getProps } = useHasInProps();

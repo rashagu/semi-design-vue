@@ -11,7 +11,7 @@ export const vuePropsType = {
   name: String,
 };
 const Consumer = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DescriptionsConsumer',
   setup() {
     const slots = useSlots();

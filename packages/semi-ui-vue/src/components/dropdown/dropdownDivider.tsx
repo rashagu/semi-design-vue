@@ -19,7 +19,7 @@ export const vuePropsType = {
   className: String,
 }
 const DropdownDivider = defineComponent({
-  props:vuePropsType,
+  props: { ...vuePropsType },
   name:'DropdownDivider',
   setup(props, {slots}) {
 

@@ -96,7 +96,7 @@ const propTypes: CombineProps<RatingItemProps> = {
 };
 export const vuePropsType = vuePropsMake<RatingItemProps>(propTypes, {});
 const Item = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Item',
   setup(props, { expose }) {
     const slots = useSlots();

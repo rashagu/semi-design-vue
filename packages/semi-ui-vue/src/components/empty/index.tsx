@@ -57,7 +57,7 @@ export const vuePropsType: CombineProps<EmptyProps> = {
 };
 
 const Empty = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Empty',
   setup(props) {
     const {getProps} = useHasInProps()

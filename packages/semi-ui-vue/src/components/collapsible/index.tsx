@@ -69,7 +69,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<CollapsibleProps>(propTypes, defaultProps);
 const Collapsible = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Collapsible',
   setup(props, {}) {
     const slots = useSlots();

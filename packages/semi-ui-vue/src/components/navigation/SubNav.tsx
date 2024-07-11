@@ -119,7 +119,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const SubNav = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'SubNav',
   setup(props, {}) {
   const slots = useSlots();

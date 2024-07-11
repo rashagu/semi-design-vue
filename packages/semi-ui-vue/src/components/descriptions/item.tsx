@@ -38,7 +38,7 @@ const propTypes: CombineProps<{
 };
 export const vuePropsType = vuePropsMake(propTypes, {});
 const DescriptionsItem = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DescriptionsItem',
   setup(props, {}) {
     const slots = useSlots();

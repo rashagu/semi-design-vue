@@ -70,7 +70,7 @@ const RenderItem = defineComponent((props, {slots}) => {
     </div>
   )
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'RenderItem'
 })
 

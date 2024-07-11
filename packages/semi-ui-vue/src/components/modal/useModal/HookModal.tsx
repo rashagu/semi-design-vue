@@ -30,7 +30,7 @@ export const vuePropsType: CombineProps<HookModalProps> = {
 };
 
 const HookModal = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'HookModal',
   setup(props_, { expose }) {
     const slots = useSlots();

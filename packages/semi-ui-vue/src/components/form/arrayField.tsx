@@ -72,7 +72,7 @@ export const vuePropsType = {
   field: String,
 };
 const ArrayFieldComponent = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ArrayFieldComponent',
   setup(props, {}) {
     const slots = useSlots();

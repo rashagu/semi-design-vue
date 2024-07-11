@@ -80,7 +80,7 @@ const SortableItem = defineComponent((props, {attrs}) => {
 
   }
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'SortableItem'
 })
 

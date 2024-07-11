@@ -68,7 +68,7 @@ const defaultProps: TagProps = {
 };
 export const vuePropsType = vuePropsMake<TagProps>(propTypes, defaultProps);
 const Index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Tag',
   setup(props, { slots }) {
     const {getProps} = useHasInProps()

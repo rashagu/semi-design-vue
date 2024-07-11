@@ -241,7 +241,7 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake<CascaderProps>(propTypes, defaultProps);
 const Index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Cascader',
   setup(props, { expose }) {
     const slots = useSlots();

@@ -115,7 +115,7 @@ const staticDefaultProps = {
 };
 export const vuePropsType = vuePropsMake(staticPropTypes, staticDefaultProps);
 const Combobox = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Combobox',
   setup(props, {}) {
     const slots = useSlots();

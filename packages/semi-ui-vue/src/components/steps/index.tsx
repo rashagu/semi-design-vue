@@ -61,7 +61,7 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake<StepsProps>(propTypes, defaultProps);
 const Steps = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Steps',
   setup(props, {}) {
     const slots = useSlots();

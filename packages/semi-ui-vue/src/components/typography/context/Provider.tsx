@@ -19,7 +19,7 @@ const Provider = defineComponent(
     return () => (slots.default ? slots.default(ConfigContext.value) : null);
   },
   {
-    props: vuePropsType,
+    props: { ...vuePropsType },
     name: 'TypographyBaseSizeProvider',
   }
 );

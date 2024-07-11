@@ -66,7 +66,7 @@ export const vuePropsType: CombineProps<NavigationProps> = {
   forwardRef: [PropTypes.object, PropTypes.func]
 };
 const navigation = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DatePickerNavigation',
   setup(props, { slots }) {
     const navRef = ref();

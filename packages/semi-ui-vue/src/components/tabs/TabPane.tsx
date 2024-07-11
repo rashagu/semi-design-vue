@@ -32,7 +32,7 @@ const propTypes: CombineProps<{
 };
 export const vuePropsType = vuePropsMake(propTypes, {});
 const TabPane = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TabPane',
   ...{ isTabPane: true },
   setup(props, {}) {

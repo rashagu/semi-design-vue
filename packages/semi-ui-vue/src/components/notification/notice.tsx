@@ -77,7 +77,7 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake<NoticeReactProps>(propTypes, defaultProps);
 const Notice = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Notice',
   setup(props, { expose }) {
     const slots = useSlots();

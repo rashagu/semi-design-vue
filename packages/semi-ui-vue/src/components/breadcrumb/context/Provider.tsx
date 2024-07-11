@@ -6,7 +6,7 @@ export const vuePropsType = {
   value: Object
 }
 const Provider = defineComponent({
-  props:vuePropsType,
+  props: { ...vuePropsType },
   name: 'BreadContextProvider',
   setup(props, {slots}) {
   const ConfigContext = ref<BreadContextType>(props.value);

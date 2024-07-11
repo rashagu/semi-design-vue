@@ -82,7 +82,7 @@ const ModalDemoConfirm = defineComponent((props, {}) => {
     </div>
   )
 },{
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'ModalDemoConfirm'
 })
 

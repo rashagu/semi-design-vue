@@ -35,7 +35,7 @@ export const vuePropsType: CombineProps<NavHeaderProps> = {
   className: PropTypes.string,
 };
 const NavHeader = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'NavHeader',
   setup(props, { slots }) {
     const { context } = useNavContext();

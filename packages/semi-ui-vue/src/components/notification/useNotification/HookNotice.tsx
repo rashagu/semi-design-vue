@@ -16,7 +16,7 @@ export const vuePropsType = {
   motion: [Object, String, Boolean] as PropType<HookNoticeProps['motion']>,
 };
 const HookNotice = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'HookNotice',
   setup(props, { expose, attrs }) {
     const slots = useSlots();

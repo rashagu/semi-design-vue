@@ -88,7 +88,7 @@ export const vuePropsType: CombineProps<OptionProps> = {
 };
 
 const Option = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'isSelectOption',
   setup(props, { slots, attrs }) {
     function onClick({ value, label, children, ...rest }: Partial<OptionProps>, event: MouseEvent) {

@@ -35,7 +35,7 @@ export const vuePropsType = {
   forwardRef: [Object, Function],
 };
 const index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'DatePickerIndex',
   setup(props, {}) {
     const slots = useSlots();

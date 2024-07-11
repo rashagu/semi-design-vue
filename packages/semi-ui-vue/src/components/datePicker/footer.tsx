@@ -31,7 +31,7 @@ export const vuePropsType = vuePropsMake(
   {}
 );
 const Footer = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Footer',
   setup(props, {}) {
     const slots = useSlots();

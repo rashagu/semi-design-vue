@@ -42,7 +42,7 @@ export const vuePropsType: CombineProps<SpaceProps> = {
   className: String,
 };
 const Index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Space',
   setup(props, { slots }) {
     return () => {

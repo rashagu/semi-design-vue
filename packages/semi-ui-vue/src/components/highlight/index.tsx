@@ -39,7 +39,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Highlight = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Highlight',
   setup(props, {}) {
     const slots = useSlots();

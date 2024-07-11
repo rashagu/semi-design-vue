@@ -19,7 +19,7 @@ export const vuePropsType: CombineProps<TableContextProps> = {
   direction: PropTypes.string as PropType<TableContextProps['direction']>,
 };
 const TableContextProvider = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TableContextProvider',
   setup(props, {}) {
     const slots = useSlots();

@@ -38,7 +38,7 @@ export const vuePropsType: CombineProps<TriggerProps> = {
 };
 
 const Index = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Trigger',
   setup(props, { slots, attrs }) {
     return () => {

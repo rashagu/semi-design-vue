@@ -82,7 +82,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const SectionRow = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'SectionRow',
   setup(props, {}) {
     const slots = useSlots();

@@ -14,7 +14,7 @@ const Provider = defineComponent((props, {slots}) => {
   }, { immediate: true, deep: true})
   return ()=>slots.default?slots.default(ConfigContext.value):null
 }, {
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'FormApiContextProvider'
 })
 

@@ -161,7 +161,7 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TableHeader = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'TableHeader',
   setup(props, {}) {
     const {getProps} = useHasInProps()

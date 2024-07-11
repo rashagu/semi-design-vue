@@ -81,7 +81,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<BaseFormProps>(propTypes, defaultProps);
 const Form = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'Form',
   setup(props, {}) {
     const slots = useSlots();

@@ -112,7 +112,7 @@ const defaultProps = {
 };
 export const vuePropsType = vuePropsMake<MonthsGridProps>(propTypes, defaultProps);
 const monthsGrid = defineComponent({
-  props: vuePropsType,
+  props: { ...vuePropsType },
   name: 'MonthsGrid',
   setup(props, { slots }) {
     const validFormat = props.format || getDefaultFormatTokenByType(props.type);
