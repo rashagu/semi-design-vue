@@ -1,5 +1,14 @@
 # @kousum/semi-ui-vue
 
+## 0.15.4
+
+### Patch Changes
+
+- CombineProps & Form.Select
+- 49f5cad: fix
+- 3c3a99f: test
+- 49f5cad: allowed Form.Select
+
 ## 0.15.4-alpha.2
 
 ### Patch Changes
