@@ -128,6 +128,10 @@ export const vuePropsType = vuePropsMake<ModalReactProps>(propTypes, defaultProp
 const Modal = defineComponent({
   props: { ...vuePropsType },
   name: 'Modal',
+  emits: {
+    cancel:(e: MouseEvent): void | Promise<any>=>{},
+    ok:(e: MouseEvent): void | Promise<any>=>{},
+  },
   setup(props, { expose }) {
     const slots = useSlots();
 

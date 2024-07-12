@@ -8,7 +8,8 @@ export interface ButtonProps extends IconButtonProps, BaseButtonProps {} // TODO
 const Button = defineComponent({
   props: { ...vuePropsType },
   name: 'Button',
-  setup(props, { slots }) {
+  emits: ['click'],
+  setup(props, { slots, emit }) {
     return () => {
       const hasIcon = Boolean(props.icon);
       const isLoading = Boolean(props.loading);

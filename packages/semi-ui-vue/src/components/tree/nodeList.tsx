@@ -29,11 +29,11 @@ export const vuePropsType: CombineProps<NodeListProps> = {
   },
   motionType: {
     type: String,
-    required: true
+    required: false
   },
   flattenList: {
     type: Array,
-    required: true
+    required: false
   },
   searchTargetIsDeep: Boolean,
   renderTreeNode: {
@@ -42,7 +42,7 @@ export const vuePropsType: CombineProps<NodeListProps> = {
   },
   onMotionEnd: {
     type: Function as PropType<NodeListProps['onMotionEnd']>,
-    required: true
+    required: false
   },
   role: String,
 };

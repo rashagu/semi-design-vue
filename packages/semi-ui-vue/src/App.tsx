@@ -218,7 +218,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemoVueSFC/>*/}
         {/*<ModalDemo2/>*/}
         {/*<UploadDemo/>*/}
-        <UpdateDemo2/>
+        {/*<UpdateDemo2/>*/}
         {/*<ProgressDemo/>*/}
         {/*<SwitchDemo/>*/}
         {/*<BreadcrumbDemo/>*/}
@@ -257,7 +257,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TypoCopyDemo/>*/}
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
         {/*  <Button />*/}
-        {/*<DemoButtonSFC/>*/}
+        <DemoButtonSFC/>
         {/*</div>*/}
         {/*<SkeletonDemo/>*/}
         {/*<SkeletonDemoSFC/>*/}
