@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 0.15.6
+
+### Patch Changes
+
+- fix
+
 ## 0.15.5
 
 ### Patch Changes
