@@ -25,6 +25,7 @@ Typography.Numeral = Numeral
 // export { TextProps } from './Text';
 // export { ParagraphProps } from './Paragraph';
 export * from './interface';
+export default Typography
 export {
     Typography,
     Text as TypographyText,

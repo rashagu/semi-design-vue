@@ -756,7 +756,7 @@ const Index = defineComponent({
       const renderData = foundation.getRenderData();
       // console.log(activeKeys, selectedKeys);
       const content = (
-        <div class={popoverCls} role="listbox" style={dropdownStyle}>
+        <div class={popoverCls} role="listbox" style={dropdownStyle} onKeydown={foundation.handleKeyDown}>
           {topSlot}
           <Item
             activeKeys={activeKeys}

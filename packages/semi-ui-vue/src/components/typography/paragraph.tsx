@@ -128,7 +128,7 @@ const paragraph = defineComponent({
   setup(props, { slots, attrs }) {
     const { className } = props;
     const paragraphCls = cls(className, `${prefixCls}-paragraph`);
-    return () => <Base children={slots.default?.()} component_={'p'} {...props} {...attrs} className={paragraphCls}></Base>;
+    return () => <Base children={slots.default?.()} {...{...props, component_: props.component_ || 'p'}} {...attrs} className={paragraphCls}></Base>;
   },
 });
 

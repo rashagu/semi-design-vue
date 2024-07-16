@@ -121,7 +121,7 @@ const propTypes: CombineProps<BaseTypographyProps> = {
   component: PropTypes.string,
   weight: [PropTypes.string, PropTypes.number],
 
-  children: [Object, Array, Function],
+  children: [Object, Array, Function, String],
   class: {
     type: String,
     default: '',
@@ -726,6 +726,7 @@ const Base = defineComponent({
         ...(isNaN(Number(weight)) ? {} : { fontWeight: weight }),
         ...style,
       };
+
 
       return (
         <Typography

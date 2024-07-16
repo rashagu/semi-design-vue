@@ -122,6 +122,12 @@ import TextDemo from './components/typography/__test__/textDemo.vue';
 import LinkDemo from './components/typography/__test__/linkDemo.vue';
 import TypoCopyDemo from './components/typography/__test__/TypoCopyDemo';
 import UpdateDemo2 from './components/upload/__test__/UpdateDemo2';
+import TableDemoColumnChildren from './components/table/__test__/TableDemoColumnChildren';
+import TableDemoSFC from './components/table/__test__/TableDemoSFC.vue';
+import PinCodeDemo from './components/pincode/__test__/PinCodeDemo';
+import LottieDemo from './components/lottie/__test__/LottieDemo';
+import CodeHighlightDemo from './components/codeHighlight/__test__/CodeHighlightDemo';
+import MarkDownRenderDemo from './components/markdownRender/__test__/markDownRenderDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -172,6 +178,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<BadgeDemo />*/}
         {/*<OverflowListDemo1 />*/}
         {/*<OverflowListDemoScroll />*/}
+        {/*<PinCodeDemo/>*/}
+        {/*<TableDemoColumnChildren/>*/}
+        {/*<TableDemoSFC/>*/}
         {/*<TableDemo1 />*/}
         {/*<TableDemo2 />*/}
         {/*<TableDemo3 />*/}
@@ -217,6 +226,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemo/>*/}
         {/*<ModalDemoVueSFC/>*/}
         {/*<ModalDemo2/>*/}
+        {/*<LottieDemo/>*/}
+        <MarkDownRenderDemo/>
+        {/*<CodeHighlightDemo/>*/}
         {/*<UploadDemo/>*/}
         {/*<UpdateDemo2/>*/}
         {/*<ProgressDemo/>*/}
@@ -257,7 +269,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TypoCopyDemo/>*/}
         {/*<div style={{color:'#E91E63',width: 100, display:'flex', flexWrap:'wrap'}}>*/}
         {/*  <Button />*/}
-        <DemoButtonSFC/>
+        {/*<DemoButtonSFC/>*/}
         {/*</div>*/}
         {/*<SkeletonDemo/>*/}
         {/*<SkeletonDemoSFC/>*/}

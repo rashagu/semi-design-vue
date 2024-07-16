@@ -25,6 +25,7 @@ import { vuePropsMake } from '../PropTypes';
 import { usePreviewContext } from './previewContext/Consumer';
 import { useBaseComponent } from '../_base/baseComponent';
 import { CombineProps } from '../interface';
+import { styleNum } from '../_utils';
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Image']>();
 const prefixCls = cssClasses.PREFIX;
@@ -37,7 +38,7 @@ const propTypes: CombineProps<ImageProps> = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   alt: PropTypes.string,
   placeholder: PropTypes.node,
-  fallback: [PropTypes.string, PropTypes.node] as PropType<ImageProps['fallback']>,
+  fallback: PropTypes.node as PropType<ImageProps['fallback']>,
   preview: [PropTypes.bool, PropTypes.object] as PropType<ImageProps['preview']>,
   onLoad: PropTypes.func as PropType<ImageProps['onLoad']>,
   onError: PropTypes.func as PropType<ImageProps['onError']>,
@@ -250,8 +251,8 @@ const Image = defineComponent({
               [`${prefixCls}-img-error`]: loadStatus === 'error',
               [imgCls]: Boolean(imgCls),
             })}
-            width={parseInt('' + width)}
-            height={height ? parseInt('' + height) : height}
+            width={width}
+            height={height}
             crossorigin={crossOrigin}
             onError={handleError}
             onLoad={handleLoaded}

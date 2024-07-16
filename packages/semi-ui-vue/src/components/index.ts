@@ -210,3 +210,8 @@ export {
   UploadVModel,
 } from './withVModel/index';
 export { default as WithVModel } from './withVModel/WithVModel';
+
+export {default as PinCode} from './pincode'
+export {default as Lottie} from './lottie'
+export {default as CodeHighlight} from './codeHighlight'
+export {default as MarkdownRender} from './markdownRender'

@@ -101,8 +101,9 @@ const Text = defineComponent({
   name: 'Text',
   setup(props, { slots }) {
     return () => {
+
       return (
-        <Base children={slots.default?.()} component_={'span'} {...props}>
+        <Base children={slots.default?.()} {...{...props, component_: props.component_ || 'span'}}>
           {{
             default: slots.default,
           }}

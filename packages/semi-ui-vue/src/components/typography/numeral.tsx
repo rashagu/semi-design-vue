@@ -136,7 +136,7 @@ const Numeral = defineComponent({
       delete baseProps.parser;
       // Each piece of content in the virtual DOM is formatted by the `formatNumeral` function.
       baseProps.children = formatNodeDFS(getFragmentChildren(slots));
-      return <Base component_={'span'} {...omit(baseProps, 'precision', 'truncate', 'component_')}></Base>;
+      return <Base {...{...omit(baseProps, 'precision', 'truncate', 'component_'), component_: baseProps.component_ || 'span'}}></Base>;
     };
   },
 });

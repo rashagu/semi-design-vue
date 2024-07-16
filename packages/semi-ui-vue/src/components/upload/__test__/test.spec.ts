@@ -1,8 +1,14 @@
-import { expect, test, describe } from 'vitest'
+import { expect, test, describe, beforeAll, vi } from 'vitest';
 import Comp from "./UploadDemo";
 import {mount} from "@vue/test-utils";
 import { fireEvent, render, screen } from '@testing-library/vue';
 
+
+beforeAll(() => {
+  window.URL.createObjectURL = vi.fn();
+  window.URL.revokeObjectURL = vi.fn();
+  vi.spyOn(window.URL, "createObjectURL").mockImplementation(() => "http://fake.url");
+});
 test('UploadDemo test', async () => {
   const wrapper = mount(Comp, {})
 
@@ -10,6 +16,28 @@ test('UploadDemo test', async () => {
   expect(profileLink.exists()).toEqual(true)
 })
 
+test('upload file', async () => {
+
+  render(Comp, {
+    global: {
+      stubs: {
+        // 因为有同名的自定义组件 与vue的transition组件冲突
+        transition: false,
+      },
+
+    },
+  })
+  const bt1 = await screen.findAllByTestId("upload-bt")
+  await fireEvent.change(bt1[0], {
+    target: {
+      files: [new File(['(⌐□_□)'], 'chucknorris.png', {type: 'image/png'})],
+    },
+  })
+
+  const text = await screen.findByText("chucknorris.png")
+  expect(text.innerHTML).toEqual('chucknorris.png')
+
+})
 test('upload sss', async () => {
 
   render(Comp)

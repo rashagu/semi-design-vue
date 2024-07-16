@@ -74,6 +74,7 @@ export interface InputProps{
   onChange?: (value: string, e: HashChangeEvent) => void;
   onBlur?: (e: FocusEvent) => void;
   onFocus?: (e: FocusEvent) => void;
+  onPaste?: (e: ClipboardEvent) => void;
   onInput?: (e: Event) => void;
   onKeyDown?: (e: KeyboardEvent) => void;
   onKeyUp?: (e: KeyboardEvent) => void;
@@ -136,6 +137,7 @@ export const propTypes: CombineProps<InputProps> = {
   onChange: PropTypes.func as PropType<InputProps['onChange']>,
   onBlur: PropTypes.func as PropType<InputProps['onBlur']>,
   onFocus: PropTypes.func as PropType<InputProps['onFocus']>,
+  onPaste: PropTypes.func as PropType<InputProps['onPaste']>,
   onInput: PropTypes.func as PropType<InputProps['onInput']>,
   onKeyDown: PropTypes.func as PropType<InputProps['onKeyDown']>,
   onKeyUp: PropTypes.func as PropType<InputProps['onKeyUp']>,
@@ -173,6 +175,7 @@ const defaultProps = {
   onChange: noop,
   onBlur: noop,
   onFocus: noop,
+  onPaste: noop,
   onInput: noop,
   onKeyDown: noop,
   onKeyUp: noop,
@@ -185,7 +188,7 @@ export const VuePropsType = vuePropsMake(propTypes, defaultProps);
 
 // Vue在这里的话 state 更新会导致整体重新渲染 导致value 无法更新到最新的
 const Input = defineComponent({
-  props: VuePropsType,
+  props: {...VuePropsType},
   name: 'Input',
   setup(props, { slots, attrs }) {
     const { getProps } = useHasInProps();
@@ -489,7 +492,7 @@ const Input = defineComponent({
           return forwardRef;
         }
       }
-      return inputRef.value;
+      return inputRef;
     }
 
     // onMounted(()=>{
@@ -585,6 +588,7 @@ const Input = defineComponent({
           // foundation.handleChange(e.target.value, e)
         },
         onFocus: (e: any) => foundation.handleFocus(e),
+        onPaste: props.onPaste,
         onBlur: (e: any) => foundation.handleBlur(e),
         onKeyup: (e: any) => foundation.handleKeyUp(e),
         onKeydown: (e: any) => foundation.handleKeyDown(e),

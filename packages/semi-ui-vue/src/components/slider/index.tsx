@@ -392,7 +392,13 @@ const Slider = defineComponent({
         'aria-disabled': disabled,
       };
       vertical && Object.assign(commonAria, { 'aria-orientation': 'vertical' });
-
+      const handleDot = props.handleDot as {
+        size?: string;
+        color?: string;
+      } & {
+        size?: string;
+        color?: string;
+      }[];
       const handleContents = !range ? (
         <Tooltip
           content={tipChildren.min}
@@ -446,17 +452,12 @@ const Slider = defineComponent({
             aria-valuemax={max}
             aria-valuemin={min}
           >
-            {props.handleDot && (
+            {handleDot && (
               <div
                 class={cssClasses.HANDLE_DOT}
                 style={{
-                  ...(props.handleDot?.size
-                    ? {
-                        width: props.handleDot.size,
-                        height: props.handleDot.size,
-                      }
-                    : {}),
-                  ...(props.handleDot?.color ? { backgroundColor: props.handleDot.color } : {}),
+                  ...(handleDot?.size ? { width: handleDot.size, height: handleDot.size } : {}),
+                  ...(handleDot?.color ? { backgroundColor: handleDot.color } : {}),
                 }}
               />
             )}
@@ -514,17 +515,12 @@ const Slider = defineComponent({
               aria-valuemax={currentValue[1]}
               aria-valuemin={min}
             >
-              {props.handleDot?.[0] && (
+              {handleDot?.[0] && (
                 <div
                   class={cssClasses.HANDLE_DOT}
                   style={{
-                    ...(props.handleDot[0]?.size
-                      ? {
-                          width: props.handleDot[0].size,
-                          height: props.handleDot[0].size,
-                        }
-                      : {}),
-                    ...(props.handleDot[0]?.color ? { backgroundColor: props.handleDot[0].color } : {}),
+                    ...(handleDot[0]?.size ? { width: handleDot[0].size, height: handleDot[0].size } : {}),
+                    ...(handleDot[0]?.color ? { backgroundColor: handleDot[0].color } : {}),
                   }}
                 />
               )}

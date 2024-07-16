@@ -266,16 +266,6 @@ const Body = defineComponent({
       cachedExpandRelatedProps: [],
     });
 
-    watch([listRef, () => context.value.getVirtualizedListRef], () => {
-      if (props.virtualized) {
-        context.value.getVirtualizedListRef?.(listRef.value);
-      } else {
-        console.warn(
-          'getVirtualizedListRef only works with virtualized. ' +
-            'See https://semi.design/zh-CN/show/table for more information.'
-        );
-      }
-    });
     let one1: WatchStopHandle;
     one1 = watch(
       () => context.value.getVirtualizedListRef,
@@ -398,6 +388,19 @@ const Body = defineComponent({
         forwardedRef(node);
       } else if (forwardedRef && typeof forwardedRef === 'object') {
         forwardedRef.value = node;
+      }
+    };
+
+    const setListRef = (listInstance: any) => {
+      listRef.value = listInstance;
+      const { getVirtualizedListRef } = context.value;
+      if (getVirtualizedListRef) {
+        if (props.virtualized) {
+          getVirtualizedListRef(listRef.value);
+        } else {
+          console.warn('getVirtualizedListRef only works with virtualized. ' +
+            'See https://semi.design/en-US/show/table for more information.');
+        }
       }
     };
 
@@ -596,7 +599,7 @@ const Body = defineComponent({
           initialScrollOffset={state.cache.virtualizedScrollTop}
           onScroll={handleVirtualizedScroll}
           onItemsRendered={onItemsRendered}
-          ref={listRef}
+          ref={setListRef}
           className={wrapCls}
           outerRef={forwardRef}
           height={virtualizedData?.length ? y : 0}

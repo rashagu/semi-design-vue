@@ -1,4 +1,15 @@
-import { defineComponent, ref, shallowRef, h, CSSProperties, Ref, getCurrentInstance, useAttrs, toRaw } from 'vue';
+import {
+  defineComponent,
+  ref,
+  shallowRef,
+  h,
+  CSSProperties,
+  Ref,
+  getCurrentInstance,
+  useAttrs,
+  toRaw,
+  ShallowRef,
+} from 'vue';
 import baseLog from '@douyinfe/semi-foundation/utils/log';
 import { DefaultAdapter } from '@douyinfe/semi-foundation/base/foundation';
 import { VALIDATE_STATUS } from '@douyinfe/semi-foundation/base/constants';
@@ -28,18 +39,19 @@ export function getProps(props: Record<string, any>) {
   // console.log('value' in newProps)
   return newProps;
 }
-export const useBaseComponent: <U extends BaseProps = {}>(
+export const useBaseComponent: <U extends BaseProps = {}, S = Record<string, any>>(
   props: U,
-  state: any
+  state: S
 ) => {
   isControlled: (key: any) => boolean;
   cache: any;
   adapter: <P extends BaseProps, S = {}>() => DefaultAdapter<P, S>;
   log: (text: string, ...rest: any) => any;
   context: Ref<ContextValue>;
-  foundation: any;
+  foundation: ShallowRef<any>;
   state: any;
   getDataAttr: () => Record<string, any>;
+  setStateAsync: (state: Partial<S>)=>Promise<void>;
 } = (props, state) => {
   const attrs = useAttrs();
   const cache = shallowRef<any>({});
@@ -87,14 +99,14 @@ export const useBaseComponent: <U extends BaseProps = {}>(
         return getPropsUseHasInProps(props)
       }, // eslint-disable-line
       getState: (key) => {
-        //console.log(key,state,state[key])
         return toRaw(state[key]);
       }, // eslint-disable-line
-      getStates: () => state, // eslint-disable-line
+      getStates: () => state as any, // eslint-disable-line
       setState: (states, cb) => {
         // console.log('setState', states)
         for (let i in states) {
           if (states.hasOwnProperty(i)) {
+            //@ts-ignore
             state[i] = states[i];
           }
         }
@@ -122,7 +134,14 @@ export const useBaseComponent: <U extends BaseProps = {}>(
   function getDataAttr() {
     return getDataAttr_({ ...props, ...attrs });
   }
-
+  function setStateAsync(state_: Partial<any>){
+    return new Promise<void>(resolve=>{
+      Object.keys(state_).forEach(key=>{
+        state[key] = state_[key]
+      })
+      resolve()
+    });
+  }
   return {
     cache,
     foundation,
@@ -132,6 +151,7 @@ export const useBaseComponent: <U extends BaseProps = {}>(
     adapter,
     log,
     getDataAttr,
+    setStateAsync,
   };
 };
 

@@ -21,6 +21,8 @@ import type {
     BaseEllipsis
 } from '@douyinfe/semi-foundation/table/foundation';
 import type { ScrollDirection, CSSDirection } from '@kousum/vue3-window';
+import { VariableSizeList } from '@kousum/vue3-window';
+
 import type {VueJsxNode} from "../interface";
 import { CSSProperties, DefineSetupFnComponent, HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes, VNode } from 'vue';
 import type { ColumnFilterProps } from './ColumnFilter';

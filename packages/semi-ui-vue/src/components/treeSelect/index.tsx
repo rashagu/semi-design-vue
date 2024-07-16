@@ -908,7 +908,7 @@ const TreeSelect = defineComponent({
       };
       const popoverCls = cls(dropdownClassName, `${prefixcls}-popover`);
       return (
-        <div class={popoverCls} style={style}>
+        <div class={popoverCls} style={style} onKeydown={foundation.handleKeyDown}>
           {renderTree()}
         </div>
       );

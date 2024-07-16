@@ -24,9 +24,9 @@
     "url": "https://github.com/rashagu/semi-design-vue"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.61.0",
-    "@douyinfe/semi-theme-default": "2.61.0",
-    "@douyinfe/semi-animation": "2.61.0",
+    "@douyinfe/semi-foundation": "2.62.0",
+    "@douyinfe/semi-theme-default": "2.62.0",
+    "@douyinfe/semi-animation": "2.62.0",
     "@kousum/semi-animation-vue": "^0.15.1",
     "@kousum/semi-icons-vue": "^0.15.1",
     "@kousum/semi-illustrations-vue": "^0.15.1",
@@ -47,6 +47,8 @@
     "sass": "^1.57.1",
     "scroll-into-view-if-needed": "^2.2.28",
     "utility-types": "^3.10.0",
+    "lottie-web": "^5.12.2",
+    "@mdx-js/vue": "^3.0.1",
     "vue": "^3.4.31"
   },
   "peerDependencies": {
@@ -60,6 +62,7 @@
     "./src/component/index.ts"
   ],
   "devDependencies": {
+    "@types/mdx": "^2.0.13",
     "@types/node": "^20.1.4",
     "@types/lodash": "^4.14.202",
     "@babel/plugin-proposal-decorators": "^7.17.2",
@@ -89,7 +92,7 @@
     "fast-glob": "^3.2.12",
     "typescript": "^5.5.2",
     "terser": "^5.16.4",
-    "vite": "5.3.2",
+    "vite": "5.3.4",
     "vue-tsc": "^2.0.21"
   }
 }

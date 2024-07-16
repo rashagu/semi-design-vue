@@ -744,6 +744,7 @@ const Upload = defineComponent({
             accept={accept}
             onChange={onChange}
             type="file"
+            data-testid="upload-bt"
             autocomplete="off"
             tabindex={-1}
             class={inputCls}

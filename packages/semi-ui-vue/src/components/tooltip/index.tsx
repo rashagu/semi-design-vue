@@ -617,7 +617,7 @@ const Tooltip = defineComponent({
       const bgColor = get(style, 'backgroundColor');
 
       const iconComponent =
-        placement.includes('left') || placement.includes('right') ? <TriangleArrowVertical /> : <TriangleArrow />;
+        placement?.includes('left') || placement?.includes('right') ? <TriangleArrowVertical /> : <TriangleArrow />;
       if (showArrow) {
         if (isVNode(showArrow)) {
           icon = showArrow;

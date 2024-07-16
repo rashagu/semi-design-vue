@@ -10,6 +10,7 @@ import { vuePropsMake } from '../PropTypes';
 import { useConfigContext } from '../configProvider/context/Consumer';
 import { useHasInProps } from '../_base/baseComponent';
 import { CombineProps } from '../interface';
+import { getFragmentChildren } from '../_utils';
 
 const propTypes: CombineProps<NormalTableProps<any> & {resizable?: any}> = {
   ...TablePropTypes,
@@ -40,19 +41,20 @@ function Table<RecordType extends Record<string, any> = Data>() {
 
       return () => {
         const direction = props.direction ?? context.value.direction;
+        const children = getFragmentChildren(slots)
         // eslint-disable-next-line prefer-destructuring
         if (props.resizable) {
           return (
             <ResizableTable
               {...getProps(props)}
-              children={slots.default?.()}
+              children={children}
               ref={tableRef}
               direction={direction}
             ></ResizableTable>
           );
         } else {
           return (
-            <NormalTable {...getProps(props)} children={slots.default?.()} ref={tableRef} direction={direction}></NormalTable>
+            <NormalTable {...getProps(props)} children={children} ref={tableRef} direction={direction}></NormalTable>
           );
         }
       };
