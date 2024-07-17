@@ -3,7 +3,8 @@ import List from "../index";
 import ListItem from "../item";
 import Descriptions from "../../descriptions";
 import Rating from "../../rating";
-import {Button, ButtonGroup} from "../../index";
+import ButtonGroup from '../../button/ButtonGroup';
+import Button from '../../button';
 
 interface ListDemoProps {
   name?: string

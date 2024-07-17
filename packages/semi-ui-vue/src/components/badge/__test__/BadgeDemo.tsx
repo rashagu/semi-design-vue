@@ -1,6 +1,6 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
 import Badge from "../index";
-import {Avatar} from "../../index";
+import Avatar from "../../avatar";
 import {IconLock} from "@kousum/semi-icons-vue";
 
 interface BadgeDemoProps {

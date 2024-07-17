@@ -4,6 +4,7 @@ import TableDemo10 from "./TableDemo10";
 import {mount} from "@vue/test-utils";
 import {fireEvent, render, screen} from "@testing-library/vue";
 
+
 test('AllTableDemo qwe', async () => {
   expect(Comp).toBeTruthy();
   const wrapper = mount(Comp, {  });

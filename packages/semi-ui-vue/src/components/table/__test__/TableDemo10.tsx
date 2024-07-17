@@ -1,14 +1,8 @@
-import { defineComponent, ref, h, Fragment, useSlots, computed, onMounted } from 'vue';
-import Table, {ColumnProps, Data, RowSelection, TableColumn} from '../index';
+import { computed, defineComponent } from 'vue';
+import Table, { ColumnProps, Data } from '../index';
 import Avatar from '../../avatar';
-import { IconMore } from '@kousum/semi-icons-vue';
-import { IllustrationNoResult, IllustrationNoResultDark } from '@kousum/semi-illustrations-vue';
-import { Button, Empty } from '../../index';
-import { IconDelete } from '@kousum/semi-icons-vue';
-import { TypographyText } from '../../typography';
+import { IconFilter } from '@kousum/semi-icons-vue';
 import * as dateFns from 'date-fns';
-import Tag from "../../tag";
-import {IconFilter} from "@kousum/semi-icons-vue";
 
 interface TableDemo1Props {
   name?: string;

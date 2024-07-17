@@ -1,6 +1,6 @@
 import { defineComponent, ref, h, Fragment, useSlots, reactive } from 'vue';
 import Tabs, { TabPane } from '../index';
-import { Button } from '../../index';
+import Button from '../../button';
 
 interface TabsDemo4Props {
   name?: string;

@@ -1,7 +1,8 @@
 import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
 import Switch from '../index';
 import Space from '../../space';
-import { Button } from '../../index';
+import Button from '../../button';
+
 
 interface SwitchDemoProps {
   name?: string;

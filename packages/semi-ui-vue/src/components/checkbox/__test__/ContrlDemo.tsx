@@ -1,5 +1,6 @@
 import { defineComponent, ref, h, Fragment, useSlots, reactive } from 'vue';
-import { Button, Checkbox } from '../../index';
+import Button from '../../button';
+import Checkbox from '../checkbox';
 
 interface ContrlDemoProps {
   name?: string;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { TypographyNumeral } from '../../index';
+import Numeral from '../numeral';
 
 
 interface Props {
@@ -19,9 +19,9 @@ const count = ref(0);
 
 </script>
 <template>
-  <TypographyNumeral :precision="1">
+  <Numeral :precision="1">
     <p>点赞量：1.6111e1 K</p>
-  </TypographyNumeral>
+  </Numeral>
 </template>
 
 <style scoped lang="scss">

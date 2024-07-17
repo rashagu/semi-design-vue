@@ -1,6 +1,4 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
-import Checkbox from '../index'
-import {CheckboxGroup} from "../index";
 import ContrlDemo from "./ContrlDemo";
 interface ExampleProps {
   name?: string

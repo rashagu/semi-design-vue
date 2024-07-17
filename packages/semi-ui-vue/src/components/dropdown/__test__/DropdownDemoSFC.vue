@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { h, onMounted, ref } from 'vue';
-import { DropdownItem, DropdownMenu, Dropdown, Button } from '../../index';
+import DropdownItem from '../dropdownItem';
+import DropdownMenu from '../dropdownMenu';
+import { Dropdown } from '../index';
+import Button from '../../button';
+
 
 defineOptions({});
 

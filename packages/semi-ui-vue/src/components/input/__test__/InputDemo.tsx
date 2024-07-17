@@ -1,10 +1,12 @@
 import {defineComponent, ref, h, onMounted,} from 'vue'
 import Input from '../index'
 import TextArea from "../textArea";
-import {IconSearch} from '@kousum/semi-icons-vue'
-import {Text} from '../../typography'
-import { AutoComplete, Button, InputGroup, ModalClass, Select, SelectOption } from '../../index';
 import InputNumber from "../../inputNumber";
+import AutoComplete from '../../autoComplete';
+import Button from '../../button';
+import InputGroup from '../inputGroup';
+import { ModalClass } from '../../modal';
+import Select, { SelectOption } from '../../select';
 
 interface ExampleProps {
   name?: string

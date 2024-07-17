@@ -41,6 +41,6 @@
 </template>
 
 <script setup>
-import { TypographyText } from '@kousum/semi-ui-vue';
+import { TypographyText } from '../index';
 const Text = TypographyText
 </script>

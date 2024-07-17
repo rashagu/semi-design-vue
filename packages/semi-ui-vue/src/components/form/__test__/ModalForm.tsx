@@ -1,13 +1,11 @@
-import {
-  Button,
-  Form,
-  FormCheckboxGroup,
-  FormInput,
-  Space,
-  Toast,
-} from "../../index";
+
 import type { FormApi } from "../index";
 import { defineComponent, ref, h, Fragment, useSlots, reactive } from "vue";
+import Button from '../../button';
+import { Form, FormCheckboxGroup, FormInput } from '../index';
+import Space from '../../space';
+import Toast from '../../toast';
+
 
 interface ModalFormProps {
   name?: string;

@@ -1,6 +1,4 @@
 import { defineComponent, ref, h, Fragment, useSlots, reactive } from 'vue';
-import type { ComponentObjectPropsOptions } from 'vue';
-import { Form, FormInput } from '../../form';
 import {
   AutoCompleteVModel,
   CascaderVModel,
@@ -18,8 +16,9 @@ import {
 } from '../index';
 import { Radio } from '../../radio';
 import { SelectOption } from '../../select';
-import { Button, TimePicker } from '../../index';
 import { IconUpload } from '@kousum/semi-icons-vue';
+import Button from '../../button';
+import { CombineProps } from '../../interface';
 
 interface WithVModelDemoProps {
   name?: string;

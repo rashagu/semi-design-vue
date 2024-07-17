@@ -81,6 +81,7 @@
     "@vitejs/plugin-vue-jsx": "^4.0.0",
     "@vitest/coverage-v8": "^2.0.3",
     "@vue/test-utils": "^2.4.6",
+    "vitest-canvas-mock": "^0.3.3",
     "babel-loader": "^8.3.0",
     "camelcase": "^6.3.0",
     "css-loader": "^6.7.1",

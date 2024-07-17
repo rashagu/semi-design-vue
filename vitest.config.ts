@@ -8,6 +8,26 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    // 没用
+    // deps: {
+    //   // >= 0.34
+    //   optimizer: {
+    //     web: {
+    //       include: ['vitest-canvas-mock']
+    //     }
+    //   }
+    // },
+    // >= 0.1.0
+    // poolOptions: {
+    //   forks: {
+    //     singleFork: true,
+    //   },
+    // },
+    // environmentOptions: {
+    //   jsdom: {
+    //     resources: 'usable',
+    //   },
+    // },
     coverage: {
       provider: "v8",
       exclude:[
@@ -40,6 +60,8 @@ export default defineConfig({
         "**/vite-plugin-semi-theme/**",
         "**/main.ts",
         "**/App.tsx",
+        "**/lottie/**",
+        "**/lottie-web/**"
       ]
     },
   },

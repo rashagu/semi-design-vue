@@ -1,6 +1,7 @@
 import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
 import type { ComponentObjectPropsOptions } from 'vue';
-import { TypographyNumeral } from '../../index';
+import { CombineProps } from '../../interface';
+import Numeral from '../numeral';
 
 interface TypoDemo3Props {
   name?: string;
@@ -15,9 +16,9 @@ const TypoDemo3 = defineComponent(
 
     return () => (
       <div>
-        <TypographyNumeral precision={1}>
+        <Numeral precision={1}>
           <p>点赞量：1.6111e1 K</p>
-        </TypographyNumeral>
+        </Numeral>
       </div>
     );
   },

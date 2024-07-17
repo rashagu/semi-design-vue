@@ -1,7 +1,7 @@
 import {defineComponent, ref, h, Fragment, useSlots, CSSProperties, onMounted} from 'vue';
 import Carousel from '../index';
-import { Space } from '../../index';
 import { Paragraph, Title } from '../../typography';
+import Space from '../../space';
 
 interface CarouselDemoProps {
   name?: string;

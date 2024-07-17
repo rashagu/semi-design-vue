@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { defineComponent, ref, h, Fragment, useSlots, onMounted } from 'vue';
 import type { ComponentObjectPropsOptions } from 'vue';
-import { Avatar, Table } from '../../index';
 import Column from '../Column';
 import { IconMore } from '@kousum/semi-icons-vue';
+import Table from '../index';
+
 
 
 interface Props {

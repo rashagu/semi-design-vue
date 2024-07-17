@@ -1,8 +1,9 @@
 import { defineComponent, ref, h, Fragment, useSlots, onMounted } from 'vue';
 import type { ComponentObjectPropsOptions } from 'vue';
-import { Avatar, Table } from '../../index';
 import Column from '../Column';
 import { IconMore } from '@kousum/semi-icons-vue';
+import Avatar from '../../avatar';
+import Table from '../index';
 
 interface TableDemoColumnChildrenProps {
   name?: string;

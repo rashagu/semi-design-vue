@@ -2,7 +2,8 @@ import {defineComponent, ref, h, Fragment, useSlots, watch, computed} from 'vue'
 import CardGroup from "../cardGroup";
 import Slider from "../../slider";
 import Card from "../index";
-import {TypographyText} from "../../index";
+import { TypographyText } from '../../typography';
+
 
 interface CardDemoProps {
   name?: string

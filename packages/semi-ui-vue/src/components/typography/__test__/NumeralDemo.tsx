@@ -1,6 +1,6 @@
 import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
-import type { ComponentObjectPropsOptions } from 'vue';
 import { Numeral } from '../index';
+import { CombineProps } from '../../interface';
 
 interface NumeralDemoProps {
   name?: string;

@@ -3,8 +3,8 @@ import DropdownMenu from "../dropdownMenu";
 import DropdownItem from "../dropdownItem";
 import DropdownDivider from "../dropdownDivider";
 import Dropdown from "../index";
-import {Button} from "../../index";
 import {IconMore} from "@kousum/semi-icons-vue";
+import Button from '../../button';
 
 interface ExampleProps {
   name?: string

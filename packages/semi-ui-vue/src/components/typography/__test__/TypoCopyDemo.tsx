@@ -1,7 +1,10 @@
 import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
 import type { ComponentObjectPropsOptions } from 'vue';
 import { IconSetting } from '@kousum/semi-icons-vue';
-import { Toast, Typography, TextArea } from '../../index';
+import { CombineProps } from '../../interface';
+import Typography from '../index';
+import Toast from '../../toast';
+import TextArea from '../../input/textArea';
 const { Paragraph, Text, Numeral } = Typography;
 
 interface TypoCopyDemoProps {

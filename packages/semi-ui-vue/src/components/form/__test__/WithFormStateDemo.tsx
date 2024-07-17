@@ -1,5 +1,6 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
-import {Button, Form, FormInput, withFormState} from "../../index";
+import { Form, FormInput, withFormState } from '../index';
+
 
 const SomeComponentInsideForm = props => (
   <code>{JSON.stringify(props.formState.value)}</code>

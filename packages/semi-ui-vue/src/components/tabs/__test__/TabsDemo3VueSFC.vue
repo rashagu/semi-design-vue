@@ -2,7 +2,6 @@
 import { h, ref } from 'vue';
 import Tabs from '../index';
 import TabPane from '../TabPane';
-import Button from '../../button/Button';
 
 defineOptions({});
 

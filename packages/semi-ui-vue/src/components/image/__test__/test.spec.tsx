@@ -1,7 +1,7 @@
 import { expect, test, describe, beforeAll, vi } from 'vitest';
 import Comp from './ImageDemo';
 import { mount } from '@vue/test-utils';
-import { Image, ImagePreview } from '../../index';
+import Image, {Preview as ImagePreview} from '../index'
 import {defineComponent, h, provide, ref} from "vue";
 import PreviewInner from "../previewInner";
 import {noop} from "lodash";

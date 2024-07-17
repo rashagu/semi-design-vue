@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { TypographyText } from '@kousum/semi-ui-vue';
+import { TypographyText } from '../index';
 import { IconLink } from '@kousum/semi-icons-vue';
 import { h } from 'vue';
 

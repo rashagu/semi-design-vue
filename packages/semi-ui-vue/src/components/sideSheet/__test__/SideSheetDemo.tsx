@@ -1,8 +1,10 @@
 import {defineComponent, ref, h, Fragment, useSlots} from 'vue'
-import {Button} from "../../index";
+
 import SideSheet from "../index";
 import RadioGroup from "../../radio/radioGroup";
-import {Radio} from "../../radio";
+import Radio from '../../radio/radio';
+import Button from '../../button';
+
 
 interface SideSheetDemoProps {
   name?: string

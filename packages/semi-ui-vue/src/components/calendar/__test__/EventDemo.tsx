@@ -1,6 +1,7 @@
 import {defineComponent, ref, h, Fragment, useSlots, reactive, CSSProperties} from 'vue'
-import {Radio, RadioGroup} from "../../index";
 import Calendar from "../index";
+import Radio from '../../radio/radio';
+import RadioGroup from '../../radio/radioGroup';
 
 interface EventDemoProps {
   name?: string

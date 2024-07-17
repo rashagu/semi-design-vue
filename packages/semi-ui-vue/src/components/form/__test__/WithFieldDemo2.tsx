@@ -1,6 +1,7 @@
 import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
 import { Form, useFormState, withField } from '../index';
-import { Input, Select } from '../../index';
+import Select from '../../select';
+import Input from '../../input';
 
 const MyComponent = (props) => {
   console.log(props);
