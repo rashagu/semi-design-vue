@@ -255,7 +255,7 @@ const Form = defineComponent({
       const shouldAppendRow = wrapperCol && labelCol;
 
       const formContent = (
-        <form style={style} {...rest} onReset={reset} onSubmit={submit} class={formCls} x-form-id={id ? id : formId}>
+        <form style={style} {...rest} onReset={reset} onSubmit={submit} class={formCls} id={id ? id : formId} x-form-id={id ? id : formId}>
           {{
             default: content,
           }}

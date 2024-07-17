@@ -15,7 +15,6 @@ import { useBaseComponent } from '../_base/baseComponent';
 import { omit } from 'lodash';
 export type { MDXProps } from 'mdx/types';
 
-
 export interface MarkdownRenderProps extends MarkdownRenderBaseProps {
   style?: CSSProperties;
   className?: string;
@@ -54,12 +53,15 @@ const index = defineComponent({
 
     const { adapter: adapterInject, setStateAsync } = useBaseComponent(props, state);
 
-    function RC(a: any, b: any) {
-      const na = typeof a ===  'symbol'?Fragment:a
+    function jsx(type: any, props: any, key: any) {
+      const na = typeof type ===  'symbol'?Fragment:type
+      if (arguments.length > 2) {
+        props.key = key
+      }
       return h(
         na,
-        typeof na === 'string' || na === Fragment ? omit(b, 'children') : b,
-        typeof na === 'string' || na === Fragment ? b.children : () => b.children
+        typeof na === 'string' || na === Fragment ? omit(props, 'children') : props,
+        typeof na === 'string' || na === Fragment ? props.children : () => props.children
       );
     }
 
@@ -68,8 +70,8 @@ const index = defineComponent({
         ...adapterInject(),
         getRuntime: () => ({
           Fragment: Fragment,
-          jsx: RC,
-          jsxs: RC,
+          jsx: jsx,
+          jsxs: jsx,
         }),
       };
     }

@@ -291,6 +291,7 @@ const FileCard = defineComponent({
       const showRetry = status === strings.FILE_STATUS_UPLOAD_FAIL && props.showRetry;
       const showReplace = status === strings.FILE_STATUS_SUCCESS && props.showReplace;
       const showPreview = status === strings.FILE_STATUS_SUCCESS && !props.showReplace;
+      const customThumbnail = typeof renderThumbnail === 'function';
       const filePicCardCls = cls({
         [`${prefixCls}-picture-file-card`]: true,
         [`${prefixCls}-picture-file-card-preview-fallback`]: fallbackPreview,
@@ -298,6 +299,7 @@ const FileCard = defineComponent({
         [`${prefixCls}-picture-file-card-show-pointer`]: typeof onPreviewClick !== 'undefined',
         [`${prefixCls}-picture-file-card-error`]: status === strings.FILE_STATUS_UPLOAD_FAIL,
         [`${prefixCls}-picture-file-card-uploading`]: showProgress,
+        [`${prefixCls}-picture-file-card-custom-thumbnail`]: customThumbnail && picHeight && picWidth
       });
       const retry = (
         <div role="button" tab-index={0} class={`${prefixCls}-picture-file-card-retry`} onClick={(e) => onRetry(e)}>
@@ -352,7 +354,7 @@ const FileCard = defineComponent({
         <IconFile size="large" />
       );
 
-      const thumbnail = typeof renderThumbnail === 'function' ? renderThumbnail(props) : defaultThumbTail;
+      const thumbnail = customThumbnail ? renderThumbnail(props) : defaultThumbTail;
 
       return (
         <div role="listitem" class={filePicCardCls} style={itemStyle} onClick={onPreviewClick}>

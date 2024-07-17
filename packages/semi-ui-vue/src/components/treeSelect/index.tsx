@@ -367,7 +367,6 @@ const TreeSelect = defineComponent({
 
     let onNodeClick;
     let onNodeDoubleClick;
-    let clearInputFlag: boolean = false;
 
     // TODO context
     const { adapter: adapterInject, context, getDataAttr } = useBaseComponent<TreeSelectProps>(props, state);
@@ -521,12 +520,6 @@ const TreeSelect = defineComponent({
         },
         updateIsFocus: (bool) => {
           state.isFocus = bool;
-        },
-        setClearInputFlag: (flag: boolean) => {
-          clearInputFlag = flag;
-        },
-        getClearInputFlag: () => {
-          return clearInputFlag;
         },
       };
     }

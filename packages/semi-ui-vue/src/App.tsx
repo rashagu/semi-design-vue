@@ -227,7 +227,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemoVueSFC/>*/}
         {/*<ModalDemo2/>*/}
         {/*<LottieDemo/>*/}
-        {/*<MarkDownRenderDemo/>*/}
+        <MarkDownRenderDemo/>
         {/*<CodeHighlightDemo/>*/}
         {/*<UploadDemo/>*/}
         {/*<UpdateDemo2/>*/}
@@ -248,11 +248,11 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DiyItemAutoComplete/>*/}
         {/*<RemoteAutoComplete/>*/}
         {/*<AutoCompleteSFC/>*/}
-        <SelectDemo/>
-        <SelectDemo2/>
-        <SelectDemo3/>
-        <SelectDemo4/>
-        <SelectDemo5/>
+        {/*<SelectDemo/>*/}
+        {/*<SelectDemo2/>*/}
+        {/*<SelectDemo3/>*/}
+        {/*<SelectDemo4/>*/}
+        {/*<SelectDemo5/>*/}
         {/*<TagDemo/>*/}
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}

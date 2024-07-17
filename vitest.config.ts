@@ -59,9 +59,7 @@ export default defineConfig({
         "**/*.cjs",
         "**/vite-plugin-semi-theme/**",
         "**/main.ts",
-        "**/App.tsx",
-        "**/lottie/**",
-        "**/lottie-web/**"
+        "**/App.tsx"
       ]
     },
   },
