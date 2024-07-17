@@ -884,8 +884,8 @@ const Index = defineComponent({
         optionContent = renderCreateOption(option, isFocused, optionIndex, style);
       } else {
         // use another name to make sure that 'key' in optionList still exist when we call onChange
-        if ('key' in option) {
-          option._keyInOptionList = option.key;
+        if ('key_' in option) {
+          option._keyInOptionList = option.key_;
         }
         optionContent = (
           <Option
@@ -918,7 +918,7 @@ const Index = defineComponent({
       if (typeof renderCreateItem === 'undefined') {
         const defaultCreateItem = (
           <Option
-            key={option.key || (((option.label as string) + option.value) as string)}
+            key={option.key_ || (((option.label as string) + option.value) as string)}
             onSelect={(v: OptionProps, e: MouseEvent) => onSelect(v, optionIndex, e)}
             onMouseEnter={() => onOptionHover(optionIndex)}
             showTick
@@ -947,7 +947,7 @@ const Index = defineComponent({
           role="button"
           aria-label="Use the input box to create an optional item"
           onClick={(e) => onSelect(option, optionIndex, e)}
-          key={option.key || option.label}
+          key={option.key_ || option.label}
         >
           {customCreateItem}
         </div>
