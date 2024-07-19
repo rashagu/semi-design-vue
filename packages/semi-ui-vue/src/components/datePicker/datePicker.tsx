@@ -12,7 +12,7 @@ import {
   watch,
 } from 'vue';
 import classnames from 'classnames';
-import { get, isDate, isEqual, isFunction, noop, stubFalse, pick } from 'lodash';
+import { get, isDate, isEqual, isFunction, noop, stubFalse, pick, omit } from 'lodash';
 import type {
   DatePickerAdapter,
   DatePickerFoundationProps,
@@ -36,7 +36,7 @@ import type { MonthsGridProps } from './monthsGrid';
 import MonthsGrid from './monthsGrid';
 import QuickControl from './quickControl';
 import Footer from './footer';
-import Trigger, { TriggerProps } from '../trigger';
+import Trigger, { TriggerProps, vuePropsType } from '../trigger';
 import type { YearAndMonthProps } from './yearAndMonth';
 import YearAndMonth from './yearAndMonth';
 import '@douyinfe/semi-foundation/datePicker/datePicker.scss';
@@ -49,8 +49,8 @@ import * as PropTypes from '../PropTypes';
 import { vuePropsMake } from '../PropTypes';
 import { CombineProps, VueJsxNode } from '../interface';
 import { useConfigContext } from '../configProvider/context/Consumer';
-import { ComponentObjectPropsOptions } from 'vue';
 
+const triggerPropsKeys = Object.keys(vuePropsType)
 export interface DatePickerProps extends DatePickerFoundationProps {
   'aria-describedby'?: AriaAttributes['aria-describedby'];
   'aria-errormessage'?: AriaAttributes['aria-errormessage'];
@@ -59,11 +59,11 @@ export interface DatePickerProps extends DatePickerFoundationProps {
   'aria-required'?: AriaAttributes['aria-required'];
   clearIcon?: VueJsxNode;
   timePickerOpts?: TimePickerProps;
-  bottomSlot?: VueJsxNode;
+  bottomSlot?: VueJsxNode | (()=>VueJsxNode);
   insetLabel?: VueJsxNode;
   insetLabelId?: string;
   prefix?: VueJsxNode;
-  topSlot?: VueJsxNode;
+  topSlot?: VueJsxNode | (()=>VueJsxNode);
   renderDate?: (dayNumber?: number, fullDate?: string) => VueJsxNode;
   renderFullDate?: (dayNumber?: number, fullDate?: string, dayStatus?: DayStatusType) => VueJsxNode;
   triggerRender?: (props: DatePickerProps) => VueJsxNode;
@@ -154,8 +154,8 @@ const propTypes: CombineProps<DatePickerProps> = {
   autoSwitchDate: PropTypes.bool,
   dropdownClassName: PropTypes.string,
   dropdownStyle: PropTypes.object,
-  topSlot: PropTypes.node,
-  bottomSlot: PropTypes.node,
+  topSlot: [PropTypes.func, ...PropTypes.node] as PropType<DatePickerProps['topSlot']>,
+  bottomSlot: [PropTypes.func, ...PropTypes.node] as PropType<DatePickerProps['bottomSlot']>,
   dateFnsLocale: PropTypes.object, // isRequired, but no need to add isRequired key. ForwardStatics function pass static properties to index.jsx, so there is no need for user to pass the prop.
   // Support synchronous switching of months
   syncSwitchMonth: PropTypes.bool,
@@ -742,10 +742,10 @@ const DatePicker = defineComponent({
         >
           {typeof triggerRender === 'function' ? (
             <Trigger
-              {...(props_ as TriggerProps)}
+              {...(pick(props_, ...triggerPropsKeys) as TriggerProps)}
               triggerRender={triggerRender}
               componentName="DatePicker"
-              componentProps={{ ...props }}
+              componentProps={{ ...adapter.getProps() }}
             />
           ) : (
             <DateInput {...props_} />
@@ -790,7 +790,7 @@ const DatePicker = defineComponent({
         <div ref={panelRef} class={wrapCls} style={dropdownStyle} x-type={type}>
           {topSlot && (
             <div class={`${cssClasses.PREFIX}-topSlot`} x-semi-prop="topSlot">
-              {topSlot}
+              {typeof topSlot === 'function'?topSlot():topSlot}
             </div>
           )}
           {/* todo: monthRange does not support presetPosition temporarily */}
@@ -801,7 +801,7 @@ const DatePicker = defineComponent({
           {presetPosition === 'bottom' && type !== 'monthRange' && renderQuickControls()}
           {bottomSlot && (
             <div class={`${cssClasses.PREFIX}-bottomSlot`} x-semi-prop="bottomSlot">
-              {bottomSlot}
+              {typeof bottomSlot === 'function'?bottomSlot():bottomSlot}
             </div>
           )}
           {renderFooter(locale, localeCode)}
