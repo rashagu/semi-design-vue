@@ -220,7 +220,7 @@ const defaultProps = {
 export const vuePropsTypeDatePickerProps = vuePropsMake(propTypes, defaultProps);
 
 const DatePicker = defineComponent({
-  props: vuePropsTypeDatePickerProps,
+  props: {...vuePropsTypeDatePickerProps},
   name: 'DatePicker',
   setup(props, {}) {
     const slots = useSlots();
@@ -758,11 +758,12 @@ const DatePicker = defineComponent({
 
     const handleCancel = (e: MouseEvent) => foundation.handleCancel();
 
+
     const renderFooter = (locale: Locale['DatePicker'], localeCode: string) => {
       if (adapter.needConfirm()) {
         return (
           <Footer
-            {...props}
+            prefixCls={props.prefixCls}
             locale={locale}
             localeCode={localeCode}
             onConfirmClick={handleConfirm}

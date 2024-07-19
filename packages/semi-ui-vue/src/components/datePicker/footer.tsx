@@ -1,4 +1,4 @@
-import { defineComponent, ref, h, Fragment, useSlots, ComponentObjectPropsOptions } from 'vue';
+import { defineComponent, ref, h, Fragment, useSlots, ComponentObjectPropsOptions, PropType } from 'vue';
 import classnames from 'classnames';
 import Button from '../button';
 import { get } from 'lodash';
@@ -16,15 +16,15 @@ interface FooterProps {
 const propsType: CombineProps<FooterProps> = {
   prefixCls: String,
   locale: {
-    type: Object,
+    type: Object as PropType<FooterProps['locale']>,
     required: true
   },
   localeCode: {
     type: String,
     required: true
   },
-  onCancelClick: Function,
-  onConfirmClick: Function,
+  onCancelClick: Function as PropType<FooterProps['onCancelClick']>,
+  onConfirmClick: Function as PropType<FooterProps['onConfirmClick']>,
 }
 export const vuePropsType = vuePropsMake(
   propsType,
@@ -33,21 +33,23 @@ export const vuePropsType = vuePropsMake(
 const Footer = defineComponent({
   props: { ...vuePropsType },
   name: 'Footer',
-  setup(props, {}) {
+  setup(props, {attrs}) {
     const slots = useSlots();
-    const { prefixCls, locale, onCancelClick, onConfirmClick } = props;
-    const wrapCls = classnames(`${prefixCls}-footer`);
+    return () => {
+      const { prefixCls, locale, onCancelClick, onConfirmClick } = props;
+      const wrapCls = classnames(`${prefixCls}-footer`);
 
-    return () => (
-      <div class={wrapCls}>
-        <Button theme="borderless" onClick={onCancelClick}>
-          {get(locale, 'footer.cancel', '')}
-        </Button>
-        <Button theme="solid" onClick={onConfirmClick}>
-          {get(locale, 'footer.confirm', '')}
-        </Button>
-      </div>
-    );
+      return (
+        <div class={wrapCls}>
+          <Button theme="borderless" onClick={onCancelClick}>
+            {get(locale, 'footer.cancel', '')}
+          </Button>
+          <Button theme="solid" onClick={onConfirmClick}>
+            {get(locale, 'footer.confirm', '')}
+          </Button>
+        </div>
+      )
+    };
   },
 });
 
