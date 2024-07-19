@@ -2,6 +2,7 @@ import { defineComponent, ref, h, Fragment, useSlots } from 'vue';
 import type { ComponentObjectPropsOptions } from 'vue';
 import MarkdownRender from '../index';
 import Typography from '../../typography';
+import Button from '../../button';
 
 interface markDownRenderDemoProps {
   name?: string;
@@ -16,12 +17,17 @@ const markDownRenderDemo = defineComponent({
   setup(props, { attrs }) {
     const slots = useSlots();
 
+    const components = {};
 
+    components['MyButton'] = ({ children,onClick }) => {
+      return <Button type={"primary"} onClick={onClick} style={{marginBottom:"12px"}}> {children} </Button>
+    }
+    const bt =  `<MyButton onClick={()=>{alert(1)}}>wewew</MyButton>`
     return () => (
       <div>
         <Typography.Text link={{ href: 'https://semi.design/' }}>链接文本</Typography.Text>
         <br />
-        <MarkdownRender raw={`
+        <MarkdownRender components={components} raw={`
 ## 
 
 正文内容是普通的文本，也可以**加粗**~~删除线~~和<u>下划线</u> [超链接](https://semi.design) 等 Markdown 与 HTML 的基本语法所支持的富文本，也支持 emoji 🍰
@@ -29,6 +35,7 @@ const markDownRenderDemo = defineComponent({
 
 部分符号需要转义 \\{\\} \\<\\> ...
 
+${bt}
 <br/>
 <br/>
 ---

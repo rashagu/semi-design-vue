@@ -1,4 +1,4 @@
-import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, isVNode, PropType, reactive } from 'vue';
+import { CSSProperties, defineComponent, h, isVNode, PropType, reactive } from 'vue';
 import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/layout/constants';
 import '@douyinfe/semi-foundation/layout/layout.scss';
@@ -33,7 +33,7 @@ const basicVuePropsType: CombineProps<BasicProps> = {
 };
 
 const Basic = defineComponent({
-  props: basicVuePropsType,
+  props: { ...basicVuePropsType },
   name: 'Basic',
   setup(props, { slots }) {
     return () => {
@@ -86,8 +86,10 @@ export const vuePropsType: CombineProps<BasicLayoutProps> = {
     default: 'section',
   },
 };
-const Layout = defineComponent(
-  (props, { slots }) => {
+const Layout = defineComponent({
+  props: { ...vuePropsType },
+  name: 'Layout',
+  setup(props, { slots }) {
     const state = reactive<BasicLayoutState>({
       siders: [],
     });
@@ -125,22 +127,18 @@ const Layout = defineComponent(
       );
     };
   },
-  {
-    props: { ...vuePropsType },
-    name: 'Layout',
-  }
-);
+});
 
 export type LayoutType = typeof Layout & {
   Header: typeof LayoutHeader;
   Footer: typeof LayoutFooter;
   Content: typeof LayoutContent;
   Sider: typeof LayoutSider;
-}
-const BaseLayout = Layout as LayoutType
-BaseLayout.Header = LayoutHeader
-BaseLayout.Footer = LayoutFooter
-BaseLayout.Content = LayoutContent
-BaseLayout.Sider = LayoutSider
+};
+const BaseLayout = Layout as LayoutType;
+BaseLayout.Header = LayoutHeader;
+BaseLayout.Footer = LayoutFooter;
+BaseLayout.Content = LayoutContent;
+BaseLayout.Sider = LayoutSider;
 export { LayoutHeader, LayoutFooter, LayoutContent, LayoutSider };
 export default BaseLayout;

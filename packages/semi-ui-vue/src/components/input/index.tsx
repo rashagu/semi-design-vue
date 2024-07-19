@@ -9,7 +9,6 @@ import {
   watch,
   onMounted,
   Ref,
-  ComponentObjectPropsOptions,
   PropType,
 } from 'vue';
 import cls from 'classnames';
@@ -186,7 +185,6 @@ const defaultProps = {
 };
 export const VuePropsType = vuePropsMake(propTypes, defaultProps);
 
-// Vue在这里的话 state 更新会导致整体重新渲染 导致value 无法更新到最新的
 const Input = defineComponent({
   props: {...VuePropsType},
   name: 'Input',
