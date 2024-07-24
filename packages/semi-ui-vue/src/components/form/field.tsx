@@ -35,6 +35,11 @@ const FormTextArea = withField(TextArea, { maintainCursor: true });
 const FormSelect = withField(Select, undefined);
 // Select after withField is a new Component, without the Option attribute, it needs to be manually assigned once
 const FormSelectOption = SelectOption;
+type FormSelectType = typeof FormSelect & {
+    Option: typeof FormSelectOption
+}
+FormSelect.Option = FormSelectOption
+const FormSelectBase = FormSelect as FormSelectType
 const FormSelectOptionGroup = SelectOptionGroup;
 
 const FormCheckboxGroup = withField(CheckboxGroup, undefined);
@@ -48,7 +53,7 @@ const FormRadio = withField(Radio, {
     valueKey: 'checked',
     valuePath: 'target.checked',
     shouldInject: false,
-}) as unknown as typeof FormRadioType;
+});
 
 const FormDatePicker = withField(DatePicker, undefined);
 const FormSwitch = withField(Switch, { valueKey: 'checked' });
@@ -65,7 +70,7 @@ export {
     FormInput,
     FormInputNumber,
     FormTextArea,
-    FormSelect,
+    FormSelectBase as FormSelect,
     FormSelectOption,
     FormSelectOptionGroup,
     FormCheckboxGroup,

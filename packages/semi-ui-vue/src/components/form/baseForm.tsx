@@ -256,9 +256,7 @@ const Form = defineComponent({
 
       const formContent = (
         <form style={style} {...rest} onReset={reset} onSubmit={submit} class={formCls} id={id ? id : formId} x-form-id={id ? id : formId}>
-          {{
-            default: content,
-          }}
+          {content()}
         </form>
       );
       const withRowForm = <Row>{formContent}</Row>;

@@ -39,6 +39,9 @@ import {
     FormSelectOptionGroup
 } from "./field";
 import FormInputGroup from "./group";
+import ErrorMessage from './errorMessage';
+import Label from './label';
+import Section from './section';
 export type { FormApi, FormFCChild } from './interface';
 
 
@@ -82,7 +85,6 @@ export const TagInput = FormTagInput;
 export const InputGroup = FormInputGroup;
 
 
-
 export type FormType = typeof Form & {
     TextArea: typeof FormTextArea;
     InputNumber: typeof FormInputNumber;
@@ -103,7 +105,11 @@ export type FormType = typeof Form & {
     TagInput: typeof FormTagInput;
     TimePicker: typeof FormTimePicker;
     TreeSelect: typeof FormTreeSelect;
-    Upload: typeof FormUpload;
+    Upload: typeof FormUpload,
+    ErrorMessage: typeof ErrorMessage,
+    InputGroup: typeof InputGroup,
+    Label: typeof Label,
+    Section: typeof Section,
 }
 const BaseForm = Form as FormType
 BaseForm.TextArea = FormTextArea
@@ -122,10 +128,15 @@ BaseForm.RadioGroup = FormRadioGroup
 BaseForm.Rating = FormRating
 BaseForm.Slider = FormSlider
 BaseForm.Switch = FormSwitch
-BaseForm.TagInput = FormTagInput
-BaseForm.TimePicker = FormTimePicker
-BaseForm.TreeSelect = FormTreeSelect
-BaseForm.Upload = FormUpload
+BaseForm.TagInput = FormTagInput;
+BaseForm.TimePicker = FormTimePicker;
+BaseForm.TreeSelect = FormTreeSelect;
+BaseForm.Upload = FormUpload;
+BaseForm.ErrorMessage = ErrorMessage;
+BaseForm.InputGroup = InputGroup;
+BaseForm.Label = Label;
+BaseForm.Section = Section;
+
 export default BaseForm;
 export {
     BaseForm as Form,
