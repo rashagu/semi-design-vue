@@ -94,7 +94,7 @@ export type DatePickerState = DatePickerFoundationState;
 const propTypes: CombineProps<DatePickerProps> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
-  'aria-invalid': PropTypes.bool,
+  'aria-invalid': [PropTypes.bool, PropTypes.string] as PropType<DatePickerProps['aria-invalid']>,
   'aria-labelledby': PropTypes.string,
   'aria-required': PropTypes.bool,
   borderless: PropTypes.bool,
@@ -222,7 +222,7 @@ export const vuePropsTypeDatePickerProps = vuePropsMake(propTypes, defaultProps)
 const DatePicker = defineComponent({
   props: {...vuePropsTypeDatePickerProps},
   name: 'DatePicker',
-  setup(props, {}) {
+  setup(props, {expose}) {
     const slots = useSlots();
 
     let clickOutSideHandler: (e: MouseEvent) => void;
@@ -480,6 +480,42 @@ const DatePicker = defineComponent({
       // TODO
       // super.componentWillUnmount();
     });
+
+
+    function open() {
+      foundation.open();
+    }
+
+    function close() {
+      foundation.close();
+    }
+
+    /**
+     *
+     * When selecting a range, the default focus is on the start input box, passing in `rangeEnd` can focus on the end input box
+     *
+     * When `insetInput` is `true`, due to trigger disabled, the cursor will focus on the input box of the popup layer panel
+     *
+     * 范围选择时，默认聚焦在开始输入框，传入 `rangeEnd` 可以聚焦在结束输入框
+     *
+     * `insetInput` 打开时，由于 trigger 禁用，会把焦点放在弹出面板的输入框上
+     */
+    function focus(focusType?: Exclude<RangeType, false>) {
+      foundation.focus(focusType);
+    }
+
+    function blur() {
+      foundation.blur();
+    }
+
+    expose({
+      open,
+      close,
+      focus,
+      blur,
+    })
+
+
 
     const setTriggerRef = (node: HTMLDivElement) => (triggerElRef.value = node);
 

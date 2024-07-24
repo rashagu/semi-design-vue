@@ -1,4 +1,4 @@
-import { defineComponent, h, useSlots } from 'vue';
+import { defineComponent, h, ref, useSlots } from 'vue';
 
 import { numbers, strings } from '@douyinfe/semi-foundation/datePicker/constants';
 import DatePicker, { DatePickerProps, vuePropsTypeDatePickerProps } from './datePicker';
@@ -32,14 +32,21 @@ import { useHasInProps } from '../_base/baseComponent';
 
 export const vuePropsType = {
   ...vuePropsTypeDatePickerProps,
-  forwardRef: [Object, Function],
+  // forwardRef: [Object, Function],
 };
 const index = defineComponent({
   props: { ...vuePropsType },
   name: 'DatePickerIndex',
-  setup(props, {}) {
+  setup(props, {expose}) {
     const slots = useSlots();
     const { getProps } = useHasInProps();
+    const vRef = ref()
+    expose({
+      open: ()=>vRef.value?.open(),
+      close: ()=>vRef.value?.close(),
+      focus: ()=>vRef.value?.focus(),
+      blur: ()=>vRef.value?.blur(),
+    })
     return () => {
       const propsObj: DatePickerProps = getProps(props);
       const { type, format, rangeSeparator } = propsObj;
@@ -88,7 +95,7 @@ const index = defineComponent({
                       dateFnsLocale: dateFnsLocale,
                     }}
                     // @ts-ignore
-                    ref={props.forwardRef}
+                    ref={vRef}
                   />
                 );
               }}
