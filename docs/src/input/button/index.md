@@ -59,7 +59,7 @@ import { Button, SplitButtonGroup } from '@kousum/semi-ui-vue';
 
 你可以直接使用这些主题色定义你的元素。
 
-```vue live=true dir="column"
+```vue live=true height="340"
 <template>
   <article>
     <strong v-for="(type, index) in types" :key="index"
@@ -85,62 +85,52 @@ import { Button, SplitButtonGroup } from '@kousum/semi-ui-vue';
 
 #### 浅色背景
 
-```jsx live=true dir="column"
-import { h } from 'vue';
-import { Button } from '@kousum/semi-ui-vue';
+```vue live=true dir="column"
+<template>
+  <Button theme='light' type='primary' style="margin-right: 8px">浅色主要</Button>
+  <Button theme='light' type='secondary' style="margin-right: 8px">浅色次要</Button>
+  <Button theme='light' type='tertiary' style="margin-right: 8px">浅色第三</Button>
+  <Button theme='light' type='warning' style="margin-right: 8px">浅色警告</Button>
+  <Button theme='light' type='danger' style="margin-right: 8px">浅色危险</Button>
+</template>
 
-export default function() {
-    return (
-        <>
-            <Button theme='light' type='primary' style={{ marginRight: '8px' }}>浅色主要</Button>
-            <Button theme='light' type='secondary' style={{ marginRight: '8px' }}>浅色次要</Button>
-            <Button theme='light' type='tertiary' style={{ marginRight: '8px' }}>浅色第三</Button>
-            <Button theme='light' type='warning' style={{ marginRight: '8px' }}>浅色警告</Button>
-            <Button theme='light' type='danger' style={{ marginRight: '8px' }}>浅色危险</Button>
-        </>
-    );
-}
+<script setup>
+  import { Button } from '@kousum/semi-ui-vue';
+</script>
 
 ```
 
 #### 深色背景
 
-```jsx live=true dir="column"
-import { h } from 'vue';
-import { Button } from '@kousum/semi-ui-vue';
+```vue live=true dir="column"
+<template>
+  <Button theme='solid' type='primary' style="margin-right: 8px">浅色主要</Button>
+  <Button theme='solid' type='secondary' style="margin-right: 8px">浅色次要</Button>
+  <Button theme='solid' type='tertiary' style="margin-right: 8px">浅色第三</Button>
+  <Button theme='solid' type='warning' style="margin-right: 8px">浅色警告</Button>
+  <Button theme='solid' type='danger' style="margin-right: 8px">浅色危险</Button>
+</template>
 
-export default function() {
-    return (
-        <>
-            <Button theme='solid' type='primary' style={{ marginRight: '8px' }}>深色主要</Button>
-            <Button theme='solid' type='secondary' style={{ marginRight: '8px' }}>深色次要</Button>
-            <Button theme='solid' type='tertiary' style={{ marginRight: '8px' }}>深色第三</Button>
-            <Button theme='solid' type='warning' style={{ marginRight: '8px' }}>深色警告</Button>
-            <Button theme='solid' type='danger' style={{ marginRight: '8px' }}>深色危险</Button>
-        </>
-    );
-}
+<script setup>
+  import { Button } from '@kousum/semi-ui-vue';
+</script>
 
 ```
 
 #### 无背景
 
-```jsx live=true dir="column"
-import { h } from 'vue';
-import { Button } from '@kousum/semi-ui-vue';
+```vue live=true dir="column"
+<template>
+  <Button theme='borderless' type='primary' style="margin-right: 8px">浅色主要</Button>
+  <Button theme='borderless' type='secondary' style="margin-right: 8px">浅色次要</Button>
+  <Button theme='borderless' type='tertiary' style="margin-right: 8px">浅色第三</Button>
+  <Button theme='borderless' type='warning' style="margin-right: 8px">浅色警告</Button>
+  <Button theme='borderless' type='danger' style="margin-right: 8px">浅色危险</Button>
+</template>
 
-export default function() {
-    return (
-        <>
-            <Button theme='borderless' type='primary' style={{ marginRight: '8px' }}>主要</Button>
-            <Button theme='borderless' type='secondary' style={{ marginRight: '8px' }}>次要</Button>
-            <Button theme='borderless' type='tertiary' style={{ marginRight: '8px' }}>第三</Button>
-            <Button theme='borderless' type='warning' style={{ marginRight: '8px' }}>警告</Button>
-            <Button theme='borderless' type='danger' style={{ marginRight: '8px' }}>危险</Button>
-        </>
-    );
-}
-
+<script setup>
+  import { Button } from '@kousum/semi-ui-vue';
+</script>
 ```
 
 ### 尺寸
@@ -151,158 +141,161 @@ export default function() {
 -   默认："default"
 -   小："small"
 
-```jsx live=true dir="column"
-import { h } from 'vue';
-import { Button } from '@kousum/semi-ui-vue';
+```vue live=true dir="column"
+<template>
+  <div>
+    <Button size='large' :style="{ marginRight: '8px' }">大尺寸</Button>
+    <Button size='default' :style="{ marginRight: '8px' }">默认尺寸</Button>
+    <Button size='small'>小尺寸</Button>
+  </div>
+</template>
 
-export default function() {
-    return (
-        <div>
-            <Button size='large' style={{ marginRight: '8px' }}>大尺寸</Button>
-            <Button size='default' style={{ marginRight: '8px' }}>默认尺寸</Button>
-            <Button size='small'>小尺寸</Button>
-        </div>
-    );
-}
+<script setup>
+  import { Button } from '@kousum/semi-ui-vue';
+</script>
 ```
 
 ### 块级按钮
 
 块级按钮具有预先定义好的宽度，它的宽度与按钮里面内容的宽度无关。
 
-```jsx live=true dir="column"
-import { h } from 'vue';
-import { Button } from '@kousum/semi-ui-vue';
-
-export default function() {
-    return (
-        <div>
-            <Button block>块级按钮</Button>
-        </div>
-    );
-}
+```vue live=true height="200"
+<template>
+  <Button block>块级按钮</Button>
+</template>
+<script setup>
+  import {Button} from '@kousum/semi-ui-vue'
+</script>
 ```
 
 ### 图标按钮
 
 可定义按钮的图标。
 
-```jsx live=true dir="column"
-import { h } from 'vue';
-import { Button } from '@kousum/semi-ui-vue';
-import { IconCamera, IconSidebar, IconChevronDown } from '@kousum/semi-icons-vue';
+```vue live=true
+<template>
+  <div>
+    <strong>默认状态：</strong>
+    <Button :icon="h(IconCamera)" aria-label="截屏" />
+    <br /><br />
+    <strong>禁用状态：</strong>
+    <Button :disabled="true" :icon="h(IconCamera)" aria-label="截屏" />
+    <br /><br />
+    <strong>复合类型：</strong>
+    <span class="btn-margin-right">
+      <Button type="primary" :icon="h(IconCamera)" aria-label="截屏" />
+      <Button type="secondary" :icon="h(IconCamera)" aria-label="截屏" />
+      <Button type="warning" :icon="h(IconCamera)" aria-label="截屏" />
+      <Button type="danger" :icon="h(IconCamera)" aria-label="截屏" />
+    </span>
+    <br /><br />
+    <strong>更改主题：</strong>
+    <Button :icon="h(IconCamera)" theme="solid" :style="{ marginRight: '10px' }" aria-label="截屏" />
+    <Button :icon="h(IconCamera)" theme="light" aria-label="截屏" />
+    <br /><br />
+    <strong>更改图标位置：</strong>
+    <Button :icon="h(IconSidebar)" theme="solid" :style="{ marginRight: '10px' }">收起</Button>
+    <Button :icon="h(IconChevronDown)" theme="solid" iconPosition="right">展开选项</Button>
+    <br /><br />
+  </div>
+</template>
 
-export default function() {
-    return (
-        <div>
-            <strong>默认状态：</strong>
-            <Button icon={<IconCamera />} aria-label="截屏" />
-            <br/><br/>
-            <strong>禁用状态：</strong>
-            <Button disabled icon={<IconCamera />} aria-label="截屏"/>
-            <br/><br/>
-            <strong>复合类型：</strong>
-            <span className="btn-margin-right">
-                <Button type="primary" icon={<IconCamera />} aria-label="截屏"/>
-                <Button type="secondary" icon={<IconCamera />} aria-label="截屏" />
-                <Button type="warning" icon={<IconCamera />} aria-label="截屏" />
-                <Button type="danger" icon={<IconCamera />} aria-label="截屏" />
-            </span>
-            <br/><br/>
-            <strong>更改主题：</strong>
-            <Button icon={<IconCamera />} theme="solid" style={{ marginRight: '10px' }} aria-label="截屏" />
-            <Button icon={<IconCamera />} theme="light" aria-label="截屏" />
-            <br/><br/>
-            <strong>更改图标位置：</strong>
-            <Button icon={<IconSidebar />} theme="solid" style={{ marginRight: '10px' }}>收起</Button>
-            <Button icon={<IconChevronDown />} theme="solid" iconPosition="right">展开选项</Button>
-            <br/><br/>
-        </div>
-    );
-}
+<script setup>
+  import { ref, h } from 'vue';
+  import { Button } from '@kousum/semi-ui-vue';
+  import { IconCamera, IconSidebar, IconChevronDown } from '@kousum/semi-icons-vue';
+
+</script>
 ```
 
 ### 链接按钮
 
 我们推荐使用 Typography 的 link 属性来实现链接型的文字按钮，具体用法详见[Typography]()
 
-```jsx live=true
-import { h } from 'vue';
-import { Typography, TypographyText } from '@kousum/semi-ui-vue';
-import { IconLink } from '@kousum/semi-icons-vue';
+```vue live=true
+<template>
+    <div>
+        <TypographyText link="https://semi.design/">链接文本</TypographyText>
+        <br />
+        <br />
+        <TypographyText link="https://semi.design/">打开网站</TypographyText>
+        <br />
+        <br />
+        <TypographyText link="https://semi.design/" :icon="h(IconLink)" underline>带下划线的网页链接</TypographyText>
+    </div>
+</template>
 
-export default function() {
-    return (
-        <div>
-            <TypographyText link={{ href: 'https://semi.design/' }}>链接文本</TypographyText>
-            <br />
-            <br />
-            <TypographyText link={{ href: 'https://semi.design/' }}>打开网站</TypographyText>
-            <br />
-            <br />
-            <TypographyText link icon={<IconLink />} underline>带下划线的网页链接</TypographyText>
-        </div>
-    );
-}
+<script setup>
+import { ref, h } from 'vue';
+import { TypographyText } from '@kousum/semi-ui-vue';
+import { IconLink } from '@kousum/semi-icons-vue';
+</script>
 ```
 
 ### 禁用状态
 
-```jsx live=true dir="column"
-import { h } from 'vue';
-import { Button } from '@kousum/semi-ui-vue';
+```vue live=true dir="column"
+<template>
+  <div>
+    <Button disabled>禁用</Button>
+    <Button disabled theme="borderless">无背景禁用</Button>
+    <Button disabled theme="light">浅色禁用</Button>
+    <Button disabled theme="borderless" type="primary">无背景主要禁用</Button>
+    <Button disabled theme="solid" type="warning">深色警告禁用</Button>
+  </div>
+</template>
 
-export default function() {
-    return (
-        <div>
-            <Button disabled>禁用</Button>
-            <Button disabled theme="borderless">无背景禁用</Button>
-            <Button disabled theme="light">浅色禁用</Button>
-            <Button disabled theme="borderless" type="primary">无背景主要禁用</Button>
-            <Button disabled theme="solid" type="warning">深色警告禁用</Button>
-        </div>
-    );
-}
+<script setup>
+  import { Button } from '@kousum/semi-ui-vue';
+</script>
 ```
 
 ### 加载状态
 
 按钮支持加载状态，通过设置 loading 参数值为 true 即可，注意：disabled 状态优先级高于 loading 状态。
 
-```jsx live=true dir="column"
-import { h, ref } from 'vue';
-import { Button } from '@kousum/semi-ui-vue';
-import { IconDelete } from '@kousum/semi-icons-vue';
+```vue live=true dir="column"
+<template>
+  <div>
+    <div>
+      <div class="btn-margin-right" style="display: inline-flex; align-items: center; padding-bottom: 14px;">
+        <Button @click="reset(false)">关闭加载态</Button>
+      <Button @click="reset(true)">开启加载态</Button>
+  </div>
+</div>
+<hr/>
+<Button :loading="saveLoading" @click="saveLoading = true" style="margin-right: 14px;">保存</Button>
+<Button :loading="delLoading" icon="IconDelete" type="danger" @click="delLoading = true" style="margin-right: 14px;">删除</Button>
+<div style="width: 200px; display: inline-block;">
+  <Button :loading="repLoading" type="warning" block theme="solid" @click="repLoading = true">撤销</Button>
+</div>
+</div>
+</template>
 
-export default function() {
-    const saveLoading = ref(false);
-    const delLoading = ref(true);
-    const repLoading = ref(true);
+<script setup>
+  import { ref } from 'vue';
+  import { Button } from '@kousum/semi-ui-vue';
+  import { IconDelete } from '@kousum/semi-icons-vue';
 
-    const reset = status => {
-        status = !!status;
-        saveLoading.value = status
-        delLoading.value = status
-        repLoading.value = status
-    };
+  const saveLoading = ref(false);
+  const delLoading = ref(true);
+  const repLoading = ref(true);
 
-    return (
-        <div>
-            <div> 
-                <div className="btn-margin-right" style={{ display: 'inline-flex', alignItems: 'center', paddingBottom: '14px' }}>
-                    <Button onClick={() => reset(false)}>关闭加载态</Button>
-                    <Button onClick={() => reset(true)}>开启加载态</Button>
-                </div>
-            </div>
-            <hr/>
-            <Button loading={saveLoading.value} onClick={() => saveLoading.value = true} style={{ marginRight: '14px' }}>保存</Button>
-            <Button loading={delLoading.value} icon={<IconDelete />} type="danger" onClick={() => delLoading.value = true} style={{ marginRight: '14px' }}>删除</Button>
-            <div style={{ width: '200px', display: 'inline-block' }}>
-                <Button loading={repLoading.value} type="warning" block theme="solid" onClick={() => repLoading.value = true}>撤销</Button>
-            </div>
-        </div>
-    );
+  const reset = (status) => {
+  status = !!status;
+  saveLoading.value = status;
+  delLoading.value = status;
+  repLoading.value = status;
+};
+</script>
+
+<style scoped>
+  .btn-margin-right {
+  display: inline-flex;
+  align-items: center;
+  padding-bottom: 14px;
 }
+</style>
 ```
 
 ### 按钮组合
@@ -311,27 +304,25 @@ export default function() {
 
 #### 组合尺寸
 
-```jsx live=true dir="column"
-import { h } from 'vue';
-import { ButtonGroup, Button } from '@kousum/semi-ui-vue';
+```vue live=true dir="column"
+<template>
+  <div style="display: flex;">
+    <div v-for="(size, index) in sizes" :key="index" style="margin-right: 10px;">
+      <ButtonGroup :size="size">
+        <Button>拷贝</Button>
+        <Button>查询</Button>
+        <Button>剪切</Button>
+      </ButtonGroup>
+    </div>
+  </div>
+</template>
 
-export default function() {
-    const sizes = ['large', 'default', 'small'];
+<script setup>
+  import { ref } from 'vue';
+  import { ButtonGroup, Button } from '@kousum/semi-ui-vue';
 
-    return (
-        <div style={{ display: 'flex' }}>
-            {sizes.map(size => (
-                <div style={{ marginRight: '10px' }} key={size}>
-                    <ButtonGroup size={size}>
-                        <Button>拷贝</Button>
-                        <Button>查询</Button>
-                        <Button>剪切</Button>
-                    </ButtonGroup>
-                </div>
-            ))}
-        </div>
-    );
-}
+  const sizes = ref(['large', 'default', 'small']);
+</script>
 ```
 
 #### 组合禁用
@@ -389,7 +380,7 @@ export default function() {
 #### 基础使用
 
 <div style="width: 100%;height: 600px;">
-<LiveCode layout="vertical" :files="{'src/SplitButtonDemo.vue':modules['./demo/SplitButtonDemo.vue']}"/>
+<LiveCode :files="{'src/SplitButtonDemo.vue':modules['./demo/SplitButtonDemo.vue']}"/>
 </div>
 
 

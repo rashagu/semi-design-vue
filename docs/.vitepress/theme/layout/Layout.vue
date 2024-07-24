@@ -707,7 +707,7 @@ img {
   max-width: 100% !important;
 
   .content {
-    max-width: 1160px !important;
+    max-width: 100% !important;
 
     .content-container {
       max-width: 100% !important;

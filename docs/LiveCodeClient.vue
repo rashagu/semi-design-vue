@@ -34,6 +34,7 @@ builtinImportMap.value.imports = {
   '@kousum/semi-icons-vue': import.meta.env.BASE_URL + 'semiIcons/semi-icons-vue.js',
   '@kousum/semi-icons-lab-vue': import.meta.env.BASE_URL + 'semiIconsLab/semi-icons-lab-vue.js',
   'lodash': import.meta.env.BASE_URL + 'lodash.js',
+  'date-fns': import.meta.env.BASE_URL + 'date-fns.js',
   '@kousum/semi-illustrations-vue': import.meta.env.BASE_URL + 'semiIllustrations/semi-illustrations-vue.js',
 };
 
@@ -54,7 +55,7 @@ const store = useStore(
 
 const previewOptions = {
   headHTML: `
-<link rel="stylesheet" href="${import.meta.env.BASE_URL}reset.css">
+<!--<link rel="stylesheet" href="${import.meta.env.BASE_URL}reset.css">-->
 <link rel="stylesheet" href="${import.meta.env.BASE_URL}semi/style.css">
 <link rel="stylesheet" href="${import.meta.env.BASE_URL}semiIcons/style.css">
 <link rel="stylesheet" href="${import.meta.env.BASE_URL}semiIconsLab/style.css">

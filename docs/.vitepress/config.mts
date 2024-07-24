@@ -105,7 +105,6 @@ export default defineConfig({
       }, {});
 
       // 使用 markdown-it 插件 jsx codeLive
-      // 使用 markdown-it 插件 jsx codeLive
       md.use((md, params) => {
         // 定义一个新的代码块规则
         md.block.ruler.before('fence', 'jsx',
@@ -113,6 +112,7 @@ export default defineConfig({
           const start = state.bMarks[startLine] + state.tShift[startLine];
           const max = state.eMarks[startLine];
 
+            const info = state.src.slice(start, max)
           // 检查是否以 ```liveCode 开头
           if (state.src.slice(start, max).trim().indexOf('```jsx live=true') !== 0) {
             return false;
@@ -146,6 +146,7 @@ export default defineConfig({
           const token = state.push('livecode', 'div', 0);
           token.content = state.getLines(startLine + 1, nextLine, state.tShift[startLine], true);
           token.map = [startLine, nextLine];
+          token.info = info
 
           state.line = nextLine + 1;
           return true;
@@ -153,12 +154,13 @@ export default defineConfig({
 
         // 定义渲染规则
         md.renderer.rules.livecode = (tokens, idx, options, env, renderer) => {
-
           const content = tokens[idx].content.trim();
+          const info = tokens[idx].info;
+          const height = info.match(/height="(\d+)"/)
           const code = btoa(encodeURIComponent(content));
           // <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/components/" alt=""/>
-          return `<div style="width: 100%;height: 800px;">
-<LiveCode2 layout="vertical" :files="{'src/demo.tsx':'${code}'}"/>
+          return `<div style="width: 100%;height: ${height?.[1] || '800'}px;">
+<LiveCode2 layout="${tokens[idx].info.indexOf('column')>-1?'vertical':'horizontal'}" :files="{'src/demo.tsx':'${code}'}"/>
 </div>`;
         };
       }, {});
@@ -170,6 +172,7 @@ export default defineConfig({
             const start = state.bMarks[startLine] + state.tShift[startLine];
             const max = state.eMarks[startLine];
 
+            const info = state.src.slice(start, max)
             // 检查是否以 ```liveCode 开头
             if (state.src.slice(start, max).trim().indexOf('```vue live=true') !== 0) {
               return false;
@@ -204,18 +207,21 @@ export default defineConfig({
             const token = state.push('livecode2', 'div', 0);
             token.content = state.getLines(startLine + 1, nextLine, state.tShift[startLine], true);
             token.map = [startLine, nextLine];
+            token.info = info
 
             state.line = nextLine + 1;
             return true;
           });
 
         // 定义渲染规则
-        md.renderer.rules.livecode2 = (tokens, idx) => {
+        md.renderer.rules.livecode2 = (tokens, idx, options) => {
           const content = tokens[idx].content.trim();
+          const info = tokens[idx].info;
+          const height = info.match(/height="(\d+)"/)
           const code = btoa(encodeURIComponent(content));
           // <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/components/" alt=""/>
-          return `<div style="width: 100%;height: 800px;">
-<LiveCode2 layout="vertical" :files="{'src/${code.slice(100, 120)}.vue':'${code}'}"/>
+          return `<div style="width: 100%;height: ${height?.[1] || '800'}px;">
+<LiveCode2 layout="${info.indexOf('column')>-1?'vertical':'horizontal'}" :files="{'src/demo.vue':'${code}'}"/>
 </div>`;
         };
       }, {});
