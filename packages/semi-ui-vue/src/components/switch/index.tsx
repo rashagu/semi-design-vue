@@ -56,7 +56,7 @@ export interface SwitchState {
 const propTypes: CombineProps<SwitchProps> = {
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
-  'aria-invalid': PropTypes.bool,
+  'aria-invalid': [PropTypes.bool, PropTypes.string] as PropType<SwitchProps['aria-invalid']>,
   'aria-errormessage': PropTypes.string,
   'aria-describedby': PropTypes.string,
   className: PropTypes.string,

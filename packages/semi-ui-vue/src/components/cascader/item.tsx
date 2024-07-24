@@ -70,8 +70,8 @@ export interface CascaderItemProps extends BaseProps {
   searchable: boolean;
   keyword: string;
   empty?: boolean;
-  emptyContent: VNode | string;
-  loadData: (selectOptions: CascaderData[]) => Promise<void>;
+  emptyContent?: VNode | string;
+  loadData?: (selectOptions: CascaderData[]) => Promise<void>;
   data: Array<Data | Entity>;
   separator: string;
   multiple: boolean;
@@ -131,11 +131,11 @@ export const vuePropsType: CombineProps<CascaderItemProps> = {
   virtualize: Object,
   emptyContent: {
     type: [Object, String],
-    required: true
+    required: false
   },
   loadData: {
     type: Function as PropType<CascaderItemProps['loadData']>,
-    required: true
+    required: false
   },
   data: {
     type: Array,

@@ -68,7 +68,7 @@ export interface RatingState {
 const propTypes: CombineProps<RatingProps> = {
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
-  'aria-invalid': PropTypes.bool,
+  'aria-invalid': [PropTypes.bool, PropTypes.string] as PropType<RatingProps['aria-invalid']>,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
   'aria-required': PropTypes.bool,

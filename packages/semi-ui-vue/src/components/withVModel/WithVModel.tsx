@@ -27,11 +27,12 @@ export default function WithVModel<T>(Comp: DefineSetupFnComponent<T>, opt?: Wit
               {...{
                 [opt?.valueKey || 'value']: props.modelValue,
                 [opt?.onKeyChangeFnName || 'onChange']: (v) => {
-                  console.log(v);
+                  // console.log(v);
                   let val = opt?.valuePath ? ObjectUtil.get(v, opt.valuePath) : v;
                   if (Array.isArray(val)) {
                     val = [...val];
                   }
+                  props.onChange?.(val);
                   props['onUpdate:modelValue']?.(val);
                 },
               }}

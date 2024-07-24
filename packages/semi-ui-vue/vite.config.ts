@@ -18,6 +18,7 @@ export default defineConfig({
       // the proper extensions will be added
       fileName: 'semi-ui-vue'
     },
+    sourcemap: true,
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: [

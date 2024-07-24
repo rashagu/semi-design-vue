@@ -124,7 +124,7 @@ const resetkey = 0;
 
 const propTypes: CombineProps<CascaderProps> = {
   'aria-labelledby': PropTypes.string,
-  'aria-invalid': PropTypes.bool,
+  'aria-invalid': [PropTypes.bool, PropTypes.string] as PropType<CascaderProps['aria-invalid']>,
   'aria-errormessage': PropTypes.string,
   'aria-describedby': PropTypes.string,
   'aria-required': PropTypes.bool,

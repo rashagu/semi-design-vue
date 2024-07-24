@@ -1,5 +1,5 @@
-import { HTMLAttributes, PropType, VNode } from 'vue';
-import {ComponentPublicInstance, VNodeRef} from "vue";
+import type{ HTMLAttributes, PropType, VNode } from 'vue';
+import type{ ComponentPublicInstance, VNodeRef } from "vue";
 
 export type VueJsxNodeSingle = VNode | string | boolean | number
 export type VueJsxNode = VNode | string | boolean | number | JSX.Element | Element | VueJsxNode[]

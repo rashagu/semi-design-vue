@@ -27,6 +27,7 @@ import { ArrayElement } from '../_base/base';
 import Radio, { RadioProps, RadioState, RadioType } from './radio';
 import Context, { RadioGroupButtonSize, RadioMode } from './context';
 import { CombineProps } from '../interface';
+import * as PropTypes from '../PropTypes';
 
 export interface OptionItem {
   label?: VNode | string;
@@ -95,7 +96,7 @@ export const vuePropsType: CombineProps<RadioGroupProps> = {
   'aria-label': String,
   'aria-describedby': String,
   'aria-errormessage': String,
-  'aria-invalid': String,
+  'aria-invalid': [PropTypes.bool, PropTypes.string] as PropType<RadioGroupProps['aria-invalid']>,
   'aria-labelledby': String,
   'aria-required': [String, Boolean],
   id: String,

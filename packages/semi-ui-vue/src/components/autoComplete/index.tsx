@@ -489,7 +489,7 @@ function AutoCompleteFuncVueProps<T>() {
   const propTypes: CombineProps<AutoCompleteProps<T>> = {
     'aria-label': PropTypes.string,
     'aria-labelledby': PropTypes.string,
-    'aria-invalid': PropTypes.bool,
+    'aria-invalid': [PropTypes.bool, PropTypes.string] as PropType<AutoCompleteProps<T>['aria-invalid']>,
     'aria-errormessage': PropTypes.string,
     'aria-describedby': PropTypes.string,
     'aria-required': PropTypes.bool,

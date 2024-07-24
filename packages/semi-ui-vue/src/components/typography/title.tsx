@@ -75,7 +75,7 @@ export const vuePropsType: CombineProps<TitleProps> = {
     default: 1,
   },
   link: {
-    type: [Object, Boolean],
+    type: [Object, Boolean, String],
     default: false,
   },
   mark: {

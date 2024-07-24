@@ -128,6 +128,8 @@ import PinCodeDemo from './components/pincode/__test__/PinCodeDemo';
 import LottieDemo from './components/lottie/__test__/LottieDemo';
 import CodeHighlightDemo from './components/codeHighlight/__test__/CodeHighlightDemo';
 import MarkDownRenderDemo from './components/markdownRender/__test__/markDownRenderDemo';
+import DatePickerTriggerRenderDemo from './components/datePicker/__test__/DatePickerTriggerRenderDemo.vue';
+import FormRenderDemo from './components/form/__test__/FormRenderDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -205,6 +207,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SkeletonDemo/>*/}
         {/*<FormAllDemo />*/}
         {/*<FormDemo />*/}
+        <FormRenderDemo/>
         {/*<WithFormApiDemo />*/}
         {/*<WithFormStateDemo/>*/}
         {/*<WithFieldDemo/>*/}
@@ -227,7 +230,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemoVueSFC/>*/}
         {/*<ModalDemo2/>*/}
         {/*<LottieDemo/>*/}
-        <MarkDownRenderDemo/>
+        {/*<MarkDownRenderDemo/>*/}
         {/*<CodeHighlightDemo/>*/}
         {/*<UploadDemo/>*/}
         {/*<UpdateDemo2/>*/}
@@ -237,6 +240,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<BreadcrumbDemo2/>*/}
         {/*<DatePickerDemo />*/}
         {/*<DatePickerDemo2/>*/}
+        {/*<DatePickerTriggerRenderDemo/>*/}
         {/*<TimePickerDemo />*/}
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}

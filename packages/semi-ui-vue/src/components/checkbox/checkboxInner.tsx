@@ -39,7 +39,7 @@ const propTypes: CombineProps<CheckboxInnerProps> = {
   ...propTypesCheckbox,
   'aria-describedby': PropTypes.string,
   'aria-errormessage': PropTypes.string,
-  'aria-invalid': PropTypes.bool,
+  'aria-invalid': [PropTypes.bool, PropTypes.string] as PropType<CheckboxInnerProps['aria-invalid']>,
   'aria-labelledby': PropTypes.string,
   'aria-required': PropTypes.bool,
   checked: PropTypes.bool,

@@ -109,7 +109,7 @@ export const propTypes: CombineProps<InputProps> = {
   role: PropTypes.string,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
-  'aria-invalid': PropTypes.bool,
+  'aria-invalid': [PropTypes.bool, PropTypes.string] as PropType<InputProps['aria-invalid']>,
   'aria-errormessage': PropTypes.string,
   'aria-describedby': PropTypes.string,
   'aria-required': PropTypes.bool,

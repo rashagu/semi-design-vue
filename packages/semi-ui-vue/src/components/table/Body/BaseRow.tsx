@@ -402,14 +402,16 @@ const TableRow = defineComponent({
         <BodyRow
           role="row"
           {...ariaProps}
-          {...rowProps}
+          {...{
+            ...rowProps,
+            onMouseenter: handleMouseEnter,
+            onMouseleave: handleMouseLeave,
+            onClick: handleClick,
+          }}
           style={baseRowStyle}
           className={rowCls}
           // used for dnd-kit sortable
           data-row-key={rowKey}
-          onMouseenter={handleMouseEnter}
-          onMouseleave={handleMouseLeave}
-          onClick={handleClick}
         >
           {renderCells()}
         </BodyRow>

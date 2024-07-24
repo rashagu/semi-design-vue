@@ -70,7 +70,7 @@ export const vuePropsType: CombineProps<TextProps> = {
     default: false,
   },
   link: {
-    type: [Boolean, Object],
+    type: [Boolean, Object, String],
     default: false,
   },
   type: {

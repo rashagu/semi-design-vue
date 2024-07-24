@@ -72,7 +72,7 @@ const propTypes: CombineProps<InputNumberProps> = {
   ...propTypesInput,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
-  'aria-invalid': PropTypes.bool,
+  'aria-invalid': [PropTypes.bool, PropTypes.string] as PropType<InputNumberProps['aria-invalid']>,
   'aria-errormessage': PropTypes.string,
   'aria-describedby': PropTypes.string,
   'aria-required': PropTypes.bool,

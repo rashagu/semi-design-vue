@@ -51,7 +51,7 @@ const propTypes: CombineProps<NumeralProps> = {
   icon: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   mark: PropTypes.bool,
   underline: PropTypes.bool,
-  link: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  link: [PropTypes.object, PropTypes.bool, PropTypes.string],
   strong: PropTypes.bool,
   type: PropTypes.string as PropType<NumeralProps['type']>,
   size: PropTypes.string as PropType<NumeralProps['size']>,

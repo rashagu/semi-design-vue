@@ -109,7 +109,7 @@ const propTypes: CombineProps<BaseTypographyProps> = {
   ellipsis: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   mark: PropTypes.bool,
   underline: PropTypes.bool,
-  link: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  link: [PropTypes.object, PropTypes.bool, PropTypes.string],
   spacing: PropTypes.string,
   strong: PropTypes.bool,
   size: PropTypes.string as PropType<BaseTypographyProps['size']>,
