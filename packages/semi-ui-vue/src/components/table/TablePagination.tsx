@@ -1,5 +1,5 @@
 import * as PropTypes from '../PropTypes';
-import { get, isFunction } from 'lodash';
+import { get, isFunction, omit } from 'lodash';
 
 import { cssClasses } from '@douyinfe/semi-foundation/table/constants';
 import Pagination from '../pagination';
@@ -47,7 +47,7 @@ const TablePagination = defineComponent({
             <Fragment>
               <span class={`${prefixCls}-pagination-info`}>{info}</span>
               <span class={`${prefixCls}-pagination-wrapper`}>
-                {total > 0 ? <Pagination {...pagination} key={get(pagination, 'pageSize', 'pagination')} /> : null}
+                {total > 0 ? <Pagination {...(omit(pagination, 'formatPageText'))} key={get(pagination, 'pageSize', 'pagination')} /> : null}
               </span>
             </Fragment>
           )}

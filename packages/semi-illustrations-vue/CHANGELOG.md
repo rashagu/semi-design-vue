@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.16.0
+
+### Minor Changes
+
+- semi 2.62.0
+
 ## 0.15.1
 
 ### Patch Changes
