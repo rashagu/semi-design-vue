@@ -32,19 +32,6 @@ const DatePickerDemo = defineComponent((props, {}) => {
   const dateValue = ref("2023-01-01")
 
 
-  return ()=>    <DatePicker
-    type="dateTime"
-    needConfirm={true}
-    onConfirm={(...args) => {
-      console.log('Confirmed: ', ...args);
-    }}
-    onCancel={(...args) => {
-      console.log('Canceled: ', ...args);
-    }}
-    onChange={(...args) => {
-      console.log('Changed: ', ...args);
-    }}
-  />
   return () => (
     <div>
       <DatePicker value={dateValue.value} onChange={(date, dateString) => {

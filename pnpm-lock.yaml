@@ -586,13 +586,13 @@ importers:
         specifier: 2.62.1
         version: 2.62.1
       '@kousum/semi-animation-vue':
-        specifier: ^0.15.1
+        specifier: latest
         version: 0.15.1(vue@3.4.31(typescript@5.5.2))
       '@kousum/semi-icons-vue':
-        specifier: ^0.15.1
+        specifier: latest
         version: 0.15.1(vue@3.4.31(typescript@5.5.2))
       '@kousum/semi-illustrations-vue':
-        specifier: ^0.15.1
+        specifier: latest
         version: 0.15.1(vue@3.4.31(typescript@5.5.2))
       '@kousum/vue-draggable':
         specifier: 1.0.2
@@ -8279,8 +8279,8 @@ packages:
   vue-component-type-helpers@2.0.19:
     resolution: {integrity: sha512-cN3f1aTxxKo4lzNeQAkVopswuImUrb5Iurll9Gaw5cqpnbTAxtEMM1mgi6ou4X79OCyqYv1U1mzBHJkzmiK82w==}
 
-  vue-component-type-helpers@2.0.26:
-    resolution: {integrity: sha512-sO9qQ8oC520SW6kqlls0iqDak53gsTVSrYylajgjmkt1c0vcgjsGSy1KzlDrbEx8pm02IEYhlUkU5hCYf8rwtg==}
+  vue-component-type-helpers@2.0.29:
+    resolution: {integrity: sha512-58i+ZhUAUpwQ+9h5Hck0D+jr1qbYl4voRt5KffBx8qzELViQ4XdT/Tuo+mzq8u63teAG8K0lLaOiL5ofqW38rg==}
 
   vue-demi@0.14.8:
     resolution: {integrity: sha512-Uuqnk9YE9SsWeReYqK2alDI5YzciATE0r2SkA6iMAtuXvNTMNACJLJEXNXaEy94ECuBe4Sk6RzRU80kjdbIo1Q==}
@@ -11862,7 +11862,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.4.31(typescript@5.5.2)
-      vue-component-type-helpers: 2.0.26
+      vue-component-type-helpers: 2.0.29
     transitivePeerDependencies:
       - encoding
       - prettier
@@ -18533,7 +18533,7 @@ snapshots:
 
   vue-component-type-helpers@2.0.19: {}
 
-  vue-component-type-helpers@2.0.26: {}
+  vue-component-type-helpers@2.0.29: {}
 
   vue-demi@0.14.8(vue@3.4.31(typescript@5.5.2)):
     dependencies:
