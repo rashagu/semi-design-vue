@@ -229,6 +229,17 @@ export default defineConfig({
       // md.use(require('markdown-it-some-plugin'));
     },
   },
+  locales: {
+    root: {
+      label: 'English',
+      lang: 'en'
+    },
+    fr: {
+      label: 'French',
+      lang: 'zh-CN', // 可选，将作为 `lang` 属性添加到 `html` 标签中
+      // 其余 locale 特定属性...
+    }
+  },
   vite: { // ...
     define: {
       'process.env': {

@@ -11,7 +11,7 @@ export function GetNavData(props:{navItem: any[]}) {
         {{default:()=>items.map(item=>{
             return (
               //@ts-ignore
-              <a href={(import.meta.env.BASE_URL + item.itemKey).replace('//', '/')} key={item.itemKey} >
+              <a href={(import.meta.env.BASE_URL + 'zh-CN' + item.itemKey).replace('//', '/')} key={item.itemKey} >
                 <NavItem {...item} tabIndex={-1}/>
               </a>
             );
