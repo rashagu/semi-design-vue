@@ -15,9 +15,10 @@ import { useBaseComponent } from '../_base/baseComponent';
 import { omit } from 'lodash';
 export type { MDXProps } from 'mdx/types';
 
-export interface MarkdownRenderProps extends MarkdownRenderBaseProps {
+export interface MarkdownRenderProps extends Omit<MarkdownRenderBaseProps, 'format'> {
   style?: CSSProperties;
   className?: string;
+  format?: string
 }
 
 export interface MarkdownRenderState extends MarkdownRenderBaseState {}
@@ -26,7 +27,7 @@ const propTypes: CombineProps<MarkdownRenderProps> = {
   style: PropTypes.object,
   format: {
     type: PropTypes.node as PropType<MarkdownRenderProps['format']>,
-    required: true,
+    required: false,
   },
   components: {
     type: PropTypes.any as PropType<MarkdownRenderProps['components']>,

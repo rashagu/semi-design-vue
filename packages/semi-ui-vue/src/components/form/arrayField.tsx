@@ -6,6 +6,7 @@ import warning from '@douyinfe/semi-foundation/utils/warning';
 import type { ArrayFieldStaff, FormUpdaterContextType } from '@douyinfe/semi-foundation/form/interface';
 import { defineComponent, h, onBeforeUnmount, reactive, useSlots, watch } from 'vue';
 import { useFormUpdaterContext } from './context/FormUpdaterContext/Consumer';
+import copy from 'fast-copy';
 
 export interface ArrayFieldProps {
   initValue?: any[];
@@ -95,8 +96,8 @@ const ArrayFieldComponent = defineComponent({
     shouldUseInitValue = !context.value.getArrayField(props.field);
 
     // Separate the arrays that reset and the usual add and remove modify, otherwise they will affect each other
-    const initValueCopyForFormState = cloneDeep(initValue);
-    const initValueCopyForReset = cloneDeep(initValue);
+    const initValueCopyForFormState = copy(initValue);
+    const initValueCopyForReset = copy(initValue);
     context.value.registerArrayField(props.field, initValueCopyForReset);
     // register ArrayField will update state.updateKey to render, So there is no need to execute forceUpdate here
     context.value.updateStateValue(props.field, initValueCopyForFormState, { notNotify: true, notUpdate: true });
@@ -136,7 +137,8 @@ const ArrayFieldComponent = defineComponent({
       const updater = context;
       const { field } = props;
       const newArrayFieldVal = updater.value.getValue(field) ? updater.value.getValue(field).slice() : [];
-      newArrayFieldVal.push(rowVal);
+      const cloneRowVal = copy(rowVal);
+      newArrayFieldVal.push(cloneRowVal);
       updater.value.updateStateValue(field, newArrayFieldVal, {});
       updater.value.updateArrayField(field, { updateKey: new Date().valueOf() });
     }

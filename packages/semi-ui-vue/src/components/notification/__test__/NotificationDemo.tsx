@@ -1,7 +1,6 @@
 import { defineComponent, ref, h, Fragment, useSlots, onMounted } from 'vue';
 import Button from '../../button';
 import NotificationList, { NotificationListClass } from '../index';
-import { ToastList } from '../../toast';
 import { NoticePosition } from '@douyinfe/semi-foundation/notification/notificationFoundation';
 import useNotification from '../useNotification';
 

@@ -364,6 +364,7 @@ const TreeSelect = defineComponent({
     const optionsRef = ref();
     let clickOutsideHandler = null;
     const treeSelectID = Math.random().toString(36).slice(2);
+    let clearInputFlag: boolean = false;
 
     let onNodeClick;
     let onNodeDoubleClick;
@@ -521,6 +522,12 @@ const TreeSelect = defineComponent({
         updateIsFocus: (bool) => {
           state.isFocus = bool;
         },
+        setClearInputFlag: (flag: boolean) => {
+          clearInputFlag = flag;
+        },
+        getClearInputFlag: () => {
+          return clearInputFlag;
+        }
       };
     }
     const adapter = adapter_();

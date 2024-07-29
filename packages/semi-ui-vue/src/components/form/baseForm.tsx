@@ -62,6 +62,7 @@ const propTypes: CombineProps<BaseFormProps> = {
   style: PropTypes.object,
   showValidateIcon: PropTypes.bool,
   stopValidateWithError: PropTypes.bool as PropType<BaseFormProps['stopValidateWithError']>,
+  stopPropagation: PropTypes.object as PropType<BaseFormProps['stopPropagation']>,
   id: PropTypes.string,
   wrapperCol: PropTypes.object, // Control wrapperCol {span: number, offset: number} for all field child nodes
   trigger: [String, Array] as PropType<BaseFormProps['trigger']>,
@@ -205,11 +206,17 @@ const Form = defineComponent({
 
     function submit(e: Event) {
       e.preventDefault();
+      if (props.stopPropagation && props.stopPropagation.submit) {
+        e.stopPropagation();
+      }
       foundation.submit(e);
     }
 
     function reset(e: Event) {
       e.preventDefault();
+      if (props.stopPropagation && props.stopPropagation.reset) {
+        e.stopPropagation();
+      }
       foundation.reset();
     }
 

@@ -137,5 +137,9 @@ export interface BaseFormProps <Values extends Record<string, any> = any> {
     disabled?: boolean;
     showValidateIcon?: boolean;
     stopValidateWithError?: boolean;
+    stopPropagation?: {
+        submit?: boolean;
+        reset?: boolean
+    };
     trigger?: FieldValidateTriggerType
 }

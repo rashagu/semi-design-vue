@@ -71,9 +71,15 @@ export interface TextAreaProps {
   onKeyPress?: (e: Event) => void;
   onEnterPress?: (e: Event) => void;
   onPressEnter?: (e: Event) => void;
+  onPaste?: (e: Event) => void;
   onResize?: (data: { height: number }) => void;
   getValueLength?: (value: string) => number;
   forwardRef?: ((instance: HTMLTextAreaElement) => void) | any | null;
+  /* Inner params for TextArea, Chat use it, 。
+   Used to disable line breaks by pressing the enter key。
+   Press enter + shift at the same time can start new line.
+*/
+  disabledEnterStartNewLine?: boolean
   minlength?: number;
   maxlength?: number;
   class?: string;
@@ -107,6 +113,7 @@ const propTypes: CombineProps<TextAreaProps> = {
   onClear: PropTypes.func as PropType<TextAreaProps['onClear']>,
   onResize: PropTypes.func as PropType<TextAreaProps['onResize']>,
   getValueLength: PropTypes.func as PropType<TextAreaProps['getValueLength']>,
+  disabledEnterStartNewLine: PropTypes.bool,
   // TODO
   // resize: PropTypes.bool,
 
@@ -155,8 +162,12 @@ const propTypes: CombineProps<TextAreaProps> = {
     type: Function as PropType<TextAreaProps['onPressEnter']>,
     default: noop,
   },
+  onPaste: {
+    type: Function as PropType<TextAreaProps['onPaste']>,
+    default: noop,
+  },
   forwardRef: {
-    type: Function,
+    type: [Function, Object],
     default: noop,
   },
 };
@@ -178,9 +189,9 @@ const defaultProps = {
   // resize: false,
 };
 
-export const VuePropsType = vuePropsMake(propTypes, defaultProps);
+export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const TextArea = defineComponent({
-  props: VuePropsType,
+  props: {...vuePropsType},
   name: 'TextArea',
   setup(props, { slots, attrs }) {
     const { getProps } = useHasInProps();
@@ -338,7 +349,7 @@ const TextArea = defineComponent({
         forwardRef(node);
       } else if (forwardRef && typeof forwardRef === 'object') {
         // TODO
-        forwardRef.current = node;
+        forwardRef.value = node;
       }
     };
 
@@ -390,7 +401,7 @@ const TextArea = defineComponent({
       });
       const itemProps: TextareaHTMLAttributes = {
         ...attrs,
-        ...omit(rest, 'insetLabel', 'insetLabelId', 'getValueLength', 'onClear', 'showClear'),
+        ...omit(rest, 'insetLabel', 'insetLabelId', 'getValueLength', 'onClear', 'showClear', 'disabledEnterStartNewLine'),
         class: itemCls,
         disabled,
         autofocus: (autoFocus || attrs.autofocus) as boolean,

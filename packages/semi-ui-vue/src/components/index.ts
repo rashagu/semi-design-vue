@@ -215,3 +215,5 @@ export {default as PinCode} from './pincode'
 export {default as Lottie} from './lottie'
 export {default as CodeHighlight} from './codeHighlight'
 export {default as MarkdownRender} from './markdownRender'
+
+export { default as Chat } from './chat';

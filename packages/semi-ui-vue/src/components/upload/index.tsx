@@ -408,7 +408,7 @@ const Upload = defineComponent({
      * @param index number
      * @returns
      */
-    const insert = (files: Array<CustomFile>, index: number): void => {
+    const insert = (files: Array<CustomFile>, index?: number): void => {
       return foundation.insertFileToList(files, index);
     };
 

@@ -130,6 +130,8 @@ import CodeHighlightDemo from './components/codeHighlight/__test__/CodeHighlight
 import MarkDownRenderDemo from './components/markdownRender/__test__/markDownRenderDemo';
 import DatePickerTriggerRenderDemo from './components/datePicker/__test__/DatePickerTriggerRenderDemo.vue';
 import FormRenderDemo from './components/form/__test__/FormRenderDemo';
+import ChatDemo from './components/chat/__test__/ChatDemo';
+import ToastUseDemo from './components/toast/__test__/ToastUseDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -203,11 +205,12 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<NotificationDemo3/>*/}
         {/*<BannerDemo/>*/}
         {/*<ToastDemo/>*/}
+        {/*<ToastUseDemo/>*/}
         {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
         {/*<FormAllDemo />*/}
         {/*<FormDemo />*/}
-        <FormRenderDemo/>
+        {/*<FormRenderDemo/>*/}
         {/*<WithFormApiDemo />*/}
         {/*<WithFormStateDemo/>*/}
         {/*<WithFieldDemo/>*/}
@@ -291,6 +294,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SpaceTest/>*/}
         {/*<PopoverTest />*/}
         {/*<NavigationDemo />*/}
+        <ChatDemo/>
         <div class={'aa'}>123</div>
       </ConfigProvider>
     </div>

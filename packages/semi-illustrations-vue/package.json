@@ -26,8 +26,8 @@
     "build:icon": "node scripts/build-illustration.cjs"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.62.1",
-    "@douyinfe/semi-theme-default": "2.62.1",
+    "@douyinfe/semi-foundation": "2.63.0",
+    "@douyinfe/semi-theme-default": "2.63.0",
     "classnames": "^2.3.2",
     "vue": "^3.4.31"
   },

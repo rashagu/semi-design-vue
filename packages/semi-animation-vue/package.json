@@ -38,10 +38,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@douyinfe/semi-animation": "2.62.1",
-    "@douyinfe/semi-animation-styled": "2.62.1",
-    "@douyinfe/semi-foundation": "2.62.1",
-    "@douyinfe/semi-theme-default": "2.62.1",
+    "@douyinfe/semi-animation": "2.63.0",
+    "@douyinfe/semi-animation-styled": "2.63.0",
+    "@douyinfe/semi-foundation": "2.63.0",
+    "@douyinfe/semi-theme-default": "2.63.0",
     "classnames": "^2.3.2",
     "sass": "^1.57.1",
     "vue": "^3.4.31"
