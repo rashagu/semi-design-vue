@@ -1,5 +1,4 @@
 import { MDXProps } from 'mdx/types';
-import { Upload } from '../index';
 import type { FileItem, UploadProps } from '../upload';
 import { Message } from '@douyinfe/semi-foundation/chat/foundation';
 import type { TooltipProps } from '../tooltip';

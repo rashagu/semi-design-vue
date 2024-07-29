@@ -20,7 +20,7 @@ import { IconThumbUpStroked,
   IconLikeThumb,
   IconRedoStroked
 } from '@kousum/semi-icons-vue';
-import { Button, Popconfirm, useBaseComponent } from '../../index';
+
 import copy from 'copy-text-to-clipboard';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/chat/constants';
 import ChatBoxActionFoundation, { ChatBoxActionAdapter } from '@douyinfe/semi-foundation/chat/chatBoxActionFoundation';
@@ -28,6 +28,9 @@ import { LocaleConsumerFunc } from '../../locale/localeConsumer';
 import { Locale } from "../../locale/interface";
 import cls from 'classnames';
 import { chatBoxPropTypes } from './chatPropsType';
+import Button from '../../button';
+import Popconfirm from '../../popconfirm';
+import { useBaseComponent } from '../../_base/baseComponent';
 const LocaleConsumer = LocaleConsumerFunc<Locale["Chat"]>()
 
 const { PREFIX_CHAT_BOX_ACTION } = cssClasses;

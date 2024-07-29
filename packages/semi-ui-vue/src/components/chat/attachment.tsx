@@ -3,7 +3,8 @@ import Image from '../image';
 import { IconBriefStroked, IconClear } from '@kousum/semi-icons-vue';
 import { strings, cssClasses } from '@douyinfe/semi-foundation/chat/constants';
 import cls from 'classnames';
-import { Progress } from '../index';
+import Progress from '../progress';
+
 
 const { PREFIX_ATTACHMENT } = cssClasses;
 const { PIC_SUFFIX_ARRAY, PIC_PREFIX } = strings;

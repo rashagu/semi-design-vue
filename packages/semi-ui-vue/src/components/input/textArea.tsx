@@ -439,10 +439,10 @@ const TextArea = defineComponent({
         >
           {autosize ? (
             <ResizeObserver onResize={throttledResizeTextarea}>
-              <textarea {...itemProps} ref={setRef} />
+              <textarea {...itemProps} data-testid={"test_base_textarea"} ref={setRef} />
             </ResizeObserver>
           ) : (
-            <textarea {...itemProps} ref={setRef} />
+            <textarea {...itemProps} data-testid={"test_base_textarea"} ref={setRef} />
           )}
           {renderClearBtn()}
           {renderCounter()}

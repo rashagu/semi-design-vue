@@ -4,14 +4,16 @@ import cls from 'classnames';
 import  * as PropTypes from '../../PropTypes';
 import { FileItem } from '../../upload/interface';
 import { InputBoxProps, InputBoxState, RenderInputAreaProps } from '../interface';
-import { Button, Upload, Tooltip, TextArea, useBaseComponent } from '../../index';
 import { IconDeleteStroked, IconChainStroked, IconArrowUp } from '@kousum/semi-icons-vue';
 import { cssClasses, strings } from "@douyinfe/semi-foundation/chat/constants";
 import InputBoxFoundation, { InputBoxAdapter } from '@douyinfe/semi-foundation/chat/inputboxFoundation';
 import Attachment from '../attachment';
 import { vuePropsMake } from '../../PropTypes';
-import type { TooltipProps } from '../../tooltip';
-import type { UploadProps } from '../../upload';
+import Tooltip, { TooltipProps } from '../../tooltip';
+import Upload, { UploadProps } from '../../upload';
+import Button from '../../button';
+import TextArea from '../../input/textArea';
+import { useBaseComponent } from '../../_base/baseComponent';
 
 const { PREFIX_INPUT_BOX } = cssClasses;
 const { SEND_HOT_KEY } = strings;
@@ -144,6 +146,7 @@ const index = defineComponent({
       const disabledSend = foundation.getDisableSend();
       return (
         <Button
+          data-testid="sendButton"
           disabled={disabledSend}
           theme='solid'
           type='primary'

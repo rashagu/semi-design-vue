@@ -1,14 +1,12 @@
 import Divider from '../divider';
 import ChatBox from './chatBox';
-import type { ChatProps, CommonChatsProps } from './interface';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/chat/constants';
 import { Locale } from '../locale/interface';
-import { Toast } from '../index';
+
 import { defineComponent, Fragment, PropType } from 'vue';
 import { LocaleConsumerFunc } from '../locale/localeConsumer';
-import * as PropTypes from '../PropTypes';
-import { CombineProps } from '../interface';
 import { chatContentVuePropsType } from './chatBox/chatPropsType';
+import Toast from '../toast';
 const LocaleConsumer = LocaleConsumerFunc<Locale['Chat']>();
 
 const { PREFIX_DIVIDER, PREFIX } = cssClasses;

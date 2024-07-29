@@ -1,4 +1,16 @@
-import { defineComponent, ref, h, Fragment, useSlots, reactive, watch, onMounted, onUnmounted, PropType } from 'vue';
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  useSlots,
+  reactive,
+  watch,
+  onMounted,
+  onUnmounted,
+  PropType,
+  nextTick,
+} from 'vue';
 import { CombineProps } from '../interface';
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
@@ -12,9 +24,10 @@ import { cssClasses, strings } from '@douyinfe/semi-foundation/chat/constants';
 import ChatFoundation, { ChatAdapter } from '@douyinfe/semi-foundation/chat/foundation';
 import type { FileItem } from '../upload';
 import { Locale } from '../locale/interface';
-import { Button, Upload, useBaseComponent } from '../index';
 import { vuePropsMake } from '../PropTypes';
 import { LocaleConsumerFunc } from '../locale/localeConsumer';
+import Button from '../button';
+import { useBaseComponent } from '../_base/baseComponent';
 const LocaleConsumer = LocaleConsumerFunc<Locale['Chat']>();
 
 const prefixCls = cssClasses.PREFIX;
@@ -90,7 +103,10 @@ const index = defineComponent({
     function adapter_(): ChatAdapter {
       return {
         ...adapterInject(),
-        getContainerRef: () => containerRef,
+        getContainerRef: () => {
+          // TODO
+          return {current: containerRef.value}
+        },
         setWheelScroll: (flag: boolean) => {
           state.wheelScroll = flag
         },
@@ -233,7 +249,7 @@ const index = defineComponent({
     watch(
       [() => props.chats, () => props.hints, () => state.chats, () => state.cacheHints, () => state.wheelScroll],
       (value, oldValue, onCleanup) => {
-        const { chats: newChats, hints: newHints } = { chats: oldValue[0], hints: oldValue[1] };
+        const { chats: newChats, hints: newHints } = props;
         const { chats: oldChats, cacheHints } = { chats: oldValue[2], cacheHints: oldValue[3] };
         const { wheelScroll } = state;
         let shouldScroll = false;
@@ -257,10 +273,20 @@ const index = defineComponent({
           }
         }
         if (!wheelScroll && shouldScroll) {
-          foundation.scrollToBottomImmediately();
+          nextTick(()=>{
+            foundation.scrollToBottomImmediately();
+          })
         }
       }
     );
+
+    function containerScroll(e: Event){
+      // TODO
+      foundation.containerScroll({
+        ...e,
+        currentTarget: e.target
+      })
+    }
     return () => {
       const {
         topSlot,
@@ -320,10 +346,11 @@ const index = defineComponent({
             {/* chat area */}
             <div class={`${prefixCls}-content`}>
               <div
+                data-testid={"chat-container-scroll"}
                 class={cls(`${prefixCls}-container`, {
                   'semi-chat-container-scroll-hidden': !wheelScroll,
                 })}
-                onScroll={foundation.containerScroll}
+                onScroll={containerScroll}
                 ref={containerRef}
               >
                 <ChatContent
