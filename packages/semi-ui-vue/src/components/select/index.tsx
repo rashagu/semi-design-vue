@@ -891,6 +891,7 @@ const Index = defineComponent({
           <Option
             showTick
             {...option}
+            optionRest={option}
             selected={option._selected}
             onSelect={(v: OptionProps, e: MouseEvent) => onSelect(v, optionIndex, e)}
             focused={isFocused}

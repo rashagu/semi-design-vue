@@ -42,6 +42,8 @@ export interface OptionProps extends RemoveIndexSignature<BasicOptionProps> {
   _keyInOptionList?: string,
   _keyInJsx?: string,
   _inputCreateOnly?: boolean,
+
+  optionRest?: Record<string, any>
 }
 
 interface renderOptionContentArgument {
@@ -85,16 +87,21 @@ export const vuePropsType: CombineProps<OptionProps> = {
   _keyInOptionList: String,
   _keyInJsx: String,
   _inputCreateOnly: Boolean,
+
+  optionRest: {
+    type: Object,
+    default: () => {}
+  }
 };
 
 const Option = defineComponent({
   props: { ...vuePropsType },
   name: 'isSelectOption',
   setup(props, { slots, attrs }) {
-    function onClick({ value, label, children, ...rest }: Partial<OptionProps>, event: MouseEvent) {
+    function onClick({ value, label, children, optionRest, ...rest }: Partial<OptionProps>, event: MouseEvent) {
       const isDisabled = props.disabled;
       if (!isDisabled) {
-        props.onSelect({ ...rest, value, label: toRaw(label || children) }, event);
+        props.onSelect({ ...(props.optionRest), ...rest, value, label: toRaw(label || children) }, event);
       }
     }
 
@@ -125,8 +132,10 @@ const Option = defineComponent({
         renderOptionItem,
         inputValue,
         semiOptionId,
-        ...rest
+        optionRest,
+        ...rest_
       } = props;
+      const rest = {...props.optionRest, ...rest_}
       const optionClassName = classNames(prefixCls, {
         [`${prefixCls}-disabled`]: disabled,
         [`${prefixCls}-selected`]: selected,

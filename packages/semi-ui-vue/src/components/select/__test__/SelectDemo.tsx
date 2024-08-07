@@ -129,7 +129,7 @@ const SelectDemo = defineComponent((props, {slots}) => {
   const dd = ref()
   function onChange(v) {
     console.log(v)
-    dd.value = v
+    dd.value = v.value
   }
   return () => {
     let { optionList, optionList2 } = state;
@@ -151,6 +151,7 @@ const SelectDemo = defineComponent((props, {slots}) => {
         filter
         optionList={optionListRef.value}
         multiple
+        onChangeWithObject={true}
         onChange={onChange}
       ></Select>
         <input placeholder={'select_change_demo'} value={dd.value}/>
