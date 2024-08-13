@@ -297,6 +297,7 @@ const Modal = defineComponent({
                 [`${cssClasses.DIALOG}-footerfill`]: footerFill,
               })}
             >
+              {slots.extraFooter?.()}
               {getCancelButton(locale)}
               <Button
                 aria-label="confirm"
