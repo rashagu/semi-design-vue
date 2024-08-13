@@ -393,12 +393,12 @@ const defaultProps: Partial<SelectProps> = {
 };
 export const vuePropsType = vuePropsMake<SelectProps>(propTypes, defaultProps);
 const Index = defineComponent({
-  props: { ...vuePropsType },
-  name: 'Select',
+  props: { ...vuePropsType, children: Array as PropType<VNode[]> },
+  name: 'Select_',
   setup(props, { expose }) {
     const slots = useSlots();
 
-    const state = reactive({
+    const state = reactive<SelectState>({
       isOpen: false,
       isFocus: false,
       options: [], // All options
@@ -443,7 +443,6 @@ const Index = defineComponent({
     const { adapter: adapterInject, context: context_, getDataAttr } = useBaseComponent<SelectProps>(props, state);
     const setOptionContainerEl = (node: HTMLDivElement) => (optionContainerEl.value = node);
 
-    let preChildren = shallowRef<VNode[]>([]);
     function adapter(): SelectAdapter<SelectProps, SelectState> {
       const keyboardAdapter = {
         registerKeyDown: (cb: () => void) => {
@@ -547,12 +546,12 @@ const Index = defineComponent({
             }));
             optionGroups[0] = { children: options, label: '' };
           } else {
-            const result = getOptionsFromGroup(preChildren.value as any);
+            const result = getOptionsFromGroup(props.children);
             optionGroups = result.optionGroups;
             options = result.options;
           }
           state.optionGroups = optionGroups;
-          return options;
+          return toRaw(options);
         },
         updateOptions: (options: OptionProps[]) => {
           state.options = options;
@@ -574,10 +573,12 @@ const Index = defineComponent({
           state.dropdownMinWidth = width;
         },
         updateSelection: (selections: Map<OptionProps['label'], any>) => {
-          state.selections = selections;
+          setTimeout(()=>{
+            state.selections = selections;
+          })
         },
         // clone Map, important!!!, prevent unexpected modify on state
-        getSelections: () => new Map(state.selections),
+        getSelections: () => new Map(toRaw(state.selections)),
 
         notifyChange: (value: OnChangeValueType | OnChangeValueType[]) => {
           props.onChange(value);
@@ -684,11 +685,11 @@ const Index = defineComponent({
     });
 
     watch(
-      [() => props.value, () => props.optionList, preChildren],
+      [() => props.value, () => props.optionList, ()=>props.children],
       (value, [prevPropsValue, prevPropsOptionList, preChildren_]) => {
         // TODO Children VNode 更新时
         const prevChildrenKeys = preChildren_.map((child: any) => child.key);
-        const nowChildrenKeys = preChildren.value.map((child: any) => child.key);
+        const nowChildrenKeys = props.children.map((child: any) => child.key);
         // const prevChildrenKeys = [];
         // const nowChildrenKeys = [];
 
@@ -1018,7 +1019,7 @@ const Index = defineComponent({
       } = props;
 
       // Do a filter first, instead of directly judging in forEach, so that the focusIndex can correspond to
-      const visibleOptions = options.filter((item) => item._show);
+      const visibleOptions = toRaw(options).filter((item) => item._show);
       let listContent: JSX.Element | JSX.Element[] = renderWithGroup(visibleOptions);
       if (virtualize) {
         listContent = renderVirtualizeList(visibleOptions);
@@ -1034,7 +1035,7 @@ const Index = defineComponent({
         [`${prefixcls}-option-list-chosen`]: selections.size,
       });
 
-      const isEmpty = !options.length || !options.some((item) => item._show);
+      const isEmpty = !options.length || !toRaw(options).some((item) => item._show);
       return (
         <div
           id={`${prefixcls}-${selectOptionListID}`}
@@ -1406,7 +1407,7 @@ const Index = defineComponent({
       }
       if (virtualize) {
         let minItemIndex = -1;
-        selections.forEach((item) => {
+        toRaw(selections).forEach((item) => {
           const itemIndex = get(item, '_scrollIndex');
           /* When the itemIndex is legal */
           if (isNumber(itemIndex) && itemIndex >= 0) {
@@ -1513,7 +1514,7 @@ const Index = defineComponent({
       const clear = clearIcon ? clearIcon : <IconClear />;
       const inner = useCustomTrigger ? (
         <Trigger
-          value={Array.from(selections.values())}
+          value={Array.from(toRaw(selections).values())}
           inputValue={inputValue}
           onChange={handleInputChange}
           onSearch={handleInputChange}
@@ -1531,8 +1532,8 @@ const Index = defineComponent({
           <Fragment key="selection">
             <div class={cls(`${prefixcls}-selection`)}>
               {multiple
-                ? renderMultipleSelection(selections, filterable)
-                : renderSingleSelection(selections, filterable)}
+                ? renderMultipleSelection(toRaw(selections), filterable)
+                : renderSingleSelection(toRaw(selections), filterable)}
             </div>
           </Fragment>,
           <Fragment key="clearicon">
@@ -1592,19 +1593,6 @@ const Index = defineComponent({
     }
 
     return () => {
-      const children_ = getFragmentChildren(slots);
-      if (
-        !props.optionList &&
-        children_ &&
-        (children_?.length !== preChildren.value.length ||
-          !isEqual(
-            children_.map((item) => item.props),
-            preChildren.value.map((item) => item.props)
-          ))
-      ) {
-        preChildren.value = children_ || [];
-      }
-
       const { direction } = context_.value;
       const defaultPosition = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
       const {
@@ -1620,7 +1608,7 @@ const Index = defineComponent({
         dropdownMargin,
       } = props;
       const { isOpen, optionKey } = state;
-      const optionList = renderOptions(slots.default ? slots.default() : null);
+      const optionList = renderOptions(props.children ? props.children : null);
       const selection = renderSelection();
       return (
         <Popover
@@ -1650,6 +1638,17 @@ const Index = defineComponent({
   },
 });
 
-export default Index;
+export default defineComponent({
+  props: { ...vuePropsType },
+  name: 'Select',
+  setup(props, {slots}){
+    const {getProps} = useHasInProps()
+
+    return ()=>{
+      const children = getFragmentChildren(slots);
+      return <Index {...getProps(props)} children={children || []}/>
+    }
+  }
+});
 
 export { Option as SelectOption, OptionGroup as SelectOptionGroup };

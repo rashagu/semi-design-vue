@@ -127,7 +127,7 @@ const SelectDemo = defineComponent((props, { slots }) => {
     optionList2: newOptions2,
   });
 
-  const dd = ref();
+  const dd = ref([]);
   function onChange(v) {
     console.log(v);
     dd.value = v.value;
@@ -141,38 +141,18 @@ const SelectDemo = defineComponent((props, { slots }) => {
     };
     function handleSearch() {}
 
+
     return (
       <div>
-        <Form onValueChange={(v) => onChange(v)}>
-          <FormSelect
-            field={'sssss'}
-            placeholder="onChange"
-            style={{ width: '260px' }}
-            filter
-            optionList={optionListRef.value.map((item) => {
-              return {
-                label: (
-                  <div class={'flex justify-between flex-1'}>
-                    {item.label}
-                  </div>
-                ),
-                CARNUMBER: 'item.carInfo.CARNUMBER',
-                ATTENDANCEUSERNAME: 'item.record?.ATTENDANCEUSERNAME',
-                value: item.value
-              }
-            })}
-            onChangeWithObject={true}
-            onChange={onChange}></FormSelect>
-        </Form>
         <Select
           placeholder="onChange"
           style={{ width: '260px' }}
           filter
           optionList={optionListRef.value}
-          multiple
           onChangeWithObject={true}
           onChange={onChange}
         ></Select>
+        {JSON.stringify(dd.value)}
         <input placeholder={'select_change_demo'} value={dd.value} />
 
         <Select

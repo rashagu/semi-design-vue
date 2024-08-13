@@ -101,7 +101,7 @@ export const useBaseComponent: <U extends BaseProps = {}, S = Record<string, any
       getState: (key) => {
         return toRaw(state[key]);
       }, // eslint-disable-line
-      getStates: () => state as any, // eslint-disable-line
+      getStates: () => toRaw(state) as any, // eslint-disable-line
       setState: (states, cb) => {
         // console.log('setState', states)
         for (let i in states) {
