@@ -82,7 +82,7 @@ function withField<
     ...omit(
       { ...propsFromComponent, ...(vuePropsType || {}) } || {},
       // 'style',
-      'class'
+      'class', 'key'
     ),
     label: [...PropTypes.node, PropTypes.func],
     id: [String],

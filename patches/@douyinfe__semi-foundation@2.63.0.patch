@@ -1,0 +1,164 @@
+diff --git a/.idea/ea06bfe87e6a3ea9d8ef512342401f89.iml b/.idea/ea06bfe87e6a3ea9d8ef512342401f89.iml
+new file mode 100644
+index 0000000000000000000000000000000000000000..0b872d82d9c39f70bff219b3b4b60145430f8984
+--- /dev/null
++++ b/.idea/ea06bfe87e6a3ea9d8ef512342401f89.iml
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="WEB_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$">
++      <excludeFolder url="file://$MODULE_DIR$/.tmp" />
++      <excludeFolder url="file://$MODULE_DIR$/temp" />
++      <excludeFolder url="file://$MODULE_DIR$/tmp" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+diff --git a/.idea/git_toolbox_blame.xml b/.idea/git_toolbox_blame.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..04ede99c250fc313e4e715cdedbe81b684fe8f89
+--- /dev/null
++++ b/.idea/git_toolbox_blame.xml
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="GitToolBoxBlameSettings">
++    <option name="version" value="2" />
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..8f4992477f68e8c8c6cdcc30c7c43bf603e0a5d5
+--- /dev/null
++++ b/.idea/modules.xml
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/ea06bfe87e6a3ea9d8ef512342401f89.iml" filepath="$PROJECT_DIR$/.idea/ea06bfe87e6a3ea9d8ef512342401f89.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/chat/foundation.ts b/chat/foundation.ts
+index a96ef97047d21da92b25f33726fe8b938e989cc8..1078a648260cf5e3acd40484bd42c732df1f03a6 100644
+--- a/chat/foundation.ts
++++ b/chat/foundation.ts
+@@ -5,14 +5,14 @@ import { debounce } from "lodash";
+ import { getUuidv4 } from "../utils/uuid";
+ import { handlePrevent } from "../utils/a11y";
+ 
+-const { PIC_PREFIX, PIC_SUFFIX_ARRAY, ROLE, 
++const { PIC_PREFIX, PIC_SUFFIX_ARRAY, ROLE,
+     SCROLL_ANIMATION_TIME, SHOW_SCROLL_GAP
+ } = strings;
+ 
+ export interface Content {
+     type: 'text' | 'image_url' | 'file_url';
+     text?: string;
+-    image_url?: { 
++    image_url?: {
+         url: string;
+         [x: string]: any
+     };
+@@ -37,7 +37,7 @@ export interface Message {
+ }
+ 
+ export interface ChatAdapter<P = Record<string, any>, S = Record<string, any>> extends DefaultAdapter<P, S> {
+-    getContainerRef: () => React.RefObject<HTMLDivElement>;
++    getContainerRef: () => any;
+     setWheelScroll: (flag: boolean) => void;
+     notifyChatsChange: (chats: Message[]) => void;
+     notifyLikeMessage: (message: Message) => void;
+@@ -84,7 +84,7 @@ export default class ChatFoundation <P = Record<string, any>, S = Record<string,
+         const element = containerRef?.current;
+         if (element) {
+             element.scrollTop = element.scrollHeight;
+-        } 
++        }
+     }
+ 
+     scrollToBottomWithAnimation = () => {
+@@ -106,11 +106,11 @@ export default class ChatFoundation <P = Record<string, any>, S = Record<string,
+                 easing: 'easeInOutCubic'
+             }
+         );
+-    
++
+         this.animation.on('frame', ({ scrollTop }: { scrollTop: number }) => {
+             element.scrollTop = scrollTop;
+         });
+-    
++
+         this.animation.start();
+     }
+ 
+@@ -155,7 +155,7 @@ export default class ChatFoundation <P = Record<string, any>, S = Record<string,
+         const newChats = [...chats, dividerMessage];
+         this._adapter.notifyChatsChange(newChats);
+         this._adapter.notifyClearContext();
+-    } 
++    }
+ 
+     onMessageSend = (input: string, attachment: any[]) => {
+         let content;
+@@ -169,13 +169,13 @@ export default class ChatFoundation <P = Record<string, any>, S = Record<string,
+                 const suffix = name.split('.').pop();
+                 const isImg = fileInstance?.type?.startsWith(PIC_PREFIX) || PIC_SUFFIX_ARRAY.includes(suffix);
+                 if (isImg) {
+-                    content.push({ 
+-                        type: 'image_url', 
+-                        image_url: { url: url } 
++                    content.push({
++                        type: 'image_url',
++                        image_url: { url: url }
+                     });
+                 } else {
+-                    content.push({ 
+-                        type: 'file_url', 
++                    content.push({
++                        type: 'file_url',
+                         file_url: {
+                             url: url,
+                             name: name,
+@@ -238,7 +238,7 @@ export default class ChatFoundation <P = Record<string, any>, S = Record<string,
+         newChats.splice(index, 1, newChat);
+         this._adapter.notifyChatsChange(newChats);
+     }
+-  
++
+     dislikeMessage = (message: Message) => {
+         const { chats } = this.getStates();
+         this._adapter.notifyDislikeMessage(message);
+@@ -252,7 +252,7 @@ export default class ChatFoundation <P = Record<string, any>, S = Record<string,
+         newChats.splice(index, 1, newChat);
+         this._adapter.notifyChatsChange(newChats);
+     }
+-  
++
+     resetMessage = (message: Message) => {
+         const { chats } = this.getStates();
+         const lastMessage = chats[chats.length - 1];
+@@ -284,7 +284,7 @@ export default class ChatFoundation <P = Record<string, any>, S = Record<string,
+         //Disable the default implementation, preventing files from being opened
+         handlePrevent(e);
+     }
+-    
++
+     handleContainerDragLeave = (e: any) => {
+         handlePrevent(e);
+         // 鼠标移动至 container 的子元素，则不做任何操作
+@@ -295,7 +295,7 @@ export default class ChatFoundation <P = Record<string, any>, S = Record<string,
+         }
+         /**
+          * 延迟隐藏 container ，防止父元素的 mouseOver 被触发，导致 container 无法隐藏
+-         * Delay hiding of the container to prevent the parent element's mouseOver from being triggered, 
++         * Delay hiding of the container to prevent the parent element's mouseOver from being triggered,
+          * causing the container to be unable to be hidden.
+         */
+         setTimeout(() => {

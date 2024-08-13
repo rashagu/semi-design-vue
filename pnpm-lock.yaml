@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
+  '@douyinfe/semi-foundation@2.63.0':
+    hash: dq3cfpxqi3rsjtci5ncjivl3ei
+    path: patches/@douyinfe__semi-foundation@2.63.0.patch
   '@vue/repl@4.3.1':
     hash: 3rqzwkhy3g36fybfmy5vlgr3bq
     path: patches/@vue__repl@4.3.1.patch
@@ -15,7 +18,7 @@ importers:
     dependencies:
       '@douyinfe/semi-foundation':
         specifier: 2.63.0
-        version: 2.63.0
+        version: 2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)
       '@douyinfe/semi-theme-default':
         specifier: 2.63.0
         version: 2.63.0
@@ -220,7 +223,7 @@ importers:
         version: 2.63.0
       '@douyinfe/semi-foundation':
         specifier: 2.63.0
-        version: 2.63.0
+        version: 2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)
       '@douyinfe/semi-theme-default':
         specifier: 2.63.0
         version: 2.63.0
@@ -308,7 +311,7 @@ importers:
     dependencies:
       '@douyinfe/semi-foundation':
         specifier: 2.63.0
-        version: 2.63.0
+        version: 2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)
       '@douyinfe/semi-theme-default':
         specifier: 2.63.0
         version: 2.63.0
@@ -393,7 +396,7 @@ importers:
     dependencies:
       '@douyinfe/semi-foundation':
         specifier: 2.63.0
-        version: 2.63.0
+        version: 2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)
       '@douyinfe/semi-theme-default':
         specifier: 2.63.0
         version: 2.63.0
@@ -478,7 +481,7 @@ importers:
     dependencies:
       '@douyinfe/semi-foundation':
         specifier: 2.63.0
-        version: 2.63.0
+        version: 2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)
       '@douyinfe/semi-theme-default':
         specifier: 2.63.0
         version: 2.63.0
@@ -581,7 +584,7 @@ importers:
         version: 2.63.0
       '@douyinfe/semi-foundation':
         specifier: 2.63.0
-        version: 2.63.0
+        version: 2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)
       '@douyinfe/semi-theme-default':
         specifier: 2.63.0
         version: 2.63.0
@@ -10552,7 +10555,7 @@ snapshots:
       memoize-one: 5.2.1
       scroll-into-view-if-needed: 2.2.31
 
-  '@douyinfe/semi-foundation@2.63.0':
+  '@douyinfe/semi-foundation@2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)':
     dependencies:
       '@douyinfe/semi-animation': 2.63.0
       '@mdx-js/mdx': 3.0.1
