@@ -11,6 +11,7 @@ import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import type { BasicOptionProps } from '@douyinfe/semi-foundation/select/optionFoundation';
 import type { CombineProps, RemoveIndexSignature } from '../interface';
 import { OptionGroupProps } from './optionGroup';
+import { useHasInProps } from '../_base/baseComponent';
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>();
 
@@ -98,10 +99,11 @@ const Option = defineComponent({
   props: { ...vuePropsType },
   name: 'isSelectOption',
   setup(props, { slots, attrs }) {
-    function onClick({ value, label, children, optionRest, ...rest }: Partial<OptionProps>, event: MouseEvent) {
+    const {getProps} = useHasInProps()
+    function onClick({ value, label, children, ...rest }: Partial<OptionProps>, event: MouseEvent) {
       const isDisabled = props.disabled;
       if (!isDisabled) {
-        props.onSelect({ ...(props.optionRest), ...rest, value, label: toRaw(label || children) }, event);
+        props.onSelect({ ...rest, value, label: toRaw(label || children) }, event);
       }
     }
 
@@ -134,7 +136,7 @@ const Option = defineComponent({
         semiOptionId,
         optionRest,
         ...rest_
-      } = props;
+      } = getProps(props);
       const rest = {...props.optionRest, ...rest_}
       const optionClassName = classNames(prefixCls, {
         [`${prefixCls}-disabled`]: disabled,

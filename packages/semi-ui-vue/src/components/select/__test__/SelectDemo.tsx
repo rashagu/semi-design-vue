@@ -1,53 +1,57 @@
-import {defineComponent, ref, h, Fragment, reactive, onMounted, createVNode, VNode} from 'vue'
-import Select, {optionRenderProps} from '../index'
-import Option from '../option'
-import OptGroup from '../optionGroup'
-import classNames from "classnames";
-import {IconGift, IconVigoLogo} from "@kousum/semi-icons-vue";
-import {Form, FormSelect} from "../../form";
+import { defineComponent, ref, h, Fragment, reactive, onMounted, createVNode, VNode } from 'vue';
+import Select, { optionRenderProps } from '../index';
+import Option from '../option';
+import OptGroup from '../optionGroup';
+import classNames from 'classnames';
+import { IconGift, IconVigoLogo } from '@kousum/semi-icons-vue';
+import { Form, FormSelect } from '../../form';
 
 interface ExampleProps {
-  name?: string
+  name?: string;
 }
 
 export const vuePropsType = {
-  name: String
-}
-const SelectDemo = defineComponent((props, {slots}) => {
-
+  name: String,
+};
+const SelectDemo = defineComponent((props, { slots }) => {
   let optionList = [
     { value: 'tony', label: 'Ironman' },
     { value: 'Thor', label: 'Thor' },
     { value: 'steve', label: 'Caption' },
     { value: 'peter', label: 'SpiderBoy' },
   ];
-  const  optionListRef = ref<{value: string, label: VNode | string}[]>([
+  const optionListRef = ref<{ value: string; label: VNode | string }[]>([
     { value: 'tony', label: 'Ironman' },
     { value: 'Thor', label: 'Thor' },
     { value: 'steve', label: 'Caption' },
     { value: 'peter', label: 'SpiderBoy' },
   ]);
-  onMounted(()=>{
-    setTimeout(()=>{
+  onMounted(() => {
+    setTimeout(() => {
       optionListRef.value = [
-        {value: 'tony', label: <span style={{color:'red'}}><span>tony</span></span>},
-        {value: 'Thor', label: <span style={{color:'#c300ff'}}><span>Thor</span></span>},
-      ]
-    }, 0)
-  })
+        {
+          value: 'tony',
+          label: (
+            <span style={{ color: 'red' }}>
+              <span>tony</span>
+            </span>
+          ),
+          a: 'ssss',
+        },
+        {
+          value: 'Thor',
+          label: (
+            <span style={{ color: '#c300ff' }}>
+              <span>Thor</span>
+            </span>
+          ),
+          a: 'ssss',
+        },
+      ];
+    }, 0);
+  });
   const renderOptionItem = (renderProps: optionRenderProps) => {
-    const {
-      disabled,
-      selected,
-      label,
-      value,
-      focused,
-      className,
-      style,
-      onMouseEnter,
-      onClick,
-      ...rest
-    } = renderProps;
+    const { disabled, selected, label, value, focused, className, style, onMouseEnter, onClick, ...rest } = renderProps;
 
     const optionCls = classNames({
       ['custom-option-render']: true,
@@ -61,7 +65,7 @@ const SelectDemo = defineComponent((props, {slots}) => {
     // 3.onMouseEnter需在wrapper dom上绑定，否则上下键盘操作时显示会有问题
 
     return (
-      <div style={style} class={optionCls} onClick={(e) => onClick(e)} onMouseenter={e => onMouseEnter(e)}>
+      <div style={style} class={optionCls} onClick={(e) => onClick(e)} onMouseenter={(e) => onMouseEnter(e)}>
         <div class="option-right">{label}</div>
       </div>
     );
@@ -73,23 +77,20 @@ const SelectDemo = defineComponent((props, {slots}) => {
       children: [
         { value: 'a-1', label: 'China' },
         { value: 'a-2', label: 'Koera' },
-      ]
+      ],
     },
     {
       label: 'Europe',
       children: [
         { value: 'b-1', label: 'Germany' },
         { value: 'b-2', label: 'France' },
-      ]
+      ],
     },
     {
       label: 'South America',
-      children: [
-        { value: 'c-1', label: 'Peru' },
-      ]
-    }
+      children: [{ value: 'c-1', label: 'Peru' }],
+    },
   ];
-
 
   let innerSlotStyle = {
     backgroundColor: 'var(--color-white)',
@@ -102,9 +103,7 @@ const SelectDemo = defineComponent((props, {slots}) => {
     borderRadius: '0 0 6px 6px',
     color: 'var(--semi-color-link)',
   };
-  let innerSlotNode = (<div style={innerSlotStyle}>
-    点击加载更多
-  </div>);
+  let innerSlotNode = <div style={innerSlotStyle}>点击加载更多</div>;
   let outSlotStyle = {
     backgroundColor: 'var(--semi-color-fill-0)',
     height: '36px',
@@ -116,9 +115,11 @@ const SelectDemo = defineComponent((props, {slots}) => {
     borderTop: '1px solid var(--semi-color-border)',
     borderRadius: '0 0 6px 6px',
   };
-  let outSlotNode = (<div style={outSlotStyle}>
-    <span style={{color: 'var(--semi-color-link)'}}>未找到应用?</span>
-  </div>);
+  let outSlotNode = (
+    <div style={outSlotStyle}>
+      <span style={{ color: 'var(--semi-color-link)' }}>未找到应用?</span>
+    </div>
+  );
   let newOptions = Array.from({ length: 3000 }, (v, i) => ({ label: `option-${i}`, value: i }));
   let newOptions2 = Array.from({ length: 30 }, (v, i) => ({ label: `option-${i}`, value: i }));
   const state = reactive({
@@ -126,10 +127,10 @@ const SelectDemo = defineComponent((props, {slots}) => {
     optionList2: newOptions2,
   });
 
-  const dd = ref()
+  const dd = ref();
   function onChange(v) {
-    console.log(v)
-    dd.value = v.value
+    console.log(v);
+    dd.value = v.value;
   }
   return () => {
     let { optionList, optionList2 } = state;
@@ -138,23 +139,41 @@ const SelectDemo = defineComponent((props, {slots}) => {
       width: '100%',
       itemSize: 36, // px
     };
-    function handleSearch() {
-    }
-
-
-
+    function handleSearch() {}
 
     return (
-      <div><Select
-        placeholder="onChange"
-        style={{ width: '260px' }}
-        filter
-        optionList={optionListRef.value}
-        multiple
-        onChangeWithObject={true}
-        onChange={onChange}
-      ></Select>
-        <input placeholder={'select_change_demo'} value={dd.value}/>
+      <div>
+        <Form onValueChange={(v) => onChange(v)}>
+          <FormSelect
+            field={'sssss'}
+            placeholder="onChange"
+            style={{ width: '260px' }}
+            filter
+            optionList={optionListRef.value.map((item) => {
+              return {
+                label: (
+                  <div class={'flex justify-between flex-1'}>
+                    {item.label}
+                  </div>
+                ),
+                CARNUMBER: 'item.carInfo.CARNUMBER',
+                ATTENDANCEUSERNAME: 'item.record?.ATTENDANCEUSERNAME',
+                value: item.value
+              }
+            })}
+            onChangeWithObject={true}
+            onChange={onChange}></FormSelect>
+        </Form>
+        <Select
+          placeholder="onChange"
+          style={{ width: '260px' }}
+          filter
+          optionList={optionListRef.value}
+          multiple
+          onChangeWithObject={true}
+          onChange={onChange}
+        ></Select>
+        <input placeholder={'select_change_demo'} value={dd.value} />
 
         <Select
           placeholder="拥有3k个Option的Select 虚拟滚动"
@@ -181,51 +200,58 @@ const SelectDemo = defineComponent((props, {slots}) => {
           filter
           dropdownClassName="components-select-demo-renderOptionItem"
           optionList={optionList2}
-          onChange={(v)=>console.log(v)}
+          onChange={(v) => console.log(v)}
           style={{ width: '300px' }}
           renderOptionItem={renderOptionItem}
         />
 
-        <Select defaultValue='abc' style={{ width: 120 }}>
-          <Option value='abc'>抖音</Option>
-          <Option value='hotsoon'>火山</Option>
-          <Option value='jianying' disabled>剪映</Option>
-          <Option value='xigua'>西瓜视频</Option>
+        <Select defaultValue="abc" style={{ width: 120 }}>
+          <Option value="abc">抖音</Option>
+          <Option value="hotsoon">火山</Option>
+          <Option value="jianying" disabled>
+            剪映
+          </Option>
+          <Option value="xigua">西瓜视频</Option>
         </Select>
-        <br/><br/>
-        <Select defaultValue='abc' disabled style={{ width: 120 }}>
-          <Option value='abc'>抖音</Option>
-          <Option value='hotsoon'>火山</Option>
+        <br />
+        <br />
+        <Select defaultValue="abc" disabled style={{ width: 120 }}>
+          <Option value="abc">抖音</Option>
+          <Option value="hotsoon">火山</Option>
         </Select>
-        <br/><br/>
-        <Select placeholder='请选择业务线1' style={{ width: 120 }}>
-          <Option value='abc'>抖音</Option>
-          <Option value='hotsoon'>火山</Option>
-          <Option value='jianying' disabled>剪映</Option>
-          <Option value='xigua'>西瓜视频</Option>
+        <br />
+        <br />
+        <Select placeholder="请选择业务线1" style={{ width: 120 }}>
+          <Option value="abc">抖音</Option>
+          <Option value="hotsoon">火山</Option>
+          <Option value="jianying" disabled>
+            剪映
+          </Option>
+          <Option value="xigua">西瓜视频</Option>
         </Select>
-        <Select placeholder='请选择业务线' style={{ width: 180 }} optionList={list}>
+        <Select placeholder="请选择业务线" style={{ width: 180 }} optionList={list}></Select>
+        <Select multiple style={{ width: '320px' }} defaultValue={['abc', 'hotsoon']}>
+          <Option value="abc">抖音</Option>
+          <Option value="hotsoon">火山</Option>
+          <Option value="jianying">剪映</Option>
+          <Option value="xigua">西瓜视频</Option>
         </Select>
-        <Select multiple style={{ width: '320px' }} defaultValue={['abc','hotsoon']}>
-          <Option value='abc'>抖音</Option>
-          <Option value='hotsoon'>火山</Option>
-          <Option value='jianying'>剪映</Option>
-          <Option value='xigua'>西瓜视频</Option>
-        </Select>
-        <br/><br/>
-        <Select multiple style={{ width: '320px' }} defaultValue={['abc','hotsoon', 'jianying']} maxTagCount={2}>
-          <Option value='abc'>抖音</Option>
-          <Option value='hotsoon'>火山</Option>
-          <Option value='jianying'>剪映</Option>
-          <Option value='xigua'>西瓜视频</Option>
+        <br />
+        <br />
+        <Select multiple style={{ width: '320px' }} defaultValue={['abc', 'hotsoon', 'jianying']} maxTagCount={2}>
+          <Option value="abc">抖音</Option>
+          <Option value="hotsoon">火山</Option>
+          <Option value="jianying">剪映</Option>
+          <Option value="xigua">西瓜视频</Option>
         </Select>
 
-        <br/><br/>
+        <br />
+        <br />
         <Select multiple style={{ width: '320px' }} defaultValue={['abc']} max={2}>
-          <Option value='abc'>抖音</Option>
-          <Option value='hotsoon'>火山</Option>
-          <Option value='jianying'>剪映</Option>
-          <Option value='xigua'>西瓜视频</Option>
+          <Option value="abc">抖音</Option>
+          <Option value="hotsoon">火山</Option>
+          <Option value="jianying">剪映</Option>
+          <Option value="xigua">西瓜视频</Option>
         </Select>
 
         <div>
@@ -245,63 +271,59 @@ const SelectDemo = defineComponent((props, {slots}) => {
         </div>
         <div>
           <Select placeholder="" style={{ width: '180px' }} filter>
-            {
-              data.map((group, index) => (
-                <OptGroup label={group.label} key={`${index}-${group.label}`}>
-                  {
-                    group.children.map((option, index2) => (
-                      <Option value={option.value} key={`${index2}-${group.label}`}>
-                        {option.label}
-                      </Option>
-                    ))
-                  }
-                </OptGroup>
-              ))
-            }
+            {data.map((group, index) => (
+              <OptGroup label={group.label} key={`${index}-${group.label}`}>
+                {group.children.map((option, index2) => (
+                  <Option value={option.value} key={`${index2}-${group.label}`}>
+                    {option.label}
+                  </Option>
+                ))}
+              </OptGroup>
+            ))}
           </Select>
         </div>
         <div>
           <div>不同尺寸</div>
-          <Select placeholder='请选择业务线' style={{ width: '180px' }} size='small'>
-            <Option value='hotsoon'>火山</Option>
+          <Select placeholder="请选择业务线" style={{ width: '180px' }} size="small">
+            <Option value="hotsoon">火山</Option>
           </Select>
-          <br/><br/>
-          <Select placeholder='请选择业务线' style={{ width: '180px' }}>
-            <Option value='hotsoon'>火山</Option>
+          <br />
+          <br />
+          <Select placeholder="请选择业务线" style={{ width: '180px' }}>
+            <Option value="hotsoon">火山</Option>
           </Select>
-          <br/><br/>
-          <Select placeholder='请选择业务线' style={{ width: '180px' }} size='large'>
-            <Option value='hotsoon'>火山</Option>
+          <br />
+          <br />
+          <Select placeholder="请选择业务线" style={{ width: '180px' }} size="large">
+            <Option value="hotsoon">火山</Option>
           </Select>
         </div>
 
         <div>
           <Select style={{ width: '180px' }}>
-            <Option value='hotsoon'>火山</Option>
+            <Option value="hotsoon">火山</Option>
           </Select>
-          <br/><br/>
-          <Select style={{ width: '180px' }} validateStatus='warning'>
-            <Option value='hotsoon'>火山</Option>
+          <br />
+          <br />
+          <Select style={{ width: '180px' }} validateStatus="warning">
+            <Option value="hotsoon">火山</Option>
           </Select>
-          <br/><br/>
-          <Select style={{ width: '180px' }} validateStatus='error'>
-            <Option value='hotsoon'>火山</Option>
+          <br />
+          <br />
+          <Select style={{ width: '180px' }} validateStatus="error">
+            <Option value="hotsoon">火山</Option>
           </Select>
         </div>
 
         <div>
-          <Select
-            style={{ width: '320px' }}
-            defaultValue={'hotsoon'}
-            prefix={<IconVigoLogo />}
-            showClear={true}
-          >
-            <Option value='abc'>抖音</Option>
-            <Option value='hotsoon'>火山</Option>
-            <Option value='jianying'>剪映</Option>
-            <Option value='xigua'>西瓜视频</Option>
+          <Select style={{ width: '320px' }} defaultValue={'hotsoon'} prefix={<IconVigoLogo />} showClear={true}>
+            <Option value="abc">抖音</Option>
+            <Option value="hotsoon">火山</Option>
+            <Option value="jianying">剪映</Option>
+            <Option value="xigua">西瓜视频</Option>
           </Select>
-          <br/><br/>
+          <br />
+          <br />
           <Select
             style={{ width: '320px' }}
             defaultValue={'hotsoon'}
@@ -309,27 +331,29 @@ const SelectDemo = defineComponent((props, {slots}) => {
             suffix={<IconGift />}
             showArrow={false}
           >
-            <Option value='abc'>抖音</Option>
-            <Option value='hotsoon'>火山</Option>
-            <Option value='jianying'>剪映</Option>
-            <Option value='xigua'>西瓜视频</Option>
+            <Option value="abc">抖音</Option>
+            <Option value="hotsoon">火山</Option>
+            <Option value="jianying">剪映</Option>
+            <Option value="xigua">西瓜视频</Option>
           </Select>
         </div>
 
         <div>
           {/*<Select style={{ width: '800px' }} optionList={list} insetLabel='业务线' defaultValue='abc' />*/}
           <Form>
-            <FormSelect field={''} style={{  }} optionList={list} placeholder={'placeholder'}></FormSelect>
+            <FormSelect field={''} style={{}} optionList={list} placeholder={'placeholder'}></FormSelect>
           </Form>
-          <br/><br/>
+          <br />
+          <br />
           <Select
             style={{ width: '300px' }}
-            optionList={list} placeholder='请选择业务线'
-            insetLabel={<span style={{marginRight: 0, marginLeft: '10px', color: "var(--semi-color-text-2)"}}>业务线</span>}>
-          </Select>
+            optionList={list}
+            placeholder="请选择业务线"
+            insetLabel={
+              <span style={{ marginRight: 0, marginLeft: '10px', color: 'var(--semi-color-text-2)' }}>业务线</span>
+            }
+          ></Select>
         </div>
-
-
 
         <div>
           <p>outerBottomSlot:</p>
@@ -338,16 +362,16 @@ const SelectDemo = defineComponent((props, {slots}) => {
             dropdownStyle={{ width: '180px' }}
             maxHeight={150}
             outerBottomSlot={outSlotNode}
-            placeholder='自定义外侧底部slot，始终显示'
+            placeholder="自定义外侧底部slot，始终显示"
             defaultOpen
             autoAdjustOverflow={false}
-            position='bottom'
+            position="bottom"
           >
-            <Option value='abc'>抖音</Option>
-            <Option value='hotsoon'>火山</Option>
-            <Option value='jianying'>剪映</Option>
-            <Option value='duoshan'>多闪</Option>
-            <Option value='xigua'>西瓜视频</Option>
+            <Option value="abc">抖音</Option>
+            <Option value="hotsoon">火山</Option>
+            <Option value="jianying">剪映</Option>
+            <Option value="duoshan">多闪</Option>
+            <Option value="xigua">西瓜视频</Option>
           </Select>
           <p style={{ marginTop: '200px' }}>innerBottomSlot:</p>
           <Select
@@ -355,39 +379,43 @@ const SelectDemo = defineComponent((props, {slots}) => {
             dropdownStyle={{ width: '180px' }}
             maxHeight={150}
             innerBottomSlot={innerSlotNode}
-            placeholder='自定义内侧底部slot，滚动至底部显示'
+            placeholder="自定义内侧底部slot，滚动至底部显示"
           >
-            <Option value='abc'>抖音</Option>
-            <Option value='hotsoon'>火山</Option>
-            <Option value='jianying'>剪映</Option>
-            <Option value='duoshan'>多闪</Option>
-            <Option value='xigua'>西瓜视频</Option>
+            <Option value="abc">抖音</Option>
+            <Option value="hotsoon">火山</Option>
+            <Option value="jianying">剪映</Option>
+            <Option value="duoshan">多闪</Option>
+            <Option value="xigua">西瓜视频</Option>
           </Select>
         </div>
-
 
         <div>
           <p>搜索</p>
-          <Select filter style={{ width: '180px' }} placeholder='带搜索功能的单选'>
-            <Option value='abc'>抖音</Option>
-            <Option value='hotsoon'>火山</Option>
-            <Option value='jianying'>剪映</Option>
-            <Option value='xigua'>西瓜视频</Option>
+          <Select filter style={{ width: '180px' }} placeholder="带搜索功能的单选">
+            <Option value="abc">抖音</Option>
+            <Option value="hotsoon">火山</Option>
+            <Option value="jianying">剪映</Option>
+            <Option value="xigua">西瓜视频</Option>
           </Select>
-          <br/><br/>
-          <Select filter multiple style={{ width: '300px' }} placeholder='带搜索功能的多选' autoClearSearchValue={false}>
-            <Option value='semi-0'>Semi-0</Option>
-            <Option value='semi-1'>Semi-1</Option>
-            <Option value='semi-2'>Semi-2</Option>
-            <Option value='semi-3'>Semi-3</Option>
-            <Option value='semi-4'>Semi-4</Option>
+          <br />
+          <br />
+          <Select
+            filter
+            multiple
+            style={{ width: '300px' }}
+            placeholder="带搜索功能的多选"
+            autoClearSearchValue={false}
+          >
+            <Option value="semi-0">Semi-0</Option>
+            <Option value="semi-1">Semi-1</Option>
+            <Option value="semi-2">Semi-2</Option>
+            <Option value="semi-3">Semi-3</Option>
+            <Option value="semi-4">Semi-4</Option>
           </Select>
         </div>
       </div>
-    )
-  }
-})
+    );
+  };
+});
 
-
-export default SelectDemo
-
+export default SelectDemo;

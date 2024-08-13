@@ -924,6 +924,7 @@ const Index = defineComponent({
             onMouseEnter={() => onOptionHover(optionIndex)}
             showTick
             {...option}
+            optionRest={option}
             focused={isFocused}
             style={style}
           >

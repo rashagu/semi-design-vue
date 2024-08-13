@@ -522,12 +522,6 @@ const TreeSelect = defineComponent({
         updateIsFocus: (bool) => {
           state.isFocus = bool;
         },
-        setClearInputFlag: (flag: boolean) => {
-          clearInputFlag = flag;
-        },
-        getClearInputFlag: () => {
-          return clearInputFlag;
-        }
       };
     }
     const adapter = adapter_();
