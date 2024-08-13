@@ -8,6 +8,7 @@ import { cloneDeep, isSemiIcon } from '../_utils';
 import ItemFoundation, {
   ItemAdapter,
   ItemProps,
+  ItemKey,
   SelectedItemProps,
 } from '@douyinfe/semi-foundation/navigation/itemFoundation';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/navigation/constants';
@@ -32,11 +33,11 @@ import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 
 const clsPrefix = `${cssClasses.PREFIX}-item`;
 
-export interface NavItemProps extends Omit<ItemProps, 'children'>, BaseProps {
+interface NavItemProps extends Omit<ItemProps, 'children'>, BaseProps {
   disabled?: boolean;
   forwardRef?: (ele: HTMLLIElement) => void;
   icon?: VNode;
-  itemKey?: string | number;
+  itemKey?: ItemKey;
   level?: number;
   link?: string;
   linkOptions?: AnchorHTMLAttributes;
@@ -52,14 +53,15 @@ export interface NavItemProps extends Omit<ItemProps, 'children'>, BaseProps {
   maxHeight?: number;
 }
 
-export interface SelectedData extends SelectedItemProps<NavItemProps> {
+interface SelectedData extends SelectedItemProps<NavItemProps> {
   text?: VNode;
 }
 
-export interface NavItemState {
+interface NavItemState {
   tooltipShow: boolean;
 }
 
+export type { NavItemProps, ItemKey, NavItemState, SelectedData };
 export const vuePropsType: CombineProps<NavItemProps> = {
   text: PropTypes.node,
   itemKey: [PropTypes.string, PropTypes.number],

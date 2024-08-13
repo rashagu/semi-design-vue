@@ -381,7 +381,7 @@ const ModalContent = defineComponent({
       const { maskClosable, className, getPopupContainer, maskFixed, getContainerContext, ...rest } = props;
       const { direction } = context.value;
       const classList = cls(className, {
-        [`${cssClasses.DIALOG}-popup`]: getPopupContainer && getPopupContainer() !== document.body && !maskFixed,
+        [`${cssClasses.DIALOG}-popup`]: getPopupContainer && getPopupContainer() !== globalThis?.document?.body && !maskFixed,
         [`${cssClasses.DIALOG}-fixed`]: maskFixed,
         [`${cssClasses.DIALOG}-rtl`]: direction === 'rtl',
       });

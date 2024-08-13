@@ -486,7 +486,7 @@ const Tooltip = defineComponent({
         },
         setInitialFocus: () => {
           const { preventScroll } = props;
-          const focusRefNode = initialFocusRef.value;
+          const focusRefNode = initialFocusRef.value as HTMLElement;
           if (focusRefNode && 'focus' in focusRefNode) {
             focusRefNode.focus({ preventScroll });
           }

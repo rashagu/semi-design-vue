@@ -329,7 +329,7 @@ const DatePicker = defineComponent({
           }
           switch (rangeInputFocus) {
             case 'rangeStart':
-              const inputStartNode = rangeInputStartRef.value;
+              const inputStartNode = rangeInputStartRef.value as HTMLInputElement;
               inputStartNode && inputStartNode.focus({ preventScroll });
               /**
                * 解决选择完startDate，切换到endDate后panel被立马关闭的问题。
@@ -350,7 +350,7 @@ const DatePicker = defineComponent({
               break;
             case 'rangeEnd':
               // console.log(rangeInputEndRef.value)
-              const inputEndNode = rangeInputEndRef.value;
+              const inputEndNode = rangeInputEndRef.value as HTMLInputElement;
               inputEndNode && inputEndNode.focus({ preventScroll });
               /**
                * 解决选择完startDate，切换到endDate后panel被立马关闭的问题。
@@ -381,14 +381,14 @@ const DatePicker = defineComponent({
           switch (rangeInputFocus) {
             case 'rangeEnd':
               if (document.activeElement !== rangeInputEndRef.value) {
-                const inputEndNode = rangeInputEndRef.value;
+                const inputEndNode = rangeInputEndRef.value as HTMLInputElement;
                 inputEndNode && inputEndNode.focus({ preventScroll });
               }
               break;
             case 'rangeStart':
             default:
               if (document.activeElement !== rangeInputEndRef.value) {
-                const inputStartNode = rangeInputStartRef.value;
+                const inputStartNode = rangeInputStartRef.value as HTMLInputElement;
                 inputStartNode && inputStartNode.focus({ preventScroll });
               }
               break;
@@ -397,20 +397,20 @@ const DatePicker = defineComponent({
 
         setInputFocus: () => {
           const { preventScroll } = props;
-          const inputNode = inputRef.value;
+          const inputNode = inputRef.value as HTMLInputElement;
           inputNode && inputNode.focus({ preventScroll });
         },
         setInputBlur: () => {
-          const inputNode = inputRef.value;
+          const inputNode = inputRef.value as HTMLInputElement;
           inputNode && inputNode.blur();
         },
         setRangeInputBlur: () => {
           const { rangeInputFocus } = state;
           if (rangeInputFocus === 'rangeStart') {
-            const inputStartNode = rangeInputStartRef.value;
+            const inputStartNode = rangeInputStartRef.value as HTMLInputElement;
             inputStartNode && inputStartNode.blur();
           } else if (rangeInputFocus === 'rangeEnd') {
-            const inputEndNode = rangeInputEndRef.value;
+            const inputEndNode = rangeInputEndRef.value as HTMLInputElement;
             inputEndNode && inputEndNode.blur();
           }
           adapter.setRangeInputFocus(false);

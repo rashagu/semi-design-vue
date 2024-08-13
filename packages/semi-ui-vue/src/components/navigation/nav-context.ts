@@ -1,4 +1,4 @@
-import { NavProps } from './index';
+import { NavProps, ItemKey } from './index';
 import { Locale } from '../locale/interface';
 
 import type { DropdownProps } from '../dropdown';
@@ -10,10 +10,10 @@ import Provider from "./nav-context/Provider";
 export interface NavContextType {
     isCollapsed?: boolean;
     mode?: NavProps['mode'];
-    openKeys?: string[];
+    openKeys?: ItemKey[];
     onCollapseChange?: NavProps['onCollapseChange'];
     prefixCls?: string;
-    selectedKeys?: string[];
+    selectedKeys?: ItemKey[];
     toggleIconPosition?: string;
     selectedKeysIsControlled?: boolean;
     openKeysIsControlled?: boolean;

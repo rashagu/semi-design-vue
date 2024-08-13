@@ -100,12 +100,13 @@ const DayCol = defineComponent({
     const renderEvents = () => {
       const { events, scrollHeight, minEventHeight } = props;
       const list = events.map((event, ind) => {
-        const { startPos, endPos, children, key } = event;
+        const { startPos, endPos, children, key, left = 0 } = event;
         const top = startPos * scrollHeight;
         const height = (endPos - startPos) * scrollHeight;
         const style = {
           top: `${top}px`,
           height: `${Math.max(minEventHeight, height)}px`,
+          left: left
         };
         return (
           <li

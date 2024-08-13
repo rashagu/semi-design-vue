@@ -574,6 +574,9 @@ const Tree = defineComponent({
 
     function renderInput() {
       const { searchClassName, searchStyle, searchRender, searchPlaceholder, showClear } = props;
+      if (searchRender === false) {
+        return null;
+      }
       const inputcls = cls(`${prefixcls}-input`);
       const { inputValue } = state;
       const inputProps = {
@@ -592,9 +595,6 @@ const Tree = defineComponent({
               inputProps.placeholder = searchPlaceholder || get(locale, 'searchPlaceholder');
               if (isFunction(searchRender)) {
                 return searchRender({ ...inputProps });
-              }
-              if (searchRender === false) {
-                return null;
               }
               return <Input aria-label="Filter Tree" ref={inputRef as any} {...inputProps} />;
             }}

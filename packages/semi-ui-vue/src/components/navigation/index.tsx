@@ -23,7 +23,7 @@ import { cssClasses, numbers, strings } from '@douyinfe/semi-foundation/navigati
 
 import type { SubNavProps, ToggleIcon } from './SubNav';
 import SubNav from './SubNav';
-import type { NavItemProps } from './Item';
+import type { NavItemProps, ItemKey } from './Item';
 import Item from './Item';
 import type { NavFooterProps } from './Footer';
 import Footer from './Footer';
@@ -37,9 +37,9 @@ import { CombineProps, VueJsxNode } from '../interface';
 import { NavFooter, NavHeader, NavItem } from '../index';
 
 export type Mode = 'vertical' | 'horizontal';
-export { NavFooterProps, NavHeaderProps, ToggleIcon, SubNavProps, NavItemProps };
+export { NavFooterProps, NavHeaderProps, ToggleIcon, ItemKey, SubNavProps, NavItemProps };
 export interface OnSelectedData {
-  itemKey: string | number;
+  itemKey: ItemKey;
   selectedKeys: (string | number)[];
   selectedItems: (NavItemProps | SubNavProps)[];
   domEvent: MouseEvent;
@@ -80,12 +80,12 @@ export interface NavProps extends BaseProps {
   tooltipHideDelay?: number;
   tooltipShowDelay?: number;
   getPopupContainer?: () => HTMLElement;
-  onClick?: (data: { itemKey: string; domEvent: MouseEvent; isOpen: boolean }) => void;
+  onClick?: (data: { itemKey: ItemKey; domEvent: MouseEvent; isOpen: boolean }) => void;
   onCollapseChange?: (isCollapse: boolean) => void;
   onDeselect?: (data?: any) => void;
   onOpenChange?: (data: {
-    itemKey: string | number;
-    openKeys: (string | number)[];
+    itemKey: ItemKey;
+    openKeys: ItemKey[];
     domEvent: MouseEvent;
     isOpen: boolean;
   }) => void;
@@ -106,10 +106,10 @@ export interface NavProps extends BaseProps {
 export interface NavState {
   isCollapsed: boolean;
   // calc state
-  openKeys: (string | number)[];
+  openKeys: ItemKey[];
   items: any[];
-  itemKeysMap: { [itemKey: string]: (string | number)[] };
-  selectedKeys: (string | number)[];
+  itemKeysMap: { [itemKey: string]: ItemKey[] };
+  selectedKeys: ItemKey[];
 }
 
 const { hasOwnProperty } = Object.prototype;

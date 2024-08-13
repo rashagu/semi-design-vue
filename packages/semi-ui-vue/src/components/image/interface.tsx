@@ -187,7 +187,7 @@ export interface PreviewImageProps {
     onError?: (src: string) => void;
 }
 
-export interface ImageOffset {
+export interface ImageTranslate {
     x: number;
     y: number;
 }
@@ -196,10 +196,8 @@ export interface PreviewImageStates {
     loading: boolean;
     width: number;
     height: number;
-    offset: ImageOffset;
+    translate: ImageTranslate;
     currZoom: number;
-    top: number;
-    left: number;
 }
 
 export interface DragDirection {

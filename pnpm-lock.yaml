@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  '@douyinfe/semi-foundation@2.63.0':
-    hash: dq3cfpxqi3rsjtci5ncjivl3ei
-    path: patches/@douyinfe__semi-foundation@2.63.0.patch
   '@vue/repl@4.3.1':
     hash: 3rqzwkhy3g36fybfmy5vlgr3bq
     path: patches/@vue__repl@4.3.1.patch
@@ -17,11 +14,11 @@ importers:
   .:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.63.0
-        version: 2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)
+        specifier: 2.64.0
+        version: 2.64.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.63.0
-        version: 2.63.0
+        specifier: 2.64.0
+        version: 2.64.0
       '@vue/repl':
         specifier: 4.3.1
         version: 4.3.1(patch_hash=3rqzwkhy3g36fybfmy5vlgr3bq)
@@ -216,17 +213,17 @@ importers:
   packages/semi-animation-vue:
     dependencies:
       '@douyinfe/semi-animation':
-        specifier: 2.63.0
-        version: 2.63.0
+        specifier: 2.64.0
+        version: 2.64.0
       '@douyinfe/semi-animation-styled':
-        specifier: 2.63.0
-        version: 2.63.0
+        specifier: 2.64.0
+        version: 2.64.0
       '@douyinfe/semi-foundation':
-        specifier: 2.63.0
-        version: 2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)
+        specifier: 2.64.0
+        version: 2.64.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.63.0
-        version: 2.63.0
+        specifier: 2.64.0
+        version: 2.64.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -310,11 +307,11 @@ importers:
   packages/semi-icons-lab-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.63.0
-        version: 2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)
+        specifier: 2.64.0
+        version: 2.64.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.63.0
-        version: 2.63.0
+        specifier: 2.64.0
+        version: 2.64.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -395,11 +392,11 @@ importers:
   packages/semi-icons-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.63.0
-        version: 2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)
+        specifier: 2.64.0
+        version: 2.64.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.63.0
-        version: 2.63.0
+        specifier: 2.64.0
+        version: 2.64.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -480,11 +477,11 @@ importers:
   packages/semi-illustrations-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.63.0
-        version: 2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)
+        specifier: 2.64.0
+        version: 2.64.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.63.0
-        version: 2.63.0
+        specifier: 2.64.0
+        version: 2.64.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -580,22 +577,22 @@ importers:
         specifier: 0.1.2
         version: 0.1.2(lodash@4.17.21)(vue@3.4.31(typescript@5.5.2))
       '@douyinfe/semi-animation':
-        specifier: 2.63.0
-        version: 2.63.0
+        specifier: 2.64.0
+        version: 2.64.0
       '@douyinfe/semi-foundation':
-        specifier: 2.63.0
-        version: 2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)
+        specifier: 2.64.0
+        version: 2.64.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.63.0
-        version: 2.63.0
+        specifier: 2.64.0
+        version: 2.64.0
       '@kousum/semi-animation-vue':
-        specifier: latest
+        specifier: '*'
         version: 0.15.1(vue@3.4.31(typescript@5.5.2))
       '@kousum/semi-icons-vue':
-        specifier: latest
+        specifier: '*'
         version: 0.15.1(vue@3.4.31(typescript@5.5.2))
       '@kousum/semi-illustrations-vue':
-        specifier: latest
+        specifier: '*'
         version: 0.15.1(vue@3.4.31(typescript@5.5.2))
       '@kousum/vue-draggable':
         specifier: 1.0.2
@@ -1775,26 +1772,26 @@ packages:
   '@douyinfe/semi-animation-styled@2.61.0':
     resolution: {integrity: sha512-kzI6uFphJFd+4FhRLJc6b3LNR1wzf5dby0CPnI9E7phmqxpv5/I/AVpJ/h/7JKW7tdsy8EqsvuCYvyHSAtPU4A==}
 
-  '@douyinfe/semi-animation-styled@2.63.0':
-    resolution: {integrity: sha512-6u7w7r/wH2R2mqBKblIjcvugsr2c0g37pupLFej+NSMkxpYUkqwXhj5Nm5HmKH7u0fPAaHC3jk+Nbjx4YvK7UQ==}
+  '@douyinfe/semi-animation-styled@2.64.0':
+    resolution: {integrity: sha512-K7c9IkmJCkLeu9EcCOzOMYbVBLM4uoSANgoIkNm2fQcfqX42gRUOLdlxkK5aKFVTsJO9fTaTeZeVSWyTRni+MQ==}
 
   '@douyinfe/semi-animation@2.61.0':
     resolution: {integrity: sha512-Yr8IAtn1NZXbCK8bJD1wnj6ktiI4mSwA8Kf4hLse0YhUeWfvIY529gQ5PUb30HiceE1RdteYxJEQwJ9IBaiCpw==}
 
-  '@douyinfe/semi-animation@2.63.0':
-    resolution: {integrity: sha512-0qWEiEpkkX/NgWJoWJIs3PGahMK7lQj9EWRVEhDaR8aEsyhrGwaXe6zj5DU3hzovhaQrsa9zDmp/9OCb3c+Xbg==}
+  '@douyinfe/semi-animation@2.64.0':
+    resolution: {integrity: sha512-rqGd+cV+zmi6DpuEuMx5mgU1dO00Pvz2PW4zE0PUeMUHod59vThcE7yCx21QyMzR1hPAUMTxSaTKYRhyIVMA5Q==}
 
   '@douyinfe/semi-foundation@2.61.0':
     resolution: {integrity: sha512-8FmVTGcerLv1GCNk4kVvYIOI4PcR+QN7/Rx/tULjwcANd47kLfLEgTSO8WwqtnJSQqXBFuZCZ4bjyG98jOeMpA==}
 
-  '@douyinfe/semi-foundation@2.63.0':
-    resolution: {integrity: sha512-34uwqa0mHhI3hgclV6Zf8QMLmRBGnfScgpjOCB9jmSg28ThGeh6WIwO4HC64e03Kr/Jves10n9cWZIwjnoWMRA==}
+  '@douyinfe/semi-foundation@2.64.0':
+    resolution: {integrity: sha512-443spMoIWFN7M9FcbYUcnTk0GLUvg31bGdKMAldtfcpYKqLiVbDO0lZ43XddPOeuYlrTEsyeSwuzgyZoi0csKg==}
 
   '@douyinfe/semi-theme-default@2.61.0':
     resolution: {integrity: sha512-obn/DOw4vZyKFAlWvZxHTpBLAK9FO9kygTSm2GROgvi+UDB2PPU6l20cuUCsdGUNWJRSqYlTTVZ1tNYIyFZ5Sg==}
 
-  '@douyinfe/semi-theme-default@2.63.0':
-    resolution: {integrity: sha512-GFOxyI4RC8tYA+VoMWWiinhEc/qAI0oFWj/r+xQcUXOdzVZbUf/hSiHPOQf1leh3nv2O8gJGwAT3A9wnGp+bag==}
+  '@douyinfe/semi-theme-default@2.64.0':
+    resolution: {integrity: sha512-9GMHOOp6z7zDkbbQBelYd6bXzHih5jBTWTQP+fPskiiPOBAm8Z48N0bmSJPcaKiyvdZeO1ztX80ApIOs9Uilhw==}
 
   '@emotion/use-insertion-effect-with-fallbacks@1.0.1':
     resolution: {integrity: sha512-jT/qyKZ9rzLErtrjGgdkMBn2OP8wl0G3sQlBb3YPryvKHsjvINUhVaPFfP+fpBcOkmrVOVEEHQFJ7nbj2TH2gw==}
@@ -10533,13 +10530,13 @@ snapshots:
 
   '@douyinfe/semi-animation-styled@2.61.0': {}
 
-  '@douyinfe/semi-animation-styled@2.63.0': {}
+  '@douyinfe/semi-animation-styled@2.64.0': {}
 
   '@douyinfe/semi-animation@2.61.0':
     dependencies:
       bezier-easing: 2.1.0
 
-  '@douyinfe/semi-animation@2.63.0':
+  '@douyinfe/semi-animation@2.64.0':
     dependencies:
       bezier-easing: 2.1.0
 
@@ -10555,9 +10552,9 @@ snapshots:
       memoize-one: 5.2.1
       scroll-into-view-if-needed: 2.2.31
 
-  '@douyinfe/semi-foundation@2.63.0(patch_hash=dq3cfpxqi3rsjtci5ncjivl3ei)':
+  '@douyinfe/semi-foundation@2.64.0':
     dependencies:
-      '@douyinfe/semi-animation': 2.63.0
+      '@douyinfe/semi-animation': 2.64.0
       '@mdx-js/mdx': 3.0.1
       async-validator: 3.5.2
       classnames: 2.5.1
@@ -10575,7 +10572,7 @@ snapshots:
 
   '@douyinfe/semi-theme-default@2.61.0': {}
 
-  '@douyinfe/semi-theme-default@2.63.0': {}
+  '@douyinfe/semi-theme-default@2.64.0': {}
 
   '@emotion/use-insertion-effect-with-fallbacks@1.0.1(react@18.3.1)':
     dependencies:

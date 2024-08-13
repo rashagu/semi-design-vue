@@ -111,6 +111,7 @@ const PreviewInner = defineComponent({
     let bodyOverflow: string;
     let scrollBarWidth: number;
     let originBodyWidth: string;
+    const imageRef = ref()
     const state = reactive<PreviewInnerStates>({
       imgSrc: [],
       imgLoadStatus: new Map(),
@@ -218,6 +219,9 @@ const PreviewInner = defineComponent({
           // Move in the preview area except the operation area, return true
           return true;
         },
+        changeImageZoom: (...args) => {
+          imageRef?.value && imageRef.value.foundation.changeZoom(...args)
+        }
       };
     }
 
@@ -444,6 +448,7 @@ const PreviewInner = defineComponent({
                 closable={closable}
               />
               <PreviewImage
+                ref={imageRef}
                 src={imgSrc[currentIndex]}
                 onZoom={handleZoomImage}
                 disableDownload={disableDownload}

@@ -14,7 +14,7 @@ import Dropdown, { DropdownMenu } from '../dropdown';
 import type { DropdownProps } from '../dropdown';
 import NavContext, { NavContextType } from './nav-context';
 
-import { times, get } from 'lodash';
+import { times, get, isNumber, isString } from 'lodash';
 import Collapsible from '../collapsible';
 import CSSAnimation from '../_cssAnimation';
 

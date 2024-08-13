@@ -51,17 +51,18 @@ export const vuePropsType = vuePropsMake<PreviewImageProps>(propTypes, defaultPr
 const PreviewImage = defineComponent({
   props: { ...vuePropsType },
   name: 'PreviewImage',
-  setup(props, {}) {
+  setup(props, {expose}) {
     const slots = useSlots();
 
     const state = reactive<PreviewImageStates>({
       width: 0,
       height: 0,
       loading: true,
-      offset: { x: 0, y: 0 },
-      currZoom: 0,
-      top: 0,
-      left: 0,
+      translate: {
+        x: 0,
+        y: 0
+      },
+      currZoom: props.zoom
     });
     const { adapter: adapterInject } = useBaseComponent<PreviewImageProps>(props, state);
     function adapter_(): PreviewImageAdapter<PreviewImageProps, PreviewImageStates> {
@@ -86,7 +87,11 @@ const PreviewImage = defineComponent({
     const imageRef = ref<HTMLImageElement>();
     const foundation = new PreviewImageFoundation(adapter);
 
+    expose({
+      foundation
+    })
     onMounted(() => {
+      foundation.init();
       window.addEventListener('resize', onWindowResize);
     });
 
@@ -111,11 +116,11 @@ const PreviewImage = defineComponent({
       foundation.handleError(e);
     };
 
-    const handleMoveImage = (e): void => {
-      foundation.handleMoveImage(e);
+    const handleImageMove = (e): void => {
+      foundation.handleImageMove(e);
     };
 
-    const onImageMouseDown = (e: any): void => {
+    const handleMouseDown = (e: any): void => {
       foundation.handleImageMouseDown(e);
     };
 
@@ -140,9 +145,9 @@ const PreviewImage = defineComponent({
           foundation.setLoading(true);
         }
         // If the incoming zoom changes, other content changes are determined based on the new zoom value
-        if (zoomChange) {
-          foundation.calculatePreviewImage(props.zoom, null);
-        }
+        // if (zoomChange) {
+        //   foundation.calculatePreviewImage(props.zoom, null);
+        // }
         if (!zoomChange && !srcChange) {
           if ('ratio' in props && props.ratio !== prevPropsRatio) {
             foundation.handleRatioChange();
@@ -156,13 +161,11 @@ const PreviewImage = defineComponent({
 
     return () => {
       const { src, rotation, crossOrigin } = props;
-      const { loading, width, height, top, left } = state;
+      const { loading, width, height, translate } = state;
       const imgStyle: CSSProperties = {
-        position: 'absolute',
-        visibility: loading ? 'hidden' : 'visible',
-        transform: `rotate(${-rotation}deg)`,
-        top: top + 'px',
-        left: left + 'px',
+        position: "absolute",
+        visibility: loading ? "hidden" : "visible",
+        transform: `translate(${translate.x}px, ${translate.y}px) rotate(${rotation}deg)`,
         width: `${width}px`,
         height: `${height}px`,
       };
@@ -175,8 +178,8 @@ const PreviewImage = defineComponent({
             alt="previewImag"
             class={`${preViewImgPrefixCls}-img`}
             key={src}
-            onMousemove={handleMoveImage}
-            onMousedown={onImageMouseDown}
+            onMousemove={handleImageMove}
+            onMousedown={handleMouseDown}
             onContextmenu={handleRightClickImage}
             onDragstart={(e): void => e.preventDefault()}
             onLoad={handleLoad}

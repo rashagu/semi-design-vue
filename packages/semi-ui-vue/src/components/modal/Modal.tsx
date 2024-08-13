@@ -154,14 +154,14 @@ const Modal = defineComponent({
         disabledBodyScroll: () => {
           const { getPopupContainer } = props;
           bodyOverflow = document.body.style.overflow || '';
-          if ((!getPopupContainer || getPopupContainer() === document.body) && bodyOverflow !== 'hidden') {
+          if ((!getPopupContainer || getPopupContainer() === globalThis?.document?.body) && bodyOverflow !== 'hidden') {
             document.body.style.overflow = 'hidden';
             document.body.style.width = `calc(${originBodyWith || '100%'} - ${scrollBarWidth}px)`;
           }
         },
         enabledBodyScroll: () => {
           const { getPopupContainer } = props;
-          if ((!getPopupContainer || getPopupContainer() === document.body) && bodyOverflow !== null && bodyOverflow !== 'hidden') {
+          if ((!getPopupContainer || getPopupContainer() === globalThis?.document?.body) && bodyOverflow !== null && bodyOverflow !== 'hidden') {
             document.body.style.overflow = bodyOverflow;
             document.body.style.width = originBodyWith;
           }
@@ -350,7 +350,7 @@ const Modal = defineComponent({
       let wrapperStyle: CSSProperties = {
         zIndex,
       };
-      if (getPopupContainer && getPopupContainer() !== document.body) {
+      if (getPopupContainer && getPopupContainer() !== globalThis?.document?.body) {
         wrapperStyle = {
           zIndex,
           position: 'static',
