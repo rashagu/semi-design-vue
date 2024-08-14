@@ -586,14 +586,14 @@ importers:
         specifier: 2.64.0
         version: 2.64.0
       '@kousum/semi-animation-vue':
-        specifier: '*'
-        version: 0.15.1(vue@3.4.31(typescript@5.5.2))
+        specifier: workspace:*
+        version: link:../semi-animation-vue
       '@kousum/semi-icons-vue':
-        specifier: '*'
-        version: 0.15.1(vue@3.4.31(typescript@5.5.2))
+        specifier: workspace:*
+        version: link:../semi-icons-vue
       '@kousum/semi-illustrations-vue':
-        specifier: '*'
-        version: 0.15.1(vue@3.4.31(typescript@5.5.2))
+        specifier: workspace:*
+        version: link:../semi-illustrations-vue
       '@kousum/vue-draggable':
         specifier: 1.0.2
         version: 1.0.2(lodash@4.17.21)(vue@3.4.31(typescript@5.5.2))
@@ -1769,26 +1769,14 @@ packages:
       search-insights:
         optional: true
 
-  '@douyinfe/semi-animation-styled@2.61.0':
-    resolution: {integrity: sha512-kzI6uFphJFd+4FhRLJc6b3LNR1wzf5dby0CPnI9E7phmqxpv5/I/AVpJ/h/7JKW7tdsy8EqsvuCYvyHSAtPU4A==}
-
   '@douyinfe/semi-animation-styled@2.64.0':
     resolution: {integrity: sha512-K7c9IkmJCkLeu9EcCOzOMYbVBLM4uoSANgoIkNm2fQcfqX42gRUOLdlxkK5aKFVTsJO9fTaTeZeVSWyTRni+MQ==}
-
-  '@douyinfe/semi-animation@2.61.0':
-    resolution: {integrity: sha512-Yr8IAtn1NZXbCK8bJD1wnj6ktiI4mSwA8Kf4hLse0YhUeWfvIY529gQ5PUb30HiceE1RdteYxJEQwJ9IBaiCpw==}
 
   '@douyinfe/semi-animation@2.64.0':
     resolution: {integrity: sha512-rqGd+cV+zmi6DpuEuMx5mgU1dO00Pvz2PW4zE0PUeMUHod59vThcE7yCx21QyMzR1hPAUMTxSaTKYRhyIVMA5Q==}
 
-  '@douyinfe/semi-foundation@2.61.0':
-    resolution: {integrity: sha512-8FmVTGcerLv1GCNk4kVvYIOI4PcR+QN7/Rx/tULjwcANd47kLfLEgTSO8WwqtnJSQqXBFuZCZ4bjyG98jOeMpA==}
-
   '@douyinfe/semi-foundation@2.64.0':
     resolution: {integrity: sha512-443spMoIWFN7M9FcbYUcnTk0GLUvg31bGdKMAldtfcpYKqLiVbDO0lZ43XddPOeuYlrTEsyeSwuzgyZoi0csKg==}
-
-  '@douyinfe/semi-theme-default@2.61.0':
-    resolution: {integrity: sha512-obn/DOw4vZyKFAlWvZxHTpBLAK9FO9kygTSm2GROgvi+UDB2PPU6l20cuUCsdGUNWJRSqYlTTVZ1tNYIyFZ5Sg==}
 
   '@douyinfe/semi-theme-default@2.64.0':
     resolution: {integrity: sha512-9GMHOOp6z7zDkbbQBelYd6bXzHih5jBTWTQP+fPskiiPOBAm8Z48N0bmSJPcaKiyvdZeO1ztX80ApIOs9Uilhw==}
@@ -2112,21 +2100,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
-
-  '@kousum/semi-animation-vue@0.15.1':
-    resolution: {integrity: sha512-Gzmkdqn/jEB9jH1T+N9jokqwvmVpRfkjm4F1R+a7vt7L3vnjElxl9tBmLeYNgiq5CQcF2Bn31Uee7EHx1gXdTg==}
-    peerDependencies:
-      vue: '>=3.4.3'
-
-  '@kousum/semi-icons-vue@0.15.1':
-    resolution: {integrity: sha512-vLWsET4tsw330P8QbTapM84uL5ehFF2q6YIxO1qr/WLrm1O5QJd7L2316XIAoUCdvJLJGUa8QdGhpy2S3wwavQ==}
-    peerDependencies:
-      vue: '>=3.4.3'
-
-  '@kousum/semi-illustrations-vue@0.15.1':
-    resolution: {integrity: sha512-KYYGJRimVgmWVdm8jEF1CB5ouDbZUvZQXzAz9/WfPBbm+D0HgZzQI6fIo58sbfju7JJZq2KQCKPDZCow9TTnmQ==}
-    peerDependencies:
-      vue: '>=3.4.3'
 
   '@kousum/vue-draggable@1.0.2':
     resolution: {integrity: sha512-5RGFjJ65YRRdOIeMgZS6IrWUh65I2fr27Npp0acN0Nl4tfo9AvSkSZtjKhTmwX949bha6VTn8k/acDemFVEczA==}
@@ -10528,29 +10501,11 @@ snapshots:
     transitivePeerDependencies:
       - '@algolia/client-search'
 
-  '@douyinfe/semi-animation-styled@2.61.0': {}
-
   '@douyinfe/semi-animation-styled@2.64.0': {}
-
-  '@douyinfe/semi-animation@2.61.0':
-    dependencies:
-      bezier-easing: 2.1.0
 
   '@douyinfe/semi-animation@2.64.0':
     dependencies:
       bezier-easing: 2.1.0
-
-  '@douyinfe/semi-foundation@2.61.0':
-    dependencies:
-      '@douyinfe/semi-animation': 2.61.0
-      async-validator: 3.5.2
-      classnames: 2.5.1
-      date-fns: 2.30.0
-      date-fns-tz: 1.3.8(date-fns@2.30.0)
-      fast-copy: 3.0.2
-      lodash: 4.17.21
-      memoize-one: 5.2.1
-      scroll-into-view-if-needed: 2.2.31
 
   '@douyinfe/semi-foundation@2.64.0':
     dependencies:
@@ -10569,8 +10524,6 @@ snapshots:
       scroll-into-view-if-needed: 2.2.31
     transitivePeerDependencies:
       - supports-color
-
-  '@douyinfe/semi-theme-default@2.61.0': {}
 
   '@douyinfe/semi-theme-default@2.64.0': {}
 
@@ -10759,31 +10712,6 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
-
-  '@kousum/semi-animation-vue@0.15.1(vue@3.4.31(typescript@5.5.2))':
-    dependencies:
-      '@douyinfe/semi-animation': 2.61.0
-      '@douyinfe/semi-animation-styled': 2.61.0
-      '@douyinfe/semi-foundation': 2.61.0
-      '@douyinfe/semi-theme-default': 2.61.0
-      classnames: 2.5.1
-      sass: 1.77.1
-      vue: 3.4.31(typescript@5.5.2)
-
-  '@kousum/semi-icons-vue@0.15.1(vue@3.4.31(typescript@5.5.2))':
-    dependencies:
-      '@douyinfe/semi-foundation': 2.61.0
-      '@douyinfe/semi-theme-default': 2.61.0
-      classnames: 2.5.1
-      sass: 1.77.1
-      vue: 3.4.31(typescript@5.5.2)
-
-  '@kousum/semi-illustrations-vue@0.15.1(vue@3.4.31(typescript@5.5.2))':
-    dependencies:
-      '@douyinfe/semi-foundation': 2.61.0
-      '@douyinfe/semi-theme-default': 2.61.0
-      classnames: 2.5.1
-      vue: 3.4.31(typescript@5.5.2)
 
   '@kousum/vue-draggable@1.0.2(lodash@4.17.21)(vue@3.4.31(typescript@5.5.2))':
     dependencies:

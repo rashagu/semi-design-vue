@@ -133,6 +133,7 @@ import FormRenderDemo from './components/form/__test__/FormRenderDemo';
 import ChatDemo from './components/chat/__test__/ChatDemo';
 import ToastUseDemo from './components/toast/__test__/ToastUseDemo';
 import SelectDemoToRawTest from './components/select/__test__/SelectDemoToRawTest';
+import ColorPickerDemo from './components/colorPicker/__test__/ColorPickerDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -256,7 +257,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DiyItemAutoComplete/>*/}
         {/*<RemoteAutoComplete/>*/}
         {/*<AutoCompleteSFC/>*/}
-        <SelectDemoToRawTest/>
+        <ColorPickerDemo/>
+        {/*<SelectDemoToRawTest/>*/}
         {/*<SelectDemo/>*/}
         {/*<SelectDemo2/>*/}
         {/*<SelectDemo3/>*/}

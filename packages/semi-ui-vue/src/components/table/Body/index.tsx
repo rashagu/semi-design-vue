@@ -510,7 +510,6 @@ const Body = defineComponent({
           }}
           class={classnames(props_.className, `${props.prefixCls}-tbody`)}
           style={{ ...props_.style }}
-          ref={ref}
         >
           {slots?.default?.()}
         </div>
@@ -530,7 +529,6 @@ const Body = defineComponent({
       return (
         <div
           {...rest}
-          ref={ref}
           onWheel={(...args) => {
             if (handleWheel) {
               handleWheel(...args);

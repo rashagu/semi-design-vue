@@ -11,7 +11,6 @@ export {
   Icon,
   ConvertIcon
 }
-
 export { default as IconAbsoluteStroked } from './src/icons/icons/IconAbsoluteStroked';
 export { default as IconActivity } from './src/icons/icons/IconActivity';
 export { default as IconAlarm } from './src/icons/icons/IconAlarm';
@@ -156,6 +155,7 @@ export { default as IconExpand } from './src/icons/icons/IconExpand';
 export { default as IconExport } from './src/icons/icons/IconExport';
 export { default as IconExternalOpen } from './src/icons/icons/IconExternalOpen';
 export { default as IconExternalOpenStroked } from './src/icons/icons/IconExternalOpenStroked';
+export { default as IconEyedropper } from './src/icons/icons/IconEyedropper';
 export { default as IconEyeClosed } from './src/icons/icons/IconEyeClosed';
 export { default as IconEyeClosedSolid } from './src/icons/icons/IconEyeClosedSolid';
 export { default as IconEyeOpened } from './src/icons/icons/IconEyeOpened';
