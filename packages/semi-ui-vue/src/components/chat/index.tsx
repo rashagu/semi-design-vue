@@ -104,8 +104,7 @@ const index = defineComponent({
       return {
         ...adapterInject(),
         getContainerRef: () => {
-          // TODO
-          return {current: containerRef.value}
+          return containerRef.value
         },
         setWheelScroll: (flag: boolean) => {
           state.wheelScroll = flag
@@ -281,11 +280,7 @@ const index = defineComponent({
     );
 
     function containerScroll(e: Event){
-      // TODO
-      foundation.containerScroll({
-        ...e,
-        currentTarget: e.target
-      })
+      foundation.containerScroll(e)
     }
     return () => {
       const {

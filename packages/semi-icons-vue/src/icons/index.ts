@@ -156,6 +156,7 @@ export { default as IconExpand } from './icons/IconExpand';
 export { default as IconExport } from './icons/IconExport';
 export { default as IconExternalOpen } from './icons/IconExternalOpen';
 export { default as IconExternalOpenStroked } from './icons/IconExternalOpenStroked';
+export { default as IconEyedropper } from './icons/IconEyedropper';
 export { default as IconEyeClosed } from './icons/IconEyeClosed';
 export { default as IconEyeClosedSolid } from './icons/IconEyeClosedSolid';
 export { default as IconEyeOpened } from './icons/IconEyeOpened';

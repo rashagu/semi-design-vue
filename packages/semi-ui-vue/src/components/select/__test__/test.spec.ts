@@ -31,7 +31,6 @@ test('SelectDemo toRaw unit', async () => {
   const select = await screen.findByText("test") as HTMLInputElement
   await fireEvent.click(select);
   const option = await screen.findByTestId("a001")
-  console.log(option);
   await fireEvent.click(option);
   const valueText = option.parentElement.className
   expect(valueText).toEqual("semi-select-option semi-select-option-selected semi-select-option-focused")

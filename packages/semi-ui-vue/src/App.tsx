@@ -132,6 +132,7 @@ import DatePickerTriggerRenderDemo from './components/datePicker/__test__/DatePi
 import FormRenderDemo from './components/form/__test__/FormRenderDemo';
 import ChatDemo from './components/chat/__test__/ChatDemo';
 import ToastUseDemo from './components/toast/__test__/ToastUseDemo';
+import SelectDemoToRawTest from './components/select/__test__/SelectDemoToRawTest';
 export interface ExampleProps {
   name?: string
 }
@@ -255,7 +256,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DiyItemAutoComplete/>*/}
         {/*<RemoteAutoComplete/>*/}
         {/*<AutoCompleteSFC/>*/}
-        <SelectDemo/>
+        <SelectDemoToRawTest/>
+        {/*<SelectDemo/>*/}
         {/*<SelectDemo2/>*/}
         {/*<SelectDemo3/>*/}
         {/*<SelectDemo4/>*/}
