@@ -406,11 +406,11 @@ const Tooltip = defineComponent({
               cb();
             }
           };
-          document.addEventListener('mousedown', clickOutsideHandler, { capture: true });
+          document.addEventListener('mousedown', clickOutsideHandler);
         },
         unregisterClickOutsideHandler: () => {
           if (clickOutsideHandler) {
-            document.removeEventListener('mousedown', clickOutsideHandler, { capture: true });
+            document.removeEventListener('mousedown', clickOutsideHandler);
             clickOutsideHandler = null;
           }
         },
