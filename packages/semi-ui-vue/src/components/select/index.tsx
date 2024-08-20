@@ -210,6 +210,7 @@ export type SelectProps = {
   preventScroll?: boolean;
   showRestTagsPopover?: boolean;
   restTagsPopoverProps?: PopoverProps;
+  isInInputGroup?: boolean;
 } & Pick<
   TooltipProps,
   | 'spacing'
@@ -341,7 +342,8 @@ const propTypes: CombineProps<SelectProps> = {
   searchPosition: String,
   searchPlaceholder: String,
   clearIcon: PropTypes.node,
-  dropdownMargin: [PropTypes.number, PropTypes.object,]
+  dropdownMargin: [PropTypes.number, PropTypes.object,],
+  isInInputGroup: Boolean,
 };
 
 const defaultProps: Partial<SelectProps> = {
