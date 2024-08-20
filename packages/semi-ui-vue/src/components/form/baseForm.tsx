@@ -84,7 +84,7 @@ export const vuePropsType = vuePropsMake<BaseFormProps>(propTypes, defaultProps)
 const Form = defineComponent({
   props: { ...vuePropsType },
   name: 'Form',
-  setup(props, {}) {
+  setup(props, {expose}) {
     const slots = useSlots();
     let currentInstance = getCurrentInstance();
 
@@ -174,6 +174,9 @@ const Form = defineComponent({
     const adapter = adapter_();
     const foundation = new FormFoundation(adapter);
     let formApi = foundation.getFormApi();
+    expose({
+      formApi
+    })
 
     if (props.getFormApi) {
       props.getFormApi(formApi as unknown as FormApi<any>);

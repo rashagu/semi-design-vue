@@ -42,6 +42,7 @@ import FormInputGroup from "./group";
 import ErrorMessage from './errorMessage';
 import Label from './label';
 import Section from './section';
+import Slot from './slot';
 export type { FormApi, FormFCChild } from './interface';
 
 
@@ -66,7 +67,9 @@ export {
     FormTagInput,
     FormTimePicker,
     FormTreeSelect,
-    FormUpload
+    FormUpload,
+    Label as FormLabel,
+    Slot as FormSlot
 }
 export const Checkbox = FormCheckbox;
 export const CheckboxGroup = FormCheckboxGroup;
@@ -110,6 +113,7 @@ export type FormType = typeof Form & {
     InputGroup: typeof InputGroup,
     Label: typeof Label,
     Section: typeof Section,
+    Slot: typeof Slot,
 }
 const BaseForm = Form as FormType
 BaseForm.TextArea = FormTextArea
@@ -136,6 +140,7 @@ BaseForm.ErrorMessage = ErrorMessage;
 BaseForm.InputGroup = InputGroup;
 BaseForm.Label = Label;
 BaseForm.Section = Section;
+BaseForm.Slot = Slot;
 
 export default BaseForm;
 export {
