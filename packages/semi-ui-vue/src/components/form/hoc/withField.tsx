@@ -747,7 +747,6 @@ function withField<
           }
         }
 
-        console.log(newProps)
         // @ts-ignore
         const com = <Component {...(newProps as any)}>{{ default: slots.default }}</Component>;
 
