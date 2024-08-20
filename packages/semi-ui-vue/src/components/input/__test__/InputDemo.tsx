@@ -7,6 +7,7 @@ import Button from '../../button';
 import InputGroup from '../inputGroup';
 import { ModalClass } from '../../modal';
 import Select, { SelectOption } from '../../select';
+import { Form } from '../../form';
 
 interface ExampleProps {
   name?: string
@@ -101,6 +102,24 @@ const InputDemo = defineComponent((props, {slots}) => {
         <Input placeholder="Name" style={{ width: '100px' }} />
         <InputNumber placeholder="Score" style={{ width: '140px' }} />
       </InputGroup>
+
+1
+      <Form>
+        <Form.InputGroup field={'ss1'}>
+          <Form.Input field={'ss2'} placeholder="Name" style={{ width: '100px' }} />
+          <Form.InputNumber field={'ss3'} placeholder="Score" style={{ width: '140px' }} />
+        </Form.InputGroup>
+        <Form.InputGroup label={{ text: (<span>手机号码</span>), required: true }} labelPosition='top'>
+          <Form.Select style={{ width: '150px' }} field='phonePrefix' initValue='+86' rules={[{ required: true }]} showClear>
+            <Form.SelectOption value='+1'>美国+1</Form.SelectOption>
+            <Form.SelectOption value='+852'>香港+852</Form.SelectOption>
+            <Form.SelectOption value='+86'>中国+86</Form.SelectOption>
+            <Form.SelectOption value='+81'>日本+81</Form.SelectOption>
+          </Form.Select>
+          <Form.Input initValue='18912345678' style={{ width: '250px' }} field='phoneNumber' rules={[{ required: true }]} showClear />
+        </Form.InputGroup>
+      </Form>
+2
       <br />
       <br />
 

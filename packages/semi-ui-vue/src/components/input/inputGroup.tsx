@@ -9,6 +9,8 @@ import Label, { LabelProps } from '../form/label';
 import { noop } from '@douyinfe/semi-foundation/utils/function';
 import { get, isFunction } from 'lodash';
 import { CombineProps } from '../interface';
+import { getFragmentChildren } from '../_utils';
+import { useHasInProps } from '../_base/baseComponent';
 
 const prefixCls = cssClasses.PREFIX;
 const sizeSet = strings.SIZE;
@@ -52,6 +54,7 @@ const InputGroup = defineComponent({
   props: VuePropsType,
   name: 'InputGroup',
   setup(props, { slots }) {
+    const { getProps } = useHasInProps()
     function renderGroupWithLabel(inner: VNode[]) {
       // eslint-disable-next-line no-unused-vars
       const { size, className, label, labelPosition, ...rest } = props;
@@ -93,8 +96,8 @@ const InputGroup = defineComponent({
         disabled: groupDisabled,
         labelPosition,
         ...rest
-      } = props;
-      const children = slots.default ? slots.default() : null;
+      } = getProps(props);
+      const children = getFragmentChildren(slots);
       const groupCls = cls(
         `${prefixCls}-group`,
         {
