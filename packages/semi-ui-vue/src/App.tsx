@@ -134,6 +134,8 @@ import ChatDemo from './components/chat/__test__/ChatDemo';
 import ToastUseDemo from './components/toast/__test__/ToastUseDemo';
 import SelectDemoToRawTest from './components/select/__test__/SelectDemoToRawTest';
 import ColorPickerDemo from './components/colorPicker/__test__/ColorPickerDemo';
+import FormLayoutDemo from './components/form/__test__/FormLayoutDemo.vue';
+import FormSlotDemo from './components/form/__test__/FormSlotDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -210,6 +212,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ToastUseDemo/>*/}
         {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
+        {/*<FormSlotDemo/>*/}
+        {/*<FormLayoutDemo/>*/}
         {/*<FormAllDemo />*/}
         {/*<FormDemo />*/}
         {/*<FormRenderDemo/>*/}
@@ -257,9 +261,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DiyItemAutoComplete/>*/}
         {/*<RemoteAutoComplete/>*/}
         {/*<AutoCompleteSFC/>*/}
-        <ColorPickerDemo/>
+        {/*<ColorPickerDemo/>*/}
+
         {/*<SelectDemoToRawTest/>*/}
-        {/*<SelectDemo/>*/}
+        <SelectDemo/>
         {/*<SelectDemo2/>*/}
         {/*<SelectDemo3/>*/}
         {/*<SelectDemo4/>*/}

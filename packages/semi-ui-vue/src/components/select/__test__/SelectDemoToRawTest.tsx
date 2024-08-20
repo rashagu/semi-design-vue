@@ -16,7 +16,9 @@ export const vuePropsType = {
 const SelectDemo = defineComponent((props, { slots }) => {
   return () => {
     return (
-      <Select placeholder="test" multiple style={{}}>
+      <Select placeholder="test" multiple style={{}} onChange={(v)=>{
+        console.log(v);
+      }}>
         <Option value="abc"><span data-testid={'a001'}>抖音</span></Option>
         <Option value="hotsoon">火山</Option>
         <Option value="jianying" disabled>
