@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 0.18.1
+
+### Patch Changes
+
+- fix Form.Select onChange
+
 ## 0.18.0
 
 ### Minor Changes
