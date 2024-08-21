@@ -289,13 +289,11 @@ const Radio = defineComponent({
           {...getDataAttr()}
         >
           <RadioInner
-            {...props}
-            {...props_}
+            {...({...props, ...props_, onChange: onChange})}
             mode={realMode}
             name={name ?? groupName}
             isButtonRadio={isButtonRadio}
             isPureCardRadioGroup={isPureCardRadioGroup}
-            onChange={onChange}
             ref={(ref: any) => {
               radioEntity = ref;
             }}
