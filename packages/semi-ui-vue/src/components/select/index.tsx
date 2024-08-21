@@ -1640,7 +1640,7 @@ const Index = defineComponent({
   },
 });
 
-export default defineComponent({
+const Select = defineComponent({
   props: { ...vuePropsType },
   name: 'Select',
   setup(props, {slots}){
@@ -1652,5 +1652,10 @@ export default defineComponent({
     }
   }
 });
-
+export type SelectType = typeof Select & {
+  Option: typeof Option
+}
+const baseSelect = Select as SelectType
+baseSelect.Option = Option
+export default baseSelect
 export { Option as SelectOption, OptionGroup as SelectOptionGroup };
