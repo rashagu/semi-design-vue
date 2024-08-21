@@ -1,4 +1,15 @@
-import { defineComponent, ref, h, Fragment, VNode, CSSProperties, reactive, watch, PropType } from 'vue';
+import {
+  defineComponent,
+  ref,
+  h,
+  Fragment,
+  VNode,
+  CSSProperties,
+  reactive,
+  watch,
+  PropType,
+  HTMLAttributes,
+} from 'vue';
 import * as PropTypes from '../PropTypes';
 import classNames from 'classnames';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/tag/constants';
@@ -162,12 +173,12 @@ const Index = defineComponent({
       const { visible: isVisible } = state;
       const clickable = onClick !== defaultProps.onClick || closable;
       // only when the Tag is clickable or closable, the value of tabIndex is allowed to be passed in.
-      const a11yProps = { role: 'button', tabIndex: tabIndex || 0, onKeyDown: handleKeyDown };
-      const baseProps = {
+      const a11yProps: HTMLAttributes = { role: 'button', tabindex: tabIndex || 0, onKeydown: handleKeyDown };
+      const baseProps: HTMLAttributes = {
         ...attr,
         onClick,
         tabindex: tabIndex,
-        className: classNames(
+        class: classNames(
           prefixCls,
           {
             [`${prefixCls}-default`]: size === 'default',
