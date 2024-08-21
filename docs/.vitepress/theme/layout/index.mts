@@ -30,6 +30,7 @@ import LiveCode2 from '../../../LiveCode2.vue';
 import DesignToken from '../../../DesignToken.vue';
 import Notice from '../../../Notice';
 import PureA from '../../../PureA';
+import ApiType from '../../../ApiType';
 
 const theme = {
   Layout,
@@ -41,6 +42,7 @@ const theme = {
     app.component('DesignToken', DesignToken);
     app.component('Notice', Notice);
     app.component('PureA', PureA);
+    app.component('ApiType', ApiType);
   }
 }
 export default theme;

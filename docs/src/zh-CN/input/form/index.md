@@ -161,7 +161,7 @@ export default () => {
 
 #### 通过 props.component
 
-通过 component 属性直接将整个内部结构以 ReactNode 形式传入
+通过 component 属性直接将整个内部结构以 VNode 形式传入
 
 ```jsx live=true dir="column" hideInDSM
 
@@ -1807,16 +1807,17 @@ useFormApi 允许你通过 hook，在 Functional Component 内直接访问父级
 ```jsx live=true dir="column" noInline=true
 
 import { useFormApi, Form, Button } from '@kousum/semi-ui-vue';
+import { defineComponent } from 'vue';
 
-const ComponentUsingFormApi = () => {
-    const formApi = useFormApi();
-    const change = () => {
-        formApi.setValue('name', Math.random());
-    };
-    return (
-        <Button onClick={change}>ChangeName By【formApi】</Button>
-    );
-};
+const ComponentUsingFormApi = defineComponent(() => {
+  const {context:formApi} = useFormApi();
+  const change = () => {
+    formApi.value.setValue('name', Math.random());
+  };
+  return ()=>(
+    <Button onClick={change}>ChangeName By【formApi】</Button>
+  );
+});
 
 
 export default () => {
@@ -1836,29 +1837,24 @@ useFormState 允许你通过 hook，在 Functional Component 内直接访问父�
 ```jsx live=true dir="column" noInline=true
 
 import { useFormState, Form } from '@kousum/semi-ui-vue';
+import { defineComponent } from 'vue';
 
-const ComponentUsingFormState = export default () => {
-    const formState = useFormState();
-    return (
-        <pre>
-            <code>{JSON.stringify(formState)}</code>
-        </pre>
-    );
-};
+const ComponentUsingFormState = defineComponent(() => {
+  const formState = useFormState();
+  return ()=>(
+    <pre><code>{JSON.stringify(formState.value)}</code></pre>
+  );
+});
 
-class UseFromStateDemo extends React.Component {
-    render() {
-        return (
-            <Form>
-                <Form.Input field='name' initValue='mike'></Form.Input>
-                <h5>FormState read by 【useFormState】：</h5>
-                <ComponentUsingFormState />
-            </Form>
-        );
-    }
+export default ()=>{
+  return (
+    <Form>
+      <Form.Input field='name' initValue='mike'></Form.Input>
+      <h5>FormState read by 【useFormState】：</h5>
+      <ComponentUsingFormState />
+    </Form>
+  );
 }
-
-render(UseFromStateDemo);
 ```
 
 #### useFieldApi
@@ -1868,29 +1864,26 @@ useFieldApi 允许你通过 hook，在 Functional Component 内直接调用指�
 ```jsx live=true dir="column" noInline=true
 
 import { useFieldApi, Form, Button } from '@kousum/semi-ui-vue';
+import { defineComponent } from 'vue';
 
-const ComponentUsingFieldApi = export default () => {
-    const nameFieldApi = useFieldApi('name');
-    const change = export default () => {
-        nameFieldApi.setValue(Math.random());
-    };
-    return (
-        <Button onClick={change}>Click Me!!! changeNameBy【fieldApi】</Button>
-    );
-};
+const ComponentUsingFieldApi = defineComponent(() => {
+  const nameFieldApi = useFieldApi('name');
+  const change = () => {
+    nameFieldApi.setValue(Math.random());
+  };
+  return ()=>(
+    <Button onClick={change}>Click Me!!! changeNameBy【fieldApi】</Button>
+  );
+});
 
-class UseFieldApiDemo extends React.PureComponent {
-    render() {
-        return (
-            <Form>
-                <Form.Input field='name' initValue='mike'></Form.Input>
-                <ComponentUsingFieldApi />
-            </Form>
-        );
-    }
+export default ()=>{
+  return (
+    <Form>
+      <Form.Input field='name' initValue='mike'></Form.Input>
+      <ComponentUsingFieldApi />
+    </Form>
+  );
 }
-
-render(UseFieldApiDemo);
 ```
 
 #### useFieldState
@@ -1900,34 +1893,32 @@ useFieldState 允许你通过 hook，在 Functional Component 内直接访问指
 ```jsx live=true dir="column" noInline=true
 
 import { useFieldState, Form } from '@kousum/semi-ui-vue';
+import { defineComponent } from 'vue';
 
-const ComponentUsingFieldState = props => {
-    const fieldState = useFieldState(props.field);
-    return (
-        <div>
-            <span>【{props.field}】FieldState read by 【useFieldState】：</span>
-            <code>{JSON.stringify(fieldState)}</code>
-        </div>
-    );
-};
-class UseFieldStateDemo extends React.PureComponent {
-    render() {
-        return (
-            <Form layout='horizontal'>
-                <div style={{ width: 400 }}>
-                    <Form.Input field='name' initValue='mike'></Form.Input>
-                    <Form.Input field='country' initValue='china'></Form.Input>
-                </div>
-                <div style={{ width: 500, marginTop: 30 }}>
-                    <ComponentUsingFieldState field='name' />
-                    <ComponentUsingFieldState field='country' style={{ marginTop: 40 }} />
-                </div>
-            </Form>
-        );
-    }
+const ComponentUsingFieldState = defineComponent(props => {
+  const fieldState = useFieldState(props.field);
+  return ()=>(
+    <div>
+      <span>【{props.field}】FieldState read by 【useFieldState】：</span>
+      <code>{JSON.stringify(fieldState.value.value)}</code>
+    </div>
+  );
+}, {props: {field: String}});
+
+export default ()=>{
+  return (
+    <Form layout='horizontal'>
+      <div style={{ width: '400px' }}>
+        <Form.Input field='name' initValue='mike'></Form.Input>
+        <Form.Input field='country' initValue='china'></Form.Input>
+      </div>
+      <div style={{ width: '500px', marginTop: '30px' }}>
+        <ComponentUsingFieldState field='name' />
+        <ComponentUsingFieldState field='country' style={{ marginTop: '40px' }} />
+      </div>
+    </Form>
+  );
 }
-
-render(UseFieldStateDemo);
 
 ```
 
@@ -1950,26 +1941,22 @@ import { withFormApi, withFormState, withField } from '@kousum/semi-ui-vue';
 import { withFormApi, Form, Button } from '@kousum/semi-ui-vue';
 
 const SomeComponetInsideForm = props => (
-    <Button onClick={export default () => {
+    <Button onClick={() => {
         props.formApi.setValue('name', Math.random());
     }}>Click Me!!! ChangeName By【formApi】</Button>
 );
 const ComponentWithFormApi = withFormApi(SomeComponetInsideForm);
 
-class WithFormApiDemo extends React.Component {
-    render() {
-        return (
-            <Form>
-                <Form.Input field='name' initValue='semi'></Form.Input>
-                <Form.Input field='familyName' initValue='design'></Form.Input>
-                <Button htmlType='submit' style={{ marginRight: 4 }}>submit</Button>
-                <ComponentWithFormApi />
-            </Form>
-        );
-    }
+export default ()=>{
+  return (
+    <Form>
+      <Form.Input field='name' initValue='semi'></Form.Input>
+      <Form.Input field='familyName' initValue='design'></Form.Input>
+      <Button htmlType='submit' style={{ marginRight: '4px' }}>submit</Button>
+      <ComponentWithFormApi />
+    </Form>
+  );
 }
-
-render(WithFormApiDemo);
 ```
 
 #### HOC-withFormState
@@ -1982,23 +1969,19 @@ render(WithFormApiDemo);
 import { withFormState, Form } from '@kousum/semi-ui-vue';
 
 const SomeComponentInsideForm = props => (
-    <code>{JSON.stringify(props.formState)}</code>
+    <code>{JSON.stringify(props.formState.value)}</code>
 );
 const ComponentWithFormState = withFormState(SomeComponentInsideForm);
 
-class WithFormStateDemo extends React.Component {
-    render() {
-        return (
-            <Form>
-                <Form.Input field='name' initValue='semi'></Form.Input>
-                <Form.Input field='familyName' initValue='design'></Form.Input>
-                <ComponentWithFormState />
-            </Form>
-        );
-    }
+export default ()=>{
+  return (
+    <Form>
+      <Form.Input field='name' initValue='semi'></Form.Input>
+      <Form.Input field='familyName' initValue='design'></Form.Input>
+      <ComponentWithFormState />
+    </Form>
+  );
 }
-
-render(WithFormStateDemo);
 ```
 
 ### withField 封装自定义表单控件
@@ -2029,87 +2012,107 @@ withField(YourComponent, withFieldOption);
 
 ```jsx live=true dir="column" noInline=true
 
-import { withField, Form } from '@kousum/semi-ui-vue';
+import { withField, Form, useFormState } from '@kousum/semi-ui-vue';
+import { defineComponent } from 'vue';
 
 // 这里将html原生的input封装
 const htmlInput = (props) => {
-    let value = props.value || '';
-    let { validateStatus, ...rest } = props; // prevent props being transparently transmitted to DOM
-    return <input {...rest} value={value} />; 
+  let value = props.value || '';
+  let { validateStatus, ...rest } = props; // prevent props being transparently transmitted to DOM
+  return <div>
+    {JSON.stringify(props)}
+    <input {...rest} value={value} />
+  </div>;
 };
-const CustomInput = withField(htmlInput, { valueKey: 'value', onKeyChangeFnName: 'onChange', valuePath: 'target.value' });
+const CustomInput = withField(htmlInput, {
+  valueKey: 'value',
+  onKeyChangeFnName: 'onInput',
+  valuePath: 'target.value'
+});
 
 // 观察formState，看input的数据流是否已被form接管
-const ComponentUsingFormState = export default () => {
-    const formState = useFormState();
-    return (
-        <pre>
-            <code>{JSON.stringify(formState)}</code>
-        </pre>
-    );
-};
+const ComponentUsingFormState = defineComponent(() => {
+  const formState = useFormState();
+  return ()=>(
+    <pre>
+      <code>{JSON.stringify(formState.value)}</code>
+    </pre>
+  );
+});
 
-class WithFieldDemo1 extends React.Component {
-    render() {
-        return (
-            <Form>
-                <CustomInput field='name' />
-                <ComponentUsingFormState />
-            </Form>
-        );
-    }
+
+export default ()=>{
+  return (
+    <Form>
+      <CustomInput field='name' />
+      <ComponentUsingFormState />
+    </Form>
+  );
 }
-
-render(WithFieldDemo1);
 ```
 
 ```jsx live=true dir="column" noInline=true
+import { withField, Input, Select, Form, useFormState } from '@kousum/semi-ui-vue';
+import { defineComponent } from 'vue';
 
-import { withField, Input, Select, Form } from '@kousum/semi-ui-vue';
-
-const MyComponent = (props) => {
-    const { onChange, value } = props;
-    const { name, role } = value || {};
+const MyComponent = defineComponent(
+  (props) => {
     const handleChange = (v, type) => {
-        let newValue = { ...value, [type==='name' ? 'name' : 'role']: v };
-        onChange(newValue);
+      let newValue = { ...props.value, [type === 'name' ? 'name' : 'role']: v };
+      props.onChange(newValue);
     };
-    return (
-        <div className='customField'>
-            <Input insetLabel='名称' value={name} onChange={v => handleChange(v, 'name')} style={{ width: 180, marginRight: 12 }} />
-            <Select
-                insetLabel='角色'
-                value={role}
-                onChange={v => handleChange(v, 'role')}
-                style={{ width: 200 }}
-                optionList={[{ value: 'rd', label: '开发' }, { value: 'UED', label: '设计师' }]}
-            />
+    return () => {
+      const { onChange, value } = props;
+      const { name, role } = value || {};
+      return (
+        <div className="customField">
+          <Input
+            insetLabel="名称"
+            value={name}
+            onChange={(v) => handleChange(v, 'name')}
+            style={{ width: '180px', marginRight: '12px' }}
+          />
+          <Select
+            insetLabel="角色"
+            value={role}
+            onChange={(v) => handleChange(v, 'role')}
+            style={{ width: '200px' }}
+            optionList={[
+              { value: 'rd', label: '开发' },
+              { value: 'UED', label: '设计师' },
+            ]}
+          />
         </div>
-    );
-};
+      );
+    };
+  },
+  {
+    props: {
+      onChange: { type: Function },
+      value: { type: Object },
+    },
+  }
+);
 const CustomField = withField(MyComponent, { valueKey: 'value', onKeyChangeFnName: 'onChange' });
 
-const ComponentUsingFormState = export default () => {
-    const formState = useFormState();
-    return (
-        <pre>
-            <code>{JSON.stringify(formState)}</code>
-        </pre>
-    );
+const ComponentUsingFormState = defineComponent(() => {
+  const formState = useFormState();
+  return () => (
+    <pre>
+      <code>{JSON.stringify(formState.value)}</code>
+    </pre>
+  );
+});
+
+export default () => {
+  return (
+    <Form>
+      <CustomField field="baseInfo" label={{ text: '基本信息', required: true }} />
+      <ComponentUsingFormState />
+    </Form>
+  );
 };
 
-class WithFieldDemo2 extends React.Component {
-    render() {
-        return (
-            <Form>
-                <CustomField field='baseInfo' label={{ text: '基本信息', required: true }} />
-                <ComponentUsingFormState />
-            </Form>
-        );
-    }
-}
-
-render(WithFieldDemo2);
 ```
 
 ## API 参考
@@ -2121,7 +2124,7 @@ render(WithFieldDemo2);
 | autoScrollToError | 若为 true，submit 或者调用 formApi.validate()校验失败时，将会自动滚动至出错的字段。object 型配置参考[options](https://github.com/stipsan/scroll-into-view-if-needed#options)                           | boolean\| object                              | false      |
 | allowEmpty        | 是否保留values中为空值的field的key，true时保留key，false时移除key                                                                                                                         | boolean                                       | false      |
 | className         | form 标签的 classname                                                                                                                                                      | string                                        |
-| component         | 用于声明表单控件，不可与 render、props.children 同时使用                                                                                                                                 | ReactNode                                     |            |
+| component         | 用于声明表单控件，不可与 render、props.children 同时使用                                                                                                                                 | VNode                                     |            |
 | disabled          | 统一应用在每个 Field 的 disabled 属性                                                                                                                                             | boolean                                       | false      |
 | extraTextPosition  | 统一应用在每个 Field 上的extraTextPosition属性，控制extraText的显示位置，可选`middle`（垂直方向以Label、extraText、Field主体的顺序显示）、`bottom` (垂直方向以Label、Field主体、extraText的顺序显示)  <br/>**在 v1.9.0 开始提供** | string                                       | 'bottom'       |
 | getFormApi        | form mounted 时会回调该函数，将 formAPI 作为参数传入。formApi 可用于修改 form 内部状态（值、校验状态、错误信息）                                                                                              | function(formApi:object)                      |            |
@@ -2202,56 +2205,60 @@ FormState 存储了所有 Form 内部的状态值，包括各表单控件的值�
 
 ```jsx
 
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
+import { defineComponent, shallowRef } from 'vue';
 
-export default () => {
-    // 函数式组件通过useRef存储formApi
-    const api = useRef();
+export const Comp = defineComponent(() => {
+  // 函数式组件通过useRef存储formApi
+  const api = shallowRef();
 
-    return (
-        <Form getFormApi={formApi => api.current = formApi}>
-            <Form.Input field='a' />
-            <Button onClick={()=>{console.log(api);}}>log</Button>
-        </Form>
-    );
-};
+  return ()=>(
+    <Form getFormApi={formApi => api.value = formApi}>
+      <Form.Input field='a' />
+      <Button onClick={()=>{console.log(api);}}>log</Button>
+    </Form>
+  );
+});
 ```
 
 ```jsx
 
-import { Form, Button } from '@douyinfe/semi-ui';
+import { Form, Button } from '@kousum/semi-ui-vue';
+import { shallowRef, defineComponent } from 'vue';
 
-class FormApiDemo extends React.Component {
-    constructor() {
-        super();
-        this.getFormApi = this.getFormApi.bind(this);
-        this.formBRef = React.createRef();
-    }
+export const Comp = defineComponent(() => {
+  const formBRef = shallowRef();
+  const formApi = shallowRef();
 
-    getFormApi(formApi) {
-        this.formApi = formApi;
-        // 获取到formApi对象后，你可以使用它来对表单进行任何你想做的修改 ~
-    }
 
-    changeValues() {
-        // 使用 FormA的 formApi
-        this.formApi.setValues({ a: 1 });
-        // 使用 FormB的 formApi
-        this.formBRef.current.formApi.setValues({ b: 2 });
-    }
 
-    render() {
-        return (
-            <>
-                {/* 通过getFormApi回调获取并保存formApi */}
-                <Form getFormApi={this.getFormApi} />
-                {/* 通过ref直接获取Form组件实例上的formApi */}
-                <Form ref={this.formBRef} />
-                <Button onClick={()=>this.changeValues()}>Change</Button>
-            </>
-        );
-    }
-}
+  function getFormApi(formApi) {
+    formApi.value = formApi;
+    // 获取到formApi对象后，你可以使用它来对表单进行任何你想做的修改 ~
+  }
+
+  function changeValues() {
+    // 使用 FormA的 formApi
+    formApi.value.setValues({ a: 1 });
+    // 使用 FormB的 formApi
+    formBRef.value.formApi.setValues({ b: 2 });
+  }
+
+  return () => {
+    return (
+      <>
+        {/* 通过getFormApi回调获取并保存formApi */}
+        <Form getFormApi={getFormApi} />
+        {/* 通过ref直接获取Form组件实例上的formApi */}
+        <Form ref={formBRef} />
+        <Button onClick={() => changeValues()}>Change</Button>
+      </>
+    );
+  }
+})
+
+
+
 ```
 
 
@@ -2285,8 +2292,8 @@ class FormApiDemo extends React.Component {
 | transform             | 校验前转换字段值，转换后的值仅会在校验时被消费，对 formState 无影响<br/> 使用示例: (value) => Number                                                                                                                 | function(fieldValue)                                                                          |           |
 | allowEmptyString      | 是否允许值为空字符串。默认情况下值为''时，该 field 对应的 key 会从 values 中移除，如果你希望保留该 key，那么需要将 allowEmptyString 设为 true                                                                       | boolean                                                                                       | false     |
 | stopValidateWithError | 为 true 时，使用 rules 校验，碰到第一个检验不通过的 rules 后，将不再触发后续 rules 的校验                                                                                                  | boolean                                                                                       | false     |
-| helpText              | 自定义提示信息，与校验信息公用同一区块展示，两者均有值时，优先展示校验信息                                                                                                                | ReactNode                                                                                     |           |
-| extraText             | 额外的提示信息，当需要错误信息和提示文案同时出现时，可以使用这个，位于 helpText/errorMessage 后                                                                                           | ReactNode                                                                                     |           |
+| helpText              | 自定义提示信息，与校验信息公用同一区块展示，两者均有值时，优先展示校验信息                                                                                                                | VNode                                                                                     |           |
+| extraText             | 额外的提示信息，当需要错误信息和提示文案同时出现时，可以使用这个，位于 helpText/errorMessage 后                                                                                           | VNode                                                                                     |           |
 | pure                  | 是否仅接管数据流，为 true 时不会自动插入 ErrorMessage、Label、extraText 等模块，样式、DOM 结构与原始的组件保持一致                                                                         | boolean                                                                                       | false     |
 | extraTextPosition     | 控制extraText的显示位置，可选`middle`（垂直方向以Label、extraText、Field主体的顺序显示）、`bottom` (垂直方向以Label、Field主体、extraText的顺序显示)；在Form与Field上同时传入时，以Field props为准                                                                          | string                                                                                       | 'bottom'     |
 | ...other              | 组件的其他可配置属性，与上面的属性平级一并传入即可，例如 Input 的 size/placeholder，**Field 会将其透传至组件本身**                                                                                                  |                                                                                               |
@@ -2301,19 +2308,19 @@ class FormApiDemo extends React.Component {
 | --------------------- | ---------------------------------------------------------------- | -------- | --------- |
 | field                 | 该表单控件的值在 formState.values 中的映射路径<br/>必填，例如存在 ArrayField负责 a[0].name、a[1].name、a[2].name三行渲染，他们的父级为a，此处props.field应为 a                                                                    | string                                                                                        |           |
 | initValue             | ArrayField的初始值，如果同时在 formProps.initValues 与 arrayFieldProps.initValue 中都配置了初始值，后者优先级更高  | Array                        | []
-| children              | ArrayField的内容，类型为 Function，函数入参为 add、addWithInitValue 等操作函数 及 arrayFields，执行后应当返回 ReactNode  | Function(ArrayFieldChildrenProps) => ReactNode  |
+| children              | ArrayField的内容，类型为 Function，函数入参为 add、addWithInitValue 等操作函数 及 arrayFields，执行后应当返回 VNode  | Function(ArrayFieldChildrenProps) => VNode  |
 
 ```ts
 interface ArrayFieldChildrenProps {
     arrayFields: ArrayFieldItem<>;                               // 当前数组表单，可以用来执行map操作渲染出每一行
-    add: export default () => void;                                             // 新增空白行
+    add: () => void;                                             // 新增空白行
     addWithInitValue: (lineObject: Record<string, any>) => void; // 新增一个带初始值的行
 }
 
 interface ArrayFieldItem {
     key: string;        // 一个用于标识当前行的key，应当绑定在当前行的 wrapper 上
     field: string;      // 本行 fieldPath, 它等同于 ArrayFieldProps.field + [index]
-    remove: export default () => void; // 移除本行的操作函数，调用时将直接删除本行
+    remove: () => void; // 移除本行的操作函数，调用时将直接删除本行
 }
 ```
 
@@ -2321,31 +2328,31 @@ interface ArrayFieldItem {
 ## Form.Section
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { Section } = Form;
 ```
 
 | 属性      | 说明     | 类型      | 版本|
 | --------- | -------- | --------- |---- |
-| text      | 段落标题 | ReactNode | v1.0.0|
+| text      | 段落标题 | VNode | v1.0.0|
 | className | 样式类名 | string    | v1.0.0|
 | style     | 内联样式 | object    | v1.0.0|
-| children  | 段落内容 | ReactNode | v1.0.0|
+| children  | 段落内容 | VNode | v1.0.0|
 
 ## Form.Label
 
 默认情况下，Label 会由 Form 自行插入到每个 Field 中。如果你需要在其他地方自行插入 Label，我们提供了 Label 组件可以导出
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { Label } = Form;
 ```
 
 | 属性      | 说明                     | 类型      | 默认值 | 版本|
 | --------- | ------------------------ | --------- | ------ |--- |
-| text      | Label 内容               | ReactNode |        |  |
+| text      | Label 内容               | VNode |        |  |
 | required  | 是否展示必填的\*号       | boolean   | false  |  |
-| extra     | 跟随在 required 后的内容 | ReactNode |        | v0.33.0 |
+| extra     | 跟随在 required 后的内容 | VNode |        | v0.33.0 |
 | align     | text-align               | string    | 'left' |  |
 | className | 样式类名                 | string    |        |  |
 | style     | 内联样式                 | string    |        |  |
@@ -2360,15 +2367,15 @@ const { Label } = Form;
 | style            | 内联样式                                                  | object                   ||
 | label            | InputGroup 的 label 标签文本                      |  Label \| string                 | |
 | labelPosition    | 该表单控件的 label 位置，可选'top'/'left'/'inset'。在 Form 与 InputGroup 同时传入时，以 InputGroup props为准 | string     | 'top'|
-| extraText        | 额外的提示信息，当需要错误信息和提示文案同时出现时，可以使用这个，位于 errorMessage 后 | ReactNode | | v2.29.0 |
+| extraText        | 额外的提示信息，当需要错误信息和提示文案同时出现时，可以使用这个，位于 errorMessage 后 | VNode | | v2.29.0 |
 | extraTextPosition| 控制extraText的显示位置，可选`middle`（垂直方向以Label、extraText、Group的顺序显示）、`bottom` (垂直方向以Label、Group、extraText的顺序显示)| string | 'bottom' | v2.29.0|
 
-当 extraTextPositon 为 middle，且 labelPosition 为 left时。由于 extraText允许为 ReactNode，内容高度不定，Label将不再确保能与 Field / InputGroup 中的首行文本对齐。
+当 extraTextPositon 为 middle，且 labelPosition 为 left时。由于 extraText允许为 VNode，内容高度不定，Label将不再确保能与 Field / InputGroup 中的首行文本对齐。
 
 ## Form.Slot
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { Slot } = Form;
 ```
 
@@ -2378,22 +2385,22 @@ const { Slot } = Form;
 | labelPosition | slot 的 label 位置，默认情况下继承自 Form props，也可单独覆盖。可选'top'、'left'                                                   | string         |  |
 | className     | slot 样式类名                                                                                                                      | string         |
 | style         | slot 内联样式                                                                                                                      | object         |
-| children      | slot 的主体内容                                                                                                                    | ReactNode      |
-| error         | slot 的错误提示信息                                                                                                                 | ErrorMessage\|ReactNode      |
+| children      | slot 的主体内容                                                                                                                    | VNode      |
+| error         | slot 的错误提示信息                                                                                                                 | ErrorMessage\|VNode      |
 
 ## Form.ErrorMessage
 
 ```jsx
-import { Form } from '@douyinfe/semi-ui';
+import { Form } from '@kousum/semi-ui-vue';
 const { ErrorMessage } = Form;
 ```
 
--   当 error 为 ReactNode、String、Boolean 时，直接渲染
+-   当 error 为 VNode、String、Boolean 时，直接渲染
 -   当 error 为数组时，会自动执行 join 操作聚合数组内的错误信息
 
 | 属性             | 说明                                                      | 类型                     |
 | ---------------- | --------------------------------------------------------- | ------------------------ |
-| error            | 错误信息内容                                              | string\|array\|ReactNode\|boolean |
+| error            | 错误信息内容                                              | string\|array\|VNode\|boolean |
 | className        | 样式类名                                                  | string                   |
 | style            | 内联样式                                                  | object                   |
 | showValidateIcon | 是否自动加上 validateStatus 对应的 icon                       | boolean                  |
