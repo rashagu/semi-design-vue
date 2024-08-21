@@ -1,7 +1,7 @@
 import useFormState from './useFormState';
 import * as ObjectUtil from '@douyinfe/semi-foundation/utils/object';
 import { FormState } from '../interface';
-import {Ref} from "vue";
+import { computed, Ref } from 'vue';
 
 const buildFieldState = (formState: Ref<FormState>, field: string) => ({
     value: ObjectUtil.get(formState.value.values, field),
@@ -11,7 +11,7 @@ const buildFieldState = (formState: Ref<FormState>, field: string) => ({
 
 function useFieldState(field: string) {
     const formState = useFormState();
-    const fieldState = buildFieldState(formState, field);
+    const fieldState = computed(()=>buildFieldState(formState, field));
     return fieldState;
 }
 

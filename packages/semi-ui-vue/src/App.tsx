@@ -136,6 +136,7 @@ import SelectDemoToRawTest from './components/select/__test__/SelectDemoToRawTes
 import ColorPickerDemo from './components/colorPicker/__test__/ColorPickerDemo';
 import FormLayoutDemo from './components/form/__test__/FormLayoutDemo.vue';
 import FormSlotDemo from './components/form/__test__/FormSlotDemo';
+import FormWinthFieldDemo4 from './components/form/__test__/FormWinthFieldDemo4';
 export interface ExampleProps {
   name?: string
 }
@@ -212,6 +213,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ToastUseDemo/>*/}
         {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
+        <FormWinthFieldDemo4/>
         {/*<FormSlotDemo/>*/}
         {/*<FormLayoutDemo/>*/}
         {/*<FormAllDemo />*/}
@@ -264,7 +266,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ColorPickerDemo/>*/}
 
         {/*<SelectDemoToRawTest/>*/}
-        <SelectDemo/>
+        {/*<SelectDemo/>*/}
         {/*<SelectDemo2/>*/}
         {/*<SelectDemo3/>*/}
         {/*<SelectDemo4/>*/}

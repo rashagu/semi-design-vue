@@ -377,11 +377,6 @@ function withField<
        *
        */
       const handleChange = (newValue: any, e: any, ...other: any[]) => {
-        // 不明来源事件触发过滤
-        if (newValue && newValue[Symbol.toStringTag] && newValue[Symbol.toStringTag] === 'Event') {
-          console.trace('不明来源事件触发过滤', newValue);
-          return;
-        }
 
         let { trigger, emptyValue } = mergeProps(_getProps());
         let { allowEmptyString, allowEmpty } = mergeProps(_getProps());
