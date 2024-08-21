@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 0.18.2
+
+### Patch Changes
+
+- fix [Form] withField handleChange & useFieldState & [Tag] vue HTMLAttributes
+
 ## 0.18.1
 
 ### Patch Changes
