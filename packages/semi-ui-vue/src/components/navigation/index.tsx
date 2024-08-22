@@ -12,7 +12,7 @@ import {
   watch,
   watchEffect,
 } from 'vue';
-import { BaseProps, useBaseComponent } from '../_base/baseComponent';
+import { BaseProps, useBaseComponent, useHasInProps } from '../_base/baseComponent';
 import * as PropTypes from '../PropTypes';
 import { vuePropsMake } from '../PropTypes';
 import cls from 'classnames';
@@ -35,6 +35,7 @@ import { Motion } from '../_base/base';
 import LocaleConsumer from '../locale/localeConsumer';
 import { CombineProps, VueJsxNode } from '../interface';
 import { NavFooter, NavHeader, NavItem } from '../index';
+import { getFragmentChildren } from '../_utils';
 
 export type Mode = 'vertical' | 'horizontal';
 export { NavFooterProps, NavHeaderProps, ToggleIcon, ItemKey, SubNavProps, NavItemProps };
@@ -58,7 +59,7 @@ export type NavItems = (string | SubNavPropsWithItems | NavItemPropsWithItems)[]
 
 export interface NavProps extends BaseProps {
   bodyStyle?: CSSProperties;
-  children?: VNode;
+  children?: VNode[];
   defaultIsCollapsed?: boolean;
   defaultOpenKeys?: string[];
   defaultSelectedKeys?: string[];
@@ -190,8 +191,8 @@ const defaultProps = {
 
 export const vuePropsType = vuePropsMake<NavProps>(propTypes, defaultProps);
 const index = defineComponent({
-  props: { ...vuePropsType },
-  name: 'Navigation',
+  props: { ...vuePropsType, children: Array as PropType<VNode[]>, },
+  name: 'NavigationIndex',
   setup(props, { slots }) {
     const slots_ = useSlots();
     let itemsChanged: boolean = true;
@@ -204,7 +205,7 @@ const index = defineComponent({
       selectedKeys: [],
     });
 
-    const { adapter: adapterInject, isControlled, getDataAttr } = useBaseComponent<NavProps>(props, state);
+    const { adapter: adapterInject, isControlled, getDataAttr, } = useBaseComponent<NavProps>(props, state);
 
     let initState = {
       isCollapsed: Boolean(isControlled('isCollapsed') ? props.isCollapsed : props.defaultIsCollapsed),
@@ -279,7 +280,7 @@ const index = defineComponent({
     const adapter = adapter_();
 
     const foundation = new NavigationFoundation(adapter);
-    if ((props.items && props.items.length) || slots_.default?.()) {
+    if ((props.items && props.items.length) || props.children) {
       const calcState = foundation.init('constructor');
       let newInitState = {
         ...initState,
@@ -340,7 +341,7 @@ const index = defineComponent({
     //   console.log('init')
     // }, {})
     watchEffect(() => {
-      if (slots.default) {
+      if (props.children) {
         foundation.init('');
       }
     });
@@ -392,7 +393,7 @@ const index = defineComponent({
     };
 
     return () => {
-      const originChildren = slots.default?.();
+      const originChildren = props.children;
       const {
         mode,
         onOpenChange,
@@ -414,7 +415,7 @@ const index = defineComponent({
         renderWrapper,
         getPopupContainer,
         ...rest
-      } = props;
+      } = adapter.getProps();
 
       const { selectedKeys, openKeys, items, isCollapsed } = state;
 
@@ -531,17 +532,29 @@ const index = defineComponent({
     };
   },
 });
-
-export type NavType = typeof index & {
+const Nav = defineComponent({
+  props: { ...vuePropsType },
+  name: 'Navigation',
+  setup(props, {  }) {
+    const slots = useSlots();
+    const {getProps} = useHasInProps()
+    const Index = index
+    return () => {
+      const children = getFragmentChildren(slots)
+      return <Index {...getProps(props)} children={children}/>
+    };
+  },
+});
+export type NavType = typeof Nav & {
   Item: typeof Item;
   Header: typeof Header;
   Footer: typeof Footer;
   SubNav: typeof SubNav
 }
 
-const BaseNav = index as NavType
+const BaseNav = Nav as NavType
 BaseNav.Item = Item
 BaseNav.Header = Header
 BaseNav.Footer = Footer
-BaseNav.SubNav = SubNav
+BaseNav.Sub = SubNav
 export default BaseNav;
