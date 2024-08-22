@@ -340,8 +340,8 @@ const Upload = defineComponent({
    *   which seems to be a bug, remove props type declare here
    */
     function getDerivedStateFromProps(props) {
-      const { fileList } = props;
-      if ('fileList' in props) {
+      const { fileList } = getProps(props);
+      if ('fileList' in getProps(props)) {
         return {
           fileList: fileList || [],
         };
