@@ -287,5 +287,11 @@ const Breadcrumb = defineComponent({
   },
 });
 
-export default Breadcrumb;
+
+export type BreadcrumbType = typeof Breadcrumb & {
+  Item: typeof BreadcrumbItem
+}
+const BaseBreadcrumb = Breadcrumb as BreadcrumbType
+BaseBreadcrumb.Item = BreadcrumbItem
+export default BaseBreadcrumb;
 export { BreadcrumbItem };
