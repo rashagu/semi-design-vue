@@ -56,6 +56,7 @@ export default defineConfig({
         additionalData: `
           @import "~@douyinfe/semi-theme-default/scss/global.scss";
           @import "~@douyinfe/semi-theme-default/scss/index.scss";
+          @import "~@douyinfe/semi-theme-default/scss/animation.scss";
         `,
       }
     }

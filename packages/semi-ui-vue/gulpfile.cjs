@@ -37,8 +37,10 @@ gulp.task('compileScss', function compileScss() {
         rootPath = rootPath.replaceAll('\\', '/')
         const scssVarStr = `@import "${rootPath}node_modules/@douyinfe/semi-theme-default/scss/index.scss";\n`;
         const cssVarStr = `@import "${rootPath}node_modules/@douyinfe/semi-theme-default/scss/global.scss";\n`;
+        const animationStr = `@import "${rootPath}node_modules/@douyinfe/semi-theme-default/scss/animation.scss";\n`;
+        const animationBuffer = Buffer.from(animationStr);
         const scssBuffer = Buffer.from(scssVarStr);
-        const buffers = [scssBuffer];
+        const buffers = [scssBuffer, animationBuffer];
         if (/_base\/base\.scss/.test(chunk.path) || /_base\\base\.scss/.test(chunk.path) || /base\/base\.scss/.test(chunk.path) || /base\\base\.scss/.test(chunk.path)) {
           buffers.push(Buffer.from(cssVarStr));
         }
