@@ -1654,8 +1654,10 @@ const Select = defineComponent({
 });
 export type SelectType = typeof Select & {
   Option: typeof Option
+  OptGroup: typeof OptionGroup
 }
 const baseSelect = Select as SelectType
 baseSelect.Option = Option
+baseSelect.OptGroup = OptionGroup
 export default baseSelect
 export { Option as SelectOption, OptionGroup as SelectOptionGroup };

@@ -41,7 +41,7 @@ export interface OptionProps extends RemoveIndexSignature<BasicOptionProps> {
   key_?: any,
   _parentGroup?: OptionGroupProps,
   _keyInOptionList?: string,
-  _keyInJsx?: string,
+  _keyInJsx?: string | number,
   _inputCreateOnly?: boolean,
 
   optionRest?: Record<string, any>
@@ -86,7 +86,7 @@ export const vuePropsType: CombineProps<OptionProps> = {
   key_: [Object, String, Number],
   _parentGroup: Object,
   _keyInOptionList: String,
-  _keyInJsx: String,
+  _keyInJsx: [String, Number],
   _inputCreateOnly: Boolean,
 
   optionRest: {
