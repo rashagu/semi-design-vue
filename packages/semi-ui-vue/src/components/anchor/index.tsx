@@ -11,7 +11,6 @@ import { ArrayElement } from '../_base/base';
 import { ShowTooltip } from '../typography/interface';
 import {
   cloneVNode,
-  ComponentObjectPropsOptions,
   CSSProperties,
   defineComponent,
   h,
@@ -366,5 +365,10 @@ const Anchor = defineComponent({
   },
 });
 
+export type AnchorType = typeof Anchor & {
+  Link: typeof Link
+}
+const BaseAnchor = Anchor as AnchorType
+BaseAnchor.Link = Link
 export { Link, Link as AnchorLink };
-export default Anchor;
+export default BaseAnchor;
