@@ -188,7 +188,7 @@ export const VuePropsType = vuePropsMake(propTypes, defaultProps);
 const Input = defineComponent({
   props: {...VuePropsType},
   name: 'Input',
-  setup(props, { slots, attrs }) {
+  setup(props, { slots, attrs, expose }) {
     const { getProps } = useHasInProps();
     const initValue = 'value' in getProps(props) ? props.value : props.defaultValue;
     const state = reactive<InputState>({
@@ -493,6 +493,14 @@ const Input = defineComponent({
       return inputRef;
     }
 
+    expose({
+      focus:()=>{
+        inputRef.value.focus();
+      },
+      blur:()=>{
+        inputRef.value.blur();
+      },
+    })
     // onMounted(()=>{
     //   console.log('onMounted')
     // })
