@@ -268,7 +268,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首页', link: '/' },
-      { text: '快速开始', link: '/start/getting-started/' },
+      { text: '快速开始', link: '/zh-CN/start/getting-started/' },
     ],
 
     sidebar: [
