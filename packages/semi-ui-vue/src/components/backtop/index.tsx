@@ -22,6 +22,7 @@ import { CombineProps, VueJsxNode } from '../interface';
 import { useBaseComponent } from '../_base/baseComponent';
 import { TabsProps } from '../tabs';
 import { vuePropsMake } from '../PropTypes';
+import { getFragmentChildren } from '../_utils';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -110,7 +111,7 @@ const BackTop = defineComponent({
     }
 
     return () => {
-      const children = slots.default?.();
+      const children = getFragmentChildren(slots);
       const { className, style, onClick, visibilityHeight, target, ...others } = props;
       const { visible } = state;
       const preCls = cls(prefixCls, className);

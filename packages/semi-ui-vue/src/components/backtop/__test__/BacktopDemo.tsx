@@ -38,6 +38,7 @@ const BacktopDemo = defineComponent((props, {}) => {
           <BackTop target={()=>containerDiv.value} style={style}>
             <IconArrowUp />
           </BackTop>
+          <BackTop target={()=>containerDiv.value}>2323</BackTop>
         </div>
       </div>
     </div>
