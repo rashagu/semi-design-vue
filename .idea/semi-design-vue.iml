@@ -24,6 +24,7 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/vite-plugin-semi-theme/dist" />
       <excludeFolder url="file://$MODULE_DIR$/docs/src/zh-CN/public" />
       <excludeFolder url="file://$MODULE_DIR$/docs/src/zh-CN/public/semi" />
+      <excludeFolder url="file://$MODULE_DIR$/docs/src/public" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -714,6 +714,13 @@ img {
     }
   }
 }
+
+
+.aside-content{
+  .outline-link{
+    line-height: 24px;
+  }
+}
 </style>
 <style lang="scss" scoped>
 .header {
@@ -730,7 +737,6 @@ img {
   //  height: 100%!important;
   //}
 }
-
 
 
 

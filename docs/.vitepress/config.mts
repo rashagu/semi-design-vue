@@ -630,7 +630,7 @@ export default defineConfig({
       },
     ],
 
-    outline: { level: [1, 4] },
+    outline: { level: [1, 3] },
     socialLinks: [{ icon: 'github', link: 'https://github.com/rashagu/semi-design-vue' }],
   },
 });
