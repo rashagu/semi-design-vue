@@ -1,23 +1,24 @@
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
+import { vuePropsMake } from '../PropTypes';
 import TreeFoundation, { TreeAdapter } from '@douyinfe/semi-foundation/tree/foundation';
 import {
-  convertDataToEntities,
-  flattenTreeData,
+  calcCheckedKeys,
+  calcDisabledKeys,
+  calcExpandedKeys,
   calcExpandedKeysForValues,
   calcMotionKeys,
+  convertDataToEntities,
   convertJsonToData,
-  findKeysForValues,
-  calcCheckedKeys,
-  calcExpandedKeys,
   filterTreeData,
+  findKeysForValues,
+  flattenTreeData,
   normalizeValue,
   updateKeys,
-  calcDisabledKeys,
 } from '@douyinfe/semi-foundation/tree/treeUtil';
-import { cssClasses, strings } from '@douyinfe/semi-foundation/tree/constants';
+import { cssClasses } from '@douyinfe/semi-foundation/tree/constants';
 
-import { isEmpty, isEqual, get, isFunction, pick, isUndefined } from 'lodash';
+import { get, isEmpty, isEqual, isFunction, isUndefined, pick } from 'lodash';
 import { cloneDeep } from './treeUtil';
 import Input from '../input/index';
 import { FixedSizeList as VirtualList } from '@kousum/vue3-window';
@@ -30,32 +31,19 @@ import '@douyinfe/semi-foundation/tree/tree.scss';
 import { IconSearch } from '@kousum/semi-icons-vue';
 import { Locale as LocaleObject } from '../locale/interface';
 import {
-  TreeProps,
-  TreeState,
-  TreeNodeProps,
-  TreeNodeData,
   FlattenNode,
   KeyEntity,
   OptionProps,
   ScrollData,
+  TreeNodeData,
+  TreeNodeProps,
+  TreeProps,
+  TreeState,
 } from './interface';
 import CheckboxGroup from '../checkbox/checkboxGroup';
-import {
-  ComponentObjectPropsOptions,
-  CSSProperties,
-  defineComponent,
-  Fragment,
-  h,
-  nextTick,
-  PropType,
-  reactive,
-  ref,
-  useSlots,
-  watch,
-} from 'vue';
-import { vuePropsMake } from '../PropTypes';
+import { CSSProperties, defineComponent, Fragment, h, PropType, reactive, ref, toRaw, useSlots, watch } from 'vue';
 import { useConfigContext } from '../configProvider/context/Consumer';
-import { useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 import { CombineProps } from '../interface';
 
 export * from './interface';
@@ -153,8 +141,9 @@ export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const Tree = defineComponent({
   props: { ...vuePropsType },
   name: 'Tree',
-  setup(props, {}) {
+  setup(props, {expose}) {
     const slots = useSlots();
+    const { getProps } = useHasInProps()
 
     let onNodeClick: any;
     let onMotionEnd: any;
@@ -257,6 +246,7 @@ const Tree = defineComponent({
       let treeData;
       let keyEntities = prevState.keyEntities || {};
       let valueEntities = prevState.cachedKeyValuePairs || {};
+
       const isSeaching = Boolean(props.filterTreeNode && prevState.inputValue && prevState.inputValue.length);
       const newState: Partial<TreeState> = {
         prevProps: props,
@@ -537,18 +527,19 @@ const Tree = defineComponent({
         () => props.disableStrictly,
         () => props.checkRelation,
 
-        () => state.keyEntities as any,
-        () => state.cachedKeyValuePairs as any,
-        () => state.inputValue as any,
-        () => state.expandedKeys as any,
-        () => state.flattenNodes as any,
-        () => state.treeData as any,
-        () => state.filteredExpandedKeys as any,
-        () => state.filteredShownKeys as any,
-        () => state.checkedKeys as any,
+        // getDerivedStateFromProps -> 不需要监听state
+        // () => state.keyEntities as any,
+        // () => state.cachedKeyValuePairs as any,
+        // () => state.inputValue as any,
+        // () => state.expandedKeys as any,
+        // () => state.flattenNodes as any,
+        // () => state.treeData as any,
+        // () => state.filteredExpandedKeys as any,
+        // () => state.filteredShownKeys as any,
+        // () => state.checkedKeys as any,
       ],
       (value, oldValue, onCleanup) => {
-        const newState = getDerivedStateFromProps({ ...props }, { ...state } as any);
+        const newState = getDerivedStateFromProps({ ...getProps(props) }, { ...state } as any);
         newState &&
           Object.keys(newState).forEach((key) => {
             state[key] = newState[key];
@@ -572,6 +563,10 @@ const Tree = defineComponent({
       }
     };
 
+    expose({
+      search,
+      scrollTo,
+    })
     function renderInput() {
       const { searchClassName, searchStyle, searchRender, searchPlaceholder, showClear } = props;
       if (searchRender === false) {
@@ -596,7 +591,7 @@ const Tree = defineComponent({
               if (isFunction(searchRender)) {
                 return searchRender({ ...inputProps });
               }
-              return <Input aria-label="Filter Tree" ref={inputRef as any} {...inputProps} />;
+              return <Input aria-label="Filter Tree" ref={inputRef} {...inputProps} />;
             }}
           </LocaleConsumer>
         </div>
@@ -624,8 +619,8 @@ const Tree = defineComponent({
       new Promise((resolve) => {
         // We need to get the latest state of loading/loaded keys
         const { loadingKeys } = foundation.handleNodeLoad(
-          state.loadedKeys || new Set([]),
-          state.loadingKeys || new Set([]),
+          toRaw(state.loadedKeys) || new Set([]),
+          toRaw(state.loadingKeys) || new Set([]),
           data,
           resolve
         );
@@ -653,11 +648,11 @@ const Tree = defineComponent({
     };
 
     const onNodeDragEnter = (e: DragEvent, treeNode: TreeNodeProps) => {
-      foundation.handleNodeDragEnter(e, treeNode, dragNode);
+      foundation.handleNodeDragEnter(e, treeNode, dragNode.value);
     };
 
     const onNodeDragOver = (e: DragEvent, treeNode: TreeNodeProps) => {
-      foundation.handleNodeDragOver(e, treeNode, dragNode);
+      foundation.handleNodeDragOver(e, treeNode, dragNode.value);
     };
 
     const onNodeDragLeave = (e: DragEvent, treeNode: TreeNodeProps) => {
@@ -669,7 +664,7 @@ const Tree = defineComponent({
     };
 
     const onNodeDrop = (e: DragEvent, treeNode: TreeNodeProps) => {
-      foundation.handleNodeDrop(e, treeNode, dragNode);
+      foundation.handleNodeDrop(e, treeNode, dragNode.value);
     };
 
     const getTreeNodeRequiredProps = () => {
@@ -700,6 +695,8 @@ const Tree = defineComponent({
       const props_: any = pick(treeNode, ['key', 'label', 'disabled', 'isLeaf', 'icon', 'isEnd']);
       const children = data[get(keyMaps, 'children', 'children')]; //TODO
       !isUndefined(children) && (props_.children = children);
+      // 不要删除，更新用
+      console.debug(state.loadingKeys.size);
       return (
         <TreeNode
           {...treeNodeProps}

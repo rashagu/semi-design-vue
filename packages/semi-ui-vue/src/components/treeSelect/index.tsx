@@ -1504,6 +1504,8 @@ const TreeSelect = defineComponent({
       const { keyMaps } = props_;
       const children = data[get(keyMaps, 'children', 'children')];
       !isUndefined(children) && (props_.children = children);
+      // 不要删除，更新用
+      console.debug(state.loadingKeys.size);
       return <TreeNode {...treeNodeProps} {...data} {...props_} data={data} style={style} showLine={showLine} />;
     };
 
