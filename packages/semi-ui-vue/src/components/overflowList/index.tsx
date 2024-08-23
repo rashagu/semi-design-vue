@@ -129,20 +129,20 @@ const OverflowList = defineComponent({
       maxCount: 0,
     });
 
-    function getDerivedStateFromProps(props: OverflowListProps): OverflowListState {
+    function getDerivedStateFromProps(props_: OverflowListProps): OverflowListState {
       const { prevProps } = state;
       const newState: OverflowListState = {};
-      newState.prevProps = props;
+      newState.prevProps = props_;
 
       const needUpdate = (name: string): boolean => {
-        return (!prevProps && name in getProps(props)) || (prevProps && !isEqual(prevProps[name], props[name]));
+        return (!prevProps && name in props_) || (prevProps && !isEqual(prevProps[name], props_[name]));
       };
       if (needUpdate('items') || needUpdate('style')) {
-        // reset visible state if the above props change.
+        // reset visible state if the above props_ change.
         newState.direction = OverflowDirection.GROW;
         newState.lastOverflowCount = 0;
-        if (props.renderMode === RenderMode.SCROLL) {
-          newState.visible = props.items;
+        if (props_.renderMode === RenderMode.SCROLL) {
+          newState.visible = props_.items;
           newState.overflow = [];
         } else {
           newState.visible = [];
@@ -158,7 +158,7 @@ const OverflowList = defineComponent({
     watch(
       () => props,
       (val) => {
-        const newState = getDerivedStateFromProps({ ...props });
+        const newState = getDerivedStateFromProps({ ...getProps(props) });
         newState &&
           Object.keys(newState).forEach((key) => {
             state[key] = newState[key];
