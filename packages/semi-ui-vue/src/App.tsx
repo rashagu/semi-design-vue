@@ -137,6 +137,14 @@ import ColorPickerDemo from './components/colorPicker/__test__/ColorPickerDemo';
 import FormLayoutDemo from './components/form/__test__/FormLayoutDemo.vue';
 import FormSlotDemo from './components/form/__test__/FormSlotDemo';
 import FormWinthFieldDemo4 from './components/form/__test__/FormWinthFieldDemo4';
+import SelectRenderOptionItem from './components/select/__test__/SelectRenderOptionItem';
+import UploadDemo3 from './components/upload/__test__/UploadDemo3';
+import UploadDemo4 from './components/upload/__test__/UploadDemo4';
+import NavDemo2 from './components/navigation/__test__/NavDemo2';
+import TabsDemo5 from './components/tabs/__test__/TabsDemo5';
+import TreeDemo3 from './components/tree/__test__/TreeDemo3';
+import TreeDemo4 from './components/tree/__test__/TreeDemo4';
+import TreeDemo5 from './components/tree/__test__/TreeDemo5';
 export interface ExampleProps {
   name?: string
 }
@@ -177,6 +185,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<StepsDemo />*/}
         {/*<BacktopDemo />*/}
         {/*<AnchorDemo />*/}
+        {/*<TabsDemo5/>*/}
         {/*<TabsDemo />*/}
         {/*<TabsDemo3/>*/}
         {/*<TabsDemo4/>*/}
@@ -213,7 +222,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ToastUseDemo/>*/}
         {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
-        <FormWinthFieldDemo4/>
+        {/*<FormWinthFieldDemo4/>*/}
         {/*<FormSlotDemo/>*/}
         {/*<FormLayoutDemo/>*/}
         {/*<FormAllDemo />*/}
@@ -225,7 +234,11 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<WithFieldDemo2/>*/}
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
+        {/*<TreeDemo />*/}
         {/*<TreeDemo2 />*/}
+        {/*<TreeDemo3/>*/}
+        {/*<TreeDemo4/>*/}
+        <TreeDemo5/>
         <div style={{backgroundColor: 'red', width: 300, height: 300}}>
 
         </div>
@@ -243,6 +256,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<LottieDemo/>*/}
         {/*<MarkDownRenderDemo/>*/}
         {/*<CodeHighlightDemo/>*/}
+        {/*<UploadDemo4/>*/}
+        {/*<UploadDemo3/>*/}
         {/*<UploadDemo/>*/}
         {/*<UpdateDemo2/>*/}
         {/*<ProgressDemo/>*/}
@@ -265,6 +280,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<AutoCompleteSFC/>*/}
         {/*<ColorPickerDemo/>*/}
 
+        {/*<SelectRenderOptionItem/>*/}
         {/*<SelectDemoToRawTest/>*/}
         {/*<SelectDemo/>*/}
         {/*<SelectDemo2/>*/}
@@ -305,6 +321,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SpaceTest/>*/}
         {/*<PopoverTest />*/}
         {/*<NavigationDemo />*/}
+        {/*<NavDemo2/>*/}
+
         {/*<ChatDemo/>*/}
         <div class={'aa'}>123</div>
       </ConfigProvider>

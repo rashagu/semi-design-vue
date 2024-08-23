@@ -279,8 +279,9 @@ const OverflowList = defineComponent({
     };
 
     const renderOverflow = (): VueJsxNode => {
+      // 不要删除，这里需要它进行更新渲染，不然页面似乎不会更新
+      console.debug(state.visibleState);
       const overflow = foundation.getOverflowItem();
-
       return props.overflowRenderer(overflow);
     };
 
