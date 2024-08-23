@@ -1,15 +1,15 @@
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
+import { vuePropsMake } from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/tree/constants';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
-import { debounce, isFunction, isString, get, isEmpty } from 'lodash';
-import { IconTreeTriangleDown, IconFile, IconFolder, IconFolderOpen } from '@kousum/semi-icons-vue';
+import { debounce, get, isEmpty, isFunction, isString } from 'lodash';
+import { IconFile, IconFolder, IconFolderOpen, IconTreeTriangleDown } from '@kousum/semi-icons-vue';
 import { Checkbox } from '../checkbox';
 import Spin from '../spin';
 import type { RenderFullLabelProps, TreeNodeProps, TreeNodeState } from './interface';
 import { getHighLightTextHTML } from '../_utils/index';
-import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropType, reactive, ref, useSlots } from 'vue';
-import { vuePropsMake } from '../PropTypes';
+import { cloneVNode, defineComponent, h, PropType, reactive, ref, useSlots } from 'vue';
 import { useTreeContext } from './TreeContext/Consumer';
 import type { CombineProps, VueHTMLAttributes } from '../interface';
 import Indent from './indent';
@@ -433,8 +433,7 @@ const TreeNode = defineComponent({
       if (renderFullLabel) {
         const customLabel = renderFullLabel({ ...labelProps });
         if (draggable) {
-          // @ts-ignore skip cloneElement type check
-          return cloneElement(customLabel, {
+          return cloneVNode(customLabel as any, {
             ref: refNode,
             ...dragProps,
           });
