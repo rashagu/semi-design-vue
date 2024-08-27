@@ -26,7 +26,7 @@ import {
 } from 'vue';
 import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 import { CombineProps, VueJsxNode } from '../interface';
-import { getFragmentChildren } from '../_utils';
+import { getChildren, getFragmentChildren, getVNodeChildren } from '../_utils';
 import cls from 'classnames';
 
 const prefixCls = cssClasses.PREFIX;
@@ -217,9 +217,9 @@ const Preview = defineComponent({
       let index = 0;
       const srcListInChildren = [];
       const titles: VueJsxNode = [];
-      const loop = (children: VNode[]) => {
-        return children.map((child) => {
-          if (child && child.props && child.type) {
+      const loop = (children_: VNode[]) => {
+        return children_.map((child) => {
+          if (child && child.type) {
             // @ts-ignore
             if (child.type.isSemiImage) {
               const { src, preview, alt } = child.props;
@@ -233,19 +233,17 @@ const Preview = defineComponent({
             }
           }
 
-          if (child && child.props && child.props.children) {
-            return cloneVNode(child, {
-              children: loop(child.props.children),
-            });
+          if (child && child.children) {
+            child.children = loop(getChildren(child.children as VNode[]))
+            return cloneVNode(child, {}, )
           }
 
           return child;
         });
       };
-
       return {
         srcListInChildren,
-        newChildren: loop(children),
+        newChildren: loop(getChildren(children)),
         titles,
       };
     };
@@ -283,10 +281,10 @@ const Preview = defineComponent({
             {newChildren}
           </div>
           <PreviewInner
-            {...(handleVisibleChange?previewInnerProps:{
+            {...(handleVisibleChange?{
               ...previewInnerProps,
               onVisibleChange: handleVisibleChange
-            })}
+            }:previewInnerProps)}
             ref={previewRef}
             src={finalSrcList}
             currentIndex={currentIndex}

@@ -220,12 +220,19 @@ export async function runAfterTicks(func: (...args: any) => any, numberOfTicks: 
 
 export function getFragmentChildren(slots: SetupContext['slots']):VNode[] | undefined {
     const children = slots.default?.()
-    if (children && Array.isArray(children) && children.length){
+    return getChildren(children)
+}
 
+export function getChildren(children: VNode[]):VNode[] | undefined {
+    if (children && Array.isArray(children) && children.length){
         const newChildren = []
         children.forEach(child=>{
             if(child.type?.toString() === 'Symbol(v-fgt)' && Array.isArray(child.children)){
                 child.children.forEach(item=>{
+                    newChildren.push(item)
+                })
+            }else if(Array.isArray(child)){
+                child.map(item=>{
                     newChildren.push(item)
                 })
             }else{
@@ -237,6 +244,9 @@ export function getFragmentChildren(slots: SetupContext['slots']):VNode[] | unde
         return children
     }
 }
+
+
+
 
 
 
