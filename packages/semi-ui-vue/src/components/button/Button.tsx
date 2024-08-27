@@ -43,7 +43,7 @@ export const vuePropsType: CombineProps<ButtonProps> = {
   id: String,
   circle: Boolean,
   className: String,
-  icon: [Object, String],
+  icon: [Object, String, Function],
   iconPosition: String as PropType<ButtonProps['iconPosition']>,
   loading: Boolean,
   block: {

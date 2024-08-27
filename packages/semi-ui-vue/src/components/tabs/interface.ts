@@ -13,7 +13,7 @@ export interface PlainTab {
     disabled?: boolean;
     icon?: VueJsxNode;
     itemKey: string;
-    tab?: VueJsxNode;
+    tab?: VueJsxNode | (()=>VueJsxNode);
     closable?: boolean
 }
 

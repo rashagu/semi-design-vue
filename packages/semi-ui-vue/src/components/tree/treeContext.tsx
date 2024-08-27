@@ -39,7 +39,7 @@ export interface TreeContextValue {
     isSearching?: boolean;
     loadData?: (treeNode?: TreeNodeData) => Promise<void>;
     onNodeLoad?: (data: TreeNodeData) => Promise<unknown>;
-    renderLabel?: (label?: VueJsxNode, treeNode?: TreeNodeData) => VueJsxNode;
+    renderLabel?: (label?: VueJsxNode, treeNode?: TreeNodeData, searchWord?: string) => VueJsxNode;
     draggable?: boolean;
     renderFullLabel?: (renderFullLabelProps: RenderFullLabelProps) => VueJsxNode;
     dragOverNodeKey?: string | string[];

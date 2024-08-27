@@ -25,7 +25,7 @@ const propTypes: CombineProps<{
   children: PropTypes.node,
   disabled: PropTypes.bool,
   itemKey: PropTypes.string,
-  tab: PropTypes.node,
+  tab: [Function, ...PropTypes.node],
   icon: PropTypes.node,
   closable: PropTypes.bool,
   tabIndex: PropTypes.number,

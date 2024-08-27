@@ -186,7 +186,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<BacktopDemo />*/}
         {/*<AnchorDemo />*/}
         {/*<TabsDemo5/>*/}
-        {/*<TabsDemo />*/}
+        <TabsDemo />
         {/*<TabsDemo3/>*/}
         {/*<TabsDemo4/>*/}
         {/*<TabsDemoVueSFC/>*/}
@@ -238,7 +238,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TreeDemo2 />*/}
         {/*<TreeDemo3/>*/}
         {/*<TreeDemo4/>*/}
-        <TreeDemo5/>
+        {/*<TreeDemo5/>*/}
         <div style={{backgroundColor: 'red', width: 300, height: 300}}>
 
         </div>

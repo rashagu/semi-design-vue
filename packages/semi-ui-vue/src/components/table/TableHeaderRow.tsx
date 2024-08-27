@@ -12,7 +12,7 @@ import {
   sliceColumnsByLevel,
   getRTLAlign,
 } from '@douyinfe/semi-foundation/table/utils';
-import { TableComponents, OnHeaderRow, Fixed } from './interface';
+import { TableComponents, OnHeaderRow, Fixed, TableLocale } from './interface';
 import {
   ComponentObjectPropsOptions,
   CSSProperties,
@@ -30,6 +30,9 @@ import { TableSelectionCellProps } from './ColumnSelection';
 import { useTableContext } from './tableContext/Consumer';
 import type { TableHeaderCell } from './TableHeader';
 import { CombineProps } from '../interface';
+import Tooltip from '../tooltip';
+import LocaleConsumer from '../locale/localeConsumer';
+import { getNextSortOrder } from './utils';
 
 export interface TableHeaderRowProps {
   components?: TableComponents;
@@ -205,24 +208,41 @@ const TableHeaderRow = defineComponent({
           return null;
         }
 
-        if (cellStyle.left && typeof cellStyle.left === 'number') {
-          cellStyle.left = cellStyle.left + 'px';
+        if (typeof column.clickToSort === 'function') {
+          if (props.onClick) {
+            props.onClick = (e: any) => {
+              props.onClick(e);
+              column.clickToSort(e);
+            };
+          } else {
+            props.onClick = column.clickToSort;
+          }
         }
 
-        if (cellStyle.right && typeof cellStyle.right === 'number') {
-          cellStyle.right = cellStyle.right + 'px';
-        }
-        return (
-          <HeaderCell
-            role="columnheader"
-            aria-colindex={cellIndex + 1}
-            {...omit(props, 'children')}
-            style={cellStyle}
+        const headerCellNode = (<HeaderCell
+          role="columnheader"
+          aria-colindex={cellIndex + 1}
+          {...(omit(props, 'children'))}
+          style={cellStyle}
+          key={column.key || column.dataIndex || cellIndex}
+        >
+          {props.children}
+        </HeaderCell>);
+        if (typeof column.clickToSort === 'function' && column.showSortTip === true) {
+          let content = getNextSortOrder(column.sortOrder);
+          return (<LocaleConsumer
+            componentName="Table"
             key={column.key || column.dataIndex || cellIndex}
           >
-            {props.children}
-          </HeaderCell>
-        );
+            {(locale: TableLocale, localeCode: string) => (
+              <Tooltip content={locale[content]}>
+                {headerCellNode}
+              </Tooltip>
+            )}
+          </LocaleConsumer>);
+        }
+
+        return headerCellNode;
       });
 
       return (

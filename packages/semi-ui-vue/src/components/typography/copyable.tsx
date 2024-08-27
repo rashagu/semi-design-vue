@@ -21,6 +21,7 @@ import { Locale } from '../locale/interface';
 import isEnterPress from '@douyinfe/semi-foundation/utils/isEnterPress';
 import * as PropTypes from '../PropTypes';
 import { CombineProps } from '../interface';
+import { CopyableConfig } from './title';
 
 const prefixCls = cssClasses.PREFIX;
 export interface CopyableProps extends BaseProps {
@@ -31,6 +32,8 @@ export interface CopyableProps extends BaseProps {
   successTip?: any;
   icon?: VNode;
   onCopy?: (e: any, content: string, res: boolean) => void;
+  render?: (copied: boolean, doCopy: (e: MouseEvent) => void, configs: CopyableConfig) => VNode
+
 }
 interface CopyableState {
   copied: boolean;
@@ -62,6 +65,7 @@ export const vuePropsType: CombineProps<CopyableProps> = {
   copyTip: PropTypes.node,
   successTip: PropTypes.node,
   icon: PropTypes.node as PropType<CopyableProps['icon']>,
+  render: Function as PropType<CopyableProps['render']>,
 };
 
 const Copyable = defineComponent({
@@ -147,12 +151,18 @@ const Copyable = defineComponent({
       return isVNode(icon) ? cloneVNode(icon, copyProps) : defaultIcon;
     };
     return () => {
-      const { style, className, forwardRef, copyTip } = props;
+      const { style, className, forwardRef, copyTip, render } = props;
       const { copied } = state;
       const finalCls = cls(className, {
         [`${prefixCls}-action-copy`]: !copied,
         [`${prefixCls}-action-copied`]: copied,
       });
+
+
+      if (render) {
+        return render(copied, copy, props);
+      }
+
       return (
         <LocaleConsumer componentName="Typography">
           {(locale: Locale['Typography']) => (

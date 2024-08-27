@@ -14,7 +14,7 @@ const table = (props: TableProps) => {
     let item: Record<string, string> = {
       key: String(i),
     };
-    dataFiber[i].children.forEach((child, index) => {
+    dataFiber[i]?.children.forEach((child, index) => {
       item[titles[index]] = child?.children ?? '';
     });
     tableDataSource.push(item);

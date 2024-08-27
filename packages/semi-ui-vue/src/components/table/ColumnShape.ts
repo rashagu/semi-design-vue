@@ -4,6 +4,7 @@ import {ColumnProps} from "./interface";
 import { CombineProps } from '../interface';
 
 const ColumnShape: CombineProps<ColumnProps> = {
+    clickToSort: [Function] as PropType<ColumnProps['clickToSort']>,
     align: String as PropType<ColumnProps['align']>,
     className: PropTypes.string,
     colSpan: PropTypes.number,
@@ -33,5 +34,6 @@ const ColumnShape: CombineProps<ColumnProps> = {
     title: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     useFullRender: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    showSortTip: PropTypes.bool,
 }
 export default ColumnShape

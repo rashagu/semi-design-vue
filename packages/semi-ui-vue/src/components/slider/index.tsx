@@ -230,7 +230,7 @@ const Slider = defineComponent({
           });
         },
         notifyChange: (cbValue: number | number[]) => {
-          props.onChange(Array.isArray(cbValue) ? [...cbValue].sort() : cbValue);
+          props.onChange(Array.isArray(cbValue) ? [...cbValue].sort((a, b)=>a - b) : cbValue);
         },
         setDragging: (value: boolean[]) => {
           dragging = value;

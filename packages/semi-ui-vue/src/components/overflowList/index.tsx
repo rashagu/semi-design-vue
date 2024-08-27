@@ -9,6 +9,7 @@ import OverflowListFoundation, { OverflowListAdapter } from '@douyinfe/semi-foun
 
 import '@douyinfe/semi-foundation/overflowList/overflowList.scss';
 import { CombineProps, VueJsxNode } from '../interface';
+import copy from 'fast-copy';
 import {
   cloneVNode,
   ComponentObjectPropsOptions,
@@ -23,6 +24,7 @@ import {
   reactive,
   ref,
   shallowRef,
+  toRaw,
   useSlots,
   VNode,
   watch,
@@ -129,8 +131,8 @@ const OverflowList = defineComponent({
       maxCount: 0,
     });
 
-    function getDerivedStateFromProps(props_: OverflowListProps): OverflowListState {
-      const { prevProps } = state;
+    function getDerivedStateFromProps(props_: OverflowListProps, prevState: OverflowListState): OverflowListState {
+      const { prevProps } = prevState;
       const newState: OverflowListState = {};
       newState.prevProps = props_;
 
@@ -138,33 +140,46 @@ const OverflowList = defineComponent({
         return (!prevProps && name in props_) || (prevProps && !isEqual(prevProps[name], props_[name]));
       };
       if (needUpdate('items') || needUpdate('style')) {
-        // reset visible state if the above props_ change.
+        // reset visible state if the above props change.
         newState.direction = OverflowDirection.GROW;
         newState.lastOverflowCount = 0;
+        newState.maxCount = 0;
         if (props_.renderMode === RenderMode.SCROLL) {
           newState.visible = props_.items;
           newState.overflow = [];
         } else {
-          newState.visible = [];
-          newState.overflow = [];
+          let maxCount = props_.items.length;
+          if (Math.floor(prevState.containerWidth / numbers.MINIMUM_HTML_ELEMENT_WIDTH) !== 0) {
+            maxCount = Math.min(maxCount, Math.floor(prevState.containerWidth / numbers.MINIMUM_HTML_ELEMENT_WIDTH));
+          }
+
+          const isCollapseFromStart = props_.collapseFrom === Boundary.START;
+          const visible = isCollapseFromStart
+            ? copy(props_.items).reverse().slice(0, maxCount)
+            : props_.items.slice(0, maxCount);
+          const overflow = isCollapseFromStart
+            ? copy(props_.items).reverse().slice(maxCount)
+            : props_.items.slice(maxCount);
+          newState.visible = visible;
+          newState.overflow = overflow;
+          newState.maxCount = maxCount;
         }
-        newState.pivot = 0;
-        newState.maxCount = 0;
+        newState.pivot = -1;
         newState.overflowStatus = 'calculating';
       }
       return newState;
     }
 
     watch(
-      () => props,
+      [() => props.items, () => props.style, () => props.renderMode, () => props.collapseFrom],
       (val) => {
-        const newState = getDerivedStateFromProps({ ...getProps(props) });
+        const newState = getDerivedStateFromProps({ ...getProps(props) }, { ...state });
         newState &&
           Object.keys(newState).forEach((key) => {
             state[key] = newState[key];
           });
       },
-      { deep: true, immediate: true }
+      { immediate: true }
     );
 
     const { adapter: adapterInject } = useBaseComponent<OverflowListProps>(props, state);
@@ -174,7 +189,9 @@ const OverflowList = defineComponent({
         ...adapterInject(),
         updateVisibleState: (visibleState): void => {
           state.visibleState = visibleState;
-          props.onVisibleStateChange?.(visibleState);
+          nextTick(() => {
+            props.onVisibleStateChange?.(visibleState);
+          });
         },
         updateStates: (states): void => {
           states &&
@@ -195,9 +212,9 @@ const OverflowList = defineComponent({
 
     const foundation = new OverflowListFoundation(adapter);
 
-    let itemRefs = ref({});
+    let itemRefs = {};
 
-    let scroller: HTMLDivElement = null;
+    let scroller = null;
     let spacer: HTMLDivElement = null;
 
     let previousWidths: Map<Element, number> = new Map();
@@ -222,40 +239,21 @@ const OverflowList = defineComponent({
         () => onItemResizeNum.value,
       ],
       (value, oldValue) => {
-        const prevItemsKeys = value[0].map((item) => item.key);
+        const prevItemsKeys = oldValue[0].map((item) => item.key);
         const nowItemsKeys = props.items.map((item) => item.key);
 
+        // Determine whether to update by comparing key values
         if (!isEqual(prevItemsKeys, nowItemsKeys)) {
-          itemRefs.value = {};
+          itemRefs = {};
           state.visibleState = new Map();
         }
-        if (isScrollMode() || state.overflowStatus !== 'calculating') {
+
+        const { overflow, containerWidth, visible, overflowStatus } = state;
+
+        if (isScrollMode() || overflowStatus !== 'calculating') {
           return;
         }
-        if (state.visible.length === 0 && state.overflow.length === 0 && props.items.length !== 0) {
-          // 推测container最多能渲染的数量
-          // Figure out the maximum number of items in this container
-          const maxCount = Math.min(
-            props.items.length,
-            Math.floor(state.containerWidth / numbers.MINIMUM_HTML_ELEMENT_WIDTH)
-          );
-          // 如果collapseFrom是start, 第一次用来计算容量时，倒转列表顺序渲染
-          // If collapseFrom === start, render item from end to start. Figuring out how many items in the end could fit in container.
-          const isCollapseFromStart = props.collapseFrom === Boundary.START;
-          const visible = isCollapseFromStart
-            ? foundation.getReversedItems().slice(0, maxCount)
-            : props.items.slice(0, maxCount);
-          const overflow = isCollapseFromStart
-            ? foundation.getReversedItems().slice(maxCount)
-            : props.items.slice(maxCount);
-          state.overflowStatus = 'calculating';
-          state.visible = visible;
-          state.overflow = overflow;
-          state.maxCount = maxCount;
-          itemSizeMap.clear();
-        } else {
-          foundation.handleCollapseOverflow();
-        }
+        foundation.handleCollapseOverflow();
       }
     );
 
@@ -269,18 +267,20 @@ const OverflowList = defineComponent({
       foundation.handleIntersect(entries);
     };
 
-    const mergeRef = (ref: any, node: Element, key: Key): void => {
-      itemRefs.value[key] = node;
-      if (typeof ref === 'function') {
-        ref(node);
-      } else if (typeof ref === 'object' && ref && 'value' in ref) {
-        ref.value = node;
+    const mergeRef = (ref_: any, node: Element, key: Key): void => {
+      if (!itemRefs[key]) {
+        itemRefs[key] = node;
+      }
+      if (typeof ref_ === 'function') {
+        ref_(node);
+      } else if (typeof ref_ === 'object' && ref_ && 'value' in ref_) {
+        ref_.value = node;
       }
     };
 
     const renderOverflow = (): VueJsxNode => {
       // 不要删除，这里需要它进行更新渲染，不然页面似乎不会更新
-      console.debug(state.visibleState);
+      console.debug(state.visibleState.size);
       const overflow = foundation.getOverflowItem();
       return props.overflowRenderer(overflow);
     };
@@ -292,6 +292,7 @@ const OverflowList = defineComponent({
       }
       return get(item, itemKey || 'key', defalutKey);
     };
+
 
     const renderItemList = () => {
       const { className, wrapperClassName, wrapperStyle, style, visibleItemRenderer, renderMode, collapseFrom } = props;
@@ -329,7 +330,7 @@ const OverflowList = defineComponent({
                   key={`${prefixCls}-scroll-wrapper`}
                 >
                   {visible.map(visibleItemRenderer).map((item) => {
-                    const { forwardRef, key } = item as any;
+                    const { forwardRef, key } = (item as any).props;
                     return cloneVNode(item as VNode, {
                       ref: (node: any) => mergeRef(forwardRef, node, key),
                       'data-scrollkey': `${key}`,
@@ -388,7 +389,7 @@ const OverflowList = defineComponent({
     };
 
     /**
-     * 调用时机问题
+     * 调用时机问题 for Vue
      * onItemResize -> handleCollapseOverflow(拿到更新后的itemSizeMap)
      */
     const onItemResizeNum_ = debounce(() => {
@@ -396,14 +397,17 @@ const OverflowList = defineComponent({
     }, 10);
 
     const onItemResize = (entry: ResizeEntry, item: OverflowItem, idx: number) => {
+      let hasChangeMap = false;
       const key = getItemKey(item, idx);
       const width = itemSizeMap.get(key);
       if (!width) {
         itemSizeMap.set(key, entry.target.clientWidth);
+        hasChangeMap = true;
       } else if (width !== entry.target.clientWidth) {
         // 某个item发生resize后，重新计算
         itemSizeMap.set(key, entry.target.clientWidth);
         state.overflowStatus = 'calculating';
+        hasChangeMap = true;
       }
       const { maxCount } = state;
       // 已经按照最大值maxCount渲染完毕，触发真正的渲染。(-1 是overflow部分会占1)
@@ -411,7 +415,7 @@ const OverflowList = defineComponent({
       if (itemSizeMap.size === maxCount - 1) {
         state.overflowStatus = 'calculating';
       }
-      onItemResizeNum_();
+      hasChangeMap && onItemResizeNum_();
     };
 
     return () => {
@@ -419,12 +423,7 @@ const OverflowList = defineComponent({
       const { renderMode } = props;
       if (renderMode === RenderMode.SCROLL) {
         return (
-          <IntersectionObserver
-            onIntersect={reintersect}
-            root={scroller}
-            threshold={props.threshold}
-            items={itemRefs.value}
-          >
+          <IntersectionObserver onIntersect={reintersect} threshold={props.threshold} root={scroller} items={itemRefs}>
             {list}
           </IntersectionObserver>
         );

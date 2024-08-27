@@ -335,7 +335,7 @@ const TreeNode = defineComponent({
       const { renderLabel } = context.value;
       const { label, keyword, data, filtered, treeNodeFilterProp } = props;
       if (isFunction(renderLabel)) {
-        return renderLabel(label, data);
+        return renderLabel(label, data, keyword);
       } else if (isString(label) && filtered && keyword) {
         return getHighLightTextHTML({
           sourceString: label,

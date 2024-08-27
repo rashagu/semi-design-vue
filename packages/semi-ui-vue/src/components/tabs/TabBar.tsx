@@ -176,7 +176,7 @@ const TabBar = defineComponent({
       if (isEmpty(items)) {
         return (
           <div role="presentation" class={arrowCls}>
-            <Button disabled={true} icon={icon} theme="borderless" />
+            <Button disabled={true} icon={()=>icon} theme="borderless" />
           </div>
         );
       }
@@ -188,15 +188,15 @@ const TabBar = defineComponent({
         <DropdownMenu>
           {items.map((panel) => {
             const { icon: i, tab, itemKey } = panel;
-            const panelIcon = i ? renderIcon(panel.icon) : null;
+            const panelIcon = ()=>i ? renderIcon(panel.icon) : null;
             return (
               <DropdownItem
                 key={itemKey}
                 onClick={(e): void => handleItemClick(itemKey, e)}
                 active={_isActive(itemKey)}
               >
-                {panelIcon}
-                {tab}
+                {panelIcon()}
+                {typeof tab === 'function'?tab():tab}
               </DropdownItem>
             );
           })}
@@ -205,7 +205,7 @@ const TabBar = defineComponent({
 
       const button = (
         <div role="presentation" class={arrowCls} onClick={(e): void => handleArrowClick(items, pos)}>
-          <Button disabled={disabled} icon={icon} theme="borderless" />
+          <Button disabled={disabled} icon={()=>icon} theme="borderless" />
         </div>
       );
 

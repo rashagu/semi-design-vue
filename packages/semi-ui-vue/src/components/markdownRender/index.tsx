@@ -14,7 +14,6 @@ import { cssClasses } from '@douyinfe/semi-foundation/markdownRender/constants';
 import { useBaseComponent } from '../_base/baseComponent';
 import { omit } from 'lodash';
 export type { MDXProps } from 'mdx/types';
-
 export interface MarkdownRenderProps extends Omit<MarkdownRenderBaseProps, 'format'> {
   style?: CSSProperties;
   className?: string;
@@ -37,15 +36,17 @@ const propTypes: CombineProps<MarkdownRenderProps> = {
     type: PropTypes.string as PropType<MarkdownRenderProps['raw']>,
     required: true,
   },
+  remarkPlugins: PropTypes.array,
+  rehypePlugins: PropTypes.array,
 };
 const defaultProps = {
   format: 'mdx',
 };
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const index = defineComponent({
+const markdownRender = defineComponent({
   props: { ...vuePropsType },
-  name: 'index',
+  name: 'markdownRender',
   setup(props, { attrs }) {
     const slots = useSlots();
     const state = reactive<MarkdownRenderState>({
@@ -102,4 +103,4 @@ const index = defineComponent({
   },
 });
 
-export default index;
+export default markdownRender;

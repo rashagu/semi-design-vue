@@ -185,6 +185,7 @@ const propTypes: CombineProps<NormalTableProps<any>> = {
   expandRowByClick: PropTypes.bool, // TODO: future api
   getVirtualizedListRef: PropTypes.func as PropType<NormalTableProps['getVirtualizedListRef']>, // TODO: future api
   bodyWrapperRef: [PropTypes.func, PropTypes.object],
+  sticky: [Boolean, Object],
   direction: PropTypes.string as PropType<NormalTableProps['direction']>,
 };
 export { propTypes as TablePropTypes };
@@ -1117,8 +1118,15 @@ function Table<RecordType extends Record<string, any>>() {
       const addFnsInColumn = (column: ColumnProps = {}) => {
         const { prefixCls } = props;
         if (column && (column.sorter || column.filters || column.onFilter || column.useFullRender)) {
+          let hasSorter = typeof column.sorter === 'function' || column.sorter === true;
+          let hasFilter = (Array.isArray(column.filters) && column.filters.length) ||
+            isVNode(column.filterDropdown) ||
+            typeof column.renderFilterDropdown === 'function';
           let hasSorterOrFilter = false;
+          const sortOrderNotControlled = !('sortOrder' in column);
+          const showSortTip = sortOrderNotControlled && column.showSortTip === true;
           const { dataIndex, title: rawTitle, useFullRender } = column;
+          const clickColumnToSorter = hasSorter && !hasFilter && !Boolean(useFullRender);
           const curQuery = foundation.getQuery(dataIndex);
           const titleMap: ColumnTitleProps = {};
           const titleArr = [];
@@ -1141,7 +1149,7 @@ function Table<RecordType extends Record<string, any>>() {
               {rawTitle}
             </span>
           );
-          if (typeof column.sorter === 'function' || column.sorter === true) {
+          if (hasSorter) {
             // In order to increase the click hot area of ​​sorting, when sorting is required & useFullRender is false,
             // both the title and sorting areas are used as the click hot area for sorting。
             const sorter = (
@@ -1149,8 +1157,9 @@ function Table<RecordType extends Record<string, any>>() {
                 key={strings.DEFAULT_KEY_COLUMN_SORTER}
                 sortOrder={sortOrder}
                 sortIcon={column.sortIcon}
-                onClick={(e) => foundation.handleSort(column, e)}
+                onClick={useFullRender || hasFilter ? e => foundation.handleSort(column, e) : null}
                 title={TitleNode}
+                showTooltip={!clickColumnToSorter && showSortTip}
               />
             );
             useFullRender && (titleMap.sorter = sorter);
@@ -1163,11 +1172,7 @@ function Table<RecordType extends Record<string, any>>() {
           const stateFilteredValue = get(curQuery, 'filteredValue');
           const defaultFilteredValue = get(curQuery, 'defaultFilteredValue');
           const filteredValue = stateFilteredValue ? stateFilteredValue : defaultFilteredValue;
-          if (
-            (Array.isArray(column.filters) && column.filters.length) ||
-            isVNode(column.filterDropdown) ||
-            typeof column.renderFilterDropdown === 'function'
-          ) {
+          if (hasFilter) {
             const filter = (
               <ColumnFilter
                 key={strings.DEFAULT_KEY_COLUMN_FILTER}
@@ -1193,6 +1198,13 @@ function Table<RecordType extends Record<string, any>>() {
               titleArr
             );
           column = { ...column, title: newTitle };
+          if (clickColumnToSorter) {
+            column.clickToSort = e => {
+              foundation.handleSort(column, e);
+            };
+            column.sortOrder = sortOrder;
+            column.showSortTip = showSortTip;
+          }
         }
 
         return column;
@@ -1502,7 +1514,6 @@ function Table<RecordType extends Record<string, any>>() {
           children,
           ...rest
         } = getProps(props);
-
         const wrapStyle: CSSProperties = {
           ...props.style,
         };

@@ -64,6 +64,8 @@ export interface DatePickerProps extends DatePickerFoundationProps {
   insetLabelId?: string;
   prefix?: VueJsxNode;
   topSlot?: VueJsxNode | (()=>VueJsxNode);
+  rightSlot?: VueJsxNode | (()=>VueJsxNode);
+  leftSlot?: VueJsxNode | (()=>VueJsxNode);
   renderDate?: (dayNumber?: number, fullDate?: string) => VueJsxNode;
   renderFullDate?: (dayNumber?: number, fullDate?: string, dayStatus?: DayStatusType) => VueJsxNode;
   triggerRender?: (props: DatePickerProps) => VueJsxNode;
@@ -155,6 +157,8 @@ const propTypes: CombineProps<DatePickerProps> = {
   dropdownClassName: PropTypes.string,
   dropdownStyle: PropTypes.object,
   topSlot: [PropTypes.func, ...PropTypes.node] as PropType<DatePickerProps['topSlot']>,
+  rightSlot: [PropTypes.func, ...PropTypes.node] as PropType<DatePickerProps['rightSlot']>,
+  leftSlot: [PropTypes.func, ...PropTypes.node] as PropType<DatePickerProps['leftSlot']>,
   bottomSlot: [PropTypes.func, ...PropTypes.node] as PropType<DatePickerProps['bottomSlot']>,
   dateFnsLocale: PropTypes.object, // isRequired, but no need to add isRequired key. ForwardStatics function pass static properties to index.jsx, so there is no need for user to pass the prop.
   // Support synchronous switching of months
@@ -812,7 +816,17 @@ const DatePicker = defineComponent({
     };
 
     const renderPanel = (locale: Locale['DatePicker'], localeCode: string, dateFnsLocale: Locale['dateFnsLocale']) => {
-      const { dropdownClassName, dropdownStyle, density, topSlot, bottomSlot, presetPosition, type } = props;
+      const {
+        dropdownClassName,
+        dropdownStyle,
+        density,
+        topSlot,
+        bottomSlot,
+        presetPosition,
+        type,
+        leftSlot,
+        rightSlot,
+      } = props;
       const wrapCls = classnames(
         cssClasses.PREFIX,
         {
@@ -824,22 +838,36 @@ const DatePicker = defineComponent({
 
       return (
         <div ref={panelRef} class={wrapCls} style={dropdownStyle} x-type={type}>
-          {topSlot && (
-            <div class={`${cssClasses.PREFIX}-topSlot`} x-semi-prop="topSlot">
-              {typeof topSlot === 'function'?topSlot():topSlot}
+          <div class={`${cssClasses.PREFIX}-container`}>
+            {leftSlot && (
+              <div class={`${cssClasses.PREFIX}-leftSlot`} x-semi-prop="leftSlot">
+                {leftSlot}
+              </div>
+            )}
+            <div>
+              {topSlot && (
+                <div class={`${cssClasses.PREFIX}-topSlot`} x-semi-prop="topSlot">
+                  {topSlot}
+                </div>
+              )}
+              {/* todo: monthRange does not support presetPosition temporarily */}
+              {presetPosition === 'top' && type !== 'monthRange' && renderQuickControls()}
+              {adapter.typeIsYearOrMonth()
+                ? renderYearMonthPanel(locale, localeCode)
+                : renderMonthGrid(locale, localeCode, dateFnsLocale)}
+              {presetPosition === 'bottom' && type !== 'monthRange' && renderQuickControls()}
+              {bottomSlot && (
+                <div class={`${cssClasses.PREFIX}-bottomSlot`} x-semi-prop="bottomSlot">
+                  {bottomSlot}
+                </div>
+              )}
             </div>
-          )}
-          {/* todo: monthRange does not support presetPosition temporarily */}
-          {presetPosition === 'top' && type !== 'monthRange' && renderQuickControls()}
-          {adapter.typeIsYearOrMonth()
-            ? renderYearMonthPanel(locale, localeCode)
-            : renderMonthGrid(locale, localeCode, dateFnsLocale)}
-          {presetPosition === 'bottom' && type !== 'monthRange' && renderQuickControls()}
-          {bottomSlot && (
-            <div class={`${cssClasses.PREFIX}-bottomSlot`} x-semi-prop="bottomSlot">
-              {typeof bottomSlot === 'function'?bottomSlot():bottomSlot}
-            </div>
-          )}
+            {rightSlot && (
+              <div class={`${cssClasses.PREFIX}-rightSlot`} x-semi-prop="rightSlot">
+                {rightSlot}
+              </div>
+            )}
+          </div>
           {renderFooter(locale, localeCode)}
         </div>
       );

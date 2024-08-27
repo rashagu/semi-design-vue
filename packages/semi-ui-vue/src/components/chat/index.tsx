@@ -31,7 +31,7 @@ import { useBaseComponent } from '../_base/baseComponent';
 const LocaleConsumer = LocaleConsumerFunc<Locale['Chat']>();
 
 const prefixCls = cssClasses.PREFIX;
-const { CHAT_ALIGN, MODE, SEND_HOT_KEY } = strings;
+const { CHAT_ALIGN, MODE, SEND_HOT_KEY, MESSAGE_STATUS } = strings;
 
 export const chatPropTypes: CombineProps<ChatProps> = {
   role: String,
@@ -198,7 +198,7 @@ const index = defineComponent({
       const { chats, hints } = nextProps;
       const newState = {} as any;
       if (chats !== prevState.chats) {
-        newState.chats = chats;
+        newState.chats = chats ?? [];
       }
       if (hints !== prevState.cacheHints) {
         newState.cacheHints = hints;
@@ -253,17 +253,18 @@ const index = defineComponent({
         const { wheelScroll } = state;
         let shouldScroll = false;
         if (newChats !== oldChats) {
-          const newLastChat = newChats[newChats.length - 1];
-          const oldLastChat = oldChats[oldChats.length - 1];
-          if (newChats.length > oldChats.length) {
-            if (newLastChat.id !== oldLastChat.id) {
+          if (Array.isArray(newChats) && Array.isArray(oldChats)) {
+            const newLastChat = newChats[newChats.length - 1];
+            const oldLastChat = oldChats[oldChats.length - 1];
+            if (newChats.length > oldChats.length) {
+              if (oldChats.length === 0 || newLastChat.id !== oldLastChat.id) {
+                shouldScroll = true;
+              }
+            } else if (newChats.length === oldChats.length &&
+              (newLastChat.status !== 'complete' || newLastChat.status !== oldLastChat.status)
+            ) {
               shouldScroll = true;
             }
-          } else if (
-            newChats.length === oldChats.length &&
-            (newLastChat.status !== 'complete' || newLastChat.status !== oldLastChat.status)
-          ) {
-            shouldScroll = true;
           }
         }
         if (newHints !== cacheHints) {
@@ -314,7 +315,7 @@ const index = defineComponent({
       const lastChat = chats.length > 0 && chats[chats.length - 1];
       let disableSend = false;
       if (lastChat && showStopGenerate) {
-        const lastChatOnGoing = lastChat.status && lastChat.status !== 'complete';
+        const lastChatOnGoing = lastChat?.status && [MESSAGE_STATUS.LOADING, MESSAGE_STATUS.INCOMPLETE].includes(lastChat?.status);
         disableSend = lastChatOnGoing;
         showStopGenerate && (showStopGenerateFlag = lastChatOnGoing);
       }

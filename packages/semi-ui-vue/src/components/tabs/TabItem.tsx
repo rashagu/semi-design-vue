@@ -8,7 +8,7 @@ import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 
 export interface TabItemProps {
-  tab?: VueJsxNode;
+  tab?: VueJsxNode | (()=>VueJsxNode);
   icon?: VueJsxNode;
   size?: TabSize;
   type?: TabType;
@@ -23,7 +23,7 @@ export interface TabItemProps {
   forwardRef?: any;
 }
 const propTypes: CombineProps<TabItemProps> = {
-  tab: PropTypes.node,
+  tab: [Function, ...PropTypes.node] as PropType<TabItemProps['tab']>,
   icon: PropTypes.node,
   size: PropTypes.string as PropType<TabItemProps['size']>,
   type: PropTypes.string as PropType<TabItemProps['type']>,
@@ -111,7 +111,7 @@ const TabItem = defineComponent({
           ref={props.forwardRef}
         >
           {panelIcon}
-          {tab}
+          {typeof tab === 'function'?tab():tab}
           {closableIcon.value}
         </div>
       );

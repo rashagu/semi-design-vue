@@ -13,6 +13,8 @@ export interface CopyableConfig {
   successTip?: VNode;
   icon?: VNode;
   onCopy?(e: MouseEvent, content: string, res: boolean): void;
+  render?: (copied: boolean, doCopy: (e: MouseEvent) => void, configs: CopyableConfig) => VNode
+
 }
 
 export type LinkType = any | boolean;
@@ -96,6 +98,7 @@ export const vuePropsType: CombineProps<TitleProps> = {
   },
   underline: Boolean,
   weight: [String, Number] as PropType<TitleProps['weight']>,
+
 };
 const Title = defineComponent({
   props: { ...vuePropsType },

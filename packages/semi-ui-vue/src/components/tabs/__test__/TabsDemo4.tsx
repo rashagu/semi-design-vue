@@ -17,14 +17,14 @@ const TabsDemo4 = defineComponent((props, {}) => {
 
   return () => {
     return (
-      <div style={{width:'400px'}}>
-        <Tabs activeKey={activeKey.value} collapsible onChange={(v)=>activeKey.value = v}>
-          <TabPane tab={<span role={'symbol'}>symbol0</span>} itemKey={'0'}>
+      <div style={{ width: '400px' }}>
+        <Tabs activeKey={activeKey.value} collapsible onChange={(v) => (activeKey.value = v)}>
+          <TabPane tab={() => <span role={'symbol'}>symbol0</span>} itemKey={'0'}>
             <div>symbol0</div>
           </TabPane>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
             return (
-              <TabPane tab={<span role={'symbol'}>symbol{item}</span>} itemKey={'' + item}>
+              <TabPane tab={() => <span role={'symbol'}>symbol{item}</span>} itemKey={'' + item}>
                 <div>symbol{item}</div>
               </TabPane>
             );

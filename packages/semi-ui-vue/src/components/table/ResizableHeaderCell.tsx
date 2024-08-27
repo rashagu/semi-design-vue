@@ -2,6 +2,7 @@ import { Resizable } from '@kousum/vue-resizable';
 import { ComponentObjectPropsOptions, defineComponent, Fragment, h, PropType, useSlots } from 'vue';
 import { omit } from 'lodash';
 import { CombineProps } from '../interface';
+import { getFragmentChildren } from '../_utils';
 
 export interface ResizableHeaderCellProps {
   onResize?: ResizeFn;
@@ -33,7 +34,7 @@ const ResizableHeaderCell = defineComponent({
         return <th {...domProps} />;
       }
 
-      let children = slots.default?.();
+      let children = getFragmentChildren(slots) || [];
 
       // Fragment must be used here, otherwise there will be an error (seemingly a react-resizable@1.9.0 problem)
       children = children.map((child, index) => <Fragment key={index}>{child}</Fragment>);

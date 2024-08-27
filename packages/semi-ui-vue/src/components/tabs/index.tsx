@@ -26,7 +26,7 @@ import {
   VNode,
   watch,
 } from 'vue';
-import { useBaseComponent } from '../_base/baseComponent';
+import { useBaseComponent, useHasInProps } from '../_base/baseComponent';
 import { CombineProps, VueJsxNode } from '../interface';
 import { getFragmentChildren } from '../_utils';
 
@@ -87,15 +87,15 @@ const defaultProps: TabsProps = {
   arrowPosition: 'both',
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
-const Tabs = defineComponent({
-  props: { ...vuePropsType },
-  name: 'Tabs',
+
+const Index = defineComponent({
+  props: { ...vuePropsType, children: Array as PropType<VNode[]> },
+  name: 'TabsIndex',
   setup(props, {}) {
     const slots = useSlots();
     const contentRef = ref();
     let contentHeight: string = 'auto';
 
-    const childrenRef = shallowRef<VNode[]>([]);
 
     const state = reactive<TabsState>({
       activeKey: '',
@@ -138,7 +138,7 @@ const Tabs = defineComponent({
         getDefaultActiveKeyFromChildren: (): string => {
           const { tabList } = props;
           let activeKey = '';
-          const list = tabList ? tabList : childrenRef.value.map((child) => (isVNode(child) ? child.props : null));
+          const list = tabList ? tabList : props.children.map((child) => (isVNode(child) ? child.props : null));
           list.forEach((item) => {
             if (item && !activeKey && !item.disabled) {
               activeKey = item.itemKey;
@@ -175,14 +175,14 @@ const Tabs = defineComponent({
     });
 
     watch(
-      [() => childrenRef.value, () => props.tabList, () => props.activeKey, () => state.activeKey],
+      [() => props.children, () => props.tabList, () => props.activeKey, () => state.activeKey],
       (value, [prevPropsChildren, prevPropsTabList, prevPropsActiveKey, prevStateActiveKey]) => {
         // Panes state acts on tab bar, no need to compare TabPane children
         const prevChildrenProps = (prevPropsChildren || []).map((child) =>
           pick(isVNode(child) ? child.props : null, panePickKeys)
         );
 
-        const nowChildrenProps = (childrenRef.value || []).map((child) =>
+        const nowChildrenProps = (props.children || []).map((child) =>
           pick(isVNode(child) ? child.props : null, panePickKeys)
         );
 
@@ -223,7 +223,7 @@ const Tabs = defineComponent({
       if (Array.isArray(tabList) && tabList.length) {
         return tabList;
       }
-      return childrenRef.value
+      return props.children
         .filter((child) => {
           return typeof child.type !== 'symbol' && (child.type as any)?.name === 'TabPane';
         })
@@ -257,10 +257,10 @@ const Tabs = defineComponent({
     const getActiveItem = () => {
       const { activeKey } = state;
       const { tabList } = props;
-      if (tabList || !Array.isArray(childrenRef.value)) {
-        return childrenRef.value;
+      if (tabList || !Array.isArray(props.children)) {
+        return props.children;
       }
-      return childrenRef.value.filter((pane) => {
+      return props.children.filter((pane) => {
         if (isVNode(pane) && pane.type && (pane.type as any).isTabPane) {
           return pane.props.itemKey === activeKey;
         }
@@ -274,17 +274,6 @@ const Tabs = defineComponent({
     };
 
     return () => {
-      const children = slots.default?.();
-      const children_ = getFragmentChildren(slots);
-      if (
-        children_.length !== childrenRef.value.length ||
-        !isEqual(
-          children_.map((item) => item.props),
-          childrenRef.value.map((item) => item.props)
-        )
-      ) {
-        childrenRef.value = children_;
-      }
 
       const {
         className,
@@ -342,7 +331,7 @@ const Tabs = defineComponent({
       } as TabBarProps;
 
       const tabBar = renderTabBar ? renderTabBar(tabBarProps, TabBar) : <TabBar {...tabBarProps} />;
-      const content = keepDOM ? children : getActiveItem();
+      const content = keepDOM ? props.children : getActiveItem();
 
       return (
         <div class={tabWrapperCls} style={style} {...getDataAttr(restProps)}>
@@ -369,7 +358,21 @@ const Tabs = defineComponent({
     };
   },
 });
+const Tabs = defineComponent({
+  props: { ...vuePropsType },
+  name: 'Tabs',
+  setup(props, {}) {
+    const slots = useSlots();
+    const {getProps} = useHasInProps()
 
+    return () => {
+      const children = getFragmentChildren(slots)
+      return (
+        <Index {...getProps(props)} children={children}/>
+      );
+    };
+  },
+});
 export default Tabs;
 
 export { TabPane, TabItem };

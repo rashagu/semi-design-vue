@@ -40,7 +40,7 @@ const propsType: CombineProps<IconButtonProps> = {
   style: PropTypes.object,
   loading: PropTypes.bool,
   prefixCls: PropTypes.string,
-  icon: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.node]),
+  icon: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.node, PropTypes.func]),
   iconSize: PropTypes.string,
   noHorizontalPadding: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.array]),
   theme: PropTypes.string as PropType<IconButtonProps['theme']>,
@@ -124,7 +124,10 @@ const Index = defineComponent({
                 IconElem = () => icon;
               } else if (typeof icon.setup === 'function') {
                 IconElem = () => <icon />;
+              } else if (typeof icon === 'function') {
+                IconElem = () => icon();
               }
+
               const children = () =>
                 getFragmentChildren(slots) ? (
                   <span class={IconElem() ? btnTextCls : ''}>{slots.default ? slots.default() : null}</span>

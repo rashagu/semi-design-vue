@@ -33,16 +33,27 @@ const TabsDemo = defineComponent((props, {}) => {
   }
   const txt = ref(1);
   onMounted(() => {
-    setInterval(() => {
-      txt.value++;
-    }, 1000);
+    // setInterval(() => {
+    //   txt.value++;
+    // }, 1000);
   });
 
 
   return () => {
     return (
       <div>
-        {txt.value}
+        {/*<Tabs type="button">*/}
+        {/*  <TabPane tab="文档" itemKey="1">*/}
+        {/*    文档*/}
+        {/*  </TabPane>*/}
+        {/*  <TabPane tab="快速起步" itemKey="2">*/}
+        {/*    快速起步*/}
+        {/*  </TabPane>*/}
+        {/*  <TabPane tab="帮助" itemKey="3">*/}
+        {/*    帮助*/}
+        {/*  </TabPane>*/}
+        {/*</Tabs>*/}
+
         <Tabs type="button" keepDOM={false}>
           <TabPane tab={'文sdfsdsf档' + txt.value} itemKey="1">
             <div>
