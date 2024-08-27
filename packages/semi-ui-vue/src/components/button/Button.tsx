@@ -121,7 +121,7 @@ const Button = defineComponent({
       } = props;
 
       const baseProps = {
-        type: htmlType,
+        disabled,
         ...attr,
         class: classNames(
           prefixCls,
@@ -140,12 +140,21 @@ const Button = defineComponent({
           },
           className
         ),
+        type: htmlType,
+        'aria-disabled': disabled,
       };
+      const xSemiProps = {};
+
+      if (!(className && className.includes('-with-icon'))) {
+        xSemiProps['x-semi-prop'] = props['x-semi-children-alias'] || 'children';
+      }
+
       return (
-        <button {...baseProps} onClick={props.onClick} onMousedown={props.onMouseDown} style={style}>
+        <button {...baseProps} style={style}>
           <span
             class={cls(`${prefixCls}-content`, props.contentClassName)}
             onClick={(e) => props.disabled && e.stopPropagation()}
+            {...xSemiProps}
           >
             {slots.default ? slots.default() : null}
           </span>
