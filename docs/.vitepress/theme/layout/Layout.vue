@@ -514,7 +514,7 @@ provide('hero-image-slot-exists', null);
 <!--    <VPContent v-if="page.filePath === 'index.md'" />-->
     <Layout className="in_body">
       <LayoutSider className="layout_sider">
-        <div class="layout_nav" style="height: calc(100vh - 60px); background-color: var(--semi-color-bg-0)">
+        <div class="layout_nav" style="height: calc(100vh - 60px); background-color: var(--semi-color-bg-0);padding-bottom: 2rem">
           <Nav
             :defaultOpenKeys="navItem.map((item) => item.itemKey)"
             style="height: calc(100%); width: 280px"
@@ -729,7 +729,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: #eee solid 1px;
+  border-bottom: var(--semi-color-border) solid 1px;
 }
 
 .layout_nav {

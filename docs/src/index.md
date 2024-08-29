@@ -23,6 +23,6 @@ features:
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
-<div style="position: fixed;left: 50%;bottom: 0;transform: translate(-50%);width: 100%;text-align:center;background-color: #ffffff;padding: 1rem">
+<div style="position: fixed;left: 50%;bottom: 0;transform: translate(-50%);width: 100%;z-index: 99;text-align:center;background-color: var(--semi-color-bg-0);border-top: 1px solid var(--semi-color-border);padding: 1rem">
 <a href="https://beian.miit.gov.cn/">浙ICP备2021003967号-1</a>
 </div>
