@@ -200,5 +200,10 @@ export function List_<T>(){
   });
 }
 const List = List_()
-export default List;
+export type ListType = typeof List & {
+  Item: typeof ListItem
+}
+const BaseList = List as ListType
+BaseList.Item = ListItem
+export default BaseList;
 export { ListItem };

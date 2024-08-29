@@ -10,6 +10,7 @@ import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, PropTyp
 import { vuePropsMake } from '../PropTypes';
 import { CombineProps, VueJsxNode } from '../interface';
 import { useHasInProps } from '../_base/baseComponent';
+import Meta from './meta';
 
 const prefixcls = cssClasses.PREFIX;
 
@@ -229,4 +230,9 @@ const Card = defineComponent({
   },
 });
 
-export default Card;
+export type CardType = typeof Card & {
+  Meta: typeof Meta
+}
+const BaseCard = Card as CardType
+BaseCard.Meta = Meta
+export default BaseCard;

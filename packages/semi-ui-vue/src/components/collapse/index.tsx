@@ -12,18 +12,7 @@ import '@douyinfe/semi-foundation/collapse/collapse.scss';
 import { noop } from '@douyinfe/semi-foundation/utils/function';
 import { isEqual } from 'lodash';
 import CollapseContext from './collapse-context';
-import {
-  ComponentObjectPropsOptions,
-  CSSProperties,
-  defineComponent,
-  h,
-  onBeforeUnmount,
-  PropType,
-  reactive,
-  useSlots,
-  VNode,
-  watch,
-} from 'vue';
+import { CSSProperties, defineComponent, h, onBeforeUnmount, PropType, reactive, useSlots, VNode, watch } from 'vue';
 import { useBaseComponent } from '../_base/baseComponent';
 import { CombineProps } from '../interface';
 
@@ -166,5 +155,12 @@ const Collapse = defineComponent({
   },
 });
 
-export default Collapse;
+
+export type CollapseType = typeof Collapse & {
+  Panel: typeof CollapsePanel;
+}
+const BaseCollapse = Collapse as CollapseType;
+BaseCollapse.Panel = CollapsePanel
+
+export default BaseCollapse;
 export { CollapsePanel };

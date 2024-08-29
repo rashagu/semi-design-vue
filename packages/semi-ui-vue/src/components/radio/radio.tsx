@@ -36,7 +36,7 @@ export type RadioProps = {
   autoFocus?: boolean;
   checked?: boolean;
   defaultChecked?: boolean;
-  value?: string | number;
+  value?: string | number | boolean;
   disabled?: boolean;
   prefixCls?: string;
   displayMode?: RadioDisplayMode;
@@ -79,7 +79,7 @@ export const vuePropsType: CombineProps<RadioProps> = {
     type: Boolean,
     default: false,
   },
-  value: [String, Number],
+  value: [String, Number, Boolean],
   disabled: Boolean,
   prefixCls: String,
   displayMode: String as PropType<RadioProps['displayMode']>,

@@ -31,7 +31,7 @@ import * as PropTypes from '../PropTypes';
 
 export interface OptionItem {
   label?: VNode | string;
-  value?: string | number;
+  value?: string | number | boolean;
   disabled?: boolean;
   extra?: VNode | string;
   style?: CSSProperties;
@@ -40,11 +40,11 @@ export interface OptionItem {
 export type Options = string[] | Array<OptionItem>;
 
 export type RadioGroupProps = {
-  defaultValue?: string | number;
+  defaultValue?: string | number | boolean;
   disabled?: boolean;
   name?: string;
   options?: Options;
-  value?: string | number;
+  value?: string | number | boolean;
   onChange?: (event: RadioChangeEvent) => void;
   className?: string;
   style?: CSSProperties;
@@ -70,7 +70,7 @@ export interface RadioGroupState {
 export const vuePropsType: CombineProps<RadioGroupProps> = {
   'onUpdate:value': Function as PropType<RadioGroupProps['onUpdate:value']>,
   defaultValue: {
-    type: [String, Number],
+    type: [String, Number, Boolean],
     // @ts-ignore
     default: undefined,
   },
@@ -78,7 +78,7 @@ export const vuePropsType: CombineProps<RadioGroupProps> = {
   name: String,
   options: [Object, Array],
   value: {
-    type: [String, Number],
+    type: [String, Number, Boolean],
     // @ts-ignore
     default: undefined,
   },

@@ -145,6 +145,10 @@ import TabsDemo5 from './components/tabs/__test__/TabsDemo5';
 import TreeDemo3 from './components/tree/__test__/TreeDemo3';
 import TreeDemo4 from './components/tree/__test__/TreeDemo4';
 import TreeDemo5 from './components/tree/__test__/TreeDemo5';
+import ImageDemo2 from './components/image/__test__/ImageDemo2';
+import SideSheetDemo2 from './components/sideSheet/__test__/SideSheetDemo2';
+import TableColumnsFromChildren from './components/table/__test__/TableColumnsFromChildren';
+import TableDocsDemo from './components/table/__test__/TableDocsDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -176,6 +180,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<HighlightDemo />*/}
         {/*<TimelineDemo/>*/}
         {/*<SideSheetDemo />*/}
+        {/*<SideSheetDemo2/>*/}
+        <TableDocsDemo/>
+        {/*<TableColumnsFromChildren/>*/}
         {/*<ListDemo />*/}
         {/*<DescriptionsDemo />*/}
         {/*<DescriptionsHorizontalDemo/>*/}
@@ -186,7 +193,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<BacktopDemo />*/}
         {/*<AnchorDemo />*/}
         {/*<TabsDemo5/>*/}
-        <TabsDemo />
+        {/*<TabsDemo />*/}
         {/*<TabsDemo3/>*/}
         {/*<TabsDemo4/>*/}
         {/*<TabsDemoVueSFC/>*/}
@@ -220,6 +227,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<BannerDemo/>*/}
         {/*<ToastDemo/>*/}
         {/*<ToastUseDemo/>*/}
+        {/*<ImageDemo2/>*/}
         {/*<ImageDemo/>*/}
         {/*<SkeletonDemo/>*/}
         {/*<FormWinthFieldDemo4/>*/}

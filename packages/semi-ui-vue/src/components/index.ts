@@ -78,7 +78,7 @@ export { default as BackTop } from './backtop';
 export { default as Badge } from './badge';
 export { default as Banner } from './banner';
 export { default as Breadcrumb, BreadcrumbItem } from './breadcrumb';
-// export { default as Calendar } from './calendar';
+export { default as Calendar } from './calendar';
 export { default as Card } from './card';
 export { default as CardGroup } from './card/cardGroup';
 export { default as Carousel } from './carousel';
