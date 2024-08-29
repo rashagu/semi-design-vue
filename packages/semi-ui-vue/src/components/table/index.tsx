@@ -65,7 +65,12 @@ function Table<RecordType extends Record<string, any> = Data>() {
 }
 
 const Table_ = Table();
-export default Table_;
+export type TableType = typeof Table_ & {
+  Column: typeof Column;
+}
+const BaseTable = Table_ as TableType;
+BaseTable.Column = Column
+export default BaseTable;
 const DEFAULT_KEY_COLUMN_SELECTION = strings.DEFAULT_KEY_COLUMN_SELECTION;
 const DEFAULT_KEY_COLUMN_EXPAND = strings.DEFAULT_KEY_COLUMN_EXPAND;
 export { Table as TableMaker, Column as TableColumn, DEFAULT_KEY_COLUMN_SELECTION, DEFAULT_KEY_COLUMN_EXPAND };

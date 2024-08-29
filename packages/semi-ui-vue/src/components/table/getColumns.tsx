@@ -17,12 +17,14 @@ export default function getColumns(children: VueJsxNode) {
             if (isVNode(child) && (child.type === Column || get(child, 'type.name') === 'Column')) {
                 const col = omit(child.props, ['children']);
 
-                if (Array.isArray(child.props.children) && child.props.children.length) {
-                    col.children = getColumns(child.props.children);
+                //@ts-ignore
+                const children_ = child.children?.default?(child.children?.default?.()):child.children
+                if (Array.isArray(children_) && children_.length) {
+                    col.children = getColumns(children_);
                 }
 
                 columns.push({
-                    key: child.key,
+                    key: child.props.dataIndex,
                     ...col,
                 });
             }

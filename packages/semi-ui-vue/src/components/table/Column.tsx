@@ -16,7 +16,7 @@ export function getColumn<RecordType extends Record<string, any> = Data>(){
     setup(props, {}) {
       const slots = useSlots();
 
-      return () => null;
+      return () => slots.default?.();
     },
   });
 

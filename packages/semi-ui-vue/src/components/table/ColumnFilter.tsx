@@ -13,6 +13,7 @@ import { CombineProps, VueJsxNode } from '../interface';
 import { cloneVNode, isVNode, h, ref, watch, defineComponent, VNode, ComponentObjectPropsOptions, PropType } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { useHasInProps } from '../_base/baseComponent';
+import * as PropTypes from '../PropTypes';
 
 function renderDropdown(props: RenderDropdownProps, nestedElem: VueJsxNode = null, level = 0) {
   const {
@@ -160,13 +161,19 @@ const propTypes: CombineProps<ColumnFilterProps> = {
   renderFilterDropdown: Function as PropType<ColumnFilterProps['renderFilterDropdown']>,
   renderFilterDropdownItem: Function as PropType<ColumnFilterProps['renderFilterDropdownItem']>,
 
-  title: String,
+  title: PropTypes.any as PropType<ColumnFilterProps['title']>,
   dataIndex: [Number, String],
   width: [Number, String],
   fixed: [Boolean, String],
+  //@ts-ignore
+  sortOrder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  //@ts-ignore
+  sorter: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  //@ts-ignore
+  defaultFilteredValue: PropTypes.array
 };
 const defaultProps = {};
-const ColumnFilterVueProps = vuePropsMake(propTypes, defaultProps);
+export const ColumnFilterVueProps = vuePropsMake(propTypes, defaultProps);
 export const ColumnFilter = defineComponent({
   props: ColumnFilterVueProps as CombineProps<ColumnFilterProps>,
   name: 'ColumnFilter',
@@ -306,7 +313,7 @@ export interface ColumnFilterProps extends Omit<RenderDropdownProps, keyof Rende
   filters?: Filter[];
 
   // warning
-  title?: string;
+  title?: any;
   dataIndex?: string | number;
   width?: string | number;
   fixed?: string | boolean;
