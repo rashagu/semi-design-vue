@@ -115,6 +115,18 @@ const navItem = [
     ],
   },
   {
+    itemKey: 'plus',
+    text: '基础',
+    textUs: 'Plus',
+    items: [
+      {
+        itemKey: '/plus/chat/',
+        text: 'Chat 对话',
+        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('divider') })),
+      },
+    ],
+  },
+  {
     itemKey: 'input',
     text: '输入类',
     textUs: 'Input',
@@ -444,7 +456,7 @@ function gotoGithub() {
 }
 
 const { page, site, theme, isDark } = useData();
-
+console.log(theme.value);
 function navSelect(v) {
   // router.go((import.meta.env.BASE_URL + v.itemKey).replace('//', '/'));
 }

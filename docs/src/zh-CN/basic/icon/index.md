@@ -45,7 +45,7 @@ import { IconAvatar, IconCard } from '@kousum/semi-icons-lab-vue';
 
 import { IconHome } from '@kousum/semi-icons-vue';
 
-() => <IconHome />;
+export default () => <IconHome />;
 
 ```
 
@@ -57,7 +57,7 @@ import { IconHome } from '@kousum/semi-icons-vue';
 
 import { IconHome, IconEmoji, IconSpin } from '@kousum/semi-icons-vue';
 
-() => (
+export default () => (
     <div>
         <IconHome size="small" />
         <IconEmoji rotate={180} />
@@ -78,13 +78,13 @@ Icon组件封装了size属性，可以更方便地定义图标尺寸，支持 `e
 ```jsx live=true
 
 import { IconSearch, IconHelpCircle, IconAlertCircle, IconMinusCircle, IconPlusCircle, IconPlus, IconRefresh } from '@kousum/semi-icons-vue';
-
-() => {
+import {cloneVNode} from "vue"
+export default () => {
     // eslint-disable-next-line react/jsx-key
     const types = [<IconSearch />, <IconHelpCircle />, <IconAlertCircle />, <IconMinusCircle />, <IconPlusCircle />, <IconPlus />, <IconRefresh />];
     const sizes = ['extra-small', 'small', 'default', 'large', 'extra-large'];
     let icons = types.map((type, i) => {
-        return <div key={i} style={{ marginBottom: 4 }}>{sizes.map(size => React.cloneElement(type, { size, key: size }))}</div>;
+        return <div key={i} style={{ marginBottom: 4 }}>{sizes.map(size => cloneVNode(type, { size, key: size }))}</div>;
     });
     return icons;
 };
@@ -98,7 +98,7 @@ import { IconSearch, IconHelpCircle, IconAlertCircle, IconMinusCircle, IconPlusC
 
 import { IconLikeHeart, IconFlag, IconLock, IconUnlock } from '@kousum/semi-icons-vue';
 
-() => (
+export default () => (
     <div>
         <div style={{ color: '#E91E63' }} >
             <IconLikeHeart size="extra-large"/>
@@ -121,7 +121,7 @@ Icon组件支持size、rotate、spin等属性
 
 import { Icon } from '@kousum/semi-ui-vue';
 
-() => {
+export default () => {
     function CustomIcon() {
         return <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="11" fill="#FBCD2C"/>
