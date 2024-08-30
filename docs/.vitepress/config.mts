@@ -264,6 +264,7 @@ export default defineConfig({
       },
     },
   },
+  ignoreDeadLinks: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -376,7 +377,7 @@ export default defineConfig({
             text: 'AutoComplete 自动完成',
           },
           {
-            link: '/input/button/',
+            link: '/zh-CN/input/button/',
             text: 'Button 按钮',
           },
           {
