@@ -149,6 +149,7 @@ import ImageDemo2 from './components/image/__test__/ImageDemo2';
 import SideSheetDemo2 from './components/sideSheet/__test__/SideSheetDemo2';
 import TableColumnsFromChildren from './components/table/__test__/TableColumnsFromChildren';
 import TableDocsDemo from './components/table/__test__/TableDocsDemo';
+import TagDocsDemo from './components/tag/__test__/TagDocsDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -181,7 +182,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TimelineDemo/>*/}
         {/*<SideSheetDemo />*/}
         {/*<SideSheetDemo2/>*/}
-        <TableDocsDemo/>
+        {/*<TableDocsDemo/>*/}
         {/*<TableColumnsFromChildren/>*/}
         {/*<ListDemo />*/}
         {/*<DescriptionsDemo />*/}
@@ -296,6 +297,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SelectDemo4/>*/}
         {/*<SelectDemo5/>*/}
         {/*<TagDemo/>*/}
+        <TagDocsDemo/>
         {/*<AvatarDemo/>*/}
         {/*<RadioDemo />*/}
 

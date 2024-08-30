@@ -57,9 +57,10 @@ const Group = defineComponent({
   name: 'TagGroup',
   setup(props, { slots }) {
     function renderNTag(n: number, restTags: (TagProps | VNode)[]) {
-      const { size, showPopover, popoverProps } = props;
+      const { size, showPopover, popoverProps, onPlusNMouseEnter } = props;
       let nTag = (
-        <Tag closable={false} size={size} color="grey" style={{ backgroundColor: 'transparent' }} key="_+n">
+        <Tag closable={false} size={size} color="grey" style={{ backgroundColor: 'transparent' }} key="_+n"
+             onMouseenter={onPlusNMouseEnter}>
           +{n}
         </Tag>
       );
@@ -100,24 +101,38 @@ const Group = defineComponent({
     }
 
     function renderAllTags() {
-      const { tagList, size, mode, avatarShape } = props;
+      const { tagList, size, mode, avatarShape, onTagClose } = props;
       const renderTags: (TagProps | VNode)[] = tagList.map((tag, index): TagProps | VNode => {
         if (mode === 'custom') {
           return tag;
         }
+        const newTag = { ...(tag as TagProps) };
         if (!(tag as TagProps).size) {
           (tag as TagProps).size = size;
         }
         if (!(tag as TagProps).avatarShape) {
           (tag as TagProps).avatarShape = avatarShape;
         }
-        return (
-          <Tag key={`${index}-tag`} {...(omit(tag, 'children') as TagProps)}>
-            {{
-              default: () => tag.children,
-            }}
-          </Tag>
-        );
+
+        if (!(newTag as TagProps).tagKey) {
+          //@ts-ignore TODO
+          if (typeof (newTag as TagProps).children === 'string' || typeof (newTag as TagProps).children === 'number') {
+            //@ts-ignore TODO
+            (newTag as TagProps).tagKey = (newTag as TagProps).children as string | number;
+          } else {
+            (newTag as TagProps).tagKey = Math.random();
+          }
+        }
+        return <Tag {...(omit(newTag, 'children') as TagProps)} key={(newTag as TagProps).tagKey} onClose={(tagChildren, e, tagKey) => {
+          if ((newTag as TagProps).onClose) {
+            (newTag as TagProps).onClose(tagChildren, e, tagKey);
+          }
+          onTagClose && onTagClose(tagChildren, e, tagKey);
+        }} >
+          {{
+            default: () => tag.children,
+          }}
+        </Tag>;
       });
       return renderTags;
     }
