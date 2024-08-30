@@ -150,6 +150,8 @@ import SideSheetDemo2 from './components/sideSheet/__test__/SideSheetDemo2';
 import TableColumnsFromChildren from './components/table/__test__/TableColumnsFromChildren';
 import TableDocsDemo from './components/table/__test__/TableDocsDemo';
 import TagDocsDemo from './components/tag/__test__/TagDocsDemo';
+import PopComfirmDocsDemo from './components/popconfirm/__test__/PopComfirmDocsDemo';
+import AvatarGroupDemo from './components/avatar/__test__/AvatarGroupDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -221,6 +223,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TableDemo12 />*/}
         {/*<TableDemo13Virtualized />*/}
         {/*<PaginationDemo />*/}
+        {/*<PopComfirmDocsDemo/>*/}
         {/*<PopconfirmDemo/>*/}
         {/*<NotificationDemo/>*/}
         {/*<NotificationDemo2/>*/}
@@ -297,8 +300,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SelectDemo4/>*/}
         {/*<SelectDemo5/>*/}
         {/*<TagDemo/>*/}
-        <TagDocsDemo/>
+        {/*<TagDocsDemo/>*/}
         {/*<AvatarDemo/>*/}
+        <AvatarGroupDemo/>
         {/*<RadioDemo />*/}
 
         {/*<InputDemo />*/}

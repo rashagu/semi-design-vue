@@ -6,6 +6,7 @@ import { AvatarGroupProps } from './interface';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/avatar/constants';
 import { ComponentObjectPropsOptions } from 'vue/dist/vue';
 import { CombineProps } from '../interface';
+import { getFragmentChildren } from '../_utils';
 
 const sizeSet = strings.SIZE;
 const shapeSet = strings.SHAPE;
@@ -52,7 +53,7 @@ const AvatarGroup = defineComponent({
     }
 
     return () => {
-      const children = slots.default ? slots.default() : null;
+      const children = getFragmentChildren(slots);
       function getAllAvatars() {
         return Array.isArray(children) ? children : [children];
       }

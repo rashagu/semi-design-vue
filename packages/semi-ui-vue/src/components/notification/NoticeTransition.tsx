@@ -17,7 +17,7 @@ export type ArgsType<T> = T extends (...args: infer A) => any ? A : never;
 
 export interface NoticeTransitionProps {
   position?: NoticePosition;
-  children: VNode | ((TransitionProps: any) => any) | VNode[] | ((transitionStyle: any) => VNode);
+  children?: VNode | ((TransitionProps: any) => any) | VNode[] | ((transitionStyle: any) => VNode);
   motion?: Motion<NoticeTransitionProps>;
 }
 
@@ -27,7 +27,7 @@ export const vuePropsType: CombineProps<NoticeTransitionProps> = {
   position: String as PropType<NoticeTransitionProps['position']>,
   children: {
     type: [Object, Function] as PropType<NoticeTransitionProps['children']>,
-    required: true
+    // required: true
   },
   motion: [Object, String, Boolean],
 };

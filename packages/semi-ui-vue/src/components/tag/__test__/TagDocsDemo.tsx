@@ -32,6 +32,7 @@ const Demo = defineComponent(() => {
         marginBottom: '30px',
       }}
     >
+
       <TagGroup
         maxTagCount={3}
         showPopover

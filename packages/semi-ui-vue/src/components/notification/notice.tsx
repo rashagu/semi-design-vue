@@ -131,7 +131,7 @@ const Notice = defineComponent({
       if (iconType) {
         return (
           <div class={iconCls} x-semi-prop="icon">
-            {isSemiIcon(iconType) ? cloneVNode(iconType, { size: iconType.props.size || 'large' }) : iconType}
+            {isSemiIcon(iconType) ? cloneVNode(iconType, { size: iconType.props?.size || 'large' }) : iconType}
           </div>
         );
       }
