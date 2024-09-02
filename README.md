@@ -81,7 +81,7 @@ Thanks to [JetBrains](https://jb.gg/OpenSourceSupport) for providing Open Source
 ## TODO
  
 - [ ] bug fix & 单元测试覆盖
-- [ ] Vue版的文档（也可以直接参考 [官方文档](https://semi.design/zh-CN/)）
+- [ ] [Vue版的文档](https://www.kousum.asia/)（也可以直接参考 [官方文档](https://semi.design/zh-CN/)）
 
 
 

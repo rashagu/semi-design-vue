@@ -140,25 +140,31 @@ export default () => {
 
 ```jsx live=true
 import { Lottie } from '@kousum/semi-ui-vue';
+import { defineComponent, onMounted, ref } from 'vue';
 
 
-export default () => {
-    const jsonURL =
-        'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/lottie_demo.json';
+const Demo = defineComponent(() => {
 
-    console.log('lottie', Lottie.getLottie());
+  const lottieRef = ref()
+  const jsonURL =
+    'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/lottie_demo.json';
 
-    return (
-        <div>
-            <Lottie
-                getLottie={lottie => console.log('lottie', lottie)}
-                params={{ path: jsonURL }}
-                width={'300px'}
-                height={'300px'}
-            />
-        </div>
-    );
-};
+  onMounted(()=>{
+    console.log('lottie', lottieRef.value.getLottie());
+  })
+  return () => (
+    <div>
+      <Lottie
+        ref={lottieRef}
+        getLottie={lottie => console.log('lottie', lottie)}
+        params={{ path: jsonURL }}
+        width={'300px'}
+        height={'300px'}
+      />
+    </div>
+  );
+})
+export default Demo
 ```
 
 ### API

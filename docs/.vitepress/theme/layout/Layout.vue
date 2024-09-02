@@ -136,7 +136,7 @@ const navItem = [
       },
       {
         itemKey: '/plus/markdownrender/',
-        text: 'Markdownrender markdown渲染',
+        text: 'Markdown 渲染',
         icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('markdown') })),
       },
 
