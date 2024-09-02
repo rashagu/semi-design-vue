@@ -122,8 +122,24 @@ const navItem = [
       {
         itemKey: '/plus/chat/',
         text: 'Chat 对话',
-        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('divider') })),
+        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('chat') })),
       },
+      {
+        itemKey: '/plus/lottie/',
+        text: 'Lottie 动画',
+        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('lottie') })),
+      },
+      {
+        itemKey: '/plus/codehighlight/',
+        text: 'Codehighlight 代码高亮',
+        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('codehighlight') })),
+      },
+      {
+        itemKey: '/plus/markdownrender/',
+        text: 'Markdownrender markdown渲染',
+        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('markdown') })),
+      },
+
     ],
   },
   {
@@ -153,6 +169,11 @@ const navItem = [
         icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('checkbox') })),
       },
       {
+        itemKey: '/input/colorPicker/',
+        text: 'ColorPicker 颜色选择器',
+        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('colors') })),
+      },
+      {
         itemKey: '/input/datepicker/',
         text: 'DatePicker 日期选择器',
         icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('datepicker') })),
@@ -171,6 +192,11 @@ const navItem = [
         itemKey: '/input/inputnumber/',
         text: 'InputNumber 数字输入框',
         icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('inputnumber') })),
+      },
+      {
+        itemKey: '/input/pinCode/',
+        text: 'PinCode 验证码输入',
+        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('pincode') })),
       },
       {
         itemKey: '/input/radio/',
@@ -526,7 +552,7 @@ provide('hero-image-slot-exists', null);
 <!--    <VPContent v-if="page.filePath === 'index.md'" />-->
     <Layout className="in_body">
       <LayoutSider className="layout_sider">
-        <div class="layout_nav" style="height: calc(100vh - 60px); background-color: var(--semi-color-bg-0);padding-bottom: 2rem">
+        <div class="layout_nav" style="height: calc(100vh - 60px); background-color: var(--semi-color-bg-0);">
           <Nav
             :defaultOpenKeys="navItem.map((item) => item.itemKey)"
             style="height: calc(100%); width: 280px"
