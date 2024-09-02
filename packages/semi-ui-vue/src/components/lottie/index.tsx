@@ -53,7 +53,7 @@ export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const index = defineComponent({
   props: { ...vuePropsType },
   name: 'Lottie',
-  setup(props, { attrs }) {
+  setup(props, { expose }) {
     const slots = useSlots();
     const container = shallowRef();
     const state = reactive<LottieState>({});
@@ -84,6 +84,12 @@ const index = defineComponent({
     });
     onUnmounted(()=>{
       foundation.destroy();
+    })
+
+    expose({
+      getLottie(){
+        return LottieFoundation.getLottie;
+      }
     })
 
     watch(

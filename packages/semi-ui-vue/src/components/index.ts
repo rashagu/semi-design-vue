@@ -219,3 +219,4 @@ export {default as CodeHighlight} from './codeHighlight'
 export {default as MarkdownRender} from './markdownRender'
 
 export { default as Chat } from './chat';
+export { default as ColorPicker } from './colorPicker';

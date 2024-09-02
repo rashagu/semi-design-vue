@@ -27,7 +27,7 @@ const propTypes: CombineProps<PinCodeProps> = {
   size: PropTypes.string as PropType<PinCodeProps['size']>,
   disabled: PropTypes.bool,
   value: PropTypes.string,
-  format: PropTypes.node as PropType<PinCodeProps['format']>,
+  format: [Function, ...PropTypes.node] as PropType<PinCodeProps['format']>,
   onChange: {
     type: PropTypes.func as PropType<PinCodeProps['onChange']>,
     required: true,
@@ -47,7 +47,7 @@ export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const PinCode = defineComponent({
   props: { ...vuePropsType },
   name: 'PinCode',
-  setup(props, { attrs }) {
+  setup(props, { expose }) {
     const slots = useSlots();
 
     let inputDOMList = [];
@@ -92,6 +92,11 @@ const PinCode = defineComponent({
     const blur = (index: number) => {
       inputDOMList[index]?.blur();
     };
+
+    expose({
+      focus,
+      blur,
+    })
 
     const renderSingleInput = (index: number) => {
       return (

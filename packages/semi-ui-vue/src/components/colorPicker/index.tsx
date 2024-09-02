@@ -96,43 +96,7 @@ const ColorPicker = defineComponent({
     }
     const adapter = adapter_();
     const foundation = new ColorPickerFoundation(adapter)
-    const colorStringToValue = (raw: string) => {
-      if (raw.startsWith('#')) {
-        return {
-          hsva: hexToHsva(raw),
-          rgba: hexToRgba(raw),
-          hex: raw,
-        };
-      } else if (raw.startsWith('rgba')) {
-        const rgba = rgbaStringToRgba(raw);
-        return {
-          hsva: rgbaStringToHsva(raw),
-          rgba: rgba,
-          hex: rgbaToHex(rgba),
-        };
-      } else if (raw.startsWith('rgb')) {
-        const rgba = rgbStringToRgba(raw);
-        return {
-          hsva: rgbStringToHsva(raw),
-          rgba: rgba,
-          hex: rgbaToHex(rgba),
-        };
-      } else if (raw.startsWith('hsv')) {
-        const hsva = hsvaStringToHsva(raw);
-        const rgba = hsvaToRgba(hsva);
-        const hex = hsvaToHex(hsva);
-        return {
-          hsva,
-          rgba,
-          hex,
-        };
-      } else {
-        throw new Error('Semi ColorPicker: error on static colorStringToValue method, input value is invalid: ' + raw);
-      }
-    };
-    expose({
-      colorStringToValue
-    })
+
 
 
     function renderPicker() {
@@ -215,7 +179,48 @@ const ColorPicker = defineComponent({
   },
 });
 
+const colorStringToValue = (raw: string) => {
+  if (raw.startsWith('#')) {
+    return {
+      hsva: hexToHsva(raw),
+      rgba: hexToRgba(raw),
+      hex: raw,
+    };
+  } else if (raw.startsWith('rgba')) {
+    const rgba = rgbaStringToRgba(raw);
+    return {
+      hsva: rgbaStringToHsva(raw),
+      rgba: rgba,
+      hex: rgbaToHex(rgba),
+    };
+  } else if (raw.startsWith('rgb')) {
+    const rgba = rgbStringToRgba(raw);
+    return {
+      hsva: rgbStringToHsva(raw),
+      rgba: rgba,
+      hex: rgbaToHex(rgba),
+    };
+  } else if (raw.startsWith('hsv')) {
+    const hsva = hsvaStringToHsva(raw);
+    const rgba = hsvaToRgba(hsva);
+    const hex = hsvaToHex(hsva);
+    return {
+      hsva,
+      rgba,
+      hex,
+    };
+  } else {
+    throw new Error('Semi ColorPicker: error on static colorStringToValue method, input value is invalid: ' + raw);
+  }
+};
+
+
 export type { ColorValue };
 export * from '@douyinfe/semi-foundation/colorPicker/interface';
 
-export default ColorPicker;
+export type ColorPickerType = typeof ColorPicker & {
+  colorStringToValue: typeof colorStringToValue
+}
+const BaseColorPicker = ColorPicker as ColorPickerType
+BaseColorPicker.colorStringToValue = colorStringToValue
+export default BaseColorPicker;
