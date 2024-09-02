@@ -1,5 +1,18 @@
 # @kousum/semi-ui-vue
 
+## 0.19.0
+
+### Minor Changes
+
+- semi 2.65.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @kousum/semi-icons-vue@0.19.0
+  - @kousum/semi-animation-vue@0.19.0
+  - @kousum/semi-illustrations-vue@0.19.0
+
 ## 0.18.2
 
 ### Patch Changes

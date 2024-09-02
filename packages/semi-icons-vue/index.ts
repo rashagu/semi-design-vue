@@ -11,6 +11,7 @@ export {
   Icon,
   ConvertIcon
 }
+
 export { default as IconAbsoluteStroked } from './src/icons/icons/IconAbsoluteStroked';
 export { default as IconActivity } from './src/icons/icons/IconActivity';
 export { default as IconAlarm } from './src/icons/icons/IconAlarm';

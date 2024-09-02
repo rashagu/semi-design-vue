@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 0.19.0
+
+### Minor Changes
+
+- semi 2.65.0
+
 ## 0.18.0
 
 ### Minor Changes
