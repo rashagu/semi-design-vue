@@ -582,6 +582,9 @@ provide('hero-image-slot-exists', null);
 </template>
 <style lang="scss">
 /* ++++ overview start ++++ */
+:root{
+  --vp-icon-copy:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E")
+}
 .semi-overview-list {
   display: flex;
   flex-wrap: wrap;

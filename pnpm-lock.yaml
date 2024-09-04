@@ -192,8 +192,8 @@ importers:
         specifier: 5.3.4
         version: 5.3.4(@types/node@20.12.12)(sass@1.77.1)(terser@5.31.0)
       vitepress:
-        specifier: ^1.3.3
-        version: 1.3.3(@algolia/client-search@4.23.3)(@types/node@20.12.12)(@types/react@18.3.2)(async-validator@4.2.5)(postcss@8.4.38)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.1)(search-insights@2.14.0)(terser@5.31.0)(typescript@5.5.2)
+        specifier: ^1.3.4
+        version: 1.3.4(@algolia/client-search@4.23.3)(@types/node@20.12.12)(@types/react@18.3.2)(async-validator@4.2.5)(postcss@8.4.38)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.1)(search-insights@2.14.0)(terser@5.31.0)(typescript@5.5.2)
       vitest:
         specifier: ^2.0.3
         version: 2.0.3(@types/node@20.12.12)(jsdom@24.0.0)(sass@1.77.1)(terser@5.31.0)
@@ -8272,8 +8272,8 @@ packages:
       terser:
         optional: true
 
-  vitepress@1.3.3:
-    resolution: {integrity: sha512-6UzEw/wZ41S/CATby7ea7UlffvRER/uekxgN6hbEvSys9ukmLOKsz87Ehq9yOx1Rwiw+Sj97yjpivP8w1sUmng==}
+  vitepress@1.3.4:
+    resolution: {integrity: sha512-I1/F6OW1xl3kW4PaIMC6snxjWgf3qfziq2aqsDoFc/Gt41WbcRv++z8zjw8qGRIJ+I4bUW7ZcKFDHHN/jkH9DQ==}
     hasBin: true
     peerDependencies:
       markdown-it-mathjax3: ^4
@@ -18498,7 +18498,7 @@ snapshots:
       sass: 1.77.1
       terser: 5.31.0
 
-  vitepress@1.3.3(@algolia/client-search@4.23.3)(@types/node@20.12.12)(@types/react@18.3.2)(async-validator@4.2.5)(postcss@8.4.38)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.1)(search-insights@2.14.0)(terser@5.31.0)(typescript@5.5.2):
+  vitepress@1.3.4(@algolia/client-search@4.23.3)(@types/node@20.12.12)(@types/react@18.3.2)(async-validator@4.2.5)(postcss@8.4.38)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.1)(search-insights@2.14.0)(terser@5.31.0)(typescript@5.5.2):
     dependencies:
       '@docsearch/css': 3.6.1
       '@docsearch/js': 3.6.1(@algolia/client-search@4.23.3)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.14.0)
