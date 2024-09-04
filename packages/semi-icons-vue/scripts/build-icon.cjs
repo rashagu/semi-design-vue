@@ -24,13 +24,15 @@ const customTemplate = ({ template }, opts, { imports, interfaces, componentName
     return typeScriptTpl.ast`
 import {defineComponent, ref, h, onActivated} from 'vue'
 import { ConvertIcon, vuePropsType as iconVuePropsType} from '../components/Icon';
-import type {IconProps} from '../components/Icon'
 const SvgComponent = defineComponent((props, {slots}) => {
     return ()=>(${jsx});
 })
 
-const IconComponent = defineComponent_({
+const IconComponent = defineComponent({
     name:'semi_icon-activity',
+    props: {
+      ...iconVuePropsType
+    },
     setup(props, {slots}){
         return ()=><ConvertIcon iconType={'activity'} {...props} >
           {{
@@ -38,7 +40,6 @@ const IconComponent = defineComponent_({
           }}
     </ConvertIcon>;
 }})
-IconComponent.props = iconVuePropsType
 export default IconComponent
 export {SvgComponent}
 `;

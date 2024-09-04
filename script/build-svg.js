@@ -48,7 +48,7 @@ async function build(entryDir, outDir, prefix, suffix, svgoPlugins = [], svgrOpt
       });
       const formattedCode = prettier.format(jsxCode, prettierConfig);
       const newFormattedCode = formattedCode
-        .replace('defineComponent_', `defineComponent<IconProps>`)
+        // .replace('defineComponent_', `defineComponent<IconProps>`)
         .replace('focusable={false}', `// @ts-ignore
             focusable={false}`)
         .replaceAll('fillRule', 'fill-rule')

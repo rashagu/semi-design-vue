@@ -63,7 +63,9 @@ export default function useModal(): [{
         },
         update: (newConfig: ConfirmProps) => {
           if (modal) {
-            modal.component.update(newConfig);
+            // TODO newConfig没传过去
+            modal.component.update();
+            // modal.component.update(newConfig);
           }
         },
       };

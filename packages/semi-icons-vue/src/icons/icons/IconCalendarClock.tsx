@@ -1,6 +1,5 @@
 import { defineComponent, ref, h, onActivated } from 'vue';
 import { ConvertIcon, vuePropsType as iconVuePropsType } from '../components/Icon';
-import type { IconProps } from '../components/Icon';
 const SvgComponent = defineComponent((props, { slots }) => {
   return () => (
     <svg
@@ -43,8 +42,11 @@ const SvgComponent = defineComponent((props, { slots }) => {
     </svg>
   );
 });
-const IconComponent = defineComponent<IconProps>({
+const IconComponent = defineComponent({
   name: 'IconCalendarClock',
+  props: {
+    ...iconVuePropsType,
+  },
   setup(props, { slots }) {
     return () => (
       <ConvertIcon iconType={'calendar_clock'} {...props}>
@@ -55,6 +57,5 @@ const IconComponent = defineComponent<IconProps>({
     );
   },
 });
-IconComponent.props = iconVuePropsType;
 export default IconComponent;
 export { SvgComponent };

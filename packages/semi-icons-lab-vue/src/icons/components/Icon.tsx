@@ -69,8 +69,8 @@ const Icon = defineComponent<IconProps>((props, {slots}) => {
 
 
 export interface convertIconType extends IconProps{
-  svg:any,
-  iconType:string
+  svg?: any,
+  iconType?: string
 }
 const ConvertIcon = defineComponent<convertIconType>((props, {slots}) => {
 

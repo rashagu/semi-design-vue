@@ -43,13 +43,13 @@ const HookModal = defineComponent({
         innerConfig.value = {
           ...innerConfig.value,
           visible: false,
-        };
+        } as ConfirmProps;
       },
       update: (newConfig) => {
         innerConfig.value = {
           ...innerConfig.value,
           ...newConfig,
-        };
+        } as ConfirmProps;
       },
     });
 

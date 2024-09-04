@@ -2,6 +2,7 @@ import {defineComponent, ref, h, onActivated, StyleValue, VNode, ComponentObject
 import { BASE_CLASS_PREFIX } from '../env';
 import cls from 'classnames';
 import '../styles/icons.scss';
+import { CombineProps } from './interface';
 
 export type IconSize = 'inherit' | 'extra-small' | 'small' | 'default' | 'large' | 'extra-large';
 
@@ -19,7 +20,7 @@ export interface IconProps  {
   tabIndex?: number
   onKeypress?: (e:any)=>void
 }
-export const vuePropsType:ComponentObjectPropsOptions<IconProps> = {
+export const vuePropsType:CombineProps<IconProps> = {
   size: String as PropType<IconSize>,
   spin: Boolean,
   rotate: Number,
@@ -69,8 +70,8 @@ const Icon = defineComponent<IconProps>((props, {slots}) => {
 
 
 export interface convertIconType extends IconProps{
-  svg:any,
-  iconType:string
+  svg?: any,
+  iconType?: string
 }
 const ConvertIcon = defineComponent<convertIconType>((props, {slots}) => {
 
