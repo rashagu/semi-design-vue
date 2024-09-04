@@ -153,6 +153,7 @@ import TagDocsDemo from './components/tag/__test__/TagDocsDemo';
 import PopComfirmDocsDemo from './components/popconfirm/__test__/PopComfirmDocsDemo';
 import AvatarGroupDemo from './components/avatar/__test__/AvatarGroupDemo';
 import TabsDocsDemo from './components/tabs/__test__/TabsDocsDemo';
+import { Numeral } from './components/typography';
 export interface ExampleProps {
   name?: string
 }
@@ -196,7 +197,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<StepsDemo />*/}
         {/*<BacktopDemo />*/}
         {/*<AnchorDemo />*/}
-        <TabsDocsDemo/>
+        {/*<TabsDocsDemo/>*/}
         {/*<TabsDemo5/>*/}
         {/*<TabsDemo />*/}
         {/*<TabsDemo3/>*/}
@@ -310,10 +311,14 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<InputDemo />*/}
         {/*<TypeDemo />*/}
         {/*<TypoDemo3/>*/}
-
+        {/**/}
         {/*<TypoDemo2/>*/}
         {/*<TypoDemoSFC/>*/}
-        {/*<NumeralDemo/>*/}
+        {/*<Numeral precision={1}>*/}
+        {/*  <p>点赞量：1.6111e1 K</p>*/}
+        {/*</Numeral>*/}
+        <NumeralDemo/>
+
         {/*<TextDemo/>*/}
         {/*<LinkDemo/>*/}
         {/*<TypoCopyDemo/>*/}

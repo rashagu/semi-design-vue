@@ -3,6 +3,7 @@ import Comp from "./TypoDemo";
 import Comp2 from "./TypoDemo2";
 import { fireEvent, render, screen } from '@testing-library/vue';
 import TypoDemoSFC from './TypoDemoSFC.vue';
+import NumeralDemo from './NumeralDemo';
 
 test('TypoDemo test', async () => {
   expect(Comp).toBeTruthy()
@@ -37,3 +38,17 @@ test('typography sfc', async () => {
 
 
 });
+
+test('typography NumeralDemo', async () => {
+  render(NumeralDemo, {
+    global: {
+      stubs: {
+      },
+    },
+  });
+
+  const input = await screen.findByText("7,100+");
+
+
+});
+

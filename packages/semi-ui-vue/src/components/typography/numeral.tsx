@@ -109,9 +109,14 @@ const Numeral = defineComponent({
               return [children];
             }
 
-            // 当ctx有值时是jsx组件，否则是template组件？？
+
+            // return children;
+            // (当ctx有值时是jsx组件，或者ctx有值type.render没值是jsx组件)，否则是template组件？？
             // type: Symbol(v-txt) 组件的children只能是文本不能是VNode
-            if (item.ctx && item.type !== Text) {
+            if(!item.ctx || item.ctx.type?.render){
+              return children;
+            }
+            if (item.type !== Text) {
               return [h(Text, children)];
             } else {
               return children;

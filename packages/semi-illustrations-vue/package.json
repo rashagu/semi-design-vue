@@ -29,7 +29,7 @@
     "@douyinfe/semi-foundation": "2.65.0",
     "@douyinfe/semi-theme-default": "2.65.0",
     "classnames": "^2.3.2",
-    "vue": "^3.4.31"
+    "vue": "^3.5.0"
   },
   "peerDependencies": {
     "vue": ">=3.4.3"
@@ -44,8 +44,8 @@
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
-    "@vitejs/plugin-vue": "^5.0.5",
-    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "@vitejs/plugin-vue": "^5.1.3",
+    "@vitejs/plugin-vue-jsx": "^4.0.1",
     "camelcase": "^6.3.0",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
@@ -61,8 +61,8 @@
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
     "typescript": "^5.5.2",
-    "vite": "5.3.4",
-    "vue-tsc": "^2.0.21"
+    "vite": "5.4.3",
+    "vue-tsc": "^2.1.4"
   },
   "gitHead": "a9bb1553bd45dcf99595a45df0adf0d967083f1e"
 }
