@@ -152,6 +152,7 @@ import TableDocsDemo from './components/table/__test__/TableDocsDemo';
 import TagDocsDemo from './components/tag/__test__/TagDocsDemo';
 import PopComfirmDocsDemo from './components/popconfirm/__test__/PopComfirmDocsDemo';
 import AvatarGroupDemo from './components/avatar/__test__/AvatarGroupDemo';
+import TabsDocsDemo from './components/tabs/__test__/TabsDocsDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -195,6 +196,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<StepsDemo />*/}
         {/*<BacktopDemo />*/}
         {/*<AnchorDemo />*/}
+        <TabsDocsDemo/>
         {/*<TabsDemo5/>*/}
         {/*<TabsDemo />*/}
         {/*<TabsDemo3/>*/}
@@ -302,7 +304,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagDemo/>*/}
         {/*<TagDocsDemo/>*/}
         {/*<AvatarDemo/>*/}
-        <AvatarGroupDemo/>
+        {/*<AvatarGroupDemo/>*/}
         {/*<RadioDemo />*/}
 
         {/*<InputDemo />*/}

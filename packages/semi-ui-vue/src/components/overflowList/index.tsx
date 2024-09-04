@@ -52,7 +52,7 @@ export interface OverflowListProps {
   overflowRenderer?: (overflowItems: Array<OverflowItem>) => VueJsxNode | VueJsxNode[];
   renderMode?: 'collapse' | 'scroll';
   style?: CSSProperties;
-  threshold?: number;
+  threshold?: number | number[];
   visibleItemRenderer?: (item: OverflowItem, index: number) => VueJsxNode;
   wrapperClassName?: string;
   wrapperStyle?: CSSProperties;
@@ -100,7 +100,7 @@ const propTypes: CombineProps<OverflowListProps> = {
   overflowRenderer: PropTypes.func as PropType<OverflowListProps['overflowRenderer']>,
   renderMode: PropTypes.string as PropType<OverflowListProps['renderMode']>,
   style: PropTypes.object,
-  threshold: PropTypes.number,
+  threshold: [PropTypes.number, PropTypes.array] as PropType<OverflowListProps['threshold']>,
   visibleItemRenderer: PropTypes.func as PropType<OverflowListProps['visibleItemRenderer']>,
   wrapperClassName: PropTypes.string,
   wrapperStyle: PropTypes.object,

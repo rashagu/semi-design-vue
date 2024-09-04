@@ -259,6 +259,7 @@ const TabBar = defineComponent({
           overflowRenderDirection={props.arrowPosition}
           wrapperStyle={props.visibleTabsStyle}
           overflowRenderer={renderOverflow}
+          threshold={[0, 1]}
           renderMode="scroll"
           className={`${cssClasses.TABS_BAR}-overflow-list`}
           visibleItemRenderer={renderTabItem as any}
