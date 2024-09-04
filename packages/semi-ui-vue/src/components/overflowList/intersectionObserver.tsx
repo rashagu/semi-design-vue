@@ -7,7 +7,7 @@ import {
   onBeforeUnmount,
   onMounted,
   PropType,
-  useSlots,
+  useSlots, VNode,
   watch,
 } from 'vue';
 import { vuePropsMake } from '../PropTypes';
@@ -22,6 +22,7 @@ export interface ReactIntersectionObserverProps {
   threshold?: IntersectionObserverInit['threshold'];
   rootMargin?: IntersectionObserverInit['rootMargin'];
   items?: Record<string, Element>;
+  children?: ()=>(VNode[] | VNode)
 }
 
 const propTypes: CombineProps<ReactIntersectionObserverProps> = {
@@ -31,6 +32,7 @@ const propTypes: CombineProps<ReactIntersectionObserverProps> = {
   threshold: [PropTypes.number, PropTypes.array],
   rootMargin: PropTypes.string,
   items: PropTypes.object,
+  children: PropTypes.func as PropType<ReactIntersectionObserverProps['children']>,
 };
 
 const defaultProps = {
@@ -72,7 +74,8 @@ const ReactIntersectionObserver = defineComponent({
     watch(
       [
         () => Object.keys(props.items),
-        ()=>props.root,
+        () => props.children,
+        () => props.root,
       ],
       () => {
         if(observer){
@@ -117,7 +120,7 @@ const ReactIntersectionObserver = defineComponent({
     }
 
     // 不能直接 return slots.default，会失去响应
-    return () => slots.default?.();
+    return () => props.children?.();
   },
 });
 

@@ -212,7 +212,7 @@ const OverflowList = defineComponent({
 
     const foundation = new OverflowListFoundation(adapter);
 
-    let itemRefs = {};
+    let itemRefs = shallowRef({});
 
     let scroller = null;
     let spacer: HTMLDivElement = null;
@@ -244,7 +244,7 @@ const OverflowList = defineComponent({
 
         // Determine whether to update by comparing key values
         if (!isEqual(prevItemsKeys, nowItemsKeys)) {
-          itemRefs = {};
+          itemRefs.value = {};
           state.visibleState = new Map();
         }
 
@@ -268,8 +268,11 @@ const OverflowList = defineComponent({
     };
 
     const mergeRef = (ref_: any, node: Element, key: Key): void => {
-      if (!itemRefs[key]) {
-        itemRefs[key] = node;
+      if (!itemRefs.value[key]) {
+        itemRefs.value[key] = node;
+        itemRefs.value = {
+          ...itemRefs.value
+        }
       }
       if (typeof ref_ === 'function') {
         ref_(node);
@@ -423,8 +426,9 @@ const OverflowList = defineComponent({
       const { renderMode } = props;
       if (renderMode === RenderMode.SCROLL) {
         return (
-          <IntersectionObserver onIntersect={reintersect} threshold={props.threshold} root={scroller} items={itemRefs}>
-            {list}
+          <IntersectionObserver onIntersect={reintersect} threshold={props.threshold} root={scroller} items={itemRefs.value}
+
+          children={()=>list}>
           </IntersectionObserver>
         );
       }

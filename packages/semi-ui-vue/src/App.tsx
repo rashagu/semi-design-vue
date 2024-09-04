@@ -154,6 +154,7 @@ import PopComfirmDocsDemo from './components/popconfirm/__test__/PopComfirmDocsD
 import AvatarGroupDemo from './components/avatar/__test__/AvatarGroupDemo';
 import TabsDocsDemo from './components/tabs/__test__/TabsDocsDemo';
 import { Numeral } from './components/typography';
+import TabsDemoReact from './components/tabs/__test__/TabsDemoReact';
 export interface ExampleProps {
   name?: string
 }
@@ -203,6 +204,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TabsDemo3/>*/}
         {/*<TabsDemo4/>*/}
         {/*<TabsDemoVueSFC/>*/}
+        <TabsDemoReact/>
         {/*<CardDemo >*/}
         {/*  {a.value}*/}
         {/*</CardDemo>*/}
@@ -317,7 +319,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<Numeral precision={1}>*/}
         {/*  <p>点赞量：1.6111e1 K</p>*/}
         {/*</Numeral>*/}
-        <NumeralDemo/>
+        {/*<NumeralDemo/>*/}
 
         {/*<TextDemo/>*/}
         {/*<LinkDemo/>*/}

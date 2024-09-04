@@ -237,15 +237,16 @@ const TabBar = defineComponent({
       );
     };
 
-    const renderOverflow = (items: any[]): Array<VueJsxNode> =>
-      items.map((item, index) => {
+    const renderOverflow = (items: any[]): Array<VueJsxNode> => {
+      return items.map((item, index) => {
         const pos = index === 0 ? 'start' : 'end';
         if (props.renderArrow) {
           return props.renderArrow(item, pos, () => handleArrowClick(item, pos));
         }
         const icon = index === 0 ? <IconChevronLeft /> : <IconChevronRight />;
         return renderCollapse(item, icon, pos);
-      });
+      })
+    };
 
     const renderCollapsedTab = (): VueJsxNode => {
       const { list } = props;

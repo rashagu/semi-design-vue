@@ -165,7 +165,7 @@ const Index = defineComponent({
       return states;
     }
 
-    watch([() => props.activeKey, () => state.activeKey], () => {
+    watch([() => props.activeKey], () => {
       const newState = getDerivedStateFromProps({ ...props });
       if (newState) {
         Object.keys(newState).forEach((key) => {
@@ -177,6 +177,7 @@ const Index = defineComponent({
     watch(
       [() => props.children, () => props.tabList, () => props.activeKey, () => state.activeKey],
       (value, [prevPropsChildren, prevPropsTabList, prevPropsActiveKey, prevStateActiveKey]) => {
+
         // Panes state acts on tab bar, no need to compare TabPane children
         const prevChildrenProps = (prevPropsChildren || []).map((child) =>
           pick(isVNode(child) ? child.props : null, panePickKeys)
