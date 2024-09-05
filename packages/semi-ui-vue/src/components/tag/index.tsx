@@ -57,7 +57,7 @@ const propTypes: CombineProps<TagProps> = {
   shape: { type: String as PropType<TagProps['shape']>, default: 'square' },
   onKeydown: Function as PropType<TagProps['onKeydown']>,
   tabIndex: Number, // use internal, when tag in taInput, we want to use left arrow and right arrow to control the tag focus, so the tabIndex need to be -1.
-  onMouseenter: Function as PropType<TagProps['onMouseenter']>,
+  onMouseenter: [Function, Array] as PropType<TagProps['onMouseenter']>,
   prefixIcon: PropTypes.node as PropType<TagProps['prefixIcon']>,
   suffixIcon: PropTypes.node as PropType<TagProps['suffixIcon']>,
 };

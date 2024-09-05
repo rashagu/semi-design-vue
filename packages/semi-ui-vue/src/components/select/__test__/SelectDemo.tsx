@@ -20,7 +20,7 @@ const SelectDemo = defineComponent((props, { slots }) => {
     { value: 'steve', label: 'Caption' },
     { value: 'peter', label: 'SpiderBoy' },
   ];
-  const optionListRef = ref<{ value: string; label: VNode | string }[]>([
+  const optionListRef = ref<{ value: string; label: VNode | string, [key: string]: any }[]>([
     { value: 'tony', label: 'Ironman' },
     { value: 'Thor', label: 'Thor' },
     { value: 'steve', label: 'Caption' },

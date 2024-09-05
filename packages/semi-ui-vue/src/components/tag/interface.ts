@@ -45,7 +45,7 @@ export interface TagProps {
     onKeydown?: (e:Event)=>void;
     'aria-label'?: AriaAttributes['aria-label'];
     tabIndex?: number; // use internal, when tag in taInput, we want to use left arrow and right arrow to control the tag focus, so the tabIndex need to be -1.
-    onMouseenter?: () => void
+    onMouseenter?: () => void | (() => void)[]
 }
 
 export interface TagGroupProps {

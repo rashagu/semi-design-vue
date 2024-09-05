@@ -77,7 +77,6 @@ const Index = defineComponent({
           el = document.createElement('div');
           const getContainer = props.getPopupContainer || context.getPopupContainer || defaultGetContainer;
           const portalContainer = getContainer();
-          console.log('initContainer');
           portalContainer.appendChild(el);
           addStyle(props.style);
           addClass(props.prefixCls, context, props.className);

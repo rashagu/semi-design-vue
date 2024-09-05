@@ -155,6 +155,8 @@ import AvatarGroupDemo from './components/avatar/__test__/AvatarGroupDemo';
 import TabsDocsDemo from './components/tabs/__test__/TabsDocsDemo';
 import { Numeral } from './components/typography';
 import TabsDemoReact from './components/tabs/__test__/TabsDemoReact';
+import ModalDocsDemo from './components/modal/__test__/ModalDocsDemo';
+import SelectDocsDemo from './components/select/__test__/SelectDocsDemo';
 export interface ExampleProps {
   name?: string
 }
@@ -204,7 +206,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TabsDemo3/>*/}
         {/*<TabsDemo4/>*/}
         {/*<TabsDemoVueSFC/>*/}
-        <TabsDemoReact/>
+        {/*<TabsDemoReact/>*/}
         {/*<CardDemo >*/}
         {/*  {a.value}*/}
         {/*</CardDemo>*/}
@@ -270,6 +272,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ModalDemo/>*/}
         {/*<ModalDemoVueSFC/>*/}
         {/*<ModalDemo2/>*/}
+        {/*<ModalDocsDemo/>*/}
         {/*<LottieDemo/>*/}
         {/*<MarkDownRenderDemo/>*/}
         {/*<CodeHighlightDemo/>*/}
@@ -297,6 +300,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<AutoCompleteSFC/>*/}
         {/*<ColorPickerDemo/>*/}
 
+        <SelectDocsDemo/>
         {/*<SelectRenderOptionItem/>*/}
         {/*<SelectDemoToRawTest/>*/}
         {/*<SelectDemo/>*/}
