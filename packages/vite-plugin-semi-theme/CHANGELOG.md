@@ -1,5 +1,11 @@
 # @kousum/vite-plugin-semi-theme
 
+## 0.20.0
+
+### Minor Changes
+
+- vue3.5.0 & fix
+
 ## 0.19.0
 
 ### Minor Changes
