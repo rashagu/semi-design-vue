@@ -260,7 +260,9 @@ const TabBar = defineComponent({
           overflowRenderDirection={props.arrowPosition}
           wrapperStyle={props.visibleTabsStyle}
           overflowRenderer={renderOverflow}
-          threshold={[0, 1]}
+          // threshold -> 比较intersectionRatio -> isIntersecting 如果是数组会按最小的那个值来比较。
+          // tabBar总宽度不能小于每一个tabBar的宽度*threshold，不然计算会出错。
+          threshold={0.5}
           renderMode="scroll"
           className={`${cssClasses.TABS_BAR}-overflow-list`}
           visibleItemRenderer={renderTabItem as any}

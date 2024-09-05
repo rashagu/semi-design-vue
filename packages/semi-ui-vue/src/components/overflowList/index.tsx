@@ -271,8 +271,8 @@ const OverflowList = defineComponent({
       if (!itemRefs.value[key]) {
         itemRefs.value[key] = node;
         itemRefs.value = {
-          ...itemRefs.value
-        }
+          ...itemRefs.value,
+        };
       }
       if (typeof ref_ === 'function') {
         ref_(node);
@@ -295,7 +295,6 @@ const OverflowList = defineComponent({
       }
       return get(item, itemKey || 'key', defalutKey);
     };
-
 
     const renderItemList = () => {
       const { className, wrapperClassName, wrapperStyle, style, visibleItemRenderer, renderMode, collapseFrom } = props;
@@ -426,10 +425,13 @@ const OverflowList = defineComponent({
       const { renderMode } = props;
       if (renderMode === RenderMode.SCROLL) {
         return (
-          <IntersectionObserver onIntersect={reintersect} threshold={props.threshold} root={scroller} items={itemRefs.value}
-
-          children={()=>list}>
-          </IntersectionObserver>
+          <IntersectionObserver
+            onIntersect={reintersect}
+            threshold={props.threshold}
+            root={scroller}
+            items={itemRefs.value}
+            children={() => list}
+          ></IntersectionObserver>
         );
       }
       return <ResizeObserver onResize={resize}>{list}</ResizeObserver>;
