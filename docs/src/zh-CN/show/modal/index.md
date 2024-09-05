@@ -583,23 +583,28 @@ export default ModalComponent
 通过 Modal.useModal 创建支持读取 context 的 contextHolder。
 
 ```jsx live=true hideInDSM
-
 import { ConfigProvider, Button, ModalClass as Modal } from '@kousum/semi-ui-vue';
 import { defineComponent } from 'vue';
 
 
-
 const Demo = defineComponent(()=>{
 
+  let a
   const [modal, contextHolder] = Modal.useModal();
-  const config = { title: 'This is a success message', content: 'Context consumer' };
+  const config = { title: 'This is a success message', content: <div>
+      'Context consumer'
+
+      <Button onClick={()=>{
+        a.update({title: 'a'})
+      }}>update</Button>
+    </div> };
 
   return ()=>(
-    <ConfigProvider>
+    <ConfigProvider direction={'rtl'}>
       <div>
         <Button
           onClick={() => {
-            modal.confirm(config);
+            a = modal.confirm(config);
           }}
         >
           Confirm Modal
@@ -610,6 +615,7 @@ const Demo = defineComponent(()=>{
   );
 })
 export default Demo
+
 ```
 
 ## API 参考
