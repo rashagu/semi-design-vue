@@ -1,7 +1,7 @@
 import HookModal from './HookModal';
 import {ConfirmProps, withConfirm, withError, withInfo, withSuccess, withWarning} from '../confirm';
 import {ModalReactProps} from '../Modal';
-import {h, Ref, ref, VNode, Fragment, watch } from "vue";
+import { h, Ref, ref, VNode, Fragment, watch, nextTick } from 'vue';
 
 type Node = VNode
 let uuid = 0;
@@ -38,23 +38,33 @@ export default function useModal(): [{
       uuid += 1;
 
 
-      // eslint-disable-next-line prefer-const
-      let closeFunc: () => void;
-      const modal: VNode = h(HookModal,
-        {
-          key: `semi-modal-${uuid}`,
-          config: withFunc(config),
-          afterClose: () => {
-            closeFunc();
-          }
-        });
+      // for vue
+      function getModal(config_: ModalReactProps) {
+        // eslint-disable-next-line prefer-const
+        let closeFunc: () => void;
+        const modal: VNode = h(HookModal,
+          {
+            key: `semi-modal-${uuid}`,
+            config: withFunc(config_),
+            afterClose: () => {
+              closeFunc();
+            }
+          });
 
-      closeFunc = patchElement(modal);
+        closeFunc = patchElement(modal);
+        return {
+          modal,
+          closeFunc
+        }
+      }
 
+      let modalObj = getModal(config)
       return {
         destroy: () => {
-          const index = elements.value.findIndex(item=>item === modal)
-          elements.value.splice(index, 1)
+          // for vue
+          modalObj.closeFunc()
+          modalObj = null
+
           // if (modal) {
             // 没有销毁方法 ？
             // console.log(modal.destroy)
@@ -62,9 +72,14 @@ export default function useModal(): [{
           // }
         },
         update: (newConfig: ConfirmProps) => {
-          if (modal) {
-            // TODO newConfig没传过去
-            modal.component.update();
+          // for vue
+          if (modalObj) {
+            modalObj.closeFunc()
+            nextTick(()=>{
+              modalObj = getModal(newConfig)
+            })
+
+            // modal.component.update();
             // modal.component.update(newConfig);
           }
         },
