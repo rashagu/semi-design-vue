@@ -19,6 +19,7 @@ hero:
 ```vue live=true noInline=true height="360"
 <script setup>
   import { Button, Toast } from '@kousum/semi-ui-vue';
+  import { defineComponent, ref } from 'vue';
 
   function clickFn() {
     Toast.info('OK')

@@ -2856,18 +2856,20 @@ const ChildrenDataSelectedDemo = defineComponent(() => {
     selectedRowKeys.value = (rowKeys);
   };
 
-  const rowSelection = {
-    selectedRowKeys: selectedRowKeys.value,
-    onSelect: doSelect,
-    onSelectAll: doSelectAll,
-  };
+  const rowSelection = computed(()=>{
+    return {
+      selectedRowKeys: selectedRowKeys.value,
+      onSelect: doSelect,
+      onSelectAll: doSelectAll,
+    }
+  });
 
   return ()=> (
     <Table
       columns={columns}
       rowKey={rowKey}
       childrenRecordName={childrenRecordName}
-      rowSelection={rowSelection}
+      rowSelection={rowSelection.value}
       dataSource={data}
       pagination={false}
     />
