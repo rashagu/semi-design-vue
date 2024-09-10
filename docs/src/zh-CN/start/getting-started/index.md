@@ -35,7 +35,7 @@ pnpm add @kousum/semi-ui-vue
 
 ## 2、使用组件
 
-在 Webpack、create-react-app 或 Vite 项目中使用时，无需进行任何编译项配置，直接使用即可。构建时所有相关资源均会按需打包。
+在 Webpack、vue-cli 或 Vite 项目中使用时，无需进行任何编译项配置，直接使用即可。构建时所有相关资源均会按需打包。
 
 ```vue
 <script setup>
