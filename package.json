@@ -38,7 +38,7 @@
     "@douyinfe/semi-theme-default": "2.65.0",
     "@vue/repl": "4.3.1",
     "lodash": "^4.17.21",
-    "vue": "^3.5.0"
+    "vue": "^3.5.4"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",

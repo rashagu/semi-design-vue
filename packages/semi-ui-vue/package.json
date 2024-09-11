@@ -1,7 +1,7 @@
 {
   "name": "@kousum/semi-ui-vue",
   "version": "0.20.0",
-  "main": "./dist/index.js",
+  "main": "./zz/index.js",
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "type": "module",
@@ -52,7 +52,7 @@
     "lottie-web": "^5.12.2",
     "@mdx-js/vue": "^3.0.1",
     "unified": "^11.0.5",
-    "vue": "^3.5.0"
+    "vue": "^3.5.4"
   },
   "peerDependencies": {
     "lodash": "^4.17.21",
