@@ -5,6 +5,9 @@ import Context from './context';
 import type { ContextValue } from './context';
 import { CombineProps } from '../interface';
 
+export const ConfigConsumer = Context.Consumer;
+
+
 export interface ConfigProviderProps extends ContextValue {}
 
 export const vuePropsType: CombineProps<ConfigProviderProps> = {

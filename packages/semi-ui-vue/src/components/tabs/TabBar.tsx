@@ -63,6 +63,7 @@ const propTypes: CombineProps<TabBarProps> = {
   visibleTabsStyle: PropTypes.object,
   arrowPosition: PropTypes.string as PropType<TabBarProps['arrowPosition']>,
   renderArrow: PropTypes.func as PropType<TabBarProps['renderArrow']>,
+  dropdownProps: PropTypes.object as PropType<TabBarProps['dropdownProps']>,
 };
 
 export const vuePropsType = vuePropsMake(propTypes, {});
@@ -180,7 +181,7 @@ const TabBar = defineComponent({
           </div>
         );
       }
-      const { dropdownClassName, dropdownStyle, showRestInDropdown } = props;
+      const { dropdownClassName, dropdownStyle, showRestInDropdown, dropdownProps } = props;
       const { rePosKey } = state;
       const disabled = !items.length;
 
@@ -213,6 +214,7 @@ const TabBar = defineComponent({
         [`${cssClasses.TABS_BAR}-dropdown`]: true,
       });
 
+      const customDropdownProps = dropdownProps?.[pos] ?? {};
       return (
         <Fragment>
           {showRestInDropdown ? (
@@ -227,6 +229,7 @@ const TabBar = defineComponent({
               style={dropdownStyle}
               trigger={'hover'}
               disableFocusListener // prevent the panel from popping up again after clicking
+              {...customDropdownProps}
             >
               {button}
             </Dropdown>
@@ -240,11 +243,12 @@ const TabBar = defineComponent({
     const renderOverflow = (items: any[]): Array<VueJsxNode> => {
       return items.map((item, index) => {
         const pos = index === 0 ? 'start' : 'end';
+        const icon = index === 0 ? <IconChevronLeft/> : <IconChevronRight/>;
+        const overflowNode = renderCollapse(item, icon, pos);
         if (props.renderArrow) {
-          return props.renderArrow(item, pos, () => handleArrowClick(item, pos));
+          return props.renderArrow(item, pos, ()=>handleArrowClick(item, pos), overflowNode);
         }
-        const icon = index === 0 ? <IconChevronLeft /> : <IconChevronRight />;
-        return renderCollapse(item, icon, pos);
+        return overflowNode;
       })
     };
 
@@ -355,6 +359,7 @@ const TabBar = defineComponent({
         [cssClasses.TABS_BAR_LINE]: type === 'line',
         [cssClasses.TABS_BAR_CARD]: type === 'card',
         [cssClasses.TABS_BAR_BUTTON]: type === 'button',
+        [cssClasses.TABS_BAR_SLASH]: type === 'slash',
         [`${cssClasses.TABS_BAR}-${tabPosition}`]: tabPosition,
         [`${cssClasses.TABS_BAR}-collapse`]: collapsible,
       });

@@ -139,7 +139,11 @@ const navItem = [
         text: 'Markdown 渲染',
         icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('markdown') })),
       },
-
+      {
+        itemKey: '/plus/hotkeys/',
+        text: 'Hotkeys 热键',
+        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('hotkeys') })),
+      },
     ],
   },
   {

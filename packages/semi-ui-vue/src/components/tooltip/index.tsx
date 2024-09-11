@@ -237,6 +237,7 @@ const Tooltip = defineComponent({
     let scrollHandler: any;
     let getPopupContainer: () => HTMLElement;
     let containerPosition: string;
+    let isAnimating = false
 
     let clickOutsideHandler;
 
@@ -273,6 +274,7 @@ const Tooltip = defineComponent({
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         off: (...args: any[]) => eventManager.value.off(...args),
+        getAnimatingState: () => isAnimating,
         insertPortal: (content: TooltipProps['content'], { position, ...containerStyle }: { position: Position }) => {
           state.isInsert = true;
           state.transitionState = 'enter';
@@ -705,11 +707,13 @@ const Tooltip = defineComponent({
           animationState={transitionState as 'enter' | 'leave'}
           motion={motion && isPositionUpdated}
           startClassName={transitionState === 'enter' ? `${prefix}-animation-show` : `${prefix}-animation-hide`}
+          onAnimationStart={() => isAnimating = true}
           onAnimationEnd={() => {
             if (transitionState === 'leave') {
               didLeave();
               props.afterClose?.();
             }
+            isAnimating = false
           }}
           children={({ animationStyle, animationClassName, animationEventsNeedBind }) => {
             return (

@@ -91,6 +91,7 @@ const index = defineComponent({
     let wheelEventHandler: any;
     const uploadRef = ref();
     const dropAreaRef = ref();
+    const scrollTargetRef = ref();
 
     const state = reactive({
       backBottomVisible: false,
@@ -150,7 +151,14 @@ const index = defineComponent({
             return;
           }
           wheelEventHandler = (e: any) => {
-            if (e.target !== containerElement) {
+            /**
+             * Why use this.scrollTargetRef.current and wheel's currentTarget target comparison?
+             * Both scroll and wheel events are on the container
+             * his.scrollTargetRef.current is the object where scrolling actually occurs
+             * wheel's currentTarget is the container,
+             * Only when the wheel event occurs and there is scroll, the following logic(show scroll bar) needs to be executed
+             */
+            if (scrollTargetRef?.value !== e.currentTarget) {
               return;
             }
             adapter.setWheelScroll(true);
@@ -281,6 +289,7 @@ const index = defineComponent({
     );
 
     function containerScroll(e: Event){
+      scrollTargetRef.value = e.target as HTMLElement;
       foundation.containerScroll(e)
     }
     return () => {

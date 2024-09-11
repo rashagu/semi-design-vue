@@ -402,9 +402,11 @@ const Index = defineComponent({
           if (loadData) {
             new Promise<void>((resolve) => {
               loadData(selectedOpt).then(() => {
-                callback();
-                state.loading = true;
-                resolve();
+                setTimeout(() => {
+                  callback();
+                  state.loading = true;
+                  resolve();
+                })
               });
             });
           }

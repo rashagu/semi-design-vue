@@ -67,6 +67,7 @@ const propTypes: CombineProps<TabsProps> = {
   more: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   arrowPosition: PropTypes.string as PropType<TabsProps['arrowPosition']>,
   renderArrow: PropTypes.func as PropType<TabsProps['renderArrow']>,
+  dropdownProps: PropTypes.object as PropType<TabsProps['dropdownProps']>,
   onVisibleTabsChange: PropTypes.func as PropType<TabsProps['onVisibleTabsChange']>,
   visibleTabsStyle: PropTypes.object,
 };
@@ -297,6 +298,7 @@ const Index = defineComponent({
         visibleTabsStyle,
         arrowPosition,
         renderArrow,
+        dropdownProps,
         ...restProps
       } = props;
       const { panes, activeKey } = state;
@@ -329,6 +331,7 @@ const Index = defineComponent({
         visibleTabsStyle,
         arrowPosition,
         renderArrow,
+        dropdownProps,
       } as TabBarProps;
 
       const tabBar = renderTabBar ? renderTabBar(tabBarProps, TabBar) : <TabBar {...tabBarProps} />;

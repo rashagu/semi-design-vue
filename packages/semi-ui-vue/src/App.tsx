@@ -157,6 +157,9 @@ import { Numeral } from './components/typography';
 import TabsDemoReact from './components/tabs/__test__/TabsDemoReact';
 import ModalDocsDemo from './components/modal/__test__/ModalDocsDemo';
 import SelectDocsDemo from './components/select/__test__/SelectDocsDemo';
+import HotKeysDemo2 from './components/hotKeys/__test__/HotKeysDemo2';
+import HotKeysDocsDemo from './components/hotKeys/__test__/HotKeysDocsDemo';
+
 export interface ExampleProps {
   name?: string
 }
@@ -300,7 +303,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<AutoCompleteSFC/>*/}
         {/*<ColorPickerDemo/>*/}
 
-        <SelectDocsDemo/>
+        {/*<HotKeysDemo2/>*/}
+        <HotKeysDocsDemo/>
+        {/*<SelectDocsDemo/>*/}
         {/*<SelectRenderOptionItem/>*/}
         {/*<SelectDemoToRawTest/>*/}
         {/*<SelectDemo/>*/}

@@ -61,28 +61,34 @@ const chatBoxContent = defineComponent({
                 <span class={`${PREFIX_CHAT_BOX}-content-loading-item`} />
             </span>;
       } else {
-        let realContent = '';
+        let realContent;
         if (typeof props.message.content === 'string') {
-          realContent = props.message.content;
+          realContent = <MarkdownRender
+            format='md'
+            raw={props.message.content}
+            components={markdownComponents as any}
+          />;
         } else if (Array.isArray(props.message.content)) {
-          realContent = props.message.content.map((item)=> {
+          realContent = props.message.content.map((item, index)=> {
             if (item.type === 'text') {
-              return item.text;
+              return <MarkdownRender
+                key={`index`}
+                format='md'
+                raw={item.text}
+                components={markdownComponents as any}
+              />;
             } else if (item.type === 'image_url') {
-              return `![image](${item.image_url.url})`;
+              return <ImageAttachment key={`index`} src={item.image_url.url} />;
             } else if (item.type === 'file_url') {
               const { name, size, url, type } = item.file_url;
               const realType = name.split('.').pop() ?? type?.split('/').pop();
-              return `<SemiFile url={'${url}'} name={'${name}'} size={'${size}'} type={'${realType}'}></SemiFile>`;
+              return <FileAttachment key={`index`} url={name} name={name} size={size} type={realType}></FileAttachment>;
             }
-            return '';
-          }).join('\n\n');
+            return null;
+          });
         }
         return (<Fragment>
-          <MarkdownRender
-            raw={realContent}
-            components={markdownComponents.value as any}
-          />
+          {realContent}
         </Fragment>);
       }
     }, [()=>props.message.status, ()=>props.message.content]);

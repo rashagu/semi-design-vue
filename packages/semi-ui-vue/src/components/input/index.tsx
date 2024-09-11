@@ -500,6 +500,9 @@ const Input = defineComponent({
       blur:()=>{
         inputRef.value.blur();
       },
+      getDom:()=>{
+        return inputRef.value;
+      },
     })
     // onMounted(()=>{
     //   console.log('onMounted')

@@ -6,6 +6,7 @@ export type { SortableItemFuncArg } from './tagInput';
 export { default as Button } from './button';
 export { default as ButtonGroup } from './button/ButtonGroup';
 export { default as ConfigProvider } from './configProvider';
+export { ConfigConsumer } from "./configProvider";
 export { DropdownMenu, DropdownItem, DropdownDivider, DropdownTitle, Dropdown } from './dropdown';
 export { Row, Col } from './grid';
 export { LayoutContent, LayoutFooter, LayoutHeader, LayoutSider } from './layout';
@@ -220,3 +221,4 @@ export {default as MarkdownRender} from './markdownRender'
 
 export { default as Chat } from './chat';
 export { default as ColorPicker } from './colorPicker';
+export { default as HotKeys } from './hotKeys';

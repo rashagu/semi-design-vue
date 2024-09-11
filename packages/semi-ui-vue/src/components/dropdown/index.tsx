@@ -156,7 +156,7 @@ const Dropdown = defineComponent({
       return {
         ...adapterInject(),
         setPopVisible: (popVisible: boolean) => (state.popVisible = popVisible),
-        notifyVisibleChange: (visible: boolean) => props.onVisibleChange(visible),
+        notifyVisibleChange: (visible: boolean) => props.onVisibleChange?.(visible),
         getPopupId: () => tooltipRef.value.getPopupId(),
       };
     };

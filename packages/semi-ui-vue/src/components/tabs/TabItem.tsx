@@ -45,7 +45,7 @@ const TabItem = defineComponent({
     const slots = useSlots();
 
     const closableIcon = computed(() => {
-      return props.type === 'card' && props.closable ? (
+      return props.closable ? (
         <IconClose
           aria-label="Close"
           role="button"
