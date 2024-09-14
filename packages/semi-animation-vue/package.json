@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-animation-vue",
-  "version": "0.20.0",
+  "version": "0.20.1",
   "description": "motion library for semi-ui-vue",
   "keywords": [
     "motion",
@@ -38,13 +38,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@douyinfe/semi-animation": "2.66.0",
-    "@douyinfe/semi-animation-styled": "2.66.0",
-    "@douyinfe/semi-foundation": "2.66.0",
-    "@douyinfe/semi-theme-default": "2.66.0",
+    "@douyinfe/semi-animation": "2.66.1",
+    "@douyinfe/semi-animation-styled": "2.66.1",
+    "@douyinfe/semi-foundation": "2.66.1",
+    "@douyinfe/semi-theme-default": "2.66.1",
     "classnames": "^2.3.2",
     "sass": "^1.57.1",
-    "vue": "^3.5.4"
+    "vue": "^3.5.5"
   },
   "peerDependencies": {
     "vue": ">=3.4.3"

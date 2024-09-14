@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-ui-vue",
-  "version": "0.20.0",
+  "version": "0.20.1",
   "main": "./zz/index.js",
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -24,9 +24,9 @@
     "url": "https://github.com/rashagu/semi-design-vue"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.66.0",
-    "@douyinfe/semi-theme-default": "2.66.0",
-    "@douyinfe/semi-animation": "2.66.0",
+    "@douyinfe/semi-foundation": "2.66.1",
+    "@douyinfe/semi-theme-default": "2.66.1",
+    "@douyinfe/semi-animation": "2.66.1",
     "@kousum/semi-animation-vue": "workspace:*",
     "@kousum/semi-icons-vue": "workspace:*",
     "@kousum/semi-illustrations-vue": "workspace:*",
@@ -52,7 +52,7 @@
     "lottie-web": "^5.12.2",
     "@mdx-js/vue": "^3.0.1",
     "unified": "^11.0.5",
-    "vue": "^3.5.4"
+    "vue": "^3.5.5"
   },
   "peerDependencies": {
     "lodash": "^4.17.21",

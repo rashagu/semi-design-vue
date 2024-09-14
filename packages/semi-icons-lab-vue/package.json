@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-icons-lab-vue",
-  "version": "0.20.0",
+  "version": "0.20.1",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,11 +28,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.66.0",
-    "@douyinfe/semi-theme-default": "2.66.0",
+    "@douyinfe/semi-foundation": "2.66.1",
+    "@douyinfe/semi-theme-default": "2.66.1",
     "classnames": "^2.3.2",
     "sass": "^1.57.1",
-    "vue": "^3.5.4"
+    "vue": "^3.5.5"
   },
   "peerDependencies": {
     "vue": ">=3.4.3"
