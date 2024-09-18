@@ -1,6 +1,6 @@
 {
   "name": "@kousum/semi-ui-vue",
-  "version": "0.20.1",
+  "version": "0.20.2",
   "main": "./zz/index.js",
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts",
