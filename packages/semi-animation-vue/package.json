@@ -76,7 +76,7 @@
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
     "typescript": "^5.5.2",
-    "vite": "5.4.3",
+    "vite": "5.4.6",
     "vue-tsc": "^2.1.4"
   },
   "gitHead": "a9bb1553bd45dcf99595a45df0adf0d967083f1e"
