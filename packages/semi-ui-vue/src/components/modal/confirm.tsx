@@ -33,7 +33,8 @@ export default function confirm<T>(props: ConfirmProps) {
   let currentConfig = {...props};
 
   const destroy = () => {
-    app.unmount()
+    // TODO
+    // app.unmount()
     if (div.parentNode) {
       setTimeout(() => {
         div.parentNode.removeChild(div);
@@ -66,7 +67,14 @@ export default function confirm<T>(props: ConfirmProps) {
   // } : false;
 
   function render(renderProps: ConfirmProps) {
-    app = createApp(h(ConfirmModal, {...renderProps, motion: props.motion}))
+    const { afterClose } = renderProps;
+    // TODO
+    app?.unmount()
+    app = createApp(h(ConfirmModal, {...renderProps, motion: props.motion, afterClose: ()=>{
+        //@ts-ignore
+        afterClose?.(...args);
+        destroy();
+      }}))
     app.mount(div)
   }
 

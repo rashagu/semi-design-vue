@@ -271,7 +271,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<InputNumberDemo />*/}
         {/*<ModalForm />*/}
         {/*<ModalDemoHook />*/}
-        {/*<ModalDemoConfirm/>*/}
+        <ModalDemoConfirm/>
         {/*<ModalDemo/>*/}
         {/*<ModalDemoVueSFC/>*/}
         {/*<ModalDemo2/>*/}
@@ -304,7 +304,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ColorPickerDemo/>*/}
 
         {/*<HotKeysDemo2/>*/}
-        <HotKeysDocsDemo/>
+        {/*<HotKeysDocsDemo/>*/}
         {/*<SelectDocsDemo/>*/}
         {/*<SelectRenderOptionItem/>*/}
         {/*<SelectDemoToRawTest/>*/}

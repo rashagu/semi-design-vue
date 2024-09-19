@@ -35,6 +35,11 @@ const ModalDemoConfirm = defineComponent((props, {}) => {
       getContainerContext: ()=>container.value,
       title: 'Are you sure ?',
       content: 'bla bla bla...',
+      footer: ()=>{
+        return <Button onClick={()=>{
+          ModalClass.destroyAll()
+        }}>close all</Button>
+      }
     });
   }
 

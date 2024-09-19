@@ -63,8 +63,8 @@ const propTypes: CombineProps<ConfirmProps> = {
   zIndex: PropTypes.number,
   title: PropTypes.node as PropType<ConfirmProps['title']>,
   icon: PropTypes.node as PropType<ConfirmProps['icon']>,
-  header: PropTypes.node as PropType<ConfirmProps['header']>,
-  footer: PropTypes.node as PropType<ConfirmProps['footer']>,
+  header: [...PropTypes.any, PropTypes.func] as PropType<ConfirmProps['header']>,
+  footer: [...PropTypes.any, PropTypes.func] as PropType<ConfirmProps['footer']>,
   hasCancel: {
     type: PropTypes.bool,
     default: undefined,
