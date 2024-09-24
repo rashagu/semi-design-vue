@@ -1,5 +1,11 @@
 # @kousum/semi-icons-vue
 
+## 0.20.3
+
+### Patch Changes
+
+- fix model
+
 ## 0.20.2
 
 ### Patch Changes
