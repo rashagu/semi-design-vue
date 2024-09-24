@@ -501,5 +501,23 @@ export class ModalClass {
 // Modal.confirm = confirm_
 // Modal.destroyAll = destroyAll
 // Modal.useModal = useModal
+export type ModalType = typeof Modal & {
+  useModal: typeof ModalClass.useModal,
+  info: typeof ModalClass.info,
+  success: typeof ModalClass.success,
+  error: typeof ModalClass.error,
+  warning: typeof ModalClass.warning,
+  confirm: typeof ModalClass.confirm,
+  destroyAll: typeof ModalClass.destroyAll,
+}
+
+const BaseModal = Modal as ModalType;
+BaseModal.useModal = ModalClass.useModal
+BaseModal.info = ModalClass.info
+BaseModal.success = ModalClass.success
+BaseModal.error = ModalClass.error
+BaseModal.warning = ModalClass.warning
+BaseModal.confirm = ModalClass.confirm
+BaseModal.destroyAll = ModalClass.destroyAll
 
 export default Modal;

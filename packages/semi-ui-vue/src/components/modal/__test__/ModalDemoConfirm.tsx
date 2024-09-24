@@ -36,7 +36,7 @@ const ModalDemoConfirm = defineComponent((props, {}) => {
       title: 'Are you sure ?',
       content: 'bla bla bla...',
       footer: ()=>{
-        return <Button onClick={()=>{
+        return <Button role={'closeAll'} onClick={()=>{
           ModalClass.destroyAll()
         }}>close all</Button>
       }
@@ -73,7 +73,7 @@ const ModalDemoConfirm = defineComponent((props, {}) => {
         </Button>
         <br />
         <br />
-        <Button onClick={confirm} type="primary">
+        <Button onClick={confirm} role={'confirm'} type="primary">
           Confirm
           <div data-testid="custom-element" >Confirm</div>
         </Button>

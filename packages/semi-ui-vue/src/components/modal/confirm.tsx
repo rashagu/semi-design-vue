@@ -34,10 +34,11 @@ export default function confirm<T>(props: ConfirmProps) {
 
   const destroy = () => {
     // TODO
-    // app.unmount()
+    // console.log(app);
+    app?.unmount()
     if (div.parentNode) {
       setTimeout(() => {
-        div.parentNode.removeChild(div);
+        div.parentNode?.removeChild(div);
       })
     }
 
@@ -45,7 +46,7 @@ export default function confirm<T>(props: ConfirmProps) {
       const fn = destroyFns[i];
 
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      if (fn === close) {
+      if (fn === destroy) {
         destroyFns.splice(i, 1);
         break;
       }
@@ -69,7 +70,7 @@ export default function confirm<T>(props: ConfirmProps) {
   function render(renderProps: ConfirmProps) {
     const { afterClose } = renderProps;
     // TODO
-    app?.unmount()
+    destroy()
     app = createApp(h(ConfirmModal, {...renderProps, motion: props.motion, afterClose: ()=>{
         //@ts-ignore
         afterClose?.(...args);
@@ -95,9 +96,9 @@ export default function confirm<T>(props: ConfirmProps) {
   }
 
   render(currentConfig);
-  destroyFns.push(close);
+  destroyFns.push(destroy);
   return {
-    destroy: close,
+    destroy: destroy,
     update,
   };
 }

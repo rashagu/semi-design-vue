@@ -25,6 +25,8 @@ test('ModalDemo inner qwe', async () => {
   const img = await screen.findByTestId("custom-element");
   await fireEvent.click(img);
   const value = await screen.findByText('bla bla bla...');
+  const closeAll = await screen.findByRole("closeAll")
+  await fireEvent.click(closeAll);
 
 });
 
