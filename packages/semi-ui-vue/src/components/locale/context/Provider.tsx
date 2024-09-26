@@ -11,7 +11,7 @@ const Provider = defineComponent((props, {slots}) => {
   watch(()=>props.value, ()=>{
     ConfigContext.value = props.value
   })
-  provide('LocalContext', ConfigContext)
+  provide('semi_LocalContext', ConfigContext)
   return ()=>slots.default?slots.default(ConfigContext.value):null
 }, {
   props: { ...vuePropsType },

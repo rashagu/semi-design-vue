@@ -1,28 +1,14 @@
-import {useSortable} from '@dnd-kit-vue/sortable';
-import {CSS} from '@dnd-kit-vue/utilities';
+import { useSortable } from '@kousum/dnd-kit-vue/sortable';
 
-
-import {
-  defineComponent,
-  ref,
-  h,
-  Fragment,
-  useSlots,
-  VNodeRef,
-  CSSProperties,
-  getCurrentInstance,
-  inject,
-  computed, watch,
-} from 'vue';
-import type {Arguments} from "@dnd-kit-vue/sortable";
-import {omit} from "lodash";
+import { defineComponent, h, ref, useSlots } from 'vue';
+import { pointerIntersection } from '@dnd-kit/collision';
 
 interface SortableItemProps {
-  id: number | string,
-  moveRow: any,
-  index?: number,
-  style:any,
-  componentsTag?: string
+  id: number | string;
+  moveRow: any;
+  index?: number;
+  style: any;
+  componentsTag?: string;
 }
 
 export const vuePropsType = {
@@ -42,25 +28,22 @@ const SortableItem = defineComponent((props, {attrs}) => {
   const slots = useSlots()
 
 
-  const params: Arguments = {id: computed(() => props.id) as any}
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-  } = useSortable(params);
+  const element = ref<Element | null>(null);
+  const handleRef = ref<HTMLButtonElement | null>(null);
+  const {isDragSource} = useSortable({
+    id: props.id,
+    index: props.index,
+    element,
+    handle: handleRef,
+    collisionDetector: pointerIntersection
+  });
 
   const style0 = {...(props.style as Object || {}), cursor: 'move'};
 
   let index = 0
 
   return () => {
-    const style: CSSProperties = {
-      ...style0,
-      transform: CSS.Transform.toString(transform.value),
-      transition: transition.value,
-    };
+
     const {currentPage, onMouseEnter, onMouseLeave, ...restProps} = attrs;
     // moveRow.moveRow(dragIndex, hoverIndex)
     if (index === 0) {
@@ -68,14 +51,11 @@ const SortableItem = defineComponent((props, {attrs}) => {
       index++
     }
 
-    console.log(style, listeners?.value);
     return h(props.componentsTag as any, {
       id: 'asd_' + props.id,
-      ref: setNodeRef as any,
-      ...attributes.value,
-      ...listeners?.value,
+      ref: element as any,
+      shadow: isDragSource?.value,
       ...restProps,
-      style
     }, slots.default?.())
 
   }

@@ -1,27 +1,12 @@
-import { computed, defineComponent, h, ref, Teleport, VNode, watch } from 'vue';
-import {TableMaker, TableComponents } from '../index';
+import { computed, defineComponent, nextTick, ref, watch } from 'vue';
+import { TableMaker } from '../index';
 import Avatar from '../../avatar';
-import {
-  closestCenter,
-  defaultDropAnimationSideEffects,
-  DndContext,
-  DragEndEvent,
-  DragOverlay,
-  DropAnimation,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from '@dnd-kit-vue/core';
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from '@dnd-kit-vue/sortable';
 import * as dateFns from 'date-fns';
 import SortableItem from './demo11/SortableItem';
 import { isNull } from 'lodash';
+import { DragDropProvider, Events } from '@kousum/dnd-kit-vue';
+import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
+import { move } from '@dnd-kit/helpers';
 
 interface TableDemo1Props {
   name?: string;
@@ -109,30 +94,17 @@ export const vuePropsType = {
 };
 const Table = TableMaker();
 const TableDemo1 = defineComponent((props, {}) => {
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      // activationConstraint: {
-      //   // distance: 5,
-      //   // delay: 100,
-      //   // tolerance: 100
-      // }
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
 
-  function handleDragEnd(event: DragEndEvent) {
-    console.log(event)
-    const { active, over } = event;
 
+  let newPageData = []
+  let newData = []
+  function handleDragEnd(event: Parameters<Events['dragend']>[0]) {
+
+    const { active, over } = {active: event.operation.source, over: event.operation.target};
     if (active && over && active.id !== over?.id) {
-      const oldIndex = pageData.value.findIndex(item => item.id === active.id);
-      const newIndex = pageData.value.findIndex(item => item.id === over.id);
-      pageData.value = arrayMove(pageData.value, oldIndex, newIndex);
-      const newData = Array.from(data.value);
+      newPageData = move(Array.from(pageData.value), event);
+      newData = Array.from(data.value);
       newData.splice((currentPage.value - 1) * PAGE_SIZE, PAGE_SIZE, ...pageData.value);
-      data.value = newData;
     }
   }
 
@@ -140,8 +112,9 @@ const TableDemo1 = defineComponent((props, {}) => {
 
   const dragOverlayRef = ref();
   const tableDragOverlayRef = ref();
-  function onDragStart(event: DragEndEvent) {
-    const { active, over } = event;
+  function onDragStart(event: Parameters<Events['dragstart']>[0]) {
+    const { active, over } = {active: event.operation.source, over: event.operation.target};
+
     console.log(active);
     dragIngIndex.value = +active.id;
   }
@@ -187,15 +160,7 @@ const TableDemo1 = defineComponent((props, {}) => {
     pageData.value = data.value.slice((pageNum - 1) * PAGE_SIZE, pageNum * PAGE_SIZE);
   };
 
-  const dropAnimationConfig: DropAnimation = {
-    sideEffects: defaultDropAnimationSideEffects({
-      styles: {
-        active: {
-          opacity: '0.5',
-        },
-      },
-    }),
-  };
+
 
   const SortableData = computed(() => {
     return data.value.slice((currentPage.value - 1) * PAGE_SIZE, currentPage.value * PAGE_SIZE);
@@ -205,52 +170,39 @@ const TableDemo1 = defineComponent((props, {}) => {
 
     return (
       <div id="components-table-demo-drag-sorting">
-        <DndContext
-          sensors={sensors.value}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-          onDragStart={onDragStart}
+        <DragDropProvider
+          modifiers={[RestrictToVerticalAxis]}
+          onDragStart={(event)=>{
+
+          }}
+          onDragOver={(event)=>{
+            // props.onSortOver(event)
+            handleDragEnd(event)
+          }}
+          onDragEnd={(event)=>{
+            // props.onSortOver(event)
+            pageData.value = Array.from(newPageData)
+            data.value = Array.from(newData);
+          }}
         >
-          <SortableContext items={pageData.value} strategy={verticalListSortingStrategy}>
-            <Table
-              id={'table_asd'}
-              columns={columns}
-              dataSource={pageData.value}
-              pagination={{
-                pageSize: PAGE_SIZE,
-                total: data.value.length,
-                currentPage: currentPage.value,
-                onPageChange: handlePageChange,
-              }}
-              components={components}
-              onRow={(record, index) => ({
-                index,
-                moveRow,
-                id: record.id,
-              })}
-            />
-          </SortableContext>
-          <Teleport to={document.body}>
-            <DragOverlay adjustScale={false} dropAnimation={dropAnimationConfig}>
-              <SortableItem index={dragIngIndex.value} style={{}} moveRow={() => {}} id={''} componentsTag={'div'}>
-                <table
-                  ref={tableDragOverlayRef}
-                  role="grid"
-                  aria-rowcount="5"
-                  aria-colcount="4"
-                  class="semi-table semi-table-demo11_DragOverlay"
-                  style={{
-                    backgroundColor: '#fff',
-                    width: '100%',
-                    boxShadow: '0 0 0 2px rgba(63, 63, 68, 0.05), 0 1px 2px 0 rgba(34, 33, 81, 0.15)'
-                  }}
-                >
-                  <tbody class="semi-table-tbody" ref={dragOverlayRef} id={'asd_DragOverlay'}></tbody>
-                </table>
-              </SortableItem>
-            </DragOverlay>
-          </Teleport>
-        </DndContext>
+          <Table
+            id={'table_asd'}
+            columns={columns}
+            dataSource={pageData.value}
+            pagination={{
+              pageSize: PAGE_SIZE,
+              total: data.value.length,
+              currentPage: currentPage.value,
+              onPageChange: handlePageChange,
+            }}
+            components={components}
+            onRow={(record, index) => ({
+              index,
+              moveRow,
+              id: record.id,
+            })}
+          />
+        </DragDropProvider>
       </div>
     );
   };

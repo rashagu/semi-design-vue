@@ -37,7 +37,7 @@ import {
 import { CombineProps, VueJsxNode } from '../interface';
 import SortableList from './SortableList';
 import type { SortableItemFuncArg } from '../tagInput';
-import { DragEndEvent } from '@dnd-kit-vue/core';
+import type { Events } from '@kousum/dnd-kit-vue';
 
 export interface DataItem extends BasicDataItem {
   label?: VueJsxNode;
@@ -352,9 +352,9 @@ const Transfer = defineComponent({
       foundation.handleSelectOrRemove(item);
     }
 
-    function onSortEnd(event?: DragEndEvent, callbackProps?: OnSortEndProps) {
+    function onSortEnd(event?: Parameters<Events['dragend']>[0], callbackProps?: OnSortEndProps) {
       if (event) {
-        const { active, over } = event;
+        const { active, over } = {active: event.operation.source, over: event.operation.target};
         const selectedItems = adapter.getSelected();
         let selectedArr = [...selectedItems.values()].map((item) => item.key);
 
@@ -641,15 +641,14 @@ const Transfer = defineComponent({
           // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
           <div
             role="listitem"
-            ref={arg.setNodeRef}
+            ref={arg.element}
             class={rightItemCls}
             key={item.key}
             {...arg.attributes}
-            style={arg.style}
           >
             {draggable ? (
               <IconHandle
-                {...arg.listeners}
+                ref={arg.handleRef}
                 role="button"
                 aria-label="Drag and sort"
                 className={`${prefixCls}-right-item-drag-handler`}
@@ -696,7 +695,7 @@ const Transfer = defineComponent({
         <SortableList
           useDragHandle
           helperClass={`${prefixCls}-right-item-drag-item-move`}
-          onSortEnd={onSortEnd}
+          onSortOver={onSortEnd}
           items={sortableListItems}
         />
       );

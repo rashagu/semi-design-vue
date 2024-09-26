@@ -1,13 +1,12 @@
-import type { Arguments } from '@dnd-kit-vue/sortable';
-import { useSortable } from '@dnd-kit-vue/sortable';
-import { CSS } from '@dnd-kit-vue/utilities';
-
-import { ComponentObjectPropsOptions, computed, CSSProperties, defineComponent, h, useSlots } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { CombineProps } from '../interface';
+import { useSortable } from '@kousum/dnd-kit-vue/sortable';
+import { pointerIntersection } from '@dnd-kit/collision';
 
 interface SortableItemProps {
   id: number | string;
   item: any;
+  index: number;
 }
 
 export const vuePropsType: CombineProps<SortableItemProps> = {
@@ -19,24 +18,28 @@ export const vuePropsType: CombineProps<SortableItemProps> = {
     type: Function,
     required: true
   },
+  index: {
+    type: Number,
+    required: true
+  },
 };
 const SortableItem = defineComponent({
   props: { ...vuePropsType },
   name: 'SortableItem',
   setup(props, {}) {
-    const slots = useSlots();
 
-    const params: Arguments = { id: computed(() => props.id) as any };
-
-    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable(params);
+    const element = ref<Element | null>(null);
+    const handleRef = ref<HTMLButtonElement | null>(null);
+    const {isDragSource} = useSortable({
+      id: props.id,
+      index: props.index,
+      element,
+      handle: handleRef,
+      collisionDetector: pointerIntersection
+    });
 
     return () => {
-      const style = {
-        transform: CSS.Transform.toString(transform.value),
-        // @ts-ignore
-        transition: transition.value,
-      };
-      return props.item({ setNodeRef, style, attributes: attributes?.value, listeners: listeners?.value });
+      return props.item({ element, handleRef: (v)=>{handleRef.value = v?.$el}, attributes: {shadow: isDragSource?.value,}});
     };
   },
 });

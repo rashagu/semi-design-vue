@@ -17,7 +17,7 @@ const Provider = defineComponent({
       },
       { deep: true }
     );
-    provide('ConfigContext', ConfigContext);
+    provide('semi_ConfigContext', ConfigContext);
     return () => (slots.default ? slots.default(ConfigContext.value) : null);
   },
 });

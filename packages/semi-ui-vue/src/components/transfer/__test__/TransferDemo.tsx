@@ -109,9 +109,9 @@ const TransferDemo = defineComponent((props, {}) => {
 
   const testValue = ref([6])
   onMounted(()=>{
-    setTimeout(()=>{
-      testValue.value = []
-    }, 1000)
+    // setTimeout(()=>{
+    //   testValue.value = []
+    // }, 1000)
   })
 
   return () => (
@@ -128,7 +128,10 @@ const TransferDemo = defineComponent((props, {}) => {
           draggable
           style={{ width: '568px' }}
           dataSource={dataWithGroup}
-          onChange={(values, items) => console.log(values, items)}
+          onChange={(values, items) => {
+            console.log(values, items)
+            testValue.value = values
+          }}
         />
       </div>
 

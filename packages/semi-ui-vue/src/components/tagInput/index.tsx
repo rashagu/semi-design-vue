@@ -31,18 +31,17 @@ import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 import { isSemiIcon } from '../_utils';
 import SortableList from './SortableList';
-import { DragEndEvent, DraggableAttributes } from '@dnd-kit-vue/core';
-import { arrayMove } from '@dnd-kit-vue/sortable';
+import { type Events } from '@kousum/dnd-kit-vue';
+import {move} from '@dnd-kit/helpers';
 
 export type Size = ArrayElement<typeof strings.SIZE_SET>;
 export type RestTagsPopoverProps = PopoverProps;
 type ValidateStatus = 'default' | 'error' | 'warning';
 
 export type SortableItemFuncArg = {
-  setNodeRef?: VNodeRef;
-  style?: CSSProperties;
-  attributes?: DraggableAttributes;
-  listeners?: any;
+  element?: VNodeRef;
+  handleRef?: VNodeRef;
+  attributes?: any;
 };
 
 export interface TagInputProps {
@@ -444,11 +443,10 @@ const Index = defineComponent({
               <div
                 class={itemWrapperCls}
                 key={elementKey}
-                ref={arg.setNodeRef as any}
-                style={arg.style}
+                ref={arg.element as any}
                 {...arg.attributes}
               >
-                <IconHandle className={`${prefixCls}-drag-handler`} {...arg.listeners}></IconHandle>
+                <IconHandle className={`${prefixCls}-drag-handler`} ref={arg.handleRef}></IconHandle>
                 {renderTagItem(value, index, onClose)}
               </div>
             ) : (
@@ -460,10 +458,8 @@ const Index = defineComponent({
             return (
               <div
                 key={elementKey}
-                ref={arg.setNodeRef}
-                style={arg.style}
+                ref={arg.element as any}
                 {...arg.attributes}
-                {...(showIconHandler ? {} : arg.listeners)}
               >
                 <Tag
                   className={tagCls}
@@ -478,7 +474,7 @@ const Index = defineComponent({
                 >
                   {/* Wrap a layer of div outside IconHandler and Value to ensure that the two are aligned */}
                   {showIconHandler && (
-                    <IconHandle className={`${prefixCls}-drag-handler`} {...arg.listeners}></IconHandle>
+                    <IconHandle className={`${prefixCls}-drag-handler`} ref={arg.handleRef}></IconHandle>
                   )}
                   <Paragraph className={typoCls} ellipsis={{ showTooltip: showContentTooltip, rows: 1 }}>
                     {value}
@@ -491,18 +487,15 @@ const Index = defineComponent({
       });
     };
 
-    const onSortEnd = (event: DragEndEvent) => {
+    const onSortOver = (event: Parameters<Events['dragend']>[0]) => {
       const tagsArray = state.tagsArray;
-      const { active, over } = event;
+      const { active, over } = {active: event.operation.source, over: event.operation.target};
 
       if (!active || !over) {
         return;
       }
-      if (active.id !== over.id) {
-        const oldIndex = tagsArray.indexOf('' + active.id);
-        const newIndex = tagsArray.indexOf('' + over.id);
-        adapter().setTagsArray(arrayMove(tagsArray, oldIndex, newIndex));
-      }
+
+      adapter().setTagsArray(move(Array.from(tagsArray), event));
     };
     function renderTags() {
       const {
@@ -542,7 +535,7 @@ const Index = defineComponent({
             useDragHandle
             items={sortableListItems}
             helperClass={`${prefixCls}-drag-item-move`}
-            onSortEnd={onSortEnd}
+            onSortOver={onSortOver}
             axis={'xy'}
           >
             {sortableListItems}

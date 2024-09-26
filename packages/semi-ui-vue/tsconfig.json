@@ -16,6 +16,7 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true,
     "ignoreDeprecations":"5.0",
     "strictNullChecks": false,
     "sourceMap": true,
