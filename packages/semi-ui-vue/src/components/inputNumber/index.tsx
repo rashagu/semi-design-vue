@@ -389,7 +389,7 @@ const InputNumber = defineComponent({
 
     const setInputRef = (node: any) => {
       const { forwardedRef } = props;
-      inputNode = node;
+      inputNode = node?.getDom();
 
       if (forwardedRef && typeof forwardedRef === 'object') {
         forwardedRef.current = node;

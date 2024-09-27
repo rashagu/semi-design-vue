@@ -503,6 +503,9 @@ const Input = defineComponent({
       getDom:()=>{
         return inputRef.value;
       },
+      get value(){
+        return inputRef.value?.value
+      }
     })
     // onMounted(()=>{
     //   console.log('onMounted')
