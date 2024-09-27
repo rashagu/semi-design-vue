@@ -6,6 +6,7 @@ import { DragDropProvider } from '@kousum/dnd-kit-vue';
 interface SortableListProps {
   items: any;
   onSortOver: any;
+  onSortEnd: any;
   useDragHandle: any;
   helperClass: any;
   axis: any;
@@ -14,6 +15,7 @@ interface SortableListProps {
 export const vuePropsType: CombineProps<Partial<SortableListProps>> = {
   items: Array,
   onSortOver: Function,
+  onSortEnd: Function,
   useDragHandle: [Boolean],
   helperClass: String,
   axis: String,
@@ -58,7 +60,7 @@ const SortableList = defineComponent({
             props.onSortOver(event)
           }}
           onDragEnd={(event)=>{
-            // props.onSortOver(event)
+            props.onSortEnd(event)
           }}
         >
           {props.items.map((item, index) => (

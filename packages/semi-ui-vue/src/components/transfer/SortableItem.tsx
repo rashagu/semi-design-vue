@@ -1,4 +1,4 @@
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed, shallowRef, watch } from 'vue';
 import { CombineProps } from '../interface';
 import { useSortable } from '@kousum/dnd-kit-vue/sortable';
 import { pointerIntersection } from '@dnd-kit/collision';
@@ -30,16 +30,30 @@ const SortableItem = defineComponent({
 
     const element = ref<Element | null>(null);
     const handleRef = ref<HTMLButtonElement | null>(null);
+    const id = shallowRef(props.id)
+    watch(()=>props.id, (value, oldValue)=>{
+      console.log(value);
+      if(value !== oldValue){
+        id.value = oldValue;
+      }
+    })
+    const index = shallowRef(props.index)
+    watch(()=>props.index, (value, oldValue)=>{
+      console.log(value);
+      if(value !== oldValue){
+        index.value = oldValue;
+      }
+    })
     const {isDragSource} = useSortable({
-      id: props.id,
-      index: props.index,
+      id: id as any,
+      index: index as any,
       element,
       handle: handleRef,
       collisionDetector: pointerIntersection
     });
 
     return () => {
-      return props.item({ element, handleRef: (v)=>{handleRef.value = v?.$el}, attributes: {shadow: isDragSource?.value,}});
+      return props.item({ element, handleRef: (v)=>{handleRef.value = v?.$el}, attributes: {'data-shadow': isDragSource?.value,}});
     };
   },
 });

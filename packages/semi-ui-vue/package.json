@@ -31,10 +31,10 @@
     "@kousum/semi-icons-vue": "workspace:*",
     "@kousum/semi-illustrations-vue": "workspace:*",
     "@kousum/vue3-window": "0.0.6",
-    "@dnd-kit/abstract": "^0.0.6-beta-20240923164446",
-    "@dnd-kit/collision": "^0.0.6-beta-20240923164446",
-    "@dnd-kit/dom": "^0.0.6-beta-20240923164446",
-    "@dnd-kit/helpers": "^0.0.6-beta-20240923164446",
+    "@dnd-kit/abstract": "0.0.6-beta-20240923164446",
+    "@dnd-kit/collision": "0.0.6-beta-20240923164446",
+    "@dnd-kit/dom": "0.0.6-beta-20240923164446",
+    "@dnd-kit/helpers": "0.0.6-beta-20240923164446",
     "@kousum/dnd-kit-vue": "0.0.6-beta-20240923164446",
     "@kousum/vue-resizable": "1.0.2",
     "@kousum/vue-draggable": "1.0.2",
@@ -52,7 +52,7 @@
     "lottie-web": "^5.12.2",
     "@mdx-js/vue": "^3.0.1",
     "unified": "^11.0.5",
-    "vue": "^3.5.8"
+    "vue": "^3.5.9"
   },
   "peerDependencies": {
     "lodash": "^4.17.21",

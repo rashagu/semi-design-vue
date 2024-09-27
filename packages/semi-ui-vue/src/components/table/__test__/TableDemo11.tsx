@@ -104,7 +104,7 @@ const TableDemo1 = defineComponent((props, {}) => {
     if (active && over && active.id !== over?.id) {
       newPageData = move(Array.from(pageData.value), event);
       newData = Array.from(data.value);
-      newData.splice((currentPage.value - 1) * PAGE_SIZE, PAGE_SIZE, ...pageData.value);
+      newData.splice((currentPage.value - 1) * PAGE_SIZE, PAGE_SIZE, ...newPageData);
     }
   }
 
@@ -176,10 +176,12 @@ const TableDemo1 = defineComponent((props, {}) => {
 
           }}
           onDragOver={(event)=>{
+            console.log('over')
             // props.onSortOver(event)
             handleDragEnd(event)
           }}
           onDragEnd={(event)=>{
+            console.log('end')
             // props.onSortOver(event)
             pageData.value = Array.from(newPageData)
             data.value = Array.from(newData);

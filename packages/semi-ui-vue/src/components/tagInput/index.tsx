@@ -278,7 +278,7 @@ const Index = defineComponent({
     watch(
       [() => props.value, () => props.inputValue, () => state.inputValue],
       (val) => {
-        const newState = getDerivedStateFromProps({ ...props }, { ...state });
+        const newState = getDerivedStateFromProps({ ...getProps(props) }, { ...state });
         if (newState) {
           Object.keys(newState).forEach((key) => {
             state[key] = newState[key];
@@ -495,8 +495,15 @@ const Index = defineComponent({
         return;
       }
 
-      adapter().setTagsArray(move(Array.from(tagsArray), event));
+      if(active.id !==  over.id){
+        const oldIndex = tagsArray.indexOf(''+active.id);
+        const newIndex = tagsArray.indexOf(''+over.id);
+        foundation.handleSortEnd({  oldIndex, newIndex });
+      }
     };
+    const onSortEnd = (event: Parameters<Events['dragend']>[0]) =>{
+      // adapter().setTagsArray([...newArr]);
+    }
     function renderTags() {
       const {
         disabled,
@@ -536,6 +543,7 @@ const Index = defineComponent({
             items={sortableListItems}
             helperClass={`${prefixCls}-drag-item-move`}
             onSortOver={onSortOver}
+            onSortEnd={onSortEnd}
             axis={'xy'}
           >
             {sortableListItems}

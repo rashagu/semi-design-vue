@@ -23,9 +23,12 @@ const TagInputDemo = defineComponent((props, {}) => {
       {/*/>*/}
       <TagInput
         draggable
-        defaultValue={['抖音','火山','西瓜视频']}
+        value={value.value}
         placeholder='请输入...'
-        onChange={v => console.log(v)}
+        onChange={v => {
+          console.log(v)
+          value.value = v
+        }}
       />
     </div>
   )

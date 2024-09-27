@@ -1,6 +1,6 @@
 import { useSortable } from '@kousum/dnd-kit-vue/sortable';
 
-import { defineComponent, h, ref, useSlots } from 'vue';
+import { defineComponent, h, ref, useSlots, computed } from 'vue';
 import { pointerIntersection } from '@dnd-kit/collision';
 
 interface SortableItemProps {
@@ -31,8 +31,8 @@ const SortableItem = defineComponent((props, {attrs}) => {
   const element = ref<Element | null>(null);
   const handleRef = ref<HTMLButtonElement | null>(null);
   const {isDragSource} = useSortable({
-    id: props.id,
-    index: props.index,
+    id: computed(()=>props.id),
+    index: computed(()=>props.index),
     element,
     handle: handleRef,
     collisionDetector: pointerIntersection
