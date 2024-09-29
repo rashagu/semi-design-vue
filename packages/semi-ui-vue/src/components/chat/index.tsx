@@ -72,6 +72,7 @@ export const chatPropTypes: CombineProps<ChatProps> = {
   uploadProps: PropTypes.object,
   uploadTipProps: PropTypes.object,
   mode: PropTypes.string as PropType<ChatProps['mode']>,
+  renderDivider: PropTypes.func as PropType<ChatProps['renderDivider']>,
 };
 const defaultProps = {
   align: CHAT_ALIGN.LEFT_RIGHT,
@@ -317,7 +318,7 @@ const index = defineComponent({
         hintCls,
         uploadProps,
         uploadTipProps,
-        sendHotKey,
+        sendHotKey, renderDivider
       } = props;
       const { backBottomVisible, chats, wheelScroll, uploadAreaVisible } = state;
       let showStopGenerateFlag = false;
@@ -371,6 +372,7 @@ const index = defineComponent({
                   onMessageReset={foundation.resetMessage}
                   onMessageCopy={onMessageCopy}
                   chatBoxRenderConfig={chatBoxRenderConfig}
+                  renderDivider={renderDivider}
                 />
                 {/* hint area */}
                 {!!hints?.length && (

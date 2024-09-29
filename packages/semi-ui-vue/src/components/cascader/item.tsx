@@ -429,6 +429,9 @@ const Item = defineComponent({
 
     function renderEmpty() {
       const { emptyContent } = props;
+      if (emptyContent === null) {
+        return null;
+      }
       return (
         <LocaleConsumer componentName="Cascader">
           {(locale: Locale['Cascader']) => (

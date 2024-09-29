@@ -159,6 +159,7 @@ import ModalDocsDemo from './components/modal/__test__/ModalDocsDemo';
 import SelectDocsDemo from './components/select/__test__/SelectDocsDemo';
 import HotKeysDemo2 from './components/hotKeys/__test__/HotKeysDemo2';
 import HotKeysDocsDemo from './components/hotKeys/__test__/HotKeysDocsDemo';
+import OptionDemo from './components/autoComplete/__test__/OptionDemo';
 
 export interface ExampleProps {
   name?: string
@@ -229,7 +230,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TableDemo8 />*/}
         {/*<TableDemo9 />*/}
         {/*<TableDemo10 />*/}
-        <TableDemo11 />
+        {/*<TableDemo11 />*/}
         {/*<TableDemo12 />*/}
         {/*<TableDemo13Virtualized />*/}
         {/*<PaginationDemo />*/}
@@ -298,6 +299,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TagInputDemo />*/}
 
         {/*<AutoCompleteDemo/>*/}
+        <OptionDemo/>
         {/*<DiyItemAutoComplete/>*/}
         {/*<RemoteAutoComplete/>*/}
         {/*<AutoCompleteSFC/>*/}

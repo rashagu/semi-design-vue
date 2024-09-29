@@ -31,14 +31,14 @@ const ChatContent = defineComponent({
         roleConfig,
         chatBoxRenderConfig,
         align,
-        customMarkDownComponents,
+        customMarkDownComponents, renderDivider,
       } = props;
       return (
         <Fragment>
           {chats.map((item, index) => {
             const lastMessage = index === chats.length - 1;
             return item.role === ROLE.DIVIDER ? (
-              <Divider key={item.id} className={PREFIX_DIVIDER}>
+              renderDivider ? renderDivider(item) : <Divider key={item.id} className={PREFIX_DIVIDER}>
                 <LocaleConsumer componentName="Chat">
                   {(locale: Locale['Chat']) => locale['clearContext']}
                 </LocaleConsumer>

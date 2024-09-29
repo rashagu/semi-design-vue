@@ -373,6 +373,7 @@ const Base = defineComponent({
     };
     function getEllipsisState() {
       const { rows, suffix, pos } = getEllipsisOpt();
+      const { strong } = props;
       const children = props.children[0].children;
       // wait until element mounted
       if (!wrapperRef || !wrapperRef.value) {
@@ -429,7 +430,8 @@ const Base = defineComponent({
         extraNode,
         ELLIPSIS_STR,
         suffix,
-        pos
+        pos,
+        strong
       );
 
       return new Promise<void>((resolve) => {

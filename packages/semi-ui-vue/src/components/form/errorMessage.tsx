@@ -6,10 +6,11 @@ import { IconAlertTriangle, IconAlertCircle } from '@kousum/semi-icons-vue';
 import { CombineProps, VueJsxNode } from '../interface';
 import { cloneVNode, ComponentObjectPropsOptions, CSSProperties, defineComponent, h, isVNode, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
+import type { BasicFieldError } from '@douyinfe/semi-foundation/form/interface';
 
 const prefix = cssClasses.PREFIX;
 
-export type ReactFieldError = Array<any> | VueJsxNode;
+export type ReactFieldError = BasicFieldError | VueJsxNode;
 
 export interface ErrorMessageProps {
   error?: ReactFieldError;

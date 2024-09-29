@@ -1440,6 +1440,9 @@ const TreeSelect = defineComponent({
 
     const renderEmpty = () => {
       const { emptyContent } = props;
+      if (emptyContent === null) {
+        return null;
+      }
       if (emptyContent) {
         return <TreeNode key={'treeSelectTreeNode'} empty emptyContent={props.emptyContent} />;
       } else {
@@ -1593,14 +1596,15 @@ const TreeSelect = defineComponent({
         renderLabel,
         renderFullLabel,
         checkRelation,
+        emptyContent
       } = props;
       const wrapperCls = cls(`${prefixTree}-wrapper`);
-      const listCls = cls(`${prefixTree}-option-list`, {
-        [`${prefixTree}-option-list-block`]: true,
-      });
       const searchNoRes = Boolean(inputValue) && !filteredKeys.size;
       const noData = isEmpty(flattenNodes) || (showFilteredOnly && searchNoRes);
       const isDropdownPositionSearch = searchPosition === strings.SEARCH_POSITION_DROPDOWN;
+      const listCls = cls(`${prefixTree}-option-list ${prefixTree}-option-list-block`, {
+        [`${prefixTree}-option-list-hidden`]: emptyContent === null && noData,
+      });
       return (
         <TreeContext.Provider
           value={{

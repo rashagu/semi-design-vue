@@ -225,7 +225,7 @@ const Checkbox = defineComponent({
         [`${prefix}-unChecked`]: !props_.checked,
         [`${prefix}-cardType`]: props_.isCardType,
         [`${prefix}-cardType_disabled`]: props_.disabled && props_.isCardType,
-        [`${prefix}-cardType_unDisabled`]: !(props_.disabled && props_.isCardType),
+        [`${prefix}-cardType_enable`]: !(props_.disabled && props_.isCardType),
         [`${prefix}-cardType_checked`]: props_.isCardType && props_.checked && !props_.disabled,
         [`${prefix}-cardType_checked_disabled`]: props_.isCardType && props_.checked && props_.disabled,
         [className]: Boolean(className),

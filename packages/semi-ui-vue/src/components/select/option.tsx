@@ -160,6 +160,12 @@ const Option = defineComponent({
 
       // Since there are empty, locale and other logic, the custom renderOptionItem is directly converged to the internal option instead of being placed in Select/index
       if (typeof renderOptionItem === 'function') {
+        const customRenderClassName = classNames(className,
+          {
+            [`${prefixCls}-custom`]: true,
+            [`${prefixCls}-custom-selected`]: selected
+          }
+        );
         return renderOptionItem({
           disabled,
           focused,
@@ -170,7 +176,7 @@ const Option = defineComponent({
           inputValue,
           onMouseEnter: (e: MouseEvent) => onMouseEnter(e),
           onClick: (e: MouseEvent) => onClick({ value, label, children, ...rest }, e),
-          className,
+          className: customRenderClassName,
           ...rest,
         });
       }

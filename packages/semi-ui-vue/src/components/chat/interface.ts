@@ -19,7 +19,8 @@ export interface CommonChatsProps {
   onMessageReset?: (message?: Message) => void;
   onMessageCopy?: (message?: Message) => void;
   chatBoxRenderConfig?: ChatBoxRenderConfig;
-  customMarkDownComponents?: MDXProps['components']
+  customMarkDownComponents?: MDXProps['components'];
+  renderDivider?: (message?: Message) => VNode;
 }
 
 export interface ChatProps extends CommonChatsProps {

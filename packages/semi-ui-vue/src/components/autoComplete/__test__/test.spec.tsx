@@ -3,6 +3,7 @@ import {mount} from "@vue/test-utils";
 import { expect, test } from 'vitest'
 import Comp from "./AutoCompleteItemsDemo";
 import OptionDemo from "./OptionDemo";
+import { render, screen, } from '@testing-library/vue';
 
 test('AutoComplete test', async () => {
   const wrapper = mount(Comp, {})
@@ -13,8 +14,7 @@ test('AutoComplete test', async () => {
 })
 
 test('AutoComplete Option test', async () => {
-  const wrapper = mount(OptionDemo, {})
-
-  const profileLink = wrapper.get('.semi-autoComplete-option')
-  expect(profileLink.text()).toEqual('s@qq.com')
+  render(OptionDemo, {})
+  const option = await screen.findByRole('option')
+  expect(option.textContent).toEqual('s@qq.com')
 })

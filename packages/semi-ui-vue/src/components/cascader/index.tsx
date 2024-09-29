@@ -1052,14 +1052,14 @@ const Index = defineComponent({
       const inner = useCustomTrigger
         ? renderCustomTrigger()
         : [
-            <Fragment key={'prefix'}>{prefix || insetLabel ? renderPrefix() : null}</Fragment>,
-            <Fragment key={'selection'}>
-              <div class={sectionCls}>{renderSelectContent()}</div>
-            </Fragment>,
-            <Fragment key={'clearbtn'}>{renderClearBtn()}</Fragment>,
-            <Fragment key={'suffix'}>{suffix ? renderSuffix() : null}</Fragment>,
-            <Fragment key={'arrow'}>{renderArrow()}</Fragment>,
-          ];
+          <Fragment key={'prefix'}>{prefix || insetLabel ? renderPrefix() : null}</Fragment>,
+          <Fragment key={'selection'}>
+            <div class={sectionCls}>{renderSelectContent()}</div>
+          </Fragment>,
+          <Fragment key={'suffix'}>{suffix ? renderSuffix() : null}</Fragment>,
+          <Fragment key={'clearbtn'}>{renderClearBtn()}</Fragment>,
+          <Fragment key={'arrow'}>{renderArrow()}</Fragment>,
+        ];
       /**
        * Reasons for disabling the a11y eslint rule:
        * The following attributes(aria-controls,aria-expanded) will be automatically added by Tooltip, no need to declare here

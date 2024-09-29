@@ -69,7 +69,7 @@ export type CommonexcludeType = {
 
 export type RadioCheckboxExcludeProps = {
     defaultValue?: any;
-    chekced?: boolean;
+    checked?: boolean;
     defaultChecked?: boolean;
     field: string;
 };
@@ -114,6 +114,7 @@ export interface BaseFormProps <Values extends Record<string, any> = any> {
     onSubmitFail?: (errors: Record<keyof Values, FieldError>, values: Partial<Values>, e?: any) => void;
     onReset?: () => void;
     onValueChange?: (values: Values, changedValue: Partial<Values>) => void;
+    onErrorChange?: (errors: Record<keyof Values, FieldError>, changedError?: Partial<Record<keyof Values, FieldError>>) => void;
     onChange?: (formState: FormState) => void;
     allowEmpty?: boolean;
     validateFields?: (values: Values) => string | Partial<AllErrors<Values>>;

@@ -29,6 +29,7 @@ import {
 import { vuePropsMake } from '../PropTypes';
 import { useBaseComponent } from '../_base/baseComponent';
 import { CombineProps } from '../interface';
+import ErrorMessage, { ReactFieldError } from './errorMessage';
 const prefix = cssClasses.PREFIX;
 
 interface BaseFormState {
@@ -44,6 +45,7 @@ const propTypes: CombineProps<BaseFormProps> = {
   onReset: PropTypes.func as PropType<BaseFormProps['onReset']>,
   // Triggered when the value of the form is updated, only when the value of the subfield changes. The entry parameter is formState.values
   onValueChange: PropTypes.func as PropType<BaseFormProps['onValueChange']>,
+  onErrorChange: PropTypes.func as PropType<BaseFormProps['onErrorChange']>,
   autoScrollToError: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   allowEmpty: PropTypes.bool,
   className: PropTypes.string,
@@ -74,6 +76,7 @@ const defaultProps = {
   onSubmit: noop,
   onReset: noop,
   onValueChange: noop,
+  onErrorChange: noop,
   layout: 'vertical',
   labelPosition: 'top',
   allowEmpty: false,
@@ -134,6 +137,9 @@ const Form = defineComponent({
         },
         notifyValueChange: (values: any, changedValues: any) => {
           props.onValueChange(values, changedValues);
+        },
+        notifyErrorChange: (errors: Record<any, ReactFieldError>, changedError: Partial<Record<any, ReactFieldError>>) => {
+          props.onErrorChange(errors, changedError);
         },
         notifyReset: () => {
           props.onReset();
@@ -234,6 +240,7 @@ const Form = defineComponent({
         onChange,
         onSubmit,
         onSubmitFail,
+        onErrorChange,
         onValueChange,
         component,
         render,

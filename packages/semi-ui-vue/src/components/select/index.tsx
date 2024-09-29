@@ -22,7 +22,7 @@ import { FixedSizeList as List } from '@kousum/vue3-window';
 import cls from 'classnames';
 import SelectFoundation, { SelectAdapter } from '@douyinfe/semi-foundation/select/foundation';
 import { cssClasses, strings, numbers } from '@douyinfe/semi-foundation/select/constants';
-import { useBaseComponent, useHasInProps, type ValidateStatus } from '../_base/baseComponent';
+import { getProps, useBaseComponent, useHasInProps, type ValidateStatus } from '../_base/baseComponent';
 import { get, isEqual, isFunction, isNumber, isString, noop } from 'lodash';
 import Tag from '../tag';
 import TagGroup from '../tag/group';
@@ -648,11 +648,19 @@ const Index = defineComponent({
           return state.isFocusInContainer;
         },
         updateScrollTop: (index?: number) => {
-          // eslint-disable-next-line max-len
-          let optionClassName = `.${prefixcls}-option-selected`;
-          if (index !== undefined) {
-            optionClassName = `.${prefixcls}-option:nth-child(${index})`;
+          let optionClassName;
+          if ('renderOptionItem' in getProps(props)) {
+            optionClassName = `.${prefixcls}-option-custom-selected`;
+            if (index !== undefined) {
+              optionClassName = `.${prefixcls}-option-custom:nth-child(${index + 1})`;
+            }
+          } else {
+            optionClassName = `.${prefixcls}-option-selected`;
+            if (index !== undefined) {
+              optionClassName = `.${prefixcls}-option:nth-child(${index + 1})`;
+            }
           }
+
           let destNode = optionContainerEl.value?.querySelector(
             `#${prefixcls}-${selectOptionListID} ${optionClassName}`
           ) as HTMLDivElement;
@@ -1538,6 +1546,7 @@ const Index = defineComponent({
                 : renderSingleSelection(toRaw(selections), filterable)}
             </div>
           </Fragment>,
+          <Fragment key="suffix">{suffix ? renderSuffix() : null}</Fragment>,
           <Fragment key="clearicon">
             {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
             {showClear ? (
@@ -1548,7 +1557,6 @@ const Index = defineComponent({
               arrowContent
             )}
           </Fragment>,
-          <Fragment key="suffix">{suffix ? renderSuffix() : null}</Fragment>,
         ]
       );
       /**

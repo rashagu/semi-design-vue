@@ -14,7 +14,7 @@ import Spin from '../spin';
 import Popover from '../popover';
 import Input, { InputProps } from '../input';
 import Trigger, { TriggerProps } from '../trigger';
-
+import { getUuidShort } from '@douyinfe/semi-foundation/utils/uuid';
 import Option from './option';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import '@douyinfe/semi-foundation/autoComplete/autoComplete.scss';
@@ -167,6 +167,30 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
           updateFocusIndex: (focusIndex: number): void => {
             state.focusIndex = focusIndex;
           },
+          updateScrollTop: (index?: number) => {
+            let optionClassName;
+            /**
+             * Unlike Select which needs to process renderOptionItem separately, when renderItem is enabled in autocomplete
+             *  the content passed by the user is still wrapped in the selector of .semi-autocomplete-option
+             * so the selector does not need to be judged separately.
+             */
+            optionClassName = `.${prefixCls}-option-selected`;
+            if (index !== undefined) {
+              optionClassName = `.${prefixCls}-option:nth-child(${index + 1})`;
+            }
+
+            let destNode = document.querySelector(`#${prefixCls}-${optionListId} ${optionClassName}`) as HTMLDivElement;
+            if (Array.isArray(destNode)) {
+              destNode = destNode[0];
+            }
+            if (destNode) {
+              const destParent = destNode.parentNode as HTMLDivElement;
+              destParent.scrollTop = destNode.offsetTop -
+                destParent.offsetTop -
+                (destParent.clientHeight / 2) +
+                (destNode.clientHeight / 2);
+            }
+          },
         };
         return {
           ...adapterInject(),
@@ -251,7 +275,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
       const foundation = new AutoCompleteFoundation(adapter);
       const triggerRef = ref();
       const optionsRef = ref();
-
+      let optionListId: string = "";
       warning(
         'triggerRender' in props && typeof props.triggerRender === 'function',
         `[Semi AutoComplete]
@@ -263,6 +287,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
 
       onMounted(() => {
         foundation.init();
+        optionListId = getUuidShort();
       });
 
       onUnmounted(() => {
@@ -440,7 +465,7 @@ function AutoCompleteFunc<T extends AutoCompleteItems>() {
           ...dropdownStyle,
         };
         return (
-          <div class={listCls} role="listbox" style={style}>
+          <div class={listCls} role="listbox" style={style} id={`${prefixCls}-${optionListId}`}>
             {!loading ? optionsNode : renderLoading()}
           </div>
         );

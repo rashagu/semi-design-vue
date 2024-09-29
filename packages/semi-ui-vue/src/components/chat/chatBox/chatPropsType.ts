@@ -19,6 +19,7 @@ export const chatContentVuePropsType: CombineProps<ChatContentProps> = {
   onMessageCopy: PropTypes.func as PropType<ChatContentProps['onMessageCopy']>,
   chatBoxRenderConfig: PropTypes.object,
   customMarkDownComponents: PropTypes.object,
+  renderDivider: PropTypes.func as PropType<ChatContentProps['renderDivider']>,
 }
 
 
