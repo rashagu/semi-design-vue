@@ -38,6 +38,9 @@ import { CombineProps, VueJsxNode } from '../interface';
 import SortableList from './SortableList';
 import type { SortableItemFuncArg } from '../tagInput';
 import type { Events } from '@kousum/dnd-kit-vue';
+import { RenderItemProps, Sortable } from '../_sortable';
+import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
+import { pointerIntersection } from '@dnd-kit/collision';
 
 export interface DataItem extends BasicDataItem {
   label?: VueJsxNode;
@@ -101,7 +104,7 @@ export interface SourcePanelProps {
   onSelect: (value: Array<string | number>) => void;
 }
 
-export type OnSortEnd = ({ oldIndex, newIndex }: OnSortEndProps) => void;
+export type OnSortEnd = (event: Parameters<Events['dragend']>[0]) => void;
 
 export interface SelectedPanelProps {
   /* Number of selected options */
@@ -180,7 +183,7 @@ export interface TransferProps {
   onDeselect?: (item: DataItem) => void;
   onSearch?: (sunInput: string) => void;
   renderSourceItem?: (item: RenderSourceItemProps) => VNode;
-  renderSelectedItem?: (item: RenderSelectedItemProps, arg: SortableItemFuncArg) => VueJsxNode;
+  renderSelectedItem?: (item: RenderSelectedItemProps) => VueJsxNode;
   renderSourcePanel?: (sourcePanelProps: SourcePanelProps) => VueJsxNode;
   renderSelectedPanel?: (selectedPanelProps: SelectedPanelProps) => VueJsxNode;
   renderSourceHeader?: (headProps: SourceHeaderProps) => VueJsxNode;
@@ -352,7 +355,7 @@ const Transfer = defineComponent({
       foundation.handleSelectOrRemove(item);
     }
 
-    function onSortEnd(event?: Parameters<Events['dragend']>[0], callbackProps?: OnSortEndProps) {
+    function onSortEnd(event?: Parameters<Events['dragend']>[0]) {
       if (event) {
         const { active, over } = {active: event.operation.source, over: event.operation.target};
         const selectedItems = adapter.getSelected();
@@ -366,9 +369,6 @@ const Transfer = defineComponent({
           const newIndex = selectedArr.indexOf(over.id);
           foundation.handleSortEnd({ oldIndex, newIndex });
         }
-      }
-      if (callbackProps) {
-        foundation.handleSortEnd(callbackProps);
       }
     }
     // function onSortEnd(callbackProps: OnSortEndProps) {
@@ -620,7 +620,7 @@ const Transfer = defineComponent({
       );
     }
 
-    function renderRightItem(item: ResolvedDataItem) {
+    function renderRightItem(item: ResolvedDataItem, sortableHandle?: any) {
       const { renderSelectedItem, draggable, type, showPath } = props;
       const onRemove = () => foundation.handleSelectOrRemove(item);
       const rightItemCls = cls({
@@ -633,40 +633,34 @@ const Transfer = defineComponent({
       const label = shouldShowPath ? foundation._generatePath(item) : item.label;
 
       if (renderSelectedItem) {
-        return (arg: SortableItemFuncArg) => renderSelectedItem({ ...item, onRemove, sortableHandle: () => {} }, arg);
+        return renderSelectedItem({ ...item, onRemove, sortableHandle: sortableHandle });
       }
 
-      return (arg: SortableItemFuncArg) => {
-        return (
-          // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
-          <div
-            role="listitem"
-            ref={arg.element}
-            class={rightItemCls}
-            key={item.key}
-            {...arg.attributes}
-          >
-            {draggable ? (
-              <IconHandle
-                ref={arg.handleRef}
-                role="button"
-                aria-label="Drag and sort"
-                className={`${prefixCls}-right-item-drag-handler`}
-              />
-            ) : null}
-            <div class={`${prefixCls}-right-item-text`}>{label}</div>
-            <IconClose
-              onClick={onRemove}
-              aria-disabled={item.disabled}
-              className={cls(`${prefixCls}-item-close-icon`, {
-                [`${prefixCls}-item-close-icon-disabled`]: item.disabled,
-              })}
-            />
-          </div>
-        );
-      };
+      const DragHandle = sortableHandle && sortableHandle(() => (
+        <IconHandle role="button" aria-label="Drag and sort" className={`${prefixCls}-right-item-drag-handler`} />
+      ));
+      return (
+        // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
+        <div role="listitem" class={rightItemCls} key={item.key}>
+          {draggable && sortableHandle ? <DragHandle /> : null}
+          <div class={`${prefixCls}-right-item-text`}>{label}</div>
+          <IconClose
+            onClick={onRemove}
+            aria-disabled={item.disabled}
+            className={cls(`${prefixCls}-item-close-icon`, {
+              [`${prefixCls}-item-close-icon-disabled`]: item.disabled
+            })}
+          />
+        </div>
+      );
     }
-
+    const renderSortItem = (props: RenderItemProps): VueJsxNode => {
+      const { id, sortableHandle } = props;
+      const { selectedItems } = state;
+      const selectedData = [...selectedItems.values()];
+      const item = selectedData.find(item => item.key === id);
+      return renderRightItem(item, sortableHandle);
+    }
     function renderEmpty(type: string, emptyText: VueJsxNode) {
       const emptyCls = cls({
         [`${prefixCls}-empty`]: true,
@@ -681,25 +675,38 @@ const Transfer = defineComponent({
     }
 
     function renderRightSortableList(selectedData: Array<ResolvedDataItem>) {
-      const sortableListItems = selectedData.map((item) => {
-        return {
-          ...item,
-          id: item.key,
-          node: renderRightItem(item),
-        };
-      });
-
-      // helperClass：add styles to the helper(item being dragged) https://github.com/clauderic/react-sortable-hoc/issues/87
-      // @ts-ignore skip SortableItem type check
-      const sortList = (
-        <SortableList
-          useDragHandle
-          helperClass={`${prefixCls}-right-item-drag-item-move`}
-          onSortOver={onSortEnd}
-          items={sortableListItems}
-        />
-      );
+      const sortItems = selectedData.map(item => item.key);
+      const sortList = <Sortable
+        modifiers={[RestrictToVerticalAxis]}
+        collisionDetector={pointerIntersection}
+        onSortEnd={onSortEnd}
+        items={sortItems}
+        renderItem={renderSortItem}
+        prefix={`${prefixCls}-right-item`}
+        dragOverlayCls={`${prefixCls}-right-item-drag-item-move`}
+      />;
       return sortList;
+
+
+      // const sortableListItems = selectedData.map((item) => {
+      //   return {
+      //     ...item,
+      //     id: item.key,
+      //     node: renderRightItem(item),
+      //   };
+      // });
+      //
+      // // helperClass：add styles to the helper(item being dragged) https://github.com/clauderic/react-sortable-hoc/issues/87
+      // // @ts-ignore skip SortableItem type check
+      // const sortList = (
+      //   <SortableList
+      //     useDragHandle
+      //     helperClass={`${prefixCls}-right-item-drag-item-move`}
+      //     onSortOver={onSortEnd}
+      //     items={sortableListItems}
+      //   />
+      // );
+      // return sortList;
     }
 
     function renderRight(locale: Locale['Transfer']) {
@@ -713,7 +720,7 @@ const Transfer = defineComponent({
         selectedData,
         onClear: () => foundation.handleClear(),
         onRemove: (item) => foundation.handleSelectOrRemove(item),
-        onSortEnd: (props) => onSortEnd(null, props),
+        onSortEnd: (props) => onSortEnd(props),
       };
       if (renderSelectedPanel) {
         return renderSelectedPanel(renderProps);
@@ -743,7 +750,7 @@ const Transfer = defineComponent({
           const list = (
             <div class={`${prefixCls}-right-list`} role="list" aria-label="Selected list">
               {selectedData.map((item) => {
-                return renderRightItem({ ...item })({});
+                return renderRightItem({ ...item });
               })}
             </div>
           );

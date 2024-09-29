@@ -160,6 +160,7 @@ import SelectDocsDemo from './components/select/__test__/SelectDocsDemo';
 import HotKeysDemo2 from './components/hotKeys/__test__/HotKeysDemo2';
 import HotKeysDocsDemo from './components/hotKeys/__test__/HotKeysDocsDemo';
 import OptionDemo from './components/autoComplete/__test__/OptionDemo';
+import TransferDemoDocs from './components/transfer/__test__/TransferDemoDocs';
 
 export interface ExampleProps {
   name?: string
@@ -297,9 +298,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<CascaderDemo3/>*/}
         {/*<CheckboxDemo />*/}
         {/*<TagInputDemo />*/}
+        <TransferDemoDocs/>
 
         {/*<AutoCompleteDemo/>*/}
-        <OptionDemo/>
+        {/*<OptionDemo/>*/}
         {/*<DiyItemAutoComplete/>*/}
         {/*<RemoteAutoComplete/>*/}
         {/*<AutoCompleteSFC/>*/}
