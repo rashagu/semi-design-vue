@@ -1,5 +1,11 @@
 # @kousum/vite-plugin-semi-theme
 
+## 0.21.0
+
+### Minor Changes
+
+- change dnd & semi 2.67.0
+
 ## 0.20.3
 
 ### Patch Changes
