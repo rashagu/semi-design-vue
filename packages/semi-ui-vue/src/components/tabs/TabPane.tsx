@@ -71,8 +71,9 @@ const TabPane = defineComponent({
       return lazyRender ? _active : true;
     };
 
+    const ChildCache = defineComponent(() => () => slots.default?.());
+
     return () => {
-      const children = slots.default?.();
       const { tabPaneMotion: motion, tabPosition, prevActiveKey } = context.value;
       const { className, style, itemKey, tabIndex, ...restProps } = props;
       const active = context.value.activeKey === itemKey;
@@ -103,6 +104,7 @@ const TabPane = defineComponent({
         (tabPane) => tabPane.itemKey === prevActiveKey
       );
       const hasMotion = motion && active && !isActivatedBecauseOtherTabPaneRemoved && !context.value.forceDisableMotion;
+      
       return (
         <div
           role="tabpanel"
@@ -127,7 +129,7 @@ const TabPane = defineComponent({
                   x-semi-prop="children"
                   {...animationEventsNeedBind}
                 >
-                  {shouldRender ? children : null}
+                  {shouldRender ? <ChildCache/> : null}
                 </div>
               );
             }}
