@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 0.21.1
+
+### Patch Changes
+
+- optimize: Reduce performance issues caused by tab switching
+
 ## 0.21.0
 
 ### Minor Changes

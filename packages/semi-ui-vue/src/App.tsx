@@ -161,6 +161,7 @@ import HotKeysDemo2 from './components/hotKeys/__test__/HotKeysDemo2';
 import HotKeysDocsDemo from './components/hotKeys/__test__/HotKeysDocsDemo';
 import OptionDemo from './components/autoComplete/__test__/OptionDemo';
 import TransferDemoDocs from './components/transfer/__test__/TransferDemoDocs';
+import TabsDemoPaneChildren from './components/tabs/__test__/TabsDemoPaneChildren';
 
 export interface ExampleProps {
   name?: string
@@ -298,7 +299,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<CascaderDemo3/>*/}
         {/*<CheckboxDemo />*/}
         {/*<TagInputDemo />*/}
-        <TransferDemoDocs/>
+        {/*<TransferDemoDocs/>*/}
+        <TabsDemoPaneChildren/>
 
         {/*<AutoCompleteDemo/>*/}
         {/*<OptionDemo/>*/}
