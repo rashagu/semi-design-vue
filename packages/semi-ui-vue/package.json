@@ -52,7 +52,7 @@
     "lottie-web": "^5.12.2",
     "@mdx-js/vue": "^3.0.1",
     "unified": "^11.0.5",
-    "vue": "^3.5.10"
+    "vue": "^3.5.12"
   },
   "peerDependencies": {
     "lodash": "^4.17.21",
@@ -95,7 +95,7 @@
     "fast-glob": "^3.2.12",
     "typescript": "^5.5.2",
     "terser": "^5.16.4",
-    "vite": "5.4.7",
-    "vue-tsc": "^2.1.4"
+    "vite": "5.4.9",
+    "vue-tsc": "^2.1.6"
   }
 }
