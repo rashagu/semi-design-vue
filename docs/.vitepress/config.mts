@@ -9,19 +9,7 @@ export default defineConfig({
   description: 'Vue3 UI components based on semi-design and Vue',
   srcDir: 'src',
   outDir: './.vitepress/out/semi-design-vue',
-  head: [
-    [
-      'script',
-      {},
-      `var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?25817a9438bb74d48fe729cf3a2f7a6a";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();`,
-    ],
-  ],
+  head: [],
   markdown: {
     config: (md) => {
       // 使用 markdown-it 插件
