@@ -1651,15 +1651,38 @@ const Index = defineComponent({
 const Select = defineComponent({
   props: { ...vuePropsType },
   name: 'Select',
-  setup(props, {slots}){
+  setup(props, {slots, expose}){
     const {getProps} = useHasInProps()
+
+    const domRef = ref()
+    expose({
+      close(){
+        domRef.value?.close()
+      },
+      open(){
+        domRef.value?.open()
+      },
+      clearInput(){
+        domRef.value?.clearInput()
+      },
+      selectAll(){
+        domRef.value?.selectAll()
+      },
+      deselectAll(){
+        domRef.value?.deselectAll()
+      },
+      focus(){
+        domRef.value?.focus()
+      },
+    })
 
     return ()=>{
       const children = getFragmentChildren(slots);
-      return <Index {...getProps(props)} children={children || []}/>
+      return <Index ref={domRef} {...getProps(props)} children={children || []}/>
     }
   }
 });
+
 export type SelectType = typeof Select & {
   Option: typeof Option
   OptGroup: typeof OptionGroup

@@ -14,11 +14,11 @@ importers:
   .:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       '@douyinfe/semi-theme-default':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       '@vue/repl':
         specifier: 4.3.1
         version: 4.3.1(patch_hash=3rqzwkhy3g36fybfmy5vlgr3bq)
@@ -213,17 +213,17 @@ importers:
   packages/semi-animation-vue:
     dependencies:
       '@douyinfe/semi-animation':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       '@douyinfe/semi-animation-styled':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       '@douyinfe/semi-foundation':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       '@douyinfe/semi-theme-default':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -307,11 +307,11 @@ importers:
   packages/semi-icons-lab-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       '@douyinfe/semi-theme-default':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -392,11 +392,11 @@ importers:
   packages/semi-icons-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       '@douyinfe/semi-theme-default':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -477,11 +477,11 @@ importers:
   packages/semi-illustrations-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       '@douyinfe/semi-theme-default':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -562,29 +562,29 @@ importers:
   packages/semi-ui-vue:
     dependencies:
       '@dnd-kit/abstract':
-        specifier: 0.0.6-beta-20240923164446
-        version: 0.0.6-beta-20240923164446
+        specifier: 0.0.6-beta-20241014170855
+        version: 0.0.6-beta-20241014170855
       '@dnd-kit/collision':
-        specifier: 0.0.6-beta-20240923164446
-        version: 0.0.6-beta-20240923164446
+        specifier: 0.0.6-beta-20241014170855
+        version: 0.0.6-beta-20241014170855
       '@dnd-kit/dom':
-        specifier: 0.0.6-beta-20240923164446
-        version: 0.0.6-beta-20240923164446
+        specifier: 0.0.6-beta-20241014170855
+        version: 0.0.6-beta-20241014170855
       '@dnd-kit/helpers':
-        specifier: 0.0.6-beta-20240923164446
-        version: 0.0.6-beta-20240923164446
+        specifier: 0.0.6-beta-20241014170855
+        version: 0.0.6-beta-20241014170855
       '@douyinfe/semi-animation':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       '@douyinfe/semi-foundation':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       '@douyinfe/semi-theme-default':
-        specifier: 2.67.0
-        version: 2.67.0
+        specifier: 2.67.2
+        version: 2.67.2
       '@kousum/dnd-kit-vue':
-        specifier: 0.0.6-beta-20240923164446
-        version: 0.0.6-beta-20240923164446(vue@3.5.12(typescript@5.5.4))
+        specifier: 0.0.6-beta-20241014170855
+        version: 0.0.6-beta-20241014170855(vue@3.5.12(typescript@5.5.4))
       '@kousum/semi-animation-vue':
         specifier: workspace:*
         version: link:../semi-animation-vue
@@ -1732,23 +1732,23 @@ packages:
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
 
-  '@dnd-kit/abstract@0.0.6-beta-20240923164446':
-    resolution: {integrity: sha512-7XX5/lTXcoQ3eCcUBz/CYrKRxP9jRPokdDCAWT14o6s9+9c0Pxz9ODOmDgcpAk+Tp6RP2IxCo5JPT2tqncAwLg==}
+  '@dnd-kit/abstract@0.0.6-beta-20241014170855':
+    resolution: {integrity: sha512-SVxHMpHKMi9r/7giJXpuwIaq2HDTP/cCGYHpWLqB4DKKdDK9r1FMQt95rgf1QIiUVIgYU/T1Pc6was7UqxHGrg==}
 
-  '@dnd-kit/collision@0.0.6-beta-20240923164446':
-    resolution: {integrity: sha512-Zz4mTfJN+0kgGK2IclcSy4XGsB/BHsMOIuFHUwRWhz3apFbqLK6hsfBhp9jwYTbnJWVVyxDZ4xmQX6SGlLFc8Q==}
+  '@dnd-kit/collision@0.0.6-beta-20241014170855':
+    resolution: {integrity: sha512-KLRQy1QvVYuiL/sjgyEB0WZXIJsKoVQHZA+7zOTnCtjfkxVU8ELZrtuHVn8srBoBmzlJC/WEpC6kRjUcfzrRng==}
 
-  '@dnd-kit/dom@0.0.6-beta-20240923164446':
-    resolution: {integrity: sha512-4Cd5nCmrybbfwRh0sPnF2jjBeHLp/6C4w+piA0tXu3kxjTdEuACeovsal25c/ouVj6nOrlUTLtfZimBzU0Ko9w==}
+  '@dnd-kit/dom@0.0.6-beta-20241014170855':
+    resolution: {integrity: sha512-4DrMM14Hg4VoWdLXtLupL2vAGGWpv2OrVPiLobd4vTGUHmDWoZxP5hkqzlKHhakAVm95YTa/BE0as11n051WEw==}
 
-  '@dnd-kit/geometry@0.0.6-beta-20240923164446':
-    resolution: {integrity: sha512-HorxV0SEVo3Yqc74zeIbO/iqohxKov7GOtJPrxksy8vQ65PFWtfc7P3DOMH4zNk6LgK5qFmtYVWlBxdmvV/NiA==}
+  '@dnd-kit/geometry@0.0.6-beta-20241014170855':
+    resolution: {integrity: sha512-Ckucs/Q0eE1KU3+7wzK1lt+JQfLYstfWPmUqjRTIGPq+3PB//dXI/ETUJQBhKjC0hRWESkfBvOzCQ4GDXCYREg==}
 
-  '@dnd-kit/helpers@0.0.6-beta-20240923164446':
-    resolution: {integrity: sha512-6nawzSzMz3gAJORmUzlMeHZCj0aFt12B0yFqnyaM3s+8iSIStHNgWFDLvPt5jNJ77OTzVCEpH3xNpu2+C4BKVg==}
+  '@dnd-kit/helpers@0.0.6-beta-20241014170855':
+    resolution: {integrity: sha512-u5VHLVwnY6uSPhYq7zi1VveZhbspJAnLAY/rWGzhzbEj2lKwtnJTMEnEcWs8BwAQaixX+s3lQzrQKJrKWhdxFg==}
 
-  '@dnd-kit/state@0.0.6-beta-20240923164446':
-    resolution: {integrity: sha512-u6SMbAYvVGUxTe0k4m1bUTRVh4+SvWUouRTALSFRWg55I86fcJ7dLGDqLG1xUUT7q6qMFKfjwrnqOupWzlRjOw==}
+  '@dnd-kit/state@0.0.6-beta-20241014170855':
+    resolution: {integrity: sha512-xjlxAJbvvrfeqeuC0lVarHFEaTwL15+FdboUvbXkomst0Qv/tGhUI3h/7sf4X+ENDHCy5I5HolNiiRKwu1Mkyw==}
 
   '@docsearch/css@3.6.2':
     resolution: {integrity: sha512-vKNZepO2j7MrYBTZIGXvlUOIR+v9KRf70FApRgovWrj3GTs1EITz/Xb0AOlm1xsQBp16clVZj1SY/qaOJbQtZw==}
@@ -1773,17 +1773,17 @@ packages:
       search-insights:
         optional: true
 
-  '@douyinfe/semi-animation-styled@2.67.0':
-    resolution: {integrity: sha512-onb5480Ekjonfb45J5lXF7Ia7xW44WKfeO656mBF3LOnam5jzO2s+/o+eNvdCmTSCDfer7yC7Uz1WLg/5+8hJw==}
+  '@douyinfe/semi-animation-styled@2.67.2':
+    resolution: {integrity: sha512-V9BB629Zl2t6RWxWpofvGIsClo9PGy9VRrLzyM9my/2JrmKxYJbG1iMwSd6z2GgbkxU4sHz3qVIX/vDfRq8sJQ==}
 
-  '@douyinfe/semi-animation@2.67.0':
-    resolution: {integrity: sha512-6vkm0Sph6wBQqo7T9uXEjDJT37/NrYx9fw12DtgPIjypuePh3+4VfNKWdgxaDwS+LmGJKCAAjCyVjBvr3lFiyw==}
+  '@douyinfe/semi-animation@2.67.2':
+    resolution: {integrity: sha512-yUicRacSB2YC09q0yL8To5P5v7ibNLdH+cTgLiyEkZKEeEj0eb9HOrZVymqHlFG/X6k+C/tC2kQZyrOLl2qy8g==}
 
-  '@douyinfe/semi-foundation@2.67.0':
-    resolution: {integrity: sha512-JdavfRdVqFZ8aSkrpiHy7OlJ7zGLBy3rrpS7Jfz2WsgOEbEfa/yxRVWr8f5nbNqMzq89zmIhEpS3sgpyc7P+dQ==}
+  '@douyinfe/semi-foundation@2.67.2':
+    resolution: {integrity: sha512-zDLooCe0PGzbJ5cvwgt97CRi2b9MJbOLaieXR0/yGjCWoIs0MGy5UM2ji1XrBcIu40INQ700ZIllKITYf/tIFQ==}
 
-  '@douyinfe/semi-theme-default@2.67.0':
-    resolution: {integrity: sha512-WujwqRurru+62JaxZd6XLkmPpT9OduPsid/TZ1jwMvLdoCrJvlvefeQZUMbMqpf23n6VN/+WZ85u8VM6tNSxfQ==}
+  '@douyinfe/semi-theme-default@2.67.2':
+    resolution: {integrity: sha512-3pYcuzdcsriuS2eS7DSrgdWMv0vmfkSVDStUfUyISEcxtfyoqu6hEw6Rl6RMrduxnKczaL9AgUe/nREf5TO2Cw==}
 
   '@emotion/use-insertion-effect-with-fallbacks@1.0.1':
     resolution: {integrity: sha512-jT/qyKZ9rzLErtrjGgdkMBn2OP8wl0G3sQlBb3YPryvKHsjvINUhVaPFfP+fpBcOkmrVOVEEHQFJ7nbj2TH2gw==}
@@ -2108,10 +2108,10 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@kousum/dnd-kit-vue@0.0.6-beta-20240923164446':
-    resolution: {integrity: sha512-j/4ay83TgeVCG999rPEaM41j2HsVkMbRM4YflQYBdZuM2Os2kGx9tXzq6mlDtPMu7mZq5d/D1qIpwwbmiiDTzg==}
+  '@kousum/dnd-kit-vue@0.0.6-beta-20241014170855':
+    resolution: {integrity: sha512-EFeuZYOfhOjihkqHWgAaDIN+IoQJ/RmUHXDts8hAsQ1bYkLlpRZNilQwcsJwC2VRtFPfC9HMWRoQyLxTFqy0KQ==}
     peerDependencies:
-      vue: 3.5.6
+      vue: 3.5.12
 
   '@kousum/vue-draggable@1.0.2':
     resolution: {integrity: sha512-5RGFjJ65YRRdOIeMgZS6IrWUh65I2fr27Npp0acN0Nl4tfo9AvSkSZtjKhTmwX949bha6VTn8k/acDemFVEczA==}
@@ -10640,37 +10640,37 @@ snapshots:
 
   '@discoveryjs/json-ext@0.5.7': {}
 
-  '@dnd-kit/abstract@0.0.6-beta-20240923164446':
+  '@dnd-kit/abstract@0.0.6-beta-20241014170855':
     dependencies:
-      '@dnd-kit/geometry': 0.0.6-beta-20240923164446
-      '@dnd-kit/state': 0.0.6-beta-20240923164446
+      '@dnd-kit/geometry': 0.0.6-beta-20241014170855
+      '@dnd-kit/state': 0.0.6-beta-20241014170855
       tslib: 2.6.2
 
-  '@dnd-kit/collision@0.0.6-beta-20240923164446':
+  '@dnd-kit/collision@0.0.6-beta-20241014170855':
     dependencies:
-      '@dnd-kit/abstract': 0.0.6-beta-20240923164446
-      '@dnd-kit/geometry': 0.0.6-beta-20240923164446
+      '@dnd-kit/abstract': 0.0.6-beta-20241014170855
+      '@dnd-kit/geometry': 0.0.6-beta-20241014170855
       tslib: 2.6.2
 
-  '@dnd-kit/dom@0.0.6-beta-20240923164446':
+  '@dnd-kit/dom@0.0.6-beta-20241014170855':
     dependencies:
-      '@dnd-kit/abstract': 0.0.6-beta-20240923164446
-      '@dnd-kit/collision': 0.0.6-beta-20240923164446
-      '@dnd-kit/geometry': 0.0.6-beta-20240923164446
-      '@dnd-kit/state': 0.0.6-beta-20240923164446
+      '@dnd-kit/abstract': 0.0.6-beta-20241014170855
+      '@dnd-kit/collision': 0.0.6-beta-20241014170855
+      '@dnd-kit/geometry': 0.0.6-beta-20241014170855
+      '@dnd-kit/state': 0.0.6-beta-20241014170855
       tslib: 2.6.2
 
-  '@dnd-kit/geometry@0.0.6-beta-20240923164446':
+  '@dnd-kit/geometry@0.0.6-beta-20241014170855':
     dependencies:
-      '@dnd-kit/state': 0.0.6-beta-20240923164446
+      '@dnd-kit/state': 0.0.6-beta-20241014170855
       tslib: 2.6.2
 
-  '@dnd-kit/helpers@0.0.6-beta-20240923164446':
+  '@dnd-kit/helpers@0.0.6-beta-20241014170855':
     dependencies:
-      '@dnd-kit/abstract': 0.0.6-beta-20240923164446
+      '@dnd-kit/abstract': 0.0.6-beta-20241014170855
       tslib: 2.6.2
 
-  '@dnd-kit/state@0.0.6-beta-20240923164446':
+  '@dnd-kit/state@0.0.6-beta-20241014170855':
     dependencies:
       '@preact/signals-core': 1.8.0
       tslib: 2.6.2
@@ -10702,15 +10702,15 @@ snapshots:
     transitivePeerDependencies:
       - '@algolia/client-search'
 
-  '@douyinfe/semi-animation-styled@2.67.0': {}
+  '@douyinfe/semi-animation-styled@2.67.2': {}
 
-  '@douyinfe/semi-animation@2.67.0':
+  '@douyinfe/semi-animation@2.67.2':
     dependencies:
       bezier-easing: 2.1.0
 
-  '@douyinfe/semi-foundation@2.67.0':
+  '@douyinfe/semi-foundation@2.67.2':
     dependencies:
-      '@douyinfe/semi-animation': 2.67.0
+      '@douyinfe/semi-animation': 2.67.2
       '@mdx-js/mdx': 3.0.1
       async-validator: 3.5.2
       classnames: 2.5.1
@@ -10726,7 +10726,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@douyinfe/semi-theme-default@2.67.0': {}
+  '@douyinfe/semi-theme-default@2.67.2': {}
 
   '@emotion/use-insertion-effect-with-fallbacks@1.0.1(react@18.3.1)':
     dependencies:
@@ -10916,11 +10916,11 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kousum/dnd-kit-vue@0.0.6-beta-20240923164446(vue@3.5.12(typescript@5.5.4))':
+  '@kousum/dnd-kit-vue@0.0.6-beta-20241014170855(vue@3.5.12(typescript@5.5.4))':
     dependencies:
-      '@dnd-kit/abstract': 0.0.6-beta-20240923164446
-      '@dnd-kit/dom': 0.0.6-beta-20240923164446
-      '@dnd-kit/state': 0.0.6-beta-20240923164446
+      '@dnd-kit/abstract': 0.0.6-beta-20241014170855
+      '@dnd-kit/dom': 0.0.6-beta-20241014170855
+      '@dnd-kit/state': 0.0.6-beta-20241014170855
       tslib: 2.6.2
       vue: 3.5.12(typescript@5.5.4)
 
@@ -16362,7 +16362,7 @@ snapshots:
   micromark@4.0.0:
     dependencies:
       '@types/debug': 4.1.12
-      debug: 4.3.5
+      debug: 4.3.7
       decode-named-character-reference: 1.0.2
       devlop: 1.1.0
       micromark-core-commonmark: 2.0.1

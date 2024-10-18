@@ -286,7 +286,7 @@ const DatePicker = defineComponent({
             ) {
               props.onClickOutSide();
               if (!adapter.needConfirm()) {
-                foundation.closePanel(e);
+                foundation.closePanel();
               }
             }
           };
