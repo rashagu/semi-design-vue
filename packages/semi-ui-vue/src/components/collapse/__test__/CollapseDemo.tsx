@@ -14,14 +14,14 @@ const CollapseDemo = defineComponent((props, {}) => {
   const slots = useSlots()
 
 
-  const activeKeyRef = ref<string | string[]>(['1'])
+  const activeKeyRef = ref<string | string[]>(['1', '2'])
   function onChange(activeKey: string | string[]) {
     console.log(activeKey)
     activeKeyRef.value = activeKey
   }
   return () => (
     <div>
-      <Collapse accordion activeKey={activeKeyRef.value} onChange={onChange}>
+      <Collapse accordion activeKey={activeKeyRef.value}>
         <CollapsePanel header="This is panel header 1" itemKey="1" extra="1234">
           <p class={"test_text"}>Hi, bytedance dance dance. This is the docsite of Semi UI. </p>
         </CollapsePanel>

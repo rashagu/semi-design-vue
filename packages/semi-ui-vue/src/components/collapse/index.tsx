@@ -77,7 +77,7 @@ const Collapse = defineComponent({
     const initKeys = foundation.initActiveKey();
     state.activeSet = new Set(initKeys);
 
-    function getDerivedStateFromProps(props: CollapseReactProps) {
+    function getDerivedStateFromProps(props: CollapseReactProps, state: CollapseState) {
       if (props.activeKey) {
         const keys = Array.isArray(props.activeKey) ? props.activeKey : [props.activeKey];
         const newSet = new Set(keys);
@@ -95,7 +95,7 @@ const Collapse = defineComponent({
     watch(
       [() => props.activeKey, () => state.activeSet],
       () => {
-        const newState = getDerivedStateFromProps({ ...props });
+        const newState = getDerivedStateFromProps({ ...props }, {...state});
         if (newState) {
           Object.keys(newState).forEach((key) => {
             state[key] = newState[key];

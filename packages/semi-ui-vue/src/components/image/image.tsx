@@ -207,8 +207,8 @@ const Image = defineComponent({
       const { src, loadStatus, previewVisible } = state;
       const {
         src: picSrc,
-        width,
-        height,
+        width: width_,
+        height: height_,
         alt,
         style,
         className,
@@ -222,6 +222,7 @@ const Image = defineComponent({
         imgStyle,
         ...restProps
       } = props;
+      const {width, height} = {width: styleNum(width_), height: styleNum(height_)}
       const outerStyle = Object.assign({ width, height }, style);
       const outerCls = cls(prefixCls, className);
       const canPreview = loadStatus === 'success' && preview && !isInGroup();
