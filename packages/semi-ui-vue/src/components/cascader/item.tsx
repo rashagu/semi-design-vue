@@ -79,6 +79,7 @@ export interface CascaderItemProps extends BaseProps {
   halfCheckedKeys: Set<string>;
   filterRender?: (props: FilterRenderProps) => VueJsxNode;
   virtualize?: Virtualize;
+  expandIcon?: VNode | string;
 }
 
 const prefixcls = cssClasses.PREFIX_OPTION;
@@ -129,6 +130,7 @@ export const vuePropsType: CombineProps<CascaderItemProps> = {
     required: true
   },
   virtualize: Object,
+  expandIcon: [Object, String],
   emptyContent: {
     type: [Object, String],
     required: false
@@ -233,6 +235,10 @@ const Item = defineComponent({
     const renderIcon = (type: string) => {
       switch (type) {
         case 'child':
+          const { expandIcon } = props;
+          if (expandIcon) {
+            return expandIcon;
+          }
           return <IconChevronRight className={`${prefixcls}-icon ${prefixcls}-icon-expand`} />;
         case 'tick':
           return <IconTick className={`${prefixcls}-icon ${prefixcls}-icon-active`} />;

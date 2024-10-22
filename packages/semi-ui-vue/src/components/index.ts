@@ -222,3 +222,4 @@ export {default as MarkdownRender} from './markdownRender'
 export { default as Chat } from './chat';
 export { default as ColorPicker } from './colorPicker';
 export { default as HotKeys } from './hotKeys';
+export { Resizable, ResizeGroup, ResizeHandler, ResizeItem } from './resizable';

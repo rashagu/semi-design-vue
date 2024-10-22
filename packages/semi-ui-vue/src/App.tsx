@@ -162,6 +162,7 @@ import HotKeysDocsDemo from './components/hotKeys/__test__/HotKeysDocsDemo';
 import OptionDemo from './components/autoComplete/__test__/OptionDemo';
 import TransferDemoDocs from './components/transfer/__test__/TransferDemoDocs';
 import TabsDemoPaneChildren from './components/tabs/__test__/TabsDemoPaneChildren';
+import ResizableDemo from './components/resizable/__test__/ResizableDemo';
 
 export interface ExampleProps {
   name?: string
@@ -201,6 +202,10 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DescriptionsDemo />*/}
         {/*<DescriptionsHorizontalDemo/>*/}
         {/*<CollapseDemo />*/}
+
+        <ResizableDemo/>
+
+
         {/*<CollapsibleDemo />*/}
         {/*<CarouselDemo/>*/}
         {/*<StepsDemo />*/}
@@ -300,7 +305,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<CheckboxDemo />*/}
         {/*<TagInputDemo />*/}
         {/*<TransferDemoDocs/>*/}
-        <TabsDemoPaneChildren/>
+        {/*<TabsDemoPaneChildren/>*/}
 
         {/*<AutoCompleteDemo/>*/}
         {/*<OptionDemo/>*/}

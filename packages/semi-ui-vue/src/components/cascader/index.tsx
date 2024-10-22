@@ -77,6 +77,8 @@ export interface CascaderProps extends BasicCascaderProps {
   'aria-required'?: AriaAttributes['aria-required'];
   'aria-label'?: AriaAttributes['aria-label'];
   arrowIcon?: VNode | string;
+  clearIcon?: VNode | string;
+  expandIcon?: VNode | string;
   defaultValue?: Value;
   dropdownStyle?: CSSProperties;
   emptyContent?: VNode | string;
@@ -130,6 +132,8 @@ const propTypes: CombineProps<CascaderProps> = {
   'aria-required': PropTypes.bool,
   'aria-label': PropTypes.string,
   arrowIcon: PropTypes.node as PropType<CascaderProps['arrowIcon']>,
+  clearIcon: PropTypes.node as PropType<CascaderProps['clearIcon']>,
+  expandIcon: PropTypes.node as PropType<CascaderProps['expandIcon']>,
   borderless: PropTypes.bool,
   changeOnSelect: PropTypes.bool,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
@@ -752,6 +756,7 @@ const Index = defineComponent({
         multiple,
         filterRender,
         virtualizeInSearch,
+        expandIcon
       } = getProps(props);
       const searchable = Boolean(filterTreeNode) && isSearching;
       const popoverCls = cls(dropdownClassName, `${prefixcls}-popover`);
@@ -781,6 +786,7 @@ const Index = defineComponent({
             halfCheckedKeys={halfCheckedKeys}
             filterRender={filterRender}
             virtualize={virtualizeInSearch}
+            expandIcon={expandIcon}
           />
           {bottomSlot}
         </div>

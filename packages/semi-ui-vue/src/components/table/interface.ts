@@ -20,11 +20,18 @@ import type {
     BaseIncludeGroupRecord,
     BaseEllipsis
 } from '@douyinfe/semi-foundation/table/foundation';
-import type { ScrollDirection, CSSDirection } from '@kousum/vue3-window';
-import { VariableSizeList } from '@kousum/vue3-window';
+
 
 import type {VueJsxNode} from "../interface";
-import { CSSProperties, DefineSetupFnComponent, HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes, VNode } from 'vue';
+import {
+    CSSProperties,
+    DefineSetupFnComponent,
+    HTMLAttributes,
+    TdHTMLAttributes,
+    ThHTMLAttributes,
+    useTemplateRef,
+    VNode,
+} from 'vue';
 import type { ColumnFilterProps } from './ColumnFilter';
 
 export interface TableProps<RecordType extends Record<string, any> = any> extends BaseProps {
@@ -283,6 +290,13 @@ export type ExpandIcon = ((expanded?: boolean) => VueJsxNode) | VueJsxNode;
 export type ExpandedRowRender<RecordType> = (record?: RecordType, index?: number, expanded?: boolean) => VueJsxNode;
 export type Footer<RecordType> = VueJsxNode | ((pageData?: RecordType[]) => VueJsxNode);
 export type FormatPageText = ((pageInfo?: { currentStart?: number; currentEnd?: number; total?: number }) => VueJsxNode) | boolean;
+/**
+ * ref to react-window `VariableSizeList` instance
+ *
+ * only work when `virtualized` is truthy
+ *
+ * @see https://github.com/DefinitelyTyped/DefinitelyTyped/blob/58aabc0cfd2baf08f5f71a2712ae7baa6cb2a3ce/types/react-window/index.d.ts#L378
+ */
 export type GetVirtualizedListRef = (ref: any) => void;
 export type GroupByFunction<RecordType> = BaseGroupByFn<RecordType>;
 export type GroupBy<RecordType> = BaseGroupBy<RecordType>;
@@ -318,7 +332,7 @@ export type RowKey<RecordType> = BaseRowKeyType | ((record?: RecordType) => stri
 export type RowSelection<RecordType> = RowSelectionProps<RecordType> | boolean;
 
 export type VirtualizedOnScrollArgs = {
-    scrollDirection?: ScrollDirection;
+    scrollDirection?: "forward" | "backward";
     scrollOffset?: number;
     scrollUpdateWasRequested?: boolean
 };
@@ -358,7 +372,7 @@ export interface BodyScrollEvent {
 export type BodyScrollPosition = 'both' | 'middle' | 'left' | 'right';
 
 export type TableLocale = Locale['Table'];
-export type Direction = CSSDirection;
+export type Direction = "ltr" | "rtl";
 export type IncludeGroupRecord<RecordType> = BaseIncludeGroupRecord<RecordType>;
 export type Sticky = boolean | {
     top?: number

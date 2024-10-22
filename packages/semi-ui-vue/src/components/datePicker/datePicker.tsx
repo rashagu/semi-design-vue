@@ -83,7 +83,7 @@ export interface DatePickerProps extends DatePickerFoundationProps {
    */
   onFocus?: (e: MouseEvent, rangeType: RangeType) => void;
   onPresetClick?: (item: PresetType, e: MouseEvent) => void;
-  onClickOutSide?: () => void;
+  onClickOutSide?: (e: MouseEvent) => void;
   locale?: Locale['DatePicker'];
   dateFnsLocale?: Locale['dateFnsLocale'];
   yearAndMonthOpts?: ScrollItemProps<any>;
@@ -174,7 +174,7 @@ const propTypes: CombineProps<DatePickerProps> = {
   presetPosition: PropTypes.string as PropType<DatePickerProps['presetPosition']>,
   dropdownMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   id: PropTypes.string as PropType<DatePickerProps['id']>,
-  onPresetClick: PropTypes.func as PropType<DatePickerProps['onClickOutSide']>,
+  onPresetClick: PropTypes.func as PropType<DatePickerProps['onPresetClick']>,
   onClickOutSide: PropTypes.func as PropType<DatePickerProps['onClickOutSide']>,
   localeCode: PropTypes.string,
   insetInput: [PropTypes.bool, PropTypes.object] as PropType<DatePickerProps['insetInput']>,
@@ -284,7 +284,7 @@ const DatePicker = defineComponent({
               !(panelEl && panelEl.contains(target)) &&
               !(path.includes(triggerEl) || path.includes(panelEl))
             ) {
-              props.onClickOutSide();
+              props.onClickOutSide(e);
               if (!adapter.needConfirm()) {
                 foundation.closePanel();
               }

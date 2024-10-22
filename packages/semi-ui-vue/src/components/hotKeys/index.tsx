@@ -76,9 +76,14 @@ const HotKeys = defineComponent({
         notifyHotKey: (e: KeyboardEvent) => {
           props.onHotKey?.(e);
         },
-        getListenerTarget: () => {
-          return props.getListenerTarget?.() ?? document.body;
+        registerEvent: () => {
+          let target = props.getListenerTarget?.() ?? document.body;
+          target.addEventListener('keydown', foundation.handleKeyDown);
         },
+        unregisterEvent: () => {
+          let target = props.getListenerTarget?.() ?? document.body;
+          target.removeEventListener('keydown', foundation.handleKeyDown);
+        }
       };
     }
     const adapter = adapter_();
