@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 0.22.0
+
+### Minor Changes
+
+- semi 2.68 & fix table sticky
+
 ## 0.21.1
 
 ### Patch Changes
