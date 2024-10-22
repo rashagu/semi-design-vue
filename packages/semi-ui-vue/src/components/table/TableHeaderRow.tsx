@@ -181,14 +181,14 @@ const TableHeaderRow = defineComponent({
               cellStyle = {
                 ...cellStyle,
                 position: 'sticky',
-                [xPositionKey]: arrayAdd(headWidths, 0, indexOfSlicedColumns),
+                [xPositionKey]: arrayAdd(headWidths, 0, indexOfSlicedColumns) + 'px',
               };
             } else if (isFixedRight(column)) {
               const xPositionKey = isRTL ? 'left' : 'right';
               cellStyle = {
                 ...cellStyle,
                 position: 'sticky',
-                [xPositionKey]: arrayAdd(headWidths, indexOfSlicedColumns + 1),
+                [xPositionKey]: arrayAdd(headWidths, indexOfSlicedColumns + 1) + 'px',
               };
             }
           }
