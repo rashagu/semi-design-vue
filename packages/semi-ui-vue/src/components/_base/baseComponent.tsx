@@ -99,9 +99,24 @@ export const useBaseComponent: <U extends BaseProps = {}, S = Record<string, any
         return getPropsUseHasInProps(props)
       }, // eslint-disable-line
       getState: (key) => {
-        return toRaw(state[key]);
+        if (state[key] instanceof Object) {
+          return toRaw(state[key])
+        }
+        return state[key];
       }, // eslint-disable-line
-      getStates: () => toRaw(state) as any, // eslint-disable-line
+      // TODO toRaw会失去响应
+      getStates: () => {
+        const newState = {};
+        Object.keys(state).map(key=>{
+          if (state[key] instanceof Object) {
+            newState[key] = toRaw(state[key])
+          }
+        })
+        return {
+          ...state,
+          ...newState
+        } as any
+      }, // eslint-disable-line
       setState: (states, cb) => {
         // console.log('setState', states)
         for (let i in states) {

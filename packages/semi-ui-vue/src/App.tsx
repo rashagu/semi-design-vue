@@ -163,6 +163,7 @@ import OptionDemo from './components/autoComplete/__test__/OptionDemo';
 import TransferDemoDocs from './components/transfer/__test__/TransferDemoDocs';
 import TabsDemoPaneChildren from './components/tabs/__test__/TabsDemoPaneChildren';
 import ResizableDemo from './components/resizable/__test__/ResizableDemo';
+import TreeCheckSimpleJsonDemo from './components/tree/__test__/TreeCheckSimpleJsonDemo';
 
 export interface ExampleProps {
   name?: string
@@ -203,7 +204,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<DescriptionsHorizontalDemo/>*/}
         {/*<CollapseDemo />*/}
 
-        <ResizableDemo/>
+        {/*<ResizableDemo/>*/}
 
 
         {/*<CollapsibleDemo />*/}
@@ -264,6 +265,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<WithFieldDemo2/>*/}
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
+        <TreeCheckSimpleJsonDemo/>
+
         {/*<TreeDemo />*/}
         {/*<TreeDemo2 />*/}
         {/*<TreeDemo3/>*/}

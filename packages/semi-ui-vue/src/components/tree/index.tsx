@@ -696,7 +696,7 @@ const Tree = defineComponent({
       const children = data[get(keyMaps, 'children', 'children')]; //TODO
       !isUndefined(children) && (props_.children = children);
       // 不要删除，更新用
-      console.debug(state.loadingKeys.size);
+      // console.debug(state.loadingKeys.size, state.checkedKeys.size);
       return (
         <TreeNode
           {...treeNodeProps}
