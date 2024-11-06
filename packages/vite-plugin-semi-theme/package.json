@@ -34,7 +34,7 @@
     "sass": "^1.57.1"
   },
   "devDependencies": {
-    "vite": "5.4.9",
+    "vite": "5.4.10",
     "typescript": "^5.5.2",
     "unbuild": "^3.0.0-rc.2"
   },

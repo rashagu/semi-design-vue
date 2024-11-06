@@ -265,7 +265,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<WithFieldDemo2/>*/}
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
-        <TreeCheckSimpleJsonDemo/>
+        {/*<TreeCheckSimpleJsonDemo/>*/}
 
         {/*<TreeDemo />*/}
         {/*<TreeDemo2 />*/}
@@ -305,7 +305,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<ScrollListDemo />*/}
         {/*<CascaderDemo/>*/}
         {/*<CascaderDemo3/>*/}
-        {/*<CheckboxDemo />*/}
+        <CheckboxDemo />
         {/*<TagInputDemo />*/}
         {/*<TransferDemoDocs/>*/}
         {/*<TabsDemoPaneChildren/>*/}
