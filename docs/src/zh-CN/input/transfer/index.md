@@ -225,7 +225,7 @@ export default Comp;
 ```jsx live=true dir="column"
 
 import { Transfer } from '@kousum/semi-ui-vue';
-() => {
+export default () => {
     const data = Array.from({ length: 20 }, (v, i) => {
         return {
             label: `选项名称 ${i}`,

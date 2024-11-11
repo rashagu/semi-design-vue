@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import {ref} from 'vue'
-import {designToken} from './designToken'
+import { onMounted, ref } from 'vue';
 import {Tabs, TabPane, Table} from '@kousum/semi-ui-vue'
 import {useData,} from "vitepress";
 
@@ -19,26 +18,38 @@ const data = useData()
 
 const { page } = useData()
 const count = ref(0)
-const designTokenData = designToken[(props.title || page.value.title)?.split(' ')[0].toLowerCase()] || []
 
-const category = {}
 
-designTokenData.forEach(item=>{
-  if (Array.isArray(category[item.category])){
-    category[item.category].push(item)
-  }else{
-    category[item.category] = [item]
-  }
-})
+const categoryArr = ref([])
+onMounted(()=>{
+  fetch(import.meta.env.BASE_URL + 'designToken.json').then(res=>{
+    res.json().then((designToken: Record<string, {
+      "key": string,
+      "value": string,
+      "comment": string,
+      "category": string,
+      "raw": string,
+    }[]>)=>{
 
-const categoryArr = []
+      const designTokenData = designToken[(props.title || page.value.title)?.split(' ')[0].toLowerCase()] || []
 
-for (const categoryArrKey in category) {
-  categoryArr.push({
-    title: categoryArrKey,
-    item: category[categoryArrKey]
+      const category = {}
+      designTokenData.forEach(item=>{
+        if (Array.isArray(category[item.category])){
+          category[item.category].push(item)
+        }else{
+          category[item.category] = [item]
+        }
+      })
+      for (const categoryArrKey in category) {
+        categoryArr.value.push({
+          title: categoryArrKey,
+          item: category[categoryArrKey]
+        })
+      }
+    })
   })
-}
+})
 
 
 // console.log(categoryArr)

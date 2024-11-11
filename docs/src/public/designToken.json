@@ -1,4 +1,4 @@
-export const designToken = {
+{
   "anchor": [
     {
       "key": "$color-anchor_slide_default-bg-default",
@@ -26287,4 +26287,4 @@ export const designToken = {
       }
     ]
   }
-};
+}
