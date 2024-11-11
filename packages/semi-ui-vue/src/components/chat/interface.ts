@@ -57,15 +57,64 @@ export interface ChatProps extends CommonChatsProps {
 export interface RenderInputAreaProps {
   defaultNode?: VNode;
   onSend?: (content?: string, attachment?: FileItem[]) => void;
-  onClear?: (e?: any) => void
+  onClear?: (e?: any) => void;
+  detailProps?: {
+    clearContextNode?: VNode;
+    uploadNode?: VNode;
+    inputNode?: VNode;
+    sendNode?: VNode;
+    onClick?: (e?: MouseEvent) => void
+  }
+}
+
+
+export interface RenderTitleProps {
+  message?: Message;
+  role?: Metadata;
+  defaultTitle?: VNode
+}
+
+export interface RenderAvatarProps {
+  message?: Message;
+  role?: Metadata;
+  defaultAvatar?: VNode
+}
+
+export interface RenderContentProps {
+  message?: Message;
+  role?: Metadata;
+  defaultContent?: VNode | VNode[];
+  className?: string
+}
+
+export interface DefaultActionNodeObj {
+  copyNode: VNode;
+  likeNode: VNode;
+  dislikeNode: VNode;
+  resetNode: VNode;
+  deleteNode: VNode
+}
+
+export interface RenderActionProps {
+  message?: Message;
+  defaultActions?: VNode | VNode[];
+  className: string;
+  defaultActionsObj?: DefaultActionNodeObj
+}
+
+export interface RenderFullChatBoxProps {
+  message?: Message;
+  role?: Metadata;
+  defaultNodes?: FullChatBoxNodes;
+  className: string
 }
 
 export interface ChatBoxRenderConfig {
-  renderChatBoxTitle?: (props: {role?: Metadata; defaultTitle?: VNode}) => VNode;
-  renderChatBoxAvatar?: (props: { role?: Metadata; defaultAvatar?: VNode}) => VNode;
-  renderChatBoxContent?: (props: {message?: Message; role?: Metadata; defaultContent?: VNode | VNode[]; className?: string}) => VNode;
-  renderChatBoxAction?: (props: {message?: Message; defaultActions?: VNode | VNode[]; className: string}) => VNode;
-  renderFullChatBox?: (props: {message?: Message; role?: Metadata; defaultNodes?: FullChatBoxNodes; className: string}) => VNode
+  renderChatBoxTitle?: (props: RenderTitleProps) => VNode;
+  renderChatBoxAvatar?: (props: RenderAvatarProps) => VNode;
+  renderChatBoxContent?: (props: RenderContentProps) => VNode;
+  renderChatBoxAction?: (props: RenderActionProps) => VNode;
+  renderFullChatBox?: (props: RenderFullChatBoxProps) => VNode
 }
 
 export interface FullChatBoxNodes {

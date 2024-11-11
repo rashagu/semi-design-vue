@@ -54,6 +54,8 @@ export interface SubNavProps extends BaseProps {
   text?: VueJsxNode;
   expandIcon?: VueJsxNode
   toggleIcon?: VueJsxNode
+  dropdownProps?: DropdownProps;
+  subDropdownProps?: DropdownProps
 }
 
 export interface SubNavState {
@@ -102,6 +104,8 @@ const propTypes: CombineProps<SubNavProps> = {
   level: PropTypes.number,
   dropdownStyle: PropTypes.object,
   className: PropTypes.string,
+  dropdownProps: PropTypes.object,
+  subDropdownProps: PropTypes.object,
 
 };
 
@@ -348,7 +352,7 @@ const SubNav = defineComponent({
   function wrapDropdown(elem: VueJsxNode = '') {
     let _elem: VueJsxNode = elem;
     const children = useSlots().default?.();
-    const { dropdownStyle, disabled } = props;
+    const { dropdownStyle, disabled, subDropdownProps, dropdownProps: userDropdownProps } = props;
 
     const { mode, isInSubNav, isCollapsed, subNavCloseDelay, subNavOpenDelay, prefixCls, getPopupContainer  } = context.value;
 
@@ -388,6 +392,7 @@ const SubNav = defineComponent({
           mouseEnterDelay={subNavOpenDelay}
           mouseLeaveDelay={subNavCloseDelay}
           onVisibleChange={handleDropdownVisible}
+          {...(userDropdownProps ? userDropdownProps : subDropdownProps)}
           {...dropdownProps}
         >
           {/*用_elem 会导致无限循环*/}

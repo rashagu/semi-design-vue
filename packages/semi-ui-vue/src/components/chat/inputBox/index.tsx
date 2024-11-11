@@ -161,17 +161,21 @@ const index = defineComponent({
     return () => {
 
       const { onClearContext, renderInputArea: renderInputArea_props, onSend, style, className, showClearContext } = props;
+      const clearNode = renderClearButton();
+      const uploadNode = renderUploadButton();
+      const inputNode = renderInputArea();
+      const sendNode = renderSendButton();
       const nodes = (
         <div class={cls(PREFIX_INPUT_BOX, { [className]: className })} style={style}>
           <div
             class={`${PREFIX_INPUT_BOX}-inner`}
             onClick={onClick}
           >
-            {showClearContext && renderClearButton()}
+            {showClearContext && clearNode}
             <div class={`${PREFIX_INPUT_BOX}-container`}>
-              {renderUploadButton()}
-              {renderInputArea()}
-              {renderSendButton()}
+              {uploadNode}
+              {inputNode}
+              {sendNode}
             </div>
           </div>
         </div>
@@ -181,6 +185,13 @@ const index = defineComponent({
           defaultNode: nodes,
           onClear: onClearContext,
           onSend: onSend,
+          detailProps: {
+            clearContextNode: clearNode,
+            uploadNode: uploadNode,
+            inputNode: inputNode,
+            sendNode: sendNode,
+            onClick: onClick,
+          }
         });
       }
       return nodes;

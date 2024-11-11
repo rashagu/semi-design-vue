@@ -31,6 +31,7 @@ import type { NavHeaderProps } from './Header';
 import Header from './Header';
 import NavContext from './nav-context';
 import '@douyinfe/semi-foundation/navigation/navigation.scss';
+import { DropdownProps } from '../dropdown';
 import { Motion } from '../_base/base';
 import LocaleConsumer from '../locale/localeConsumer';
 import { CombineProps, VueJsxNode } from '../interface';
@@ -63,6 +64,7 @@ export interface NavProps extends BaseProps {
   defaultIsCollapsed?: boolean;
   defaultOpenKeys?: string[];
   defaultSelectedKeys?: string[];
+  subDropdownProps?: DropdownProps;
   expandIcon?: VueJsxNode;
   footer?: VNode | NavFooterProps;
   header?: VNode | NavHeaderProps;
@@ -121,6 +123,7 @@ const propTypes: CombineProps<NavProps> = {
   openKeys: Array,
   // Initial selected navigation key array
   defaultSelectedKeys: Array,
+  subDropdownProps: Object,
   selectedKeys: Array,
   // Navigation type, now supports vertical, horizontal
   mode: String as PropType<NavProps['mode']>,
@@ -362,7 +365,7 @@ const index = defineComponent({
      * @returns {JSX.Element}
      */
     function renderItems(items: (SubNavPropsWithItems | NavItemPropsWithItems)[] = [], level = 0) {
-      const { expandIcon } = props;
+      const { expandIcon, subDropdownProps } = props;
       const finalDom = (
         <>
           {items.map((item, idx) => {
@@ -373,6 +376,7 @@ const index = defineComponent({
                   {...(item as SubNavPropsWithItems)}
                   level={level}
                   expandIcon={expandIcon}
+                  subDropdownProps={subDropdownProps}
                 >
                   {renderItems(item.items as (SubNavPropsWithItems | NavItemPropsWithItems)[], level + 1)}
                 </SubNav>

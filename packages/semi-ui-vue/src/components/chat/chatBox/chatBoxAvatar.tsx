@@ -1,7 +1,7 @@
 import { defineComponent, ref, h, Fragment, useSlots, VNode, PropType } from 'vue';
 import { CombineProps } from '../../interface';
 import Avatar from '../../avatar';
-import { Metadata } from '../interface';
+import type { Message, Metadata, RenderAvatarProps } from '../interface';
 import { cssClasses } from '@douyinfe/semi-foundation/chat/constants';
 import cls from 'classnames';
 
@@ -11,12 +11,14 @@ interface ChatBoxAvatarProps {
   // children?: string;
   role?: Metadata;
   continueSend?: boolean;
-  customRenderFunc?: (props: { role?: Metadata; defaultAvatar?: VNode }) => VNode;
+  message?: Message;
+  customRenderFunc?: (props: RenderAvatarProps) => VNode;
 }
 
 export const vuePropsType: CombineProps<ChatBoxAvatarProps> = {
   role: Object,
   continueSend: Boolean,
+  message: Object,
   customRenderFunc: Function as PropType<ChatBoxAvatarProps['customRenderFunc']>,
 };
 const chatBoxAvatar = defineComponent({
@@ -40,6 +42,7 @@ const chatBoxAvatar = defineComponent({
         return props.customRenderFunc({
           role: props.role,
           defaultAvatar: node,
+          message: props.message
         });
       }
       return node;

@@ -39,10 +39,11 @@ const index = defineComponent({
         <ChatBoxAvatar
           continueSend={continueSend.value}
           role={info.value}
+          message={props.message}
           customRenderFunc={props.chatBoxRenderConfig.renderChatBoxAvatar}
         />
       );
-    }, [info, () => props.chatBoxRenderConfig.renderChatBoxAvatar]);
+    }, [info, ()=>props.message, () => props.chatBoxRenderConfig.renderChatBoxAvatar]);
 
     const titleNode = useMemo(() => {
       return (
@@ -52,7 +53,7 @@ const index = defineComponent({
           customRenderFunc={props.chatBoxRenderConfig.renderChatBoxTitle}
         />
       );
-    }, [info, () => props.message, ()=>props.chatBoxRenderConfig.renderChatBoxTitle]);
+    }, [info, ()=>props.message, () => props.message, ()=>props.chatBoxRenderConfig.renderChatBoxTitle]);
 
     const contentNode = useMemo(() => {
       return (

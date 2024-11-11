@@ -1,6 +1,6 @@
 import { defineComponent, ref, h, Fragment, useSlots, VNode, PropType } from 'vue';
 import { CombineProps } from '../../interface';
-import { Message, Metadata } from '../interface';
+import type { Message, Metadata, RenderTitleProps } from '../interface';
 import { cssClasses } from '@douyinfe/semi-foundation/chat/constants';
 const { PREFIX_CHAT_BOX } = cssClasses;
 
@@ -8,7 +8,7 @@ interface ChatBoxTitleProps {
   // children?: VNode | undefined | any;
   role?: Metadata;
   message?: Message;
-  customRenderFunc?: (props: { role?: Metadata; message: Message; defaultTitle?: VNode }) => VNode;
+  customRenderFunc?: (props: RenderTitleProps) => VNode;
 }
 
 export const vuePropsType: CombineProps<ChatBoxTitleProps> = {

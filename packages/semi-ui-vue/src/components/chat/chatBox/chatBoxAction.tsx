@@ -13,7 +13,7 @@ import {
 } from 'vue';
 import * as PropTypes from '../../PropTypes';
 import { CombineProps } from '../../interface';
-import type { ChatBoxProps, Message } from '../interface';
+import type { ChatBoxProps, DefaultActionNodeObj, Message, RenderActionProps } from '../interface';
 import { IconThumbUpStroked,
   IconDeleteStroked,
   IconCopyStroked,
@@ -37,7 +37,7 @@ const { PREFIX_CHAT_BOX_ACTION } = cssClasses;
 const { ROLE, MESSAGE_STATUS } = strings;
 
 interface ChatBoxActionProps extends ChatBoxProps {
-  customRenderFunc?: (props: { message?: Message; defaultActions?: VNode | VNode[]; className: string }) => VNode
+  customRenderFunc?: (props: RenderActionProps) => VNode
   showReset?: boolean
 }
 
@@ -239,17 +239,36 @@ const chatBoxAction = defineComponent({
         [`${PREFIX_CHAT_BOX_ACTION}-hidden`]: !finished,
       });
       const { customRenderFunc } = props;
+
       if (customRenderFunc) {
         const actionNodes = [];
-        complete && actionNodes.push(copyNode());
-        showFeedback && actionNodes.push(likeNode());
-        showFeedback && actionNodes.push(dislikeNode());
-        showReset && actionNodes.push(resetNode());
-        actionNodes.push(deleteNode());
+        const actionNodeObj = {} as DefaultActionNodeObj;
+        if (complete) {
+          const copyNode_ = copyNode();
+          actionNodes.push(copyNode_);
+          actionNodeObj.copyNode = copyNode_;
+        }
+        if (showFeedback) {
+          const likeNode_ = likeNode();
+          actionNodes.push(likeNode_);
+          actionNodeObj.likeNode = likeNode_;
+          const dislikeNode_ = dislikeNode();
+          actionNodes.push(dislikeNode_);
+          actionNodeObj.dislikeNode = dislikeNode_;
+        }
+        if (showReset) {
+          const resetNode_ = resetNode();
+          actionNodes.push(resetNode_);
+          actionNodeObj.resetNode = resetNode_;
+        }
+        const deleteNode_ = deleteNode();
+        actionNodes.push(deleteNode_);
+        actionNodeObj.deleteNode = deleteNode_;
         return customRenderFunc({
           message,
           defaultActions: actionNodes,
-          className: wrapCls
+          className: wrapCls,
+          defaultActionsObj: actionNodeObj
         });
       }
       return <div class={wrapCls} ref={containerRef}>
