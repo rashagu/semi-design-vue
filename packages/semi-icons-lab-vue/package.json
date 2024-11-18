@@ -28,11 +28,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.69.0",
-    "@douyinfe/semi-theme-default": "2.69.0",
+    "@douyinfe/semi-foundation": "2.69.1",
+    "@douyinfe/semi-theme-default": "2.69.1",
     "classnames": "^2.3.2",
     "sass": "^1.57.1",
-    "vue": "^3.5.12"
+    "vue": "^3.5.13"
   },
   "peerDependencies": {
     "vue": ">=3.4.3"
@@ -47,7 +47,7 @@
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
-    "@vitejs/plugin-vue": "^5.1.5",
+    "@vitejs/plugin-vue": "^5.2.0",
     "@vitejs/plugin-vue-jsx": "^4.1.0",
     "camelcase": "^6.3.0",
     "del": "^6.0.0",
@@ -63,7 +63,7 @@
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
     "typescript": "^5.5.2",
-    "vite": "5.4.10",
+    "vite": "5.4.11",
     "vue-tsc": "^2.1.6"
   }
 }

@@ -34,11 +34,11 @@
     "packages/vite-plugin-semi-theme"
   ],
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.69.0",
-    "@douyinfe/semi-theme-default": "2.69.0",
+    "@douyinfe/semi-foundation": "2.69.1",
+    "@douyinfe/semi-theme-default": "2.69.1",
     "@vue/repl": "4.3.1",
     "lodash": "^4.17.21",
-    "vue": "^3.5.12"
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
@@ -48,7 +48,7 @@
     "@babel/preset-react": "^7.16.7",
     "@changesets/cli": "^2.27.1",
     "@chromatic-com/storybook": "1.3.4",
-    "@douyinfe/semi-theme-default": "2.69.0",
+    "@douyinfe/semi-theme-default": "2.69.1",
     "@kousum/semi-icons-lab-vue": "workspace: *",
     "@kousum/semi-icons-vue": "workspace: *",
     "@kousum/semi-illustrations-vue": "workspace: *",
@@ -77,7 +77,7 @@
     "@testing-library/vue": "^8.1.0",
     "@types/lodash": "^4.17.5",
     "@types/node": "^20.1.4",
-    "@vitejs/plugin-vue": "^5.1.5",
+    "@vitejs/plugin-vue": "^5.2.0",
     "@vitejs/plugin-vue-jsx": "^4.1.0",
     "@vitest/coverage-v8": "^2.0.5",
     "@vue/test-utils": "^2.4.6",
@@ -95,7 +95,7 @@
     "ts-node": "^10.9.2",
     "tslib": "^2.4.1",
     "typescript": "^5.5.2",
-    "vite": "5.4.10",
+    "vite": "5.4.11",
     "vitepress": "^1.4.0",
     "vitest": "^2.1.2",
     "vitest-canvas-mock": "^0.3.3",

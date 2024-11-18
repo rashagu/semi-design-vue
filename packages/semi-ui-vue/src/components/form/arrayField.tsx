@@ -79,7 +79,7 @@ const ArrayFieldComponent = defineComponent({
     const slots = useSlots();
     let cacheFieldValues: any[];
     let shouldUseInitValue: boolean;
-    let cacheUpdateKey: string;
+    let cacheUpdateKey: string | number;
     const { context } = useFormUpdaterContext();
     const initValueInProps = props.initValue;
     const initValueInForm = context.value.getValue(props.field);
@@ -128,9 +128,14 @@ const ArrayFieldComponent = defineComponent({
 
     function add() {
       const { keys } = state;
+      const { field } = props;
+      const updater = context.value;
       keys.push(getUuidv4());
       shouldUseInitValue = true;
       state.keys = keys;
+      let updateKey = new Date().valueOf();
+      updater.updateArrayField(field, { updateKey });
+      cacheUpdateKey = updateKey;
     }
 
     function addWithInitValue(rowVal: Record<string, any> | string) {

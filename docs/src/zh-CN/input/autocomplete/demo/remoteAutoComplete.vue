@@ -53,8 +53,8 @@ const renderItem = (item) => {
     <div style="display: flex; align-items: center;">
       <div style="font-size: 32px">{item.icon}</div>
       <div style="margin-left: 12px;">
-        <p>{item.value}</p>
-        <p>{item.label}</p>
+        <div>{item.value}</div>
+        <div>{item.label}</div>
       </div>
     </div>
   );

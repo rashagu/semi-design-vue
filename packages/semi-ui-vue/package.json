@@ -24,9 +24,9 @@
     "url": "https://github.com/rashagu/semi-design-vue"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.69.0",
-    "@douyinfe/semi-theme-default": "2.69.0",
-    "@douyinfe/semi-animation": "2.69.0",
+    "@douyinfe/semi-foundation": "2.69.1",
+    "@douyinfe/semi-theme-default": "2.69.1",
+    "@douyinfe/semi-animation": "2.69.1",
     "@kousum/semi-animation-vue": "workspace:*",
     "@kousum/semi-icons-vue": "workspace:*",
     "@kousum/semi-illustrations-vue": "workspace:*",
@@ -52,7 +52,7 @@
     "lottie-web": "^5.12.2",
     "@mdx-js/vue": "^3.0.1",
     "unified": "^11.0.5",
-    "vue": "^3.5.12"
+    "vue": "^3.5.13"
   },
   "peerDependencies": {
     "lodash": "^4.17.21",
@@ -73,7 +73,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "reset-css": "^5.0.2",
-    "@vitejs/plugin-vue": "^5.1.5",
+    "@vitejs/plugin-vue": "^5.2.0",
     "@vitejs/plugin-vue-jsx": "^4.1.0",
     "@types/stringify-object": "^4.0.5",
     "del": "^6.0.0",
@@ -95,7 +95,7 @@
     "fast-glob": "^3.2.12",
     "typescript": "^5.5.2",
     "terser": "^5.16.4",
-    "vite": "5.4.10",
+    "vite": "5.4.11",
     "vue-tsc": "^2.1.6"
   }
 }
