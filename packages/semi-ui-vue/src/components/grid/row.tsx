@@ -55,7 +55,7 @@ export const vuePropsType: CombineProps<RowProps> = {
   justify: String as PropType<RowProps['justify']>,
   className: String,
   style: [String, Object] as PropType<RowProps['style']>,
-  gutter: [Number, Array] as PropType<RowProps['gutter']>,
+  gutter: [Number, Array, Object] as PropType<RowProps['gutter']>,
   prefixCls: {
     type: String,
     default: cssClasses.PREFIX,
