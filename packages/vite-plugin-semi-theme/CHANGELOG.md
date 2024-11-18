@@ -1,5 +1,11 @@
 # @kousum/vite-plugin-semi-theme
 
+## 0.22.0
+
+### Minor Changes
+
+- semi 2.69.1
+
 ## 0.21.0
 
 ### Minor Changes
