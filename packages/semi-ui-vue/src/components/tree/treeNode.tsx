@@ -78,7 +78,7 @@ const propTypes: CombineProps<TreeNodeProps> = {
   style: [Object, String] as PropType<TreeNodeProps['style']>,
   display: PropTypes.any,
 
-  value: [Object, Array, String],
+  value: [Object, Array, String, Number],
 };
 
 const defaultProps = {
