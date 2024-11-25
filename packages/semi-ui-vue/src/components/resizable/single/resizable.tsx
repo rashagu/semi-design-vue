@@ -51,7 +51,7 @@ export interface HandleStyle {
 export interface ResizableProps {
   style?: CSSProperties;
   className?: string;
-  grid?: [number, number];
+  grid?: [number, number] | number;
   snap?: {
     x?: number[];
     y?: number[]
@@ -102,7 +102,7 @@ const propTypes: CombineProps<ResizableProps> = {
   style: PropTypes.object,
   className: PropTypes.string,
   //@ts-ignore
-  grid: PropTypes.array as PropType<ResizableProps['grid']>,
+  grid: [PropTypes.array, PropTypes.number] as PropType<ResizableProps['grid']>,
   snap: PropTypes.object,
   snapGap: PropTypes.number,
   bounds: PropTypes.node as PropType<ResizableProps['bounds']>,
