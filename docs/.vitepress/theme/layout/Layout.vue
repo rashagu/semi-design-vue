@@ -88,6 +88,11 @@ const navItem = [
         icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('grid') })),
       },
       {
+        itemKey: '/basic/resizable/',
+        text: 'Resizable 伸缩框',
+        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('steps') })),
+      },
+      {
         itemKey: '/basic/icon/',
         text: 'Icon 图标',
         icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('icons') })),
@@ -116,7 +121,7 @@ const navItem = [
   },
   {
     itemKey: 'plus',
-    text: '基础',
+    text: 'Plus 组件',
     textUs: 'Plus',
     items: [
       {
@@ -125,24 +130,24 @@ const navItem = [
         icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('chat') })),
       },
       {
-        itemKey: '/plus/lottie/',
-        text: 'Lottie 动画',
-        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('lottie') })),
-      },
-      {
         itemKey: '/plus/codehighlight/',
         text: 'Codehighlight 代码高亮',
         icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('codehighlight') })),
       },
       {
+        itemKey: '/plus/hotkeys/',
+        text: 'Hotkeys 热键',
+        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('configprovider') })),
+      },
+      {
+        itemKey: '/plus/lottie/',
+        text: 'Lottie 动画',
+        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('lottie') })),
+      },
+      {
         itemKey: '/plus/markdownrender/',
         text: 'Markdown 渲染',
         icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('markdown') })),
-      },
-      {
-        itemKey: '/plus/hotkeys/',
-        text: 'Hotkeys 热键',
-        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('hotkeys') })),
       },
     ],
   },
