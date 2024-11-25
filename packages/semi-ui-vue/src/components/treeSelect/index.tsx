@@ -1383,12 +1383,12 @@ const TreeSelect = defineComponent({
         disabled,
         preventScroll,
       } = props;
+      const { inputValue, inputTriggerFocus } = state;
       const isDropdownPositionSearch = searchPosition === strings.SEARCH_POSITION_DROPDOWN;
       const inputcls = cls({
         [`${prefixTree}-input`]: isDropdownPositionSearch,
         [`${prefixcls}-inputTrigger`]: !isDropdownPositionSearch,
       });
-      const { inputValue } = state;
       const baseInputProps = {
         value: inputValue,
         className: inputcls,
@@ -1409,6 +1409,7 @@ const TreeSelect = defineComponent({
       const wrapperCls = cls({
         [`${prefixTree}-search-wrapper`]: isDropdownPositionSearch,
         [`${prefixcls}-triggerSingleSearch-wrapper`]: !isDropdownPositionSearch && !multiple,
+        [`${prefixcls}-triggerSingleSearch-upper`]: !isDropdownPositionSearch && inputTriggerFocus,
       });
       const useCusSearch = typeof searchRender === 'function' || typeof searchRender === 'boolean';
       if (useCusSearch && !searchRender) {

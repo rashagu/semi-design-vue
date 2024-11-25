@@ -1,7 +1,7 @@
 import Consumer from "./context/Consumer";
 import Provider from "./context/Provider";
 import type { Ref } from 'vue';
-import type { ResizeCallback, ResizeStartCallback } from '@douyinfe/semi-foundation/resizable/singleConstants';
+import type { ResizeCallback, ResizeStartCallback } from '@douyinfe/semi-foundation/resizable/types';
 
 
 export interface ResizeContextProps {

@@ -2,10 +2,20 @@ import classNames from 'classnames';
 import * as PropTypes from '../../PropTypes';
 import { ResizeItemFoundation, ResizeItemAdapter } from '@douyinfe/semi-foundation/resizable/foundation';
 import { cssClasses } from '@douyinfe/semi-foundation/resizable/constants';
-import { ResizeCallback, ResizeStartCallback } from '@douyinfe/semi-foundation/resizable/singleConstants';
-import { ResizeContext, ResizeContextProps } from './resizeContext';
+import { ResizeCallback, ResizeStartCallback } from '@douyinfe/semi-foundation/resizable/types';
 import { noop } from 'lodash';
-import { CSSProperties, defineComponent, h, onMounted, onUnmounted, PropType, reactive, ref, useSlots } from 'vue';
+import {
+  CSSProperties,
+  defineComponent,
+  h,
+  onMounted,
+  onUnmounted,
+  PropType,
+  reactive,
+  ref,
+  useSlots,
+  watch,
+} from 'vue';
 import { CombineProps } from '../../interface';
 import { vuePropsMake } from '../../PropTypes';
 import { useResizeContext } from './context/Consumer';
@@ -61,12 +71,35 @@ const ResizeItem = defineComponent({
     }
     const adapter = adapter_();
     const foundation = new ResizeItemFoundation(adapter);
-    let itemIndex: number;
+    let itemIndex: number = -1;
+    let direction: 'horizontal' | 'vertical';
     onMounted(() => {
       foundation.init();
       const { min, max, onResizeStart, onChange, onResizeEnd, defaultSize } = props;
-      itemIndex = context.value.registerItem(itemRef, min, max, defaultSize, onResizeStart, onChange, onResizeEnd);
+
+      if (itemIndex === -1) {
+        // 开发过程在StrictMode下context方法会执行两次，需要判断一下是否已经注册过
+        itemIndex = context.value.registerItem(itemRef, min, max, defaultSize, onResizeStart, onChange, onResizeEnd);
+      }
+      direction = context.value.direction; // 留一个direction的引用，方便在componentDidUpdate中判断方向是否有变化
     });
+    watch([
+      ()=>context.value.direction,
+    ], ()=>{
+      // 支持动态方向，修改item的style
+      if (context.value.direction !== direction) {
+        direction = context.value.direction;
+        if (direction === 'horizontal') {
+          const newWidth = itemRef.value?.style.height;
+          itemRef.value.style.width = newWidth;
+          itemRef.value.style.removeProperty('height');
+        } else {
+          const newHeight = itemRef.value?.style.width;
+          itemRef.value.style.height = newHeight;
+          itemRef.value.style.removeProperty('width');
+        }
+      }
+    })
 
     onUnmounted(() => {
       foundation.destroy();

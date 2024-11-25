@@ -3,7 +3,7 @@ import * as PropTypes from '../../PropTypes';
 import { ResizeGroupFoundation, ResizeGroupAdapter } from '@douyinfe/semi-foundation/resizable/foundation';
 import { cssClasses } from '@douyinfe/semi-foundation/resizable/constants';
 import { ResizeContext, type ResizeContextProps } from './resizeContext';
-import { ResizeCallback, ResizeStartCallback } from '@douyinfe/semi-foundation/resizable/singleConstants';
+import { ResizeCallback, ResizeStartCallback } from '@douyinfe/semi-foundation/resizable/types';
 import '@douyinfe/semi-foundation/resizable/resizable.scss';
 import {
   CSSProperties,
@@ -17,7 +17,7 @@ import {
   ref,
   useSlots,
   useTemplateRef,
-  VNode,
+  VNode, watch,
 } from 'vue';
 import { CombineProps } from '../../interface';
 import { vuePropsMake } from '../../PropTypes';
@@ -42,6 +42,7 @@ export interface ResizeGroupState {
   };
   backgroundStyle: CSSProperties;
   curHandler: number;
+  contextValue: ResizeContextProps
 }
 
 const propTypes: CombineProps<ResizeGroupProps> = {
@@ -72,44 +73,41 @@ const ResizeGroup = defineComponent({
         nextOffset: 0,
       },
       backgroundStyle: {
-        height: '100%',
-        width: '100%',
-        backgroundColor: 'rgba(0,0,0,0)',
         cursor: 'auto',
-        opacity: 0,
-        position: 'fixed',
-        zIndex: 9999,
-        top: '0',
-        left: '0',
-        bottom: '0',
-        right: '0',
       },
       curHandler: null,
+      contextValue: {
+        direction: props.direction,
+        registerItem: registerItem,
+        registerHandler: registerHandler,
+        notifyResizeStart: ()=>{}, //
+        getGroupSize: getGroupSize,
+      },
     });
 
     const groupRef = ref();
 
     let groupSize: number;
     let availableSize: number;
-    const itemRefs: Ref<HTMLDivElement>[] = [];
+    const itemRefs: Map<number, Ref<HTMLDivElement>> = new Map();
     let itemMinMap: Map<number, string> = new Map();
     let itemMaxMap: Map<number, string> = new Map();
     let itemMinusMap: Map<number, number> = new Map();
-    let itemDefaultSizeList: (string | number)[] = [];
+    let itemDefaultSizeList: Map<number, (string|number)> = new Map();
     let itemResizeStart: Map<number, ResizeStartCallback> = new Map();
     let itemResizing: Map<number, ResizeCallback> = new Map();
     let itemResizeEnd: Map<number, ResizeCallback> = new Map();
-    const handlerRefs: Ref<HTMLDivElement>[] = [];
+    const handlerRefs: Map<number, Ref<HTMLDivElement>> = new Map();
 
     const { adapter: adapterInject, getDataAttr } = useBaseComponent(props, state);
     function adapter_(): ResizeGroupAdapter<ResizeGroupProps, ResizeGroupState> {
       return {
         ...adapterInject(),
         getGroupRef: () => groupRef.value,
-        getItem: (id: number) => itemRefs[id].value,
-        getItemCount: () => itemRefs.length,
-        getHandler: (id: number) => handlerRefs[id].value,
-        getHandlerCount: () => handlerRefs.length,
+        getItem: (id: number) => itemRefs.get(id).value,
+        getItemCount: () => itemRefs.size,
+        getHandler: (id: number) => handlerRefs.get(id).value,
+        getHandlerCount: () => handlerRefs.size,
         getItemMin: (index) => {
           return itemMinMap.get(index);
         },
@@ -126,7 +124,7 @@ const ResizeGroup = defineComponent({
           return itemResizeStart.get(index);
         },
         getItemDefaultSize: (index) => {
-          return itemDefaultSizeList[index];
+          return itemDefaultSizeList.get(index);
         },
         registerEvents: registerEvent,
         unregisterEvents: unregisterEvent,
@@ -134,32 +132,50 @@ const ResizeGroup = defineComponent({
     }
     const adapter = adapter_();
     const foundation = new ResizeGroupFoundation(adapter);
+    state.contextValue.notifyResizeStart = foundation.onResizeStart;
 
     onMounted(() => {
       foundation.init();
+      // 监听窗口大小变化，保证一些限制仍生效
+      window.addEventListener('resize', foundation.ensureConstraint);
+
     });
+    watch([
+      ()=>props.direction,
+    ], (v, [prevPropsDirection])=>{
+      // 支持动态调整伸缩direction
+      if (props.direction !== prevPropsDirection) {
+        state.contextValue = {
+          ...state.contextValue, // 保留其他上下文值
+          direction: props.direction,
+        }
+        foundation.direction = props.direction;
+      }
+    })
 
     onUnmounted(() => {
       foundation.destroy();
+      window.removeEventListener('resize', foundation.ensureConstraint);
+
     });
 
-    function window(): Window | null {
+    function window_(): Window | null {
       return (groupRef.value.ownerDocument.defaultView as Window) ?? null;
     }
 
     function registerEvent() {
-      if (window) {
-        window().addEventListener('mousemove', foundation.onResizing);
-        window().addEventListener('mouseup', foundation.onResizeEnd);
-        window().addEventListener('mouseleave', foundation.onResizeEnd);
+      if (window_) {
+        window_().addEventListener('mousemove', foundation.onResizing);
+        window_().addEventListener('mouseup', foundation.onResizeEnd);
+        window_().addEventListener('mouseleave', foundation.onResizeEnd);
       }
     };
 
     function unregisterEvent() {
-      if (window) {
-        window().removeEventListener('mousemove', foundation.onResizing);
-        window().removeEventListener('mouseup', foundation.onResizeEnd);
-        window().removeEventListener('mouseleave', foundation.onResizeEnd);
+      if (window_) {
+        window_().removeEventListener('mousemove', foundation.onResizing);
+        window_().removeEventListener('mouseup', foundation.onResizeEnd);
+        window_().removeEventListener('mouseleave', foundation.onResizeEnd);
       }
     };
 
@@ -172,27 +188,34 @@ const ResizeGroup = defineComponent({
       onChange: ResizeCallback,
       onResizeEnd: ResizeCallback
     ) {
-      itemRefs.push(ref);
-      let index = itemRefs.length - 1;
+      if (Array.from(itemRefs.values()).some(r => r === ref)) {
+        return -1;
+      }
+      let index = itemRefs.size;
+      itemRefs.set(index, ref);
       itemMinMap.set(index, min);
       itemMaxMap.set(index, max);
-      itemDefaultSizeList.push(defaultSize);
+      itemDefaultSizeList.set(index, defaultSize);
       itemResizeStart.set(index, onResizeStart);
       itemResizing.set(index, onChange);
       itemResizeEnd.set(index, onResizeEnd);
       return index;
     };
 
-    const registerHandler = (ref: Ref<HTMLDivElement>) => {
-      handlerRefs.push(ref);
-      return handlerRefs.length - 1;
+    function registerHandler(ref: Ref<HTMLDivElement>) {
+      if (Array.from(handlerRefs.values()).some(r => r === ref)) {
+        return -1;
+      }
+      let index = handlerRefs.size;
+      handlerRefs.set(index, ref);
+      return index;
     };
 
-    const getGroupSize = () => {
+    function getGroupSize() {
       return groupSize;
-    };
+    }
 
-    const contextValue = {
+    const contextValue: ResizeContextProps = {
       direction: props.direction,
       registerItem: registerItem,
       registerHandler: registerHandler,
@@ -203,7 +226,7 @@ const ResizeGroup = defineComponent({
     return () => {
       const { direction, className, ...rest } = props;
       return (
-        <ResizeContext.Provider value={contextValue}>
+        <ResizeContext.Provider value={state.contextValue}>
           <div
             style={{
               flexDirection: direction === 'vertical' ? 'column' : 'row',
@@ -212,7 +235,7 @@ const ResizeGroup = defineComponent({
             class={classNames(className, prefixCls + '-group')}
             {...rest}
           >
-            {state.isResizing && <div style={state.backgroundStyle} />}
+            {state.isResizing && <div style={state.backgroundStyle} class={classNames(className, prefixCls + '-background')}/>}
             {slots.default?.()}
           </div>
         </ResizeContext.Provider>

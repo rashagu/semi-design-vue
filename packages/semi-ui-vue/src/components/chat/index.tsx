@@ -87,6 +87,8 @@ const index = defineComponent({
   name: 'index',
   setup(props, { attrs }) {
     const slots = useSlots();
+
+    let dragStatus = false;
     const containerRef = ref();
     let animation: any;
     let wheelEventHandler: any;
@@ -199,6 +201,9 @@ const index = defineComponent({
         getDropAreaElement: () => {
           return dropAreaRef?.value;
         },
+        getDragStatus: () => dragStatus,
+        setDragStatus: (status: boolean) => { dragStatus = status; },
+
       };
     }
     const adapter = adapter_();
@@ -338,6 +343,9 @@ const index = defineComponent({
               onDragover={foundation.handleContainerDragOver}
               onDrop={foundation.handleContainerDrop}
               onDragleave={foundation.handleContainerDragLeave}
+              onDragstart={foundation.handleDragStart}
+              onDragend={foundation.handleDragEnd}
+
             >
               <span class={`${prefixCls}-dropArea-text`}>
                 <LocaleConsumer componentName="Chat">

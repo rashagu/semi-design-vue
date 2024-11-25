@@ -3,7 +3,7 @@ import * as PropTypes from '../../PropTypes';
 import { ResizableHandlerFoundation, ResizableHandlerAdapter } from '@douyinfe/semi-foundation/resizable/foundation';
 
 import { cssClasses } from '@douyinfe/semi-foundation/resizable/constants';
-import { directionStyles, Direction, HandlerCallback } from '@douyinfe/semi-foundation/resizable/singleConstants';
+import type { Direction, HandlerCallback } from '@douyinfe/semi-foundation/resizable/types';
 import {
   CSSProperties,
   defineComponent,
@@ -83,9 +83,8 @@ const ResizableHandler = defineComponent({
       const { style, className } = props;
       return (
         <div
-          class={classNames(className, prefixCls + '-resizableHandler')}
+          class={classNames(className, prefixCls + '-resizableHandler', prefixCls + '-resizableHandler-' + props.direction)}
           style={{
-            ...directionStyles[props.direction],
             ...style
           }}
           ref={resizeHandlerRef}

@@ -4,7 +4,8 @@ import * as PropTypes from '../../PropTypes';
 import { ResizableFoundation, ResizableAdapter } from '@douyinfe/semi-foundation/resizable/foundation';
 
 import { cssClasses, } from '@douyinfe/semi-foundation/resizable/constants';
-import { Direction, Size, Enable, ResizeStartCallback, ResizeCallback, HandleClassName, directions } from '@douyinfe/semi-foundation/resizable/singleConstants';
+import type { Direction, Size, Enable, ResizeStartCallback, ResizeCallback, HandleClassName } from '@douyinfe/semi-foundation/resizable/types';
+import  {directions } from '@douyinfe/semi-foundation/resizable/types';
 
 import ResizableHandler from './resizableHandler';
 import '@douyinfe/semi-foundation/resizable/resizable.scss';
@@ -173,17 +174,7 @@ const Resizable = defineComponent({
         height: 0,
       },
       backgroundStyle: {
-        height: '100%',
-        width: '100%',
-        backgroundColor: 'rgba(0,0,0,0)',
         cursor: 'auto',
-        opacity: 0,
-        position: 'fixed',
-        zIndex: 9999,
-        top: '0',
-        left: '0',
-        bottom: '0',
-        right: '0',
       },
       flexBasis: undefined,
     });
@@ -280,7 +271,7 @@ const Resizable = defineComponent({
           ref={resizableRef}
           {...getDataAttr()}
         >
-          {state.isResizing && <div style={state.backgroundStyle} />}
+          {state.isResizing && <div style={state.backgroundStyle} class={classNames(className, prefixCls + '-background')}/>}
           {children}
           {renderResizeHandler()}
         </div>

@@ -38,9 +38,11 @@ const propTypes: CombineProps<MarkdownRenderProps> = {
   },
   remarkPlugins: PropTypes.array,
   rehypePlugins: PropTypes.array,
+  remarkGfm: PropTypes.bool,
 };
 const defaultProps = {
   format: 'mdx',
+  remarkGfm: true,
 };
 
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);

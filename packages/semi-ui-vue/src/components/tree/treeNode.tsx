@@ -246,7 +246,7 @@ const TreeNode = defineComponent({
 
     function renderArrow() {
       const showIcon = !isLeaf();
-      const { loading, expanded, showLine } = props;
+      const { loading, expanded, showLine, level } = props;
       if (loading) {
         return <Spin wrapperClassName={`${prefixcls}-spin-icon`} />;
       }
@@ -261,7 +261,8 @@ const TreeNode = defineComponent({
           />
         );
       }
-      if (showLine) {
+      // when leaf node 's level is 0, no switcher
+      if (showLine && level) {
         return renderSwitcher();
       }
       return <span class={`${prefixcls}-empty-icon`} />;

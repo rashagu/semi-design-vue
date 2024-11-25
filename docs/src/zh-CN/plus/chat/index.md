@@ -81,7 +81,7 @@ const commonOuterStyle = {
   border: '1px solid var(--semi-color-border)',
   borderRadius: '16px',
   margin: '8px 16px',
-  height: 550,
+  height: '550px',
 }
 
 let id = 0;
@@ -483,7 +483,7 @@ const commonOuterStyle = {
   border: '1px solid var(--semi-color-border)',
   borderRadius: '16px',
   margin: '8px 16px',
-  height: 550,
+  height: '550px',
 }
 
 let id = 0;
