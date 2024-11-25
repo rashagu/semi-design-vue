@@ -331,7 +331,7 @@ export default Demo
 
 可通过 handleNode 设置不同方向的拖动元素节点，可通过 handleStyle，handleClassName 设置不同方向上的样式
 
-```jsx
+```tsx
 type HandleNode = {
     left: ReactNode,
     right: ReactNode,
