@@ -2,13 +2,13 @@
   <Layout style="border: 1px solid var(--semi-color-border)">
     <LayoutHeader style="background-color: var(--semi-color-bg-1)">
       <div>
-        <Nav mode="horizontal" defaultSelectedKeys="Home">
+        <Nav mode="horizontal" :defaultSelectedKeys="['Home']">
           <NavHeader>
             <IconSemiLogo style="font-size: 36px" />
           </NavHeader>
-          <NavItem itemKey="Home" text="首页" :icon="IconHome" />
-          <NavItem itemKey="Live" text="直播" :icon="IconLive" />
-          <NavItem itemKey="Setting" text="设置" :icon="IconSetting" />
+          <NavItem itemKey="Home" text="首页" :icon="h(IconHome)" />
+          <NavItem itemKey="Live" text="直播" :icon="h(IconLive)" />
+          <NavItem itemKey="Setting" text="设置" :icon="h(IconSetting)" />
           <NavFooter>
             <Button theme="borderless" :icon="h(IconBell)" style="color: var(--semi-color-text-2); margin-right: 12px" />
             <Button
@@ -24,7 +24,7 @@
     <LayoutContent style="padding: 24px; background-color: var(--semi-color-bg-0)">
       <Breadcrumb style="margin-bottom: 24px" :routes="['首页', '当这个页面标题很长时需要省略', '上一页', '详情页']" />
       <div style="border-radius: 10px; border: 1px solid var(--semi-color-border); height: 276px; padding: 32px">
-        <Skeleton :placeholder="h(SkeletonParagraph,{ rows: 2 }, [])" :loading="true">
+        <Skeleton :placeholder="h(SkeletonParagraph,{ rows: 2 }, ()=>[])" :loading="true">
           <p>Hi, Bytedance dance dance.</p>
           <p>Hi, Bytedance dance dance.</p>
         </Skeleton>
