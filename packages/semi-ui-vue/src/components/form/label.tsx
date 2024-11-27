@@ -27,7 +27,7 @@ export interface LabelProps {
   width?: number | string;
   style?: CSSProperties;
   className?: string;
-  extra?: VNode;
+  extra?: VNode | (()=>VNode);
 
   optional?: boolean;
 }
@@ -42,7 +42,7 @@ const propTypes: CombineProps<LabelProps> = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   style: PropTypes.object,
   className: PropTypes.string,
-  extra: PropTypes.node as PropType<any>,
+  extra: [PropTypes.node, PropTypes.func] as PropType<any>,
   optional: PropTypes.bool,
 };
 const defaultProps = {
@@ -92,7 +92,7 @@ const Label = defineComponent({
       const contentWithExtra = (
         <>
           {textContent}
-          <div class={`${prefixCls}-field-label-extra`}>{extra}</div>
+          <div class={`${prefixCls}-field-label-extra`}>{typeof extra === 'function'?extra():extra}</div>
         </>
       );
 
