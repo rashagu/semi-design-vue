@@ -56,9 +56,9 @@ const store = useStore(
 const previewOptions = {
   headHTML: `
 <!--<link rel="stylesheet" href="${import.meta.env.BASE_URL}reset.css">-->
-<link rel="stylesheet" href="${import.meta.env.BASE_URL}semi/style.css">
-<link rel="stylesheet" href="${import.meta.env.BASE_URL}semiIcons/style.css">
-<link rel="stylesheet" href="${import.meta.env.BASE_URL}semiIconsLab/style.css">
+<link rel="stylesheet" href="${import.meta.env.BASE_URL}semi/semi-ui-vue.css">
+<link rel="stylesheet" href="${import.meta.env.BASE_URL}semiIcons/semi-icons-vue.css">
+<link rel="stylesheet" href="${import.meta.env.BASE_URL}semiIconsLab/semi-icons-lab-vue.css">
 <style>
 #app{
 padding: 10px;

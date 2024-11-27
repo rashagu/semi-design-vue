@@ -61,8 +61,8 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@types/node": "^20.1.4",
-    "@vitejs/plugin-vue": "^5.2.0",
-    "@vitejs/plugin-vue-jsx": "^4.1.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
@@ -76,7 +76,7 @@
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
     "typescript": "^5.5.2",
-    "vite": "5.4.11",
+    "vite": "6.0.1",
     "vue-tsc": "^2.1.6"
   },
   "gitHead": "a9bb1553bd45dcf99595a45df0adf0d967083f1e"

@@ -73,8 +73,8 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "reset-css": "^5.0.2",
-    "@vitejs/plugin-vue": "^5.2.0",
-    "@vitejs/plugin-vue-jsx": "^4.1.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@types/stringify-object": "^4.0.5",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
@@ -95,7 +95,7 @@
     "fast-glob": "^3.2.12",
     "typescript": "^5.5.2",
     "terser": "^5.16.4",
-    "vite": "5.4.11",
+    "vite": "6.0.1",
     "vue-tsc": "^2.1.6"
   }
 }
