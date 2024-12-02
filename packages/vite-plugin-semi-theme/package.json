@@ -39,7 +39,7 @@
     "unbuild": "^3.0.0-rc.2"
   },
   "peerDependencies": {
-    "vite": "^5.0.0",
+    "vite": "^6.0.0",
     "vue": "^3.0.0"
   }
 }

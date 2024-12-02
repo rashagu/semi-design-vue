@@ -5,6 +5,7 @@ import OptGroup from '../optionGroup';
 import classNames from 'classnames';
 import { IconGift, IconVigoLogo } from '@kousum/semi-icons-vue';
 import { Form, FormSelect } from '../../form';
+import { SelectVModel } from '../../withVModel';
 
 interface ExampleProps {
   name?: string;
@@ -130,8 +131,11 @@ const SelectDemo = defineComponent((props, { slots }) => {
   const dd = ref([]);
   function onChange(v) {
     console.log(v);
-    dd.value = v.value;
+    dd.value = v;
+    vv.value = v;
+    console.log(vv.value);
   }
+  const vv = ref([])
   return () => {
     let { optionList, optionList2 } = state;
     let virtualize = {
@@ -140,6 +144,24 @@ const SelectDemo = defineComponent((props, { slots }) => {
       itemSize: 36, // px
     };
     function handleSearch() {}
+
+    // return <SelectVModel
+    //   placeholder="onChange"
+    //   style={{ width: '260px' }}
+    //   filter
+    //   optionList={optionListRef.value}
+    //   v-model={vv.value}
+    // />
+
+    // return <Select
+    //   placeholder="onChange"
+    //   style={{ width: '260px' }}
+    //   filter
+    //   optionList={optionListRef.value}
+    //   value={vv.value}
+    //   multiple={true}
+    //   onChange={onChange}
+    // ></Select>
 
 // return         <Form>
 //   <Form.Select
