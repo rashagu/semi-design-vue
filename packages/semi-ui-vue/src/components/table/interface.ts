@@ -20,6 +20,7 @@ import type {
     BaseIncludeGroupRecord,
     BaseEllipsis
 } from '@douyinfe/semi-foundation/table/foundation';
+import { TableCellProps } from './TableCell';
 
 
 import type {VueJsxNode} from "../interface";
@@ -129,7 +130,12 @@ export interface ColumnProps<RecordType extends Record<string, any> = any> {
     onHeaderCell?: OnHeaderCell<RecordType>;
     ellipsis?: BaseEllipsis;
     resize?: boolean
-    showSortTip?: boolean
+    showSortTip?: boolean;
+    /**
+     * self control whether to update cell for performance reasons
+     */
+    shouldCellUpdate?: (props: TableCellProps, prevProps: TableCellProps) => boolean
+
 }
 
 export type Align = BaseAlign;
@@ -263,7 +269,12 @@ export interface RowSelectionProps<RecordType> {
     onSelectAll?: RowSelectionOnSelectAll<RecordType>;
     onCell?: ColumnProps['onCell'];
     onHeaderCell?: ColumnProps['onHeaderCell'];
-    renderCell?: RowSelectionRenderCell<RecordType>
+    renderCell?: RowSelectionRenderCell<RecordType>;
+    /**
+     * self control whether to update cell for performance reasons
+     */
+    shouldCellUpdate?: (props: TableCellProps, prevProps: TableCellProps) => boolean
+
 }
 
 export type RowSelectionRenderCell<RecordType> = (renderCellArgs: {

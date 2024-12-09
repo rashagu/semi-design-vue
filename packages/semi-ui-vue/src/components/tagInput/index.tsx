@@ -30,9 +30,7 @@ import { IconClear, IconHandle } from '@kousum/semi-icons-vue';
 import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 import { isSemiIcon } from '../_utils';
-import SortableList from './SortableList';
 import { type Events } from '@kousum/dnd-kit-vue';
-import {move} from '@dnd-kit/helpers';
 import { RenderItemProps, Sortable } from '../_sortable';
 
 export type Size = ArrayElement<typeof strings.SIZE_SET>;

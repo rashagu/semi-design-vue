@@ -48,7 +48,7 @@ const propTypes: CombineProps<NumeralProps> = {
   copyable: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   delete: PropTypes.bool,
   disabled: PropTypes.bool,
-  icon: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  icon: PropTypes.oneOfType([...PropTypes.node, PropTypes.string]),
   mark: PropTypes.bool,
   underline: PropTypes.bool,
   link: [PropTypes.object, PropTypes.bool, PropTypes.string],

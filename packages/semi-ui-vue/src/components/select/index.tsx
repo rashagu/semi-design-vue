@@ -1618,7 +1618,6 @@ const Index = defineComponent({
         dropdownMargin,
       } = props;
       const { isOpen, optionKey } = state;
-      const optionList = renderOptions(props.children ? props.children : null);
       const selection = renderSelection();
       return (
         <Popover
@@ -1627,10 +1626,9 @@ const Index = defineComponent({
           autoAdjustOverflow={autoAdjustOverflow}
           mouseLeaveDelay={mouseLeaveDelay}
           mouseEnterDelay={mouseEnterDelay}
-          // transformFromCenter TODO: check no such property
           zIndex={zIndex}
           ref={optionsRef}
-          content={optionList}
+          content={renderOptions(props.children ? props.children : null)}
           visible={isOpen}
           trigger="custom"
           rePosKey={optionKey}

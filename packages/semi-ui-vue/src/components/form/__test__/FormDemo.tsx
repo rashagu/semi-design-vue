@@ -30,7 +30,7 @@ const FormDemo = defineComponent((props, { attrs }) => {
       <Form getFormApi={v=>formApi.value = v} layout="horizontal" onValueChange={(values) => console.log(values)}>
         <FormInput
           field="UserName"
-          label="用户名"
+          label={{text: "用户名", extra:()=><div>'sds'</div>}}
           style={{ width: 80 }}
           rules={[
             { required: true, message: 'required error' },

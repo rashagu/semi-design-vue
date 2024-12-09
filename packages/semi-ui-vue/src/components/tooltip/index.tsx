@@ -54,6 +54,7 @@ import CSSAnimation from '../_cssAnimation';
 import { Motion } from '../_base/base';
 import { CombineProps, VueJsxNode } from '../interface';
 import { vuePropsMake } from '../PropTypes';
+import { setRefJsx } from '../_utils/setRefJsx';
 
 export type Trigger = ArrayElement<typeof strings.TRIGGER_SET>;
 export { Position };
@@ -153,7 +154,7 @@ const propTypes: CombineProps<TooltipProps> = {
   clickTriggerToHide: PropTypes.bool,
   visible: PropTypes.bool,
   style: PropTypes.object,
-  content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  content: PropTypes.oneOfType([...PropTypes.node, PropTypes.func]),
   prefixCls: PropTypes.string,
   onVisibleChange: PropTypes.func as PropType<TooltipProps['onVisibleChange']>,
   onClickOutSide: PropTypes.func as PropType<TooltipProps['onClickOutSide']>,
@@ -875,13 +876,7 @@ const Tooltip = defineComponent({
           // Call the original ref, if any
           const { ref } = children as any;
           // this.log('tooltip render() - get ref', ref);
-          if (ref) {
-            if (typeof ref.r === 'function') {
-              ref.r(node);
-            } else if (ref.r && typeof ref.r === 'object' && isRef(ref.r)) {
-              ref.r.value = node;
-            }
-          }
+          setRefJsx(ref, node)
         },
         tabIndex: children.props?.tabIndex || 0, // a11y keyboard, in some condition select's tabindex need to -1 or 0
         'data-popupid': state.id,

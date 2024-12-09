@@ -49,7 +49,7 @@ const propTypes: CombineProps<BaseFormProps> = {
   autoScrollToError: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   allowEmpty: PropTypes.bool,
   className: PropTypes.string,
-  component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  component: PropTypes.oneOfType([...PropTypes.node, PropTypes.func]),
   disabled: PropTypes.bool,
   extraTextPosition: PropTypes.string as PropType<BaseFormProps['extraTextPosition']>,
   getFormApi: PropTypes.func as PropType<BaseFormProps['getFormApi']>,

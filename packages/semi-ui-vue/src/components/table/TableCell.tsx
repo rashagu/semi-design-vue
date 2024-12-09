@@ -162,6 +162,10 @@ const TableCell = defineComponent({
       //组件是否需要更新，需要返回一个布尔值，返回true则更新，返回flase不更新，这是一个关键点
       const { column, expandIcon } = props;
       const cellInSelectionColumn = isSelectionColumn(column);
+      const { shouldCellUpdate } = column;
+      if (typeof shouldCellUpdate === 'function') {
+        return shouldCellUpdate(nextProps, props);
+      }
       // The expand button may be in a separate column or in the first data column
       const columnHasExpandIcon = isExpandedColumn(column) || expandIcon;
       if ((cellInSelectionColumn || columnHasExpandIcon) && !isEqual(nextProps, props)) {

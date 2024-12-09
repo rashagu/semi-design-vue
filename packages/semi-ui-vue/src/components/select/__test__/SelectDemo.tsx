@@ -128,7 +128,8 @@ const SelectDemo = defineComponent((props, { slots }) => {
     optionList2: newOptions2,
   });
 
-  const dd = ref([]);
+  const dd = ref();
+  const dds = ref();
   function onChange(v) {
     console.log(v);
     dd.value = v;
@@ -184,8 +185,8 @@ const SelectDemo = defineComponent((props, { slots }) => {
           onChangeWithObject={true}
           onChange={onChange}
         ></Select>
-        {JSON.stringify(dd.value)}
-        <input placeholder={'select_change_demo'} value={dd.value} />
+        {JSON.stringify(dd.value?.value)}
+        <input placeholder={'select_change_demo'} value={dd.value?.value} />
 
         <Select
           placeholder="拥有3k个Option的Select 虚拟滚动"

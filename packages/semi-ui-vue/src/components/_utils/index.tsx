@@ -2,7 +2,6 @@
 /* argus-disable unPkgSensitiveInfo */
 import { cloneDeepWith, get, set } from 'lodash';
 import warning from '@douyinfe/semi-foundation/utils/warning';
-import { findAll } from '@douyinfe/semi-foundation/utils/getHighlight';
 import type { SetupContext } from 'vue';
 import { h, isVNode, VNode } from 'vue';
 import { isHTMLElement } from '@douyinfe/semi-foundation/utils/dom';
@@ -67,46 +66,6 @@ export function cloneDeep(value: any, customizer?: (value: any) => any) {
     });
 }
 
-/**
- * [getHighLightTextHTML description]
- *
- * @param   {string} sourceString [source content text]
- * @param   {Array<string>} searchWords [keywords to be highlighted]
- * @param   {object} option
- * @param   {true}      option.highlightTag [The tag wrapped by the highlighted content, mark is used by default]
- * @param   {true}      option.highlightClassName
- * @param   {true}      option.highlightStyle
- * @param   {boolean}   option.caseSensitive
- *
- * @return  {Array<object>}
- */
-export const getHighLightTextHTML = ({
-    sourceString = '',
-    searchWords = [],
-    option = { autoEscape: true, caseSensitive: false }
-}: GetHighLightTextHTMLProps) => {
-    const chunks: HighLightTextHTMLChunk[] = findAll({ sourceString, searchWords, ...option });
-    const markEle = option.highlightTag || 'mark';
-    const highlightClassName = option.highlightClassName || '';
-    const highlightStyle = option.highlightStyle || {};
-    return chunks.map((chunk: HighLightTextHTMLChunk) => {
-        const { end, start, highlight } = chunk;
-        const text = sourceString.substr(start, end - start);
-        if (highlight) {
-            return h(
-                markEle,
-                {
-                    style: highlightStyle,
-                    className: highlightClassName,
-                },
-                text
-            );
-        } else {
-            return text;
-        }
-    });
-};
-
 export interface RegisterMediaQueryOption {
     match?: (e: MediaQueryList | MediaQueryListEvent) => void;
     unmatch?: (e: MediaQueryList | MediaQueryListEvent) => void;
@@ -135,25 +94,6 @@ export const registerMediaQuery = (media: string, { match, unmatch, callInInit =
     }
     return null;
 };
-export interface GetHighLightTextHTMLProps {
-    sourceString?: string;
-    searchWords?: any[];
-    option: HighLightTextHTMLOption;
-}
-
-export interface HighLightTextHTMLOption {
-    highlightTag?: string;
-    highlightClassName?: string;
-    highlightStyle?: Record<string, any>;
-    caseSensitive: boolean;
-    autoEscape: boolean;
-}
-
-export interface HighLightTextHTMLChunk {
-    start?: number;
-    end?: number;
-    highlight?: any;
-}
 
 /**
  * Determine whether the incoming element is a built-in icon

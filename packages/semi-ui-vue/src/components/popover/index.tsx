@@ -77,7 +77,7 @@ const triggerSet = strings.TRIGGER_SET;
 
 const propTypes:CombineProps<PopoverProps> = {
   // children: PropTypes.node,
-  content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  content: PropTypes.oneOfType([...PropTypes.node, PropTypes.func]),
   visible: PropTypes.bool,
   autoAdjustOverflow: PropTypes.bool,
   motion: PropTypes.bool,

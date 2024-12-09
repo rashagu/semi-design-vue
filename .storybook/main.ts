@@ -36,7 +36,7 @@ const config: StorybookConfig = {
             additionalData: `
           @import "@douyinfe/semi-theme-default/scss/global.scss";
           @import "@douyinfe/semi-theme-default/scss/index.scss";
-          @import "../packages/semi-ui-vue/src/docDemo.scss";
+          @import "@kousum/semi-ui-vue/src/docDemo.scss";
         `,
           }
         }

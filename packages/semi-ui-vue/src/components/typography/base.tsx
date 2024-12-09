@@ -116,7 +116,7 @@ const propTypes: CombineProps<BaseTypographyProps> = {
   type: PropTypes.string as PropType<BaseTypographyProps['type']>,
   style: PropTypes.object,
   className: PropTypes.string,
-  icon: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  icon: PropTypes.oneOfType([...PropTypes.node, PropTypes.string]),
   heading: PropTypes.string,
   component: PropTypes.string,
   weight: [PropTypes.string, PropTypes.number],

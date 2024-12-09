@@ -8,7 +8,7 @@ import { IconFile, IconFolder, IconFolderOpen, IconTreeTriangleDown } from '@kou
 import { Checkbox } from '../checkbox';
 import Spin from '../spin';
 import type { RenderFullLabelProps, TreeNodeProps, TreeNodeState } from './interface';
-import { getHighLightTextHTML } from '../_utils/index';
+import Highlight from '../highlight';
 import { cloneVNode, defineComponent, h, PropType, reactive, ref, useSlots } from 'vue';
 import { useTreeContext } from './TreeContext/Consumer';
 import type { CombineProps, VueHTMLAttributes } from '../interface';
@@ -246,7 +246,7 @@ const TreeNode = defineComponent({
 
     function renderArrow() {
       const showIcon = !isLeaf();
-      const { loading, expanded, showLine, level } = props;
+      const { loading, expanded, showLine } = props;
       if (loading) {
         return <Spin wrapperClassName={`${prefixcls}-spin-icon`} />;
       }
@@ -261,8 +261,7 @@ const TreeNode = defineComponent({
           />
         );
       }
-      // when leaf node 's level is 0, no switcher
-      if (showLine && level) {
+      if (showLine) {
         return renderSwitcher();
       }
       return <span class={`${prefixcls}-empty-icon`} />;
@@ -340,14 +339,14 @@ const TreeNode = defineComponent({
       if (isFunction(renderLabel)) {
         return renderLabel(label, data, keyword);
       } else if (isString(label) && filtered && keyword) {
-        return getHighLightTextHTML({
-          sourceString: label,
-          searchWords: [keyword],
-          option: {
-            highlightTag: 'span',
-            highlightClassName: `${prefixcls}-highlight`,
-          },
-        } as any);
+        return (
+          <Highlight
+            highlightClassName={`${prefixcls}-highlight`}
+            component='span'
+            sourceString={label}
+            searchWords={[keyword]}
+          />
+        );
       } else {
         return label;
       }

@@ -42,7 +42,7 @@ const propTypes: CombineProps<LabelProps> = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   style: PropTypes.object,
   className: PropTypes.string,
-  extra: [PropTypes.node, PropTypes.func] as PropType<any>,
+  extra: [...PropTypes.node, PropTypes.func] as PropType<any>,
   optional: PropTypes.bool,
 };
 const defaultProps = {

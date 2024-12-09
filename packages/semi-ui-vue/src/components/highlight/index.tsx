@@ -1,17 +1,35 @@
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
 import { cssClasses } from '@douyinfe/semi-foundation/highlight/constants';
-import { getHighLightTextHTML } from '../_utils/index';
+import HighlightFoundation from '@douyinfe/semi-foundation/highlight/foundation';
+import type { SearchWords, Chunk } from '@douyinfe/semi-foundation/highlight/foundation';
+
 import '@douyinfe/semi-foundation/highlight/highlight.scss';
-import { ComponentObjectPropsOptions, CSSProperties, defineComponent, h, useSlots } from 'vue';
+import { ComponentObjectPropsOptions, createVNode, CSSProperties, defineComponent, h, useSlots } from 'vue';
 import { vuePropsMake } from '../PropTypes';
 import { CombineProps } from '../interface';
+
+interface GetHighLightTextHTMLProps {
+  sourceString?: string;
+  searchWords?: SearchWords;
+  option: HighLightTextHTMLOption;
+}
+
+interface HighLightTextHTMLOption {
+  highlightTag?: string;
+  highlightClassName?: string;
+  highlightStyle?: CSSProperties;
+  caseSensitive: boolean;
+  autoEscape: boolean;
+}
+
+interface HighLightTextHTMLChunk extends Chunk {}
 
 export interface HighlightProps {
   autoEscape?: boolean;
   caseSensitive?: boolean;
   sourceString?: string;
-  searchWords?: Array<string>;
+  searchWords?: SearchWords;
   highlightStyle?: CSSProperties;
   highlightClassName?: string;
   component?: string;
@@ -44,6 +62,38 @@ const Highlight = defineComponent({
   setup(props, {}) {
     const slots = useSlots();
 
+    const getHighLightTextHTML = ({
+      sourceString = '',
+      searchWords = [],
+      option = { autoEscape: true, caseSensitive: false },
+    }: GetHighLightTextHTMLProps) => {
+      const chunks: HighLightTextHTMLChunk[] = new HighlightFoundation().findAll({
+        sourceString,
+        searchWords,
+        ...option,
+      });
+      const markEle = option.highlightTag || 'mark';
+      const highlightClassName = option.highlightClassName || '';
+      const highlightStyle = option.highlightStyle || {};
+      return chunks.map((chunk: HighLightTextHTMLChunk, index: number) => {
+        const { end, start, highlight, style, className } = chunk;
+        const text = sourceString.substr(start, end - start);
+        if (highlight) {
+          return createVNode(
+            markEle,
+            {
+              style: { ...highlightStyle, ...style },
+              className: `${highlightClassName} ${className || ''}`.trim(),
+              key: text + index,
+            },
+            text
+          );
+        } else {
+          return text;
+        }
+      });
+    };
+
     return () => {
       const { searchWords, sourceString, component, highlightClassName, highlightStyle, caseSensitive, autoEscape } =
         props;
@@ -63,7 +113,9 @@ const Highlight = defineComponent({
         autoEscape,
       };
 
-      return getHighLightTextHTML({ sourceString, searchWords, option });
+      return (
+        getHighLightTextHTML({ sourceString, searchWords, option })
+      );
     };
   },
 });

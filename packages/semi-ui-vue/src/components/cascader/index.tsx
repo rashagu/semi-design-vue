@@ -198,7 +198,7 @@ const propTypes: CombineProps<CascaderProps> = {
   preventScroll: PropTypes.bool,
   position: PropTypes.string as PropType<CascaderProps['position']>,
   searchPosition: PropTypes.string as PropType<CascaderProps['searchPosition']>,
-
+  checkRelation: PropTypes.string as PropType<CascaderProps['checkRelation']>,
   autoClearSearchValue: {
     type: Boolean,
     default: true,
@@ -241,6 +241,7 @@ const defaultProps = {
   enableLeafClick: false,
   'aria-label': 'Cascader',
   searchPosition: strings.SEARCH_POSITION_TRIGGER,
+  checkRelation: strings.RELATED,
 };
 
 export const vuePropsType = vuePropsMake<CascaderProps>(propTypes, defaultProps);
@@ -450,7 +451,7 @@ const Index = defineComponent({
 
     // watch props OK
     function getDerivedStateFromProps(props: CascaderProps) {
-      const { multiple, value, defaultValue, onChangeWithObject, leafOnly, autoMergeValue } = props;
+      const { multiple, value, defaultValue, onChangeWithObject, leafOnly, autoMergeValue, checkRelation } = props;
       const { prevProps } = state;
       let keyEntities = state.keyEntities || {};
       const newState: Partial<CascaderState> = {};
@@ -520,18 +521,22 @@ const Index = defineComponent({
           if (isSet(realKeys)) {
             realKeys = [...realKeys];
           }
-          const calRes = calcCheckedKeys(realKeys, keyEntities);
-          const checkedKeys = new Set(calRes.checkedKeys);
-          const halfCheckedKeys = new Set(calRes.halfCheckedKeys);
-          // disableStrictly
-          if (props.disableStrictly) {
-            newState.disabledKeys = calcDisabledKeys(keyEntities);
+          if (checkRelation === strings.RELATED) {
+            const calRes = calcCheckedKeys(realKeys, keyEntities);
+            const checkedKeys = new Set(calRes.checkedKeys);
+            const halfCheckedKeys = new Set(calRes.halfCheckedKeys);
+            // disableStrictly
+            if (props.disableStrictly) {
+              newState.disabledKeys = calcDisabledKeys(keyEntities);
+            }
+            const isLeafOnlyMerge = calcMergeType(autoMergeValue, leafOnly) === strings.LEAF_ONLY_MERGE_TYPE;
+            newState.checkedKeys = checkedKeys;
+            newState.halfCheckedKeys = halfCheckedKeys;
+            newState.resolvedCheckedKeys = new Set(normalizeKeyList(checkedKeys, keyEntities, isLeafOnlyMerge));
+          } else {
+            newState.checkedKeys = new Set(realKeys);
           }
-          const isLeafOnlyMerge = calcMergeType(autoMergeValue, leafOnly) === strings.LEAF_ONLY_MERGE_TYPE;
           newState.prevProps = props;
-          newState.checkedKeys = checkedKeys;
-          newState.halfCheckedKeys = halfCheckedKeys;
-          newState.resolvedCheckedKeys = new Set(normalizeKeyList(checkedKeys, keyEntities, isLeafOnlyMerge));
         }
       }
       return newState;
@@ -639,10 +644,10 @@ const Index = defineComponent({
     };
 
     function renderTagInput() {
-      const { size, disabled, placeholder, maxTagCount, showRestTagsPopover, restTagsPopoverProps } = props;
+      const { size, disabled, placeholder, maxTagCount, showRestTagsPopover, restTagsPopoverProps, checkRelation } = props;
       const { inputValue, checkedKeys, keyEntities, resolvedCheckedKeys } = state;
       const tagInputcls = cls(`${prefixcls}-tagInput-wrapper`);
-      const realKeys = mergeType === strings.NONE_MERGE_TYPE ? checkedKeys : resolvedCheckedKeys;
+      const realKeys = mergeType === strings.NONE_MERGE_TYPE  || checkRelation === strings.UN_RELATED ? checkedKeys : resolvedCheckedKeys;
       return (
         <TagInput
           className={tagInputcls}
@@ -817,9 +822,10 @@ const Index = defineComponent({
     };
 
     const renderMultipleTags = () => {
-      const { autoMergeValue, maxTagCount } = props;
+      const { autoMergeValue, maxTagCount, checkRelation } = props;
       const { checkedKeys, resolvedCheckedKeys } = state;
-      const realKeys = mergeType === strings.NONE_MERGE_TYPE ? checkedKeys : resolvedCheckedKeys;
+      const realKeys = mergeType === strings.NONE_MERGE_TYPE || checkRelation === strings.UN_RELATED ?
+        checkedKeys : resolvedCheckedKeys;
       const displayTag: Array<VNode | string> = [];
       const hiddenTag: Array<VNode | string> = [];
       [...realKeys].forEach((checkedKey, idx) => {

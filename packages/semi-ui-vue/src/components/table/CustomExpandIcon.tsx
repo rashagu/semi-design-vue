@@ -40,7 +40,7 @@ const propTypes: CombineProps<CustomExpandIconProps> = {
   onClick: PropTypes.func as PropType<CustomExpandIconProps['onClick']>,
   onMouseEnter: PropTypes.func as PropType<CustomExpandIconProps['onMouseEnter']>,
   onMouseLeave: PropTypes.func as PropType<CustomExpandIconProps['onMouseLeave']>,
-  expandIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  expandIcon: PropTypes.oneOfType([...PropTypes.node, PropTypes.func]),
   prefixCls: PropTypes.string,
   motion: PropTypes.bool,
 };

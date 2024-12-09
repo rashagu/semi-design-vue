@@ -26,8 +26,8 @@
     "build:icon": "node scripts/build-illustration.cjs"
   },
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.70.1",
-    "@douyinfe/semi-theme-default": "2.70.1",
+    "@douyinfe/semi-foundation": "2.71.0",
+    "@douyinfe/semi-theme-default": "2.71.0",
     "classnames": "^2.3.2",
     "vue": "^3.5.13"
   },
@@ -61,7 +61,7 @@
     "through2": "^4.0.2",
     "ts-node": "^10.5.0",
     "typescript": "^5.5.2",
-    "vite": "6.0.1",
+    "vite": "6.0.3",
     "vue-tsc": "^2.1.6"
   },
   "gitHead": "a9bb1553bd45dcf99595a45df0adf0d967083f1e"

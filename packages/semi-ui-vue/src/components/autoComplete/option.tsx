@@ -4,7 +4,8 @@ import { isString } from 'lodash';
 import { cssClasses } from '@douyinfe/semi-foundation/autoComplete/constants';
 import { LocaleConsumerFunc } from '../locale/localeConsumer';
 import { IconTick } from '@kousum/semi-icons-vue';
-import { getFragmentChildren, getHighLightTextHTML } from '../_utils/index';
+import { getFragmentChildren } from '../_utils/index';
+import Highlight from '../highlight';
 import { Locale } from '../locale/interface';
 import { BasicOptionProps } from '@douyinfe/semi-foundation/autoComplete/optionFoundation';
 import { CombineProps, type RemoveIndexSignature, VueJsxNode } from '../interface';
@@ -34,15 +35,6 @@ export interface OptionProps extends RemoveIndexSignature<BasicOptionProps> {
   focused?: boolean,
   onSelect?:  (opts: OptionProps, e: MouseEvent) => any,
   prefixCls?: string,
-}
-interface renderOptionContentArgument {
-  config: {
-    searchWords: any;
-    sourceString: VueJsxNode;
-  };
-  children: VueJsxNode;
-  inputValue: string;
-  prefixCls: string;
 }
 
 const propTypes: CombineProps<OptionProps> = {
@@ -81,9 +73,13 @@ const Option = defineComponent({
       }
     }
 
-    function renderOptionContent({ config, children, inputValue, prefixCls }: renderOptionContentArgument) {
+    function renderOptionContent({ children, inputValue, prefixCls }) {
       if (isString(children) && inputValue) {
-        return getHighLightTextHTML(config as any);
+        return (<Highlight
+          searchWords={[inputValue]}
+          sourceString={children}
+          highlightClassName={`${prefixCls}-keyword`}
+        />);
       }
       return children;
     }
@@ -152,13 +148,6 @@ const Option = defineComponent({
         });
       }
 
-      const config = {
-        searchWords: inputValue,
-        sourceString: children,
-        option: {
-          highlightClassName: `${prefixCls}-keyword`,
-        },
-      };
       return (
         // eslint-disable-next-line jsx-a11y/interactive-supports-focus,jsx-a11y/click-events-have-key-events
         <div
@@ -178,7 +167,7 @@ const Option = defineComponent({
             </div>
           ) : null}
           {isString(children) ? (
-            <div class={`${prefixCls}-text`}>{renderOptionContent({ children, config, inputValue, prefixCls })}</div>
+            <div class={`${prefixCls}-text`}>{renderOptionContent({ children, inputValue, prefixCls })}</div>
           ) : (
             children
           )}

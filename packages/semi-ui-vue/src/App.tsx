@@ -164,6 +164,8 @@ import TransferDemoDocs from './components/transfer/__test__/TransferDemoDocs';
 import TabsDemoPaneChildren from './components/tabs/__test__/TabsDemoPaneChildren';
 import ResizableDemo from './components/resizable/__test__/ResizableDemo';
 import TreeCheckSimpleJsonDemo from './components/tree/__test__/TreeCheckSimpleJsonDemo';
+import DragMoveDemo from './components/dragMove/__test__/DragMoveDemo';
+import JsonViewerDemo from './components/jsonViewer/__test__/JsonViewerDemo';
 
 export interface ExampleProps {
   name?: string
@@ -266,6 +268,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
         {/*<TreeCheckSimpleJsonDemo/>*/}
+        <DragMoveDemo/>
+        {/*<JsonViewerDemo/>*/}
 
         {/*<TreeDemo />*/}
         {/*<TreeDemo2 />*/}
@@ -322,7 +326,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SelectDocsDemo/>*/}
         {/*<SelectRenderOptionItem/>*/}
         {/*<SelectDemoToRawTest/>*/}
-        <SelectDemo/>
+        {/*<SelectDemo/>*/}
         {/*<SelectDemo2/>*/}
         {/*<SelectDemo3/>*/}
         {/*<SelectDemo4/>*/}

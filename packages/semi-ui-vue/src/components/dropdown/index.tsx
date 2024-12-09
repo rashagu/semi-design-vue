@@ -105,7 +105,7 @@ const propTypes: CombineProps<DropdownProps> = {
   onHeaderCell: PropTypes.func,
   onGroupedRow: PropTypes.func,
 
-  render: [PropTypes.node, PropTypes.func, PropTypes.object] as PropType<DropdownProps['render']>,
+  render: [...PropTypes.node, PropTypes.func, PropTypes.object] as PropType<DropdownProps['render']>,
   visible: PropTypes.bool,
   position: PropTypes.string as PropType<DropdownProps['position']>,
   getPopupContainer: PropTypes.func as PropType<DropdownProps['getPopupContainer']>,

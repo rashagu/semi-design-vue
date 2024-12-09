@@ -8,6 +8,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    setupFiles: ['@vitest/web-worker'],
     // 没用
     // deps: {
     //   // >= 0.34

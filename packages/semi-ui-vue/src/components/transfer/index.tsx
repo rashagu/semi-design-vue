@@ -35,8 +35,6 @@ import {
   watch,
 } from 'vue';
 import { CombineProps, VueJsxNode } from '../interface';
-import SortableList from './SortableList';
-import type { SortableItemFuncArg } from '../tagInput';
 import type { Events } from '@kousum/dnd-kit-vue';
 import { RenderItemProps, Sortable } from '../_sortable';
 import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';

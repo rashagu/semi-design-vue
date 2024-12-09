@@ -5,7 +5,7 @@ import { isString } from 'lodash';
 import { cssClasses } from '@douyinfe/semi-foundation/select/constants';
 import { LocaleConsumerFunc } from '../locale/localeConsumer';
 import { IconTick } from '@kousum/semi-icons-vue';
-import { getHighLightTextHTML } from '../_utils/index';
+import Highlight, { HighlightProps } from '../highlight';
 import type { Locale } from '../locale/interface';
 import getDataAttr from '@douyinfe/semi-foundation/utils/getDataAttr';
 import type { BasicOptionProps } from '@douyinfe/semi-foundation/select/optionFoundation';
@@ -45,16 +45,6 @@ export interface OptionProps extends RemoveIndexSignature<BasicOptionProps> {
   _inputCreateOnly?: boolean,
 
   optionRest?: Record<string, any>
-}
-
-interface renderOptionContentArgument {
-  config: {
-    searchWords: any;
-    sourceString: string | number | VNode | VNode[];
-  };
-  children: string | number | VNode | VNode[];
-  inputValue: string;
-  prefixCls: string;
 }
 
 export const vuePropsType: CombineProps<OptionProps> = {
@@ -107,9 +97,15 @@ const Option = defineComponent({
       }
     }
 
-    function renderOptionContent({ config, children, inputValue, prefixCls }: renderOptionContentArgument) {
+    function renderOptionContent({ config, children, inputValue, prefixCls }) {
       if (isString(children) && inputValue) {
-        return getHighLightTextHTML(config as any);
+        return (
+          <Highlight
+            searchWords={config.searchWords as HighlightProps['searchWords']}
+            sourceString={config.sourceString as string}
+            highlightClassName={config.highlightClassName as string}
+          />
+        );
       }
       return children;
     }
@@ -182,11 +178,9 @@ const Option = defineComponent({
       }
 
       const config = {
-        searchWords: inputValue,
+        searchWords: [inputValue],
         sourceString: children,
-        option: {
-          highlightClassName: `${prefixCls}-keyword`,
-        },
+        highlightClassName: `${prefixCls}-keyword`
       };
       return (
         // eslint-disable-next-line jsx-a11y/interactive-supports-focus,jsx-a11y/click-events-have-key-events
