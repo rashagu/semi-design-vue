@@ -14,25 +14,13 @@ const SvgComponent = defineComponent((props, { slots }) => {
       {...props}
     >
       <path
-        d="M3 4.12781L12.0013 2.5L21 4.12781V9.51683C21 15.1811 17.3751 20.2095 12.0013 22C6.62604 20.2095 3 15.18 3 9.51434V4.12781Z"
+        d="m3 4.13 9-1.63 9 1.63v5.39c0 5.66-3.62 10.69-9 12.48-5.37-1.8-9-6.82-9-12.49V4.13Z"
         stroke="currentColor"
         stroke-width={2}
         stroke-linejoin="round"
       />
-      <path
-        d="M11.9749 7.47485V15.4749"
-        stroke="currentColor"
-        stroke-width={2}
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <path
-        d="M7.97485 11.4749H15.9749"
-        stroke="currentColor"
-        stroke-width={2}
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
+      <path d="M11.97 7.47v8" stroke="currentColor" stroke-width={2} stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M7.97 11.47h8" stroke="currentColor" stroke-width={2} stroke-linecap="round" stroke-linejoin="round" />
     </svg>
   );
 });

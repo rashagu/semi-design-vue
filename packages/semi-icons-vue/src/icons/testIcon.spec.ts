@@ -369,7 +369,7 @@ import {default as IconStar, SvgComponent as SvgComponent365 }  from "./icons/Ic
 import {default as IconStarStroked, SvgComponent as SvgComponent366 }  from "./icons/IconStarStroked";
 import {default as IconStop, SvgComponent as SvgComponent367 }  from "./icons/IconStop";
 import {default as IconStopwatchStroked, SvgComponent as SvgComponent368 }  from "./icons/IconStopwatchStroked";
-import {default as IconStorysStroked, SvgComponent as SvgComponent369 }  from "./icons/IconStorysStroked";
+import {default as IconStoryStroked, SvgComponent as SvgComponent369 }  from "./icons/IconStoryStroked";
 import {default as IconStrikeThrough, SvgComponent as SvgComponent370 }  from "./icons/IconStrikeThrough";
 import {default as IconSun, SvgComponent as SvgComponent371 }  from "./icons/IconSun";
 import {default as IconSync, SvgComponent as SvgComponent372 }  from "./icons/IconSync";
@@ -1553,7 +1553,7 @@ const wrapper367 = shallowMount(IconStop, {});
 const wrapper368 = shallowMount(IconStopwatchStroked, {});
   const wrapperSvgComponent368 = shallowMount(SvgComponent368, {});
   
-const wrapper369 = shallowMount(IconStorysStroked, {});
+const wrapper369 = shallowMount(IconStoryStroked, {});
   const wrapperSvgComponent369 = shallowMount(SvgComponent369, {});
   
 const wrapper370 = shallowMount(IconStrikeThrough, {});

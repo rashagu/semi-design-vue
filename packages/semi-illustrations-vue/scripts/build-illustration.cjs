@@ -11,6 +11,12 @@ const outDir = resolve(__dirname, '../src/components/illustrations');
 
 const svgoPlugins = [
     {
+        name: 'convertPathData',
+        params: {
+            floatPrecision: 2
+        }
+    },
+    {
         name: 'cleanupListOfValues',
         active: true,
     },

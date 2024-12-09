@@ -13,10 +13,7 @@ const SvgComponent = defineComponent((props, { slots }) => {
       aria-hidden={true}
       {...props}
     >
-      <path
-        d="M5 12.5C5 11.6716 5.67157 11 6.5 11H17.5C18.3284 11 19 11.6716 19 12.5C19 13.3284 18.3284 14 17.5 14H6.5C5.67157 14 5 13.3284 5 12.5Z"
-        fill="currentColor"
-      />
+      <path d="M5 12.5c0-.83.67-1.5 1.5-1.5h11a1.5 1.5 0 0 1 0 3h-11A1.5 1.5 0 0 1 5 12.5Z" fill="currentColor" />
     </svg>
   );
 });

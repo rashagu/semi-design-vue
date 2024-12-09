@@ -16,7 +16,7 @@ const SvgComponent = defineComponent((props, { slots }) => {
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
-        d="M22 3C22 2.44772 21.5523 2 21 2C20.4477 2 20 2.44772 20 3V21C20 21.5523 20.4477 22 21 22C21.5523 22 22 21.5523 22 21V3ZM3 6C2.44772 6 2 6.44772 2 7V17C2 17.5523 2.44772 18 3 18H13C13.5523 18 14 17.5523 14 17V7C14 6.44772 13.5523 6 13 6H3ZM4 16V8H12V16H4Z"
+        d="M22 3a1 1 0 1 0-2 0v18a1 1 0 1 0 2 0V3ZM3 6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H3Zm1 10V8h8v8H4Z"
         fill="currentColor"
       />
     </svg>

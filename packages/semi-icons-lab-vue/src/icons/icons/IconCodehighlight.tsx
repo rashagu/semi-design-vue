@@ -14,22 +14,22 @@ const SvgComponent = defineComponent((props, { slots }) => {
       {...props}
     >
       <rect y={0.406} width={22} height={10} rx={2} fill="#49C4FD" />
-      <path d="M0 4.59375H11V17.5938H2C0.895431 17.5938 0 16.6983 0 15.5938V4.59375Z" fill="#F9FCFF" />
-      <path d="M11 4.59375H22V15.5938C22 16.6983 21.1046 17.5938 20 17.5938H11V4.59375Z" fill="#F9FCFF" />
-      <path d="M7 8L4 11L7 14" stroke="#F8CE27" stroke-width={1.5} stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M15 8L18 11L15 14" stroke="#49C4FD" stroke-width={1.5} stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M12 8L10 14.5" stroke="#E0E4E7" stroke-width={1.5} stroke-linecap="round" />
+      <path d="M0 4.6h11v13H2a2 2 0 0 1-2-2v-11Z" fill="#F9FCFF" />
+      <path d="M11 4.6h11v11a2 2 0 0 1-2 2h-9v-13Z" fill="#F9FCFF" />
+      <path d="m7 8-3 3 3 3" stroke="#F8CE27" stroke-width={1.5} stroke-linecap="round" stroke-linejoin="round" />
+      <path d="m15 8 3 3-3 3" stroke="#49C4FD" stroke-width={1.5} stroke-linecap="round" stroke-linejoin="round" />
+      <path d="m12 8-2 6.5" stroke="#E0E4E7" stroke-width={1.5} stroke-linecap="round" />
     </svg>
   );
 });
 const IconComponent = defineComponent({
-  name: 'IconCodehighlight',
+  name: 'IconCodeHighlight',
   props: {
     ...iconVuePropsType,
   },
   setup(props, { slots }) {
     return () => (
-      <ConvertIcon iconType={'codehighlight'} {...props}>
+      <ConvertIcon iconType={'code-highlight'} {...props}>
         {{
           default: () => <SvgComponent />,
         }}

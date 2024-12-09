@@ -13,7 +13,7 @@ const SvgComponent = defineComponent((props, { slots }) => {
       aria-hidden={true}
       {...props}
     >
-      <path d="M12 8.5C12 8.5 12.5 6 11 4C9.5 2 8 2 8 2" stroke="#AAB2BF" stroke-width={2} stroke-linecap="round" />
+      <path d="M12 8.5S12.5 6 11 4 8 2 8 2" stroke="#AAB2BF" stroke-width={2} stroke-linecap="round" />
       <rect x={1} y={6} width={22} height={15} rx={2} fill="#DDE3E8" />
       <rect x={3} y={8} width={3} height={3} rx={1.5} fill="#6A6F7F" />
       <rect x={8} y={8} width={3} height={3} rx={1.5} fill="#6A6F7F" />

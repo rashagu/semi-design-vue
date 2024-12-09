@@ -381,7 +381,7 @@ export { default as IconStar } from './src/icons/icons/IconStar';
 export { default as IconStarStroked } from './src/icons/icons/IconStarStroked';
 export { default as IconStop } from './src/icons/icons/IconStop';
 export { default as IconStopwatchStroked } from './src/icons/icons/IconStopwatchStroked';
-export { default as IconStorysStroked } from './src/icons/icons/IconStorysStroked';
+export { default as IconStoryStroked } from './src/icons/icons/IconStoryStroked';
 export { default as IconStrikeThrough } from './src/icons/icons/IconStrikeThrough';
 export { default as IconSun } from './src/icons/icons/IconSun';
 export { default as IconSync } from './src/icons/icons/IconSync';

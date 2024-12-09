@@ -14,12 +14,12 @@ const SvgComponent = defineComponent((props, { slots }) => {
       {...props}
     >
       <path
-        d="M2.50009 14.5V5.5C2.50009 4.39543 3.39552 3.5 4.50009 3.5H19.5001C20.6047 3.5 21.5001 4.39543 21.5001 5.5V14.5C21.5001 15.6046 20.6047 16.5 19.5001 16.5H4.50009C3.39552 16.5 2.50009 15.6046 2.50009 14.5Z"
+        d="M2.5 14.5v-9c0-1.1.9-2 2-2h15a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2Z"
         stroke="currentColor"
         stroke-width={3}
       />
-      <path d="M7.5 21.5H16.5" stroke="currentColor" stroke-width={3} stroke-linecap="round" />
-      <path d="M12 15.5V20.5" stroke="currentColor" stroke-width={4} />
+      <path d="M7.5 21.5h9" stroke="currentColor" stroke-width={3} stroke-linecap="round" />
+      <path d="M12 15.5v5" stroke="currentColor" stroke-width={4} />
     </svg>
   );
 });
