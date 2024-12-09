@@ -12,6 +12,7 @@ import type { BasicOptionProps } from '@douyinfe/semi-foundation/select/optionFo
 import type { CombineProps, RemoveIndexSignature } from '../interface';
 import { OptionGroupProps } from './optionGroup';
 import { useHasInProps } from '../_base/baseComponent';
+import { getTextFormVText } from '../_utils';
 
 const LocaleConsumer = LocaleConsumerFunc<Locale['Select']>();
 
@@ -111,7 +112,7 @@ const Option = defineComponent({
     }
 
     return () => {
-      const children = slots.default ? slots.default() : null;
+      const children = getTextFormVText(slots.default ? slots.default() : null);
       // 还有部分属性没有写到props
       const {
         disabled,

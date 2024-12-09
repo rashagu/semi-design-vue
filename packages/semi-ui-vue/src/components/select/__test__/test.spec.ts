@@ -1,5 +1,6 @@
 import { expect, test, describe } from 'vitest'
 import Comp from "./SelectDemo";
+import SelectTest from "./SelectTest";
 import {mount} from "@vue/test-utils";
 import {fireEvent, render, screen} from "@testing-library/vue";
 import SelectDemoToRawTest from './SelectDemoToRawTest';
@@ -36,4 +37,14 @@ test('SelectDemo toRaw unit', async () => {
   expect(valueText).toEqual("semi-select-option semi-select-option-selected semi-select-option-focused")
   const hs = await screen.findAllByText("火山")
   expect(hs.length).toEqual(2)
+})
+
+test('SelectDemo filter highlight', async () => {
+
+  render(SelectTest)
+  await (new Promise(resolve => setTimeout(resolve, 500)))
+  const input = await screen.findByRole("select-search-input")
+  await fireEvent.input(input, {target: {value: '抖'}})
+  const text = await screen.findByText("抖")
+  expect(text.getAttribute('class')).toEqual('semi-highlight-tag semi-select-option-keyword')
 })

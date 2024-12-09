@@ -154,6 +154,13 @@ const SelectDemo = defineComponent((props, { slots }) => {
     //   v-model={vv.value}
     // />
 
+    // return         <Select filter style={{ width: '180px' }} placeholder="带搜索功能的单选">
+    //   <Select.Option value="abc">抖音</Select.Option>
+    //   <Select.Option value="ulikecam">轻颜相机</Select.Option>
+    //   <Select.Option value="jianying">剪映</Select.Option>
+    //   <Select.Option value="xigua">西瓜视频</Select.Option>
+    // </Select>
+
     // return <Select
     //   placeholder="onChange"
     //   style={{ width: '260px' }}

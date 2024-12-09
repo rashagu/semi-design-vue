@@ -166,6 +166,7 @@ import ResizableDemo from './components/resizable/__test__/ResizableDemo';
 import TreeCheckSimpleJsonDemo from './components/tree/__test__/TreeCheckSimpleJsonDemo';
 import DragMoveDemo from './components/dragMove/__test__/DragMoveDemo';
 import JsonViewerDemo from './components/jsonViewer/__test__/JsonViewerDemo';
+import SelectTest from './components/select/__test__/SelectTest';
 
 export interface ExampleProps {
   name?: string
@@ -268,7 +269,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<TreeSelectDemo/>*/}
         {/*<TreeCheckDemo />*/}
         {/*<TreeCheckSimpleJsonDemo/>*/}
-        <DragMoveDemo/>
+        {/*<DragMoveDemo/>*/}
         {/*<JsonViewerDemo/>*/}
 
         {/*<TreeDemo />*/}
@@ -327,6 +328,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SelectRenderOptionItem/>*/}
         {/*<SelectDemoToRawTest/>*/}
         {/*<SelectDemo/>*/}
+        <SelectTest/>
         {/*<SelectDemo2/>*/}
         {/*<SelectDemo3/>*/}
         {/*<SelectDemo4/>*/}

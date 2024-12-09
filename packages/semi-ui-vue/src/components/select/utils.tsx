@@ -2,7 +2,7 @@ import { defineComponent, ref, h, Fragment, VNode } from 'vue';
 import warning from '@douyinfe/semi-foundation/utils/warning';
 import type { OptionProps } from './option';
 import type { OptionGroupProps } from './optionGroup';
-import { getFragmentChildren } from '../_utils';
+import { getFragmentChildren, getTextFormVText } from '../_utils';
 
 const generateOption = (child: VNode, parent: any, index: number, newKey?: string | number): OptionProps => {
   const childProps = child.props;
@@ -17,7 +17,7 @@ const generateOption = (child: VNode, parent: any, index: number, newKey?: strin
     label:
       childProps.label ||
       // @ts-ignore
-      (typeof child.children === 'object' && child.children.default ? child.children.default() : null) ||
+      (typeof child.children === 'object' && child.children.default ? getTextFormVText(child.children.default()) : null) ||
       childProps.value,
     _show: true,
     _selected: false,

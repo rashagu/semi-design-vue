@@ -186,6 +186,16 @@ export function getChildren(children: VNode[]):VNode[] | undefined {
 }
 
 
+/**
+ * 获取v-txt中的仅文本
+ * @param children
+ */
+export function getTextFormVText(children: VNode[]){
+    if (Array.isArray(children) && children.length === 1 && children[0].type?.toString() === 'Symbol(v-txt)'){
+        return children[0].children;
+    }
+    return children
+}
 
 
 
