@@ -85,7 +85,7 @@ const vuePropsType = vuePropsMake(chatPropTypes, defaultProps);
 const index = defineComponent({
   props: { ...vuePropsType },
   name: 'index',
-  setup(props, { attrs }) {
+  setup(props, { expose, attrs }) {
     const slots = useSlots();
 
     let dragStatus = false;
@@ -258,6 +258,13 @@ const index = defineComponent({
     function sendMessage(content: string, attachment: FileItem[]) {
       foundation.onMessageSend(content, attachment);
     }
+
+    expose({
+      resetMessage,
+      clearContext,
+      scrollToBottom,
+      sendMessage,
+    })
 
     watch(
       [() => props.chats, () => props.hints, () => state.chats, () => state.cacheHints, () => state.wheelScroll],
