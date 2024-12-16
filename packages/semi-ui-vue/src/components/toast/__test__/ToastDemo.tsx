@@ -48,15 +48,15 @@ const ToastDemo = defineComponent((props, {}) => {
   };
   return () => {
 
-    return  <Button onClick={() => {
-      Toast.info('opts.value')
-      // setTimeout(() => {
-      //   opts.value = {
-      //     content: 'Hi, Bytedansssssssssssce dance dance',
-      //     duration: 3,
-      //   }
-      // }, 1000)
-    }}>Display Toast</Button>
+    // return  <Button onClick={() => {
+    //   Toast.info('opts.value')
+    //   // setTimeout(() => {
+    //   //   opts.value = {
+    //   //     content: 'Hi, Bytedansssssssssssce dance dance',
+    //   //     duration: 3,
+    //   //   }
+    //   // }, 1000)
+    // }}>Display Toast</Button>
     return (
       <div>
 

@@ -284,7 +284,9 @@ const Tooltip = defineComponent({
 
           nextTick(() => {
             setTimeout(() => {
-              eventManager.value.emit('portalInserted');
+              if(state.transitionState === 'enter'){
+                eventManager.value.emit('portalInserted');
+              }
             }, 0);
           });
         },

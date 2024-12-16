@@ -65,7 +65,7 @@ const index = defineComponent({
           customRenderFunc={props.chatBoxRenderConfig.renderChatBoxContent}
         />
       );
-    }, [() => props.message, info, () => props.chatBoxRenderConfig.renderChatBoxContent]);
+    }, [() => props.message, info, () => props.chatBoxRenderConfig.renderChatBoxContent, () => props.mode]);
 
     const actionNode = useMemo(() => {
       return (

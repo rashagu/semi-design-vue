@@ -14,11 +14,11 @@ importers:
   .:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       '@douyinfe/semi-theme-default':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       '@vue/repl':
         specifier: 4.4.2
         version: 4.4.2(patch_hash=4i22gbsbdjboratjcc7c56w2hq)
@@ -216,17 +216,17 @@ importers:
   packages/semi-animation-vue:
     dependencies:
       '@douyinfe/semi-animation':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       '@douyinfe/semi-animation-styled':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       '@douyinfe/semi-foundation':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       '@douyinfe/semi-theme-default':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -310,11 +310,11 @@ importers:
   packages/semi-icons-lab-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       '@douyinfe/semi-theme-default':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -395,11 +395,11 @@ importers:
   packages/semi-icons-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       '@douyinfe/semi-theme-default':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -480,11 +480,11 @@ importers:
   packages/semi-illustrations-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       '@douyinfe/semi-theme-default':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -577,14 +577,14 @@ importers:
         specifier: 0.0.6-beta-20241014170855
         version: 0.0.6-beta-20241014170855
       '@douyinfe/semi-animation':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       '@douyinfe/semi-foundation':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       '@douyinfe/semi-theme-default':
-        specifier: 2.71.0
-        version: 2.71.0
+        specifier: 2.71.2
+        version: 2.71.2
       '@kousum/dnd-kit-vue':
         specifier: 0.0.6-beta-20241014170855
         version: 0.0.6-beta-20241014170855(vue@3.5.13(typescript@5.5.4))
@@ -627,9 +627,6 @@ importers:
       fast-copy:
         specifier: ^3.0.2
         version: 3.0.2
-      jsonc-parser:
-        specifier: 3.3.1
-        version: 3.3.1
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -1723,20 +1720,20 @@ packages:
       search-insights:
         optional: true
 
-  '@douyinfe/semi-animation-styled@2.71.0':
-    resolution: {integrity: sha512-3ZIoLN+rEdw6gt5FJdTa2wwKqUFR9U7n7monKouFqWobi08LseophDQ12QToNaVOgwKWpngoK97KBeCZGgKvkw==}
+  '@douyinfe/semi-animation-styled@2.71.2':
+    resolution: {integrity: sha512-Cgov9FUMreyLXmGQ6pn8YipY48c5Tln4GRK63+yy2aKo5DWn//nf5GYmaMso+2imnSjtCZpM1jNqSuidHuzfsQ==}
 
-  '@douyinfe/semi-animation@2.71.0':
-    resolution: {integrity: sha512-4BGmvLGB+YI7YBSq+iUM3YbPu+dCmk8VlVOBGdy4dRtBw7St/qPc0eMEKkrnLt4hDQzYQeVOTyh6CdXt7GvRFA==}
+  '@douyinfe/semi-animation@2.71.2':
+    resolution: {integrity: sha512-tgEkPdsBwvRVC0KDo4GxHvuTAUZWHTurLEEZB6TBH1C4QqLOqOmgCPloBk4jJi4gEXpMBvENhcCq2pGQZh2fGg==}
 
-  '@douyinfe/semi-foundation@2.71.0':
-    resolution: {integrity: sha512-b0bMP9XQxBArshXW2kYScKAh1okk+5hdNA22+57ZWdyzKBN0NWdQjNcfb0/ltihCVYkgPIb5wPxRIju70aXtdQ==}
+  '@douyinfe/semi-foundation@2.71.2':
+    resolution: {integrity: sha512-cnoiwdtkgyImzmzJK/HN89XWNHJSPehyA7LAMNrJpVwGhvzKZbxhtN+k1eqnYz0iqvO6mnyYp0bHDQtJb3cLxw==}
 
-  '@douyinfe/semi-json-viewer-core@2.71.0':
-    resolution: {integrity: sha512-qAjr3nwLXGm/I6Trkj/S7vhFmTRhz3PlDv0ZMBywDkMtrk0pU1jBEYurqzFsJ/fxmDQhl4TUN8q5RM5t9Qlh5w==}
+  '@douyinfe/semi-json-viewer-core@2.71.2':
+    resolution: {integrity: sha512-UhWEfJQjgT7URyY9RHByk69Cf+L5/m31z1EbcjqCC9DW14462fEdEzRT4W3Z8zTKAGRd16axARuugtkFdUHciw==}
 
-  '@douyinfe/semi-theme-default@2.71.0':
-    resolution: {integrity: sha512-AYi/yuunuemgSkz+6aG8NUPv9LXKQo/OemhteO9IdCm/jtUzQXjrq6p1RGjg40TRvhwYPRL1cbOo7OoZ97CrKw==}
+  '@douyinfe/semi-theme-default@2.71.2':
+    resolution: {integrity: sha512-iDPQlZYKMyXUp/ec++S68w/Ty89Oj05MYyPWGQzIdB2/wWpcxPBg+DcdpAA4eZ1emSqYsD/OB/0wCavj+az+VA==}
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -9747,16 +9744,16 @@ snapshots:
     transitivePeerDependencies:
       - '@algolia/client-search'
 
-  '@douyinfe/semi-animation-styled@2.71.0': {}
+  '@douyinfe/semi-animation-styled@2.71.2': {}
 
-  '@douyinfe/semi-animation@2.71.0':
+  '@douyinfe/semi-animation@2.71.2':
     dependencies:
       bezier-easing: 2.1.0
 
-  '@douyinfe/semi-foundation@2.71.0':
+  '@douyinfe/semi-foundation@2.71.2':
     dependencies:
-      '@douyinfe/semi-animation': 2.71.0
-      '@douyinfe/semi-json-viewer-core': 2.71.0
+      '@douyinfe/semi-animation': 2.71.2
+      '@douyinfe/semi-json-viewer-core': 2.71.2
       '@mdx-js/mdx': 3.0.1
       async-validator: 3.5.2
       classnames: 2.5.1
@@ -9772,11 +9769,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@douyinfe/semi-json-viewer-core@2.71.0':
+  '@douyinfe/semi-json-viewer-core@2.71.2':
     dependencies:
       jsonc-parser: 3.3.1
 
-  '@douyinfe/semi-theme-default@2.71.0': {}
+  '@douyinfe/semi-theme-default@2.71.2': {}
 
   '@esbuild/aix-ppc64@0.20.2':
     optional: true

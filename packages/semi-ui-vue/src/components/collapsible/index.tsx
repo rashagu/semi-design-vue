@@ -8,6 +8,7 @@ import * as PropTypes from '../PropTypes';
 import { vuePropsMake } from '../PropTypes';
 import cls from 'classnames';
 import { cssClasses } from '@douyinfe/semi-foundation/collapsible/constants';
+import { isEqual, omit, pick } from "lodash";
 import '@douyinfe/semi-foundation/collapsible/collapsible.scss';
 import {
   ComponentObjectPropsOptions,

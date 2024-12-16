@@ -53,7 +53,7 @@ const chatBoxContent = defineComponent({
         [`${PREFIX_CHAT_BOX}-content-user`]: (bubble && isUser) || userBubble,
         [`${PREFIX_CHAT_BOX}-content-error`]: props.message.status === MESSAGE_STATUS.ERROR && (bubble || userBubble)
       });
-    }, [()=>props.message.role, ()=>props.message.status]);
+    }, [()=>props.message.role, ()=>props.message.status, ()=>props.mode]);
 
     const node = useMemo(() => {
       if (props.message.status === MESSAGE_STATUS.LOADING) {
