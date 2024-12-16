@@ -12,7 +12,7 @@ export const vuePropsType = {
 }
 const ToastDemo = defineComponent((props, {}) => {
   const slots = useSlots()
-  const Toast = useToastHook()
+  // const Toast = useToastHook()
   const id = Toast.info({
     content:<div class={"test_class1"}>useToastHook</div>
   })
@@ -46,46 +46,58 @@ const ToastDemo = defineComponent((props, {}) => {
     title: 'This is a success message',
     content: 123,
   };
-  return () => (
-    <div>
+  return () => {
 
-      <ToastList ref={(instance: any) => {
-        instance?.add({...{
-            motion: true,
-            zIndex: 1010,
-            content: 'test',
-          }, id: 'id'});
-      }}/>
+    return  <Button onClick={() => {
+      Toast.info('opts.value')
+      // setTimeout(() => {
+      //   opts.value = {
+      //     content: 'Hi, Bytedansssssssssssce dance dance',
+      //     duration: 3,
+      //   }
+      // }, 1000)
+    }}>Display Toast</Button>
+    return (
       <div>
-        <Button onClick={() => {
-          Toast.info(opts.value)
-          // setTimeout(() => {
-          //   opts.value = {
-          //     content: 'Hi, Bytedansssssssssssce dance dance',
-          //     duration: 3,
-          //   }
-          // }, 1000)
-        }}>Display Toast</Button>
-        <br/>
 
-
-        <br/>
-        <Button onClick={throttled} className={'Throttled'}>Throttled Toast</Button>
-
-
+        <ToastList ref={(instance: any) => {
+          instance?.add({...{
+              motion: true,
+              zIndex: 1010,
+              content: 'test',
+            }, id: 'id'});
+        }}/>
         <div>
-          <Button
-            onClick={() => {
-              toast_.success(config);
-            }}
-          >
-            Hook Toast
-          </Button>
+          <Button onClick={() => {
+            Toast.info(opts.value)
+            // setTimeout(() => {
+            //   opts.value = {
+            //     content: 'Hi, Bytedansssssssssssce dance dance',
+            //     duration: 3,
+            //   }
+            // }, 1000)
+          }}>Display Toast</Button>
+          <br/>
+
+
+          <br/>
+          <Button onClick={throttled} className={'Throttled'}>Throttled Toast</Button>
+
+
+          <div>
+            <Button
+              onClick={() => {
+                toast_.success(config);
+              }}
+            >
+              Hook Toast
+            </Button>
+          </div>
+          {contextHolder.value}
         </div>
-        {contextHolder.value}
       </div>
-    </div>
-  )
+    )
+  }
 })
 
 

@@ -90,7 +90,7 @@ export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const JsonViewerCom = defineComponent({
   props: { ...vuePropsType },
   name: 'JsonViewerCom',
-  setup(props, { attrs }) {
+  setup(props, { expose, attrs }) {
     const slots = useSlots();
     const state = reactive<JsonViewerState>({
       searchOptions: {
@@ -154,6 +154,11 @@ const JsonViewerCom = defineComponent({
     function format() {
       foundation.jsonViewer.format();
     }
+
+    expose({
+      getValue,
+      format,
+    })
 
     function getStyle() {
       const { width, height } = props;

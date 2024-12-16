@@ -167,6 +167,7 @@ import TreeCheckSimpleJsonDemo from './components/tree/__test__/TreeCheckSimpleJ
 import DragMoveDemo from './components/dragMove/__test__/DragMoveDemo';
 import JsonViewerDemo from './components/jsonViewer/__test__/JsonViewerDemo';
 import SelectTest from './components/select/__test__/SelectTest';
+import { InputVModel } from './components';
 
 export interface ExampleProps {
   name?: string
@@ -189,9 +190,15 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
   // })
   // console.log(ConfigProvider);
   const a = ref('sdsd')
+  const testRef = ref()
+  watch(testRef, (v)=>{
+    console.log(v, v?.getRef());
+  })
   return () => (
     <div>
       <ConfigProvider locale={zh_CN}>
+        {a.value}
+        <InputVModel ref={testRef} v-model={a.value}/>
         {/*<WithVModelDemo/>*/}
         {/*<CalenderDemo />*/}
         {/*<TransferDemo/>*/}
@@ -328,7 +335,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<SelectRenderOptionItem/>*/}
         {/*<SelectDemoToRawTest/>*/}
         {/*<SelectDemo/>*/}
-        <SelectTest/>
+        {/*<SelectTest/>*/}
         {/*<SelectDemo2/>*/}
         {/*<SelectDemo3/>*/}
         {/*<SelectDemo4/>*/}

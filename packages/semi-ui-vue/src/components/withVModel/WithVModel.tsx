@@ -16,13 +16,16 @@ export default function WithVModel<T>(Comp: DefineSetupFnComponent<T>, opt?: Wit
       const instance = ref();
 
       expose({
-        ...instance.value,
+        getRef(){
+          return instance.value
+        },
       });
       return () => {
         if (props['onUpdate:modelValue']) {
           return (
             //@ts-ignore
             <Comp
+              ref={instance}
               {...omit(props, 'update:modelValue', 'modelValue', opt?.valueKey || 'value', 'onChange')}
               {...{
                 [opt?.valueKey || 'value']: props.modelValue,
