@@ -31,7 +31,6 @@ import { CombineProps } from '../interface';
 
 export interface CarouselState {
   activeIndex: number;
-  children: VNode[];
   preIndex: number;
   isReverse: boolean;
   isInit: boolean;
@@ -88,7 +87,6 @@ const Carousel = defineComponent({
     let preChildren: VNode[] = [];
     const state = reactive<CarouselState>({
       activeIndex: -1,
-      children: [],
       preIndex: -1,
       isReverse: false,
       isInit: true,
@@ -102,7 +100,7 @@ const Carousel = defineComponent({
         getStates() {
           return {
             ...state,
-            children: preChildren,
+            // children: preChildren,
           };
         },
         notifyChange: (activeIndex: number, preIndex: number): void => {
@@ -119,6 +117,9 @@ const Carousel = defineComponent({
         },
         setIsInit: (isInit: boolean): void => {
           state.isInit = isInit;
+        },
+        getChildren: (): any[] => {
+          return getChildren() as any[];
         },
       };
     }
@@ -208,12 +209,11 @@ const Carousel = defineComponent({
       return foundation.onIndicatorChange(activeIndex);
     };
 
-    // function getChildren() {
-    //   const originChildren:VNode[] = slots.default?.()?.[0].children as any  || [];
-    //   return originChildren.filter(child => {
-    //     return isVNode(child);
-    //   });
-    // }
+    function getChildren() {
+      return preChildren.filter(child => {
+        return isVNode(child);
+      });
+    }
 
     const getValidIndex = (activeIndex: number): number => {
       return foundation.getValidIndex(activeIndex);
@@ -223,9 +223,10 @@ const Carousel = defineComponent({
       const { speed, animation } = props;
       const { activeIndex, preIndex, isInit } = state;
 
+      const children = getChildren();
       return (
         <Fragment>
-          {preChildren.map((child: any, index: number) => {
+          {children.map((child: any, index: number) => {
             const isCurrent = index === activeIndex;
             const isPrev = index === getValidIndex(activeIndex - 1);
             const isNext = index === getValidIndex(activeIndex + 1);
@@ -266,12 +267,14 @@ const Carousel = defineComponent({
         [cssClasses.CAROUSEL_INDICATOR]: true,
       });
 
-      if (showIndicator && preChildren.length > 1) {
+      const children = getChildren();
+
+      if (showIndicator && children.length > 1) {
         return (
           <div class={carouselIndicatorCls}>
             <CarouselIndicator
               type={indicatorType}
-              total={preChildren.length}
+              total={children.length}
               activeIndex={activeIndex}
               position={indicatorPosition}
               trigger={trigger}
@@ -287,8 +290,9 @@ const Carousel = defineComponent({
 
     const renderArrow = () => {
       const { showArrow, arrowType, theme, arrowProps } = props;
+      const children = getChildren();
 
-      if (showArrow && preChildren.length > 1) {
+      if (showArrow && children.length > 1) {
         return <CarouselArrow type={arrowType} theme={theme} prev={prev} next={next} arrowProps={arrowProps} />;
       }
       return null;

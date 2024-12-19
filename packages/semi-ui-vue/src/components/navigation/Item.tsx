@@ -196,6 +196,7 @@ const NavItem = defineComponent({
       return (
         <Tooltip
           content={text}
+          wrapWhenSpecial={false}
           position="right"
           trigger={'hover'}
           mouseEnterDelay={showDelay}
