@@ -18,7 +18,8 @@ import type {
     BaseFilter,
     BaseChangeInfoFilter,
     BaseIncludeGroupRecord,
-    BaseEllipsis
+    BaseEllipsis,
+    OnChangeExtra
 } from '@douyinfe/semi-foundation/table/foundation';
 import { TableCellProps } from './TableCell';
 
@@ -325,7 +326,7 @@ export interface ChangeInfo<RecordType> {
     pagination?: TablePaginationProps;
     filters?: ChangeInfoFilter<RecordType>[];
     sorter?: ChangeInfoSorter<RecordType>;
-    extra?: Record<string, any>
+    extra?: OnChangeExtra
 }
 export type OnChange<RecordType> = (changeInfo: ChangeInfo<RecordType>) => void;
 export type OnRow<RecordType> = (record?: RecordType, index?: number) => OnRowReturnObject;

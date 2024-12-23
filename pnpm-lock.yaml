@@ -14,11 +14,11 @@ importers:
   .:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       '@vue/repl':
         specifier: 4.4.2
         version: 4.4.2(patch_hash=4i22gbsbdjboratjcc7c56w2hq)
@@ -216,17 +216,17 @@ importers:
   packages/semi-animation-vue:
     dependencies:
       '@douyinfe/semi-animation':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       '@douyinfe/semi-animation-styled':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       '@douyinfe/semi-foundation':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -310,11 +310,11 @@ importers:
   packages/semi-icons-lab-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -395,11 +395,11 @@ importers:
   packages/semi-icons-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -480,11 +480,11 @@ importers:
   packages/semi-illustrations-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -577,14 +577,14 @@ importers:
         specifier: 0.0.6-beta-20241014170855
         version: 0.0.6-beta-20241014170855
       '@douyinfe/semi-animation':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       '@douyinfe/semi-foundation':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       '@douyinfe/semi-theme-default':
-        specifier: 2.71.3
-        version: 2.71.3
+        specifier: 2.72.0
+        version: 2.72.0
       '@kousum/dnd-kit-vue':
         specifier: 0.0.6-beta-20241014170855
         version: 0.0.6-beta-20241014170855(vue@3.5.13(typescript@5.5.4))
@@ -1720,20 +1720,20 @@ packages:
       search-insights:
         optional: true
 
-  '@douyinfe/semi-animation-styled@2.71.3':
-    resolution: {integrity: sha512-/uV7Y8cfvop4hfs/C1teJrIZGlFT4EgKYVTCz+0Sl1yepCSHRTYaVt61jEbh/oewoW9xpk1VboR8se0UiQmHCg==}
+  '@douyinfe/semi-animation-styled@2.72.0':
+    resolution: {integrity: sha512-zJba1jtUdlTXo1/GAAv4ImGfllT04CRH0wOT876a408lVXHauJjrGJby0ESbkMKaFTAdNYh76fJ+sp+qLOweXQ==}
 
-  '@douyinfe/semi-animation@2.71.3':
-    resolution: {integrity: sha512-6Q9CqlEKRcYFvOHN5tOT3TpB+hO7V8cyI2dyHHwZNukqVfMJ9/olIkAeKPPpbWcf33JEV6+O7ZNwBgZUVYZsEw==}
+  '@douyinfe/semi-animation@2.72.0':
+    resolution: {integrity: sha512-6K0YUysNA20akUWwzUdeED4XQXU2iD0gJdmnW44ZwbKGv5thKo38bQ0YYPcmjsk60EtlmQy8xSfnTNoRCq/FBg==}
 
-  '@douyinfe/semi-foundation@2.71.3':
-    resolution: {integrity: sha512-eOkRQriI8QDVWI+EuQ3MVD5i490B876a2xHAmgNf3FkFZ1OUcRPURIfLVo6/6WXx57lXEVCgY2nbduO9zGGHZw==}
+  '@douyinfe/semi-foundation@2.72.0':
+    resolution: {integrity: sha512-2Z+cdPYGRwCY+eCsptq5UCPQZ9ltIWcY7lpe5rudDIBI8Z2GprXvpmMG2HbdpqCz047AMvI+g/x9xzhHi5FR+A==}
 
-  '@douyinfe/semi-json-viewer-core@2.71.3':
-    resolution: {integrity: sha512-Poopkfc5n+FIN8UZbB8VNLS5k067mYxrtqsC/F37beTrSkAtsBzh1wlXOEIarDi+BzCSLyErNBp1Xfp0OvehXQ==}
+  '@douyinfe/semi-json-viewer-core@2.72.0':
+    resolution: {integrity: sha512-A7mJXKu1pz/iFbXLcWTPmnvl5J+Yj9UZYR/NNx9UczqvCmYaUz9px+Aa9ynKsdsWhSD1B4xWbp8x6A4FlBJCAA==}
 
-  '@douyinfe/semi-theme-default@2.71.3':
-    resolution: {integrity: sha512-N6j+mSqcxN2/N+/QP2UbvH38Ht52n5JrKkDsYjdA6xiYBKRLIU1VjcAdFTkzQyKjOXrtkaiarMcypi2fwoS3ww==}
+  '@douyinfe/semi-theme-default@2.72.0':
+    resolution: {integrity: sha512-l8SOMqiaDFkZKgRmRKe7bTADprVQc5VsJIAbu14qSoo8pdQvJMPnRgeCsTRkTzLTw8YU1IpGeD6514dZP6qlvA==}
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -9744,16 +9744,16 @@ snapshots:
     transitivePeerDependencies:
       - '@algolia/client-search'
 
-  '@douyinfe/semi-animation-styled@2.71.3': {}
+  '@douyinfe/semi-animation-styled@2.72.0': {}
 
-  '@douyinfe/semi-animation@2.71.3':
+  '@douyinfe/semi-animation@2.72.0':
     dependencies:
       bezier-easing: 2.1.0
 
-  '@douyinfe/semi-foundation@2.71.3':
+  '@douyinfe/semi-foundation@2.72.0':
     dependencies:
-      '@douyinfe/semi-animation': 2.71.3
-      '@douyinfe/semi-json-viewer-core': 2.71.3
+      '@douyinfe/semi-animation': 2.72.0
+      '@douyinfe/semi-json-viewer-core': 2.72.0
       '@mdx-js/mdx': 3.0.1
       async-validator: 3.5.2
       classnames: 2.5.1
@@ -9769,11 +9769,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@douyinfe/semi-json-viewer-core@2.71.3':
+  '@douyinfe/semi-json-viewer-core@2.72.0':
     dependencies:
       jsonc-parser: 3.3.1
 
-  '@douyinfe/semi-theme-default@2.71.3': {}
+  '@douyinfe/semi-theme-default@2.72.0': {}
 
   '@esbuild/aix-ppc64@0.20.2':
     optional: true
