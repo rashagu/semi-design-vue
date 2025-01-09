@@ -36,6 +36,7 @@ import {
 import { CombineProps } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 import { styleNum } from '../_utils';
+import { isEqual } from 'lodash';
 const prefixCls = cssClasses.PREFIX;
 
 export type { JsonViewerOptions };
@@ -138,8 +139,11 @@ const JsonViewerCom = defineComponent({
     onMounted(()=>{
       foundation.init();
     })
-    watch(()=>props.options, (value, oldValue, onCleanup)=>{
-      if (oldValue !== value) {
+    watch([
+      ()=>props.options,
+      ()=>props.value,
+    ], ([options, value], [oldOptions, oldValue], onCleanup)=>{
+      if (oldValue !== value || !isEqual(options, oldOptions)) {
         foundation.jsonViewer.dispose();
         foundation.init();
       }
