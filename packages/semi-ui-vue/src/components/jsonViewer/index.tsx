@@ -44,6 +44,7 @@ export interface JsonViewerProps extends BaseProps {
   value: string;
   width: number;
   height: number;
+  showSearch?: boolean;
   className?: string;
   style?: CSSProperties;
   onChange?: (value: string) => void;
@@ -73,6 +74,7 @@ const propTypes: CombineProps<JsonViewerProps> = {
     type: Number,
     required: true,
   },
+  showSearch: Boolean,
   width: {
     type: Number,
     required: true,
@@ -86,6 +88,10 @@ const defaultProps: Partial<JsonViewerProps> = {
   width: 400,
   height: 400,
   value: '',
+  options: {
+    readOnly: false,
+    autoWrap: true
+  }
 };
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const JsonViewerCom = defineComponent({
@@ -104,6 +110,7 @@ const JsonViewerCom = defineComponent({
     const editorRef = shallowRef()
     const searchInputRef = shallowRef()
     const replaceInputRef = shallowRef()
+    let isComposing: boolean = false;
 
     const { adapter: adapterInject, getDataAttr } = useBaseComponent(props, state)
 
@@ -230,6 +237,16 @@ const JsonViewerCom = defineComponent({
             className={`${prefixCls}-search-bar-input`}
             onChange={(_value, e) => {
               e.preventDefault();
+              if (!isComposing) {
+                searchHandler();
+              }
+              searchInputRef.value?.focus();
+            }}
+            onCompositionstart={() => {
+              isComposing = true;
+            }}
+            onCompositionend={() => {
+              isComposing = false;
               searchHandler();
               searchInputRef.value?.focus();
             }}
@@ -264,6 +281,8 @@ const JsonViewerCom = defineComponent({
     }
 
     function renderReplaceBar() {
+      const { readOnly } = props.options;
+
       return (
         <div class={`${prefixCls}-replace-bar`}>
           <Input
@@ -275,6 +294,7 @@ const JsonViewerCom = defineComponent({
             ref={replaceInputRef}
           />
           <Button
+            disabled={readOnly}
             onClick={() => {
               const value = replaceInputRef.value?.value;
               foundation.replace(value);
@@ -283,6 +303,7 @@ const JsonViewerCom = defineComponent({
             替换
           </Button>
           <Button
+            disabled={readOnly}
             onClick={() => {
               const value = replaceInputRef.value?.value;
               foundation.replaceAll(value);
@@ -299,7 +320,7 @@ const JsonViewerCom = defineComponent({
     return () => {
 
       let isDragging = false;
-      const { width, className, style, ...rest } = props;
+      const { width, className, style, showSearch = true, ...rest } = props;
       return (
         <>
           <div style={{ ...getStyle(), position: 'relative', ...style }} class={className} {...getDataAttr()}>
@@ -308,7 +329,7 @@ const JsonViewerCom = defineComponent({
               ref={editorRef}
               class={classNames(prefixCls, `${prefixCls}-background`)}
             ></div>
-            <DragMove
+            {showSearch && <DragMove
               onMouseDown={() => {
                 isDragging = false;
               }}
@@ -335,7 +356,7 @@ const JsonViewerCom = defineComponent({
                   renderSearchBox()
                 )}
               </div>
-            </DragMove>
+            </DragMove>}
           </div>
         </>
       );

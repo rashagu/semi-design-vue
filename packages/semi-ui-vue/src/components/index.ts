@@ -192,6 +192,7 @@ export type { FormApi, FormFCChild, CommonFieldProps } from './form/index';
 export { default as Image } from './image';
 export { Preview as ImagePreview } from './image';
 export type { RuleItem, BaseFormProps } from './form/interface';
+export { default as DragMove } from './dragMove';
 
 //v-model
 export {
@@ -223,3 +224,5 @@ export { default as Chat } from './chat';
 export { default as ColorPicker } from './colorPicker';
 export { default as HotKeys } from './hotKeys';
 export { Resizable, ResizeGroup, ResizeHandler, ResizeItem } from './resizable';
+export { default as Cropper } from './cropper';
+export { default as AudioPlayer } from './audioPlayer';

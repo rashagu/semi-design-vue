@@ -5,8 +5,11 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
+  '@douyinfe/semi-foundation@2.73.0':
+    hash: 68d845fc596cc3ad70725cb975aaae3949f2c948a8baaa5c78f39a79ebc011b9
+    path: patches/@douyinfe__semi-foundation@2.73.0.patch
   '@vue/repl@4.4.2':
-    hash: 4i22gbsbdjboratjcc7c56w2hq
+    hash: a8bb7e4c6f697eb0965370d9a0537e82f338ad17107466497fdb72e20b60680b
     path: patches/@vue__repl@4.4.2.patch
 
 importers:
@@ -14,14 +17,14 @@ importers:
   .:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0(patch_hash=68d845fc596cc3ad70725cb975aaae3949f2c948a8baaa5c78f39a79ebc011b9)
       '@douyinfe/semi-theme-default':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0
       '@vue/repl':
         specifier: 4.4.2
-        version: 4.4.2(patch_hash=4i22gbsbdjboratjcc7c56w2hq)
+        version: 4.4.2(patch_hash=a8bb7e4c6f697eb0965370d9a0537e82f338ad17107466497fdb72e20b60680b)
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -216,17 +219,17 @@ importers:
   packages/semi-animation-vue:
     dependencies:
       '@douyinfe/semi-animation':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0
       '@douyinfe/semi-animation-styled':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0
       '@douyinfe/semi-foundation':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0(patch_hash=68d845fc596cc3ad70725cb975aaae3949f2c948a8baaa5c78f39a79ebc011b9)
       '@douyinfe/semi-theme-default':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -310,11 +313,11 @@ importers:
   packages/semi-icons-lab-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0(patch_hash=68d845fc596cc3ad70725cb975aaae3949f2c948a8baaa5c78f39a79ebc011b9)
       '@douyinfe/semi-theme-default':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -395,11 +398,11 @@ importers:
   packages/semi-icons-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0(patch_hash=68d845fc596cc3ad70725cb975aaae3949f2c948a8baaa5c78f39a79ebc011b9)
       '@douyinfe/semi-theme-default':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -480,11 +483,11 @@ importers:
   packages/semi-illustrations-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0(patch_hash=68d845fc596cc3ad70725cb975aaae3949f2c948a8baaa5c78f39a79ebc011b9)
       '@douyinfe/semi-theme-default':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -577,14 +580,14 @@ importers:
         specifier: 0.0.6-beta-20241014170855
         version: 0.0.6-beta-20241014170855
       '@douyinfe/semi-animation':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0
       '@douyinfe/semi-foundation':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0(patch_hash=68d845fc596cc3ad70725cb975aaae3949f2c948a8baaa5c78f39a79ebc011b9)
       '@douyinfe/semi-theme-default':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: 2.73.0
+        version: 2.73.0
       '@kousum/dnd-kit-vue':
         specifier: 0.0.6-beta-20241014170855
         version: 0.0.6-beta-20241014170855(vue@3.5.13(typescript@5.5.4))
@@ -1720,20 +1723,20 @@ packages:
       search-insights:
         optional: true
 
-  '@douyinfe/semi-animation-styled@2.72.0':
-    resolution: {integrity: sha512-zJba1jtUdlTXo1/GAAv4ImGfllT04CRH0wOT876a408lVXHauJjrGJby0ESbkMKaFTAdNYh76fJ+sp+qLOweXQ==}
+  '@douyinfe/semi-animation-styled@2.73.0':
+    resolution: {integrity: sha512-DC5meqG7Ooxpual6UEVrK0t6oo+PJQUv6r+TG7XMPaXmJRehwmd11L55aDq7h0xs6IO8TJEI3kfHCvnvcCCKBA==}
 
-  '@douyinfe/semi-animation@2.72.0':
-    resolution: {integrity: sha512-6K0YUysNA20akUWwzUdeED4XQXU2iD0gJdmnW44ZwbKGv5thKo38bQ0YYPcmjsk60EtlmQy8xSfnTNoRCq/FBg==}
+  '@douyinfe/semi-animation@2.73.0':
+    resolution: {integrity: sha512-oNJepL4gXcdB/poFbYoLke/lfmcrHq85oR/ax/xPeh8Z5A4816MYcqNXjW/nG7hXBnKeoE8TPpAYWDxqyINq5Q==}
 
-  '@douyinfe/semi-foundation@2.72.0':
-    resolution: {integrity: sha512-2Z+cdPYGRwCY+eCsptq5UCPQZ9ltIWcY7lpe5rudDIBI8Z2GprXvpmMG2HbdpqCz047AMvI+g/x9xzhHi5FR+A==}
+  '@douyinfe/semi-foundation@2.73.0':
+    resolution: {integrity: sha512-9QfpGJs/iY7TUhuyXj85s2p7ILLJnptTO2LAfHoq9o0B3+nhptLb1sDIqG7BS1PJrTcABxavl0IbSrxcITln2w==}
 
-  '@douyinfe/semi-json-viewer-core@2.72.0':
-    resolution: {integrity: sha512-A7mJXKu1pz/iFbXLcWTPmnvl5J+Yj9UZYR/NNx9UczqvCmYaUz9px+Aa9ynKsdsWhSD1B4xWbp8x6A4FlBJCAA==}
+  '@douyinfe/semi-json-viewer-core@2.73.0':
+    resolution: {integrity: sha512-E7jzWuQl5OPMUkoyVeT9HHC9G3PiEG5yvas6c0Cw3jwFBRGgJ6X0FjYDJsUdcfuOkhMbly2AQvwN2cIe9cmBGA==}
 
-  '@douyinfe/semi-theme-default@2.72.0':
-    resolution: {integrity: sha512-l8SOMqiaDFkZKgRmRKe7bTADprVQc5VsJIAbu14qSoo8pdQvJMPnRgeCsTRkTzLTw8YU1IpGeD6514dZP6qlvA==}
+  '@douyinfe/semi-theme-default@2.73.0':
+    resolution: {integrity: sha512-b8g4/l0p8m4iJHiHzw4kX2O8ZDT9QfDS+vB30olXlPnKUZ4QI6Slw8NeYoZUKKM8Xyf2fEcazYQuX4VBjUbMpA==}
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -7565,8 +7568,8 @@ packages:
   vue-component-type-helpers@2.0.19:
     resolution: {integrity: sha512-cN3f1aTxxKo4lzNeQAkVopswuImUrb5Iurll9Gaw5cqpnbTAxtEMM1mgi6ou4X79OCyqYv1U1mzBHJkzmiK82w==}
 
-  vue-component-type-helpers@2.1.10:
-    resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==}
+  vue-component-type-helpers@2.2.0:
+    resolution: {integrity: sha512-cYrAnv2me7bPDcg9kIcGwjJiSB6Qyi08+jLDo9yuvoFQjzHiPTzML7RnkJB1+3P6KMsX/KbCD4QE3Tv/knEllw==}
 
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
@@ -9744,16 +9747,16 @@ snapshots:
     transitivePeerDependencies:
       - '@algolia/client-search'
 
-  '@douyinfe/semi-animation-styled@2.72.0': {}
+  '@douyinfe/semi-animation-styled@2.73.0': {}
 
-  '@douyinfe/semi-animation@2.72.0':
+  '@douyinfe/semi-animation@2.73.0':
     dependencies:
       bezier-easing: 2.1.0
 
-  '@douyinfe/semi-foundation@2.72.0':
+  '@douyinfe/semi-foundation@2.73.0(patch_hash=68d845fc596cc3ad70725cb975aaae3949f2c948a8baaa5c78f39a79ebc011b9)':
     dependencies:
-      '@douyinfe/semi-animation': 2.72.0
-      '@douyinfe/semi-json-viewer-core': 2.72.0
+      '@douyinfe/semi-animation': 2.73.0
+      '@douyinfe/semi-json-viewer-core': 2.73.0
       '@mdx-js/mdx': 3.0.1
       async-validator: 3.5.2
       classnames: 2.5.1
@@ -9769,11 +9772,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@douyinfe/semi-json-viewer-core@2.72.0':
+  '@douyinfe/semi-json-viewer-core@2.73.0':
     dependencies:
       jsonc-parser: 3.3.1
 
-  '@douyinfe/semi-theme-default@2.72.0': {}
+  '@douyinfe/semi-theme-default@2.73.0': {}
 
   '@esbuild/aix-ppc64@0.20.2':
     optional: true
@@ -10531,7 +10534,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.5.13(typescript@5.5.4)
-      vue-component-type-helpers: 2.1.10
+      vue-component-type-helpers: 2.2.0
 
   '@svgr/babel-plugin-add-jsx-attribute@5.4.0': {}
 
@@ -11057,7 +11060,7 @@ snapshots:
     dependencies:
       '@vue/shared': 3.5.13
 
-  '@vue/repl@4.4.2(patch_hash=4i22gbsbdjboratjcc7c56w2hq)': {}
+  '@vue/repl@4.4.2(patch_hash=a8bb7e4c6f697eb0965370d9a0537e82f338ad17107466497fdb72e20b60680b)': {}
 
   '@vue/runtime-core@3.4.27':
     dependencies:
@@ -16447,7 +16450,7 @@ snapshots:
 
   vue-component-type-helpers@2.0.19: {}
 
-  vue-component-type-helpers@2.1.10: {}
+  vue-component-type-helpers@2.2.0: {}
 
   vue-demi@0.14.10(vue@3.5.13(typescript@5.5.4)):
     dependencies:

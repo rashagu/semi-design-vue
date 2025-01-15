@@ -92,6 +92,7 @@ export interface DropdownProps extends TooltipProps {
   onEscKeyDown?: TooltipProps['onEscKeyDown'];
 
   name?: string;
+  tooltipStyle?: CSSProperties;
 }
 
 interface DropdownState {
@@ -124,6 +125,7 @@ const propTypes: CombineProps<DropdownProps> = {
   spacing: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   menu: PropTypes.array,
   name: String,
+  tooltipStyle: PropTypes.object,
 };
 export const DropdownVuePropsType = propTypes;
 const defaultProps = {
@@ -255,6 +257,7 @@ const Dropdown = defineComponent({
         className,
         motion,
         style,
+        tooltipStyle,
         prefixCls,
 
         render,
@@ -297,6 +300,7 @@ const Dropdown = defineComponent({
           showArrow={false}
           returnFocusOnClose={true}
           ref={tooltipRef}
+          style={tooltipStyle}
           {...attr}
         >
           {cloneVNode(children, {

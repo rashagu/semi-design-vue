@@ -34,8 +34,8 @@
     "packages/vite-plugin-semi-theme"
   ],
   "dependencies": {
-    "@douyinfe/semi-foundation": "2.72.0",
-    "@douyinfe/semi-theme-default": "2.72.0",
+    "@douyinfe/semi-foundation": "2.73.0",
+    "@douyinfe/semi-theme-default": "2.73.0",
     "@vue/repl": "4.4.2",
     "lodash": "^4.17.21",
     "vue": "^3.5.13"
@@ -48,7 +48,7 @@
     "@babel/preset-react": "^7.16.7",
     "@changesets/cli": "^2.27.1",
     "@chromatic-com/storybook": "1.3.4",
-    "@douyinfe/semi-theme-default": "2.72.0",
+    "@douyinfe/semi-theme-default": "2.73.0",
     "@kousum/semi-icons-lab-vue": "workspace: *",
     "@kousum/semi-icons-vue": "workspace: *",
     "@kousum/semi-illustrations-vue": "workspace: *",
@@ -106,7 +106,8 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "@vue/repl@4.4.2": "patches/@vue__repl@4.4.2.patch"
+      "@vue/repl@4.4.2": "patches/@vue__repl@4.4.2.patch",
+      "@douyinfe/semi-foundation@2.73.0": "patches/@douyinfe__semi-foundation@2.73.0.patch"
     }
   }
 }

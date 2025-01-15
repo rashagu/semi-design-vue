@@ -168,6 +168,8 @@ import DragMoveDemo from './components/dragMove/__test__/DragMoveDemo';
 import JsonViewerDemo from './components/jsonViewer/__test__/JsonViewerDemo';
 import SelectTest from './components/select/__test__/SelectTest';
 import { InputVModel } from './components';
+import CropperDemo from './components/cropper/__test__/CropperDemo';
+import AudioPlayerDemo from './components/audioPlayer/__test__/AudioPlayerDemo';
 
 export interface ExampleProps {
   name?: string
@@ -198,7 +200,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
     <div>
       <ConfigProvider locale={zh_CN}>
         {a.value}
-        <InputVModel ref={testRef} v-model={a.value}/>
+        <AudioPlayerDemo/>
+        {/*<CropperDemo/>*/}
+        {/*<InputVModel ref={testRef} v-model={a.value}/>*/}
         {/*<WithVModelDemo/>*/}
         {/*<CalenderDemo />*/}
         {/*<TransferDemo/>*/}

@@ -3,7 +3,7 @@ import * as PropTypes from '../PropTypes';
 import {
   cloneVNode, CSSProperties,
   defineComponent,
-  h, isRef,
+  h, isRef, onBeforeUnmount,
   onMounted,
   onUnmounted,
   PropType,
@@ -132,7 +132,7 @@ const DragMove = defineComponent({
       foundation.init();
     })
 
-    onUnmounted(()=>{
+    onBeforeUnmount(()=>{
       foundation.destroy();
     })
 
@@ -146,20 +146,6 @@ const DragMove = defineComponent({
           // Call the original ref, if any
           const { ref } = children as any;
           setRefJsx(ref, node)
-        },
-        onMousedown: (e: MouseEvent) => {
-          foundation.onMouseDown(e);
-          const { onMouseDown } = children.props;
-          if (typeof onMouseDown === 'function') {
-            onMouseDown(e);
-          }
-        },
-        onTouchstart: (e: TouchEvent) => {
-          foundation.onTouchStart(e);
-          const { onMouseMove } = children.props;
-          if (typeof onMouseMove === 'function') {
-            onMouseMove(e);
-          }
         },
       });
       return newChildren;

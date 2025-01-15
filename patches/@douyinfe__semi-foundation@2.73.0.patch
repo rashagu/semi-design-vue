@@ -1,0 +1,77 @@
+diff --git a/.idea/git_toolbox_blame.xml b/.idea/git_toolbox_blame.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..04ede99c250fc313e4e715cdedbe81b684fe8f89
+--- /dev/null
++++ b/.idea/git_toolbox_blame.xml
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="GitToolBoxBlameSettings">
++    <option name="version" value="2" />
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..7402153a5c4af1773015a0132813b7518c3e6d79
+--- /dev/null
++++ b/.idea/modules.xml
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/semi-foundation@2.73.0.iml" filepath="$PROJECT_DIR$/.idea/semi-foundation@2.73.0.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/.idea/semi-foundation@2.73.0.iml b/.idea/semi-foundation@2.73.0.iml
+new file mode 100644
+index 0000000000000000000000000000000000000000..0b872d82d9c39f70bff219b3b4b60145430f8984
+--- /dev/null
++++ b/.idea/semi-foundation@2.73.0.iml
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="WEB_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$">
++      <excludeFolder url="file://$MODULE_DIR$/.tmp" />
++      <excludeFolder url="file://$MODULE_DIR$/temp" />
++      <excludeFolder url="file://$MODULE_DIR$/tmp" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+diff --git a/audioPlayer/foundation.ts b/audioPlayer/foundation.ts
+index 01d6bfbf39c166cff3429e02c72a87649837f7a3..0033ceefffceb73a524de0bbe32c8ec6bf546e2c 100644
+--- a/audioPlayer/foundation.ts
++++ b/audioPlayer/foundation.ts
+@@ -8,7 +8,7 @@ export interface AudioPlayerAdapter<P = Record<string, any>, S = Record<string,
+     handleStatusClick: () => void;
+     handleTimeUpdate: () => void;
+     handleTrackChange: (direction: 'next' | 'prev') => void;
+-    getAudioRef: () => React.RefObject<HTMLAudioElement>;
++    getAudioRef: () => HTMLAudioElement;
+     handleTimeChange: (value: number) => void;
+     handleSpeedChange: (value: { label: string; value: number }) => void;
+     handleSeek: (direction: number) => void;
+@@ -25,12 +25,12 @@ class AudioPlayerFoundation extends BaseFoundation<AudioPlayerAdapter> {
+     initAudioState() {
+         const audioRef = this.getAudioRef();
+         const props = this.getProps();
+-        
++
+         this.setState({
+-            totalTime: audioRef.current?.duration || 0,
++            totalTime: audioRef?.duration || 0,
+             isPlaying: props.autoPlay,
+-            volume: audioRef.current?.volume * 100 || 100,
+-            currentRate: { label: '1.0x', value: audioRef.current?.playbackRate || 1 },
++            volume: audioRef?.volume * 100 || 100,
++            currentRate: { label: '1.0x', value: audioRef?.playbackRate || 1 },
+         });
+     }
+ 

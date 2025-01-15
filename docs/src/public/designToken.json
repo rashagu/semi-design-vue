@@ -211,6 +211,248 @@
       "raw": "$transform_scale-anchor_title-text: var(--semi-transform_scale-none);//锚点-放大"
     }
   ],
+  "audioplayer": [
+    {
+      "key": "$color-audio-player-background",
+      "value": "rgba(var(--semi-grey-9), .8)",
+      "category": "color",
+      "raw": "$color-audio-player-background: rgba(var(--semi-grey-9), .8);"
+    },
+    {
+      "key": "$color-audio-player-control-icon",
+      "value": "var(--semi-color-bg-0)",
+      "category": "color",
+      "raw": "$color-audio-player-control-icon: var(--semi-color-bg-0);"
+    },
+    {
+      "key": "$color-audio-player-control-icon-play",
+      "value": "var(--semi-color-text-0)",
+      "category": "color",
+      "raw": "$color-audio-player-control-icon-play: var(--semi-color-text-0);"
+    },
+    {
+      "key": "$color-audio-player-font-color",
+      "value": "var(--semi-color-bg-0)",
+      "category": "color",
+      "raw": "$color-audio-player-font-color: var(--semi-color-bg-0);"
+    },
+    {
+      "key": "$color-audio-player-font-color-speed",
+      "value": "rgba(var(--semi-grey-8), 1)",
+      "category": "color",
+      "raw": "$color-audio-player-font-color-speed: rgba(var(--semi-grey-8), 1);"
+    },
+    {
+      "key": "$color-audio-player-background-light",
+      "value": "var(--semi-color-bg-0)",
+      "category": "color",
+      "raw": "$color-audio-player-background-light: var(--semi-color-bg-0);"
+    },
+    {
+      "key": "$color-audio-player-control-icon-light",
+      "value": "rgba(var(--semi-grey-9), 1)",
+      "category": "color",
+      "raw": "$color-audio-player-control-icon-light: rgba(var(--semi-grey-9), 1);"
+    },
+    {
+      "key": "$color-audio-player-control-icon-play-light",
+      "value": "var(--semi-color-bg-0)",
+      "category": "color",
+      "raw": "$color-audio-player-control-icon-play-light: var(--semi-color-bg-0);"
+    },
+    {
+      "key": "$color-audio-player-font-color-light",
+      "value": "rgba(var(--semi-grey-9), 1)",
+      "category": "color",
+      "raw": "$color-audio-player-font-color-light: rgba(var(--semi-grey-9), 1);"
+    },
+    {
+      "key": "$font-size-audio-player-text",
+      "value": "14px",
+      "category": "font",
+      "raw": "$font-size-audio-player-text: 14px;"
+    },
+    {
+      "key": "$gap-audio-player-small",
+      "value": "4px",
+      "category": "other",
+      "raw": "$gap-audio-player-small: 4px;"
+    },
+    {
+      "key": "$gap-audio-player-medium",
+      "value": "16px",
+      "category": "other",
+      "raw": "$gap-audio-player-medium: 16px;"
+    },
+    {
+      "key": "$gap-audio-player-large",
+      "value": "24px",
+      "category": "other",
+      "raw": "$gap-audio-player-large: 24px;"
+    },
+    {
+      "key": "$width-audio-player-max",
+      "value": "1440px",
+      "category": "width",
+      "raw": "$width-audio-player-max: 1440px;"
+    },
+    {
+      "key": "$height-audio-player",
+      "value": "78px",
+      "category": "height",
+      "raw": "$height-audio-player: 78px;"
+    },
+    {
+      "key": "$width-audio-player-slider",
+      "value": "323px",
+      "category": "width",
+      "raw": "$width-audio-player-slider: 323px;"
+    },
+    {
+      "key": "$width-audio-player-speed",
+      "value": "40px",
+      "category": "width",
+      "raw": "$width-audio-player-speed: 40px;"
+    },
+    {
+      "key": "$height-audio-player-speed",
+      "value": "24px",
+      "category": "height",
+      "raw": "$height-audio-player-speed: 24px;"
+    },
+    {
+      "key": "$width-audio-player-speed-menu",
+      "value": "65px",
+      "category": "width",
+      "raw": "$width-audio-player-speed-menu: 65px;"
+    },
+    {
+      "key": "$width-audio-player-volume",
+      "value": "43px",
+      "category": "width",
+      "raw": "$width-audio-player-volume: 43px;"
+    },
+    {
+      "key": "$height-audio-player-volume",
+      "value": "164px",
+      "category": "height",
+      "raw": "$height-audio-player-volume: 164px;"
+    },
+    {
+      "key": "$height-audio-player-time",
+      "value": "22px",
+      "category": "height",
+      "raw": "$height-audio-player-time: 22px;"
+    },
+    {
+      "key": "$border-radius-audio-player-speed",
+      "value": "3px",
+      "category": "other",
+      "raw": "$border-radius-audio-player-speed: 3px;"
+    },
+    {
+      "key": "$border-radius-audio-player-volume",
+      "value": "4px",
+      "category": "other",
+      "raw": "$border-radius-audio-player-volume: 4px;"
+    },
+    {
+      "key": "$border-radius-audio-player-slider",
+      "value": "9999px",
+      "category": "other",
+      "raw": "$border-radius-audio-player-slider: 9999px;"
+    },
+    {
+      "key": "$font-size-audio-player-small",
+      "value": "12px",
+      "category": "font",
+      "raw": "$font-size-audio-player-small: 12px;"
+    },
+    {
+      "key": "$line-height-audio-player-small",
+      "value": "16px",
+      "category": "other",
+      "raw": "$line-height-audio-player-small: 16px;"
+    },
+    {
+      "key": "$width-audio-player-slider-bar",
+      "value": "4px",
+      "category": "width",
+      "raw": "$width-audio-player-slider-bar: 4px;"
+    },
+    {
+      "key": "$size-audio-player-slider-dot",
+      "value": "16px",
+      "category": "other",
+      "raw": "$size-audio-player-slider-dot: 16px;"
+    },
+    {
+      "key": "$color-audio-player-disabled-bg",
+      "value": "rgba(var(--semi-grey-0), .35)",
+      "category": "color",
+      "raw": "$color-audio-player-disabled-bg: rgba(var(--semi-grey-0), .35);"
+    },
+    {
+      "key": "$color-audio-player-slider-bg",
+      "value": "rgba(var(--semi-grey-5), 1)",
+      "category": "color",
+      "raw": "$color-audio-player-slider-bg: rgba(var(--semi-grey-5), 1);"
+    },
+    {
+      "key": "$color-audio-player-slider-bg-light",
+      "value": "rgba(var(--semi-grey-2), 1)",
+      "category": "color",
+      "raw": "$color-audio-player-slider-bg-light: rgba(var(--semi-grey-2), 1);"
+    },
+    {
+      "key": "$color-audio-player-slider-progress",
+      "value": "rgba(var(--semi-blue-4), 1)",
+      "category": "color",
+      "raw": "$color-audio-player-slider-progress: rgba(var(--semi-blue-4), 1);"
+    },
+    {
+      "key": "$color-audio-player-slider-dot-bg",
+      "value": "rgba(var(--semi-white), 1)",
+      "category": "color",
+      "raw": "$color-audio-player-slider-dot-bg: rgba(var(--semi-white), 1);"
+    },
+    {
+      "key": "$color-audio-player-disabled-text",
+      "value": "var(--semi-color-grey-7)",
+      "category": "color",
+      "raw": "$color-audio-player-disabled-text: var(--semi-color-grey-7);"
+    },
+    {
+      "key": "$color-audio-player-text-default",
+      "value": "var(--semi-color-default)",
+      "category": "color",
+      "raw": "$color-audio-player-text-default: var(--semi-color-default);"
+    },
+    {
+      "key": "$color-audio-player-light-disabled-bg",
+      "value": "var(--semi-color-disabled-text)",
+      "category": "color",
+      "raw": "$color-audio-player-light-disabled-bg: var(--semi-color-disabled-text);"
+    },
+    {
+      "key": "$color-audio-player-light-disabled-text",
+      "value": "rgba(var(--semi-white), 1)",
+      "category": "color",
+      "raw": "$color-audio-player-light-disabled-text: rgba(var(--semi-white), 1);"
+    },
+    {
+      "key": "$color-audio-player-light-text",
+      "value": "rgba(var(--semi-grey-9), 1)",
+      "category": "color",
+      "raw": "$color-audio-player-light-text: rgba(var(--semi-grey-9), 1);"
+    },
+    {
+      "key": "$color-audio-player-light-hover-bg",
+      "value": "rgba(var(--semi-grey-1), 1)",
+      "category": "color",
+      "raw": "$color-audio-player-light-hover-bg: rgba(var(--semi-grey-1), 1);"
+    }
+  ],
   "autocomplete": [
     {
       "key": "$spacing-autoComplete_loading_wrapper-paddingTop",
@@ -2582,6 +2824,48 @@
       "comment": "图标按钮底部内边距 - 小尺寸",
       "category": "spacing",
       "raw": "$spacing-button_iconOnly_small-paddingBottom: $spacing-extra-tight; // 图标按钮底部内边距 - 小尺寸"
+    },
+    {
+      "key": "$height-button_iconOnly_small",
+      "value": "$height-control-small",
+      "comment": "图标按钮 height - 小尺寸",
+      "category": "height",
+      "raw": "$height-button_iconOnly_small: $height-control-small; // 图标按钮 height - 小尺寸"
+    },
+    {
+      "key": "$width-button_iconOnly_small",
+      "value": "$height-control-small",
+      "comment": "图标按钮 width - 小尺寸",
+      "category": "width",
+      "raw": "$width-button_iconOnly_small: $height-control-small; // 图标按钮 width - 小尺寸"
+    },
+    {
+      "key": "$height-button_iconOnly_default",
+      "value": "$height-control-default",
+      "comment": "图标按钮 height - 默认",
+      "category": "height",
+      "raw": "$height-button_iconOnly_default:$height-control-default;  // 图标按钮 height - 默认"
+    },
+    {
+      "key": "$width-button_iconOnly_default",
+      "value": "$height-control-default",
+      "comment": "图标按钮 width - 默认",
+      "category": "width",
+      "raw": "$width-button_iconOnly_default: $height-control-default; // 图标按钮 width - 默认"
+    },
+    {
+      "key": "$height-button_iconOnly_large",
+      "value": "$height-control-large",
+      "comment": "图标按钮 height - 大尺寸",
+      "category": "height",
+      "raw": "$height-button_iconOnly_large: $height-control-large; // 图标按钮 height - 大尺寸"
+    },
+    {
+      "key": "$width-button_iconOnly_large",
+      "value": "$height-control-large",
+      "comment": "图标按钮 width - 大尺寸",
+      "category": "width",
+      "raw": "$width-button_iconOnly_large: $height-control-large; // 图标按钮 width - 大尺寸"
     },
     {
       "key": "$spacing-button_iconOnly_content-marginLeft",
@@ -6376,6 +6660,43 @@
       "raw": "$font-colorPicker_inputNumberSuffix-fontSize:14px; // 颜色手动输入区域百分比字体大小"
     }
   ],
+  "cropper": [
+    {
+      "key": "$color-cropper_mask-bg",
+      "value": "var(--semi-color-overlay-bg)",
+      "comment": "裁切框遮罩背景颜色",
+      "category": "color",
+      "raw": "$color-cropper_mask-bg: var(--semi-color-overlay-bg); // 裁切框遮罩背景颜色"
+    },
+    {
+      "key": "$color-cropper_box-outline",
+      "value": "var(--semi-color-primary)",
+      "comment": "裁切框边框颜色",
+      "category": "color",
+      "raw": "$color-cropper_box-outline: var(--semi-color-primary); // 裁切框边框颜色"
+    },
+    {
+      "key": "$color-cropper_box_corner-bg",
+      "value": "var(--semi-color-primary)",
+      "comment": "裁切框调整块背景色",
+      "category": "color",
+      "raw": "$color-cropper_box_corner-bg: var(--semi-color-primary); // 裁切框调整块背景色"
+    },
+    {
+      "key": "$width-cropper_box-outline",
+      "value": "1px",
+      "comment": "裁切框边框宽度",
+      "category": "width",
+      "raw": "$width-cropper_box-outline: 1px; // 裁切框边框宽度"
+    },
+    {
+      "key": "$width-cropper_box_corner",
+      "value": "10px",
+      "comment": "裁切框调整块宽高",
+      "category": "width",
+      "raw": "$width-cropper_box_corner: 10px; // 裁切框调整块宽高"
+    }
+  ],
   "datepicker": [
     {
       "key": "$width-datepicker_day",
@@ -10011,7 +10332,7 @@
     {
       "key": "$color-inputNumber_button-bg-hover",
       "value": "var(--semi-color-fill-0)",
-      "comment": "步进器按钮图标颜色 - 悬浮",
+      "comment": "步进�按钮图标颜色 - 悬浮",
       "category": "color",
       "raw": "$color-inputNumber_button-bg-hover: var(--semi-color-fill-0); // 步进器按钮图标颜色 - 悬浮"
     },
@@ -10105,6 +10426,77 @@
       "comment": "数字输入框-变大",
       "category": "other",
       "raw": "$transform_scale-inputNumber: var(--semi-transform_scale-none);//数字输入框-变大"
+    }
+  ],
+  "jsonviewer": [
+    {
+      "key": "$color-json-viewer-background",
+      "value": "var(--semi-color-default)",
+      "comment": "JSON背景颜色",
+      "category": "color",
+      "raw": "$color-json-viewer-background: var(--semi-color-default); // JSON背景颜色"
+    },
+    {
+      "key": "$color-json-viewer-key",
+      "value": "rgba(var(--semi-red-5), 1)",
+      "comment": "JSON key 颜色",
+      "category": "color",
+      "raw": "$color-json-viewer-key: rgba(var(--semi-red-5), 1); // JSON key 颜色"
+    },
+    {
+      "key": "$color-json-viewer-value",
+      "value": "rgba(var(--semi-blue-5), 1)",
+      "category": "color",
+      "raw": "$color-json-viewer-value: rgba(var(--semi-blue-5), 1); "
+    },
+    {
+      "key": "$color-json-viewer-number",
+      "value": "rgba(var(--semi-green-5), 1)",
+      "comment": "JSON number 颜色",
+      "category": "color",
+      "raw": "$color-json-viewer-number: rgba(var(--semi-green-5), 1); // JSON number 颜色"
+    },
+    {
+      "key": "$color-json-viewer-keyword",
+      "value": "rgba(var(--semi-blue-5), 1)",
+      "comment": "JSON keyword 颜色",
+      "category": "color",
+      "raw": "$color-json-viewer-keyword: rgba(var(--semi-blue-5), 1); // JSON keyword 颜色"
+    },
+    {
+      "key": "$color-json-viewer-delimiter-comma",
+      "value": "rgba(var(--semi-blue-6), 1)",
+      "comment": "JSON delimiter comma 颜色",
+      "category": "color",
+      "raw": "$color-json-viewer-delimiter-comma: rgba(var(--semi-blue-6), 1); // JSON delimiter comma 颜色"
+    },
+    {
+      "key": "$color-json-viewer-search-result-background",
+      "value": "rgba(var(--semi-green-2), 1)",
+      "comment": "JSON search result background 颜色",
+      "category": "color",
+      "raw": "$color-json-viewer-search-result-background: rgba(var(--semi-green-2), 1); // JSON search result background 颜色"
+    },
+    {
+      "key": "$color-json-viewer-current-search-result-background",
+      "value": "rgba(var(--semi-yellow-4), 1)",
+      "comment": "JSON current search result background 颜色",
+      "category": "color",
+      "raw": "$color-json-viewer-current-search-result-background: rgba(var(--semi-yellow-4), 1); // JSON current search result background 颜色"
+    },
+    {
+      "key": "$color-json-viewer-folding-icon",
+      "value": "rgba(var(--semi-blue-7), 1)",
+      "comment": "JSON folding icon 颜色",
+      "category": "color",
+      "raw": "$color-json-viewer-folding-icon: rgba(var(--semi-blue-7), 1); // JSON folding icon 颜色"
+    },
+    {
+      "key": "$color-json-viewer-line-number",
+      "value": "rgba(var(--semi-grey-5), 1)",
+      "comment": "JSON line number 颜色",
+      "category": "color",
+      "raw": "$color-json-viewer-line-number: rgba(var(--semi-grey-5), 1); // JSON line number 颜色"
     }
   ],
   "list": [
@@ -13724,6 +14116,55 @@
       "comment": "伸缩框组件中handler的z-index",
       "category": "other",
       "raw": "$z-resizable_handler: 2000 !default; // 伸缩框组件中handler的z-index"
+    },
+    {
+      "key": "$z-resizable_background",
+      "value": "2010",
+      "comment": "伸缩框组件中背景的z-index",
+      "category": "other",
+      "raw": "$z-resizable_background: 2010; // 伸缩框组件中背景的z-index"
+    },
+    {
+      "key": "$height-row-handler",
+      "value": "10px",
+      "comment": "单个伸缩框中上下handler的高度",
+      "category": "height",
+      "raw": "$height-row-handler: 10px; // 单个伸缩框中上下handler的高度"
+    },
+    {
+      "key": "$width-col-handler",
+      "value": "10px",
+      "comment": "单个伸缩框中左右handler的宽度",
+      "category": "width",
+      "raw": "$width-col-handler: 10px;  // 单个伸缩框中左右handler的宽度"
+    },
+    {
+      "key": "$width-edge-handler",
+      "value": "20px",
+      "comment": "单个伸缩框中边角handler的宽度",
+      "category": "width",
+      "raw": "$width-edge-handler: 20px; // 单个伸缩框中边角handler的宽度"
+    },
+    {
+      "key": "$height-edge-handler",
+      "value": "20px",
+      "comment": "单个伸缩框中边角handler的高度",
+      "category": "height",
+      "raw": "$height-edge-handler: 20px; // 单个伸缩框中边角handler的高度"
+    },
+    {
+      "key": "$width-horizontal-handler",
+      "value": "10px",
+      "comment": "组合伸缩框中水平方向handler的宽度",
+      "category": "width",
+      "raw": "$width-horizontal-handler: 10px; // 组合伸缩框中水平方向handler的宽度"
+    },
+    {
+      "key": "$height-vertical-handler",
+      "value": "10px",
+      "comment": "组合伸缩框中垂直方向handler的高度",
+      "category": "height",
+      "raw": "$height-vertical-handler: 10px;  // 组合伸缩框中垂直方向handler的高度"
     }
   ],
   "scrolllist": [
