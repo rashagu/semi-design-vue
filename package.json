@@ -2,7 +2,6 @@
   "name": "semi-ui-vue",
   "private": true,
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "dev": "pnpm -C ./packages/semi-ui-vue dev",
     "test:unit": "vitest --environment jsdom",
     "test": "vitest run --coverage",
