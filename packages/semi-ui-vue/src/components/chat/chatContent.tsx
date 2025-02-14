@@ -32,6 +32,7 @@ const ChatContent = defineComponent({
         chatBoxRenderConfig,
         align,
         customMarkDownComponents, renderDivider,
+        markdownRenderProps
       } = props;
       return (
         <Fragment>
@@ -61,6 +62,7 @@ const ChatContent = defineComponent({
                 lastChat={lastMessage}
                 customMarkDownComponents={customMarkDownComponents}
                 chatBoxRenderConfig={chatBoxRenderConfig}
+                markdownRenderProps={markdownRenderProps}
               />
             );
           })}

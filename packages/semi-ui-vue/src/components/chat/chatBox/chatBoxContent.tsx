@@ -3,7 +3,7 @@ import { CombineProps } from '../../interface';
 
 import cls from 'classnames';
 import { Message, Metadata, RenderContentProps } from '../interface';
-import MarkdownRender from '../../markdownRender';
+import MarkdownRender, { type MarkdownRenderProps } from '../../markdownRender';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/chat/constants';
 import { MDXProps } from 'mdx/types';
 import { FileAttachment, ImageAttachment } from '../attachment';
@@ -19,7 +19,8 @@ interface ChatBoxContentProps {
   children?: string;
   role?: Metadata;
   message?: Message;
-  customRenderFunc?: (props: RenderContentProps) => VNode
+  customRenderFunc?: (props: RenderContentProps) => VNode;
+  markdownRenderProps?: MarkdownRenderProps;
 }
 
 export const vuePropsType: CombineProps<ChatBoxContentProps> = {
@@ -29,6 +30,7 @@ export const vuePropsType: CombineProps<ChatBoxContentProps> = {
   role: Object as PropType<ChatBoxContentProps['role']>,
   message: Object as PropType<ChatBoxContentProps['message']>,
   customRenderFunc: Function as PropType<ChatBoxContentProps['customRenderFunc']>,
+  markdownRenderProps: Object as PropType<ChatBoxContentProps['markdownRenderProps']>,
 
 };
 const chatBoxContent = defineComponent({
@@ -67,6 +69,7 @@ const chatBoxContent = defineComponent({
             format='md'
             raw={props.message.content}
             components={markdownComponents as any}
+            {...props.markdownRenderProps}
           />;
         } else if (Array.isArray(props.message.content)) {
           realContent = props.message.content.map((item, index)=> {
@@ -96,7 +99,7 @@ const chatBoxContent = defineComponent({
 
     return () => {
 
-      const { message = {}, customRenderFunc, role: roleInfo, customMarkDownComponents, mode } = props;
+      const { message = {}, customRenderFunc, role: roleInfo, customMarkDownComponents, mode, markdownRenderProps } = props;
 
 
       if (customRenderFunc) {

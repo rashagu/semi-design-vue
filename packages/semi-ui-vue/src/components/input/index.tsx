@@ -9,7 +9,7 @@ import {
   watch,
   onMounted,
   Ref,
-  PropType,
+  PropType, type HTMLAttributes,
 } from 'vue';
 import cls from 'classnames';
 import * as PropTypes from '../PropTypes';
@@ -90,6 +90,8 @@ export interface InputProps{
   onlyBorder?: number;
   onCompositionstart?: any
   onCompositionend?: any
+
+  inputMode?: HTMLAttributes['inputmode'];
 }
 
 export interface InputState {
@@ -156,6 +158,8 @@ export const propTypes: CombineProps<InputProps> = {
   showClearIgnoreDisabled: PropTypes.bool,
   onCompositionstart: PropTypes.func as PropType<InputProps['onCompositionstart']>,
   onCompositionend: PropTypes.func as PropType<InputProps['onCompositionend']>,
+
+  inputMode: PropTypes.string as PropType<InputProps['inputMode']>,
 };
 
 const defaultProps = {
@@ -581,6 +585,7 @@ const Input = defineComponent({
       const inputProps: InputHTMLAttributes = {
         ...attrs,
         ...rest,
+        inputmode: props.inputMode,
         style: { ...inputStyle },
         autofocus: autoFocus,
         class: inputCls,

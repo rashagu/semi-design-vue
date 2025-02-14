@@ -166,7 +166,7 @@ export function List_<T>(){
               })
             );
           });
-        } else if (!children && !loading) {
+        } else if (!children) {
           childrenList = renderEmpty();
         }
         return (

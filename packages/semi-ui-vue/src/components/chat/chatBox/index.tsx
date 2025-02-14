@@ -63,6 +63,7 @@ const index = defineComponent({
           message={props.message}
           customMarkDownComponents={props.customMarkDownComponents}
           customRenderFunc={props.chatBoxRenderConfig.renderChatBoxContent}
+          markdownRenderProps={props.markdownRenderProps}
         />
       );
     }, [() => props.message, info, () => props.chatBoxRenderConfig.renderChatBoxContent, () => props.mode]);
@@ -121,6 +122,7 @@ const index = defineComponent({
         chatBoxRenderConfig = {},
         customMarkDownComponents,
         previousMessage,
+        markdownRenderProps
       } = props;
       const { renderChatBoxAvatar, renderChatBoxAction, renderChatBoxContent, renderChatBoxTitle, renderFullChatBox } =
         chatBoxRenderConfig;

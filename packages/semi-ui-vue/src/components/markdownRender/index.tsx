@@ -14,6 +14,7 @@ import { cssClasses } from '@douyinfe/semi-foundation/markdownRender/constants';
 import { useBaseComponent } from '../_base/baseComponent';
 import { omit } from 'lodash';
 export type { MDXProps } from 'mdx/types';
+export type { Processor } from 'unified';
 export interface MarkdownRenderProps extends Omit<MarkdownRenderBaseProps, 'format'> {
   style?: CSSProperties;
   className?: string;

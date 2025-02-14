@@ -105,6 +105,7 @@ const PinCode = defineComponent({
           key={`input-${index}`}
           data-testid="pin-code-input"
           autoFocus={props.autoFocus && index === 0}
+          inputMode={props.format === "number" ? "numeric" : "text"}
           value={state.valueList[index]}
           size={props.size}
           disabled={props.disabled}

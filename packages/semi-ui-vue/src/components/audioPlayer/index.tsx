@@ -411,9 +411,9 @@ const AudioPlayer = defineComponent({
             />
           </Tooltip>
           <Dropdown
-            tooltipStyle={{background:'none'}}
+            className={cls(`${prefixCls}-control-speed-menu`)}
             render={
-              <Dropdown.Menu className={cls(`${prefixCls}-control-speed-menu`)}>
+              <Dropdown.Menu>
                 {rateOptions.map((option) => (
                   <Dropdown.Item
                     className={cls(`${prefixCls}-control-speed-menu-item`)}

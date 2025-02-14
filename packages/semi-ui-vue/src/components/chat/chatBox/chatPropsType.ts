@@ -20,6 +20,7 @@ export const chatContentVuePropsType: CombineProps<ChatContentProps> = {
   chatBoxRenderConfig: PropTypes.object,
   customMarkDownComponents: PropTypes.object,
   renderDivider: PropTypes.func as PropType<ChatContentProps['renderDivider']>,
+  markdownRenderProps: PropTypes.object as PropType<ChatContentProps['markdownRenderProps']>,
 }
 
 

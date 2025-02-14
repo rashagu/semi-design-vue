@@ -4,6 +4,7 @@ import { Message } from '@douyinfe/semi-foundation/chat/foundation';
 import type { TooltipProps } from '../tooltip';
 import { CSSProperties, VNode } from 'vue';
 import { ToastFuncType } from '../toast/useToast';
+import { MarkdownRenderProps } from '../markdownRender';
 
 export { Message };
 export interface CommonChatsProps {
@@ -21,6 +22,7 @@ export interface CommonChatsProps {
   chatBoxRenderConfig?: ChatBoxRenderConfig;
   customMarkDownComponents?: MDXProps['components'];
   renderDivider?: (message?: Message) => VNode;
+  markdownRenderProps?: MarkdownRenderProps
 }
 
 export interface ChatProps extends CommonChatsProps {
