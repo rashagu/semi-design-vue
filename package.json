@@ -24,6 +24,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "packageManager": "pnpm@10",
   "workspaces": [
     "packages/semi-animation-vue",
     "packages/semi-icons-vue",
