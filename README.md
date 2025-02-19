@@ -17,6 +17,9 @@
 # Demo
 > [https://stackblitz.com/edit/vitejs-vite-ao3gtf](https://stackblitz.com/edit/vitejs-vite-ao3gtf)
 
+# 版本号说明
+> 同步官方主要版本号和次要版本号
+
 # 🔥 安装
 
 ```sh

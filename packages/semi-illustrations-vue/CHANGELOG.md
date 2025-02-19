@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 1.0.0
+
+### Major Changes
+
+- semi 2.74.0  & 同步官方主要版本号和次要版本号
+
 ## 0.24.0
 
 ### Minor Changes

@@ -1,5 +1,18 @@
 # @kousum/semi-ui-vue
 
+## 1.0.0
+
+### Major Changes
+
+- semi 2.74.0  & 同步官方主要版本号和次要版本号
+
+### Patch Changes
+
+- Updated dependencies
+  - @kousum/semi-animation-vue@1.0.0
+  - @kousum/semi-icons-vue@1.0.0
+  - @kousum/semi-illustrations-vue@1.0.0
+
 ## 0.25.0
 
 ### Minor Changes
