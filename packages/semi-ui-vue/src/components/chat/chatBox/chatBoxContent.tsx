@@ -68,7 +68,7 @@ const chatBoxContent = defineComponent({
           realContent = <MarkdownRender
             format='md'
             raw={props.message.content}
-            components={markdownComponents as any}
+            components={markdownComponents.value}
             {...props.markdownRenderProps}
           />;
         } else if (Array.isArray(props.message.content)) {
@@ -78,7 +78,7 @@ const chatBoxContent = defineComponent({
                 key={`index`}
                 format='md'
                 raw={item.text}
-                components={markdownComponents as any}
+                components={markdownComponents.value}
               />;
             } else if (item.type === 'image_url') {
               return <ImageAttachment key={`index`} src={item.image_url.url} />;
