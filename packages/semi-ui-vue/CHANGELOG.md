@@ -1,10 +1,16 @@
 # @kousum/semi-ui-vue
 
+## 2.74.1
+
+### Patch Changes
+
+- 修复 Chat 组件 markdownComponents 不生效的问题
+
 ## 1.0.0
 
 ### Major Changes
 
-- semi 2.74.0  & 同步官方主要版本号和次要版本号
+- semi 2.74.0 & 同步官方主要版本号和次要版本号
 
 ### Patch Changes
 
