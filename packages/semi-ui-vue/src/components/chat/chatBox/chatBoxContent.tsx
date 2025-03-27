@@ -107,6 +107,9 @@ const chatBoxContent = defineComponent({
           message,
           role: roleInfo,
           defaultContent: node.value,
+          // vue额外的别删
+          markdownComponents: markdownComponents.value,
+          wrapCls: wrapCls.value,
           className: wrapCls.value,
         });
       } else {

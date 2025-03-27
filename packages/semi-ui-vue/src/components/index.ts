@@ -226,3 +226,5 @@ export { default as HotKeys } from './hotKeys';
 export { Resizable, ResizeGroup, ResizeHandler, ResizeItem } from './resizable';
 export { default as Cropper } from './cropper';
 export { default as AudioPlayer } from './audioPlayer';
+
+export {default as JsonViewer} from './jsonViewer';

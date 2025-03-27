@@ -86,6 +86,9 @@ export interface RenderContentProps {
   message?: Message;
   role?: Metadata;
   defaultContent?: VNode | VNode[];
+  // vue额外的别删
+  markdownComponents: MDXProps['components'];
+  wrapCls: string;
   className?: string
 }
 
