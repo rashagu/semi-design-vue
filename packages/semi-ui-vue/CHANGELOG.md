@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 2.74.2
+
+### Patch Changes
+
+- Add customRenderFunc params
+
 ## 2.74.1
 
 ### Patch Changes
