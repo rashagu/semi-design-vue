@@ -1,101 +1,63 @@
-name: 🐛 Bug 报告
-description: 提交一个软件缺陷或问题报告
-title: "[BUG] "
-labels: ["bug"]
-assignees: ""
+name: Bug Report
+description: File a bug report.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+assignees:
+  - octocat
 body:
   - type: markdown
     attributes:
       value: |
-        ## 感谢您报告问题！
-        请尽可能详细地填写以下信息，帮助我们更快定位和解决问题。
-
+        Thanks for taking the time to fill out this bug report!
   - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: dropdown
     id: version
     attributes:
-      label: 软件版本
-      description: 您使用的是哪个版本？（可在设置/关于中查看）
-      placeholder: 例如：v2.1.0
+      label: Version
+      description: What version of our software are you running?
+      options:
+        - 1.0.2 (Default)
+        - 1.0.3 (Edge)
+      default: 0
     validations:
       required: true
-
   - type: dropdown
-    id: environment
+    id: browsers
     attributes:
-      label: 运行环境
+      label: What browsers are you seeing the problem on?
       multiple: true
       options:
-        - "Windows"
-        - "macOS"
-        - "Linux"
-        - "Android"
-        - "iOS"
-        - "其他"
-    validations:
-      required: true
-
-  - type: input
-    id: os-version
-    attributes:
-      label: 系统版本
-      description: 操作系统具体版本号
-      placeholder: 例如：Windows 11 22H2 / macOS 14.4
-
-  - type: textarea
-    id: steps
-    attributes:
-      label: 重现步骤
-      description: 清晰描述如何重现这个错误
-      placeholder: |
-        1. 打开应用
-        2. 点击XX菜单
-        3. 执行XX操作
-        4. 出现XX错误
-    validations:
-      required: true
-
-  - type: textarea
-    id: expected
-    attributes:
-      label: 预期行为
-      description: 您期望看到什么结果？
-    validations:
-      required: true
-
-  - type: textarea
-    id: actual
-    attributes:
-      label: 实际行为
-      description: 实际发生了什么？
-    validations:
-      required: true
-
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
   - type: textarea
     id: logs
     attributes:
-      label: 错误日志
-      description: 请提供相关错误日志（如果有）
-      render: shell  # 代码高亮显示
-
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
   - type: checkboxes
-    id: attachments
+    id: terms
     attributes:
-      label: 附加材料
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com).
       options:
-        - label: 我已添加截图
-        - label: 我已添加屏幕录制
-        - label: 我已附加相关文件
-
-  - type: textarea
-    id: additional
-    attributes:
-      label: 补充说明
-      description: 任何其他有助于解决问题的信息
-      placeholder: 例如：这个问题在之前版本是否出现？是否有临时解决方法？
-
-  - type: markdown
-    attributes:
-      value: |
-        **提示：**
-        - 使用 Ctrl+Shift+J/Cmd+Opt+J 可以打开开发者工具获取错误日志
-        - 截图请直接拖拽到输入框上传
+        - label: I agree to follow this project's Code of Conduct
+          required: true
