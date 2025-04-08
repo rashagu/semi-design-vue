@@ -20,7 +20,7 @@ interface ChatBoxContentProps {
   role?: Metadata;
   message?: Message;
   customRenderFunc?: (props: RenderContentProps) => VNode;
-  markdownRenderProps?: MarkdownRenderProps;
+  markdownRenderProps?: Partial<MarkdownRenderProps>;
 }
 
 export const vuePropsType: CombineProps<ChatBoxContentProps> = {
