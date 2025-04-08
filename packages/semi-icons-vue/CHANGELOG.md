@@ -1,10 +1,16 @@
 # @kousum/semi-icons-vue
 
+## 2.77.0-alpha.0
+
+### Minor Changes
+
+- feat semi 2.77.1
+
 ## 1.0.0
 
 ### Major Changes
 
-- semi 2.74.0  & 同步官方主要版本号和次要版本号
+- semi 2.74.0 & 同步官方主要版本号和次要版本号
 
 ## 0.24.0
 
