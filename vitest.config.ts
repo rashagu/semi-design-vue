@@ -8,27 +8,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['@vitest/web-worker'],
-    // 没用
-    // deps: {
-    //   // >= 0.34
-    //   optimizer: {
-    //     web: {
-    //       include: ['vitest-canvas-mock']
-    //     }
-    //   }
-    // },
-    // >= 0.1.0
-    // poolOptions: {
-    //   forks: {
-    //     singleFork: true,
-    //   },
-    // },
-    // environmentOptions: {
-    //   jsdom: {
-    //     resources: 'usable',
-    //   },
-    // },
+    setupFiles: ['@vitest/web-worker', 'vitest-canvas-mock'],
     coverage: {
       provider: "v8",
       exclude:[
