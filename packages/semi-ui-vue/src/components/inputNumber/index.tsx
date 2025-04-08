@@ -600,7 +600,7 @@ const InputNumber = defineComponent({
 });
 
 export default defineComponent({
-  props: { ...vuePropsType },
+  props: { ...vuePropsType, id: String as PropType<string> },
   name: 'InputNumber',
   setup(props, {}) {
     return ()=>{
