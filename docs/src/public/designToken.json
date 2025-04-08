@@ -4553,6 +4553,13 @@
       "raw": "$color-cascader_danger-border-active: var(--semi-color-danger-light-active); // 级联选择触发器危险描边颜色 - 按下"
     },
     {
+      "key": "$color-cascader_prefix_suffix_text-default",
+      "value": "var(--semi-color-text-2)",
+      "comment": "级联选择前后缀文字颜色",
+      "category": "color",
+      "raw": "$color-cascader_prefix_suffix_text-default: var(--semi-color-text-2); // 级联选择前后缀文字颜色"
+    },
+    {
       "key": "$spacing-cascader_selection-paddingLeft",
       "value": "12px",
       "comment": "级联选择触发器左侧内边距",
@@ -4790,6 +4797,13 @@
       "raw": "$font-cascader_selection_n-fontSize: $font-size-small; // 超出 maxTagCount 后，+n 的文字尺寸"
     },
     {
+      "key": "$font-cascader_prefix_suffix_fontWeight",
+      "value": "$font-weight-bold",
+      "comment": "级联选择 prefix/suffix 文字字重",
+      "category": "font",
+      "raw": "$font-cascader_prefix_suffix_fontWeight: $font-weight-bold; // 级联选择 prefix/suffix 文字字重"
+    },
+    {
       "key": "$width-cascader-border",
       "value": "1px",
       "comment": "级联选择触发器描边宽度",
@@ -4935,13 +4949,6 @@
       "comment": "级联选择 prefix/suffix 图标水平内间距",
       "category": "spacing",
       "raw": "$spacing-cascader_icon-marginX: $spacing-tight; // 级联选择 prefix/suffix 图标水平内间距"
-    },
-    {
-      "key": "$spacing-cascader_label-marginRight",
-      "value": "$spacing-base-tight",
-      "comment": "级联选择 prefix/suffix 图标水平内间距",
-      "category": "spacing",
-      "raw": "$spacing-cascader_label-marginRight: $spacing-base-tight; // 级联选择 prefix/suffix 图标水平内间距"
     },
     {
       "key": "$spacing-cascader_label_checkbox-marginRight",
@@ -9996,10 +10003,11 @@
       "raw": "$spacing-input-paddingRight: $spacing-base-tight; // 输入文字距离容器的右侧内边距"
     },
     {
-      "key": "$spacing-input_insetLabel-marginRight",
+      "key": "$spacing-input_prefix_suffix-marginX",
       "value": "$spacing-base-tight",
+      "comment": "prefix/suffix 水平外边距",
       "category": "spacing",
-      "raw": "$spacing-input_insetLabel-marginRight: $spacing-base-tight;"
+      "raw": "$spacing-input_prefix_suffix-marginX: $spacing-base-tight; // prefix/suffix 水平外边距"
     },
     {
       "key": "$spacing-input_prefix_icon-marginY",
@@ -10049,11 +10057,11 @@
       "raw": "$spacing-input_group_withTopLabel-marginBottom: $spacing-base;"
     },
     {
-      "key": "$font-input_insetLabel-fontWeight",
-      "value": "600",
-      "comment": "prefix 文字字重",
+      "key": "$font-input_prefix_suffix-fontWeight",
+      "value": "$font-weight-bold",
+      "comment": "prefix/suffix 文字字重",
       "category": "font",
-      "raw": "$font-input_insetLabel-fontWeight: 600; // prefix 文字字重"
+      "raw": "$font-input_prefix_suffix-fontWeight: $font-weight-bold; // prefix/suffix 文字字重"
     },
     {
       "key": "$spacing-textarea-paddingY",
@@ -10332,7 +10340,7 @@
     {
       "key": "$color-inputNumber_button-bg-hover",
       "value": "var(--semi-color-fill-0)",
-      "comment": "步进�按钮图标颜色 - 悬浮",
+      "comment": "步进器按钮图标颜色 - 悬浮",
       "category": "color",
       "raw": "$color-inputNumber_button-bg-hover: var(--semi-color-fill-0); // 步进器按钮图标颜色 - 悬浮"
     },
@@ -11602,10 +11610,10 @@
     },
     {
       "key": "$spacing-navigation_vertical_nav_header-paddingLeft",
-      "value": "($width-navigation_container_collapsed - $spacing-base-tight - $width-navigation_border - $height-navigation_header_logo_collapsed) * 0.5",
+      "value": "($width-navigation_container_collapsed - $spacing-navigation_collapsed-paddingX * 2 - $width-navigation_border - $height-navigation_header_logo_collapsed) * 0.5",
       "comment": "侧边导航栏 header 左侧内边距",
       "category": "spacing",
-      "raw": "$spacing-navigation_vertical_nav_header-paddingLeft:  ($width-navigation_container_collapsed - $spacing-base-tight - $width-navigation_border - $height-navigation_header_logo_collapsed) * 0.5; // 侧边导航栏 header 左侧内边距"
+      "raw": "$spacing-navigation_vertical_nav_header-paddingLeft:  ($width-navigation_container_collapsed - $spacing-navigation_collapsed-paddingX * 2 - $width-navigation_border - $height-navigation_header_logo_collapsed) * 0.5; // 侧边导航栏 header 左侧内边距"
     },
     {
       "key": "$spacing-navigation_vertical_nav_header-paddingRight",
@@ -11616,10 +11624,10 @@
     },
     {
       "key": "$spacing-navigation_vertical_nav_header_collapsed-paddingLeft",
-      "value": "($width-navigation_container_collapsed - $spacing-base-tight - $width-navigation_border - $height-navigation_header_logo_collapsed) * 0.5",
+      "value": "($width-navigation_container_collapsed - $spacing-navigation_collapsed-paddingX * 2 - $width-navigation_border - $height-navigation_header_logo_collapsed) * 0.5",
       "comment": "侧边导航栏收起后 header 左侧内边距",
       "category": "spacing",
-      "raw": "$spacing-navigation_vertical_nav_header_collapsed-paddingLeft: ($width-navigation_container_collapsed - $spacing-base-tight - $width-navigation_border - $height-navigation_header_logo_collapsed) * 0.5; // 侧边导航栏收起后 header 左侧内边距"
+      "raw": "$spacing-navigation_vertical_nav_header_collapsed-paddingLeft: ($width-navigation_container_collapsed - $spacing-navigation_collapsed-paddingX * 2 - $width-navigation_border - $height-navigation_header_logo_collapsed) * 0.5; // 侧边导航栏收起后 header 左侧内边距"
     },
     {
       "key": "$spacing-navigation_vertical_nav_header_collapsed-paddingRight",
@@ -14775,13 +14783,6 @@
       "raw": "$color-select-option-bg-selected: transparent; // 选择器菜单选项背景颜色 - 选中态"
     },
     {
-      "key": "$color-select_inset_label-text",
-      "value": "var(--semi-color-text-2)",
-      "comment": "分组选择器菜单项辅助文本颜色",
-      "category": "color",
-      "raw": "$color-select_inset_label-text: var(--semi-color-text-2); // 分组选择器菜单项辅助文本颜色"
-    },
-    {
       "key": "$color-select_create_tips-text",
       "value": "var(--semi-color-text-2)",
       "comment": "分组选择器菜单项提示文本颜色",
@@ -14794,6 +14795,13 @@
       "comment": "分组选择器菜单项分组标题文本颜色",
       "category": "color",
       "raw": "$color-select_group-text: var(--semi-color-text-2); // 分组选择器菜单项分组标题文本颜色"
+    },
+    {
+      "key": "$color-select_prefix_suffix_text-default",
+      "value": "var(--semi-color-text-2)",
+      "comment": "选择器输入框前后缀文本颜色",
+      "category": "color",
+      "raw": "$color-select_prefix_suffix_text-default: var(--semi-color-text-2); // 选择器输入框前后缀文本颜色"
     },
     {
       "key": "$width-select_icon_right",
@@ -15090,13 +15098,6 @@
       "raw": "$spacing-select_selection-marginLeft: $spacing-base-tight; // 选择器内容区左侧外边距"
     },
     {
-      "key": "$spacing-select_insetLabel-marginRight",
-      "value": "$spacing-base-tight",
-      "comment": "选择器内嵌标签右侧外边距",
-      "category": "spacing",
-      "raw": "$spacing-select_insetLabel-marginRight: $spacing-base-tight; // 选择器内嵌标签右侧外边距"
-    },
-    {
       "key": "$spacing-select_option_list-paddingTop",
       "value": "$spacing-extra-tight",
       "comment": "选择器内容区顶部内边距",
@@ -15174,18 +15175,18 @@
       "raw": "$font-select-fontWeight: $font-weight-regular; // 选择器文本字重"
     },
     {
-      "key": "$font-select_inset_label-fontWeight",
-      "value": "600",
-      "comment": "选择器内嵌标签文本字重",
-      "category": "font",
-      "raw": "$font-select_inset_label-fontWeight: 600; // 选择器内嵌标签文本字重"
-    },
-    {
       "key": "$font-select_keyword-fontWeight",
       "value": "600",
       "comment": "选择器搜索结果命关键词中文本字重",
       "category": "font",
       "raw": "$font-select_keyword-fontWeight: 600; // 选择器搜索结果命关键词中文本字重"
+    },
+    {
+      "key": "$font-select_prefix_suffix-fontWeight",
+      "value": "$font-weight-bold",
+      "comment": "选择器输入框前后缀文本字重",
+      "category": "font",
+      "raw": "$font-select_prefix_suffix-fontWeight: $font-weight-bold; // 选择器输入框前后缀文本字重"
     },
     {
       "key": "$opacity-select_selection_text_inactive",
@@ -19400,11 +19401,11 @@
       "raw": "$spacing-tagInput_tag_icon_paddingLeft: 4px; // tag中有handler icon时tag的左内边距"
     },
     {
-      "key": "$spacing-tagInput_insetLabel-marginRight",
+      "key": "$spacing-tagInput_prefix_suffix-marginX",
       "value": "$spacing-base-tight",
-      "comment": "Form容器中标签输入框内嵌Label的右边距",
+      "comment": "标签输入框 prefix/suffix 水平外边距",
       "category": "spacing",
-      "raw": "$spacing-tagInput_insetLabel-marginRight: $spacing-base-tight; // Form容器中标签输入框内嵌Label的右边距"
+      "raw": "$spacing-tagInput_prefix_suffix-marginX: $spacing-base-tight; // 标签输入框 prefix/suffix 水平外边距"
     },
     {
       "key": "$height-tagInput-large",
@@ -19498,11 +19499,11 @@
       "raw": "$z-tagInput_drag_item_move: 2000 !default; // 标签输入框中正在拖拽元素的z-index"
     },
     {
-      "key": "$font-tagInput_insetLabel-fontWeight",
-      "value": "600",
-      "comment": "prefix 文字字重",
+      "key": "$font-tagInput_prefix_suffix-fontWeight",
+      "value": "$font-weight-bold",
+      "comment": "标签输入框 prefix/suffix 文字字重",
       "category": "font",
-      "raw": "$font-tagInput_insetLabel-fontWeight: 600; // prefix 文字字重"
+      "raw": "$font-tagInput_prefix_suffix-fontWeight: $font-weight-bold; // 标签输入框 prefix/suffix 文字字重"
     },
     {
       "key": "$transition_duration-tagInput-bg",
@@ -21374,6 +21375,13 @@
       "raw": "$font-treeSelect_large-lineHeight: $height-treeSelect_large; // 大尺寸树选择器选择器文本行高"
     },
     {
+      "key": "$font-treeSelect_prefix_suffix_fontWeight",
+      "value": "$font-weight-bold",
+      "comment": "树选择器前缀后缀文本字重",
+      "category": "font",
+      "raw": "$font-treeSelect_prefix_suffix_fontWeight: $font-weight-bold; // 树选择器前缀后缀文本字重"
+    },
+    {
       "key": "$spacing-treeSelect_selection_tagInput_wrapper-paddingX",
       "value": "$spacing-extra-tight",
       "comment": "树选择器多选标签容器水平内边距",
@@ -21458,13 +21466,6 @@
       "raw": "$spacing-treeSelect_prefix_icon-marginX: $spacing-tight; // 树选择器前缀图标水平外边距"
     },
     {
-      "key": "$spacing-treeSelect_insertLabel-marginRight",
-      "value": "$spacing-base-tight",
-      "comment": "树选择器前缀标签右侧外边距",
-      "category": "spacing",
-      "raw": "$spacing-treeSelect_insertLabel-marginRight: $spacing-base-tight; // 树选择器前缀标签右侧外边距"
-    },
-    {
       "key": "$spacing-treeSelect_selection_withSuffix-paddingRight",
       "value": "0px",
       "comment": "树选择器有后缀时内容右侧内边距",
@@ -21507,18 +21508,11 @@
       "raw": "$color-treeSelect_inputTrigger-bg-default: transparent; // 带搜索的树选择器触发器背景颜色"
     },
     {
-      "key": "$color-treeSelect_insertLabel-text-default",
+      "key": "$color-treeSelect_prefix_suffix_text-default",
       "value": "var(--semi-color-text-2)",
-      "comment": "带搜索的树前缀标签文本颜色",
+      "comment": "带搜索的树选择器前后缀文本颜色",
       "category": "color",
-      "raw": "$color-treeSelect_insertLabel-text-default: var(--semi-color-text-2); // 带搜索的树前缀标签文本颜色"
-    },
-    {
-      "key": "$font-treeSelect_insertLabel-fontWeight",
-      "value": "600",
-      "comment": "带搜索的树前缀标签文本字重",
-      "category": "font",
-      "raw": "$font-treeSelect_insertLabel-fontWeight: 600; // 带搜索的树前缀标签文本字重"
+      "raw": "$color-treeSelect_prefix_suffix_text-default: var(--semi-color-text-2); // 带搜索的树选择器前后缀文本颜色"
     },
     {
       "key": "$width-treeSelect_arrow",
@@ -22699,6 +22693,267 @@
       "comment": "图片墙图片信息文本字重",
       "category": "font",
       "raw": "$font-upload_picture_file_card_pic_info-fontWeight: 600; // 图片墙图片信息文本字重"
+    }
+  ],
+  "userguide": [
+    {
+      "key": "$color-userGuide_popup-text-default",
+      "value": "var(--semi-color-text-0)",
+      "comment": "气泡卡片文字颜色 - 默认",
+      "category": "color",
+      "raw": "$color-userGuide_popup-text-default: var(--semi-color-text-0); // 气泡卡片文字颜色 - 默认"
+    },
+    {
+      "key": "$color-userGuide_popup-text-primary",
+      "value": "var(--semi-color-tertiary-light-default)",
+      "comment": "气泡卡片文字颜色 - primary",
+      "category": "color",
+      "raw": "$color-userGuide_popup-text-primary: var(--semi-color-tertiary-light-default); // 气泡卡片文字颜色 - primary"
+    },
+    {
+      "key": "$color-userGuide_modal_content_indicator-bg",
+      "value": "var(--semi-color-primary-light-active)",
+      "comment": "弹窗指示器背景颜色",
+      "category": "color",
+      "raw": "$color-userGuide_modal_content_indicator-bg: var(--semi-color-primary-light-active); // 弹窗指示器背景颜色"
+    },
+    {
+      "key": "$color-userGuide_modal_content_indicator-bg-active",
+      "value": "var(--semi-color-primary)",
+      "comment": "弹窗指示器背景颜色 - 选中态",
+      "category": "color",
+      "raw": "$color-userGuide_modal_content_indicator-bg-active: var(--semi-color-primary);  // 弹窗指示器背景颜色 - 选中态"
+    },
+    {
+      "key": "$width-userGuide_popover-default",
+      "value": "400px",
+      "comment": "默认气泡卡片宽度",
+      "category": "width",
+      "raw": "$width-userGuide_popover-default: 400px; // 默认气泡卡片宽度"
+    },
+    {
+      "key": "$height-userGuide_popup_content_cover-default",
+      "value": "200px",
+      "comment": "默认气泡卡片封面高度",
+      "category": "height",
+      "raw": "$height-userGuide_popup_content_cover-default: 200px; // 默认气泡卡片封面高度"
+    },
+    {
+      "key": "$width-userGuide_modal_content_cover-default",
+      "value": "600px",
+      "comment": "默认弹窗式卡片封面宽度",
+      "category": "width",
+      "raw": "$width-userGuide_modal_content_cover-default: 600px; // 默认弹窗式卡片封面宽度"
+    },
+    {
+      "key": "$height-userGuide_modal_content_cover-default",
+      "value": "300px",
+      "comment": "默认弹窗式卡片封面高度",
+      "category": "height",
+      "raw": "$height-userGuide_modal_content_cover-default: 300px; // 默认弹窗式卡片封面高度"
+    },
+    {
+      "key": "$height-userGuide_modal_content_indicator-default",
+      "value": "30px",
+      "comment": "默认弹窗式卡片指示器整体高度",
+      "category": "height",
+      "raw": "$height-userGuide_modal_content_indicator-default: 30px; // 默认弹窗式卡片指示器整体高度"
+    },
+    {
+      "key": "$width-userGuide_modal_content_indicator_item-default",
+      "value": "6px",
+      "comment": "默认弹窗式卡片单个指示器宽度",
+      "category": "width",
+      "raw": "$width-userGuide_modal_content_indicator_item-default: 6px; // 默认弹窗式卡片单个指示器宽度"
+    },
+    {
+      "key": "$height-userGuide_modal_content_indicator_item-default",
+      "value": "6px",
+      "comment": "默认弹窗式卡片单个指示器高度",
+      "category": "height",
+      "raw": "$height-userGuide_modal_content_indicator_item-default: 6px; // 默认弹窗式卡片单个指示器高度"
+    },
+    {
+      "key": "$font-userGuide_popup_content_title-lineHeight",
+      "value": "24px",
+      "comment": "气泡卡片标题行高",
+      "category": "font",
+      "raw": "$font-userGuide_popup_content_title-lineHeight: 24px; // 气泡卡片标题行高"
+    },
+    {
+      "key": "$font-userGuide_popup_content_description-lineHeight",
+      "value": "20px",
+      "comment": "气泡卡片详情行高",
+      "category": "font",
+      "raw": "$font-userGuide_popup_content_description-lineHeight: 20px; // 气泡卡片详情行高"
+    },
+    {
+      "key": "$font-userGuide_popup_content_indicator-lineHeight",
+      "value": "20px",
+      "comment": "气泡卡片指示器行高",
+      "category": "font",
+      "raw": "$font-userGuide_popup_content_indicator-lineHeight: 20px; // 气泡卡片指示器行高"
+    },
+    {
+      "key": "$font-userGuide_modal_content_title-lineHeight",
+      "value": "24px",
+      "comment": "弹窗式卡片标题行高",
+      "category": "font",
+      "raw": "$font-userGuide_modal_content_title-lineHeight: 24px; // 弹窗式卡片标题行高"
+    },
+    {
+      "key": "$font-userGuide_modal_content_description-lineHeight",
+      "value": "20px",
+      "comment": "弹窗式卡片详情行高",
+      "category": "font",
+      "raw": "$font-userGuide_modal_content_description-lineHeight: 20px; // 弹窗式卡片详情行高"
+    },
+    {
+      "key": "$spacing-userGuide_popup_content_body-padding",
+      "value": "24px",
+      "comment": "气泡卡片内边距",
+      "category": "spacing",
+      "raw": "$spacing-userGuide_popup_content_body-padding: 24px; // 气泡卡片内边距"
+    },
+    {
+      "key": "$spacing-userGuide_popup_content_title-marginBottom",
+      "value": "8px",
+      "comment": "气泡卡片标题底部外边距",
+      "category": "spacing",
+      "raw": "$spacing-userGuide_popup_content_title-marginBottom: 8px; // 气泡卡片标题底部外边距"
+    },
+    {
+      "key": "$spacing-userGuide_popup_content_description-marginBottom",
+      "value": "48px",
+      "comment": "气泡卡片详情底部外边距",
+      "category": "spacing",
+      "raw": "$spacing-userGuide_popup_content_description-marginBottom: 48px; // 气泡卡片详情底部外边距"
+    },
+    {
+      "key": "$spacing-userGuide_popup_content_button-gap",
+      "value": "12px",
+      "comment": "气泡卡片底部按钮间距",
+      "category": "spacing",
+      "raw": "$spacing-userGuide_popup_content_button-gap: 12px; // 气泡卡片底部按钮间距"
+    },
+    {
+      "key": "$spacing-userGuide_popup_content_button-marginLeft",
+      "value": "120px",
+      "comment": "气泡卡片按钮组左边距",
+      "category": "spacing",
+      "raw": "$spacing-userGuide_popup_content_button-marginLeft: 120px; // 气泡卡片按钮组左边距"
+    },
+    {
+      "key": "$spacing-userGuide_modal_content_title-marginBottom",
+      "value": "8px",
+      "comment": "弹窗式卡片标题底部外边距",
+      "category": "spacing",
+      "raw": "$spacing-userGuide_modal_content_title-marginBottom: 8px; // 弹窗式卡片标题底部外边距"
+    },
+    {
+      "key": "$spacing-userGuide_modal_content_body-padding",
+      "value": "24px 48px",
+      "comment": "弹窗式卡片body内边距",
+      "category": "spacing",
+      "raw": "$spacing-userGuide_modal_content_body-padding: 24px 48px; // 弹窗式卡片body内边距"
+    },
+    {
+      "key": "$spacing-userGuide_modal_content_footer-padding",
+      "value": "24px",
+      "comment": "弹窗式卡片footer内边距",
+      "category": "spacing",
+      "raw": "$spacing-userGuide_modal_content_footer-padding: 24px; // 弹窗式卡片footer内边距"
+    },
+    {
+      "key": "$spacing-userGuide_popup_content_indicator-gap",
+      "value": "8px",
+      "comment": "弹窗式片指示器间距",
+      "category": "spacing",
+      "raw": "$spacing-userGuide_popup_content_indicator-gap: 8px; // 弹窗式片指示器间距"
+    },
+    {
+      "key": "$spacing-userGuide_modal_content_button-gap",
+      "value": "12px",
+      "comment": "弹窗式卡片底部按钮间距",
+      "category": "spacing",
+      "raw": "$spacing-userGuide_modal_content_button-gap: 12px; // 弹窗式卡片底部按钮间距"
+    },
+    {
+      "key": "$radius-userGuide_popup_content_cover",
+      "value": "var(--semi-border-radius-medium) var(--semi-border-radius-medium) 0 0",
+      "comment": "气泡卡片封面圆角",
+      "category": "radius",
+      "raw": "$radius-userGuide_popup_content_cover: var(--semi-border-radius-medium) var(--semi-border-radius-medium) 0 0; // 气泡卡片封面圆角"
+    },
+    {
+      "key": "$radius-userGuide_modal_content_indicator",
+      "value": "var(--semi-border-radius-large)",
+      "comment": "气泡卡片指示器圆角",
+      "category": "radius",
+      "raw": "$radius-userGuide_modal_content_indicator: var(--semi-border-radius-large); // 气泡卡片指示器圆角"
+    },
+    {
+      "key": "$font-userGuide_popup_content_title-fontSize",
+      "value": "$font-size-header-5",
+      "comment": "气泡卡片标题字体大小",
+      "category": "font",
+      "raw": "$font-userGuide_popup_content_title-fontSize: $font-size-header-5; // 气泡卡片标题字体大小"
+    },
+    {
+      "key": "$font-userGuide_popup_content_description-fontSize",
+      "value": "$font-size-regular",
+      "comment": "气泡卡片详情字体大小",
+      "category": "font",
+      "raw": "$font-userGuide_popup_content_description-fontSize: $font-size-regular; // 气泡卡片详情字体大小"
+    },
+    {
+      "key": "$font-userGuide_popup_content_indicator-fontSize",
+      "value": "$font-size-regular",
+      "comment": "气泡卡片指示器字体大小",
+      "category": "font",
+      "raw": "$font-userGuide_popup_content_indicator-fontSize: $font-size-regular; // 气泡卡片指示器字体大小"
+    },
+    {
+      "key": "$font-userGuide_popup_content_title-fontWeight",
+      "value": "$font-weight-bold",
+      "comment": "气泡卡片标题字重",
+      "category": "font",
+      "raw": "$font-userGuide_popup_content_title-fontWeight: $font-weight-bold; // 气泡卡片标题字重"
+    },
+    {
+      "key": "$font-userGuide_modal_content_title-fontSize",
+      "value": "$font-size-header-5",
+      "comment": "弹窗式卡片标题字体大小",
+      "category": "font",
+      "raw": "$font-userGuide_modal_content_title-fontSize: $font-size-header-5; // 弹窗式卡片标题字体大小"
+    },
+    {
+      "key": "$font-userGuide_modal_content_description-fontSize",
+      "value": "$font-size-regular",
+      "comment": "弹窗式卡详情字体大小",
+      "category": "font",
+      "raw": "$font-userGuide_modal_content_description-fontSize: $font-size-regular; // 弹窗式卡详情字体大小"
+    },
+    {
+      "key": "$font-userGuide_modal_content_title-fontWeight",
+      "value": "$font-weight-bold",
+      "comment": "弹窗式卡片标题字重",
+      "category": "font",
+      "raw": "$font-userGuide_modal_content_title-fontWeight: $font-weight-bold; // 弹窗式卡片标题字重"
+    },
+    {
+      "key": "$transition_duration-userGuide_spotLight",
+      "value": "200ms",
+      "comment": "spotLight 动画持续时间",
+      "category": "animation",
+      "raw": "$transition_duration-userGuide_spotLight: 200ms; // spotLight 动画持续时间"
+    },
+    {
+      "key": "$transition_function-userGuide_spotLight",
+      "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "comment": "spotLight 过渡曲线",
+      "category": "animation",
+      "raw": "$transition_function-userGuide_spotLight: cubic-bezier(0.4, 0, 0.2, 1); // spotLight 过渡曲线"
     }
   ],
   "global": {

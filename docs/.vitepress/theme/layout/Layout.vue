@@ -436,6 +436,11 @@ const navItem = [
         text: 'Tooltip 工具提示',
         icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('tooltip') })),
       },
+      {
+        itemKey: '/show/userGuide/',
+        text: 'UserGuide 用户引导',
+        icon: h(Icon, {}, () => h(InlineSvg, { svg: getIcon('userGuide') })),
+      },
     ],
   },
   {

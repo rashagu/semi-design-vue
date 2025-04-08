@@ -31,6 +31,7 @@ import LocaleConsumer from '../locale/localeConsumer';
 import { getScrollbarWidth } from '../_utils';
 import { vuePropsMake } from '../PropTypes';
 import { CombineProps } from '../interface';
+import { omit } from 'lodash';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -288,7 +289,6 @@ const UserGuide = defineComponent({
       const isPrimaryTheme = theme === 'primary' || step?.theme === 'primary';
       const { cover, title, description } = step;
 
-      console.log(prevButtonProps);
       return (
         <LocaleConsumer componentName="UserGuide">
           {(locale: Locale['UserGuide'], localeCode: Locale['code']) => (
@@ -324,7 +324,7 @@ const UserGuide = defineComponent({
                         theme={isPrimaryTheme ? 'solid' : 'light'}
                         type={isPrimaryTheme ? 'primary' : 'tertiary'}
                         onClick={foundation.handlePrev}
-                        {...prevButtonProps}
+                        {...omit(prevButtonProps, 'children')}
                       >
                         {prevButtonProps?.children || locale.prev}
                       </Button>
@@ -334,7 +334,7 @@ const UserGuide = defineComponent({
                       theme={isPrimaryTheme ? 'borderless' : 'solid'}
                       type={'primary'}
                       onClick={foundation.handleNext}
-                      {...nextButtonProps}
+                      {...omit(nextButtonProps, 'children')}
                     >
                       {isLast ? finishText || locale.finish : nextButtonProps?.children || locale.next}
                     </Button>
@@ -528,11 +528,11 @@ const UserGuide = defineComponent({
                   </Button>
                 )}
                 {showPrevButton && !isFirst && (
-                  <Button type="tertiary" onClick={foundation.handlePrev} {...prevButtonProps}>
+                  <Button type="tertiary" onClick={foundation.handlePrev} {...omit(prevButtonProps, 'children')}>
                     {prevButtonProps?.children || locale.prev}
                   </Button>
                 )}
-                <Button theme="solid" onClick={foundation.handleNext} {...nextButtonProps}>
+                <Button theme="solid" onClick={foundation.handleNext} {...omit(nextButtonProps, 'children')}>
                   {isLast ? finishText || locale.finish : nextButtonProps?.children || locale.next}
                 </Button>
               </div>

@@ -37,6 +37,13 @@ const UserGuideDemo = defineComponent({
           <UserGuide
             mode="popup"
             mask={true}
+            nextButtonProps={{
+              children: 'Next',
+            }}
+            prevButtonProps={{
+              children: 'Prev',
+              theme: 'borderless',
+            }}
             visible={visible.value}
             steps={[
               {
