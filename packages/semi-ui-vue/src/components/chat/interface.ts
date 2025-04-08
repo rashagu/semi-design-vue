@@ -22,7 +22,7 @@ export interface CommonChatsProps {
   chatBoxRenderConfig?: ChatBoxRenderConfig;
   customMarkDownComponents?: MDXProps['components'];
   renderDivider?: (message?: Message) => VNode;
-  markdownRenderProps?: MarkdownRenderProps
+  markdownRenderProps?: Partial<MarkdownRenderProps>
 }
 
 export interface ChatProps extends CommonChatsProps {
