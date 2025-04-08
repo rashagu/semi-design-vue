@@ -170,6 +170,7 @@ import SelectTest from './components/select/__test__/SelectTest';
 import { InputVModel } from './components';
 import CropperDemo from './components/cropper/__test__/CropperDemo';
 import AudioPlayerDemo from './components/audioPlayer/__test__/AudioPlayerDemo';
+import UserGuideDemo from './components/userGuide/__test__/UserGuideDemo';
 
 export interface ExampleProps {
   name?: string
@@ -200,7 +201,8 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
     <div>
       <ConfigProvider locale={zh_CN}>
         {a.value}
-        <AudioPlayerDemo/>
+        <UserGuideDemo/>
+        {/*<AudioPlayerDemo/>*/}
         {/*<CropperDemo/>*/}
         {/*<InputVModel ref={testRef} v-model={a.value}/>*/}
         {/*<WithVModelDemo/>*/}

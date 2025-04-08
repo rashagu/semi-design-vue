@@ -29,21 +29,25 @@ import {
   onMounted,
   PropType,
   reactive,
-  shallowRef,
-  useSlots,
+  shallowRef, Teleport,
+  useSlots, VNode,
   watch,
 } from 'vue';
 import { CombineProps } from '../interface';
 import { vuePropsMake } from '../PropTypes';
 import { styleNum } from '../_utils';
 import { isEqual } from 'lodash';
+import { LocaleConsumerFunc } from '../locale/localeConsumer';
+import { Locale } from '../locale/interface';
+const LocaleConsumer = LocaleConsumerFunc<Locale['JsonViewer']>();
+
 const prefixCls = cssClasses.PREFIX;
 
 export type { JsonViewerOptions };
 export interface JsonViewerProps extends BaseProps {
   value: string;
-  width: number;
-  height: number;
+  width: number | string;
+  height: number | string;
   showSearch?: boolean;
   className?: string;
   style?: CSSProperties;
@@ -54,7 +58,8 @@ export interface JsonViewerProps extends BaseProps {
 
 export interface JsonViewerState {
   searchOptions: SearchOptions;
-  showSearchBar: boolean
+  showSearchBar: boolean;
+  customRenderMap: Map<HTMLElement, VNode>
 }
 
 interface SearchOptions {
@@ -71,14 +76,14 @@ const propTypes: CombineProps<JsonViewerProps> = {
     required: true,
   },
   height: {
-    type: Number,
+    type: [Number, String],
+    required: true,
+  },
+  width: {
+    type: [Number, String],
     required: true,
   },
   showSearch: Boolean,
-  width: {
-    type: Number,
-    required: true,
-  },
   onChange: PropTypes.func as PropType<JsonViewerProps['onChange']>,
   options: Object,
   renderTooltip: PropTypes.func as PropType<JsonViewerProps['renderTooltip']>,
@@ -106,6 +111,7 @@ const JsonViewerCom = defineComponent({
         regex: false,
       },
       showSearchBar: false,
+      customRenderMap: new Map(),
     })
     const editorRef = shallowRef()
     const searchInputRef = shallowRef()
@@ -125,6 +131,9 @@ const JsonViewerCom = defineComponent({
         notifyHover: (value, el) => {
           const res = props.renderTooltip?.(value, el);
           return res;
+        },
+        notifyCustomRender: (customRenderMap) => {
+          state.customRenderMap = customRenderMap;
         },
         setSearchOptions: (key: string) => {
           state.searchOptions = {
@@ -190,7 +199,7 @@ const JsonViewerCom = defineComponent({
 
     function renderSearchBox() {
       return (
-        <div class={`${prefixCls}-search-bar-container`}>
+        <div class={`${prefixCls}-search-bar-container`} style={{ position: 'absolute', top: '20px', right: '20px' }}>
           {renderSearchBar()}
           {renderReplaceBar()}
         </div>
@@ -231,52 +240,58 @@ const JsonViewerCom = defineComponent({
 
     function renderSearchBar() {
       return (
-        <div class={`${prefixCls}-search-bar`}>
-          <Input
-            placeholder="查找"
-            className={`${prefixCls}-search-bar-input`}
-            onChange={(_value, e) => {
-              e.preventDefault();
-              if (!isComposing) {
-                searchHandler();
-              }
-              searchInputRef.value?.focus();
-            }}
-            onCompositionstart={() => {
-              isComposing = true;
-            }}
-            onCompositionend={() => {
-              isComposing = false;
-              searchHandler();
-              searchInputRef.value?.focus();
-            }}
-            ref={searchInputRef}
-          />
-          {renderSearchOptions()}
-          <ButtonGroup>
-            <Button
-              icon={<IconChevronLeft />}
-              onClick={e => {
-                e.preventDefault();
-                foundation.prevSearch();
-              }}
-            />
-            <Button
-              icon={<IconChevronRight />}
-              onClick={e => {
-                e.preventDefault();
-                foundation.nextSearch();
-              }}
-            />
-          </ButtonGroup>
-          <Button
-            icon={<IconClose />}
-            size="small"
-            theme={'borderless'}
-            type={'tertiary'}
-            onClick={() => foundation.showSearchBar()}
-          />
-        </div>
+        <LocaleConsumer
+          componentName="JsonViewer"
+        >
+          {(locale: Locale['JsonViewer'], localeCode: Locale['code']) => (
+            <div class={`${prefixCls}-search-bar`}>
+              <Input
+                placeholder={locale.search}
+                className={`${prefixCls}-search-bar-input`}
+                onChange={(_value, e) => {
+                  e.preventDefault();
+                  if (!isComposing) {
+                    searchHandler();
+                  }
+                  searchInputRef.value?.focus();
+                }}
+                onCompositionstart={() => {
+                  isComposing = true;
+                }}
+                onCompositionend={() => {
+                  isComposing = false;
+                  searchHandler();
+                  searchInputRef.value?.focus();
+                }}
+                ref={searchInputRef}
+              />
+              {renderSearchOptions()}
+              <ButtonGroup>
+                <Button
+                  icon={<IconChevronLeft />}
+                  onClick={e => {
+                    e.preventDefault();
+                    foundation.prevSearch();
+                  }}
+                />
+                <Button
+                  icon={<IconChevronRight />}
+                  onClick={e => {
+                    e.preventDefault();
+                    foundation.nextSearch();
+                  }}
+                />
+              </ButtonGroup>
+              <Button
+                icon={<IconClose />}
+                size="small"
+                theme={'borderless'}
+                type={'tertiary'}
+                onClick={() => foundation.showSearchBar()}
+              />
+            </div>
+          )}
+        </LocaleConsumer>
       );
     }
 
@@ -284,34 +299,42 @@ const JsonViewerCom = defineComponent({
       const { readOnly } = props.options;
 
       return (
-        <div class={`${prefixCls}-replace-bar`}>
-          <Input
-            placeholder="替换"
-            className={`${prefixCls}-replace-bar-input`}
-            onChange={(value, e) => {
-              e.preventDefault();
-            }}
-            ref={replaceInputRef}
-          />
-          <Button
-            disabled={readOnly}
-            onClick={() => {
-              const value = replaceInputRef.value?.value;
-              foundation.replace(value);
-            }}
-          >
-            替换
-          </Button>
-          <Button
-            disabled={readOnly}
-            onClick={() => {
-              const value = replaceInputRef.value?.value;
-              foundation.replaceAll(value);
-            }}
-          >
-            全部替换
-          </Button>
-        </div>
+        <LocaleConsumer
+          componentName="JsonViewer"
+        >
+          {(locale: Locale['JsonViewer'], localeCode: Locale['code']) => (
+            <div class={`${prefixCls}-replace-bar`}>
+              <Input
+                placeholder={locale.replace}
+                className={`${prefixCls}-replace-bar-input`}
+                onChange={(value, e) => {
+                  e.preventDefault();
+                }}
+                ref={replaceInputRef}
+              />
+              <Button
+                style={{ width: 'fit-content' }}
+                disabled={readOnly}
+                onClick={() => {
+                  const value = replaceInputRef.value?.value;
+                  foundation.replace(value);
+                }}
+              >
+                {locale.replace}
+              </Button>
+              <Button
+                style={{ width: 'fit-content' }}
+                disabled={readOnly}
+                onClick={() => {
+                  const value = replaceInputRef.value?.value;
+                  foundation.replaceAll(value);
+                }}
+              >
+                {locale.replaceAll}
+              </Button>
+            </div>
+          )}
+        </LocaleConsumer>
       );
     }
 
@@ -337,7 +360,7 @@ const JsonViewerCom = defineComponent({
                 isDragging = true;
               }}
             >
-              <div style={{ position: 'absolute', top: '20px', left: styleNum(width - 52) }}>
+              <div style={{ position: 'absolute', top: '20px', left: styleNum(width) }}>
                 {!state.showSearchBar ? (
                   <Button
                     className={`${prefixCls}-search-bar-trigger`}
@@ -351,6 +374,7 @@ const JsonViewerCom = defineComponent({
                       foundation.showSearchBar();
                     }}
                     icon={<IconSearch />}
+                    style={{ position: 'absolute', top: 20, right: 20 }}
                   />
                 ) : (
                   renderSearchBox()
@@ -358,6 +382,12 @@ const JsonViewerCom = defineComponent({
               </div>
             </DragMove>}
           </div>
+          {Array.from(state.customRenderMap.entries()).map(([key, value]) => {
+            // key.innerHTML = '';
+            return <Teleport to={key}>
+              {value}
+            </Teleport>
+          })}
         </>
       );
     };

@@ -9,7 +9,7 @@ import { Checkbox } from '../checkbox';
 import Spin from '../spin';
 import type { RenderFullLabelProps, TreeNodeProps, TreeNodeState } from './interface';
 import Highlight from '../highlight';
-import { cloneVNode, defineComponent, h, PropType, reactive, ref, useSlots } from 'vue';
+import { cloneVNode, defineComponent, h, isVNode, PropType, reactive, ref, useSlots } from 'vue';
 import { useTreeContext } from './TreeContext/Consumer';
 import type { CombineProps, VueHTMLAttributes } from '../interface';
 import Indent from './indent';
@@ -65,6 +65,7 @@ const propTypes: CombineProps<TreeNodeProps> = {
   motionKey: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   isEnd: PropTypes.array,
   showLine: PropTypes.bool,
+  expandIcon: PropTypes.node as PropType<TreeNodeProps['expandIcon']>,
   eventKey: String,
   label: PropTypes.node,
   data: Object,
@@ -246,11 +247,30 @@ const TreeNode = defineComponent({
 
     function renderArrow() {
       const showIcon = !isLeaf();
-      const { loading, expanded, showLine } = props;
+      const { loading, expanded, showLine, expandIcon } = props;
       if (loading) {
         return <Spin wrapperClassName={`${prefixcls}-spin-icon`} />;
       }
       if (showIcon) {
+        if (expandIcon) {
+          if (typeof expandIcon === 'function') {
+            return expandIcon({
+              onClick: onExpand,
+              className: `${prefixcls}-expand-icon`,
+              expanded
+            });
+          } else if (isVNode(expandIcon)) {
+            const className = cls(`${prefixcls}-expand-icon`, {
+              [expandIcon?.props?.className]: expandIcon?.props?.className
+            });
+            return cloneVNode(expandIcon, {
+              onClick: onExpand,
+              className,
+            } as any);
+          } else {
+            return expandIcon;
+          }
+        }
         return (
           <IconTreeTriangleDown
             role="button"

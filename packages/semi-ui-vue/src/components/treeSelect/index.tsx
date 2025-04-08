@@ -160,6 +160,12 @@ export interface TreeSelectProps
   zIndex?: number;
   searchPosition?: string;
   stopPropagation?: boolean | string;
+  restTagsPopoverProps?: PopoverProps;
+  expandIcon?: VNode | ((props: {
+    onClick: (e: MouseEvent) => void;
+    className: string;
+    expanded: boolean
+  }) => VNode);
   searchRender?: boolean | ((inputProps: InputProps) => VueJsxNode);
   onSelect?: (selectedKey: string, selected: boolean, selectedNode: TreeNodeData) => void;
   renderSelectedItem?: RenderSelectedItem;
@@ -264,6 +270,7 @@ const propTypes: CombineProps<TreeSelectProps> = {
   mouseLeaveDelay: PropTypes.number,
   triggerRender: PropTypes.func as PropType<TreeSelectProps['triggerRender']>,
   stopPropagation: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  expandIcon: PropTypes.node as PropType<TreeSelectProps['expandIcon']>,
   outerBottomSlot: PropTypes.node,
   outerTopSlot: PropTypes.node,
   onVisibleChange: PropTypes.func as PropType<TreeSelectProps['onVisibleChange']>,
@@ -1505,12 +1512,13 @@ const TreeSelect = defineComponent({
         return null;
       }
       const props_: any = pick(treeNode, ['key', 'label', 'disabled', 'isLeaf', 'icon', 'isEnd']);
-      const { keyMaps } = props_;
+      const { keyMaps, expandIcon } = props_;
       const children = data[get(keyMaps, 'children', 'children')];
       !isUndefined(children) && (props_.children = children);
       // 不要删除，更新用
       console.debug(state.loadingKeys.size);
-      return <TreeNode {...treeNodeProps} {...data} {...props_} data={data} style={style} showLine={showLine} />;
+      return <TreeNode {...treeNodeProps} {...data} {...props_} data={data} style={style} showLine={showLine}
+                       expandIcon={expandIcon}/>;
     };
 
     const itemKey = (index: number, data: Record<string, any>) => {

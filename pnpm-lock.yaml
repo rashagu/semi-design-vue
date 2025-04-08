@@ -14,11 +14,11 @@ importers:
   .:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       '@douyinfe/semi-theme-default':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       '@vue/repl':
         specifier: 4.4.2
         version: 4.4.2(patch_hash=a8bb7e4c6f697eb0965370d9a0537e82f338ad17107466497fdb72e20b60680b)
@@ -216,17 +216,17 @@ importers:
   packages/semi-animation-vue:
     dependencies:
       '@douyinfe/semi-animation':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       '@douyinfe/semi-animation-styled':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       '@douyinfe/semi-foundation':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       '@douyinfe/semi-theme-default':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -310,11 +310,11 @@ importers:
   packages/semi-icons-lab-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       '@douyinfe/semi-theme-default':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -395,11 +395,11 @@ importers:
   packages/semi-icons-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       '@douyinfe/semi-theme-default':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -480,11 +480,11 @@ importers:
   packages/semi-illustrations-vue:
     dependencies:
       '@douyinfe/semi-foundation':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       '@douyinfe/semi-theme-default':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -577,14 +577,14 @@ importers:
         specifier: 0.0.6-beta-20241014170855
         version: 0.0.6-beta-20241014170855
       '@douyinfe/semi-animation':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       '@douyinfe/semi-foundation':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       '@douyinfe/semi-theme-default':
-        specifier: 2.74.0
-        version: 2.74.0
+        specifier: 2.77.1
+        version: 2.77.1
       '@kousum/dnd-kit-vue':
         specifier: 0.0.6-beta-20241014170855
         version: 0.0.6-beta-20241014170855(vue@3.5.13(typescript@5.5.4))
@@ -1759,20 +1759,20 @@ packages:
       search-insights:
         optional: true
 
-  '@douyinfe/semi-animation-styled@2.74.0':
-    resolution: {integrity: sha512-FfcWtbk1nCemvk7i9SMlFTLgXvFQmCXCKslE/CL6cu9JM23a4R2FnHUPReYjnoTX/aIzfYKcZVxOYpE1u79/Xg==}
+  '@douyinfe/semi-animation-styled@2.77.1':
+    resolution: {integrity: sha512-FBRroqVJroel1CXmBgV58ulZHG2xUVInJF7k0FAag54noKKaToEobSxRjiTJ6JHne3ZDU1M6sBqpbzYJElFnPQ==}
 
-  '@douyinfe/semi-animation@2.74.0':
-    resolution: {integrity: sha512-S0n5d928HClJfglsfk1IjiYWGYYxhxWordKZU23JoAH9/PpordvmbzsC+6iBe9eCsDJClVoj1fOyzOYhOOdoew==}
+  '@douyinfe/semi-animation@2.77.1':
+    resolution: {integrity: sha512-Q1D7whvQe0D+mPov8hXeH/e1uR/iBhpGGcW1LCTL2pSVMEZEYGJLf2KeXTTiCIgRVWm0PRH3Sux7auJ64zg7vw==}
 
-  '@douyinfe/semi-foundation@2.74.0':
-    resolution: {integrity: sha512-i5iChgEkEYDp9pwhYibi2Jc05hEmbIowY4JwqXBrCXtnZnEkSUBedl+SHOwHNbqbNNFaXhUzc+KF/YJLGCmL0w==}
+  '@douyinfe/semi-foundation@2.77.1':
+    resolution: {integrity: sha512-DAXRy8ryLNzbKAiTAv+RrivGCoMU0asv2cO7PNV5aBq0ICB8XXn97FHyZo6Wb5NpqpyMhOaOr8Ro1bfpd0FeaA==}
 
-  '@douyinfe/semi-json-viewer-core@2.74.0':
-    resolution: {integrity: sha512-g8n3NNXQili/IKakeriFN1RRmTs2N/Av8yByysLE8kHh7JylkzB109UcoK98HnjFztvu2xY1blXsc+rM9WjLWQ==}
+  '@douyinfe/semi-json-viewer-core@2.77.1':
+    resolution: {integrity: sha512-LOW+7ga2OzFIL9pGKftwHfl1kKLTV3x6Cs857iyvq9GIF/GHbAboiHcKUy2OZIHfy66zvP+Focs+yhfZG7IcZw==}
 
-  '@douyinfe/semi-theme-default@2.74.0':
-    resolution: {integrity: sha512-Q5vOIhf2qoUJkUEAAHx72Y21HDrA0IGx7QRhCRXtWrh+5HEFHWmNZQDV07Qtoppuo3CnPaPb9mJZNb5h7jmixQ==}
+  '@douyinfe/semi-theme-default@2.77.1':
+    resolution: {integrity: sha512-Rug75C7jjSqmCP2L2tBI0K4dnXuo4GardzwSzdSjxDkiaIXwOwR5KE0K1FRbKWkQ7xmxbyRu4S6Pff+CDEJ/lA==}
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -10053,16 +10053,16 @@ snapshots:
     transitivePeerDependencies:
       - '@algolia/client-search'
 
-  '@douyinfe/semi-animation-styled@2.74.0': {}
+  '@douyinfe/semi-animation-styled@2.77.1': {}
 
-  '@douyinfe/semi-animation@2.74.0':
+  '@douyinfe/semi-animation@2.77.1':
     dependencies:
       bezier-easing: 2.1.0
 
-  '@douyinfe/semi-foundation@2.74.0':
+  '@douyinfe/semi-foundation@2.77.1':
     dependencies:
-      '@douyinfe/semi-animation': 2.74.0
-      '@douyinfe/semi-json-viewer-core': 2.74.0
+      '@douyinfe/semi-animation': 2.77.1
+      '@douyinfe/semi-json-viewer-core': 2.77.1
       '@mdx-js/mdx': 3.0.1
       async-validator: 3.5.2
       classnames: 2.5.1
@@ -10078,11 +10078,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@douyinfe/semi-json-viewer-core@2.74.0':
+  '@douyinfe/semi-json-viewer-core@2.77.1':
     dependencies:
       jsonc-parser: 3.3.1
 
-  '@douyinfe/semi-theme-default@2.74.0': {}
+  '@douyinfe/semi-theme-default@2.77.1': {}
 
   '@esbuild/aix-ppc64@0.20.2':
     optional: true

@@ -74,6 +74,8 @@ export const chatPropTypes: CombineProps<ChatProps> = {
   mode: PropTypes.string as PropType<ChatProps['mode']>,
   renderDivider: PropTypes.func as PropType<ChatProps['renderDivider']>,
   markdownRenderProps: PropTypes.object as PropType<ChatProps['markdownRenderProps']>,
+
+  enableUpload: PropTypes.bool,
 };
 const defaultProps = {
   align: CHAT_ALIGN.LEFT_RIGHT,
@@ -331,7 +333,7 @@ const index = defineComponent({
         hintCls,
         uploadProps,
         uploadTipProps,
-        sendHotKey, renderDivider, markdownRenderProps
+        sendHotKey, renderDivider, markdownRenderProps, enableUpload
       } = props;
       const { backBottomVisible, chats, wheelScroll, uploadAreaVisible } = state;
       let showStopGenerateFlag = false;
@@ -342,9 +344,19 @@ const index = defineComponent({
         disableSend = lastChatOnGoing;
         showStopGenerate && (showStopGenerateFlag = lastChatOnGoing);
       }
+      const { dragUpload, clickUpload, pasteUpload } = foundation.getUploadProps(enableUpload);
+      const dragEventHandlers = dragUpload ? {
+        onDragover: foundation.handleDragOver,
+        onDragstart: foundation.handleDragStart,
+        onDragend: foundation.handleDragEnd,
+      } : {};
       return (
-        <div class={cls(`${prefixCls}`, className)} style={style} onDragover={foundation.handleDragOver}>
-          {uploadAreaVisible && (
+        <div
+          class={cls(`${prefixCls}`, className)}
+          style={style}
+          {...dragEventHandlers}
+        >
+          {dragUpload && uploadAreaVisible && (
             <div
               ref={dropAreaRef}
               class={`${prefixCls}-dropArea`}
@@ -443,6 +455,8 @@ const index = defineComponent({
               uploadProps={uploadProps}
               uploadTipProps={uploadTipProps}
               sendHotKey={sendHotKey}
+              clickUpload={clickUpload}
+              pasteUpload={pasteUpload}
             />
             {bottomSlot}
           </div>

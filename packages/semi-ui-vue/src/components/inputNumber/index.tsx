@@ -14,8 +14,11 @@ import { IconChevronUp, IconChevronDown } from '@kousum/semi-icons-vue';
 import '@douyinfe/semi-foundation/inputNumber/inputNumber.scss';
 import { isNaN, isString, noop } from 'lodash';
 import { ArrayElement } from '../_base/base';
+import { LocaleConsumerFunc } from '../locale/localeConsumer';
+import type { Locale } from '../locale/interface';
+const LocaleConsumer = LocaleConsumerFunc<Locale['InputNumber']>();
+
 import {
-  ComponentObjectPropsOptions,
   CSSProperties,
   defineComponent,
   h,
@@ -33,7 +36,11 @@ import { CombineProps } from '../interface';
 export interface InputNumberProps extends InputProps {
   autofocus?: boolean;
   className?: string;
+  clearIcon?: VNode;
+  currency?: string | boolean;
+  currencyDisplay?: 'code' | 'symbol' | 'name';
   defaultValue?: number | string;
+  defaultCurrency?: string;
   disabled?: boolean;
   formatter?: (value: number | string) => string;
   forwardedRef?: any;
@@ -42,8 +49,11 @@ export interface InputNumberProps extends InputProps {
   insetLabel?: VNode;
   insetLabelId?: string;
   keepFocus?: boolean;
+  localeCode?: string;
   max?: number;
   min?: number;
+  minimumFractionDigits?: number;
+  maximumFractionDigits?: number;
   parser?: (value: string) => string;
   precision?: number;
   prefixCls?: string;
@@ -51,6 +61,7 @@ export interface InputNumberProps extends InputProps {
   pressTimeout?: number;
   shiftStep?: number;
   showClear?: boolean;
+  showCurrencySymbol?: boolean;
   size?: ArrayElement<typeof strings.SIZE>;
   step?: number;
   style?: CSSProperties;
@@ -78,6 +89,10 @@ const propTypes: CombineProps<InputNumberProps> = {
   'aria-required': PropTypes.bool,
   autofocus: PropTypes.bool,
   className: PropTypes.string,
+  clearIcon: PropTypes.node as PropType<InputNumberProps['insetLabel']>,
+  currency: [PropTypes.string, PropTypes.bool],
+  currencyDisplay: PropTypes.string as PropType<InputNumberProps['currencyDisplay']>,
+  defaultCurrency: PropTypes.string,
   defaultValue: [PropTypes.number, PropTypes.string],
   disabled: PropTypes.bool,
   formatter: PropTypes.func as PropType<InputNumberProps['formatter']>,
@@ -87,8 +102,11 @@ const propTypes: CombineProps<InputNumberProps> = {
   insetLabel: PropTypes.node as PropType<InputNumberProps['insetLabel']>,
   insetLabelId: PropTypes.string,
   keepFocus: PropTypes.bool,
+  localeCode: PropTypes.string,
   max: PropTypes.number,
   min: PropTypes.number,
+  minimumFractionDigits: PropTypes.number,
+  maximumFractionDigits: PropTypes.number,
   parser: PropTypes.func as PropType<InputNumberProps['parser']>,
   precision: PropTypes.number,
   prefixCls: PropTypes.string,
@@ -96,6 +114,8 @@ const propTypes: CombineProps<InputNumberProps> = {
   pressTimeout: PropTypes.number,
   preventScroll: PropTypes.bool,
   shiftStep: PropTypes.number,
+  showClear: PropTypes.bool,
+  showCurrencySymbol: PropTypes.bool,
   size: PropTypes.string as PropType<InputNumberProps['size']>,
   step: PropTypes.number,
   style: PropTypes.object,
@@ -125,6 +145,7 @@ const defaultProps: InputNumberProps = {
   shiftStep: numbers.DEFAULT_SHIFT_STEP,
   size: strings.DEFAULT_SIZE,
   step: numbers.DEFAULT_STEP,
+  showCurrencySymbol: true,
   onBlur: noop,
   onChange: noop,
   onDownClick: noop,
@@ -136,7 +157,7 @@ const defaultProps: InputNumberProps = {
 export const vuePropsType = vuePropsMake(propTypes, defaultProps);
 const InputNumber = defineComponent({
   props: { ...vuePropsType },
-  name: 'InputNumber',
+  name: 'InputNumber0',
   setup(props, {}) {
     let cursorStart!: number;
     let cursorEnd!: number;
@@ -197,6 +218,9 @@ const InputNumber = defineComponent({
             document.removeEventListener(eventName, handler);
             adapter.setCache(eventName, null);
           }
+        },
+        getInputCharacter: (index: number) => {
+          return inputNode.value[index];
         },
         recordCursorPosition: () => {
           // Record position
@@ -361,7 +385,7 @@ const InputNumber = defineComponent({
                 foundation.updateStates({ value: valueStr });
               }
             } else if (foundation.isValidNumber(parsedNum)) {
-              newValue = foundation.doFormat(parsedNum);
+              newValue = foundation.doFormat(parsedNum, true, true);
               foundation.updateStates({ number: parsedNum, value: newValue });
             } else {
               // Invalid digital analog blurring effect instead of controlled failure
@@ -370,7 +394,19 @@ const InputNumber = defineComponent({
             }
           }
           if (newValue && isString(newValue) && newValue !== String(props.value)) {
-            foundation.notifyChange(newValue, null);
+            if (foundation._isCurrency()) {
+              // 仅在解析后的数值而不是格式化的字符串变化时 notifyChange
+              // notifyChange only when the parsed value changes, not the formatted string
+              const parsedNewValue = foundation.doParse(newValue);
+              const parsedPropValue = typeof props.value === 'string' ?
+                foundation.doParse(props.value) : props.value;
+
+              if (parsedNewValue !== parsedPropValue) {
+                foundation.notifyChange(newValue, null);
+              }
+            } else {
+              foundation.notifyChange(newValue, null);
+            }
           }
         }
 
@@ -563,4 +599,19 @@ const InputNumber = defineComponent({
   },
 });
 
-export default InputNumber;
+export default defineComponent({
+  props: { ...vuePropsType },
+  name: 'InputNumber',
+  setup(props, {}) {
+    return ()=>{
+      return <LocaleConsumer componentName="InputNumber">
+        {(locale: Locale['InputNumber'], localeCode: string, dateFnsLocale, currency: string) => (
+          <InputNumber localeCode={localeCode} {...{defaultCurrency: currency, ...props}}/>
+        )}
+      </LocaleConsumer>
+    }
+  }
+});
+
+
+export {InputNumber}

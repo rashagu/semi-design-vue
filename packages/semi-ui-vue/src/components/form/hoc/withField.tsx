@@ -272,6 +272,7 @@ function withField<
             )
             .then((res) => {
               if (isUnmounted.value || validatePromise.value !== rootPromise) {
+                console.warn(`[Semi Form]: When FieldComponent (${mergeProps(_getProps()).field}) has an unfinished validation process, you repeatedly trigger a new validation, the old validation will be abandoned, and will neither resolve nor reject. Usually this is an unreasonable practice. Please check your code.`);
                 return;
               }
               // validation passed
@@ -281,6 +282,7 @@ function withField<
             })
             .catch((err) => {
               if (isUnmounted.value || validatePromise.value !== rootPromise) {
+                console.warn(`[Semi Form]: When FieldComponent (${mergeProps(_getProps()).field}) has an unfinished validation process, you repeatedly trigger a new validation, the old validation will be abandoned, and will neither resolve nor reject. Usually this is an unreasonable practice. Please check your code.`);
                 return;
               }
 
@@ -328,6 +330,7 @@ function withField<
             maybePromisedErrors.then((result: any) => {
               // If the async validate is outdated (a newer validate occurs), the result should be discarded
               if (isUnmounted.value || validatePromise.value !== rootPromise) {
+                console.warn(`[Semi Form]: When Field: (${mergeProps(_getProps()).field}) has an unfinished validation process, you repeatedly trigger a new validation, the old validation will be abandoned, and will neither resolve nor reject. Usually this is an unreasonable practice. Please check your code.`);
                 return;
               }
 

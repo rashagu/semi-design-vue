@@ -84,13 +84,18 @@ const getRenderText = (
   ellipsisContainer.style.textOverflow = 'clip';
   ellipsisContainer.style.webkitLineClamp = 'none';
   // Render fake container
-  if (ellipsisApp){
-    ellipsisApp.unmount()
-  }
-  ellipsisApp = createApp(
-    ()=>h('div'),
-  )
-  ellipsisApp.mount(ellipsisContainer);
+  // if (ellipsisApp){
+  //   ellipsisApp.unmount()
+  // }
+  // ellipsisApp = createApp(
+  //   ()=>h('div'),
+  // )
+  // ellipsisApp.mount(ellipsisContainer);
+
+
+  // Clear container content
+  ellipsisContainer.innerHTML = '';
+
 
   // Check if ellipsis in measure div is enough for content
   function inRange() {

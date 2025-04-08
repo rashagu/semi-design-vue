@@ -107,6 +107,7 @@ export interface FormFCChild<K extends Record<string, any> = any> {
 interface setValuesConfig {
     isOverride: boolean;
 }
+type BatchValidateResult<Values> = string | Partial<AllErrors<Values>>
 
 export interface BaseFormProps <Values extends Record<string, any> = any> {
     'aria-label'?: AriaAttributes['aria-label'];
@@ -117,7 +118,7 @@ export interface BaseFormProps <Values extends Record<string, any> = any> {
     onErrorChange?: (errors: Record<keyof Values, FieldError>, changedError?: Partial<Record<keyof Values, FieldError>>) => void;
     onChange?: (formState: FormState) => void;
     allowEmpty?: boolean;
-    validateFields?: (values: Values) => string | Partial<AllErrors<Values>>;
+    validateFields?: (values: Values) => BatchValidateResult<Values> | Promise<BatchValidateResult<Values>>;
     /** Use this if you want to populate the form with initial values. */
     initValues?: Values;
     id?: string;

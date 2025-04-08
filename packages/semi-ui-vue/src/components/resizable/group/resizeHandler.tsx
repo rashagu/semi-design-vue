@@ -72,9 +72,12 @@ const ResizeHandler = defineComponent({
         ...adapterInject(),
         registerEvents: () => {
           handlerRef.value.addEventListener('mousedown', onMouseDown);
+          handlerRef.value.addEventListener('touchstart', onTouchStart);
+
         },
         unregisterEvents: () => {
           handlerRef.value.removeEventListener('mousedown', onMouseDown);
+          handlerRef.value.removeEventListener('touchstart', onTouchStart);
         },
       };
     }
@@ -94,9 +97,13 @@ const ResizeHandler = defineComponent({
     })
     const onMouseDown = (e: MouseEvent) => {
       const { notifyResizeStart } = context.value;
-      notifyResizeStart(handlerIndex, e);
+      notifyResizeStart(handlerIndex, e, 'mouse');
     }
 
+    const onTouchStart = (e: TouchEvent) => {
+      const { notifyResizeStart } = context.value;
+      notifyResizeStart(handlerIndex, e.targetTouches[0], 'touch');
+    }
     return () => {
       const children = slots.default?.();
       const { style, className } = props;

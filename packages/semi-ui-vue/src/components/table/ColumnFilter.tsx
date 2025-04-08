@@ -326,7 +326,7 @@ export interface RenderDropdownProps extends FilterDropdownProps, RenderFilterDr
   filterDropdownVisible?: boolean;
   onSelect?: (data: OnSelectData) => void;
   onFilterDropdownVisibleChange?: OnFilterDropdownVisibleChange;
-  renderFilterDropdown?: (props?: RenderFilterDropdownProps) => VNode;
+  renderFilterDropdown?: (props: RenderFilterDropdownProps) => VNode;
   renderFilterDropdownItem?: RenderFilterDropdownItem;
 }
 

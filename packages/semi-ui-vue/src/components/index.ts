@@ -228,3 +228,4 @@ export { default as Cropper } from './cropper';
 export { default as AudioPlayer } from './audioPlayer';
 
 export {default as JsonViewer} from './jsonViewer';
+export { default as UserGuide } from './userGuide';

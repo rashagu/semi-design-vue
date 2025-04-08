@@ -62,9 +62,13 @@ const ResizableHandler = defineComponent({
         ...adapterInject(),
         registerEvent: () => {
           resizeHandlerRef.value.addEventListener('mousedown', foundation.onMouseDown);
+          resizeHandlerRef.value.addEventListener('touchstart', foundation.onTouchStart);
+
         },
         unregisterEvent: () => {
           resizeHandlerRef.value.removeEventListener('mousedown', foundation.onMouseDown);
+          resizeHandlerRef.value.removeEventListener('touchstart', foundation.onTouchStart);
+
         },
       };
     }

@@ -1,7 +1,7 @@
 import Consumer from "./context/Consumer";
 import Provider from "./context/Provider";
 import type { Ref } from 'vue';
-import type { ResizeCallback, ResizeStartCallback } from '@douyinfe/semi-foundation/resizable/types';
+import type { ResizeCallback, ResizeEventType, ResizeStartCallback } from '@douyinfe/semi-foundation/resizable/types';
 
 
 export interface ResizeContextProps {
@@ -13,7 +13,7 @@ export interface ResizeContextProps {
                    onResizeEnd: ResizeCallback
     ) => number;
     registerHandler: (ref: Ref<HTMLDivElement>) => number;
-    notifyResizeStart: (handlerIndex: number, e: MouseEvent) => void;
+    notifyResizeStart: (handlerIndex: number, e: MouseEvent | Touch, type: ResizeEventType) => void;
     getGroupSize: () => number
 }
 

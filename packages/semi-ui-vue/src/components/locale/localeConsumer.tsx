@@ -9,7 +9,7 @@ import DefaultLocale from './source/zh_CN';
 import { Locale } from './interface';
 import { CombineProps } from '../interface';
 
-type ChildrenRender<T> = (componentLocal: T, localeCode: string, dateFnsLocale: dateFns) => VNode;
+type ChildrenRender<T> = (componentLocal: T, localeCode: string, dateFnsLocale: dateFns, currency: string) => VNode;
 export interface LocaleConsumerProps<T> {
   componentName: string;
   // children?: ChildrenRender<T>;
@@ -46,7 +46,9 @@ function LocaleConsumerFunc<T>() {
          */
         const defaultFnsLocale = get(DefaultLocale, 'dateFnsLocale');
         const dateFnsLocale = get(locale, 'dateFnsLocale', defaultFnsLocale);
-        return children?.(locale[componentName], locale.code, dateFnsLocale);
+        const currency = get(locale, 'currency');
+        return children(locale[componentName], locale.code, dateFnsLocale, currency);
+
       }
 
       return () => {

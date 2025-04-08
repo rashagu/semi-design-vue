@@ -13,7 +13,7 @@ import Progress from '../progress/index';
 import Tooltip from '../tooltip/index';
 import Spin from '../spin/index';
 import { isElement } from '../_base/reactUtils';
-import { RenderFileItemProps, UploadListType } from './interface';
+import { RenderFileItemProps, type RenderPictureCloseProps, UploadListType } from './interface';
 import { defineComponent, h, useSlots, Fragment, ComponentObjectPropsOptions, PropType, reactive } from 'vue';
 import type { CSSProperties, FunctionalComponent, VNode } from 'vue';
 import { vuePropsMake } from '../PropTypes';
@@ -102,6 +102,7 @@ export interface FileCardProps extends RenderFileItemProps {
   picHeight?: string | number;
 
   renderThumbnail?: any
+  renderPicClose?: (renderPicCloseProps: RenderPictureCloseProps) => VNode | string;
 }
 
 const propTypes: CombineProps<FileCardProps> = {
@@ -168,6 +169,8 @@ const propTypes: CombineProps<FileCardProps> = {
   event: Object,
   shouldUpload: Boolean,
   _sizeInvalid: Boolean,
+
+  renderPicClose: PropTypes.func as PropType<FileCardProps['renderPicClose']>,
 };
 
 const defaultProps = {
@@ -280,6 +283,7 @@ const FileCard = defineComponent({
         onPreviewClick,
         showPicInfo,
         renderPicInfo,
+        renderPicClose,
         renderPicPreviewIcon,
         renderThumbnail,
         name,
@@ -324,9 +328,14 @@ const FileCard = defineComponent({
         </div>
       );
       const close = (
-        <div role="button" tab-index={0} class={`${prefixCls}-picture-file-card-close`} onClick={(e) => onRemove(e)}>
-          <IconClear class={`${prefixCls}-picture-file-card-icon-close`} />
-        </div>
+        <>
+          {typeof renderPicClose === 'function' ?
+            <>{renderPicClose({ className: `${prefixCls}-picture-file-card-close`, remove: e => onRemove(e) })}</>
+            : <div role="button" tabindex={0} class={`${prefixCls}-picture-file-card-close`} onClick={e => onRemove(e)}>
+              <IconClear className={`${prefixCls}-picture-file-card-icon-close`} />
+            </div>
+          }
+        </>
       );
 
       const picInfo =
@@ -348,11 +357,8 @@ const FileCard = defineComponent({
         itemStyle.width = styleNum(picWidth);
         imgStyle.width = styleNum(picWidth);
       }
-      const defaultThumbTail = !fallbackPreview ? (
-        <img src={url} alt={name} onError={(error) => foundation.handleImageError(error)} style={imgStyle} />
-      ) : (
-        <IconFile size="large" />
-      );
+      const defaultThumbTail = !fallbackPreview ? <img src={url} alt={name} onError={error => foundation.handleImageError(error)} style={imgStyle} /> : <IconFile size="large" />;
+
 
       const thumbnail = customThumbnail ? renderThumbnail(props) : defaultThumbTail;
 

@@ -167,7 +167,12 @@ const Form = defineComponent({
           const xId = id ? id : formId;
           return document.querySelectorAll(`form[x-form-id="${xId}"] .${cssClasses.PREFIX}-field-error-message`);
         },
-        getFieldDOM: (field: string) => document.querySelector(`.${cssClasses.PREFIX}-field[x-field-id="${field}"]`),
+        getFieldDOM: (field: string) => {
+          const { formId } = state;
+          const { id } = props;
+          const xId = id ? id : formId;
+          return document.querySelector(`form[x-form-id="${xId}"] .${cssClasses.PREFIX}-field[x-field-id="${field}"]`);
+        },
         getFieldErrorDOM: (field: string) => {
           const { formId } = state;
           const { id } = props;

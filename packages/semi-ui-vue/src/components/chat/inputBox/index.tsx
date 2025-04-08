@@ -38,6 +38,8 @@ export const propsType: CombineProps<InputBoxProps> = {
   onSend: PropTypes.func as PropType<InputBoxProps['onSend']>,
   onClearContext: PropTypes.func as PropType<InputBoxProps['onClearContext']>,
   onInputChange: PropTypes.func as PropType<InputBoxProps['onInputChange']>,
+  clickUpload: PropTypes.bool,
+  pasteUpload: PropTypes.bool,
 };
 const vuePropsType = vuePropsMake(propsType, {
   uploadProps: {}
@@ -81,7 +83,10 @@ const index = defineComponent({
     }
 
     const renderUploadButton = () => {
-      const { uploadProps, uploadRef, uploadTipProps } = props;
+      const { uploadProps, uploadRef, uploadTipProps, clickUpload } = props;
+      if (!clickUpload) {
+        return null;
+      }
       const { attachment } = state;
       const { className, onChange, renderFileItem, ...rest } = uploadProps;
       const children = slots.children?.()

@@ -53,6 +53,7 @@ const prefixcls = cssClasses.PREFIX;
 
 const propTypes: CombineProps<Omit<TreeProps, 'children'>> = {
   autoMergeValue: PropTypes.bool,
+  expandIcon: PropTypes.node as PropType<TreeProps['expandIcon']>,
   blockNode: PropTypes.bool,
   className: PropTypes.string,
   showClear: PropTypes.bool,
@@ -691,7 +692,7 @@ const Tree = defineComponent({
       if (!treeNodeProps) {
         return null;
       }
-      const { keyMaps, showLine } = props;
+      const { keyMaps, showLine, expandIcon } = props;
       const props_: any = pick(treeNode, ['key', 'label', 'disabled', 'isLeaf', 'icon', 'isEnd']);
       const children = data[get(keyMaps, 'children', 'children')]; //TODO
       !isUndefined(children) && (props_.children = children);
@@ -704,6 +705,7 @@ const Tree = defineComponent({
           {...props_}
           showLine={showLine}
           data={data}
+          expandIcon={expandIcon}
           style={isEmpty(style) ? {} : style}
         />
       );

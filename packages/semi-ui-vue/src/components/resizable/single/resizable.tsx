@@ -183,17 +183,29 @@ const Resizable = defineComponent({
       return {
         ...adapterInject(),
         getResizable: getResizable,
-        registerEvent: () => {
+        registerEvent: (type = 'mouse')=> {
           let window = foundation.window;
-          window?.addEventListener('mouseup', foundation.onMouseUp);
-          window?.addEventListener('mousemove', foundation.onMouseMove);
-          window?.addEventListener('mouseleave', foundation.onMouseUp);
+          if (type === 'mouse') {
+            window?.addEventListener('mouseup', foundation.onMouseUp);
+            window?.addEventListener('mousemove', foundation.onMouseMove);
+            window?.addEventListener('mouseleave', foundation.onMouseUp);
+          } else {
+            window?.addEventListener('touchmove', foundation.onTouchMove, { passive: false });
+            window?.addEventListener('touchend', foundation.onMouseUp);
+            window?.addEventListener('touchcancel', foundation.onMouseUp);
+          }
         },
-        unregisterEvent: () => {
+        unregisterEvent: (type = 'mouse') => {
           let window = foundation.window;
-          window?.removeEventListener('mouseup', foundation.onMouseUp);
-          window?.removeEventListener('mousemove', foundation.onMouseMove);
-          window?.removeEventListener('mouseleave', foundation.onMouseUp);
+          if (type === 'mouse') {
+            window?.removeEventListener('mouseup', foundation.onMouseUp);
+            window?.removeEventListener('mousemove', foundation.onMouseMove);
+            window?.removeEventListener('mouseleave', foundation.onMouseUp);
+          } else {
+            window?.removeEventListener('touchmove', foundation.onTouchMove, { passive: false } as any);
+            window?.removeEventListener('touchend', foundation.onMouseUp);
+            window?.removeEventListener('touchcancel', foundation.onMouseUp);
+          }
         },
       };
     }

@@ -1,6 +1,6 @@
 import { MDXProps } from 'mdx/types';
 import type { FileItem, UploadProps } from '../upload';
-import { Message } from '@douyinfe/semi-foundation/chat/foundation';
+import { EnableUploadProps, Message } from '@douyinfe/semi-foundation/chat/foundation';
 import type { TooltipProps } from '../tooltip';
 import { CSSProperties, VNode } from 'vue';
 import { ToastFuncType } from '../toast/useToast';
@@ -49,7 +49,8 @@ export interface ChatProps extends CommonChatsProps {
   uploadProps?: UploadProps;
   uploadTipProps?: TooltipProps;
   showClearContext?: boolean;
-  sendHotKey?: 'enter' | 'shift+enter'
+  sendHotKey?: 'enter' | 'shift+enter';
+  enableUpload?: boolean | EnableUploadProps
 
   inputContentConvert?: (...arg: any[])=>void
   InputBoxStyle?: CSSProperties
@@ -178,6 +179,8 @@ export interface InputBoxProps {
   onSend?: (content: string, attachment: FileItem[]) => void;
   onClearContext?: (e: any) => void;
   onInputChange?: (props: {inputValue: string; attachment: FileItem[]}) => void
+  clickUpload?: boolean;
+  pasteUpload?: boolean
 }
 
 export interface InputBoxState {

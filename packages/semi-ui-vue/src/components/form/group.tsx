@@ -64,7 +64,10 @@ export const vuePropsType: CombineProps<InputGroupProps> = {
   labelPosition: String as PropType<InputGroupProps['labelPosition']>,
   disabled: Boolean,
   extraText: PropTypes.node,
-  extraTextPosition: String as PropType<InputGroupProps['extraTextPosition']>,
+  extraTextPosition: {
+    type: String as PropType<InputGroupProps['extraTextPosition']>,
+    default: 'bottom'
+  },
 };
 const FormInputGroup = defineComponent({
   props: { ...vuePropsType },

@@ -317,7 +317,7 @@ const Pagination = defineComponent({
               foundation.changePageSize(newPageSize as any);
             }}
             value={pageSize}
-            key={pageSize}
+            key={pageSize + pageSizeToken}
             position={popoverPosition || 'bottomRight'}
             clickToHide
             zIndex={popoverZIndex}

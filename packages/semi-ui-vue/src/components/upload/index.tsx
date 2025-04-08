@@ -18,6 +18,7 @@ import type {
   OnChangeProps,
   customRequestArgs,
   CustomError,
+  RenderPictureCloseProps,
 } from './interface';
 import { Locale } from '../locale/interface';
 import '@douyinfe/semi-foundation/upload/upload.scss';
@@ -121,6 +122,7 @@ export interface UploadProps {
   renderPicInfo?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
   renderThumbnail?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
   renderPicPreviewIcon?: (renderFileItemProps: RenderFileItemProps) => VNode | string;
+  renderPicClose?: (renderPicCloseProps: RenderPictureCloseProps) => VNode | string;
   renderFileOperation?: (fileItem: RenderFileItemProps) => VNode | string;
   showClear?: boolean;
   showPicInfo?: boolean; // Show pic info in picture wall
@@ -201,6 +203,7 @@ const propTypes: CombineProps<UploadProps> = {
   renderFileItem: PropTypes.func as PropType<UploadProps['renderFileItem']>,
   renderPicPreviewIcon: PropTypes.func as PropType<UploadProps['renderPicPreviewIcon']>,
   renderFileOperation: PropTypes.func as PropType<UploadProps['renderFileOperation']>,
+  renderPicClose: PropTypes.func as PropType<UploadProps['renderPicClose']>,
   renderPicInfo: PropTypes.func as PropType<UploadProps['renderPicInfo']>,
   renderThumbnail: PropTypes.func as PropType<UploadProps['renderThumbnail']>,
   showClear: PropTypes.bool,
@@ -434,6 +437,7 @@ const Upload = defineComponent({
         itemStyle,
         showPicInfo,
         renderPicInfo,
+        renderPicClose,
         renderPicPreviewIcon,
         renderFileOperation,
         renderFileItem,
@@ -465,6 +469,7 @@ const Upload = defineComponent({
         showPicInfo,
         renderPicInfo,
         renderPicPreviewIcon,
+        renderPicClose,
         renderFileOperation,
         renderThumbnail,
         onReplace,

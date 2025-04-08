@@ -512,8 +512,10 @@ function scrollItemFunc<T extends Item>() {
               key={prefixKey + index}
               {...events}
               class={cls}
+              // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
               role="option"
-              aria-selected={selected}
+              //
+              // aria-selected={selected}
               aria-disabled={item.disabled}
             >
               {text}

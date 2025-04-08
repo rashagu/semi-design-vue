@@ -36,6 +36,10 @@ export interface OptionItem {
   extra?: VNode | string;
   style?: CSSProperties;
   className?: string;
+  addonId?: string;
+  addonStyle?: CSSProperties;
+  addonClassName?: string;
+  extraId?: string
 }
 export type Options = string[] | Array<OptionItem>;
 
@@ -200,6 +204,10 @@ const RadioGroup = defineComponent({
                 extra={option.extra}
                 className={option.className}
                 style={option.style}
+                addonId={option.addonId}
+                addonStyle={option.addonStyle}
+                addonClassName={option.addonClassName}
+                extraId={option.extraId}
               >
                 {option.label}
               </Radio>

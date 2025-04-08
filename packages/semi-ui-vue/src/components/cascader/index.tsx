@@ -254,6 +254,7 @@ const Index = defineComponent({
     const { getProps } = useHasInProps();
 
     const state = reactive<CascaderState>({
+      emptyContentMinWidth: null,
       disabledKeys: new Set(),
       isOpen: props.defaultOpen,
       /* By changing rePosKey, the dropdown position can be refreshed */
@@ -366,6 +367,13 @@ const Index = defineComponent({
         ...adapterInject<CascaderProps, CascaderState>(),
         ...filterAdapter,
         ...cascaderAdapter,
+        setEmptyContentMinWidth: minWidth => {
+          state.emptyContentMinWidth = minWidth
+        },
+        getTriggerWidth: () => {
+          const el = triggerRef.value;
+          return el.width;
+        },
         updateStates: (states) => {
           for (let key in states) {
             state[key] = states[key];
@@ -767,8 +775,10 @@ const Index = defineComponent({
       const popoverCls = cls(dropdownClassName, `${prefixcls}-popover`);
       const renderData = foundation.getRenderData();
       // console.log(activeKeys, selectedKeys);
+      const isEmpty = !renderData || !renderData.length;
+      const realDropDownStyle = isEmpty ? {...dropdownStyle, minWidth: state.emptyContentMinWidth } : dropdownStyle;
       const content = (
-        <div class={popoverCls} role="listbox" style={dropdownStyle} onKeydown={foundation.handleKeyDown}>
+        <div class={popoverCls} role="listbox" style={realDropDownStyle} onKeydown={foundation.handleKeyDown}>
           {topSlot}
           <Item
             activeKeys={activeKeys}
