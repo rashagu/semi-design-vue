@@ -26,8 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
@@ -37,14 +37,14 @@ jobs:
       - run: pnpm build-storybook:vite
       - run: pnpm docs:build
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v4
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./docs/.vitepress/out/semi-design-vue
           destination: ./_site
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
 
   # Deployment job
   deploy:
@@ -56,4 +56,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
