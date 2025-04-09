@@ -201,7 +201,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
     <div>
       <ConfigProvider locale={zh_CN}>
         {a.value}
-        <UserGuideDemo/>
+        {/*<UserGuideDemo/>*/}
         {/*<AudioPlayerDemo/>*/}
         {/*<CropperDemo/>*/}
         {/*<InputVModel ref={testRef} v-model={a.value}/>*/}
@@ -352,7 +352,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<AvatarGroupDemo/>*/}
         {/*<RadioDemo />*/}
 
-        {/*<InputDemo />*/}
+        <InputDemo />
         {/*<TypeDemo />*/}
         {/*<TypoDemo3/>*/}
         {/**/}

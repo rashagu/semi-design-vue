@@ -57,7 +57,7 @@ const InputDemo = defineComponent((props, {slots}) => {
     })
   }
 
-  const autosize = ref({ minRows: 1, maxRows: 213})
+  const autosize = ref()
   onMounted(()=>{
     setTimeout(()=>{
       pwd.value = 'ddd'
