@@ -230,9 +230,9 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<AnchorDemo />*/}
         {/*<TabsDocsDemo/>*/}
         {/*<TabsDemo5/>*/}
-        {/*<TabsDemo />*/}
-        {/*<TabsDemo3/>*/}
-        {/*<TabsDemo4/>*/}
+        <TabsDemo />
+        <TabsDemo3/>
+        <TabsDemo4/>
         {/*<TabsDemoVueSFC/>*/}
         {/*<TabsDemoReact/>*/}
         {/*<CardDemo >*/}
@@ -352,7 +352,7 @@ const App = defineComponent<ExampleProps>((props, {slots}) => {
         {/*<AvatarGroupDemo/>*/}
         {/*<RadioDemo />*/}
 
-        <InputDemo />
+        {/*<InputDemo />*/}
         {/*<TypeDemo />*/}
         {/*<TypoDemo3/>*/}
         {/**/}

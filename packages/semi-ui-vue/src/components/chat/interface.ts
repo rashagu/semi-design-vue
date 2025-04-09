@@ -4,7 +4,8 @@ import { EnableUploadProps, Message } from '@douyinfe/semi-foundation/chat/found
 import type { TooltipProps } from '../tooltip';
 import { CSSProperties, VNode } from 'vue';
 import { ToastFuncType } from '../toast/useToast';
-import { MarkdownRenderProps } from '../markdownRender';
+import type { MarkdownRenderProps as OriginMarkdownRenderProps } from '../markdownRender';
+export type MarkdownRenderProps = Partial<OriginMarkdownRenderProps>;
 
 export { Message };
 export interface CommonChatsProps {
@@ -22,7 +23,7 @@ export interface CommonChatsProps {
   chatBoxRenderConfig?: ChatBoxRenderConfig;
   customMarkDownComponents?: MDXProps['components'];
   renderDivider?: (message?: Message) => VNode;
-  markdownRenderProps?: Partial<MarkdownRenderProps>
+  markdownRenderProps?: MarkdownRenderProps
 }
 
 export interface ChatProps extends CommonChatsProps {

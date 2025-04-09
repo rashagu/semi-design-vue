@@ -2,8 +2,8 @@ import { defineComponent, ref, h, Fragment, useSlots, VNode, PropType } from 'vu
 import { CombineProps } from '../../interface';
 
 import cls from 'classnames';
-import { Message, Metadata, RenderContentProps } from '../interface';
-import MarkdownRender, { type MarkdownRenderProps } from '../../markdownRender';
+import { Message, Metadata, RenderContentProps, MarkdownRenderProps } from '../interface';
+import MarkdownRender from '../../markdownRender';
 import { cssClasses, strings } from '@douyinfe/semi-foundation/chat/constants';
 import { MDXProps } from 'mdx/types';
 import { FileAttachment, ImageAttachment } from '../attachment';
@@ -20,7 +20,7 @@ interface ChatBoxContentProps {
   role?: Metadata;
   message?: Message;
   customRenderFunc?: (props: RenderContentProps) => VNode;
-  markdownRenderProps?: Partial<MarkdownRenderProps>;
+  markdownRenderProps?: MarkdownRenderProps;
 }
 
 export const vuePropsType: CombineProps<ChatBoxContentProps> = {
@@ -79,6 +79,7 @@ const chatBoxContent = defineComponent({
                 format='md'
                 raw={item.text}
                 components={markdownComponents.value}
+                {...props.markdownRenderProps}
               />;
             } else if (item.type === 'image_url') {
               return <ImageAttachment key={`index`} src={item.image_url.url} />;

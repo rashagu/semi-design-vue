@@ -57,6 +57,7 @@ interface CropperProps {
   maxZoom?: number;
   minZoom?: number;
   zoomStep?: number
+  preview?: () => HTMLElement
 }
 
 interface CropperState {
@@ -89,6 +90,8 @@ const propTypes: CombineProps<CropperProps> = {
   maxZoom: PropTypes.number,
   minZoom: PropTypes.number,
   zoomStep: PropTypes.number,
+
+  preview: PropTypes.func as PropType<CropperProps['preview']>,
 };
 
 const defaultProps = {
@@ -280,6 +283,14 @@ const index = defineComponent({
       const cropperBoxY = cropperBox.centerPoint.y - cropperBox.height / 2;
       const cropperImgX = imgX - cropperBoxX;
       const cropperImgY = imgY - cropperBoxY;
+
+      foundation.updatePreview({
+        width: imgData.width,
+        height: imgData.height,
+        translateX: cropperImgX,
+        translateY: cropperImgY,
+        rotate: rotate,
+      });
 
       return (<ResizeObserver
         onResize={()=>{

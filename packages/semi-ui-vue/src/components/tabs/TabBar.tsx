@@ -15,7 +15,7 @@ import {
   ComponentObjectPropsOptions,
   defineComponent,
   Fragment,
-  h,
+  h, nextTick,
   onMounted,
   PropType,
   reactive,
@@ -82,6 +82,15 @@ const TabBar = defineComponent({
 
     onMounted(() => {
       state.uuid = getUuidv4();
+      nextTick(()=>{
+        // Perform the scroll in the setState callback to ensure the uuid is updated to the DOM
+        if (props.collapsible) {
+          // Add a small delay to ensure the DOM is fully rendered
+          requestAnimationFrame(() => {
+            scrollActiveTabItemIntoView();
+          });
+        }
+      })
     });
 
     watch(
@@ -146,7 +155,7 @@ const TabBar = defineComponent({
 
     const tabListNode = ref();
     const scrollTabItemIntoViewByKey = (key: string, logicalPosition: ScrollLogicalPosition = 'nearest') => {
-      const tabItem = (tabListNode.value as HTMLElement).querySelector(
+      const tabItem = (tabListNode.value as HTMLElement)?.querySelector(
         `[data-uuid="${state.uuid}"] .${cssClasses.TABS_TAB}[data-scrollkey=${JSON.stringify(key)}]`
       );
       tabItem?.scrollIntoView({ behavior: 'smooth', block: logicalPosition, inline: logicalPosition });

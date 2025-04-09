@@ -62,7 +62,7 @@ export interface JsonViewerState {
   customRenderMap: Map<HTMLElement, VNode>
 }
 
-interface SearchOptions {
+export interface SearchOptions {
   caseSensitive: boolean;
   wholeWord: boolean;
   regex: boolean
@@ -146,6 +146,11 @@ const JsonViewerCom = defineComponent({
         },
         showSearchBar: () => {
           state.showSearchBar = !state.showSearchBar
+          state.searchOptions = {
+            caseSensitive: false,
+            wholeWord: false,
+            regex: false,
+          }
         },
       };
     }
@@ -175,9 +180,39 @@ const JsonViewerCom = defineComponent({
       foundation.jsonViewer.format();
     }
 
+    function search(searchText: string, caseSensitive?: boolean, wholeWord?: boolean, regex?: boolean) {
+      foundation.search(searchText, caseSensitive, wholeWord, regex);
+    }
+
+    function getSearchResults() {
+      return foundation.getSearchResults();
+    }
+
+    function prevSearch(step?: number) {
+      foundation.prevSearch(step);
+    }
+
+    function nextSearch(step?: number) {
+      foundation.nextSearch(step);
+    }
+
+    function replace(replaceText: string) {
+      foundation.replace(replaceText);
+    }
+
+    function replaceAll(replaceText: string) {
+      foundation.replaceAll(replaceText);
+    }
+
     expose({
       getValue,
       format,
+      search,
+      getSearchResults,
+      prevSearch,
+      nextSearch,
+      replace,
+      replaceAll,
     })
 
     function getStyle() {
