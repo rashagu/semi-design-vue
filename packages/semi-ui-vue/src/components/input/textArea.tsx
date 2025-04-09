@@ -19,12 +19,13 @@ import TextAreaFoundation from '@douyinfe/semi-foundation/input/textareaFoundati
 import { cssClasses } from '@douyinfe/semi-foundation/input/constants';
 import { useBaseComponent, useHasInProps, ValidateStatus } from '../_base/baseComponent';
 import '@douyinfe/semi-foundation/input/textarea.scss';
-import { noop, omit, isFunction, isUndefined, isObject, throttle } from 'lodash';
+import { noop, omit, isFunction, isUndefined, isObject, throttle, isEqual } from 'lodash';
 import type { DebouncedFunc } from 'lodash';
 import { IconClear } from '@kousum/semi-icons-vue';
 import { vuePropsMake } from '../PropTypes';
 import ResizeObserver from '../resizeObserver';
 import { CombineProps } from '../interface';
+import { styleNum } from '../_utils';
 
 const prefixCls = cssClasses.PREFIX;
 
@@ -197,7 +198,6 @@ const TextArea = defineComponent({
     const { getProps } = useHasInProps();
     let focusing = false;
     let libRef = ref(null);
-    const onUpdateValueFunc = props['onUpdate:value'];
     const initValue = 'value' in getProps(props) ? props.value : props.defaultValue;
     const state = reactive<TextAreaState>({
       value: initValue,
@@ -224,6 +224,7 @@ const TextArea = defineComponent({
       return {
         ...adapterInject(),
         setValue: (value: string) => {
+          const onUpdateValueFunc = props['onUpdate:value'];
           if (onUpdateValueFunc) {
             onUpdateValueFunc(value);
           }
@@ -294,6 +295,11 @@ const TextArea = defineComponent({
         if ((props.value !== prevValue || props.placeholder !== prevPlaceholder) && props.autosize) {
           foundation.resizeTextarea();
         }
+      }
+    );
+
+    watch(() => props.autosize, () => {
+        foundation.resizeTextarea();
       }
     );
 
@@ -439,7 +445,8 @@ const TextArea = defineComponent({
         >
           {autosize ? (
             <ResizeObserver onResize={throttledResizeTextarea}>
-              <textarea {...itemProps} data-testid={"test_base_textarea"} ref={setRef} />
+              {/*// TODO VUE3 这里需要加style height 不然会被重置*/}
+              <textarea {...itemProps} data-testid={"test_base_textarea"} ref={setRef} style={{height: styleNum(state.height)}} />
             </ResizeObserver>
           ) : (
             <textarea {...itemProps} data-testid={"test_base_textarea"} ref={setRef} />

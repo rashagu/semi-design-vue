@@ -57,11 +57,14 @@ const InputDemo = defineComponent((props, {slots}) => {
     })
   }
 
+  const autosize = ref({ minRows: 1, maxRows: 213})
   onMounted(()=>{
     setTimeout(()=>{
       pwd.value = 'ddd'
+      autosize.value = { minRows: 214, maxRows: 213};
     }, 1000)
   })
+
 
   return () => (
     <div id={'a'}>
@@ -89,6 +92,7 @@ const InputDemo = defineComponent((props, {slots}) => {
       <TextArea value={defaultValue.value} placeholder={'请输入'} />
       <TextArea v-model={[defaultValue.value, 'value']} placeholder={'请输入'} />
       <TextArea maxCount={100} showClear />
+      <TextArea  autosize={autosize.value} showClear />
 
       <Input defaultValue="ies" validateStatus="warning"></Input>
       <br />
