@@ -446,7 +446,7 @@ const TextArea = defineComponent({
           {autosize ? (
             <ResizeObserver onResize={throttledResizeTextarea}>
               {/*// TODO VUE3 这里需要加style height 不然会被重置*/}
-              <textarea {...itemProps} data-testid={"test_base_textarea"} ref={setRef} style={{height: styleNum(state.height)}} />
+              <textarea {...itemProps} data-testid={"test_base_textarea"} ref={setRef} style={state.height?{height: styleNum(state.height)}:{}} />
             </ResizeObserver>
           ) : (
             <textarea {...itemProps} data-testid={"test_base_textarea"} ref={setRef} />
