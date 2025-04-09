@@ -1,5 +1,11 @@
 # @kousum/semi-illustrations-vue
 
+## 2.77.1
+
+### Patch Changes
+
+- fix
+
 ## 2.77.0
 
 ### Patch Changes
