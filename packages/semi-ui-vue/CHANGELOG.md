@@ -1,5 +1,15 @@
 # @kousum/semi-ui-vue
 
+## 2.77.0
+
+### Patch Changes
+
+- 修复一些问题
+- Updated dependencies
+  - @kousum/semi-animation-vue@2.77.0
+  - @kousum/semi-icons-vue@2.77.0
+  - @kousum/semi-illustrations-vue@2.77.0
+
 ## 2.77.0-alpha.0
 
 ### Minor Changes

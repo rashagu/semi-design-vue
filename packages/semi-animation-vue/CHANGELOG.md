@@ -1,5 +1,11 @@
 # @kousum/semi-animation-vue
 
+## 2.77.0
+
+### Patch Changes
+
+- 修复一些问题
+
 ## 2.77.0-alpha.0
 
 ### Minor Changes
