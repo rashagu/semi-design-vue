@@ -29,7 +29,7 @@ export const FileAttachment = (props: FileProps) => {
     <a href={url} target="_blank" class={`${PREFIX_ATTACHMENT}-file`} rel="noreferrer">
       <IconBriefStroked size="extra-large" class={`${PREFIX_ATTACHMENT}-file-icon`} />
       <div class={`${PREFIX_ATTACHMENT}-file-info`}>
-        <span class={`${PREFIX_ATTACHMENT}-file-title`}>{name}</span>
+        <span class={`${PREFIX_ATTACHMENT}-file-title`} style={{whiteSpace:'nowrap'}} title={name}>{name}</span>
         <span class={`${PREFIX_ATTACHMENT}-file-metadata`}>
           <span class={`${PREFIX_ATTACHMENT}-file-type`}>{type}</span>
           {type ? ' · ' : ''}
