@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 2.78.1
+
+### Patch Changes
+
+- fix Textarea
+
 ## 2.78.0
 
 ### Minor Changes

@@ -11,7 +11,7 @@ const table = (props: TableProps) => {
   const titlesColumns = columnsFiber.map((column, i) => {
     return {
       dataIndex: String(i),
-      title: column?.props?.children || ""
+      title: (column?.props?.children || column?.children) || ""
     };
   });
   const tableDataSource: any[] = [];
@@ -20,7 +20,7 @@ const table = (props: TableProps) => {
       key: String(i),
     };
     dataFiber[i]?.children.forEach((child, index) => {
-      item[String(index)] = child?.props?.children ?? "";
+      item[String(index)] = (child?.props?.children || child?.children) ?? "";
     });
     tableDataSource.push(item);
   }
