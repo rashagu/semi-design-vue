@@ -1,5 +1,11 @@
 # @kousum/semi-ui-vue
 
+## 2.78.3
+
+### Patch Changes
+
+- fix: [Upload] whiteSpace
+
 ## 2.78.2
 
 ### Patch Changes
