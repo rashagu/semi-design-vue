@@ -6,4 +6,5 @@ import { fireEvent, render, screen } from '@testing-library/vue';
 test('PaginationDemo test', async () => {
   render(Comp)
   const img = await screen.findByText("低成本快速创建风格各异的设计系统，更少时间，更快交付");
+  const img2 = await screen.findByText("Markdown 表格");
 })

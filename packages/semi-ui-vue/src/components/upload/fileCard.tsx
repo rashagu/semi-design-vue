@@ -446,7 +446,7 @@ const FileCard = defineComponent({
           <div class={previewCls}>{previewContent}</div>
           <div class={`${infoCls}-main`}>
             <div class={`${infoCls}-main-text`}>
-              <span class={`${infoCls}-name`}>{name}</span>
+              <span class={`${infoCls}-name`} style={{whiteSpace:'nowrap'}} title={name}>{name}</span>
               <span>
                 <span class={`${infoCls}-size`}>{fileSize}</span>
                 {showReplace && (
